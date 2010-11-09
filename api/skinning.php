@@ -12,7 +12,7 @@
  */
 
 // TODO this will be dynamic in the future
-define( 'BP_TASTY_SKIN_NAME', 'bp-minimal' );
+define( 'BP_TASTY_SKIN_NAME', 'minimal' );
 define( 'BP_TASTY_EXTRAS_SKIN_DIR', BP_TASTY_EXTRAS_DIR . '/skins' );
 define( 'BP_TASTY_ACTIVE_SKIN_DIR', BP_TASTY_EXTRAS_SKIN_DIR . '/' . BP_TASTY_SKIN_NAME );
 
