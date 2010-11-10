@@ -69,6 +69,12 @@ function bp_tasty_locate_template( $template_names, $load = false )
 	return '';
 }
 
+/**
+ * Load a template
+ *
+ * @param string $template_name
+ * @return string
+ */
 function bp_tasty_load_template( $template_name )
 {
 	if ( !is_array( $template_name ) ) {
