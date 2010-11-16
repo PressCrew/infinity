@@ -1,6 +1,7 @@
 /* ========================= */
 /* ! Wrapper  */
-/* ========================= */	
+/* ========================= */
+
 img.bp-tasty-menu-icon {
 	float: left;
 	margin: 2px 5px 0px 0px;
@@ -12,27 +13,27 @@ img.bp-tasty-menu-icon.indent {
 table.bp-tasty-cpanel-nav {
 	border: none;
 	margin-top: 8px;
-	width:75%;
+	width: 75%;
 }
 	table.bp-tasty-cpanel-nav td {
-		-moz-border-radius-topleft:6px;
-		-moz-border-radius-topright:6px;
-		font-size:14px;
-		background-color:#FFFFFF;
-		border:1px solid #C2C1C1;
-		font-size:14px;
-		margin-bottom:19px;
-		padding:8px 3px;
-		text-align:center;
+		-moz-border-radius-topleft: 6px;
+		-moz-border-radius-topright: 6px;
+		font-size: 14px;
+		background-color: #FFFFFF;
+		border: 1px solid #C2C1C1;
+		font-size: 14px;
+		margin-bottom: 19px;
+		padding: 8px 3px;
+		text-align: center;
 	}
 	table.bp-tasty-cpanel-nav td a:hover {
-	color: #111;
+		color:#AD4646;
 	}
 	table.bp-tasty-cpanel-nav td.current {
-		background:url("../images/alert-overlay.png") repeat-x scroll 0 50% #3E3E3E;
-		border-color:#746B6B #B0ADAD -moz-use-text-color;
-		border-style:solid solid none;
-		border-width:1px 1px medium;
+		background: url("../images/alert-overlay.png") repeat-x scroll 0 50% #3E3E3E;
+		border-color: #746B6B #B0ADAD -moz-use-text-color;
+		border-style: solid solid none;
+		border-width: 1px 1px medium;
 	}
 	table.bp-tasty-cpanel-nav td.current a {
 		color: #FFF;
@@ -41,7 +42,7 @@ table.bp-tasty-cpanel-nav {
 	}
 	
 table.bp-tasty-cpanel-nav td a {
-color: #666;
+	color: #666;
 }
 
 /* ==================== */
@@ -49,181 +50,238 @@ color: #666;
 /* ==================== */
 
 .bp-tasty-cpanel-page-start  {
-background:url("../images/sprite.png") no-repeat scroll 0 -19px transparent;
-padding-left:16px;
+	background: url("../images/sprite.png") no-repeat scroll 0 -210px transparent;
+	padding-left: 16px;
 }
 
 a:hover.bp-tasty-cpanel-page-start {
-background:url("../images/sprite.png") no-repeat scroll 0 -210px transparent;
-padding-left:16px;
+	background: url("../images/sprite.png") no-repeat scroll 0 -19px transparent;
+	padding-left: 16px;
 }
 
 .bp-tasty-cpanel-page-skins {
-background:url("../images/sprite.png") no-repeat scroll 0 -141px transparent;
-padding-left:16px;
+	background: url("../images/sprite.png") no-repeat scroll 0 -332px transparent;
+	padding-left:16px;
 }
 
 a:hover.bp-tasty-cpanel-page-skins {
-background:url("../images/sprite.png") no-repeat scroll 0 -332px transparent;
-padding-left:16px;
+	background: url("../images/sprite.png") no-repeat scroll 0 -141px transparent;
+	padding-left: 16px;
 }
 
 .bp-tasty-cpanel-page-widgets {
-background:url("../images/sprite.png") no-repeat scroll 0 -80px transparent;
-padding-left:15px;
+	background: url("../images/sprite.png") no-repeat scroll 0 -271px transparent;
+	padding-left: 15px;
 }
 
 a:hover.bp-tasty-cpanel-page-widgets {
-background:url("../images/sprite.png") no-repeat scroll 0 -271px transparent;
-padding-left:15px;
+	background: url("../images/sprite.png") no-repeat scroll 0 -80px transparent;
+	padding-left: 15px;
 }
 
 .bp-tasty-cpanel-page-shortcodes {
-background:url("../images/sprite.png") no-repeat scroll 0 -59px transparent;
-padding-left: 15px;
+	background: url("../images/sprite.png") no-repeat scroll 0 -250px transparent;
+	padding-left: 15px;
 }
 
 a:hover.bp-tasty-cpanel-page-shortcodes {
-background:url("../images/sprite.png") no-repeat scroll 0 -250px transparent;
-padding-left: 15px;
+	background: url("../images/sprite.png") no-repeat scroll 0 -59px transparent;
+	padding-left: 15px;
 }
 
 .bp-tasty-cpanel-page-options {
-background:url("../images/sprite.png") no-repeat scroll 0 -122px transparent;
-padding-left: 15px;
+	background: url("../images/sprite.png") no-repeat scroll 0 -313px transparent;
+	padding-left: 15px;
 }
 
 a:hover.bp-tasty-cpanel-page-options {
-background:url("../images/sprite.png") no-repeat scroll 0 -313px transparent;
-padding-left: 15px;
+	background: url("../images/sprite.png") no-repeat scroll 0 -122px transparent;
+	padding-left: 15px;
 }
 
 .bp-tasty-cpanel-page-docs {
-background:url("../images/sprite.png") no-repeat;
-padding-left: 15px;
+	background: url("../images/sprite.png") no-repeat scroll 0 -191px transparent;
+	padding-left: 15px;
 }
 
 a:hover.bp-tasty-cpanel-page-docs {
-background:url("../images/sprite.png") no-repeat scroll 0 -191px transparent;
-padding-left: 15px;
+	background: url("../images/sprite.png") no-repeat;
+	padding-left: 15px;
 }
 
 .bp-tasty-cpanel-page-about {
-background:url("../images/sprite.png") no-repeat scroll 0 -101px transparent;
-padding-left: 15px;
+	background: url("../images/sprite.png") no-repeat scroll 0 -292px transparent;
+	padding-left: 15px;
 }
 
 a:hover.bp-tasty-cpanel-page-about {
-background:url("../images/sprite.png") no-repeat scroll 0 -292px transparent;
-padding-left: 15px;
+	background: url("../images/sprite.png") no-repeat scroll 0 -101px transparent;
+	padding-left: 15px;
 }
 
 .bp-tasty-cpanel-page-thanks {
-background:url("../images/sprite.png") no-repeat scroll 0 -39px transparent;
-padding-left:15px;
+	background: url("../images/sprite.png") no-repeat scroll 0 -229px transparent;
+	padding-left: 15px;
 }
 
 a:hover.bp-tasty-cpanel-page-thanks {
-background:url("../images/sprite.png") no-repeat scroll 0 -229px transparent;
-padding-left:15px;
+	background: url("../images/sprite.png") no-repeat scroll 0 -39px transparent;
+	padding-left: 15px;
 }
 	
 /* ========================= */
 /* ! Control Panel Styling   */
 /* ========================= */	
-.input_wrap{
-	width:740px;
+
+.input_wrap {
+	width: 740px;
 }
 
 .rm_section{
-	border:1px solid #ddd;
-	border-bottom:0;
-	background:#f9f9f9;
+	border: 1px solid #ddd;
+	border-bottom: 0;
+	background: #f9f9f9;
 	overflow: hidden;
-		-moz-box-shadow: 1px 3px 3px rgba(203,199,199,0.5);
+	-moz-box-shadow: 1px 3px 3px rgba(203,199,199,0.5);
 	-webkit-box-shadow: 1px 3px 3px rgba(203,199,199,0.5);
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
-	width:75%;
+	width: 75%;
 }
 
 .input-wrapper label{
-	font-size:12px;
-	font-weight:700;
-	width:200px;
-	display:block;
-	float:left;	
+	font-size: 12px;
+	font-weight: 700;
+	width: 200px;
+	display: block;
+	float: left;
 }
+
 .input-wrapper {
-	border-bottom:1px solid #DDDDDD;
-	border-top:1px solid #FFFFFF;
-	padding:20px 10px 5px;
+	border-bottom: 1px solid #DDDDDD;
+	border-top: 1px solid #FFFFFF;
+	padding: 20px 10px 5px;
 }
 
 .input-wrapper p {
-	display:block;
-	color:#999;
-	padding-left:200px;
+	display: block;
+	color: #999;
+	padding-left: 200px;
 }
 
-.button, .button-secondary, .submit input, input[type="button"], input[type="submit"] {
-	background:url("../images/alert-overlay.png") repeat-x scroll 0 50% #439F2B !important;
-	border:1px solid #6C6B6B !important;
-	color:#FFFFFF !important;
-	font-size:12px;
-	font-weight:700;
-	letter-spacing:0.2px;
-	line-height:1.1;
-	padding:5px 2px 4px;
-	text-shadow:0 1px 0 #4B4444;
+.button,
+.button-secondary,
+.submit input,
+input[type="button"],
+input[type="submit"] {
+	background: url("../images/alert-overlay.png") repeat-x scroll 0 50% #439F2B !important;
+	border: 1px solid #6C6B6B !important;
+	color: #FFFFFF !important;
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: 0.2px;
+	line-height: 1.1;
+	padding: 5px 2px 4px;
+	text-shadow: 0 1px 0 #4B4444;
 }
 
-.input-wrapper input[type="text"], .rm_opts select{
-	width:280px;
-	font-size:12px;
-	padding:4px;
-	color:#333;
-	line-height:1em;
-	background:#f3f3f3;
+.input-wrapper input[type="text"],
+.rm_opts select {
+	width: 280px;
+	font-size: 12px;
+	padding: 4px;
+	color: #333;
+	line-height: 1em;
+	background: #f3f3f3;
 }
-.rm_input input:focus, .rm_input textarea:focus{
-		background:#fff;
+
+.rm_input input:focus,
+.rm_input textarea:focus {
+	background:#fff;
 }
-.rm_input textarea{
-	width:280px;
-	height:175px;
-	font-size:12px;
-	padding:4px;
-	color:#333;
-	line-height:1.5em;
-	background:#f3f3f3;
+
+.rm_input textarea {
+	width: 280px;
+	height: 175px;
+	font-size: 12px;
+	padding: 4px;
+	color: #333;
+	line-height: 1.5em;
+	background: #f3f3f3;
 }
+
 .rm_title h3 {
-background:url("../images/sprite.png") no-repeat scroll 0 -159px transparent;
-color:#444444;
-cursor:pointer;
-float:left;
-font-size:16px;
-font-weight:bold;
-margin:0 0 0 8px;
-padding:6px 6px 6px 26px;
-width:81%;
+	background: url("../images/sprite.png") no-repeat scroll 0 -159px transparent;
+	color: #444444;
+	cursor: pointer;
+	float: left;
+	font-size: 16px;
+	font-weight: bold;
+	margin: 0 0 0 8px;
+	padding: 6px 6px 6px 26px;
+	width: 81%;
 }
 
 .rm_title h3:hover {
-color:#AD4646;
+	color: #AD4646;
 }
 
 .rm_title{
-	background:none repeat scroll 0 0 #EEEEEE;
-	border-bottom:1px solid #DDDDDD;
-	cursor:pointer;
-	height:30px;
-	margin-top:0;
-	padding-bottom:10px;
-	padding-top:10px;
+	background: none repeat scroll 0 0 #EEEEEE;
+	border-bottom: 1px solid #DDDDDD;
+	cursor: pointer;
+	height: 30px;
+	margin-top: 0;
+	padding-bottom: 10px;
+	padding-top: 10px;
 }
 
+.rm_title h3 img.inactive {
+	margin: -8px 10px 0 2px;
+	width: 32px;
+	height: 32px;
+	background: url('images/pointer.png') no-repeat 0 0;
+	float: left;
+	-moz-border-radius: 6px;
+	border: 1px solid #ccc;
+}
 
+.rm_title h3 img.active {
+	margin: -8px 10px 0 2px;
+	width: 32px;
+	height: 32px;
+	background: url('images/pointer.png') no-repeat  0 -32px;
+	float: left;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border: 1px solid #ccc;
+}
+		
+.rm_title h3:hover img {
+	border: 1px solid #999;
+}
 
-	
+.rm_title span.submit {
+	display: block;
+	float: right;
+	margin: 0;
+	padding: 0;
+	width: 15%;
+	padding: 14px 0;
+}
+
+.clearfix {
+	clear: both;
+}
+
+.rm_table th,
+.rm_table td {
+	border: 1px solid #bbb;
+	padding: 10px;
+	text-align: center;
+}
+
+.rm_table th,
+.rm_table td.feature {
+	border-color:#888;
+}

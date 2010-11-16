@@ -142,10 +142,10 @@ abstract class Pie_Easy_Options_Section
 	 */
 	protected function render_section()
 	{ ?>
-		<div class="<?php print esc_attr( $this->class ) ?>">
+		<div class="<?php print esc_attr( $this->class ) ?> <?php print esc_attr( $this->class ) ?>-<?php print esc_attr( $this->name ) ?>">
 			<div class="<?php print esc_attr( $this->class_title ) ?>">
 				<h3><?php print $this->title ?></h3>
-				<input name="save_section_<?php print $this->name ?>" type="submit" value="<?php _e( 'Save Changes' ) ?>" />
+				<input name="save_section_<?php print esc_attr( $this->name ) ?>" type="submit" value="<?php _e( 'Save Changes' ) ?>" />
 			</div>
 			<div class="<?php print esc_attr( $this->class_content ) ?>">
 				<?php print $this->section_content ?>
