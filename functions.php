@@ -23,7 +23,7 @@ define( 'BP_TASTY_ADMIN_URL', BP_TASTY_THEME_URL . '/dashboard' );
 define( 'BP_TASTY_EXTRAS_DIR',  get_theme_root() . '/bp-tasty-extras' );
 define( 'BP_TASTY_TEXT_DOMAIN',  BP_TASTY_NAME );
 
-// load files
+// load API files
 require_once( BP_TASTY_API_DIR . '/l10n.php' );
 require_once( BP_TASTY_API_DIR . '/options.php' );
 require_once( BP_TASTY_API_DIR . '/skinning.php' );
