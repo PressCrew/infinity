@@ -37,6 +37,9 @@ function bp_tasty_dashboard_setup()
 {
 	// enqueue styles
     wp_enqueue_style( 'bp-tasty-dashboard', BP_TASTY_ADMIN_URL . '/assets/css/cpanel.css', false, BP_TASTY_VERSION, 'screen' );
+
+	// enqueue script
+	wp_enqueue_script( 'bp-tasty-dashboard', BP_TASTY_ADMIN_URL . '/assets/js/dashboard.js', false, BP_TASTY_VERSION );
 }
 
 /**
