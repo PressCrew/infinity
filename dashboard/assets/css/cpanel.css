@@ -216,7 +216,7 @@ input[type="submit"] {
 
 .rm_title h3 {
 	background: url("../images/sprite.png") no-repeat scroll 0 -159px transparent;
-	color: #444444;
+	color: #666;
 	cursor: pointer;
 	float: left;
 	font-size: 16px;
@@ -224,10 +224,17 @@ input[type="submit"] {
 	margin: 0 0 0 8px;
 	padding: 6px 6px 6px 26px;
 	width: 81%;
+	text-shadow:0 -1px 0 #FFFFFF;
 }
 
 .rm_title h3:hover {
 	color: #AD4646;
+}
+
+h3.active {
+	background: url("../images/sprite.png") no-repeat scroll 0 -348px transparent;
+	color: #222;
+	color: #444444;
 }
 
 .rm_title{
