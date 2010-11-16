@@ -28,7 +28,7 @@ function bp_tasty_filter_template( $located_template, $template_names )
 {
 	// template already located, skip
 	if ( empty( $located_template ) ) {
-		return bp_tasty_locate_theme_template( $template_names );
+		return bp_tasty_locate_template( $template_names );
 	} else {
 		return $located_template;
 	}
