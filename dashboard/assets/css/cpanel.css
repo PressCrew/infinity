@@ -185,8 +185,12 @@ input[type="submit"] {
 	text-shadow: 0 1px 0 #4B4444;
 }
 
+.rm_options {
+	display: none;
+}
+
 .input-wrapper input[type="text"],
-.rm_opts select {
+.rm_options select {
 	width: 280px;
 	font-size: 12px;
 	padding: 4px;
@@ -236,25 +240,19 @@ input[type="submit"] {
 	padding-top: 10px;
 }
 
-.rm_title h3 img.inactive {
+.rm_title h3 img {
 	margin: -8px 10px 0 2px;
 	width: 32px;
 	height: 32px;
 	background: url('images/pointer.png') no-repeat 0 0;
 	float: left;
 	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
 	border: 1px solid #ccc;
 }
 
 .rm_title h3 img.active {
-	margin: -8px 10px 0 2px;
-	width: 32px;
-	height: 32px;
 	background: url('images/pointer.png') no-repeat  0 -32px;
-	float: left;
-	-moz-border-radius: 6px;
-	-webkit-border-radius: 6px;
-	border: 1px solid #ccc;
 }
 		
 .rm_title h3:hover img {
