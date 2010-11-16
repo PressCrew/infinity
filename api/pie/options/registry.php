@@ -22,6 +22,11 @@ abstract class Pie_Easy_Options_Registry
 	const SECTION_PREFIX = '~';
 
 	/**
+	 * The string on which to split field option key => values
+	 */
+	const FIELD_OPTION_DELIM = '=';
+
+	/**
 	 * All sections that are currently configured
 	 *
 	 * @var array
@@ -254,7 +259,19 @@ abstract class Pie_Easy_Options_Registry
 			 is_array( $option_config['field_options'] ) &&
 			 count( $option_config['field_options'] ) >= 1 )
 		{
-			$option->set_field_options( $option_config['field_options'] );
+			// the final field options
+			$field_options = array();
+
+			// loop through all field options
+			foreach ( $option_config['field_options'] as $field_option ) {
+				// split each one at the delimeter
+				$field_option = explode( self::FIELD_OPTION_DELIM, $field_option, 2 );
+				// add to array
+				$field_options[trim($field_option[0])] = trim($field_option[1]);
+			}
+
+			// finally set them for the option
+			$option->set_field_options( $field_options );
 		}
 
 		// register it
