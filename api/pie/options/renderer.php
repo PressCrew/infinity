@@ -74,8 +74,10 @@ abstract class Pie_Easy_Options_Renderer
 	{ ?>
 		<div class="<?php print $this->option->class ?>">
 			<?php $this->render_label() ?>
-			<?php $this->render_field() ?>
-			<?php $this->render_description() ?>
+			<div class="pie-easy-options-field">
+				<?php $this->render_field() ?>
+				<?php $this->render_description() ?>
+			</div>
 		</div><?php
 	}
 
@@ -84,7 +86,7 @@ abstract class Pie_Easy_Options_Renderer
 	 */
 	protected function render_label()
 	{ ?>
-		<label for="<?php print esc_attr( $this->option->name ) ?>" title="<?php print esc_attr( $this->option->title ) ?>"><?php print esc_attr( $this->option->title ) ?></label><?php
+		<label class="pie-easy-options-title" for="<?php print esc_attr( $this->option->name ) ?>" title="<?php print esc_attr( $this->option->title ) ?>"><?php print esc_attr( $this->option->title ) ?></label><?php
 	}
 
 	/**

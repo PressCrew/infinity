@@ -164,9 +164,7 @@ a:hover.bp-tasty-cpanel-page-thanks {
 }
 
 .input-wrapper p {
-	display: block;
 	color: #999;
-	padding-left: 200px;
 }
 
 .button,
@@ -214,6 +212,9 @@ input[type="submit"] {
 	background: #f3f3f3;
 }
 
+.input-wrapper div.pie-easy-options-field {
+	margin-left: 200px;
+}
 .input-wrapper.color-picker input {
 	width: 100px;
 }
