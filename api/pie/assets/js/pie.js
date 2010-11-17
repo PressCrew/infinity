@@ -8,7 +8,7 @@ jQuery(document).ready(function() {
 		var
 			inputEl,
 			pickerEl,
-			pickerBg = function(color)
+			pickerBg = function(pickerEl, color)
 			{
 				// get child div
 				var el = pickerEl.children('div');
@@ -26,15 +26,19 @@ jQuery(document).ready(function() {
 			init: function (inputSelector, pickerSelector)
 			{
 				// set elements on init
-				inputEl = jQuery(inputSelector);
 				pickerEl = jQuery(pickerSelector);
+				inputEl = jQuery(inputSelector).bind('click', function () {
+					jQuery(this).bind('keyup', function () {
+						pickerBg(jQuery(pickerSelector), this.value);
+					});
+				});
 
 				// attach color picker event
 				pickerEl.ColorPicker({
 					onBeforeShow: function () {
 						// set elements before show
-						inputEl = jQuery(inputSelector);
 						pickerEl = jQuery(pickerSelector);
+						inputEl = jQuery(inputSelector);
 					},
 					onShow: function (colpkr) {
 						jQuery(colpkr).fadeIn(500);
@@ -47,13 +51,13 @@ jQuery(document).ready(function() {
 					onChange: function (hsb, hex, rgb) {
 						color = '#' + hex;
 						inputEl.val(color);
-						pickerBg(color);
+						pickerBg(pickerEl, color);
 					}
 				});
 
 				// initialize color on init
 				if (inputEl.val()) {
-					pickerBg(inputEl.val());
+					pickerBg(pickerEl, inputEl.val());
 				}
 			}
 		};
