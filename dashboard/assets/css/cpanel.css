@@ -216,7 +216,8 @@ input[type="submit"] {
 	margin-left: 200px;
 }
 .input-wrapper.color-picker input {
-	width: 100px;
+	font-size: 20px;
+	width: 130px;
 }
 
 .rm_title h3 {
