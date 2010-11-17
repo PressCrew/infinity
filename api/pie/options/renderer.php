@@ -248,8 +248,7 @@ abstract class Pie_Easy_Options_Renderer
 			<div style="background-color: <?php print esc_attr( $this->option->get() ) ?>;"></div>
         </div>
 		<script type="text/javascript">
-			jQuery(document).ready(function()
-			{
+			jQuery(document).ready(function() {
 				pieEasyColorPicker.init(
 					'input[name=<?php print $this->option->name ?>]',
 					'div#pie-easy-options-cp-wrapper-<?php print esc_attr( $this->option->name ) ?>'
