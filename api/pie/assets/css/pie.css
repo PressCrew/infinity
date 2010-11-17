@@ -4,7 +4,7 @@ div.pie-easy-options-cp-box {
 	position: relative;
 	width: 36px;
 	height: 36px;
-	margin: 0;
+	vertical-align: top;
 	background: url(../images/colorpicker_launch.png);
 }
 
