@@ -1,29 +1,40 @@
-
-
-
 jQuery(document).ready(function() {
 
 	/**
-	 * color picker wrapper
+	 * Color Picker wrapper
 	 */
 	pieEasyColorPicker = function ()
 	{
-		var inputEl;
-		var pickerEl;
+		var
+			inputEl,
+			pickerEl,
+			pickerBg = function(color)
+			{
+				// get child div
+				var el = pickerEl.children('div');
+				// set color if needed
+				if (color) {
+					el.css('background-color', color);
+					pickerEl.ColorPickerSetColor(color);
+				}
+				// return color
+				return el.css('background-color', color);
+			};
 
 		return {
-			// Initialize values for a colorpicker
+			// Initialize a colorpicker
 			init: function (inputSelector, pickerSelector)
 			{
-				// set elements
-				var pcp = this;
+				// set elements on init
 				inputEl = jQuery(inputSelector);
 				pickerEl = jQuery(pickerSelector);
 
 				// attach color picker event
 				pickerEl.ColorPicker({
 					onBeforeShow: function () {
-						pcp.input(jQuery(this).prev('input'));
+						// set elements before show
+						inputEl = jQuery(inputSelector);
+						pickerEl = jQuery(pickerSelector);
 					},
 					onShow: function (colpkr) {
 						jQuery(colpkr).fadeIn(500);
@@ -34,39 +45,16 @@ jQuery(document).ready(function() {
 						return false;
 					},
 					onChange: function (hsb, hex, rgb) {
-						this.color = '#' + hex;
-						pcp.input().val(this.color);
-						pcp.bgcolor(this.color);
+						color = '#' + hex;
+						inputEl.val(color);
+						pickerBg(color);
 					}
 				});
-				
-				// set color
+
+				// initialize color on init
 				if (inputEl.val()) {
-					this.bgcolor(inputEl.val());
-				} else {
-					inputEl.val(this.bgcolor());
+					pickerBg(inputEl.val());
 				}
-			},
-
-			// Set the current picker input being manipulated
-			input: function (el)
-			{
-				if (el) {
-					inputEl = el;
-				}
-				return inputEl;
-			},
-
-			// Set the current picker bg color
-			bgcolor: function (color)
-			{
-				var el = pickerEl.children('div');
-
-				if (color) {
-					el.css('background-color', color);
-				}
-
-				return el.css('background-color', color);
 			}
 		};
 	}();
