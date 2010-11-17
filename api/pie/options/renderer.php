@@ -11,6 +11,8 @@
  * @since 1.0
  */
 
+require_once( 'walkers.php' );
+
 /**
  * Make rendering options easy
  */
@@ -22,6 +24,22 @@ abstract class Pie_Easy_Options_Renderer
 	 * @var Pie_Easy_Options_Option
 	 */
 	private $option;
+
+	/**
+	 * Setup necessary files
+	 */
+	static public function setup( $pie_url )
+	{
+		// global css
+		wp_enqueue_style( 'pie-easy', $pie_url . '/assets/css/pie.css' );
+		
+		// color picker plugin
+		wp_enqueue_style( 'pie-easy-colorpicker', $pie_url . '/assets/css/colorpicker.css' );
+		wp_enqueue_script( 'pie-easy-colorpicker', $pie_url . '/assets/js/colorpicker.js', array( 'jquery' ) );
+
+		// pie javascript
+		wp_enqueue_script( 'pie-easy', $pie_url . '/assets/js/pie.js', array( 'jquery' ) );
+	}
 
 	/**
 	 * Render an option
@@ -121,6 +139,9 @@ abstract class Pie_Easy_Options_Renderer
 			case 'checkbox':
 				$this->render_checkbox();
 				break;
+			case 'colorpicker':
+				$this->render_colorpicker();
+				break;
 			case 'page':
 				$this->render_page();
 				break;
@@ -157,7 +178,7 @@ abstract class Pie_Easy_Options_Renderer
 			'exclude'            => null,
 			'echo'               => true,
 			'selected'           => $this->option->get(),
-			'hierarchical'       => true,
+			'hierarchical'       => false,
 			'name'               => $this->option->name,
 			'id'                 => $this->option->field_id,
 			'class'              => $this->option->field_class,
@@ -191,7 +212,7 @@ abstract class Pie_Easy_Options_Renderer
 			'exclude'				=> false,
 			'exclude_tree'			=> false,
 			'include'				=> false,
-			'hierarchical'			=> true,
+			'hierarchical'			=> false,
 			'title_li'				=> __( 'Categories' ),
 			'number'				=> null,
 			'echo'					=> true,
@@ -199,7 +220,7 @@ abstract class Pie_Easy_Options_Renderer
 			'current_category'		=> false,
 			'pad_counts'			=> false,
 			'taxonomy'				=> 'category',
-			'walker'				=> 'Pie_Easy_Options_Walker_Category',
+			'walker'				=> new Pie_Easy_Options_Walker_Category(),
 			'pie_easy_option'		=> $this->option );
 
 		// call the WordPress function
@@ -223,9 +244,18 @@ abstract class Pie_Easy_Options_Renderer
 		$this->render_input( 'text' );
 		
 		// now the color picker box ?>
-		<div id="pie_easy_options_cp_<?php print esc_attr( $this->option->name ) ?>" class="pie_easy_options_cp_box">
+		<div id="pie-easy-options-cp-wrapper-<?php print esc_attr( $this->option->name ) ?>" class="pie-easy-options-cp-box">
 			<div style="background-color: <?php print esc_attr( $this->option->get() ) ?>;"></div>
-        </div><?php
+        </div>
+		<script type="text/javascript">
+			jQuery(document).ready(function()
+			{
+				pieEasyColorPicker.init(
+					'input[name=<?php print $this->option->name ?>]',
+					'div#pie-easy-options-cp-wrapper-<?php print esc_attr( $this->option->name ) ?>'
+				);
+			});
+		</script><?php
 	}
 
 	/**
