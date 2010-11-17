@@ -186,7 +186,7 @@ input[type="submit"] {
 }
 
 .rm_options {
-	display: none;
+/*	display: none;*/
 }
 
 .input-wrapper input[type="text"],
@@ -212,6 +212,10 @@ input[type="submit"] {
 	color: #333;
 	line-height: 1.5em;
 	background: #f3f3f3;
+}
+
+.input-wrapper.color-picker input {
+	width: 100px;
 }
 
 .rm_title h3 {
