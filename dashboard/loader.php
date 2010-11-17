@@ -35,6 +35,9 @@ add_action( 'bp_tasty_dashboard_cpanel_content', 'bp_tasty_dashboard_cpanel_opti
  */
 function bp_tasty_dashboard_setup()
 {
+	// pie options renderer setup
+	BP_Tasty_Options_Renderer::setup( BP_TASTY_PIE_URL );
+
 	// enqueue styles
     wp_enqueue_style( 'bp-tasty-dashboard', BP_TASTY_ADMIN_URL . '/assets/css/cpanel.css', false, BP_TASTY_VERSION, 'screen' );
 
