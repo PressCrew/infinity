@@ -74,8 +74,10 @@ abstract class Pie_Easy_Options_Renderer
 	{ ?>
 		<div class="<?php print $this->option->class ?>">
 			<?php $this->render_label() ?>
-			<?php $this->render_field() ?>
-			<?php $this->render_description() ?>
+			<div class="pie-easy-options-field">
+				<?php $this->render_field() ?>
+				<?php $this->render_description() ?>
+			</div>
 		</div><?php
 	}
 
@@ -84,7 +86,7 @@ abstract class Pie_Easy_Options_Renderer
 	 */
 	protected function render_label()
 	{ ?>
-		<label for="<?php print esc_attr( $this->option->name ) ?>" title="<?php print esc_attr( $this->option->title ) ?>"><?php print esc_attr( $this->option->title ) ?></label><?php
+		<label class="pie-easy-options-title" for="<?php print esc_attr( $this->option->name ) ?>" title="<?php print esc_attr( $this->option->title ) ?>"><?php print esc_attr( $this->option->title ) ?></label><?php
 	}
 
 	/**
@@ -93,34 +95,6 @@ abstract class Pie_Easy_Options_Renderer
 	protected function render_description()
 	{ ?>
 		<p><?php print esc_attr( $this->option->description ) ?></p><?php
-	}
-
-	/**
-	 * Render form input tag
-	 *
-	 * @param string $type A valid form input type
-	 */
-	protected function render_input( $type )
-	{ ?>
-		<input type="<?php print $type ?>" name="<?php print esc_attr( $this->option->name ) ?>" id="<?php print esc_attr(  $this->option->field_id ) ?>" class="<?php print esc_attr( $this->option->field_class ) ?>" value="<?php print esc_attr( $this->option->get() ) ?>" /> <?php
-	}
-
-	/**
-	 * Render a group of inputs with the same name
-	 *
-	 * @param string $type
-	 */
-	protected function render_input_group( $type )
-	{
-		if ( is_array( $this->option->field_options ) ) {
-			foreach ( $this->option->field_options as $value => $display ) {
-				$checked = ( $this->option->get() == $value ) ? ' checked=checked' : null; ?>
-				<input type="<?php print $type ?>" name="<?php print esc_attr( $this->option->name ) ?>" id="<?php print esc_attr( $this->option->field_id ) ?>" value="<?php print esc_attr( $value ) ?>"<?php print $checked ?> /><?php
-				print $display;
-			}
-		} else {
-			throw new Exception( sprintf( 'The "%s" option has no array of field options to render.', $this->option->name ) );
-		}
 	}
 
 	/**
@@ -145,8 +119,26 @@ abstract class Pie_Easy_Options_Renderer
 			case 'page':
 				$this->render_page();
 				break;
+			case 'pages':
+				$this->render_pages();
+				break;
+			case 'post':
+				$this->render_post();
+				break;
+			case 'posts':
+				$this->render_posts();
+				break;
 			case 'radio':
 				$this->render_radio();
+				break;
+			case 'select':
+				$this->render_select();
+				break;
+			case 'tag':
+				$this->render_tag();
+				break;
+			case 'tags':
+				$this->render_tags();
 				break;
 			case 'text':
 				$this->render_text();
@@ -248,8 +240,7 @@ abstract class Pie_Easy_Options_Renderer
 			<div style="background-color: <?php print esc_attr( $this->option->get() ) ?>;"></div>
         </div>
 		<script type="text/javascript">
-			jQuery(document).ready(function()
-			{
+			jQuery(document).ready(function() {
 				pieEasyColorPicker.init(
 					'input[name=<?php print $this->option->name ?>]',
 					'div#pie-easy-options-cp-wrapper-<?php print esc_attr( $this->option->name ) ?>'
@@ -258,14 +249,55 @@ abstract class Pie_Easy_Options_Renderer
 		</script><?php
 	}
 
+
+	/**
+	 * Render form input tag
+	 *
+	 * @param string $type A valid form input type
+	 */
+	protected function render_input( $type )
+	{ ?>
+		<input type="<?php print $type ?>" name="<?php print esc_attr( $this->option->name ) ?>" id="<?php print esc_attr(  $this->option->field_id ) ?>" class="<?php print esc_attr( $this->option->field_class ) ?>" value="<?php print esc_attr( $this->option->get() ) ?>" /> <?php
+	}
+
+	/**
+	 * Render a group of inputs with the same name
+	 *
+	 * @param string $type
+	 * @param array $field_options
+	 * @param mixed $selected_value
+	 */
+	protected function render_input_group( $type, $field_options = null, $selected_value = null )
+	{
+		// field options defaults to rendered option config
+		if ( empty( $field_options ) ) {
+			$field_options = $this->option->field_options;
+		}
+
+		// select value defaults to rendered option setting
+		if ( empty( $selected_value ) ) {
+			$selected_value = $this->option->get();
+		}
+
+		if ( is_array( $field_options ) ) {
+			foreach ( $field_options as $value => $display ) {
+				$checked = ( $value == $selected_value ) ? ' checked=checked' : null; ?>
+				<input type="<?php print $type ?>" name="<?php print esc_attr( $this->option->name ) ?>" id="<?php print esc_attr( $this->option->field_id ) ?>" value="<?php print esc_attr( $value ) ?>"<?php print $checked ?> /><?php
+				print $display;
+			}
+		} else {
+			throw new Exception( sprintf( 'The "%s" option has no array of field options to render.', $this->option->name ) );
+		}
+	}
+	
 	/**
 	 * Render a page select box
 	 */
 	protected function render_page()
 	{
 		$args = array(
-			'depth'		=> false,
-			'child_of'	=> false,
+			'depth'		=> 0,
+			'child_of'	=> 0,
 			'echo'		=> true,
 			'selected'	=> $this->option->get(),
 			'name'		=> $this->option->name );
@@ -275,11 +307,151 @@ abstract class Pie_Easy_Options_Renderer
 	}
 
 	/**
+	 * Render page checkboxes
+	 */
+	protected function render_pages()
+	{
+		$args = array(
+			'depth'        => 0,
+			'show_date'    => '',
+			'date_format'  => get_option('date_format'),
+			'child_of'     => 0,
+			'exclude'      => '',
+			'include'      => '',
+			'title_li'     => '',
+			'echo'         => true,
+			'authors'      => '',
+			'sort_column'  => 'menu_order, post_title',
+			'link_before'  => '',
+			'link_after'   => '',
+			'walker'			=> new Pie_Easy_Options_Walker_Page(),
+			'pie_easy_option'	=> $this->option );
+
+		// call the WordPress function
+		wp_list_pages( $args );
+	}
+
+	/**
+	 * Render a post select box
+	 */
+	protected function render_post()
+	{
+		// get all posts
+		$posts = get_posts();
+
+		// field options
+		$options = array();
+
+		// build of options array
+		foreach ( $posts as $post ) {
+			$options[$post->ID] = apply_filters( 'the_title', $post->post_title, $post->ID );
+		}
+
+		// call the select renderer
+		$this->render_select( $options );
+	}
+
+	/**
+	 * Render posts checkboxes
+	 */
+	protected function render_posts()
+	{
+		// get all posts
+		$posts = get_posts();
+
+		// field options
+		$options = array();
+
+		// build of options array
+		foreach ( $posts as $post ) {
+			$options[$post->ID] = apply_filters( 'the_title', $post->post_title, $post->ID );
+		}
+
+		// call the input group  renderer
+		$this->render_input_group( 'checkbox', $options );
+	}
+
+	/**
 	 * Render one or more radio button tags
 	 */
 	protected function render_radio()
 	{
 		$this->render_input_group( 'radio' );
+	}
+
+	/**
+	 * Render a select tag
+	 *
+	 * @param array $field_options
+	 * @param mixed $selected_value
+	 */
+	protected function render_select( $field_options = null, $selected_value = null )
+	{
+		// field options defaults to rendered option config
+		if ( empty( $field_options ) ) {
+			$field_options = $this->option->field_options;
+		}
+
+		// select value defaults to rendered option setting
+		if ( empty( $selected_value ) ) {
+			$selected_value = $this->option->get();
+		} ?>
+
+		<select name="<?php print esc_attr( $this->option->name ) ?>" id="<?php print esc_attr( $this->option->field_id ) ?>" class="<?php print esc_attr( $this->option->field_class ) ?>">
+			<option value="">--- Select One ---</option>
+			<?php foreach ( $field_options as $value => $text ):
+				$selected = ( $value == $selected_value ) ? ' selected="selected"' : null; ?>
+				<option value="<?php print esc_attr( $value ) ?>"<?php print $selected ?>><?php print esc_html( $text ) ?></option>
+			<?php endforeach; ?>
+		</select><?php
+	}
+
+	/**
+	 * Render a tag select box
+	 */
+	protected function render_tag()
+	{
+		$args = array(
+			'hide_empty' => false
+		);
+
+		// get all tags
+		$tags = get_tags( $args );
+
+		// field options
+		$options = array();
+
+		// build of options array
+		foreach ( $tags as $tag ) {
+			$options[$tag->term_id] = $tag->name;
+		}
+
+		// call the select renderer
+		$this->render_select( $options );
+	}
+
+	/**
+	 * Render tags checkboxes
+	 */
+	protected function render_tags()
+	{
+		$args = array(
+			'hide_empty' => false
+		);
+
+		// get all tags
+		$tags = get_tags( $args );
+
+		// field options
+		$options = array();
+
+		// build of options array
+		foreach ( $tags as $tag ) {
+			$options[$tag->term_id] = $tag->name;
+		}
+
+		// call the input group  renderer
+		$this->render_input_group( 'checkbox', $options );
 	}
 
 	/**
