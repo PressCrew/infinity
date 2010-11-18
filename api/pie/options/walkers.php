@@ -31,16 +31,69 @@ class Pie_Easy_Options_Walker_Category extends Walker_Category
 
 		// put a checkbox before the category
 		$output .= sprintf(
-			'<input type="checkbox" value="%s" name="%s" id="%s" class="%s"%s />',
+			'<input type="checkbox" value="%s" name="%s" id="%s" class="%s"%s /> %s',
 			esc_attr( $category->term_id ),
 			esc_attr( $option->name ),
 			esc_attr( $option->field_id ),
 			esc_attr( $option->field_class ),
-			( $option->get() == $category->term_id ) ? ' checked="checked"' : null
+			( $option->get() == $category->term_id ) ? ' checked="checked"' : null,
+			apply_filters( 'list_cats', esc_attr( $category->name ), $category )
 		);
+	}
 
-		// call parent to render category link
-		$output .= parent::start_el( $output, $category, $depth, $args );
+	/**
+	 * @see Walker::end_el()
+	 *
+	 * @param string $output Passed by reference. Used to append additional content.
+	 * @param object $page Not used.
+	 * @param int $depth Depth of category. Not used.
+	 * @param array $args Only uses 'list' for whether should append to output.
+	 */
+	function end_el(&$output, $page, $depth, $args) {
+		$output .= "\n";
+	}
+}
+
+/**
+ * Make page options easy
+ */
+class Pie_Easy_Options_Walker_Page extends Walker_Page
+{
+	/**
+	 * @see Walker::start_el()
+	 *
+	 * @param string $output Passed by reference. Used to append additional content.
+	 * @param object $page Page data object.
+	 * @param int $depth Depth of page. Used for padding.
+	 * @param int $current_page Page ID.
+	 * @param array $args
+	 */
+	function start_el(&$output, $page, $depth, $args, $current_page)
+	{
+		// get option from args
+		$option = $args['pie_easy_option'];
+
+		// put a checkbox before the page
+		$output .= sprintf(
+			'<input type="checkbox" value="%s" name="%s" id="%s" class="%s"%s /> %s',
+			esc_attr( $page->ID ),
+			esc_attr( $option->name ),
+			esc_attr( $option->field_id ),
+			esc_attr( $option->field_class ),
+			( $option->get() == $page->ID ) ? ' checked="checked"' : null,
+			apply_filters( 'the_title', $page->post_title, $page->ID )
+		);
+	}
+
+	/**
+	 * @see Walker::end_el()
+	 *
+	 * @param string $output Passed by reference. Used to append additional content.
+	 * @param object $page Page data object. Not used.
+	 * @param int $depth Depth of page. Not Used.
+	 */
+	function end_el(&$output, $page, $depth) {
+		$output .= "\n";
 	}
 }
 
