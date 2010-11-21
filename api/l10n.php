@@ -4,14 +4,14 @@
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://bp-tricks.com/
- * @copyright Copyright &copy; 2010 Marshall Sorenson
+ * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
  * @package api
  * @subpackage localization
  * @since 1.0
  */
 
-require_once( BP_TASTY_PIE_DIR . '/l10n.php' );
+Pie_Easy_Loader::load( 'l10n' );
 
 /**
  * Tasty Localization
