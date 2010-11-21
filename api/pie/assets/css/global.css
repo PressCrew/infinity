@@ -1,0 +1,73 @@
+/**
+ * Copyright (C) 2010  Marshall Sorenson
+ *
+ * Contact Information:
+ *     marshall.sorenson@gmail.com
+ *     http://marshallsorenson.com
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+
+/* Options */
+div.pie-easy-options-cp-box {
+	display: inline-block;
+	position: relative;
+	width: 36px;
+	height: 36px;
+	vertical-align: top;
+	background: url(../images/colorpicker_launch.png);
+}
+
+div.pie-easy-options-cp-box div {
+	position: absolute;
+	top: 3px;
+	left: 3px;
+	width: 30px;
+	height: 30px;
+	background: url(../images/colorpicker_launch.png) center;
+}
+
+/* Uploader */
+
+div.pie-easy-options-fu fieldset {
+	padding: 10px;
+	border: 1px solid gray;
+	background-color: white;
+}
+	div.pie-easy-options-fu fieldset legend {
+		margin-left: 10px;
+		padding: 3px;
+		border: 1px solid gray;
+	}
+div.pie-easy-options-fu fieldset.pie-easy-options-fu-img {
+	float: left;
+	height: 178px;
+	width: 190px;
+	margin-right: 20px;
+}
+	div.pie-easy-options-fu fieldset.pie-easy-options-fu-img img {
+		max-height: 100px;
+		max-width: 100px;
+	}
+div.pie-easy-options-fu fieldset.pie-easy-options-fu-log {
+	height: 150px;
+	width: 300px;
+	padding: 5px 3px 3px 1px;
+}
+	div.pie-easy-options-fu fieldset.pie-easy-options-fu-log textarea {
+		width: 100%;
+		height: 100%;
+		border: 0px;
+	}

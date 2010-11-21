@@ -4,14 +4,12 @@
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://marshallsorenson.com/
- * @copyright Copyright &copy; 2010 Marshall Sorenson
+ * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
  * @package pie
  * @subpackage options
  * @since 1.0
  */
-
-require_once( 'walkers.php' );
 
 /**
  * Make rendering options easy
@@ -26,19 +24,31 @@ abstract class Pie_Easy_Options_Renderer
 	private $option;
 
 	/**
+	 * The uploader renderer
+	 *
+	 * @var Pie_Easy_Options_Uploader
+	 */
+	private $uploader;
+
+	/**
 	 * Setup necessary files
 	 */
-	static public function setup( $pie_url )
+	static public function init()
 	{
-		// global css
-		wp_enqueue_style( 'pie-easy', $pie_url . '/assets/css/pie.css' );
-		
-		// color picker plugin
-		wp_enqueue_style( 'pie-easy-colorpicker', $pie_url . '/assets/css/colorpicker.css' );
-		wp_enqueue_script( 'pie-easy-colorpicker', $pie_url . '/assets/js/colorpicker.js', array( 'jquery' ) );
+		// color picker
+		Pie_Easy_Loader::enqueue_style( 'colorpicker' );
+		Pie_Easy_Loader::enqueue_script( 'colorpicker', array('jquery') );
+	}
 
-		// pie javascript
-		wp_enqueue_script( 'pie-easy', $pie_url . '/assets/js/pie.js', array( 'jquery' ) );
+	/**
+	 * Enable uploader support
+	 *
+	 * @param Pie_Easy_Options_Uploader $uploader
+	 */
+	final public function enable_uploader( Pie_Easy_Options_Uploader $uploader )
+	{
+		$this->uploader = $uploader;
+		$this->uploader->init();
 	}
 
 	/**
@@ -145,6 +155,9 @@ abstract class Pie_Easy_Options_Renderer
 				break;
 			case 'textarea':
 				$this->render_textarea();
+				break;
+			case 'upload':
+				$this->render_upload();
 				break;
 			default:
 				throw new UnexpectedValueException( sprintf(
@@ -468,6 +481,20 @@ abstract class Pie_Easy_Options_Renderer
 	protected function render_textarea()
 	{ ?>
 		<textarea name="<?php print esc_attr( $this->option->name ) ?>" id="<?php print esc_attr(  $this->option->field_id ) ?>" class="<?php print esc_attr( $this->option->field_class ) ?>" rows="5" cols="50"><?php print esc_attr( $this->option->get() ) ?></textarea> <?php
+	}
+
+	/**
+	 * Render a file uploader
+	 */
+	final protected function render_upload()
+	{
+		// make sure uploader was enabled
+		if ( $this->uploader instanceof Pie_Easy_Options_Uploader ) {
+			// render it!
+			$this->uploader->render( $this->option );
+		} else {
+			throw new Exception( 'Uploader support has not been initiated.' );
+		}
 	}
 }
 
