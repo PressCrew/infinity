@@ -4,17 +4,38 @@
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://bp-tricks.com/
- * @copyright Copyright &copy; 2010 Marshall Sorenson
+ * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
  * @package api
  * @subpackage options
  * @since 1.0
  */
 
-require_once( BP_TASTY_PIE_DIR . '/options/section.php' );
-require_once( BP_TASTY_PIE_DIR . '/options/option.php' );
-require_once( BP_TASTY_PIE_DIR . '/options/registry.php' );
-require_once( BP_TASTY_PIE_DIR . '/options/renderer.php' );
+Pie_Easy_Loader::load( 'options' );
+
+/**
+ * Tasty Options
+ */
+class BP_Tasty_Options
+{
+	/**
+	 * Initialize options support
+	 */
+	static public function init()
+	{
+		BP_Tasty_Options_Renderer::init();
+	}
+
+	/**
+	 * Initialize options AJAX requrest handling
+	 */
+	static public function init_ajax()
+	{
+		Pie_Easy_Loader::load('ajax');
+		$uploader = new BP_Tasty_Options_Uploader();
+		$uploader->init_ajax();
+	}
+}
 
 /**
  * Tasty Options Section
@@ -123,7 +144,9 @@ class BP_Tasty_Options_Registry extends Pie_Easy_Options_Registry
 	 */
 	protected function create_renderer()
 	{
-		return new BP_Tasty_Options_Renderer();
+		$renderer = new BP_Tasty_Options_Renderer();
+		$renderer->enable_uploader( new BP_Tasty_Options_Uploader( 'admin_head' ) );
+		return $renderer;
 	}
 
 }
@@ -136,6 +159,13 @@ class BP_Tasty_Options_Renderer extends Pie_Easy_Options_Renderer
 	// nothing custom yet
 }
 
+/**
+ * Tasty Options Uploader
+ */
+class BP_Tasty_Options_Uploader extends Pie_Easy_Options_Uploader
+{
+	// nothing custom yet
+}
 
 //
 // Helpers

@@ -4,7 +4,7 @@
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://bp-tricks.com/
- * @copyright Copyright &copy; 2010 Marshall Sorenson
+ * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
  * @package dashboard
  * @subpackage loader
@@ -22,6 +22,7 @@ require_once( BP_TASTY_ADMIN_DIR . '/cpanel.php' );
 //
 // Actions
 //
+add_action( 'admin_init', 'bp_tasty_ajax_setup' );
 add_action( 'admin_menu', 'bp_tasty_dashboard_setup' );
 add_action( 'admin_menu', 'bp_tasty_dashboard_setup_menu' );
 add_action( 'bp_tasty_dashboard_cpanel_content', 'bp_tasty_dashboard_cpanel_options_content' );
@@ -31,18 +32,37 @@ add_action( 'bp_tasty_dashboard_cpanel_content', 'bp_tasty_dashboard_cpanel_opti
 //
 
 /**
+ * Setup AJAX handling
+ */
+function bp_tasty_ajax_setup()
+{
+	if ( defined( 'DOING_AJAX' ) ) {
+		BP_Tasty_Options::init_ajax();
+	}
+}
+
+/**
  * Handle setup of the control panel environment
  */
 function bp_tasty_dashboard_setup()
 {
-	// pie options renderer setup
-	BP_Tasty_Options_Renderer::setup( BP_TASTY_PIE_URL );
-
 	// enqueue styles
     wp_enqueue_style( 'bp-tasty-dashboard', BP_TASTY_ADMIN_URL . '/assets/css/cpanel.css', false, BP_TASTY_VERSION, 'screen' );
 
 	// enqueue script
 	wp_enqueue_script( 'bp-tasty-dashboard', BP_TASTY_ADMIN_URL . '/assets/js/dashboard.js', false, BP_TASTY_VERSION );
+	
+	if ( $_GET['page'] == 'bp-tasty-control-panel' ) {
+
+		// pie easy options init
+		BP_Tasty_Options::init();
+
+		// pie easy options load options config
+		BP_Tasty_Options_Registry::instance()
+			->load_config_file(
+				BP_TASTY_CONF_DIR . '/options.ini',
+				'BP_Tasty_Options_Option' );
+	}
 }
 
 /**
