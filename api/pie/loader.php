@@ -17,7 +17,7 @@ if ( defined( 'PIE_EASY_DIR' ) ) {
 }
 
 // set pie contants
-define( 'PIE_EASY_DIR', __DIR__ );
+define( 'PIE_EASY_DIR', dirname( __FILE__ ) );
 define( 'PIE_EASY_VERSION', '1.0' );
 
 /**
