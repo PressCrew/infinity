@@ -83,8 +83,9 @@ class Pie_Easy_Options_Uploader
 	 * Render a flash uploader for the given option
 	 *
 	 * @param Pie_Easy_Options_Option $option
+	 * @param Pie_Easy_Options_Renderer $renderer
 	 */
-	public function render( Pie_Easy_Options_Option $option )
+	public function render( Pie_Easy_Options_Option $option, Pie_Easy_Options_Renderer $renderer )
 	{
 		// make uploader element id
 		$uploader_id = 'pie-easy-options-fu-' . $option->name;
@@ -96,13 +97,13 @@ class Pie_Easy_Options_Uploader
 				<legend><?php _e( 'Current Image' ) ?></legend>
 				<img src="" alt="" />
 			</fieldset>
-			<fieldset class="pie-easy-options-fu-log">
+			<fieldset class="pie-easy-options-fu-stat">
 				<legend><?php _e( 'Upload Status' ) ?></legend>
-				<textarea></textarea>
+				<textarea></textarea><div><p></p></div>
 			</fieldset>
 			<div class="pie-easy-options-fu-btn">
-				<input type="button" id="foo_man_chu" />
-				<input type="button" value="<?php _e( 'Cancel Upload' ) ?>" onclick="cancelQueue(<?php print $uploader_var ?>);" disabled="disabled" />
+				<input type="button" /><?php
+				$renderer->render_input( 'hidden' ); ?>
 			</div>
 			<script type="text/javascript">
 				jQuery(document).ready(function() {

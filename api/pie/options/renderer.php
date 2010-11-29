@@ -35,6 +35,10 @@ abstract class Pie_Easy_Options_Renderer
 	 */
 	static public function init()
 	{
+		// jQuery UI
+		Pie_Easy_Loader::enqueue_style( 'ui-lightness/jquery-ui-custom' );
+		Pie_Easy_Loader::enqueue_script( 'jquery-ui.custom.min', array('jquery') );
+		
 		// color picker
 		Pie_Easy_Loader::enqueue_style( 'colorpicker' );
 		Pie_Easy_Loader::enqueue_script( 'colorpicker', array('jquery') );
@@ -268,7 +272,7 @@ abstract class Pie_Easy_Options_Renderer
 	 *
 	 * @param string $type A valid form input type
 	 */
-	protected function render_input( $type )
+	public function render_input( $type )
 	{ ?>
 		<input type="<?php print $type ?>" name="<?php print esc_attr( $this->option->name ) ?>" id="<?php print esc_attr(  $this->option->field_id ) ?>" class="<?php print esc_attr( $this->option->field_class ) ?>" value="<?php print esc_attr( $this->option->get() ) ?>" /> <?php
 	}
@@ -491,7 +495,7 @@ abstract class Pie_Easy_Options_Renderer
 		// make sure uploader was enabled
 		if ( $this->uploader instanceof Pie_Easy_Options_Uploader ) {
 			// render it!
-			$this->uploader->render( $this->option );
+			$this->uploader->render( $this->option, $this );
 		} else {
 			throw new Exception( 'Uploader support has not been initiated.' );
 		}
