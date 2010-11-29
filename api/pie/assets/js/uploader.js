@@ -24,6 +24,42 @@
 pieEasyFlashUploader = function ()
 {
 	var
+	bbar = function ()
+		{
+			var bar, btnRem, btnView;
+
+			return {
+				construct: function (uploader)
+				{
+					// the button bar
+					bar = jQuery('fieldset.pie-easy-options-fu-img div', uploader);
+					// view button
+					btnView = bar.children().eq(0).button({
+							icons: {
+								primary: "ui-icon-zoomin"
+							}
+					});
+					// remove button
+					btnRem = bar.children().eq(1).button({
+							icons: {
+								primary: "ui-icon-trash"
+							}
+					});
+					// display on load?
+					if ( attachId(uploader).length ) {
+						this.show();
+					}
+				},
+				show: function ()
+				{
+					bar.fadeIn(750);
+				},
+				hide: function ()
+				{
+					bar.fadeOut(750);
+				}
+			}
+		}(),
 	status = function ()
 		{
 			var stat, log, prg, prgTxt;
@@ -73,6 +109,10 @@ pieEasyFlashUploader = function ()
 				}
 			}
 		}(),
+	attachId = function(uploader)
+	{
+		return jQuery('input[type=hidden]', uploader).val();
+	},
 	mediaSrc = function(el, attachId)
 	{
 		jQuery.ajax(
@@ -185,7 +225,8 @@ pieEasyFlashUploader = function ()
 				} else {
 					status.logMsg('Upload successful: "' + file.name + '" saved as attachment ID #' + serverData );
 					status.prgMsg('Loading image preview...');
-					mediaSrc(jQuery('img', this), serverData);
+					mediaSrc(jQuery('p img', this), serverData);
+					bbar.show();
 				}
 			},
 		uploadComplete: function(event, file)
@@ -239,6 +280,8 @@ pieEasyFlashUploader = function ()
 			{
 				// get uploader
 				var uploader = jQuery('#' + uploaderId);
+				// setup button bar
+				bbar.construct(uploader);
 				// set options
 				options.button_placeholder = jQuery('input[type=button]', uploader)[0];
 				// return the object
