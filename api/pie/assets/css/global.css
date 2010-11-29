@@ -42,13 +42,13 @@ div.pie-easy-options-cp-box div {
 /* Uploader */
 
 div.pie-easy-options-fu fieldset {
-	height: 170px;
+	min-height: 150px;
 	padding: 10px;
 	border: 1px solid gray;
 	background-color: white;
 }
 	div.pie-easy-options-fu fieldset legend {
-		margin-left: 10px;
+		margin-left: 3px;
 		padding: 3px;
 		border: 1px solid gray;
 	}
@@ -56,13 +56,27 @@ div.pie-easy-options-fu fieldset.pie-easy-options-fu-img {
 	float: left;
 	width: 170px;
 	margin-right: 20px;
+	text-align: center;
 }
-	div.pie-easy-options-fu fieldset.pie-easy-options-fu-img img {
+	div.pie-easy-options-fu fieldset.pie-easy-options-fu-img p {
+		min-height: 60px;
+	}
+	div.pie-easy-options-fu fieldset.pie-easy-options-fu-img p img {
 		max-height: 150px;
 		max-width: 150px;
 	}
+	div.pie-easy-options-fu fieldset.pie-easy-options-fu-img div {
+		padding: 5px 0 0 5px;
+		text-align: center;
+		display: none;
+	}
+		div.pie-easy-options-fu fieldset.pie-easy-options-fu-img div button {
+			line-height: 1em;
+			font-size: 12px;
+		}
 div.pie-easy-options-fu fieldset.pie-easy-options-fu-stat {
 	float: left;
+	height: 150px;
 	width: 300px;
 	display: none;
 }
@@ -81,4 +95,6 @@ div.pie-easy-options-fu fieldset.pie-easy-options-fu-stat {
 	}
 div.pie-easy-options-fu div.pie-easy-options-fu-btn {
 	clear: left;
+	width: 170px;
+	text-align: center;
 }

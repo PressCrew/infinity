@@ -95,7 +95,8 @@ class Pie_Easy_Options_Uploader
 		<div class="pie-easy-options-fu" id="<?php print $uploader_id ?>">
 			<fieldset class="pie-easy-options-fu-img">
 				<legend><?php _e( 'Current Image' ) ?></legend>
-				<img src="" alt="" />
+				<p><img src="" /></p>
+				<div><button>Zoom</button><button>Remove</button></div>
 			</fieldset>
 			<fieldset class="pie-easy-options-fu-stat">
 				<legend><?php _e( 'Upload Status' ) ?></legend>
@@ -104,7 +105,7 @@ class Pie_Easy_Options_Uploader
 			<div class="pie-easy-options-fu-btn">
 				<input type="button" /><?php
 				$renderer->render_input( 'hidden' ); ?>
-			</div>
+			</div>	
 			<script type="text/javascript">
 				jQuery(document).ready(function() {
 					var <?php print $uploader_var ?> = pieEasyFlashUploader.create('<?php print $uploader_id ?>');
