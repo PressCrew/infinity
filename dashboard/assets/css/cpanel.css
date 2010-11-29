@@ -167,11 +167,11 @@ a:hover.bp-tasty-cpanel-page-thanks {
 	color: #999;
 }
 
-.button,
-.button-secondary,
-.submit input,
-input[type="button"],
-input[type="submit"] {
+div.bp-tasty-cpanel-content .button,
+div.bp-tasty-cpanel-content .button-secondary,
+div.bp-tasty-cpanel-content .submit input,
+div.bp-tasty-cpanel-content input[type="button"],
+div.bp-tasty-cpanel-content input[type="submit"] {
 	background: url("../images/alert-overlay.png") repeat-x scroll 0 50% #439F2B !important;
 	border: 1px solid #6C6B6B !important;
 	color: #FFFFFF !important;
