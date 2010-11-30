@@ -244,6 +244,11 @@ abstract class Pie_Easy_Options_Registry
 			$option->set_default_value( $option_config['default_value'] );
 		}
 
+		// capabilities
+		if ( isset( $option_config['capabilities'] ) ) {
+			$option->set_capabilities( $option_config['capabilities'] );
+		}
+
 		// css id
 		if ( isset( $option_config['field_id'] ) ) {
 			$option->set_field_id( $option_config['field_id'] );
@@ -367,10 +372,45 @@ abstract class Pie_Easy_Options_Registry
 			$html .= $section->render( $options_html, $output );
 			
 		}
+
+		$html .= $this->renderer->render_manifest();
 		
 		// all done
 		if ( $output === false ) {
 			return $html;
+		}
+	}
+
+	/**
+	 * Look through POST vars for options from this registry that can be saved
+	 */
+	public function process_form()
+	{
+		if ( empty( $_POST ) ) {
+			return false;
+		} elseif ( isset( $_POST['_manifest_'] ) ) {
+			// load manifest
+			$manifest = explode( ',', $_POST['_manifest_'] );
+			// loop through manifest options
+			foreach ( $manifest as $option_name ) {
+				// is this option registered?
+				if ( $this->registered( $option_name ) ) {
+					// get the option
+					$option = $this->option($option_name);
+					// look for option name as POST key
+					if ( array_key_exists( $option->name, $_POST ) ) {
+						// yep, update it
+						$option->update( $_POST[$option->name] );
+					} else {
+						// nope, delete it
+						$option->delete();
+					}
+				}
+			}
+			// done saving
+			return true;
+		} else {
+			throw new Exception( 'No manifest was rendered.' );
 		}
 	}
 }

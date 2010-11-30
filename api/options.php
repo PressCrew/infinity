@@ -104,7 +104,12 @@ class BP_Tasty_Options_Registry extends Pie_Easy_Options_Registry
 	static public function instance()
 	{
 		if ( !self::$instance instanceof self ) {
+			// init singleton
 			self::$instance = new self();
+			// add form processing
+			if ( current_user_can('manage_options') ) {
+				add_action( 'buddypress_page_bp-tasty-control-panel', array( self::$instance, 'process_form' ) );
+			}
 		}
 
 		return self::$instance;
