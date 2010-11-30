@@ -28,15 +28,23 @@ class Pie_Easy_Options_Walker_Category extends Walker_Category
 	{
 		// get option from args
 		$option = $args['pie_easy_option'];
+		
+		// selected values
+		$selected = $option->get();
+
+		// handle empty values
+		if ( empty( $selected ) ) {
+			$selected = array();
+		}
 
 		// put a checkbox before the category
 		$output .= sprintf(
-			'<input type="checkbox" value="%s" name="%s" id="%s" class="%s"%s /> %s',
+			'<input type="checkbox" value="%s" name="%s[]" id="%s" class="%s"%s /> %s',
 			esc_attr( $category->term_id ),
 			esc_attr( $option->name ),
 			esc_attr( $option->field_id ),
 			esc_attr( $option->field_class ),
-			( $option->get() == $category->term_id ) ? ' checked="checked"' : null,
+			( in_array( $category->term_id, $selected ) ) ? ' checked="checked"' : null,
 			apply_filters( 'list_cats', esc_attr( $category->name ), $category )
 		);
 	}
@@ -73,14 +81,22 @@ class Pie_Easy_Options_Walker_Page extends Walker_Page
 		// get option from args
 		$option = $args['pie_easy_option'];
 
+		// selected values
+		$selected = $option->get();
+
+		// handle empty values
+		if ( empty( $selected ) ) {
+			$selected = array();
+		}
+
 		// put a checkbox before the page
 		$output .= sprintf(
-			'<input type="checkbox" value="%s" name="%s" id="%s" class="%s"%s /> %s',
+			'<input type="checkbox" value="%s" name="%s[]" id="%s" class="%s"%s /> %s',
 			esc_attr( $page->ID ),
 			esc_attr( $option->name ),
 			esc_attr( $option->field_id ),
 			esc_attr( $option->field_class ),
-			( $option->get() == $page->ID ) ? ' checked="checked"' : null,
+			( in_array( $page->ID, $selected ) ) ? ' checked="checked"' : null,
 			apply_filters( 'the_title', $page->post_title, $page->ID )
 		);
 	}

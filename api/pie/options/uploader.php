@@ -93,13 +93,15 @@ class Pie_Easy_Options_Uploader
 		// make uploader element id
 		$uploader_id = 'pie-easy-options-fu-' . $option->name;
 		// make uploader var name
-		$uploader_var = 'pie_easy_options_fu_' . $option->name; ?>
+		$uploader_var = 'pie_easy_options_fu_' . $option->name;
+		// get saved attachment url
+		$attach_url = $this->media_url( $option->get() ); ?>
 
 		<div class="pie-easy-options-fu" id="<?php print $uploader_id ?>">
 			<fieldset class="pie-easy-options-fu-img">
 				<legend><?php _e( 'Current Image' ) ?></legend>
-				<p><img src="" alt="" /></p>
-				<div><a class="thickbox" href="">Zoom</a><a>Remove</a></div>
+				<p><img src="<?php print esc_attr( $attach_url ) ?>" alt="" /></p>
+				<div><a class="thickbox" href="<?php print esc_attr( $attach_url ) ?>">Zoom</a><a>Remove</a></div>
 			</fieldset>
 			<fieldset class="pie-easy-options-fu-stat">
 				<legend><?php _e( 'Upload Status' ) ?></legend>
@@ -115,6 +117,27 @@ class Pie_Easy_Options_Uploader
 				});
 			</script>
 		</div><?php
+	}
+
+	/**
+	 * Get the URL for an attachment id
+	 * 
+	 * @param string $attach_id
+	 * @param string $size
+	 * @return string|null
+	 */
+	public function media_url( $attach_id, $size = null )
+	{
+		// try to get the attachment info
+		$src = wp_get_attachment_image_src( $attach_id, $size );
+
+		// did we find one?
+		if ( is_array($src) ) {
+			// return the url
+			return $src[0];
+		} else {
+			return null;
+		}
 	}
 
 	/**

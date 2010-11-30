@@ -17,6 +17,13 @@
 abstract class Pie_Easy_Options_Renderer
 {
 	/**
+	 * All options that have been rendered
+	 *
+	 * @var array
+	 */
+	private $options_rendered = array();
+
+	/**
 	 * The current option being rendered
 	 * 
 	 * @var Pie_Easy_Options_Option
@@ -74,6 +81,7 @@ abstract class Pie_Easy_Options_Renderer
 
 		// render the option
 		$this->render_option();
+		$this->options_rendered[] = $option;
 
 		// return results if output buffering is on
 		if ( $output === false ) {
@@ -296,10 +304,15 @@ abstract class Pie_Easy_Options_Renderer
 			$selected_value = $this->option->get();
 		}
 
+		// force the selected value to an array
+		if ( !is_array( $selected_value ) ) {
+			$selected_value = array( $selected_value );
+		}
+
 		if ( is_array( $field_options ) ) {
 			foreach ( $field_options as $value => $display ) {
-				$checked = ( $value == $selected_value ) ? ' checked=checked' : null; ?>
-				<input type="<?php print $type ?>" name="<?php print esc_attr( $this->option->name ) ?>" id="<?php print esc_attr( $this->option->field_id ) ?>" value="<?php print esc_attr( $value ) ?>"<?php print $checked ?> /><?php
+				$checked = ( in_array( $value, $selected_value ) ) ? ' checked=checked' : null; ?>
+				<input type="<?php print $type ?>" name="<?php print esc_attr( $this->option->name ) ?><?php if ( $type == 'checkbox' ): ?>[]<?php endif; ?>" id="<?php print esc_attr( $this->option->field_id ) ?>" value="<?php print esc_attr( $value ) ?>"<?php print $checked ?> /><?php
 				print $display;
 			}
 		} else {
@@ -499,6 +512,20 @@ abstract class Pie_Easy_Options_Renderer
 		} else {
 			throw new Exception( 'Uploader support has not been initiated.' );
 		}
+	}
+
+	/**
+	 * Render a hidden input which is a serialized array of all option names that were rendered
+	 */
+	final public function render_manifest()
+	{
+		$option_names = array();
+
+		foreach ( $this->options_rendered as $option ) {
+			$option_names[] = $option->name;
+		} ?>
+
+		<input type="hidden" name="_manifest_" value="<?php print esc_attr( implode( ',', $option_names ) ) ?>" /> <?php
 	}
 }
 

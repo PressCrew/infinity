@@ -108,6 +108,13 @@ abstract class Pie_Easy_Options_Option
 	private $default_value;
 
 	/**
+	 * Required capabilities
+	 *
+	 * @var array
+	 */
+	private $capabilities = array( 'manage_options' );
+
+	/**
 	 * Constructor
 	 * 
 	 * @param string $name Option name may only contain alphanumeric characters as well as the underscore for use as a word separator.
@@ -165,7 +172,11 @@ abstract class Pie_Easy_Options_Option
 	 */
 	public function update( $value )
 	{
-		return update_option( $this->get_api_name(), $value );
+		if ( $this->check_caps() ) {
+			return update_option( $this->get_api_name(), $value );
+		}
+		
+		return false;
 	}
 
 	/**
@@ -176,7 +187,27 @@ abstract class Pie_Easy_Options_Option
 	 */
 	public function delete()
 	{
-		return delete_option( $this->get_api_name() );
+		if ( $this->check_caps() ) {
+			return delete_option( $this->get_api_name() );
+		}
+
+		return false;
+	}
+
+	/**
+	 * Check that user has all required capabilities to edit this option
+	 *
+	 * @return boolean
+	 */
+	private function check_caps()
+	{
+		foreach ( $this->capabilities as $cap ) {
+			if ( !current_user_can( $cap ) ) {
+				return false;
+			}
+		}
+		
+		return true;
 	}
 
 	/**
@@ -214,7 +245,13 @@ abstract class Pie_Easy_Options_Option
 	{
 		if ( empty( $this->field_type ) ) {
 			if ( $this->check_field_type( $type ) ) {
+				// set it
 				$this->field_type = $type;
+				// add cap for upload field
+				if ( 'upload' == $type ) {
+					$this->capabilities['upload_files'] = 'upload_files';
+				}
+				// done
 				return true;
 			} else {
 				throw new Exception( sprintf( 'The "%s" field type is not valid.', $type ) );
@@ -277,6 +314,26 @@ abstract class Pie_Easy_Options_Option
 			$this->default_value = $value;
 		} else {
 			throw new Exception( sprintf( 'The default value for "%s" has already been set.', $this->name ) );
+		}
+	}
+
+	/**
+	 * Set additional capabilities
+	 *
+	 * @param string $string A comma separated list of capabilities
+	 */
+	public function set_capabilities( $string )
+	{
+		if ( empty( $this->capabilities ) ) {
+			// split at comma
+			$caps = explode( ',', $string );
+			// trim and set each
+			foreach ( $caps as $cap ) {
+				$cap_trimmed = trim( $cap );
+				$this->capabilities[$cap_trimmed] = $cap_trimmed;
+			}
+		} else {
+			throw new Exception( sprintf( 'The capabilities for "%s" has already been set.', $this->name ) );
 		}
 	}
 
