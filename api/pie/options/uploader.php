@@ -47,6 +47,9 @@ class Pie_Easy_Options_Uploader
 		Pie_Easy_Loader::enqueue_script( 'jquery.swfupload', array( 'jquery' ) );
 		Pie_Easy_Loader::enqueue_script( 'uploader', array( 'jquery' ) );
 
+		// enque thickbox
+		add_thickbox();
+
 		// localize the upload wrapper
 		$this->localize_script();
 	}
@@ -95,8 +98,8 @@ class Pie_Easy_Options_Uploader
 		<div class="pie-easy-options-fu" id="<?php print $uploader_id ?>">
 			<fieldset class="pie-easy-options-fu-img">
 				<legend><?php _e( 'Current Image' ) ?></legend>
-				<p><img src="" /></p>
-				<div><button>Zoom</button><button>Remove</button></div>
+				<p><img src="" alt="" /></p>
+				<div><a class="thickbox" href="">Zoom</a><a>Remove</a></div>
 			</fieldset>
 			<fieldset class="pie-easy-options-fu-stat">
 				<legend><?php _e( 'Upload Status' ) ?></legend>
@@ -120,8 +123,10 @@ class Pie_Easy_Options_Uploader
 	public function ajax_media_url()
 	{
 		if ( isset( $_POST['attachment_id'] ) && is_numeric( $_POST['attachment_id'] ) ) {
+			// determine size to retrieve
+			$size = ( isset( $_POST['attachment_size'] ) ) ? $_POST['attachment_size'] : 'full';
 			// try to get the attachment info
-			$src = wp_get_attachment_image_src( $_POST['attachment_id'] );
+			$src = wp_get_attachment_image_src( $_POST['attachment_id'], $size );
 			// check it out
 			if ( is_array($src) ) {
 				Pie_Easy_Ajax::response( 1, $src[0], $src[1], $src[2] );

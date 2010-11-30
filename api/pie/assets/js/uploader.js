@@ -26,7 +26,7 @@ pieEasyFlashUploader = function ()
 	var
 	bbar = function ()
 		{
-			var bar, btnRem, btnView;
+			var bar, btnRem, btnZoom;
 
 			return {
 				construct: function (uploader)
@@ -34,17 +34,24 @@ pieEasyFlashUploader = function ()
 					// the button bar
 					bar = jQuery('fieldset.pie-easy-options-fu-img div', uploader);
 					// view button
-					btnView = bar.children().eq(0).button({
+					btnZoom = bar.children().eq(0).button({
 							icons: {
 								primary: "ui-icon-zoomin"
 							}
-					});
+						});
 					// remove button
 					btnRem = bar.children().eq(1).button({
 							icons: {
 								primary: "ui-icon-trash"
 							}
-					});
+						}).click( function ()
+							{
+								attachId(uploader, '');
+								jQuery('p img', uploader).attr('src', '');
+								bbar.zoomHref('');
+								bbar.hide();
+								return false;
+							});
 					// display on load?
 					if ( attachId(uploader).length ) {
 						this.show();
@@ -57,6 +64,10 @@ pieEasyFlashUploader = function ()
 				hide: function ()
 				{
 					bar.fadeOut(750);
+				},
+				zoomHref: function (href)
+				{
+					btnZoom.attr('href', href);
 				}
 			}
 		}(),
@@ -109,11 +120,17 @@ pieEasyFlashUploader = function ()
 				}
 			}
 		}(),
-	attachId = function(uploader)
+	attachId = function(uploader, value)
 	{
-		return jQuery('input[type=hidden]', uploader).val();
+		var input = jQuery('input[type=hidden]', uploader);
+		
+		if (typeof value == 'undefined') {
+			return input.val();
+		} else {
+			return input.val(value);
+		}
 	},
-	mediaSrc = function(el, attachId)
+	attachUrl = function(el, attachId)
 	{
 		jQuery.ajax(
 			{
@@ -122,13 +139,15 @@ pieEasyFlashUploader = function ()
 				url: ajaxurl,
 				data: {
 					'action': 'pie_easy_options_uploader_media_url',
-					'attachment_id': attachId
+					'attachment_id': attachId,
+					'attachment_size': 'full'
 			},
 			success: function(rs)
 				{
 					var r = pieEasyAjax.splitResponse(rs);
 					// TODO error handling
 					el.attr('src', r[1]);
+					bbar.zoomHref(r[1]);
 				}
 		});
 	},
@@ -225,7 +244,8 @@ pieEasyFlashUploader = function ()
 				} else {
 					status.logMsg('Upload successful: "' + file.name + '" saved as attachment ID #' + serverData );
 					status.prgMsg('Loading image preview...');
-					mediaSrc(jQuery('p img', this), serverData);
+					attachId(this, serverData);
+					attachUrl(jQuery('p img', this), serverData);
 					bbar.show();
 				}
 			},
@@ -241,6 +261,7 @@ pieEasyFlashUploader = function ()
 				}
 				
 				status.destruct();
+				alert('You must save your changes to make this edit permanent.');
 			}
 	},
 	// default options
