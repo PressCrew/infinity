@@ -77,6 +77,22 @@ class BP_Tasty_Options_Option extends Pie_Easy_Options_Option
 }
 
 /**
+ * Tasty Options Option
+ */
+class BP_Tasty_Options_Skin_Option extends BP_Tasty_Options_Option
+{
+	/**
+	 * Use a custom name prefix to keep option scopes from being tainted
+	 * 
+	 * @return string
+	 */
+	protected function name_prefix()
+	{
+		return sprintf( '%s_%s_', 'skin', BP_TASTY_SKIN_NAME );
+	}
+}
+
+/**
  * Tasty Options Registry
  */
 class BP_Tasty_Options_Registry extends Pie_Easy_Options_Registry
@@ -119,9 +135,10 @@ class BP_Tasty_Options_Registry extends Pie_Easy_Options_Registry
 	 * Initialize the registry with an options file
 	 *
 	 * @param string $ini
+	 * @param string $option_class
 	 * @return boolean
 	 */
-	static public function init( $ini )
+	static public function init( $ini, $option_class )
 	{
 		// already initialized?
 		if ( self::$instance instanceof self ) {
@@ -129,22 +146,7 @@ class BP_Tasty_Options_Registry extends Pie_Easy_Options_Registry
 		}
 
 		// initialize it!
-		return self::instance()->load_config_file( $ini );
-	}
-
-	/**
-	 * Create a new option from scratch
-	 *
-	 * @param string $name Option name may only contain alphanumeric characters as well as the underscore for use as a word separator.
-	 * @param string $title
-	 * @param string $desc
-	 * @param string $field_type
-	 * @param string $section
-	 * @return BP_Tasty_Options_Option
-	 */
-	protected function create_option( $name, $title, $desc, $field_type, $section = BP_Tasty_Options_Option::DEFAULT_SECTION )
-	{
-		return new BP_Tasty_Options_Option( $name, $title, $desc, $field_type, $section );
+		return self::instance()->load_config_file( $ini, $option_class );
 	}
 
 	/**
@@ -200,7 +202,7 @@ class BP_Tasty_Options_Uploader extends Pie_Easy_Options_Uploader
  */
 function bp_tasty_options_registry_init()
 {
-	return BP_Tasty_Options_Registry::init( BP_TASTY_CONF_DIR . '/options.ini' );
+	return BP_Tasty_Options_Registry::init( BP_TASTY_CONF_DIR . '/options.ini', 'BP_Tasty_Options_Option' );
 }
 
 /**

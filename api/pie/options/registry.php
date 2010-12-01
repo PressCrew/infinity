@@ -34,6 +34,13 @@ abstract class Pie_Easy_Options_Registry
 	private $sections = array();
 
 	/**
+	 * The class use for new options
+	 * 
+	 * @var Pie_Easy_Options_Option 
+	 */
+	private $option_class;
+
+	/**
 	 * All options that are currently configured
 	 *
 	 * @var array
@@ -61,16 +68,21 @@ abstract class Pie_Easy_Options_Registry
 	}
 
 	/**
-	 * Create a new option from scratch
+	 * Set the class to use for creating new options
 	 *
-	 * @param string $name Option name may only contain alphanumeric characters as well as the underscore for use as a word separator.
-	 * @param string $title
-	 * @param string $desc
-	 * @param string $field_type
-	 * @param string $section
-	 * @return Pie_Easy_Options_Option
+	 * @param string $class_name
+	 * @return boolean
 	 */
-	abstract protected function create_option( $name, $title, $desc, $field_type, $section = self::DEFAULT_SECTION );
+	private function set_option_class( $class_name )
+	{
+		// set the options class
+		if ( class_exists( $class_name ) ) {
+			$this->option_class = $class_name;
+			return true;
+		} else {
+			throw new Exception( 'Provided options class does not exist' );
+		}
+	}
 
 	/**
 	 * Create a new section from scratch
@@ -171,10 +183,14 @@ abstract class Pie_Easy_Options_Registry
 	 * 
 	 * @uses parse_ini_file()
 	 * @param string $filename
+	 * @param string $option_class
 	 * @return boolean 
 	 */
-	public function load_config_file( $filename )
+	public function load_config_file( $filename, $option_class )
 	{
+		// try to set the option class
+		$this->set_option_class( $option_class );
+
 		// try to parse the file
 		return $this->load_config_array( parse_ini_file( $filename, true ) );
 	}
@@ -183,10 +199,14 @@ abstract class Pie_Easy_Options_Registry
 	 * Load options from an ini string
 	 *
 	 * @param string $ini_text
+	 * @param string $option_class
 	 * @return boolean
 	 */
-	public function load_config_text( $ini_text )
+	public function load_config_text( $ini_text, $option_class )
 	{
+		// try to set the option class
+		$this->set_option_class( $option_class );
+
 		// try to parse the text
 		return $this->load_config_array( parse_ini_string( $ini_text, true ) );
 	}
@@ -219,14 +239,20 @@ abstract class Pie_Easy_Options_Registry
 
 	/**
 	 * Load a single option into the registry (one parsed ini section)
+	 * 
 	 * @param string $option_name
 	 * @param string $option_config
 	 * @return boolean
 	 */
 	private function load_config_option( $option_name, $option_config )
 	{
+		// make sure this is not a dupe
+		if ( $this->registered($option_name) ) {
+			throw new Exception( sprintf( 'The "%s" option has already been registered', $option_name ) );
+		}
+		
 		// create new option
-		$option = $this->create_option(
+		$option = new $this->{option_class}(
 			$option_name,
 			$option_config['title'],
 			$option_config['description'],
