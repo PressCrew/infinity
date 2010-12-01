@@ -11,10 +11,75 @@
  * @since 1.0
  */
 
-// TODO this will be dynamic in the future
-define( 'BP_TASTY_SKIN_NAME', 'minimal' );
 define( 'BP_TASTY_EXTRAS_SKIN_DIR', BP_TASTY_EXTRAS_DIR . '/skins' );
 define( 'BP_TASTY_ACTIVE_SKIN_DIR', BP_TASTY_EXTRAS_SKIN_DIR . '/' . BP_TASTY_SKIN_NAME );
+
+define( 'BP_TASTY_SKIN_DEFAULT', 'minimal' );
+define( 'BP_TASTY_SKIN_NAME', bp_tasty_skins_active_name() );
+
+/**
+ * Get the name of the active skin
+ *
+ * @return string
+ */
+function bp_tasty_skins_active_name()
+{
+	// make sure registry has been initialized
+	bp_tasty_options_registry_init();
+	
+	// try to get it from the options
+	$skin_name = bp_tasty_get_option( 'active_skin' );
+
+	// did we get a name?
+	if ( empty( $skin_name ) ) {
+		// nope, use default
+		return BP_TASTY_SKIN_DEFAULT;
+	} else {
+		return $skin_name;
+	}
+}
+
+/**
+ * Return a list of the available skins in the skins dir
+ *
+ * @return array
+ */
+function bp_tasty_skins_available()
+{
+	// does the skins directory exist?
+	if ( is_dir( BP_TASTY_EXTRAS_SKIN_DIR ) ) {
+		// open the skins dir
+		$dh = opendir( BP_TASTY_EXTRAS_SKIN_DIR );
+		// check that handle is valid
+		if ( $dh ) {
+			// list of dirs
+			$dirs = array();
+			// loop through and add dirs only to list
+			while (($file = readdir($dh)) !== false) {
+				// skip "dot" files
+				if ( preg_match('/^\./', $file) ) {
+					continue;
+				}
+				// build up full file path
+				$file_path = BP_TASTY_EXTRAS_SKIN_DIR . DIRECTORY_SEPARATOR . $file;
+				// is it a directory?
+				if ( is_dir($file_path) ) {
+					$dirs[$file] = $file;
+				}
+			}
+			// destroy handle
+			closedir($dh);
+			// put skins in alphabetical order
+			asort($dirs);
+			// done
+			return $dirs;
+		} else {
+			throw new Exception( 'Unable to open the skins dir: ' . BP_TASTY_EXTRAS_SKIN_DIR );
+		}
+	} else {
+		throw new Exception( 'The skins dir does not exist: ' . BP_TASTY_EXTRAS_SKIN_DIR );
+	}
+}
 
 /**
  * Filter located template from bp_core_load_template

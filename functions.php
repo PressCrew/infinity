@@ -29,10 +29,13 @@ define( 'BP_TASTY_TEXT_DOMAIN',  BP_TASTY_NAME );
 require_once( BP_TASTY_PIE_DIR . '/loader.php' );
 Pie_Easy_Loader::init( BP_TASTY_PIE_URL );
 
-// load API files
-require_once( BP_TASTY_API_DIR . '/l10n.php' );
+// load Tasty API
 require_once( BP_TASTY_API_DIR . '/options.php' );
+require_once( BP_TASTY_API_DIR . '/l10n.php' );
 require_once( BP_TASTY_API_DIR . '/skinning.php' );
+
+// initialize registry (just in case)
+bp_tasty_options_registry_init();
 
 // only load admin functionality if the dashboard is actually loaded
 if ( is_admin() ) {
