@@ -23,6 +23,7 @@ define( 'BP_TASTY_CONF_DIR', BP_TASTY_THEME_DIR . '/config' );
 define( 'BP_TASTY_ADMIN_DIR', BP_TASTY_THEME_DIR . '/dashboard' );
 define( 'BP_TASTY_ADMIN_URL', BP_TASTY_THEME_URL . '/dashboard' );
 define( 'BP_TASTY_EXTRAS_DIR',  get_theme_root() . '/bp-tasty-extras' );
+define( 'BP_TASTY_EXTRAS_SKIN_DIR', BP_TASTY_EXTRAS_DIR . '/skins' );
 define( 'BP_TASTY_TEXT_DOMAIN',  BP_TASTY_NAME );
 
 // load PIE and initialize
@@ -34,7 +35,7 @@ require_once( BP_TASTY_API_DIR . '/options.php' );
 require_once( BP_TASTY_API_DIR . '/l10n.php' );
 require_once( BP_TASTY_API_DIR . '/skinning.php' );
 
-// initialize registry (just in case)
+// initialize global registry (just in case)
 bp_tasty_options_registry_init();
 
 // only load admin functionality if the dashboard is actually loaded

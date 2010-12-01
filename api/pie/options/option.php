@@ -17,7 +17,7 @@
 abstract class Pie_Easy_Options_Option
 {
 	/**
-	 * All options are prepended with this prefix template
+	 * All global options are prepended with this prefix template
 	 */
 	const PREFIX_TPL = '%s_opt_';
 
@@ -130,11 +130,11 @@ abstract class Pie_Easy_Options_Option
 	 * @param string $field_type
 	 * @param string $section
 	 */
-	public function __construct( $name, $title, $desc, $field_type, $section = self::DEFAULT_SECTION )
+	final public function __construct( $name, $title, $desc, $field_type, $section = self::DEFAULT_SECTION )
 	{
 		// name must adhere to a strict format
 		if ( preg_match( '/^[a-z0-9]+(_[a-z0-9]+)*$/', $name ) ) {
-			$this->name = $name;
+			$this->name = $this->name_prefix() . $name;
 		} else {
 			throw new Exception( 'Option name does not match the allowed pattern.' );
 		}
@@ -364,6 +364,16 @@ abstract class Pie_Easy_Options_Option
 		}
 	}
 
+	/**
+	 * Override this to prefix all names with a string
+	 *
+	 * @return string
+	 */
+	protected function name_prefix()
+	{
+		return '';
+	}
+	
 	/**
 	 * Get the prefix for API option
 	 *

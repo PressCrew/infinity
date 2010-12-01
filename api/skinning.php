@@ -11,11 +11,31 @@
  * @since 1.0
  */
 
-define( 'BP_TASTY_EXTRAS_SKIN_DIR', BP_TASTY_EXTRAS_DIR . '/skins' );
-define( 'BP_TASTY_ACTIVE_SKIN_DIR', BP_TASTY_EXTRAS_SKIN_DIR . '/' . BP_TASTY_SKIN_NAME );
-
 define( 'BP_TASTY_SKIN_DEFAULT', 'minimal' );
 define( 'BP_TASTY_SKIN_NAME', bp_tasty_skins_active_name() );
+define( 'BP_TASTY_SKIN_DIR', BP_TASTY_EXTRAS_SKIN_DIR . '/' . BP_TASTY_SKIN_NAME );
+
+// initialize skin options in registry
+bp_tasty_skins_registry_init();
+
+
+/**
+ * Initialize the skin registry options
+ *
+ * @return boolean
+ */
+function bp_tasty_skins_registry_init()
+{
+	// path to skin ini
+	$skin_ini = BP_TASTY_SKIN_DIR . '/options.ini';
+
+	// load the skin config if it exists
+	if ( is_readable( $skin_ini ) ) {
+		return BP_Tasty_Options_Registry::instance()->load_config_file( $skin_ini, 'BP_Tasty_Options_Skin_Option' );
+	} else {
+		return;
+	}
+}
 
 /**
  * Get the name of the active skin
@@ -24,10 +44,10 @@ define( 'BP_TASTY_SKIN_NAME', bp_tasty_skins_active_name() );
  */
 function bp_tasty_skins_active_name()
 {
-	// make sure registry has been initialized
+	// make sure global registry has been initialized
 	bp_tasty_options_registry_init();
 	
-	// try to get it from the options
+	// try to get name from the options
 	$skin_name = bp_tasty_get_option( 'active_skin' );
 
 	// did we get a name?
@@ -116,7 +136,7 @@ function bp_tasty_locate_template( $template_names, $load = false )
 		foreach ( $template_names as $template_name ) {
 
 			// prepend all template names with the active skin dir
-			$located_template = BP_TASTY_ACTIVE_SKIN_DIR . '/' . $template_name;
+			$located_template = BP_TASTY_SKIN_DIR . '/' . $template_name;
 
 			// does it exist?
 			if ( file_exists( $located_template ) ) {
