@@ -53,15 +53,8 @@ function bp_tasty_dashboard_setup()
 	wp_enqueue_script( 'bp-tasty-dashboard', BP_TASTY_ADMIN_URL . '/assets/js/dashboard.js', false, BP_TASTY_VERSION );
 	
 	if ( $_GET['page'] == 'bp-tasty-control-panel' ) {
-
 		// pie easy options init
 		BP_Tasty_Options::init();
-
-		// pie easy options load options config
-		BP_Tasty_Options_Registry::instance()
-			->load_config_file(
-				BP_TASTY_CONF_DIR . '/options.ini',
-				'BP_Tasty_Options_Option' );
 	}
 }
 

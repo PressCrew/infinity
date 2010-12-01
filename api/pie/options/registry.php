@@ -260,23 +260,44 @@ abstract class Pie_Easy_Options_Registry
 		}
 
 		// options
-		if ( isset( $option_config['field_options'] ) &&
-			 is_array( $option_config['field_options'] ) &&
-			 count( $option_config['field_options'] ) >= 1 )
-		{
-			// the final field options
-			$field_options = array();
+		if ( isset( $option_config['field_options'] ) ) {
 
-			// loop through all field options
-			foreach ( $option_config['field_options'] as $field_option ) {
-				// split each one at the delimeter
-				$field_option = explode( self::FIELD_OPTION_DELIM, $field_option, 2 );
-				// add to array
-				$field_options[trim($field_option[0])] = trim($field_option[1]);
+			if ( is_array( $option_config['field_options'] ) ) {
+
+				// loop through all field options
+				foreach ( $option_config['field_options'] as $field_option ) {
+					// split each one at the delimeter
+					$field_option = explode( self::FIELD_OPTION_DELIM, $field_option, 2 );
+					// add to array
+					$field_options[trim($field_option[0])] = trim($field_option[1]);
+				}
+
+			} elseif ( strlen( $option_config['field_options'] ) ) {
+
+				// possibly a function
+				$callback = $option_config['field_options'];
+
+				// check if the function exists
+				if ( function_exists( $callback ) ) {
+					// call it
+					$field_options = $callback();
+					// make sure we got an array
+					if ( !is_array( $field_options ) ) {
+						throw new Exception( sprintf( 'The field options callback function "%s" did not return an array.', $callback ) );
+					}
+				} else {
+					throw new Exception( sprintf( 'The field options callback function "%s" does not exist.', $callback ) );
+				}
+
+			} else {
+				throw new Exception( sprintf( 'The field options for the "%s" option is not configured correctly.', $option_name ) );
 			}
 
-			// finally set them for the option
-			$option->set_field_options( $field_options );
+			// make sure we ended up with some options
+			if ( count( $field_options ) >= 1 ) {
+				// finally set them for the option
+				$option->set_field_options( $field_options );
+			}
 		}
 
 		// register it

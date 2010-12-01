@@ -73,6 +73,7 @@ abstract class Pie_Easy_Options_Renderer
 	{
 		// set as currently rendered option
 		$this->option = $option;
+		$this->option->enable_post_override();
 
 		// handle output buffering if applicable
 		if ( $output === false ) {

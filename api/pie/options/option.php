@@ -115,6 +115,13 @@ abstract class Pie_Easy_Options_Option
 	private $capabilities = array( 'manage_options' );
 
 	/**
+	 * If true, a POST value will override the real option value
+	 * 
+	 * @var boolean
+	 */
+	private $post_override = false;
+
+	/**
 	 * Constructor
 	 * 
 	 * @param string $name Option name may only contain alphanumeric characters as well as the underscore for use as a word separator.
@@ -153,6 +160,22 @@ abstract class Pie_Easy_Options_Option
 	}
 
 	/**
+	 * Toggle post override ON
+	 */
+	public function enable_post_override()
+	{
+		$this->post_override = true;
+	}
+
+	/**
+	 * Toggle post override OFF
+	 */
+	public function disable_post_override()
+	{
+		$this->post_override = false;
+	}
+
+	/**
 	 * Get (read) the value of this option
 	 *
 	 * @uses get_option()
@@ -160,7 +183,11 @@ abstract class Pie_Easy_Options_Option
 	 */
 	public function get()
 	{
-		return get_option( $this->get_api_name(), $this->default_value );
+		if ( $this->post_override === true && isset( $_POST[$this->name] ) ) {
+			return $_POST[$this->name];
+		} else {
+			return get_option( $this->get_api_name(), $this->default_value );
+		}
 	}
 
 	/**

@@ -116,6 +116,23 @@ class BP_Tasty_Options_Registry extends Pie_Easy_Options_Registry
 	}
 
 	/**
+	 * Initialize the registry with an options file
+	 *
+	 * @param string $ini
+	 * @return boolean
+	 */
+	static public function init( $ini )
+	{
+		// already initialized?
+		if ( self::$instance instanceof self ) {
+			return;
+		}
+
+		// initialize it!
+		return self::instance()->load_config_file( $ini );
+	}
+
+	/**
 	 * Create a new option from scratch
 	 *
 	 * @param string $name Option name may only contain alphanumeric characters as well as the underscore for use as a word separator.
@@ -177,6 +194,16 @@ class BP_Tasty_Options_Uploader extends Pie_Easy_Options_Uploader
 //
 
 /**
+ * Initialize the registry
+ *
+ * @return boolean
+ */
+function bp_tasty_options_registry_init()
+{
+	return BP_Tasty_Options_Registry::init( BP_TASTY_CONF_DIR . '/options.ini' );
+}
+
+/**
  * Render all sections in the registery
  *
  * @param boolean $output
@@ -186,4 +213,39 @@ function bp_tasty_options_registry_render_sections( $output = true )
 {
 	return BP_Tasty_Options_Registry::instance()->render_sections( $output );
 }
+
+/**
+ * Get an option value
+ *
+ * @param string $option_name
+ * @return mixed
+ */
+function bp_tasty_get_option( $option_name )
+{
+	return BP_Tasty_Options_Registry::instance()->option( $option_name )->get();
+}
+
+/**
+ * Update an option value
+ *
+ * @param string $option_name
+ * @param mixed $new_value
+ * @return boolean
+ */
+function bp_tasty_update_option( $option_name, $new_value )
+{
+	return BP_Tasty_Options_Registry::instance()->option( $option_name )->update( $new_value );
+}
+
+/**
+ * Delete an option
+ *
+ * @param string $option_name
+ * @return boolean
+ */
+function bp_tasty_delete_option( $option_name )
+{
+	return BP_Tasty_Options_Registry::instance()->option( $option_name )->delete();
+}
+
 ?>
