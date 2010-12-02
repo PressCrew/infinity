@@ -11,6 +11,12 @@
  * @since 1.0
  */
 
+// initialize global registry
+bp_tasty_options_registry_init();
+
+//
+// Constants
+//
 define( 'BP_TASTY_ADMIN_TPLS_DIR', BP_TASTY_ADMIN_DIR . '/templates' );
 
 //
