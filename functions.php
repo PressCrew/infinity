@@ -37,18 +37,16 @@ require_once( BP_TASTY_API_DIR . '/options.php' );
 require_once( BP_TASTY_API_DIR . '/l10n.php' );
 require_once( BP_TASTY_API_DIR . '/skinning.php' );
 
-// load skin functions
-bp_tasty_skin_load_functions();
-
-// enqueue skin assets
-bp_tasty_skin_enqueue_assets();
-
-// initialize global registry (just in case)
-bp_tasty_options_registry_init();
-
-// only load admin functionality if the dashboard is actually loaded
 if ( is_admin() ) {
+	// only load admin functionality if the dashboard is actually loaded
 	require_once( BP_TASTY_ADMIN_DIR . '/loader.php' );
+} else {
+	// load skin functions
+	bp_tasty_skin_load_functions();
+	// enqueue skin assets
+	bp_tasty_skin_enqueue_assets();
+	// initialize global registry
+	bp_tasty_options_registry_init();
 }
 
 ?>
