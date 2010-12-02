@@ -147,6 +147,20 @@ function bp_tasty_skin_enqueue_assets()
 }
 
 /**
+ * Load the active skin's functions
+ */
+function bp_tasty_skin_load_functions()
+{
+	// path to functions file
+	$filename = BP_TASTY_SKIN_DIR . DIRECTORY_SEPARATOR . 'functions.php';
+
+	// does it exist?
+	if ( file_exists( $filename ) ) {
+		require_once $filename;
+	}
+}
+
+/**
  * Get a skin option value
  *
  * @param string $option_name
