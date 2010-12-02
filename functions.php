@@ -37,6 +37,12 @@ require_once( BP_TASTY_API_DIR . '/options.php' );
 require_once( BP_TASTY_API_DIR . '/l10n.php' );
 require_once( BP_TASTY_API_DIR . '/skinning.php' );
 
+// load skin functions
+bp_tasty_skin_load_functions();
+
+// enqueue skin assets
+bp_tasty_skin_enqueue_assets();
+
 // initialize global registry (just in case)
 bp_tasty_options_registry_init();
 
@@ -44,8 +50,5 @@ bp_tasty_options_registry_init();
 if ( is_admin() ) {
 	require_once( BP_TASTY_ADMIN_DIR . '/loader.php' );
 }
-
-// enqueue skin assets
-bp_tasty_skin_enqueue_assets();
 
 ?>
