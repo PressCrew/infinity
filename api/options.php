@@ -88,7 +88,7 @@ class BP_Tasty_Options_Skin_Option extends BP_Tasty_Options_Option
 	 */
 	protected function name_prefix()
 	{
-		return sprintf( '%s_%s_', 'skin', BP_TASTY_SKIN_NAME );
+		return bp_tasty_skins_options_name_prefix();
 	}
 }
 
@@ -135,10 +135,11 @@ class BP_Tasty_Options_Registry extends Pie_Easy_Options_Registry
 	 * Initialize the registry with an options file
 	 *
 	 * @param string $ini
+	 * @param string $section_class
 	 * @param string $option_class
 	 * @return boolean
 	 */
-	static public function init( $ini, $option_class )
+	static public function init( $ini, $section_class, $option_class )
 	{
 		// already initialized?
 		if ( self::$instance instanceof self ) {
@@ -146,19 +147,7 @@ class BP_Tasty_Options_Registry extends Pie_Easy_Options_Registry
 		}
 
 		// initialize it!
-		return self::instance()->load_config_file( $ini, $option_class );
-	}
-
-	/**
-	 * Create a new section from scratch
-	 *
-	 * @param string $name Section name may only contain alphanumeric characters as well as the underscore for use as a word separator.
-	 * @param string $title
-	 * @return BP_Tasty_Options_Section
-	 */
-	protected function create_section( $name, $title )
-	{
-		return new BP_Tasty_Options_Section( $name, $title );
+		return self::instance()->load_config_file( $ini, $section_class, $option_class );
 	}
 
 	/**
@@ -202,7 +191,10 @@ class BP_Tasty_Options_Uploader extends Pie_Easy_Options_Uploader
  */
 function bp_tasty_options_registry_init()
 {
-	return BP_Tasty_Options_Registry::init( BP_TASTY_CONF_DIR . '/options.ini', 'BP_Tasty_Options_Option' );
+	return BP_Tasty_Options_Registry::init(
+		BP_TASTY_CONF_DIR . '/options.ini',
+		'BP_Tasty_Options_Section',
+		'BP_Tasty_Options_Option' );
 }
 
 /**
@@ -225,29 +217,6 @@ function bp_tasty_options_registry_render_sections( $output = true )
 function bp_tasty_get_option( $option_name )
 {
 	return BP_Tasty_Options_Registry::instance()->option( $option_name )->get();
-}
-
-/**
- * Update an option value
- *
- * @param string $option_name
- * @param mixed $new_value
- * @return boolean
- */
-function bp_tasty_update_option( $option_name, $new_value )
-{
-	return BP_Tasty_Options_Registry::instance()->option( $option_name )->update( $new_value );
-}
-
-/**
- * Delete an option
- *
- * @param string $option_name
- * @return boolean
- */
-function bp_tasty_delete_option( $option_name )
-{
-	return BP_Tasty_Options_Registry::instance()->option( $option_name )->delete();
 }
 
 ?>

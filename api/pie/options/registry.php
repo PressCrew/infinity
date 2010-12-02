@@ -27,11 +27,11 @@ abstract class Pie_Easy_Options_Registry
 	const FIELD_OPTION_DELIM = '=';
 
 	/**
-	 * All sections that are currently configured
+	 * The class to use for new sections
 	 *
-	 * @var array
+	 * @var Pie_Easy_Options_Section
 	 */
-	private $sections = array();
+	private $section_class;
 
 	/**
 	 * The class use for new options
@@ -39,6 +39,13 @@ abstract class Pie_Easy_Options_Registry
 	 * @var Pie_Easy_Options_Option 
 	 */
 	private $option_class;
+
+	/**
+	 * All sections that are currently configured
+	 *
+	 * @var array
+	 */
+	private $sections = array();
 
 	/**
 	 * All options that are currently configured
@@ -68,6 +75,23 @@ abstract class Pie_Easy_Options_Registry
 	}
 
 	/**
+	 * Set the class to use for creating new sections
+	 *
+	 * @param string $class_name
+	 * @return boolean
+	 */
+	private function set_section_class( $class_name )
+	{
+		// set the option class
+		if ( class_exists( $class_name ) ) {
+			$this->section_class = $class_name;
+			return true;
+		} else {
+			throw new Exception( 'Provided section class does not exist' );
+		}
+	}
+
+	/**
 	 * Set the class to use for creating new options
 	 *
 	 * @param string $class_name
@@ -75,23 +99,14 @@ abstract class Pie_Easy_Options_Registry
 	 */
 	private function set_option_class( $class_name )
 	{
-		// set the options class
+		// set the option class
 		if ( class_exists( $class_name ) ) {
 			$this->option_class = $class_name;
 			return true;
 		} else {
-			throw new Exception( 'Provided options class does not exist' );
+			throw new Exception( 'Provided option class does not exist' );
 		}
 	}
-
-	/**
-	 * Create a new section from scratch
-	 *
-	 * @param string $name Section name may only contain alphanumeric characters as well as the underscore for use as a word separator.
-	 * @param string $title
-	 * @return Pie_Easy_Options_Section
-	 */
-	abstract protected function create_section( $name, $title );
 
 	/**
 	 * Create a new renderer
@@ -183,12 +198,14 @@ abstract class Pie_Easy_Options_Registry
 	 * 
 	 * @uses parse_ini_file()
 	 * @param string $filename
+	 * @param string $section_class
 	 * @param string $option_class
 	 * @return boolean 
 	 */
-	public function load_config_file( $filename, $option_class )
+	public function load_config_file( $filename, $section_class, $option_class )
 	{
-		// try to set the option class
+		// try to set the section and option class
+		$this->set_section_class( $section_class );
 		$this->set_option_class( $option_class );
 
 		// try to parse the file
@@ -199,10 +216,11 @@ abstract class Pie_Easy_Options_Registry
 	 * Load options from an ini string
 	 *
 	 * @param string $ini_text
+	 * @param string $section_class
 	 * @param string $option_class
 	 * @return boolean
 	 */
-	public function load_config_text( $ini_text, $option_class )
+	public function load_config_text( $ini_text,  $section_class, $option_class )
 	{
 		// try to set the option class
 		$this->set_option_class( $option_class );
@@ -250,14 +268,16 @@ abstract class Pie_Easy_Options_Registry
 		if ( $this->registered($option_name) ) {
 			throw new Exception( sprintf( 'The "%s" option has already been registered', $option_name ) );
 		}
-		
+
+		$section = $this->sections[$option_config['section']];
+
 		// create new option
 		$option = new $this->{option_class}(
 			$option_name,
 			$option_config['title'],
 			$option_config['description'],
 			$option_config['field_type'],
-			$option_config['section']
+			$section->name
 		);
 
 		// container class
@@ -340,7 +360,7 @@ abstract class Pie_Easy_Options_Registry
 	private function load_config_section( $section_name, $section_config )
 	{
 		// create new section
-		$section = $this->create_section(
+		$section = new $this->{section_class}(
 			trim( $section_name, self::SECTION_PREFIX ),
 			$section_config['title']
 		);

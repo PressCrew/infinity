@@ -31,7 +31,13 @@ function bp_tasty_skins_registry_init()
 
 	// load the skin config if it exists
 	if ( is_readable( $skin_ini ) ) {
-		return BP_Tasty_Options_Registry::instance()->load_config_file( $skin_ini, 'BP_Tasty_Options_Skin_Option' );
+		return
+			BP_Tasty_Options_Registry::instance()
+				->load_config_file(
+					$skin_ini,
+					'BP_Tasty_Options_Section',
+					'BP_Tasty_Options_Skin_Option'
+				);
 	} else {
 		return;
 	}
@@ -99,6 +105,27 @@ function bp_tasty_skins_available()
 	} else {
 		throw new Exception( 'The skins dir does not exist: ' . BP_TASTY_EXTRAS_SKIN_DIR );
 	}
+}
+
+/**
+ * Return the prefix used for skin option names and section name
+ *
+ * @return string
+ */
+function bp_tasty_skins_options_name_prefix()
+{
+	return sprintf( '%s_%s_', 'skin', BP_TASTY_SKIN_NAME );
+}
+
+/**
+ * Get a skin option value
+ *
+ * @param string $option_name
+ * @return mixed
+ */
+function bp_tasty_get_skin_option( $option_name )
+{
+	return BP_Tasty_Options_Registry::instance()->option( bp_tasty_skins_options_name_prefix() . $option_name )->get();
 }
 
 /**
