@@ -23,7 +23,9 @@ define( 'BP_TASTY_CONF_DIR', BP_TASTY_THEME_DIR . '/config' );
 define( 'BP_TASTY_ADMIN_DIR', BP_TASTY_THEME_DIR . '/dashboard' );
 define( 'BP_TASTY_ADMIN_URL', BP_TASTY_THEME_URL . '/dashboard' );
 define( 'BP_TASTY_EXTRAS_DIR',  get_theme_root() . '/bp-tasty-extras' );
+define( 'BP_TASTY_EXTRAS_URL', get_theme_root_uri() . '/bp-tasty-extras' );
 define( 'BP_TASTY_EXTRAS_SKIN_DIR', BP_TASTY_EXTRAS_DIR . '/skins' );
+define( 'BP_TASTY_EXTRAS_SKIN_URL', BP_TASTY_EXTRAS_URL . '/skins' );
 define( 'BP_TASTY_TEXT_DOMAIN',  BP_TASTY_NAME );
 
 // load PIE and initialize
@@ -42,5 +44,8 @@ bp_tasty_options_registry_init();
 if ( is_admin() ) {
 	require_once( BP_TASTY_ADMIN_DIR . '/loader.php' );
 }
+
+// enqueue skin assets
+bp_tasty_skin_enqueue_assets();
 
 ?>

@@ -214,7 +214,7 @@ function bp_tasty_options_registry_render_sections( $output = true )
  * @param string $option_name
  * @return mixed
  */
-function bp_tasty_get_option( $option_name )
+function bp_tasty_option( $option_name )
 {
 	return BP_Tasty_Options_Registry::instance()->option( $option_name )->get();
 }

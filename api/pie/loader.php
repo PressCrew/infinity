@@ -39,6 +39,8 @@ final class Pie_Easy_Loader
 	 */
 	private $features = array(
 		'ajax',
+		'enqueue',
+		'files',
 		'l10n',
 		'options' => array( 'option', 'registry', 'renderer', 'section', 'uploader', 'walkers' )
 	);
