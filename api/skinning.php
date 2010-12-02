@@ -11,13 +11,23 @@
  * @since 1.0
  */
 
+Pie_Easy_Loader::load( 'enqueue' );
+
 define( 'BP_TASTY_SKIN_DEFAULT', 'minimal' );
 define( 'BP_TASTY_SKIN_NAME', bp_tasty_skins_active_name() );
 define( 'BP_TASTY_SKIN_DIR', BP_TASTY_EXTRAS_SKIN_DIR . '/' . BP_TASTY_SKIN_NAME );
+define( 'BP_TASTY_SKIN_URL', BP_TASTY_EXTRAS_SKIN_URL . '/' . BP_TASTY_SKIN_NAME );
+define( 'BP_TASTY_SKIN_ASSETS_DIR', BP_TASTY_SKIN_DIR . '/assets' );
+define( 'BP_TASTY_SKIN_ASSETS_URL', BP_TASTY_SKIN_URL . '/assets' );
+define( 'BP_TASTY_SKIN_ASSETS_CSS_DIR', BP_TASTY_SKIN_ASSETS_DIR . '/css' );
+define( 'BP_TASTY_SKIN_ASSETS_CSS_URL', BP_TASTY_SKIN_ASSETS_URL . '/css' );
+define( 'BP_TASTY_SKIN_ASSETS_IMAGES_DIR', BP_TASTY_SKIN_ASSETS_DIR . '/images' );
+define( 'BP_TASTY_SKIN_ASSETS_IMAGES_URL', BP_TASTY_SKIN_ASSETS_URL . '/images' );
+define( 'BP_TASTY_SKIN_ASSETS_JS_DIR', BP_TASTY_SKIN_ASSETS_DIR . '/js' );
+define( 'BP_TASTY_SKIN_ASSETS_JS_URL', BP_TASTY_SKIN_ASSETS_URL . '/js' );
 
 // initialize skin options in registry
 bp_tasty_skins_registry_init();
-
 
 /**
  * Initialize the skin registry options
@@ -54,7 +64,7 @@ function bp_tasty_skins_active_name()
 	bp_tasty_options_registry_init();
 	
 	// try to get name from the options
-	$skin_name = bp_tasty_get_option( 'active_skin' );
+	$skin_name = bp_tasty_option( 'active_skin' );
 
 	// did we get a name?
 	if ( empty( $skin_name ) ) {
@@ -118,14 +128,66 @@ function bp_tasty_skins_options_name_prefix()
 }
 
 /**
+ * Enqueue all of the active skin's assets
+ */
+function bp_tasty_skin_enqueue_assets()
+{
+	// all stylesheets
+	Pie_Easy_Enqueue::styles(
+		BP_TASTY_SKIN_ASSETS_CSS_DIR,
+		BP_TASTY_SKIN_ASSETS_CSS_URL,
+		sprintf( '%s-%s-', BP_TASTY_NAME, BP_TASTY_SKIN_NAME )
+	);
+	// all javascript
+	Pie_Easy_Enqueue::scripts(
+		BP_TASTY_SKIN_ASSETS_JS_DIR,
+		BP_TASTY_SKIN_ASSETS_JS_URL,
+		sprintf( '%s-%s-', BP_TASTY_NAME, BP_TASTY_SKIN_NAME )
+	);
+}
+
+/**
  * Get a skin option value
  *
  * @param string $option_name
  * @return mixed
  */
-function bp_tasty_get_skin_option( $option_name )
+function bp_tasty_skin_option( $option_name )
 {
-	return BP_Tasty_Options_Registry::instance()->option( bp_tasty_skins_options_name_prefix() . $option_name )->get();
+	return bp_tasty_option( bp_tasty_skins_options_name_prefix() . $option_name );
+}
+
+/**
+ * Get a skin image url
+ *
+ * @param string $image Relative path to image from skin images directory
+ * @return string
+ */
+function bp_tasty_skin_image( $image )
+{
+	return BP_TASTY_SKIN_ASSETS_IMAGES_URL . '/' . $image;
+}
+
+/**
+ * Get a skin script url
+ *
+ * @param string $handle
+ * @return string
+ */
+function bp_tasty_skin_script( $handle )
+{
+	return BP_TASTY_SKIN_ASSETS_JS_URL . '/' . $handle . '.js';
+}
+
+/**
+ * Get a skin stylesheet url
+ *
+ * @param string $handle
+ * @return string
+ */
+function bp_tasty_skin_style( $handle )
+{
+	return BP_TASTY_SKIN_ASSETS_CSS_URL . '/' . $handle . '.css';
 }
 
 /**
