@@ -205,6 +205,27 @@ function bp_tasty_skin_style( $handle )
 }
 
 /**
+ * Filter the template that WP is trying to load to see if the skin
+ * wants to completely override it.
+ *
+ * @param string $template
+ * @return string
+ */
+function bp_tasty_filter_template( $template )
+{
+	// see if it exists in the skin
+	$skin_template = bp_tasty_locate_template( array( basename( $template ) ) );
+	
+	// return skin template?
+	if ( $skin_template ) {
+		return $skin_template;
+	} else {
+		return $template;
+	}
+}
+add_filter( 'template_include', 'bp_tasty_filter_template', 10 );
+
+/**
  * Filter located template from bp_core_load_template
  *
  * @see bp_core_load_template()
@@ -212,7 +233,7 @@ function bp_tasty_skin_style( $handle )
  * @param array $template_names
  * @return string
  */
-function bp_tasty_filter_template( $located_template, $template_names )
+function bp_tasty_filter_bp_template( $located_template, $template_names )
 {
 	// template already located, skip
 	if ( empty( $located_template ) ) {
@@ -221,7 +242,7 @@ function bp_tasty_filter_template( $located_template, $template_names )
 		return $located_template;
 	}
 }
-add_filter( 'bp_located_template', 'bp_tasty_filter_template', 10, 2 );
+add_filter( 'bp_located_template', 'bp_tasty_filter_bp_template', 10, 2 );
 
 /**
  * Check if template exists in custom style (skin) path
