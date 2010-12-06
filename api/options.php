@@ -219,4 +219,15 @@ function bp_tasty_option( $option_name )
 	return BP_Tasty_Options_Registry::instance()->option( $option_name )->get();
 }
 
+/**
+ * Get an option image url
+ *
+ * @param string $option_name
+ * @return mixed
+ */
+function bp_tasty_option_image_url( $option_name )
+{
+	return BP_Tasty_Options_Registry::instance()->option( $option_name )->get_image_url();
+}
+
 ?>

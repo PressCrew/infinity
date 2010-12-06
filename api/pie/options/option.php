@@ -222,6 +222,44 @@ abstract class Pie_Easy_Options_Option
 	}
 
 	/**
+	 * Get the attachment image source
+	 *
+	 * @return <type>
+	 */
+	public function get_image_src()
+	{
+		// only works for uploads
+		if ( $this->field_type == 'upload' ) {
+
+			// try to get the attachment info
+			$src = wp_get_attachment_image_src( $this->get() );
+
+			// did we find one?
+			if ( is_array($src) ) {
+				return $src;
+			} else {
+				return false;
+			}
+
+		} else {
+			throw new Exception( 'This option is not for an image attachment' );
+		}
+	}
+
+	/**
+	 * Return the URL of an image attachment
+	 *
+	 * @return string|false
+	 */
+	public function get_image_url()
+	{
+		// get the details
+		$src = $this->get_image_src();
+		// try to return a url
+		return ( $src ) ? $src[0] : false;
+	}
+
+	/**
 	 * Check that user has all required capabilities to edit this option
 	 *
 	 * @return boolean

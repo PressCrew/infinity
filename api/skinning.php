@@ -172,6 +172,17 @@ function bp_tasty_skin_option( $option_name )
 }
 
 /**
+ * Get a skin option value
+ *
+ * @param string $option_name
+ * @return mixed
+ */
+function bp_tasty_skin_option_image_url( $option_name )
+{
+	return bp_tasty_option_image_url( bp_tasty_skins_options_name_prefix() . $option_name );
+}
+
+/**
  * Get a skin image url
  *
  * @param string $image Relative path to image from skin images directory
@@ -202,6 +213,38 @@ function bp_tasty_skin_script( $handle )
 function bp_tasty_skin_style( $handle )
 {
 	return BP_TASTY_SKIN_ASSETS_CSS_URL . '/' . $handle . '.css';
+}
+
+/**
+ * Load a custom header background, or the default if one is not set
+ *
+ * @param string $option_name Name of the skin option from which background was uploaded
+ * @param string $default_bg Relative path to default skin header background.
+ * @return string
+ */
+function bp_tasty_skin_header_bg( $option_name, $default_bg )
+{
+	// try to load the bg
+	$bg = bp_tasty_skin_option_image_url( $option_name );
+
+	// return custom bg, or the default
+	return ( $bg ) ? $bg : bp_tasty_skin_image( $default_bg );
+}
+
+/**
+ * Load a custom header logo, or the default if one is not set
+ *
+ * @param string $option_name Name of the skin option from which logo was uploaded
+ * @param string $default_logo Relative path to default skin header logo.
+ * @return string
+ */
+function bp_tasty_skin_header_logo( $option_name, $default_logo )
+{
+	// try to load a logo
+	$logo = bp_tasty_skin_option_image_url( $option_name );
+
+	// return custom logo, or the default
+	return ( $logo ) ? $logo : bp_tasty_skin_image( $default_logo );
 }
 
 /**
