@@ -83,39 +83,22 @@ function bp_tasty_skins_active_name()
  */
 function bp_tasty_skins_available()
 {
-	// does the skins directory exist?
-	if ( is_dir( BP_TASTY_EXTRAS_SKIN_DIR ) ) {
-		// open the skins dir
-		$dh = opendir( BP_TASTY_EXTRAS_SKIN_DIR );
-		// check that handle is valid
-		if ( $dh ) {
-			// list of dirs
-			$dirs = array();
-			// loop through and add dirs only to list
-			while (($file = readdir($dh)) !== false) {
-				// skip "dot" files
-				if ( preg_match('/^\./', $file) ) {
-					continue;
-				}
-				// build up full file path
-				$file_path = BP_TASTY_EXTRAS_SKIN_DIR . DIRECTORY_SEPARATOR . $file;
-				// is it a directory?
-				if ( is_dir($file_path) ) {
-					$dirs[$file] = $file;
-				}
-			}
-			// destroy handle
-			closedir($dh);
-			// put skins in alphabetical order
-			asort($dirs);
-			// done
-			return $dirs;
-		} else {
-			throw new Exception( 'Unable to open the skins dir: ' . BP_TASTY_EXTRAS_SKIN_DIR );
+	// load dirs in skins directory
+	$skin_dirs = Pie_Easy_Files::list_filtered( BP_TASTY_EXTRAS_SKIN_DIR, '/^\w+$/', true );
+
+	// dirs to actually return
+	$skins = array();
+
+	// loop through and add only directories
+	foreach ( $skin_dirs as $skin_name => $skin_dir ) {
+		// is it a directory?
+		if ( is_dir($skin_dir) ) {
+			// yep, key and value are the skin name
+			$skins[$skin_name] = $skin_name;
 		}
-	} else {
-		throw new Exception( 'The skins dir does not exist: ' . BP_TASTY_EXTRAS_SKIN_DIR );
 	}
+
+	return $skins;
 }
 
 /**
