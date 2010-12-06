@@ -25,6 +25,7 @@ define( 'BP_TASTY_SKIN_ASSETS_IMAGES_DIR', BP_TASTY_SKIN_ASSETS_DIR . '/images' 
 define( 'BP_TASTY_SKIN_ASSETS_IMAGES_URL', BP_TASTY_SKIN_ASSETS_URL . '/images' );
 define( 'BP_TASTY_SKIN_ASSETS_JS_DIR', BP_TASTY_SKIN_ASSETS_DIR . '/js' );
 define( 'BP_TASTY_SKIN_ASSETS_JS_URL', BP_TASTY_SKIN_ASSETS_URL . '/js' );
+define( 'BP_TASTY_SKIN_CONFIG_DIR', BP_TASTY_SKIN_DIR . '/config' );
 
 // initialize skin options in registry
 bp_tasty_skins_registry_init();
@@ -37,7 +38,7 @@ bp_tasty_skins_registry_init();
 function bp_tasty_skins_registry_init()
 {
 	// path to skin ini
-	$skin_ini = BP_TASTY_SKIN_DIR . '/options.ini';
+	$skin_ini = BP_TASTY_SKIN_CONFIG_DIR . '/options.ini';
 
 	// load the skin config if it exists
 	if ( is_readable( $skin_ini ) ) {
