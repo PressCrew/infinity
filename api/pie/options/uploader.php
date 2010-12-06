@@ -111,11 +111,6 @@ class Pie_Easy_Options_Uploader
 				<input type="button" /><?php
 				$renderer->render_input( 'hidden' ); ?>
 			</div>	
-			<script type="text/javascript">
-				jQuery(document).ready(function() {
-					var <?php print $uploader_var ?> = pieEasyFlashUploader.create('<?php print $uploader_id ?>');
-				});
-			</script>
 		</div><?php
 	}
 

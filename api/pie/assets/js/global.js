@@ -97,3 +97,9 @@ pieEasyColorPicker = function ()
 		}
 	};
 }();
+
+jQuery(document).ready(function() {
+	jQuery('div.pie-easy-options-fu').each(function () {
+		jQuery(this).pieEasyUploader();
+	});
+});
