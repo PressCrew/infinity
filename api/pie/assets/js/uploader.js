@@ -21,261 +21,118 @@
  */
 
 /* SWF Uploader wrapper */
-pieEasyFlashUploader = function ()
-{
-	var
-	attach = function ()
-		{
-			var input, image;
+(function( $ ){
 
-			return {
-				construct: function (uploader)
-					{
-						input = jQuery('div.pie-easy-options-fu-btn input[type=hidden]', uploader);
-						image = jQuery('fieldset.pie-easy-options-fu-img p img', uploader);
-					},
-				id: function(value)
-					{
-						if (typeof value == 'undefined') {
-							return input.val();
-						} else {
-							input.val(value);
-							this.update();
-							return value;
-						}
-					},
-				update: function()
-					{
-						jQuery.ajax(
-								{
-									async: false,
-									type: 'POST',
-									url: ajaxurl,
-									data: {
-										'action': 'pie_easy_options_uploader_media_url',
-										'attachment_id': this.id(),
-										'attachment_size': 'full'
-								},
-							success: function(rs)
-								{
-									var r = pieEasyAjax.splitResponse(rs);
-									// TODO error handling
-									image.attr('src', r[1]);
-									bbar.zoomHref(r[1]);
-									bbar.show();
-								}
-						});
-					}
+	var listeners = {
+		swfuploadLoaded: function(event) {
+			// nothing for now
+		},
+		fileDialogStart: function(event) {
+			$(this).pieEasyUploader('status').init();
+			$(this).pieEasyUploader('status').logMsg('Opening file dialog...');
+			$(this).pieEasyUploader('status').prgMsg('Waiting for file to be selected...');
+		},
+		fileDialogComplete: function(event, numFilesSelected, numFilesQueued){
+			if (numFilesQueued >= 1) {
+				$(this).pieEasyUploader('status').logMsg('Closing file dialog...');
+				$(this).pieEasyUploader('status').logMsg('Selected ' + numFilesSelected + ' files');
+				$(this).pieEasyUploader('status').logMsg('Queued ' + numFilesQueued + ' files');
+			} else {
+				$(this).pieEasyUploader('status').logMsg('No files selected');
+				$(this).pieEasyUploader('status').hide();
 			}
-		}(),
-	bbar = function ()
-		{
-			var bar, btnRem, btnZoom;
-
-			return {
-				construct: function (uploader)
-				{
-					// the button bar
-					bar = jQuery('fieldset.pie-easy-options-fu-img div', uploader);
-					// view button
-					btnZoom = bar.children().eq(0).button({
-							icons: {
-								primary: "ui-icon-zoomin"
-							}
-						});
-					// remove button
-					btnRem = bar.children().eq(1).button({
-							icons: {
-								primary: "ui-icon-trash"
-							}
-						}).click( function ()
-							{
-								attach.id('');
-								bbar.zoomHref('');
-								bbar.hide();
-								return false;
-							});
-					// display on load?
-					if ( attach.id().length ) {
-						this.show();
-					}
-				},
-				show: function ()
-				{
-					bar.fadeIn(750);
-				},
-				hide: function ()
-				{
-					bar.fadeOut(750);
-				},
-				zoomHref: function (href)
-				{
-					btnZoom.attr('href', href);
-				}
+		},
+		fileQueued: function(event, file) {
+			$(this).pieEasyUploader('status').logMsg('File queued for upload: "' + file.name + '"');
+			$(this).pieEasyUploader('status').prgMsg('Uploading your image...');
+			$(this).swfupload('startUpload');
+		},
+		fileQueueError: function(event, file, errorCode, message) {
+			switch (errorCode) {
+				case SWFUpload.QUEUE_ERROR.QUEUE_LIMIT_EXCEEDED:
+					alert('You have selected too many files.');
+					return $(this).pieEasyUploader('status').logMsg('Queue Error: Queue limit exceeded');
+				case SWFUpload.QUEUE_ERROR.FILE_EXCEEDS_SIZE_LIMIT:
+					$(this).pieEasyUploader('status').prgMsg('Upload Failed: The file is too big');
+					return $(this).pieEasyUploader('status').logMsg('Queue Error: File "' + file.name + '" is too large (' + file.size + 'K) [' + message + ']');
+				case SWFUpload.QUEUE_ERROR.ZERO_BYTE_FILE:
+					$(this).pieEasyUploader('status').prgMsg('Upload Failed: The file is empty');
+					return $(this).pieEasyUploader('status').logMsg('Queue Error: Zero byte file (' + file.name + ') [' + message + ']');
+				case SWFUpload.QUEUE_ERROR.INVALID_FILETYPE:
+					$(this).pieEasyUploader('status').prgMsg('Upload Failed: Invalid File Type');
+					return $(this).pieEasyUploader('status').logMsg('Queue Error: Invalid file type (' + file.name + ') [' + message + ']');
+				default:
+					$(this).pieEasyUploader('status').prgMsg('Upload Failed: An unknown error occured');
+					return $(this).pieEasyUploader('status').logMsg('Queue Error: ' + errorCode + ', File name: "' + file.name + '", File size: ' + file.size + ', Message: ' + message);
 			}
-		}(),
-	status = function ()
-		{
-			var stat, log, prg, prgTxt;
-
-			return {
-				construct: function (uploader)
-				{
-					stat = jQuery('fieldset.pie-easy-options-fu-stat', uploader);
-					log = jQuery('fieldset.pie-easy-options-fu-stat textarea', uploader);
-					prg = jQuery('div', stat).progressbar({value: 0});
-					prgTxt = jQuery('p', prg);
-					this.show();
-					return prg;
-				},
-				destruct: function ()
-				{
-					this.hide();
-					prg.progressbar('destroy');
-					prg = null;
-				},
-				show: function ()
-				{
-					this.prgMsg();
-					this.logClr();
-					stat.fadeIn(500);
-				},
-				hide: function ()
-				{
-					stat.fadeOut(750);
-				},
-				logMsg: function (msg)
-				{
-					log.val(log.val() + msg + "\n");
-					log.scrollTop(log[0].scrollHeight - log.height());
-				},
-				logClr: function ()
-				{
-					log.val('');
-				},
-				prgPct: function (pct)
-				{
-					return prg.progressbar('value', pct);
-				},
-				prgMsg: function (msg)
-				{
-					return prgTxt.text(msg);
-				}
+		},
+		uploadStart: function(event, file) {
+			$(this).pieEasyUploader('status').logMsg('Starting upload of: "' + file.name + '"');
+			$(this).pieEasyUploader('status').prgMsg('Starting your upload...');
+		},
+		uploadProgress: function(event, file, bytesLoaded, bytesTotal) {
+			var pct = Math.ceil((bytesLoaded / bytesTotal) * 100);
+			$(this).pieEasyUploader('status').prgPct(pct);
+			$(this).pieEasyUploader('status').prgMsg('Your upload is ' + pct + '% complete');
+			$(this).pieEasyUploader('status').logMsg('Upload progress: ' + pct + '% (' + bytesLoaded + ' bytes)');
+			if (pct == 100) {
+				$(this).pieEasyUploader('status').logMsg('Processing image file...');
+				$(this).pieEasyUploader('status').prgMsg('Creating thumbnails, please wait...');
 			}
-		}(),
-	// listeners
-	listeners = {
-		swfuploadLoaded: function(event)
-			{
-			},
-		fileDialogStart: function(event)
-			{
-				status.construct(this);
-				status.logMsg('Opening file dialog...');
-				status.prgMsg('Waiting for file to be selected...');
-			},
-		fileDialogComplete: function(event, numFilesSelected, numFilesQueued)
-			{
-				status.logMsg('Closing file dialog...');
-			},
-		fileQueued: function(event, file)
-			{
-				status.logMsg('File queued for upload: "' + file.name + '"');
-				status.prgMsg('Uploading your image...');
-				jQuery(this).swfupload('startUpload');
-			},
-		fileQueueError: function(event, file, errorCode, message)
-			{
-				switch (errorCode) {
-					case SWFUpload.QUEUE_ERROR.QUEUE_LIMIT_EXCEEDED:
-						alert('You have selected too many files.');
-						return status.logMsg('Queue Error: Queue limit exceeded');
-					case SWFUpload.QUEUE_ERROR.FILE_EXCEEDS_SIZE_LIMIT:
-						status.prgMsg('Upload Failed: The file is too big');
-						return status.logMsg('Queue Error: File "' + file.name + '" is too large (' + file.size + 'K) [' + message + ']');
-					case SWFUpload.QUEUE_ERROR.ZERO_BYTE_FILE:
-						status.prgMsg('Upload Failed: The file is empty');
-						return status.logMsg('Queue Error: Zero byte file (' + file.name + ') [' + message + ']');
-					case SWFUpload.QUEUE_ERROR.INVALID_FILETYPE:
-						status.prgMsg('Upload Failed: Invalid File Type');
-						return status.logMsg('Queue Error: Invalid file type (' + file.name + ') [' + message + ']');
-					default:
-						status.prgMsg('Upload Failed: An unknown error occured');
-						return status.logMsg('Queue Error: ' + errorCode + ', File name: "' + file.name + '", File size: ' + file.size + ', Message: ' + message);
-				}
-			},
-		uploadStart: function(event, file)
-			{
-				status.logMsg('Starting upload of: "' + file.name + '"');
-				status.prgMsg('Starting your upload...');
-			},
-		uploadProgress: function(event, file, bytesLoaded, bytesTotal)
-			{
-				var pct = Math.ceil((bytesLoaded / bytesTotal) * 100);
-				status.prgPct(pct);
-				status.prgMsg('Your upload is ' + pct + '% complete');
-				status.logMsg('Upload progress: ' + pct + '% (' + bytesLoaded + ' bytes)');
-				if (pct == 100) {
-					status.logMsg('Processing image file...');
-					status.prgMsg('Creating thumbnails, please wait...');
-				}
-			},
-		uploadError: function(event, file, errorCode, message)
-			{
-				status.prgMsg('Upload Failed: See status log');
+		},
+		uploadError: function(event, file, errorCode, message) {
+			$(this).pieEasyUploader('status').prgMsg('Upload Failed: See status log');
 
-				switch (errorCode) {
-					case SWFUpload.UPLOAD_ERROR.HTTP_ERROR:
-						return status.logMsg('Upload Error: HTTP Error (' + file.name + ') [' + message + ']');
-					case SWFUpload.UPLOAD_ERROR.MISSING_UPLOAD_URL:
-						return status.logMsg('Upload Error: No backend file (' + file.name + ') [' + message + ']');
-					case SWFUpload.UPLOAD_ERROR.UPLOAD_FAILED:
-						return status.logMsg('Upload Error: Upload initialization failed (' + file.name + ') [' + message + ']');
-					case SWFUpload.UPLOAD_ERROR.IO_ERROR:
-						return status.logMsg('Upload Error: IO Error (' + file.name + ') [' + message + ']');
-					case SWFUpload.UPLOAD_ERROR.SECURITY_ERROR:
-						return status.logMsg('Upload Error: Security Error (' + file.name + ') [' + message + ']');
-					case SWFUpload.UPLOAD_ERROR.UPLOAD_LIMIT_EXCEEDED:
-						return status.logMsg('Upload Error: Upload limit exceeded (' + file.name + ') [' + message + ']');
-					case SWFUpload.UPLOAD_ERROR.SPECIFIED_FILE_ID_NOT_FOUND:
-						return status.logMsg('Upload Error: The file not found (' + file.name + ') [' + message + ']');
-					case SWFUpload.UPLOAD_ERROR.FILE_VALIDATION_FAILED:
-						return status.logMsg('Upload Error: File validation failed (' + file.name + ') [' + message + ']');
-					case SWFUpload.UPLOAD_ERROR.FILE_CANCELLED:
-						return status.logMsg('Upload Error: Cancelled (' + file.name + ') [' + message + ']');
-					case SWFUpload.UPLOAD_ERROR.UPLOAD_STOPPED:
-						return status.logMsg('Upload Error: Stopped (' + file.name + ') [' + message + ']');
-					default:
-						return status.logMsg('Upload Error: ' + errorCode + ', File name: "' + file.name + '", File size: ' + file.size + ', Message: ' + message);
-				}
-			},
-		uploadSuccess: function(event, file, serverData)
-			{
-				if (isNaN(serverData)) {
-					status.logMsg('Upload of "' + file.name + '" failed: WordPress did not return an attachment ID');
-				} else {
-					status.logMsg('Upload successful: "' + file.name + '" saved as attachment ID #' + serverData );
-					status.prgMsg('Loading image preview...');
-					attach.id(serverData);
-				}
-			},
-		uploadComplete: function(event, file)
-			{
-				status.logMsg('Upload of "' + file.name + '" completed.');
-				status.prgMsg('Your upload is complete!');
-
-				if (jQuery(this).swfupload('getStats').files_queued >= 1) {
-					status.prgMsg('Uploading next file in queue...');
-					jQuery(this).swfupload('startUpload');
-					return;
-				}
-				
-				status.destruct();
-				alert('You must save your changes to make this setting permanent.');
+			switch (errorCode) {
+				case SWFUpload.UPLOAD_ERROR.HTTP_ERROR:
+					return $(this).pieEasyUploader('status').logMsg('Upload Error: HTTP Error (' + file.name + ') [' + message + ']');
+				case SWFUpload.UPLOAD_ERROR.MISSING_UPLOAD_URL:
+					return $(this).pieEasyUploader('status').logMsg('Upload Error: No backend file (' + file.name + ') [' + message + ']');
+				case SWFUpload.UPLOAD_ERROR.UPLOAD_FAILED:
+					return $(this).pieEasyUploader('status').logMsg('Upload Error: Upload initialization failed (' + file.name + ') [' + message + ']');
+				case SWFUpload.UPLOAD_ERROR.IO_ERROR:
+					return $(this).pieEasyUploader('status').logMsg('Upload Error: IO Error (' + file.name + ') [' + message + ']');
+				case SWFUpload.UPLOAD_ERROR.SECURITY_ERROR:
+					return $(this).pieEasyUploader('status').logMsg('Upload Error: Security Error (' + file.name + ') [' + message + ']');
+				case SWFUpload.UPLOAD_ERROR.UPLOAD_LIMIT_EXCEEDED:
+					return $(this).pieEasyUploader('status').logMsg('Upload Error: Upload limit exceeded (' + file.name + ') [' + message + ']');
+				case SWFUpload.UPLOAD_ERROR.SPECIFIED_FILE_ID_NOT_FOUND:
+					return $(this).pieEasyUploader('status').logMsg('Upload Error: The file not found (' + file.name + ') [' + message + ']');
+				case SWFUpload.UPLOAD_ERROR.FILE_VALIDATION_FAILED:
+					return $(this).pieEasyUploader('status').logMsg('Upload Error: File validation failed (' + file.name + ') [' + message + ']');
+				case SWFUpload.UPLOAD_ERROR.FILE_CANCELLED:
+					return $(this).pieEasyUploader('status').logMsg('Upload Error: Cancelled (' + file.name + ') [' + message + ']');
+				case SWFUpload.UPLOAD_ERROR.UPLOAD_STOPPED:
+					return $(this).pieEasyUploader('status').logMsg('Upload Error: Stopped (' + file.name + ') [' + message + ']');
+				default:
+					return $(this).pieEasyUploader('status').logMsg('Upload Error: ' + errorCode + ', File name: "' + file.name + '", File size: ' + file.size + ', Message: ' + message);
 			}
-	},
-	// default options
-	options = {
+		},
+		uploadSuccess: function(event, file, serverData) {
+			if (isNaN(serverData)) {
+				$(this).pieEasyUploader('status').logMsg('Upload of "' + file.name + '" failed: WordPress did not return an attachment ID');
+			} else {
+				$(this).pieEasyUploader('status').logMsg('Upload successful: "' + file.name + '" saved as attachment ID #' + serverData );
+				$(this).pieEasyUploader('status').prgMsg('Loading image preview...');
+				$(this).pieEasyUploader('attach').id(serverData);
+			}
+		},
+		uploadComplete: function(event, file) {
+			$(this).pieEasyUploader('status').logMsg('Upload of "' + file.name + '" completed.');
+			$(this).pieEasyUploader('status').prgMsg('Your upload is complete!');
+
+			if ($(this).swfupload('getStats').files_queued >= 1) {
+				$(this).pieEasyUploader('status').prgMsg('Uploading next file in queue...');
+				$(this).swfupload('startUpload');
+				return;
+			}
+
+			$(this).pieEasyUploader('status').destroy();
+			alert('You must save your changes to make this setting permanent.');
+		}
+	};
+
+	var settings = {
 		flash_url : pieEasyFlashUploaderL10n.flash_url,
 		upload_url: pieEasyFlashUploaderL10n.upload_url,
 		post_params: {
@@ -294,6 +151,7 @@ pieEasyFlashUploader = function ()
 		file_queue_limit : 0,
 		// button
 		button_image_url: pieEasyFlashUploaderL10n.button_image_url,
+		button_placeholder : null,
 		button_placeholder_id : null,
 		button_width: 132,
 		button_height: 23,
@@ -305,33 +163,146 @@ pieEasyFlashUploader = function ()
 		debug_handler: function (message) {alert(message)}
 	}
 
-	return {
-		// create a new uploader
-		create: function (uploaderId)
-			{
-				// get uploader
-				var uploader = jQuery('#' + uploaderId);
-				// setup attach input
-				attach.construct(uploader);
-				// setup button bar
-				bbar.construct(uploader);
-				// set options
-				options.button_placeholder = jQuery('input[type=button]', uploader)[0];
-				// return the object
-				return uploader.bindAll(listeners).swfupload(options);
+	var methods = {
+		init: function() {
+			// init buttons
+			$(this).pieEasyUploader('ibar').init();
+			// set options
+			var options = $.extend(
+				{}, settings, { button_placeholder: $('input[type=button]', this)[0] }
+			);
+			// bind listeners and initialize uploader
+			return this.bindAll(listeners).swfupload(options);
+		},
+		ibar: function(){
+			var
+				$this = this,
+				_bar = $('fieldset.pie-easy-options-fu-img div', $this),
+				_btnZoom = _bar.children().eq(0),
+				_btnRem = _bar.children().eq(1);
+			return {
+				init: function(){
+					// init zoom button
+					_btnZoom.button({
+						icons: {
+						primary: "ui-icon-zoomin"
+					}});
+					// init rem button
+					_btnRem.button({
+						icons: {
+							primary: "ui-icon-trash"
+						}
+					}).click(function(){
+						$this.pieEasyUploader('attach').id('');
+						return false;
+					});
+					// display on load?
+					if ( $this.pieEasyUploader('attach').id().length ) {
+						this.show();
+					}
+				},
+				show: function(){
+					_bar.show();
+				},
+				hide: function(){
+					_bar.fadeOut(750);
+				},
+				zoomHref: function (href) {
+					_btnZoom.attr('href', href);
+				}
 			}
-	};
-}();
+		},
+		attach: function(){
+			var
+				$this = this,
+				_input = $('div.pie-easy-options-fu-btn input[type=hidden]', this),
+				_image = $('fieldset.pie-easy-options-fu-img p img', this);
+			return {
+				id: function (value) {
+					if (typeof value == 'undefined') {
+						return _input.val();
+					} else {
+						_input.val(value);
+						this.update();
+						return value;
+					}
+				},
+				update: function(){
+					if (this.id()) {
+						$.ajax({
+							async: false,
+							type: 'POST',
+							url: ajaxurl,
+							data: {
+								'action': 'pie_easy_options_uploader_media_url',
+								'attachment_id': this.id(),
+								'attachment_size': 'full'
+							},
+							success: function(rs){
+								var r = pieEasyAjax.splitResponse(rs);
+								// TODO error handling
+								_image.attr('src', r[1]);
+								$this.pieEasyUploader('ibar').zoomHref(r[1]);
+								$this.pieEasyUploader('ibar').show();
+							}
+						});
+					} else {
+						_image.attr('src', '');
+						$this.pieEasyUploader('ibar').zoomHref('');
+						$this.pieEasyUploader('ibar').hide();
+					}
+				}
+			}
+		},
+		status: function(){
+			var
+				_stat = $('fieldset.pie-easy-options-fu-stat', this),
+				_log = $('fieldset.pie-easy-options-fu-stat textarea', this),
+				_prg = $('div', _stat),
+				_prgTxt = $('p', _prg);
+			return {
+				init: function(){
+					_prg.progressbar({value: 0});
+					return this.show();
+				},
+				destroy: function(){
+					this.hide();
+					_prg.progressbar('destroy');
+				},
+				show: function(){
+					this.prgMsg();
+					this.logClr();
+					_stat.fadeIn(500);
+				},
+				hide: function(){
+					_stat.fadeOut(750);
+				},
+				logMsg: function(msg){
+					_log.val(_log.val() + msg + "\n");
+					_log.scrollTop(_log[0].scrollHeight - _log.height());
+				},
+				logClr: function(){
+					_log.val('');
+				},
+				prgPct: function (pct){
+					return _prg.progressbar('value', pct);
+				},
+				prgMsg: function (msg){
+					return _prgTxt.text(msg);
+				}
+			}
+		}
+	}
 
-/* SWF Uploader wrapper l10n defaults */
-pieEasyFlashUploaderL10n = {
-	flash_url: null,
-	upload_url: null,
-		pp_auth_cookie: null,
-		pp_logged_in_cookie: null,
-		pp_wpnonce: null,
-	file_size_limit: null,
-	button_image_url: null,
-	button_text: null,
-	button_text_style: null
-};
+	$.fn.pieEasyUploader = function (method)
+	{
+		if ( methods[method] ) {
+			return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
+		} else if (typeof method === 'object' || ! method) {
+			return methods.init.apply(this, arguments);
+		} else {
+			return $.error('Method ' +  method + ' does not exist on jQuery.pieEasyUploader');
+		}
+	}
+
+})( jQuery );
