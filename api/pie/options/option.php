@@ -224,15 +224,16 @@ abstract class Pie_Easy_Options_Option
 	/**
 	 * Get the attachment image source
 	 *
-	 * @return <type>
+	 * @param string $size
+	 * @return string|false
 	 */
-	public function get_image_src()
+	public function get_image_src( $size = 'thumbnail' )
 	{
 		// only works for uploads
 		if ( $this->field_type == 'upload' ) {
 
 			// try to get the attachment info
-			$src = wp_get_attachment_image_src( $this->get() );
+			$src = wp_get_attachment_image_src( $this->get(), $size );
 
 			// did we find one?
 			if ( is_array($src) ) {
@@ -249,12 +250,13 @@ abstract class Pie_Easy_Options_Option
 	/**
 	 * Return the URL of an image attachment
 	 *
+	 * @param string $size
 	 * @return string|false
 	 */
-	public function get_image_url()
+	public function get_image_url( $size = 'thumbnail' )
 	{
 		// get the details
-		$src = $this->get_image_src();
+		$src = $this->get_image_src( $size );
 		// try to return a url
 		return ( $src ) ? $src[0] : false;
 	}

@@ -175,12 +175,13 @@ function bp_tasty_skin_option( $option_name )
 /**
  * Get a skin option value
  *
+ * @param string $size
  * @param string $option_name
  * @return mixed
  */
-function bp_tasty_skin_option_image_url( $option_name )
+function bp_tasty_skin_option_image_url( $option_name, $size = 'thumbnail' )
 {
-	return bp_tasty_option_image_url( bp_tasty_skins_options_name_prefix() . $option_name );
+	return bp_tasty_option_image_url( bp_tasty_skins_options_name_prefix() . $option_name, $size );
 }
 
 /**
@@ -226,7 +227,7 @@ function bp_tasty_skin_style( $handle )
 function bp_tasty_skin_header_bg( $option_name, $default_bg )
 {
 	// try to load the bg
-	$bg = bp_tasty_skin_option_image_url( $option_name );
+	$bg = bp_tasty_skin_option_image_url( $option_name, 'full' );
 
 	// return custom bg, or the default
 	return ( $bg ) ? $bg : bp_tasty_skin_image( $default_bg );
@@ -242,7 +243,7 @@ function bp_tasty_skin_header_bg( $option_name, $default_bg )
 function bp_tasty_skin_header_logo( $option_name, $default_logo )
 {
 	// try to load a logo
-	$logo = bp_tasty_skin_option_image_url( $option_name );
+	$logo = bp_tasty_skin_option_image_url( $option_name, 'full' );
 
 	// return custom logo, or the default
 	return ( $logo ) ? $logo : bp_tasty_skin_image( $default_logo );
