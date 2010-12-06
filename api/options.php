@@ -221,13 +221,14 @@ function bp_tasty_option( $option_name )
 
 /**
  * Get an option image url
- *
+ * 
  * @param string $option_name
+ * @param string $size
  * @return mixed
  */
-function bp_tasty_option_image_url( $option_name )
+function bp_tasty_option_image_url( $option_name, $size = 'thumbnail' )
 {
-	return BP_Tasty_Options_Registry::instance()->option( $option_name )->get_image_url();
+	return BP_Tasty_Options_Registry::instance()->option( $option_name )->get_image_url( $size );
 }
 
 ?>
