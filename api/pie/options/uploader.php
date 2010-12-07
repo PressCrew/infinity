@@ -47,6 +47,11 @@ class Pie_Easy_Options_Uploader
 		Pie_Easy_Loader::enqueue_script( 'jquery.swfupload', array( 'jquery' ) );
 		Pie_Easy_Loader::enqueue_script( 'uploader', array( 'jquery' ) );
 
+		// enqueue image editor scripts and style
+		wp_enqueue_script( 'wp-ajax-response' );
+		wp_enqueue_script('image-edit');
+		wp_enqueue_style('imgareaselect');
+
 		// enque thickbox
 		add_thickbox();
 
@@ -60,6 +65,7 @@ class Pie_Easy_Options_Uploader
 	public function init_ajax()
 	{
 		add_action( 'wp_ajax_pie_easy_options_uploader_media_url', array( $this, 'ajax_media_url' ) );
+		add_action( 'wp_ajax_pie_easy_options_uploader_image_edit', array( $this, 'ajax_image_edit' ) );
 	}
 
 	/**
@@ -89,12 +95,18 @@ class Pie_Easy_Options_Uploader
 	 * @param Pie_Easy_Options_Renderer $renderer
 	 */
 	public function render( Pie_Easy_Options_Option $option, Pie_Easy_Options_Renderer $renderer )
-	{ ?>
+	{
+		$edit_url = sprintf( 'media.php?attachment_id=%d&action=edit', $option->get() );
+		$attach_url = $option->get_image_url('full'); ?>
 		<div class="pie-easy-options-fu">
 			<fieldset class="pie-easy-options-fu-img">
 				<legend><?php _e( 'Current Image' ) ?></legend>
-				<p><img src="<?php print esc_attr( $option->get_image_url('full') ) ?>" alt="" /></p>
-				<div><a class="thickbox" href="<?php print esc_attr( $attach_url ) ?>">Zoom</a><a>Remove</a></div>
+				<p><img src="<?php print esc_attr( $attach_url ) ?>" alt="" /></p>
+				<div>
+					<a class="thickbox" href="<?php print esc_attr( $attach_url ) ?>">Zoom</a>
+					<a>Edit</a>
+					<a>Trash</a>
+				</div>
 			</fieldset>
 			<fieldset class="pie-easy-options-fu-stat">
 				<legend><?php _e( 'Upload Status' ) ?></legend>
@@ -125,6 +137,20 @@ class Pie_Easy_Options_Uploader
 			}
 		} else {
 			Pie_Easy_Ajax::response( 0, 'No attachment ID received.' );
+		}
+	}
+
+	/**
+	 * Print the WP image edit form via ajax
+	 */
+	public function ajax_image_edit()
+	{
+		if ( isset( $_POST['attachment_id'] ) && is_numeric( $_POST['attachment_id'] ) ) {
+			// load api file
+			require_once ABSPATH . 'wp-admin/includes/image-edit.php';
+			// load the form
+			wp_image_editor( $_POST['attachment_id'] );
+			die();
 		}
 	}
 }

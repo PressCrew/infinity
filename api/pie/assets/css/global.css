@@ -59,7 +59,7 @@ div.pie-easy-options-fu fieldset.pie-easy-options-fu-img {
 	text-align: center;
 }
 	div.pie-easy-options-fu fieldset.pie-easy-options-fu-img p {
-		min-height: 60px;
+		min-height: 70px;
 	}
 	div.pie-easy-options-fu fieldset.pie-easy-options-fu-img p img {
 		max-height: 150px;
@@ -70,9 +70,13 @@ div.pie-easy-options-fu fieldset.pie-easy-options-fu-img {
 		text-align: center;
 		display: none;
 	}
-		div.pie-easy-options-fu fieldset.pie-easy-options-fu-img div a {
-			line-height: 1em;
-			font-size: 12px;
+		div.pie-easy-options-fu fieldset.pie-easy-options-fu-img div a span.ui-icon {
+			left: 0.1em;
+		}
+		div.pie-easy-options-fu fieldset.pie-easy-options-fu-img div a span.ui-button-text {
+			font-size: 10px;
+			padding-left: 1.8em;
+			padding-right: 0.5em;
 		}
 div.pie-easy-options-fu fieldset.pie-easy-options-fu-stat {
 	float: left;

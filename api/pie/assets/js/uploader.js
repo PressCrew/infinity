@@ -179,14 +179,48 @@
 				$this = this,
 				_bar = $('fieldset.pie-easy-options-fu-img div', $this),
 				_btnZoom = _bar.children().eq(0),
-				_btnRem = _bar.children().eq(1);
+				_btnEdit = _bar.children().eq(1),
+				_btnRem = _bar.children().eq(2);
 			return {
 				init: function(){
 					// init zoom button
 					_btnZoom.button({
 						icons: {
-						primary: "ui-icon-zoomin"
+							primary: "ui-icon-zoomin"
 					}});
+					_btnEdit.button({
+						icons: {
+							primary: "ui-icon-wrench"
+						}
+					}).click(function(){
+						$.ajax({
+							async: false,
+							type: 'POST',
+							url: ajaxurl,
+							data: {
+								'action': 'pie_easy_options_uploader_image_edit',
+								'attachment_id': $this.pieEasyUploader('attach').id()
+							},
+							success: function(r){
+								_btnEdit.after('<div></div>');
+								var _btnDia = _btnEdit.next();
+								_btnDia.empty();
+								_btnDia.append(r);
+								_btnDia.dialog({
+									modal: true,
+									draggable: false,
+									width: 600,
+									title: 'Edit Image',
+									zIndex: 3,
+									buttons: {
+										"Close": function() {
+											$(this).dialog("close");
+										}
+									}
+								});
+							}
+						});
+					});
 					// init rem button
 					_btnRem.button({
 						icons: {
