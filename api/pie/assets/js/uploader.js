@@ -150,6 +150,7 @@
 		file_upload_limit : 10,
 		file_queue_limit : 0,
 		// button
+		button_window_mode: SWFUpload.WINDOW_MODE.OPAQUE,
 		button_image_url: pieEasyFlashUploaderL10n.button_image_url,
 		button_placeholder : null,
 		button_placeholder_id : null,
@@ -216,6 +217,9 @@
 										"Close": function() {
 											$(this).dialog("close");
 										}
+									},
+									beforeClose: function(){
+										$this.pieEasyUploader('attach').update()
 									}
 								});
 							}
