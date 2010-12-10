@@ -13,41 +13,41 @@
 
 Pie_Easy_Loader::load( 'enqueue' );
 
-define( 'BP_TASTY_SKIN_DEFAULT', 'minimal' );
-define( 'BP_TASTY_SKIN_NAME', bp_tasty_skins_active_name() );
-define( 'BP_TASTY_SKIN_DIR', BP_TASTY_EXTRAS_SKIN_DIR . '/' . BP_TASTY_SKIN_NAME );
-define( 'BP_TASTY_SKIN_URL', BP_TASTY_EXTRAS_SKIN_URL . '/' . BP_TASTY_SKIN_NAME );
-define( 'BP_TASTY_SKIN_ASSETS_DIR', BP_TASTY_SKIN_DIR . '/assets' );
-define( 'BP_TASTY_SKIN_ASSETS_URL', BP_TASTY_SKIN_URL . '/assets' );
-define( 'BP_TASTY_SKIN_ASSETS_CSS_DIR', BP_TASTY_SKIN_ASSETS_DIR . '/css' );
-define( 'BP_TASTY_SKIN_ASSETS_CSS_URL', BP_TASTY_SKIN_ASSETS_URL . '/css' );
-define( 'BP_TASTY_SKIN_ASSETS_IMAGES_DIR', BP_TASTY_SKIN_ASSETS_DIR . '/images' );
-define( 'BP_TASTY_SKIN_ASSETS_IMAGES_URL', BP_TASTY_SKIN_ASSETS_URL . '/images' );
-define( 'BP_TASTY_SKIN_ASSETS_JS_DIR', BP_TASTY_SKIN_ASSETS_DIR . '/js' );
-define( 'BP_TASTY_SKIN_ASSETS_JS_URL', BP_TASTY_SKIN_ASSETS_URL . '/js' );
-define( 'BP_TASTY_SKIN_CONFIG_DIR', BP_TASTY_SKIN_DIR . '/config' );
+define( 'TASTY_SKIN_DEFAULT', 'minimal' );
+define( 'TASTY_SKIN_NAME', tasty_skins_active_name() );
+define( 'TASTY_SKIN_DIR', TASTY_EXTRAS_SKIN_DIR . '/' . TASTY_SKIN_NAME );
+define( 'TASTY_SKIN_URL', TASTY_EXTRAS_SKIN_URL . '/' . TASTY_SKIN_NAME );
+define( 'TASTY_SKIN_ASSETS_DIR', TASTY_SKIN_DIR . '/assets' );
+define( 'TASTY_SKIN_ASSETS_URL', TASTY_SKIN_URL . '/assets' );
+define( 'TASTY_SKIN_ASSETS_CSS_DIR', TASTY_SKIN_ASSETS_DIR . '/css' );
+define( 'TASTY_SKIN_ASSETS_CSS_URL', TASTY_SKIN_ASSETS_URL . '/css' );
+define( 'TASTY_SKIN_ASSETS_IMAGES_DIR', TASTY_SKIN_ASSETS_DIR . '/images' );
+define( 'TASTY_SKIN_ASSETS_IMAGES_URL', TASTY_SKIN_ASSETS_URL . '/images' );
+define( 'TASTY_SKIN_ASSETS_JS_DIR', TASTY_SKIN_ASSETS_DIR . '/js' );
+define( 'TASTY_SKIN_ASSETS_JS_URL', TASTY_SKIN_ASSETS_URL . '/js' );
+define( 'TASTY_SKIN_CONFIG_DIR', TASTY_SKIN_DIR . '/config' );
 
 // initialize skin options in registry
-bp_tasty_skins_registry_init();
+tasty_skins_registry_init();
 
 /**
  * Initialize the skin registry options
  *
  * @return boolean
  */
-function bp_tasty_skins_registry_init()
+function tasty_skins_registry_init()
 {
 	// path to skin ini
-	$skin_ini = BP_TASTY_SKIN_CONFIG_DIR . '/options.ini';
+	$skin_ini = TASTY_SKIN_CONFIG_DIR . '/options.ini';
 
 	// load the skin config if it exists
 	if ( is_readable( $skin_ini ) ) {
 		return
-			BP_Tasty_Options_Registry::instance()
+			Tasty_Options_Registry::instance()
 				->load_config_file(
 					$skin_ini,
-					'BP_Tasty_Options_Section',
-					'BP_Tasty_Options_Skin_Option'
+					'Tasty_Options_Section',
+					'Tasty_Options_Skin_Option'
 				);
 	} else {
 		return;
@@ -59,18 +59,18 @@ function bp_tasty_skins_registry_init()
  *
  * @return string
  */
-function bp_tasty_skins_active_name()
+function tasty_skins_active_name()
 {
 	// make sure global registry has been initialized
-	bp_tasty_options_registry_init();
+	tasty_options_registry_init();
 	
 	// try to get name from the options
-	$skin_name = bp_tasty_option( 'active_skin' );
+	$skin_name = tasty_option( 'active_skin' );
 
 	// did we get a name?
 	if ( empty( $skin_name ) ) {
 		// nope, use default
-		return BP_TASTY_SKIN_DEFAULT;
+		return TASTY_SKIN_DEFAULT;
 	} else {
 		return $skin_name;
 	}
@@ -81,10 +81,10 @@ function bp_tasty_skins_active_name()
  *
  * @return array
  */
-function bp_tasty_skins_available()
+function tasty_skins_available()
 {
 	// load dirs in skins directory
-	$skin_dirs = Pie_Easy_Files::list_filtered( BP_TASTY_EXTRAS_SKIN_DIR, '/^\w+$/', true );
+	$skin_dirs = Pie_Easy_Files::list_filtered( TASTY_EXTRAS_SKIN_DIR, '/^\w+$/', true );
 
 	// dirs to actually return
 	$skins = array();
@@ -106,37 +106,37 @@ function bp_tasty_skins_available()
  *
  * @return string
  */
-function bp_tasty_skins_options_name_prefix()
+function tasty_skins_options_name_prefix()
 {
-	return sprintf( '%s_%s_', 'skin', BP_TASTY_SKIN_NAME );
+	return sprintf( '%s_%s_', 'skin', TASTY_SKIN_NAME );
 }
 
 /**
  * Enqueue all of the active skin's assets
  */
-function bp_tasty_skin_enqueue_assets()
+function tasty_skin_enqueue_assets()
 {
 	// all stylesheets
 	Pie_Easy_Enqueue::styles(
-		BP_TASTY_SKIN_ASSETS_CSS_DIR,
-		BP_TASTY_SKIN_ASSETS_CSS_URL,
-		sprintf( '%s-%s-', BP_TASTY_NAME, BP_TASTY_SKIN_NAME )
+		TASTY_SKIN_ASSETS_CSS_DIR,
+		TASTY_SKIN_ASSETS_CSS_URL,
+		sprintf( '%s-%s-', TASTY_NAME, TASTY_SKIN_NAME )
 	);
 	// all javascript
 	Pie_Easy_Enqueue::scripts(
-		BP_TASTY_SKIN_ASSETS_JS_DIR,
-		BP_TASTY_SKIN_ASSETS_JS_URL,
-		sprintf( '%s-%s-', BP_TASTY_NAME, BP_TASTY_SKIN_NAME )
+		TASTY_SKIN_ASSETS_JS_DIR,
+		TASTY_SKIN_ASSETS_JS_URL,
+		sprintf( '%s-%s-', TASTY_NAME, TASTY_SKIN_NAME )
 	);
 }
 
 /**
  * Load the active skin's functions
  */
-function bp_tasty_skin_load_functions()
+function tasty_skin_load_functions()
 {
 	// path to functions file
-	$filename = BP_TASTY_SKIN_DIR . DIRECTORY_SEPARATOR . 'functions.php';
+	$filename = TASTY_SKIN_DIR . DIRECTORY_SEPARATOR . 'functions.php';
 
 	// does it exist?
 	if ( file_exists( $filename ) ) {
@@ -150,9 +150,9 @@ function bp_tasty_skin_load_functions()
  * @param string $option_name
  * @return mixed
  */
-function bp_tasty_skin_option( $option_name )
+function tasty_skin_option( $option_name )
 {
-	return bp_tasty_option( bp_tasty_skins_options_name_prefix() . $option_name );
+	return tasty_option( tasty_skins_options_name_prefix() . $option_name );
 }
 
 /**
@@ -162,9 +162,9 @@ function bp_tasty_skin_option( $option_name )
  * @param string $option_name
  * @return mixed
  */
-function bp_tasty_skin_option_image_url( $option_name, $size = 'thumbnail' )
+function tasty_skin_option_image_url( $option_name, $size = 'thumbnail' )
 {
-	return bp_tasty_option_image_url( bp_tasty_skins_options_name_prefix() . $option_name, $size );
+	return tasty_option_image_url( tasty_skins_options_name_prefix() . $option_name, $size );
 }
 
 /**
@@ -173,9 +173,9 @@ function bp_tasty_skin_option_image_url( $option_name, $size = 'thumbnail' )
  * @param string $image Relative path to image from skin images directory
  * @return string
  */
-function bp_tasty_skin_image( $image )
+function tasty_skin_image( $image )
 {
-	return BP_TASTY_SKIN_ASSETS_IMAGES_URL . '/' . $image;
+	return TASTY_SKIN_ASSETS_IMAGES_URL . '/' . $image;
 }
 
 /**
@@ -184,9 +184,9 @@ function bp_tasty_skin_image( $image )
  * @param string $handle
  * @return string
  */
-function bp_tasty_skin_script( $handle )
+function tasty_skin_script( $handle )
 {
-	return BP_TASTY_SKIN_ASSETS_JS_URL . '/' . $handle . '.js';
+	return TASTY_SKIN_ASSETS_JS_URL . '/' . $handle . '.js';
 }
 
 /**
@@ -195,9 +195,9 @@ function bp_tasty_skin_script( $handle )
  * @param string $handle
  * @return string
  */
-function bp_tasty_skin_style( $handle )
+function tasty_skin_style( $handle )
 {
-	return BP_TASTY_SKIN_ASSETS_CSS_URL . '/' . $handle . '.css';
+	return TASTY_SKIN_ASSETS_CSS_URL . '/' . $handle . '.css';
 }
 
 /**
@@ -207,13 +207,13 @@ function bp_tasty_skin_style( $handle )
  * @param string $default_bg Relative path to default skin header background.
  * @return string
  */
-function bp_tasty_skin_header_bg( $option_name, $default_bg )
+function tasty_skin_header_bg( $option_name, $default_bg )
 {
 	// try to load the bg
-	$bg = bp_tasty_skin_option_image_url( $option_name, 'full' );
+	$bg = tasty_skin_option_image_url( $option_name, 'full' );
 
 	// return custom bg, or the default
-	return ( $bg ) ? $bg : bp_tasty_skin_image( $default_bg );
+	return ( $bg ) ? $bg : tasty_skin_image( $default_bg );
 }
 
 /**
@@ -223,13 +223,13 @@ function bp_tasty_skin_header_bg( $option_name, $default_bg )
  * @param string $default_logo Relative path to default skin header logo.
  * @return string
  */
-function bp_tasty_skin_header_logo( $option_name, $default_logo )
+function tasty_skin_header_logo( $option_name, $default_logo )
 {
 	// try to load a logo
-	$logo = bp_tasty_skin_option_image_url( $option_name, 'full' );
+	$logo = tasty_skin_option_image_url( $option_name, 'full' );
 
 	// return custom logo, or the default
-	return ( $logo ) ? $logo : bp_tasty_skin_image( $default_logo );
+	return ( $logo ) ? $logo : tasty_skin_image( $default_logo );
 }
 
 /**
@@ -239,10 +239,10 @@ function bp_tasty_skin_header_logo( $option_name, $default_logo )
  * @param string $template
  * @return string
  */
-function bp_tasty_filter_template( $template )
+function tasty_filter_template( $template )
 {
 	// see if it exists in the skin
-	$skin_template = bp_tasty_locate_template( array( basename( $template ) ) );
+	$skin_template = tasty_locate_template( array( basename( $template ) ) );
 	
 	// return skin template?
 	if ( $skin_template ) {
@@ -251,7 +251,7 @@ function bp_tasty_filter_template( $template )
 		return $template;
 	}
 }
-add_filter( 'template_include', 'bp_tasty_filter_template', 10 );
+add_filter( 'template_include', 'tasty_filter_template', 10 );
 
 /**
  * Filter located template from bp_core_load_template
@@ -261,16 +261,16 @@ add_filter( 'template_include', 'bp_tasty_filter_template', 10 );
  * @param array $template_names
  * @return string
  */
-function bp_tasty_filter_bp_template( $located_template, $template_names )
+function tasty_filter_bp_template( $located_template, $template_names )
 {
 	// template already located, skip
 	if ( empty( $located_template ) ) {
-		return bp_tasty_locate_template( $template_names );
+		return tasty_locate_template( $template_names );
 	} else {
 		return $located_template;
 	}
 }
-add_filter( 'bp_located_template', 'bp_tasty_filter_bp_template', 10, 2 );
+add_filter( 'bp_located_template', 'tasty_filter_bp_template', 10, 2 );
 
 /**
  * Check if template exists in custom style (skin) path
@@ -279,7 +279,7 @@ add_filter( 'bp_located_template', 'bp_tasty_filter_bp_template', 10, 2 );
  * @param boolean $load Auto load template if set to true
  * @return string
  */
-function bp_tasty_locate_template( $template_names, $load = false )
+function tasty_locate_template( $template_names, $load = false )
 {
 	// did we get an array?
 	if ( is_array( $template_names ) ) {
@@ -288,7 +288,7 @@ function bp_tasty_locate_template( $template_names, $load = false )
 		foreach ( $template_names as $template_name ) {
 
 			// prepend all template names with the active skin dir
-			$located_template = BP_TASTY_SKIN_DIR . '/' . $template_name;
+			$located_template = TASTY_SKIN_DIR . '/' . $template_name;
 
 			// does it exist?
 			if ( file_exists( $located_template ) ) {
@@ -312,13 +312,13 @@ function bp_tasty_locate_template( $template_names, $load = false )
  * @param string $template_name
  * @return string
  */
-function bp_tasty_load_template( $template_name )
+function tasty_load_template( $template_name )
 {
 	if ( !is_array( $template_name ) ) {
 		$template_name = array( $template_name );
 	}
 
-	return bp_tasty_locate_template( $template_name, true );
+	return tasty_locate_template( $template_name, true );
 }
 
 ?>

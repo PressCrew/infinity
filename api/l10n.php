@@ -16,7 +16,7 @@ Pie_Easy_Loader::load( 'l10n' );
 /**
  * Tasty Localization
  */
-class BP_Tasty_L10n extends Pie_Easy_L10n
+class Tasty_L10n extends Pie_Easy_L10n
 {
 	// no customizations yet
 }
