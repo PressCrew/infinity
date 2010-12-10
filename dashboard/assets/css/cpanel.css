@@ -2,20 +2,20 @@
 /* ! Wrapper  */
 /* ========================= */
 
-img.bp-tasty-menu-icon {
+img.tasty-menu-icon {
 	float: left;
 	margin: 2px 5px 0px 0px;
 }
-img.bp-tasty-menu-icon.indent {
+img.tasty-menu-icon.indent {
 	margin-left: 12px;
 }
 
-table.bp-tasty-cpanel-nav {
+table.tasty-cpanel-nav {
 	border: none;
 	margin-top: 8px;
 	width: 75%;
 }
-	table.bp-tasty-cpanel-nav td {
+	table.tasty-cpanel-nav td {
 		-moz-border-radius-topleft: 6px;
 		-moz-border-radius-topright: 6px;
 		font-size: 14px;
@@ -26,22 +26,22 @@ table.bp-tasty-cpanel-nav {
 		padding: 8px 3px;
 		text-align: center;
 	}
-	table.bp-tasty-cpanel-nav td a:hover {
+	table.tasty-cpanel-nav td a:hover {
 		color:#AD4646;
 	}
-	table.bp-tasty-cpanel-nav td.current {
+	table.tasty-cpanel-nav td.current {
 		background: url("../images/alert-overlay.png") repeat-x scroll 0 50% #3E3E3E;
 		border-color: #746B6B #B0ADAD -moz-use-text-color;
 		border-style: solid solid none;
 		border-width: 1px 1px medium;
 	}
-	table.bp-tasty-cpanel-nav td.current a {
+	table.tasty-cpanel-nav td.current a {
 		color: #FFF;
 		font-weight: 700;
 		text-shadow: 0px -1px 0px #222;
 	}
 	
-table.bp-tasty-cpanel-nav td a {
+table.tasty-cpanel-nav td a {
 	color: #666;
 }
 
@@ -49,82 +49,82 @@ table.bp-tasty-cpanel-nav td a {
 /* ! Navigation Icons   */
 /* ==================== */
 
-.bp-tasty-cpanel-page-start  {
+.tasty-cpanel-page-start  {
 	background: url("../images/sprite.png") no-repeat scroll 0 -210px transparent;
 	padding-left: 16px;
 }
 
-a:hover.bp-tasty-cpanel-page-start {
+a:hover.tasty-cpanel-page-start {
 	background: url("../images/sprite.png") no-repeat scroll 0 -19px transparent;
 	padding-left: 16px;
 }
 
-.bp-tasty-cpanel-page-skins {
+.tasty-cpanel-page-skins {
 	background: url("../images/sprite.png") no-repeat scroll 0 -332px transparent;
 	padding-left:16px;
 }
 
-a:hover.bp-tasty-cpanel-page-skins {
+a:hover.tasty-cpanel-page-skins {
 	background: url("../images/sprite.png") no-repeat scroll 0 -141px transparent;
 	padding-left: 16px;
 }
 
-.bp-tasty-cpanel-page-widgets {
+.tasty-cpanel-page-widgets {
 	background: url("../images/sprite.png") no-repeat scroll 0 -271px transparent;
 	padding-left: 15px;
 }
 
-a:hover.bp-tasty-cpanel-page-widgets {
+a:hover.tasty-cpanel-page-widgets {
 	background: url("../images/sprite.png") no-repeat scroll 0 -80px transparent;
 	padding-left: 15px;
 }
 
-.bp-tasty-cpanel-page-shortcodes {
+.tasty-cpanel-page-shortcodes {
 	background: url("../images/sprite.png") no-repeat scroll 0 -250px transparent;
 	padding-left: 15px;
 }
 
-a:hover.bp-tasty-cpanel-page-shortcodes {
+a:hover.tasty-cpanel-page-shortcodes {
 	background: url("../images/sprite.png") no-repeat scroll 0 -59px transparent;
 	padding-left: 15px;
 }
 
-.bp-tasty-cpanel-page-options {
+.tasty-cpanel-page-options {
 	background: url("../images/sprite.png") no-repeat scroll 0 -313px transparent;
 	padding-left: 15px;
 }
 
-a:hover.bp-tasty-cpanel-page-options {
+a:hover.tasty-cpanel-page-options {
 	background: url("../images/sprite.png") no-repeat scroll 0 -122px transparent;
 	padding-left: 15px;
 }
 
-.bp-tasty-cpanel-page-docs {
+.tasty-cpanel-page-docs {
 	background: url("../images/sprite.png") no-repeat scroll 0 -191px transparent;
 	padding-left: 15px;
 }
 
-a:hover.bp-tasty-cpanel-page-docs {
+a:hover.tasty-cpanel-page-docs {
 	background: url("../images/sprite.png") no-repeat;
 	padding-left: 15px;
 }
 
-.bp-tasty-cpanel-page-about {
+.tasty-cpanel-page-about {
 	background: url("../images/sprite.png") no-repeat scroll 0 -292px transparent;
 	padding-left: 15px;
 }
 
-a:hover.bp-tasty-cpanel-page-about {
+a:hover.tasty-cpanel-page-about {
 	background: url("../images/sprite.png") no-repeat scroll 0 -101px transparent;
 	padding-left: 15px;
 }
 
-.bp-tasty-cpanel-page-thanks {
+.tasty-cpanel-page-thanks {
 	background: url("../images/sprite.png") no-repeat scroll 0 -229px transparent;
 	padding-left: 15px;
 }
 
-a:hover.bp-tasty-cpanel-page-thanks {
+a:hover.tasty-cpanel-page-thanks {
 	background: url("../images/sprite.png") no-repeat scroll 0 -39px transparent;
 	padding-left: 15px;
 }
@@ -167,11 +167,11 @@ a:hover.bp-tasty-cpanel-page-thanks {
 	color: #999;
 }
 
-div.bp-tasty-cpanel-content div.rm_title .button,
-div.bp-tasty-cpanel-content div.rm_title .button-secondary,
-div.bp-tasty-cpanel-content div.rm_title .submit input,
-div.bp-tasty-cpanel-content div.rm_title input[type="button"],
-div.bp-tasty-cpanel-content div.rm_title input[type="submit"] {
+div.tasty-cpanel-content div.rm_title .button,
+div.tasty-cpanel-content div.rm_title .button-secondary,
+div.tasty-cpanel-content div.rm_title .submit input,
+div.tasty-cpanel-content div.rm_title input[type="button"],
+div.tasty-cpanel-content div.rm_title input[type="submit"] {
 	background: url("../images/alert-overlay.png") repeat-x scroll 0 50% #439F2B !important;
 	border: 1px solid #6C6B6B !important;
 	color: #FFFFFF !important;

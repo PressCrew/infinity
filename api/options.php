@@ -16,14 +16,14 @@ Pie_Easy_Loader::load( 'options' );
 /**
  * Tasty Options
  */
-class BP_Tasty_Options
+class Tasty_Options
 {
 	/**
 	 * Initialize options support
 	 */
 	static public function init()
 	{
-		BP_Tasty_Options_Renderer::init();
+		Tasty_Options_Renderer::init();
 	}
 
 	/**
@@ -32,7 +32,7 @@ class BP_Tasty_Options
 	static public function init_ajax()
 	{
 		Pie_Easy_Loader::load('ajax');
-		$uploader = new BP_Tasty_Options_Uploader();
+		$uploader = new Tasty_Options_Uploader();
 		$uploader->init_ajax();
 	}
 }
@@ -40,7 +40,7 @@ class BP_Tasty_Options
 /**
  * Tasty Options Section
  */
-class BP_Tasty_Options_Section extends Pie_Easy_Options_Section
+class Tasty_Options_Section extends Pie_Easy_Options_Section
 {
 	/**
 	 * Constructor
@@ -63,7 +63,7 @@ class BP_Tasty_Options_Section extends Pie_Easy_Options_Section
 /**
  * Tasty Options Option
  */
-class BP_Tasty_Options_Option extends Pie_Easy_Options_Option
+class Tasty_Options_Option extends Pie_Easy_Options_Option
 {
 	/**
 	 * Return the name of the implementing API
@@ -72,14 +72,14 @@ class BP_Tasty_Options_Option extends Pie_Easy_Options_Option
 	 */
 	protected function get_api_slug()
 	{
-		return 'bp_tasty';
+		return 'tasty_theme';
 	}
 }
 
 /**
  * Tasty Options Option
  */
-class BP_Tasty_Options_Skin_Option extends BP_Tasty_Options_Option
+class Tasty_Options_Skin_Option extends Tasty_Options_Option
 {
 	/**
 	 * Use a custom name prefix to keep option scopes from being tainted
@@ -88,14 +88,14 @@ class BP_Tasty_Options_Skin_Option extends BP_Tasty_Options_Option
 	 */
 	protected function name_prefix()
 	{
-		return bp_tasty_skins_options_name_prefix();
+		return tasty_skins_options_name_prefix();
 	}
 }
 
 /**
  * Tasty Options Registry
  */
-class BP_Tasty_Options_Registry extends Pie_Easy_Options_Registry
+class Tasty_Options_Registry extends Pie_Easy_Options_Registry
 {
 	/**
 	 * The singleton instance
@@ -124,7 +124,7 @@ class BP_Tasty_Options_Registry extends Pie_Easy_Options_Registry
 			self::$instance = new self();
 			// add form processing
 			if ( current_user_can('manage_options') ) {
-				add_action( 'buddypress_page_bp-tasty-control-panel', array( self::$instance, 'process_form' ) );
+				add_action( 'buddypress_page_tasty-control-panel', array( self::$instance, 'process_form' ) );
 			}
 		}
 
@@ -153,12 +153,12 @@ class BP_Tasty_Options_Registry extends Pie_Easy_Options_Registry
 	/**
 	 * Create a new renderer
 	 *
-	 * @return BP_Tasty_Options_Renderer
+	 * @return Tasty_Options_Renderer
 	 */
 	protected function create_renderer()
 	{
-		$renderer = new BP_Tasty_Options_Renderer();
-		$renderer->enable_uploader( new BP_Tasty_Options_Uploader( 'admin_head' ) );
+		$renderer = new Tasty_Options_Renderer();
+		$renderer->enable_uploader( new Tasty_Options_Uploader( 'admin_head' ) );
 		return $renderer;
 	}
 
@@ -167,7 +167,7 @@ class BP_Tasty_Options_Registry extends Pie_Easy_Options_Registry
 /**
  * Tasty Options Renderer
  */
-class BP_Tasty_Options_Renderer extends Pie_Easy_Options_Renderer
+class Tasty_Options_Renderer extends Pie_Easy_Options_Renderer
 {
 	// nothing custom yet
 }
@@ -175,7 +175,7 @@ class BP_Tasty_Options_Renderer extends Pie_Easy_Options_Renderer
 /**
  * Tasty Options Uploader
  */
-class BP_Tasty_Options_Uploader extends Pie_Easy_Options_Uploader
+class Tasty_Options_Uploader extends Pie_Easy_Options_Uploader
 {
 	// nothing custom yet
 }
@@ -189,12 +189,12 @@ class BP_Tasty_Options_Uploader extends Pie_Easy_Options_Uploader
  *
  * @return boolean
  */
-function bp_tasty_options_registry_init()
+function tasty_options_registry_init()
 {
-	return BP_Tasty_Options_Registry::init(
-		BP_TASTY_CONF_DIR . '/options.ini',
-		'BP_Tasty_Options_Section',
-		'BP_Tasty_Options_Option' );
+	return Tasty_Options_Registry::init(
+		TASTY_CONF_DIR . '/options.ini',
+		'Tasty_Options_Section',
+		'Tasty_Options_Option' );
 }
 
 /**
@@ -203,9 +203,9 @@ function bp_tasty_options_registry_init()
  * @param boolean $output
  * @return string|void
  */
-function bp_tasty_options_registry_render_sections( $output = true )
+function tasty_options_registry_render_sections( $output = true )
 {
-	return BP_Tasty_Options_Registry::instance()->render_sections( $output );
+	return Tasty_Options_Registry::instance()->render_sections( $output );
 }
 
 /**
@@ -214,9 +214,9 @@ function bp_tasty_options_registry_render_sections( $output = true )
  * @param string $option_name
  * @return mixed
  */
-function bp_tasty_option( $option_name )
+function tasty_option( $option_name )
 {
-	return BP_Tasty_Options_Registry::instance()->option( $option_name )->get();
+	return Tasty_Options_Registry::instance()->option( $option_name )->get();
 }
 
 /**
@@ -226,9 +226,9 @@ function bp_tasty_option( $option_name )
  * @param string $size
  * @return mixed
  */
-function bp_tasty_option_image_url( $option_name, $size = 'thumbnail' )
+function tasty_option_image_url( $option_name, $size = 'thumbnail' )
 {
-	return BP_Tasty_Options_Registry::instance()->option( $option_name )->get_image_url( $size );
+	return Tasty_Options_Registry::instance()->option( $option_name )->get_image_url( $size );
 }
 
 ?>

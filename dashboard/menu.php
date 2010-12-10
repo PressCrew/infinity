@@ -14,34 +14,34 @@
 /**
  * Adds the Tasty Framework submenu item to the BuddyPress menu
  */
-function bp_tasty_dashboard_setup_menu()
+function tasty_dashboard_setup_menu()
 {
 	// PIE menu
 	add_submenu_page(
 		'bp-general-settings',
-		__( 'PIE Framework', BP_TASTY_TEXT_DOMAIN),
-		sprintf('<img src="%s" class="bp-tasty-menu-icon" />', bp_tasty_dashboard_image('pie_16x16.png') ) . __( 'PIE Framework', BP_TASTY_TEXT_DOMAIN ),
+		__( 'PIE Framework', TASTY_TEXT_DOMAIN),
+		sprintf('<img src="%s" class="tasty-menu-icon" />', tasty_dashboard_image('pie_16x16.png') ) . __( 'PIE Framework', TASTY_TEXT_DOMAIN ),
 		'manage_options',
-		'bp-tasty-pie-panel',
-		'bp_tasty_dashboard_pie_screen' );
+		'tasty-pie-panel',
+		'tasty_dashboard_pie_screen' );
 
 	// Sweet control panel
 	add_submenu_page(
 		'bp-general-settings',
-		__( 'Sweet', BP_TASTY_TEXT_DOMAIN),
-		sprintf('<img src="%s" class="bp-tasty-menu-icon indent" />', bp_tasty_dashboard_image('sweet_16x16.png') ) . __( 'Sweet API', BP_TASTY_TEXT_DOMAIN ),
+		__( 'Sweet', TASTY_TEXT_DOMAIN),
+		sprintf('<img src="%s" class="tasty-menu-icon indent" />', tasty_dashboard_image('sweet_16x16.png') ) . __( 'Sweet API', TASTY_TEXT_DOMAIN ),
 		'manage_options',
-		'bp-tasty-sweet-panel',
-		'bp_tasty_dashboard_sweet_screen' );
+		'tasty-sweet-panel',
+		'tasty_dashboard_sweet_screen' );
 
 	// Tasty control panel
 	add_submenu_page(
 		'bp-general-settings',
-		__( 'Tasty', BP_TASTY_TEXT_DOMAIN),
-		sprintf('<img src="%s" class="bp-tasty-menu-icon indent" />', bp_tasty_dashboard_image('tasty_16x16.png') ) . __( 'Tasty Theme', BP_TASTY_TEXT_DOMAIN ),
+		__( 'Tasty', TASTY_TEXT_DOMAIN),
+		sprintf('<img src="%s" class="tasty-menu-icon indent" />', tasty_dashboard_image('tasty_16x16.png') ) . __( 'Tasty Theme', TASTY_TEXT_DOMAIN ),
 		'manage_options',
-		'bp-tasty-control-panel',
-		'bp_tasty_dashboard_cpanel_screen' );
+		'tasty-control-panel',
+		'tasty_dashboard_cpanel_screen' );
 }
 
 ?>

@@ -11,43 +11,43 @@
  */
 
 // DO NOT EDIT these constants for any reason
-define( 'BP_TASTY_VERSION', '1.0' );
-define( 'BP_TASTY_NAME', 'bp-tasty' );
-define( 'BP_TASTY_THEME_DIR', STYLESHEETPATH );
-define( 'BP_TASTY_THEME_URL', get_stylesheet_directory_uri() );
-define( 'BP_TASTY_API_DIR', BP_TASTY_THEME_DIR . '/api' );
-define( 'BP_TASTY_API_URL', BP_TASTY_THEME_URL . '/api' );
-define( 'BP_TASTY_PIE_DIR', BP_TASTY_API_DIR . '/pie' );
-define( 'BP_TASTY_PIE_URL', BP_TASTY_API_URL . '/pie' );
-define( 'BP_TASTY_CONF_DIR', BP_TASTY_THEME_DIR . '/config' );
-define( 'BP_TASTY_ADMIN_DIR', BP_TASTY_THEME_DIR . '/dashboard' );
-define( 'BP_TASTY_ADMIN_URL', BP_TASTY_THEME_URL . '/dashboard' );
-define( 'BP_TASTY_EXTRAS_DIR',  get_theme_root() . '/bp-tasty-extras' );
-define( 'BP_TASTY_EXTRAS_URL', get_theme_root_uri() . '/bp-tasty-extras' );
-define( 'BP_TASTY_EXTRAS_SKIN_DIR', BP_TASTY_EXTRAS_DIR . '/skins' );
-define( 'BP_TASTY_EXTRAS_SKIN_URL', BP_TASTY_EXTRAS_URL . '/skins' );
-define( 'BP_TASTY_TEXT_DOMAIN',  BP_TASTY_NAME );
+define( 'TASTY_VERSION', '1.0' );
+define( 'TASTY_NAME', 'tasty' );
+define( 'TASTY_THEME_DIR', STYLESHEETPATH );
+define( 'TASTY_THEME_URL', get_stylesheet_directory_uri() );
+define( 'TASTY_API_DIR', TASTY_THEME_DIR . '/api' );
+define( 'TASTY_API_URL', TASTY_THEME_URL . '/api' );
+define( 'TASTY_PIE_DIR', TASTY_API_DIR . '/pie' );
+define( 'TASTY_PIE_URL', TASTY_API_URL . '/pie' );
+define( 'TASTY_CONF_DIR', TASTY_THEME_DIR . '/config' );
+define( 'TASTY_ADMIN_DIR', TASTY_THEME_DIR . '/dashboard' );
+define( 'TASTY_ADMIN_URL', TASTY_THEME_URL . '/dashboard' );
+define( 'TASTY_EXTRAS_DIR',  get_theme_root() . '/tasty-extras' );
+define( 'TASTY_EXTRAS_URL', get_theme_root_uri() . '/tasty-extras' );
+define( 'TASTY_EXTRAS_SKIN_DIR', TASTY_EXTRAS_DIR . '/skins' );
+define( 'TASTY_EXTRAS_SKIN_URL', TASTY_EXTRAS_URL . '/skins' );
+define( 'TASTY_TEXT_DOMAIN',  TASTY_NAME );
 
 // load PIE and initialize
-require_once( BP_TASTY_PIE_DIR . '/loader.php' );
-Pie_Easy_Loader::init( BP_TASTY_PIE_URL );
+require_once( TASTY_PIE_DIR . '/loader.php' );
+Pie_Easy_Loader::init( TASTY_PIE_URL );
 
 // load Tasty API
-require_once( BP_TASTY_API_DIR . '/options.php' );
-require_once( BP_TASTY_API_DIR . '/l10n.php' );
-require_once( BP_TASTY_API_DIR . '/skinning.php' );
+require_once( TASTY_API_DIR . '/options.php' );
+require_once( TASTY_API_DIR . '/l10n.php' );
+require_once( TASTY_API_DIR . '/skinning.php' );
 
 // load skin functions
-bp_tasty_skin_load_functions();
+tasty_skin_load_functions();
 
 if ( is_admin() ) {
 	// only load admin functionality if the dashboard is actually loaded
-	require_once( BP_TASTY_ADMIN_DIR . '/loader.php' );
+	require_once( TASTY_ADMIN_DIR . '/loader.php' );
 } else {
 	// enqueue skin assets
-	bp_tasty_skin_enqueue_assets();
+	tasty_skin_enqueue_assets();
 	// initialize global registry
-	bp_tasty_options_registry_init();
+	tasty_options_registry_init();
 }
 
 ?>
