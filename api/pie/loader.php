@@ -42,7 +42,8 @@ final class Pie_Easy_Loader
 		'enqueue',
 		'files',
 		'l10n',
-		'options' => array( 'option', 'registry', 'renderer', 'section', 'uploader', 'walkers' )
+		'options' => array( 'option', 'registry', 'renderer', 'section', 'uploader', 'walkers' ),
+		'scheme'
 	);
 
 	/**
