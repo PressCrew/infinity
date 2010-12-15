@@ -1,6 +1,6 @@
 <?php
 /**
- * PIE Framework loader class file
+ * PIE loader class file
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://marshallsorenson.com/
@@ -40,6 +40,7 @@ final class Pie_Easy_Loader
 	private $features = array(
 		'ajax',
 		'enqueue',
+		'features' => array( 'feature' ),
 		'files',
 		'l10n',
 		'options' => array( 'option', 'registry', 'renderer', 'section', 'uploader', 'walkers' ),

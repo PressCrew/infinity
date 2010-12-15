@@ -1,6 +1,6 @@
 <?php
 /**
- * PIE Framework enqueue helpers class file
+ * PIE enqueue helpers class file
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://marshallsorenson.com/

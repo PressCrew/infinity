@@ -1,6 +1,6 @@
 <?php
 /**
- * BP Tasty Theme localization class file
+ * Tasty Theme localization class file
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://bp-tricks.com/

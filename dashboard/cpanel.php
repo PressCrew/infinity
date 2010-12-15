@@ -1,6 +1,6 @@
 <?php
 /**
- * BP Tasty theme dashboard control panel functions
+ * Tasty theme dashboard control panel functions
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://bp-tricks.com/
@@ -32,7 +32,6 @@ function tasty_dashboard_actions()
 	return
 		array(
 			'start' => __( 'Start', TASTY_TEXT_DOMAIN ),
-			'skins' => __( 'Skins', TASTY_TEXT_DOMAIN ),
 			'widgets' => __( 'Widgets', TASTY_TEXT_DOMAIN ),
 			'shortcodes' => __( 'Shortcodes', TASTY_TEXT_DOMAIN ),
 			'options' => __( 'Options', TASTY_TEXT_DOMAIN ),

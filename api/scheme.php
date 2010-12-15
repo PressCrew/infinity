@@ -20,12 +20,10 @@ Pie_Easy_Loader::load( 'scheme' );
  */
 function tasty_scheme_init()
 {
-	// try to load this active theme as a scheme
-	if ( current_theme_supports( TASTY_SUPPORT_INFINITE_CHILDREN ) ) {
-		return Pie_Easy_Scheme::init( 'config', TASTY_NAME );
-	}
-
-	return false;
+	// initialize the scheme
+	Pie_Easy_Scheme::instance()->init( 'config', TASTY_NAME );
+	Pie_Easy_Scheme::instance()->load_options( Tasty_Options_Registry::instance(), 'Tasty_Options_Section', 'Tasty_Options_Option' );
+	return true;
 }
 
 /**
@@ -63,5 +61,17 @@ function tasty_filter_template( $template )
 	return Pie_Easy_Scheme::instance()->filter_template( $template );
 }
 add_filter( 'template_include', 'tasty_filter_template', 10 );
+
+/**
+ * Get a theme image url
+ *
+ * @param string $image Relative path to image from the theme's images directory
+ * @param string $theme Return an image from a theme other than the active theme
+ * @return string
+ */
+function tasty_theme_image( $image, $theme = null )
+{
+	return Pie_Easy_Scheme::instance()->images_url( $theme ) . '/' . $image;
+}
 
 ?>

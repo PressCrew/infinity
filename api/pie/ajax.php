@@ -1,6 +1,6 @@
 <?php
 /**
- * PIE Framework AJAX helpers class file
+ * PIE AJAX helpers class file
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://marshallsorenson.com/

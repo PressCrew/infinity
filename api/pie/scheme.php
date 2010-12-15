@@ -1,6 +1,6 @@
 <?php
 /**
- * PIE Framework scheme helper class file
+ * PIE scheme helper class file
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://marshallsorenson.com/
@@ -17,14 +17,29 @@
 final class Pie_Easy_Scheme
 {
 	/**
+	 * Name of the assets directory
+	 */
+	const DIR_ASSETS = 'assets';
+
+	/**
+	 * Name of the css directory
+	 */
+	const DIR_CSS = 'css';
+
+	/**
+	 * Name of the images directory
+	 */
+	const DIR_IMAGES = 'images';
+
+	/**
+	 * Name of the images directory
+	 */
+	const DIR_JS = 'js';
+	
+	/**
 	 * Parent Theme ini setting
 	 */
 	const SETTING_PARENT_THEME = 'parent_theme';
-
-	/**
-	 * Enable Skins ini setting
-	 */
-	const SETTING_ENABLE_SKINS = 'enable_skins';
 
 	/**
 	 * Singleton instance
@@ -41,7 +56,7 @@ final class Pie_Easy_Scheme
 	private $config_dir;
 
 	/**
-	 * Name of the ini file that is preferred by the API
+	 * Name of the configuration ini file that is preferred by the API
 	 *
 	 * @var string
 	 */
@@ -60,13 +75,6 @@ final class Pie_Easy_Scheme
 	 * @var array
 	 */
 	private $parent_themes = array();
-
-	/**
-	 * Set to true if skinning has been enabled in the config
-	 *
-	 * @var boolean
-	 */
-	private $skinning_enabled;
 
 	/**
 	 * Constructor
@@ -97,15 +105,11 @@ final class Pie_Easy_Scheme
 	 * @param string $config_file
 	 * @return boolean
 	 */
-	static public function init( $config_dir, $config_file )
+	public function init( $config_dir, $config_file )
 	{
-		if ( !self::$instance instanceof self ) {
-			self::instance()->set_config_dir( $config_dir );
-			self::instance()->set_config_file( $config_file );
-			self::instance()->load();
-		}
-
-		return true;
+		$this->set_config_dir( $config_dir );
+		$this->set_config_file( $config_file );
+		return $this->load();
 	}
 
 	/**
@@ -149,7 +153,18 @@ final class Pie_Easy_Scheme
 	public function load( $parent_theme = null )
 	{
 		if ( empty( $parent_theme ) ) {
-			$parent_theme = basename( STYLESHEETPATH );
+			$parent_theme = $this->active_theme();
+		}
+
+		// path to functions file
+		$func_file = sprintf(
+			'%s/%s/functions.php',
+			get_theme_root(),
+			$parent_theme );
+
+		// load functions file if it exists
+		if ( file_exists( $func_file ) ) {
+			require_once $func_file;
 		}
 
 		// build up path to config file
@@ -187,17 +202,51 @@ final class Pie_Easy_Scheme
 				// push myself onto the beginning of the stack
 				array_unshift( $this->parent_themes, $this->parent_theme );
 
-				// enable skinning?
-				if ( isset( $ini[self::SETTING_ENABLE_SKINS] ) ) {
-					$this->skinning_enabled = $ini[self::SETTING_ENABLE_SKINS];
-				}
-
 			} else {
 				throw new Exception( 'Failed to parse parent theme ini file: ' . $ini_file );
 			}
 		} else {
 			throw new Exception( 'The parent theme ini file does not exist or is not readable: ' . $ini_file );
 		}
+	}
+
+	/**
+	 * Load options for a theme
+	 *
+	 * @param Pie_Easy_Options_Registry $registry
+	 * @param string $section_class
+	 * @param string $option_class
+	 * @param string $ini_file_name
+	 * @return boolean
+	 */
+	public function load_options( Pie_Easy_Options_Registry $registry, $section_class, $option_class, $ini_file_name = 'options' )
+	{
+		// reverse the stack
+		$themes = array_reverse($this->parent_themes, true );
+
+		// loop through entire theme stack in reverse and try to load options
+		foreach( $themes as $theme ) {
+
+			// path to options ini
+			$options_ini = sprintf(
+				'%s%s%s%s%s%s%s.ini',
+				get_theme_root(),
+				DIRECTORY_SEPARATOR,
+				$theme,
+				DIRECTORY_SEPARATOR,
+				$this->config_dir,
+				DIRECTORY_SEPARATOR,
+				$ini_file_name
+			);
+
+			// load the option config if it exists
+			if ( is_readable( $options_ini ) ) {
+				$registry->load_config_file( $options_ini, $section_class, $option_class );
+			}
+
+		}
+
+		return true;
 	}
 
 	/**
@@ -262,6 +311,117 @@ final class Pie_Easy_Scheme
 		return '';
 	}
 
+	/**
+	 * Return the name of the active theme
+	 * 
+	 * @return string
+	 */
+	private function active_theme()
+	{
+		return get_stylesheet();
+	}
+
+	/**
+	 * Assets directory path
+	 *
+	 * @param string $theme
+	 * @return string
+	 */
+	private function assets_dir( $theme = null )
+	{
+		if ( empty( $theme ) ) {
+			$theme = $this->active_theme();
+		}
+
+		return
+			get_theme_root() .
+			DIRECTORY_SEPARATOR . $theme .
+			DIRECTORY_SEPARATOR . self::DIR_ASSETS;
+	}
+
+	/**
+	 * Assets directory URL
+	 *
+	 * @param string $theme
+	 * @return string
+	 */
+	private function assets_url( $theme = null )
+	{
+		if ( empty( $theme ) ) {
+			$theme = $this->active_theme();
+		}
+
+		return
+			get_theme_root_uri() .
+			'/' . $theme .
+			'/' . self::DIR_ASSETS;
+	}
+
+	/**
+	 * CSS directory path
+	 *
+	 * @param string $theme
+	 * @return string
+	 */
+	public function css_dir( $theme = null )
+	{
+		return $this->assets_dir( $theme ) . DIRECTORY_SEPARATOR . self::DIR_CSS;
+	}
+
+	/**
+	 * CSS directory URL
+	 *
+	 * @param string $theme
+	 * @return string
+	 */
+	public function css_url( $theme = null )
+	{
+		return $this->assets_url( $theme ) . '/' . self::DIR_CSS;
+	}
+
+	/**
+	 * JS directory path
+	 *
+	 * @param string $theme
+	 * @return string
+	 */
+	public function js_dir( $theme = null )
+	{
+		return $this->assets_dir( $theme ) . DIRECTORY_SEPARATOR . self::DIR_JS;
+	}
+
+	/**
+	 * JS directory URL
+	 *
+	 * @param string $theme
+	 * @return string
+	 */
+	public function js_url( $theme = null )
+	{
+		return $this->assets_url( $theme ) . '/' . self::DIR_JS;
+	}
+
+	/**
+	 * Images directory path
+	 *
+	 * @param string $theme
+	 * @return string
+	 */
+	public function images_dir( $theme = null )
+	{
+		return $this->assets_dir( $theme ) . DIRECTORY_SEPARATOR . self::DIR_IMAGES;
+	}
+
+	/**
+	 * Images directory URL
+	 *
+	 * @param string $theme
+	 * @return string
+	 */
+	public function images_url( $theme = null )
+	{
+		return $this->assets_url( $theme ) . '/' . self::DIR_IMAGES;
+	}
 }
 
 ?>

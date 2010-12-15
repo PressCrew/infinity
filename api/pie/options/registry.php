@@ -1,6 +1,6 @@
 <?php
 /**
- * PIE Framework API options registry
+ * PIE API options registry
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://marshallsorenson.com/
@@ -259,16 +259,21 @@ abstract class Pie_Easy_Options_Registry
 	 * Load a single option into the registry (one parsed ini section)
 	 * 
 	 * @param string $option_name
-	 * @param string $option_config
+	 * @param array $option_config
 	 * @return boolean
 	 */
 	private function load_config_option( $option_name, $option_config )
 	{
-		// make sure this is not a dupe
-		if ( $this->registered($option_name) ) {
-			throw new Exception( sprintf( 'The "%s" option has already been registered', $option_name ) );
+		// if option has already been registered, the only thing
+		// that can be done is to override the default value
+		if ( $this->registered( $option_name ) ) {
+			if ( isset( $option_config['default_value'] ) ) {
+				$this->option( $option_name )->set_default_value( $option_config['default_value'] );
+			}
+			return;
 		}
 
+		// get section from section stack
 		$section = $this->sections[$option_config['section']];
 
 		// create new option

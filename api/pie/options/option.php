@@ -1,6 +1,6 @@
 <?php
 /**
- * PIE Framework API options option class file
+ * PIE API options option class file
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://marshallsorenson.com/
@@ -134,7 +134,7 @@ abstract class Pie_Easy_Options_Option
 	{
 		// name must adhere to a strict format
 		if ( preg_match( '/^[a-z0-9]+(_[a-z0-9]+)*$/', $name ) ) {
-			$this->name = $this->name_prefix() . $name;
+			$this->name = $name;
 		} else {
 			throw new Exception( 'Option name does not match the allowed pattern.' );
 		}
@@ -227,13 +227,18 @@ abstract class Pie_Easy_Options_Option
 	 * @param string $size
 	 * @return string|false
 	 */
-	public function get_image_src( $size = 'thumbnail' )
+	public function get_image_src( $size = 'thumbnail', $attach_id = null )
 	{
 		// only works for uploads
 		if ( $this->field_type == 'upload' ) {
 
+			// attach id was passed?
+			if ( empty( $attach_id ) ) {
+				$attach_id = $this->get();
+			}
+
 			// try to get the attachment info
-			$src = wp_get_attachment_image_src( $this->get(), $size );
+			$src = wp_get_attachment_image_src( $attach_id, $size );
 
 			// did we find one?
 			if ( is_array($src) ) {
@@ -255,10 +260,26 @@ abstract class Pie_Easy_Options_Option
 	 */
 	public function get_image_url( $size = 'thumbnail' )
 	{
-		// get the details
-		$src = $this->get_image_src( $size );
-		// try to return a url
-		return ( $src ) ? $src[0] : false;
+		// get the value
+		$value = $this->get();
+
+		// did we get a number?
+		if ( is_numeric( $value ) && $value >= 1 ) {
+
+			// get the details
+			$src = $this->get_image_src( $size, $value );
+
+			// try to return a url
+			return ( $src ) ? $src[0] : false;
+
+		} elseif ( is_string( $value ) && strlen( $value ) >= 1 ) {
+
+			// they must have provided an image path
+			return get_stylesheet_directory_uri() . '/' . $value;
+
+		}
+
+		return null;
 	}
 
 	/**
@@ -377,11 +398,7 @@ abstract class Pie_Easy_Options_Option
 	 */
 	public function set_default_value( $value )
 	{
-		if ( empty( $this->default_value ) ) {
-			$this->default_value = $value;
-		} else {
-			throw new Exception( sprintf( 'The default value for "%s" has already been set.', $this->name ) );
-		}
+		$this->default_value = $value;
 	}
 
 	/**
@@ -404,16 +421,6 @@ abstract class Pie_Easy_Options_Option
 		}
 	}
 
-	/**
-	 * Override this to prefix all names with a string
-	 *
-	 * @return string
-	 */
-	protected function name_prefix()
-	{
-		return '';
-	}
-	
 	/**
 	 * Get the prefix for API option
 	 *
