@@ -1,6 +1,6 @@
 <?php
 /**
- * BP Tasty theme dashboard loader
+ * Tasty theme dashboard loader
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://bp-tricks.com/
@@ -10,9 +10,6 @@
  * @subpackage loader
  * @since 1.0
  */
-
-// initialize global registry
-tasty_options_registry_init();
 
 //
 // Constants

@@ -1,6 +1,6 @@
 <?php
 /**
- * PIE Framework API options renderer class file
+ * PIE API options renderer class file
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://marshallsorenson.com/

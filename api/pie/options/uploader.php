@@ -1,6 +1,6 @@
 <?php
 /**
- * PIE Framework API options uploader class file
+ * PIE API options uploader class file
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://marshallsorenson.com/

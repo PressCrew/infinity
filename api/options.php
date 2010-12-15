@@ -1,6 +1,6 @@
 <?php
 /**
- * BP Tasty Theme options classes file
+ * Tasty Theme options classes file
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://bp-tricks.com/
@@ -73,22 +73,6 @@ class Tasty_Options_Option extends Pie_Easy_Options_Option
 	protected function get_api_slug()
 	{
 		return 'tasty_theme';
-	}
-}
-
-/**
- * Tasty Options Option
- */
-class Tasty_Options_Skin_Option extends Tasty_Options_Option
-{
-	/**
-	 * Use a custom name prefix to keep option scopes from being tainted
-	 * 
-	 * @return string
-	 */
-	protected function name_prefix()
-	{
-		return tasty_skins_options_name_prefix();
 	}
 }
 
@@ -185,19 +169,6 @@ class Tasty_Options_Uploader extends Pie_Easy_Options_Uploader
 //
 
 /**
- * Initialize the registry
- *
- * @return boolean
- */
-function tasty_options_registry_init()
-{
-	return Tasty_Options_Registry::init(
-		TASTY_CONF_DIR . '/options.ini',
-		'Tasty_Options_Section',
-		'Tasty_Options_Option' );
-}
-
-/**
  * Render all sections in the registery
  *
  * @param boolean $output
@@ -220,11 +191,23 @@ function tasty_option( $option_name )
 }
 
 /**
+ * Get an option image src array
+ *
+ * @param string $option_name
+ * @param string $size
+ * @return array
+ */
+function tasty_option_image_src( $option_name, $size = 'thumbnail' )
+{
+	return Tasty_Options_Registry::instance()->option( $option_name )->get_image_src( $size );
+}
+
+/**
  * Get an option image url
  * 
  * @param string $option_name
  * @param string $size
- * @return mixed
+ * @return string
  */
 function tasty_option_image_url( $option_name, $size = 'thumbnail' )
 {

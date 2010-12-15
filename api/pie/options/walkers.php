@@ -1,6 +1,6 @@
 <?php
 /**
- * PIE Framework API options walkers class file
+ * PIE API options walkers class file
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://marshallsorenson.com/

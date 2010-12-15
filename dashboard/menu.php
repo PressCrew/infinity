@@ -1,6 +1,6 @@
 <?php
 /**
- * BP Tasty theme dashboard menu functions
+ * Tasty theme dashboard menu functions
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://bp-tricks.com/
@@ -12,15 +12,15 @@
  */
 
 /**
- * Adds the Tasty Framework submenu item to the BuddyPress menu
+ * Adds the Tasty submenu item to the BuddyPress menu
  */
 function tasty_dashboard_setup_menu()
 {
 	// PIE menu
 	add_submenu_page(
 		'bp-general-settings',
-		__( 'PIE Framework', TASTY_TEXT_DOMAIN),
-		sprintf('<img src="%s" class="tasty-menu-icon" />', tasty_dashboard_image('pie_16x16.png') ) . __( 'PIE Framework', TASTY_TEXT_DOMAIN ),
+		__( 'PIE', TASTY_TEXT_DOMAIN),
+		sprintf('<img src="%s" class="tasty-menu-icon" />', tasty_dashboard_image('pie_16x16.png') ) . __( 'PIE', TASTY_TEXT_DOMAIN ),
 		'manage_options',
 		'tasty-pie-panel',
 		'tasty_dashboard_pie_screen' );

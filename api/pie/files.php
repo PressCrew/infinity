@@ -1,6 +1,6 @@
 <?php
 /**
- * PIE Framework file system helper class file
+ * PIE file system helper class file
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://marshallsorenson.com/

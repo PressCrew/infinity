@@ -1,6 +1,6 @@
 <?php
 /**
- * PIE Framework localization class file
+ * PIE localization class file
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://marshallsorenson.com/
