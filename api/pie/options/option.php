@@ -108,6 +108,13 @@ abstract class Pie_Easy_Options_Option
 	private $default_value;
 
 	/**
+	 * Feature required for this option to display
+	 *
+	 * @var string
+	 */
+	private $required_feature;
+
+	/**
 	 * Required capabilities
 	 *
 	 * @var array
@@ -299,6 +306,20 @@ abstract class Pie_Easy_Options_Option
 	}
 
 	/**
+	 * Check that theme has required feature support enabled if applicable
+	 *
+	 * @return boolean
+	 */
+	public function supported()
+	{
+		if ( $this->required_feature ) {
+			return current_theme_supports( $this->required_feature );
+		}
+
+		return true;
+	}
+
+	/**
 	 * Check if field type is valid
 	 * 
 	 * @param string $type
@@ -388,6 +409,20 @@ abstract class Pie_Easy_Options_Option
 			$this->field_options= $field_options;
 		} else {
 			throw new Exception( sprintf( 'The field options for "%s" have already been set.', $this->name ) );
+		}
+	}
+
+	/**
+	 * Set the required feature
+	 *
+	 * @param string $feature_name
+	 */
+	public function set_required_feature( $feature_name )
+	{
+		if ( empty( $this->required_feature ) ) {
+			$this->required_feature= $feature_name;
+		} else {
+			throw new Exception( sprintf( 'The required feature for "%s" has already been set.', $this->name ) );
 		}
 	}
 

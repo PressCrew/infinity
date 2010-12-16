@@ -295,6 +295,11 @@ abstract class Pie_Easy_Options_Registry
 			$option->set_default_value( $option_config['default_value'] );
 		}
 
+		// required feature
+		if ( isset( $option_config['required_feature'] ) ) {
+			$option->set_required_feature( $option_config['required_feature'] );
+		}
+
 		// capabilities
 		if ( isset( $option_config['capabilities'] ) ) {
 			$option->set_capabilities( $option_config['capabilities'] );
