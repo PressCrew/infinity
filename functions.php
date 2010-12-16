@@ -43,8 +43,7 @@ if ( is_admin() ) {
 	// only load admin functionality if the dashboard is actually loaded
 	require_once( TASTY_ADMIN_DIR . '/loader.php' );
 } else {
-	// initialize features
-	add_action( 'after_setup_theme', array( 'Tasty_Features', 'init' ), 999 );
+	// ???
 }
 
 ?>

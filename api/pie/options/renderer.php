@@ -71,22 +71,26 @@ abstract class Pie_Easy_Options_Renderer
 	 */
 	final public function render( Pie_Easy_Options_Option $option, $output = true )
 	{
-		// set as currently rendered option
-		$this->option = $option;
-		$this->option->enable_post_override();
+		// check feature support
+		if ( $option->supported() ) {
+			
+			// set as currently rendered option
+			$this->option = $option;
+			$this->option->enable_post_override();
 
-		// handle output buffering if applicable
-		if ( $output === false ) {
-			ob_start();
-		}
+			// handle output buffering if applicable
+			if ( $output === false ) {
+				ob_start();
+			}
 
-		// render the option
-		$this->render_option();
-		$this->options_rendered[] = $option;
+			// render the option
+			$this->render_option();
+			$this->options_rendered[] = $option;
 
-		// return results if output buffering is on
-		if ( $output === false ) {
-			return ob_get_clean();
+			// return results if output buffering is on
+			if ( $output === false ) {
+				return ob_get_clean();
+			}
 		}
 	}
 
