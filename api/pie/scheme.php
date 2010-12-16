@@ -156,24 +156,14 @@ final class Pie_Easy_Scheme
 			$parent_theme = $this->active_theme();
 		}
 
-		// path to functions file
-		$func_file = sprintf(
-			'%s/%s/functions.php',
-			get_theme_root(),
-			$parent_theme );
+		// paths to files
+		$ini_file = $this->theme_file($parent_theme, $this->config_dir, $this->config_file . '.ini');
+		$func_file = $this->theme_file( $parent_theme, 'functions.php' );
 
 		// load functions file if it exists
 		if ( file_exists( $func_file ) ) {
 			require_once $func_file;
 		}
-
-		// build up path to config file
-		$ini_file = sprintf(
-			'%s/%s/%s/%s.ini',
-			get_theme_root(),
-			$parent_theme,
-			$this->config_dir,
-			$this->config_file );
 
 		// does ini file exist?
 		if ( is_readable( $ini_file ) ) {
@@ -228,16 +218,7 @@ final class Pie_Easy_Scheme
 		foreach( $themes as $theme ) {
 
 			// path to options ini
-			$options_ini = sprintf(
-				'%s%s%s%s%s%s%s.ini',
-				get_theme_root(),
-				DIRECTORY_SEPARATOR,
-				$theme,
-				DIRECTORY_SEPARATOR,
-				$this->config_dir,
-				DIRECTORY_SEPARATOR,
-				$ini_file_name
-			);
+			$options_ini = $this->theme_file( $theme, $this->config_dir, $ini_file_name . '.ini' );
 
 			// load the option config if it exists
 			if ( is_readable( $options_ini ) ) {
@@ -292,7 +273,7 @@ final class Pie_Easy_Scheme
 				foreach ($this->parent_themes as $theme_name ) {
 
 					// prepend all template names with theme dir
-					$located_template = sprintf( '%s/%s/%s', get_theme_root(), $theme_name, $template_name );
+					$located_template = $this->theme_file( $theme_name, $template_name );
 
 					// does it exist?
 					if ( file_exists( $located_template ) ) {
@@ -319,6 +300,61 @@ final class Pie_Easy_Scheme
 	private function active_theme()
 	{
 		return get_stylesheet();
+	}
+
+	/**
+	 * Return path to a theme directory
+	 *
+	 * @param string $theme
+	 * @return string
+	 */
+	public function theme_dir( $theme )
+	{
+		return get_theme_root() . DIRECTORY_SEPARATOR . $theme;
+	}
+
+	/**
+	 * Return URL to a theme directory
+	 *
+	 * @param string $theme
+	 * @return string
+	 */
+	public function theme_dir_url( $theme )
+	{
+		return get_theme_root_uri() . '/' . $theme;
+	}
+
+	/**
+	 * Return path to a theme file
+	 *
+	 * @param string $theme
+	 * @param string $file_names
+	 */
+	public function theme_file( $theme, $file_names )
+	{
+		// get all args except the first
+		$file_names = func_get_args();
+		array_shift($file_names);
+
+		return
+			$this->theme_dir( $theme ) .
+			DIRECTORY_SEPARATOR .
+			implode(DIRECTORY_SEPARATOR, $file_names);
+	}
+
+	/**
+	 * Return URL to a theme file
+	 *
+	 * @param string $theme
+	 * @param string $file_names
+	 */
+	public function theme_file_url( $theme, $file_names )
+	{
+		// get all args except the first
+		$file_names = func_get_args();
+		array_shift($file_names);
+
+		return $this->theme_dir_url( $theme ) . '/' . implode( '/', $file_names );
 	}
 
 	/**
