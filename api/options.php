@@ -1,6 +1,6 @@
 <?php
 /**
- * Tasty Theme options classes file
+ * Infinity Theme options classes file
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://bp-tricks.com/
@@ -14,16 +14,16 @@
 Pie_Easy_Loader::load( 'options' );
 
 /**
- * Tasty Options
+ * Infinity Options
  */
-class Tasty_Options
+class Infinity_Options
 {
 	/**
 	 * Initialize options support
 	 */
 	static public function init()
 	{
-		Tasty_Options_Renderer::init();
+		Infinity_Options_Renderer::init();
 	}
 
 	/**
@@ -32,15 +32,15 @@ class Tasty_Options
 	static public function init_ajax()
 	{
 		Pie_Easy_Loader::load('ajax');
-		$uploader = new Tasty_Options_Uploader();
+		$uploader = new Infinity_Options_Uploader();
 		$uploader->init_ajax();
 	}
 }
 
 /**
- * Tasty Options Section
+ * Infinity Options Section
  */
-class Tasty_Options_Section extends Pie_Easy_Options_Section
+class Infinity_Options_Section extends Pie_Easy_Options_Section
 {
 	/**
 	 * Constructor
@@ -61,9 +61,9 @@ class Tasty_Options_Section extends Pie_Easy_Options_Section
 }
 
 /**
- * Tasty Options Option
+ * Infinity Options Option
  */
-class Tasty_Options_Option extends Pie_Easy_Options_Option
+class Infinity_Options_Option extends Pie_Easy_Options_Option
 {
 	/**
 	 * Return the name of the implementing API
@@ -72,14 +72,14 @@ class Tasty_Options_Option extends Pie_Easy_Options_Option
 	 */
 	protected function get_api_slug()
 	{
-		return 'tasty_theme';
+		return 'infinity_theme';
 	}
 }
 
 /**
- * Tasty Options Registry
+ * Infinity Options Registry
  */
-class Tasty_Options_Registry extends Pie_Easy_Options_Registry
+class Infinity_Options_Registry extends Pie_Easy_Options_Registry
 {
 	/**
 	 * The singleton instance
@@ -108,7 +108,7 @@ class Tasty_Options_Registry extends Pie_Easy_Options_Registry
 			self::$instance = new self();
 			// add form processing
 			if ( current_user_can('manage_options') ) {
-				add_action( 'buddypress_page_tasty-control-panel', array( self::$instance, 'process_form' ) );
+				add_action( 'buddypress_page_infinity-control-panel', array( self::$instance, 'process_form' ) );
 			}
 		}
 
@@ -137,29 +137,29 @@ class Tasty_Options_Registry extends Pie_Easy_Options_Registry
 	/**
 	 * Create a new renderer
 	 *
-	 * @return Tasty_Options_Renderer
+	 * @return Infinity_Options_Renderer
 	 */
 	protected function create_renderer()
 	{
-		$renderer = new Tasty_Options_Renderer();
-		$renderer->enable_uploader( new Tasty_Options_Uploader( 'admin_head' ) );
+		$renderer = new Infinity_Options_Renderer();
+		$renderer->enable_uploader( new Infinity_Options_Uploader( 'admin_head' ) );
 		return $renderer;
 	}
 
 }
 
 /**
- * Tasty Options Renderer
+ * Infinity Options Renderer
  */
-class Tasty_Options_Renderer extends Pie_Easy_Options_Renderer
+class Infinity_Options_Renderer extends Pie_Easy_Options_Renderer
 {
 	// nothing custom yet
 }
 
 /**
- * Tasty Options Uploader
+ * Infinity Options Uploader
  */
-class Tasty_Options_Uploader extends Pie_Easy_Options_Uploader
+class Infinity_Options_Uploader extends Pie_Easy_Options_Uploader
 {
 	// nothing custom yet
 }
@@ -174,9 +174,9 @@ class Tasty_Options_Uploader extends Pie_Easy_Options_Uploader
  * @param boolean $output
  * @return string|void
  */
-function tasty_options_registry_render_sections( $output = true )
+function infinity_options_registry_render_sections( $output = true )
 {
-	return Tasty_Options_Registry::instance()->render_sections( $output );
+	return Infinity_Options_Registry::instance()->render_sections( $output );
 }
 
 /**
@@ -185,9 +185,9 @@ function tasty_options_registry_render_sections( $output = true )
  * @param string $option_name
  * @return mixed
  */
-function tasty_option( $option_name )
+function infinity_option( $option_name )
 {
-	return Tasty_Options_Registry::instance()->option( $option_name )->get();
+	return Infinity_Options_Registry::instance()->option( $option_name )->get();
 }
 
 /**
@@ -197,9 +197,9 @@ function tasty_option( $option_name )
  * @param string $size
  * @return array
  */
-function tasty_option_image_src( $option_name, $size = 'thumbnail' )
+function infinity_option_image_src( $option_name, $size = 'thumbnail' )
 {
-	return Tasty_Options_Registry::instance()->option( $option_name )->get_image_src( $size );
+	return Infinity_Options_Registry::instance()->option( $option_name )->get_image_src( $size );
 }
 
 /**
@@ -209,9 +209,9 @@ function tasty_option_image_src( $option_name, $size = 'thumbnail' )
  * @param string $size
  * @return string
  */
-function tasty_option_image_url( $option_name, $size = 'thumbnail' )
+function infinity_option_image_url( $option_name, $size = 'thumbnail' )
 {
-	return Tasty_Options_Registry::instance()->option( $option_name )->get_image_url( $size );
+	return Infinity_Options_Registry::instance()->option( $option_name )->get_image_url( $size );
 }
 
 ?>

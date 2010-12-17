@@ -1,1 +1,1 @@
-Tasty
+Infinity

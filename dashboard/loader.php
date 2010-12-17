@@ -1,6 +1,6 @@
 <?php
 /**
- * Tasty theme dashboard loader
+ * Infinity theme dashboard loader
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://bp-tricks.com/
@@ -14,21 +14,21 @@
 //
 // Constants
 //
-define( 'TASTY_ADMIN_TPLS_DIR', TASTY_ADMIN_DIR . '/templates' );
+define( 'INFINITY_ADMIN_TPLS_DIR', INFINITY_ADMIN_DIR . '/templates' );
 
 //
 // Files
 //
-require_once( TASTY_ADMIN_DIR . '/menu.php' );
-require_once( TASTY_ADMIN_DIR . '/cpanel.php' );
+require_once( INFINITY_ADMIN_DIR . '/menu.php' );
+require_once( INFINITY_ADMIN_DIR . '/cpanel.php' );
 
 //
 // Actions
 //
-add_action( 'admin_init', 'tasty_ajax_setup' );
-add_action( 'admin_menu', 'tasty_dashboard_setup' );
-add_action( 'admin_menu', 'tasty_dashboard_setup_menu' );
-add_action( 'tasty_dashboard_cpanel_content', 'tasty_dashboard_cpanel_options_content' );
+add_action( 'admin_init', 'infinity_ajax_setup' );
+add_action( 'admin_menu', 'infinity_dashboard_setup' );
+add_action( 'admin_menu', 'infinity_dashboard_setup_menu' );
+add_action( 'infinity_dashboard_cpanel_content', 'infinity_dashboard_cpanel_options_content' );
 
 //
 // Functions
@@ -37,27 +37,27 @@ add_action( 'tasty_dashboard_cpanel_content', 'tasty_dashboard_cpanel_options_co
 /**
  * Setup AJAX handling
  */
-function tasty_ajax_setup()
+function infinity_ajax_setup()
 {
 	if ( defined( 'DOING_AJAX' ) ) {
-		Tasty_Options::init_ajax();
+		Infinity_Options::init_ajax();
 	}
 }
 
 /**
  * Handle setup of the control panel environment
  */
-function tasty_dashboard_setup()
+function infinity_dashboard_setup()
 {
 	// enqueue styles
-    wp_enqueue_style( 'tasty-dashboard', TASTY_ADMIN_URL . '/assets/css/cpanel.css', false, TASTY_VERSION, 'screen' );
+    wp_enqueue_style( 'infinity-dashboard', INFINITY_ADMIN_URL . '/assets/css/cpanel.css', false, INFINITY_VERSION, 'screen' );
 
 	// enqueue script
-	wp_enqueue_script( 'tasty-dashboard', TASTY_ADMIN_URL . '/assets/js/dashboard.js', false, TASTY_VERSION );
+	wp_enqueue_script( 'infinity-dashboard', INFINITY_ADMIN_URL . '/assets/js/dashboard.js', false, INFINITY_VERSION );
 	
-	if ( $_GET['page'] == 'tasty-control-panel' ) {
+	if ( $_GET['page'] == 'infinity-control-panel' ) {
 		// pie easy options init
-		Tasty_Options::init();
+		Infinity_Options::init();
 	}
 }
 
@@ -66,17 +66,17 @@ function tasty_dashboard_setup()
  *
  * @param string $rel_path
  */
-function tasty_dashboard_load_template( $rel_path )
+function infinity_dashboard_load_template( $rel_path )
 {
-	include( TASTY_ADMIN_TPLS_DIR . DIRECTORY_SEPARATOR . $rel_path );
+	include( INFINITY_ADMIN_TPLS_DIR . DIRECTORY_SEPARATOR . $rel_path );
 }
 
 /**
  * Return path to a dashboard image
  */
-function tasty_dashboard_image( $name )
+function infinity_dashboard_image( $name )
 {
-	return TASTY_ADMIN_URL . '/assets/images/' . $name;
+	return INFINITY_ADMIN_URL . '/assets/images/' . $name;
 }
 
 ?>

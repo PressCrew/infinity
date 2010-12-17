@@ -1,6 +1,6 @@
 <?php
 /**
- * Tasty Theme scheme initilization file
+ * Infinity Theme scheme initilization file
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://bp-tricks.com/
@@ -18,11 +18,11 @@ Pie_Easy_Loader::load( 'scheme' );
  *
  * @return boolean
  */
-function tasty_scheme_init()
+function infinity_scheme_init()
 {
 	// initialize the scheme
-	Pie_Easy_Scheme::instance()->init( 'config', TASTY_NAME );
-	Pie_Easy_Scheme::instance()->load_options( Tasty_Options_Registry::instance(), 'Tasty_Options_Section', 'Tasty_Options_Option' );
+	Pie_Easy_Scheme::instance()->init( 'config', INFINITY_NAME );
+	Pie_Easy_Scheme::instance()->load_options( Infinity_Options_Registry::instance(), 'Infinity_Options_Section', 'Infinity_Options_Option' );
 	return true;
 }
 
@@ -33,7 +33,7 @@ function tasty_scheme_init()
  * @param boolean $load Auto load template if set to true
  * @return string
  */
-function tasty_locate_template( $template_name, $load = false )
+function infinity_locate_template( $template_name, $load = false )
 {	
 	return Pie_Easy_Scheme::instance()->locate_template( $template_name );
 }
@@ -44,9 +44,9 @@ function tasty_locate_template( $template_name, $load = false )
  * @param string|array $template_name
  * @return string
  */
-function tasty_load_template( $template_name )
+function infinity_load_template( $template_name )
 {
-	return tasty_locate_template( $template_name, true );
+	return infinity_locate_template( $template_name, true );
 }
 
 /**
@@ -56,11 +56,11 @@ function tasty_load_template( $template_name )
  * @param string $template
  * @return string
  */
-function tasty_filter_template( $template )
+function infinity_filter_template( $template )
 {
 	return Pie_Easy_Scheme::instance()->filter_template( $template );
 }
-add_filter( 'template_include', 'tasty_filter_template', 10 );
+add_filter( 'template_include', 'infinity_filter_template', 10 );
 
 /**
  * Get a theme image url
@@ -69,7 +69,7 @@ add_filter( 'template_include', 'tasty_filter_template', 10 );
  * @param string $theme Return an image from a theme other than the active theme
  * @return string
  */
-function tasty_theme_image( $image, $theme = null )
+function infinity_theme_image( $image, $theme = null )
 {
 	return Pie_Easy_Scheme::instance()->images_url( $theme ) . '/' . $image;
 }

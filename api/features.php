@@ -1,6 +1,6 @@
 <?php
 /**
- * Tasty Theme features classes file
+ * Infinity Theme features classes file
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://bp-tricks.com/
@@ -14,9 +14,9 @@
 Pie_Easy_Loader::load( 'features' );
 
 /**
- * Tasty Feature factory class
+ * Infinity Feature factory class
  */
-final class Tasty_Features
+final class Infinity_Features
 {
 	/**
 	 * Initialize all features that require it
@@ -29,48 +29,48 @@ final class Tasty_Features
 	/**
 	 * Infinite Children
 	 *
-	 * @return Tasty_Feature_Infinite_Children
+	 * @return Infinity_Feature_Infinite_Children
 	 */
 	final static public function infinite_children()
 	{
-		return new Tasty_Feature_Infinite_Children();
+		return new Infinity_Feature_Infinite_Children();
 	}
 
 	/**
 	 * Header Logo
 	 *
-	 * @return Tasty_Feature_Header_Logo
+	 * @return Infinity_Feature_Header_Logo
 	 */
 	final static public function header_logo()
 	{
-		return new Tasty_Feature_Header_Logo();
+		return new Infinity_Feature_Header_Logo();
 	}
 
 	/**
 	 * Header Background
 	 *
-	 * @return Tasty_Feature_Header_Background
+	 * @return Infinity_Feature_Header_Background
 	 */
 	final static public function header_background()
 	{
-		return new Tasty_Feature_Header_Background();
+		return new Infinity_Feature_Header_Background();
 	}
 
 	/**
 	 * Site Background
 	 *
-	 * @return Tasty_Feature_Site_Background
+	 * @return Infinity_Feature_Site_Background
 	 */
 	final static public function site_background()
 	{
-		return new Tasty_Feature_Site_Background();
+		return new Infinity_Feature_Site_Background();
 	}
 }
 
 /**
- * Tasty Feature base class
+ * Infinity Feature base class
  */
-abstract class Tasty_Feature extends Pie_Easy_Feature
+abstract class Infinity_Feature extends Pie_Easy_Feature
 {
 	/**
 	 * Define our API slug
@@ -79,14 +79,14 @@ abstract class Tasty_Feature extends Pie_Easy_Feature
 	 */
 	final protected function get_api_slug()
 	{
-		return TASTY_NAME;
+		return INFINITY_NAME;
 	}
 }
 
 /**
- * Tasty Infinite Children feature
+ * Infinity Infinite Children feature
  */
-class Tasty_Feature_Infinite_Children extends Tasty_Feature
+class Infinity_Feature_Infinite_Children extends Infinity_Feature
 {
 	/**
 	 * Constructor
@@ -101,9 +101,9 @@ class Tasty_Feature_Infinite_Children extends Tasty_Feature
 }
 
 /**
- * Tasty "Header Logo" Feature
+ * Infinity "Header Logo" Feature
  */
-class Tasty_Feature_Header_Logo extends Tasty_Feature
+class Infinity_Feature_Header_Logo extends Infinity_Feature
 {
 	/**
 	 * Constructor
@@ -132,7 +132,7 @@ class Tasty_Feature_Header_Logo extends Tasty_Feature
 			}
 
 			// load attachment image data
-			list( $url, $width, $height ) = tasty_option_image_src( 'tasty_header_logo', 'full' );
+			list( $url, $width, $height ) = infinity_option_image_src( 'infinity_header_logo', 'full' );
 ?>
 			<style type="text/css">
 				<?php print $selector ?> {
@@ -150,9 +150,9 @@ class Tasty_Feature_Header_Logo extends Tasty_Feature
 }
 
 /**
- * Tasty "Header Background" Feature
+ * Infinity "Header Background" Feature
  */
-class Tasty_Feature_Header_Background extends Tasty_Feature
+class Infinity_Feature_Header_Background extends Infinity_Feature
 {
 	/**
 	 * Constructor
@@ -181,12 +181,12 @@ class Tasty_Feature_Header_Background extends Tasty_Feature
 			}
 
 			// load attachment image url
-			$url = tasty_option_image_url( 'tasty_header_background', 'full' );
+			$url = infinity_option_image_url( 'infinity_header_background', 'full' );
 ?>
 			<style type="text/css">
 				<?php print $selector ?> {
 					background-image: url('<?php print $url ?>');
-					background-repeat: <?php print tasty_option( 'tasty_header_background_tiling' ) ?>;
+					background-repeat: <?php print infinity_option( 'infinity_header_background_tiling' ) ?>;
 				}
 			</style><?php
 		}
@@ -196,9 +196,9 @@ class Tasty_Feature_Header_Background extends Tasty_Feature
 }
 
 /**
- * Tasty "Site Background" Feature
+ * Infinity "Site Background" Feature
  */
-class Tasty_Feature_Site_Background extends Tasty_Feature
+class Infinity_Feature_Site_Background extends Infinity_Feature
 {
 	/**
 	 * Constructor
@@ -227,12 +227,12 @@ class Tasty_Feature_Site_Background extends Tasty_Feature
 			}
 
 			// load attachment image url
-			$url = tasty_option_image_url( 'tasty_site_background', 'full' );
+			$url = infinity_option_image_url( 'infinity_site_background', 'full' );
 ?>
 			<style type="text/css">
 				<?php print $selector ?> {
 					background-image: url('<?php print $url ?>');
-					background-repeat: <?php print tasty_option( 'tasty_site_background_tiling' ) ?>;
+					background-repeat: <?php print infinity_option( 'infinity_site_background_tiling' ) ?>;
 				}
 			</style><?php
 		}
@@ -251,9 +251,9 @@ class Tasty_Feature_Site_Background extends Tasty_Feature
  * @param string $selector
  * @return boolean
  */
-function tasty_feature_header_logo_style( $selector = null )
+function infinity_feature_header_logo_style( $selector = null )
 {
-	return Tasty_Features::header_logo()->style( $selector );
+	return Infinity_Features::header_logo()->style( $selector );
 }
 
 /**
@@ -262,9 +262,9 @@ function tasty_feature_header_logo_style( $selector = null )
  * @param string $selector
  * @return boolean
  */
-function tasty_feature_header_background_style( $selector = null )
+function infinity_feature_header_background_style( $selector = null )
 {
-	return Tasty_Features::header_background()->style( $selector );
+	return Infinity_Features::header_background()->style( $selector );
 }
 
 /**
@@ -273,9 +273,9 @@ function tasty_feature_header_background_style( $selector = null )
  * @param string $selector
  * @return boolean
  */
-function tasty_feature_site_background_style( $selector = null )
+function infinity_feature_site_background_style( $selector = null )
 {
-	return Tasty_Features::site_background()->style( $selector );
+	return Infinity_Features::site_background()->style( $selector );
 }
 
 ?>
