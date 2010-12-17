@@ -1,6 +1,6 @@
 <?php
 /**
- * Tasty theme dashboard menu functions
+ * Infinity theme dashboard menu functions
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://bp-tricks.com/
@@ -12,36 +12,36 @@
  */
 
 /**
- * Adds the Tasty submenu item to the BuddyPress menu
+ * Adds the Infinity submenu item to the BuddyPress menu
  */
-function tasty_dashboard_setup_menu()
+function infinity_dashboard_setup_menu()
 {
 	// PIE menu
 	add_submenu_page(
 		'bp-general-settings',
-		__( 'PIE', TASTY_TEXT_DOMAIN),
-		sprintf('<img src="%s" class="tasty-menu-icon" />', tasty_dashboard_image('pie_16x16.png') ) . __( 'PIE', TASTY_TEXT_DOMAIN ),
+		__( 'PIE', INFINITY_TEXT_DOMAIN),
+		sprintf('<img src="%s" class="infinity-menu-icon" />', infinity_dashboard_image('pie_16x16.png') ) . __( 'PIE', INFINITY_TEXT_DOMAIN ),
 		'manage_options',
-		'tasty-pie-panel',
-		'tasty_dashboard_pie_screen' );
+		'infinity-pie-panel',
+		'infinity_dashboard_pie_screen' );
 
 	// Sweet control panel
 	add_submenu_page(
 		'bp-general-settings',
-		__( 'Sweet', TASTY_TEXT_DOMAIN),
-		sprintf('<img src="%s" class="tasty-menu-icon indent" />', tasty_dashboard_image('sweet_16x16.png') ) . __( 'Sweet API', TASTY_TEXT_DOMAIN ),
+		__( 'Sweet', INFINITY_TEXT_DOMAIN),
+		sprintf('<img src="%s" class="infinity-menu-icon indent" />', infinity_dashboard_image('sweet_16x16.png') ) . __( 'Sweet API', INFINITY_TEXT_DOMAIN ),
 		'manage_options',
-		'tasty-sweet-panel',
-		'tasty_dashboard_sweet_screen' );
+		'infinity-sweet-panel',
+		'infinity_dashboard_sweet_screen' );
 
-	// Tasty control panel
+	// Infinity control panel
 	add_submenu_page(
 		'bp-general-settings',
-		__( 'Tasty', TASTY_TEXT_DOMAIN),
-		sprintf('<img src="%s" class="tasty-menu-icon indent" />', tasty_dashboard_image('tasty_16x16.png') ) . __( 'Tasty Theme', TASTY_TEXT_DOMAIN ),
+		__( 'Infinity', INFINITY_TEXT_DOMAIN),
+		sprintf('<img src="%s" class="infinity-menu-icon indent" />', infinity_dashboard_image('infinity_16x16.png') ) . __( 'Infinity Theme', INFINITY_TEXT_DOMAIN ),
 		'manage_options',
-		'tasty-control-panel',
-		'tasty_dashboard_cpanel_screen' );
+		'infinity-control-panel',
+		'infinity_dashboard_cpanel_screen' );
 }
 
 ?>

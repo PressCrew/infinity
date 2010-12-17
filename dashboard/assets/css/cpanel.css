@@ -2,20 +2,20 @@
 /* ! Wrapper  */
 /* ========================= */
 
-img.tasty-menu-icon {
+img.infinity-menu-icon {
 	float: left;
 	margin: 2px 5px 0px 0px;
 }
-img.tasty-menu-icon.indent {
+img.infinity-menu-icon.indent {
 	margin-left: 12px;
 }
 
-table.tasty-cpanel-nav {
+table.infinity-cpanel-nav {
 	border: none;
 	margin-top: 8px;
 	width: 75%;
 }
-	table.tasty-cpanel-nav td {
+	table.infinity-cpanel-nav td {
 		-moz-border-radius-topleft: 6px;
 		-moz-border-radius-topright: 6px;
 		font-size: 14px;
@@ -26,22 +26,22 @@ table.tasty-cpanel-nav {
 		padding: 8px 3px;
 		text-align: center;
 	}
-	table.tasty-cpanel-nav td a:hover {
+	table.infinity-cpanel-nav td a:hover {
 		color:#AD4646;
 	}
-	table.tasty-cpanel-nav td.current {
+	table.infinity-cpanel-nav td.current {
 		background: url("../images/alert-overlay.png") repeat-x scroll 0 50% #3E3E3E;
 		border-color: #746B6B #B0ADAD -moz-use-text-color;
 		border-style: solid solid none;
 		border-width: 1px 1px medium;
 	}
-	table.tasty-cpanel-nav td.current a {
+	table.infinity-cpanel-nav td.current a {
 		color: #FFF;
 		font-weight: 700;
 		text-shadow: 0px -1px 0px #222;
 	}
 	
-table.tasty-cpanel-nav td a {
+table.infinity-cpanel-nav td a {
 	color: #666;
 }
 
@@ -49,72 +49,72 @@ table.tasty-cpanel-nav td a {
 /* ! Navigation Icons   */
 /* ==================== */
 
-.tasty-cpanel-page-start  {
+.infinity-cpanel-page-start  {
 	background: url("../images/sprite.png") no-repeat scroll 0 -210px transparent;
 	padding-left: 16px;
 }
 
-a:hover.tasty-cpanel-page-start {
+a:hover.infinity-cpanel-page-start {
 	background: url("../images/sprite.png") no-repeat scroll 0 -19px transparent;
 	padding-left: 16px;
 }
 
-.tasty-cpanel-page-widgets {
+.infinity-cpanel-page-widgets {
 	background: url("../images/sprite.png") no-repeat scroll 0 -271px transparent;
 	padding-left: 15px;
 }
 
-a:hover.tasty-cpanel-page-widgets {
+a:hover.infinity-cpanel-page-widgets {
 	background: url("../images/sprite.png") no-repeat scroll 0 -80px transparent;
 	padding-left: 15px;
 }
 
-.tasty-cpanel-page-shortcodes {
+.infinity-cpanel-page-shortcodes {
 	background: url("../images/sprite.png") no-repeat scroll 0 -250px transparent;
 	padding-left: 15px;
 }
 
-a:hover.tasty-cpanel-page-shortcodes {
+a:hover.infinity-cpanel-page-shortcodes {
 	background: url("../images/sprite.png") no-repeat scroll 0 -59px transparent;
 	padding-left: 15px;
 }
 
-.tasty-cpanel-page-options {
+.infinity-cpanel-page-options {
 	background: url("../images/sprite.png") no-repeat scroll 0 -313px transparent;
 	padding-left: 15px;
 }
 
-a:hover.tasty-cpanel-page-options {
+a:hover.infinity-cpanel-page-options {
 	background: url("../images/sprite.png") no-repeat scroll 0 -122px transparent;
 	padding-left: 15px;
 }
 
-.tasty-cpanel-page-docs {
+.infinity-cpanel-page-docs {
 	background: url("../images/sprite.png") no-repeat scroll 0 -191px transparent;
 	padding-left: 15px;
 }
 
-a:hover.tasty-cpanel-page-docs {
+a:hover.infinity-cpanel-page-docs {
 	background: url("../images/sprite.png") no-repeat;
 	padding-left: 15px;
 }
 
-.tasty-cpanel-page-about {
+.infinity-cpanel-page-about {
 	background: url("../images/sprite.png") no-repeat scroll 0 -292px transparent;
 	padding-left: 15px;
 }
 
-a:hover.tasty-cpanel-page-about {
+a:hover.infinity-cpanel-page-about {
 	background: url("../images/sprite.png") no-repeat scroll 0 -101px transparent;
 	padding-left: 15px;
 }
 
-.tasty-cpanel-page-thanks {
+.infinity-cpanel-page-thanks {
 	background: url("../images/sprite.png") no-repeat scroll 0 -229px transparent;
 	padding-left: 15px;
 }
 
-a:hover.tasty-cpanel-page-thanks {
+a:hover.infinity-cpanel-page-thanks {
 	background: url("../images/sprite.png") no-repeat scroll 0 -39px transparent;
 	padding-left: 15px;
 }
@@ -157,11 +157,11 @@ a:hover.tasty-cpanel-page-thanks {
 	color: #999;
 }
 
-div.tasty-cpanel-content div.rm_title .button,
-div.tasty-cpanel-content div.rm_title .button-secondary,
-div.tasty-cpanel-content div.rm_title .submit input,
-div.tasty-cpanel-content div.rm_title input[type="button"],
-div.tasty-cpanel-content div.rm_title input[type="submit"] {
+div.infinity-cpanel-content div.rm_title .button,
+div.infinity-cpanel-content div.rm_title .button-secondary,
+div.infinity-cpanel-content div.rm_title .submit input,
+div.infinity-cpanel-content div.rm_title input[type="button"],
+div.infinity-cpanel-content div.rm_title input[type="submit"] {
 	background: url("../images/alert-overlay.png") repeat-x scroll 0 50% #439F2B !important;
 	border: 1px solid #6C6B6B !important;
 	color: #FFFFFF !important;

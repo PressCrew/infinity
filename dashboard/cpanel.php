@@ -1,6 +1,6 @@
 <?php
 /**
- * Tasty theme dashboard control panel functions
+ * Infinity theme dashboard control panel functions
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://bp-tricks.com/
@@ -11,14 +11,14 @@
  * @since 1.0
  */
 
-function tasty_dashboard_action()
+function infinity_dashboard_action()
 {
 	if ( isset( $_GET['action'] ) ) {
 		return trim( $_GET['action'] );
 	} elseif ( isset( $_POST['action'] ) ) {
 		return trim( $_POST['action'] );
 	} else {
-		return key( tasty_dashboard_actions() );
+		return key( infinity_dashboard_actions() );
 	}
 }
 
@@ -27,34 +27,34 @@ function tasty_dashboard_action()
  *
  * @return array
  */
-function tasty_dashboard_actions()
+function infinity_dashboard_actions()
 {
 	return
 		array(
-			'start' => __( 'Start', TASTY_TEXT_DOMAIN ),
-			'widgets' => __( 'Widgets', TASTY_TEXT_DOMAIN ),
-			'shortcodes' => __( 'Shortcodes', TASTY_TEXT_DOMAIN ),
-			'options' => __( 'Options', TASTY_TEXT_DOMAIN ),
-			'docs' => __( 'Documentation', TASTY_TEXT_DOMAIN ),
-			'about' => __( 'About', TASTY_TEXT_DOMAIN ),
-			'thanks' => __( 'Thanks', TASTY_TEXT_DOMAIN )
+			'start' => __( 'Start', INFINITY_TEXT_DOMAIN ),
+			'widgets' => __( 'Widgets', INFINITY_TEXT_DOMAIN ),
+			'shortcodes' => __( 'Shortcodes', INFINITY_TEXT_DOMAIN ),
+			'options' => __( 'Options', INFINITY_TEXT_DOMAIN ),
+			'docs' => __( 'Documentation', INFINITY_TEXT_DOMAIN ),
+			'about' => __( 'About', INFINITY_TEXT_DOMAIN ),
+			'thanks' => __( 'Thanks', INFINITY_TEXT_DOMAIN )
 		);
 }
 
 /**
  * Print the navigation
  */
-function tasty_dashboard_cpanel_navigation()
+function infinity_dashboard_cpanel_navigation()
 {
-	$actions = tasty_dashboard_actions();
-	$current_action = tasty_dashboard_action();
+	$actions = infinity_dashboard_actions();
+	$current_action = infinity_dashboard_action();
 	$cell_width = floor( 100 / count($actions) ); ?>
 
-	<table class="widefat tasty-cpanel-nav">
+	<table class="widefat infinity-cpanel-nav">
 		<tr><?php
 		foreach ( $actions as $action_slug => $action_title ):
 			$current_class = ( $action_slug == $current_action ) ? 'current' : '' ?>
-			<td class="<?php print $current_class ?>" style="width: <?php print $cell_width ?>%;"><a href="?page=tasty-control-panel&action=<?php print $action_slug ?>" class="tasty-cpanel-page-<?php print $action_slug ?>"><?php print $action_title ?></a></td><?php
+			<td class="<?php print $current_class ?>" style="width: <?php print $cell_width ?>%;"><a href="?page=infinity-control-panel&action=<?php print $action_slug ?>" class="infinity-cpanel-page-<?php print $action_slug ?>"><?php print $action_title ?></a></td><?php
 		endforeach; ?>
 		</tr>
 	</table><?php
@@ -67,25 +67,25 @@ function tasty_dashboard_cpanel_navigation()
 /**
  * Route requests and display the control panel
  */
-function tasty_dashboard_cpanel_screen()
+function infinity_dashboard_cpanel_screen()
 {
-	tasty_dashboard_load_template( 'layout.php' );
+	infinity_dashboard_load_template( 'layout.php' );
 }
 
 /**
  * Route requests and display the control panel
  */
-function tasty_dashboard_pie_screen()
+function infinity_dashboard_pie_screen()
 {
-	tasty_dashboard_load_template( 'pie.php' );
+	infinity_dashboard_load_template( 'pie.php' );
 }
 
 /**
  * Route requests and display the control panel
  */
-function tasty_dashboard_sweet_screen()
+function infinity_dashboard_sweet_screen()
 {
-	tasty_dashboard_load_template( 'sweet.php' );
+	infinity_dashboard_load_template( 'sweet.php' );
 }
 
 //
@@ -95,9 +95,9 @@ function tasty_dashboard_sweet_screen()
 /**
  * Display options form
  */
-function tasty_dashboard_cpanel_options_content()
+function infinity_dashboard_cpanel_options_content()
 {
-	tasty_dashboard_load_template( 'options.php' );
+	infinity_dashboard_load_template( 'options.php' );
 }
 
 ?>
