@@ -107,8 +107,33 @@ final class Pie_Easy_Scheme
 	 */
 	public function init( $config_dir, $config_file )
 	{
+		// setup config
 		$this->set_config_dir( $config_dir );
 		$this->set_config_file( $config_file );
+
+		// template filter callback
+		$filter = array( $this, 'filter_template' );
+
+		// add filters
+		add_filter( '404_template', $filter );
+		add_filter( 'search_template', $filter );
+		add_filter( 'taxonomy_template', $filter );
+		add_filter( 'front_page_template', $filter );
+		add_filter( 'home_template', $filter );
+		add_filter( 'attachment_template', $filter );
+		add_filter( 'single_template', $filter );
+		add_filter( 'page_template', $filter );
+		add_filter( 'category_template', $filter );
+		add_filter( 'tag_template', $filter );
+		add_filter( 'author_template', $filter );
+		add_filter( 'date_template', $filter );
+		add_filter( 'archive_template', $filter );
+		add_filter( 'comments_popup_template', $filter );
+		add_filter( 'paged_template', $filter );
+		add_filter( 'index_template', $filter );
+		add_filter( 'comments_template', $filter );
+
+		// load it
 		return $this->load();
 	}
 
@@ -238,6 +263,11 @@ final class Pie_Easy_Scheme
 	 */
 	function filter_template( $template )
 	{
+		// fall back to index
+		if ( empty( $template ) ) {
+			$template = 'index.php';
+		}
+	
 		// see if it exists in the scheme
 		$scheme_template = $this->locate_template( array( basename( $template ) ) );
 
@@ -457,6 +487,123 @@ final class Pie_Easy_Scheme
 	public function images_url( $theme = null )
 	{
 		return $this->assets_url( $theme ) . '/' . self::DIR_IMAGES;
+	}
+
+	/**
+	 * Look for a header in the scheme stack
+	 *
+	 * @param string $name
+	 * @return boolean
+	 */
+	public function get_header( $name = null )
+	{
+		$templates = array();
+
+		if ( isset($name) )
+			$templates[] = "header-{$name}.php";
+
+		$templates[] = "header.php";
+
+		$located_template = $this->locate_template( $templates );
+
+		if ( $located_template ) {
+			do_action( 'get_header', $name );
+			return load_template( $located_template );
+		} else {
+			return get_header( $name );
+		}
+	}
+
+	/**
+	 * Look for a footer in the scheme stack
+	 *
+	 * @param string $name
+	 * @return boolean
+	 */
+	public function get_footer( $name = null )
+	{
+		$templates = array();
+
+		if ( isset($name) )
+			$templates[] = "footer-{$name}.php";
+
+		$templates[] = "footer.php";
+
+		$located_template = $this->locate_template( $templates );
+
+		if ( $located_template ) {
+			do_action( 'get_footer', $name );
+			return load_template( $located_template );
+		} else {
+			return get_footer( $name );
+		}
+	}
+
+	/**
+	 * Look for a sidebar in the scheme stack
+	 *
+	 * @param string $name
+	 * @return boolean
+	 */
+	public function get_sidebar( $name = null )
+	{
+		$templates = array();
+
+		if ( isset($name) )
+			$templates[] = "sidebar-{$name}.php";
+
+		$templates[] = "sidebar.php";
+
+		$located_template = $this->locate_template( $templates );
+
+		if ( $located_template ) {
+			do_action( 'get_sidebar', $name );
+			return load_template( $located_template );
+		} else {
+			return get_sidebar( $name );
+		}
+	}
+
+	/**
+	 * Look for a template part in the scheme stack
+	 *
+	 * @param string $slug The slug name for the generic template.
+	 * @param string $name The name of the specialised template.
+	 */
+	function get_template_part( $slug, $name = null )
+	{
+		$templates = array();
+		if ( isset($name) )
+			$templates[] = "{$slug}-{$name}.php";
+
+		$templates[] = "{$slug}.php";
+		
+		$located_template = $this->locate_template( $templates );
+		
+		if ( $located_template ) {
+			do_action( "get_template_part_{$slug}", $slug, $name );
+			load_template( $located_template, false );
+		} else {
+			get_template_part( $slug, $name );
+		}
+	}
+
+	/**
+	 * Look for a search form in the scheme stack
+	 *
+	 * @param string $slug The slug name for the generic template.
+	 * @param string $name The name of the specialised template.
+	 */
+	function get_search_form( $echo = true )
+	{
+		$located_template = $this->locate_template( 'searchform.php' );
+
+		if ( $located_template ) {
+			do_action( 'get_search_form' );
+			load_template( $located_template, false );
+		} else {
+			return get_search_form( $echo );
+		}
 	}
 }
 
