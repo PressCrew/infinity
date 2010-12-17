@@ -50,17 +50,72 @@ function infinity_load_template( $template_name )
 }
 
 /**
- * Filter the template that WP is trying to load to see if the scheme
- * wants to completely override it.
+ * Load a header from the scheme stack
  *
- * @param string $template
- * @return string
+ * @param string $name
+ * @return boolean
  */
-function infinity_filter_template( $template )
+function infinity_get_header( $name = null )
 {
-	return Pie_Easy_Scheme::instance()->filter_template( $template );
+	return Pie_Easy_Scheme::instance()->get_header( $name );
 }
-add_filter( 'template_include', 'infinity_filter_template', 10 );
+
+/**
+ * Load a footer from the scheme stack
+ *
+ * @param string $name
+ * @return boolean
+ */
+function infinity_get_footer( $name = null )
+{
+	return Pie_Easy_Scheme::instance()->get_footer( $name );
+}
+
+/**
+ * Load a sidebar from the scheme stack
+ *
+ * @param string $name
+ * @return boolean
+ */
+function infinity_get_sidebar( $name = null )
+{
+	return Pie_Easy_Scheme::instance()->get_sidebar( $name );
+}
+
+/**
+ * Load the search form from the scheme stack
+ *
+ * @param string $echo
+ * @return boolean
+ */
+function infinity_get_search_form( $echo = true )
+{
+	return Pie_Easy_Scheme::instance()->get_search_form( $echo );
+}
+
+/**
+ * Load a template part from the scheme stack
+ *
+ * @param string $slug The slug name for the generic template.
+ * @param string $name The name of the specialised template.
+ * @return boolean
+ */
+function infinity_get_template_part( $slug, $name = null )
+{
+	return Pie_Easy_Scheme::instance()->get_template_part( $slug, $name );
+}
+
+/**
+ * Load comments template from the scheme stack (wrapper)
+ *
+ * @param string $file Optional, default '/comments.php'. The file to load
+ * @param bool $separate_comments Optional, whether to separate the comments by comment type. Default is false.
+ */
+function infinity_comments_template( $file = '/comments.php', $separate_comments = false )
+{
+	// this is just a wrapper to avoid confusion
+	return comments_template( $file, $separate_comments );
+}
 
 /**
  * Get a theme image url
