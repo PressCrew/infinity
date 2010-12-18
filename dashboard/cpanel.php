@@ -72,22 +72,6 @@ function infinity_dashboard_cpanel_screen()
 	infinity_dashboard_load_template( 'layout.php' );
 }
 
-/**
- * Route requests and display the control panel
- */
-function infinity_dashboard_pie_screen()
-{
-	infinity_dashboard_load_template( 'pie.php' );
-}
-
-/**
- * Route requests and display the control panel
- */
-function infinity_dashboard_sweet_screen()
-{
-	infinity_dashboard_load_template( 'sweet.php' );
-}
-
 //
 // Content Actions
 //
