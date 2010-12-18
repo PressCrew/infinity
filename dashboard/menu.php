@@ -14,13 +14,13 @@
 /**
  * Adds the Infinity submenu item to the BuddyPress menu
  */
-function infinity_dashboard_setup_menu()
+function infinity_dashboard_menu_setup()
 {
 	add_object_page(
 		__( 'Infinity', INFINITY_TEXT_DOMAIN),
 		__( 'Infinity', INFINITY_TEXT_DOMAIN),
 		'manage_options',
-		'infinity-control-panel',
+		INFINITY_ADMIN_PAGE,
 		'infinity_dashboard_cpanel_screen' );
 }
 
