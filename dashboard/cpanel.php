@@ -86,11 +86,59 @@ function infinity_dashboard_cpanel_screen()
 //
 
 /**
+ * Display start page
+ */
+function infinity_dashboard_cpanel_start_content()
+{
+	infinity_dashboard_load_template( 'start.php' );
+}
+
+/**
+ * Display widgets page
+ */
+function infinity_dashboard_cpanel_widgets_content()
+{
+	infinity_dashboard_load_template( 'widgets.php' );
+}
+
+/**
+ * Display shortcodes page
+ */
+function infinity_dashboard_cpanel_shortcodes_content()
+{
+	infinity_dashboard_load_template( 'shortcodes.php' );
+}
+
+/**
  * Display options form
  */
 function infinity_dashboard_cpanel_options_content()
 {
 	infinity_dashboard_load_template( 'options.php' );
+}
+
+/**
+ * Display docs page
+ */
+function infinity_dashboard_cpanel_docs_content()
+{
+	infinity_dashboard_load_template( 'docs.php' );
+}
+
+/**
+ * Display about page
+ */
+function infinity_dashboard_cpanel_about_content()
+{
+	infinity_dashboard_load_template( 'about.php' );
+}
+
+/**
+ * Display thanks page
+ */
+function infinity_dashboard_cpanel_thanks_content()
+{
+	infinity_dashboard_load_template( 'thanks.php' );
 }
 
 ?>
