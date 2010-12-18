@@ -14,21 +14,21 @@
 //
 // Constants
 //
-define( 'INFINITY_ADMIN_TPLS_DIR', INFINITY_ADMIN_DIR . '/templates' );
+define( 'INFINITY_ADMIN_PAGE', 'infinity-cpanel' );
+define( 'INFINITY_ADMIN_TPLS_DIR', INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'templates' );
 
 //
 // Files
 //
-require_once( INFINITY_ADMIN_DIR . '/menu.php' );
-require_once( INFINITY_ADMIN_DIR . '/cpanel.php' );
+require_once( INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'menu.php' );
+require_once( INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'cpanel.php' );
 
 //
 // Actions
 //
 add_action( 'admin_init', 'infinity_ajax_setup' );
-add_action( 'admin_menu', 'infinity_dashboard_setup' );
-add_action( 'admin_menu', 'infinity_dashboard_setup_menu' );
-add_action( 'infinity_dashboard_cpanel_content', 'infinity_dashboard_cpanel_options_content' );
+add_action( 'admin_menu', 'infinity_dashboard_menu_setup' );
+add_action( 'admin_menu', 'infinity_dashboard_cpanel_setup' );
 
 //
 // Functions
@@ -47,17 +47,28 @@ function infinity_ajax_setup()
 /**
  * Handle setup of the control panel environment
  */
-function infinity_dashboard_setup()
+function infinity_dashboard_cpanel_setup()
 {
-	// enqueue styles
-    wp_enqueue_style( 'infinity-dashboard', INFINITY_ADMIN_URL . '/assets/css/cpanel.css', false, INFINITY_VERSION, 'screen' );
+	// setup dashboard if its active
+	$action = infinity_dashboard_cpanel_action();
 
-	// enqueue script
-	wp_enqueue_script( 'infinity-dashboard', INFINITY_ADMIN_URL . '/assets/js/dashboard.js', false, INFINITY_VERSION );
-	
-	if ( $_GET['page'] == 'infinity-control-panel' ) {
+	if ( $action ) {
+
 		// pie easy options init
 		Infinity_Options::init();
+
+		// add content hook
+		add_action(
+			'infinity_dashboard_cpanel_content',
+			sprintf( 'infinity_dashboard_cpanel_%s_content', $action )
+		);
+
+		// enqueue styles
+		wp_enqueue_style( INFINITY_ADMIN_PAGE, INFINITY_ADMIN_URL . '/assets/css/cpanel.css', false, INFINITY_VERSION, 'screen' );
+
+		// enqueue script
+		wp_enqueue_script( INFINITY_ADMIN_PAGE, INFINITY_ADMIN_URL . '/assets/js/dashboard.js', false, INFINITY_VERSION );
+
 	}
 }
 

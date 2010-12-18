@@ -108,7 +108,7 @@ class Infinity_Options_Registry extends Pie_Easy_Options_Registry
 			self::$instance = new self();
 			// add form processing
 			if ( current_user_can('manage_options') ) {
-				add_action( 'buddypress_page_infinity-control-panel', array( self::$instance, 'process_form' ) );
+				add_action( 'load-' . INFINITY_ADMIN_PAGE, array( self::$instance, 'process_form' ) );
 			}
 		}
 

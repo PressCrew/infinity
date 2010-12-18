@@ -11,15 +11,24 @@
  * @since 1.0
  */
 
-function infinity_dashboard_action()
+/**
+ * Return the current dashboard action
+ *
+ * @return string|null
+ */
+function infinity_dashboard_cpanel_action()
 {
-	if ( isset( $_GET['action'] ) ) {
-		return trim( $_GET['action'] );
-	} elseif ( isset( $_POST['action'] ) ) {
-		return trim( $_POST['action'] );
-	} else {
-		return key( infinity_dashboard_actions() );
+	if ( $_GET['page'] == INFINITY_ADMIN_PAGE ) {
+		if ( isset( $_GET['action'] ) ) {
+			return trim( $_GET['action'] );
+		} elseif ( isset( $_POST['action'] ) ) {
+			return trim( $_POST['action'] );
+		} else {
+			return key( infinity_dashboard_cpanel_actions() );
+		}
 	}
+
+	return null;
 }
 
 /**
@@ -27,7 +36,7 @@ function infinity_dashboard_action()
  *
  * @return array
  */
-function infinity_dashboard_actions()
+function infinity_dashboard_cpanel_actions()
 {
 	return
 		array(
@@ -46,15 +55,15 @@ function infinity_dashboard_actions()
  */
 function infinity_dashboard_cpanel_navigation()
 {
-	$actions = infinity_dashboard_actions();
-	$current_action = infinity_dashboard_action();
+	$actions = infinity_dashboard_cpanel_actions();
+	$current_action = infinity_dashboard_cpanel_action();
 	$cell_width = floor( 100 / count($actions) ); ?>
 
 	<table class="widefat infinity-cpanel-nav">
 		<tr><?php
 		foreach ( $actions as $action_slug => $action_title ):
 			$current_class = ( $action_slug == $current_action ) ? 'current' : '' ?>
-			<td class="<?php print $current_class ?>" style="width: <?php print $cell_width ?>%;"><a href="?page=infinity-control-panel&action=<?php print $action_slug ?>" class="infinity-cpanel-page-<?php print $action_slug ?>"><?php print $action_title ?></a></td><?php
+			<td class="<?php print $current_class ?>" style="width: <?php print $cell_width ?>%;"><a href="?page=<?php print INFINITY_ADMIN_PAGE ?>&action=<?php print $action_slug ?>" class="infinity-cpanel-page-<?php print $action_slug ?>"><?php print $action_title ?></a></td><?php
 		endforeach; ?>
 		</tr>
 	</table><?php
