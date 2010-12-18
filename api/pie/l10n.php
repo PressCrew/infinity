@@ -45,10 +45,10 @@ abstract class Pie_Easy_L10n
 		$mofile = sprintf( '%s-%s.mo', $domain, get_locale() );
 
 		// global .mo file path
-		$mofile_global = WP_LANG_DIR . '/' . $mofile;
+		$mofile_global = WP_LANG_DIR . DIRECTORY_SEPARATOR . $mofile;
 
 		// custom .mo file path
-		$mofile_custom = ( $custom_dir_path ) ? $custom_dir_path . '/' . $mofile : null;
+		$mofile_custom = ( $custom_dir_path ) ? $custom_dir_path . DIRECTORY_SEPARATOR . $mofile : null;
 
 		// try to load it
 		if ( file_exists( $mofile_global ) ) {
