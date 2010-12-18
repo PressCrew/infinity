@@ -12,13 +12,14 @@
  */
 
 // check if pie has been included already
-if ( defined( 'PIE_EASY_DIR' ) ) {
+if ( defined( 'PIE_EASY_VERSION' ) ) {
 	return;
 }
 
 // set pie contants
-define( 'PIE_EASY_DIR', dirname( __FILE__ ) );
 define( 'PIE_EASY_VERSION', '1.0' );
+define( 'PIE_EASY_DIR', dirname( __FILE__ ) );
+define( 'PIE_EASY_VENDORS_DIR', PIE_EASY_DIR . DIRECTORY_SEPARATOR . 'vendors' );
 
 /**
  * Make loading pie features easy
@@ -43,6 +44,7 @@ final class Pie_Easy_Loader
 		'features' => array( 'feature' ),
 		'files',
 		'l10n',
+		'markdown',
 		'options' => array( 'option', 'registry', 'renderer', 'section', 'uploader', 'walkers' ),
 		'scheme'
 	);
