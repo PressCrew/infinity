@@ -15,33 +15,33 @@ define( 'INFINITY_VERSION', '1.0' );
 define( 'INFINITY_NAME', 'infinity' );
 define( 'INFINITY_THEME_DIR', TEMPLATEPATH );
 define( 'INFINITY_THEME_URL', get_template_directory_uri() );
-define( 'INFINITY_API_DIR', INFINITY_THEME_DIR . '/api' );
+define( 'INFINITY_API_DIR', INFINITY_THEME_DIR . DIRECTORY_SEPARATOR . 'api' );
 define( 'INFINITY_API_URL', INFINITY_THEME_URL . '/api' );
-define( 'INFINITY_PIE_DIR', INFINITY_API_DIR . '/pie' );
+define( 'INFINITY_PIE_DIR', INFINITY_API_DIR . DIRECTORY_SEPARATOR . 'pie' );
 define( 'INFINITY_PIE_URL', INFINITY_API_URL . '/pie' );
-define( 'INFINITY_CONF_DIR', INFINITY_THEME_DIR . '/config' );
-define( 'INFINITY_ADMIN_DIR', INFINITY_THEME_DIR . '/dashboard' );
+define( 'INFINITY_CONF_DIR', INFINITY_THEME_DIR . DIRECTORY_SEPARATOR . 'config' );
+define( 'INFINITY_ADMIN_DIR', INFINITY_THEME_DIR . DIRECTORY_SEPARATOR . 'dashboard' );
 define( 'INFINITY_ADMIN_URL', INFINITY_THEME_URL . '/dashboard' );
-define( 'INFINITY_EXTRAS_DIR', get_theme_root() . '/infinity-extras' );
+define( 'INFINITY_EXTRAS_DIR', get_theme_root() . DIRECTORY_SEPARATOR . 'infinity-extras' );
 define( 'INFINITY_EXTRAS_URL', get_theme_root_uri() . '/infinity-extras' );
 define( 'INFINITY_TEXT_DOMAIN', INFINITY_NAME );
 
 // load PIE and initialize
-require_once( INFINITY_PIE_DIR . '/loader.php' );
+require_once( INFINITY_PIE_DIR . DIRECTORY_SEPARATOR . 'loader.php' );
 Pie_Easy_Loader::init( INFINITY_PIE_URL );
 
 // load Infinity API
-require_once( INFINITY_API_DIR . '/scheme.php' );
-require_once( INFINITY_API_DIR . '/options.php' );
-require_once( INFINITY_API_DIR . '/features.php' );
-require_once( INFINITY_API_DIR . '/l10n.php' );
+require_once( INFINITY_API_DIR . DIRECTORY_SEPARATOR . 'scheme.php' );
+require_once( INFINITY_API_DIR . DIRECTORY_SEPARATOR . 'options.php' );
+require_once( INFINITY_API_DIR . DIRECTORY_SEPARATOR . 'features.php' );
+require_once( INFINITY_API_DIR . DIRECTORY_SEPARATOR . 'l10n.php' );
 
 // initialize scheme
 infinity_scheme_init();
 
 if ( is_admin() ) {
 	// only load admin functionality if the dashboard is actually loaded
-	require_once( INFINITY_ADMIN_DIR . '/loader.php' );
+	require_once( INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'loader.php' );
 } else {
 	// ???
 }

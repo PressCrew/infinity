@@ -111,8 +111,12 @@ function infinity_get_template_part( $slug, $name = null )
  * @param string $file Optional, default '/comments.php'. The file to load
  * @param bool $separate_comments Optional, whether to separate the comments by comment type. Default is false.
  */
-function infinity_comments_template( $file = '/comments.php', $separate_comments = false )
+function infinity_comments_template( $file = null, $separate_comments = false )
 {
+	if ( $file === null ) {
+		$file = DIRECTORY_SEPARATOR . 'comments.php';
+	}
+	
 	// this is just a wrapper to avoid confusion
 	return comments_template( $file, $separate_comments );
 }
