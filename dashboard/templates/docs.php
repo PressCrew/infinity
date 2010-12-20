@@ -1,4 +1,3 @@
-<?php
-	Pie_Easy_Loader::load( 'docs' );
-	Pie_Easy_Docs::create( INFINITY_ADMIN_DOCS_DIR . DIRECTORY_SEPARATOR . 'docs', 'index' )->publish();
-?>
+<div class="infinity-cpanel-docs">
+	<?php infinity_dashboard_doc_publish( 'docs', infinity_dashboard_route_param( 1 ) ); ?>
+</div>
