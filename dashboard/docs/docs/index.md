@@ -1,5 +1,3 @@
-Lets see if this fucker prints
-
 * Red
 * Green
 * Blue

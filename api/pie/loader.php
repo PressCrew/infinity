@@ -40,6 +40,7 @@ final class Pie_Easy_Loader
 	 */
 	private $features = array(
 		'ajax',
+		'docs',
 		'enqueue',
 		'features' => array( 'feature' ),
 		'files',
@@ -92,12 +93,18 @@ final class Pie_Easy_Loader
 	/**
 	 * Load a feature via static call
 	 *
-	 * @param string $feature
+	 * @param string $feature,...
 	 * @return bool
 	 */
 	final static public function load( $feature )
 	{
-		return self::$instance->load_feature( $feature );
+		// handle variable number of args
+		$features = func_get_args();
+
+		// loop through all features
+		foreach ( $features as $feature ) {
+			self::$instance->load_feature( $feature );
+		}
 	}
 	
 	/**

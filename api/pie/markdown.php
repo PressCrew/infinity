@@ -26,6 +26,12 @@ require_once
  */
 final class Pie_Easy_Markdown
 {
+	/**
+	 * Parse markdown markup
+	 *
+	 * @param string $text
+	 * @return string
+	 */
 	public static function parse( $text )
 	{
 		return Markdown( $text );

@@ -18,11 +18,11 @@
  */
 function infinity_dashboard_cpanel_action()
 {
-	if ( $_GET['page'] == INFINITY_ADMIN_PAGE ) {
-		if ( isset( $_GET['action'] ) ) {
-			return trim( $_GET['action'] );
-		} elseif ( isset( $_POST['action'] ) ) {
-			return trim( $_POST['action'] );
+	$route = infinity_dashboard_parse_route();
+	
+	if ( $route['screen'] == 'cpanel' ) {
+		if ( $route['action'] ) {
+			return $route['action'];
 		} else {
 			return key( infinity_dashboard_cpanel_actions() );
 		}
@@ -63,7 +63,7 @@ function infinity_dashboard_cpanel_navigation()
 		<tr><?php
 		foreach ( $actions as $action_slug => $action_title ):
 			$current_class = ( $action_slug == $current_action ) ? 'current' : '' ?>
-			<td class="<?php print $current_class ?>" style="width: <?php print $cell_width ?>%;"><a href="?page=<?php print INFINITY_ADMIN_PAGE ?>&action=<?php print $action_slug ?>" class="infinity-cpanel-page-<?php print $action_slug ?>"><?php print $action_title ?></a></td><?php
+			<td class="<?php print $current_class ?>" style="width: <?php print $cell_width ?>%;"><a href="<?php print infinity_dashboard_route('cpanel', $action_slug) ?>" class="infinity-cpanel-page-<?php print $action_slug ?>"><?php print $action_title ?></a></td><?php
 		endforeach; ?>
 		</tr>
 	</table><?php
