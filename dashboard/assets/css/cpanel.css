@@ -291,10 +291,18 @@ h3.active {
 /* ! Theme Documentation  */
 /* ====================== */
 
+div.infinity-cpanel-docs {
+	width: 600px;
+	margin-left: 30px;
+}
 div.infinity-cpanel-docs p,
 div.infinity-cpanel-docs ul,
 div.infinity-cpanel-docs ol {
 	margin: 0 0 1.5em 0;
+}
+div.infinity-cpanel-docs blockquote {
+	margin: 0 0 1.5em 1em;
+	font-style: italic;
 }
 div.infinity-cpanel-docs h1,
 div.infinity-cpanel-docs h2,
@@ -302,7 +310,7 @@ div.infinity-cpanel-docs h3,
 div.infinity-cpanel-docs h4,
 div.infinity-cpanel-docs h5,
 div.infinity-cpanel-docs h6 {
-	margin: 1.2em 0 .3em;
+	margin: .3em 0 .3em;
 	border-bottom: 1px solid #eee;
 	padding-bottom: .2em;
 	font-family: arial,verdana,sans-serif;
@@ -321,4 +329,7 @@ div.infinity-cpanel-docs ul li,
 div.infinity-cpanel-docs ol li {
 	margin-left: 1.4em;
 	padding-left: 0;
+}
+div.infinity-cpanel-docs em {
+	font-weight: bold;
 }
