@@ -18,7 +18,7 @@
  */
 function infinity_dashboard_cpanel_action()
 {
-	$route = infinity_dashboard_parse_route();
+	$route = infinity_dashboard_route_parse();
 	
 	if ( $route['screen'] == 'cpanel' ) {
 		if ( $route['action'] ) {
@@ -63,7 +63,7 @@ function infinity_dashboard_cpanel_navigation()
 		<tr><?php
 		foreach ( $actions as $action_slug => $action_title ):
 			$current_class = ( $action_slug == $current_action ) ? 'current' : '' ?>
-			<td class="<?php print $current_class ?>" style="width: <?php print $cell_width ?>%;"><a href="<?php print infinity_dashboard_route('cpanel', $action_slug) ?>" class="infinity-cpanel-page-<?php print $action_slug ?>"><?php print $action_title ?></a></td><?php
+			<td class="<?php print $current_class ?>" style="width: <?php print $cell_width ?>%;"><a href="<?php print infinity_dashboard_route( 'cpanel', $action_slug ) ?>" class="infinity-cpanel-page-<?php print $action_slug ?>"><?php print $action_title ?></a></td><?php
 		endforeach; ?>
 		</tr>
 	</table><?php

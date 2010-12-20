@@ -14,7 +14,7 @@
 //
 // Constants
 //
-define( 'INFINITY_ADMIN_PAGE', 'infinity-cpanel' );
+define( 'INFINITY_ADMIN_PAGE', 'infinity-theme' );
 define( 'INFINITY_ADMIN_TPLS_DIR', INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'templates' );
 define( 'INFINITY_ADMIN_DOCS_DIR', INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'docs' );
 define( 'INFINITY_ROUTE_PARAM', 'route' );
@@ -86,24 +86,25 @@ function infinity_dashboard_load_template( $rel_path )
 }
 
 /**
- * Build a page/route URL from screen, action, and params
+ * Build a page/route URL
  *
- * @param string $screen
- * @param string $action
- * @param string $params,...
+ * @param string|array $params,...
  * @return array
  */
-function infinity_dashboard_route( $screen, $action = null, $params = null )
+function infinity_dashboard_route( $params = null )
 {
-	// usinging variable args
-	$args = func_get_args();
-	
 	// build the base URL
-	$url = sprintf( '%sadmin.php?page=%s-%s', admin_url(), INFINITY_NAME, array_shift($args) );
-	
-	// remaining args are our route
-	if ( count( $args ) ) {
-		$url .= sprintf( '&%s=%s', INFINITY_ROUTE_PARAM, implode( INFINITY_ROUTE_DELIM, $args ) );
+	$url = sprintf( '%sadmin.php?page=%s', admin_url(), INFINITY_ADMIN_PAGE );
+
+	// is params an array?
+	if ( !is_array( $params ) ) {
+		// use variable args
+		$params = func_get_args();
+	}
+
+	// add route if necessary
+	if ( count( $params ) ) {
+		$url .= sprintf( '&%s=%s', INFINITY_ROUTE_PARAM, implode( INFINITY_ROUTE_DELIM, $params ) );
 	}
 
 	return $url;
@@ -114,7 +115,7 @@ function infinity_dashboard_route( $screen, $action = null, $params = null )
  * 
  * @return array
  */
-function infinity_dashboard_parse_route()
+function infinity_dashboard_route_parse()
 {
 	// the route defaults
 	$route = array(
@@ -124,24 +125,19 @@ function infinity_dashboard_parse_route()
 	);
 
 	// page contains screen
-	if ( isset( $_GET['page'] ) ) {
-		// split at hyphen
-		$page_toks = explode( '-', $_GET['page'] );
-		// must be exactly two tokens
-		if ( count( $page_toks ) == 2 && $page_toks[0] == INFINITY_NAME ) {
-			// second token is the screen
-			$route['screen'] = $page_toks[1];
-			// check if a route is set
-			if ( isset( $_GET[INFINITY_ROUTE_PARAM] ) ) {
-				// get route tokens
-				$route_toks = explode( INFINITY_ROUTE_DELIM, $_GET[INFINITY_ROUTE_PARAM] );
-				// get at least one token?
-				if ( count( $route_toks ) ) {
-					// first token is the action
-					$route['action'] = array_shift($route_toks);
-					// remaining tokens are params
-					$route['params'] = $route_toks;
-				}
+	if ( isset( $_GET['page'] ) && $_GET['page'] == INFINITY_ADMIN_PAGE ) {
+		// check if a route is set
+		if ( isset( $_GET[INFINITY_ROUTE_PARAM] ) ) {
+			// get route tokens
+			$route_toks = explode( INFINITY_ROUTE_DELIM, $_GET[INFINITY_ROUTE_PARAM] );
+			// get at least one token?
+			if ( count( $route_toks ) ) {
+				// first token is the screen
+				$route['screen'] = array_shift($route_toks);
+				// second token is the action
+				$route['action'] = array_shift($route_toks);
+				// remaining tokens are params
+				$route['params'] = $route_toks;
 			}
 		}
 	}
@@ -150,11 +146,85 @@ function infinity_dashboard_parse_route()
 }
 
 /**
+ * Retrieve a specific route param by offset
+ *
+ * @param integer $offset
+ * @return mixed
+ */
+function infinity_dashboard_route_param( $offset )
+{
+	$route = infinity_dashboard_route_parse();
+	
+	if ( isset( $route['params'][--$offset] ) ) {
+		return $route['params'][$offset];
+	}
+
+	return null;
+}
+
+/**
  * Return path to a dashboard image
  */
 function infinity_dashboard_image( $name )
 {
 	return INFINITY_ADMIN_URL . '/assets/images/' . $name;
+}
+
+/**
+ * Publish a document page
+ *
+ * @param string $book Name of directory containing the page files
+ * @param string $page Name of page to publish
+ */
+function infinity_dashboard_doc_publish( $book, $page = null )
+{
+	Pie_Easy_Loader::load( 'docs' );
+	$doc = new Pie_Easy_Docs( INFINITY_ADMIN_DOCS_DIR . DIRECTORY_SEPARATOR . $book, $page );
+	$doc->set_pre_filter( 'infinity_dashboard_doc_filter' );
+	$doc->publish();
+}
+
+/**
+ * Pre filter doc contents before parsing
+ *
+ * @param string $contents
+ * @return string
+ */
+function infinity_dashboard_doc_filter( $contents )
+{
+	// replace internal URLs with valid URLs (infinity://admin:foo/cpanel/docs/foo_page)
+	return preg_replace_callback( '/infinity:\/\/([a-z]+)(:([a-z]+))?((\/[\w\.]+)*)/', 'infinity_dashboard_doc_filter_cb', $contents );
+}
+
+/**
+ * Pre filter callback
+ *
+ * @param array $match
+ * @return string
+ */
+function infinity_dashboard_doc_filter_cb( $match )
+{
+	// where are we
+	$location = $match[1];
+
+	// TODO add the location feature
+	if ( $location != 'admin' ) {
+		throw new Exception( 'Only the "admin" location is allowed' );
+	}
+
+	// call type
+	$call_type = $match[3];
+
+	// the route
+	$route = trim( $match[4], INFINITY_ROUTE_DELIM );
+
+	switch( $call_type ) {
+		case '':
+		case 'action':
+			return infinity_dashboard_route( $route );
+		case 'image':
+			return infinity_dashboard_image( $route );
+	}
 }
 
 ?>

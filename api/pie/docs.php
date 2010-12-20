@@ -72,6 +72,20 @@ class Pie_Easy_Docs
 	 * @var string
 	 */
 	private $page_url_template;
+	
+	/**
+	 * The callback to filter markup before parsing
+	 * 
+	 * @var string|array 
+	 */
+	private $pre_parse_callback;
+	
+	/**
+	 * The callback to filter markup after parsing
+	 * 
+	 * @var string|array 
+	 */
+	private $post_parse_callback;
 
 	/**
 	 * Constructor
@@ -94,16 +108,32 @@ class Pie_Easy_Docs
 		// grab entire contents of file
 		$contents = file_get_contents( $this->page_file );
 
+		// call pre parse filter if exists
+		if ( $this->pre_parse_callback ) {
+			$contents = call_user_func( $this->pre_parse_callback, $contents );
+		}
+
 		// parse content based on markup format
 		switch ( $this->page_markup ) {
 			// HTML
 			case self::MARKUP_HTML:
-				return $contents;
+				break;
 			// Markdown
 			case self::MARKUP_MARKDOWN:
 			case self::MARKUP_MARKDOWN_LONG:
-				return Pie_Easy_Markdown::parse( $contents );
+				$contents = Pie_Easy_Markdown::parse( $contents );
+				break;
+			// Invalid
+			default:
+				throw new Exception( sprintf( 'The markup format "%s" is not valid', $this->page_markup ) );
 		}
+
+		// call post parse filter if exists
+		if ( $this->post_parse_callback ) {
+			$contents = call_user_func( $this->post_parse_callback, $contents );
+		}
+
+		return $contents;
 	}
 
 	/**
@@ -115,14 +145,31 @@ class Pie_Easy_Docs
 	}
 
 	/**
-	 * Factory helper
+	 * Set the pre parse filter callback
 	 *
-	 * @param string $page
-	 * @return Pie_Easy_Docs
+	 * @param mixed $callback
 	 */
-	static public function create( $page )
+	public function set_pre_filter( $callback )
 	{
-		return new self( $page );
+		if ( is_callable( $callback ) ) {
+			$this->pre_parse_callback = $callback;
+		} else {
+			throw new Exception( sprintf( 'Invalid callback' ) );
+		}
+	}
+
+	/**
+	 * Set the post parse filter callback
+	 *
+	 * @param mixed $callback
+	 */
+	public function set_post_filter( $callback )
+	{
+		if ( is_callable( $callback ) ) {
+			$this->post_parse_callback = $callback;
+		} else {
+			throw new Exception( sprintf( 'Invalid callback' ) );
+		}
 	}
 
 	/**
@@ -211,7 +258,7 @@ class Pie_Easy_Docs
 	}
 
 	/**
-	 * Return URI for a given page
+	 * Return URL for a given page
 	 *
 	 * @param string $page
 	 * @return string
