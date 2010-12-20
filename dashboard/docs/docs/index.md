@@ -1,6 +1,4 @@
-* Red
-* Green
-* Blue
+## Documentation
 
-[This link](infinity://admin/cpanel/docs/stuff) goes to some stuff.
-[This link](infinity://admin:image/foo.jpg) is actually an image.
+* [The Scheme](infinity://admin/cpanel/docs/scheme)
+* [Options Builder](infinity://admin/cpanel/docs/options)
