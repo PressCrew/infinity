@@ -119,7 +119,7 @@ function infinity_dashboard_route_parse()
 {
 	// the route defaults
 	$route = array(
-		'screen' => null,
+		'screen' => 'cpanel',
 		'action' => null,
 		'params' => null,
 	);
