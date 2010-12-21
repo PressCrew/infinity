@@ -44,29 +44,10 @@ function infinity_dashboard_cpanel_actions()
 			'widgets' => __( 'Widgets', INFINITY_TEXT_DOMAIN ),
 			'shortcodes' => __( 'Shortcodes', INFINITY_TEXT_DOMAIN ),
 			'options' => __( 'Options', INFINITY_TEXT_DOMAIN ),
-			'docs' => __( 'Documentation', INFINITY_TEXT_DOMAIN ),
+			'docs' => __( 'Docs', INFINITY_TEXT_DOMAIN ),
 			'about' => __( 'About', INFINITY_TEXT_DOMAIN ),
 			'thanks' => __( 'Thanks', INFINITY_TEXT_DOMAIN )
 		);
-}
-
-/**
- * Print the navigation
- */
-function infinity_dashboard_cpanel_navigation()
-{
-	$actions = infinity_dashboard_cpanel_actions();
-	$current_action = infinity_dashboard_cpanel_action();
-	$cell_width = floor( 100 / count($actions) ); ?>
-
-	<table class="widefat infinity-cpanel-nav">
-		<tr><?php
-		foreach ( $actions as $action_slug => $action_title ):
-			$current_class = ( $action_slug == $current_action ) ? 'current' : '' ?>
-			<td class="<?php print $current_class ?>" style="width: <?php print $cell_width ?>%;"><a href="<?php print infinity_dashboard_route( 'cpanel', $action_slug ) ?>" class="infinity-cpanel-page-<?php print $action_slug ?>"><?php print $action_title ?></a></td><?php
-		endforeach; ?>
-		</tr>
-	</table><?php
 }
 
 //
