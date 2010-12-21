@@ -1,8 +1,8 @@
 ## The Scheme
 
-Infinity uses something that we would like to call "The Scheme".
+Infinity uses something that we call "The Scheme".
 While this sounds like the Title of a Jerry Bruckheimer movie, it's
-actually a quite accurate description of what Pie allows you to do.
+actually quite an accurate description of what Infinity allows you to do.
 
 > *Scheme* - An orderly combination of related parts.
 > a systematic plan for a course of action
@@ -22,22 +22,20 @@ parent theme itself. That way, when the parent theme is updated, your
 modifications are preserved.
 
 Infinity takes this concept to the next level by allowing you to create an
-infinite number of themes that can extend each other the same way a Child Theme
-extends a Parent Theme. You can take this extremely powerful feature as far
+infinite number of themes that can extend each other the same way a child theme
+extends a parent theme. You can take this extremely powerful feature as far
 as you wish, and it gives you total freedom in how you set up your
-Theme Development work flow.
+theme development work flow.
+
+![Scheme Hierarchy](infinity://admin:image/docs/scheme_hierarchy.jpg)
 
 Now we hear you say; Isn't the Parent -> Child functionality more then enough
-for mose cases? The answer is Yes! In most cases you can use this structure to
+for mose cases?
+
+The answer is Yes! In most cases you can use this structure to
 create custom themes based on Infinity. It all works exactly as it normally would,
 and if you don't feel the need to go deeper then that, there is no special
 configuration required.
-
-### Where The Scheme comes in handy
-
-Why develop something as complicated as this, if there are no real world
-examples to use it for? At first glance this feature might seem like something cool,
-but not very useful, but there a lot of projects that can benefit from this!
 
 ### Customize Child Themes without having to worry about upgrades
 
