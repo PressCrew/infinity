@@ -1,4 +1,6 @@
 ## Documentation
 
 * [The Scheme](infinity://admin/cpanel/docs/scheme)
-* [Options Builder](infinity://admin/cpanel/docs/options)
+* [Getting Started](infinity://admin/cpanel/docs/setup)
+* [Theme Options](infinity://admin/cpanel/docs/options)
+* [Theme Features](infinity://admin/cpanel/docs/features)

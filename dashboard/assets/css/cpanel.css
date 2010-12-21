@@ -304,16 +304,20 @@ div.infinity-cpanel-docs blockquote {
 	margin: 0 0 1.5em 1em;
 	font-style: italic;
 }
+div.infinity-cpanel-docs pre {
+	margin: 0 0 1.5em 1em;
+}
 div.infinity-cpanel-docs h1,
 div.infinity-cpanel-docs h2,
 div.infinity-cpanel-docs h3,
 div.infinity-cpanel-docs h4,
 div.infinity-cpanel-docs h5,
 div.infinity-cpanel-docs h6 {
-	margin: .3em 0 .3em;
+	margin: .6em 0;
 	border-bottom: 1px solid #eee;
-	padding-bottom: .2em;
+	padding-bottom: .1em;
 	font-family: arial,verdana,sans-serif;
+	font-weight: bold;
 }
 div.infinity-cpanel-docs ul,
 div.infinity-cpanel-docs ol {
