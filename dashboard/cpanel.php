@@ -59,7 +59,7 @@ function infinity_dashboard_cpanel_actions()
  */
 function infinity_dashboard_cpanel_screen()
 {
-	infinity_dashboard_load_template( 'layout.php' );
+	infinity_dashboard_load_template( 'cpanel.php' );
 }
 
 //
@@ -71,7 +71,7 @@ function infinity_dashboard_cpanel_screen()
  */
 function infinity_dashboard_cpanel_start_content()
 {
-	infinity_dashboard_load_template( 'start.php' );
+	infinity_dashboard_load_template( 'cpanel/start.php' );
 }
 
 /**
@@ -79,7 +79,7 @@ function infinity_dashboard_cpanel_start_content()
  */
 function infinity_dashboard_cpanel_widgets_content()
 {
-	infinity_dashboard_load_template( 'widgets.php' );
+	infinity_dashboard_load_template( 'cpanel/widgets.php' );
 }
 
 /**
@@ -87,7 +87,7 @@ function infinity_dashboard_cpanel_widgets_content()
  */
 function infinity_dashboard_cpanel_shortcodes_content()
 {
-	infinity_dashboard_load_template( 'shortcodes.php' );
+	infinity_dashboard_load_template( 'cpanel/shortcodes.php' );
 }
 
 /**
@@ -95,7 +95,7 @@ function infinity_dashboard_cpanel_shortcodes_content()
  */
 function infinity_dashboard_cpanel_options_content()
 {
-	infinity_dashboard_load_template( 'options.php' );
+	infinity_dashboard_load_template( 'cpanel/options.php' );
 }
 
 /**
@@ -103,7 +103,7 @@ function infinity_dashboard_cpanel_options_content()
  */
 function infinity_dashboard_cpanel_docs_content()
 {
-	infinity_dashboard_load_template( 'docs.php' );
+	infinity_dashboard_load_template( 'cpanel/docs.php' );
 }
 
 /**
@@ -111,7 +111,7 @@ function infinity_dashboard_cpanel_docs_content()
  */
 function infinity_dashboard_cpanel_about_content()
 {
-	infinity_dashboard_load_template( 'about.php' );
+	infinity_dashboard_load_template( 'cpanel/about.php' );
 }
 
 /**
@@ -119,7 +119,7 @@ function infinity_dashboard_cpanel_about_content()
  */
 function infinity_dashboard_cpanel_thanks_content()
 {
-	infinity_dashboard_load_template( 'thanks.php' );
+	infinity_dashboard_load_template( 'cpanel/thanks.php' );
 }
 
 ?>
