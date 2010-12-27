@@ -25,6 +25,9 @@ define( 'INFINITY_ADMIN_URL', INFINITY_THEME_URL . '/dashboard' );
 define( 'INFINITY_EXTRAS_DIR', get_theme_root() . DIRECTORY_SEPARATOR . 'infinity-extras' );
 define( 'INFINITY_EXTRAS_URL', get_theme_root_uri() . '/infinity-extras' );
 define( 'INFINITY_TEXT_DOMAIN', INFINITY_NAME );
+define( 'INFINITY_ADMIN_PAGE', 'infinity-theme' );
+define( 'INFINITY_ADMIN_TPLS_DIR', INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'templates' );
+define( 'INFINITY_ADMIN_DOCS_DIR', INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'docs' );
 
 // load PIE and initialize
 require_once( INFINITY_PIE_DIR . DIRECTORY_SEPARATOR . 'loader.php' );

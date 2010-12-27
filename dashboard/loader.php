@@ -14,9 +14,6 @@
 //
 // Constants
 //
-define( 'INFINITY_ADMIN_PAGE', 'infinity-theme' );
-define( 'INFINITY_ADMIN_TPLS_DIR', INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'templates' );
-define( 'INFINITY_ADMIN_DOCS_DIR', INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'docs' );
 define( 'INFINITY_ROUTE_PARAM', 'route' );
 define( 'INFINITY_ROUTE_DELIM', '/' );
 
