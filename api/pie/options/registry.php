@@ -11,6 +11,8 @@
  * @since 1.0
  */
 
+Pie_Easy_Loader::load( 'collections' );
+
 /**
  * Make keeping track of options easy
  */
@@ -43,16 +45,17 @@ abstract class Pie_Easy_Options_Registry
 	/**
 	 * All sections that are currently configured
 	 *
-	 * @var array
+	 * @var Pie_Easy_Map|null
 	 */
-	private $sections = array();
+	private $sections;
 
 	/**
 	 * All options that are currently configured
 	 *
-	 * @var array
+	 * @var Pie_Easy_Map|null
 	 */
-	private $options = array();
+
+	private $options;
 	
 	/**
 	 * An option renderer instance
@@ -66,6 +69,10 @@ abstract class Pie_Easy_Options_Registry
 	 */
 	public function __construct()
 	{
+		// initiate the maps
+		$this->sections = new Pie_Easy_Map();
+		$this->options = new Pie_Easy_Map();
+
 		// get the renderer
 		$this->renderer = $this->create_renderer();
 
@@ -121,15 +128,15 @@ abstract class Pie_Easy_Options_Registry
 	 * @param Pie_Easy_Options_Option $option
 	 * @return boolean
 	 */
-	public function register( Pie_Easy_Options_Option $option )
+	public function register_option( Pie_Easy_Options_Option $option )
 	{
 		// make sure that the option has not already been registered
-		if ( $this->registered( $option->name ) ) {
+		if ( $this->options->contains( $option->name ) ) {
 			throw new Exception( sprintf( 'The "%s" option has already been registered', $option->name ) );
 		}
 
 		// register it
-		$this->options[$option->name] = $option;
+		$this->options->add( $option->name, $option );
 		return true;
 	}
 
@@ -139,16 +146,54 @@ abstract class Pie_Easy_Options_Registry
 	 * @param Pie_Easy_Options_Section $section
 	 * @return boolean
 	 */
-	public function add_section( Pie_Easy_Options_Section $section )
+	public function register_section( Pie_Easy_Options_Section $section )
 	{
 		// make sure that the section has not already been registered
-		if ( array_key_exists( $section->name, $this->sections ) ) {
+		if ( $this->get_section( $section->name ) ) {
 			throw new Exception( sprintf( 'The "%s" section has already been registered', $section->name ) );
 		}
 
 		// register it
-		$this->sections[$section->name] = $section;
+		$this->sections->add( $section->name, $section );
 		return true;
+	}
+
+	/**
+	 * Check if a section has been registered
+	 *
+	 * @param string $section_name
+	 * @return boolean
+	 */
+	public function has_section( $section_name )
+	{
+		return $this->sections->contains( $section_name );
+	}
+
+	/**
+	 * Return a registered section by name
+	 *
+	 * @param string $section_name
+	 * @return Pie_Easy_Options_Section
+	 */
+	public function get_section( $section_name )
+	{
+		// check section registry
+		if ( $this->sections->contains( $section_name ) ) {
+			// return it
+			return $this->sections->item_at( $section_name );
+		}
+
+		throw new Exception( sprintf( 'Unable to get section "%s": not registered.', $section_name ) );
+	}
+
+	/**
+	 * Return all registered sections as an array
+	 *
+	 * @return array
+	 */
+	public function get_sections()
+	{
+		return $this->sections->to_array();
 	}
 
 	/**
@@ -159,8 +204,8 @@ abstract class Pie_Easy_Options_Registry
 	 */
 	public function unregister( $option_name )
 	{
-		if ( $this->registered( $option_name ) ) {
-			unset( $this->options[$option_name] );
+		if ( $this->options->contains( $option_name ) ) {
+			$this->options->remove( $option_name );
 			return true;
 		}
 
@@ -173,9 +218,9 @@ abstract class Pie_Easy_Options_Registry
 	 * @param string $option_name
 	 * @return boolean
 	 */
-	public function registered( $option_name )
+	public function has_option( $option_name )
 	{
-		return array_key_exists( $option_name, $this->options );
+		return $this->options->contains( $option_name );
 	}
 
 	/**
@@ -184,13 +229,25 @@ abstract class Pie_Easy_Options_Registry
 	 * @param string $option_name
 	 * @return Pie_Easy_Options_Option
 	 */
-	public function option( $option_name )
+	public function get_option( $option_name )
 	{
-		if ( $this->registered( $option_name ) ) {
-			return $this->options[$option_name];
+		// check option registry
+		if ( $this->options->contains( $option_name ) ) {
+			// return it
+			return $this->options->item_at( $option_name );
 		}
 
 		throw new Exception( sprintf( 'Unable to get option "%s": not registered.', $option_name ) );
+	}
+
+	/**
+	 * Return all registered options as an array
+	 *
+	 * @return array
+	 */
+	public function get_options()
+	{
+		return $this->options->to_array();
 	}
 
 	/**
@@ -266,15 +323,15 @@ abstract class Pie_Easy_Options_Registry
 	{
 		// if option has already been registered, the only thing
 		// that can be done is to override the default value
-		if ( $this->registered( $option_name ) ) {
+		if ( $this->options->contains( $option_name ) ) {
 			if ( isset( $option_config['default_value'] ) ) {
-				$this->option( $option_name )->set_default_value( $option_config['default_value'] );
+				$this->get_option( $option_name )->set_default_value( $option_config['default_value'] );
 			}
 			return;
 		}
 
-		// get section from section stack
-		$section = $this->sections[$option_config['section']];
+		// get section from section registry
+		$section = $this->sections->item_at( $option_config['section'] );
 
 		// create new option
 		$option = new $this->{option_class}(
@@ -357,7 +414,7 @@ abstract class Pie_Easy_Options_Registry
 		}
 
 		// register it
-		return self::register( $option );
+		return self::register_option( $option );
 	}
 
 	/**
@@ -391,7 +448,7 @@ abstract class Pie_Easy_Options_Registry
 		}
 
 		// register it
-		return self::add_section( $section );
+		return self::register_section( $section );
 	}
 
 	/**
@@ -401,10 +458,10 @@ abstract class Pie_Easy_Options_Registry
 	 * @param boolean $output Set to false to return results instead of printing
 	 * @return string
 	 */
-	public function render( $option_name, $output = true )
+	public function render_option( $option_name, $output = true )
 	{
-		if ( $this->registered( $option_name) ) {
-			return $this->renderer->render( $this->option( $option_name ), $output );
+		if ( $this->options->contains( $option_name) ) {
+			return $this->renderer->render( $this->get_option( $option_name ), $output );
 		} else {
 			throw new Exception( sprintf( 'The "%s" option is not registered.', $option_name ) );
 		}
@@ -419,12 +476,12 @@ abstract class Pie_Easy_Options_Registry
 	public function render_sections( $output = true )
 	{
 		// make sure there is at least one section to render
-		if ( empty( $this->sections ) ) {
+		if ( $this->sections->count() < 1 ) {
 			throw new Exception( 'There are no registered sections to render.' );
 		}
 
 		// make sure there is at least one option to render
-		if ( empty( $this->options ) ) {
+		if ( $this->options->count() < 1 ) {
 			throw new Exception( 'There are no registered options to render.' );
 		}
 		
@@ -471,9 +528,9 @@ abstract class Pie_Easy_Options_Registry
 			// loop through manifest options
 			foreach ( $manifest as $option_name ) {
 				// is this option registered?
-				if ( $this->registered( $option_name ) ) {
+				if ( $this->options->contains( $option_name ) ) {
 					// get the option
-					$option = $this->option($option_name);
+					$option = $this->get_option($option_name);
 					// look for option name as POST key
 					if ( array_key_exists( $option->name, $_POST ) ) {
 						// yep, update it
