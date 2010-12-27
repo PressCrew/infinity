@@ -108,7 +108,7 @@ class Infinity_Options_Registry extends Pie_Easy_Options_Registry
 			self::$instance = new self();
 			// add form processing
 			if ( current_user_can('manage_options') ) {
-				add_action( 'load-' . INFINITY_ADMIN_PAGE, array( self::$instance, 'process_form' ) );
+				add_action( 'load-toplevel_page_' . INFINITY_ADMIN_PAGE, array( self::$instance, 'process_form' ) );
 			}
 		}
 
@@ -187,7 +187,7 @@ function infinity_options_registry_render_sections( $output = true )
  */
 function infinity_option( $option_name )
 {
-	return Infinity_Options_Registry::instance()->option( $option_name )->get();
+	return Infinity_Options_Registry::instance()->get_option( $option_name )->get();
 }
 
 /**
@@ -199,7 +199,7 @@ function infinity_option( $option_name )
  */
 function infinity_option_image_src( $option_name, $size = 'thumbnail' )
 {
-	return Infinity_Options_Registry::instance()->option( $option_name )->get_image_src( $size );
+	return Infinity_Options_Registry::instance()->get_option( $option_name )->get_image_src( $size );
 }
 
 /**
@@ -211,7 +211,7 @@ function infinity_option_image_src( $option_name, $size = 'thumbnail' )
  */
 function infinity_option_image_url( $option_name, $size = 'thumbnail' )
 {
-	return Infinity_Options_Registry::instance()->option( $option_name )->get_image_url( $size );
+	return Infinity_Options_Registry::instance()->get_option( $option_name )->get_image_url( $size );
 }
 
 ?>
