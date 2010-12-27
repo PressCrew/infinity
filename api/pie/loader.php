@@ -40,13 +40,17 @@ final class Pie_Easy_Loader
 	 */
 	private $features = array(
 		'ajax',
+		'collections' =>
+			array( 'map', 'map_iterator', 'stack', 'stack_iterator' ),
 		'docs',
 		'enqueue',
-		'features' => array( 'feature' ),
+		'features' =>
+			array( 'feature' ),
 		'files',
 		'l10n',
 		'markdown',
-		'options' => array( 'option', 'registry', 'renderer', 'section', 'uploader', 'walkers' ),
+		'options' =>
+			array( 'option', 'registry', 'renderer', 'section', 'uploader', 'walkers' ),
 		'scheme'
 	);
 
