@@ -149,7 +149,7 @@ abstract class Pie_Easy_Options_Registry
 	public function register_section( Pie_Easy_Options_Section $section )
 	{
 		// make sure that the section has not already been registered
-		if ( $this->get_section( $section->name ) ) {
+		if ( $this->sections->contains( $section->name ) ) {
 			throw new Exception( sprintf( 'The "%s" section has already been registered', $section->name ) );
 		}
 
