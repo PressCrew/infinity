@@ -34,7 +34,7 @@ widget, and use the built in WordPress editor to crop and edit their image.
 Now you can add the following markup to your theme template to ouput
 the uploaded image:
 
-	<img src=<?php echo infinity_option_image_url( 'mytheme_storefront_image' ) ?>">
+	<img src="<?php echo infinity_option_image_url( 'mytheme_storefront_image' ) ?>">
 
 That's all there is to it! Infinity handles all the hard stuff behind the scenes so you
 can focus on making your theme awesome, instead of making it work.
