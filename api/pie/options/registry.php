@@ -21,7 +21,7 @@ abstract class Pie_Easy_Options_Registry
 	/**
 	 * The prefix that denotes a section name in the config
 	 */
-	const SECTION_PREFIX = '~';
+	const SECTION_PREFIX = '.';
 
 	/**
 	 * The string on which to split field option key => values
