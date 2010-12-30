@@ -57,7 +57,7 @@ the option output in your WordPress theme.
 This works exactly the same as you would normally do in when building a theme.
 Option names _MUST_ begin with the name of your theme's directory name.
 
-	`[mytheme_storefront_image]`
+	[mytheme_storefront_image]
 
 Child themes inherit *All* of the options from *EVERY* ancestor theme, allowing you to
 create a highly extensible theme hierarchy.
