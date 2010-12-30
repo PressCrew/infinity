@@ -44,7 +44,7 @@ can focus on making your theme awesome, instead of making it work.
 To define a section, you add something like this to your options.ini file BEFORE any options that
 will be assigned to that section are defined.
 
-	[~typography]
+	[.typography]
 	title = "Typography"
 
 Now you have a new section to which typography options can be assigned.
