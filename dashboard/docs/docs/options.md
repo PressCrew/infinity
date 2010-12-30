@@ -42,7 +42,8 @@ can focus on making your theme awesome, instead of making it work.
 ## Sections
 
 To define a section, you add something like this to your options.ini file BEFORE any options that
-will be assigned to that section are defined.
+will be assigned to that section are defined. Section names must be all lower case. Section titles
+can contain just about any character except double quotes.
 
 	[.typography]
 	title = "Typography"
