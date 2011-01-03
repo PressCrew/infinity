@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'collections' );
+Pie_Easy_Loader::load( 'ajax', 'collections' );
 
 /**
  * Make keeping track of options easy
@@ -31,16 +31,23 @@ abstract class Pie_Easy_Options_Registry
 	/**
 	 * The class to use for new sections
 	 *
-	 * @var Pie_Easy_Options_Section
+	 * @var string
 	 */
 	private $section_class;
 
 	/**
 	 * The class use for new options
 	 * 
-	 * @var Pie_Easy_Options_Option 
+	 * @var string
 	 */
 	private $option_class;
+
+	/**
+	 * The option renderer instance
+	 *
+	 * @var Pie_Easy_Options_Option_Renderer
+	 */
+	private $option_renderer;
 
 	/**
 	 * All sections that are currently configured
@@ -56,13 +63,7 @@ abstract class Pie_Easy_Options_Registry
 	 */
 
 	private $options;
-	
-	/**
-	 * An option renderer instance
-	 *
-	 * @var Pie_Easy_Options_Renderer
-	 */
-	private $renderer;
+
 	
 	/**
 	 * Constructor
@@ -72,13 +73,6 @@ abstract class Pie_Easy_Options_Registry
 		// initiate the maps
 		$this->sections = new Pie_Easy_Map();
 		$this->options = new Pie_Easy_Map();
-
-		// get the renderer
-		$this->renderer = $this->create_renderer();
-
-		if ( !$this->renderer instanceof Pie_Easy_Options_Renderer ) {
-			throw new UnexpectedValueException( 'That is not a valid renderer object' );
-		}
 	}
 
 	/**
@@ -87,7 +81,7 @@ abstract class Pie_Easy_Options_Registry
 	 * @param string $class_name
 	 * @return boolean
 	 */
-	private function set_section_class( $class_name )
+	public function set_section_class( $class_name )
 	{
 		// set the option class
 		if ( class_exists( $class_name ) ) {
@@ -104,7 +98,7 @@ abstract class Pie_Easy_Options_Registry
 	 * @param string $class_name
 	 * @return boolean
 	 */
-	private function set_option_class( $class_name )
+	public function set_option_class( $class_name )
 	{
 		// set the option class
 		if ( class_exists( $class_name ) ) {
@@ -116,11 +110,14 @@ abstract class Pie_Easy_Options_Registry
 	}
 
 	/**
-	 * Create a new renderer
-	 * 
-	 * @return Pie_Easy_Options_Renderer
+	 * Set the option renderer
+	 *
+	 * @param Pie_Easy_Options_Option_Renderer $renderer
 	 */
-	abstract protected function create_renderer();
+	public function set_option_renderer( Pie_Easy_Options_Option_Renderer $renderer )
+	{
+		$this->option_renderer = $renderer;
+	}
 
 	/**
 	 * Register an option
@@ -241,13 +238,29 @@ abstract class Pie_Easy_Options_Registry
 	}
 
 	/**
-	 * Return all registered options as an array
+	 * Return registered options as an array
 	 *
+	 * @param Pie_Easy_Options_Section $section Limit options to one section
 	 * @return array
 	 */
-	public function get_options()
+	public function get_options( Pie_Easy_Options_Section $section = null )
 	{
-		return $this->options->to_array();
+		// return options for one section only?
+		if ( $section ) {
+			// options for this section
+			$options = array();
+			// loop through and compare names
+			foreach ( $this->options as $option ) {
+				if ( $section->name == $option->section ) {
+					$options[] = $option;
+				}
+			}
+			// return them
+			return $options;
+		} else {
+			// return ALL options
+			return $this->options->to_array();
+		}
 	}
 
 	/**
@@ -255,16 +268,10 @@ abstract class Pie_Easy_Options_Registry
 	 * 
 	 * @uses parse_ini_file()
 	 * @param string $filename
-	 * @param string $section_class
-	 * @param string $option_class
 	 * @return boolean 
 	 */
-	public function load_config_file( $filename, $section_class, $option_class )
+	public function load_config_file( $filename )
 	{
-		// try to set the section and option class
-		$this->set_section_class( $section_class );
-		$this->set_option_class( $option_class );
-
 		// try to parse the file
 		return $this->load_config_array( parse_ini_file( $filename, true ) );
 	}
@@ -273,15 +280,10 @@ abstract class Pie_Easy_Options_Registry
 	 * Load options from an ini string
 	 *
 	 * @param string $ini_text
-	 * @param string $section_class
-	 * @param string $option_class
 	 * @return boolean
 	 */
-	public function load_config_text( $ini_text,  $section_class, $option_class )
+	public function load_config_text( $ini_text )
 	{
-		// try to set the option class
-		$this->set_option_class( $option_class );
-
 		// try to parse the text
 		return $this->load_config_array( parse_ini_string( $ini_text, true ) );
 	}
@@ -456,62 +458,16 @@ abstract class Pie_Easy_Options_Registry
 	 *
 	 * @param string $option_name
 	 * @param boolean $output Set to false to return results instead of printing
-	 * @return string
+	 * @return string|boolean
 	 */
 	public function render_option( $option_name, $output = true )
 	{
-		if ( $this->options->contains( $option_name) ) {
-			return $this->renderer->render( $this->get_option( $option_name ), $output );
+		if ( $this->options->contains( $option_name ) ) {
+			$html = $this->option_renderer->render( $this->get_option( $option_name ), $output );
+			$html .= $this->option_renderer->render_manifest( $output );
+			return ( $output ) ? true : $html;
 		} else {
 			throw new Exception( sprintf( 'The "%s" option is not registered.', $option_name ) );
-		}
-	}
-
-	/**
-	 * Render all sections and their registered options and return as one large string
-	 *
-	 * @param boolean $output Set to false to return results instead of printing
-	 * @return string|void
-	 */
-	public function render_sections( $output = true )
-	{
-		// make sure there is at least one section to render
-		if ( $this->sections->count() < 1 ) {
-			throw new Exception( 'There are no registered sections to render.' );
-		}
-
-		// make sure there is at least one option to render
-		if ( $this->options->count() < 1 ) {
-			throw new Exception( 'There are no registered options to render.' );
-		}
-		
-		// the html to return if output is disabled
-		$html = '';
-		
-		// loop through all sections
-		foreach ( $this->sections as $section ) {
-
-			// the options markup for this section
-			$options_html = '';
-			
-			// loop through and render each option for this section
-			foreach( $this->options as $option ) {
-				// assigned to this section?
-				if ( $option->section == $section->name ) {
-					$options_html .= $this->renderer->render( $option, false );
-				}
-			}
-
-			// render the section
-			$html .= $section->render( $options_html, $output );
-			
-		}
-
-		$html .= $this->renderer->render_manifest();
-		
-		// all done
-		if ( $output === false ) {
-			return $html;
 		}
 	}
 
@@ -545,6 +501,18 @@ abstract class Pie_Easy_Options_Registry
 			return true;
 		} else {
 			throw new Exception( 'No manifest was rendered.' );
+		}
+	}
+
+	/**
+	 * Process the form and generate an AJAX response
+	 */
+	public function process_form_ajax()
+	{
+		if ( $this->process_form() ) {
+			Pie_Easy_Ajax::response( true, 'Options update: success' );
+		} else {
+			Pie_Easy_Ajax::response( false, 'Options update: failed' );
 		}
 	}
 }

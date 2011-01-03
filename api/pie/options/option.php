@@ -53,7 +53,7 @@ abstract class Pie_Easy_Options_Option
 	 * @var string
 	 */
 	private $description;
-
+	
 	/**
 	 * The class of the option container
 	 *
@@ -329,7 +329,7 @@ abstract class Pie_Easy_Options_Option
 	{
 		return in_array( $type, $this->field_types, true );
 	}
-
+	
 	/**
 	 * Set the container css class
 	 *

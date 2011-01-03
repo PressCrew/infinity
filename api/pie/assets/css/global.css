@@ -21,6 +21,23 @@
  */
 
 /* Options */
+div.pie-easy-options-wrapper {
+	line-height: 100%;
+}
+label.pie-easy-options-title {
+	font-weight: bold;
+	line-height: 100%;
+}
+p.pie-easy-options-description {
+	line-height: 100%;
+}
+
+/* Color Picker */
+.color-picker input {
+	font-size: 20px;
+	width: 130px;
+}
+
 div.pie-easy-options-cp-box {
 	display: inline-block;
 	position: relative;
@@ -29,7 +46,6 @@ div.pie-easy-options-cp-box {
 	vertical-align: top;
 	background: url(../images/colorpicker_launch.png);
 }
-
 div.pie-easy-options-cp-box div {
 	position: absolute;
 	top: 3px;
@@ -40,7 +56,6 @@ div.pie-easy-options-cp-box div {
 }
 
 /* Uploader */
-
 div.pie-easy-options-fu fieldset {
 	min-height: 150px;
 	padding: 10px;
@@ -51,6 +66,7 @@ div.pie-easy-options-fu fieldset {
 		margin-left: 3px;
 		padding: 3px;
 		border: 1px solid gray;
+		background-color: white;
 	}
 div.pie-easy-options-fu fieldset.pie-easy-options-fu-img {
 	float: left;
