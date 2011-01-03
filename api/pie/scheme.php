@@ -229,12 +229,10 @@ final class Pie_Easy_Scheme
 	 * Load options for a theme
 	 *
 	 * @param Pie_Easy_Options_Registry $registry
-	 * @param string $section_class
-	 * @param string $option_class
 	 * @param string $ini_file_name
 	 * @return boolean
 	 */
-	public function load_options( Pie_Easy_Options_Registry $registry, $section_class, $option_class, $ini_file_name = 'options' )
+	public function load_options( Pie_Easy_Options_Registry $registry, $ini_file_name = 'options' )
 	{
 		// reverse the stack
 		$themes = array_reverse($this->parent_themes, true );
@@ -247,7 +245,7 @@ final class Pie_Easy_Scheme
 
 			// load the option config if it exists
 			if ( is_readable( $options_ini ) ) {
-				$registry->load_config_file( $options_ini, $section_class, $option_class );
+				$registry->load_config_file( $options_ini );
 			}
 
 		}

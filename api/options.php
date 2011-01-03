@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'options' );
+Pie_Easy_Loader::load( 'ajax', 'options' );
 
 /**
  * Infinity Options
@@ -23,7 +23,7 @@ class Infinity_Options
 	 */
 	static public function init()
 	{
-		Infinity_Options_Renderer::init();
+		Infinity_Options_Option_Renderer::init();
 	}
 
 	/**
@@ -31,7 +31,6 @@ class Infinity_Options
 	 */
 	static public function init_ajax()
 	{
-		Pie_Easy_Loader::load('ajax');
 		$uploader = new Infinity_Options_Uploader();
 		$uploader->init_ajax();
 	}
@@ -42,22 +41,7 @@ class Infinity_Options
  */
 class Infinity_Options_Section extends Pie_Easy_Options_Section
 {
-	/**
-	 * Constructor
-	 *
-	 * @param string $name
-	 * @param string $title
-	 */
-	public function __construct( $name, $title )
-	{
-		// run the parent
-		parent::__construct( $name, $title );
-
-		// set default classes
-		$this->set_class( 'rm_section' );
-		$this->set_class_title( 'rm_title' );
-		$this->set_class_content( 'rm_options' );
-	}
+	// nothing custom yet
 }
 
 /**
@@ -104,11 +88,23 @@ class Infinity_Options_Registry extends Pie_Easy_Options_Registry
 	static public function instance()
 	{
 		if ( !self::$instance instanceof self ) {
+
 			// init singleton
 			self::$instance = new self();
+
+			// set section and option classes
+			self::$instance->set_section_class('Infinity_Options_Section');
+			self::$instance->set_option_class('Infinity_Options_Option');
+			
+			// set renderer
+			$renderer = new Infinity_Options_Option_Renderer();
+			$renderer->enable_uploader( new Infinity_Options_Uploader( 'admin_head' ) );
+			self::$instance->set_option_renderer( $renderer );
+
 			// add form processing
 			if ( current_user_can('manage_options') ) {
 				add_action( 'load-toplevel_page_' . INFINITY_ADMIN_PAGE, array( self::$instance, 'process_form' ) );
+				add_action( 'wp_ajax_' . INFINITY_NAME . '_options_update', array( self::$instance, 'process_form_ajax' ) );
 			}
 		}
 
@@ -119,11 +115,9 @@ class Infinity_Options_Registry extends Pie_Easy_Options_Registry
 	 * Initialize the registry with an options file
 	 *
 	 * @param string $ini
-	 * @param string $section_class
-	 * @param string $option_class
 	 * @return boolean
 	 */
-	static public function init( $ini, $section_class, $option_class )
+	static public function init( $ini )
 	{
 		// already initialized?
 		if ( self::$instance instanceof self ) {
@@ -131,29 +125,43 @@ class Infinity_Options_Registry extends Pie_Easy_Options_Registry
 		}
 
 		// initialize it!
-		return self::instance()->load_config_file( $ini, $section_class, $option_class );
+		return self::instance()->load_config_file( $ini );
 	}
-
-	/**
-	 * Create a new renderer
-	 *
-	 * @return Infinity_Options_Renderer
-	 */
-	protected function create_renderer()
-	{
-		$renderer = new Infinity_Options_Renderer();
-		$renderer->enable_uploader( new Infinity_Options_Uploader( 'admin_head' ) );
-		return $renderer;
-	}
-
 }
 
 /**
  * Infinity Options Renderer
  */
-class Infinity_Options_Renderer extends Pie_Easy_Options_Renderer
+class Infinity_Options_Option_Renderer extends Pie_Easy_Options_Option_Renderer
 {
-	// nothing custom yet
+	/**
+	 * Override render option method to customize output
+	 */
+	protected function render_option()
+	{ ?>
+		<div class="<?php $this->render_classes( 'infinity-cpanel-options-single' ) ?>">
+			<div class="infinity-cpanel-options-single-header">
+				<?php $this->render_label() ?>
+				<a class="infinity-cpanel-options-save-all" href="#">Save All</a>
+				<a class="infinity-cpanel-options-save-one" href="#<?php print esc_attr( $this->get_option_name() ) ?>">Save</a>
+			</div>
+			<ul>
+				<li><a href="#tabs-1">Edit Setting</a></li>
+				<li><a href="#tabs-2">Documentation</a></li>
+				<li><a href="#tabs-3">Sample Code</a></li>
+			</ul>
+			<div id="tabs-1">
+				<p><?php $this->render_description() ?></p>
+				<?php $this->render_field() ?>
+			</div>
+			<div id="tabs-2">
+				<p>Docs for this option</p>
+			</div>
+			<div id="tabs-3">
+				<p>Sample code for this option</p>
+			</div>
+		</div><?php
+	}
 }
 
 /**
@@ -167,17 +175,6 @@ class Infinity_Options_Uploader extends Pie_Easy_Options_Uploader
 //
 // Helpers
 //
-
-/**
- * Render all sections in the registery
- *
- * @param boolean $output
- * @return string|void
- */
-function infinity_options_registry_render_sections( $output = true )
-{
-	return Infinity_Options_Registry::instance()->render_sections( $output );
-}
 
 /**
  * Get an option value
@@ -213,5 +210,41 @@ function infinity_option_image_url( $option_name, $size = 'thumbnail' )
 {
 	return Infinity_Options_Registry::instance()->get_option( $option_name )->get_image_url( $size );
 }
+
+/**
+ * Render a menu composed of all the sections with their options.
+ */
+function infinity_options_render_menu_items()
+{
+	foreach ( Infinity_Options_Registry::instance()->get_sections() as $section ) { ?>
+		<div>
+			<a href="#<?php print esc_attr( $section->name ) ?>"><?php print esc_html( $section->title ) ?></a>
+		</div>
+		<ul>
+			<?php foreach( Infinity_Options_Registry::instance()->get_options( $section ) as $option ): ?>
+			<li><a href="#<?php print esc_attr( $option->name ) ?>"><?php print esc_html( $option->title ) ?></a></li>
+			<?php endforeach; ?>
+		</ul>
+		<?php
+	}
+}
+
+/**
+ * Render options according to the option name POST var
+ */
+function infinity_options_render_options_screen()
+{
+	if ( isset( $_POST['option_name'] ) ) {
+		// try to render the option
+		$content = Infinity_Options_Registry::instance()->render_option( $_POST['option_name'], false );
+		// respond
+		if ( $content ) {
+			Pie_Easy_Ajax::responseStd( true, null, $content );
+		} else {
+			Pie_Easy_Ajax::responseStd( false, 'Failed to render options' );
+		}
+	}
+}
+add_action( 'wp_ajax_infinity_options_screen', 'infinity_options_render_options_screen' );
 
 ?>

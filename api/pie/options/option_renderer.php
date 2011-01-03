@@ -14,7 +14,7 @@
 /**
  * Make rendering options easy
  */
-abstract class Pie_Easy_Options_Renderer
+abstract class Pie_Easy_Options_Option_Renderer
 {
 	/**
 	 * All options that have been rendered
@@ -63,6 +63,16 @@ abstract class Pie_Easy_Options_Renderer
 	}
 
 	/**
+	 * Get the name of the option being rendered
+	 *
+	 * @return string
+	 */
+	final protected function get_option_name()
+	{
+		return $this->option->name;
+	}
+
+	/**
 	 * Render an option
 	 *
 	 * @param Pie_Easy_Options_Option $option
@@ -95,17 +105,42 @@ abstract class Pie_Easy_Options_Renderer
 	}
 
 	/**
-	 * Render option label and input wrapped in a container
+	 * Render option label, input, and description wrapped in a container
+	 *
+	 * This is a very basic implementation. In most cases you will want to override
+	 * this to generate custom markup.
 	 */
 	protected function render_option()
-	{ ?>
-		<div class="<?php print $this->option->class ?>">
+	{ 
+		// start rendering ?>
+		<div class="<?php $this->render_classes( 'pie-easy-options-wrapper' ) ?>">
 			<?php $this->render_label() ?>
+			<p class="pie-easy-options-description">
+				<?php $this->render_description() ?>
+			</p>
 			<div class="pie-easy-options-field">
 				<?php $this->render_field() ?>
-				<?php $this->render_description() ?>
 			</div>
 		</div><?php
+	}
+
+	/**
+	 * Render wrapper classes
+	 *
+	 * @param string $class,...
+	 */
+	protected function render_classes( $class = null )
+	{
+		// get unlimited number of class args
+		$classes = func_get_args();
+
+		// append custom class if set
+		if ( $this->option->class ) {
+			$classes[] = $this->option->class;
+		}
+
+		// render them all delimited with a space
+		print join( ' ', $classes );
 	}
 
 	/**
@@ -120,8 +155,8 @@ abstract class Pie_Easy_Options_Renderer
 	 * Render form input description
 	 */
 	protected function render_description()
-	{ ?>
-		<p><?php print esc_attr( $this->option->description ) ?></p><?php
+	{
+		print esc_attr( $this->option->description );
 	}
 
 	/**
@@ -521,16 +556,27 @@ abstract class Pie_Easy_Options_Renderer
 
 	/**
 	 * Render a hidden input which is a serialized array of all option names that were rendered
+	 *
+	 * @param boolean $output
 	 */
-	final public function render_manifest()
+	final public function render_manifest( $output = true )
 	{
 		$option_names = array();
 
 		foreach ( $this->options_rendered as $option ) {
 			$option_names[] = $option->name;
-		} ?>
+		}
 
-		<input type="hidden" name="_manifest_" value="<?php print esc_attr( implode( ',', $option_names ) ) ?>" /> <?php
+		$html = sprintf(
+			'<input type="hidden" name="_manifest_" value="%s" />',
+			esc_attr( implode( ',', $option_names ) )
+		);
+
+		if ( $output ) {
+			print $html;
+		} else {
+			return $html;
+		}
 	}
 }
 

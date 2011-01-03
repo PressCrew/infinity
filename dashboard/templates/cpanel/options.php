@@ -1,3 +1,9 @@
-<form action="" method="POST">
-	<?php infinity_options_registry_render_sections() ?>
-</form>
+<div id="infinity-cpanel-options" class="ui-widget ui-widget-content ui-corner-all ui-helper-clearfix">
+	<div id="infinity-cpanel-options-menu">
+		<?php infinity_options_render_menu_items() ?>
+	</div>
+	<div id="infinity-cpanel-options-content">
+		<form action="" method="POST">
+		</form>
+	</div>
+</div>

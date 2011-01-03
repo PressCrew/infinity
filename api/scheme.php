@@ -22,7 +22,7 @@ function infinity_scheme_init()
 {
 	// initialize the scheme
 	Pie_Easy_Scheme::instance()->init( 'config', INFINITY_NAME );
-	Pie_Easy_Scheme::instance()->load_options( Infinity_Options_Registry::instance(), 'Infinity_Options_Section', 'Infinity_Options_Option' );
+	Pie_Easy_Scheme::instance()->load_options( Infinity_Options_Registry::instance() );
 	return true;
 }
 

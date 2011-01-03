@@ -11,6 +11,8 @@
  * @since 1.0
  */
 
+Pie_Easy_Loader::load('ajax');
+
 /**
  * Make an uploaded file option easy
  */
@@ -92,9 +94,9 @@ class Pie_Easy_Options_Uploader
 	 * Render a flash uploader for the given option
 	 *
 	 * @param Pie_Easy_Options_Option $option
-	 * @param Pie_Easy_Options_Renderer $renderer
+	 * @param Pie_Easy_Options_Option_Renderer $renderer
 	 */
-	public function render( Pie_Easy_Options_Option $option, Pie_Easy_Options_Renderer $renderer )
+	public function render( Pie_Easy_Options_Option $option, Pie_Easy_Options_Option_Renderer $renderer )
 	{
 		$edit_url = sprintf( 'media.php?attachment_id=%d&action=edit', $option->get() );
 		$attach_url = $option->get_image_url('full'); ?>

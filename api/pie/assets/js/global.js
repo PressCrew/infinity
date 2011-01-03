@@ -34,6 +34,15 @@ pieEasyAjax = {
 	splitResponse: function (str)
 	{
 		return str.split('[[[s]]]');
+	},
+	splitResponseStd: function (str)
+	{
+		var sr = this.splitResponse(str);
+		return {
+			code: sr[0],
+			message: sr[1],
+			content: sr[2]
+		}
 	}
 };
 
@@ -97,9 +106,3 @@ pieEasyColorPicker = function ()
 		}
 	};
 }();
-
-jQuery(document).ready(function() {
-	jQuery('div.pie-easy-options-fu').each(function () {
-		jQuery(this).pieEasyUploader();
-	});
-});

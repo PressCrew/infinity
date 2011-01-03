@@ -50,7 +50,7 @@ final class Pie_Easy_Loader
 		'l10n',
 		'markdown',
 		'options' =>
-			array( 'option', 'registry', 'renderer', 'section', 'uploader', 'walkers' ),
+			array( 'registry', 'option', 'option_renderer', 'section', 'uploader', 'walkers' ),
 		'scheme'
 	);
 
