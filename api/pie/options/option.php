@@ -108,6 +108,13 @@ abstract class Pie_Easy_Options_Option
 	private $default_value;
 
 	/**
+	 * Sibling option required for this option to display
+	 *
+	 * @var string
+	 */
+	private $required_option;
+
+	/**
 	 * Feature required for this option to display
 	 *
 	 * @var string
@@ -294,7 +301,7 @@ abstract class Pie_Easy_Options_Option
 	 *
 	 * @return boolean
 	 */
-	private function check_caps()
+	final public function check_caps()
 	{
 		foreach ( $this->capabilities as $cap ) {
 			if ( !current_user_can( $cap ) ) {
@@ -310,7 +317,7 @@ abstract class Pie_Easy_Options_Option
 	 *
 	 * @return boolean
 	 */
-	public function supported()
+	final public function supported()
 	{
 		if ( $this->required_feature ) {
 			return current_theme_supports( $this->required_feature );
@@ -406,9 +413,23 @@ abstract class Pie_Easy_Options_Option
 	public function set_field_options( $field_options )
 	{
 		if ( empty( $this->field_options ) ) {
-			$this->field_options= $field_options;
+			$this->field_options = $field_options;
 		} else {
 			throw new Exception( sprintf( 'The field options for "%s" have already been set.', $this->name ) );
+		}
+	}
+
+	/**
+	 * Set the required option
+	 *
+	 * @param string $option_name
+	 */
+	public function set_required_option( $option_name )
+	{
+		if ( empty( $this->required_option ) ) {
+			$this->required_option = $option_name;
+		} else {
+			throw new Exception( sprintf( 'The required option for "%s" has already been set.', $this->name ) );
 		}
 	}
 

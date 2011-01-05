@@ -37,6 +37,7 @@ div#infinity-cpanel-options-flash {
 div.infinity-cpanel-options-single {
 	width: 100%;
 	padding-left: 7px;
+	margin-bottom: 15px;
 }
 div.infinity-cpanel-options-single ul.ui-tabs-nav {
 	padding-top: 0.1em;

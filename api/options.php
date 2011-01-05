@@ -138,29 +138,30 @@ class Infinity_Options_Option_Renderer extends Pie_Easy_Options_Option_Renderer
 	 * Override render option method to customize output
 	 */
 	protected function render_option()
-	{ ?>
+	{
+		// start rendering ?>
 		<div class="<?php $this->render_classes( 'infinity-cpanel-options-single' ) ?>">
 			<div class="infinity-cpanel-options-single-header">
 				<?php $this->render_label() ?>
 				<a class="infinity-cpanel-options-save-all" href="#">Save All</a>
-				<a class="infinity-cpanel-options-save-one" href="#<?php print esc_attr( $this->get_option_name() ) ?>">Save</a>
+				<a class="infinity-cpanel-options-save-one" href="#<?php $this->render_name() ?>">Save</a>
 			</div>
 			<div class="infinity-cpanel-options-single-flash">
 				<!-- flash messages for this option will render here -->
 			</div>
 			<ul>
-				<li><a href="#tabs-1">Edit Setting</a></li>
-				<li><a href="#tabs-2">Documentation</a></li>
-				<li><a href="#tabs-3">Sample Code</a></li>
+				<li><a href="#<?php $this->render_name() ?>-tabs-1">Edit Setting</a></li>
+				<li><a href="#<?php $this->render_name() ?>-tabs-2">Documentation</a></li>
+				<li><a href="#<?php $this->render_name() ?>-tabs-3">Sample Code</a></li>
 			</ul>
-			<div id="tabs-1">
+			<div id="<?php $this->render_name() ?>-tabs-1">
 				<p><?php $this->render_description() ?></p>
 				<?php $this->render_field() ?>
 			</div>
-			<div id="tabs-2">
+			<div id="<?php $this->render_name() ?>-tabs-2">
 				<p>Docs for this option</p>
 			</div>
-			<div id="tabs-3">
+			<div id="<?php $this->render_name() ?>-tabs-3">
 				<p>Sample code for this option</p>
 			</div>
 		</div><?php
@@ -219,17 +220,22 @@ function infinity_option_image_url( $option_name, $size = 'thumbnail' )
  */
 function infinity_options_render_menu_items()
 {
-	// TODO check for theme support!!!
-	foreach ( Infinity_Options_Registry::instance()->get_sections() as $section ) { ?>
+	foreach ( Infinity_Options_Registry::instance()->get_sections() as $section ) {
+		// get options
+		$options = Infinity_Options_Registry::instance()->get_menu_options( $section );
+		// if section has no options, skip it
+		if ( empty( $options ) ) {
+			continue;
+		}
+		// begin rendering ?>
 		<div>
 			<a href="#<?php print esc_attr( $section->name ) ?>"><?php print esc_html( $section->title ) ?></a>
 		</div>
 		<ul>
-			<?php foreach( Infinity_Options_Registry::instance()->get_options( $section ) as $option ): ?>
+			<?php foreach( $options as $option ): ?>
 			<li><a href="#<?php print esc_attr( $option->name ) ?>"><?php print esc_html( $option->title ) ?></a></li>
 			<?php endforeach; ?>
-		</ul>
-		<?php
+		</ul><?php
 	}
 }
 
