@@ -90,7 +90,7 @@ final class Pie_Easy_Loader
 	static private function init_reqs()
 	{
 		// global style and script
-		Pie_Easy_Loader::enqueue_style( 'global' );
+		Pie_Easy_Loader::enqueue_style( 'global', array('pie-easy-ui-lightness/jquery-ui-custom', 'pie-easy-colorpicker' ) );
 		Pie_Easy_Loader::enqueue_script( 'global', array('jquery') );
 	}
 

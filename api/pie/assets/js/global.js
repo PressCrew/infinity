@@ -21,13 +21,80 @@
  */
 
 /* bindAll() helper */
-jQuery.fn.bindAll = function(options) {
-	var $this = this;
-	jQuery.each(options, function(key, val){
-		$this.bind(key, val);
-	});
-	return this;
-}
+(function($){
+	$.fn.bindAll = function(options) {
+		var $this = this;
+		$.each(options, function(key, val){
+			$this.bind(key, val);
+		});
+		return this;
+	}
+})(jQuery);
+
+/* flash messaging helper */
+(function($){
+	
+	var methods = {
+		set: function(state, icon, msg)
+		{
+			return this.each(function(){
+				// maintain chain
+				var $this = $(this);
+				// create msg
+				$(this).html(
+					'<div class="ui-widget pie-easy-flash">' +
+					'<div class="ui-state-' + state + ' ui-corner-all">' +
+					'<p><span class="ui-icon ui-icon-' + icon + '"></span>' + msg + '</p>' +
+					'</div></div>'
+				);
+				// add dismiss button
+				if (state != 'default') {
+					$(this).find('p').append('<a href="#">Ok</a>');
+					$(this).find('a').button().click(function(){
+						$this.fadeOut(300, function(){
+							$this.empty();
+						});
+					});
+				}
+			});
+		},
+		reset: function()
+		{
+			return this.each(function(){
+				$(this).empty();
+			});
+		},
+		alert: function(msg)
+		{
+			return this.each(function(){
+				$(this).pieEasyFlash('set', 'highlight', 'info', msg);
+			});
+		},
+		error: function(msg)
+		{
+			return this.each(function(){
+				$(this).pieEasyFlash('set', 'error', 'alert', msg);
+			});
+		},
+		loading: function(msg)
+		{
+			return this.each(function(){
+				$(this).pieEasyFlash('set', 'default', 'ajax-loader', msg);
+			});
+		}
+	}
+
+	$.fn.pieEasyFlash = function (method)
+	{
+		if ( methods[method] ) {
+			return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
+		} else if (typeof method === 'object' || ! method) {
+			return methods.init.apply(this, arguments);
+		} else {
+			return $.error('Method ' +  method + ' does not exist on jQuery.pieEasyFlash');
+		}
+	}
+})(jQuery);
 
 /* AJAX helpers */
 pieEasyAjax = {
