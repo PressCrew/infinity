@@ -54,6 +54,7 @@
 						$this.fadeOut(300, function(){
 							$this.empty();
 						});
+						return false;
 					});
 				}
 			});

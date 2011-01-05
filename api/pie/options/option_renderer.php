@@ -63,16 +63,6 @@ abstract class Pie_Easy_Options_Option_Renderer
 	}
 
 	/**
-	 * Get the name of the option being rendered
-	 *
-	 * @return string
-	 */
-	final protected function get_option_name()
-	{
-		return $this->option->name;
-	}
-
-	/**
 	 * Render an option
 	 *
 	 * @param Pie_Easy_Options_Option $option
@@ -125,6 +115,16 @@ abstract class Pie_Easy_Options_Option_Renderer
 	}
 
 	/**
+	 * Render the option name
+	 * 
+	 * This is useful when using it as part of an attribute
+	 */
+	protected function render_name()
+	{
+		print esc_attr( $this->option->name );
+	}
+
+	/**
 	 * Render wrapper classes
 	 *
 	 * @param string $class,...
@@ -148,7 +148,7 @@ abstract class Pie_Easy_Options_Option_Renderer
 	 */
 	protected function render_label()
 	{ ?>
-		<label class="pie-easy-options-title" for="<?php print esc_attr( $this->option->name ) ?>" title="<?php print esc_attr( $this->option->title ) ?>"><?php print esc_attr( $this->option->title ) ?></label><?php
+		<label class="pie-easy-options-title" for="<?php $this->render_name() ?>" title="<?php print esc_attr( $this->option->title ) ?>"><?php print esc_attr( $this->option->title ) ?></label><?php
 	}
 
 	/**
@@ -301,14 +301,14 @@ abstract class Pie_Easy_Options_Option_Renderer
 		$this->render_input( 'text' );
 		
 		// now the color picker box ?>
-		<div id="pie-easy-options-cp-wrapper-<?php print esc_attr( $this->option->name ) ?>" class="pie-easy-options-cp-box">
+		<div id="pie-easy-options-cp-wrapper-<?php $this->render_name() ?>" class="pie-easy-options-cp-box">
 			<div style="background-color: <?php print esc_attr( $this->option->get() ) ?>;"></div>
         </div>
 		<script type="text/javascript">
 			jQuery(document).ready(function() {
 				pieEasyColorPicker.init(
-					'input[name=<?php print $this->option->name ?>]',
-					'div#pie-easy-options-cp-wrapper-<?php print esc_attr( $this->option->name ) ?>'
+					'input[name=<?php $this->render_name() ?>]',
+					'div#pie-easy-options-cp-wrapper-<?php $this->render_name() ?>'
 				);
 			});
 		</script><?php
@@ -322,7 +322,7 @@ abstract class Pie_Easy_Options_Option_Renderer
 	 */
 	public function render_input( $type )
 	{ ?>
-		<input type="<?php print $type ?>" name="<?php print esc_attr( $this->option->name ) ?>" id="<?php print esc_attr(  $this->option->field_id ) ?>" class="<?php print esc_attr( $this->option->field_class ) ?>" value="<?php print esc_attr( $this->option->get() ) ?>" /> <?php
+		<input type="<?php print $type ?>" name="<?php $this->render_name() ?>" id="<?php print esc_attr(  $this->option->field_id ) ?>" class="<?php print esc_attr( $this->option->field_class ) ?>" value="<?php print esc_attr( $this->option->get() ) ?>" /> <?php
 	}
 
 	/**
@@ -352,7 +352,7 @@ abstract class Pie_Easy_Options_Option_Renderer
 		if ( is_array( $field_options ) ) {
 			foreach ( $field_options as $value => $display ) {
 				$checked = ( in_array( $value, $selected_value ) ) ? ' checked=checked' : null; ?>
-				<input type="<?php print $type ?>" name="<?php print esc_attr( $this->option->name ) ?><?php if ( $type == 'checkbox' ): ?>[]<?php endif; ?>" id="<?php print esc_attr( $this->option->field_id ) ?>" value="<?php print esc_attr( $value ) ?>"<?php print $checked ?> /><?php
+				<input type="<?php print $type ?>" name="<?php $this->render_name() ?><?php if ( $type == 'checkbox' ): ?>[]<?php endif; ?>" id="<?php print esc_attr( $this->option->field_id ) ?>" value="<?php print esc_attr( $value ) ?>"<?php print $checked ?> /><?php
 				print $display;
 			}
 		} else {
@@ -467,7 +467,7 @@ abstract class Pie_Easy_Options_Option_Renderer
 			$selected_value = $this->option->get();
 		} ?>
 
-		<select name="<?php print esc_attr( $this->option->name ) ?>" id="<?php print esc_attr( $this->option->field_id ) ?>" class="<?php print esc_attr( $this->option->field_class ) ?>">
+		<select name="<?php $this->render_name() ?>" id="<?php print esc_attr( $this->option->field_id ) ?>" class="<?php print esc_attr( $this->option->field_class ) ?>">
 			<option value="">--- Select One ---</option>
 			<?php foreach ( $field_options as $value => $text ):
 				$selected = ( $value == $selected_value ) ? ' selected="selected"' : null; ?>
@@ -537,7 +537,7 @@ abstract class Pie_Easy_Options_Option_Renderer
 	 */
 	protected function render_textarea()
 	{ ?>
-		<textarea name="<?php print esc_attr( $this->option->name ) ?>" id="<?php print esc_attr(  $this->option->field_id ) ?>" class="<?php print esc_attr( $this->option->field_class ) ?>" rows="5" cols="50"><?php print esc_attr( $this->option->get() ) ?></textarea> <?php
+		<textarea name="<?php $this->render_name() ?>" id="<?php print esc_attr(  $this->option->field_id ) ?>" class="<?php print esc_attr( $this->option->field_class ) ?>" rows="5" cols="50"><?php print esc_attr( $this->option->get() ) ?></textarea> <?php
 	}
 
 	/**

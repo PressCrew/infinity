@@ -264,6 +264,38 @@ abstract class Pie_Easy_Options_Registry
 	}
 
 	/**
+	 * Return registered options that are valid in a menu
+	 *
+	 * It does not make sense to list an option in a menu which requires another option,
+	 * so this helper method will remove them.
+	 *
+	 * @param Pie_Easy_Options_Section $section Limit options to one section
+	 * @return array
+	 */
+	public function get_menu_options( Pie_Easy_Options_Section $section = null )
+	{
+		// get all options for section
+		$options = $this->get_options( $section );
+
+		foreach ( $options as $key => $option ) {
+			// remove options that require another option
+			if ( $option->required_option ) {
+				unset( $options[$key] );
+			}
+			// remove options that aren't supported
+			if ( !$option->supported() ) {
+				unset( $options[$key] );
+			}
+			// remove options that fail caps check
+			if ( !$option->check_caps() ) {
+				unset( $options[$key] );
+			}
+		}
+
+		return $options;
+	}
+
+	/**
 	 * Load options from an ini file
 	 * 
 	 * @uses parse_ini_file()
@@ -352,6 +384,11 @@ abstract class Pie_Easy_Options_Registry
 		// default value
 		if ( isset( $option_config['default_value'] ) ) {
 			$option->set_default_value( $option_config['default_value'] );
+		}
+
+		// required option
+		if ( isset( $option_config['required_option'] ) ) {
+			$option->set_required_option( $option_config['required_option'] );
 		}
 
 		// required feature
@@ -463,8 +500,24 @@ abstract class Pie_Easy_Options_Registry
 	public function render_option( $option_name, $output = true )
 	{
 		if ( $this->options->contains( $option_name ) ) {
-			$html = $this->option_renderer->render( $this->get_option( $option_name ), $output );
+			
+			// get the option from map
+			$option = $this->get_option( $option_name );
+			
+			// render the option
+			$html = $this->option_renderer->render( $option, $output );
+			
+			// render options that require this one
+			foreach ( $this->options as $sibling_option ) {
+				if ( $option->name == $sibling_option->required_option ) {
+					$html .= $this->option_renderer->render( $sibling_option, $output );
+				}
+			}
+			
+			// render the manifest
 			$html .= $this->option_renderer->render_manifest( $output );
+			
+			// return result
 			return ( $output ) ? true : $html;
 		} else {
 			throw new Exception( sprintf( 'The "%s" option is not registered.', $option_name ) );

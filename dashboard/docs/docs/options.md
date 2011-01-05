@@ -156,6 +156,13 @@ Child themes can override the default value set in any of their ancestor themes.
 A comma separated list of WordPress capabilities that the user must have in order to edit
 this specific option.
 
+### `required_option`
+
+Providing the name of another option will cause this "dependant option" to always
+be displayed when the required option is displayed.
+
+Additionally, this option will not be displayed in the theme options menu.
+
 ### `required_feature`
 
 Providing the name of a theme feature will invoke a call to `current_theme_supports()`
