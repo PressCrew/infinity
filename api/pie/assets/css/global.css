@@ -20,6 +20,54 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+/* Restore sanity */
+body.toplevel_page_infinity-theme div#wpbody-content {
+	font-family: "Trebuchet MS","Tahoma","Verdana","Arial","sans-serif";
+}
+body.toplevel_page_infinity-theme div#wpbody-content h1,
+body.toplevel_page_infinity-theme div#wpbody-content h2,
+body.toplevel_page_infinity-theme div#wpbody-content h3,
+body.toplevel_page_infinity-theme div#wpbody-content h4,
+body.toplevel_page_infinity-theme div#wpbody-content h5,
+body.toplevel_page_infinity-theme div#wpbody-content h6 {
+	margin: 0.1em 0 .6em 0;
+	line-height: 100%;
+	font-weight: bold;
+	font-family: "Trebuchet MS","Tahoma","Verdana","Arial","sans-serif";
+}
+body.toplevel_page_infinity-theme div#wpbody-content p,
+body.toplevel_page_infinity-theme div#wpbody-content li {
+	line-height: 100%;
+	font-family: "Trebuchet MS","Tahoma","Verdana","Arial","sans-serif";
+}
+
+/* Activity Icon */
+.ui-icon.ui-icon-ajax-loader {
+	background-image: url('../images/ajax_loader.gif');
+}
+
+/* Flash Messages */
+div.pie-easy-flash div.ui-state-default,
+div.pie-easy-flash div.ui-state-error,
+div.pie-easy-flash div.ui-state-highlight {
+	padding: 0 0.8em;
+}
+div.pie-easy-flash span.ui-icon {
+	float: left;
+	margin-right: 0.3em;
+}
+div.pie-easy-flash span.ui-icon-ajax-loader {
+	margin-top: -0.1em;
+	margin-right: 0.7em;
+}
+div.pie-easy-flash a.ui-button {
+	margin-left: 0.5em;
+}
+div.pie-easy-flash span.ui-button-text {
+	padding: 0.1em 0.5em;
+	font-size: 10px;
+}
+
 /* Options */
 div.pie-easy-options-wrapper {
 	line-height: 100%;

@@ -473,16 +473,34 @@ abstract class Pie_Easy_Options_Registry
 
 	/**
 	 * Look through POST vars for options from this registry that can be saved
+	 * 
+	 * @return integer Number of options saved
 	 */
 	public function process_form()
 	{
 		if ( empty( $_POST ) ) {
 			return false;
 		} elseif ( isset( $_POST['_manifest_'] ) ) {
+
 			// load manifest
 			$manifest = explode( ',', $_POST['_manifest_'] );
+
+			// "save only these" option names if param is set
+			$save_options =
+				!empty( $_POST['option_names'] ) ?
+				explode( ',', $_POST['option_names'] ) : null;
+
+			// keep track of how many were updated
+			$save_count = 0;
+
 			// loop through manifest options
 			foreach ( $manifest as $option_name ) {
+
+				// skip options that don't exist in save options if set
+				if ( !empty( $save_options ) && !in_array( $option_name, $save_options ) ) {
+					continue;
+				}
+
 				// is this option registered?
 				if ( $this->options->contains( $option_name ) ) {
 					// get the option
@@ -495,10 +513,14 @@ abstract class Pie_Easy_Options_Registry
 						// nope, delete it
 						$option->delete();
 					}
+					// increment the count
+					$save_count++;
 				}
 			}
+			
 			// done saving
-			return true;
+			return $save_count;
+			
 		} else {
 			throw new Exception( 'No manifest was rendered.' );
 		}
@@ -509,10 +531,16 @@ abstract class Pie_Easy_Options_Registry
 	 */
 	public function process_form_ajax()
 	{
-		if ( $this->process_form() ) {
-			Pie_Easy_Ajax::response( true, 'Options update: success' );
+		// process the form
+		$save_count = $this->process_form();
+
+		// any options saved successfuly?
+		if ( $save_count == 1 ) {
+			Pie_Easy_Ajax::responseStd( true, sprintf( '%d option successfully updated.', $save_count ) );
+		} elseif ( $save_count > 1 ) {
+			Pie_Easy_Ajax::responseStd( true, sprintf( '%d options successfully updated.', $save_count ) );
 		} else {
-			Pie_Easy_Ajax::response( false, 'Options update: failed' );
+			Pie_Easy_Ajax::responseStd( false, 'An error has occurred. No options were updated.' );
 		}
 	}
 }
