@@ -166,54 +166,57 @@ abstract class Pie_Easy_Options_Option_Renderer
 	{
 		// call the applicable rendering method
 		switch ( $this->option->field_type ) {
-			case 'category':
+			case Pie_Easy_Options_Option::FIELD_CATEGORY:
 				$this->render_category();
 				break;
-			case 'categories':
+			case Pie_Easy_Options_Option::FIELD_CATEGORIES:
 				$this->render_categories();
 				break;
-			case 'checkbox':
+			case Pie_Easy_Options_Option::FIELD_CHECKBOX:
 				$this->render_checkbox();
 				break;
-			case 'colorpicker':
+			case Pie_Easy_Options_Option::FIELD_COLORPICKER:
 				$this->render_colorpicker();
 				break;
-			case 'page':
+			case Pie_Easy_Options_Option::FIELD_CSS:
+				$this->render_css();
+				break;
+			case Pie_Easy_Options_Option::FIELD_PAGE:
 				$this->render_page();
 				break;
-			case 'pages':
+			case Pie_Easy_Options_Option::FIELD_PAGES:
 				$this->render_pages();
 				break;
-			case 'post':
+			case Pie_Easy_Options_Option::FIELD_POST:
 				$this->render_post();
 				break;
-			case 'posts':
+			case Pie_Easy_Options_Option::FIELD_POSTS:
 				$this->render_posts();
 				break;
-			case 'radio':
+			case Pie_Easy_Options_Option::FIELD_RADIO:
 				$this->render_radio();
 				break;
-			case 'select':
+			case Pie_Easy_Options_Option::FIELD_SELECT:
 				$this->render_select();
 				break;
-			case 'tag':
+			case Pie_Easy_Options_Option::FIELD_TAG:
 				$this->render_tag();
 				break;
-			case 'tags':
+			case Pie_Easy_Options_Option::FIELD_TAGS:
 				$this->render_tags();
 				break;
-			case 'text':
+			case Pie_Easy_Options_Option::FIELD_TEXT:
 				$this->render_text();
 				break;
-			case 'textarea':
+			case Pie_Easy_Options_Option::FIELD_TEXTAREA:
 				$this->render_textarea();
 				break;
-			case 'upload':
+			case Pie_Easy_Options_Option::FIELD_UPLOAD:
 				$this->render_upload();
 				break;
 			default:
 				throw new UnexpectedValueException( sprintf(
-					'The option type "%s" does not have a renderer yet.',
+					'The option type "%s" does not have a rendering method defined.',
 					$this->option->field_type ) );
 		}
 	}

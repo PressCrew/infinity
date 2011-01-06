@@ -25,7 +25,28 @@ abstract class Pie_Easy_Options_Option
 	 * Name of the default section
 	 */
 	const DEFAULT_SECTION = 'default';
-
+	
+	/**
+	 * Field types
+	 */
+	const FIELD_CATEGORY = 'category';
+	const FIELD_CATEGORIES = 'categories';
+	const FIELD_CHECKBOX = 'checkbox';
+	const FIELD_CSS = 'css';
+	const FIELD_COLORPICKER = 'colorpicker';
+	const FIELD_PAGE = 'page';
+	const FIELD_PAGES = 'pages';
+	const FIELD_POST = 'post';
+	const FIELD_POSTS = 'posts';
+	const FIELD_RADIO = 'radio';
+	const FIELD_SELECT = 'select';
+	const FIELD_TAG = 'tag';
+	const FIELD_TAGS = 'tags';
+	const FIELD_TEXT = 'text';
+	const FIELD_TEXTAREA = 'textarea';
+	const FIELD_TEXTBLOCK = 'textblock';
+	const FIELD_UPLOAD = 'upload';
+	
 	/**
 	 * Section of the option
 	 *
@@ -81,17 +102,6 @@ abstract class Pie_Easy_Options_Option
 	 * @var string
 	 */
 	private $field_type;
-
-	/**
-	 * Valid field types
-	 *
-	 * @var array
-	 */
-	private $field_types = array(
-		'category', 'categories', 'checkbox',
-		'colorpicker', 'page', 'pages', 'post', 'posts',
-		'radio', 'select', 'tag', 'tags', 'text',
-		'textarea', 'textblock', 'upload' );
 
 	/**
 	 * An array of field options
@@ -334,7 +344,28 @@ abstract class Pie_Easy_Options_Option
 	 */
 	private function check_field_type( $type )
 	{
-		return in_array( $type, $this->field_types, true );
+		switch ( $type ) {
+			case self::FIELD_CATEGORY:
+			case self::FIELD_CATEGORIES:
+			case self::FIELD_CSS:
+			case self::FIELD_CHECKBOX:
+			case self::FIELD_COLORPICKER:
+			case self::FIELD_PAGE:
+			case self::FIELD_PAGES:
+			case self::FIELD_POST:
+			case self::FIELD_POSTS:
+			case self::FIELD_RADIO:
+			case self::FIELD_SELECT:
+			case self::FIELD_TAG:
+			case self::FIELD_TAGS:
+			case self::FIELD_TEXT:
+			case self::FIELD_TEXTAREA:
+			case self::FIELD_TEXTBLOCK:
+			case self::FIELD_UPLOAD:
+				return true;
+			default:
+				return false;
+		}
 	}
 	
 	/**
