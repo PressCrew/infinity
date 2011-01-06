@@ -596,6 +596,27 @@ abstract class Pie_Easy_Options_Registry
 			Pie_Easy_Ajax::responseStd( false, 'An error has occurred. No options were updated.' );
 		}
 	}
+
+	/**
+	 * Export CSS markup from all registered options that have the "css" field type
+	 *
+	 * @return string|null
+	 */
+	public function export_css()
+	{
+		// css to export
+		$css = null;
+
+		// loop through and check field type
+		foreach ( $this->options as $option ) {
+			if ( $option->field_type == Pie_Easy_Options_Option::FIELD_CSS ) {
+				// append css markup
+				$css .= $option->get() . "\n";
+			}
+		}
+
+		return $css;
+	}
 }
 
 ?>

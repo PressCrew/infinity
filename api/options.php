@@ -192,6 +192,18 @@ function infinity_option( $option_name )
 }
 
 /**
+ * Get special meta data about option value
+ *
+ * @param string $option_name
+ * @param string $meta_type
+ * @return mixed
+ */
+function infinity_option_meta( $option_name, $meta_type )
+{
+	return Infinity_Options_Registry::instance()->get_option( $option_name )->get_meta( $meta_type );
+}
+
+/**
  * Get an option image src array
  *
  * @param string $option_name

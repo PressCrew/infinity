@@ -22,6 +22,16 @@ abstract class Pie_Easy_Options_Option
 	const PREFIX_TPL = '%s_opt_';
 
 	/**
+	 * Special meta options use this as a delimeter
+	 */
+	const META_DELIM = '.';
+
+	/**
+	 * For tracking the time updated
+	 */
+	const META_TIME_UPDATED = 'time_updated';
+
+	/**
 	 * Name of the default section
 	 */
 	const DEFAULT_SECTION = 'default';
@@ -32,8 +42,8 @@ abstract class Pie_Easy_Options_Option
 	const FIELD_CATEGORY = 'category';
 	const FIELD_CATEGORIES = 'categories';
 	const FIELD_CHECKBOX = 'checkbox';
-	const FIELD_CSS = 'css';
 	const FIELD_COLORPICKER = 'colorpicker';
+	const FIELD_CSS = 'css';
 	const FIELD_PAGE = 'page';
 	const FIELD_PAGES = 'pages';
 	const FIELD_POST = 'post';
@@ -215,6 +225,17 @@ abstract class Pie_Easy_Options_Option
 	}
 
 	/**
+	 * Get special meta data about an option itself
+	 *
+	 * @param string $type
+	 * @return mixed
+	 */
+	public function get_meta( $type )
+	{
+		return get_option( $this->get_meta_option_name( $type ) );
+	}
+
+	/**
 	 * Update the value of this option
 	 *
 	 * @uses update_option()
@@ -224,10 +245,25 @@ abstract class Pie_Easy_Options_Option
 	public function update( $value )
 	{
 		if ( $this->check_caps() ) {
-			return update_option( $this->get_api_name(), $value );
+			if ( update_option( $this->get_api_name(), $value ) ) {
+				$this->update_meta( self::META_TIME_UPDATED, time() );
+				return true;
+			}
 		}
 		
 		return false;
+	}
+
+	/**
+	 * Set special meta data about an option itself
+	 *
+	 * @param string $type
+	 * @param mixed $value
+	 * @return boolean
+	 */
+	private function update_meta( $type, $value )
+	{
+		return update_option( $this->get_meta_option_name( $type ), $value );
 	}
 
 	/**
@@ -239,10 +275,23 @@ abstract class Pie_Easy_Options_Option
 	public function delete()
 	{
 		if ( $this->check_caps() ) {
-			return delete_option( $this->get_api_name() );
+			if ( delete_option( $this->get_api_name() ) ) {
+				$this->delete_meta();
+				return true;
+			}
 		}
 
 		return false;
+	}
+
+	/**
+	 * Delete all special meta data about an option
+	 *
+	 * @return boolean
+	 */
+	private function delete_meta( $type, $value )
+	{
+		return delete_option( $this->get_meta_option_name( self::META_TIME_UPDATED ) );
 	}
 
 	/**
@@ -505,6 +554,22 @@ abstract class Pie_Easy_Options_Option
 			}
 		} else {
 			throw new Exception( sprintf( 'The capabilities for "%s" has already been set.', $this->name ) );
+		}
+	}
+
+	/**
+	 * Build a special meta option name based on the given type
+	 *
+	 * @param string $type
+	 * @return string
+	 */
+	private function get_meta_option_name( $type )
+	{
+		switch ( $type ) {
+			case self::META_TIME_UPDATED:
+				return $this->get_api_name() . self::META_DELIM . $type;
+			default:
+				throw new Exception( sprintf( 'The "%s" type is not valid', $type ) );
 		}
 	}
 
