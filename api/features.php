@@ -19,11 +19,11 @@ Pie_Easy_Loader::load( 'features' );
 final class Infinity_Features
 {
 	/**
-	 * Initialize all features that require it
+	 * Initialize features that require it
 	 */
-	final static public function init()
+	final static function init()
 	{
-		self::header_logo()->init();
+		self::custom_css()->enqueue();
 	}
 
 	/**
@@ -34,6 +34,16 @@ final class Infinity_Features
 	final static public function infinite_children()
 	{
 		return new Infinity_Feature_Infinite_Children();
+	}
+
+	/**
+	 * Custom CSS
+	 *
+	 * @return Infinity_Feature_Custom_Css
+	 */
+	final static public function custom_css()
+	{
+		return new Infinity_Feature_Custom_Css();
 	}
 
 	/**
@@ -97,6 +107,33 @@ class Infinity_Feature_Infinite_Children extends Infinity_Feature
 			'Infinite Children',
 			'Create an unlimited hierarchy of child themes.'
 		);
+	}
+}
+
+/**
+ * Infinity Custom CSS feature
+ */
+class Infinity_Feature_Custom_Css extends Infinity_Feature
+{
+	/**
+	 * Constructor
+	 */
+	final public function __construct() {
+		parent::__construct(
+			'custom-css',
+			'Custom CSS',
+			'Allow custom CSS to be provided with theme options.'
+		);
+	}
+
+	/**
+	 * Enqueue the css export script
+	 */
+	final public function enqueue()
+	{
+		if ( $this->supported() ) {
+			wp_enqueue_style( 'infinity-custom', INFINITY_EXPORT_URL . '/css.php', null, infinity_option_meta( 'infinity_custom_css', 'time_updated' ) );
+		}
 	}
 }
 

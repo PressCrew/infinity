@@ -317,6 +317,14 @@ abstract class Pie_Easy_Options_Option_Renderer
 		</script><?php
 	}
 
+	/**
+	 * Render a CSS text area
+	 */
+	public function render_css()
+	{
+		// simply render a textarea
+		$this->render_textarea();
+	}
 
 	/**
 	 * Render form input tag

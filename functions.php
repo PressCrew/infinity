@@ -22,6 +22,8 @@ define( 'INFINITY_PIE_URL', INFINITY_API_URL . '/pie' );
 define( 'INFINITY_CONF_DIR', INFINITY_THEME_DIR . DIRECTORY_SEPARATOR . 'config' );
 define( 'INFINITY_ADMIN_DIR', INFINITY_THEME_DIR . DIRECTORY_SEPARATOR . 'dashboard' );
 define( 'INFINITY_ADMIN_URL', INFINITY_THEME_URL . '/dashboard' );
+define( 'INFINITY_EXPORT_DIR', INFINITY_THEME_DIR . DIRECTORY_SEPARATOR . 'export' );
+define( 'INFINITY_EXPORT_URL', INFINITY_THEME_URL . '/export' );
 define( 'INFINITY_EXTRAS_DIR', get_theme_root() . DIRECTORY_SEPARATOR . 'infinity-extras' );
 define( 'INFINITY_EXTRAS_URL', get_theme_root_uri() . '/infinity-extras' );
 define( 'INFINITY_TEXT_DOMAIN', INFINITY_NAME );
@@ -46,7 +48,8 @@ if ( is_admin() ) {
 	// only load admin functionality if the dashboard is actually loaded
 	require_once( INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'loader.php' );
 } else {
-	// ???
+	// some features need initialization
+	Infinity_Features::init();
 }
 
 ?>

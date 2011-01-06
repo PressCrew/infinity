@@ -79,6 +79,11 @@ div.infinity-cpanel-options-single-header {
 		padding: 0.2em 2.1em 0.2em 1em;
 	}
 
+textarea.infinity-cpanel-option-field-css {
+	width: 90%;
+	height: 400px;
+}
+
 /* ====================== */
 /* ! Theme Documentation  */
 /* ====================== */
