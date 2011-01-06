@@ -1,12 +1,12 @@
 # Infinity Theme Features
 
-Infinity has a few of built-in features that you can use to quickly add functionality
-to your themes. We've done this, because we think that certain customization features are
+Infinity has a few built-in features that you can use to quickly add functionality
+to your theme. We've done this, because we think that certain customization features are
 essential for any theme.
 
 Unlike the standard solutions WordPress provides for custom headers and custom backgrounds,
-we've integrated this functionality into the theme options panel, so your users do not have
-to switch between different pages in the dashboard.
+we've integrated this functionality directly into the theme options panel, so your users do
+not have to switch between different pages in the dashboard.
 
 Currently there are four core features that you can use in your themes. You enable them in
 your child theme's functions.php just like you would with any other theme. Some of the features
@@ -29,7 +29,7 @@ To enable header logo support, add the following to your child theme's functions
 
 	add_theme_support( 'infinity-header-logo' );
 
-This features enables a file upload option in the theme options panel for a custom logo.
+This feature enables a file upload option in the theme options panel for a custom logo.
 
 To display the logo you must execute this function in the `<head>` element of your theme:
 
@@ -45,7 +45,7 @@ To enable header background support, add the following to your child theme's fun
 
 	add_theme_support( 'infinity-header-background' );
 
-This features enables a file upload option in the theme options
+This feature enables a file upload option in the theme options
 panel for a custom header background image.
 
 To display the background you must execute this function in the `<head>` element of your theme:
@@ -62,7 +62,7 @@ To enable site background support, add the following to your child theme's funct
 
 	add_theme_support( 'infinity-site-background' );
 
-This features enables a file upload option in the theme options
+This feature enables a file upload option in the theme options
 panel for a custom site background image.
 
 To display the background you must execute this function in the `<head>` element of your theme:
