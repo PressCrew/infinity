@@ -55,12 +55,14 @@
 								.button({icons: {secondary: "ui-icon-arrowthick-1-e"}});
 							$('a.infinity-cpanel-options-save-all')
 								.button({icons: {secondary: "ui-icon-arrowthick-2-n-s"}});
+							// remove message
+							message.fadeOut().empty();
 						} else {
-							alert(sr.message);
-							// TODO error message
+							// error
+							message.fadeOut(300, function(){
+								message.pieEasyFlash('error', sr.content).fadeIn();
+							})
 						}
-						// remove message
-						message.fadeOut().empty();
 					}
 				);
 				return false;

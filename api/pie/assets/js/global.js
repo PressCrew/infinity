@@ -49,8 +49,8 @@
 				);
 				// add dismiss button
 				if (state != 'default') {
-					$(this).find('p').append('<a href="#">Ok</a>');
-					$(this).find('a').button().click(function(){
+					$(this).find('p').append('<button>Ok</button>');
+					$(this).find('button').button().click(function(){
 						$this.fadeOut(300, function(){
 							$this.empty();
 						});
