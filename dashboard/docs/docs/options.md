@@ -13,9 +13,9 @@ Infinity theme option values are retrieved with a few custom functions. It is im
 you use these functions to get your theme option values as they do many special things behind
 the scenes, like handling default values and checking user capabilities.
 
-	infinity_option( $option_name )
-	infinity_option_image_src( $option_name, $size )
-	infinity_option_image_url( $option_name, $size )
+	infinity_option( $option_name );
+	infinity_option_image_src( $option_name, $size );
+	infinity_option_image_url( $option_name, $size );
 
 The options.ini file tells Infinity what options you want to provide with your theme,
 and loads them into the WordPress dashboard for the site administrator to configure.
@@ -113,6 +113,7 @@ This is where you configure what type of option you want to display. The availab
 * _Widget Fields_
 	* _upload_ - Media uploader widget
 	* _colorpicker_ - Color picker widget
+	* _css_ - Custom CSS integration (requires the "infinity-custom-css" theme feauture)
 
 ### `field_options`
 
