@@ -235,7 +235,8 @@
 						return false;
 					});
 					// display on load?
-					if ( $this.pieEasyUploader('attach').id().length >= 1 ) {
+					var attachId = $this.pieEasyUploader('attach').id();
+					if ( !isNaN(parseInt(attachId)) ) {
 						this.show();
 					}
 				},
