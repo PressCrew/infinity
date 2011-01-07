@@ -110,23 +110,6 @@ class Infinity_Options_Registry extends Pie_Easy_Options_Registry
 
 		return self::$instance;
 	}
-
-	/**
-	 * Initialize the registry with an options file
-	 *
-	 * @param string $ini
-	 * @return boolean
-	 */
-	static public function init( $ini )
-	{
-		// already initialized?
-		if ( self::$instance instanceof self ) {
-			return;
-		}
-
-		// initialize it!
-		return self::instance()->load_config_file( $ini );
-	}
 }
 
 /**
