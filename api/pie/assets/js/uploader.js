@@ -170,7 +170,7 @@
 			$(this).pieEasyUploader('ibar').init();
 			// set options
 			var options = $.extend(
-				{}, settings, { button_placeholder: $('input[type=button]', this)[0] }
+				{}, settings, {button_placeholder: $('input[type=button]', this)[0]}
 			);
 			// bind listeners and initialize uploader
 			return this.bindAll(listeners).swfupload(options);
@@ -235,7 +235,7 @@
 						return false;
 					});
 					// display on load?
-					if ( !isNaN($this.pieEasyUploader('attach').id()) ) {
+					if ( $this.pieEasyUploader('attach').id().length >= 1 ) {
 						this.show();
 					}
 				},
