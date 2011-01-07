@@ -289,7 +289,7 @@ abstract class Pie_Easy_Options_Option
 	 *
 	 * @return boolean
 	 */
-	private function delete_meta( $type, $value )
+	private function delete_meta()
 	{
 		return delete_option( $this->get_meta_option_name( self::META_TIME_UPDATED ) );
 	}
