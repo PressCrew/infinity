@@ -126,8 +126,8 @@ class Infinity_Options_Option_Renderer extends Pie_Easy_Options_Option_Renderer
 		<div class="<?php $this->render_classes( 'infinity-cpanel-options-single' ) ?>">
 			<div class="infinity-cpanel-options-single-header">
 				<?php $this->render_label() ?>
-				<a class="infinity-cpanel-options-save-all" href="#">Save All</a>
-				<a class="infinity-cpanel-options-save-one" href="#<?php $this->render_name() ?>">Save</a>
+				<a class="infinity-cpanel-options-save" href="#">Save All</a>
+				<a class="infinity-cpanel-options-save" href="#<?php $this->render_name() ?>">Save</a>
 			</div>
 			<div class="infinity-cpanel-options-single-flash">
 				<!-- flash messages for this option will render here -->

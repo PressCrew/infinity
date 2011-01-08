@@ -51,10 +51,9 @@
 							// init options tabs
 							$('div.infinity-cpanel-options-single').tabs().css('float', 'left');
 							// init submit buttons
-							$('a.infinity-cpanel-options-save-one')
-								.button({icons: {secondary: "ui-icon-arrowthick-1-e"}});
-							$('a.infinity-cpanel-options-save-all')
-								.button({icons: {secondary: "ui-icon-arrowthick-2-n-s"}});
+							$('a.infinity-cpanel-options-save')
+								.first().button({icons: {secondary: "ui-icon-arrowthick-2-n-s"}})
+								.next().button({icons: {secondary: "ui-icon-arrowthick-1-e"}});
 							// remove message
 							message.fadeOut().empty();
 						} else {
@@ -70,8 +69,7 @@
 		);
 
 		// cpanel options page menu save button clicks
-		$('a.infinity-cpanel-options-save-one, a.infinity-cpanel-options-save-all')
-			.live('click', function(){
+		$('a.infinity-cpanel-options-save').live('click', function(){
 
 				// get option from href
 				var option = $(this).attr('href').substr(1);
