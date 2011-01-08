@@ -263,9 +263,21 @@ abstract class Pie_Easy_Options_Option
 	public function update( $value )
 	{
 		if ( $this->check_caps() ) {
-			if ( update_option( $this->get_api_name(), $value ) ) {
-				$this->update_meta( self::META_TIME_UPDATED, time() );
-				return true;
+			// force numeric values to integers
+			if ( is_numeric( $value ) ) {
+				$value = (integer) $value;
+			}
+			// is the value null, an empty string, or equal to the default value?
+			if ( $value === null || $value === '' || $value === $this->default_value ) {
+				// its pointless to store this option
+				// try to delete it in case it already exists
+				return $this->delete();
+			} else {
+				// create or update it
+				if ( update_option( $this->get_api_name(), $value ) ) {
+					$this->update_meta( self::META_TIME_UPDATED, time() );
+					return true;
+				}
 			}
 		}
 		
