@@ -11,6 +11,8 @@
  * @since 1.0
  */
 
+Pie_Easy_Loader::load( 'scheme' );
+
 /**
  * Make an option easy
  */
@@ -64,6 +66,13 @@ abstract class Pie_Easy_Options_Option
 	 */
 	private $section;
 
+	/**
+	 * The theme that created this option
+	 * 
+	 * @var string 
+	 */
+	private $theme;
+	
 	/**
 	 * Name of the option
 	 *
@@ -128,6 +137,13 @@ abstract class Pie_Easy_Options_Option
 	private $default_value;
 
 	/**
+	 * Name of the theme which last over wrote the default value
+	 *
+	 * @var string
+	 */
+	private $default_value_theme;
+
+	/**
 	 * Sibling option required for this option to display
 	 *
 	 * @var string
@@ -158,13 +174,14 @@ abstract class Pie_Easy_Options_Option
 	/**
 	 * Constructor
 	 * 
+	 * @param string $theme The theme that created this option
 	 * @param string $name Option name may only contain alphanumeric characters as well as the underscore for use as a word separator.
 	 * @param string $title
 	 * @param string $desc
 	 * @param string $field_type
 	 * @param string $section
 	 */
-	final public function __construct( $name, $title, $desc, $field_type, $section = self::DEFAULT_SECTION )
+	final public function __construct( $theme, $name, $title, $desc, $field_type, $section = self::DEFAULT_SECTION )
 	{
 		// name must adhere to a strict format
 		if ( preg_match( '/^[a-z0-9]+(_[a-z0-9]+)*$/', $name ) ) {
@@ -174,9 +191,10 @@ abstract class Pie_Easy_Options_Option
 		}
 
 		// set basic string properties
-		$this->section = $section;
+		$this->theme = $theme;
 		$this->title = $title;
 		$this->description = $desc;
+		$this->section = $section;
 
 		// set the field type
 		$this->set_field_type( $field_type );
@@ -302,26 +320,32 @@ abstract class Pie_Easy_Options_Option
 	 */
 	public function get_image_src( $size = 'thumbnail', $attach_id = null )
 	{
-		// only works for uploads
-		if ( $this->field_type == 'upload' ) {
+		// attach id was passed?
+		if ( empty( $attach_id ) ) {
+			$attach_id = $this->get();
+		}
 
-			// attach id was passed?
-			if ( empty( $attach_id ) ) {
-				$attach_id = $this->get();
-			}
-
+		if ( is_numeric( $attach_id ) ) {
 			// try to get the attachment info
 			$src = wp_get_attachment_image_src( $attach_id, $size );
-
-			// did we find one?
-			if ( is_array($src) ) {
-				return $src;
-			} else {
-				return false;
-			}
-
 		} else {
-			throw new Exception( 'This option is not for an image attachment' );
+			// determine theme to use
+			if ( $attach_id == $this->default_value ) {
+				$theme = $this->default_value_theme;
+			} else {
+				$theme = $this->theme;
+			}
+			// mimic the src array
+			$src[0] = Pie_Easy_Scheme::instance()->theme_file_url( $theme, $attach_id );
+			$src[1] = null;
+			$src[2] = null;
+		}
+
+		// did we find one?
+		if ( is_array($src) ) {
+			return $src;
+		} else {
+			return false;
 		}
 	}
 
@@ -347,8 +371,15 @@ abstract class Pie_Easy_Options_Option
 
 		} elseif ( is_string( $value ) && strlen( $value ) >= 1 ) {
 
+			// determine theme to use
+			if ( $value == $this->default_value ) {
+				$theme = $this->default_value_theme;
+			} else {
+				$theme = $this->theme;
+			}
+
 			// they must have provided an image path
-			return get_stylesheet_directory_uri() . '/' . $value;
+			return Pie_Easy_Scheme::instance()->theme_file_url( $theme, $value );
 
 		}
 
@@ -531,10 +562,18 @@ abstract class Pie_Easy_Options_Option
 	 * Set default value
 	 *
 	 * @param mixed $value
+	 * @param string $theme The theme that last update the default value
+	 * @return true
 	 */
-	public function set_default_value( $value )
+	public function set_default_value( $value, $theme = null )
 	{
+		// use option's theme if empty
+		$this->default_value_theme = empty( $theme ) ? $this->theme : $theme;
+
+		// set the default value
 		$this->default_value = $value;
+
+		return true;
 	}
 
 	/**
