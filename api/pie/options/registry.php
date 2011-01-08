@@ -580,14 +580,8 @@ abstract class Pie_Easy_Options_Registry
 					$option = $this->get_option($option_name);
 					// look for option name as POST key
 					if ( array_key_exists( $option->name, $_POST ) ) {
-						// found in POST
-						if ( $_POST[$option->name] == '' ) {
-							// delete it
-							$option->delete();
-						} else {
-							// update it
-							$option->update( $_POST[$option->name] );
-						}
+						// update it
+						$option->update( $_POST[$option->name] );
 					} else {
 						// not in POST, delete it
 						$option->delete();
