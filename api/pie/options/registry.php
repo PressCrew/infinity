@@ -29,6 +29,13 @@ abstract class Pie_Easy_Options_Registry
 	const FIELD_OPTION_DELIM = '=';
 
 	/**
+	 * Name of the theme currently being loaded
+	 * 
+	 * @var string
+	 */
+	private $loading_theme;
+
+	/**
 	 * The class to use for new sections
 	 *
 	 * @var string
@@ -300,10 +307,14 @@ abstract class Pie_Easy_Options_Registry
 	 * 
 	 * @uses parse_ini_file()
 	 * @param string $filename
+	 * @param string $theme The theme to assign the file options to
 	 * @return boolean 
 	 */
-	public function load_config_file( $filename )
+	public function load_config_file( $filename, $theme )
 	{
+		// set the current theme being loaded
+		$this->loading_theme = $theme;
+
 		// try to parse the file
 		return $this->load_config_array( parse_ini_file( $filename, true ) );
 	}
@@ -312,10 +323,14 @@ abstract class Pie_Easy_Options_Registry
 	 * Load options from an ini string
 	 *
 	 * @param string $ini_text
+	 * @param string $theme The theme to assign the file options to
 	 * @return boolean
 	 */
-	public function load_config_text( $ini_text )
+	public function load_config_text( $ini_text, $theme )
 	{
+		// set the current theme being loaded
+		$this->loading_theme = $theme;
+		
 		// try to parse the text
 		return $this->load_config_array( parse_ini_string( $ini_text, true ) );
 	}
@@ -359,7 +374,11 @@ abstract class Pie_Easy_Options_Registry
 		// that can be done is to override the default value
 		if ( $this->options->contains( $option_name ) ) {
 			if ( isset( $option_config['default_value'] ) ) {
-				$this->get_option( $option_name )->set_default_value( $option_config['default_value'] );
+				$this->get_option( $option_name )
+					->set_default_value(
+						$option_config['default_value'],
+						$this->loading_theme
+					);
 			}
 			return;
 		}
@@ -369,6 +388,7 @@ abstract class Pie_Easy_Options_Registry
 
 		// create new option
 		$option = new $this->{option_class}(
+			$this->loading_theme,
 			$option_name,
 			$option_config['title'],
 			$option_config['description'],

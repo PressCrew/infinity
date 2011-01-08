@@ -245,7 +245,7 @@ final class Pie_Easy_Scheme
 
 			// load the option config if it exists
 			if ( is_readable( $options_ini ) ) {
-				$registry->load_config_file( $options_ini );
+				$registry->load_config_file( $options_ini, $theme );
 			}
 
 		}
