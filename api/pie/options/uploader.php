@@ -79,9 +79,9 @@ class Pie_Easy_Options_Uploader
 			'uploader',
 			'pieEasyFlashUploaderL10n',
 			array(
-				'ajax_url' => admin_url('admin-ajax.php'),
+				'ajax_url' => get_site_url( 1, 'wp-admin/admin-ajax.php'),
 				'flash_url' => includes_url('js/swfupload/swfupload.swf'),
-				'upload_url' => esc_attr( admin_url('async-upload.php') ),
+				'upload_url' => esc_attr( site_url( 'wp-admin/async-upload.php' ) ),
 					'pp_auth_cookie' => (is_ssl() ? $_COOKIE[SECURE_AUTH_COOKIE] : $_COOKIE[AUTH_COOKIE]),
 					'pp_logged_in_cookie' => $_COOKIE[LOGGED_IN_COOKIE],
 					'pp_wpnonce' => wp_create_nonce( 'media-form' ),
