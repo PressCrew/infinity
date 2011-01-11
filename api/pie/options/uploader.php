@@ -79,7 +79,10 @@ class Pie_Easy_Options_Uploader
 			'uploader',
 			'pieEasyFlashUploaderL10n',
 			array(
-				'ajax_url' => get_site_url( 1, 'wp-admin/admin-ajax.php'),
+				'ajax_url' =>
+					is_admin() ?
+						admin_url( 'admin-ajax.php' ) :
+						get_site_url( 1, 'wp-admin/admin-ajax.php' ),
 				'flash_url' => includes_url('js/swfupload/swfupload.swf'),
 				'upload_url' => esc_attr( site_url( 'wp-admin/async-upload.php' ) ),
 					'pp_auth_cookie' => (is_ssl() ? $_COOKIE[SECURE_AUTH_COOKIE] : $_COOKIE[AUTH_COOKIE]),
