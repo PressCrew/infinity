@@ -87,6 +87,8 @@ class Infinity_Options_Registry extends Pie_Easy_Options_Registry
 	 */
 	static public function instance()
 	{
+		global $blog_id;
+		
 		if ( !self::$instance instanceof self ) {
 
 			// init singleton
@@ -100,9 +102,9 @@ class Infinity_Options_Registry extends Pie_Easy_Options_Registry
 			$renderer = new Infinity_Options_Option_Renderer();
 			$renderer->enable_uploader( new Infinity_Options_Uploader( 'admin_head' ) );
 			self::$instance->set_option_renderer( $renderer );
-
+			
 			// add form processing
-			if ( current_user_can('manage_options') ) {
+			if ( current_user_can_for_blog( $blog_id, 'manage_options' ) ) {
 				add_action( 'load-toplevel_page_' . INFINITY_ADMIN_PAGE, array( self::$instance, 'process_form' ) );
 				add_action( 'wp_ajax_' . INFINITY_NAME . '_options_update', array( self::$instance, 'process_form_ajax' ) );
 			}

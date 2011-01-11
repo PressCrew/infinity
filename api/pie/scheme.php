@@ -111,28 +111,6 @@ final class Pie_Easy_Scheme
 		$this->set_config_dir( $config_dir );
 		$this->set_config_file( $config_file );
 
-		// template filter callback
-		$filter = array( $this, 'filter_template' );
-
-		// add filters
-		add_filter( '404_template', $filter );
-		add_filter( 'search_template', $filter );
-		add_filter( 'taxonomy_template', $filter );
-		add_filter( 'front_page_template', $filter );
-		add_filter( 'home_template', $filter );
-		add_filter( 'attachment_template', $filter );
-		add_filter( 'single_template', $filter );
-		add_filter( 'page_template', $filter );
-		add_filter( 'category_template', $filter );
-		add_filter( 'tag_template', $filter );
-		add_filter( 'author_template', $filter );
-		add_filter( 'date_template', $filter );
-		add_filter( 'archive_template', $filter );
-		add_filter( 'comments_popup_template', $filter );
-		add_filter( 'paged_template', $filter );
-		add_filter( 'index_template', $filter );
-		add_filter( 'comments_template', $filter );
-
 		// load it
 		return $this->load();
 	}
@@ -170,6 +148,39 @@ final class Pie_Easy_Scheme
 	}
 
 	/**
+	 * Add template filters
+	 */
+	private function add_filters()
+	{
+		// only add filters if there is at least one parent theme
+		if ( count( $this->parent_themes ) >= 1) {
+
+			// template filter callback
+			$filter = array( $this, 'filter_template' );
+
+			// add filters
+			add_filter( '404_template', $filter );
+			add_filter( 'search_template', $filter );
+			add_filter( 'taxonomy_template', $filter );
+			add_filter( 'front_page_template', $filter );
+			add_filter( 'home_template', $filter );
+			add_filter( 'attachment_template', $filter );
+			add_filter( 'single_template', $filter );
+			add_filter( 'page_template', $filter );
+			add_filter( 'category_template', $filter );
+			add_filter( 'tag_template', $filter );
+			add_filter( 'author_template', $filter );
+			add_filter( 'date_template', $filter );
+			add_filter( 'archive_template', $filter );
+			add_filter( 'comments_popup_template', $filter );
+			add_filter( 'paged_template', $filter );
+			add_filter( 'index_template', $filter );
+			add_filter( 'comments_template', $filter );
+
+		}
+	}
+
+	/**
 	 * Load the scheme, using a parent theme as the starting point for the stack
 	 *
 	 * @param string $parent_theme Parent theme's *directory name*\
@@ -183,12 +194,6 @@ final class Pie_Easy_Scheme
 
 		// paths to files
 		$ini_file = $this->theme_file($parent_theme, $this->config_dir, $this->config_file . '.ini');
-		$func_file = $this->theme_file( $parent_theme, 'functions.php' );
-
-		// load functions file if it exists
-		if ( file_exists( $func_file ) ) {
-			require_once $func_file;
-		}
 
 		// does ini file exist?
 		if ( is_readable( $ini_file ) ) {
@@ -220,8 +225,24 @@ final class Pie_Easy_Scheme
 			} else {
 				throw new Exception( 'Failed to parse parent theme ini file: ' . $ini_file );
 			}
-		} else {
-			throw new Exception( 'The parent theme ini file does not exist or is not readable: ' . $ini_file );
+		}
+
+		// try to load additional functions files after WP theme setup
+		add_action( 'after_setup_theme', array($this, 'load_functions') );
+
+		// add filters
+		$this->add_filters();
+	}
+
+	/**
+	 * Try to load functions file for themes in stack
+	 */
+	public function load_functions()
+	{
+		// loop through parent theme stack in reverse order
+		foreach ( array_reverse( $this->parent_themes, true ) as $theme ) {
+			// load functions file if it exists
+			include_once $this->theme_file( $theme, 'functions.php' );
 		}
 	}
 
