@@ -42,15 +42,6 @@ function infinity_ajax_setup()
 	if ( defined( 'DOING_AJAX' ) ) {
 		Infinity_Options::init_ajax();
 	}
-	
-	// localize dashboard scripts
-	wp_localize_script(
-		INFINITY_ADMIN_PAGE,
-		'InfinityDashboardL10n',
-		array(
-			'ajax_url' => admin_url('admin-ajax.php')
-		)
-	);
 }
 
 /**
@@ -77,6 +68,15 @@ function infinity_dashboard_cpanel_setup()
 
 		// enqueue script
 		wp_enqueue_script( INFINITY_ADMIN_PAGE, INFINITY_ADMIN_URL . '/assets/js/dashboard.js', false, INFINITY_VERSION );
+
+		// localize script
+		wp_localize_script(
+			INFINITY_ADMIN_PAGE,
+			'InfinityDashboardL10n',
+			array(
+				'ajax_url' => admin_url('admin-ajax.php')
+			)
+		);
 
 	}
 }
