@@ -74,7 +74,7 @@ function infinity_dashboard_cpanel_setup()
 			INFINITY_ADMIN_PAGE,
 			'InfinityDashboardL10n',
 			array(
-				'ajax_url' => admin_url('admin-ajax.php')
+				'ajax_url' => get_site_url( 1, 'wp-admin/admin-ajax.php' )
 			)
 		);
 
