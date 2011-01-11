@@ -197,7 +197,7 @@
 						$.ajax({
 							async: false,
 							type: 'POST',
-							url: ajaxurl,
+							url: pieEasyFlashUploaderL10n.ajax_url,
 							data: {
 								'action': 'pie_easy_options_uploader_image_edit',
 								'attachment_id': $this.pieEasyUploader('attach').id()
@@ -271,7 +271,7 @@
 						$.ajax({
 							async: false,
 							type: 'POST',
-							url: ajaxurl,
+							url: pieEasyFlashUploaderL10n.ajax_url,
 							data: {
 								'action': 'pie_easy_options_uploader_media_url',
 								'attachment_id': this.id(),

@@ -34,7 +34,7 @@
 						.fadeIn();
 				// send request for option screen
 				$.post(
-					ajaxurl,
+					InfinityDashboardL10n.ajax_url,
 					{
 						'action': 'infinity_options_screen',
 						'option_name': option
@@ -89,12 +89,15 @@
 				// show loading message and exec post
 				message.fadeIn(300, function(){
 					// send request for option save
-					$.post(ajaxurl, data, function(r) {
-						var sr = pieEasyAjax.splitResponseStd(r);
-						// flash them ;)
-						message.fadeOut(300, function() {
-							var state = (sr.code >= 1) ? 'alert' : 'error';
-							$(this).pieEasyFlash(state, sr.message).fadeIn();
+					$.post(
+						InfinityDashboardL10n.ajax_url,
+						data,
+						function(r) {
+							var sr = pieEasyAjax.splitResponseStd(r);
+							// flash them ;)
+							message.fadeOut(300, function() {
+								var state = (sr.code >= 1) ? 'alert' : 'error';
+								$(this).pieEasyFlash(state, sr.message).fadeIn();
 						});
 					});
 				});

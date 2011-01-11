@@ -26,7 +26,7 @@ require_once( INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'cpanel.php' );
 //
 // Actions
 //
-add_action( 'admin_init', 'infinity_ajax_setup' );
+add_action( 'init', 'infinity_ajax_setup' );
 add_action( 'admin_menu', 'infinity_dashboard_menu_setup' );
 add_action( 'admin_menu', 'infinity_dashboard_cpanel_setup' );
 
@@ -42,6 +42,15 @@ function infinity_ajax_setup()
 	if ( defined( 'DOING_AJAX' ) ) {
 		Infinity_Options::init_ajax();
 	}
+	
+	// localize dashboard scripts
+	wp_localize_script(
+		INFINITY_ADMIN_PAGE,
+		'InfinityDashboardL10n',
+		array(
+			'ajax_url' => admin_url('admin-ajax.php')
+		)
+	);
 }
 
 /**
