@@ -178,17 +178,28 @@
 		ibar: function(){
 			var
 				$this = this,
-				_bar = $('fieldset.pie-easy-options-fu-img div', $this),
+				_bar = $('fieldset.pie-easy-options-fu-img div.pie-easy-options-fu-ibar', $this),
+				_diaZoom = $('fieldset.pie-easy-options-fu-img div.pie-easy-options-fu-zoom', $this),
 				_btnZoom = _bar.children().eq(0),
 				_btnEdit = _bar.children().eq(1),
 				_btnRem = _bar.children().eq(2);
 			return {
 				init: function(){
+					// init zoom dialogue
+					_diaZoom.dialog({
+						autoOpen: false,
+						modal: true,
+						height: _diaZoom.children('img').attr('height') + 60,
+						width: _diaZoom.children('img').attr('width') + 30
+					});
 					// init zoom button
 					_btnZoom.button({
 						icons: {
 							primary: "ui-icon-zoomin"
-					}});
+						}
+					}).click(function(){
+						_diaZoom.dialog('open');
+					});
 					_btnEdit.button({
 						icons: {
 							primary: "ui-icon-wrench"
