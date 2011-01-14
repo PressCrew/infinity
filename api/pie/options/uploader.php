@@ -54,9 +54,6 @@ class Pie_Easy_Options_Uploader
 		wp_enqueue_script('image-edit');
 		wp_enqueue_style('imgareaselect');
 
-		// enque thickbox
-		add_thickbox();
-
 		// localize the upload wrapper
 		$this->localize_script();
 	}
