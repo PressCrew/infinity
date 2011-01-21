@@ -124,6 +124,11 @@ final class Pie_Easy_Loader
 			return $this->load_package( $feature );
 		} elseif ( in_array( $feature, $this->features, true ) ) {
 			return $this->load_file( $feature );
+		} else {
+			$split = explode( DIRECTORY_SEPARATOR, $feature );
+			if ( count($split) == 2 ) {
+				return $this->load_file( $split[1], $split[0] );
+			}
 		}
 
 		// sorry
