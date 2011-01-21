@@ -68,9 +68,7 @@ abstract class Pie_Easy_Options_Registry
 	 *
 	 * @var Pie_Easy_Map|null
 	 */
-
 	private $options;
-
 	
 	/**
 	 * Constructor
@@ -423,39 +421,45 @@ abstract class Pie_Easy_Options_Registry
 	 */
 	private function load_config_option( $option_name, $option_config )
 	{
-		// if option has already been registered, the only thing
-		// that can be done is to override the default value
+		// if option has already been registered, use that option
+		// and possibly override some values
 		if ( $this->options->contains( $option_name ) ) {
-			if ( isset( $option_config['default_value'] ) ) {
-				$this->get_option( $option_name )
-					->set_default_value(
-						$option_config['default_value'],
-						$this->loading_theme
-					);
+			$option = $this->get_option( $option_name );
+		} else {
+			// get section from section registry
+			$section = $this->sections->item_at( $option_config['section'] );
+
+			// adding options to parent sections is not allowed
+			foreach ( $this->sections as $section_i ) {
+				if ( $section->is_parent_of( $section_i ) ) {
+					throw new Exception(
+						sprintf( 'Cannot add options to section "%s" because it is acting as a parent section', $section->name ) );
+				}
 			}
-			return;
-		}
 
-		// get section from section registry
-		$section = $this->sections->item_at( $option_config['section'] );
+			// create new option
+			$option = new $this->{option_class}(
+				$this->loading_theme,
+				$option_name,
+				$option_config['title'],
+				$option_config['description'],
+				$option_config['field_type'],
+				$section->name
+			);
 
-		// adding options to parent sections is not allowed
-		foreach ( $this->sections as $section_i ) {
-			if ( $section->is_parent_of( $section_i ) ) {
-				throw new Exception(
-					sprintf( 'Cannot add options to section "%s" because it is acting as a parent section', $section->name ) );
+			// register it
+			self::register_option( $option );
+			
+			// required option
+			if ( isset( $option_config['required_option'] ) ) {
+				$option->set_required_option( $option_config['required_option'] );
+			}
+
+			// required feature
+			if ( isset( $option_config['required_feature'] ) ) {
+				$option->set_required_feature( $option_config['required_feature'] );
 			}
 		}
-
-		// create new option
-		$option = new $this->{option_class}(
-			$this->loading_theme,
-			$option_name,
-			$option_config['title'],
-			$option_config['description'],
-			$option_config['field_type'],
-			$section->name
-		);
 
 		// container class
 		if ( isset( $option_config['class'] ) ) {
@@ -464,22 +468,12 @@ abstract class Pie_Easy_Options_Registry
 		
 		// default value
 		if ( isset( $option_config['default_value'] ) ) {
-			$option->set_default_value( $option_config['default_value'] );
-		}
-
-		// required option
-		if ( isset( $option_config['required_option'] ) ) {
-			$option->set_required_option( $option_config['required_option'] );
-		}
-
-		// required feature
-		if ( isset( $option_config['required_feature'] ) ) {
-			$option->set_required_feature( $option_config['required_feature'] );
+			$option->set_default_value( $option_config['default_value'], $this->loading_theme );
 		}
 
 		// capabilities
 		if ( isset( $option_config['capabilities'] ) ) {
-			$option->set_capabilities( $option_config['capabilities'] );
+			$option->add_capabilities( $option_config['capabilities'] );
 		}
 
 		// css id
@@ -533,8 +527,7 @@ abstract class Pie_Easy_Options_Registry
 			}
 		}
 
-		// register it
-		return self::register_option( $option );
+		return true;
 	}
 
 	/**

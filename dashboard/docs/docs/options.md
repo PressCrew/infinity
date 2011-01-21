@@ -49,16 +49,18 @@ will be assigned to that section are defined. Section names must be all lower ca
 
 Now you have a new section to which typography options can be assigned.
 
-### You configure sections using the directives that follow.
+### Section Directives
 
-### `title`
+You configure sections with the directives below:
+
+#### title
 
 The section title which is displayed in the theme options panel menu. Section titles
 can contain just about any character except double quotes.
 
 	title = "Welcome Text"
 
-### `parent`
+#### parent
 
 Sections can be nested to build up a tree. In order to configure a section to belong to a parent
 section, you simply add the "parent" directive and set its value to another section that has
@@ -79,42 +81,73 @@ Option names _MUST_ begin with the name of your theme's directory name.
 	[mytheme_storefront_image]
 
 Child themes inherit *All* of the options from *EVERY* ancestor theme, allowing you to
-create a highly extensible theme hierarchy.
+create a highly extensible theme hierarchy. In addition, some of the option directives can
+be overridden for fine grained control over the look and features of your theme.
 
-### You configure options using the directives that follow.
+### Option Directives
 
-### `section`
+You configure options with the directives below:
+
+#### section
 
 This tells Infinity in which section of the theme options you want to put the option.
 You can create your own sections to divide the theme options, and Infinity handles the
 layout automagically. This allows you to provide your users with a well organized and easy
 to configure theme.
 
-### `title`
+	section = "home_page"
+
+Child them can override section: _No_
+
+#### title
 
 Use a descriptive name to tell the user what this option does.
 
-### `description`
+	title = "Welcome Text"
+
+Child them can override title: _No_
+
+#### description
 
 A more detailed description of what the options does inside your theme.
 
-### `class`
+	description = "Edit the welcome text on your home page"
+
+Child them can override description: _No_
+
+#### class
 
 You can assign a extra CSS class to any option to customize the looks using CSS.
 This is a powerful feature which allows you to completely customize the look and feel of
 the options panel and make it fit your theme's or client's needs.
 
-### `field_id`
+	class = "my-css-class"
+
+Child them can override class: _Yes_
+
+#### field\_id
 
 You can assign a CSS id to the option field in case you need to provide advanced functionality.
 
-### `field_class`
+	field_id = "my-css-id"
+
+Child them can override field\_id: _Yes_
+
+#### field\_class
 
 You can assign an extra CSS class to the option field for customized styling of the input.
 
-### `field_type`
+	field_class = "my-css-class"
 
-This is where you configure what type of option you want to display. The available types are
+Child them can override field\_class: _Yes_
+
+#### field\_type
+
+This is where you configure what type of option you want to display.
+
+	field_type = "text"
+
+The available types are:
 
 * _Basic Fields_
 	* _text_ - Text input
@@ -134,7 +167,9 @@ This is where you configure what type of option you want to display. The availab
 	* _colorpicker_ - Color picker widget
 	* _css_ - Custom CSS integration (requires the "infinity-custom-css" theme feauture)
 
-### `field_options`
+Child them can override field\_type: _No_
+
+#### field\_options
 
 Basic multi-select field types, which include `checkbox`, `radio` and `select` support this option.
 
@@ -164,29 +199,48 @@ and the corresponding value for the keys are the description.
 		);
 	}
 
-### `default_value`
+Child them can override field\_options: _No_
+
+#### default\_value
 
 You can provide a default value for the option here. This will be returned by calls to
 `infinity_option()` if the option has not been set by the site administrator.
 
-Child themes can override the default value set in any of their ancestor themes.
+	default_value = "blue"
 
-### `capabilities`
+Child them can override default\_value: _Yes_
+
+#### capabilities
 
 A comma separated list of WordPress capabilities that the user must have in order to edit
 this specific option.
 
-### `required_option`
+	capabilities = "edit_posts"
+
+Child them can override capabilities: _No_  
+Child them can add/append to capabilities: _Yes_
+
+#### required\_option
 
 Providing the name of another option will cause this "dependant option" to always
 be displayed when the required option is displayed.
 
+	required_option = "option_name"
+
 Additionally, this option will not be displayed in the theme options menu.
 
-### `required_feature`
+Child them can override required\_option: _No_
+
+#### required\_feature
 
 Providing the name of a theme feature will invoke a call to `current_theme_supports()`
 to determine if the option should be visible to the site administrator.
+
+	required_feature = "a-feature-name"
+
+Child them can override required\_feature: _No_
+
+## Sample Configuration
 
 Take a look at the options-sample.ini file located in the `infinity/config` directory
 to see complete working examples of all the options available to you.
