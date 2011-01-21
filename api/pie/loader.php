@@ -50,7 +50,9 @@ final class Pie_Easy_Loader
 		'l10n',
 		'markdown',
 		'options' =>
-			array( 'registry', 'option', 'option_renderer', 'section', 'uploader', 'walkers' ),
+			array( 'registry', 'option', 'option_directive', 'option_renderer', 'section', 'uploader', 'walkers' ),
+		'init' =>
+			array( 'directive' ),
 		'scheme'
 	);
 
@@ -90,7 +92,7 @@ final class Pie_Easy_Loader
 	static private function init_reqs()
 	{
 		// global style and script
-		Pie_Easy_Loader::enqueue_style( 'global', array('pie-easy-ui-lightness/jquery-ui-custom', 'pie-easy-colorpicker' ) );
+		Pie_Easy_Loader::enqueue_style( 'global', array('colors', 'pie-easy-ui-lightness/jquery-ui-custom', 'pie-easy-colorpicker' ) );
 		Pie_Easy_Loader::enqueue_script( 'global', array('jquery') );
 	}
 

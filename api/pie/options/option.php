@@ -11,10 +11,23 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'scheme' );
+Pie_Easy_Loader::load( 'collections', 'scheme' );
 
 /**
  * Make an option easy
+ *
+ * @property-read string $section
+ * @property-read string $title
+ * @property-read string $description
+ * @property string $class
+ * @property string $field_id
+ * @property string $field_class
+ * @property-read string $field_type Type of field to generate for the option
+ * @property-read array $field_options An array of field options
+ * @property array $capabilities Required capabilities, can only be appended
+ * @property mixed $default_value Default value of the option
+ * @property-read string $required_option Sibling option required for this option to display
+ * @property-read string $required_feature Feature required for this option to display
  */
 abstract class Pie_Easy_Options_Option
 {
@@ -58,13 +71,6 @@ abstract class Pie_Easy_Options_Option
 	const FIELD_TEXTAREA = 'textarea';
 	const FIELD_TEXTBLOCK = 'textblock';
 	const FIELD_UPLOAD = 'upload';
-	
-	/**
-	 * Section of the option
-	 *
-	 * @var string
-	 */
-	private $section;
 
 	/**
 	 * The theme that created this option
@@ -81,60 +87,9 @@ abstract class Pie_Easy_Options_Option
 	private $name;
 
 	/**
-	 * Title of the option
-	 *
-	 * @var string
+	 * @var Pie_Easy_Map Option directives
 	 */
-	private $title;
-
-	/**
-	 * Description of the option
-	 *
-	 * @var string
-	 */
-	private $description;
-	
-	/**
-	 * The class of the option container
-	 *
-	 * @var string
-	 */
-	private $class;
-
-	/**
-	 * CSS id of the option form field
-	 *
-	 * @var string
-	 */
-	private $field_id;
-
-	/**
-	 * CSS id of the option form field
-	 *
-	 * @var string
-	 */
-	private $field_class;
-
-	/**
-	 * Type of field to generate for the option
-	 *
-	 * @var string
-	 */
-	private $field_type;
-
-	/**
-	 * An array of field options
-	 *
-	 * @var array
-	 */
-	private $field_options = array();
-
-	/**
-	 * Default value of the option
-	 *
-	 * @var mixed
-	 */
-	private $default_value;
+	private $directives;
 
 	/**
 	 * Name of the theme which last over wrote the default value
@@ -142,27 +97,6 @@ abstract class Pie_Easy_Options_Option
 	 * @var string
 	 */
 	private $default_value_theme;
-
-	/**
-	 * Sibling option required for this option to display
-	 *
-	 * @var string
-	 */
-	private $required_option;
-
-	/**
-	 * Feature required for this option to display
-	 *
-	 * @var string
-	 */
-	private $required_feature;
-
-	/**
-	 * Required capabilities
-	 *
-	 * @var array
-	 */
-	private $capabilities = array( 'manage_options' );
 
 	/**
 	 * If true, a POST value will override the real option value
@@ -190,13 +124,17 @@ abstract class Pie_Easy_Options_Option
 			throw new Exception( 'Option name does not match the allowed pattern.' );
 		}
 
+		// init directives map
+		$this->directives = new Pie_Easy_Map();
+		
 		// set basic string properties
 		$this->theme = $theme;
-		$this->title = $title;
-		$this->description = $desc;
-		$this->section = $section;
 
-		// set the field type
+		// set directives
+		$this->set_directive( 'section', $section, true );
+		$this->set_directive( 'title', $title, true );
+		$this->set_directive( 'description', $desc, true );
+		$this->add_capabilities( 'capabilities', 'manage_options' );
 		$this->set_field_type( $field_type );
 	}
 
@@ -208,7 +146,11 @@ abstract class Pie_Easy_Options_Option
 	 */
 	public function __get( $name )
 	{
-		return $this->$name;
+		if ( $this->directives->contains($name) ) {
+			return $this->directives->item_at($name)->value;
+		} else {
+			return $this->$name;
+		}
 	}
 
 	/**
@@ -459,7 +401,24 @@ abstract class Pie_Easy_Options_Option
 				return false;
 		}
 	}
-	
+
+	/**
+	 * Set a directive
+	 * 
+	 * @param string $name
+	 * @param mixed $value
+	 * @param boolean $read_only
+	 */
+	private function set_directive( $name, $value, $read_only = null )
+	{
+		if ( $this->directives->contains($name) ) {
+			$this->directives->item_at($name)->set_value($value, true);
+		} else {
+			$directive = new Pie_Easy_Options_Directive( $name, $value, $read_only );
+			$this->directives->add( $name, $directive );
+		}
+	}
+
 	/**
 	 * Set the container css class
 	 *
@@ -467,11 +426,7 @@ abstract class Pie_Easy_Options_Option
 	 */
 	public function set_class( $class )
 	{
-		if ( empty( $this->class ) ) {
-			$this->class = $class;
-		} else {
-			throw new Exception( sprintf( 'The container class for "%s" has already been set.', $this->name ) );
-		}
+		$this->set_directive( 'class', $class );
 	}
 
 	/**
@@ -482,21 +437,17 @@ abstract class Pie_Easy_Options_Option
 	 */
 	private function set_field_type( $type )
 	{
-		if ( empty( $this->field_type ) ) {
-			if ( $this->check_field_type( $type ) ) {
-				// set it
-				$this->field_type = $type;
-				// add cap for upload field
-				if ( 'upload' == $type ) {
-					$this->capabilities['upload_files'] = 'upload_files';
-				}
-				// done
-				return true;
-			} else {
-				throw new Exception( sprintf( 'The "%s" field type is not valid.', $type ) );
+		if ( $this->check_field_type( $type ) ) {
+			// set it
+			$this->set_directive( 'field_type', $type, true );
+			// add cap for upload field
+			if ( 'upload' == $type ) {
+				$this->add_capabilities( 'upload_files' );
 			}
+			// done
+			return true;
 		} else {
-			throw new Exception( sprintf( 'The field type for "%s" has already been set.', $this->name ) );
+			throw new Exception( sprintf( 'The "%s" field type is not valid.', $type ) );
 		}
 	}
 
@@ -507,11 +458,7 @@ abstract class Pie_Easy_Options_Option
 	 */
 	public function set_field_id( $field_id )
 	{
-		if ( empty( $this->field_id ) ) {
-			$this->field_id = $field_id;
-		} else {
-			throw new Exception( sprintf( 'The field id for "%s" has already been set.', $this->name ) );
-		}
+		$this->set_directive( 'field_id', $field_id );
 	}
 
 	/**
@@ -521,11 +468,7 @@ abstract class Pie_Easy_Options_Option
 	 */
 	public function set_field_class( $field_class )
 	{
-		if ( empty( $this->field_class ) ) {
-			$this->field_class = $field_class;
-		} else {
-			throw new Exception( sprintf( 'The field class for "%s" has already been set.', $this->name ) );
-		}
+		$this->set_directive( 'field_class', $field_class );
 	}
 
 	/**
@@ -535,11 +478,7 @@ abstract class Pie_Easy_Options_Option
 	 */
 	public function set_field_options( $field_options )
 	{
-		if ( empty( $this->field_options ) ) {
-			$this->field_options = $field_options;
-		} else {
-			throw new Exception( sprintf( 'The field options for "%s" have already been set.', $this->name ) );
-		}
+		$this->set_directive( 'field_options', $field_options, true );
 	}
 
 	/**
@@ -549,11 +488,7 @@ abstract class Pie_Easy_Options_Option
 	 */
 	public function set_required_option( $option_name )
 	{
-		if ( empty( $this->required_option ) ) {
-			$this->required_option = $option_name;
-		} else {
-			throw new Exception( sprintf( 'The required option for "%s" has already been set.', $this->name ) );
-		}
+		$this->set_directive( 'required_option', $option_name, true );
 	}
 
 	/**
@@ -563,11 +498,7 @@ abstract class Pie_Easy_Options_Option
 	 */
 	public function set_required_feature( $feature_name )
 	{
-		if ( empty( $this->required_feature ) ) {
-			$this->required_feature= $feature_name;
-		} else {
-			throw new Exception( sprintf( 'The required feature for "%s" has already been set.', $this->name ) );
-		}
+		$this->set_directive( 'required_feature', $feature_name, true );
 	}
 
 	/**
@@ -583,7 +514,7 @@ abstract class Pie_Easy_Options_Option
 		$this->default_value_theme = empty( $theme ) ? $this->theme : $theme;
 
 		// set the default value
-		$this->default_value = $value;
+		$this->set_directive( 'default_value', $value );
 
 		return true;
 	}
@@ -593,19 +524,22 @@ abstract class Pie_Easy_Options_Option
 	 *
 	 * @param string $string A comma separated list of capabilities
 	 */
-	public function set_capabilities( $string )
+	public function add_capabilities( $string )
 	{
-		if ( empty( $this->capabilities ) ) {
-			// split at comma
-			$caps = explode( ',', $string );
-			// trim and set each
-			foreach ( $caps as $cap ) {
-				$cap_trimmed = trim( $cap );
-				$this->capabilities[$cap_trimmed] = $cap_trimmed;
-			}
-		} else {
-			throw new Exception( sprintf( 'The capabilities for "%s" has already been set.', $this->name ) );
+		// split at comma
+		$caps = explode( ',', $string );
+
+		// trim and set each
+		foreach ( $caps as $cap ) {
+			$cap_trimmed = trim( $cap );
+			$capabilities[$cap_trimmed] = $cap_trimmed;
 		}
+
+		if ( $this->capabilities ) {
+			$capabilities = array_merge( $this->capabilities, $capabilities );
+		}
+
+		$this->set_directive( 'capabilities', $capabilities );
 	}
 
 	/**
