@@ -215,25 +215,84 @@ function infinity_option_image_url( $option_name, $size = 'thumbnail' )
 /**
  * Render a menu composed of all the sections with their options.
  */
-function infinity_options_render_menu_items()
+function infinity_options_render_menu( $args )
 {
-	foreach ( Infinity_Options_Registry::instance()->get_sections() as $section ) {
-		// get options
-		$options = Infinity_Options_Registry::instance()->get_menu_options( $section );
-		// if section has no options, skip it
-		if ( empty( $options ) ) {
-			continue;
+	// define default args
+	$defaults->sections = null;
+	
+	// parse the args
+	$options = (object) wp_parse_args( $args, $defaults );
+
+	// sections to filter on
+	$get_sections = array();
+	
+	// determine what sections to get
+	if ( !empty( $options->sections ) ) {
+		// split at comma
+		$split_sections = explode( ',', $options->sections );
+		// get each section from registry
+		foreach ( $split_sections as $split_section ) {
+			$get_sections[] = trim( $split_section );
 		}
-		// begin rendering ?>
-		<div>
-			<a href="#<?php print esc_attr( $section->name ) ?>"><?php print esc_html( $section->title ) ?></a>
-		</div>
-		<ul>
-			<?php foreach( $options as $option ): ?>
-			<li><a href="#<?php print esc_attr( $option->name ) ?>"><?php print esc_html( $option->title ) ?></a></li>
-			<?php endforeach; ?>
-		</ul><?php
 	}
+
+	// get only "root" sections
+	$sections = Infinity_Options_Registry::instance()->get_root_sections( $get_sections );
+
+	// loop through fetched sections and render
+	foreach ( $sections as $section ) {
+		infinity_options_render_menu_section( $section );
+	}
+}
+
+/**
+ * Render a menu section
+ */
+function infinity_options_render_menu_section( Infinity_Options_Section $section )
+{
+	// get children of this section
+	$children = Infinity_Options_Registry::instance()->get_section_children( $section );
+
+	// get options for section
+	$options = Infinity_Options_Registry::instance()->get_menu_options( $section );
+
+	// check results
+	if ( empty( $children ) && empty( $options ) ) {
+		// don't render anything
+		return;
+	}
+		
+	// begin rendering ?>
+	<div>
+		<a href="#<?php print esc_attr( $section->name ) ?>"><?php print esc_html( $section->title ) ?></a>
+	</div> <?php
+
+	if ( $children ) {
+		// render all children sections ?>
+		<div><div class="infinity-cpanel-options-menu infinity-cpanel-options-submenu"><?php
+			foreach ( $children as $child ) {
+				infinity_options_render_menu_section( $child );
+			}?>
+		</div></div><?php
+	} else {
+		// render this section's options
+		infinity_options_render_menu_options( $options );
+	}
+}
+
+/**
+ * Render options for a menu section
+ *
+ * @param array $options
+ */
+function infinity_options_render_menu_options( $options )
+{
+	// begin rendering ?>
+	<ul><?php
+	foreach( $options as $option ) { ?>
+		<li><a href="#<?php print esc_attr( $option->name ) ?>"><?php print esc_html( $option->title ) ?></a></li><?php
+	}?>
+	</ul><?php
 }
 
 /**

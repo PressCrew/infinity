@@ -19,13 +19,17 @@ div#infinity-cpanel {
 div#infinity-cpanel-options {
 	padding: 10px;
 }
-	div#infinity-cpanel-options-menu {
+	div.infinity-cpanel-options-menu {
 		float: left;
 		width: 220px;
 	}
-		div#infinity-cpanel-options-menu .ui-accordion-content {
+		div.infinity-cpanel-options-menu .ui-accordion-content {
 			padding: 0.5em 1.1em;
 		}
+	div.infinity-cpanel-options-submenu {
+		float: none;
+		width: auto;
+	}
 	div#infinity-cpanel-options-content {
 		padding: 0px 10px 10px 235px;
 	}

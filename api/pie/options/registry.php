@@ -201,6 +201,59 @@ abstract class Pie_Easy_Options_Registry
 	}
 
 	/**
+	 * Return all registered child sections of a section
+	 *
+	 * This adheres to parent settings in the options ini file
+	 *
+	 * @return array
+	 */
+	public function get_section_children( $section )
+	{
+		// the sections that will be returned
+		$sections = array();
+
+		// find all registered sections where parent is the target section
+		foreach ( $this->sections as $section_i ) {
+			if ( $section->is_parent_of( $section_i ) ) {
+				$sections[] = $section_i;
+			}
+		}
+
+		return $sections;
+	}
+
+	/**
+	 * Get sections that should behave as a root section
+	 *
+	 * @param array $section_names An array of section names to include, defaults to all
+	 * @return array
+	 */
+	public function get_root_sections( $section_names = array() )
+	{
+		// sections to be returned
+		$sections = array();
+
+		// loop through all registered sections
+		foreach ( $this->sections as $section ) {
+			// filter on section names
+			if ( empty( $section_names ) || in_array( $section->name, $section_names, true ) ) {
+				$sections[] = $section;
+			}
+		}
+
+		// don't return sections who have a parent in the result
+		foreach( $sections as $key => $section_i ) {
+			foreach( $sections as $section_ii ) {
+				if ( $section_ii->is_parent_of( $section_i ) ) {
+					unset( $sections[$key] );
+				}
+			}
+		}
+
+		return $sections;
+	}
+
+	/**
 	 * Unregister an option
 	 *
 	 * @param string $option_name
@@ -386,6 +439,14 @@ abstract class Pie_Easy_Options_Registry
 		// get section from section registry
 		$section = $this->sections->item_at( $option_config['section'] );
 
+		// adding options to parent sections is not allowed
+		foreach ( $this->sections as $section_i ) {
+			if ( $section->is_parent_of( $section_i ) ) {
+				throw new Exception(
+					sprintf( 'Cannot add options to section "%s" because it is acting as a parent section', $section->name ) );
+			}
+		}
+
 		// create new option
 		$option = new $this->{option_class}(
 			$this->loading_theme,
@@ -504,6 +565,11 @@ abstract class Pie_Easy_Options_Registry
 		// css content class
 		if ( isset( $section_config['class_content'] ) ) {
 			$section->set_class_content( $section_config['class_content'] );
+		}
+
+		// section parent
+		if ( isset( $section_config['parent'] ) ) {
+			$section->set_parent( $section_config['parent'] );
 		}
 
 		// register it
