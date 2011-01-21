@@ -87,10 +87,16 @@ function infinity_dashboard_cpanel_setup()
 /**
  * Load a dashboard template relative to the template dir root
  *
- * @param string $rel_path
+ * @param string $rel_path Relative path to template from dashboard template root
+ * @param array|stdClass $args Variables to inject into template
+ * @param array|stdClass $defaults Default values of variables being injected into template
  */
-function infinity_dashboard_load_template( $rel_path )
+function infinity_dashboard_load_template( $rel_path, $args = null, $defaults = null )
 {
+	// populate local scope
+	extract( wp_parse_args( $args, (array) $defaults ) );
+
+	// include the template
 	include( INFINITY_ADMIN_TPLS_DIR . DIRECTORY_SEPARATOR . $rel_path );
 }
 

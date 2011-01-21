@@ -42,13 +42,32 @@ can focus on making your theme awesome, instead of making it work.
 ## Sections
 
 To define a section, you add something like this to your options.ini file BEFORE any options that
-will be assigned to that section are defined. Section names must be all lower case. Section titles
-can contain just about any character except double quotes.
+will be assigned to that section are defined. Section names must be all lower case.
 
 	[.typography]
 	title = "Typography"
 
 Now you have a new section to which typography options can be assigned.
+
+### You configure sections using the directives that follow.
+
+### `title`
+
+The section title which is displayed in the theme options panel menu. Section titles
+can contain just about any character except double quotes.
+
+	title = "Welcome Text"
+
+### `parent`
+
+Sections can be nested to build up a tree. In order to configure a section to belong to a parent
+section, you simply add the "parent" directive and set its value to another section that has
+already been defined:
+
+	parent = "layout"
+
+Any section which has children sections assigned to it cannot contain options. If you try to
+assign options to a parent section, a fatal error will occur.
 
 ## Options
 
@@ -62,7 +81,7 @@ Option names _MUST_ begin with the name of your theme's directory name.
 Child themes inherit *All* of the options from *EVERY* ancestor theme, allowing you to
 create a highly extensible theme hierarchy.
 
-You configure each option using the directives that follow.
+### You configure options using the directives that follow.
 
 ### `section`
 

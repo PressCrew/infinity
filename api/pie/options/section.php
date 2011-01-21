@@ -52,6 +52,13 @@ abstract class Pie_Easy_Options_Section
 	private $class_content;
 
 	/**
+	 * The parent section
+	 *
+	 * @var
+	 */
+	private $parent;
+
+	/**
 	 * The current content to be wrapped
 	 *
 	 * @var string
@@ -109,6 +116,31 @@ abstract class Pie_Easy_Options_Section
 	public function set_class_content( $class )
 	{
 		$this->class_content = $class;
+	}
+
+	/**
+	 * Set the parent section
+	 *
+	 * @param string $section_name
+	 */
+	public function set_parent( $section_name )
+	{
+		if ( $this->name != $section_name ) {
+			$this->parent = trim( $section_name );
+		} else {
+			throw new Exception( sprintf( 'The section "%s" cannot be a parent of itself!', $this->name ) );
+		}
+	}
+
+	/**
+	 * Returns true if section is parent of given section
+	 *
+	 * @param Pie_Easy_Options_Section $section
+	 * @return boolean
+	 */
+	public function is_parent_of( Pie_Easy_Options_Section $section )
+	{
+		return $this->name == $section->parent;
 	}
 
 	/**

@@ -11,9 +11,9 @@
 		$('a#infinity-cpanel-toolbar-thanks').button({icons: {primary: "ui-icon-heart"}});
 
 		// cpanel options page menu
-		$('div#infinity-cpanel-options-menu').accordion({
+		$('div.infinity-cpanel-options-menu').accordion({
 			collapsible: true,
-			fillSpace: true,
+			clearStyle: true,
 			icons: {
 				header: 'ui-icon-folder-collapsed',
 				headerSelected: 'ui-icon-folder-open'
@@ -21,7 +21,7 @@
 		});
 
 		// cpanel options page menu item clicks
-		$('div#infinity-cpanel-options-menu ul li a').bind('click',
+		$('div.infinity-cpanel-options-menu ul li a').bind('click',
 			function(){
 				// the form
 				var form = $('div#infinity-cpanel-options form').empty();
