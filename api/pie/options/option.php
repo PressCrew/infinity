@@ -134,7 +134,7 @@ abstract class Pie_Easy_Options_Option
 		$this->set_directive( 'section', $section, true );
 		$this->set_directive( 'title', $title, true );
 		$this->set_directive( 'description', $desc, true );
-		$this->add_capabilities( 'capabilities', 'manage_options' );
+		$this->add_capabilities( 'manage_options' );
 		$this->set_field_type( $field_type );
 	}
 
