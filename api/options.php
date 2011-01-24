@@ -215,7 +215,7 @@ function infinity_option_image_url( $option_name, $size = 'thumbnail' )
 /**
  * Render a menu composed of all the sections with their options.
  */
-function infinity_options_render_menu( $args )
+function infinity_options_render_menu( $args = null )
 {
 	// define default args
 	$defaults->sections = null;

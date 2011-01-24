@@ -95,7 +95,7 @@ function infinity_dashboard_cpanel_shortcodes_content()
  *
  * @param array|stdClass Variables to inject into template
  */
-function infinity_dashboard_cpanel_options_content( $args )
+function infinity_dashboard_cpanel_options_content( $args = null )
 {
 	$defaults->menu_args = null;
 
