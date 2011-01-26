@@ -127,7 +127,7 @@ final class Pie_Easy_Loader
 		} elseif ( in_array( $feature, $this->features, true ) ) {
 			return $this->load_file( $feature );
 		} else {
-			$split = explode( DIRECTORY_SEPARATOR, $feature );
+			$split = explode( '/', $feature );
 			if ( count($split) == 2 ) {
 				return $this->load_file( $split[1], $split[0] );
 			}

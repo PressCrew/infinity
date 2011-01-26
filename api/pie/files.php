@@ -17,6 +17,77 @@
 final class Pie_Easy_Files
 {
 	/**
+	 * Split a path at forward '/' OR backward '\' slashes
+	 * 
+	 * @param string $path
+	 * @return array
+	 */
+	public static function path_split ( $path )
+	{
+		return preg_split( '/\/|\\\/', $path, null, PREG_SPLIT_NO_EMPTY );
+	}
+
+	/**
+	 * Pop the last file off the end of a path
+	 *
+	 * @param string $path
+	 * @return string
+	 */
+	public static function path_pop ( $path )
+	{
+		return array_pop( self::path_split( $path ) );
+	}
+
+	/**
+	 * Build a filesytem path from an array of file names
+	 *
+	 * @param array $file_names,...
+	 * @param boolean $relative
+	 * @return string
+	 */
+	public static function path_build ( $file_names, $relative = false )
+	{
+		if ( !is_array( $file_names ) ) {
+			$file_names = func_get_args();
+			if ( func_get_arg( func_num_args() - 1 ) === true ) {
+				$relative = true;
+			} else {
+				$relative = false;
+			}
+		}
+
+		if ( $relative ) {
+			$prefix = null;
+		} else {
+			$prefix = DIRECTORY_SEPARATOR;
+		}
+
+		return $prefix . implode( DIRECTORY_SEPARATOR, $file_names );
+	}
+
+	/**
+	 * Normalize a filesystem path
+	 *
+	 * This will remove useless slashes and convert invalid directory separators
+	 * with the correct separator for the local system
+	 *
+	 * @param string $path
+	 * @return string
+	 */
+	public static function path_normalize( $path )
+	{
+		// is this a relative path?
+		if ( $path{0} == '/' || $path{0} == '\\' ) {
+			$relative = false;
+		} else {
+			$relative = true;
+		}
+
+		// return the path
+		return self::path_build( self::path_split( $path ), $relative );
+	}
+
+	/**
 	 * List all files in a directory filtered by a regular expression
 	 *
 	 * @param string $dir Absolute path to directory
@@ -51,12 +122,17 @@ final class Pie_Easy_Files
 				// done
 				return $return_files;
 			} else {
-				throw new Exception( 'Unable to open the directory: ' . $dir );
+				throw new Pie_Easy_Files_Exception( 'Unable to open the directory: ' . $dir );
 			}
 		} else {
-			throw new Exception( 'The directory does not exist: ' . $dir );
+			throw new Pie_Easy_Files_Exception( 'The directory does not exist: ' . $dir );
 		}
 	}
 }
+
+/**
+ * Pie Easy File Exception
+ */
+final class Pie_Easy_Files_Exception extends Exception {}
 
 ?>

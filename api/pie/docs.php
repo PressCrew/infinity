@@ -36,11 +36,11 @@ class Pie_Easy_Docs
 	const MARKUP_MARKDOWN_LONG = 'markdown';
 
 	/**
-	 * The directory containing the docs
+	 * Directories which may contain the docs
 	 *
-	 * @var string
+	 * @var array
 	 */
-	private $docs_dir;
+	private $doc_dirs;
 
 	/**
 	 * The page name
@@ -90,11 +90,17 @@ class Pie_Easy_Docs
 	/**
 	 * Constructor
 	 * 
+	 * @param string|array $dir Directory or directories which may contain the doc page
 	 * @param string $page The page being viewed in the docs dir
 	 */
 	public function __construct( $dir, $page = null )
 	{
-		$this->docs_dir = $dir;
+		if ( is_array( $dir ) ) {
+			$this->doc_dirs = $dir;
+		} else {
+			$this->doc_dirs = array( $dir );
+		}
+		
 		$this->set_page( $page );
 	}
 
@@ -183,6 +189,18 @@ class Pie_Easy_Docs
 		// fall back to default
 		if ( empty( $page ) ) {
 			$page = self::DEFAULT_PAGE;
+		} else {
+			// split page at static directory separators
+			$splits = Pie_Easy_Files::path_split( $page );
+			// page is last item
+			$page = array_pop( $splits );
+			// anything left?
+			if ( count($splits) ) {
+				// append remaining parts to each doc dir
+				foreach ( $this->doc_dirs as &$doc_dir ) {
+					$doc_dir .= Pie_Easy_Files::path_build( $splits );
+				}
+			}
 		}
 
 		// validate the page name
@@ -245,16 +263,26 @@ class Pie_Easy_Docs
 				self::MARKUP_MARKDOWN_LONG
 			));
 
-		// list all files that match page
-		$files = Pie_Easy_Files::list_filtered( $this->docs_dir, sprintf( '/^%s\.(%s)$/', $page, $formats ), true );
-		
-		// get any files?
-		if ( count($files) ) {
-			// return the first one
-			return array_shift( $files );
-		} else {
-			throw new Exception( sprintf( 'A file for the doc page "%s" does not exist in "%s"', $page, $this->docs_dir ) );
+		// loop through all doc dirs looking for doc page
+		foreach ( $this->doc_dirs as $doc_dir ) {
+
+			try {
+				// list all files in current dir that match page
+				$files = Pie_Easy_Files::list_filtered( $doc_dir, sprintf( '/^%s\.(%s)$/', $page, $formats ), true );
+			} catch ( Pie_Easy_Files_Exception $e ) {
+				// ignore file errors
+				continue;
+			}
+
+			// get any files?
+			if ( count($files) ) {
+				// return the first one
+				return array_shift( $files );
+			}
 		}
+
+		// no doc page found
+		throw new Exception( sprintf( 'A file for the doc page "%s" does not exist in any of the configured directories', $page ) );
 	}
 
 	/**
@@ -263,7 +291,7 @@ class Pie_Easy_Docs
 	 * @param string $page
 	 * @return string
 	 */
-	private function page_url( $page )
+	public function page_url( $page )
 	{
 		return sprintf( $this->page_url_template, $page );
 	}

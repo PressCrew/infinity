@@ -97,7 +97,7 @@ to configure theme.
 
 	section = "home_page"
 
-Child them can override section: _No_
+Child theme can override section: **No**
 
 #### title
 
@@ -105,7 +105,7 @@ Use a descriptive name to tell the user what this option does.
 
 	title = "Welcome Text"
 
-Child them can override title: _No_
+Child theme can override title: **No**
 
 #### description
 
@@ -113,7 +113,7 @@ A more detailed description of what the options does inside your theme.
 
 	description = "Edit the welcome text on your home page"
 
-Child them can override description: _No_
+Child theme can override description: **No**
 
 #### class
 
@@ -123,7 +123,7 @@ the options panel and make it fit your theme's or client's needs.
 
 	class = "my-css-class"
 
-Child them can override class: _Yes_
+Child theme can override class: **Yes**
 
 #### field\_id
 
@@ -131,7 +131,7 @@ You can assign a CSS id to the option field in case you need to provide advanced
 
 	field_id = "my-css-id"
 
-Child them can override field\_id: _Yes_
+Child theme can override field\_id: **Yes**
 
 #### field\_class
 
@@ -139,7 +139,7 @@ You can assign an extra CSS class to the option field for customized styling of 
 
 	field_class = "my-css-class"
 
-Child them can override field\_class: _Yes_
+Child theme can override field\_class: **Yes**
 
 #### field\_type
 
@@ -167,7 +167,7 @@ The available types are:
 	* _colorpicker_ - Color picker widget
 	* _css_ - Custom CSS integration (requires the "infinity-custom-css" theme feauture)
 
-Child them can override field\_type: _No_
+Child theme can override field\_type: **No**
 
 #### field\_options
 
@@ -199,7 +199,7 @@ and the corresponding value for the keys are the description.
 		);
 	}
 
-Child them can override field\_options: _No_
+Child theme can override field\_options: **No**
 
 #### default\_value
 
@@ -208,7 +208,84 @@ You can provide a default value for the option here. This will be returned by ca
 
 	default_value = "blue"
 
-Child them can override default\_value: _Yes_
+Child theme can override default\_value: **Yes**
+
+#### documentation
+
+Documentation can be provided for any option by creating a doc page in the configuration
+docs folder:
+
+	wp-content/themes/child_theme/config/docs/mytheme_option.md
+
+Sub-directories are also allowed:
+
+	wp-content/themes/child_theme/config/docs/foo/bar/mytheme_option.md
+
+There are two valid formats for doc pages.
+
+* **Markdown**
+
+	The doc page must end with the `.md` extension and contain valid Markdown markup. This is the
+	preferred method for themes that will be extended so that non-classed element styles can be
+	applied.
+
+	For help with Markdown, see
+	[Basic Usage](http://daringfireball.net/projects/markdown/basics) and the
+	[Syntax Reference](http://daringfireball.net/projects/markdown/syntax)
+
+	**Note:** Custom Infinity `<a>` and `<img>` tags support is under development
+
+* **HTML**
+
+	The doc page must end with the `.html` extension and contain valid HTML markup *with all tags
+	properly closed*.
+
+	Please keep in mind that anyone extending your theme will have to spend
+	additional time on styling of the options panel if your markup implements special formatting
+	which relies on custom CSS ids or classes. **The use of ids and classes is strongly discouraged.**
+
+There are three documentation modes:
+
+* **Disabled** (default)
+
+	`documentation = false`
+
+	This disables documentation for the option.
+
+* **Automatic**
+
+	`documentation = true`
+
+	In this case the doc page should have the exact same name as the option.
+
+* **Manual**
+
+	`documentation = "mytheme_option"`
+
+	In this case the doc page should be named `mytheme_option.md` or `mytheme_option.html`.
+
+	Sub-directory:
+
+	`documentation = "foo/bar/mytheme_option"`
+
+	Create the directories `config/docs/foo/bar` and place your doc page in the `foo` directory.
+
+	Infinity makes heavy use of the manual mode due to the fact that you can re-use the same
+	page doc for as many options as you wish. This allows you to build up and pull from a library
+	of reusable documentation.
+
+The output of the doc page will be shown in the Documentation tab of the option. If documentation
+for the option is disabled, or no doc page can be found in the theme hierarchy, no documentation
+tab will be displayed.
+
+If you are extending a theme and wish to provide different documentation than the parent's author
+has provided, you simply create the same doc page in your theme, and your documentation will override
+the parent file. In this case you are not limited to using the same format. If the parent theme
+has a file named `mytheme_option.html`, you can create a file called `mytheme_option.md` and your Markdown
+file will override the HTML file.
+
+Child theme can override documentation setting: **Yes**  
+Child theme can override documentation pages: **Yes**
 
 #### capabilities
 
@@ -217,8 +294,8 @@ this specific option.
 
 	capabilities = "edit_posts"
 
-Child them can override capabilities: _No_  
-Child them can add/append to capabilities: _Yes_
+Child theme can override capabilities: **No**
+Child theme can add/append to capabilities: **Yes**
 
 #### required\_option
 
@@ -229,7 +306,7 @@ be displayed when the required option is displayed.
 
 Additionally, this option will not be displayed in the theme options menu.
 
-Child them can override required\_option: _No_
+Child theme can override required\_option: **No**
 
 #### required\_feature
 
@@ -238,7 +315,7 @@ to determine if the option should be visible to the site administrator.
 
 	required_feature = "a-feature-name"
 
-Child them can override required\_feature: _No_
+Child theme can override required\_feature: **No**
 
 ## Sample Configuration
 

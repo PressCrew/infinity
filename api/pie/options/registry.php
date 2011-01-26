@@ -476,6 +476,11 @@ abstract class Pie_Easy_Options_Registry
 			$option->add_capabilities( $option_config['capabilities'] );
 		}
 
+		// documentation
+		if ( isset( $option_config['documentation'] ) ) {
+			$option->set_documentation( $option_config['documentation'] );
+		}
+
 		// css id
 		if ( isset( $option_config['field_id'] ) ) {
 			$option->set_field_id( $option_config['field_id'] );

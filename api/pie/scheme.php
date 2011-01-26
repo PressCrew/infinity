@@ -11,6 +11,8 @@
  * @since 1.0
  */
 
+Pie_Easy_Loader::load( 'files' );
+
 /**
  * Make Scheming Easy
  */
@@ -35,6 +37,11 @@ final class Pie_Easy_Scheme
 	 * Name of the images directory
 	 */
 	const DIR_JS = 'js';
+
+	/**
+	 * Name of the docs directory (under config)
+	 */
+	const DIR_DOCS = 'docs';
 	
 	/**
 	 * Parent Theme ini setting
@@ -372,30 +379,74 @@ final class Pie_Easy_Scheme
 	{
 		return get_theme_root_uri() . '/' . $theme;
 	}
+	
+	/**
+	 * Return array of all theme root directory paths
+	 *
+	 * @param string $file_names,...
+	 * @return array
+	 */
+	public function theme_dirs( $file_names = null )
+	{
+		// did we get an array as the first arg?
+		if ( !is_array( $file_names ) ) {
+			// nope, get all args
+			$file_names = func_get_args();
+		}
+
+		// paths to return
+		$paths = array();
+
+		foreach ( $this->parent_themes as $theme ) {
+			$paths[] = $this->theme_file( $theme, $file_names );
+		}
+
+		return $paths;
+	}
+
+	/**
+	 * Return array of all theme config dirs
+	 *
+	 * @return array
+	 */
+	public function theme_config_dirs()
+	{
+		return $this->theme_dirs( $this->config_dir );
+	}
+
+	/**
+	 * Return array of all theme config dirs
+	 *
+	 * @return array
+	 */
+	public function theme_documentation_dirs()
+	{
+		return $this->theme_dirs( $this->config_dir, self::DIR_DOCS );
+	}
 
 	/**
 	 * Return path to a theme file
 	 *
 	 * @param string $theme
-	 * @param string $file_names
+	 * @param string $file_names,...
 	 */
 	public function theme_file( $theme, $file_names )
 	{
-		// get all args except the first
-		$file_names = func_get_args();
-		array_shift($file_names);
+		// did we get an array as the second arg?
+		if ( !is_array( $file_names ) ) {
+			// nope, get all args except the first
+			$file_names = func_get_args();
+			array_shift($file_names);
+		}
 
-		return
-			$this->theme_dir( $theme ) .
-			DIRECTORY_SEPARATOR .
-			implode(DIRECTORY_SEPARATOR, $file_names);
+		return $this->theme_dir( $theme ) . Pie_Easy_Files::path_build( $file_names );
 	}
 
 	/**
 	 * Return URL to a theme file
 	 *
 	 * @param string $theme
-	 * @param string $file_names
+	 * @param string $file_names,...
 	 */
 	public function theme_file_url( $theme, $file_names )
 	{
@@ -404,6 +455,67 @@ final class Pie_Easy_Scheme
 		array_shift($file_names);
 
 		return $this->theme_dir_url( $theme ) . '/' . implode( '/', $file_names );
+	}
+
+	/**
+	 * Locate a theme file, giving priority to lower themes in the stack
+	 *
+	 * @param string $file_names,... The file names that make up the RELATIVE path to the theme root
+	 * @return string|false
+	 */
+	public function locate_file( $file_names )
+	{
+		// did we get an array as the first arg?
+		if ( !is_array( $file_names ) ) {
+			// nope, get all args
+			$file_names = func_get_args();
+		}
+
+		// file path to be located
+		$locate_names = array();
+
+		// split all strings in case thy contain a static directory separator
+		foreach ( $file_names as $file_name ) {
+			// split it
+			$splits = Pie_Easy_Files::path_split( $file_name );
+			// append to array
+			foreach ( $splits as $split ) {
+				$locate_names[] = $split;
+			}
+		}
+
+		// loop through stack
+		foreach ( $this->parent_themes as $parent_theme ) {
+
+			// path to stackfile
+			$stack_file =
+				$this->theme_dir( $parent_theme ) . Pie_Easy_Files::path_build( $locate_names );
+
+			// does stack file exist?
+			if ( is_readable( $stack_file ) ) {
+				return $stack_file;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Locate a config file, giving priority to lower themes in the stack
+	 *
+	 * @param string $file_names,... The file names that make up the RELATIVE path to the theme config root
+	 * @return string|false
+	 */
+	public function locate_config_file( $file_names )
+	{
+		// get all args
+		$file_names = func_get_args();
+
+		// prepend file names with path to config directory
+		array_unshift( $file_names, $this->config_dir );
+
+		// call the generic locator
+		return $this->locate_file( $file_names );
 	}
 
 	/**

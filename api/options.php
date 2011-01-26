@@ -136,19 +136,27 @@ class Infinity_Options_Option_Renderer extends Pie_Easy_Options_Option_Renderer
 			</div>
 			<ul>
 				<li><a href="#<?php $this->render_name() ?>-tabs-1">Edit Setting</a></li>
+				<?php if ( $this->has_documentation() ): ?>
 				<li><a href="#<?php $this->render_name() ?>-tabs-2">Documentation</a></li>
+				<?php endif; ?>
+				<?php if ( is_admin() ): ?>
 				<li><a href="#<?php $this->render_name() ?>-tabs-3">Sample Code</a></li>
+				<?php endif; ?>
 			</ul>
 			<div id="<?php $this->render_name() ?>-tabs-1">
 				<p><?php $this->render_description() ?></p>
 				<?php $this->render_field() ?>
 			</div>
+			<?php if ( $this->has_documentation() ): ?>
 			<div id="<?php $this->render_name() ?>-tabs-2">
-				<p>Docs for this option</p>
+				<p><?php $this->render_documentation( Pie_Easy_Scheme::instance()->theme_documentation_dirs() ) ?></p>
 			</div>
+			<?php endif; ?>
+			<?php if ( is_admin() ): ?>
 			<div id="<?php $this->render_name() ?>-tabs-3">
 				<p>Sample code for this option</p>
 			</div>
+			<?php endif; ?>
 		</div><?php
 	}
 }
