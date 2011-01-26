@@ -11,6 +11,8 @@
  * @since 1.0
  */
 
+Pie_Easy_Loader::load( 'docs' );
+
 /**
  * Make rendering options easy
  */
@@ -60,6 +62,16 @@ abstract class Pie_Easy_Options_Option_Renderer
 	{
 		$this->uploader = $uploader;
 		$this->uploader->init();
+	}
+
+	/**
+	 * Return true if the option being rendered has documentation to render
+	 *
+	 * @return boolean
+	 */
+	final protected function has_documentation()
+	{
+		return ( $this->option->documentation );
 	}
 
 	/**
@@ -562,6 +574,39 @@ abstract class Pie_Easy_Options_Option_Renderer
 			$this->uploader->render( $this->option, $this );
 		} else {
 			throw new Exception( 'Uploader support has not been initiated.' );
+		}
+	}
+
+	/**
+	 * Render documentation for this option
+	 *
+	 * @param array $doc_dirs Directory paths under which to search for doc page file
+	 * @return null
+	 */
+	final protected function render_documentation( $doc_dirs )
+	{
+		// is documentation set?
+		if ( $this->option->documentation ) {
+			// boolean value?
+			if ( is_numeric( $this->option->documentation ) ) {
+				// use auto naming?
+				if ( (boolean) $this->option->documentation == true ) {
+					// yes, page is option name
+					$page = $this->option->name;
+				} else {
+					// no, documentation disabled
+					return null;
+				}
+			} else {
+				// page name was set manually
+				$page = $this->option->documentation;
+			}
+
+			// new easy doc object
+			$doc = new Pie_Easy_Docs( $doc_dirs, $page );
+
+			// publish it!
+			$doc->publish();
 		}
 	}
 

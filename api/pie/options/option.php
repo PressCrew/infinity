@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'collections', 'scheme' );
+Pie_Easy_Loader::load( 'collections', 'docs', 'scheme' );
 
 /**
  * Make an option easy
@@ -26,6 +26,7 @@ Pie_Easy_Loader::load( 'collections', 'scheme' );
  * @property-read array $field_options An array of field options
  * @property array $capabilities Required capabilities, can only be appended
  * @property mixed $default_value Default value of the option
+ * @property boolean|string $documentation true/false to enable/disable, string for manual page name
  * @property-read string $required_option Sibling option required for this option to display
  * @property-read string $required_feature Feature required for this option to display
  */
@@ -540,6 +541,16 @@ abstract class Pie_Easy_Options_Option
 		}
 
 		$this->set_directive( 'capabilities', $capabilities );
+	}
+
+	/**
+	 * Set the documentation file
+	 *
+	 * @param string $rel_path Path to documentation file relative to the theme config docs
+	 */
+	public function set_documentation( $rel_path )
+	{
+		$this->set_directive( 'documentation', trim( $rel_path, '\\/' ) );
 	}
 
 	/**
