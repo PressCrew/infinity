@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'scheme' );
+Pie_Easy_Loader::load( 'schemes' );
 
 /**
  * Initialize and load the scheme for the active theme
