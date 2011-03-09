@@ -644,8 +644,14 @@ abstract class Pie_Easy_Options_Registry
 					$option = $this->get_option($option_name);
 					// look for option name as POST key
 					if ( array_key_exists( $option->name, $_POST ) ) {
+						// get new value
+						$new_value = $_POST[$option->name];
+						// strip slashes from new value?
+						if ( is_scalar( $new_value ) ) {
+							$new_value = stripslashes( $_POST[$option->name] );
+						}
 						// update it
-						$option->update( $_POST[$option->name] );
+						$option->update( $new_value );
 					} else {
 						// not in POST, delete it
 						$option->delete();
