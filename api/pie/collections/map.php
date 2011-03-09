@@ -112,15 +112,24 @@ class Pie_Easy_Map implements IteratorAggregate,ArrayAccess,Countable
 	 *
 	 * @param mixed $key
 	 * @param mixed $value
+	 * @param boolean $prepend
 	 * @throws Exception if the map is read-only
 	 */
-	public function add( $key, $value )
+	public function add( $key, $value, $prepend = false )
 	{
 		if( !$this->read_only ) {
-			if ( $key === null ) {
-				$this->data[] = $value;
+			if ( $prepend ) {
+				if ( !is_null($key) ) {
+					$this->data = array_merge( array( $key => $value ), $this->data );
+				} else {
+					throw new Exception( 'Prepend requires a non-null key' );
+				}
 			} else {
-				$this->data[$key] = $value;
+				if ( $key === null ) {
+					$this->data[] = $value;
+				} else {
+					$this->data[$key] = $value;
+				}
 			}
 		} else {
 			throw new Exception( 'The map is read only.' );
