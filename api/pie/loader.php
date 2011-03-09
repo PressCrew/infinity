@@ -53,7 +53,8 @@ final class Pie_Easy_Loader
 			array( 'registry', 'option', 'option_directive', 'option_renderer', 'section', 'uploader', 'walkers' ),
 		'init' =>
 			array( 'directive' ),
-		'scheme'
+		'schemes' =>
+			array( 'scheme', 'scheme_directive' )
 	);
 
 	/**
