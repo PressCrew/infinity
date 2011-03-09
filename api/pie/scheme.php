@@ -79,9 +79,9 @@ final class Pie_Easy_Scheme
 	/**
 	 * Parent theme stack
 	 *
-	 * @var array
+	 * @var Pie_Easy_Map
 	 */
-	private $parent_themes = array();
+	private $parent_themes;
 
 	/**
 	 * Constructor
@@ -89,6 +89,9 @@ final class Pie_Easy_Scheme
 	private function __construct()
 	{
 		// this is a singleton
+		
+		// initialize themes map
+		$this->parent_themes = new Pie_Easy_Map();
 	}
 
 	/**
@@ -160,7 +163,7 @@ final class Pie_Easy_Scheme
 	private function add_filters()
 	{
 		// only add filters if there is at least one parent theme
-		if ( count( $this->parent_themes ) >= 1) {
+		if ( count( $this->parent_themes ) >= 1 ) {
 
 			// template filter callback
 			$filter = array( $this, 'filter_template' );
@@ -200,7 +203,7 @@ final class Pie_Easy_Scheme
 		}
 
 		// paths to files
-		$ini_file = $this->theme_file($parent_theme, $this->config_dir, $this->config_file . '.ini');
+		$ini_file = $this->theme_file( $parent_theme, $this->config_dir, $this->config_file . '.ini' );
 
 		// does ini file exist?
 		if ( is_readable( $ini_file ) ) {
@@ -227,7 +230,7 @@ final class Pie_Easy_Scheme
 				$this->parent_theme = $parent_theme;
 
 				// push myself onto the beginning of the stack
-				array_unshift( $this->parent_themes, $this->parent_theme );
+				$this->parent_themes->add( $this->parent_theme, $this->parent_theme, true );
 
 			} else {
 				throw new Exception( 'Failed to parse parent theme ini file: ' . $ini_file );
@@ -247,7 +250,7 @@ final class Pie_Easy_Scheme
 	public function load_functions()
 	{
 		// loop through parent theme stack in reverse order
-		foreach ( array_reverse( $this->parent_themes, true ) as $theme ) {
+		foreach ( array_reverse( $this->parent_themes->to_array(), true ) as $theme ) {
 			// load functions file if it exists
 			include_once $this->theme_file( $theme, 'functions.php' );
 		}
@@ -263,7 +266,7 @@ final class Pie_Easy_Scheme
 	public function load_options( Pie_Easy_Options_Registry $registry, $ini_file_name = 'options' )
 	{
 		// reverse the stack
-		$themes = array_reverse($this->parent_themes, true );
+		$themes = array_reverse( $this->parent_themes->to_array(), true );
 
 		// loop through entire theme stack in reverse and try to load options
 		foreach( $themes as $theme ) {
@@ -315,7 +318,7 @@ final class Pie_Easy_Scheme
 	public function locate_template( $template_names, $load = false )
 	{
 		// must have at least one parent them to search
-		if ( !empty( $this->parent_themes ) ) {
+		if ( count( $this->parent_themes ) >= 1 ) {
 
 			// convert string arg to array
 			if ( !is_array( $template_names ) ) {
@@ -326,7 +329,7 @@ final class Pie_Easy_Scheme
 			foreach ( $template_names as $template_name ) {
 
 				// loop through the entire theme stack
-				foreach ($this->parent_themes as $theme_name ) {
+				foreach ( $this->parent_themes as $theme_name ) {
 
 					// prepend all template names with theme dir
 					$located_template = $this->theme_file( $theme_name, $template_name );
@@ -397,8 +400,8 @@ final class Pie_Easy_Scheme
 		// paths to return
 		$paths = array();
 
-		foreach ( $this->parent_themes as $theme ) {
-			$paths[] = $this->theme_file( $theme, $file_names );
+		foreach ( $this->parent_themes as $theme_name ) {
+			$paths[] = $this->theme_file( $theme_name, $file_names );
 		}
 
 		return $paths;
@@ -485,11 +488,11 @@ final class Pie_Easy_Scheme
 		}
 
 		// loop through stack
-		foreach ( $this->parent_themes as $parent_theme ) {
+		foreach ( $this->parent_themes as $theme_name ) {
 
 			// path to stackfile
 			$stack_file =
-				$this->theme_dir( $parent_theme ) . Pie_Easy_Files::path_build( $locate_names );
+				$this->theme_dir( $theme_name ) . Pie_Easy_Files::path_build( $locate_names );
 
 			// does stack file exist?
 			if ( is_readable( $stack_file ) ) {
