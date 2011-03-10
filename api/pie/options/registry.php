@@ -130,7 +130,7 @@ abstract class Pie_Easy_Options_Registry
 	 * @param Pie_Easy_Options_Option $option
 	 * @return boolean
 	 */
-	public function register_option( Pie_Easy_Options_Option $option )
+	private function register_option( Pie_Easy_Options_Option $option )
 	{
 		// make sure that the option has not already been registered
 		if ( $this->options->contains( $option->name ) ) {
@@ -148,7 +148,7 @@ abstract class Pie_Easy_Options_Registry
 	 * @param Pie_Easy_Options_Section $section
 	 * @return boolean
 	 */
-	public function register_section( Pie_Easy_Options_Section $section )
+	private function register_section( Pie_Easy_Options_Section $section )
 	{
 		// make sure that the section has not already been registered
 		if ( $this->sections->contains( $section->name ) ) {
@@ -257,7 +257,7 @@ abstract class Pie_Easy_Options_Registry
 	 * @param string $option_name
 	 * @return boolean
 	 */
-	public function unregister( $option_name )
+	private function unregister_option( $option_name )
 	{
 		if ( $this->options->contains( $option_name ) ) {
 			$this->options->remove( $option_name );
@@ -448,7 +448,7 @@ abstract class Pie_Easy_Options_Registry
 			);
 
 			// register it
-			self::register_option( $option );
+			$this->register_option( $option );
 			
 			// required option
 			if ( isset( $option_config['required_option'] ) ) {
@@ -571,7 +571,7 @@ abstract class Pie_Easy_Options_Registry
 		}
 
 		// register it
-		return self::register_section( $section );
+		return $this->register_section( $section );
 	}
 
 	/**
