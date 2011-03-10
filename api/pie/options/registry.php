@@ -132,13 +132,26 @@ abstract class Pie_Easy_Options_Registry
 	 */
 	private function register_option( Pie_Easy_Options_Option $option )
 	{
-		// make sure that the option has not already been registered
-		if ( $this->options->contains( $option->name ) ) {
-			throw new Exception( sprintf( 'The "%s" option has already been registered', $option->name ) );
+		// has the option already been registered?
+		if ( $this->has_option( $option->name ) ) {
+
+			// get options stack
+			$options_stack = $this->get_option_stack( $option->name );
+
+			// check if option already registered for this theme
+			if ( $options_stack->contains( $option->theme ) ) {
+				throw new Exception( sprintf(
+					'The "%s" option has already been registered for the "%s" theme',
+					$option->name, $option->theme ) );
+			}
+
+		} else {
+			$options_stack = new Pie_Easy_Stack();
+			$this->options->add( $option->name, $options_stack );
 		}
 
 		// register it
-		$this->options->add( $option->name, $option );
+		$options_stack->push( $option );
 		return true;
 	}
 
@@ -259,7 +272,7 @@ abstract class Pie_Easy_Options_Registry
 	 */
 	private function unregister_option( $option_name )
 	{
-		if ( $this->options->contains( $option_name ) ) {
+		if ( $this->has_option( $option_name ) ) {
 			$this->options->remove( $option_name );
 			return true;
 		}
@@ -287,11 +300,12 @@ abstract class Pie_Easy_Options_Registry
 	public function get_option( $option_name )
 	{
 		// check option registry
-		if ( $this->options->contains( $option_name ) ) {
-			// return it
-			return $this->options->item_at( $option_name );
+		if ( $this->has_option( $option_name ) ) {
+			// from top of options stack
+			return $this->get_option_stack($option_name)->peek();
 		}
 
+		// didn't find the option
 		throw new Exception( sprintf( 'Unable to get option "%s": not registered.', $option_name ) );
 	}
 
@@ -303,22 +317,40 @@ abstract class Pie_Easy_Options_Registry
 	 */
 	public function get_options( Pie_Easy_Options_Section $section = null )
 	{
-		// return options for one section only?
-		if ( $section ) {
-			// options for this section
-			$options = array();
-			// loop through and compare names
-			foreach ( $this->options as $option ) {
-				if ( $section->name == $option->section ) {
-					$options[] = $option;
+		// options to return
+		$options = array();
+
+		// loop through and compare names
+		foreach ( $this->options as $option_stack ) {
+
+			// use option on top of stack
+			$option = $option_stack->peek();
+
+			// specific section?
+			if ( $section ) {
+				// do section names match?
+				if ( $section->name != $option->section ) {
+					continue;
 				}
 			}
-			// return them
-			return $options;
-		} else {
-			// return ALL options
-			return $this->options->to_array();
+
+			// add to array
+			$options[] = $option;
 		}
+		
+		// return them
+		return $options;
+	}
+
+	/**
+	 * Return options stack for the given option name
+	 *
+	 * @param string $option_name
+	 * @return Pie_Easy_Stack
+	 */
+	private function get_option_stack( $option_name )
+	{
+		return $this->options->item_at( $option_name );
 	}
 
 	/**
@@ -421,11 +453,25 @@ abstract class Pie_Easy_Options_Registry
 	 */
 	private function load_config_option( $option_name, $option_config )
 	{
-		// if option has already been registered, use that option
+		// if option has already been registered, deep copy that option
 		// and possibly override some values
-		if ( $this->options->contains( $option_name ) ) {
-			$option = $this->get_option( $option_name );
+		if ( $this->has_option( $option_name ) ) {
+
+			// get source option, which is on top of the options stack
+			$source_option = $this->get_option_stack($option_name)->peek();
+
+			// copy option properties (do NOT use cloning)
+			$option = new $this->{option_class}(
+				$this->loading_theme,
+				$source_option->name,
+				$source_option->title,
+				$source_option->description,
+				$source_option->field_type,
+				$source_option->section
+			);
+			
 		} else {
+
 			// get section from section registry
 			$section = $this->sections->item_at( $option_config['section'] );
 
@@ -447,18 +493,19 @@ abstract class Pie_Easy_Options_Registry
 				$section->name
 			);
 
-			// register it
-			$this->register_option( $option );
-			
-			// required option
-			if ( isset( $option_config['required_option'] ) ) {
-				$option->set_required_option( $option_config['required_option'] );
-			}
+		}
 
-			// required feature
-			if ( isset( $option_config['required_feature'] ) ) {
-				$option->set_required_feature( $option_config['required_feature'] );
-			}
+		// register it
+		$this->register_option( $option );
+
+		// required option
+		if ( isset( $option_config['required_option'] ) ) {
+			$option->set_required_option( $option_config['required_option'] );
+		}
+
+		// required feature
+		if ( isset( $option_config['required_feature'] ) ) {
+			$option->set_required_feature( $option_config['required_feature'] );
 		}
 
 		// container class
@@ -583,7 +630,7 @@ abstract class Pie_Easy_Options_Registry
 	 */
 	public function render_option( $option_name, $output = true )
 	{
-		if ( $this->options->contains( $option_name ) ) {
+		if ( $this->has_option( $option_name ) ) {
 			
 			// get the option from map
 			$option = $this->get_option( $option_name );
@@ -592,7 +639,7 @@ abstract class Pie_Easy_Options_Registry
 			$html = $this->option_renderer->render( $option, $output );
 			
 			// render options that require this one
-			foreach ( $this->options as $sibling_option ) {
+			foreach ( $this->get_options() as $sibling_option ) {
 				if ( $option->name == $sibling_option->required_option ) {
 					$html .= $this->option_renderer->render( $sibling_option, $output );
 				}
@@ -639,7 +686,7 @@ abstract class Pie_Easy_Options_Registry
 				}
 
 				// is this option registered?
-				if ( $this->options->contains( $option_name ) ) {
+				if ( $this->has_option( $option_name ) ) {
 					// get the option
 					$option = $this->get_option($option_name);
 					// look for option name as POST key
@@ -698,7 +745,7 @@ abstract class Pie_Easy_Options_Registry
 		$css = null;
 
 		// loop through and check field type
-		foreach ( $this->options as $option ) {
+		foreach ( $this->get_options() as $option ) {
 			if ( $option->field_type == Pie_Easy_Options_Option::FIELD_CSS ) {
 				// append css markup
 				$css .= $option->get() . "\n";
