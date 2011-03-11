@@ -70,13 +70,6 @@ final class Pie_Easy_Scheme
 	private $config_file;
 
 	/**
-	 * The current theme being loaded into the scheme
-	 *
-	 * @var string
-	 */
-	private $theme;
-
-	/**
 	 * Theme stack
 	 *
 	 * @var Pie_Easy_Map
@@ -85,11 +78,11 @@ final class Pie_Easy_Scheme
 
 	/**
 	 * Constructor
+	 * 
+	 * this is a singleton
 	 */
 	private function __construct()
 	{
-		// this is a singleton
-		
 		// initialize themes map
 		$this->themes = new Pie_Easy_Map();
 	}
@@ -226,11 +219,8 @@ final class Pie_Easy_Scheme
 					$this->load( $parent_theme );
 				}
 
-				// set theme property AFTER recursion
-				$this->theme = $theme;
-
-				// push myself onto the beginning of the stack
-				$this->themes->add( $this->theme, new Pie_Easy_Stack(), true );
+				// push myself onto the beginning of the stack AFTER recursion
+				$this->themes->add( $theme, new Pie_Easy_Stack(), true );
 
 			} else {
 				throw new Exception( 'Failed to parse parent theme ini file: ' . $ini_file );
