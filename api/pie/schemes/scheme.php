@@ -44,9 +44,14 @@ final class Pie_Easy_Scheme
 	const DIR_DOCS = 'docs';
 	
 	/**
-	 * Parent Theme ini setting
+	 * ini directives
 	 */
-	const SETTING_PARENT_THEME = 'parent_theme';
+	const DIRECTIVE_PARENT_THEME = 'parent_theme';
+	const DIRECTIVE_STYLE_DEFS = 'style';
+	const DIRECTIVE_STYLE_ACTS = 'style_actions';
+	const DIRECTIVE_STYLE_CONDS = 'style_conditions';
+	const DIRECTIVE_ADVANCED = 'advanced';
+	const DIRECTIVE_OPT_SAVE_SINGLE = 'options_save_single';
 
 	/**
 	 * Singleton instance
@@ -77,6 +82,11 @@ final class Pie_Easy_Scheme
 	private $themes;
 
 	/**
+	 * @var Pie_Easy_Map Option directives
+	 */
+	private $directives;
+
+	/**
 	 * Constructor
 	 * 
 	 * this is a singleton
@@ -85,6 +95,7 @@ final class Pie_Easy_Scheme
 	{
 		// initialize themes map
 		$this->themes = new Pie_Easy_Stack();
+		$this->directives = new Pie_Easy_Map();
 	}
 
 	/**
@@ -151,6 +162,95 @@ final class Pie_Easy_Scheme
 	}
 
 	/**
+	 * Has a directive?
+	 *
+	 * @param string $name
+	 * @return boolean
+	 */
+	public function has_directive( $name )
+	{
+		// check for theme directive
+		return $this->directives->contains( $name );
+	}
+
+	/**
+	 * Get a directive
+	 *
+	 * @param string $name
+	 * @return mixed
+	 */
+	public function get_directive( $name )
+	{
+		// check for existing map of theme directives
+		if ( $this->has_directive( $name ) ) {
+			// use existing directive map
+			$directive_map = $this->get_directive_map( $name );
+			// check for directive according to theme stack from TOP DOWN
+			foreach ( $this->themes->to_array(true) as $theme ) {
+				// does theme have this directive set?
+				if ( $directive_map->contains( $theme ) ) {
+					return $directive_map->item_at($theme)->value;
+				}
+			}
+		}
+
+		// directive not set
+		return null;
+	}
+
+	/**
+	 * Get a directive's themes map
+	 *
+	 * @param string $name
+	 * @return Pie_Easy_Map|null
+	 */
+	public function get_directive_map( $name )
+	{
+		if ( $this->has_directive( $name ) ) {
+			return $this->directives->item_at( $name );
+		}
+
+		// directive not set
+		return null;
+	}
+
+	/**
+	 * Set a directive
+	 *
+	 * @param string $theme
+	 * @param string $name
+	 * @param mixed $value
+	 * @param boolean $read_only
+	 */
+	private function set_directive( $theme, $name, $value, $read_only = null )
+	{
+		// convert arrays to maps
+		if ( is_array( $value ) ) {
+			$value = new Pie_Easy_Map( $value, $read_only );
+		}
+
+		// check for existing map of theme directives
+		if ( $this->has_directive( $name ) ) {
+			// use existing directive map
+			$directive_map = $this->get_directive_map( $name );
+		} else {
+			// create and add new map
+			$directive_map = new Pie_Easy_Map();
+			$this->directives->add( $name, $directive_map );
+		}
+
+		// check for existing directive for given theme
+		if ( $directive_map->contains( $theme ) ) {
+			return $directive_map->item_at($theme)->set_value( $value );
+		} else {
+			// create new directive
+			$directive = new Pie_Easy_Scheme_Directive( $name, $value, $read_only );
+			// add it to directive map
+			return $directive_map->add( $theme, $directive );
+		}
+	}
+
+	/**
 	 * Add template filters
 	 */
 	private function add_filters()
@@ -209,8 +309,8 @@ final class Pie_Easy_Scheme
 
 				// parent theme?
 				$parent_theme =
-					isset( $ini[self::SETTING_PARENT_THEME] )
-						? $ini[self::SETTING_PARENT_THEME]
+					isset( $ini[self::DIRECTIVE_PARENT_THEME] )
+						? $ini[self::DIRECTIVE_PARENT_THEME]
 						: false;
 
 				// recurse up the theme stack if necessary
@@ -221,6 +321,20 @@ final class Pie_Easy_Scheme
 
 				// push onto the stack AFTER recursion
 				$this->themes->push( $theme );
+
+				// loop through directives and set them
+				foreach ( $ini as $name => $value ) {
+					if ( $name == self::DIRECTIVE_ADVANCED ) {
+						if ( is_array( $value ) ) {
+							foreach ( $value as $name_adv => $value_adv ) {
+								$this->set_directive( $theme, $name_adv, $value_adv, true );
+							}
+						}
+						continue;
+					} else {
+						$this->set_directive( $theme, $name, $value, true );
+					}
+				}
 
 			} else {
 				throw new Exception( 'Failed to parse theme ini file: ' . $ini_file );
@@ -233,7 +347,6 @@ final class Pie_Easy_Scheme
 		// add filters
 		$this->add_filters();
 	}
-
 
 	/**
 	 * Try to load functions file for themes in stack
