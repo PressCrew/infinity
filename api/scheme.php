@@ -27,6 +27,17 @@ function infinity_scheme_init()
 }
 
 /**
+ * Get a scheme directive value
+ *
+ * @param string $name
+ * @return mixed
+ */
+function infinity_scheme_directive( $name )
+{
+	return Pie_Easy_Scheme::instance()->get_directive( $name );
+}
+
+/**
  * Check if template exists anywhere in the scheme
  *
  * @param string|array $template_names
