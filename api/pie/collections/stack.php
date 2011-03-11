@@ -54,11 +54,16 @@ class Pie_Easy_Stack implements IteratorAggregate,Countable
 	/**
 	 * Return entire stack as an array
 	 *
+	 * @param boolean $reverse
 	 * @return array
 	 */
-	public function to_array()
+	public function to_array( $reverse = false )
 	{
-		return $this->data;
+		if ( $reverse ) {
+			return array_reverse( $this->data, true );
+		} else {
+			return $this->data;
+		}
 	}
 
 	/**
