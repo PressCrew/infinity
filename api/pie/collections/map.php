@@ -183,12 +183,17 @@ class Pie_Easy_Map implements IteratorAggregate,ArrayAccess,Countable
 
 	/**
 	 * Return the entire list of items in the map
-	 * 
+	 *
+	 * @param boolean $reverse
 	 * @return array
 	 */
-	public function to_array()
+	public function to_array( $reverse = false )
 	{
-		return $this->data;
+		if ( $reverse ) {
+			return array_reverse( $this->data, true );
+		} else {
+			return $this->data;
+		}
 	}
 
 	/**
