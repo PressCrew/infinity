@@ -204,7 +204,7 @@ final class Pie_Easy_Scheme
 	 * @param string $name
 	 * @return Pie_Easy_Map|null
 	 */
-	public function get_directive_map( $name )
+	private function get_directive_map( $name )
 	{
 		if ( $this->has_directive( $name ) ) {
 			return $this->directives->item_at( $name );
