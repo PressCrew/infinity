@@ -72,7 +72,7 @@ final class Pie_Easy_Scheme
 	/**
 	 * Theme stack
 	 *
-	 * @var Pie_Easy_Map
+	 * @var Pie_Easy_Stack
 	 */
 	private $themes;
 
@@ -84,7 +84,7 @@ final class Pie_Easy_Scheme
 	private function __construct()
 	{
 		// initialize themes map
-		$this->themes = new Pie_Easy_Map();
+		$this->themes = new Pie_Easy_Stack();
 	}
 
 	/**
@@ -155,8 +155,8 @@ final class Pie_Easy_Scheme
 	 */
 	private function add_filters()
 	{
-		// only add filters if there is at least one parent theme
-		if ( count( $this->themes ) >= 1 ) {
+		// only add filters if there is at least one theme
+		if ( count( $this->themes ) ) {
 
 			// template filter callback
 			$filter = array( $this, 'filter_template' );
@@ -219,11 +219,11 @@ final class Pie_Easy_Scheme
 					$this->load( $parent_theme );
 				}
 
-				// push myself onto the beginning of the stack AFTER recursion
-				$this->themes->add( $theme, new Pie_Easy_Stack(), true );
+				// push onto the stack AFTER recursion
+				$this->themes->push( $theme );
 
 			} else {
-				throw new Exception( 'Failed to parse parent theme ini file: ' . $ini_file );
+				throw new Exception( 'Failed to parse theme ini file: ' . $ini_file );
 			}
 		}
 
@@ -234,13 +234,14 @@ final class Pie_Easy_Scheme
 		$this->add_filters();
 	}
 
+
 	/**
 	 * Try to load functions file for themes in stack
 	 */
 	public function load_functions()
 	{
-		// loop through parent theme stack in reverse order
-		foreach ( array_reverse( $this->themes->to_array(), true ) as $theme => $directives ) {
+		// loop through theme stack
+		foreach ( $this->themes->to_array() as $theme  ) {
 			// load functions file if it exists
 			include_once $this->theme_file( $theme, 'functions.php' );
 		}
@@ -255,11 +256,8 @@ final class Pie_Easy_Scheme
 	 */
 	public function load_options( Pie_Easy_Options_Registry $registry, $ini_file_name = 'options' )
 	{
-		// reverse the stack
-		$themes = array_reverse( $this->themes->to_array(), true );
-
-		// loop through entire theme stack in reverse and try to load options
-		foreach( $themes as $theme => $directives ) {
+		// loop through entire theme stack BOTTOM UP and try to load options
+		foreach( $this->themes->to_array() as $theme ) {
 
 			// path to options ini
 			$options_ini = $this->theme_file( $theme, $this->config_dir, $ini_file_name . '.ini' );
@@ -307,8 +305,8 @@ final class Pie_Easy_Scheme
 	 */
 	public function locate_template( $template_names, $load = false )
 	{
-		// must have at least one parent them to search
-		if ( count( $this->themes ) >= 1 ) {
+		// must have at least one theme to search
+		if ( count( $this->themes ) ) {
 
 			// convert string arg to array
 			if ( !is_array( $template_names ) ) {
@@ -318,8 +316,8 @@ final class Pie_Easy_Scheme
 			// loop through all templates
 			foreach ( $template_names as $template_name ) {
 
-				// loop through the entire theme stack
-				foreach ( $this->themes as $theme => $directives ) {
+				// loop through the entire theme stack FROM TOP DOWN
+				foreach ( $this->themes->to_array(true) as $theme ) {
 
 					// prepend all template names with theme dir
 					$located_template = $this->theme_file( $theme, $template_name );
@@ -390,7 +388,7 @@ final class Pie_Easy_Scheme
 		// paths to return
 		$paths = array();
 
-		foreach ( $this->themes as $theme => $directives ) {
+		foreach ( $this->themes->to_array(true) as $theme ) {
 			$paths[] = $this->theme_file( $theme, $file_names );
 		}
 
@@ -451,7 +449,7 @@ final class Pie_Easy_Scheme
 	}
 
 	/**
-	 * Locate a theme file, giving priority to lower themes in the stack
+	 * Locate a theme file, giving priority to top themes in the stack
 	 *
 	 * @param string $file_names,... The file names that make up the RELATIVE path to the theme root
 	 * @return string|false
@@ -477,8 +475,8 @@ final class Pie_Easy_Scheme
 			}
 		}
 
-		// loop through stack
-		foreach ( $this->themes as $theme => $directives ) {
+		// loop through stack TOP DOWN
+		foreach ( $this->themes->to_array(true) as $theme ) {
 
 			// path to stackfile
 			$stack_file =
