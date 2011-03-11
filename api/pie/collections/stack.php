@@ -145,10 +145,15 @@ class Pie_Easy_Stack implements IteratorAggregate,Countable
 	 * 
 	 * @param mixed $item The item to be pushed into the stack
 	 */
-	public function push( $item )
+	public function push( $item, $prepend = false )
 	{
 		++$this->count;
-		array_push( $this->data, $item );
+		
+		if ( $prepend ) {
+			array_unshift( $this->data, $item );
+		} else {
+			array_push( $this->data, $item );
+		}
 	}
 
 	/**
