@@ -20,13 +20,24 @@
 			}
 		});
 
+		// cpanel options page show all options for section
+		$('a.infinity-cpanel-options-menu-showall').button().click(function(){
+			return false;
+		});
+
 		// cpanel options page menu item clicks
-		$('div.infinity-cpanel-options-menu ul li a').bind('click',
+		$('div.infinity-cpanel-options-menu a.infinity-cpanel-options-menu-show').bind('click',
 			function(){
+				// null vars
+				var option, section;
 				// the form
 				var form = $('div#infinity-cpanel-options form').empty();
-				// get option from href
-				var option = $(this).attr('href').substr(1);
+				// option or section?
+				if ($(this).hasClass('infinity-cpanel-options-menu-showall')) {
+					section = $(this).attr('href').substr(1);
+				} else {
+					option = $(this).attr('href').substr(1);
+				}
 				// message element
 				var message =
 					$('div#infinity-cpanel-options-flash')
@@ -37,7 +48,8 @@
 					InfinityDashboardL10n.ajax_url,
 					{
 						'action': 'infinity_options_screen',
-						'option_name': option
+						'option_name': option,
+						'section_name': section,
 					},
 					function(r) {
 						var sr = pieEasyAjax.splitResponseStd(r);
@@ -48,12 +60,15 @@
 							$('div.pie-easy-options-fu').each(function(){
 								$(this).pieEasyUploader();
 							});
-							// init options tabs
-							$('div.infinity-cpanel-options-single').tabs().css('float', 'left');
-							// init submit buttons
-							$('a.infinity-cpanel-options-save')
-								.first().button({icons: {secondary: "ui-icon-arrowthick-2-n-s"}})
-								.next().button({icons: {secondary: "ui-icon-arrowthick-1-e"}});
+							// init option reqs
+							$('div.infinity-cpanel-options-single').each(function(){
+								// tabs
+								$(this).tabs().css('float', 'left');
+								// save buttons
+								$('a.infinity-cpanel-options-save', this)
+									.first().button({icons: {secondary: "ui-icon-arrowthick-2-n-s"}})
+									.next().button({icons: {secondary: "ui-icon-arrowthick-1-e"}});
+							});
 							// remove message
 							message.fadeOut().empty();
 						} else {

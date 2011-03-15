@@ -283,8 +283,9 @@ function infinity_options_render_menu_section( Infinity_Options_Section $section
 		
 	// begin rendering ?>
 	<div>
-		<a href="#<?php print esc_attr( $section->name ) ?>"><?php print esc_html( $section->title ) ?></a>
-	</div> <?php
+		<a href="#"><?php print esc_html( $section->title ) ?></a>
+		<a href="#<?php print esc_attr( $section->name ) ?>" class="infinity-cpanel-options-menu-show infinity-cpanel-options-menu-showall">Show All</a>
+	</div><?php
 
 	if ( $children ) {
 		// render all children sections ?>
@@ -309,7 +310,7 @@ function infinity_options_render_menu_options( $options )
 	// begin rendering ?>
 	<ul><?php
 	foreach( $options as $option ) { ?>
-		<li><a href="#<?php print esc_attr( $option->name ) ?>"><?php print esc_html( $option->title ) ?></a></li><?php
+		<li><a href="#<?php print esc_attr( $option->name ) ?>" class="infinity-cpanel-options-menu-show"><?php print esc_html( $option->title ) ?></a></li><?php
 	}?>
 	</ul><?php
 }
@@ -319,16 +320,44 @@ function infinity_options_render_menu_options( $options )
  */
 function infinity_options_render_options_screen()
 {
-	if ( isset( $_POST['option_name'] ) ) {
-		// try to render the option
-		$content = Infinity_Options_Registry::instance()->render_option( $_POST['option_name'], false );
-		// respond
-		if ( $content ) {
-			Pie_Easy_Ajax::responseStd( true, null, $content );
-		} else {
-			Pie_Easy_Ajax::responseStd( false, 'Failed to render options' );
+	// options to render
+	$options = array();
+
+	// content to return
+	$content = null;
+
+	// try to populate options array
+	if ( !empty( $_POST['option_name'] ) ) {
+		// look up the single option
+		$option = Infinity_Options_Registry::instance()->get_option( $_POST['option_name'] );
+		// did we get a valid option?
+		if ( $option instanceof Pie_Easy_Options_Option ) {
+			// add it to options to array
+			$options[] = $option;
+		}
+	} elseif ( !empty( $_POST['section_name'] ) ) {
+		// look up section
+		$section = Infinity_Options_Registry::instance()->get_section( $_POST['section_name'] );
+		// did we get a valid section?
+		if ( $section instanceof Pie_Easy_Options_Section ) {
+			// get all options for this section
+			$options = Infinity_Options_Registry::instance()->get_menu_options( $section );
 		}
 	}
+
+	// loop through all options and render each one
+	foreach ( $options as $option_to_render ) {
+		// try to render the option
+		$content .= Infinity_Options_Registry::instance()->render_option( $option_to_render, false );
+	}
+
+	// respond
+	if ( strlen($content) ) {
+		Pie_Easy_Ajax::responseStd( true, null, $content );
+	} else {
+		Pie_Easy_Ajax::responseStd( false, 'Failed to render options' );
+	}
+
 }
 add_action( 'wp_ajax_infinity_options_screen', 'infinity_options_render_options_screen' );
 

@@ -624,35 +624,36 @@ abstract class Pie_Easy_Options_Registry
 	/**
 	 * Render one option given it's name
 	 *
-	 * @param string $option_name
+	 * @param string $option
 	 * @param boolean $output Set to false to return results instead of printing
 	 * @return string|boolean
 	 */
-	public function render_option( $option_name, $output = true )
+	public function render_option( $option, $output = true )
 	{
-		if ( $this->has_option( $option_name ) ) {
-			
+		if ( is_string( $option ) ) {
 			// get the option from map
-			$option = $this->get_option( $option_name );
-			
-			// render the option
-			$html = $this->option_renderer->render( $option, $output );
-			
-			// render options that require this one
-			foreach ( $this->get_options() as $sibling_option ) {
-				if ( $option->name == $sibling_option->required_option ) {
-					$html .= $this->option_renderer->render( $sibling_option, $output );
-				}
-			}
-			
-			// render the manifest
-			$html .= $this->option_renderer->render_manifest( $output );
-			
-			// return result
-			return ( $output ) ? true : $html;
-		} else {
-			throw new Exception( sprintf( 'The "%s" option is not registered.', $option_name ) );
+			$option = $this->get_option( $option );
+		} elseif ( !$this->has_option( $option->name ) ) {
+			// not good
+			throw new Exception( sprintf( 'The "%s" option is not registered.', $option->name ) );
 		}
+			
+		// render the option
+		$html = $this->option_renderer->render( $option, $output );
+
+		// render options that require this one
+		foreach ( $this->get_options() as $sibling_option ) {
+			if ( $option->name == $sibling_option->required_option ) {
+				$html .= $this->option_renderer->render( $sibling_option, $output );
+			}
+		}
+
+		// render the manifest
+		$html .= $this->option_renderer->render_manifest( $output );
+
+		// return result
+		return ( $output ) ? true : $html;
+
 	}
 
 	/**
