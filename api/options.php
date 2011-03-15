@@ -129,7 +129,9 @@ class Infinity_Options_Option_Renderer extends Pie_Easy_Options_Option_Renderer
 			<div class="infinity-cpanel-options-single-header">
 				<?php $this->render_label() ?>
 				<a class="infinity-cpanel-options-save" href="#">Save All</a>
-				<a class="infinity-cpanel-options-save" href="#<?php $this->render_name() ?>">Save</a>
+				<?php if ( $this->do_save_single_button() ): ?>
+					<a class="infinity-cpanel-options-save" href="#<?php $this->render_name() ?>">Save</a>
+				<?php endif; ?>
 			</div>
 			<div class="infinity-cpanel-options-single-flash">
 				<!-- flash messages for this option will render here -->
@@ -158,6 +160,15 @@ class Infinity_Options_Option_Renderer extends Pie_Easy_Options_Option_Renderer
 			</div>
 			<?php endif; ?>
 		</div><?php
+	}
+
+	/**
+	 * Returns ture
+	 * @return <type>
+	 */
+	private function do_save_single_button()
+	{
+		return ( infinity_scheme_directive( Pie_Easy_Scheme::DIRECTIVE_OPT_SAVE_SINGLE ) );
 	}
 }
 
