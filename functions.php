@@ -13,8 +13,8 @@
 // DO NOT EDIT these constants for any reason
 define( 'INFINITY_VERSION', '1.0' );
 define( 'INFINITY_NAME', 'infinity' );
-define( 'INFINITY_THEME_DIR', get_theme_root() . DIRECTORY_SEPARATOR . INFINITY_NAME );
-define( 'INFINITY_THEME_URL', get_theme_root_uri() . '/' . INFINITY_NAME );
+define( 'INFINITY_THEME_DIR', get_theme_root( INFINITY_NAME ) . DIRECTORY_SEPARATOR . INFINITY_NAME );
+define( 'INFINITY_THEME_URL', get_theme_root_uri( INFINITY_NAME ) . '/' . INFINITY_NAME );
 define( 'INFINITY_API_DIR', INFINITY_THEME_DIR . DIRECTORY_SEPARATOR . 'api' );
 define( 'INFINITY_API_URL', INFINITY_THEME_URL . '/api' );
 define( 'INFINITY_PIE_DIR', INFINITY_API_DIR . DIRECTORY_SEPARATOR . 'pie' );
@@ -24,8 +24,8 @@ define( 'INFINITY_ADMIN_DIR', INFINITY_THEME_DIR . DIRECTORY_SEPARATOR . 'dashbo
 define( 'INFINITY_ADMIN_URL', INFINITY_THEME_URL . '/dashboard' );
 define( 'INFINITY_EXPORT_DIR', INFINITY_THEME_DIR . DIRECTORY_SEPARATOR . 'export' );
 define( 'INFINITY_EXPORT_URL', INFINITY_THEME_URL . '/export' );
-define( 'INFINITY_EXTRAS_DIR', get_theme_root() . DIRECTORY_SEPARATOR . INFINITY_NAME . '-extras' );
-define( 'INFINITY_EXTRAS_URL', get_theme_root_uri() . '/' . INFINITY_NAME . '-extras' );
+define( 'INFINITY_EXTRAS_DIR', get_theme_root( INFINITY_NAME ) . DIRECTORY_SEPARATOR . INFINITY_NAME . '-extras' );
+define( 'INFINITY_EXTRAS_URL', get_theme_root_uri( INFINITY_NAME ) . '/' . INFINITY_NAME . '-extras' );
 define( 'INFINITY_TEXT_DOMAIN', INFINITY_NAME );
 define( 'INFINITY_ADMIN_PAGE', INFINITY_NAME . '-theme' );
 define( 'INFINITY_ADMIN_TPLS_DIR', INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'templates' );

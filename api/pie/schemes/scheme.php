@@ -300,45 +300,48 @@ final class Pie_Easy_Scheme
 
 		// does ini file exist?
 		if ( is_readable( $ini_file ) ) {
-
 			// parse it
 			$ini = parse_ini_file( $ini_file, true );
+		} else {
+			// yipes, theme has no ini file.
+			// assume that parent theme is 'infinity'
+			$ini[self::DIRECTIVE_PARENT_THEME] = INFINITY_NAME;
+		}
 
-			// make sure we got something
-			if ( $ini !== false ) {
+		// make sure we got something
+		if ( $ini !== false ) {
 
-				// parent theme?
-				$parent_theme =
-					isset( $ini[self::DIRECTIVE_PARENT_THEME] )
-						? $ini[self::DIRECTIVE_PARENT_THEME]
-						: false;
+			// parent theme?
+			$parent_theme =
+				isset( $ini[self::DIRECTIVE_PARENT_THEME] )
+					? $ini[self::DIRECTIVE_PARENT_THEME]
+					: false;
 
-				// recurse up the theme stack if necessary
-				if ( $parent_theme ) {
-					// load it
-					$this->load( $parent_theme );
-				}
-
-				// push onto the stack AFTER recursion
-				$this->themes->push( $theme );
-
-				// loop through directives and set them
-				foreach ( $ini as $name => $value ) {
-					if ( $name == self::DIRECTIVE_ADVANCED ) {
-						if ( is_array( $value ) ) {
-							foreach ( $value as $name_adv => $value_adv ) {
-								$this->set_directive( $theme, $name_adv, $value_adv, true );
-							}
-						}
-						continue;
-					} else {
-						$this->set_directive( $theme, $name, $value, true );
-					}
-				}
-
-			} else {
-				throw new Exception( 'Failed to parse theme ini file: ' . $ini_file );
+			// recurse up the theme stack if necessary
+			if ( $parent_theme ) {
+				// load it
+				$this->load( $parent_theme );
 			}
+
+			// push onto the stack AFTER recursion
+			$this->themes->push( $theme );
+
+			// loop through directives and set them
+			foreach ( $ini as $name => $value ) {
+				if ( $name == self::DIRECTIVE_ADVANCED ) {
+					if ( is_array( $value ) ) {
+						foreach ( $value as $name_adv => $value_adv ) {
+							$this->set_directive( $theme, $name_adv, $value_adv, true );
+						}
+					}
+					continue;
+				} else {
+					$this->set_directive( $theme, $name, $value, true );
+				}
+			}
+
+		} else {
+			throw new Exception( 'Failed to parse theme ini file: ' . $ini_file );
 		}
 
 		// try to load additional functions files after WP theme setup
@@ -429,20 +432,20 @@ final class Pie_Easy_Scheme
 			// loop through all templates
 			foreach ( $template_names as $template_name ) {
 
-				// loop through the entire theme stack FROM TOP DOWN
-				foreach ( $this->themes->to_array(true) as $theme ) {
+				// get all possible template paths
+				$template_paths = $this->theme_dirs( $template_name );
 
-					// prepend all template names with theme dir
-					$located_template = $this->theme_file( $theme, $template_name );
+				// loop through all templates
+				foreach ( $template_paths as $template_path ) {
 
 					// does it exist?
-					if ( file_exists( $located_template ) ) {
+					if ( file_exists( $template_path ) ) {
 						// load it?
 						if ($load) {
-							load_template( $located_template );
+							load_template( $template_path );
 						}
 						// return the located template path
-						return $located_template;
+						return $template_path;
 					}
 				}
 			}
@@ -470,7 +473,7 @@ final class Pie_Easy_Scheme
 	 */
 	public function theme_dir( $theme )
 	{
-		return get_theme_root() . DIRECTORY_SEPARATOR . $theme;
+		return get_theme_root( $theme ) . DIRECTORY_SEPARATOR . $theme;
 	}
 
 	/**
@@ -481,7 +484,7 @@ final class Pie_Easy_Scheme
 	 */
 	public function theme_dir_url( $theme )
 	{
-		return get_theme_root_uri() . '/' . $theme;
+		return get_theme_root_uri( $theme ) . '/' . $theme;
 	}
 	
 	/**
@@ -504,7 +507,7 @@ final class Pie_Easy_Scheme
 		foreach ( $this->themes->to_array(true) as $theme ) {
 			$paths[] = $this->theme_file( $theme, $file_names );
 		}
-
+		
 		return $paths;
 	}
 
@@ -635,7 +638,7 @@ final class Pie_Easy_Scheme
 		}
 
 		return
-			get_theme_root() .
+			get_theme_root( $theme ) .
 			DIRECTORY_SEPARATOR . $theme .
 			DIRECTORY_SEPARATOR . self::DIR_ASSETS;
 	}
@@ -653,7 +656,7 @@ final class Pie_Easy_Scheme
 		}
 
 		return
-			get_theme_root_uri() .
+			get_theme_root_uri( $theme ) .
 			'/' . $theme .
 			'/' . self::DIR_ASSETS;
 	}
