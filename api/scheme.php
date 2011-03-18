@@ -21,7 +21,7 @@ Pie_Easy_Loader::load( 'schemes' );
 function infinity_scheme_init()
 {
 	// initialize the scheme
-	Pie_Easy_Scheme::instance()->init( 'config', INFINITY_NAME );
+	Pie_Easy_Scheme::instance()->init( INFINITY_NAME, 'config' );
 	Pie_Easy_Scheme::instance()->load_options( Infinity_Options_Registry::instance() );
 	return true;
 }

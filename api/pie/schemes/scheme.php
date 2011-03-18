@@ -64,6 +64,13 @@ final class Pie_Easy_Scheme
 	static private $instance;
 
 	/**
+	 * Name of the root theme
+	 *
+	 * @var string
+	 */
+	private $root_theme;
+
+	/**
 	 * Relative path to the config dir relative to the theme's template path
 	 *
 	 * @var string
@@ -123,13 +130,15 @@ final class Pie_Easy_Scheme
 	/**
 	 * One time initialization helper
 	 *
+	 * @param string $root_theme
 	 * @param string $config_dir
 	 * @param string $config_file
 	 * @return boolean
 	 */
-	public function init( $config_dir, $config_file )
+	public function init( $root_theme, $config_dir, $config_file = null )
 	{
 		// setup config
+		$this->set_root_theme( $root_theme );
 		$this->set_config_dir( $config_dir );
 		$this->set_config_file( $config_file );
 
@@ -146,6 +155,22 @@ final class Pie_Easy_Scheme
 		add_action( 'after_setup_theme', array($this, 'load_functions') );
 		
 		return true;
+	}
+
+	/**
+	 * Set the name of the root theme
+	 *
+	 * @param string $name
+	 * @return boolean
+	 */
+	public function set_root_theme( $name )
+	{
+		if ( empty( $this->root_theme ) ) {
+			$this->root_theme = $name;
+			return true;
+		}
+
+		return false;
 	}
 
 	/**
@@ -173,7 +198,7 @@ final class Pie_Easy_Scheme
 	public function set_config_file( $file_name )
 	{
 		if ( empty( $this->config_file ) ) {
-			$this->config_file = $file_name;
+			$this->config_file = ( strlen($file_name) ) ? $file_name : $this->root_theme;
 			return true;
 		}
 
@@ -323,8 +348,8 @@ final class Pie_Easy_Scheme
 			$ini = parse_ini_file( $ini_file, true );
 		} else {
 			// yipes, theme has no ini file.
-			// assume that parent theme is 'infinity'
-			$ini[self::DIRECTIVE_PARENT_THEME] = INFINITY_NAME;
+			// assume that parent theme is the root theme
+			$ini[self::DIRECTIVE_PARENT_THEME] = $this->root_theme;
 		}
 
 		// make sure we got something
