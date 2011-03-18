@@ -7,7 +7,7 @@
  * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
  * @package pie
- * @subpackage scheme
+ * @subpackage schemes
  * @since 1.0
  */
 
@@ -50,6 +50,9 @@ final class Pie_Easy_Scheme
 	const DIRECTIVE_STYLE_DEFS = 'style';
 	const DIRECTIVE_STYLE_ACTS = 'style_actions';
 	const DIRECTIVE_STYLE_CONDS = 'style_conditions';
+	const DIRECTIVE_SCRIPT_DEFS = 'script';
+	const DIRECTIVE_SCRIPT_ACTS = 'script_actions';
+	const DIRECTIVE_SCRIPT_CONDS = 'script_conditions';
 	const DIRECTIVE_ADVANCED = 'advanced';
 	const DIRECTIVE_OPT_SAVE_SINGLE = 'options_save_single';
 
@@ -85,6 +88,11 @@ final class Pie_Easy_Scheme
 	 * @var Pie_Easy_Map Option directives
 	 */
 	private $directives;
+
+	/**
+	 * @var Pie_Easy_Scheme_Enqueue
+	 */
+	private $enqueue;
 
 	/**
 	 * Constructor
@@ -126,7 +134,18 @@ final class Pie_Easy_Scheme
 		$this->set_config_file( $config_file );
 
 		// load it
-		return $this->load();
+		$this->load();
+		
+		// add filters
+		$this->add_filters();
+		
+		// enqueue styles and scripts
+		$this->enqueue = new Pie_Easy_Scheme_Enqueue( $this );
+		
+		// try to load additional functions files after WP theme setup
+		add_action( 'after_setup_theme', array($this, 'load_functions') );
+		
+		return true;
 	}
 
 	/**
@@ -204,7 +223,7 @@ final class Pie_Easy_Scheme
 	 * @param string $name
 	 * @return Pie_Easy_Map|null
 	 */
-	private function get_directive_map( $name )
+	public function get_directive_map( $name )
 	{
 		if ( $this->has_directive( $name ) ) {
 			return $this->directives->item_at( $name );
@@ -343,12 +362,6 @@ final class Pie_Easy_Scheme
 		} else {
 			throw new Exception( 'Failed to parse theme ini file: ' . $ini_file );
 		}
-
-		// try to load additional functions files after WP theme setup
-		add_action( 'after_setup_theme', array($this, 'load_functions') );
-
-		// add filters
-		$this->add_filters();
 	}
 
 	/**
