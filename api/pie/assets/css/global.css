@@ -20,27 +20,6 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-/* Restore sanity */
-body.toplevel_page_infinity-theme div#wpbody-content {
-	font-family: "Trebuchet MS","Tahoma","Verdana","Arial","sans-serif";
-}
-body.toplevel_page_infinity-theme div#wpbody-content h1,
-body.toplevel_page_infinity-theme div#wpbody-content h2,
-body.toplevel_page_infinity-theme div#wpbody-content h3,
-body.toplevel_page_infinity-theme div#wpbody-content h4,
-body.toplevel_page_infinity-theme div#wpbody-content h5,
-body.toplevel_page_infinity-theme div#wpbody-content h6 {
-	margin: 0.1em 0 .6em 0;
-	line-height: 100%;
-	font-weight: bold;
-	font-family: "Trebuchet MS","Tahoma","Verdana","Arial","sans-serif";
-}
-body.toplevel_page_infinity-theme div#wpbody-content p,
-body.toplevel_page_infinity-theme div#wpbody-content li {
-	line-height: 100%;
-	font-family: "Trebuchet MS","Tahoma","Verdana","Arial","sans-serif";
-}
-
 /* Activity Icon */
 .ui-icon.ui-icon-ajax-loader {
 	background-image: url('../images/ajax_loader.gif');
