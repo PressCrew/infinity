@@ -131,6 +131,9 @@ You can assign a CSS id to the option field in case you need to provide advanced
 
 	field_id = "my-css-id"
 
+Since radio and checkbox groups cannot all have the same CSS id, the entire group of
+inputs will be wrapped with a div where the id equals the `field_id`.
+
 Child theme can override field\_id: **Yes**
 
 #### field\_class

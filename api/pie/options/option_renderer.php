@@ -295,8 +295,18 @@ abstract class Pie_Easy_Options_Option_Renderer
 			'walker'				=> new Pie_Easy_Options_Walker_Category(),
 			'pie_easy_option'		=> $this->option );
 
+		// render div wrapper if applicable
+		if ( $this->option->field_id ) { ?>
+			<div id="<?php print $this->option->field_id ?>"><?php
+		}
+
 		// call the WordPress function
 		wp_list_categories( $args );
+
+		// close div wrapper if applicable
+		if ( $this->option->field_id ) { ?>
+			</div><?php
+		}
 	}
 
 	/**
@@ -373,10 +383,19 @@ abstract class Pie_Easy_Options_Option_Renderer
 		}
 
 		if ( is_array( $field_options ) ) {
+			// render div wrapper if applicable
+			if ( $this->option->field_id ) { ?>
+				<div id="<?php print $this->option->field_id ?>"><?php
+			}
+			// loop through all field options
 			foreach ( $field_options as $value => $display ) {
+				$loop = ($loop) ? $loop + 1 : 1;
 				$checked = ( in_array( $value, $selected_value ) ) ? ' checked=checked' : null; ?>
-				<input type="<?php print $type ?>" name="<?php $this->render_name() ?><?php if ( $type == 'checkbox' ): ?>[]<?php endif; ?>" id="<?php print esc_attr( $this->option->field_id ) ?>" value="<?php print esc_attr( $value ) ?>"<?php print $checked ?> /><?php
-				print $display;
+				<input type="<?php print $type ?>" name="<?php $this->render_name() ?><?php if ( $type == 'checkbox' ): ?>[]<?php endif; ?>" value="<?php print esc_attr( $value ) ?>"<?php print $checked ?> /><label for="<?php print $element_id ?>"><?php print $display ?></label><?php
+			}
+			// close div wrapper if applicable
+			if ( $this->option->field_id ) { ?>
+				</div><?php
 			}
 		} else {
 			throw new Exception( sprintf( 'The "%s" option has no array of field options to render.', $this->option->name ) );
@@ -420,8 +439,18 @@ abstract class Pie_Easy_Options_Option_Renderer
 			'walker'			=> new Pie_Easy_Options_Walker_Page(),
 			'pie_easy_option'	=> $this->option );
 
+		// render div wrapper if applicable
+		if ( $this->option->field_id ) { ?>
+			<div id="<?php print $this->option->field_id ?>"><?php
+		}
+
 		// call the WordPress function
 		wp_list_pages( $args );
+
+		// close div wrapper if applicable
+		if ( $this->option->field_id ) { ?>
+			</div><?php
+		}
 	}
 
 	/**
