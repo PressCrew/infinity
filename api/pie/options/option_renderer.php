@@ -578,6 +578,22 @@ abstract class Pie_Easy_Options_Option_Renderer
 	}
 
 	/**
+	 * Render a string representation of the date the option was last updated
+	 *
+	 * @param string $format
+	 */
+	final protected function render_date_updated( $format = 'F j, Y, g:i a' )
+	{
+		$time_updated = $this->option->get_meta( Pie_Easy_Options_Option::META_TIME_UPDATED );
+
+		if ( $time_updated ) {
+			print date( $format, $time_updated );
+		} else {
+			print 'Never';
+		}
+	}
+
+	/**
 	 * Render documentation for this option
 	 *
 	 * @param array $doc_dirs Directory paths under which to search for doc page file
@@ -607,6 +623,31 @@ abstract class Pie_Easy_Options_Option_Renderer
 
 			// publish it!
 			$doc->publish();
+		}
+	}
+	
+	/**
+	 * Render sample code for this option
+	 *
+	 * @return null
+	 */
+	final protected function render_sample_code()
+	{
+
+// begin rendering ?>
+<strong>Test if option is set</strong>
+<code>&lt;?php if ( infinity_option( '<?php print $this->option->name ?>' ) ): ?&gt;
+    <?php print $this->option->name ?> has a value
+&lt;?php endif; ?&gt;</code>
+
+<strong>Echo an option value</strong>
+<code>&lt;?php echo infinity_option( '<?php print $this->option->name ?>' ); ?&gt;</code><?php
+
+		// special uploader functions
+		if ( $this->option->field_type == Infinity_Options_Option::FIELD_UPLOAD ) {
+// begin rendering ?>
+<strong>Echo option as image URL</strong>
+<code>&lt;img src="&lt;?php echo infinity_option_image_url( '<?php print $this->option->name ?>' ); ?&gt;"&gt;</code><?php
 		}
 	}
 
