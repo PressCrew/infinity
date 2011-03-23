@@ -46,6 +46,12 @@ div#infinity-cpanel-options {
 	div#infinity-cpanel-options-content {
 		padding: 0px 10px 10px 235px;
 	}
+	div#infinity-cpanel-options-content code {
+		display: block;
+		white-space: pre;
+		margin-bottom: 10px;
+		padding: 4px;
+	}
 
 div#infinity-cpanel-options-flash {
 	display: none;
@@ -67,8 +73,13 @@ div.infinity-cpanel-options-single ul.ui-tabs-nav {
 		}
 
 div.infinity-cpanel-options-single div.ui-tabs-panel {
-	padding: 0.5em 1em;
+	padding: 0.5em 1em 0.25em 1em;
 }
+	div.infinity-cpanel-options-single div.ui-tabs-panel div.infinity-cpanel-options-last-modified {
+		line-height: 9px;
+		font-size: 9px;
+		text-align: right;
+	}
 
 div.infinity-cpanel-options-single-flash {
 	display: none;

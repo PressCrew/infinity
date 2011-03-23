@@ -148,6 +148,9 @@ class Infinity_Options_Option_Renderer extends Pie_Easy_Options_Option_Renderer
 			<div id="<?php $this->render_name() ?>-tabs-1">
 				<p><?php $this->render_description() ?></p>
 				<?php $this->render_field() ?>
+				<div class="infinity-cpanel-options-last-modified">
+					Last Modified: <?php echo $this->render_date_updated() ?>
+				</div>
 			</div>
 			<?php if ( $this->has_documentation() ): ?>
 			<div id="<?php $this->render_name() ?>-tabs-2">
@@ -156,7 +159,7 @@ class Infinity_Options_Option_Renderer extends Pie_Easy_Options_Option_Renderer
 			<?php endif; ?>
 			<?php if ( is_admin() ): ?>
 			<div id="<?php $this->render_name() ?>-tabs-3">
-				<p>Sample code for this option</p>
+				<p><?php $this->render_sample_code() ?></p>
 			</div>
 			<?php endif; ?>
 		</div><?php
