@@ -12,6 +12,7 @@
 
 		// cpanel options page menu
 		$('div.infinity-cpanel-options-menu').accordion({
+			autoHeight: false,
 			collapsible: true,
 			clearStyle: true,
 			icons: {
