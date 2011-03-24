@@ -13,7 +13,7 @@
 
 		// init cpanel tabs
 		$('div#infinity-cpanel-content').tabs({
-				tabTemplate: "<li><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-close'>Remove Tab</span></li>",
+				tabTemplate: "<li><a href='#{href}'>#{label}</a><span class='ui-icon ui-icon-close'></span></li>",
 				add: function( event, ui ) {
 					
 					// message element
