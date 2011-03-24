@@ -102,8 +102,8 @@ class Pie_Easy_Options_Uploader
 		$edit_url = sprintf( 'media.php?attachment_id=%d&action=edit', $option->get() );
 		list( $attach_url, $attach_width, $attach_height ) = $option->get_image_src('full'); ?>
 		<div class="pie-easy-options-fu">
-			<fieldset class="pie-easy-options-fu-img">
-				<legend><?php _e( 'Current Image' ) ?></legend>
+			<fieldset class="pie-easy-options-fu-img ui-corner-all">
+				<legend class="ui-corner-all"><?php _e( 'Current Image' ) ?></legend>
 				<p><img src="<?php print esc_attr( $attach_url ) ?>" alt="" /></p>
 				<div class="pie-easy-options-fu-ibar">
 					<a>Zoom</a>
@@ -114,8 +114,8 @@ class Pie_Easy_Options_Uploader
 					<img src="<?php print esc_attr( $attach_url ) ?>"  height="<?php print $attach_height ?>" width="<?php print $attach_width ?>" alt="">
 				</div>
 			</fieldset>
-			<fieldset class="pie-easy-options-fu-stat">
-				<legend><?php _e( 'Upload Status' ) ?></legend>
+			<fieldset class="pie-easy-options-fu-stat ui-corner-all">
+				<legend class="ui-corner-all"><?php _e( 'Upload Status' ) ?></legend>
 				<textarea></textarea><div><p></p></div>
 			</fieldset>
 			<div class="pie-easy-options-fu-btn">
