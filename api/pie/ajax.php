@@ -49,6 +49,27 @@ final class Pie_Easy_Ajax
 	{
 		return self::response( $code, $message, $content );
 	}
+
+	/**
+	 * Start capturing an AJAX response
+	 *
+	 * @return boolean
+	 */
+	public static function responseBegin()
+	{
+		return ob_start();
+	}
+
+	/**
+	 * End capturing an AJAX response
+	 *
+	 * @param integer $code A response code
+	 * @param string $message Optional response message
+	 */
+	public static function responseEnd( $code, $message = null )
+	{
+		self::response( $code, $message, ob_get_clean() );
+	}
 }
 
 ?>
