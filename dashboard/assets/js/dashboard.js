@@ -12,8 +12,9 @@
 		$('a#infinity-cpanel-toolbar-thanks').button({icons: {primary: "ui-icon-heart"}, text: false});
 
 		// init cpanel tabs
-		$('div#infinity-cpanel-content').tabs({
+		$('div#infinity-cpanel').tabs({
 				tabTemplate: "<li><a href='#{href}'>#{label}</a><span class='ui-icon ui-icon-close'></span></li>",
+				panelTemplate: '<div class="infinity-cpanel-tab"></div>',
 				add: function( event, ui ) {
 					
 					// message element
@@ -36,10 +37,8 @@
 							if (sr.code >= 1) {
 								// success
 								message.fadeOut(200, function(){
-									var content = $('<p style="display: none;">' + sr.content + '</p>');
-									$(ui.panel).append(content);
+									$(ui.panel).append(sr.content);
 									initOptionsPanel();
-									content.fadeIn(200);
 								});
 							} else {
 								// error
@@ -51,7 +50,6 @@
 					);
 				}
 		}).find('.ui-tabs-nav').sortable({
-			axis: 'x',
 			cursor: 'move',
 			containment: 'parent'
 		});
@@ -59,7 +57,7 @@
 		// create and/or select cpanel tab
 		$('a.infinity-cpanel-opentab').live('click', function(){
 			var href = $(this).attr('href');
-			var cpanel = $('div#infinity-cpanel-content');
+			var cpanel = $('div#infinity-cpanel');
 			if ( !$('div'+href ).length ) {
 				cpanel.tabs( "add", $(this).attr('href'), $(this).attr('title') );
 			}
@@ -68,9 +66,9 @@
 		})
 
 		// close cpanel tab
-		$( "div#infinity-cpanel-content ul.ui-tabs-nav span.ui-icon-close" ).live( "click", function() {
+		$( "div#infinity-cpanel ul.ui-tabs-nav span.ui-icon-close" ).live( "click", function() {
 			var index = $(this).siblings('a').first().attr('href').substring(1);
-			$('div#infinity-cpanel-content').tabs( "remove", index );
+			$('div#infinity-cpanel').tabs( "remove", index );
 			return false;
 		});
 
