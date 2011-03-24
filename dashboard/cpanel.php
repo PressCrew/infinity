@@ -126,4 +126,21 @@ function infinity_dashboard_cpanel_thanks_content()
 	infinity_dashboard_load_template( 'cpanel/thanks.php' );
 }
 
+/**
+ * Output cpanel tab content
+ */
+function infinity_dashboard_cpanel_tabs_content()
+{
+	$action = infinity_dashboard_cpanel_action();
+	
+	if ( $action ) {
+		Pie_Easy_Ajax::responseBegin();
+		infinity_dashboard_load_template( sprintf( 'cpanel/%s.php', $action ) );
+		Pie_Easy_Ajax::responseEnd( true );
+	} else {
+		Pie_Easy_Ajax::responseStd( false, sprintf( __( 'There was an error while trying to load the %s tab content.', INFINITY_TEXT_DOMAIN ), $action ) );
+	}
+}
+add_action( 'wp_ajax_infinity_tabs_content', 'infinity_dashboard_cpanel_tabs_content' );
+
 ?>

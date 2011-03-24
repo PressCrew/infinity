@@ -5,19 +5,42 @@
 div#infinity-cpanel {
 	padding-top: 10px;
 }
-	span#infinity-cpanel-toolbar {
-		padding: 1px 10px;
+	div#infinity-cpanel-toolbar {
+		padding: 2px 8px;
 	}
-	div.infinity-cpanel-content {
-		padding-top: 10px;
+		div#infinity-cpanel-toolbar .ui-button {
+			padding: 2px;
+			top: 4px;
+		}
+		div#infinity-cpanel-toolbar .ui-button-icon-only {
+			width: 1.2em;
+		}
+		div#infinity-cpanel-toolbar .ui-button-text {
+			line-height: 100%;
+		}
+		a#infinity-cpanel-toolbar-menu.ui-button {
+			padding: 0px;
+			top: 0px;
+		}
+	div#infinity-cpanel-content {
 	}
+		div#infinity-cpanel-content.ui-widget ul {
+			font-size: 12px;
+		}
+			div#infinity-cpanel-content.ui-widget ul li a {
+				padding: 0.25em 1em;
+			}
+			div#infinity-cpanel-content.ui-widget ul li .ui-icon-close {
+				float: left;
+				margin: 0.3em 0.2em 0 0;
+				cursor: pointer;
+			}
 
 /* ================ */
 /* ! Theme Options  */
 /* ================ */
 
 div#infinity-cpanel-options {
-	padding: 10px;
 }
 	div.infinity-cpanel-options-menu {
 		float: left;
