@@ -50,6 +50,10 @@
 						}
 					);
 				}
+		}).find('.ui-tabs-nav').sortable({
+			axis: 'x',
+			cursor: 'move',
+			containment: 'parent'
 		});
 		
 		// create and/or select cpanel tab
