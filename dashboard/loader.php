@@ -139,21 +139,34 @@ function infinity_dashboard_route_parse()
 		'params' => null,
 	);
 
-	// page contains screen
+	// the route string
+	$route_string = '';
+
+	// look for route string in request
 	if ( isset( $_GET['page'] ) && $_GET['page'] == INFINITY_ADMIN_PAGE ) {
-		// check if a route is set
-		if ( isset( $_GET[INFINITY_ROUTE_PARAM] ) ) {
-			// get route tokens
-			$route_toks = explode( INFINITY_ROUTE_DELIM, $_GET[INFINITY_ROUTE_PARAM] );
-			// get at least one token?
-			if ( count( $route_toks ) ) {
-				// first token is the screen
-				$route['screen'] = array_shift($route_toks);
-				// second token is the action
-				$route['action'] = array_shift($route_toks);
-				// remaining tokens are params
-				$route['params'] = $route_toks;
-			}
+		// route is in get
+		if ( isset( $_GET[INFINITY_ROUTE_PARAM] ) )  {
+			$route_string = $_GET[INFINITY_ROUTE_PARAM];
+		}
+	} elseif ( DOING_AJAX == true ) {
+		// route is in post
+		if ( isset( $_POST[INFINITY_ROUTE_PARAM] ) )  {
+			$route_string = $_POST[INFINITY_ROUTE_PARAM];
+		}		
+	}
+
+	// check if a route is set
+	if ( $route_string ) {
+		// get route tokens
+		$route_toks = explode( INFINITY_ROUTE_DELIM, $route_string );
+		// get at least one token?
+		if ( count( $route_toks ) ) {
+			// first token is the screen
+			$route['screen'] = array_shift($route_toks);
+			// second token is the action
+			$route['action'] = array_shift($route_toks);
+			// remaining tokens are params
+			$route['params'] = $route_toks;
 		}
 	}
 
