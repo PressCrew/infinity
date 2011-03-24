@@ -3,37 +3,46 @@
 /* ========================= */
 
 div#infinity-cpanel {
-	padding-top: 10px;
+	margin-top: 10px;
+	padding: 5px;
 }
-	div#infinity-cpanel-toolbar {
-		padding: 2px 8px;
+	div#infinity-cpanel hr {
+		height: 2px;
+		margin: 0 0 5px 0;
+		border-style: dotted;
 	}
-		div#infinity-cpanel-toolbar .ui-button {
-			padding: 2px;
-			top: 4px;
-		}
-		div#infinity-cpanel-toolbar .ui-button-icon-only {
-			width: 1.2em;
-		}
-		div#infinity-cpanel-toolbar .ui-button-text {
-			line-height: 100%;
-		}
-		a#infinity-cpanel-toolbar-menu.ui-button {
-			padding: 0px;
-			top: 0px;
-		}
-	div#infinity-cpanel-content {
+	div#infinity-cpanel div.infinity-cpanel-tab {
+		padding: 0.75em 0.25em;
 	}
-		div#infinity-cpanel-content.ui-widget ul {
-			font-size: 12px;
-		}
-			div#infinity-cpanel-content.ui-widget ul li a {
-				padding: 0.25em 1em;
-			}
-			div#infinity-cpanel-content.ui-widget ul li .ui-icon-close {
-				float: right;
-				cursor: pointer;
-			}
+	
+div#infinity-cpanel-toolbar {
+	padding: 0 0 5px 0;
+}
+	div#infinity-cpanel-toolbar .ui-button {
+		padding: 2px;
+		top: 4px;
+	}
+	div#infinity-cpanel-toolbar .ui-button-icon-only {
+		width: 1.2em;
+	}
+	div#infinity-cpanel-toolbar .ui-button-text {
+		line-height: 100%;
+	}
+	a#infinity-cpanel-toolbar-menu.ui-button {
+		padding: 0px;
+		top: 0px;
+	}
+
+ul#infinity-cpanel-tabs {
+	font-size: 12px;
+}
+	ul#infinity-cpanel-tabs li a {
+		padding: 0.25em 1em;
+	}
+	ul#infinity-cpanel-tabs li .ui-icon-close {
+		float: right;
+		cursor: pointer;
+	}
 
 /* ================ */
 /* ! Theme Options  */
@@ -41,20 +50,18 @@ div#infinity-cpanel {
 
 div#infinity-cpanel-options {
 }
-	div.infinity-cpanel-options-menu {
-		float: left;
-		width: 220px;
+
+div.infinity-cpanel-options-menu {
+	float: left;
+	width: 220px;
+}
+div.infinity-cpanel-options-menu ul.ui-accordion-content li {
+	line-height: 100%;
+}
+	div.infinity-cpanel-options-menu .ui-accordion-content {
+		padding: 0.5em 1.1em;
 	}
-	div.infinity-cpanel-options-menu ul.ui-accordion-content li {
-		line-height: 100%;
-	}
-		div.infinity-cpanel-options-menu .ui-accordion-content {
-			padding: 0.5em 1.1em;
-		}
-	div.infinity-cpanel-options-submenu {
-		float: none;
-		width: auto;
-	}
+
 	.ui-accordion-header a.infinity-cpanel-options-menu-showall {
 		padding: 0;
 		font-size: 10px;
@@ -65,15 +72,21 @@ div#infinity-cpanel-options {
 	.ui-accordion-header a.infinity-cpanel-options-menu-showall span {
 		padding: 1px 5px;
 	}
-	div#infinity-cpanel-options-content {
-		padding: 0px 10px 10px 235px;
-	}
-	div#infinity-cpanel-options-content code {
-		display: block;
-		white-space: pre;
-		margin-bottom: 10px;
-		padding: 4px;
-	}
+
+div.infinity-cpanel-options-submenu {
+	float: none;
+	width: auto;
+}
+
+div#infinity-cpanel-options-content {
+	padding: 0px 10px 10px 235px;
+}
+div#infinity-cpanel-options-content code {
+	display: block;
+	white-space: pre;
+	margin-bottom: 10px;
+	padding: 4px;
+}
 
 div#infinity-cpanel-options-flash {
 	display: none;
@@ -84,24 +97,24 @@ div.infinity-cpanel-options-single {
 	padding-left: 7px;
 	margin-bottom: 15px;
 }
-div.infinity-cpanel-options-single ul.ui-tabs-nav {
-	padding-top: 0.1em;
-}
-	div.infinity-cpanel-options-single ul.ui-tabs-nav li {
+	div.infinity-cpanel-options-single ul.ui-tabs-nav {
+		padding-top: 0.1em;
 	}
-		div.infinity-cpanel-options-single ul.ui-tabs-nav li a {
-			line-height: 90%;
-			font-size: 10px;
+		div.infinity-cpanel-options-single ul.ui-tabs-nav li {
 		}
+			div.infinity-cpanel-options-single ul.ui-tabs-nav li a {
+				line-height: 90%;
+				font-size: 10px;
+			}
 
-div.infinity-cpanel-options-single div.ui-tabs-panel {
-	padding: 0.5em 1em 0.25em 1em;
-}
-	div.infinity-cpanel-options-single div.ui-tabs-panel div.infinity-cpanel-options-last-modified {
-		line-height: 9px;
-		font-size: 9px;
-		text-align: right;
+	div.infinity-cpanel-options-single div.ui-tabs-panel {
+		padding: 0.5em 1em 0.25em 1em;
 	}
+		div.infinity-cpanel-options-single div.ui-tabs-panel div.infinity-cpanel-options-last-modified {
+			line-height: 9px;
+			font-size: 9px;
+			text-align: right;
+		}
 
 div.infinity-cpanel-options-single-flash {
 	display: none;
@@ -138,56 +151,54 @@ textarea.infinity-cpanel-option-field-css {
 /* ! Theme Documentation  */
 /* ====================== */
 
-div#infinity-cpanel-docs {
-	width: 600px;
-	margin-left: 30px;
+.infinity-docs {
 	font-family: "Verdana","Arial","sans-serif";
 	font-size: 12px;
 }
-div#infinity-cpanel-docs p,
-div#infinity-cpanel-docs ul,
-div#infinity-cpanel-docs ol {
+.infinity-docs p,
+.infinity-docs ul,
+.infinity-docs ol {
 	margin: 0 0 1.5em 0;
 }
-div#infinity-cpanel-docs blockquote {
+.infinity-docs blockquote {
 	margin: 0 0 1.5em 1em;
 	font-style: italic;
 }
-div#infinity-cpanel-docs pre code {
+.infinity-docs pre code {
 	display: inline-block;
 	font-size: 12px;
 	margin: 0;
 	padding: 1px 5px;
 }
-div#infinity-cpanel-docs pre {
+.infinity-docs pre {
 	margin: 0 0 1.5em 1em;
 }
-div#infinity-cpanel-docs h1,
-div#infinity-cpanel-docs h2,
-div#infinity-cpanel-docs h3,
-div#infinity-cpanel-docs h4,
-div#infinity-cpanel-docs h5,
-div#infinity-cpanel-docs h6 {
+.infinity-docs h1,
+.infinity-docs h2,
+.infinity-docs h3,
+.infinity-docs h4,
+.infinity-docs h5,
+.infinity-docs h6 {
 	margin: 0.1em 0 .6em 0;
 	font-weight: bold;
 	border-bottom: 1px solid #eee;
 	font-family: arial,verdana,sans-serif;
 }
-div#infinity-cpanel-docs ul,
-div#infinity-cpanel-docs ol {
+.infinity-docs ul,
+.infinity-docs ol {
 	margin: .3em 0 1.5em 1em;
 }
-div#infinity-cpanel-docs ol {
+.infinity-docs ol {
 	list-style-type: decimal;
 }
-div#infinity-cpanel-docs ul {
+.infinity-docs ul {
 	list-style-type: disc;
 }
-div#infinity-cpanel-docs ul li,
-div#infinity-cpanel-docs ol li {
+.infinity-docs ul li,
+.infinity-docs ol li {
 	margin-left: 1.4em;
 	padding-left: 0;
 }
-div#infinity-cpanel-docs em {
+.infinity-docs em {
 	font-weight: bold;
 }
