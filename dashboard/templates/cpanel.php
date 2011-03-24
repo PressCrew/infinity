@@ -6,13 +6,19 @@
 		$current_action = infinity_dashboard_cpanel_action();
 	?>
 	<div id="infinity-cpanel">
-		<span id="infinity-cpanel-toolbar" class="ui-widget-header ui-corner-all">
+		<div id="infinity-cpanel-toolbar" class="ui-widget-header ui-corner-all">
+			<a id="infinity-cpanel-toolbar-menu" title="<?php _e( 'Infinity', INFINITY_TEXT_DOMAIN ) ?>"><?php _e( 'Infinity', INFINITY_TEXT_DOMAIN ) ?></a>
 			<?php foreach ( $actions as $action_slug => $action_title ): ?>
-			<a id="infinity-cpanel-toolbar-<?php print $action_slug ?>" href="<?php print infinity_dashboard_route( 'cpanel', $action_slug ) ?>"><?php print $action_title ?></a>
+				<a id="infinity-cpanel-toolbar-<?php print $action_slug ?>" class="infinity-cpanel-opentab" href="#infinity-cpanel-content-tab-<?php print $action_slug ?>" title="<?php print $action_title ?>"></a>
 			<?php endforeach; ?>
-		</span>
-		<div class="infinity-cpanel-content" id="infinity-cpanel-<?php print infinity_dashboard_cpanel_action() ?>">
-			<?php do_action( 'infinity_dashboard_cpanel_content' ) ?>
+		</div>
+		<div id="infinity-cpanel-content">
+			<ul>
+				<li><a href="#infinity-cpanel-content-tab-start"><?php _e( 'Start', INFINITY_TEXT_DOMAIN ) ?></a></li>
+			</ul>
+			<div id="infinity-cpanel-content-tab-start">
+				<?php infinity_dashboard_cpanel_start_content() ?>
+			</div>
 		</div>
 	</div>
 </div>
