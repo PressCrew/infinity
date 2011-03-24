@@ -31,8 +31,7 @@ div#infinity-cpanel {
 				padding: 0.25em 1em;
 			}
 			div#infinity-cpanel-content.ui-widget ul li .ui-icon-close {
-				float: left;
-				margin: 0.3em 0.2em 0 0;
+				float: right;
 				cursor: pointer;
 			}
 
