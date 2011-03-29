@@ -81,6 +81,22 @@ abstract class Pie_Easy_Options_Registry
 	}
 
 	/**
+	 * Init screen reqs
+	 */
+	public function init_screen()
+	{
+		$this->option_renderer->init_screen();
+	}
+
+	/**
+	 * Init ajax reqs
+	 */
+	public function init_ajax()
+	{
+		$this->option_renderer->init_ajax();
+	}
+
+	/**
 	 * Set the class to use for creating new sections
 	 *
 	 * @param string $class_name

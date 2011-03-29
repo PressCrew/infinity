@@ -40,17 +40,37 @@ abstract class Pie_Easy_Options_Option_Renderer
 	private $uploader;
 
 	/**
-	 * Setup necessary files
+	 * Init screen requirements
 	 */
-	static public function init()
+	public function init_screen()
 	{
 		// jQuery UI
-		Pie_Easy_Loader::enqueue_style( 'ui-lightness/jquery-ui-custom' );
-		Pie_Easy_Loader::enqueue_script( 'jquery-ui.custom.min', array('jquery') );
+		wp_enqueue_style( 'pie-easy-ui-lightness' );
+		wp_enqueue_script( 'jquery-ui-accordion' );
+		wp_enqueue_script( 'jquery-ui-button' );
+		wp_enqueue_script( 'jquery-ui-dialog' );
+		wp_enqueue_script( 'jquery-ui-progressbar' );
+		wp_enqueue_script( 'jquery-ui-tabs' );
 		
 		// color picker
-		Pie_Easy_Loader::enqueue_style( 'colorpicker' );
-		Pie_Easy_Loader::enqueue_script( 'colorpicker', array('jquery') );
+		wp_enqueue_style( 'pie-easy-colorpicker' );
+		wp_enqueue_script( 'pie-easy-colorpicker' );
+
+		// uploader
+		if ( $this->uploader instanceof Pie_Easy_Options_Uploader ) {
+			$this->uploader->init_screen();
+		}
+	}
+
+	/**
+	 * Init ajax requirements
+	 */
+	final public function init_ajax()
+	{
+		// uploader
+		if ( $this->uploader instanceof Pie_Easy_Options_Uploader ) {
+			$this->uploader->init_ajax();
+		}
 	}
 
 	/**
@@ -61,7 +81,6 @@ abstract class Pie_Easy_Options_Option_Renderer
 	final public function enable_uploader( Pie_Easy_Options_Uploader $uploader )
 	{
 		$this->uploader = $uploader;
-		$this->uploader->init();
 	}
 
 	/**

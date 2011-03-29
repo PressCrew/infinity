@@ -19,8 +19,8 @@
 function infinity_dashboard_cpanel_action()
 {
 	$route = infinity_dashboard_route_parse();
-	
-	if ( $route['screen'] == 'cpanel' ) {
+
+	if ( ($route) && $route['screen'] == 'cpanel' ) {
 		if ( $route['action'] ) {
 			return $route['action'];
 		} else {
