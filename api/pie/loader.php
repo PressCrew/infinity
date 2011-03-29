@@ -70,7 +70,7 @@ final class Pie_Easy_Loader
 	 *
 	 * @param string $pie_url The full URL to pie files
 	 */
-	final public function init( $pie_url )
+	final static public function init( $pie_url )
 	{
 		// new instance if necessary
 		if ( !self::$instance instanceof self ) {
@@ -83,18 +83,48 @@ final class Pie_Easy_Loader
 			// create singleton instance
 			self::$instance = new self();
 			// handle requirements
-			self::init_reqs();
+			self::init_deps();
 		}
 	}
 
 	/**
-	 * Initialize requirements
+	 * Initialize screen requirements
 	 */
-	static private function init_reqs()
+	final static private function init_deps()
+	{
+		// need the enqueuer
+		self::$instance->load( 'enqueue' );
+		
+		// override jQuery UI
+		add_action( 'wp_default_scripts', array( Pie_Easy_Enqueue::instance(), 'override_jui' ) );
+
+		// register some styles
+		Pie_Easy_Enqueue::register_style(
+			'pie-easy-ui-lightness', 'ui-lightness/jquery-ui-custom.css', array('colors') );
+		Pie_Easy_Enqueue::register_style(
+			'pie-easy-colorpicker', 'colorpicker.css', array('colors') );
+		Pie_Easy_Enqueue::register_style(
+			'pie-easy-global', 'global.css', array('pie-easy-ui-lightness', 'pie-easy-colorpicker' ) );
+	
+		// register more scripts
+		Pie_Easy_Enqueue::register_script(
+			'pie-easy-global', 'global.js', array('jquery-ui-button') );
+		Pie_Easy_Enqueue::register_script(
+			'pie-easy-colorpicker', 'colorpicker.js', array('jquery') );
+		Pie_Easy_Enqueue::register_script(
+			'pie-easy-jquery-swfupload', 'jquery.swfupload.js', array('jquery', 'swfupload-all') );
+		Pie_Easy_Enqueue::register_script(
+			'pie-easy-uploader', 'uploader.js', array('pie-easy-global', 'pie-easy-jquery-swfupload', 'jquery-ui-button') );
+	}
+
+	/**
+	 * Initialize screen requirements
+	 */
+	final static public function init_screen()
 	{
 		// global style and script
-		Pie_Easy_Loader::enqueue_style( 'global', array('colors', 'pie-easy-ui-lightness/jquery-ui-custom', 'pie-easy-colorpicker' ) );
-		Pie_Easy_Loader::enqueue_script( 'global', array('jquery') );
+		wp_enqueue_style( 'pie-easy-global' );
+		wp_enqueue_script( 'pie-easy-global' );
 	}
 
 	/**
@@ -176,51 +206,6 @@ final class Pie_Easy_Loader
 		return true;
 	}
 
-	/**
-	 * Enqueue a PIE stylesheet
-	 *
-	 * @param string $handle
-	 * @param array $deps
-	 */
-	final static public function enqueue_style( $handle, $deps = false, $media = 'all' )
-	{
-		return
-			wp_enqueue_style(
-				'pie-easy-' . $handle,
-				sprintf( '%s/%s.css', PIE_EASY_CSS_URL, $handle ),
-				$deps,
-				PIE_EASY_VERSION,
-				$media
-			);
-	}
-
-	/**
-	 * Enqueue a PIE script
-	 *
-	 * @param string $handle
-	 * @param array $deps
-	 */
-	final static public function enqueue_script( $handle, $deps = false )
-	{
-		return
-			wp_enqueue_script(
-				'pie-easy-' . $handle,
-				sprintf( '%s/%s.js', PIE_EASY_JS_URL, $handle ),
-				$deps,
-				PIE_EASY_VERSION
-			);
-	}
-
-	/**
-	 * Localize a PIE script
-	 *
-	 * @param string $handle
-	 * @param array $deps
-	 */
-	final static public function localize_script( $handle, $object_name, $l10n )
-	{
-		return wp_localize_script( 'pie-easy-' . $handle, $object_name, $l10n );
-	}
 }
 
 ?>

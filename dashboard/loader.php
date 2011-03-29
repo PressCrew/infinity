@@ -40,7 +40,7 @@ add_action( 'admin_menu', 'infinity_dashboard_cpanel_setup' );
 function infinity_ajax_setup()
 {
 	if ( defined( 'DOING_AJAX' ) ) {
-		Infinity_Options::init_ajax();
+		Infinity_Options_Registry::instance()->init_ajax();
 	}
 }
 
@@ -54,8 +54,11 @@ function infinity_dashboard_cpanel_setup()
 
 	if ( $action ) {
 
+		// init pie interface requirements
+		Pie_Easy_Loader::init_screen();
+
 		// pie easy options init
-		Infinity_Options::init();
+		Infinity_Options_Registry::instance()->init_screen();
 
 		// add content hook
 		add_action(
@@ -67,7 +70,7 @@ function infinity_dashboard_cpanel_setup()
 		wp_enqueue_style( INFINITY_ADMIN_PAGE, INFINITY_ADMIN_URL . '/assets/css/cpanel.css', false, INFINITY_VERSION, 'screen' );
 
 		// enqueue script
-		wp_enqueue_script( INFINITY_ADMIN_PAGE, INFINITY_ADMIN_URL . '/assets/js/dashboard.js', false, INFINITY_VERSION );
+		wp_enqueue_script( INFINITY_ADMIN_PAGE, INFINITY_ADMIN_URL . '/assets/js/dashboard.js', array('jquery-ui-button','jquery-ui-tabs','jquery-ui-sortable'), INFINITY_VERSION );
 
 		// localize script
 		wp_localize_script(
@@ -132,45 +135,57 @@ function infinity_dashboard_route( $params = null )
  */
 function infinity_dashboard_route_parse()
 {
-	// the route defaults
-	$route = array(
-		'screen' => 'cpanel',
-		'action' => null,
-		'params' => null,
-	);
+	// route exists?
+	$route_found = false;
 
 	// the route string
 	$route_string = '';
 
 	// look for route string in request
 	if ( isset( $_GET['page'] ) && $_GET['page'] == INFINITY_ADMIN_PAGE ) {
+		// have route
+		$route_found = true;
 		// route is in get
 		if ( isset( $_GET[INFINITY_ROUTE_PARAM] ) )  {
 			$route_string = $_GET[INFINITY_ROUTE_PARAM];
 		}
-	} elseif ( DOING_AJAX == true ) {
+	} elseif ( defined( 'DOING_AJAX' ) && DOING_AJAX == true ) {
+		// have route
+		$route_found = true;
 		// route is in post
 		if ( isset( $_POST[INFINITY_ROUTE_PARAM] ) )  {
+			$route_found = true;
 			$route_string = $_POST[INFINITY_ROUTE_PARAM];
 		}		
 	}
 
-	// check if a route is set
-	if ( $route_string ) {
-		// get route tokens
-		$route_toks = explode( INFINITY_ROUTE_DELIM, $route_string );
-		// get at least one token?
-		if ( count( $route_toks ) ) {
-			// first token is the screen
-			$route['screen'] = array_shift($route_toks);
-			// second token is the action
-			$route['action'] = array_shift($route_toks);
-			// remaining tokens are params
-			$route['params'] = $route_toks;
+	// parse if route found
+	if ( $route_found ) {
+		// have a route string?
+		if ( strlen($route_string) ) {
+			// get route tokens
+			$route_toks = explode( INFINITY_ROUTE_DELIM, $route_string );
+			// get at least one token?
+			if ( count( $route_toks ) ) {
+				// first token is the screen
+				$route['screen'] = array_shift($route_toks);
+				// second token is the action
+				$route['action'] = array_shift($route_toks);
+				// remaining tokens are params
+				$route['params'] = $route_toks;
+				// done
+				return $route;
+			}
 		}
+		// use route defaults
+		return array(
+			'screen' => 'cpanel',
+			'action' => null,
+			'params' => null,
+		);
 	}
 
-	return $route;
+	return false;
 }
 
 /**

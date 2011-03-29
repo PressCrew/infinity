@@ -40,19 +40,15 @@ class Pie_Easy_Options_Uploader
 	/**
 	 * Setup necessary scripts and actions
 	 */
-	public function init()
+	public function init_screen()
 	{
-		// enqueue flash uploader scripts
-		wp_enqueue_script('swfupload-all');
-
-		// enqueue uploader plugin and wrapper
-		Pie_Easy_Loader::enqueue_script( 'jquery.swfupload', array( 'jquery' ) );
-		Pie_Easy_Loader::enqueue_script( 'uploader', array( 'jquery' ) );
+		// enqueue uploader plugin
+		wp_enqueue_script( 'pie-easy-uploader' );
 
 		// enqueue image editor scripts and style
 		wp_enqueue_script( 'wp-ajax-response' );
-		wp_enqueue_script('image-edit');
-		wp_enqueue_style('imgareaselect');
+		wp_enqueue_script( 'image-edit' );
+		wp_enqueue_style( 'imgareaselect' );
 
 		// localize the upload wrapper
 		$this->localize_script();
@@ -72,8 +68,8 @@ class Pie_Easy_Options_Uploader
 	 */
 	private function localize_script()
 	{
-		Pie_Easy_Loader::localize_script(
-			'uploader',
+		wp_localize_script(
+			'pie-easy-uploader',
 			'pieEasyFlashUploaderL10n',
 			array(
 				'ajax_url' =>

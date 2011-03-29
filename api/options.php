@@ -14,29 +14,6 @@
 Pie_Easy_Loader::load( 'ajax', 'options' );
 
 /**
- * Infinity Options
- */
-class Infinity_Options
-{
-	/**
-	 * Initialize options support
-	 */
-	static public function init()
-	{
-		Infinity_Options_Option_Renderer::init();
-	}
-
-	/**
-	 * Initialize options AJAX requrest handling
-	 */
-	static public function init_ajax()
-	{
-		$uploader = new Infinity_Options_Uploader();
-		$uploader->init_ajax();
-	}
-}
-
-/**
  * Infinity Options Section
  */
 class Infinity_Options_Section extends Pie_Easy_Options_Section
