@@ -32,6 +32,13 @@ div#infinity-cpanel-toolbar {
 		padding: 0px;
 		top: 0px;
 	}
+	a#infinity-cpanel-toolbar-refresh.ui-button {
+		float: right;
+		top: 2px;
+		right: 8px;
+		padding: 2px;
+		font-size: 10px;
+	}
 
 ul#infinity-cpanel-tabs {
 	font-size: 12px;

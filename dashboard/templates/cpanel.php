@@ -9,15 +9,12 @@
 		<div id="infinity-cpanel-toolbar" class="ui-corner-all">
 			<a id="infinity-cpanel-toolbar-menu" title="<?php _e( 'Infinity', INFINITY_TEXT_DOMAIN ) ?>"><?php _e( 'Infinity', INFINITY_TEXT_DOMAIN ) ?></a>
 			<?php foreach ( $actions as $action_slug => $action_title ): ?>
-				<a id="infinity-cpanel-toolbar-<?php print $action_slug ?>" class="infinity-cpanel-opentab" href="#infinity-cpanel-tab-<?php print $action_slug ?>" title="<?php print $action_title ?>"></a>
+				<a id="infinity-cpanel-toolbar-<?php print $action_slug ?>" href="?page=<?php print INFINITY_ADMIN_PAGE ?>&route=cpanel/<?php print $action_slug ?>#infinity-cpanel-tab-<?php print $action_slug ?>" title="<?php print $action_title ?>"></a>
 			<?php endforeach; ?>
+			<a id="infinity-cpanel-toolbar-refresh" title="<?php _e( 'Refresh current tab', INFINITY_TEXT_DOMAIN ) ?>"><?php _e( 'Refresh', INFINITY_TEXT_DOMAIN ) ?></a>
 		</div>
 		<hr class="ui-state-default">
 		<ul id="infinity-cpanel-tabs">
-			<li><a href="#infinity-cpanel-tab-start"><?php _e( 'Start', INFINITY_TEXT_DOMAIN ) ?></a></li>
 		</ul>
-		<div id="infinity-cpanel-tab-start" class="infinity-cpanel-tab">
-			<?php infinity_dashboard_cpanel_start_content() ?>
-		</div>
 	</div>
 </div>
