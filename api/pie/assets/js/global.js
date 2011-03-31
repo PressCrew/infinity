@@ -35,6 +35,10 @@
 (function($){
 	
 	var methods = {
+		find: function()
+		{
+			return $('.pie-easy-flash', this);
+		},
 		set: function(state, icon, msg)
 		{
 			return this.each(function(){

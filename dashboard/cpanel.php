@@ -132,7 +132,7 @@ function infinity_dashboard_cpanel_thanks_content()
 function infinity_dashboard_cpanel_tabs_content()
 {
 	$action = infinity_dashboard_cpanel_action();
-	
+
 	if ( $action ) {
 		Pie_Easy_Ajax::responseBegin();
 		infinity_dashboard_load_template( sprintf( 'cpanel/%s.php', $action ) );

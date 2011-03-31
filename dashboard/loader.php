@@ -135,57 +135,46 @@ function infinity_dashboard_route( $params = null )
  */
 function infinity_dashboard_route_parse()
 {
-	// route exists?
-	$route_found = false;
-
 	// the route string
 	$route_string = '';
 
 	// look for route string in request
-	if ( isset( $_GET['page'] ) && $_GET['page'] == INFINITY_ADMIN_PAGE ) {
-		// have route
-		$route_found = true;
-		// route is in get
-		if ( isset( $_GET[INFINITY_ROUTE_PARAM] ) )  {
+	if ( ( isset( $_REQUEST['page'] ) && $_REQUEST['page'] == INFINITY_ADMIN_PAGE ) ) {
+		// look for route in request, post has priority
+		if ( isset( $_POST[INFINITY_ROUTE_PARAM] ) )  {
+			$route_string = $_POST[INFINITY_ROUTE_PARAM];
+		} elseif ( isset( $_GET[INFINITY_ROUTE_PARAM] ) )  {
 			$route_string = $_GET[INFINITY_ROUTE_PARAM];
 		}
-	} elseif ( defined( 'DOING_AJAX' ) && DOING_AJAX == true ) {
-		// have route
-		$route_found = true;
-		// route is in post
-		if ( isset( $_POST[INFINITY_ROUTE_PARAM] ) )  {
-			$route_found = true;
-			$route_string = $_POST[INFINITY_ROUTE_PARAM];
-		}		
+	} else {
+		return false;
 	}
 
-	// parse if route found
-	if ( $route_found ) {
-		// have a route string?
-		if ( strlen($route_string) ) {
-			// get route tokens
-			$route_toks = explode( INFINITY_ROUTE_DELIM, $route_string );
-			// get at least one token?
-			if ( count( $route_toks ) ) {
-				// first token is the screen
-				$route['screen'] = array_shift($route_toks);
-				// second token is the action
-				$route['action'] = array_shift($route_toks);
-				// remaining tokens are params
-				$route['params'] = $route_toks;
-				// done
-				return $route;
-			}
+	// have a route string?
+	if ( strlen($route_string) ) {
+		// get route tokens
+		$route_toks = explode( INFINITY_ROUTE_DELIM, $route_string );
+		// get at least one token?
+		if ( count( $route_toks ) ) {
+			// first token is the screen
+			$route['screen'] = array_shift($route_toks);
+			// second token is the action
+			$route['action'] = array_shift($route_toks);
+			// remaining tokens are params
+			$route['params'] = $route_toks;
+			// done
+			return $route;
 		}
+	} else {
+
 		// use route defaults
 		return array(
 			'screen' => 'cpanel',
 			'action' => null,
 			'params' => null,
 		);
-	}
 
-	return false;
+	}
 }
 
 /**
