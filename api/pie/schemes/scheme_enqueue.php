@@ -18,10 +18,12 @@ class Pie_Easy_Scheme_Enqueue
 {
 	const ITEM_DELIM = ',';
 	const TRIGGER_PATH = 'path';
+	const TRIGGER_DEPS = 'deps';
 	const TRIGGER_ALWAYS = 'always';
 	const TRIGGER_ACTS = 'actions';
 	const TRIGGER_CONDS = 'conditions';
-	const ACTION_HANDLER = 'template_redirect';
+	const ACTION_HANDLER_STYLES = 'pie_easy_enqueue_styles';
+	const ACTION_HANDLER_SCRIPTS = 'pie_easy_enqueue_scripts';
 
 	/**
 	 * @var Pie_Easy_Scheme
@@ -52,11 +54,17 @@ class Pie_Easy_Scheme_Enqueue
 
 		// define styles
 		if ( $this->define( $this->styles, Pie_Easy_Scheme::DIRECTIVE_STYLE_DEFS ) ) {
+
 			// hook up styles always handler
-			add_action( self::ACTION_HANDLER, array( $this, 'handle_style_always' ) );
+			add_action( self::ACTION_HANDLER_STYLES, array( $this, 'handle_style_always' ) );
+
+			// init style depends
+			$this->depends( $this->styles, Pie_Easy_Scheme::DIRECTIVE_STYLE_DEPS );
+			
 			// init style triggers
 			$this->triggers( $this->styles, Pie_Easy_Scheme::DIRECTIVE_STYLE_ACTS, self::TRIGGER_ACTS );
 			$this->triggers( $this->styles, Pie_Easy_Scheme::DIRECTIVE_STYLE_CONDS, self::TRIGGER_CONDS );
+
 		}
 
 		// init scripts map
@@ -64,8 +72,13 @@ class Pie_Easy_Scheme_Enqueue
 
 		// define scripts
 		if ( $this->define( $this->scripts, Pie_Easy_Scheme::DIRECTIVE_SCRIPT_DEFS ) ) {
+			
 			// hook up scripts always handler
-			add_action( self::ACTION_HANDLER, array( $this, 'handle_script_always' ) );
+			add_action( self::ACTION_HANDLER_SCRIPTS, array( $this, 'handle_script_always' ) );
+
+			// init script depends
+			$this->depends( $this->scripts, Pie_Easy_Scheme::DIRECTIVE_SCRIPT_DEPS );
+
 			// init script triggers
 			$this->triggers( $this->scripts, Pie_Easy_Scheme::DIRECTIVE_SCRIPT_ACTS, self::TRIGGER_ACTS );
 			$this->triggers( $this->scripts, Pie_Easy_Scheme::DIRECTIVE_SCRIPT_CONDS, self::TRIGGER_CONDS );
@@ -110,6 +123,8 @@ class Pie_Easy_Scheme_Enqueue
 						$trigger = new Pie_Easy_Map();
 						// add path value
 						$trigger->add( self::TRIGGER_PATH, $this->scheme->theme_file_url( $theme, $path ) );
+						// init deps stack
+						$trigger->add( self::TRIGGER_DEPS, new Pie_Easy_Stack( array('pie-easy-global') ) );
 						// init empty always toggle
 						$trigger->add( self::TRIGGER_ALWAYS, true );
 						// init empty actions stack
@@ -118,7 +133,7 @@ class Pie_Easy_Scheme_Enqueue
 						$trigger->add( self::TRIGGER_CONDS, new Pie_Easy_Stack() );
 						
 						// add trigger to main map
-						$map->add( $this->make_handle( $theme, $handle), $trigger );
+						$map->add( $this->make_handle( $theme, $handle ), $trigger );
 					}
 				}
 			}
@@ -126,6 +141,62 @@ class Pie_Easy_Scheme_Enqueue
 			return true;
 		}
 		
+		return false;
+	}
+	
+	/**
+	 * Set dependancies for specified directives.
+	 *
+	 * This is for scheme directives that define a handle with a
+	 * value being a delimeted string of dependant style or script handles
+	 *
+	 * @param Pie_Easy_Map $map
+	 * @param string $directive_name
+	 * @return boolean
+	 */
+	private function depends( Pie_Easy_Map $map, $directive_name )
+	{
+		// check if at least one theme defined this dep
+		if ( $this->scheme->has_directive( $directive_name ) ) {
+
+			// get dep directives for all themes
+			$directive_map = $this->scheme->get_directive_map( $directive_name );
+
+			// loop through and update triggers map with deps
+			foreach ( $directive_map as $theme => $directive ) {
+
+				// is directive value a map?
+				if ( $directive->value instanceof Pie_Easy_Map ) {
+
+					// yes, add action to each trigger's dependancy stack
+					foreach( $directive->value as $handle => $dep_handles ) {
+
+						// get theme handle
+						$theme_handle = $this->make_handle( $theme, $handle );
+						
+						// split dep handles at delimeter
+						$dep_handles = explode( self::ITEM_DELIM, $dep_handles );
+
+						// loop through each handle
+						foreach ( $dep_handles as $dep_handle ) {
+
+							// get dep_theme handle
+							$dep_theme_handle = $this->make_handle( $theme, $dep_handle );
+
+							// does dep theme handle exist?
+							if ( $map->item_at( $dep_theme_handle ) ) {
+								// yep, use it
+								$dep_handle = $dep_theme_handle;
+							}
+
+							// push onto trigger's dep stack
+							$map->item_at($theme_handle)->item_at(self::TRIGGER_DEPS)->push($dep_handle);
+						}
+					}
+				}
+			}
+			return true;
+		}
 		return false;
 	}
 
@@ -190,13 +261,71 @@ class Pie_Easy_Scheme_Enqueue
 			// is this a conditions trigger type?
 			if ( $trigger_type == self::TRIGGER_CONDS ) {
 				// yes, hook up conditions handler
-				add_action( self::ACTION_HANDLER, array( $this, 'handle_' . $directive_name ) );
+				add_action(
+					$this->handler_action( $directive_name ),
+					array( $this, 'handle_' . $directive_name ),
+					11
+				);
 			}
 
 			return true;
 		}
 
 		return false;
+	}
+
+	/**
+	 * Determine handler action based on directive
+	 *
+	 * @param string $directive_name
+	 * @return string
+	 */
+	private function handler_action( $directive_name )
+	{
+		switch ( $directive_name ) {
+			case Pie_Easy_Scheme::DIRECTIVE_STYLE_DEFS:
+			case Pie_Easy_Scheme::DIRECTIVE_STYLE_ACTS:
+			case Pie_Easy_Scheme::DIRECTIVE_STYLE_CONDS:
+				return self::ACTION_HANDLER_STYLES;
+			case Pie_Easy_Scheme::DIRECTIVE_SCRIPT_DEFS:
+			case Pie_Easy_Scheme::DIRECTIVE_SCRIPT_ACTS:
+			case Pie_Easy_Scheme::DIRECTIVE_SCRIPT_CONDS:
+				return self::ACTION_HANDLER_SCRIPTS;
+			default:
+				throw new Exception('That directive does not have a handler action.');
+		}
+	}
+
+	/**
+	 * Enqueue a style with data from a config map
+	 *
+	 * @param string $handle
+	 * @param string $config_map
+	 */
+	private function enqueue_style( $handle, $config_map )
+	{
+		// do it
+		wp_enqueue_style(
+			$handle,
+			$config_map->item_at(self::TRIGGER_PATH),
+			$config_map->item_at(self::TRIGGER_DEPS)->to_array()
+		);
+	}
+
+	/**
+	 * Enqueue a script with data from a config map
+	 *
+	 * @param string $handle
+	 * @param string $config_map
+	 */
+	private function enqueue_script( $handle, $config_map )
+	{
+		// do it
+		wp_enqueue_script(
+			$handle,
+			$config_map->item_at(self::TRIGGER_PATH),
+			$config_map->item_at(self::TRIGGER_DEPS)->to_array()
+		);
 	}
 
 	/**
@@ -209,7 +338,7 @@ class Pie_Easy_Scheme_Enqueue
 			// always load?
 			if ( $config_map->item_at(self::TRIGGER_ALWAYS) == true ) {
 				// yes, enqueue it!
-				wp_enqueue_style( $handle, $config_map->item_at(self::TRIGGER_PATH) );
+				$this->enqueue_style( $handle, $config_map );
 			}
 		}
 	}
@@ -227,7 +356,7 @@ class Pie_Easy_Scheme_Enqueue
 			// action in this style's action stack?
 			if ( $config_map->item_at(self::TRIGGER_ACTS)->contains($action) ) {
 				// yes, enqueue it!
-				wp_enqueue_style( $handle, $config_map->item_at(self::TRIGGER_PATH) );
+				$this->enqueue_style( $handle, $config_map );
 			}
 		}
 	}
@@ -246,7 +375,7 @@ class Pie_Easy_Scheme_Enqueue
 					// try to exec the callback
 					if ( function_exists( $callback ) && call_user_func($callback) == true ) {
 						// callback exists and evaled to true, enqueue it
-						wp_enqueue_style( $handle, $config_map->item_at(self::TRIGGER_PATH) );
+						$this->enqueue_style( $handle, $config_map );
 						// done with this inner (conditions) loop
 						break;
 					}
@@ -265,7 +394,7 @@ class Pie_Easy_Scheme_Enqueue
 			// always load?
 			if ( $config_map->item_at(self::TRIGGER_ALWAYS) == true ) {
 				// yes, enqueue it!
-				wp_enqueue_script( $handle, $config_map->item_at(self::TRIGGER_PATH) );
+				$this->enqueue_script( $handle, $config_map );
 			}
 		}
 	}
@@ -283,7 +412,7 @@ class Pie_Easy_Scheme_Enqueue
 			// action in this script's action stack?
 			if ( $config_map->item_at(self::TRIGGER_ACTS)->contains($action) ) {
 				// yes, enqueue it!
-				wp_enqueue_script( $handle, $config_map->item_at(self::TRIGGER_PATH) );
+				$this->enqueue_script( $handle, $config_map );
 			}
 		}
 	}
@@ -302,7 +431,7 @@ class Pie_Easy_Scheme_Enqueue
 					// try to exec the callback
 					if ( function_exists( $callback ) && call_user_func($callback) == true ) {
 						// callback exists and evaled to true, enqueue it
-						wp_enqueue_script( $handle, $config_map->item_at(self::TRIGGER_PATH) );
+						$this->enqueue_script( $handle, $config_map );
 						// done with this inner (conditions) loop
 						break;
 					}

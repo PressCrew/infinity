@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'files' );
+Pie_Easy_Loader::load( 'files', 'collections' );
 
 /**
  * Make Scheming Easy
@@ -47,10 +47,13 @@ final class Pie_Easy_Scheme
 	 * ini directives
 	 */
 	const DIRECTIVE_PARENT_THEME = 'parent_theme';
+	const DIRECTIVE_UI_THEME = 'ui_theme';
 	const DIRECTIVE_STYLE_DEFS = 'style';
+	const DIRECTIVE_STYLE_DEPS = 'style_depends';
 	const DIRECTIVE_STYLE_ACTS = 'style_actions';
 	const DIRECTIVE_STYLE_CONDS = 'style_conditions';
 	const DIRECTIVE_SCRIPT_DEFS = 'script';
+	const DIRECTIVE_SCRIPT_DEPS = 'script_depends';
 	const DIRECTIVE_SCRIPT_ACTS = 'script_actions';
 	const DIRECTIVE_SCRIPT_CONDS = 'script_conditions';
 	const DIRECTIVE_ADVANCED = 'advanced';

@@ -40,26 +40,37 @@ abstract class Pie_Easy_Options_Option_Renderer
 	private $uploader;
 
 	/**
-	 * Init screen requirements
+	 * Constructor
 	 */
-	public function init_screen()
+	public function __construct()
+	{
+		add_action( 'pie_easy_enqueue_styles', array($this, 'init_styles') );
+		add_action( 'pie_easy_enqueue_scripts', array($this, 'init_scripts') );
+	}
+
+	/**
+	 * Init screen style requirements
+	 */
+	public function init_styles()
+	{
+		// color picker
+		wp_enqueue_style( 'pie-easy-colorpicker' );
+	}
+
+	/**
+	 * Init screen style requirements
+	 */
+	public function init_scripts()
 	{
 		// jQuery UI
-		wp_enqueue_style( 'pie-easy-ui-lightness' );
 		wp_enqueue_script( 'jquery-ui-accordion' );
 		wp_enqueue_script( 'jquery-ui-button' );
 		wp_enqueue_script( 'jquery-ui-dialog' );
 		wp_enqueue_script( 'jquery-ui-progressbar' );
 		wp_enqueue_script( 'jquery-ui-tabs' );
-		
-		// color picker
-		wp_enqueue_style( 'pie-easy-colorpicker' );
-		wp_enqueue_script( 'pie-easy-colorpicker' );
 
-		// uploader
-		if ( $this->uploader instanceof Pie_Easy_Options_Uploader ) {
-			$this->uploader->init_screen();
-		}
+		// color picker
+		wp_enqueue_script( 'pie-easy-colorpicker' );
 	}
 
 	/**

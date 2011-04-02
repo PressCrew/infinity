@@ -28,7 +28,11 @@ final class Pie_Easy_Enqueue
 	 */
 	private function __construct()
 	{
-		// this is a singleton
+		// use our our actions because things get too freaking confusing
+		add_action( 'wp_print_styles', array($this, 'do_enqueue_styles') );
+		add_action( 'wp_print_scripts', array($this, 'do_enqueue_scripts') );
+		add_action( 'admin_print_styles', array($this, 'do_enqueue_styles') );
+		add_action( 'admin_print_scripts', array($this, 'do_enqueue_scripts') );
 	}
 	
 	/**
@@ -36,7 +40,7 @@ final class Pie_Easy_Enqueue
 	 *
 	 * @return Pie_Easy_Enqueue
 	 */
-	public function instance()
+	static public function instance()
 	{
 		if ( !self::$instance instanceof self ) {
 			self::$instance = new self();
@@ -52,7 +56,7 @@ final class Pie_Easy_Enqueue
 	 * @param string $src
 	 * @param array $deps
 	 */
-	static public function register_style( $handle, $src, $deps = false )
+	static public function pie_style( $handle, $src, $deps = false )
 	{
 		return
 			wp_register_style(
@@ -70,7 +74,7 @@ final class Pie_Easy_Enqueue
 	 * @param string $src
 	 * @param array $deps
 	 */
-	static public function register_script( $handle, $src, $deps = false )
+	static public function pie_script( $handle, $src, $deps = false )
 	{
 		return
 			wp_register_script(
@@ -127,6 +131,23 @@ final class Pie_Easy_Enqueue
 				$version
 			);
 		}
+	}
+
+	/**
+	 * Call enqueue styles action
+	 */
+	public function do_enqueue_styles()
+	{
+		do_action('pie_easy_enqueue_styles');
+	}
+
+	/**
+	 * Call enqueue scripts action
+	 */
+	public function do_enqueue_scripts()
+	{
+		do_action('pie_easy_enqueue_scripts');
+		do_action('pie_easy_localize_scripts');
 	}
 
 	/**
