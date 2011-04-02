@@ -90,10 +90,16 @@ final class Pie_Easy_Loader
 
 			// init scripts manually right away
 			self::$instance->init_scripts();
-
-			// init styles via enqueue actions
-			add_action( 'pie_easy_enqueue_styles', array( self::$instance, 'init_styles' ) );
 		}
+	}
+
+	/**
+	 * Initialize required screen dependancies
+	 */
+	final public function init_screen()
+	{
+		// init styles via enqueue actions
+		add_action( 'pie_easy_enqueue_styles', array( self::$instance, 'init_styles' ) );
 	}
 
 	/**
@@ -113,9 +119,6 @@ final class Pie_Easy_Loader
 			'pie-easy-jquery-swfupload', 'jquery.swfupload.js', array('jquery', 'swfupload-all') );
 		Pie_Easy_Enqueue::pie_script(
 			'pie-easy-uploader', 'uploader.js', array('pie-easy-global', 'pie-easy-jquery-swfupload', 'jquery-ui-button') );
-
-		// enqueue global scripts now
-		wp_enqueue_script( 'pie-easy-global' );
 	}
 
 	/**
@@ -127,22 +130,31 @@ final class Pie_Easy_Loader
 		self::$instance->load( 'schemes' );
 
 		// custom ui?
-		$ui_theme_map = Pie_Easy_Scheme::instance()->get_directive_map( Pie_Easy_Scheme::DIRECTIVE_UI_THEME );
-		
-		// try to register it
-		if ( $ui_theme_map instanceof Pie_Easy_Map ) {
-			foreach ( $ui_theme_map->to_array( true ) as $theme => $directive ) {
-				wp_register_style(
-					'pie-easy-ui',
-					Pie_Easy_Scheme::instance()->theme_file_url( $theme, $directive->value ),
-					array('colors')
-				);
-				break;
+		$jui_theme = Pie_Easy_Scheme::instance()->get_directive( Pie_Easy_Scheme::DIRECTIVE_JUI_THEME );
+
+		if ( $jui_theme ) {
+			// get style map
+			$style_map = Pie_Easy_Scheme::instance()->get_directive_map( Pie_Easy_Scheme::DIRECTIVE_STYLE_DEFS );
+			// try to register it
+			if ( $style_map instanceof Pie_Easy_Map ) {
+				foreach ( $style_map->to_array( true ) as $theme => $directive ) {
+					if ( $directive->value->contains($jui_theme) ) {
+						$ui_handle = $theme . '-' . $jui_theme;
+						$ui_path = $directive->value->item_at( $jui_theme );
+						wp_register_style(
+							$ui_handle,
+							Pie_Easy_Scheme::instance()->theme_file_url( $theme, $ui_path ),
+							array('colors')
+						);
+						break;
+					}
+				}
 			}
 		} else {
+			$ui_handle = 'pie-easy-ui';
 			// register default ui style
 			Pie_Easy_Enqueue::pie_style(
-				'pie-easy-ui',
+				$ui_handle,
 				'ui-lightness/jquery-ui-custom.css',
 				array('colors')
 			);
@@ -152,11 +164,7 @@ final class Pie_Easy_Loader
 		Pie_Easy_Enqueue::pie_style(
 			'pie-easy-colorpicker', 'colorpicker.css', array('colors') );
 		Pie_Easy_Enqueue::pie_style(
-			'pie-easy-global', 'global.css', array('pie-easy-ui', 'pie-easy-colorpicker' ) );
-
-		// enqueue global styles now
-		wp_enqueue_style( 'pie-easy-ui' );
-		wp_enqueue_style( 'pie-easy-global' );
+			'pie-easy-global', 'global.css', array($ui_handle, 'pie-easy-colorpicker' ) );
 	}
 
 	/**

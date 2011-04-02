@@ -35,7 +35,13 @@ class Pie_Easy_Options_Uploader
 		if ( $script_action ) {
 			$this->script_action = $script_action;
 		}
+	}
 
+	/**
+	 * Init screen deps
+	 */
+	public function init_screen()
+	{
 		add_action( 'pie_easy_enqueue_styles', array($this, 'init_styles') );
 		add_action( 'pie_easy_enqueue_scripts', array($this, 'init_scripts') );
 	}

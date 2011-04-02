@@ -54,6 +54,12 @@ function infinity_dashboard_cpanel_setup()
 
 	if ( $action ) {
 
+		// init pie screen reqs
+		Pie_Easy_Loader::init_screen();
+
+		// init options screen reqs
+		Infinity_Options_Registry::instance()->init_screen();
+
 		// add content hook
 		add_action(
 			'infinity_dashboard_cpanel_content',
@@ -62,6 +68,9 @@ function infinity_dashboard_cpanel_setup()
 
 		// localize script
 		add_action( 'pie_easy_localize_scripts', 'infinity_dashboard_cpanel_localize_js' );
+
+		// hook for config actions
+		do_action( 'infinity_dashboard_cpanel_setup' );
 	}
 }
 
