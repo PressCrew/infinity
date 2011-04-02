@@ -27,8 +27,8 @@ require_once( INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'cpanel.php' );
 // Actions
 //
 add_action( 'init', 'infinity_ajax_setup' );
+add_action( 'admin_init', 'infinity_dashboard_cpanel_setup' );
 add_action( 'admin_menu', 'infinity_dashboard_menu_setup' );
-add_action( 'admin_menu', 'infinity_dashboard_cpanel_setup' );
 
 //
 // Functions
@@ -54,37 +54,32 @@ function infinity_dashboard_cpanel_setup()
 
 	if ( $action ) {
 
-		// init pie interface requirements
-		Pie_Easy_Loader::init_screen();
-
-		// pie easy options init
-		Infinity_Options_Registry::instance()->init_screen();
-
 		// add content hook
 		add_action(
 			'infinity_dashboard_cpanel_content',
 			sprintf( 'infinity_dashboard_cpanel_%s_content', $action )
 		);
 
-		// enqueue styles
-		wp_enqueue_style( INFINITY_ADMIN_PAGE, INFINITY_ADMIN_URL . '/assets/css/cpanel.css', false, INFINITY_VERSION, 'screen' );
-
-		// enqueue script
-		wp_enqueue_script( INFINITY_ADMIN_PAGE, INFINITY_ADMIN_URL . '/assets/js/dashboard.js', array('jquery-ui-button','jquery-ui-tabs','jquery-ui-sortable'), INFINITY_VERSION );
-
 		// localize script
-		wp_localize_script(
-			INFINITY_ADMIN_PAGE,
-			'InfinityDashboardL10n',
-			array(
-				'ajax_url' =>
-					is_admin() ?
-						admin_url( 'admin-ajax.php' ) :
-						get_site_url( 1, 'wp-admin/admin-ajax.php' )
-			)
-		);
-
+		add_action( 'pie_easy_localize_scripts', 'infinity_dashboard_cpanel_localize_js' );
 	}
+}
+
+/**
+ * Handle setup of the control panel js env
+ */
+function infinity_dashboard_cpanel_localize_js()
+{
+	wp_localize_script(
+		INFINITY_NAME . '-cpanel',
+		'InfinityDashboardL10n',
+		array(
+			'ajax_url' =>
+				is_admin() ?
+					admin_url( 'admin-ajax.php' ) :
+					get_site_url( 1, 'wp-admin/admin-ajax.php' )
+		)
+	);
 }
 
 /**

@@ -35,12 +35,24 @@ class Pie_Easy_Options_Uploader
 		if ( $script_action ) {
 			$this->script_action = $script_action;
 		}
+
+		add_action( 'pie_easy_enqueue_styles', array($this, 'init_styles') );
+		add_action( 'pie_easy_enqueue_scripts', array($this, 'init_scripts') );
 	}
 	
 	/**
-	 * Setup necessary scripts and actions
+	 * Load necessary styles
 	 */
-	public function init_screen()
+	public function init_styles()
+	{
+		// enqueue image editor style
+		wp_enqueue_style( 'imgareaselect' );
+	}
+
+	/**
+	 * Load necessary scripts
+	 */
+	public function init_scripts()
 	{
 		// enqueue uploader plugin
 		wp_enqueue_script( 'pie-easy-uploader' );
@@ -48,7 +60,6 @@ class Pie_Easy_Options_Uploader
 		// enqueue image editor scripts and style
 		wp_enqueue_script( 'wp-ajax-response' );
 		wp_enqueue_script( 'image-edit' );
-		wp_enqueue_style( 'imgareaselect' );
 
 		// localize the upload wrapper
 		$this->localize_script();

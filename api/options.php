@@ -143,8 +143,9 @@ class Infinity_Options_Option_Renderer extends Pie_Easy_Options_Option_Renderer
 	}
 
 	/**
-	 * Returns ture
-	 * @return <type>
+	 * Returns true if single save button should be displayed
+	 * 
+	 * @return boolean
 	 */
 	private function do_save_single_button()
 	{

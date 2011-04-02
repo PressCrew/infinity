@@ -74,57 +74,89 @@ final class Pie_Easy_Loader
 	{
 		// new instance if necessary
 		if ( !self::$instance instanceof self ) {
+
 			// define PIE urls
 			define( 'PIE_EASY_URL', $pie_url );
 			define( 'PIE_EASY_ASSETS_URL', PIE_EASY_URL . '/assets' );
 			define( 'PIE_EASY_CSS_URL', PIE_EASY_ASSETS_URL . '/css' );
 			define( 'PIE_EASY_IMAGES_URL', PIE_EASY_ASSETS_URL . '/images' );
 			define( 'PIE_EASY_JS_URL', PIE_EASY_ASSETS_URL . '/js' );
+
 			// create singleton instance
 			self::$instance = new self();
-			// handle requirements
-			self::init_deps();
+
+			// need the enqueuer
+			self::$instance->load( 'enqueue' );
+
+			// init scripts manually right away
+			self::$instance->init_scripts();
+
+			// init styles via enqueue actions
+			add_action( 'pie_easy_enqueue_styles', array( self::$instance, 'init_styles' ) );
 		}
 	}
 
 	/**
 	 * Initialize screen requirements
 	 */
-	final static private function init_deps()
+	final private function init_scripts()
 	{
-		// need the enqueuer
-		self::$instance->load( 'enqueue' );
-		
 		// override jQuery UI
 		add_action( 'wp_default_scripts', array( Pie_Easy_Enqueue::instance(), 'override_jui' ) );
 
-		// register some styles
-		Pie_Easy_Enqueue::register_style(
-			'pie-easy-ui-lightness', 'ui-lightness/jquery-ui-custom.css', array('colors') );
-		Pie_Easy_Enqueue::register_style(
-			'pie-easy-colorpicker', 'colorpicker.css', array('colors') );
-		Pie_Easy_Enqueue::register_style(
-			'pie-easy-global', 'global.css', array('pie-easy-ui-lightness', 'pie-easy-colorpicker' ) );
-	
 		// register more scripts
-		Pie_Easy_Enqueue::register_script(
+		Pie_Easy_Enqueue::pie_script(
 			'pie-easy-global', 'global.js', array('jquery-ui-button') );
-		Pie_Easy_Enqueue::register_script(
+		Pie_Easy_Enqueue::pie_script(
 			'pie-easy-colorpicker', 'colorpicker.js', array('jquery') );
-		Pie_Easy_Enqueue::register_script(
+		Pie_Easy_Enqueue::pie_script(
 			'pie-easy-jquery-swfupload', 'jquery.swfupload.js', array('jquery', 'swfupload-all') );
-		Pie_Easy_Enqueue::register_script(
+		Pie_Easy_Enqueue::pie_script(
 			'pie-easy-uploader', 'uploader.js', array('pie-easy-global', 'pie-easy-jquery-swfupload', 'jquery-ui-button') );
+
+		// enqueue global scripts now
+		wp_enqueue_script( 'pie-easy-global' );
 	}
 
 	/**
-	 * Initialize screen requirements
+	 * Initialize screen styles
 	 */
-	final static public function init_screen()
+	final public function init_styles()
 	{
-		// global style and script
+		// need schemes
+		self::$instance->load( 'schemes' );
+
+		// custom ui?
+		$ui_theme_map = Pie_Easy_Scheme::instance()->get_directive_map( Pie_Easy_Scheme::DIRECTIVE_UI_THEME );
+		
+		// try to register it
+		if ( $ui_theme_map instanceof Pie_Easy_Map ) {
+			foreach ( $ui_theme_map->to_array( true ) as $theme => $directive ) {
+				wp_register_style(
+					'pie-easy-ui',
+					Pie_Easy_Scheme::instance()->theme_file_url( $theme, $directive->value ),
+					array('colors')
+				);
+				break;
+			}
+		} else {
+			// register default ui style
+			Pie_Easy_Enqueue::pie_style(
+				'pie-easy-ui',
+				'ui-lightness/jquery-ui-custom.css',
+				array('colors')
+			);
+		}
+
+		// more core pie styles
+		Pie_Easy_Enqueue::pie_style(
+			'pie-easy-colorpicker', 'colorpicker.css', array('colors') );
+		Pie_Easy_Enqueue::pie_style(
+			'pie-easy-global', 'global.css', array('pie-easy-ui', 'pie-easy-colorpicker' ) );
+
+		// enqueue global styles now
+		wp_enqueue_style( 'pie-easy-ui' );
 		wp_enqueue_style( 'pie-easy-global' );
-		wp_enqueue_script( 'pie-easy-global' );
 	}
 
 	/**

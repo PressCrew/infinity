@@ -34,6 +34,13 @@ is assumed that the parent theme is "infinity"
 
 	parent_theme = "my-child-theme"
 
+#### [ui\_theme]
+
+The ui\_theme is where you define your jQuery UI theme style sheet.
+The value is the style sheet's relative path *from your theme's root directory.*
+
+	ui_theme = "path/to/ui-custom.css"
+
 ### Automatic Style Enqueuing
 
 Infinity allows you to enqueue your theme's style sheets entirely using configuration
@@ -64,6 +71,28 @@ The above code would result in the following three syle sheets being enqueued.
 
 *Important:* All styles will ALWAYS be enqueued, UNLESS an action or condition is set (see below)
 
+#### [style\_depends]
+
+The style dependancies section lets you define other style sheets that one of your
+style sheets requires to be loaded before it.
+
+The format is:
+
+	handle = "comma,separated,style,handles"
+
+You should use the *exact* same handle names that you defined in the `[styles]` section.
+If your list of required handles contains a handle which is not defined by you, it will
+still be passed to `wp_enqueue_styles()` as a dependancy assuming that is has already
+been registered in WordPress.
+
+Here is an example:
+
+	[style_depends]
+	sliders = "colors,thickbox"
+
+In the above example, the `colors` and `thickbox` style sheets would be enqueued before
+the `sliders` style sheet.
+
 #### [style\_actions]
 
 The style actions section lets you fine tune when styles are enqueued by assigning one
@@ -80,7 +109,7 @@ Here is an example:
 	[style_actions]
 	wp = "colors,sliders"
 
-In the above example, the colors and sliders style sheets would only be enqueued if and when
+In the above example, the `colors` and `sliders` style sheets would only be enqueued if and when
 the `wp` action is called by WordPress. It is up to you to use actions that are called in time
 for `wp_enqueue_styles()` to work properly.
 
@@ -101,12 +130,12 @@ Here is an example:
 	is_front_page = "sliders"
 	is_page = "page-sidebar"
 
-In the above example, the sliders style sheet would only be enqueued if the `is_front_page()`
+In the above example, the `sliders` style sheet would only be enqueued if the `is_front_page()`
 function returns true, and the page-sidebar style sheet would only be enqueued if the `is_page()`
 function returns true.
 
-All style conditions are evaluated on the `template_redirect` action at priority 10.
-This is hard coded in Infinity and cannot be changed via any configuration settings.
+All style conditions are evaluated on the `wp_print_styles` and `admin_print_styles` actions at
+priority 10. This is hard coded in Infinity and cannot be changed via any configuration settings.
 
 ### Automatic Script Enqueuing
 
@@ -138,6 +167,28 @@ The above code would result in the following three scripts being enqueued.
 
 *Important:* All scripts will ALWAYS be enqueued, UNLESS an action or condition is set (see below)
 
+#### [script\_depends]
+
+The script dependancies section lets you define other scripts that one of your
+scripts requires to be loaded before it.
+
+The format is:
+
+	handle = "comma,separated,script,handles"
+
+You should use the *exact* same handle names that you defined in the `[scripts]` section.
+If your list of requuired handles contains a script handle which is not defined by you, it
+will still be passed to `wp_enqueue_scripts()` as a dependancy assuming that is has already been
+registered in WordPress.
+
+Here is an example:
+
+	[script_depends]
+	custom = "sliders,ajax"
+
+In the above example, the `sliders` and `ajax` scripts would be enqueued before
+the `custom` script.
+
 #### [script\_actions]
 
 The script actions section lets you fine tune when scripts are enqueued by assigning one
@@ -154,7 +205,7 @@ Here is an example:
 	[script_actions]
 	wp = "sliders,custom"
 
-In the above example, the sliders and custom scripts would only be enqueued if and when
+In the above example, the `sliders` and `custom` scripts would only be enqueued if and when
 the `wp` action is called by WordPress. It is up to you to use actions that are called in time
 for `wp_enqueue_scripts()` to work properly.
 
@@ -174,11 +225,11 @@ Here is an example:
 	[script_conditions]
 	is_front_page = "sliders"
 
-In the above example, the sliders script would only be enqueued if the `is_front_page()`
+In the above example, the `sliders` script would only be enqueued if the `is_front_page()`
 function returns true.
 
-All script conditions are evaluated on the `template_redirect` action at priority 10.
-This is hard coded in Infinity and cannot be changed via any configuration settings.
+All script conditions are evaluated on the `wp_print_styles` and `admin_print_styles` actions
+at priority 10. This is hard coded in Infinity and cannot be changed via any configuration settings.
 
 ### Advanced Directives
 
