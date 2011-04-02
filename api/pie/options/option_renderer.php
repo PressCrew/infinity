@@ -40,12 +40,16 @@ abstract class Pie_Easy_Options_Option_Renderer
 	private $uploader;
 
 	/**
-	 * Constructor
+	 * Init screen deps
 	 */
-	public function __construct()
+	public function init_screen()
 	{
 		add_action( 'pie_easy_enqueue_styles', array($this, 'init_styles') );
 		add_action( 'pie_easy_enqueue_scripts', array($this, 'init_scripts') );
+
+		if ( $this->uploader instanceof Pie_Easy_Options_Uploader ) {
+			$this->uploader->init_screen();
+		}
 	}
 
 	/**

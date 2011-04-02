@@ -92,7 +92,7 @@ class Pie_Easy_Scheme_Enqueue
 	 * @param string $handle
 	 * @return string
 	 */
-	private function make_handle( $theme, $handle )
+	public function make_handle( $theme, $handle )
 	{
 		return sprintf( '%s-%s', $theme, trim( $handle ) );
 	}
@@ -124,7 +124,7 @@ class Pie_Easy_Scheme_Enqueue
 						// add path value
 						$trigger->add( self::TRIGGER_PATH, $this->scheme->theme_file_url( $theme, $path ) );
 						// init deps stack
-						$trigger->add( self::TRIGGER_DEPS, new Pie_Easy_Stack( array('pie-easy-global') ) );
+						$trigger->add( self::TRIGGER_DEPS, new Pie_Easy_Stack() );
 						// init empty always toggle
 						$trigger->add( self::TRIGGER_ALWAYS, true );
 						// init empty actions stack

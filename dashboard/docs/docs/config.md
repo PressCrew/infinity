@@ -34,13 +34,6 @@ is assumed that the parent theme is "infinity"
 
 	parent_theme = "my-child-theme"
 
-#### [ui\_theme]
-
-The ui\_theme is where you define your jQuery UI theme style sheet.
-The value is the style sheet's relative path *from your theme's root directory.*
-
-	ui_theme = "path/to/ui-custom.css"
-
 ### Automatic Style Enqueuing
 
 Infinity allows you to enqueue your theme's style sheets entirely using configuration
@@ -234,6 +227,13 @@ at priority 10. This is hard coded in Infinity and cannot be changed via any con
 ### Advanced Directives
 
 Infinity has some additional configuration directives which are available for special cases.
+
+#### [jui\_theme]
+
+The jui\_theme is where you define your jQuery UI theme style sheet handle as defined in
+the `[scripts]` section if you which to override the default theme.
+
+	jui_theme = "ui_style_handle"
 
 #### options\_save\_single
 

@@ -81,6 +81,14 @@ abstract class Pie_Easy_Options_Registry
 	}
 
 	/**
+	 * Init screen reqs
+	 */
+	public function init_screen()
+	{
+		$this->option_renderer->init_screen();
+	}
+
+	/**
 	 * Init ajax reqs
 	 */
 	public function init_ajax()
