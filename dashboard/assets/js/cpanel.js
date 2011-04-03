@@ -43,8 +43,12 @@
 		
 		// add and/or select cpanel tab
 		$('a', cpanel).live('click', function(){
-			load_tab(this);
-			return false;
+			if ( $(this).attr('target') ) {
+				return;
+			} else {
+				load_tab(this);
+				return false;
+			}
 		})
 
 		// close cpanel tab
