@@ -79,8 +79,23 @@
 				// panel exists
 				cpanel.tabs('select', hash);
 			} else {
-				// create new panel
-				cpanel.tabs('add', hash, $anchor.attr('title'));
+				// the title
+				var title = '';
+				// find title from toolbar
+				$('div#infinity-cpanel-toolbar a').each(function(){
+					if ( $(this).attr('hash') == hash ) {
+						title = $(this).attr('title');
+						return false; // break!
+					}
+				});
+				// find a title?
+				if (title.length) {
+					// create new panel
+					cpanel.tabs('add', hash, title);
+				} else {
+					// not good
+					alert('A tab for ' + hash + 'does not exist');
+				}
 			}
 
 			// update refr button
