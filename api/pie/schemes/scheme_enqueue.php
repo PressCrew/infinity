@@ -121,14 +121,23 @@ class Pie_Easy_Scheme_Enqueue
 
 						// new map for this trigger
 						$trigger = new Pie_Easy_Map();
+
 						// add path value
-						$trigger->add( self::TRIGGER_PATH, $this->scheme->theme_file_url( $theme, $path ) );
+						if ( preg_match( '/^http/i', $path ) ) {
+							$trigger->add( self::TRIGGER_PATH, $path );
+						} else {
+							$trigger->add( self::TRIGGER_PATH, $this->scheme->theme_file_url( $theme, $path ) );
+						}
+
 						// init deps stack
 						$trigger->add( self::TRIGGER_DEPS, new Pie_Easy_Stack() );
+
 						// init empty always toggle
 						$trigger->add( self::TRIGGER_ALWAYS, true );
+
 						// init empty actions stack
 						$trigger->add( self::TRIGGER_ACTS, new Pie_Easy_Stack() );
+
 						// init empty conditions stack
 						$trigger->add( self::TRIGGER_CONDS, new Pie_Easy_Stack() );
 						
