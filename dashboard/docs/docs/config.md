@@ -43,7 +43,8 @@ is called to enqueue the styles where the configuration calls for it.
 #### [style]
 
 The style section is where you define your styles. A style is a handle (name) of the style sheet
-and the style sheet's relative path *from your theme's root directory.*
+and the style sheet's relative path *from your theme's root directory.* Full length URLs to
+style sheets are also supported if the begin with `http`.
 
 The format is:
 
@@ -55,12 +56,14 @@ Here is an example:
 	colors = "css/colors.css"
 	sliders = "css/vendors/slider.css"
 	page-sidebar = "css/pagesidebars.css"
+	gfonts = "http://fonts.googleapis.com/css?family=Droid+Sans:regular"
 
 The above code would result in the following three syle sheets being enqueued.
 
 	http://mysite.com/wp-content/themes/my-theme/css/colors.css
 	http://mysite.com/wp-content/themes/my-theme/css/vendors/slider.css
 	http://mysite.com/wp-content/themes/my-theme/css/pagesidebars.css
+	http://fonts.googleapis.com/css?family=Droid+Sans:regular
 
 *Important:* All styles will ALWAYS be enqueued, UNLESS an action or condition is set (see below)
 
@@ -81,9 +84,9 @@ been registered in WordPress.
 Here is an example:
 
 	[style_depends]
-	sliders = "colors,thickbox"
+	sliders = "colors,gfonts"
 
-In the above example, the `colors` and `thickbox` style sheets would be enqueued before
+In the above example, the `colors` and `gfonts` style sheets would be enqueued before
 the `sliders` style sheet.
 
 #### [style\_actions]
@@ -139,7 +142,8 @@ is called to enqueue the scripts where the configuration calls for it.
 #### [script]
 
 The script section is where you define your scripts. A script is a handle (name) of the script
-and the script file's relative path *from your theme's root directory.*
+and the script file's relative path *from your theme's root directory.* Full length URLs to
+style sheets are also supported if the begin with `http`.
 
 The format is:
 
@@ -151,12 +155,14 @@ Here is an example:
 	sliders = "js/vendors/slider.js"
 	ajax = "js/ajax.js"
 	custom = "js/custom.js"
+	gmaps = http://maps.google.com/maps/api/js
 
 The above code would result in the following three scripts being enqueued.
 
 	http://mysite.com/wp-content/themes/my-theme/js/vendors/slider.js
 	http://mysite.com/wp-content/themes/my-theme/js/ajax.js
 	http://mysite.com/wp-content/themes/my-theme/js/custom.js
+	http://maps.google.com/maps/api/js
 
 *Important:* All scripts will ALWAYS be enqueued, UNLESS an action or condition is set (see below)
 
@@ -177,9 +183,9 @@ registered in WordPress.
 Here is an example:
 
 	[script_depends]
-	custom = "sliders,ajax"
+	custom = "gmaps,ajax"
 
-In the above example, the `sliders` and `ajax` scripts would be enqueued before
+In the above example, the `gmaps` and `ajax` scripts would be enqueued before
 the `custom` script.
 
 #### [script\_actions]
