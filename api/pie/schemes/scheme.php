@@ -236,7 +236,7 @@ final class Pie_Easy_Scheme
 			foreach ( $this->themes->to_array(true) as $theme ) {
 				// does theme have this directive set?
 				if ( $directive_map->contains( $theme ) ) {
-					return $directive_map->item_at($theme)->value;
+					return $directive_map->item_at($theme);
 				}
 			}
 		}
@@ -291,7 +291,7 @@ final class Pie_Easy_Scheme
 			return $directive_map->item_at($theme)->set_value( $value );
 		} else {
 			// create new directive
-			$directive = new Pie_Easy_Scheme_Directive( $name, $value, $read_only );
+			$directive = new Pie_Easy_Scheme_Directive( $name, $value, $theme, $read_only );
 			// add it to directive map
 			return $directive_map->add( $theme, $directive );
 		}
