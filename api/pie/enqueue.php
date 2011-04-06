@@ -11,17 +11,26 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'files' );
+Pie_Easy_Loader::load( 'collections', 'files' );
 
 /**
  * Make enqueing assets Easy
  */
 final class Pie_Easy_Enqueue
 {
+	const DEFAULT_UI_STYLE = 'pie-easy-ui';
+
 	/**
 	 * @var Pie_Easy_Enqueue
 	 */
 	static private $instance;
+
+	/**
+	 * The style handle for the UI theme
+	 *
+	 * @var string
+	 */
+	private $ui_style_handle;
 
 	/**
 	 * Singleton constructor
@@ -50,13 +59,44 @@ final class Pie_Easy_Enqueue
 	}
 
 	/**
+	 * This must be called before anything has created the $wp_scripts global
+	 */
+	static public function init()
+	{
+		// negative priorities work... shhhh...
+		add_action( 'wp_default_scripts', array( self::instance(), 'override_jui' ), -99999 );
+	}
+
+	/**
+	 * Set/Get UI style handle
+	 *
+	 * @param string $handle
+	 */
+	public function ui_style_handle( $handle = null )
+	{
+		if ( $handle ) {
+			if ( empty( $this->ui_style_handle ) ) {
+				$this->ui_style_handle = $handle;
+			} else {
+				throw new Exception( 'Cannot set style handle once it has been set' );
+			}
+		}
+
+		if ( $this->ui_style_handle ) {
+			return $this->ui_style_handle;
+		} else {
+			return self::DEFAULT_UI_STYLE;
+		}
+	}
+	
+	/**
 	 * Register a PIE style
 	 *
 	 * @param string $handle
 	 * @param string $src
 	 * @param array $deps
 	 */
-	static public function pie_style( $handle, $src, $deps = false )
+	private function register_style( $handle, $src, $deps = false )
 	{
 		return
 			wp_register_style(
@@ -74,7 +114,7 @@ final class Pie_Easy_Enqueue
 	 * @param string $src
 	 * @param array $deps
 	 */
-	static public function pie_script( $handle, $src, $deps = false )
+	private function register_script( $handle, $src, $deps = false )
 	{
 		return
 			wp_register_script(
@@ -92,8 +132,8 @@ final class Pie_Easy_Enqueue
 	 * @param string $uri URI of the directory
 	 * @param string $prefix A prefix for the enqueued handle
 	 * @param string $version
-	 */
-	static public function auto_styles( $dir, $uri, $prefix = null, $version = null )
+	 *
+	public function auto_styles( $dir, $uri, $prefix = null, $version = null )
 	{
 		// get all css files from dir
 		$files = Pie_Easy_Files::list_filtered( $dir, '/\.css$/' );
@@ -108,6 +148,7 @@ final class Pie_Easy_Enqueue
 			);
 		}
 	}
+	*/
 	
 	/**
 	 * Enqueue all javascript source files in a directory
@@ -116,8 +157,8 @@ final class Pie_Easy_Enqueue
 	 * @param string $uri URI of the directory
 	 * @param string $prefix A prefix for the enqueued handle
 	 * @param string $version
-	 */
-	static public function auto_scripts( $dir, $uri, $prefix = null, $version = null )
+	 *
+	public function auto_scripts( $dir, $uri, $prefix = null, $version = null )
 	{
 		// get all css files from dir
 		$files = Pie_Easy_Files::list_filtered( $dir, '/\.js$/' );
@@ -132,12 +173,38 @@ final class Pie_Easy_Enqueue
 			);
 		}
 	}
+	*/
 
 	/**
 	 * Call enqueue styles action
 	 */
 	public function do_enqueue_styles()
 	{
+		// get ui handle
+		$ui_handle = $this->ui_style_handle();
+
+		// register default
+		$this->register_style(
+			self::DEFAULT_UI_STYLE,
+			'ui-lightness/jquery-ui-custom.css',
+			(is_admin()) ? array('colors') : array()
+		);
+
+		// more core pie styles
+		$this->register_style(
+			'pie-easy-colorpicker',
+			'colorpicker.css',
+			(is_admin()) ? array('colors') : array()
+		);
+		$this->register_style(
+			'pie-easy-global',
+			'global.css',
+			array( $ui_handle, 'pie-easy-colorpicker' )
+		);
+
+		// enqueue the UI
+		wp_enqueue_style( $ui_handle );
+
 		do_action('pie_easy_enqueue_styles');
 	}
 
@@ -146,6 +213,17 @@ final class Pie_Easy_Enqueue
 	 */
 	public function do_enqueue_scripts()
 	{
+		// register default scripts
+		$this->register_script(
+			'pie-easy-global', 'global.js', array('jquery-ui-button') );
+		$this->register_script(
+			'pie-easy-colorpicker', 'colorpicker.js', array('jquery') );
+		$this->register_script(
+			'pie-easy-jquery-swfupload', 'jquery.swfupload.js', array('jquery', 'swfupload-all') );
+		$this->register_script(
+			'pie-easy-uploader', 'uploader.js', array('pie-easy-global', 'pie-easy-jquery-swfupload', 'jquery-ui-button') );
+
+		// actions!
 		do_action('pie_easy_enqueue_scripts');
 		do_action('pie_easy_localize_scripts');
 	}
@@ -207,7 +285,8 @@ final class Pie_Easy_Enqueue
 				$wp_scripts,
 				$handle,
 				PIE_EASY_JS_URL . '/' . $cfg['src'],
-				$cfg['deps'], '1.8.11',
+				$cfg['deps'],
+				'1.8.11',
 				false,
 				1
 			);

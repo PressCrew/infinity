@@ -31,6 +31,11 @@ abstract class Pie_Easy_Init_Directive
 	private $value;
 
 	/**
+	 * @var string The theme that set this directive
+	 */
+	private $theme;
+
+	/**
 	 * @var boolean Set to true to make directive read only
 	 */
 	private $read_only = false;
@@ -40,11 +45,13 @@ abstract class Pie_Easy_Init_Directive
 	 *
 	 * @param string $name
 	 * @param mixed $value
+	 * @param string $theme
 	 * @param boolean $read_only
 	 */
-	public function __construct( $name, $value, $read_only = false )
+	public function __construct( $name, $value, $theme, $read_only = false )
 	{
 		$this->name = strtolower( trim( $name ) );
+		$this->theme = strtolower( trim( $theme ) );
 		$this->value = $value;
 
 		if ( $read_only ) {
@@ -61,6 +68,7 @@ abstract class Pie_Easy_Init_Directive
 	public function __get( $name )
 	{
 		switch ( $name ) {
+			case 'theme':
 			case 'name':
 			case 'value':	
 			case 'read_only':

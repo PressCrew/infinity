@@ -54,9 +54,6 @@ function infinity_dashboard_cpanel_setup()
 
 	if ( $action ) {
 
-		// init pie screen reqs
-		Pie_Easy_Loader::init_screen();
-
 		// init options screen reqs
 		Infinity_Options_Registry::instance()->init_screen();
 

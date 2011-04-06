@@ -36,6 +36,11 @@ class Pie_Easy_Scheme_Enqueue
 	private $styles;
 
 	/**
+	 * @var Pie_Easy_Stack
+	 */
+	private $styles_ignore;
+
+	/**
 	 * @var Pie_Easy_Map
 	 */
 	private $scripts;
@@ -47,13 +52,24 @@ class Pie_Easy_Scheme_Enqueue
 	 */
 	public function __construct( Pie_Easy_Scheme $scheme )
 	{
+		// set scheme
 		$this->scheme = $scheme;
 
-		// init styles map
+		// init styles maps
 		$this->styles = new Pie_Easy_Map();
+		$this->styles_ignore = new Pie_Easy_Stack();
+
+		// get style defs
+		$style_defs =
+			$this->scheme->get_directive_map(
+				Pie_Easy_Scheme::DIRECTIVE_STYLE_DEFS
+			);
+
+		// init ui env
+		$this->setup_ui( $style_defs );
 
 		// define styles
-		if ( $this->define( $this->styles, Pie_Easy_Scheme::DIRECTIVE_STYLE_DEFS ) ) {
+		if ( $this->define( $this->styles, $style_defs ) ) {
 
 			// hook up styles always handler
 			add_action( self::ACTION_HANDLER_STYLES, array( $this, 'handle_style_always' ) );
@@ -70,8 +86,11 @@ class Pie_Easy_Scheme_Enqueue
 		// init scripts map
 		$this->scripts = new Pie_Easy_Map();
 
+		// get script defs
+		$script_defs = $this->scheme->get_directive_map( Pie_Easy_Scheme::DIRECTIVE_SCRIPT_DEFS );
+
 		// define scripts
-		if ( $this->define( $this->scripts, Pie_Easy_Scheme::DIRECTIVE_SCRIPT_DEFS ) ) {
+		if ( $this->define( $this->scripts, $script_defs ) ) {
 			
 			// hook up scripts always handler
 			add_action( self::ACTION_HANDLER_SCRIPTS, array( $this, 'handle_script_always' ) );
@@ -92,65 +111,108 @@ class Pie_Easy_Scheme_Enqueue
 	 * @param string $handle
 	 * @return string
 	 */
-	public function make_handle( $theme, $handle )
+	private function make_handle( $theme, $handle )
 	{
 		return sprintf( '%s-%s', $theme, trim( $handle ) );
 	}
 
 	/**
-	 * Try to define triggers which have been set in the scheme's config
+	 * Set UI environment
 	 *
-	 * @return boolean
+	 * @param Pie_Easy_Map $style_defs
 	 */
-	private function define( $map, $directive )
+	private function setup_ui( Pie_Easy_Map $style_defs )
 	{
-		// check if at least one theme defined some triggers
-		if ( $this->scheme->has_directive( $directive ) ) {
+		// custom JUI set?
+		$jui_active_theme = $this->scheme->get_directive( Pie_Easy_Scheme::DIRECTIVE_JUI_THEME );
 
-			// get trigger directives for all themes
-			$directive_map = $this->scheme->get_directive_map( $directive );
+		// try to make a handle
+		if ( $jui_active_theme instanceof Pie_Easy_Scheme_Directive ) {
+			$jui_active_handle = $this->make_handle( $jui_active_theme->theme, $jui_active_theme->value );
+		} else {
+			return false;
+		}
 
-			// loop through and populate trigger map
-			foreach ( $directive_map as $theme => $directive ) {
+		// get the entire JUI theme map
+		$jui_theme_map = $this->scheme->get_directive_map( Pie_Easy_Scheme::DIRECTIVE_JUI_THEME );
 
-				// is directive value a map?
-				if ( $directive->value instanceof Pie_Easy_Map ) {
-
-					// yes, add each handle and URL path to map
-					foreach( $directive->value as $handle => $path ) {
-
-						// new map for this trigger
-						$trigger = new Pie_Easy_Map();
-
-						// add path value
-						if ( preg_match( '/^http/i', $path ) ) {
-							$trigger->add( self::TRIGGER_PATH, $path );
-						} else {
-							$trigger->add( self::TRIGGER_PATH, $this->scheme->theme_file_url( $theme, $path ) );
-						}
-
-						// init deps stack
-						$trigger->add( self::TRIGGER_DEPS, new Pie_Easy_Stack() );
-
-						// init empty always toggle
-						$trigger->add( self::TRIGGER_ALWAYS, true );
-
-						// init empty actions stack
-						$trigger->add( self::TRIGGER_ACTS, new Pie_Easy_Stack() );
-
-						// init empty conditions stack
-						$trigger->add( self::TRIGGER_CONDS, new Pie_Easy_Stack() );
-						
-						// add trigger to main map
-						$map->add( $this->make_handle( $theme, $handle ), $trigger );
+		// loop through all JUI theme maps
+		foreach ( $jui_theme_map as $jui_theme ) {
+			// jui handle for this iteration
+			$jui_handle = $this->make_handle($jui_theme->theme, $jui_theme->value);
+			// is this the active jui handle?
+			if ( $jui_handle == $jui_active_handle ) {
+				// try to get jui theme settings theme styles
+				if ( $style_defs->contains( $jui_theme->theme ) ) {
+					// ok, we have the styles
+					$theme_styles = $style_defs->item_at($jui_theme->theme)->value;
+					// do the theme styles contain the theme handle
+					if ( $theme_styles->contains( $jui_theme->value ) ) {
+						// yes! register it
+						wp_register_style(
+							$jui_handle,
+							$this->enqueue_path(
+								$jui_theme->theme,
+								$theme_styles->item_at($jui_theme->value)
+							),
+							(is_admin()) ? array('colors') : array()
+						);
+						// set it as the ui style handle in the enqueuer
+						Pie_Easy_Enqueue::instance()->ui_style_handle( $jui_handle );
+						// skip to next loop to avoid the ignore list!
+						continue;
 					}
 				}
 			}
 
-			return true;
+			// jui handle was not used, so add it to the ignore stack
+			$this->styles_ignore->push( $jui_handle );
 		}
-		
-		return false;
+	}
+
+	/**
+	 * Try to define triggers which have been set in the scheme's config
+	 *
+	 * @param Pie_Easy_Map $map
+	 * @param Pie_Easy_Map $directive_map
+	 * @return boolean
+	 */
+	private function define( Pie_Easy_Map $map, Pie_Easy_Map $directive_map )
+	{		
+		// loop through and populate trigger map
+		foreach ( $directive_map as $theme => $directive ) {
+
+			// is directive value a map?
+			if ( $directive->value instanceof Pie_Easy_Map ) {
+
+				// yes, add each handle and URL path to map
+				foreach( $directive->value as $handle => $path ) {
+
+					// new map for this trigger
+					$trigger = new Pie_Easy_Map();
+
+					// add path value
+					$trigger->add( self::TRIGGER_PATH, $this->enqueue_path($theme, $path) );
+
+					// init deps stack
+					$trigger->add( self::TRIGGER_DEPS, new Pie_Easy_Stack() );
+
+					// init empty always toggle
+					$trigger->add( self::TRIGGER_ALWAYS, true );
+
+					// init empty actions stack
+					$trigger->add( self::TRIGGER_ACTS, new Pie_Easy_Stack() );
+
+					// init empty conditions stack
+					$trigger->add( self::TRIGGER_CONDS, new Pie_Easy_Stack() );
+
+					// add trigger to main map
+					$map->add( $this->make_handle( $theme, $handle ), $trigger );
+				}
+			}
+		}
+
+		return true;
 	}
 	
 	/**
@@ -182,7 +244,7 @@ class Pie_Easy_Scheme_Enqueue
 
 						// get theme handle
 						$theme_handle = $this->make_handle( $theme, $handle );
-						
+
 						// split dep handles at delimeter
 						$dep_handles = explode( self::ITEM_DELIM, $dep_handles );
 
@@ -306,6 +368,21 @@ class Pie_Easy_Scheme_Enqueue
 	}
 
 	/**
+	 * Determine path to enqueue
+	 * 
+	 * @param string $theme
+	 * @param string $path
+	 * @return string 
+	 */
+	private function enqueue_path( $theme, $path )
+	{
+		if ( preg_match( '/^http:\/\//i', $path ) ) {
+			return $path;
+		} else {
+			return $this->scheme->theme_file_url( $theme, $path );
+		}
+	}
+	/**
 	 * Enqueue a style with data from a config map
 	 *
 	 * @param string $handle
@@ -313,12 +390,19 @@ class Pie_Easy_Scheme_Enqueue
 	 */
 	private function enqueue_style( $handle, $config_map )
 	{
-		// do it
-		wp_enqueue_style(
+		if ( $this->styles_ignore->contains( $handle ) ) {
+			return;
+		}
+		
+		// reg it
+		wp_register_style(
 			$handle,
 			$config_map->item_at(self::TRIGGER_PATH),
 			$config_map->item_at(self::TRIGGER_DEPS)->to_array()
 		);
+
+		// enq it
+		wp_enqueue_style($handle);
 	}
 
 	/**

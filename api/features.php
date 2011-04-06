@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'features' );
+Pie_Easy_Loader::load( 'enqueue', 'features' );
 
 /**
  * Infinity Feature factory class
@@ -23,7 +23,7 @@ final class Infinity_Features
 	 */
 	final static function init()
 	{
-		self::custom_css()->enqueue();
+		add_action( 'pie_easy_enqueue_styles', array( self::custom_css(), 'init_styles' ), 999 );
 	}
 
 	/**
@@ -129,7 +129,7 @@ class Infinity_Feature_Custom_Css extends Infinity_Feature
 	/**
 	 * Enqueue the css export script
 	 */
-	final public function enqueue()
+	final public function init_styles()
 	{
 		if ( $this->supported() ) {
 			wp_enqueue_style( 'infinity-custom', INFINITY_EXPORT_URL . '/css.php', null, infinity_option_meta( 'infinity_custom_css', 'time_updated' ) );
