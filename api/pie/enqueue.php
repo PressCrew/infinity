@@ -186,7 +186,7 @@ final class Pie_Easy_Enqueue
 		// register default
 		$this->register_style(
 			self::DEFAULT_UI_STYLE,
-			'ui-lightness/jquery-ui-custom.css',
+			'ui/jquery-ui-1.8.11.custom.css',
 			(is_admin()) ? array('colors') : array()
 		);
 
