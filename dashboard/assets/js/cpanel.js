@@ -1,37 +1,109 @@
 (function($){
 	$(document).ready(function() {
-
+		
 		// cpanel toolbar buttons
-		var b_menu =
+		var tb_menu =
 			$('a#infinity-cpanel-toolbar-menu')
 				.button({icons:{secondary: "ui-icon-triangle-1-s"}});
-		var b_start =
+		var tb_start =
 			$('a#infinity-cpanel-toolbar-start')
-				.button({icons: {primary: "ui-icon-power"}, text: false});
-		var b_refresh =
+				.button({icons: {primary: "ui-icon-power"}});
+		var tb_refresh =
 			$('a#infinity-cpanel-toolbar-refresh')
 				.button({icons: {primary: "ui-icon-refresh"}})
-				.attr('href', b_start.attr('href'));
+				.attr('href', tb_start.attr('href'));
 		// more toolbar buttons
-		$('a#infinity-cpanel-toolbar-widgets').button({icons: {primary: "ui-icon-gear"}, text: false});
-		$('a#infinity-cpanel-toolbar-shortcodes').button({icons: {primary: "ui-icon-copy"}, text: false});
-		$('a#infinity-cpanel-toolbar-options').button({icons: {primary: "ui-icon-wrench"}, text: false});
-		$('a#infinity-cpanel-toolbar-docs').button({icons: {primary: "ui-icon-document"}, text: false});
-		$('a#infinity-cpanel-toolbar-about').button({icons: {primary: "ui-icon-person"}, text: false});
-		$('a#infinity-cpanel-toolbar-thanks').button({icons: {primary: "ui-icon-heart"}, text: false});
+		$('a#infinity-cpanel-toolbar-options').button({icons: {primary: "ui-icon-pencil"}});
+		$('a#infinity-cpanel-toolbar-shortcodes').button({icons: {primary: "ui-icon-copy"}});
+		$('a#infinity-cpanel-toolbar-widgets').button({icons: {primary: "ui-icon-gear"}});
+		$('a#infinity-cpanel-toolbar-about').button({icons: {primary: "ui-icon-info"}});
 
-		// cpanel element
+		// cpanel menu buttons
+		$('li#infinity-cpanel-toolbar-menu-item-start a').button({icons: {primary: "ui-icon-power"}});
+		$('li#infinity-cpanel-toolbar-menu-item-options a').button({icons: {primary: "ui-icon-pencil"}});
+		$('li#infinity-cpanel-toolbar-menu-item-shortcodes a').button({icons: {primary: "ui-icon-copy"}});
+		$('li#infinity-cpanel-toolbar-menu-item-widgets a').button({icons: {primary: "ui-icon-gear"}});
+		$('li#infinity-cpanel-toolbar-menu-item-about a').button({icons: {primary: "ui-icon-info"}});
+		$('li#infinity-cpanel-toolbar-menu-item-devs a').button({icons: {primary: "ui-icon-wrench", secondary: "ui-icon-triangle-1-e"}});
+			$('li#infinity-cpanel-toolbar-menu-item-docs a').button({icons: {primary: "ui-icon-document"}});
+			$('li#infinity-cpanel-toolbar-menu-item-api a').button({icons: {primary: "ui-icon-note"}});
+			$('li#infinity-cpanel-toolbar-menu-item-repo a').button({icons: {primary: "ui-icon-link"}}).click(function(){alert('External Link');return false;});
+		$('li#infinity-cpanel-toolbar-menu-item-comm a').button({icons: {primary: "ui-icon-person",secondary: "ui-icon-triangle-1-e"}});
+			$('li#infinity-cpanel-toolbar-menu-item-news a').button({icons: {primary: "ui-icon-signal-diag"}});
+			$('li#infinity-cpanel-toolbar-menu-item-support a').button({icons: {primary: "ui-icon-help"}}).click(function(){alert('External Link');return false;});
+			$('li#infinity-cpanel-toolbar-menu-item-thanks a').button({icons: {primary: "ui-icon-heart"}});
+		
+		// menus
+		$('a.infinity-cpanel-context-menu').each(function() {
+			var $this = $(this);
+			// new menu
+			var menu = $this.next().menu({
+				select: function(event, ui) {
+					$(this).hide();
+				},
+				input: $(this)
+			}).hide();
+			// hide other menus
+			menu.parent().siblings('li').children('a').click(function(){
+				menu.hide();
+			});
+		}).click(function(event) {
+			// menu is next element
+			var menu = $(this).next();
+			// is it a re-click?
+			if (menu.is(":visible")) {
+				menu.hide();
+				return false;
+			}
+			// display me
+			menu.show()
+				.css({'top': 0, 'left': 0})
+				.position({
+					my: "left top",
+					at: "right top",
+					offset: "5 0",
+					collision: "fit none",
+					of: this
+				});
+			// hide all menus
+			$(document).one("click", function() {
+				menu.hide();
+			});
+			return false;
+		});
+
+		// main menu has a special position and css tweaks
+		tb_menu.click(function(){
+			var $this = $(this);
+			$this.next()
+				.removeClass('ui-corner-all')
+				.addClass('ui-corner-top')
+				.css({'border-bottom-width': 0})
+				.position({
+					my: "left top",
+					at: "left bottom",
+					offset: "0 2",
+					collision: "fit none",
+					of: this
+				});
+			$(document).one("click", function() {
+				$this.removeClass('ui-corner-top').addClass('ui-corner-all').css({'border-bottom-width': '1px'});
+			});
+		});
+
+		// cpanel elements
 		var cpanel = $('div#infinity-cpanel');
+		var cpanel_t = $('div#infinity-cpanel-tabs', cpanel);
 
 		// init cpanel tabs
-		cpanel.tabs({
+		cpanel_t.tabs({
 			tabTemplate: "<li><a href='#{href}'>#{label}</a><span class='ui-icon ui-icon-close'></span></li>",
 			panelTemplate: '<div class="infinity-cpanel-tab"></div>',
 			add: function(event, ui) {
-				cpanel.tabs('select', '#' + ui.panel.id);
+				cpanel_t.tabs('select', '#' + ui.panel.id);
 			},
 			select: function(event, ui) {
-				b_refresh.attr('href', $(ui.panel).data('infinity.href.loaded'));
+				tb_refresh.attr('href', $(ui.panel).data('infinity.href.loaded'));
 			}
 		}).find('.ui-tabs-nav').sortable({
 			cursor: 'move',
@@ -39,22 +111,25 @@
 		});
 
 		// load start page by default
-		load_tab(b_start);
+		load_tab(tb_start);
 		
 		// add and/or select cpanel tab
 		$('a', cpanel).live('click', function(){
-			if ( $(this).attr('target') ) {
-				return;
-			} else {
-				load_tab(this);
-				return false;
+			if ( $(this).attr('href').length ) {
+				if ( $(this).attr('target') ) {
+					return true;
+				} else {
+					load_tab(this);
+					return false;
+				}
 			}
+			return true;
 		})
 
 		// close cpanel tab
-		$( 'ul.ui-tabs-nav span.ui-icon-close', cpanel ).live( "click", function() {
+		$( 'ul.ui-tabs-nav span.ui-icon-close', cpanel_t ).live( "click", function() {
 			var index = $(this).siblings('a').first().attr('href').substring(1);
-			cpanel.tabs( "remove", index );
+			cpanel_t.tabs( "remove", index );
 			return false;
 		});
 
@@ -77,7 +152,7 @@
 
 			if ( $('div' + hash).length ) {
 				// panel exists
-				cpanel.tabs('select', hash);
+				cpanel_t.tabs('select', hash);
 			} else {
 				// the title
 				var title = '';
@@ -91,7 +166,7 @@
 				// find a title?
 				if (title.length) {
 					// create new panel
-					cpanel.tabs('add', hash, title);
+					cpanel_t.tabs('add', hash, title);
 				} else {
 					// not good
 					alert('A tab for ' + hash + 'does not exist');
@@ -99,7 +174,7 @@
 			}
 
 			// update refr button
-			b_refresh.attr('href', href);
+			tb_refresh.attr('href', href);
 
 			// find active panel
 			var panel = $('div' + hash).empty();
@@ -115,7 +190,7 @@
 			// get content for the tab
 			$.post(
 				InfinityDashboardL10n.ajax_url + '?' + href.split('?').pop(),
-				{ 'action': 'infinity_tabs_content' },
+				{'action': 'infinity_tabs_content'},
 				function(r) {
 					var sr = pieEasyAjax.splitResponseStd(r);
 					var message = panel.pieEasyFlash('find');

@@ -264,7 +264,7 @@ function infinity_options_render_menu_section( Infinity_Options_Section $section
 		
 	// begin rendering ?>
 	<div>
-		<a href="#"><?php print esc_html( $section->title ) ?></a>
+		<a><?php print esc_html( $section->title ) ?></a>
 		<a href="#<?php print esc_attr( $section->name ) ?>" class="infinity-cpanel-options-menu-show infinity-cpanel-options-menu-showall">Show All</a>
 	</div><?php
 
