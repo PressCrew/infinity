@@ -65,6 +65,14 @@ function infinity_dashboard_cpanel_screen()
 //
 
 /**
+ * Print version
+ */
+function infinity_dashboard_cpanel_version()
+{
+	return sprintf( '%s %s', INFINITY_VERSION, INFINITY_BRANCH );
+}
+
+/**
  * Display start page
  */
 function infinity_dashboard_cpanel_start_content()

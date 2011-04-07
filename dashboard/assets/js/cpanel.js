@@ -75,14 +75,18 @@
 		// main menu has a special position and css tweaks
 		tb_menu.click(function(){
 			var $this = $(this);
-			$this.next()
+			$this
 				.removeClass('ui-corner-all')
 				.addClass('ui-corner-top')
-				.css({'border-bottom-width': 0})
+				.css({'border-bottom-width': 0});
+			$this.next()
+				.removeClass('ui-corner-all')
+				.addClass('ui-corner-bottom')
+				.css({'border-top-width': 0})
 				.position({
 					my: "left top",
 					at: "left bottom",
-					offset: "0 2",
+					offset: "0 0",
 					collision: "fit none",
 					of: this
 				});
