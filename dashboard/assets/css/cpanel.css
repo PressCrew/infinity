@@ -110,8 +110,8 @@ div.infinity-cpanel-options-menu {
 	float: left;
 	width: 220px;
 }
-	div.infinity-cpanel-options-menu .ui-accordion-content {
-		padding: 0.5em 1.1em;
+	div.infinity-cpanel-options-menu ul.ui-accordion-content {
+		padding: 0.8em 0.5em;
 	}
 	div.infinity-cpanel-options-menu ul.ui-accordion-content li {
 		line-height: 100%;
