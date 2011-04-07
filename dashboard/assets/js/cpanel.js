@@ -114,8 +114,8 @@
 		load_tab(tb_start);
 		
 		// add and/or select cpanel tab
-		$('a', cpanel).live('click', function(){
-			if ( $(this).attr('href').length ) {
+		$('a', cpanel).live('click', function() {
+			if ( $(this).attr('href') ) {
 				if ( $(this).attr('target') ) {
 					return true;
 				} else {
