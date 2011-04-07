@@ -1,5 +1,12 @@
 <div class="wrap nosubsub">
 	<div id="infinity-cpanel">
+		<div id="infinity-cpanel-header">
+			<div id="infinity-cpanel-header-slogan">
+			</div>
+			<div id="infinity-cpanel-header-logo">
+				<p><?php print infinity_dashboard_cpanel_version() ?></p>
+			</div>
+		</div>
 		<div id="infinity-cpanel-toolbar">
 			<a id="infinity-cpanel-toolbar-menu" class="infinity-cpanel-context-menu" title="<?php _e( 'Infinity', INFINITY_TEXT_DOMAIN ) ?>"><?php _e( 'Infinity', INFINITY_TEXT_DOMAIN ) ?></a>
 			<ul id="infinity-cpanel-toolbar-menu-items">

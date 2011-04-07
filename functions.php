@@ -12,6 +12,7 @@
 
 // DO NOT EDIT these constants for any reason
 define( 'INFINITY_VERSION', '1.0' );
+define( 'INFINITY_BRANCH', 'pre-beta' );
 define( 'INFINITY_NAME', 'infinity' );
 define( 'INFINITY_THEME_DIR', get_theme_root( INFINITY_NAME ) . DIRECTORY_SEPARATOR . INFINITY_NAME );
 define( 'INFINITY_THEME_URL', get_theme_root_uri( INFINITY_NAME ) . '/' . INFINITY_NAME );
