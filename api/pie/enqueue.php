@@ -280,6 +280,7 @@ final class Pie_Easy_Enqueue
 				array( 'src' => 'jquery.ui.tabs.min.js', 'deps' => $deps_cw )
 		);
 
+		// override stable scripts
 		foreach ( $jui as $handle => $cfg ) {
 			$this->override_script(
 				$wp_scripts,
@@ -291,6 +292,17 @@ final class Pie_Easy_Enqueue
 				1
 			);
 		}
+
+		// menu is experimental!
+		$this->override_script(
+			$wp_scripts,
+			'jquery-ui-menu',
+			PIE_EASY_JS_URL . '/' . 'jquery.ui.menu.min.js',
+			$deps_cw,
+			'1.9m2',
+			false,
+			1
+		);
 	}
 
 	/**

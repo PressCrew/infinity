@@ -24,7 +24,7 @@ function infinity_dashboard_cpanel_action()
 		if ( $route['action'] ) {
 			return $route['action'];
 		} else {
-			return key( infinity_dashboard_cpanel_actions() );
+			return array_shift( infinity_dashboard_cpanel_actions() );
 		}
 	}
 
@@ -38,16 +38,14 @@ function infinity_dashboard_cpanel_action()
  */
 function infinity_dashboard_cpanel_actions()
 {
-	return
-		array(
-			'start' => __( 'Start', INFINITY_TEXT_DOMAIN ),
-			'widgets' => __( 'Widgets', INFINITY_TEXT_DOMAIN ),
-			'shortcodes' => __( 'Shortcodes', INFINITY_TEXT_DOMAIN ),
-			'options' => __( 'Options', INFINITY_TEXT_DOMAIN ),
-			'docs' => __( 'Docs', INFINITY_TEXT_DOMAIN ),
-			'about' => __( 'About', INFINITY_TEXT_DOMAIN ),
-			'thanks' => __( 'Thanks', INFINITY_TEXT_DOMAIN )
-		);
+	return array(
+		// main
+		'start', 'options', 'shortcodes', 'widgets', 'about',
+		// devs
+		'docs', 'api',
+		// community
+		'news', 'thanks'
+	);
 }
 
 //
