@@ -61,7 +61,7 @@
 				.position({
 					my: "left top",
 					at: "right top",
-					offset: "5 0",
+					offset: "5 -5",
 					collision: "fit none",
 					of: this
 				});
@@ -72,26 +72,15 @@
 			return false;
 		});
 
-		// main menu has a special position and css tweaks
+		// main menu has a special positioning
 		tb_menu.click(function(){
-			var $this = $(this);
-			$this
-				.removeClass('ui-corner-all')
-				.addClass('ui-corner-top')
-				.css({'border-bottom-width': 0});
-			$this.next()
-				.removeClass('ui-corner-all')
-				.addClass('ui-corner-bottom')
-				.css({'border-top-width': 0})
-				.position({
-					my: "left top",
-					at: "left bottom",
-					offset: "0 0",
-					collision: "fit none",
-					of: this
-				});
-			$(document).one("click", function() {
-				$this.removeClass('ui-corner-top').addClass('ui-corner-all').css({'border-bottom-width': '1px'});
+			$(this).next().position(
+			{
+				my: "left top",
+				at: "left bottom",
+				offset: "-7 4",
+				collision: "fit none",
+				of: this
 			});
 		});
 
