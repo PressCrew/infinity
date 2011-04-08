@@ -154,3 +154,8 @@ div.pie-easy-options-fu div.pie-easy-options-fu-btn {
 	width: 190px;
 	text-align: center;
 }
+
+/* make image editor elements align to top of JUI dialog */
+.ui-dialog-content div.image-editor table td {
+	vertical-align: top;
+}
