@@ -60,11 +60,9 @@ p.pie-easy-options-description {
 }
 
 /* Color Picker */
-.color-picker input {
-	font-size: 20px;
-	width: 130px;
+.colorpicker {
+	z-index: 1000;
 }
-
 div.pie-easy-options-cp-box {
 	display: inline-block;
 	position: relative;
