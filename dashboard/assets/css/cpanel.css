@@ -89,8 +89,9 @@ div#infinity-cpanel-toolbar {
 	div#infinity-cpanel-toolbar .ui-menu {
 		position: absolute;
 		z-index: 3;
-		padding: 5px 8px 8px 8px;
+		padding: 4px 6px 6px 8px;
 		background: url(../images/ui_pattern_bg.png) repeat;
+		border: 1px dotted #b6b6b6;
 	}
 		div#infinity-cpanel-toolbar .ui-menu .ui-button {
 			top: 0;
