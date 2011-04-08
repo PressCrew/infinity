@@ -166,6 +166,17 @@ class Infinity_Options_Uploader extends Pie_Easy_Options_Uploader
 //
 
 /**
+ * Initialize options environment
+ */
+function infinity_options_init()
+{
+	// init screen reqs
+	Infinity_Options_Registry::instance()->init_screen();
+
+	do_action( 'infinity_options_init' );
+}
+
+/**
  * Get an option value
  *
  * @param string $option_name

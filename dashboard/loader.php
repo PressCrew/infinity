@@ -29,6 +29,7 @@ require_once( INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'cpanel.php' );
 add_action( 'init', 'infinity_ajax_setup' );
 add_action( 'admin_init', 'infinity_dashboard_cpanel_setup' );
 add_action( 'admin_menu', 'infinity_dashboard_menu_setup' );
+add_action( 'pie_easy_localize_scripts', 'infinity_dashboard_cpanel_localize_js' );
 
 //
 // Functions
@@ -54,17 +55,14 @@ function infinity_dashboard_cpanel_setup()
 
 	if ( $action ) {
 
-		// init options screen reqs
-		Infinity_Options_Registry::instance()->init_screen();
+		// init options
+		infinity_options_init();
 
 		// add content hook
 		add_action(
 			'infinity_dashboard_cpanel_content',
 			sprintf( 'infinity_dashboard_cpanel_%s_content', $action )
 		);
-
-		// localize script
-		add_action( 'pie_easy_localize_scripts', 'infinity_dashboard_cpanel_localize_js' );
 
 		// hook for config actions
 		do_action( 'infinity_dashboard_cpanel_setup' );
