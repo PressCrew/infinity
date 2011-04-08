@@ -113,9 +113,6 @@
 			cursor: 'move',
 			containment: 'parent'
 		});
-
-		// load start page by default
-		load_tab(tb_start);
 		
 		// add and/or select cpanel tab
 		$('a', cpanel).live('click', function() {
@@ -216,7 +213,7 @@
 
 		// init options panel
 		function initOptionsPanel()
-		{	
+		{
 			// skip this if not options panel
 			if ( !$('div#infinity-cpanel-options').length ) {
 				return;
@@ -342,6 +339,15 @@
 				});
 			}
 
+		}
+
+		// initial load
+		if ( cpanel.length ) {
+			// load start page by default
+			load_tab(tb_start);
+		} else {
+			// init options in case they are displayed on page load
+			initOptionsPanel();
 		}
 
 	});
