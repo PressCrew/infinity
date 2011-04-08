@@ -236,10 +236,10 @@ div.infinity-cpanel-options-single-header {
 		float: left;
 		margin-top: 5px;
 	}
-	div.infinity-cpanel-options-single-header a {
+	div.infinity-cpanel-options-single-header a.ui-button {
 		display: block;
 		float: right;
-		top: 8px;
+		top: 22px;
 		margin-left: 7px;
 	}
 	div.infinity-cpanel-options-single-header a .ui-button-text {
