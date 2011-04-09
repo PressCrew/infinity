@@ -17,11 +17,13 @@
 class Pie_Easy_Scheme_Enqueue
 {
 	const ITEM_DELIM = ',';
+	const PARAM_DELIM = ':';
 	const TRIGGER_PATH = 'path';
 	const TRIGGER_DEPS = 'deps';
 	const TRIGGER_ALWAYS = 'always';
 	const TRIGGER_ACTS = 'actions';
 	const TRIGGER_CONDS = 'conditions';
+	const TRIGGER_PARAMS = 'params';
 	const ACTION_HANDLER_STYLES = 'pie_easy_enqueue_styles';
 	const ACTION_HANDLER_SCRIPTS = 'pie_easy_enqueue_scripts';
 
@@ -206,6 +208,9 @@ class Pie_Easy_Scheme_Enqueue
 					// init empty conditions stack
 					$trigger->add( self::TRIGGER_CONDS, new Pie_Easy_Stack() );
 
+					// init empty params stack
+					$trigger->add( self::TRIGGER_PARAMS, new Pie_Easy_Stack() );
+
 					// add trigger to main map
 					$map->add( $this->make_handle( $theme, $handle ), $trigger );
 				}
@@ -299,6 +304,23 @@ class Pie_Easy_Scheme_Enqueue
 					// yes, add action to each trigger's trigger stack
 					foreach( $directive->value as $action => $handles ) {
 
+						// no action params by default
+						$action_params = null;
+
+						// check for params for action
+						if ( stripos($action, self::PARAM_DELIM) ) {
+							// split action at param delimeter
+							$action_parts = explode( self::PARAM_DELIM, $action );
+							// must have exactly two results
+							if ( count( $action_parts ) == 2 ) {
+								// action is first result
+								$action = $action_parts[0];
+								$action_params = explode( self::ITEM_DELIM, $action_parts[1] );
+							} else {
+								throw new Exception( 'Invalid parameter syntax' );
+							}
+						}
+						
 						// split handles at delimeter
 						$handles = explode( self::ITEM_DELIM, $handles );
 
@@ -316,6 +338,9 @@ class Pie_Easy_Scheme_Enqueue
 								
 								// push onto trigger's trigger stack
 								$map->item_at($handle)->item_at($trigger_type)->push($action);
+
+								// push params onto trigger's params stack
+								$map->item_at($handle)->item_at(self::TRIGGER_PARAMS)->copy_from($action_params);
 
 								// is this an actions trigger type?
 								if ( $trigger_type == self::TRIGGER_ACTS ) {
@@ -466,7 +491,7 @@ class Pie_Easy_Scheme_Enqueue
 				// check if ANY of the conditions eval to true
 				foreach( $config_map->item_at(self::TRIGGER_CONDS) as $callback ) {
 					// try to exec the callback
-					if ( function_exists( $callback ) && call_user_func($callback) == true ) {
+					if ( function_exists( $callback ) && call_user_func_array($callback,$config_map->item_at(self::TRIGGER_PARAMS)->to_array()) == true ) {
 						// callback exists and evaled to true, enqueue it
 						$this->enqueue_style( $handle, $config_map );
 						// done with this inner (conditions) loop
@@ -522,7 +547,7 @@ class Pie_Easy_Scheme_Enqueue
 				// check if ANY of the conditions eval to true
 				foreach( $config_map->item_at(self::TRIGGER_CONDS) as $callback ) {
 					// try to exec the callback
-					if ( function_exists( $callback ) && call_user_func($callback) == true ) {
+					if ( function_exists( $callback ) && call_user_func_array($callback,$config_map->item_at(self::TRIGGER_PARAMS)->to_array()) == true ) {
 						// callback exists and evaled to true, enqueue it
 						$this->enqueue_script( $handle, $config_map );
 						// done with this inner (conditions) loop
