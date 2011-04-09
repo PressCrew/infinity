@@ -114,9 +114,13 @@ for `wp_enqueue_styles()` to work properly.
 The style conditions section lets fine tune when styles are enqueued by assigning one
 or more style handles to a condition (callback function) which evaluates to true.
 
-The format is:
+The basic format is:
 
 	callback_name = "comma,separated,style,handles"
+
+The format to pass any number of arguments to the callback is:
+
+	callback_name:arg1,arg2,arg3 = "comma,separated,style,handles"
 
 You should use the *exact* same handle names that you defined in the `[styles]` section.
 
@@ -213,9 +217,13 @@ for `wp_enqueue_scripts()` to work properly.
 The script conditions section lets fine tune when scripts are enqueued by assigning one
 or more script handles to a condition (callback function) which evaluates to true.
 
-The format is:
+The basic format is:
 
 	callback_name = "comma,separated,script,handles"
+
+The format to pass any number of arguments to the callback is:
+
+	callback_name:arg1,arg2,arg3 = "comma,separated,script,handles"
 
 You should use the *exact* same handle names that you defined in the `[scripts]` section.
 
