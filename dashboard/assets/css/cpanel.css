@@ -15,6 +15,9 @@ div#infinity-cpanel {
     background: url(../images/ui_pattern_bg.png) repeat;
 	font-family: "Droid Sans","Arial","sans-serif";
     text-shadow: 0 -1px 0 #ffffff;
+	box-shadow: 1px 1px #eee, 3px 3px 2px #a5a5a5;
+	-moz-box-shadow: 1px 1px #eee, 3px 3px 2px #a5a5a5;
+	-webkit-box-shadow: 1px 1px #eee, 3px 3px 2px #a5a5a5;
 }
 	div#infinity-cpanel h1 {
 		font-size: 22px;
@@ -107,8 +110,9 @@ div#infinity-cpanel-tabs {
 	z-index: 2;
 	padding: 8px 10px;
 }
-	div#infinity-cpanel-tabs ul {
+	div#infinity-cpanel-tabs ul.ui-tabs-nav  {
 		font-size: 12px;
+		margin-left: 2px;
 	}
 	div#infinity-cpanel-tabs ul li a {
 		padding: 0.25em 1em;
@@ -116,6 +120,11 @@ div#infinity-cpanel-tabs {
 	div#infinity-cpanel-tabs ul li .ui-icon-close {
 		float: right;
 		cursor: pointer;
+	}
+	div#infinity-cpanel-tabs div.ui-tabs-panel {
+		box-shadow: inset 1px 0px #eeeeee, inset 2px 0px 2px #aaaaaa, inset 1px 0px 2px #cccccc;
+		-moz-box-shadow: inset 1px 0px #eeeeee, inset 2px 0px 2px #aaaaaa, inset 1px 0px 2px #cccccc;
+		-webkit-box-shadow: inset 1px 0px #eeeeee, inset 2px 0px 2px #aaaaaa, inset 1px 0px 2px #cccccc;
 	}
 	div#infinity-cpanel-tabs div.infinity-cpanel-tab {
 		min-height: 400px;
@@ -147,8 +156,12 @@ div.infinity-cpanel-options-menu {
 	float: left;
 	width: 220px;
 }
+	div.infinity-cpanel-options-menu div.ui-accordion-header {
+		font-size: 13px;
+	}
 	div.infinity-cpanel-options-menu ul.ui-accordion-content {
 		padding: 0.8em 0.5em;
+		background: url(../images/ui_pattern_bg.png) repeat;
 	}
 	div.infinity-cpanel-options-menu ul.ui-accordion-content li {
 		line-height: 100%;
