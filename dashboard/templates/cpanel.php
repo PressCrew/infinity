@@ -4,7 +4,7 @@
 			<div id="infinity-cpanel-header-slogan">
 			</div>
 			<div id="infinity-cpanel-header-logo">
-				<p><?php print infinity_dashboard_cpanel_version() ?></p>
+				<p><?php print INFINITY_VERSION ?></p>
 			</div>
 		</div>
 		<div id="infinity-cpanel-toolbar">
