@@ -40,10 +40,11 @@ function infinity_dashboard_menu_shifter()
 				.addClass('menu-top-first menu-top-last')
 				.insertBefore('li#menu-posts');
 		m.children('a').first().css({
-			'color': '#3F7CAB',
+			'color': '#285D92',
 			'background': '#cccccc url(<?php print INFINITY_ADMIN_URL ?>/assets/images/ui_pattern_bg.png) repeat 0px -3px',
 			'font-family': 'Helvetica,Arial,sans-serif',
 			'font-weight': 'bold',
+			'text-shadow': '-1px -1px #eeeeee, 2px 1px #c2c2c2',
 			'letter-spacing': '0.16em',
 			'border-color': '#dddddd'
 		});
