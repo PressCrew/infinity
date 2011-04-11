@@ -204,13 +204,12 @@ function infinity_dashboard_image( $name )
 /**
  * Publish a document page
  *
- * @param string $book Name of directory containing the page files
  * @param string $page Name of page to publish
  */
-function infinity_dashboard_doc_publish( $book, $page = null )
+function infinity_dashboard_doc_publish( $page = null )
 {
 	Pie_Easy_Loader::load( 'docs' );
-	$doc = new Pie_Easy_Docs( INFINITY_ADMIN_DOCS_DIR . DIRECTORY_SEPARATOR . $book, $page );
+	$doc = new Pie_Easy_Docs( INFINITY_ADMIN_DOCS_DIR . DIRECTORY_SEPARATOR, $page );
 	$doc->set_pre_filter( 'infinity_dashboard_doc_filter' );
 	$doc->publish();
 }
