@@ -29,19 +29,21 @@ theme development work flow.
 
 ![Scheme Hierarchy](infinity://admin:image/docs/scheme_hierarchy.jpg)
 
-Now we hear you say; Isn't the Parent -> Child functionality more then enough
-for mose cases?
+### Overkill?
 
-The answer is Yes! In most cases you can use this structure to
-create custom themes based on Infinity. It all works exactly as it normally would,
-and if you don't feel the need to go deeper then that, there is no special
-configuration required.
+If you think this is overkill, more than likely you are not running
+a massive multi-site WordPress install. If you choose not to take advantage
+of the infinite theming capabilities, that is OK! Everything works exactly as it
+normally would.
+
+If you don't feel the need to go deeper than one theme, there is no special configuration
+required to take advantage of the many other powerful features of Infinity.
 
 ### Customize Child Themes without having to worry about upgrades
 
-If you have modified a Child Theme of a Infinity, you can easily create a
-Grandchild Theme to further customize it exactly as you wish. This means that if your
-Child Themes gets an update you can safely upgrade and enjoy the new features,
-without losing your customizations! This solves a very big issue for most WordPress
+If you have modified a child theme of a Infinity, you can easily create a
+grandchild theme to further customize it exactly as you wish. This means that if your
+child themes gets an update you can safely upgrade and enjoy the new features,
+without losing your customizations! This solves a very big problem with most WordPress
 parent themes and frameworks, and we're very glad that we have managed to solve this
 problem with Infinity.

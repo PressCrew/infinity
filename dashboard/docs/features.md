@@ -9,27 +9,35 @@ we've integrated this functionality directly into the theme options panel, so yo
 not have to switch between different pages in the dashboard.
 
 Currently there are four core features that you can use in your themes. You enable them in
-your child theme's functions.php just like you would with any other theme. Some of the features
-require that template tags be added to your template files, particularly your header.php file,
-*so pay close attention to the documentation for each feature*.
+your child theme's functions.php just like you would with any other theme.
+
+> Some of the features require that template tags be added to your template files,
+particularly your header.php file, *so pay close attention to the documentation
+for each feature*.
 
 ### Custom CSS
+
+This feature enables a custom CSS option in the theme options panel.
 
 To enable custom css support, add the following to your child theme's functions.php:
 
 	add_theme_support( 'infinity-custom-css' );
 
-This feature enables a custom CSS option in the theme options panel and automatically merges ALL
-of the values of registered options with the field type of "css" to the browser by enqueueing
-a special export script.
+> All of the values of registered options with the `field_type` of "css" are merged
+and sent to the browser by enqueueing a special export script. This is done automatically,
+there are no additional steps to take.
 
 ### Header Logo
+
+This feature enables a file upload option in the theme options panel for a custom logo.
 
 To enable header logo support, add the following to your child theme's functions.php:
 
 	add_theme_support( 'infinity-header-logo' );
 
-This feature enables a file upload option in the theme options panel for a custom logo.
+> This feature requires the additional step of placing a template tag
+in the `<head>` element of your theme! If you skip the step below,
+this feature will *not* work properly.
 
 To display the logo you must execute this function in the `<head>` element of your theme:
 
@@ -41,12 +49,16 @@ To associate the output with your own CSS selector, you can do something like th
 
 ### Header Background
 
+This feature enables a file upload option in the theme options
+panel for a custom header background image.
+
 To enable header background support, add the following to your child theme's functions.php:
 
 	add_theme_support( 'infinity-header-background' );
 
-This feature enables a file upload option in the theme options
-panel for a custom header background image.
+> This feature requires the additional step of placing a template tag
+in the `<head>` element of your theme! If you skip the step below,
+this feature will *not* work properly.
 
 To display the background you must execute this function in the `<head>` element of your theme:
 
@@ -58,12 +70,16 @@ To associate the output with your own CSS selector, you can do something like th
 
 ### Site Background
 
+This feature enables a file upload option in the theme options
+panel for a custom site background image.
+
 To enable site background support, add the following to your child theme's functions.php:
 
 	add_theme_support( 'infinity-site-background' );
 
-This feature enables a file upload option in the theme options
-panel for a custom site background image.
+> This feature requires the additional step of placing a template tag
+in the `<head>` element of your theme! If you skip the step below,
+this feature will *not* work properly.
 
 To display the background you must execute this function in the `<head>` element of your theme:
 
