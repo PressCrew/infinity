@@ -258,7 +258,7 @@ class Pie_Easy_Docs
 	 */
 	private function validate_page_name( $page )
 	{
-		return ( preg_match( '/^\w+$/', $page ) );
+		return ( preg_match( '/^\.?\w+$/', $page ) );
 	}
 
 	/**

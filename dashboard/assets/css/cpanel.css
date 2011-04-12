@@ -19,12 +19,6 @@ div#infinity-cpanel {
 	-moz-box-shadow: 1px 1px #eee, 3px 3px 2px #a5a5a5;
 	-webkit-box-shadow: 1px 1px #eee, 3px 3px 2px #a5a5a5;
 }
-	div#infinity-cpanel h1 {
-		font-size: 22px;
-	}
-	div#infinity-cpanel h3 {
-		color: #e39613;
-	}
 
 div#infinity-cpanel-header {
 	position: relative;
@@ -114,10 +108,10 @@ div#infinity-cpanel-tabs {
 		font-size: 12px;
 		margin-left: 2px;
 	}
-	div#infinity-cpanel-tabs ul li a {
+	div#infinity-cpanel-tabs ul.ui-tabs-nav li a {
 		padding: 0.25em 1em;
 	}
-	div#infinity-cpanel-tabs ul li .ui-icon-close {
+	div#infinity-cpanel-tabs ul.ui-tabs-nav li .ui-icon-close {
 		float: right;
 		cursor: pointer;
 	}
@@ -128,11 +122,13 @@ div#infinity-cpanel-tabs {
 	}
 	div#infinity-cpanel-tabs div.infinity-cpanel-tab {
 		min-height: 400px;
-		padding: 20px;
 		border-radius: 0 0 8px 8px;
 		-moz-border-radius: 0 0 8px 8px;
 		-webkit-border-radius: 0 0 8px 8px;
 		background: #f4f4f4;
+	}
+	div#infinity-cpanel-tabs div.infinity-docs {
+		padding: 0 1.5em 1.5em 1.5em;
 	}
 
 /* ================ */
@@ -272,9 +268,13 @@ textarea.infinity-cpanel-option-field-css {
 /* ====================== */
 
 .infinity-docs {
-    font-family: "Droid Sans","Arial","sans-serif";
+    padding: 0;
+}
+.infinity-docs * {
+    font-family: "Helvetica","Arial",sans-serif;
     font-size: 12px;
-    padding: 10px;
+	color: #222222;
+	text-shadow: none;
 }
 .infinity-docs p,
 .infinity-docs ul,
@@ -283,13 +283,31 @@ textarea.infinity-cpanel-option-field-css {
 }
 .infinity-docs blockquote {
 	margin: 0 0 1.5em 1em;
+	padding: 6px 12px;
+	color: #111111;
 	font-style: italic;
+	letter-spacing: 1px;
+	max-width: 70%;
+	background-color: #e4f2fd;
+	border: 1px dotted #869edf;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+.infinity-docs blockquote p {
+	margin: 0;
 }
 .infinity-docs pre code {
 	display: inline-block;
-	font-size: 12px;
 	margin: 0;
-	padding: 1px 5px;
+	padding: 6px 12px;
+	color: #864304;
+	font-family: "Lucida Console","Courier New",monospace;
+	background-color: #fff;
+	border: 1px dashed darkgray;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
 }
 .infinity-docs pre {
 	margin: 0 0 1.5em 1em;
@@ -300,11 +318,20 @@ textarea.infinity-cpanel-option-field-css {
 .infinity-docs h4,
 .infinity-docs h5,
 .infinity-docs h6 {
-	margin: 0.1em 0 .6em 0;
-	font-weight: bold;
-	border-bottom: 1px solid #eee;
-	font-family: arial,verdana,sans-serif;
+	padding: 0;
+	color: #222222;
+	font-family: "Droid Sans","Arial","sans-serif";
+	font-weight: bolder;
+	font-style: normal;
+	line-height: 110%;
+	border-bottom: 1px solid #dddddd;
 }
+.infinity-docs h1 { font-size: 2em; margin: .67em 0;}
+.infinity-docs h2 { font-size: 1.5em; margin: .75em 0;}
+.infinity-docs h3 { font-size: 1.17em; margin: .83em 0; }
+.infinity-docs h4 { font-size: 1em; margin: 1.12em 0; }
+.infinity-docs h5 { font-size: .83em; margin: 1.5em 0; }
+.infinity-docs h6 { font-size: .75em; margin: 1.67em 0; }
 .infinity-docs ul,
 .infinity-docs ol {
 	margin: .3em 0 1.5em 1em;
@@ -320,8 +347,20 @@ textarea.infinity-cpanel-option-field-css {
 	margin-left: 1.4em;
 	padding-left: 0;
 }
+	.infinity-docs ul li ul,
+	.infinity-docs ol li ol {
+		margin-bottom: 0.5em;
+	}
 .infinity-docs em {
 	font-weight: bold;
+}
+.infinity-docs.infinity-docs-toc {
+	float: right;
+	width: 25%;
+}
+.infinity-docs.infinity-docs-page {
+	float: left;
+	width: 65%;
 }
 
 /* ================== */
