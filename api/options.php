@@ -15,6 +15,9 @@ Pie_Easy_Loader::load( 'ajax', 'options' );
 
 /**
  * Infinity Options Section
+ *
+ * @package api
+ * @subpackage options
  */
 class Infinity_Options_Section extends Pie_Easy_Options_Section
 {
@@ -23,6 +26,9 @@ class Infinity_Options_Section extends Pie_Easy_Options_Section
 
 /**
  * Infinity Options Option
+ *
+ * @package api
+ * @subpackage options
  */
 class Infinity_Options_Option extends Pie_Easy_Options_Option
 {
@@ -39,6 +45,9 @@ class Infinity_Options_Option extends Pie_Easy_Options_Option
 
 /**
  * Infinity Options Registry
+ *
+ * @package api
+ * @subpackage options
  */
 class Infinity_Options_Registry extends Pie_Easy_Options_Registry
 {
@@ -93,6 +102,9 @@ class Infinity_Options_Registry extends Pie_Easy_Options_Registry
 
 /**
  * Infinity Options Renderer
+ *
+ * @package api
+ * @subpackage options
  */
 class Infinity_Options_Option_Renderer extends Pie_Easy_Options_Option_Renderer
 {
@@ -155,6 +167,9 @@ class Infinity_Options_Option_Renderer extends Pie_Easy_Options_Option_Renderer
 
 /**
  * Infinity Options Uploader
+ *
+ * @package api
+ * @subpackage options
  */
 class Infinity_Options_Uploader extends Pie_Easy_Options_Uploader
 {

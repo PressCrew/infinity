@@ -11,10 +11,16 @@
  * @since 1.0
  */
 
+/**
+ * Load reqs
+ */
 Pie_Easy_Loader::load( 'files', 'collections' );
 
 /**
  * Make Scheming Easy
+ *
+ * @package pie
+ * @subpackage schemes
  */
 final class Pie_Easy_Scheme
 {

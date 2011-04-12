@@ -13,6 +13,9 @@
 
 /**
  * Make enqueuing scheme styles and scripts easy
+ *
+ * @package pie
+ * @subpackage schemes
  */
 class Pie_Easy_Scheme_Enqueue
 {

@@ -13,6 +13,9 @@
 
 /**
  * Make L10n Easy
+ *
+ * @package pie
+ * @subpackage localization
  */
 abstract class Pie_Easy_L10n
 {

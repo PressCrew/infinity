@@ -14,6 +14,8 @@
 /**
  * Make an init directive easy
  *
+ * @package pie
+ * @subpackage options
  * @property string $name The name of the directive
  * @property mixed $value The value of the directive
  * @property-read boolean $read_only Whether the value is read only

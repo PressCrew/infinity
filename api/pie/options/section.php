@@ -13,6 +13,9 @@
 
 /**
  * Make an option section easy
+ *
+ * @package pie
+ * @subpackage options
  */
 abstract class Pie_Easy_Options_Section
 {
@@ -54,7 +57,7 @@ abstract class Pie_Easy_Options_Section
 	/**
 	 * The parent section
 	 *
-	 * @var
+	 * @var string
 	 */
 	private $parent;
 

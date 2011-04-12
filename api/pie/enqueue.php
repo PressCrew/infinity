@@ -15,6 +15,9 @@ Pie_Easy_Loader::load( 'collections', 'files' );
 
 /**
  * Make enqueing assets Easy
+ *
+ * @package pie
+ * @subpackage enqueue
  */
 final class Pie_Easy_Enqueue
 {

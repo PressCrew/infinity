@@ -19,6 +19,9 @@
  * Originally authored by Qiang Xue for the {@link http://www.yiiframework.com/ Yii Framework},
  * Copyright 2008-2010 {@link http://www.yiiframework.com/ Yii Software LLC},
  * and released under the {@link http://www.yiiframework.com/license/ Yii License}
+ *
+ * @package pie
+ * @subpackage collections
  */
 class Pie_Easy_Stack_Iterator implements Iterator
 {

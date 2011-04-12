@@ -15,6 +15,9 @@ Pie_Easy_Loader::load( 'init/directive' );
 
 /**
  * Make an option directive easy
+ *
+ * @package pie
+ * @subpackage options
  */
 class Pie_Easy_Options_Directive extends Pie_Easy_Init_Directive
 {
