@@ -11,18 +11,32 @@
  * @since 1.0
  */
 
-// check if pie has been included already
+/**
+ * check if pie has been included already
+ * @ignore
+ */
 if ( defined( 'PIE_EASY_VERSION' ) ) {
 	return;
 }
 
-// set pie contants
+/**
+ * PIE version
+ */
 define( 'PIE_EASY_VERSION', '1.0' );
+/**
+ * PIE root directory
+ */
 define( 'PIE_EASY_DIR', dirname( __FILE__ ) );
+/**
+ * PIE vendors library directory
+ */
 define( 'PIE_EASY_VENDORS_DIR', PIE_EASY_DIR . DIRECTORY_SEPARATOR . 'vendors' );
 
 /**
  * Make loading pie features easy
+ *
+ * @package pie
+ * @subpackage loader
  */
 final class Pie_Easy_Loader
 {

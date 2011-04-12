@@ -7,7 +7,7 @@
  * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
  * @package api
- * @subpackage options
+ * @subpackage features
  * @since 1.0
  */
 
@@ -15,6 +15,9 @@ Pie_Easy_Loader::load( 'enqueue', 'features' );
 
 /**
  * Infinity Feature factory class
+ *
+ * @package api
+ * @subpackage features
  */
 final class Infinity_Features
 {
@@ -79,13 +82,16 @@ final class Infinity_Features
 
 /**
  * Infinity Feature base class
+ *
+ * @package api
+ * @subpackage features
  */
 abstract class Infinity_Feature extends Pie_Easy_Feature
 {
 	/**
 	 * Define our API slug
 	 *
-	 * @return
+	 * @return string
 	 */
 	final protected function get_api_slug()
 	{
@@ -95,6 +101,9 @@ abstract class Infinity_Feature extends Pie_Easy_Feature
 
 /**
  * Infinity Infinite Children feature
+ *
+ * @package api
+ * @subpackage features
  */
 class Infinity_Feature_Infinite_Children extends Infinity_Feature
 {
@@ -112,6 +121,9 @@ class Infinity_Feature_Infinite_Children extends Infinity_Feature
 
 /**
  * Infinity Custom CSS feature
+ *
+ * @package api
+ * @subpackage features
  */
 class Infinity_Feature_Custom_Css extends Infinity_Feature
 {
@@ -139,6 +151,9 @@ class Infinity_Feature_Custom_Css extends Infinity_Feature
 
 /**
  * Infinity "Header Logo" Feature
+ *
+ * @package api
+ * @subpackage features
  */
 class Infinity_Feature_Header_Logo extends Infinity_Feature
 {
@@ -192,6 +207,9 @@ class Infinity_Feature_Header_Logo extends Infinity_Feature
 
 /**
  * Infinity "Header Background" Feature
+ *
+ * @package api
+ * @subpackage features
  */
 class Infinity_Feature_Header_Background extends Infinity_Feature
 {
@@ -242,6 +260,9 @@ class Infinity_Feature_Header_Background extends Infinity_Feature
 
 /**
  * Infinity "Site Background" Feature
+ *
+ * @package api
+ * @subpackage features
  */
 class Infinity_Feature_Site_Background extends Infinity_Feature
 {

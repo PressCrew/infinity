@@ -15,6 +15,9 @@ Pie_Easy_Loader::load( 'files' );
 
 /**
  * Make Documentation easy
+ *
+ * @package pie
+ * @subpackage docs
  */
 class Pie_Easy_Docs
 {

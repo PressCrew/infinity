@@ -15,6 +15,9 @@ Pie_Easy_Loader::load('ajax');
 
 /**
  * Make an uploaded file option easy
+ *
+ * @package pie
+ * @subpackage options
  */
 class Pie_Easy_Options_Uploader
 {

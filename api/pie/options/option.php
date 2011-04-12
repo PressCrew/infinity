@@ -16,6 +16,8 @@ Pie_Easy_Loader::load( 'collections', 'docs', 'schemes' );
 /**
  * Make an option easy
  *
+ * @package pie
+ * @subpackage options
  * @property-read string $section
  * @property-read string $title
  * @property-read string $description

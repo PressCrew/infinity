@@ -15,6 +15,9 @@ Pie_Easy_Loader::load( 'l10n' );
 
 /**
  * Infinity Localization
+ *
+ * @package api
+ * @subpackage localization
  */
 class Infinity_L10n extends Pie_Easy_L10n
 {

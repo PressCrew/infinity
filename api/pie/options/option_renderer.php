@@ -15,6 +15,9 @@ Pie_Easy_Loader::load( 'docs' );
 
 /**
  * Make rendering options easy
+ *
+ * @package pie
+ * @subpackage options
  */
 abstract class Pie_Easy_Options_Option_Renderer
 {

@@ -7,11 +7,13 @@
  * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
  * @package pie
- * @subpackage textile
+ * @subpackage parsers
  * @since 1.0
  */
 
-// load the markdown lib
+/**
+ * Load the markdown lib
+ */
 require_once
 	PIE_EASY_VENDORS_DIR .
 	DIRECTORY_SEPARATOR . 'textile' .
@@ -19,6 +21,9 @@ require_once
 
 /**
  * Make Textile parsing easy
+ *
+ * @package pie
+ * @subpackage parsers
  */
 final class Pie_Easy_Textile
 {

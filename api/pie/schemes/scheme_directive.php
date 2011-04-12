@@ -15,6 +15,9 @@ Pie_Easy_Loader::load( 'init/directive' );
 
 /**
  * Make a scheme directive easy
+ *
+ * @package pie
+ * @subpackage schemes
  */
 class Pie_Easy_Scheme_Directive extends Pie_Easy_Init_Directive
 {

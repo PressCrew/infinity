@@ -15,6 +15,9 @@ Pie_Easy_Loader::load( 'ajax', 'collections' );
 
 /**
  * Make keeping track of options easy
+ *
+ * @package pie
+ * @subpackage options
  */
 abstract class Pie_Easy_Options_Registry
 {

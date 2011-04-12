@@ -13,6 +13,9 @@
 
 /**
  * Make category options easy
+ *
+ * @package pie
+ * @subpackage options
  */
 class Pie_Easy_Options_Walker_Category extends Walker_Category
 {
@@ -63,6 +66,9 @@ class Pie_Easy_Options_Walker_Category extends Walker_Category
 
 /**
  * Make page options easy
+ *
+ * @package pie
+ * @subpackage options
  */
 class Pie_Easy_Options_Walker_Page extends Walker_Page
 {

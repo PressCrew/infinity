@@ -13,6 +13,9 @@
 
 /**
  * Make the File System Easy
+ *
+ * @package pie
+ * @subpackage files
  */
 final class Pie_Easy_Files
 {
@@ -132,6 +135,9 @@ final class Pie_Easy_Files
 
 /**
  * Pie Easy File Exception
+ *
+ * @package pie
+ * @subpackage files
  */
 final class Pie_Easy_Files_Exception extends Exception {}
 

@@ -13,6 +13,9 @@
 
 /**
  * Make a feature easy
+ *
+ * @package pie
+ * @subpackage features
  */
 abstract class Pie_Easy_Feature
 {

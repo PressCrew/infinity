@@ -13,6 +13,9 @@
 
 /**
  * Make AJAX Easy
+ *
+ * @package pie
+ * @subpackage ajax
  */
 final class Pie_Easy_Ajax
 {
