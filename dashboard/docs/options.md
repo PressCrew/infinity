@@ -224,7 +224,7 @@ Sub-directories are also allowed:
 
 	wp-content/themes/child_theme/config/docs/foo/bar/mytheme_option.md
 
-There are two valid formats for doc pages.
+There are three valid formats for doc pages.
 
 * **Markdown**
 
@@ -235,6 +235,15 @@ There are two valid formats for doc pages.
 	For help with Markdown, see
 	[Basic Usage](http://daringfireball.net/projects/markdown/basics) and the
 	[Syntax Reference](http://daringfireball.net/projects/markdown/syntax)
+
+	**Note:** Custom Infinity `<a>` and `<img>` tags support is under development
+
+* **Textile**
+
+	The doc page must end with the `.text` or `.textile` extensions and contain valid Textile
+	markup.
+
+	For help with Textile, see the [Syntax Reference](http://textile.thresholdstate.com/)
 
 	**Note:** Custom Infinity `<a>` and `<img>` tags support is under development
 
@@ -265,7 +274,8 @@ There are three documentation modes:
 
 	`documentation = "mytheme_option"`
 
-	In this case the doc page should be named `mytheme_option.md` or `mytheme_option.html`.
+	In this case the doc page should be named `mytheme_option.text`,
+	`mytheme_option.md` or `mytheme_option.html`.
 
 	Sub-directory:
 
@@ -284,8 +294,8 @@ tab will be displayed.
 If you are extending a theme and wish to provide different documentation than the parent's author
 has provided, you simply create the same doc page in your theme, and your documentation will override
 the parent file. In this case you are not limited to using the same format. If the parent theme
-has a file named `mytheme_option.html`, you can create a file called `mytheme_option.md` and your Markdown
-file will override the HTML file.
+has a file named `mytheme_option.html`, you can create a file called `mytheme_option.md` and
+your Markdown file will override the HTML file.
 
 Child theme can override documentation setting: **Yes**  
 Child theme can override documentation pages: **Yes**
