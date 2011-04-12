@@ -54,7 +54,8 @@ final class Pie_Easy_Loader
 		'init' =>
 			array( 'directive' ),
 		'schemes' =>
-			array( 'scheme', 'scheme_directive', 'scheme_enqueue' )
+			array( 'scheme', 'scheme_directive', 'scheme_enqueue' ),
+		'textile'
 	);
 
 	/**

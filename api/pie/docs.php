@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'files', 'markdown' );
+Pie_Easy_Loader::load( 'files' );
 
 /**
  * Make Documentation easy
@@ -34,6 +34,13 @@ class Pie_Easy_Docs
 	 */
 	const MARKUP_MARKDOWN = 'md';
 	const MARKUP_MARKDOWN_LONG = 'markdown';
+
+	/**
+	 * Textile markup type
+	 * @link http://textile.thresholdstate.com/
+	 */
+	const MARKUP_TEXTILE = 'text';
+	const MARKUP_TEXTILE_LONG = 'textile';
 
 	/**
 	 * Directories which may contain the docs
@@ -127,7 +134,14 @@ class Pie_Easy_Docs
 			// Markdown
 			case self::MARKUP_MARKDOWN:
 			case self::MARKUP_MARKDOWN_LONG:
+				Pie_Easy_Loader::load( 'markdown' );
 				$contents = Pie_Easy_Markdown::parse( $contents );
+				break;
+			// Textile
+			case self::MARKUP_TEXTILE:
+			case self::MARKUP_TEXTILE_LONG:
+				Pie_Easy_Loader::load( 'textile' );
+				$contents = Pie_Easy_Textile::parse( $contents );
 				break;
 			// Invalid
 			default:
@@ -260,7 +274,9 @@ class Pie_Easy_Docs
 			join( '|', array(
 				self::MARKUP_HTML,
 				self::MARKUP_MARKDOWN,
-				self::MARKUP_MARKDOWN_LONG
+				self::MARKUP_MARKDOWN_LONG,
+				self::MARKUP_TEXTILE,
+				self::MARKUP_TEXTILE_LONG
 			));
 
 		// loop through all doc dirs looking for doc page
