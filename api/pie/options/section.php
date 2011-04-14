@@ -16,33 +16,35 @@
  *
  * @package pie
  * @subpackage options
+ * @property-read string $section The name of the section (slug)
+ * @property-read string $title The title of the section
+ * @property-read string $class The CSS class for this section
+ * @property-read string $class_title The CSS class for the title of this section
+ * @property-read string $parent The parent section (slug)
+ * @property-read string $section_content The content that will be wrapped with the section's layout
  */
 abstract class Pie_Easy_Options_Section
 {
 	/**
 	 * The name of this section
-	 *
 	 * @var string
 	 */
 	private $name;
 
 	/**
 	 * The title of this section
-	 *
 	 * @var string
 	 */
 	private $title;
 
 	/**
 	 * The CSS class for this section
-	 *
 	 * @var string
 	 */
 	private $class;
 
 	/**
 	 * The CSS class for the title of this section
-	 *
 	 * @var string
 	 */
 	private $class_title;
@@ -56,23 +58,21 @@ abstract class Pie_Easy_Options_Section
 
 	/**
 	 * The parent section
-	 *
 	 * @var string
 	 */
 	private $parent;
 
 	/**
 	 * The current content to be wrapped
-	 *
 	 * @var string
 	 */
 	private $section_content;
 
 	/**
-	 * Constructor
+	 * Initializes the section
 	 *
-	 * @param string $name
-	 * @param string $title
+	 * @param string $name Section name (slug)
+	 * @param string $title Section title
 	 */
 	public function __construct( $name, $title  )
 	{
@@ -81,8 +81,7 @@ abstract class Pie_Easy_Options_Section
 	}
 
 	/**
-	 * Allow read access to all properties (for now)
-	 *
+	 * @ignore
 	 * @param string $name
 	 * @return mixed
 	 */
@@ -92,7 +91,7 @@ abstract class Pie_Easy_Options_Section
 	}
 
 	/**
-	 * Set the CSS class
+	 * Set the CSS class for this section's container
 	 *
 	 * @param string $class
 	 */
@@ -147,9 +146,9 @@ abstract class Pie_Easy_Options_Section
 	}
 
 	/**
-	 * Render a section of options
+	 * Render this section
 	 *
-	 * @param string $content The content to wrap with the section
+	 * @param string $content The content that should be wrapped in the section layout
 	 * @param boolean $output Set to false to return results instead of printing
 	 * @return string|void
 	 */
@@ -173,7 +172,9 @@ abstract class Pie_Easy_Options_Section
 	}
 
 	/**
-	 * Wrap the section content with the section layout
+	 * Render the section layout around the section's content
+	 *
+	 * If you override this method, make sure you include all of the CSS classes!
 	 */
 	protected function render_section()
 	{ ?>

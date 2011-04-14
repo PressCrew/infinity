@@ -29,8 +29,8 @@ class Pie_Easy_Options_Uploader
 	private $script_action;
 
 	/**
-	 * Constructor
-	 *
+	 * Initializes the uploader
+	 * 
 	 * @param string $script_action The action on which to localize the script
 	 */
 	public function __construct( $script_action = null )
@@ -41,7 +41,7 @@ class Pie_Easy_Options_Uploader
 	}
 
 	/**
-	 * Init screen deps
+	 * Initialize screen dependancies
 	 */
 	public function init_screen()
 	{
@@ -50,7 +50,7 @@ class Pie_Easy_Options_Uploader
 	}
 	
 	/**
-	 * Load necessary styles
+	 * Enqueue required styles
 	 */
 	public function init_styles()
 	{
@@ -59,7 +59,7 @@ class Pie_Easy_Options_Uploader
 	}
 
 	/**
-	 * Load necessary scripts
+	 * Enqueue required scripts
 	 */
 	public function init_scripts()
 	{
@@ -142,7 +142,7 @@ class Pie_Easy_Options_Uploader
 	}
 
 	/**
-	 * Get the url for a media attachment
+	 * Get the url for a media attachment for an AJAX request
 	 */
 	public function ajax_media_url()
 	{

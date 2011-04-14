@@ -43,7 +43,7 @@ abstract class Pie_Easy_Options_Option_Renderer
 	private $uploader;
 
 	/**
-	 * Init screen deps
+	 * Init screen dependancies for all applicable option types
 	 */
 	public function init_screen()
 	{
@@ -57,6 +57,8 @@ abstract class Pie_Easy_Options_Option_Renderer
 
 	/**
 	 * Init screen style requirements
+	 *
+	 * @ignore
 	 */
 	public function init_styles()
 	{
@@ -66,6 +68,8 @@ abstract class Pie_Easy_Options_Option_Renderer
 
 	/**
 	 * Init screen style requirements
+	 *
+	 * @ignore
 	 */
 	public function init_scripts()
 	{
@@ -81,7 +85,7 @@ abstract class Pie_Easy_Options_Option_Renderer
 	}
 
 	/**
-	 * Init ajax requirements
+	 * Initialize ajax requirements for all applicable option types
 	 */
 	final public function init_ajax()
 	{
@@ -92,7 +96,7 @@ abstract class Pie_Easy_Options_Option_Renderer
 	}
 
 	/**
-	 * Enable uploader support
+	 * Enable uploader support by passing a valid uploader object
 	 *
 	 * @param Pie_Easy_Options_Uploader $uploader
 	 */
@@ -114,7 +118,7 @@ abstract class Pie_Easy_Options_Option_Renderer
 	/**
 	 * Render an option
 	 *
-	 * @param Pie_Easy_Options_Option $option
+	 * @param Pie_Easy_Options_Option $option The option to render
 	 * @param boolean $output Set to false to return results instead of printing
 	 * @return string|void
 	 */
@@ -178,7 +182,7 @@ abstract class Pie_Easy_Options_Option_Renderer
 	 *
 	 * @param string $class,...
 	 */
-	protected function render_classes( $class = null )
+	protected function render_classes()
 	{
 		// get unlimited number of class args
 		$classes = func_get_args();
@@ -209,7 +213,7 @@ abstract class Pie_Easy_Options_Option_Renderer
 	}
 
 	/**
-	 * Render the field based on type
+	 * Render the field based on option type
 	 */
 	final protected function render_field()
 	{
@@ -348,6 +352,8 @@ abstract class Pie_Easy_Options_Option_Renderer
 
 	/**
 	 * Render one or more checkboxes
+	 *
+	 * @see render_input_group
 	 */
 	protected function render_checkbox()
 	{
@@ -356,6 +362,8 @@ abstract class Pie_Easy_Options_Option_Renderer
 
 	/**
 	 * Render a color picker input
+	 *
+	 * @see render_input
 	 */
 	protected function render_colorpicker()
 	{
@@ -378,17 +386,19 @@ abstract class Pie_Easy_Options_Option_Renderer
 
 	/**
 	 * Render a CSS text area
+	 *
+	 * @see render_textarea
 	 */
-	public function render_css()
+	protected function render_css()
 	{
 		// simply render a textarea
 		$this->render_textarea();
 	}
 
 	/**
-	 * Render form input tag
+	 * Render a simple form input tag
 	 *
-	 * @param string $type A valid form input type
+	 * @param string $type A valid form input element "type" attribute value (see HTML spec)
 	 */
 	public function render_input( $type )
 	{ ?>
@@ -398,7 +408,7 @@ abstract class Pie_Easy_Options_Option_Renderer
 	/**
 	 * Render a group of inputs with the same name
 	 *
-	 * @param string $type
+	 * @param string $type Valid types are 'checkbox' and 'radio'
 	 * @param array $field_options
 	 * @param mixed $selected_value
 	 */
@@ -492,6 +502,8 @@ abstract class Pie_Easy_Options_Option_Renderer
 
 	/**
 	 * Render a post select box
+	 *
+	 * @see render_select
 	 */
 	protected function render_post()
 	{
@@ -512,6 +524,8 @@ abstract class Pie_Easy_Options_Option_Renderer
 
 	/**
 	 * Render posts checkboxes
+	 *
+	 * @see render_input_group
 	 */
 	protected function render_posts()
 	{
@@ -532,6 +546,8 @@ abstract class Pie_Easy_Options_Option_Renderer
 
 	/**
 	 * Render one or more radio button tags
+	 *
+	 * @see render_input_group
 	 */
 	protected function render_radio()
 	{
@@ -541,8 +557,8 @@ abstract class Pie_Easy_Options_Option_Renderer
 	/**
 	 * Render a select tag
 	 *
-	 * @param array $field_options
-	 * @param mixed $selected_value
+	 * @param array $field_options Multi-dimensional array of options to render (value => description)
+	 * @param mixed $selected_value The value to render as selected
 	 */
 	protected function render_select( $field_options = null, $selected_value = null )
 	{
@@ -567,6 +583,8 @@ abstract class Pie_Easy_Options_Option_Renderer
 
 	/**
 	 * Render a tag select box
+	 *
+	 * @see render_select
 	 */
 	protected function render_tag()
 	{
@@ -591,6 +609,8 @@ abstract class Pie_Easy_Options_Option_Renderer
 
 	/**
 	 * Render tags checkboxes
+	 *
+	 * @see render_input_group
 	 */
 	protected function render_tags()
 	{
@@ -615,6 +635,8 @@ abstract class Pie_Easy_Options_Option_Renderer
 
 	/**
 	 * Render a text input tag
+	 *
+	 * @see render_input
 	 */
 	protected function render_text()
 	{
@@ -631,6 +653,8 @@ abstract class Pie_Easy_Options_Option_Renderer
 
 	/**
 	 * Render a file uploader
+	 *
+	 * @see Pie_Easy_Options_Uploader::render()
 	 */
 	final protected function render_upload()
 	{
@@ -663,7 +687,6 @@ abstract class Pie_Easy_Options_Option_Renderer
 	 * Render documentation for this option
 	 *
 	 * @param array $doc_dirs Directory paths under which to search for doc page file
-	 * @return null
 	 */
 	final protected function render_documentation( $doc_dirs )
 	{
@@ -677,7 +700,7 @@ abstract class Pie_Easy_Options_Option_Renderer
 					$page = $this->option->name;
 				} else {
 					// no, documentation disabled
-					return null;
+					return;
 				}
 			} else {
 				// page name was set manually
@@ -694,12 +717,9 @@ abstract class Pie_Easy_Options_Option_Renderer
 	
 	/**
 	 * Render sample code for this option
-	 *
-	 * @return null
 	 */
 	final protected function render_sample_code()
 	{
-
 // begin rendering ?>
 <strong>Test if option is set</strong>
 <code>&lt;?php if ( infinity_option( '<?php print $this->option->name ?>' ) ): ?&gt;

@@ -14,7 +14,7 @@
 Pie_Easy_Loader::load( 'files' );
 
 /**
- * Make Documentation easy
+ * Make documentation easy
  *
  * @package pie
  * @subpackage docs
@@ -28,6 +28,8 @@ class Pie_Easy_Docs
 
 	/**
 	 * HTML markup type
+	 *
+	 * No markup parsing is done. Good in, good out.
 	 */
 	const MARKUP_HTML = 'html';
 
@@ -36,6 +38,10 @@ class Pie_Easy_Docs
 	 * @link http://daringfireball.net/projects/markdown/
 	 */
 	const MARKUP_MARKDOWN = 'md';
+	/**
+	 * Markdown markup type (long)
+	 * @see MARKUP_TEXTILE
+	 */
 	const MARKUP_MARKDOWN_LONG = 'markdown';
 
 	/**
@@ -43,65 +49,53 @@ class Pie_Easy_Docs
 	 * @link http://textile.thresholdstate.com/
 	 */
 	const MARKUP_TEXTILE = 'text';
+	/**
+	 * Textile markup type (long)
+	 * @see MARKUP_TEXTILE
+	 */
 	const MARKUP_TEXTILE_LONG = 'textile';
 
 	/**
 	 * Directories which may contain the docs
-	 *
 	 * @var array
 	 */
 	private $doc_dirs;
 
 	/**
 	 * The page name
-	 *
 	 * @var string
 	 */
 	private $page;
 
 	/**
 	 * The page file to parse
-	 *
 	 * @var string
 	 */
 	private $page_file;
 
 	/**
 	 * The page markup format
-	 *
 	 * @var string
 	 */
 	private $page_markup;
 
 	/**
-	 * The URL template to use for link generation
-	 *
-	 * This template is processed with sprintf() and should contain exactly one string token
-	 * which will be replaced with the page name.
-	 *
-	 * @var string
-	 */
-	private $page_url_template;
-	
-	/**
 	 * The callback to filter markup before parsing
-	 * 
 	 * @var string|array 
 	 */
 	private $pre_parse_callback;
 	
 	/**
 	 * The callback to filter markup after parsing
-	 * 
 	 * @var string|array 
 	 */
 	private $post_parse_callback;
 
 	/**
-	 * Constructor
-	 * 
-	 * @param string|array $dir Directory or directories which may contain the doc page
-	 * @param string $page The page being viewed in the docs dir
+	 * Initialize the doc parser
+	 *
+	 * @param string|array $dir Directory or directories which may contain the doc page, in the order in which they should be searched
+	 * @param string $page The page to locate and parse from the doc dirs stack
 	 */
 	public function __construct( $dir, $page = null )
 	{
@@ -115,7 +109,7 @@ class Pie_Easy_Docs
 	}
 
 	/**
-	 * Get parsed and formatted contents of page file
+	 * Parse and return formatted contents of page file
 	 *
 	 * @return string Valid HTML markup
 	 */
@@ -161,6 +155,8 @@ class Pie_Easy_Docs
 
 	/**
 	 * Print the results of parsing
+	 *
+	 * @see parse
 	 */
 	public function publish()
 	{
@@ -169,6 +165,9 @@ class Pie_Easy_Docs
 
 	/**
 	 * Set the pre parse filter callback
+	 *
+	 * The callback should accept one parameter, which is the raw
+	 * contents of the page that was found.
 	 *
 	 * @param mixed $callback
 	 */
@@ -183,6 +182,9 @@ class Pie_Easy_Docs
 
 	/**
 	 * Set the post parse filter callback
+	 *
+	 * The callback should accept one parameter, which is the
+	 * parsed contents of the page that was found.
 	 *
 	 * @param mixed $callback
 	 */
@@ -304,16 +306,6 @@ class Pie_Easy_Docs
 		throw new Exception( sprintf( 'A file for the doc page "%s" does not exist in any of the configured directories', $page ) );
 	}
 
-	/**
-	 * Return URL for a given page
-	 *
-	 * @param string $page
-	 * @return string
-	 */
-	public function page_url( $page )
-	{
-		return sprintf( $this->page_url_template, $page );
-	}
 }
 
 ?>

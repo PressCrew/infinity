@@ -73,17 +73,16 @@ final class Pie_Easy_Loader
 	);
 
 	/**
-	 * Constructor
+	 * This is a singleton
 	 */
-	private function __construct()
-	{
-		// can't create singleton
-	}
+	private function __construct() {}
 
 	/**
-	 * Initialize
+	 * Initialize PIE
 	 *
-	 * @param string $pie_url The full URL to pie files
+	 * You must tell PIE at what URL its root directory is located
+	 *
+	 * @param string $pie_url The absolute URL to pie root
 	 */
 	final static public function init( $pie_url )
 	{
@@ -109,12 +108,11 @@ final class Pie_Easy_Loader
 	}
 
 	/**
-	 * Load a feature via static call
+	 * Load feature(s) via static call
 	 *
-	 * @param string $feature,...
-	 * @return bool
+	 * @param string $feature,... An unlimited number of features to load
 	 */
-	final static public function load( $feature )
+	final static public function load()
 	{
 		// handle variable number of args
 		$features = func_get_args();
@@ -126,10 +124,10 @@ final class Pie_Easy_Loader
 	}
 	
 	/**
-	 * Load a feature
+	 * Load a single feature
 	 *
 	 * @param string $feature
-	 * @return boolean
+	 * @return true|void
 	 */
 	final public function load_feature( $feature )
 	{
@@ -153,7 +151,7 @@ final class Pie_Easy_Loader
 	 * Load a feature package
 	 *
 	 * @param string $feature
-	 * @return true
+	 * @return true|void
 	 */
 	private function load_package( $feature )
 	{

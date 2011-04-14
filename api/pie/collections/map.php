@@ -36,8 +36,6 @@ class Pie_Easy_Map implements IteratorAggregate,ArrayAccess,Countable
 	private $read_only = false;
 
 	/**
-	 * Constructor.
-	 *
 	 * Initializes the list with an array or an iterable object.
 	 *
 	 * @param array $data The intial data. Default is null, meaning no initialization.

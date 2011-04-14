@@ -74,7 +74,7 @@ abstract class Pie_Easy_Options_Registry
 	private $options;
 	
 	/**
-	 * Constructor
+	 * Initializes map properties
 	 */
 	public function __construct()
 	{
@@ -84,7 +84,7 @@ abstract class Pie_Easy_Options_Registry
 	}
 
 	/**
-	 * Init screen reqs
+	 * Init screen dependencies for all applicable options to be rendered
 	 */
 	public function init_screen()
 	{
@@ -92,7 +92,7 @@ abstract class Pie_Easy_Options_Registry
 	}
 
 	/**
-	 * Init ajax reqs
+	 * Init ajax requirements
 	 */
 	public function init_ajax()
 	{
@@ -100,7 +100,7 @@ abstract class Pie_Easy_Options_Registry
 	}
 
 	/**
-	 * Set the class to use for creating new sections
+	 * Set the PHP class to use for creating new sections
 	 *
 	 * @param string $class_name
 	 * @return boolean
@@ -117,7 +117,7 @@ abstract class Pie_Easy_Options_Registry
 	}
 
 	/**
-	 * Set the class to use for creating new options
+	 * Set the PHP class to use for creating new options
 	 *
 	 * @param string $class_name
 	 * @return boolean
@@ -134,7 +134,7 @@ abstract class Pie_Easy_Options_Registry
 	}
 
 	/**
-	 * Set the option renderer
+	 * Set the option renderer by passing a valid renderer object
 	 *
 	 * @param Pie_Easy_Options_Option_Renderer $renderer
 	 */
@@ -193,7 +193,7 @@ abstract class Pie_Easy_Options_Registry
 	}
 
 	/**
-	 * Check if a section has been registered
+	 * Returns true if a section has been registered
 	 *
 	 * @param string $section_name
 	 * @return boolean
@@ -235,9 +235,10 @@ abstract class Pie_Easy_Options_Registry
 	 *
 	 * This adheres to parent settings in the options ini file
 	 *
+	 * @param Pie_Easy_Options_Section $section The section object whose children you want to get
 	 * @return array
 	 */
-	public function get_section_children( $section )
+	public function get_section_children( Pie_Easy_Options_Section $section )
 	{
 		// the sections that will be returned
 		$sections = array();
@@ -254,6 +255,8 @@ abstract class Pie_Easy_Options_Registry
 
 	/**
 	 * Get sections that should behave as a root section
+	 *
+	 * This method mostly exists as a helper to use when rendering menus
 	 *
 	 * @param array $section_names An array of section names to include, defaults to all
 	 * @return array
@@ -300,7 +303,7 @@ abstract class Pie_Easy_Options_Registry
 	}
 
 	/**
-	 * Check if an option has been registered
+	 * Returns true if an option has been registered
 	 *
 	 * @param string $option_name
 	 * @return boolean
@@ -311,7 +314,7 @@ abstract class Pie_Easy_Options_Registry
 	}
 
 	/**
-	 * Return a registered option object
+	 * Return a registered option object by name
 	 *
 	 * @param string $option_name
 	 * @return Pie_Easy_Options_Option
@@ -331,7 +334,7 @@ abstract class Pie_Easy_Options_Registry
 	/**
 	 * Return registered options as an array
 	 *
-	 * @param Pie_Easy_Options_Section $section Limit options to one section
+	 * @param Pie_Easy_Options_Section $section Limit options to one section by passing a section object
 	 * @return array
 	 */
 	public function get_options( Pie_Easy_Options_Section $section = null )
@@ -376,7 +379,7 @@ abstract class Pie_Easy_Options_Registry
 	 * Return registered options that are valid in a menu
 	 *
 	 * It does not make sense to list an option in a menu which requires another option,
-	 * so this helper method will remove them.
+	 * so this helper method will return an array without them.
 	 *
 	 * @param Pie_Easy_Options_Section $section Limit options to one section
 	 * @return array
@@ -405,11 +408,11 @@ abstract class Pie_Easy_Options_Registry
 	}
 
 	/**
-	 * Load options from an ini file
+	 * Load option directives from an ini file
 	 * 
 	 * @uses parse_ini_file()
-	 * @param string $filename
-	 * @param string $theme The theme to assign the file options to
+	 * @param string $filename Absolute path to the options ini file to parse
+	 * @param string $theme The theme to assign the prased option directives to
 	 * @return boolean 
 	 */
 	public function load_config_file( $filename, $theme )
@@ -424,8 +427,9 @@ abstract class Pie_Easy_Options_Registry
 	/**
 	 * Load options from an ini string
 	 *
-	 * @param string $ini_text
-	 * @param string $theme The theme to assign the file options to
+	 * @uses parse_ini_string()
+	 * @param string $ini_text The ini formatted string
+	 * @param string $theme The theme to assign the parsed option directives to
 	 * @return boolean
 	 */
 	public function load_config_text( $ini_text, $theme )
@@ -643,7 +647,8 @@ abstract class Pie_Easy_Options_Registry
 	/**
 	 * Render one option given it's name
 	 *
-	 * @param string $option
+	 * @uses Pie_Easy_Options_Option_Renderer::render()
+	 * @param string $option The option to render
 	 * @param boolean $output Set to false to return results instead of printing
 	 * @return string|boolean
 	 */
@@ -676,7 +681,7 @@ abstract class Pie_Easy_Options_Registry
 	}
 
 	/**
-	 * Look through POST vars for options from this registry that can be saved
+	 * Look through POST vars for options from this registry and try to save them
 	 * 
 	 * @return integer Number of options saved
 	 */
@@ -738,6 +743,8 @@ abstract class Pie_Easy_Options_Registry
 
 	/**
 	 * Process the form and generate an AJAX response
+	 *
+	 * @see process_form
 	 */
 	public function process_form_ajax()
 	{

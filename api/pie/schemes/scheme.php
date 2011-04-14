@@ -49,8 +49,8 @@ final class Pie_Easy_Scheme
 	 */
 	const DIR_DOCS = 'docs';
 	
-	/**
-	 * ini directives
+	/**#@+
+	 * ini directive enumeration
 	 */
 	const DIRECTIVE_PARENT_THEME = 'parent_theme';
 	const DIRECTIVE_STYLE_DEFS = 'style';
@@ -64,6 +64,7 @@ final class Pie_Easy_Scheme
 	const DIRECTIVE_ADVANCED = 'advanced';
 	const DIRECTIVE_JUI_THEME = 'jui_theme';
 	const DIRECTIVE_OPT_SAVE_SINGLE = 'options_save_single';
+	/**#@-*/
 
 	/**
 	 * Singleton instance
@@ -111,9 +112,7 @@ final class Pie_Easy_Scheme
 	private $enqueue;
 
 	/**
-	 * Constructor
-	 * 
-	 * this is a singleton
+	 * This is a singleton
 	 */
 	private function __construct()
 	{
@@ -172,7 +171,7 @@ final class Pie_Easy_Scheme
 	 * @param string $name
 	 * @return boolean
 	 */
-	public function set_root_theme( $name )
+	private function set_root_theme( $name )
 	{
 		if ( empty( $this->root_theme ) ) {
 			$this->root_theme = $name;
@@ -188,7 +187,7 @@ final class Pie_Easy_Scheme
 	 * @param string $dir_name
 	 * @return boolean
 	 */
-	public function set_config_dir( $dir_name )
+	private function set_config_dir( $dir_name )
 	{
 		if ( empty( $this->config_dir ) ) {
 			$this->config_dir = $dir_name;
@@ -204,7 +203,7 @@ final class Pie_Easy_Scheme
 	 * @param string $file_name
 	 * @return boolean
 	 */
-	public function set_config_file( $file_name )
+	private function set_config_file( $file_name )
 	{
 		if ( empty( $this->config_file ) ) {
 			$this->config_file = ( strlen($file_name) ) ? $file_name : $this->root_theme;
@@ -215,7 +214,7 @@ final class Pie_Easy_Scheme
 	}
 
 	/**
-	 * Has a directive?
+	 * Return true if directive is set
 	 *
 	 * @param string $name
 	 * @return boolean
@@ -227,10 +226,10 @@ final class Pie_Easy_Scheme
 	}
 
 	/**
-	 * Get a directive
+	 * Get a directive by name
 	 *
-	 * @param string $name
-	 * @return mixed
+	 * @param string $name Name of directive to retreive (slug)
+	 * @return Pie_Easy_Scheme_Directive
 	 */
 	public function get_directive( $name )
 	{
@@ -339,6 +338,8 @@ final class Pie_Easy_Scheme
 	/**
 	 * Load the scheme, using a theme as the starting point for the stack
 	 *
+	 * This method recursively crawls UP the theme hiearachy
+	 *
 	 * @param string $theme Theme's *directory name*
 	 * @return boolean
 	 */
@@ -399,7 +400,9 @@ final class Pie_Easy_Scheme
 	}
 
 	/**
-	 * Try to load functions file for themes in stack
+	 * Try to load function files for themes in stack
+	 * 
+	 * @ignore
 	 */
 	public function load_functions()
 	{
@@ -411,13 +414,13 @@ final class Pie_Easy_Scheme
 	}
 
 	/**
-	 * Load options for a theme
+	 * Enable theme options for the scheme by passing a valid options registry object
 	 *
 	 * @param Pie_Easy_Options_Registry $registry
 	 * @param string $ini_file_name
 	 * @return boolean
 	 */
-	public function load_options( Pie_Easy_Options_Registry $registry, $ini_file_name = 'options' )
+	public function enable_options( Pie_Easy_Options_Registry $registry, $ini_file_name = 'options' )
 	{
 		// loop through entire theme stack BOTTOM UP and try to load options
 		foreach( $this->themes->to_array() as $theme ) {
@@ -438,10 +441,11 @@ final class Pie_Easy_Scheme
 	/**
 	 * If template exists in scheme, return it, otherwise return the original template
 	 *
+	 * @ignore
 	 * @param string $template
 	 * @return string
 	 */
-	function filter_template( $template )
+	public function filter_template( $template )
 	{
 		// fall back to index
 		if ( empty( $template ) ) {
@@ -540,13 +544,10 @@ final class Pie_Easy_Scheme
 	 * @param string $file_names,...
 	 * @return array
 	 */
-	public function theme_dirs( $file_names = null )
+	public function theme_dirs()
 	{
-		// did we get an array as the first arg?
-		if ( !is_array( $file_names ) ) {
-			// nope, get all args
-			$file_names = func_get_args();
-		}
+		// get all args
+		$file_names = func_get_args();
 
 		// paths to return
 		$paths = array();
@@ -559,17 +560,7 @@ final class Pie_Easy_Scheme
 	}
 
 	/**
-	 * Return array of all theme config dirs
-	 *
-	 * @return array
-	 */
-	public function theme_config_dirs()
-	{
-		return $this->theme_dirs( $this->config_dir );
-	}
-
-	/**
-	 * Return array of all theme config dirs
+	 * Return array of all theme documentation dirs
 	 *
 	 * @return array
 	 */
@@ -584,13 +575,21 @@ final class Pie_Easy_Scheme
 	 * @param string $theme
 	 * @param string $file_names,...
 	 */
-	public function theme_file( $theme, $file_names )
+	public function theme_file( $theme )
 	{
-		// did we get an array as the second arg?
-		if ( !is_array( $file_names ) ) {
-			// nope, get all args except the first
-			$file_names = func_get_args();
-			array_shift($file_names);
+		// get all args
+		$args = func_get_args();
+		array_shift($args);
+
+		// one or more args left, then we got some file names
+		if ( count($args) >= 1 ) {
+			if ( count($args) == 1 && is_array(reset($args)) ) {
+				$file_names = $args[0];
+			} else {
+				$file_names = $args;
+			}
+		} else {
+			throw new Exception( 'No file names passed' );
 		}
 
 		return $this->theme_dir( $theme ) . Pie_Easy_Files::path_build( $file_names );
@@ -602,7 +601,7 @@ final class Pie_Easy_Scheme
 	 * @param string $theme
 	 * @param string $file_names,...
 	 */
-	public function theme_file_url( $theme, $file_names )
+	public function theme_file_url( $theme )
 	{
 		// get all args except the first
 		$file_names = func_get_args();
@@ -614,21 +613,19 @@ final class Pie_Easy_Scheme
 	/**
 	 * Locate a theme file, giving priority to top themes in the stack
 	 *
+	 * @todo This method is really powerful but needs some work before we use it
 	 * @param string $file_names,... The file names that make up the RELATIVE path to the theme root
 	 * @return string|false
 	 */
-	public function locate_file( $file_names )
+	private function locate_file()
 	{
-		// did we get an array as the first arg?
-		if ( !is_array( $file_names ) ) {
-			// nope, get all args
-			$file_names = func_get_args();
-		}
+		// get all args
+		$file_names = func_get_args();
 
 		// file path to be located
 		$locate_names = array();
 
-		// split all strings in case thy contain a static directory separator
+		// split all strings in case they contain a static directory separator
 		foreach ( $file_names as $file_name ) {
 			// split it
 			$splits = Pie_Easy_Files::path_split( $file_name );
@@ -652,126 +649,6 @@ final class Pie_Easy_Scheme
 		}
 
 		return false;
-	}
-
-	/**
-	 * Locate a config file, giving priority to lower themes in the stack
-	 *
-	 * @param string $file_names,... The file names that make up the RELATIVE path to the theme config root
-	 * @return string|false
-	 */
-	public function locate_config_file( $file_names )
-	{
-		// get all args
-		$file_names = func_get_args();
-
-		// prepend file names with path to config directory
-		array_unshift( $file_names, $this->config_dir );
-
-		// call the generic locator
-		return $this->locate_file( $file_names );
-	}
-
-	/**
-	 * Assets directory path
-	 *
-	 * @param string $theme
-	 * @return string
-	 */
-	private function assets_dir( $theme = null )
-	{
-		if ( empty( $theme ) ) {
-			$theme = $this->active_theme();
-		}
-
-		return
-			get_theme_root( $theme ) .
-			DIRECTORY_SEPARATOR . $theme .
-			DIRECTORY_SEPARATOR . self::DIR_ASSETS;
-	}
-
-	/**
-	 * Assets directory URL
-	 *
-	 * @param string $theme
-	 * @return string
-	 */
-	private function assets_url( $theme = null )
-	{
-		if ( empty( $theme ) ) {
-			$theme = $this->active_theme();
-		}
-
-		return
-			get_theme_root_uri( $theme ) .
-			'/' . $theme .
-			'/' . self::DIR_ASSETS;
-	}
-
-	/**
-	 * CSS directory path
-	 *
-	 * @param string $theme
-	 * @return string
-	 */
-	public function css_dir( $theme = null )
-	{
-		return $this->assets_dir( $theme ) . DIRECTORY_SEPARATOR . self::DIR_CSS;
-	}
-
-	/**
-	 * CSS directory URL
-	 *
-	 * @param string $theme
-	 * @return string
-	 */
-	public function css_url( $theme = null )
-	{
-		return $this->assets_url( $theme ) . '/' . self::DIR_CSS;
-	}
-
-	/**
-	 * JS directory path
-	 *
-	 * @param string $theme
-	 * @return string
-	 */
-	public function js_dir( $theme = null )
-	{
-		return $this->assets_dir( $theme ) . DIRECTORY_SEPARATOR . self::DIR_JS;
-	}
-
-	/**
-	 * JS directory URL
-	 *
-	 * @param string $theme
-	 * @return string
-	 */
-	public function js_url( $theme = null )
-	{
-		return $this->assets_url( $theme ) . '/' . self::DIR_JS;
-	}
-
-	/**
-	 * Images directory path
-	 *
-	 * @param string $theme
-	 * @return string
-	 */
-	public function images_dir( $theme = null )
-	{
-		return $this->assets_dir( $theme ) . DIRECTORY_SEPARATOR . self::DIR_IMAGES;
-	}
-
-	/**
-	 * Images directory URL
-	 *
-	 * @param string $theme
-	 * @return string
-	 */
-	public function images_url( $theme = null )
-	{
-		return $this->assets_url( $theme ) . '/' . self::DIR_IMAGES;
 	}
 
 	/**

@@ -18,12 +18,12 @@ Pie_Easy_Loader::load( 'collections', 'docs', 'schemes' );
  *
  * @package pie
  * @subpackage options
- * @property-read string $section
- * @property-read string $title
- * @property-read string $description
- * @property string $class
- * @property string $field_id
- * @property string $field_class
+ * @property-read string $section The section to which this options is assigned (slug)
+ * @property-read string $title The option title
+ * @property-read string $description The option description
+ * @property string $class The CSS class to apply to the option's container
+ * @property string $field_id The CSS id to apply to the option's input field
+ * @property string $field_class The CSS class to apply to the option's input field
  * @property-read string $field_type Type of field to generate for the option
  * @property-read array $field_options An array of field options
  * @property array $capabilities Required capabilities, can only be appended
@@ -54,8 +54,8 @@ abstract class Pie_Easy_Options_Option
 	 */
 	const DEFAULT_SECTION = 'default';
 	
-	/**
-	 * Field types
+	/**#@+
+	 * Field type enumeration
 	 */
 	const FIELD_CATEGORY = 'category';
 	const FIELD_CATEGORIES = 'categories';
@@ -74,7 +74,8 @@ abstract class Pie_Easy_Options_Option
 	const FIELD_TEXTAREA = 'textarea';
 	const FIELD_TEXTBLOCK = 'textblock';
 	const FIELD_UPLOAD = 'upload';
-
+	/**#@-*/
+	
 	/**
 	 * The theme that created this option
 	 * 
@@ -109,8 +110,6 @@ abstract class Pie_Easy_Options_Option
 	private $post_override = false;
 
 	/**
-	 * Constructor
-	 * 
 	 * @param string $theme The theme that created this option
 	 * @param string $name Option name may only contain alphanumeric characters as well as the underscore for use as a word separator.
 	 * @param string $title
@@ -142,8 +141,7 @@ abstract class Pie_Easy_Options_Option
 	}
 
 	/**
-	 * Allow read access to all properties (for now)
-	 *
+	 * @ignore
 	 * @param string $name
 	 * @return mixed
 	 */
@@ -158,6 +156,10 @@ abstract class Pie_Easy_Options_Option
 
 	/**
 	 * Toggle post override ON
+	 *
+	 * If enabled, post override will force the option to return it's value as set in POST
+	 *
+	 * @see disable_post_override
 	 */
 	public function enable_post_override()
 	{
@@ -166,6 +168,8 @@ abstract class Pie_Easy_Options_Option
 
 	/**
 	 * Toggle post override OFF
+	 *
+	 * @see enable_post_override
 	 */
 	public function disable_post_override()
 	{
@@ -175,7 +179,7 @@ abstract class Pie_Easy_Options_Option
 	/**
 	 * Get (read) the value of this option
 	 *
-	 * @uses get_option()
+	 * @see enable_post_override
 	 * @return mixed
 	 */
 	public function get()
@@ -190,7 +194,7 @@ abstract class Pie_Easy_Options_Option
 	/**
 	 * Get special meta data about an option itself
 	 *
-	 * @param string $type
+	 * @param string $type The available types are constants of this class prefixed with "META_"
 	 * @return mixed
 	 */
 	public function get_meta( $type )
@@ -201,7 +205,6 @@ abstract class Pie_Easy_Options_Option
 	/**
 	 * Update the value of this option
 	 *
-	 * @uses update_option()
 	 * @param mixed $value
 	 * @return boolean
 	 */
@@ -242,9 +245,8 @@ abstract class Pie_Easy_Options_Option
 	}
 
 	/**
-	 * Delete this option
+	 * Delete this option completely from the database
 	 *
-	 * @uses delete_option()
 	 * @return boolean
 	 */
 	public function delete()
@@ -270,10 +272,23 @@ abstract class Pie_Easy_Options_Option
 	}
 
 	/**
-	 * Get the attachment image source
+	 * Get the attachment image source details
 	 *
-	 * @param string $size
-	 * @return string|false
+	 * Returns an array with attachment details
+	 * 
+	 * <code>
+	 * Array (
+	 *   [0] => url
+	 *   [1] => width
+	 *   [2] => height
+	 * )
+	 * </code>
+	 *
+	 * @see wp_get_attachment_image_src()
+	 * @link http://codex.wordpress.org/Function_Reference/wp_get_attachment_image_src
+	 * @param string $size Either a string (`thumbnail`, `medium`, `large` or `full`), or a two item array representing width and height in pixels, e.g. array(32,32). The size of media icons are never affected.
+	 * @param integer $attach_id The id of the attachment, defaults to option value.
+	 * @return array|false
 	 */
 	public function get_image_src( $size = 'thumbnail', $attach_id = null )
 	{
@@ -307,9 +322,11 @@ abstract class Pie_Easy_Options_Option
 	}
 
 	/**
-	 * Return the URL of an image attachment
+	 * Return the URL of an image attachment for this option
 	 *
-	 * @param string $size
+	 * This method is only useful if the option is storing the id of an attachment
+	 *
+	 * @param string $size Either a string (`thumbnail`, `medium`, `large` or `full`), or a two item array representing width and height in pixels, e.g. array(32,32). The size of media icons are never affected.
 	 * @return string|false
 	 */
 	public function get_image_url( $size = 'thumbnail' )
@@ -344,7 +361,7 @@ abstract class Pie_Easy_Options_Option
 	}
 
 	/**
-	 * Check that user has all required capabilities to edit this option
+	 * Check that current user has all required capabilities to view/edit this option
 	 *
 	 * @return boolean
 	 */
@@ -423,7 +440,7 @@ abstract class Pie_Easy_Options_Option
 	}
 
 	/**
-	 * Set the container css class
+	 * Set the CSS class attribute to apply to this option's container element
 	 *
 	 * @param string $class
 	 */
@@ -433,7 +450,7 @@ abstract class Pie_Easy_Options_Option
 	}
 
 	/**
-	 * Set the field type
+	 * Set the field type of this option
 	 * 
 	 * @param string $type
 	 * @return boolean
@@ -455,7 +472,7 @@ abstract class Pie_Easy_Options_Option
 	}
 
 	/**
-	 * Set the field css id
+	 * Set the CSS id attribute to apply to the field of this option
 	 *
 	 * @param string $field_id
 	 */
@@ -465,7 +482,7 @@ abstract class Pie_Easy_Options_Option
 	}
 
 	/**
-	 * Set the field css class
+	 * Set the CSS class attribute to apply to the field of this option
 	 *
 	 * @param string $field_class
 	 */
@@ -475,7 +492,7 @@ abstract class Pie_Easy_Options_Option
 	}
 
 	/**
-	 * Set the field options
+	 * Set the field options for this option
 	 * 
 	 * @param array $field_options
 	 */
@@ -485,7 +502,7 @@ abstract class Pie_Easy_Options_Option
 	}
 
 	/**
-	 * Set the required option
+	 * Set an option that is required for this one to display
 	 *
 	 * @param string $option_name
 	 */
@@ -495,7 +512,7 @@ abstract class Pie_Easy_Options_Option
 	}
 
 	/**
-	 * Set the required feature
+	 * Set a feature that must be supported/enabled for this option to display
 	 *
 	 * @param string $feature_name
 	 */
@@ -505,9 +522,9 @@ abstract class Pie_Easy_Options_Option
 	}
 
 	/**
-	 * Set default value
+	 * Set the default value to be used by this option in the event it has not been set
 	 *
-	 * @param mixed $value
+	 * @param mixed $value New value
 	 * @param string $theme The theme that last update the default value
 	 * @return true
 	 */
@@ -523,7 +540,7 @@ abstract class Pie_Easy_Options_Option
 	}
 
 	/**
-	 * Set additional capabilities
+	 * Set additional capabilities which are required for this option to show
 	 *
 	 * @param string $string A comma separated list of capabilities
 	 */
@@ -546,7 +563,7 @@ abstract class Pie_Easy_Options_Option
 	}
 
 	/**
-	 * Set the documentation file
+	 * Set the documentation file for this option
 	 *
 	 * @param string $rel_path Path to documentation file relative to the theme config docs
 	 */
@@ -593,6 +610,9 @@ abstract class Pie_Easy_Options_Option
 
 	/**
 	 * Return the name of the implementing API
+	 *
+	 * If you are rolling your own parent theme, this should probably return the
+	 * name of the theme you are creating.
 	 *
 	 * @return string
 	 */

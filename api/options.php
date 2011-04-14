@@ -59,12 +59,9 @@ class Infinity_Options_Registry extends Pie_Easy_Options_Registry
 	private static $instance;
 
 	/**
-	 * Constructor
+	 * This is a singleton
 	 */
-	private function __constructor()
-	{
-		// this is a singleton
-	}
+	private function __constructor() {}
 
 	/**
 	 * Return the instance of this singleton
@@ -206,7 +203,7 @@ function infinity_option( $option_name )
  * Get special meta data about option value
  *
  * @param string $option_name
- * @param string $meta_type
+ * @param string $meta_type The only valid type so far is "time_updated"
  * @return mixed
  */
 function infinity_option_meta( $option_name, $meta_type )
@@ -218,7 +215,7 @@ function infinity_option_meta( $option_name, $meta_type )
  * Get an option image src array
  *
  * @param string $option_name
- * @param string $size
+ * @param string $size Either a string (`thumbnail`, `medium`, `large` or `full`), or a two item array representing width and height in pixels, e.g. array(32,32). The size of media icons are never affected.
  * @return array
  */
 function infinity_option_image_src( $option_name, $size = 'thumbnail' )
@@ -230,7 +227,7 @@ function infinity_option_image_src( $option_name, $size = 'thumbnail' )
  * Get an option image url
  * 
  * @param string $option_name
- * @param string $size
+ * @param string $size Either a string (`thumbnail`, `medium`, `large` or `full`), or a two item array representing width and height in pixels, e.g. array(32,32). The size of media icons are never affected.
  * @return string
  */
 function infinity_option_image_url( $option_name, $size = 'thumbnail' )
@@ -240,6 +237,8 @@ function infinity_option_image_url( $option_name, $size = 'thumbnail' )
 
 /**
  * Render a menu composed of all the sections with their options.
+ *
+ * @ignore
  */
 function infinity_options_render_menu( $args = null )
 {
@@ -273,6 +272,8 @@ function infinity_options_render_menu( $args = null )
 
 /**
  * Render a menu section
+ * 
+ * @ignore
  */
 function infinity_options_render_menu_section( Infinity_Options_Section $section )
 {
@@ -310,6 +311,7 @@ function infinity_options_render_menu_section( Infinity_Options_Section $section
 /**
  * Render options for a menu section
  *
+ * @ignore
  * @param array $options
  */
 function infinity_options_render_menu_options( $options )
@@ -324,6 +326,8 @@ function infinity_options_render_menu_options( $options )
 
 /**
  * Render options according to the option name POST var
+ * 
+ * @ignore
  */
 function infinity_options_render_options_screen()
 {

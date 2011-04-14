@@ -12,10 +12,13 @@
  */
 
 /**
- * Make a feature easy
+ * Make a theme feature easy
  *
  * @package pie
  * @subpackage features
+ * @property-read string $name The name of the feature
+ * @property-read string $title The title of the feature
+ * @property-read string $description The description of the feature
  */
 abstract class Pie_Easy_Feature
 {
@@ -26,37 +29,34 @@ abstract class Pie_Easy_Feature
 
 	/**
 	 * Name of the feature
-	 *
 	 * @var string
 	 */
 	private $name;
 
 	/**
 	 * Title of the feature
-	 *
 	 * @var string
 	 */
 	private $title;
 
 	/**
 	 * Description of the feature
-	 *
 	 * @var string
 	 */
 	private $description;
 
 	/**
-	 * Constructor
+	 * Initialize the feature.
 	 * 
 	 * @param string $name Feature name may only contain alphanumeric characters as well as the hyphen for use as a word seperator.
-	 * @param string $title
-	 * @param string $desc
+	 * @param string $title The title of the feature
+	 * @param string $desc A description of the feature
 	 */
 	public function __construct( $name, $title, $desc )
 	{
 		// name must adhere to a strict format
 		if ( preg_match( '/^[a-z0-9]+(-[a-z0-9]+)*$/', $name ) ) {
-			$this->name = $this->name_prefix() . $name;
+			$this->name = $name;
 		} else {
 			throw new Exception( 'Feature name does not match the allowed pattern.' );
 		}
@@ -69,6 +69,7 @@ abstract class Pie_Easy_Feature
 	/**
 	 * Allow read access to all properties (for now)
 	 *
+	 * @ignore
 	 * @param string $name
 	 * @return mixed
 	 */
@@ -78,8 +79,9 @@ abstract class Pie_Easy_Feature
 	}
 
 	/**
-	 * Returns true if current theme supports this feature
+	 * Returns true if the active theme supports this feature
 	 *
+	 * @see current_theme_supports()
 	 * @return boolean
 	 */
 	public function supported()
@@ -87,16 +89,6 @@ abstract class Pie_Easy_Feature
 		return current_theme_supports( $this->get_api_name() );
 	}
 
-	/**
-	 * Override this to prefix all names with a string
-	 *
-	 * @return string
-	 */
-	protected function name_prefix()
-	{
-		return '';
-	}
-	
 	/**
 	 * Get the prefix for API feature
 	 *
@@ -119,6 +111,9 @@ abstract class Pie_Easy_Feature
 
 	/**
 	 * Return the name of the implementing API
+	 *
+	 * If you roll your own parent theme using PIE, this would normally be the
+	 * name of that theme. It is used in the prefix of the feature name.
 	 *
 	 * @return string
 	 */

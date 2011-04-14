@@ -28,7 +28,7 @@ require_once
 final class Pie_Easy_Textile
 {
 	/**
-	 * Parse textile markup
+	 * Parse textile markup and return HTML
 	 *
 	 * @param string $text
 	 * @return string

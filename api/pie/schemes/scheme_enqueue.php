@@ -19,15 +19,31 @@
  */
 class Pie_Easy_Scheme_Enqueue
 {
+	/**
+	 * String on which to split "string packed" values
+	 */
 	const ITEM_DELIM = ',';
+	/**
+	 * String on which to split "string packed" parameters
+	 */
 	const PARAM_DELIM = ':';
+	/**#@+
+	 *  Trigger map key
+	 */
 	const TRIGGER_PATH = 'path';
 	const TRIGGER_DEPS = 'deps';
 	const TRIGGER_ALWAYS = 'always';
 	const TRIGGER_ACTS = 'actions';
 	const TRIGGER_CONDS = 'conditions';
 	const TRIGGER_PARAMS = 'params';
+	/**#@-*/
+	/**
+	 * Action on which to enqueue styles
+	 */
 	const ACTION_HANDLER_STYLES = 'pie_easy_enqueue_styles';
+	/**
+	 * Action on which to enqueue scripts
+	 */
 	const ACTION_HANDLER_SCRIPTS = 'pie_easy_enqueue_scripts';
 
 	/**
@@ -51,8 +67,8 @@ class Pie_Easy_Scheme_Enqueue
 	private $scripts;
 
 	/**
-	 * Constructor
-	 *
+	 * Initialize the enqueuer by passing a valid PIE scheme object
+	 * 
 	 * @param Pie_Easy_Scheme $scheme
 	 */
 	public function __construct( Pie_Easy_Scheme $scheme )
@@ -451,6 +467,8 @@ class Pie_Easy_Scheme_Enqueue
 
 	/**
 	 * Handle enqueing styles that should always be loaded
+	 *
+	 * @ignore
 	 */
 	public function handle_style_always()
 	{
@@ -466,6 +484,8 @@ class Pie_Easy_Scheme_Enqueue
 
 	/**
 	 * Handle enqueing styles on configured actions
+	 *
+	 * @ignore
 	 */
 	public function handle_style_actions()
 	{
@@ -484,6 +504,8 @@ class Pie_Easy_Scheme_Enqueue
 
 	/**
 	 * Handle enqueing styles when specific conditions are met
+	 *
+	 * @ignore
 	 */
 	public function handle_style_conditions()
 	{
@@ -507,6 +529,8 @@ class Pie_Easy_Scheme_Enqueue
 
 	/**
 	 * Handle enqueing scripts that should always be loaded
+	 *
+	 * @ignore
 	 */
 	public function handle_script_always()
 	{
@@ -522,6 +546,8 @@ class Pie_Easy_Scheme_Enqueue
 
 	/**
 	 * Handle enqueing scripts on configured actions
+	 *
+	 * @ignore
 	 */
 	public function handle_script_actions()
 	{
@@ -540,6 +566,8 @@ class Pie_Easy_Scheme_Enqueue
 
 	/**
 	 * Handle enqueing scripts when specific conditions are met
+	 *
+	 * @ignore
 	 */
 	public function handle_script_conditions()
 	{

@@ -21,8 +21,6 @@ final class Pie_Easy_Ajax
 {
 	/**
 	 * Delimiter on which to split AJAX responses
-	 *
-	 * @var string
 	 */
 	const RESPONSE_DELIMETER = '[[[s]]]';
 
@@ -31,7 +29,7 @@ final class Pie_Easy_Ajax
 	 *
 	 * @param mixed $param,... Unlimited number of SCALAR values to join with the response delimeter
 	 */
-	public static function response( $param = null )
+	public static function response()
 	{
 		$args = func_get_args();
 		die( join( self::RESPONSE_DELIMETER, $args ) );
@@ -43,6 +41,7 @@ final class Pie_Easy_Ajax
 	 * A standard AJAX response for our purposes is a delimited string containing
 	 * a response code, message, and content
 	 *
+	 * @see response
 	 * @param integer $code A response code
 	 * @param string $message Optional response message
 	 * @param string $content Optional response content
@@ -56,6 +55,7 @@ final class Pie_Easy_Ajax
 	/**
 	 * Start capturing an AJAX response
 	 *
+	 * @see responseEnd
 	 * @return boolean
 	 */
 	public static function responseBegin()
@@ -66,6 +66,7 @@ final class Pie_Easy_Ajax
 	/**
 	 * End capturing an AJAX response
 	 *
+	 * @see responseBegin()
 	 * @param integer $code A response code
 	 * @param string $message Optional response message
 	 */

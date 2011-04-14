@@ -21,6 +21,9 @@ Pie_Easy_Loader::load( 'collections', 'files' );
  */
 final class Pie_Easy_Enqueue
 {
+	/**
+	 * Default UI style handle
+	 */
 	const DEFAULT_UI_STYLE = 'pie-easy-ui';
 
 	/**
@@ -36,7 +39,7 @@ final class Pie_Easy_Enqueue
 	private $ui_style_handle;
 
 	/**
-	 * Singleton constructor
+	 * This is a singleton
 	 */
 	private function __construct()
 	{
@@ -62,6 +65,8 @@ final class Pie_Easy_Enqueue
 	}
 
 	/**
+	 * Initialize actions required for enqueueing to work properly.
+	 *
 	 * This must be called before anything has created the $wp_scripts global
 	 */
 	static public function init()
@@ -72,6 +77,11 @@ final class Pie_Easy_Enqueue
 
 	/**
 	 * Set/Get UI style handle
+	 *
+	 * Get or set the style hande that has the path to the jQuery UI stylesheet that should
+	 * be enqueued. This is important to ensure that the UI styles load before everything else.
+	 *
+	 * This method is used internally in PIE. There should be no reason to call this.
 	 *
 	 * @param string $handle
 	 */
@@ -180,6 +190,10 @@ final class Pie_Easy_Enqueue
 
 	/**
 	 * Call enqueue styles action
+	 *
+	 * Never call this manually unless you really know what you are doing!
+	 *
+	 * @ignore
 	 */
 	public function do_enqueue_styles()
 	{
@@ -213,6 +227,10 @@ final class Pie_Easy_Enqueue
 
 	/**
 	 * Call enqueue scripts action
+	 *
+	 * Never call this manually unless you really know what you are doing!
+	 *
+	 * @ignore
 	 */
 	public function do_enqueue_scripts()
 	{
@@ -234,6 +252,9 @@ final class Pie_Easy_Enqueue
 	/**
 	 * Replace all registered jQuery UI scripts with the most recent version
 	 *
+	 * Never call this manually unless you really know what you are doing!
+	 *
+	 * @ignore
 	 * @param WP_Scripts $wp_scripts
 	 */
 	public function override_jui( WP_Scripts $wp_scripts )
