@@ -22,7 +22,7 @@ function infinity_scheme_init()
 {
 	// initialize the scheme
 	Pie_Easy_Scheme::instance()->init( INFINITY_NAME, 'config' );
-	Pie_Easy_Scheme::instance()->load_options( Infinity_Options_Registry::instance() );
+	Pie_Easy_Scheme::instance()->enable_options( Infinity_Options_Registry::instance() );
 	return true;
 }
 
@@ -130,18 +130,6 @@ function infinity_comments_template( $file = null, $separate_comments = false )
 	
 	// this is just a wrapper to avoid confusion
 	return comments_template( $file, $separate_comments );
-}
-
-/**
- * Get a theme image url
- *
- * @param string $image Relative path to image from the theme's images directory
- * @param string $theme Return an image from a theme other than the active theme
- * @return string
- */
-function infinity_theme_image( $image, $theme = null )
-{
-	return Pie_Easy_Scheme::instance()->images_url( $theme ) . '/' . $image;
 }
 
 ?>

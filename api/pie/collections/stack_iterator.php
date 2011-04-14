@@ -41,8 +41,6 @@ class Pie_Easy_Stack_Iterator implements Iterator
 	private $count;
 
 	/**
-	 * Constructor.
-	 *
 	 * @param array $data The data to be iterated through
 	 */
 	public function __construct( &$data )

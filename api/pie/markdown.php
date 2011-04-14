@@ -36,7 +36,7 @@ require_once
 final class Pie_Easy_Markdown
 {
 	/**
-	 * Parse markdown markup
+	 * Parse markdown markup and return HTML
 	 *
 	 * @param string $text
 	 * @return string

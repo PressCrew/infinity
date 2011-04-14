@@ -30,16 +30,6 @@ final class Infinity_Features
 	}
 
 	/**
-	 * Infinite Children
-	 *
-	 * @return Infinity_Feature_Infinite_Children
-	 */
-	final static public function infinite_children()
-	{
-		return new Infinity_Feature_Infinite_Children();
-	}
-
-	/**
 	 * Custom CSS
 	 *
 	 * @return Infinity_Feature_Custom_Css
@@ -100,26 +90,6 @@ abstract class Infinity_Feature extends Pie_Easy_Feature
 }
 
 /**
- * Infinity Infinite Children feature
- *
- * @package api
- * @subpackage features
- */
-class Infinity_Feature_Infinite_Children extends Infinity_Feature
-{
-	/**
-	 * Constructor
-	 */
-	final public function __construct() {
-		parent::__construct(
-			'infinite-children',
-			'Infinite Children',
-			'Create an unlimited hierarchy of child themes.'
-		);
-	}
-}
-
-/**
  * Infinity Custom CSS feature
  *
  * @package api
@@ -127,9 +97,6 @@ class Infinity_Feature_Infinite_Children extends Infinity_Feature
  */
 class Infinity_Feature_Custom_Css extends Infinity_Feature
 {
-	/**
-	 * Constructor
-	 */
 	final public function __construct() {
 		parent::__construct(
 			'custom-css',
@@ -157,9 +124,6 @@ class Infinity_Feature_Custom_Css extends Infinity_Feature
  */
 class Infinity_Feature_Header_Logo extends Infinity_Feature
 {
-	/**
-	 * Constructor
-	 */
 	final public function __construct()
 	{
 		// run parent constructor
@@ -213,9 +177,6 @@ class Infinity_Feature_Header_Logo extends Infinity_Feature
  */
 class Infinity_Feature_Header_Background extends Infinity_Feature
 {
-	/**
-	 * Constructor
-	 */
 	final public function __construct()
 	{
 		// run parent constructor
@@ -266,9 +227,6 @@ class Infinity_Feature_Header_Background extends Infinity_Feature
  */
 class Infinity_Feature_Site_Background extends Infinity_Feature
 {
-	/**
-	 * Constructor
-	 */
 	final public function __construct()
 	{
 		// run parent constructor
@@ -282,15 +240,10 @@ class Infinity_Feature_Site_Background extends Infinity_Feature
 	/**
 	 * Inject the style for the custom site background
 	 */
-	final public function style( $selector = null )
+	final public function style( $selector = 'body' )
 	{
 		// only print style if this feature is supported
 		if ( $this->supported() ) {
-
-			// fall back to body tag
-			if ( empty( $selector ) ) {
-				$selector = 'body';
-			}
 
 			// load attachment image url
 			$url = infinity_option_image_url( 'infinity_site_background', 'full' );
@@ -318,6 +271,9 @@ class Infinity_Feature_Site_Background extends Infinity_Feature
 /**
  * Print header logo style
  *
+ * This should be placed inside the <head> element in your theme template
+ *
+ * @see Infinity_Feature_Header_Logo::style()
  * @param string $selector
  * @return boolean
  */
@@ -329,6 +285,9 @@ function infinity_feature_header_logo_style( $selector = null )
 /**
  * Print header background style
  *
+ * This should be placed inside the <head> element in your theme template
+ *
+ * @see Infinity_Feature_Header_Background::style()
  * @param string $selector
  * @return boolean
  */
@@ -340,6 +299,9 @@ function infinity_feature_header_background_style( $selector = null )
 /**
  * Print site background style
  *
+ * This should be placed inside the <head> element in your theme template
+ *
+ * @see Infinity_Feature_Site_Background::style()
  * @param string $selector
  * @return boolean
  */

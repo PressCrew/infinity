@@ -27,8 +27,6 @@ abstract class Pie_Easy_L10n
 	private $domain;
 	
 	/**
-	 * Constructor
-	 * 
 	 * @param string $domain 
 	 */
 	public function __construct( $domain )

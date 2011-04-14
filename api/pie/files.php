@@ -16,6 +16,7 @@
  *
  * @package pie
  * @subpackage files
+ * @uses Pie_Easy_Files_Exception
  */
 final class Pie_Easy_Files
 {
@@ -31,8 +32,9 @@ final class Pie_Easy_Files
 	}
 
 	/**
-	 * Pop the last file off the end of a path
+	 * Pop and return the last file off the end of a path
 	 *
+	 * @see path_split
 	 * @param string $path
 	 * @return string
 	 */
@@ -42,27 +44,33 @@ final class Pie_Easy_Files
 	}
 
 	/**
-	 * Build a filesytem path from an array of file names
+	 * Build a filesytem path from a list of file names
 	 *
-	 * @param array $file_names,...
-	 * @param boolean $relative
+	 * @internal Using this for building URL paths is a bad idea.
+	 * @param array $file_names,... One array or an unlimited number of file names
+	 * @param boolean $relative [Optional] Set to true if the path is relative (no leading slash)
 	 * @return string
 	 */
-	public static function path_build ( $file_names, $relative = false )
+	public static function path_build ()
 	{
-		if ( !is_array( $file_names ) ) {
-			$file_names = func_get_args();
-			if ( func_get_arg( func_num_args() - 1 ) === true ) {
-				$relative = true;
-			} else {
-				$relative = false;
-			}
-		}
+		// prefix is null by default
+		$prefix = DIRECTORY_SEPARATOR;
 
-		if ( $relative ) {
+		// get all args
+		$args = func_get_args();
+
+		// check for relative flag
+		if ( end( $args ) === true ) {
 			$prefix = null;
+			array_pop($args);
+		}
+		reset( $args );
+
+		// if two or more args, we got some file names
+		if ( is_array($args[0]) ) {
+			$file_names = $args[0];
 		} else {
-			$prefix = DIRECTORY_SEPARATOR;
+			$file_names = $args;
 		}
 
 		return $prefix . implode( DIRECTORY_SEPARATOR, $file_names );

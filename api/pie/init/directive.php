@@ -15,8 +15,8 @@
  * Make an init directive easy
  *
  * @package pie
- * @subpackage options
- * @property string $name The name of the directive
+ * @subpackage init
+ * @property-read string $name The name of the directive
  * @property mixed $value The value of the directive
  * @property-read boolean $read_only Whether the value is read only
  */
@@ -43,12 +43,12 @@ abstract class Pie_Easy_Init_Directive
 	private $read_only = false;
 
 	/**
-	 * Constructor
-	 *
-	 * @param string $name
-	 * @param mixed $value
-	 * @param string $theme
-	 * @param boolean $read_only
+	 * Initialize the directive
+	 * 
+	 * @param string $name Name for this directive (slug format)
+	 * @param mixed $value Value for this directive
+	 * @param string $theme Slug of the theme which is setting this directive
+	 * @param boolean $read_only Set to true to disallow modification of the value once set
 	 */
 	public function __construct( $name, $value, $theme, $read_only = false )
 	{
@@ -62,8 +62,7 @@ abstract class Pie_Easy_Init_Directive
 	}
 
 	/**
-	 * Getter
-	 *
+	 * @ignore
 	 * @param string $name
 	 * @return mixed
 	 */
@@ -82,8 +81,7 @@ abstract class Pie_Easy_Init_Directive
 	}
 
 	/**
-	 * Setter
-	 *
+	 * @ignore
 	 * @param string $name
 	 * @param mixed $value
 	 */
@@ -99,10 +97,10 @@ abstract class Pie_Easy_Init_Directive
 	
 	/**
 	 * Set the value
-	 * 
-	 * @param string $value
+	 *
+	 * @param mixed $value New value for the directive
 	 * @param boolean $silent Set to true to silently ignore failure to set due to read only status
-	 * @return boolean True on success, false on silent failure
+	 * @return boolean true on success, false on silent failure
 	 */
 	public function set_value( $value, $silent = false )
 	{

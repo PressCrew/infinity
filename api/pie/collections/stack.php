@@ -40,8 +40,6 @@ class Pie_Easy_Stack implements IteratorAggregate,Countable
 	private $count = 0;
 
 	/**
-	 * Constructor.
-	 *
 	 * Initializes the stack with an array or an iterable object.
 	 *
 	 * @param array $data The initial data. Default is null, meaning no initialization.

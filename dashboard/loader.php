@@ -108,15 +108,17 @@ function infinity_dashboard_load_template( $rel_path, $args = null, $defaults = 
  * @param string|array $params,...
  * @return array
  */
-function infinity_dashboard_route( $params = null )
+function infinity_dashboard_route()
 {
 	// build the base URL
 	$url = sprintf( '%sadmin.php?page=%s', admin_url(), INFINITY_ADMIN_PAGE );
 
-	// is params an array?
-	if ( !is_array( $params ) ) {
-		// use variable args
-		$params = func_get_args();
+	// use variable args
+	$params = func_get_args();
+	
+	// check if first is an array
+	if ( is_array( current($params) ) ) {
+		$params = $params[0];
 	}
 
 	// add route if necessary

@@ -41,8 +41,6 @@ class Pie_Easy_Map_Iterator implements Iterator
 	private $key;
 
 	/**
-	 * Constructor.
-	 *
 	 * @param array $data The data to be iterated through
 	 */
 	public function __construct( &$data )
