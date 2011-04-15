@@ -8,6 +8,10 @@ Unlike the standard solutions WordPress provides for custom headers and custom b
 we've integrated this functionality directly into the theme options panel, so your users do
 not have to switch between different pages in the dashboard.
 
+<ul class="infinity-docs-menu"></ul>
+
+### Enabling Theme Support
+
 Currently there are four core features that you can use in your themes. You enable them in
 your child theme's functions.php just like you would with any other theme.
 

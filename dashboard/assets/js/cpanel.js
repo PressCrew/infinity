@@ -259,6 +259,8 @@
 								$('div.pie-easy-options-fu').each(function(){
 									$(this).pieEasyUploader();
 								});
+								// init docs
+								initDocPage();
 								// init option reqs
 								$('div.infinity-cpanel-options-single').each(function(){
 									option_init(this);
@@ -327,7 +329,52 @@
 					return false;
 				});
 			}
+		}
 
+		// init doc pages
+		function initDocPage()
+		{
+			// recursive menu builder
+			function build_menu(menu, els_head, anchor)
+			{
+				var filter, did_one;
+
+				els_head.each(function(){
+					// name of anchor
+					var a_name = 'menu_item_' + anchor++;
+					// inject before self
+					$(this).before($('<a></a>').attr('name', a_name));
+					// create list item
+					var item = $('<li></li>').appendTo(menu);
+					var item_a = $('<a></a>').appendTo(item);
+					var item_s = $('<ul></ul>');
+					// build up link
+					item_a.attr('target', '_self').attr('href', '#' + a_name).html($(this).html());
+					// determine next level
+					switch (this.tagName) {
+						case 'H3':filter = 'h4';break;
+						case 'H4':filter = 'h5';break;
+						case 'H5':filter = 'h6';break;
+						case 'H6':return false;
+					}
+					// next level headers
+					var next = $(this).nextUntil(this.tagName).filter(filter);
+					// build sub
+					if ( build_menu(item_s, next, anchor) ) {
+						item.append(item_s);
+					}
+					// yay
+					return did_one = true;
+				});
+
+				return did_one;
+			}
+
+			$('div.infinity-docs').each(function(){
+				var menu = $('ul.infinity-docs-menu', this);
+				var headers = $('h3', this);
+				build_menu(menu, headers, 1);
+			});
 		}
 
 		// initial load
@@ -337,6 +384,8 @@
 		} else {
 			// init options in case they are displayed on page load
 			initOptionsPanel();
+			//init docs
+			initDocPage();
 		}
 
 	});

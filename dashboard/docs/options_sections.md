@@ -1,5 +1,12 @@
 ## Theme Options: Sections
 
+Infinity options are grouped into sections. Sections play an important role in how
+options are displayed in the options panel.
+
+<ul class="infinity-docs-menu"></ul>
+
+### Configuration
+
 To define a section, you add something like this to your options.ini file BEFORE any options that
 will be assigned to that section are defined. Section names must be all lower case.
 
@@ -8,7 +15,7 @@ will be assigned to that section are defined. Section names must be all lower ca
 
 Now you have a new section to which typography options can be assigned.
 
-### Section Directives
+### Directives
 
 You configure sections with the directives below:
 

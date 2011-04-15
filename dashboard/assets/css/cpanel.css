@@ -351,6 +351,12 @@ textarea.infinity-cpanel-option-field-css {
 	.infinity-docs ol li ol {
 		margin-bottom: 0.5em;
 	}
+.infinity-docs ul.infinity-docs-menu {
+	margin-bottom: 3em;
+}
+.infinity-docs ul.infinity-docs-menu li a {
+	font-size: 1.2em;
+}
 .infinity-docs em {
 	font-weight: bold;
 }

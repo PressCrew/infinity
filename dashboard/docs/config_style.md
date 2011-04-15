@@ -4,7 +4,11 @@ Infinity allows you to enqueue your theme's style sheets entirely using configur
 directives without writing any PHP code. The WordPress function `wp_enqueue_styles()`
 is called to enqueue the styles where the configuration calls for it.
 
+<ul class="infinity-docs-menu"></ul>
+
 ### Directives
+
+> *Important:* All styles will ALWAYS be enqueued, UNLESS an action or condition is set (see below)
 
 #### [style]
 
@@ -30,8 +34,6 @@ The above code would result in the following three syle sheets being enqueued.
 	http://mysite.com/wp-content/themes/my-theme/css/vendors/slider.css
 	http://mysite.com/wp-content/themes/my-theme/css/pagesidebars.css
 	http://fonts.googleapis.com/css?family=Droid+Sans:regular
-
-> *Important:* All styles will ALWAYS be enqueued, UNLESS an action or condition is set (see below)
 
 #### [style\_depends]
 

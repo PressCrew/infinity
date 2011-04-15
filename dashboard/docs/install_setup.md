@@ -3,6 +3,8 @@
 Themes built on Infinity can use all the WordPress functions you've come to expect.
 Whether you are starting from scratch, or extending an existing theme, setup is very simple.
 
+<ul class="infinity-docs-menu"></ul>
+
 > For our examples we are using Twenty Ten, the default theme that ships with Wordpress
 
 ### Upload the Themes
