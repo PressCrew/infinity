@@ -139,8 +139,8 @@ class Infinity_Options_Option_Renderer extends Pie_Easy_Options_Option_Renderer
 				</div>
 			</div>
 			<?php if ( $this->has_documentation() ): ?>
-			<div id="<?php $this->render_name() ?>-tabs-2" class="infinity-docs">
-				<p><?php $this->render_documentation( Pie_Easy_Scheme::instance()->theme_documentation_dirs() ) ?></p>
+			<div id="<?php $this->render_name() ?>-tabs-2">
+				<div class="infinity-docs"><?php $this->render_documentation( Pie_Easy_Scheme::instance()->theme_documentation_dirs() ) ?></div>
 			</div>
 			<?php endif; ?>
 			<?php if ( is_admin() ): ?>

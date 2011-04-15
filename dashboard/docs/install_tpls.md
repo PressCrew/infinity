@@ -5,14 +5,16 @@ for the infinite child theme template inheritance to work properly. If you wish 
 theme hierarchy which is **three or more** themes deep, including Infinity, you must use these
 special functions **instead of** the standard core functions in WordPress.
 
-> Don't worry! These functions are just basic wrappers that allow us to work some magic.
+*If you are only inheriting instant options, and not templates, this does not apply to you.*
 
-*If you are only inheriting instant options, and not templates, this do not apply to you.*
+<ul class="infinity-docs-menu"></ul>
 
 ### Custom Functions
 
 The arguments for these custom functions are identical to the
 function which they are replacing.
+
+> Don't worry! These functions are just basic wrappers that allow us to work some magic.
 
 #### Locate Template
 

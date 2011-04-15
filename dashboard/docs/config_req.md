@@ -2,9 +2,9 @@
 
 Infinity has directives that MUST be set for Infinity to work properly.
 
-> Currently there is only one, but more may be added in the future.
-
 ### Directives
+
+> Currently there is only one, but more may be added in the future.
 
 #### parent\_theme
 

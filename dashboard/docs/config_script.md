@@ -4,7 +4,11 @@ Infinity allows you to enqueue your theme's scripts entirely using configuration
 directives without writing any PHP code. The WordPress function `wp_enqueue_scripts()`
 is called to enqueue the scripts where the configuration calls for it.
 
+<ul class="infinity-docs-menu"></ul>
+
 ### Directives
+
+> *Important:* All scripts will ALWAYS be enqueued, UNLESS an action or condition is set (see below)
 
 #### [script]
 
@@ -30,8 +34,6 @@ The above code would result in the following three scripts being enqueued.
 	http://mysite.com/wp-content/themes/my-theme/js/ajax.js
 	http://mysite.com/wp-content/themes/my-theme/js/custom.js
 	http://maps.google.com/maps/api/js
-
-> *Important:* All scripts will ALWAYS be enqueued, UNLESS an action or condition is set (see below)
 
 #### [script\_depends]
 

@@ -4,6 +4,10 @@ If you have not already successfully installed Infinity
 according the the [Installation](infinity://admin/cpanel/docs/install_setup) page,
 you might want to do that first to make this easier to follow.
 
+<ul class="infinity-docs-menu"></ul>
+
+### INI File Basics
+
 All of the configuration of Infinity is done with ini files. The ini files all reside
 in a subdirectory named `config` in your theme's root:
 

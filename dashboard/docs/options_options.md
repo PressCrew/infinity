@@ -1,5 +1,12 @@
 ## Theme Options: Options
 
+Infinity options are the most powerful feature of Infinity, allowing you to build
+custom themes extremely quickly and efficiently.
+
+<ul class="infinity-docs-menu"></ul>
+
+### Configuration
+
 Each option configuration block begins with a unique name that you use to call
 the option output in your WordPress theme.
 This works exactly the same as you would normally do in when building a theme.
@@ -11,10 +18,12 @@ Child themes inherit *All* of the options from *EVERY* ancestor theme, allowing 
 create a highly extensible theme hierarchy. In addition, some of the option directives can
 be overridden for fine grained control over the look and features of your theme.
 
-> Take a look at the options.sample.ini file located in the `wp-content/themes/infinity/config` directory
-to see complete working examples of all the options available to you.
+### Overriding
 
-### Option Directives
+Some option directives can be overridden by child themes. After each directive there is a note
+which explains in what cases each directive can be overridden.
+
+### Directives
 
 You configure options with the directives below:
 
@@ -26,6 +35,8 @@ layout automagically. This allows you to provide your users with a well organize
 to configure theme.
 
 	section = "home_page"
+
+> *Important* Every option must be assigned to at least one section.
 
 Child theme can override section: **No**
 
@@ -259,3 +270,8 @@ to determine if the option should be visible to the site administrator.
 	required_feature = "a-feature-name"
 
 Child theme can override required\_feature: **No**
+
+### Sample Configuration
+
+> Take a look at the options.sample.ini file located in the `wp-content/themes/infinity/config` directory
+to see complete working examples of all the options available to you.
