@@ -29,6 +29,7 @@ require_once( INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'cpanel.php' );
 add_action( 'init', 'infinity_ajax_setup' );
 add_action( 'admin_init', 'infinity_dashboard_cpanel_setup' );
 add_action( 'admin_menu', 'infinity_dashboard_menu_setup' );
+add_action( 'network_admin_menu', 'infinity_dashboard_menu_setup' );
 add_action( 'pie_easy_localize_scripts', 'infinity_dashboard_cpanel_localize_js' );
 
 //
