@@ -72,7 +72,7 @@ final class Pie_Easy_Enqueue
 	static public function init()
 	{
 		// negative priorities work... shhhh...
-		add_action( 'wp_default_scripts', array( self::instance(), 'override_jui' ), -99999 );
+		add_action( 'wp_print_scripts', array( self::instance(), 'override_jui' ), -99999 );
 	}
 
 	/**
@@ -255,10 +255,11 @@ final class Pie_Easy_Enqueue
 	 * Never call this manually unless you really know what you are doing!
 	 *
 	 * @ignore
-	 * @param WP_Scripts $wp_scripts
 	 */
-	public function override_jui( WP_Scripts $wp_scripts )
-	{		
+	public function override_jui()
+	{
+		global $wp_scripts;
+
 		$deps_c = array( 'jquery-ui-core' );
 		$deps_cw = array_merge( $deps_c, array( 'jquery-ui-widget' ) );
 		$deps_cwm = array_merge( $deps_cw, array( 'jquery-ui-mouse' ) );
