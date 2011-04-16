@@ -346,12 +346,15 @@ class Pie_Easy_Scheme_Enqueue
 						// loop through each handle
 						foreach ( $handles as $handle ) {
 
-							// trim handle
-							$handle = $this->make_handle( $theme, $handle );
+							// is this an override situation? (exact handle already in map)
+							if ( !$map->item_at( $handle ) ) {
+								// not an override, use theme handle
+								$handle = $this->make_handle( $theme, $handle );
+							}
 
 							// does trigger handle exist?
 							if ( $map->item_at( $handle ) ) {
-
+								
 								// remove trigger's always toggle
 								$map->item_at($handle)->add(self::TRIGGER_ALWAYS, false);
 								
