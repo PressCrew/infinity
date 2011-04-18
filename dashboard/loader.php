@@ -79,10 +79,7 @@ function infinity_dashboard_cpanel_localize_js()
 		INFINITY_NAME . '-cpanel',
 		'InfinityDashboardL10n',
 		array(
-			'ajax_url' =>
-				is_admin() ?
-					admin_url( 'admin-ajax.php' ) :
-					get_site_url( 1, 'wp-admin/admin-ajax.php' )
+			'ajax_url' => admin_url( 'admin-ajax.php' )
 		)
 	);
 }
