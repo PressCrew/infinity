@@ -136,11 +136,13 @@
 		flash_url : pieEasyFlashUploaderL10n.flash_url,
 		upload_url: pieEasyFlashUploaderL10n.upload_url,
 		post_params: {
+			'short' : 1,
 			'post_id' : 0,
 			'auth_cookie' : pieEasyFlashUploaderL10n.pp_auth_cookie,
 			'logged_in_cookie': pieEasyFlashUploaderL10n.pp_logged_in_cookie,
 			'_wpnonce' : pieEasyFlashUploaderL10n.pp_wpnonce,
-			'short' : 1
+			'pie_easy_options_blog_id' : pieEasyFlashUploaderL10n.pp_blog_id,
+			'pie_easy_options_blog_theme' : pieEasyFlashUploaderL10n.pp_blog_theme
 		},
 		// file upload
 		file_post_name: "async-upload",
@@ -277,7 +279,7 @@
 						return value;
 					}
 				},
-				update: function(){
+				update: function() {
 					if (this.id()) {
 						$.ajax({
 							async: false,
@@ -286,7 +288,9 @@
 							data: {
 								'action': 'pie_easy_options_uploader_media_url',
 								'attachment_id': this.id(),
-								'attachment_size': 'full'
+								'attachment_size': 'full',
+								'pie_easy_options_blog_id' : pieEasyFlashUploaderL10n.pp_blog_id,
+								'pie_easy_options_blog_theme' : pieEasyFlashUploaderL10n.pp_blog_theme
 							},
 							success: function(rs){
 								var r = pieEasyAjax.splitResponse(rs);

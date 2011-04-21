@@ -717,6 +717,8 @@ abstract class Pie_Easy_Options_Option_Renderer
 	
 	/**
 	 * Render sample code for this option
+	 *
+	 * @todo get rid of these infinity functions
 	 */
 	final protected function render_sample_code()
 	{

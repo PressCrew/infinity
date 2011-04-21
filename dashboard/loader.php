@@ -20,69 +20,19 @@ define( 'INFINITY_ROUTE_DELIM', '/' );
 //
 // Files
 //
-require_once( INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'menu.php' );
+
+// admin menu
+if ( is_admin() ) {
+	require_once( INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'menu.php' );
+}
+
+// control panel
 require_once( INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'cpanel.php' );
 
-//
-// Actions
-//
-add_action( 'init', 'infinity_ajax_setup' );
-add_action( 'admin_init', 'infinity_dashboard_cpanel_setup' );
-add_action( 'admin_menu', 'infinity_dashboard_menu_setup' );
-add_action( 'network_admin_menu', 'infinity_dashboard_menu_setup' );
-add_action( 'pie_easy_localize_scripts', 'infinity_dashboard_cpanel_localize_js' );
 
 //
 // Functions
 //
-
-/**
- * Setup AJAX handling
- */
-function infinity_ajax_setup()
-{
-	if ( defined( 'DOING_AJAX' ) ) {
-		Infinity_Options_Registry::instance()->init_ajax();
-	}
-}
-
-/**
- * Handle setup of the control panel environment
- */
-function infinity_dashboard_cpanel_setup()
-{
-	// setup dashboard if its active
-	$action = infinity_dashboard_cpanel_action();
-
-	if ( $action ) {
-
-		// init options
-		infinity_options_init();
-
-		// add content hook
-		add_action(
-			'infinity_dashboard_cpanel_content',
-			sprintf( 'infinity_dashboard_cpanel_%s_content', $action )
-		);
-
-		// hook for config actions
-		do_action( 'infinity_dashboard_cpanel_setup' );
-	}
-}
-
-/**
- * Handle setup of the control panel js env
- */
-function infinity_dashboard_cpanel_localize_js()
-{
-	wp_localize_script(
-		INFINITY_NAME . '-cpanel',
-		'InfinityDashboardL10n',
-		array(
-			'ajax_url' => admin_url( 'admin-ajax.php' )
-		)
-	);
-}
 
 /**
  * Load a dashboard template relative to the template dir root

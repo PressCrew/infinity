@@ -308,7 +308,7 @@ abstract class Pie_Easy_Options_Option
 				$theme = $this->theme;
 			}
 			// mimic the src array
-			$src[0] = Pie_Easy_Scheme::instance()->theme_file_url( $theme, $attach_id );
+			$src[0] = Pie_Easy_Files::theme_file_url( $theme, $attach_id );
 			$src[1] = null;
 			$src[2] = null;
 		}
@@ -353,7 +353,7 @@ abstract class Pie_Easy_Options_Option
 			}
 
 			// they must have provided an image path
-			return Pie_Easy_Scheme::instance()->theme_file_url( $theme, $value );
+			return Pie_Easy_Files::theme_file_url( $theme, $value );
 
 		}
 

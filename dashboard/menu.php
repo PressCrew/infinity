@@ -11,6 +11,13 @@
  * @since 1.0
  */
 
+//
+// Hooks
+//
+add_action( 'admin_menu', 'infinity_dashboard_menu_setup' );
+add_action( 'network_admin_menu', 'infinity_dashboard_menu_setup' );
+////
+
 /**
  * Adds the Infinity submenu item to the BuddyPress menu
  */

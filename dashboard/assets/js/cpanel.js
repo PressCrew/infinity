@@ -179,7 +179,7 @@
 
 			// get content for the tab
 			$.post(
-				InfinityDashboardL10n.ajax_url + '?' + href.split('?').pop(),
+				ajaxurl + '?' + href.split('?').pop(),
 				{'action': 'infinity_tabs_content'},
 				function(r) {
 					var sr = pieEasyAjax.splitResponseStd(r);
@@ -244,11 +244,13 @@
 							.fadeIn();
 					// send request for option screen
 					$.post(
-						InfinityDashboardL10n.ajax_url,
+						InfinityOptionsL10n.ajax_url,
 						{
 							'action': 'infinity_options_screen',
 							'option_name': option,
-							'section_name': section
+							'section_name': section,
+							'pie_easy_options_blog_id': InfinityOptionsL10n.blog_id,
+							'pie_easy_options_blog_theme': InfinityOptionsL10n.blog_theme
 						},
 						function(r) {
 							var sr = pieEasyAjax.splitResponseStd(r);
@@ -301,6 +303,7 @@
 					// form data
 					var data =
 						'action=infinity_options_update'
+						+ '&pie_easy_options_blog_id=' + InfinityOptionsL10n.blog_id
 						+ '&option_names=' + option
 						+ '&' + $(this).parents('form').first().serialize()
 
@@ -314,7 +317,7 @@
 					message.fadeIn(300, function(){
 						// send request for option save
 						$.post(
-							InfinityDashboardL10n.ajax_url,
+							InfinityOptionsL10n.ajax_url,
 							data,
 							function(r) {
 								var sr = pieEasyAjax.splitResponseStd(r);

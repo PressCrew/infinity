@@ -67,6 +67,13 @@ class Pie_Easy_Scheme_Enqueue
 	private $scripts;
 
 	/**
+	 * The domain to set document.domain to
+	 *
+	 * @var string
+	 */
+	private $script_domain;
+
+	/**
 	 * Initialize the enqueuer by passing a valid PIE scheme object
 	 * 
 	 * @param Pie_Easy_Scheme $scheme
@@ -76,6 +83,14 @@ class Pie_Easy_Scheme_Enqueue
 		// set scheme
 		$this->scheme = $scheme;
 
+		// define script domain
+		$this->script_domain = $this->scheme->get_directive( Pie_Easy_Scheme::DIRECTIVE_SCRIPT_DOMAIN );
+
+		// hook up script domain handler
+		if ( $this->script_domain instanceof Pie_Easy_Scheme_Directive ) {
+			add_action( self::ACTION_HANDLER_SCRIPTS, array( $this, 'handle_script_domain' ) );
+		}
+		
 		// init styles maps
 		$this->styles = new Pie_Easy_Map();
 		$this->styles_ignore = new Pie_Easy_Stack();
@@ -102,6 +117,8 @@ class Pie_Easy_Scheme_Enqueue
 			$this->triggers( $this->styles, Pie_Easy_Scheme::DIRECTIVE_STYLE_ACTS, self::TRIGGER_ACTS );
 			$this->triggers( $this->styles, Pie_Easy_Scheme::DIRECTIVE_STYLE_CONDS, self::TRIGGER_CONDS );
 
+			// reg em
+			$this->register_styles();
 		}
 
 		// init scripts map
@@ -122,6 +139,9 @@ class Pie_Easy_Scheme_Enqueue
 			// init script triggers
 			$this->triggers( $this->scripts, Pie_Easy_Scheme::DIRECTIVE_SCRIPT_ACTS, self::TRIGGER_ACTS );
 			$this->triggers( $this->scripts, Pie_Easy_Scheme::DIRECTIVE_SCRIPT_CONDS, self::TRIGGER_CONDS );
+
+			// reg em
+			$this->register_scripts();
 		}
 	}
 
@@ -426,16 +446,17 @@ class Pie_Easy_Scheme_Enqueue
 		if ( preg_match( '/^http:\/\//i', $path ) ) {
 			return $path;
 		} else {
-			return $this->scheme->theme_file_url( $theme, $path );
+			return Pie_Easy_Files::theme_file_url( $theme, $path );
 		}
 	}
+
 	/**
-	 * Enqueue a style with data from a config map
+	 * Register a style with data from a config map
 	 *
 	 * @param string $handle
 	 * @param string $config_map
 	 */
-	private function enqueue_style( $handle, $config_map )
+	private function register_style( $handle, $config_map )
 	{
 		if ( $this->styles_ignore->contains( $handle ) ) {
 			return;
@@ -447,25 +468,42 @@ class Pie_Easy_Scheme_Enqueue
 			$config_map->item_at(self::TRIGGER_PATH),
 			$config_map->item_at(self::TRIGGER_DEPS)->to_array()
 		);
-
-		// enq it
-		wp_enqueue_style($handle);
 	}
 
 	/**
-	 * Enqueue a script with data from a config map
+	 * Register all styles
+	 */
+	private function register_styles()
+	{
+		foreach ( $this->styles as $handle => $config_map ) {
+			$this->register_style( $handle, $config_map );
+		}
+	}
+
+	/**
+	 * Register a script with data from a config map
 	 *
 	 * @param string $handle
 	 * @param string $config_map
 	 */
-	private function enqueue_script( $handle, $config_map )
+	private function register_script( $handle, $config_map )
 	{
 		// do it
-		wp_enqueue_script(
+		wp_register_script(
 			$handle,
 			$config_map->item_at(self::TRIGGER_PATH),
 			$config_map->item_at(self::TRIGGER_DEPS)->to_array()
 		);
+	}
+
+	/**
+	 * Register all scripts
+	 */
+	private function register_scripts()
+	{
+		foreach ( $this->scripts as $handle => $config_map ) {
+			$this->register_script( $handle, $config_map );
+		}
 	}
 
 	/**
@@ -480,7 +518,7 @@ class Pie_Easy_Scheme_Enqueue
 			// always load?
 			if ( $config_map->item_at(self::TRIGGER_ALWAYS) == true ) {
 				// yes, enqueue it!
-				$this->enqueue_style( $handle, $config_map );
+				wp_enqueue_style( $handle );
 			}
 		}
 	}
@@ -500,7 +538,7 @@ class Pie_Easy_Scheme_Enqueue
 			// action in this style's action stack?
 			if ( $config_map->item_at(self::TRIGGER_ACTS)->contains($action) ) {
 				// yes, enqueue it!
-				$this->enqueue_style( $handle, $config_map );
+				wp_enqueue_style( $handle );
 			}
 		}
 	}
@@ -521,7 +559,7 @@ class Pie_Easy_Scheme_Enqueue
 					// try to exec the callback
 					if ( function_exists( $callback ) && call_user_func_array($callback,$config_map->item_at(self::TRIGGER_PARAMS)->to_array()) == true ) {
 						// callback exists and evaled to true, enqueue it
-						$this->enqueue_style( $handle, $config_map );
+						wp_enqueue_style( $handle );
 						// done with this inner (conditions) loop
 						break;
 					}
@@ -542,7 +580,7 @@ class Pie_Easy_Scheme_Enqueue
 			// always load?
 			if ( $config_map->item_at(self::TRIGGER_ALWAYS) == true ) {
 				// yes, enqueue it!
-				$this->enqueue_script( $handle, $config_map );
+				wp_enqueue_script( $handle );
 			}
 		}
 	}
@@ -562,7 +600,7 @@ class Pie_Easy_Scheme_Enqueue
 			// action in this script's action stack?
 			if ( $config_map->item_at(self::TRIGGER_ACTS)->contains($action) ) {
 				// yes, enqueue it!
-				$this->enqueue_script( $handle, $config_map );
+				wp_enqueue_script( $handle );
 			}
 		}
 	}
@@ -583,7 +621,7 @@ class Pie_Easy_Scheme_Enqueue
 					// try to exec the callback
 					if ( function_exists( $callback ) && call_user_func_array($callback,$config_map->item_at(self::TRIGGER_PARAMS)->to_array()) == true ) {
 						// callback exists and evaled to true, enqueue it
-						$this->enqueue_script( $handle, $config_map );
+						wp_enqueue_script( $handle );
 						// done with this inner (conditions) loop
 						break;
 					}
@@ -591,5 +629,19 @@ class Pie_Easy_Scheme_Enqueue
 			}
 		}
 	}
+
+	/**
+	 * Handle setting of the document domain
+	 *
+	 * @ignore
+	 */
+	public function handle_script_domain()
+	{
+		// render it
+		?><script type="text/javascript">document.domain = '<?php print $this->script_domain->value ?>';</script><?php
+		echo PHP_EOL;
+	}
+
 }
+
 ?>
