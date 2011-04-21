@@ -11,7 +11,10 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load('ajax');
+Pie_Easy_Loader::load( 'ajax', 'files' );
+
+// Special handling for async uploading
+add_action( 'wp_loaded', array( 'Pie_Easy_Options_Uploader', 'async_handler' ) );
 
 /**
  * Make an uploaded file option easy
@@ -22,11 +25,35 @@ Pie_Easy_Loader::load('ajax');
 class Pie_Easy_Options_Uploader
 {
 	/**
+	 * Script which handles the AJAX requests
+	 */
+	const SCRIPT_AJAX = 'admin-ajax.php';
+
+	/**
+	 * Script which accepts the async upload
+	 */
+	const SCRIPT_ASYNC = 'async-upload.php';
+
+	/**
 	 * The action on which to localize the script
 	 *
 	 * @var string
 	 */
 	private $script_action;
+
+	/**
+	 * Blog id when screen was initialized
+	 *
+	 * @var integer
+	 */
+	private $screen_blog_id;
+
+	/**
+	 * Blog theme when screen was initialized
+	 *
+	 * @var string
+	 */
+	private $screen_blog_theme;
 
 	/**
 	 * Initializes the uploader
@@ -41,10 +68,35 @@ class Pie_Easy_Options_Uploader
 	}
 
 	/**
+	 * Async uploading requires special handling when a file is being
+	 * uploaded for a blog other than the current one.
+	 */
+	static public function async_handler()
+	{
+		if ( isset( $_SERVER['SCRIPT_FILENAME'] ) ) {
+			// script that is executing
+			$script = Pie_Easy_Files::path_pop( $_SERVER['SCRIPT_FILENAME'] );
+			// script must be async script
+			if ( $script === self::SCRIPT_ASYNC ) {
+				if ( !empty($_POST[Pie_Easy_Options_Registry::PARAM_BLOG_ID]) ) {
+					switch_to_blog( $_POST[Pie_Easy_Options_Registry::PARAM_BLOG_ID] );
+				}
+			}
+		} else {
+			throw new Exception( 'SCRIPT_FILENAME not set, not good' );
+		}
+	}
+
+	/**
 	 * Initialize screen dependancies
 	 */
 	public function init_screen()
 	{
+		global $blog_id;
+
+		$this->screen_blog_id = (integer) $blog_id;
+		$this->screen_blog_theme = get_stylesheet();
+
 		add_action( 'pie_easy_enqueue_styles', array($this, 'init_styles') );
 		add_action( 'pie_easy_enqueue_scripts', array($this, 'init_scripts') );
 	}
@@ -92,12 +144,14 @@ class Pie_Easy_Options_Uploader
 			'pie-easy-uploader',
 			'pieEasyFlashUploaderL10n',
 			array(
-				'ajax_url' => admin_url( 'admin-ajax.php' ),
+				'ajax_url' => admin_url( self::SCRIPT_AJAX ),
+				'upload_url' => admin_url( self::SCRIPT_ASYNC ),
 				'flash_url' => includes_url('js/swfupload/swfupload.swf'),
-				'upload_url' => esc_attr( site_url( 'wp-admin/async-upload.php' ) ),
-					'pp_auth_cookie' => (is_ssl() ? $_COOKIE[SECURE_AUTH_COOKIE] : $_COOKIE[AUTH_COOKIE]),
-					'pp_logged_in_cookie' => $_COOKIE[LOGGED_IN_COOKIE],
-					'pp_wpnonce' => wp_create_nonce( 'media-form' ),
+				'pp_blog_id' => $this->screen_blog_id,
+				'pp_blog_theme' => $this->screen_blog_theme,
+				'pp_auth_cookie' => (is_ssl() ? $_COOKIE[SECURE_AUTH_COOKIE] : $_COOKIE[AUTH_COOKIE]),
+				'pp_logged_in_cookie' => $_COOKIE[LOGGED_IN_COOKIE],
+				'pp_wpnonce' => wp_create_nonce( 'media-form' ),
 				'file_size_limit' => 1024 * 1024,
 				'button_image_url' => includes_url('images/upload.png?ver=20100531')
 			)

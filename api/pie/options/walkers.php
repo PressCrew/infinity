@@ -60,7 +60,7 @@ class Pie_Easy_Options_Walker_Category extends Walker_Category
 	 * @param array $args Only uses 'list' for whether should append to output.
 	 */
 	function end_el(&$output, $page, $depth, $args) {
-		$output .= "\n";
+		$output .= PHP_EOL;
 	}
 }
 
@@ -113,7 +113,7 @@ class Pie_Easy_Options_Walker_Page extends Walker_Page
 	 * @param int $depth Depth of page. Not Used.
 	 */
 	function end_el(&$output, $page, $depth) {
-		$output .= "\n";
+		$output .= PHP_EOL;
 	}
 }
 

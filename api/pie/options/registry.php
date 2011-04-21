@@ -32,6 +32,23 @@ abstract class Pie_Easy_Options_Registry
 	const FIELD_OPTION_DELIM = '=';
 
 	/**
+	 * Name of parameter which passes back blog id
+	 */
+	const PARAM_BLOG_ID = 'pie_easy_options_blog_id';
+
+	/**
+	 * Name of parameter which passes back blog theme
+	 */
+	const PARAM_BLOG_THEME = 'pie_easy_options_blog_theme';
+
+	/**
+	 * Stack of config files that have been loaded
+	 * 
+	 * @var Pie_Easy_Stack
+	 */
+	private $files_loaded;
+
+	/**
 	 * Name of the theme currently being loaded
 	 * 
 	 * @var string
@@ -72,6 +89,20 @@ abstract class Pie_Easy_Options_Registry
 	 * @var Pie_Easy_Map|null
 	 */
 	private $options;
+
+	/**
+	 * Blog id when screen was initialized
+	 *
+	 * @var integer
+	 */
+	protected $screen_blog_id;
+
+	/**
+	 * Blog theme when screen was initialized
+	 *
+	 * @var string
+	 */
+	protected $screen_blog_theme;
 	
 	/**
 	 * Initializes map properties
@@ -79,6 +110,7 @@ abstract class Pie_Easy_Options_Registry
 	public function __construct()
 	{
 		// initiate the maps
+		$this->files_loaded = new Pie_Easy_Stack();
 		$this->sections = new Pie_Easy_Map();
 		$this->options = new Pie_Easy_Map();
 	}
@@ -88,6 +120,14 @@ abstract class Pie_Easy_Options_Registry
 	 */
 	public function init_screen()
 	{
+		global $blog_id;
+
+		$this->screen_blog_id = (integer) $blog_id;
+		$this->screen_blog_theme = get_stylesheet();
+
+		add_action( 'pie_easy_enqueue_styles', array($this, 'init_styles') );
+		add_action( 'pie_easy_enqueue_scripts', array($this, 'init_scripts') );
+		
 		$this->option_renderer->init_screen();
 	}
 
@@ -98,6 +138,28 @@ abstract class Pie_Easy_Options_Registry
 	{
 		$this->option_renderer->init_ajax();
 	}
+
+	/**
+	 * Enqueue required styles
+	 */
+	public function init_styles() {}
+	
+	/**
+	 * Enqueue required scripts
+	 */
+	public function init_scripts()
+	{
+		// enqueue any scripts here
+		// BEFORE LOCALIZING!!!
+
+		// localize the upload wrapper
+		$this->localize_script();
+	}
+
+	/**
+	 * Localize the ajax url
+	 */
+	protected function localize_script() {}
 
 	/**
 	 * Set the PHP class to use for creating new sections
@@ -417,28 +479,18 @@ abstract class Pie_Easy_Options_Registry
 	 */
 	public function load_config_file( $filename, $theme )
 	{
+		// skip loaded files
+		if ( $this->files_loaded->contains( $filename ) ) {
+			return;
+		} else {
+			$this->files_loaded->push( $filename );
+		}
+
 		// set the current theme being loaded
 		$this->loading_theme = $theme;
 
 		// try to parse the file
 		return $this->load_config_array( parse_ini_file( $filename, true ) );
-	}
-
-	/**
-	 * Load options from an ini string
-	 *
-	 * @uses parse_ini_string()
-	 * @param string $ini_text The ini formatted string
-	 * @param string $theme The theme to assign the parsed option directives to
-	 * @return boolean
-	 */
-	public function load_config_text( $ini_text, $theme )
-	{
-		// set the current theme being loaded
-		$this->loading_theme = $theme;
-		
-		// try to parse the text
-		return $this->load_config_array( parse_ini_string( $ini_text, true ) );
 	}
 
 	/**
@@ -690,7 +742,7 @@ abstract class Pie_Easy_Options_Registry
 		if ( empty( $_POST ) ) {
 			return false;
 		} elseif ( isset( $_POST['_manifest_'] ) ) {
-
+			
 			// load manifest
 			$manifest = explode( ',', $_POST['_manifest_'] );
 
@@ -732,6 +784,9 @@ abstract class Pie_Easy_Options_Registry
 					$save_count++;
 				}
 			}
+
+			// restore blog
+			restore_current_blog();
 			
 			// done saving
 			return $save_count;
@@ -775,7 +830,7 @@ abstract class Pie_Easy_Options_Registry
 		foreach ( $this->get_options() as $option ) {
 			if ( $option->field_type == Pie_Easy_Options_Option::FIELD_CSS ) {
 				// append css markup
-				$css .= $option->get() . "\n";
+				$css .= $option->get() . PHP_EOL;
 			}
 		}
 

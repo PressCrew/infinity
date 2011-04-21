@@ -19,7 +19,6 @@ define( 'INFINITY_API_DIR', INFINITY_THEME_DIR . DIRECTORY_SEPARATOR . 'api' );
 define( 'INFINITY_API_URL', INFINITY_THEME_URL . '/api' );
 define( 'INFINITY_PIE_DIR', INFINITY_API_DIR . DIRECTORY_SEPARATOR . 'pie' );
 define( 'INFINITY_PIE_URL', INFINITY_API_URL . '/pie' );
-define( 'INFINITY_CONF_DIR', INFINITY_THEME_DIR . DIRECTORY_SEPARATOR . 'config' );
 define( 'INFINITY_ADMIN_DIR', INFINITY_THEME_DIR . DIRECTORY_SEPARATOR . 'dashboard' );
 define( 'INFINITY_ADMIN_URL', INFINITY_THEME_URL . '/dashboard' );
 define( 'INFINITY_EXPORT_DIR', INFINITY_THEME_DIR . DIRECTORY_SEPARATOR . 'export' );
@@ -43,6 +42,7 @@ require_once( INFINITY_API_DIR . DIRECTORY_SEPARATOR . 'l10n.php' );
 
 // initialize scheme
 infinity_scheme_init();
+infinity_options_init();
 
 if ( is_admin() ) {
 	// only load admin functionality if the dashboard is actually loaded

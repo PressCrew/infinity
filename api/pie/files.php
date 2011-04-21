@@ -139,6 +139,32 @@ final class Pie_Easy_Files
 			throw new Pie_Easy_Files_Exception( 'The directory does not exist: ' . $dir );
 		}
 	}
+
+	/**
+	 * Return URL to a theme directory
+	 *
+	 * @param string $theme
+	 * @return string
+	 */
+	static public function theme_dir_url( $theme )
+	{
+		return get_theme_root_uri( $theme ) . '/' . $theme;
+	}
+
+	/**
+	 * Return URL to a theme file
+	 *
+	 * @param string $theme
+	 * @param string $file_names,...
+	 */
+	static public function theme_file_url( $theme )
+	{
+		// get all args except the first
+		$file_names = func_get_args();
+		array_shift($file_names);
+
+		return self::theme_dir_url( $theme ) . '/' . implode( '/', $file_names );
+	}
 }
 
 /**

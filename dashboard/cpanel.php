@@ -11,6 +11,12 @@
  * @since 1.0
  */
 
+//
+// Hooks
+//
+add_action( 'admin_init', 'infinity_dashboard_cpanel_setup' );
+////
+
 /**
  * Return the current dashboard action
  *
@@ -49,79 +55,31 @@ function infinity_dashboard_cpanel_actions()
 }
 
 //
-// Screens
+// Actions
 //
 
 /**
- * Route requests and display the control panel
+ * Handle setup of the control panel environment
  */
-function infinity_dashboard_cpanel_screen()
+function infinity_dashboard_cpanel_setup()
 {
-	infinity_dashboard_load_template( 'cpanel.php' );
-}
+	// setup dashboard if its active
+	$action = infinity_dashboard_cpanel_action();
 
-//
-// Content Actions
-//
+	if ( $action ) {
+		
+		// init options
+		infinity_scheme_init();
 
-/**
- * Display start page
- */
-function infinity_dashboard_cpanel_start_content()
-{
-	infinity_dashboard_load_template( 'cpanel/start.php' );
-}
+		// init options
+		infinity_options_init();
 
-/**
- * Display widgets page
- */
-function infinity_dashboard_cpanel_widgets_content()
-{
-	infinity_dashboard_load_template( 'cpanel/widgets.php' );
-}
+		// tab action
+		add_action( 'wp_ajax_infinity_tabs_content', 'infinity_dashboard_cpanel_tabs_content' );
 
-/**
- * Display shortcodes page
- */
-function infinity_dashboard_cpanel_shortcodes_content()
-{
-	infinity_dashboard_load_template( 'cpanel/shortcodes.php' );
-}
-
-/**
- * Display options form
- *
- * @param array|stdClass Variables to inject into template
- */
-function infinity_dashboard_cpanel_options_content( $args = null )
-{
-	$defaults->menu_args = null;
-
-	infinity_dashboard_load_template( 'cpanel/options.php', $args, $defaults );
-}
-
-/**
- * Display docs page
- */
-function infinity_dashboard_cpanel_docs_content()
-{
-	infinity_dashboard_load_template( 'cpanel/docs.php' );
-}
-
-/**
- * Display about page
- */
-function infinity_dashboard_cpanel_about_content()
-{
-	infinity_dashboard_load_template( 'cpanel/about.php' );
-}
-
-/**
- * Display thanks page
- */
-function infinity_dashboard_cpanel_thanks_content()
-{
-	infinity_dashboard_load_template( 'cpanel/thanks.php' );
+		// hook for config actions
+		do_action( 'infinity_dashboard_cpanel_setup' );
+	}
 }
 
 /**
@@ -139,6 +97,30 @@ function infinity_dashboard_cpanel_tabs_content()
 		Pie_Easy_Ajax::responseStd( false, sprintf( __( 'There was an error while trying to load the %s tab content.', INFINITY_TEXT_DOMAIN ), $action ) );
 	}
 }
-add_action( 'wp_ajax_infinity_tabs_content', 'infinity_dashboard_cpanel_tabs_content' );
+
+//
+// Screens
+//
+
+/**
+ * Route requests and display the control panel
+ */
+function infinity_dashboard_cpanel_screen()
+{
+	infinity_dashboard_load_template( 'cpanel.php' );
+}
+
+
+/**
+ * Display options form
+ *
+ * @param array|stdClass Variables to inject into template
+ */
+function infinity_dashboard_cpanel_options_content( $args = null )
+{
+	$defaults->menu_args = null;
+
+	infinity_dashboard_load_template( 'cpanel/options.php', $args, $defaults );
+}
 
 ?>

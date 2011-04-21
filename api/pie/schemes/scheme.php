@@ -63,15 +63,18 @@ final class Pie_Easy_Scheme
 	const DIRECTIVE_SCRIPT_CONDS = 'script_conditions';
 	const DIRECTIVE_ADVANCED = 'advanced';
 	const DIRECTIVE_JUI_THEME = 'jui_theme';
+	const DIRECTIVE_SCRIPT_DOMAIN = 'script_domain';
 	const DIRECTIVE_OPT_SAVE_SINGLE = 'options_save_single';
 	/**#@-*/
 
 	/**
-	 * Singleton instance
-	 * 
-	 * @var Pie_Easy_Scheme
+	 * Singleton instances
+	 *
+	 * Map of Pie_Easy_Scheme objects, theme names are keys
+	 *
+	 * @var Pie_Easy_Map
 	 */
-	static private $instance;
+	static private $instances;
 
 	/**
 	 * Name of the root theme
@@ -122,17 +125,28 @@ final class Pie_Easy_Scheme
 	}
 
 	/**
-	 * Return the singleton instance
+	 * Return the singleton instance of the scheme for a specific theme
 	 *
+	 * If no start theme is supplied, the active theme will be used
+	 *
+	 * @param string $start_theme Theme at which to start building the scheme from (bottom up)
 	 * @return Pie_Easy_Scheme
 	 */
-	static public function instance()
+	static public function instance( $start_theme = null )
 	{
-		if ( !self::$instance instanceof self ) {
-			self::$instance = new self();
+		if ( empty( $start_theme ) ) {
+			$start_theme = get_stylesheet();
 		}
 
-		return self::$instance;
+		if ( !self::$instances instanceof Pie_Easy_Map ) {
+			self::$instances = new Pie_Easy_Map();
+		}
+
+		if ( !self::$instances->contains( $start_theme ) ) {
+			self::$instances->add( $start_theme, new self() );
+		}
+
+		return self::$instances->item_at( $start_theme );
 	}
 
 	/**
@@ -143,8 +157,13 @@ final class Pie_Easy_Scheme
 	 * @param string $config_file
 	 * @return boolean
 	 */
-	public function init( $root_theme, $config_dir, $config_file = null )
+	public function init( $root_theme, $config_dir = 'config', $config_file = null )
 	{
+		// do not init same scheme twice
+		if ( $this->root_theme ) {
+			return;
+		}
+		
 		// setup config
 		$this->set_root_theme( $root_theme );
 		$this->set_config_dir( $config_dir );
@@ -526,17 +545,6 @@ final class Pie_Easy_Scheme
 	{
 		return get_theme_root( $theme ) . DIRECTORY_SEPARATOR . $theme;
 	}
-
-	/**
-	 * Return URL to a theme directory
-	 *
-	 * @param string $theme
-	 * @return string
-	 */
-	public function theme_dir_url( $theme )
-	{
-		return get_theme_root_uri( $theme ) . '/' . $theme;
-	}
 	
 	/**
 	 * Return array of all theme root directory paths
@@ -593,21 +601,6 @@ final class Pie_Easy_Scheme
 		}
 
 		return $this->theme_dir( $theme ) . Pie_Easy_Files::path_build( $file_names );
-	}
-
-	/**
-	 * Return URL to a theme file
-	 *
-	 * @param string $theme
-	 * @param string $file_names,...
-	 */
-	public function theme_file_url( $theme )
-	{
-		// get all args except the first
-		$file_names = func_get_args();
-		array_shift($file_names);
-
-		return $this->theme_dir_url( $theme ) . '/' . implode( '/', $file_names );
 	}
 
 	/**

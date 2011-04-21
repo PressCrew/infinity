@@ -18,11 +18,10 @@ Pie_Easy_Loader::load( 'schemes' );
  *
  * @return boolean
  */
-function infinity_scheme_init()
+function infinity_scheme_init( $theme = null )
 {
 	// initialize the scheme
-	Pie_Easy_Scheme::instance()->init( INFINITY_NAME, 'config' );
-	Pie_Easy_Scheme::instance()->enable_options( Infinity_Options_Registry::instance() );
+	Pie_Easy_Scheme::instance( $theme )->init( INFINITY_NAME );
 	return true;
 }
 
