@@ -142,7 +142,7 @@ class Infinity_Feature_Header_Logo extends Infinity_Feature
 		// only print style if this feature is supported
 		if ( $this->supported() ) {
 
-			// fall back to Twenty Ten style of layout
+			// fall back to core layout
 			if ( empty( $selector ) ) {
 				$selector = 'div#header h1#site-title a';
 			}
@@ -195,7 +195,7 @@ class Infinity_Feature_Header_Background extends Infinity_Feature
 		// only print style if this feature is supported
 		if ( $this->supported() ) {
 
-			// fall back to Twenty Ten style of layout
+			// fall back to core style of layout
 			if ( empty( $selector ) ) {
 				$selector = 'div#header';
 			}
