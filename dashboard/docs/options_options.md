@@ -201,15 +201,18 @@ There are three documentation modes:
 
 * **Disabled** (default)
 
-	`documentation = false`
+	`documentation = off`
 
 	This disables documentation for the option.
 
 * **Automatic**
 
-	`documentation = true`
+	`documentation = on`
 
-	In this case the doc page should have the exact same name as the option.
+	In this case the doc page should have the exact same name as the option, and be placed
+	in a subdirectory of your `config/docs` folder called `options`. For example:
+
+	`my-theme/config/options/option_name.md`
 
 * **Manual**
 
@@ -238,7 +241,7 @@ the parent file. In this case you are not limited to using the same format. If t
 has a file named `mytheme_option.html`, you can create a file called `mytheme_option.md` and
 your Markdown file will override the HTML file.
 
-Child theme can override documentation setting: **Yes**  
+Child theme can override documentation setting: **Yes**<br />
 Child theme can override documentation pages: **Yes**
 
 #### capabilities
@@ -248,7 +251,7 @@ this specific option.
 
 	capabilities = "edit_posts"
 
-Child theme can override capabilities: **No**  
+Child theme can override capabilities: **No**<br />
 Child theme can add/append to capabilities: **Yes**
 
 #### required\_option

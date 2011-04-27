@@ -20,7 +20,7 @@ Here are some .ini directives.
 
 	[section_one]
 	item_a = 1;
-	item_b = true;
+	item_b = on;
 	item_c = "Hello there"
 
 #### PHP Code

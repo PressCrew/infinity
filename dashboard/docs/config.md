@@ -1,7 +1,7 @@
 ## Configuration: Overview
 
 If you have not already successfully installed Infinity
-according the the [Installation](infinity://admin/cpanel/docs/install_setup) page,
+according the the [Installation](infinity://admin:ddoc/install_setup) page,
 you might want to do that first to make this easier to follow.
 
 <ul class="infinity-docs-menu"></ul>
@@ -19,7 +19,7 @@ directives, and values:
 	; a comment
 	[section]
 	directive_one = 1
-	directive_two = true
+	directive_two = on
 	directive_three = "a string value"
 
 ### The Infinity Config File

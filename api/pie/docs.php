@@ -81,13 +81,13 @@ class Pie_Easy_Docs
 
 	/**
 	 * The callback to filter markup before parsing
-	 * @var string|array 
+	 * @var string|array
 	 */
 	private $pre_parse_callback;
-	
+
 	/**
 	 * The callback to filter markup after parsing
-	 * @var string|array 
+	 * @var string|array
 	 */
 	private $post_parse_callback;
 
@@ -104,7 +104,7 @@ class Pie_Easy_Docs
 		} else {
 			$this->doc_dirs = array( $dir );
 		}
-		
+
 		$this->set_page( $page );
 	}
 
@@ -209,6 +209,10 @@ class Pie_Easy_Docs
 		if ( empty( $page ) ) {
 			$page = self::DEFAULT_PAGE;
 		} else {
+			// trailing slash means index
+			if ( substr( $page, -1, 1 ) == '/' ) {
+				$page .= self::DEFAULT_PAGE;
+			}
 			// split page at static directory separators
 			$splits = Pie_Easy_Files::path_split( $page );
 			// page is last item
@@ -234,8 +238,8 @@ class Pie_Easy_Docs
 
 	/**
 	 * Set the file of the page
-	 * 
-	 * @param string $page 
+	 *
+	 * @param string $page
 	 */
 	private function update_page_file()
 	{
@@ -254,7 +258,7 @@ class Pie_Easy_Docs
 			$this->page_markup = $matches[1];
 		}
 	}
-	
+
 	/**
 	 * Validate a page name
 	 *

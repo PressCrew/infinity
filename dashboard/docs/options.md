@@ -39,4 +39,4 @@ the uploaded image:
 That's all there is to it! Infinity handles all the hard stuff behind the scenes so you
 can focus on making your theme awesome, instead of making it work.
 
-Next Page: [Sections](infinity://admin/cpanel/docs/options_sections)
+Next Page: [Sections](infinity://admin:ddoc/options_sections)

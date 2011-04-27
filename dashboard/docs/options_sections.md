@@ -37,4 +37,4 @@ already been defined:
 > Any section which has children sections assigned to it cannot contain options. If you try to
 assign options to a parent section, a fatal error will occur.
 
-Next Page: [Sections](infinity://admin/cpanel/docs/options_options)
+Next Page: [Sections](infinity://admin:ddoc/options_options)

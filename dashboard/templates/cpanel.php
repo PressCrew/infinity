@@ -22,14 +22,17 @@
 				<li id="infinity-cpanel-toolbar-menu-item-widgets">
 					<a href="<?php print infinity_dashboard_route( 'cpanel', 'widgets' ) ?>#infinity-cpanel-tab-widgets" title="<?php _e( 'Widgets', INFINITY_TEXT_DOMAIN ) ?>"><?php _e( 'Widgets', INFINITY_TEXT_DOMAIN ) ?></a>
 				</li>
+				<li id="infinity-cpanel-toolbar-menu-item-docs">
+					<a href="<?php print infinity_dashboard_route( 'cpanel', 'docs' ) ?>#infinity-cpanel-tab-docs" title="<?php _e( 'User Docs', INFINITY_TEXT_DOMAIN ) ?>"><?php _e( 'User Docs', INFINITY_TEXT_DOMAIN ) ?></a>
+				</li>
 				<li id="infinity-cpanel-toolbar-menu-item-about">
 					<a href="<?php print infinity_dashboard_route( 'cpanel', 'about' ) ?>#infinity-cpanel-tab-about" title="<?php _e( 'About', INFINITY_TEXT_DOMAIN ) ?>"><?php _e( 'About', INFINITY_TEXT_DOMAIN ) ?></a>
 				</li>
 				<li id="infinity-cpanel-toolbar-menu-item-devs">
 					<a class="infinity-cpanel-context-menu" title="<?php _e( 'Developers', INFINITY_TEXT_DOMAIN ) ?>"><?php _e( 'Developers', INFINITY_TEXT_DOMAIN ) ?></a>
 					<ul>
-						<li id="infinity-cpanel-toolbar-menu-item-docs">
-							<a href="<?php print infinity_dashboard_route( 'cpanel', 'docs' ) ?>#infinity-cpanel-tab-docs" title="<?php _e( 'Docs', INFINITY_TEXT_DOMAIN ) ?>"><?php _e( 'Documentation', INFINITY_TEXT_DOMAIN ) ?></a>
+						<li id="infinity-cpanel-toolbar-menu-item-ddocs">
+							<a href="<?php print infinity_dashboard_route( 'cpanel', 'ddocs' ) ?>#infinity-cpanel-tab-ddocs" title="<?php _e( 'Dev Docs', INFINITY_TEXT_DOMAIN ) ?>"><?php _e( 'Documentation', INFINITY_TEXT_DOMAIN ) ?></a>
 						</li>
 						<li id="infinity-cpanel-toolbar-menu-item-api">
 							<a href="<?php print infinity_dashboard_route( 'cpanel', 'api' ) ?>#infinity-cpanel-tab-api" title="<?php _e( 'API', INFINITY_TEXT_DOMAIN ) ?>"><?php _e( 'API Browser', INFINITY_TEXT_DOMAIN ) ?></a>
@@ -55,6 +58,7 @@
 			<a id="infinity-cpanel-toolbar-options" href="<?php print infinity_dashboard_route( 'cpanel', 'options' ) ?>#infinity-cpanel-tab-options" title="<?php _e( 'Options', INFINITY_TEXT_DOMAIN ) ?>"><?php _e( 'Options', INFINITY_TEXT_DOMAIN ) ?></a>
 			<a id="infinity-cpanel-toolbar-shortcodes" href="<?php print infinity_dashboard_route( 'cpanel', 'shortcodes' ) ?>#infinity-cpanel-tab-shortcodes" title="<?php _e( 'Shortcodes', INFINITY_TEXT_DOMAIN ) ?>"><?php _e( 'Shortcodes', INFINITY_TEXT_DOMAIN ) ?></a>
 			<a id="infinity-cpanel-toolbar-widgets" href="<?php print infinity_dashboard_route( 'cpanel', 'widgets' ) ?>#infinity-cpanel-tab-widgets" title="<?php _e( 'Widgets', INFINITY_TEXT_DOMAIN ) ?>"><?php _e( 'Widgets', INFINITY_TEXT_DOMAIN ) ?></a>
+			<a id="infinity-cpanel-toolbar-docs" href="<?php print infinity_dashboard_route( 'cpanel', 'docs' ) ?>#infinity-cpanel-tab-docs" title="<?php _e( 'User Docs', INFINITY_TEXT_DOMAIN ) ?>"><?php _e( 'User Docs', INFINITY_TEXT_DOMAIN ) ?></a>
 			<a id="infinity-cpanel-toolbar-about" href="<?php print infinity_dashboard_route( 'cpanel', 'about' ) ?>#infinity-cpanel-tab-about" title="<?php _e( 'About', INFINITY_TEXT_DOMAIN ) ?>"><?php _e( 'About', INFINITY_TEXT_DOMAIN ) ?></a>
 			<a id="infinity-cpanel-toolbar-refresh" title="<?php _e( 'Refresh current tab', INFINITY_TEXT_DOMAIN ) ?>"><?php _e( 'Refresh', INFINITY_TEXT_DOMAIN ) ?></a>
 		</div>

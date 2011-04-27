@@ -14,6 +14,6 @@ the `[scripts]` section if you which to override the default theme.
 #### options\_save\_single
 
 The default is to always show two save buttons for each option on the theme options panel.
-Set this to false if you only want to show the "Save All" button.
+Set this to `off` if you only want to show the "Save All" button.
 
-	options_save_single = false
+	options_save_single = off

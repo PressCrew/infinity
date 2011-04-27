@@ -30,7 +30,7 @@ abstract class Pie_Easy_Options_Option_Renderer
 
 	/**
 	 * The current option being rendered
-	 * 
+	 *
 	 * @var Pie_Easy_Options_Option
 	 */
 	private $option;
@@ -126,7 +126,7 @@ abstract class Pie_Easy_Options_Option_Renderer
 	{
 		// check feature support
 		if ( $option->supported() ) {
-			
+
 			// set as currently rendered option
 			$this->option = $option;
 			$this->option->enable_post_override();
@@ -154,7 +154,7 @@ abstract class Pie_Easy_Options_Option_Renderer
 	 * this to generate custom markup.
 	 */
 	protected function render_option()
-	{ 
+	{
 		// start rendering ?>
 		<div class="<?php $this->render_classes( 'pie-easy-options-wrapper' ) ?>">
 			<?php $this->render_label() ?>
@@ -169,7 +169,7 @@ abstract class Pie_Easy_Options_Option_Renderer
 
 	/**
 	 * Render the option name
-	 * 
+	 *
 	 * This is useful when using it as part of an attribute
 	 */
 	protected function render_name()
@@ -369,7 +369,7 @@ abstract class Pie_Easy_Options_Option_Renderer
 	{
 		// render the input text field
 		$this->render_input( 'text' );
-		
+
 		// now the color picker box ?>
 		<div id="pie-easy-options-cp-wrapper-<?php $this->render_name() ?>" class="pie-easy-options-cp-box">
 			<div style="background-color: <?php print esc_attr( $this->option->get() ) ?>;"></div>
@@ -448,7 +448,7 @@ abstract class Pie_Easy_Options_Option_Renderer
 			throw new Exception( sprintf( 'The "%s" option has no array of field options to render.', $this->option->name ) );
 		}
 	}
-	
+
 	/**
 	 * Render a page select box
 	 */
@@ -697,7 +697,7 @@ abstract class Pie_Easy_Options_Option_Renderer
 				// use auto naming?
 				if ( (boolean) $this->option->documentation == true ) {
 					// yes, page is option name
-					$page = $this->option->name;
+					$page = 'options/' . $this->option->name;
 				} else {
 					// no, documentation disabled
 					return;
@@ -714,7 +714,7 @@ abstract class Pie_Easy_Options_Option_Renderer
 			$doc->publish();
 		}
 	}
-	
+
 	/**
 	 * Render sample code for this option
 	 *

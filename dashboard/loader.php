@@ -63,7 +63,7 @@ function infinity_dashboard_route()
 
 	// use variable args
 	$params = func_get_args();
-	
+
 	// check if first is an array
 	if ( is_array( current($params) ) ) {
 		$params = $params[0];
@@ -79,7 +79,7 @@ function infinity_dashboard_route()
 
 /**
  * Parse the page/route into screen, action, and params
- * 
+ *
  * @return array
  */
 function infinity_dashboard_route_parse()
@@ -135,7 +135,7 @@ function infinity_dashboard_route_parse()
 function infinity_dashboard_route_param( $offset )
 {
 	$route = infinity_dashboard_route_parse();
-	
+
 	if ( isset( $route['params'][--$offset] ) ) {
 		return $route['params'][$offset];
 	}
@@ -159,7 +159,20 @@ function infinity_dashboard_image( $name )
 function infinity_dashboard_doc_publish( $page = null )
 {
 	Pie_Easy_Loader::load( 'docs' );
-	$doc = new Pie_Easy_Docs( INFINITY_ADMIN_DOCS_DIR . DIRECTORY_SEPARATOR, $page );
+	$doc = new Pie_Easy_Docs( Pie_Easy_Scheme::instance()->theme_documentation_dirs(), $page );
+	$doc->set_pre_filter( 'infinity_dashboard_doc_filter' );
+	$doc->publish();
+}
+
+/**
+ * Publish a developer (core) document page
+ *
+ * @param string $page Name of page to publish
+ */
+function infinity_dashboard_devdoc_publish( $page = null )
+{
+	Pie_Easy_Loader::load( 'docs' );
+	$doc = new Pie_Easy_Docs( INFINITY_ADMIN_DOCS_DIR, $page );
 	$doc->set_pre_filter( 'infinity_dashboard_doc_filter' );
 	$doc->publish();
 }
@@ -184,13 +197,8 @@ function infinity_dashboard_doc_filter( $contents )
  */
 function infinity_dashboard_doc_filter_cb( $match )
 {
-	// where are we
+	// where are we?
 	$location = $match[1];
-
-	// TODO add the location feature
-	if ( $location != 'admin' ) {
-		throw new Exception( 'Only the "admin" location is allowed' );
-	}
 
 	// call type
 	$call_type = $match[3];
@@ -198,12 +206,19 @@ function infinity_dashboard_doc_filter_cb( $match )
 	// the route
 	$route = trim( $match[4], INFINITY_ROUTE_DELIM );
 
-	switch( $call_type ) {
-		case '':
-		case 'action':
-			return infinity_dashboard_route( $route );
-		case 'image':
-			return infinity_dashboard_image( $route );
+	switch ( $location ) {
+		case 'admin':
+			switch( $call_type ) {
+				case '':
+				case 'action':
+					return infinity_dashboard_route( $route );
+				case 'image':
+					return infinity_dashboard_image( $route );
+				case 'doc':
+					return infinity_dashboard_route( 'cpanel', 'docs', $route );
+				case 'ddoc':
+					return infinity_dashboard_route( 'cpanel', 'ddocs', $route );
+			}
 	}
 }
 
