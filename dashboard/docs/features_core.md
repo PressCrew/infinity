@@ -1,4 +1,4 @@
-# Infinity Theme Features
+# Infinity Core Theme Features
 
 Infinity has a few built-in features that you can use to quickly add functionality
 to your theme. We've done this, because we think that certain customization features are
@@ -10,10 +10,9 @@ not have to switch between different pages in the dashboard.
 
 <ul class="infinity-docs-menu"></ul>
 
-### Enabling Theme Support
+## Directives
 
-Currently there are four core features that you can use in your themes. You enable them in
-your child theme's functions.php just like you would with any other theme.
+Currently there are four core features that you can use in your themes.
 
 > Some of the features require that template tags be added to your template files,
 particularly your header.php file, *so pay close attention to the documentation
@@ -23,9 +22,10 @@ for each feature*.
 
 This feature enables a custom CSS option in the theme options panel.
 
-To enable custom css support, add the following to your child theme's functions.php:
+To enable custom css support, add the following to the `[feature]` section
+of your theme's infinity.ini:
 
-	add_theme_support( 'infinity-custom-css' );
+	infinity-custom-css = on
 
 > All of the values of registered options with the `field_type` of "css" are merged
 and sent to the browser by enqueueing a special export script. This is done automatically,
@@ -35,9 +35,10 @@ there are no additional steps to take.
 
 This feature enables a file upload option in the theme options panel for a custom logo.
 
-To enable header logo support, add the following to your child theme's functions.php:
+To enable header logo support, add the following to the `[feature]` section
+of your theme's infinity.ini:
 
-	add_theme_support( 'infinity-header-logo' );
+	infinity-header-logo = on
 
 > This feature requires the additional step of placing a template tag
 in the `<head>` element of your theme! If you skip the step below,
@@ -56,9 +57,10 @@ To associate the output with your own CSS selector, you can do something like th
 This feature enables a file upload option in the theme options
 panel for a custom header background image.
 
-To enable header background support, add the following to your child theme's functions.php:
+To enable header background support, add the following to the `[feature]` section
+of your theme's infinity.ini:
 
-	add_theme_support( 'infinity-header-background' );
+	infinity-header-background = on
 
 > This feature requires the additional step of placing a template tag
 in the `<head>` element of your theme! If you skip the step below,
@@ -77,9 +79,10 @@ To associate the output with your own CSS selector, you can do something like th
 This feature enables a file upload option in the theme options
 panel for a custom site background image.
 
-To enable site background support, add the following to your child theme's functions.php:
+To enable site background support, add the following to the `[feature]` section
+of your theme's infinity.ini:
 
-	add_theme_support( 'infinity-site-background' );
+	infinity-site-background = on
 
 > This feature requires the additional step of placing a template tag
 in the `<head>` element of your theme! If you skip the step below,

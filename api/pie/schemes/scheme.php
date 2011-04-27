@@ -48,11 +48,12 @@ final class Pie_Easy_Scheme
 	 * Name of the docs directory (under config)
 	 */
 	const DIR_DOCS = 'docs';
-	
+
 	/**#@+
 	 * ini directive enumeration
 	 */
 	const DIRECTIVE_PARENT_THEME = 'parent_theme';
+	const DIRECTIVE_FEATURE = 'feature';
 	const DIRECTIVE_STYLE_DEFS = 'style';
 	const DIRECTIVE_STYLE_DEPS = 'style_depends';
 	const DIRECTIVE_STYLE_ACTS = 'style_actions';
@@ -163,7 +164,7 @@ final class Pie_Easy_Scheme
 		if ( $this->root_theme ) {
 			return;
 		}
-		
+
 		// setup config
 		$this->set_root_theme( $root_theme );
 		$this->set_config_dir( $config_dir );
@@ -171,16 +172,19 @@ final class Pie_Easy_Scheme
 
 		// load it
 		$this->load();
-		
+
 		// add filters
 		$this->add_filters();
-		
+
+		// run theme feature support helper
+		$this->feature_support();
+
 		// enqueue styles and scripts
 		$this->enqueue = new Pie_Easy_Scheme_Enqueue( $this );
-		
+
 		// try to load additional functions files after WP theme setup
 		add_action( 'after_setup_theme', array($this, 'load_functions') );
-		
+
 		return true;
 	}
 
@@ -419,8 +423,33 @@ final class Pie_Easy_Scheme
 	}
 
 	/**
+	 * Enable/disable feature support
+	 *
+	 * @ignore
+	 */
+	private function feature_support()
+	{
+		// any features set?
+		if ( $this->has_directive( self::DIRECTIVE_FEATURE ) ) {
+			// at least one feature was set, get map
+			$map = $this->get_directive_map( self::DIRECTIVE_FEATURE );
+			// loop through and add theme support for each feature
+			foreach ( $map as $directive ) {
+				foreach( $directive->value as $feature => $toggle ) {
+					// toggled on?
+					if ( (boolean) $toggle === true ) {
+						add_theme_support( $feature );
+					} else {
+						remove_theme_support( $feature );
+					}
+				}
+			}
+		}
+	}
+
+	/**
 	 * Try to load function files for themes in stack
-	 * 
+	 *
 	 * @ignore
 	 */
 	public function load_functions()
@@ -428,7 +457,11 @@ final class Pie_Easy_Scheme
 		// loop through theme stack
 		foreach ( $this->themes->to_array() as $theme  ) {
 			// load functions file if it exists
-			include_once $this->theme_file( $theme, 'functions.php' );
+			$filename = $this->theme_file( $theme, 'functions.php' );
+			// try to load it
+			if ( is_readable( $filename ) ) {
+				require_once $filename;
+			}
 		}
 	}
 
@@ -470,7 +503,7 @@ final class Pie_Easy_Scheme
 		if ( empty( $template ) ) {
 			$template = 'index.php';
 		}
-	
+
 		// see if it exists in the scheme
 		$scheme_template = $this->locate_template( array( basename( $template ) ) );
 
@@ -527,7 +560,7 @@ final class Pie_Easy_Scheme
 
 	/**
 	 * Return the name of the active theme
-	 * 
+	 *
 	 * @return string
 	 */
 	private function active_theme()
@@ -545,7 +578,7 @@ final class Pie_Easy_Scheme
 	{
 		return get_theme_root( $theme ) . DIRECTORY_SEPARATOR . $theme;
 	}
-	
+
 	/**
 	 * Return array of all theme root directory paths
 	 *
@@ -563,7 +596,7 @@ final class Pie_Easy_Scheme
 		foreach ( $this->themes->to_array(true) as $theme ) {
 			$paths[] = $this->theme_file( $theme, $file_names );
 		}
-		
+
 		return $paths;
 	}
 
@@ -732,9 +765,9 @@ final class Pie_Easy_Scheme
 			$templates[] = "{$slug}-{$name}.php";
 
 		$templates[] = "{$slug}.php";
-		
+
 		$located_template = $this->locate_template( $templates );
-		
+
 		if ( $located_template ) {
 			do_action( "get_template_part_{$slug}", $slug, $name );
 			load_template( $located_template, false );
