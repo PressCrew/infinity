@@ -1,6 +1,6 @@
 (function($){
 	$(document).ready(function() {
-		
+
 		// cpanel toolbar buttons
 		var tb_menu =
 			$('a#infinity-cpanel-toolbar-menu')
@@ -12,10 +12,12 @@
 			$('a#infinity-cpanel-toolbar-refresh')
 				.button({icons: {primary: "ui-icon-refresh"}})
 				.attr('href', tb_start.attr('href'));
+
 		// more toolbar buttons
 		$('a#infinity-cpanel-toolbar-options').button({icons: {primary: "ui-icon-pencil"}});
 		$('a#infinity-cpanel-toolbar-shortcodes').button({icons: {primary: "ui-icon-copy"}});
 		$('a#infinity-cpanel-toolbar-widgets').button({icons: {primary: "ui-icon-gear"}});
+		$('a#infinity-cpanel-toolbar-docs').button({icons: {primary: "ui-icon-document"}});
 		$('a#infinity-cpanel-toolbar-about').button({icons: {primary: "ui-icon-info"}});
 
 		// cpanel menu buttons
@@ -23,16 +25,17 @@
 		$('li#infinity-cpanel-toolbar-menu-item-options a').button({icons: {primary: "ui-icon-pencil"}});
 		$('li#infinity-cpanel-toolbar-menu-item-shortcodes a').button({icons: {primary: "ui-icon-copy"}});
 		$('li#infinity-cpanel-toolbar-menu-item-widgets a').button({icons: {primary: "ui-icon-gear"}});
+		$('li#infinity-cpanel-toolbar-menu-item-docs a').button({icons: {primary: "ui-icon-document"}});
 		$('li#infinity-cpanel-toolbar-menu-item-about a').button({icons: {primary: "ui-icon-info"}});
 		$('li#infinity-cpanel-toolbar-menu-item-devs a').button({icons: {primary: "ui-icon-wrench", secondary: "ui-icon-triangle-1-e"}});
-			$('li#infinity-cpanel-toolbar-menu-item-docs a').button({icons: {primary: "ui-icon-document"}});
+			$('li#infinity-cpanel-toolbar-menu-item-ddocs a').button({icons: {primary: "ui-icon-document"}});
 			$('li#infinity-cpanel-toolbar-menu-item-api a').button({icons: {primary: "ui-icon-note"}});
 			$('li#infinity-cpanel-toolbar-menu-item-repo a').button({icons: {primary: "ui-icon-link"}}).click(function(){alert('External Link');return false;});
 		$('li#infinity-cpanel-toolbar-menu-item-comm a').button({icons: {primary: "ui-icon-person",secondary: "ui-icon-triangle-1-e"}});
 			$('li#infinity-cpanel-toolbar-menu-item-news a').button({icons: {primary: "ui-icon-signal-diag"}});
 			$('li#infinity-cpanel-toolbar-menu-item-support a').button({icons: {primary: "ui-icon-help"}}).click(function(){alert('External Link');return false;});
 			$('li#infinity-cpanel-toolbar-menu-item-thanks a').button({icons: {primary: "ui-icon-heart"}});
-		
+
 		// menus
 		$('a.infinity-cpanel-context-menu').each(function() {
 			var $this = $(this);
@@ -102,7 +105,7 @@
 			cursor: 'move',
 			containment: 'parent'
 		});
-		
+
 		// add and/or select cpanel tab
 		$('a', cpanel).live('click', function() {
 			if ( $(this).attr('href') ) {
