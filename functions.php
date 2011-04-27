@@ -66,7 +66,6 @@ if ( is_admin() ) {
  * To override infinity_setup() in a child theme, add your own infinity_setup to your child theme's
  * functions.php file.
  *
- * @uses add_theme_support() To add support for post thumbnails and automatic feed links.
  * @uses register_nav_menus() To add support for navigation menus.
  * @uses add_editor_style() To style the visual editor.
  * @uses load_theme_textdomain() For translation/localization support.
@@ -75,20 +74,8 @@ if ( is_admin() ) {
  */
 function infinity_setup()
 {
-	/* Infinity theme features */
-	add_theme_support( 'infinity-custom-css' );
-	add_theme_support( 'infinity-header-logo' );
-	add_theme_support( 'infinity-header-background' );
-	add_theme_support( 'infinity-site-background' );
-
 	// This theme styles the visual editor with editor-style.css to match the theme style.
 	add_editor_style();
-
-	// This theme uses post thumbnails
-	add_theme_support( 'post-thumbnails' );
-
-	// Add default posts and comments RSS feed links to head
-	add_theme_support( 'automatic-feed-links' );
 
 	// Make theme available for translation
 	// Translations can be filed in the /languages/ directory
@@ -113,7 +100,8 @@ add_action( 'after_setup_theme', 'infinity_setup' );
  * To override this in a child theme, remove the filter and optionally add
  * your own function tied to the wp_page_menu_args filter hook.
  */
-function infinity_page_menu_args( $args ) {
+function infinity_page_menu_args( $args )
+{
 	$args['show_home'] = true;
 	return $args;
 }
@@ -127,7 +115,8 @@ add_filter( 'wp_page_menu_args', 'infinity_page_menu_args' );
  *
  * @return int
  */
-function infinity_excerpt_length( $length ) {
+function infinity_excerpt_length( $length )
+{
 	return 40;
 }
 add_filter( 'excerpt_length', 'infinity_excerpt_length' );
@@ -137,7 +126,8 @@ add_filter( 'excerpt_length', 'infinity_excerpt_length' );
  *
  * @return string "Continue Reading" link
  */
-function infinity_continue_reading_link() {
+function infinity_continue_reading_link()
+{
 	return ' <a href="'. get_permalink() . '">' . __( 'Continue reading <span class="meta-nav">&rarr;</span>', INFINITY_TEXT_DOMAIN ) . '</a>';
 }
 
@@ -149,7 +139,8 @@ function infinity_continue_reading_link() {
  *
  * @return string An ellipsis
  */
-function infinity_auto_excerpt_more( $more ) {
+function infinity_auto_excerpt_more( $more )
+{
 	return ' &hellip;' . infinity_continue_reading_link();
 }
 add_filter( 'excerpt_more', 'infinity_auto_excerpt_more' );
@@ -162,7 +153,8 @@ add_filter( 'excerpt_more', 'infinity_auto_excerpt_more' );
  *
  * @return string Excerpt with a pretty "Continue Reading" link
  */
-function infinity_custom_excerpt_more( $output ) {
+function infinity_custom_excerpt_more( $output )
+{
 	if ( has_excerpt() && ! is_attachment() ) {
 		$output .= infinity_continue_reading_link();
 	}
@@ -177,7 +169,8 @@ add_filter( 'get_the_excerpt', 'infinity_custom_excerpt_more' );
  *
  * @return string The gallery style filter, with the styles themselves removed.
  */
-function infinity_remove_gallery_css( $css ) {
+function infinity_remove_gallery_css( $css )
+{
 	return preg_replace( "#<style type='text/css'>(.*?)</style>#s", '', $css );
 }
 add_filter( 'gallery_style', 'infinity_remove_gallery_css' );
@@ -190,7 +183,8 @@ add_filter( 'gallery_style', 'infinity_remove_gallery_css' );
  *
  * Used as a callback by wp_list_comments() for displaying the comments.
  */
-function infinity_comment( $comment, $args, $depth ) {
+function infinity_comment( $comment, $args, $depth )
+{
 	$GLOBALS['comment'] = $comment;
 	switch ( $comment->comment_type ) :
 		case '' :
@@ -240,7 +234,8 @@ function infinity_comment( $comment, $args, $depth ) {
  *
  * @uses register_sidebar
  */
-function infinity_widgets_init() {
+function infinity_widgets_init()
+{
 	// Area 1, located at the top of the sidebar.
 	register_sidebar( array(
 		'name' => __( 'Primary Widget Area', INFINITY_TEXT_DOMAIN ),
@@ -316,7 +311,8 @@ add_action( 'widgets_init', 'infinity_widgets_init' );
  * To override this in a child theme, remove the filter and optionally add your own
  * function tied to the widgets_init action hook.
  */
-function infinity_remove_recent_comments_style() {
+function infinity_remove_recent_comments_style()
+{
 	global $wp_widget_factory;
 	remove_action( 'wp_head', array( $wp_widget_factory->widgets['WP_Widget_Recent_Comments'], 'recent_comments_style' ) );
 }
@@ -325,7 +321,8 @@ add_action( 'widgets_init', 'infinity_remove_recent_comments_style' );
 /**
  * Prints HTML with meta information for the current post—date/time and author.
  */
-function infinity_posted_on() {
+function infinity_posted_on()
+{
 	printf( __( '<span class="%1$s">Posted on</span> %2$s <span class="meta-sep">by</span> %3$s', INFINITY_TEXT_DOMAIN ),
 		'meta-prep meta-prep-author',
 		sprintf( '<a href="%1$s" title="%2$s" rel="bookmark"><span class="entry-date">%3$s</span></a>',
@@ -344,7 +341,8 @@ function infinity_posted_on() {
 /**
  * Prints HTML with meta information for the current post (category, tags and permalink).
  */
-function infinity_posted_in() {
+function infinity_posted_in()
+{
 	// Retrieves tag list of current post, separated by commas.
 	$tag_list = get_the_tag_list( '', ', ' );
 	if ( $tag_list ) {
