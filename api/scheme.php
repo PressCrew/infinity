@@ -44,7 +44,7 @@ function infinity_scheme_directive( $name )
  * @return string
  */
 function infinity_locate_template( $template_name, $load = false )
-{	
+{
 	return Pie_Easy_Scheme::instance()->locate_template( $template_name );
 }
 
@@ -57,6 +57,32 @@ function infinity_locate_template( $template_name, $load = false )
 function infinity_load_template( $template_name )
 {
 	return infinity_locate_template( $template_name, true );
+}
+
+/**
+ * Return absolute path to first image matching path in the scheme stack
+ *
+ * @param string $path Image file path RELATIVE to your image_root setting
+ */
+function infinity_image_path( $path )
+{
+	// locate image in scheme stack
+	$image_path = Pie_Easy_Scheme::instance()->locate_image( $path );
+	// convert path to url
+	return ($image_path) ? Pie_Easy_Files::theme_file_to_url($image_path) : null;
+}
+
+/**
+ * Return URL to first image matching path in the scheme stack
+ *
+ * @param string $path Image file path RELATIVE to your image_root setting
+ */
+function infinity_image_url( $path )
+{
+	// locate image in scheme stack
+	$image_path = infinity_get_image_path( $path );
+	// convert path to url
+	return ($image_path) ? Pie_Easy_Files::theme_file_to_url($image_path) : null;
 }
 
 /**
@@ -126,7 +152,7 @@ function infinity_comments_template( $file = null, $separate_comments = false )
 	if ( $file === null ) {
 		$file = DIRECTORY_SEPARATOR . 'comments.php';
 	}
-	
+
 	// this is just a wrapper to avoid confusion
 	return comments_template( $file, $separate_comments );
 }

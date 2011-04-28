@@ -17,8 +17,8 @@ is normally done via arcane hooks, filters and API functions to simple configura
 A majority of the customization and configuration of a theme can be done with
 *no PHP code required*.
 
-Some of the more powerful features of the configuration files are *instant option
-panels*, and *automatic style and script enqueueing*.
+Some of the more powerful features of the configuration files are *cascading option
+panels*, **cascading theme images** and *automatic style and script enqueueing*.
 
 There is a very small learning curve to start using these configuration files, as all
 of the terminology should be familiar to even novice theme developers.

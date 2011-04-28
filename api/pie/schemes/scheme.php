@@ -53,6 +53,7 @@ final class Pie_Easy_Scheme
 	 * ini directive enumeration
 	 */
 	const DIRECTIVE_PARENT_THEME = 'parent_theme';
+	const DIRECTIVE_IMAGE_ROOT = 'image_root';
 	const DIRECTIVE_FEATURE = 'feature';
 	const DIRECTIVE_STYLE_DEFS = 'style';
 	const DIRECTIVE_STYLE_DEPS = 'style_depends';
@@ -639,7 +640,10 @@ final class Pie_Easy_Scheme
 	/**
 	 * Locate a theme file, giving priority to top themes in the stack
 	 *
-	 * @todo This method is really powerful but needs some work before we use it
+	 * If first argument is a Pie_Easy_Map instance, it is expected to be
+	 * a map of theme directives whose values are relative path prefixes.
+	 *
+	 * @param Pie_Easy_Map $prefix_map Optional map of directives which define path prefixes
 	 * @param string $file_names,... The file names that make up the RELATIVE path to the theme root
 	 * @return string|false
 	 */
@@ -648,8 +652,23 @@ final class Pie_Easy_Scheme
 		// get all args
 		$file_names = func_get_args();
 
-		// file path to be located
+		// file paths to be located
 		$locate_names = array();
+
+		// no prefix map by default
+		$prefix_map = null;
+
+		// prefixes map?
+		if ( !empty( $file_names ) ) {
+			if ( $file_names[0] instanceof Pie_Easy_Map ) {
+				$prefix_map = array_shift( $file_names );
+			}
+		}
+
+		// still have something?
+		if ( empty( $file_names ) ) {
+			return false;
+		}
 
 		// split all strings in case they contain a static directory separator
 		foreach ( $file_names as $file_name ) {
@@ -664,14 +683,42 @@ final class Pie_Easy_Scheme
 		// loop through stack TOP DOWN
 		foreach ( $this->themes->to_array(true) as $theme ) {
 
-			// path to stackfile
-			$stack_file =
-				$this->theme_dir( $theme ) . Pie_Easy_Files::path_build( $locate_names );
+			// build path to stackfile
+			$stack_file = $this->theme_dir( $theme );
+
+			// inject prefix?
+			if ( $prefix_map && $prefix_map->contains($theme) ) {
+				$stack_file .= DIRECTORY_SEPARATOR . $prefix_map->item_at($theme)->value;
+			}
+
+			// append requested path
+			$stack_file .= Pie_Easy_Files::path_build( $locate_names );
 
 			// does stack file exist?
 			if ( is_readable( $stack_file ) ) {
 				return $stack_file;
 			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Locate a theme image, giving priority to top themes in the stack
+	 *
+	 * @param string $file_names,... The file names that make up the RELATIVE path to the theme root
+	 * @return string|false
+	 */
+	public function locate_image()
+	{
+		// image root must be set
+		if ( $this->has_directive( self::DIRECTIVE_IMAGE_ROOT) ) {
+			// get all args
+			$args = func_get_args();
+			// image roots is first arg
+			array_unshift( $args, $this->get_directive_map( self::DIRECTIVE_IMAGE_ROOT ) );
+			// locate it
+			return call_user_func_array( array($this,'locate_file'), $args );
 		}
 
 		return false;
