@@ -37,4 +37,4 @@ We hope you enjoy it.
 
 If you wish to support us, the best way is to get involved in the community!
 
-Ok, enough talk... let's [get started](infinity://admin:ddoc/scheme)!
+Ok, enough talk... let's [get started](infinity://admin:doc/scheme)!
