@@ -192,6 +192,7 @@
 						message.fadeOut(200, function(){
 							panel.html(sr.content);
 							initOptionsPanel();
+							initDocPage();
 						});
 					} else {
 						// error
