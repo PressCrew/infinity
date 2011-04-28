@@ -22,7 +22,7 @@ final class Pie_Easy_Files
 {
 	/**
 	 * Split a path at forward '/' OR backward '\' slashes
-	 * 
+	 *
 	 * @param string $path
 	 * @return array
 	 */
@@ -155,7 +155,7 @@ final class Pie_Easy_Files
 	 * Return URL to a theme file
 	 *
 	 * @param string $theme
-	 * @param string $file_names,...
+	 * @param string|array $file_names,...
 	 */
 	static public function theme_file_url( $theme )
 	{
@@ -163,7 +163,29 @@ final class Pie_Easy_Files
 		$file_names = func_get_args();
 		array_shift($file_names);
 
+		// were file names passed as an array?
+		if ( is_array( current( $file_names ) ) ) {
+			$file_names = current( $file_names );
+		}
+
 		return self::theme_dir_url( $theme ) . '/' . implode( '/', $file_names );
+	}
+
+	/**
+	 * Return URL to a theme file given an absolute file system path
+	 *
+	 * @param string $file_path
+	 */
+	static public function theme_file_to_url( $file_path )
+	{
+		// convert path to be realtive to themes root
+		$relative_path = str_replace( get_theme_root(), '', $file_path );
+		// split it up
+		$file_names = self::path_split( $relative_path, DIRECTORY_SEPARATOR );
+		// theme is first arg, beautiful!
+		$theme = array_shift( $file_names );
+		// return as url
+		return self::theme_file_url( $theme, $file_names );
 	}
 }
 
