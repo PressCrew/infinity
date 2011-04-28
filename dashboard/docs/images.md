@@ -14,6 +14,8 @@ to duplicate the templates.
 This is where cascading images comes in. Another powerful Infinity innovation which allows
 extreme control over your theme hierarchy.
 
+<ul class="infinity-docs-menu"></ul>
+
 ### The Basics
 
 Your parent theme has this image root:
@@ -36,7 +38,7 @@ you would have code in your parent theme's template similar to this:
 
 	<img src="<?php infinity_image_url('banners/blue.jpg') ?>">
 
-### The power of cascading
+### The Power of Cascading
 
 Now, you wish to override this in your **child** theme and your **grandparent** theme is the
 one which is activated. Normally you would have to duplicate the template only to tweak the
