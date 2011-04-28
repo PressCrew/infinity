@@ -215,9 +215,15 @@ function infinity_dashboard_doc_filter_cb( $match )
 				case 'image':
 					return infinity_dashboard_image( $route );
 				case 'doc':
-					return infinity_dashboard_route( 'cpanel', 'docs', $route );
-				case 'ddoc':
 					return infinity_dashboard_route( 'cpanel', 'ddocs', $route );
+			}
+		case 'theme':
+			switch( $call_type ) {
+				case '':
+				case 'image':
+					return infinity_image_url( $route );
+				case 'doc':
+					return infinity_dashboard_route( 'cpanel', 'docs', $route );
 			}
 	}
 }

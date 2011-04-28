@@ -81,4 +81,4 @@ Any theme hierarchy which is **three or more** deep, including Infinity,
 must use some custom template tags in order for the template inheritance to work properly.
 
 > Full documentation for this can be found here:
-[Templating](infinity://admin:ddoc/install_tpls)
+[Templating](infinity://admin:doc/install_tpls)

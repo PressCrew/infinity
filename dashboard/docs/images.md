@@ -65,4 +65,4 @@ Be smart, use at your own risk, YMMV!
 
 ### Helper Functions
 
-Be sure to complete documentation on the [image cascading functions](infinity://admin:ddoc/images_funcs).
+Be sure to complete documentation on the [image cascading functions](infinity://admin:doc/images_funcs).

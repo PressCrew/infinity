@@ -1,7 +1,7 @@
 ## Configuration: Overview
 
 If you have not already successfully installed Infinity
-according the the [Installation](infinity://admin:ddoc/install_setup) page,
+according the the [Installation](infinity://admin:doc/install_setup) page,
 you might want to do that first to make this easier to follow.
 
 <ul class="infinity-docs-menu"></ul>
