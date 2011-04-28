@@ -67,9 +67,7 @@ function infinity_load_template( $template_name )
 function infinity_image_path( $path )
 {
 	// locate image in scheme stack
-	$image_path = Pie_Easy_Scheme::instance()->locate_image( $path );
-	// convert path to url
-	return ($image_path) ? Pie_Easy_Files::theme_file_to_url($image_path) : null;
+	return Pie_Easy_Scheme::instance()->locate_image( $path );
 }
 
 /**
@@ -80,7 +78,7 @@ function infinity_image_path( $path )
 function infinity_image_url( $path )
 {
 	// locate image in scheme stack
-	$image_path = infinity_get_image_path( $path );
+	$image_path = infinity_image_path( $path );
 	// convert path to url
 	return ($image_path) ? Pie_Easy_Files::theme_file_to_url($image_path) : null;
 }
