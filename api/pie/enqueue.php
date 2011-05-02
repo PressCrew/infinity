@@ -49,7 +49,7 @@ final class Pie_Easy_Enqueue
 		add_action( 'admin_print_styles', array($this, 'do_enqueue_styles') );
 		add_action( 'admin_print_scripts', array($this, 'do_enqueue_scripts') );
 	}
-	
+
 	/**
 	 * Return singleton instance
 	 *
@@ -101,7 +101,7 @@ final class Pie_Easy_Enqueue
 			return self::DEFAULT_UI_STYLE;
 		}
 	}
-	
+
 	/**
 	 * Register a PIE style
 	 *
@@ -162,7 +162,7 @@ final class Pie_Easy_Enqueue
 		}
 	}
 	*/
-	
+
 	/**
 	 * Enqueue all javascript source files in a directory
 	 *
@@ -234,6 +234,10 @@ final class Pie_Easy_Enqueue
 	 */
 	public function do_enqueue_scripts()
 	{
+		// register popular jQuery plugins
+		$this->register_script(
+			'jquery-cookie', 'jquery.cookie.js', array('jquery') );
+
 		// register default scripts
 		$this->register_script(
 			'pie-easy-global', 'global.js', array('jquery-ui-button') );
