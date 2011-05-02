@@ -33,7 +33,7 @@
 
 /* flash messaging helper */
 (function($){
-	
+
 	var methods = {
 		find: function()
 		{
@@ -115,6 +115,19 @@ pieEasyAjax = {
 			message: sr[1],
 			content: sr[2]
 		}
+	},
+	queryParam: function(p, s)
+	{
+		var i, q = s.split('?').pop().split('#').shift().split('&');
+
+		for (i in q) {
+			var pv = q[i].split('=');
+			if (pv[0] == p) {
+				return pv[1];
+			}
+		}
+
+		return null;
 	}
 };
 
