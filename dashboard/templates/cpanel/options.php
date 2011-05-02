@@ -1,7 +1,5 @@
 <div id="infinity-cpanel-options" class="ui-helper-clearfix">
-	<div class="infinity-cpanel-options-menu">
-		<?php infinity_options_render_menu( $menu_args ) ?>
-	</div>
+	<?php infinity_options_render_menu( $menu_args ) ?>
 	<div id="infinity-cpanel-options-content">
 		<div id="infinity-cpanel-options-flash">
 		</div>

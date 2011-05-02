@@ -21,20 +21,20 @@
 		$('a#infinity-cpanel-toolbar-about').button({icons: {primary: "ui-icon-info"}});
 
 		// cpanel menu buttons
-		$('li#infinity-cpanel-toolbar-menu-item-start a').button({icons: {primary: "ui-icon-power"}});
-		$('li#infinity-cpanel-toolbar-menu-item-options a').button({icons: {primary: "ui-icon-pencil"}});
-		$('li#infinity-cpanel-toolbar-menu-item-shortcodes a').button({icons: {primary: "ui-icon-copy"}});
-		$('li#infinity-cpanel-toolbar-menu-item-widgets a').button({icons: {primary: "ui-icon-gear"}});
-		$('li#infinity-cpanel-toolbar-menu-item-docs a').button({icons: {primary: "ui-icon-document"}});
-		$('li#infinity-cpanel-toolbar-menu-item-about a').button({icons: {primary: "ui-icon-info"}});
-		$('li#infinity-cpanel-toolbar-menu-item-devs a').button({icons: {primary: "ui-icon-wrench", secondary: "ui-icon-triangle-1-e"}});
-			$('li#infinity-cpanel-toolbar-menu-item-ddocs a').button({icons: {primary: "ui-icon-document"}});
-			$('li#infinity-cpanel-toolbar-menu-item-api a').button({icons: {primary: "ui-icon-note"}});
-			$('li#infinity-cpanel-toolbar-menu-item-repo a').button({icons: {primary: "ui-icon-link"}}).click(function(){alert('External Link');return false;});
-		$('li#infinity-cpanel-toolbar-menu-item-comm a').button({icons: {primary: "ui-icon-person",secondary: "ui-icon-triangle-1-e"}});
-			$('li#infinity-cpanel-toolbar-menu-item-news a').button({icons: {primary: "ui-icon-signal-diag"}});
-			$('li#infinity-cpanel-toolbar-menu-item-support a').button({icons: {primary: "ui-icon-help"}}).click(function(){alert('External Link');return false;});
-			$('li#infinity-cpanel-toolbar-menu-item-thanks a').button({icons: {primary: "ui-icon-heart"}});
+		$('a#infinity-cpanel-toolbar-menu-item-start').button({icons: {primary: "ui-icon-power"}});
+		$('a#infinity-cpanel-toolbar-menu-item-options').button({icons: {primary: "ui-icon-pencil"}});
+		$('a#infinity-cpanel-toolbar-menu-item-shortcodes').button({icons: {primary: "ui-icon-copy"}});
+		$('a#infinity-cpanel-toolbar-menu-item-widgets').button({icons: {primary: "ui-icon-gear"}});
+		$('a#infinity-cpanel-toolbar-menu-item-docs').button({icons: {primary: "ui-icon-document"}});
+		$('a#infinity-cpanel-toolbar-menu-item-about').button({icons: {primary: "ui-icon-info"}});
+		$('a#infinity-cpanel-toolbar-menu-item-devs').button({icons: {primary: "ui-icon-wrench", secondary: "ui-icon-triangle-1-e"}});
+			$('a#infinity-cpanel-toolbar-menu-item-ddocs').button({icons: {primary: "ui-icon-document"}});
+			$('a#infinity-cpanel-toolbar-menu-item-api').button({icons: {primary: "ui-icon-note"}});
+			$('a#infinity-cpanel-toolbar-menu-item-repo').button({icons: {primary: "ui-icon-link"}}).click(function(){alert('External Link');return false;});
+		$('a#infinity-cpanel-toolbar-menu-item-comm').button({icons: {primary: "ui-icon-person",secondary: "ui-icon-triangle-1-e"}});
+			$('a#infinity-cpanel-toolbar-menu-item-news').button({icons: {primary: "ui-icon-signal-diag"}});
+			$('a#infinity-cpanel-toolbar-menu-item-support').button({icons: {primary: "ui-icon-help"}}).click(function(){alert('External Link');return false;});
+			$('a#infinity-cpanel-toolbar-menu-item-thanks').button({icons: {primary: "ui-icon-heart"}});
 
 		// menus
 		$('a.infinity-cpanel-context-menu').each(function() {
@@ -98,7 +98,11 @@
 			add: function(event, ui) {
 				cpanel_t.tabs('select', '#' + ui.panel.id);
 			},
+			remove: function(event, ui) {
+				saveTab('rem', ui.tab);
+			},
 			select: function(event, ui) {
+				$.cookie('infinity_cpanel_tab_selected', ui.panel.id, {expires: 7});
 				tb_refresh.attr('href', $(ui.panel).data('infinity.href.loaded'));
 			}
 		}).find('.ui-tabs-nav').sortable({
@@ -112,7 +116,7 @@
 				if ( $(this).attr('target') ) {
 					return true;
 				} else {
-					load_tab(this);
+					loadTab(this);
 					return false;
 				}
 			}
@@ -127,12 +131,14 @@
 		});
 
 		// load content into a tab panel
-		function load_tab(anchor) {
-
+		function loadTab(anchor)
+		{
 			var $anchor = $(anchor);
 			var href = $anchor.attr('href');
 			var hash = $anchor.attr('hash');
 			var message = $('<div></div>');
+
+			saveTab('add', $anchor);
 
 			if ( !hash.length ) {
 				var panel_id = $('div.infinity-cpanel-tab:visible').attr('id');
@@ -204,6 +210,60 @@
 			);
 		}
 
+		// manage currently open tabs in a cookie
+		// valid cmds: 'get', 'add', 'rem'
+		function saveTab(cmd, a)
+		{
+			var $a = $(a);
+			var c = $.cookie('infinity_cpanel_tabs_open');
+			var t = (c) ? c.split('|') : [];
+			var i, id;
+
+			if (cmd == 'get') {
+				return t;
+			} else {
+				// must have a hash
+				if ($a.attr('hash')) {
+					id = $a.attr('hash').substr(1);
+				} else {
+					id = $a.closest('div.ui-tabs-panel').attr('id');
+					$a.attr('hash', id);
+				}
+				// remove anchor from tabs
+				for (i in t) {
+					if (t[i].split('#')[1] == id) {
+						t.splice(i, 1);
+						break;
+					}
+				}
+				// add it if applies
+				if (cmd == 'add') {
+					t.push($a.attr('href'));
+				}
+				// update cookie
+				return $.cookie('infinity_cpanel_tabs_open', t.join('|'), {expires: 7});
+			}
+		}
+
+		// load tabs on page load
+		function initTabs()
+		{
+			var t = saveTab('get'),
+				ts = $.cookie('infinity_cpanel_tab_selected');
+
+			if (t.length) {
+				for (i in t) {
+					loadTab($('<a></a>').attr('href', t[i]));
+				}
+				if (ts) {
+					cpanel_t.tabs('option', 'selected', ts);
+				}
+			} else {
+				// load start by default
+				loadTab(tb_start);
+			}
+		}
+
 		// init options panel
 		function initOptionsPanel()
 		{
@@ -212,18 +272,36 @@
 				return;
 			}
 
-			// cpanel options page menu
-			$('div.infinity-cpanel-options-menu').accordion({
+			// the option form
+			var form = $('div#infinity-cpanel-options form');
+			// the menu(s)
+			var menu = $('div.infinity-cpanel-options-menu');
+			// get last option loaded
+			var last = $.cookie('infinity_cpanel_option_loaded');
+
+			// setup accordion menu
+			menu.accordion({
 				autoHeight: false,
 				collapsible: true,
 				clearStyle: true,
 				icons: {
 					header: 'ui-icon-folder-collapsed',
 					headerSelected: 'ui-icon-folder-open'
+				},
+				change: function(event, ui) {
+					var states = [];
+					menu.each(function(){
+						var state = [
+							$(this).attr('id'),
+							$(this).accordion('option', 'active')
+						];
+						states.push(state.join(','));
+					});
+					$.cookie('infinity_cpanel_option_menu_states', states.join('|'), {expires: 7});
 				}
 			});
 
-			// cpanel options page show all options for section
+			// show all options for section
 			$('a.infinity-cpanel-options-menu-showall').button().click(function(){
 				return false;
 			});
@@ -231,63 +309,86 @@
 			// cpanel options page menu item clicks
 			$('div.infinity-cpanel-options-menu a.infinity-cpanel-options-menu-show').bind('click',
 				function(){
-					// null vars
-					var option, section;
-					// the form
-					var form = $('div#infinity-cpanel-options form').empty();
-					// option or section?
-					if ($(this).hasClass('infinity-cpanel-options-menu-showall')) {
-						section = $(this).attr('href').substr(1);
-					} else {
-						option = $(this).attr('href').substr(1);
-					}
-					// message element
-					var message =
-						$('div#infinity-cpanel-options-flash')
-							.pieEasyFlash('loading', 'Loading option editor.')
-							.fadeIn();
-					// send request for option screen
-					$.post(
-						InfinityOptionsL10n.ajax_url,
-						{
-							'action': 'infinity_options_screen',
-							'option_name': option,
-							'section_name': section,
-							'pie_easy_options_blog_id': InfinityOptionsL10n.blog_id,
-							'pie_easy_options_blog_theme': InfinityOptionsL10n.blog_theme
-						},
-						function(r) {
-							var sr = pieEasyAjax.splitResponseStd(r);
-							if (sr.code >= 1) {
-								// inject options markup
-								form.html(sr.content);
-								// init uploaders
-								$('div.pie-easy-options-fu').each(function(){
-									$(this).pieEasyUploader();
-								});
-								// init docs
-								initDocPage();
-								// init option reqs
-								$('div.infinity-cpanel-options-single').each(function(){
-									option_init(this);
-								});
-								// remove message
-								message.fadeOut().empty();
-							} else {
-								// error
-								message.fadeOut(300, function(){
-									message.pieEasyFlash('error', sr.content).fadeIn();
-								})
-							}
-						}
-					);
+					optionLoad($(this).attr('id'));
 					return false;
 				}
 			);
 
-			// init an option
-			function option_init(option) {
+			// populate form if empty
+			if (form.children().length < 1 && last) {
+				// get states from cookie
+				var om_states = $.cookie('infinity_cpanel_option_menu_states').split('|');
+				// activate menus that were open
+				if (om_states.length) {
+					var om_state_idx, om_state_cur, om_state_menu, om_state_act, om_state_new;
+					for (om_state_idx in om_states) {
+						om_state_cur = om_states[om_state_idx].split(',');
+						om_state_menu = $('#' + om_state_cur[0]);
+						om_state_act = om_state_menu.accordion('option', 'active');
+						om_state_new = ('false' == om_state_cur[1]) ? false : Number(om_state_cur[1]);
+						if (om_state_act !== om_state_new) {
+							om_state_menu.accordion('activate', om_state_new);
+						}
+					}
+				}
+				// load last option
+				optionLoad(last);
+			}
 
+			// load option screen
+			function optionLoad(id)
+			{
+				// what to load?
+				var load = id.split('___');
+				// message element
+				var message =
+					$('div#infinity-cpanel-options-flash')
+						.pieEasyFlash('loading', 'Loading option editor.')
+						.fadeIn();
+				// empty the form
+				form.empty();
+				// send request for option screen
+				$.post(
+					InfinityOptionsL10n.ajax_url,
+					{
+						'action': 'infinity_options_screen',
+						'load_type': load[0],
+						'load_name': load[1],
+						'pie_easy_options_blog_id': InfinityOptionsL10n.blog_id,
+						'pie_easy_options_blog_theme': InfinityOptionsL10n.blog_theme
+					},
+					function(r) {
+						var sr = pieEasyAjax.splitResponseStd(r);
+						if (sr.code >= 1) {
+							// save as last option screen
+							$.cookie('infinity_cpanel_option_loaded', id, {expires: 7});
+							// inject options markup
+							form.html(sr.content);
+							// init uploaders
+							$('div.pie-easy-options-fu').each(function(){
+								$(this).pieEasyUploader();
+							});
+							// init docs
+							initDocPage();
+							// init option reqs
+							$('div.infinity-cpanel-options-single').each(function(){
+								optionInit(this);
+							});
+							// remove message
+							message.fadeOut().empty();
+						} else {
+							// error
+							message.fadeOut(300, function(){
+								message.pieEasyFlash('error', sr.content).fadeIn();
+							})
+						}
+					}
+				);
+			}
+
+			// init an option
+			function optionInit(option)
+			{
 				var $option = $(option);
 
 				// tabs
@@ -342,7 +443,7 @@
 		function initDocPage()
 		{
 			// recursive menu builder
-			function build_menu(menu, els_head, anchor)
+			function buildDocMenu(menu, els_head, anchor)
 			{
 				var filter, did_one;
 
@@ -367,7 +468,7 @@
 					// next level headers
 					var next = $(this).nextUntil(this.tagName).filter(filter);
 					// build sub
-					if ( build_menu(item_s, next, anchor) ) {
+					if ( buildDocMenu(item_s, next, anchor) ) {
 						item.append(item_s);
 					}
 					// yay
@@ -380,14 +481,14 @@
 			$('div.infinity-docs').each(function(){
 				var menu = $('ul.infinity-docs-menu', this);
 				var headers = $('h3', this);
-				build_menu(menu, headers, 1);
+				buildDocMenu(menu, headers, 1);
 			});
 		}
 
 		// initial load
 		if ( cpanel.length ) {
-			// load start page by default
-			load_tab(tb_start);
+			// initialize tabs
+			initTabs();
 		} else {
 			// init options in case they are displayed on page load
 			initOptionsPanel();

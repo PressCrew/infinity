@@ -330,10 +330,15 @@ function infinity_options_render_menu( $args = null )
 	// get only "root" sections
 	$sections = $registry->get_root_sections( $get_sections );
 
+	// begin rendering ?>
+	<div id="menu___root" class="infinity-cpanel-options-menu"><?php
+
 	// loop through fetched sections and render
 	foreach ( $sections as $section ) {
 		infinity_options_render_menu_section( $registry, $section );
-	}
+	}?>
+
+	</div><?php
 }
 
 /**
@@ -356,14 +361,14 @@ function infinity_options_render_menu_section( Infinity_Options_Registry $regist
 	}
 
 	// begin rendering ?>
-	<div>
+	<div id="menu___<?php print esc_attr( $section->name ) ?>">
 		<a><?php print esc_html( $section->title ) ?></a>
-		<a href="#<?php print esc_attr( $section->name ) ?>" class="infinity-cpanel-options-menu-show infinity-cpanel-options-menu-showall">Show All</a>
+		<a id="section___<?php print esc_attr( $section->name ) ?>" class="infinity-cpanel-options-menu-show infinity-cpanel-options-menu-showall" href="#">Show All</a>
 	</div><?php
 
 	if ( $children ) {
 		// render all children sections ?>
-		<div><div class="infinity-cpanel-options-menu infinity-cpanel-options-submenu"><?php
+		<div><div id="submenu___<?php print esc_attr( $section->name ) ?>" class="infinity-cpanel-options-menu infinity-cpanel-options-submenu"><?php
 			foreach ( $children as $child ) {
 				infinity_options_render_menu_section( $registry, $child );
 			}?>
@@ -385,7 +390,7 @@ function infinity_options_render_menu_options( $options )
 	// begin rendering ?>
 	<ul><?php
 	foreach( $options as $option ) { ?>
-		<li><a href="#<?php print esc_attr( $option->name ) ?>" class="infinity-cpanel-options-menu-show"><?php print esc_html( $option->title ) ?></a></li><?php
+		<li><a id="option___<?php print esc_attr( $option->name ) ?>" class="infinity-cpanel-options-menu-show" href="#"><?php print esc_html( $option->title ) ?></a></li><?php
 	}?>
 	</ul><?php
 }
@@ -397,6 +402,20 @@ function infinity_options_render_menu_options( $options )
  */
 function infinity_options_render_options_screen()
 {
+	// load type
+	if ( !empty($_POST['load_type']) ) {
+		$load_type = $_POST['load_type'];
+	} else {
+		Pie_Easy_Ajax::responseStd( false, 'Missing required "load_type" parameter' );
+	}
+
+	// load name
+	if ( !empty($_POST['load_name']) ) {
+		$load_name = $_POST['load_name'];
+	} else {
+		Pie_Easy_Ajax::responseStd( false, 'Missing requried "load_name" parameter' );
+	}
+
 	// switch blog?
 	if ( !empty($_POST[Pie_Easy_Options_Registry::PARAM_BLOG_ID]) ) {
 		switch_to_blog( $_POST[Pie_Easy_Options_Registry::PARAM_BLOG_ID] );
@@ -412,27 +431,35 @@ function infinity_options_render_options_screen()
 	// options to render
 	$options = array();
 
+	// populate options array
+	switch( $load_type ) {
+		// load all options in a section
+		case 'section':
+			// look up section
+			$section = Infinity_Options_Registry::instance($theme)->get_section( $load_name );
+			// did we get a valid section?
+			if ( $section instanceof Pie_Easy_Options_Section ) {
+				// get all options for this section
+				$options = Infinity_Options_Registry::instance($theme)->get_menu_options( $section );
+			}
+			break;
+		// load a single option
+		case 'option':
+			// look up the single option
+			$option = Infinity_Options_Registry::instance($theme)->get_option( $load_name );
+			// did we get a valid option?
+			if ( $option instanceof Pie_Easy_Options_Option ) {
+				// add it to options to array
+				$options[] = $option;
+			}
+			break;
+		// unknown load type
+		default:
+			Pie_Easy_Ajax::responseStd( false, sprintf( 'The load type "%s" is invalid', $load_type ) );
+	}
+
 	// content to return
 	$content = null;
-
-	// try to populate options array
-	if ( !empty( $_POST['option_name'] ) ) {
-		// look up the single option
-		$option = Infinity_Options_Registry::instance($theme)->get_option( $_POST['option_name'] );
-		// did we get a valid option?
-		if ( $option instanceof Pie_Easy_Options_Option ) {
-			// add it to options to array
-			$options[] = $option;
-		}
-	} elseif ( !empty( $_POST['section_name'] ) ) {
-		// look up section
-		$section = Infinity_Options_Registry::instance($theme)->get_section( $_POST['section_name'] );
-		// did we get a valid section?
-		if ( $section instanceof Pie_Easy_Options_Section ) {
-			// get all options for this section
-			$options = Infinity_Options_Registry::instance($theme)->get_menu_options( $section );
-		}
-	}
 
 	// loop through all options and render each one
 	foreach ( $options as $option_to_render ) {
