@@ -62,6 +62,7 @@
 			<a id="infinity-cpanel-toolbar-docs" href="<?php print infinity_dashboard_route( 'cpanel', 'docs' ) ?>#infinity-cpanel-tab-docs" title="<?php _e( 'User Docs', INFINITY_TEXT_DOMAIN ) ?>"><?php _e( 'User Docs', INFINITY_TEXT_DOMAIN ) ?></a>
 			<a id="infinity-cpanel-toolbar-about" href="<?php print infinity_dashboard_route( 'cpanel', 'about' ) ?>#infinity-cpanel-tab-about" title="<?php _e( 'About', INFINITY_TEXT_DOMAIN ) ?>"><?php _e( 'About', INFINITY_TEXT_DOMAIN ) ?></a>
 			<a id="infinity-cpanel-toolbar-refresh" title="<?php _e( 'Refresh current tab', INFINITY_TEXT_DOMAIN ) ?>"><?php _e( 'Refresh', INFINITY_TEXT_DOMAIN ) ?></a>
+			<input id="infinity-cpanel-toolbar-scroll" type="checkbox" /><label for="infinity-cpanel-toolbar-scroll" title="<?php _e( 'Toggle scroll bars on/off', INFINITY_TEXT_DOMAIN ) ?>">Scrolling</label>
 		</div>
 		<div id="infinity-cpanel-tabs">
 			<ul><!-- tabs are injected here --></ul>

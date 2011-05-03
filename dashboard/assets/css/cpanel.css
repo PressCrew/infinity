@@ -4,8 +4,9 @@
 
 div#infinity-cpanel {
 	position: relative;
-	min-width: 650px;
-	min-height: 400px;
+	overflow: hidden;
+	min-width: 1000px;
+	min-height: 600px;
 	margin: 25px 0 20px 0;
     padding: 20px 0 10px 0;
 	border: 1px solid #dddddd;
@@ -75,14 +76,17 @@ div#infinity-cpanel-toolbar {
 		a#infinity-cpanel-toolbar-menu .ui-button-text {
 			font-size: 14px;
 		}
-	a#infinity-cpanel-toolbar-refresh.ui-button {
+	a#infinity-cpanel-toolbar-refresh.ui-button,
+	input#infinity-cpanel-toolbar-scroll + label.ui-button {
 		float: right;
 		top: 12px;
 		right: 8px;
 		padding: 0;
 	}
-		a#infinity-cpanel-toolbar-refresh.ui-button .ui-button-text {
+		a#infinity-cpanel-toolbar-refresh.ui-button .ui-button-text,
+		input#infinity-cpanel-toolbar-scroll + label.ui-button .ui-button-text {
 			font-size: 12px;
+			padding-left: 20px;
 		}
 	div#infinity-cpanel-toolbar .ui-menu {
 		position: absolute;
@@ -126,7 +130,11 @@ div#infinity-cpanel-tabs {
 		-moz-border-radius: 0 0 8px 8px;
 		-webkit-border-radius: 0 0 8px 8px;
 		background: #f4f4f4;
+		overflow: hidden;
 	}
+		div#infinity-cpanel-tabs div.infinity-cpanel-tab.infinity-cpanel-tab-scroll {
+			overflow: auto;
+		}
 	div#infinity-cpanel-tabs div.infinity-docs {
 		padding: 0 1.5em 1.5em 1.5em;
 	}

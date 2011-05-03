@@ -12,6 +12,18 @@
 			$('a#infinity-cpanel-toolbar-refresh')
 				.button({icons: {primary: "ui-icon-refresh"}})
 				.attr('href', tb_start.attr('href'));
+		var tb_scroll =
+			$('input#infinity-cpanel-toolbar-scroll')
+				.button({
+					icons: {primary: "ui-icon-arrow-2-n-s"},
+					create: function(event, ui){
+						if (Boolean(Number($.cookie('infinity_cpanel_scroll')))) {
+							$(this).attr('checked', 'checked').button('refresh');
+						}
+					}
+				}).click(function() {
+					initScroll();
+				});
 
 		// more toolbar buttons
 		$('a#infinity-cpanel-toolbar-options').button({icons: {primary: "ui-icon-pencil"}});
@@ -88,7 +100,13 @@
 		});
 
 		// cpanel elements
-		var cpanel = $('div#infinity-cpanel');
+		var cpanel = $('div#infinity-cpanel').resizable(
+			{
+				minWidth: 1000,
+				minHeight: 600,
+				alsoResize: 'div.infinity-cpanel-tab'
+			}
+		);
 		var cpanel_t = $('div#infinity-cpanel-tabs', cpanel);
 
 		// init cpanel tabs
@@ -104,6 +122,9 @@
 			select: function(event, ui) {
 				$.cookie('infinity_cpanel_tab_selected', ui.panel.id, {expires: 7});
 				tb_refresh.attr('href', $(ui.panel).data('infinity.href.loaded'));
+			},
+			show: function(event, ui) {
+				initScroll($(ui.panel));
 			}
 		}).find('.ui-tabs-nav').sortable({
 			cursor: 'move',
@@ -128,6 +149,12 @@
 			var index = $(this).siblings('a').first().attr('href').substring(1);
 			cpanel_t.tabs( "remove", index );
 			return false;
+		});
+
+		// scroll cpanel tab
+		tb_scroll.click(function()
+		{
+
 		});
 
 		// load content into a tab panel
@@ -243,6 +270,37 @@
 				// update cookie
 				return $.cookie('infinity_cpanel_tabs_open', t.join('|'), {expires: 7});
 			}
+		}
+
+		// show scroll bars
+		function initScroll(panel)
+		{
+			var checked = (tb_scroll.attr('checked'));
+
+			if (!panel) {
+				panel = cpanel_t.find('div.infinity-cpanel-tab:visible');
+			}
+
+			panel.toggleClass('infinity-cpanel-tab-scroll', checked);
+			$.cookie('infinity_cpanel_scroll', Number(checked), {expires: 7});
+
+			if (checked == true) {
+				// calc heights
+				var cp_ot = cpanel.offset().top;
+				var cp_hc = ($(window).height() - cp_ot) * 0.9;
+				var tp_ot, tp_hc;
+				// update heights
+				tp_ot = panel.offset().top;
+				tp_hc = cp_hc - (tp_ot - cp_ot);
+				cpanel.css({'height': cp_hc});
+				panel.css({'height': tp_hc - 10});
+			} else {
+				// kill heights
+				cpanel.css({'height': null});
+				panel.css({'height': null});
+			}
+
+
 		}
 
 		// load tabs on page load
