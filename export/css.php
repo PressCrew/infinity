@@ -10,6 +10,9 @@
  * @since 1.0
  */
 
+// set content type
+header('Content-Type: text/css');
+
 // last modified
 if ( array_key_exists( 'ver', $_GET ) ) {
 	$last_modified = (integer) trim( $_GET['ver'] );
