@@ -215,7 +215,7 @@
 
 			// get content for the tab
 			$.post(
-				ajaxurl + '?' + href.split('?').pop(),
+				ajaxurl + '?' + href.split('?').pop().split('#').shift(),
 				{'action': 'infinity_tabs_content'},
 				function(r) {
 					var sr = pieEasyAjax.splitResponseStd(r);
@@ -296,11 +296,9 @@
 				panel.css({'height': tp_hc - 10});
 			} else {
 				// kill heights
-				cpanel.css({'height': null});
-				panel.css({'height': null});
+				cpanel.height('auto');
+				panel.height('auto');
 			}
-
-
 		}
 
 		// load tabs on page load
@@ -375,17 +373,22 @@
 			// populate form if empty
 			if (form.children().length < 1 && last) {
 				// get states from cookie
-				var om_states = $.cookie('infinity_cpanel_option_menu_states').split('|');
-				// activate menus that were open
-				if (om_states.length) {
-					var om_state_idx, om_state_cur, om_state_menu, om_state_act, om_state_new;
-					for (om_state_idx in om_states) {
-						om_state_cur = om_states[om_state_idx].split(',');
-						om_state_menu = $('#' + om_state_cur[0]);
-						om_state_act = om_state_menu.accordion('option', 'active');
-						om_state_new = ('false' == om_state_cur[1]) ? false : Number(om_state_cur[1]);
-						if (om_state_act !== om_state_new) {
-							om_state_menu.accordion('activate', om_state_new);
+				var om_states = $.cookie('infinity_cpanel_option_menu_states');
+				// get the cookie?
+				if (om_states != null) {
+					// split at pipe
+					om_states = om_states.split('|');
+					// activate menus that were open
+					if (om_states.length) {
+						var om_state_idx, om_state_cur, om_state_menu, om_state_act, om_state_new;
+						for (om_state_idx in om_states) {
+							om_state_cur = om_states[om_state_idx].split(',');
+							om_state_menu = $('#' + om_state_cur[0]);
+							om_state_act = om_state_menu.accordion('option', 'active');
+							om_state_new = ('false' == om_state_cur[1]) ? false : Number(om_state_cur[1]);
+							if (om_state_act !== om_state_new) {
+								om_state_menu.accordion('activate', om_state_new);
+							}
 						}
 					}
 				}
