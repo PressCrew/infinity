@@ -53,7 +53,7 @@ abstract class Pie_Easy_Options_Option
 	 * Name of the default section
 	 */
 	const DEFAULT_SECTION = 'default';
-	
+
 	/**#@+
 	 * Field type enumeration
 	 */
@@ -75,14 +75,14 @@ abstract class Pie_Easy_Options_Option
 	const FIELD_TEXTBLOCK = 'textblock';
 	const FIELD_UPLOAD = 'upload';
 	/**#@-*/
-	
+
 	/**
 	 * The theme that created this option
-	 * 
-	 * @var string 
+	 *
+	 * @var string
 	 */
 	private $theme;
-	
+
 	/**
 	 * Name of the option
 	 *
@@ -104,7 +104,7 @@ abstract class Pie_Easy_Options_Option
 
 	/**
 	 * If true, a POST value will override the real option value
-	 * 
+	 *
 	 * @var boolean
 	 */
 	private $post_override = false;
@@ -123,12 +123,12 @@ abstract class Pie_Easy_Options_Option
 		if ( preg_match( '/^[a-z0-9]+(_[a-z0-9]+)*$/', $name ) ) {
 			$this->name = $name;
 		} else {
-			throw new Exception( 'Option name does not match the allowed pattern.' );
+			throw new Exception( 'Option name does not match the allowed pattern' );
 		}
 
 		// init directives map
 		$this->directives = new Pie_Easy_Map();
-		
+
 		// set basic string properties
 		$this->theme = $theme;
 
@@ -228,7 +228,7 @@ abstract class Pie_Easy_Options_Option
 				}
 			}
 		}
-		
+
 		return false;
 	}
 
@@ -275,7 +275,7 @@ abstract class Pie_Easy_Options_Option
 	 * Get the attachment image source details
 	 *
 	 * Returns an array with attachment details
-	 * 
+	 *
 	 * <code>
 	 * Array (
 	 *   [0] => url
@@ -372,7 +372,7 @@ abstract class Pie_Easy_Options_Option
 				return false;
 			}
 		}
-		
+
 		return true;
 	}
 
@@ -392,7 +392,7 @@ abstract class Pie_Easy_Options_Option
 
 	/**
 	 * Check if field type is valid
-	 * 
+	 *
 	 * @param string $type
 	 * @return boolean
 	 */
@@ -424,7 +424,7 @@ abstract class Pie_Easy_Options_Option
 
 	/**
 	 * Set a directive
-	 * 
+	 *
 	 * @param string $name
 	 * @param mixed $value
 	 * @param boolean $read_only
@@ -451,7 +451,7 @@ abstract class Pie_Easy_Options_Option
 
 	/**
 	 * Set the field type of this option
-	 * 
+	 *
 	 * @param string $type
 	 * @return boolean
 	 */
@@ -467,7 +467,7 @@ abstract class Pie_Easy_Options_Option
 			// done
 			return true;
 		} else {
-			throw new Exception( sprintf( 'The "%s" field type is not valid.', $type ) );
+			throw new Exception( sprintf( 'The "%s" field type is not valid', $type ) );
 		}
 	}
 
@@ -493,7 +493,7 @@ abstract class Pie_Easy_Options_Option
 
 	/**
 	 * Set the field options for this option
-	 * 
+	 *
 	 * @param array $field_options
 	 */
 	public function set_field_options( $field_options )

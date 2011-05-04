@@ -75,7 +75,7 @@ class Pie_Easy_Scheme_Enqueue
 
 	/**
 	 * Initialize the enqueuer by passing a valid PIE scheme object
-	 * 
+	 *
 	 * @param Pie_Easy_Scheme $scheme
 	 */
 	public function __construct( Pie_Easy_Scheme $scheme )
@@ -90,7 +90,7 @@ class Pie_Easy_Scheme_Enqueue
 		if ( $this->script_domain instanceof Pie_Easy_Scheme_Directive ) {
 			add_action( self::ACTION_HANDLER_SCRIPTS, array( $this, 'handle_script_domain' ) );
 		}
-		
+
 		// init styles maps
 		$this->styles = new Pie_Easy_Map();
 		$this->styles_ignore = new Pie_Easy_Stack();
@@ -112,7 +112,7 @@ class Pie_Easy_Scheme_Enqueue
 
 			// init style depends
 			$this->depends( $this->styles, Pie_Easy_Scheme::DIRECTIVE_STYLE_DEPS );
-			
+
 			// init style triggers
 			$this->triggers( $this->styles, Pie_Easy_Scheme::DIRECTIVE_STYLE_ACTS, self::TRIGGER_ACTS );
 			$this->triggers( $this->styles, Pie_Easy_Scheme::DIRECTIVE_STYLE_CONDS, self::TRIGGER_CONDS );
@@ -129,7 +129,7 @@ class Pie_Easy_Scheme_Enqueue
 
 		// define scripts
 		if ( $this->define( $this->scripts, $script_defs ) ) {
-			
+
 			// hook up scripts always handler
 			add_action( self::ACTION_HANDLER_SCRIPTS, array( $this, 'handle_script_always' ) );
 
@@ -219,7 +219,7 @@ class Pie_Easy_Scheme_Enqueue
 	 * @return boolean
 	 */
 	private function define( Pie_Easy_Map $map, Pie_Easy_Map $directive_map )
-	{		
+	{
 		// loop through and populate trigger map
 		foreach ( $directive_map as $theme => $directive ) {
 
@@ -258,7 +258,7 @@ class Pie_Easy_Scheme_Enqueue
 
 		return true;
 	}
-	
+
 	/**
 	 * Set dependancies for specified directives.
 	 *
@@ -359,7 +359,7 @@ class Pie_Easy_Scheme_Enqueue
 								throw new Exception( 'Invalid parameter syntax' );
 							}
 						}
-						
+
 						// split handles at delimeter
 						$handles = explode( self::ITEM_DELIM, $handles );
 
@@ -374,10 +374,10 @@ class Pie_Easy_Scheme_Enqueue
 
 							// does trigger handle exist?
 							if ( $map->item_at( $handle ) ) {
-								
+
 								// remove trigger's always toggle
 								$map->item_at($handle)->add(self::TRIGGER_ALWAYS, false);
-								
+
 								// push onto trigger's trigger stack
 								$map->item_at($handle)->item_at($trigger_type)->push($action);
 
@@ -430,16 +430,16 @@ class Pie_Easy_Scheme_Enqueue
 			case Pie_Easy_Scheme::DIRECTIVE_SCRIPT_CONDS:
 				return self::ACTION_HANDLER_SCRIPTS;
 			default:
-				throw new Exception('That directive does not have a handler action.');
+				throw new Exception( 'That directive does not have a handler action' );
 		}
 	}
 
 	/**
 	 * Determine path to enqueue
-	 * 
+	 *
 	 * @param string $theme
 	 * @param string $path
-	 * @return string 
+	 * @return string
 	 */
 	private function enqueue_path( $theme, $path )
 	{
@@ -461,7 +461,7 @@ class Pie_Easy_Scheme_Enqueue
 		if ( $this->styles_ignore->contains( $handle ) ) {
 			return;
 		}
-		
+
 		// reg it
 		wp_register_style(
 			$handle,

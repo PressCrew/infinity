@@ -170,7 +170,7 @@ class Infinity_Options_Option_Renderer extends Pie_Easy_Options_Option_Renderer
 		<div class="<?php $this->render_classes( 'infinity-cpanel-options-single' ) ?>">
 			<div class="infinity-cpanel-options-single-header">
 				<?php $this->render_label() ?>
-				<a class="infinity-cpanel-options-save" href="#">Save All</a>
+				<a class="infinity-cpanel-options-save" href="#"><?php _e('Save All', infinity_text_domain) ?></a>
 				<?php if ( $this->do_save_single_button() ): ?>
 					<a class="infinity-cpanel-options-save" href="#<?php $this->render_name() ?>">Save</a>
 				<?php endif; ?>
@@ -179,19 +179,19 @@ class Infinity_Options_Option_Renderer extends Pie_Easy_Options_Option_Renderer
 				<!-- flash messages for this option will render here -->
 			</div>
 			<ul>
-				<li><a href="#<?php $this->render_name() ?>-tabs-1">Edit Setting</a></li>
+				<li><a href="#<?php $this->render_name() ?>-tabs-1"><?php _e('Edit Setting', infinity_text_domain) ?></a></li>
 				<?php if ( $this->has_documentation() ): ?>
-				<li><a href="#<?php $this->render_name() ?>-tabs-2">Documentation</a></li>
+				<li><a href="#<?php $this->render_name() ?>-tabs-2"><?php _e('Documentation', infinity_text_domain) ?></a></li>
 				<?php endif; ?>
 				<?php if ( is_admin() ): ?>
-				<li><a href="#<?php $this->render_name() ?>-tabs-3">Sample Code</a></li>
+				<li><a href="#<?php $this->render_name() ?>-tabs-3"><?php _e('Sample Code', infinity_text_domain) ?></a></li>
 				<?php endif; ?>
 			</ul>
 			<div id="<?php $this->render_name() ?>-tabs-1">
 				<p><?php $this->render_description() ?></p>
 				<?php $this->render_field() ?>
 				<div class="infinity-cpanel-options-last-modified">
-					Last Modified: <?php echo $this->render_date_updated() ?>
+					<?php _e('Last Modified:', infinity_text_domain) ?> <?php echo $this->render_date_updated() ?>
 				</div>
 			</div>
 			<?php if ( $this->has_documentation() ): ?>
@@ -363,7 +363,7 @@ function infinity_options_render_menu_section( Infinity_Options_Registry $regist
 	// begin rendering ?>
 	<div id="menu___<?php print esc_attr( $section->name ) ?>">
 		<a><?php print esc_html( $section->title ) ?></a>
-		<a id="section___<?php print esc_attr( $section->name ) ?>" class="infinity-cpanel-options-menu-show infinity-cpanel-options-menu-showall" href="#">Show All</a>
+		<a id="section___<?php print esc_attr( $section->name ) ?>" class="infinity-cpanel-options-menu-show infinity-cpanel-options-menu-showall" href="#"><?php _e('Show All', infinity_text_domain) ?></a>
 	</div><?php
 
 	if ( $children ) {
@@ -474,7 +474,7 @@ function infinity_options_render_options_screen()
 	if ( strlen($content) ) {
 		Pie_Easy_Ajax::responseStd( true, null, $content );
 	} else {
-		Pie_Easy_Ajax::responseStd( false, 'Failed to render options' );
+		Pie_Easy_Ajax::responseStd( false, __('Failed to render options', infinity_text_domain) );
 	}
 
 }

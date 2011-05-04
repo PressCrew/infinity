@@ -84,7 +84,7 @@ class Pie_Easy_Stack implements IteratorAggregate,Countable
 				++$this->count;
 			}
 		} elseif ( $data !== null ) {
-			throw new Exception( 'Stack data must be an array or an object implementing Traversable.' );
+			throw new Exception( 'Stack data must be an array or an object implementing Traversable' );
 		}
 	}
 
@@ -99,9 +99,9 @@ class Pie_Easy_Stack implements IteratorAggregate,Countable
 
 	/**
 	 * Check whether the stack contains an item
-	 * 
+	 *
 	 * @param mixed The item
-	 * @return boolean 
+	 * @return boolean
 	 */
 	public function contains( $item )
 	{
@@ -110,9 +110,9 @@ class Pie_Easy_Stack implements IteratorAggregate,Countable
 
 	/**
 	 * Returns the item at the top of the stack.
-	 * 
+	 *
 	 * Unlike pop() this method does not remove the item from the stack.
-	 * 
+	 *
 	 * @return mixed Item at the top of the stack
 	 * @throws Exception if the stack is empty
 	 */
@@ -121,13 +121,13 @@ class Pie_Easy_Stack implements IteratorAggregate,Countable
 		if ( $this->count ) {
 			return $this->data[$this->count - 1];
 		} else {
-			throw new Exception( 'The stack is empty.' );
+			throw new Exception( 'The stack is empty' );
 		}
 	}
 
 	/**
 	 * Pops up the item at the top of the stack.
-	 * 
+	 *
 	 * @return mixed The item at the top of the stack
 	 * @throws Exception if the stack is empty
 	 */
@@ -137,19 +137,19 @@ class Pie_Easy_Stack implements IteratorAggregate,Countable
 			--$this->count;
 			return array_pop($this->data);
 		} else {
-			throw new Exception( 'The stack is empty.' );
+			throw new Exception( 'The stack is empty' );
 		}
 	}
 
 	/**
 	 * Pushes an item into the stack.
-	 * 
+	 *
 	 * @param mixed $item The item to be pushed into the stack
 	 */
 	public function push( $item, $prepend = false )
 	{
 		++$this->count;
-		
+
 		if ( $prepend ) {
 			array_unshift( $this->data, $item );
 		} else {
@@ -159,8 +159,8 @@ class Pie_Easy_Stack implements IteratorAggregate,Countable
 
 	/**
 	 * The number of items in the stack
-	 * 
-	 * @return integer 
+	 *
+	 * @return integer
 	 */
 	public function count()
 	{

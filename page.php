@@ -27,8 +27,8 @@ infinity_get_header(); ?>
 
 					<div class="entry-content">
 						<?php the_content(); ?>
-						<?php wp_link_pages( array( 'before' => '<div class="page-link">' . __( 'Pages:', INFINITY_TEXT_DOMAIN ), 'after' => '</div>' ) ); ?>
-						<?php edit_post_link( __( 'Edit', INFINITY_TEXT_DOMAIN ), '<span class="edit-link">', '</span>' ); ?>
+						<?php wp_link_pages( array( 'before' => '<div class="page-link">' . __( 'Pages:', infinity_text_domain ), 'after' => '</div>' ) ); ?>
+						<?php edit_post_link( __( 'Edit', infinity_text_domain ), '<span class="edit-link">', '</span>' ); ?>
 					</div><!-- .entry-content -->
 				</div><!-- #post-## -->
 

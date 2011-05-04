@@ -28,6 +28,18 @@ define( 'PIE_EASY_VERSION', '1.0' );
  */
 define( 'PIE_EASY_DIR', dirname( __FILE__ ) );
 /**
+ * PIE text domain
+ */
+define( 'PIE_EASY_TEXT_DOMAIN', 'pie_easy_text' );
+/**
+ * PIE text domain shorthand (for code completion purposes)
+ */
+define( 'pie_easy_text', PIE_EASY_TEXT_DOMAIN );
+/**
+ * PIE languages directory
+ */
+define( 'PIE_EASY_LANGUAGES_DIR', PIE_EASY_DIR . DIRECTORY_SEPARATOR . 'languages' );
+/**
  * PIE vendors library directory
  */
 define( 'PIE_EASY_VENDORS_DIR', PIE_EASY_DIR . DIRECTORY_SEPARATOR . 'vendors' );
@@ -42,11 +54,11 @@ final class Pie_Easy_Loader
 {
 	/**
 	 * Singleton instance
-	 * 
+	 *
 	 * @var Pie_Easy_Loader
 	 */
 	private static $instance;
-	
+
 	/**
 	 * Available features
 	 *
@@ -96,6 +108,9 @@ final class Pie_Easy_Loader
 			define( 'PIE_EASY_IMAGES_URL', PIE_EASY_ASSETS_URL . '/images' );
 			define( 'PIE_EASY_JS_URL', PIE_EASY_ASSETS_URL . '/js' );
 
+			// setup i18n
+			load_theme_textdomain( 'pie-easy-api', PIE_EASY_LANGUAGES_DIR );
+
 			// create singleton instance
 			self::$instance = new self();
 
@@ -122,7 +137,7 @@ final class Pie_Easy_Loader
 			self::$instance->load_feature( $feature );
 		}
 	}
-	
+
 	/**
 	 * Load a single feature
 	 *

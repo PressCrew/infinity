@@ -23,14 +23,14 @@
 			</li>
 
 			<li id="archives" class="widget-container">
-				<h3 class="widget-title"><?php _e( 'Archives', INFINITY_TEXT_DOMAIN ); ?></h3>
+				<h3 class="widget-title"><?php _e( 'Archives', infinity_text_domain ); ?></h3>
 				<ul>
 					<?php wp_get_archives( 'type=monthly' ); ?>
 				</ul>
 			</li>
 
 			<li id="meta" class="widget-container">
-				<h3 class="widget-title"><?php _e( 'Meta', INFINITY_TEXT_DOMAIN ); ?></h3>
+				<h3 class="widget-title"><?php _e( 'Meta', infinity_text_domain ); ?></h3>
 				<ul>
 					<?php wp_register(); ?>
 					<li><?php wp_loginout(); ?></li>

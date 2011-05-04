@@ -26,6 +26,7 @@ define( 'INFINITY_EXPORT_URL', INFINITY_THEME_URL . '/export' );
 define( 'INFINITY_EXTRAS_DIR', get_theme_root( INFINITY_NAME ) . DIRECTORY_SEPARATOR . INFINITY_NAME . '-extras' );
 define( 'INFINITY_EXTRAS_URL', get_theme_root_uri( INFINITY_NAME ) . '/' . INFINITY_NAME . '-extras' );
 define( 'INFINITY_TEXT_DOMAIN', INFINITY_NAME );
+define( 'infinity_text_domain', INFINITY_TEXT_DOMAIN ); // for code completion
 define( 'INFINITY_ADMIN_PAGE', INFINITY_NAME . '-theme' );
 define( 'INFINITY_ADMIN_TPLS_DIR', INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'templates' );
 define( 'INFINITY_ADMIN_DOCS_DIR', INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'docs' );
@@ -89,7 +90,7 @@ function infinity_setup()
 
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus( array(
-		'primary' => __( 'Primary Navigation', INFINITY_TEXT_DOMAIN ),
+		'primary' => __( 'Primary Navigation', infinity_text_domain ),
 	) );
 }
 add_action( 'after_setup_theme', 'infinity_setup' );
@@ -128,7 +129,7 @@ add_filter( 'excerpt_length', 'infinity_excerpt_length' );
  */
 function infinity_continue_reading_link()
 {
-	return ' <a href="'. get_permalink() . '">' . __( 'Continue reading <span class="meta-nav">&rarr;</span>', INFINITY_TEXT_DOMAIN ) . '</a>';
+	return ' <a href="'. get_permalink() . '">' . __( 'Continue reading <span class="meta-nav">&rarr;</span>', infinity_text_domain ) . '</a>';
 }
 
 /**
@@ -193,17 +194,17 @@ function infinity_comment( $comment, $args, $depth )
 		<div id="comment-<?php comment_ID(); ?>">
 		<div class="comment-author vcard">
 			<?php echo get_avatar( $comment, 40 ); ?>
-			<?php printf( __( '%s <span class="says">says:</span>', INFINITY_TEXT_DOMAIN ), sprintf( '<cite class="fn">%s</cite>', get_comment_author_link() ) ); ?>
+			<?php printf( __( '%s <span class="says">says:</span>', infinity_text_domain ), sprintf( '<cite class="fn">%s</cite>', get_comment_author_link() ) ); ?>
 		</div><!-- .comment-author .vcard -->
 		<?php if ( $comment->comment_approved == '0' ) : ?>
-			<em><?php _e( 'Your comment is awaiting moderation.', INFINITY_TEXT_DOMAIN ); ?></em>
+			<em><?php _e( 'Your comment is awaiting moderation.', infinity_text_domain ); ?></em>
 			<br />
 		<?php endif; ?>
 
 		<div class="comment-meta commentmetadata"><a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>">
 			<?php
 				/* translators: 1: date, 2: time */
-				printf( __( '%1$s at %2$s', INFINITY_TEXT_DOMAIN ), get_comment_date(),  get_comment_time() ); ?></a><?php edit_comment_link( __( '(Edit)', INFINITY_TEXT_DOMAIN ), ' ' );
+				printf( __( '%1$s at %2$s', infinity_text_domain ), get_comment_date(),  get_comment_time() ); ?></a><?php edit_comment_link( __( '(Edit)', infinity_text_domain ), ' ' );
 			?>
 		</div><!-- .comment-meta .commentmetadata -->
 
@@ -220,7 +221,7 @@ function infinity_comment( $comment, $args, $depth )
 		case 'trackback' :
 	?>
 	<li class="post pingback">
-		<p><?php _e( 'Pingback:', INFINITY_TEXT_DOMAIN ); ?> <?php comment_author_link(); ?><?php edit_comment_link( __('(Edit)', INFINITY_TEXT_DOMAIN), ' ' ); ?></p>
+		<p><?php _e( 'Pingback:', infinity_text_domain ); ?> <?php comment_author_link(); ?><?php edit_comment_link( __('(Edit)', infinity_text_domain), ' ' ); ?></p>
 	<?php
 			break;
 	endswitch;
@@ -238,9 +239,9 @@ function infinity_widgets_init()
 {
 	// Area 1, located at the top of the sidebar.
 	register_sidebar( array(
-		'name' => __( 'Primary Widget Area', INFINITY_TEXT_DOMAIN ),
+		'name' => __( 'Primary Widget Area', infinity_text_domain ),
 		'id' => 'primary-widget-area',
-		'description' => __( 'The primary widget area', INFINITY_TEXT_DOMAIN ),
+		'description' => __( 'The primary widget area', infinity_text_domain ),
 		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
 		'after_widget' => '</li>',
 		'before_title' => '<h3 class="widget-title">',
@@ -249,9 +250,9 @@ function infinity_widgets_init()
 
 	// Area 2, located below the Primary Widget Area in the sidebar. Empty by default.
 	register_sidebar( array(
-		'name' => __( 'Secondary Widget Area', INFINITY_TEXT_DOMAIN ),
+		'name' => __( 'Secondary Widget Area', infinity_text_domain ),
 		'id' => 'secondary-widget-area',
-		'description' => __( 'The secondary widget area', INFINITY_TEXT_DOMAIN ),
+		'description' => __( 'The secondary widget area', infinity_text_domain ),
 		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
 		'after_widget' => '</li>',
 		'before_title' => '<h3 class="widget-title">',
@@ -260,9 +261,9 @@ function infinity_widgets_init()
 
 	// Area 3, located in the footer. Empty by default.
 	register_sidebar( array(
-		'name' => __( 'First Footer Widget Area', INFINITY_TEXT_DOMAIN ),
+		'name' => __( 'First Footer Widget Area', infinity_text_domain ),
 		'id' => 'first-footer-widget-area',
-		'description' => __( 'The first footer widget area', INFINITY_TEXT_DOMAIN ),
+		'description' => __( 'The first footer widget area', infinity_text_domain ),
 		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
 		'after_widget' => '</li>',
 		'before_title' => '<h3 class="widget-title">',
@@ -271,9 +272,9 @@ function infinity_widgets_init()
 
 	// Area 4, located in the footer. Empty by default.
 	register_sidebar( array(
-		'name' => __( 'Second Footer Widget Area', INFINITY_TEXT_DOMAIN ),
+		'name' => __( 'Second Footer Widget Area', infinity_text_domain ),
 		'id' => 'second-footer-widget-area',
-		'description' => __( 'The second footer widget area', INFINITY_TEXT_DOMAIN ),
+		'description' => __( 'The second footer widget area', infinity_text_domain ),
 		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
 		'after_widget' => '</li>',
 		'before_title' => '<h3 class="widget-title">',
@@ -282,9 +283,9 @@ function infinity_widgets_init()
 
 	// Area 5, located in the footer. Empty by default.
 	register_sidebar( array(
-		'name' => __( 'Third Footer Widget Area', INFINITY_TEXT_DOMAIN ),
+		'name' => __( 'Third Footer Widget Area', infinity_text_domain ),
 		'id' => 'third-footer-widget-area',
-		'description' => __( 'The third footer widget area', INFINITY_TEXT_DOMAIN ),
+		'description' => __( 'The third footer widget area', infinity_text_domain ),
 		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
 		'after_widget' => '</li>',
 		'before_title' => '<h3 class="widget-title">',
@@ -293,9 +294,9 @@ function infinity_widgets_init()
 
 	// Area 6, located in the footer. Empty by default.
 	register_sidebar( array(
-		'name' => __( 'Fourth Footer Widget Area', INFINITY_TEXT_DOMAIN ),
+		'name' => __( 'Fourth Footer Widget Area', infinity_text_domain ),
 		'id' => 'fourth-footer-widget-area',
-		'description' => __( 'The fourth footer widget area', INFINITY_TEXT_DOMAIN ),
+		'description' => __( 'The fourth footer widget area', infinity_text_domain ),
 		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
 		'after_widget' => '</li>',
 		'before_title' => '<h3 class="widget-title">',
@@ -323,7 +324,7 @@ add_action( 'widgets_init', 'infinity_remove_recent_comments_style' );
  */
 function infinity_posted_on()
 {
-	printf( __( '<span class="%1$s">Posted on</span> %2$s <span class="meta-sep">by</span> %3$s', INFINITY_TEXT_DOMAIN ),
+	printf( __( '<span class="%1$s">Posted on</span> %2$s <span class="meta-sep">by</span> %3$s', infinity_text_domain ),
 		'meta-prep meta-prep-author',
 		sprintf( '<a href="%1$s" title="%2$s" rel="bookmark"><span class="entry-date">%3$s</span></a>',
 			get_permalink(),
@@ -332,7 +333,7 @@ function infinity_posted_on()
 		),
 		sprintf( '<span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s">%3$s</a></span>',
 			get_author_posts_url( get_the_author_meta( 'ID' ) ),
-			sprintf( esc_attr__( 'View all posts by %s', INFINITY_TEXT_DOMAIN ), get_the_author() ),
+			sprintf( esc_attr__( 'View all posts by %s', infinity_text_domain ), get_the_author() ),
 			get_the_author()
 		)
 	);
@@ -346,11 +347,11 @@ function infinity_posted_in()
 	// Retrieves tag list of current post, separated by commas.
 	$tag_list = get_the_tag_list( '', ', ' );
 	if ( $tag_list ) {
-		$posted_in = __( 'This entry was posted in %1$s and tagged %2$s. Bookmark the <a href="%3$s" title="Permalink to %4$s" rel="bookmark">permalink</a>.', INFINITY_TEXT_DOMAIN );
+		$posted_in = __( 'This entry was posted in %1$s and tagged %2$s. Bookmark the <a href="%3$s" title="Permalink to %4$s" rel="bookmark">permalink</a>.', infinity_text_domain );
 	} elseif ( is_object_in_taxonomy( get_post_type(), 'category' ) ) {
-		$posted_in = __( 'This entry was posted in %1$s. Bookmark the <a href="%3$s" title="Permalink to %4$s" rel="bookmark">permalink</a>.', INFINITY_TEXT_DOMAIN );
+		$posted_in = __( 'This entry was posted in %1$s. Bookmark the <a href="%3$s" title="Permalink to %4$s" rel="bookmark">permalink</a>.', infinity_text_domain );
 	} else {
-		$posted_in = __( 'Bookmark the <a href="%3$s" title="Permalink to %4$s" rel="bookmark">permalink</a>.', INFINITY_TEXT_DOMAIN );
+		$posted_in = __( 'Bookmark the <a href="%3$s" title="Permalink to %4$s" rel="bookmark">permalink</a>.', infinity_text_domain );
 	}
 	// Prints the string, replacing the placeholders.
 	printf(

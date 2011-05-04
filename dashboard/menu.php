@@ -24,8 +24,8 @@ add_action( 'network_admin_menu', 'infinity_dashboard_menu_setup' );
 function infinity_dashboard_menu_setup()
 {
 	add_menu_page(
-		__( 'Infinity', INFINITY_TEXT_DOMAIN),
-		__( 'infinity', INFINITY_TEXT_DOMAIN),
+		__( 'Infinity', infinity_text_domain),
+		__( 'infinity', infinity_text_domain),
 		'manage_options',
 		INFINITY_ADMIN_PAGE,
 		'infinity_dashboard_cpanel_screen',

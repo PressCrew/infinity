@@ -101,7 +101,7 @@ class Infinity_Feature_Custom_Css extends Infinity_Feature
 		parent::__construct(
 			'custom-css',
 			'Custom CSS',
-			'Allow custom CSS to be provided with theme options.'
+			__('Allow custom CSS to be provided with theme options.', infinity_text_domain)
 		);
 	}
 
@@ -130,7 +130,7 @@ class Infinity_Feature_Header_Logo extends Infinity_Feature
 		parent::__construct(
 			'header-logo',
 			'Header Logo',
-			'Custom header logo support.'
+			__('Custom header logo support.', infinity_text_domain)
 		);
 	}
 
@@ -183,7 +183,7 @@ class Infinity_Feature_Header_Background extends Infinity_Feature
 		parent::__construct(
 			'header-background',
 			'Header Background',
-			'Custom header background support.'
+			__('Custom header background support.', infinity_text_domain)
 		);
 	}
 
@@ -233,7 +233,7 @@ class Infinity_Feature_Site_Background extends Infinity_Feature
 		parent::__construct(
 			'site-background',
 			'Site Background',
-			'Custom site background support.'
+			__('Custom site background support.', infinity_text_domain)
 		);
 	}
 

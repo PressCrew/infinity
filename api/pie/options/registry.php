@@ -43,14 +43,14 @@ abstract class Pie_Easy_Options_Registry
 
 	/**
 	 * Stack of config files that have been loaded
-	 * 
+	 *
 	 * @var Pie_Easy_Stack
 	 */
 	private $files_loaded;
 
 	/**
 	 * Name of the theme currently being loaded
-	 * 
+	 *
 	 * @var string
 	 */
 	private $loading_theme;
@@ -64,7 +64,7 @@ abstract class Pie_Easy_Options_Registry
 
 	/**
 	 * The class use for new options
-	 * 
+	 *
 	 * @var string
 	 */
 	private $option_class;
@@ -103,7 +103,7 @@ abstract class Pie_Easy_Options_Registry
 	 * @var string
 	 */
 	protected $screen_blog_theme;
-	
+
 	/**
 	 * Initializes map properties
 	 */
@@ -127,7 +127,7 @@ abstract class Pie_Easy_Options_Registry
 
 		add_action( 'pie_easy_enqueue_styles', array($this, 'init_styles') );
 		add_action( 'pie_easy_enqueue_scripts', array($this, 'init_scripts') );
-		
+
 		$this->option_renderer->init_screen();
 	}
 
@@ -143,7 +143,7 @@ abstract class Pie_Easy_Options_Registry
 	 * Enqueue required styles
 	 */
 	public function init_styles() {}
-	
+
 	/**
 	 * Enqueue required scripts
 	 */
@@ -279,7 +279,7 @@ abstract class Pie_Easy_Options_Registry
 			return $this->sections->item_at( $section_name );
 		}
 
-		throw new Exception( sprintf( 'Unable to get section "%s": not registered.', $section_name ) );
+		throw new Exception( sprintf( 'Unable to get section "%s": not registered', $section_name ) );
 	}
 
 	/**
@@ -390,7 +390,7 @@ abstract class Pie_Easy_Options_Registry
 		}
 
 		// didn't find the option
-		throw new Exception( sprintf( 'Unable to get option "%s": not registered.', $option_name ) );
+		throw new Exception( sprintf( 'Unable to get option "%s": not registered', $option_name ) );
 	}
 
 	/**
@@ -421,7 +421,7 @@ abstract class Pie_Easy_Options_Registry
 			// add to array
 			$options[] = $option;
 		}
-		
+
 		// return them
 		return $options;
 	}
@@ -471,11 +471,11 @@ abstract class Pie_Easy_Options_Registry
 
 	/**
 	 * Load option directives from an ini file
-	 * 
+	 *
 	 * @uses parse_ini_file()
 	 * @param string $filename Absolute path to the options ini file to parse
 	 * @param string $theme The theme to assign the prased option directives to
-	 * @return boolean 
+	 * @return boolean
 	 */
 	public function load_config_file( $filename, $theme )
 	{
@@ -521,7 +521,7 @@ abstract class Pie_Easy_Options_Registry
 
 	/**
 	 * Load a single option into the registry (one parsed ini section)
-	 * 
+	 *
 	 * @param string $option_name
 	 * @param array $option_config
 	 * @return boolean
@@ -544,7 +544,7 @@ abstract class Pie_Easy_Options_Registry
 				$source_option->field_type,
 				$source_option->section
 			);
-			
+
 		} else {
 
 			// get section from section registry
@@ -587,7 +587,7 @@ abstract class Pie_Easy_Options_Registry
 		if ( isset( $option_config['class'] ) ) {
 			$option->set_class( $option_config['class'] );
 		}
-		
+
 		// default value
 		if ( isset( $option_config['default_value'] ) ) {
 			$option->set_default_value( $option_config['default_value'], $this->loading_theme );
@@ -637,14 +637,14 @@ abstract class Pie_Easy_Options_Registry
 					$field_options = $callback();
 					// make sure we got an array
 					if ( !is_array( $field_options ) ) {
-						throw new Exception( sprintf( 'The field options callback function "%s" did not return an array.', $callback ) );
+						throw new Exception( sprintf( 'The field options callback function "%s" did not return an array', $callback ) );
 					}
 				} else {
-					throw new Exception( sprintf( 'The field options callback function "%s" does not exist.', $callback ) );
+					throw new Exception( sprintf( 'The field options callback function "%s" does not exist', $callback ) );
 				}
 
 			} else {
-				throw new Exception( sprintf( 'The field options for the "%s" option is not configured correctly.', $option_name ) );
+				throw new Exception( sprintf( 'The field options for the "%s" option is not configured correctly', $option_name ) );
 			}
 
 			// make sure we ended up with some options
@@ -711,9 +711,9 @@ abstract class Pie_Easy_Options_Registry
 			$option = $this->get_option( $option );
 		} elseif ( !$this->has_option( $option->name ) ) {
 			// not good
-			throw new Exception( sprintf( 'The "%s" option is not registered.', $option->name ) );
+			throw new Exception( sprintf( 'The "%s" option is not registered', $option->name ) );
 		}
-			
+
 		// render the option
 		$html = $this->option_renderer->render( $option, $output );
 
@@ -734,7 +734,7 @@ abstract class Pie_Easy_Options_Registry
 
 	/**
 	 * Look through POST vars for options from this registry and try to save them
-	 * 
+	 *
 	 * @return integer Number of options saved
 	 */
 	public function process_form()
@@ -742,7 +742,7 @@ abstract class Pie_Easy_Options_Registry
 		if ( empty( $_POST ) ) {
 			return false;
 		} elseif ( isset( $_POST['_manifest_'] ) ) {
-			
+
 			// load manifest
 			$manifest = explode( ',', $_POST['_manifest_'] );
 
@@ -787,12 +787,12 @@ abstract class Pie_Easy_Options_Registry
 
 			// restore blog
 			restore_current_blog();
-			
+
 			// done saving
 			return $save_count;
-			
+
 		} else {
-			throw new Exception( 'No manifest was rendered.' );
+			throw new Exception( 'No manifest was rendered' );
 		}
 	}
 
@@ -808,11 +808,11 @@ abstract class Pie_Easy_Options_Registry
 
 		// any options saved successfuly?
 		if ( $save_count == 1 ) {
-			Pie_Easy_Ajax::responseStd( true, sprintf( '%d option successfully updated.', $save_count ) );
+			Pie_Easy_Ajax::responseStd( true, sprintf( __('%d option successfully updated.', pie_easy_text), $save_count ) );
 		} elseif ( $save_count > 1 ) {
-			Pie_Easy_Ajax::responseStd( true, sprintf( '%d options successfully updated.', $save_count ) );
+			Pie_Easy_Ajax::responseStd( true, sprintf( __('%d options successfully updated.', pie_easy_text), $save_count ) );
 		} else {
-			Pie_Easy_Ajax::responseStd( false, 'An error has occurred. No options were updated.' );
+			Pie_Easy_Ajax::responseStd( false, __('An error has occurred. No options were updated.', pie_easy_text) );
 		}
 	}
 

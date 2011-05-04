@@ -53,8 +53,8 @@ class Pie_Easy_Map implements IteratorAggregate,ArrayAccess,Countable
 
 	/**
 	 * Check whether this map is read-only or not. Defaults to false.
-	 * 
-	 * @return boolean 
+	 *
+	 * @return boolean
 	 */
 	public function get_read_only()
 	{
@@ -73,7 +73,7 @@ class Pie_Easy_Map implements IteratorAggregate,ArrayAccess,Countable
 
 	/**
 	 * Returns the number of items in the map.
-	 * 
+	 *
 	 * @return integer
 	 */
 	public function count()
@@ -133,13 +133,13 @@ class Pie_Easy_Map implements IteratorAggregate,ArrayAccess,Countable
 				}
 			}
 		} else {
-			throw new Exception( 'The map is read only.' );
+			throw new Exception( 'The map is read only' );
 		}
 	}
 
 	/**
 	 * Removes an item from the map by its key.
-	 * 
+	 *
 	 * @param mixed $key The key of the item to be removed
 	 * @return mixed The removed value, null if no such key exists.
 	 * @throws Exception if the map is read-only
@@ -157,7 +157,7 @@ class Pie_Easy_Map implements IteratorAggregate,ArrayAccess,Countable
 				return null;
 			}
 		} else {
-			throw new Exception( 'The map is read only.' );
+			throw new Exception( 'The map is read only' );
 		}
 	}
 
@@ -173,9 +173,9 @@ class Pie_Easy_Map implements IteratorAggregate,ArrayAccess,Countable
 
 	/**
 	 * Check whether the map contains an item with the specified key
-	 * 
+	 *
 	 * @param mixed $key
-	 * @return boolean 
+	 * @return boolean
 	 */
 	public function contains( $key )
 	{
@@ -201,7 +201,7 @@ class Pie_Easy_Map implements IteratorAggregate,ArrayAccess,Countable
 	 * Copies iterable data into the map.
 	 *
 	 * Note, existing data in the map will be cleared first.
-	 * 
+	 *
 	 * @param mixed the data to be copied from, must be an array or object implementing Traversable
 	 * @throws Exception If data is neither an array nor an iterator.
 	 */
@@ -222,7 +222,7 @@ class Pie_Easy_Map implements IteratorAggregate,ArrayAccess,Countable
 			}
 
 		} elseif ( $data !== null ) {
-			throw new Exception( 'Map data must be an array or an object implementing Traversable.' );
+			throw new Exception( 'Map data must be an array or an object implementing Traversable' );
 		}
 	}
 
@@ -262,13 +262,13 @@ class Pie_Easy_Map implements IteratorAggregate,ArrayAccess,Countable
 				}
 			}
 		} elseif ( $data !== null ) {
-			throw new Exception( 'Map data must be an array or an object implementing Traversable.' );
+			throw new Exception( 'Map data must be an array or an object implementing Traversable' );
 		}
 	}
 
 	/**
 	 * Merges two arrays into one recursively.
-	 * 
+	 *
 	 * @see merge_with
 	 * @param array $a Array to be merged to
 	 * @param array $b Array to be merged from
@@ -285,7 +285,7 @@ class Pie_Easy_Map implements IteratorAggregate,ArrayAccess,Countable
 				$a[$k] = $v;
 			}
 		}
-		
+
 		return $a;
 	}
 
