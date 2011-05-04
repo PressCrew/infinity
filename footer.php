@@ -29,9 +29,9 @@
 
 			<div id="site-generator">
 				<?php do_action( 'infinity_credits' ); ?>
-				<a href="<?php echo esc_url( __('http://wordpress.org/', INFINITY_TEXT_DOMAIN) ); ?>"
-						title="<?php esc_attr_e('Semantic Personal Publishing Platform', INFINITY_TEXT_DOMAIN); ?>" rel="generator">
-					<?php printf( __('Proudly powered by %s.', INFINITY_TEXT_DOMAIN), 'WordPress' ); ?>
+				<a href="<?php echo esc_url( __('http://wordpress.org/', infinity_text_domain) ); ?>"
+						title="<?php esc_attr_e('Semantic Personal Publishing Platform', infinity_text_domain); ?>" rel="generator">
+					<?php printf( __('Proudly powered by %s.', infinity_text_domain), 'WordPress' ); ?>
 				</a>
 			</div><!-- #site-generator -->
 

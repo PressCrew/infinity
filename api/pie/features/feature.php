@@ -47,7 +47,7 @@ abstract class Pie_Easy_Feature
 
 	/**
 	 * Initialize the feature.
-	 * 
+	 *
 	 * @param string $name Feature name may only contain alphanumeric characters as well as the hyphen for use as a word seperator.
 	 * @param string $title The title of the feature
 	 * @param string $desc A description of the feature
@@ -58,7 +58,7 @@ abstract class Pie_Easy_Feature
 		if ( preg_match( '/^[a-z0-9]+(-[a-z0-9]+)*$/', $name ) ) {
 			$this->name = $name;
 		} else {
-			throw new Exception( 'Feature name does not match the allowed pattern.' );
+			throw new Exception( 'Feature name does not match the allowed pattern' );
 		}
 
 		// set basic string properties

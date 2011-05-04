@@ -67,7 +67,7 @@ function infinity_dashboard_cpanel_setup()
 	$action = infinity_dashboard_cpanel_action();
 
 	if ( $action ) {
-		
+
 		// init options
 		infinity_scheme_init();
 
@@ -94,7 +94,7 @@ function infinity_dashboard_cpanel_tabs_content()
 		infinity_dashboard_load_template( sprintf( 'cpanel/%s.php', $action ) );
 		Pie_Easy_Ajax::responseEnd( true );
 	} else {
-		Pie_Easy_Ajax::responseStd( false, sprintf( __( 'There was an error while trying to load the %s tab content.', INFINITY_TEXT_DOMAIN ), $action ) );
+		Pie_Easy_Ajax::responseStd( false, sprintf( __('There was an error while trying to load the %s tab content.', infinity_text_domain), $action ) );
 	}
 }
 

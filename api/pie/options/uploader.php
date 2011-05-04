@@ -57,7 +57,7 @@ class Pie_Easy_Options_Uploader
 
 	/**
 	 * Initializes the uploader
-	 * 
+	 *
 	 * @param string $script_action The action on which to localize the script
 	 */
 	public function __construct( $script_action = null )
@@ -100,7 +100,7 @@ class Pie_Easy_Options_Uploader
 		add_action( 'pie_easy_enqueue_styles', array($this, 'init_styles') );
 		add_action( 'pie_easy_enqueue_scripts', array($this, 'init_scripts') );
 	}
-	
+
 	/**
 	 * Enqueue required styles
 	 */
@@ -170,25 +170,25 @@ class Pie_Easy_Options_Uploader
 		list( $attach_url, $attach_width, $attach_height ) = $option->get_image_src('full'); ?>
 		<div class="pie-easy-options-fu">
 			<fieldset class="pie-easy-options-fu-img ui-corner-all">
-				<legend class="ui-corner-all"><?php _e( 'Current Image' ) ?></legend>
+				<legend class="ui-corner-all"><?php _e('Current Image', pie_easy_text) ?></legend>
 				<p><img src="<?php print esc_attr( $attach_url ) ?>" alt="" /></p>
 				<div class="pie-easy-options-fu-ibar">
-					<a>Zoom</a>
-					<a>Edit</a>
-					<a>Trash</a>
+					<a><?php _e('Zoom', pie_easy_text) ?></a>
+					<a><?php _e('Edit', pie_easy_text) ?></a>
+					<a><?php _e('Trash', pie_easy_text) ?></a>
 				</div>
-				<div class="pie-easy-options-fu-zoom" title="Full Size Image">
+				<div class="pie-easy-options-fu-zoom" title="<?php _e('Full Size Image', pie_easy_text) ?>">
 					<img src="<?php print esc_attr( $attach_url ) ?>"  height="<?php print $attach_height ?>" width="<?php print $attach_width ?>" alt="">
 				</div>
 			</fieldset>
 			<fieldset class="pie-easy-options-fu-stat ui-corner-all">
-				<legend class="ui-corner-all"><?php _e( 'Upload Status' ) ?></legend>
+				<legend class="ui-corner-all"><?php _e('Upload Status', pie_easy_text) ?></legend>
 				<textarea></textarea><div><p></p></div>
 			</fieldset>
 			<div class="pie-easy-options-fu-btn">
 				<input type="button" /><?php
 				$renderer->render_input( 'hidden' ); ?>
-			</div>	
+			</div>
 		</div><?php
 	}
 
@@ -204,12 +204,12 @@ class Pie_Easy_Options_Uploader
 			$src = wp_get_attachment_image_src( $_POST['attachment_id'], $size );
 			// check it out
 			if ( is_array($src) ) {
-				Pie_Easy_Ajax::response( 1, $src[0], $src[1], $src[2] );
+				Pie_Easy_Ajax::response( true, $src[0], $src[1], $src[2] );
 			} else {
-				Pie_Easy_Ajax::response( 0, 'Failed to lookup attachment URL.' );
+				Pie_Easy_Ajax::response( false, __('Failed to lookup attachment URL', pie_easy_text) );
 			}
 		} else {
-			Pie_Easy_Ajax::response( 0, 'No attachment ID received.' );
+			Pie_Easy_Ajax::response( 0, __('No attachment ID received', pie_easy_text) );
 		}
 	}
 

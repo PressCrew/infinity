@@ -12,7 +12,7 @@ infinity_get_header(); ?>
 			<div id="content" role="main">
 
 				<h1 class="page-title"><?php
-					printf( __( 'Tag Archives: %s', INFINITY_TEXT_DOMAIN ), '<span>' . single_tag_title( '', false ) . '</span>' );
+					printf( __( 'Tag Archives: %s', infinity_text_domain ), '<span>' . single_tag_title( '', false ) . '</span>' );
 				?></h1>
 
 <?php

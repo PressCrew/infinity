@@ -30,13 +30,13 @@ infinity_get_header(); ?>
 
 			<h1 class="page-title">
 <?php if ( is_day() ) : ?>
-				<?php printf( __( 'Daily Archives: <span>%s</span>', INFINITY_TEXT_DOMAIN ), get_the_date() ); ?>
+				<?php printf( __( 'Daily Archives: <span>%s</span>', infinity_text_domain ), get_the_date() ); ?>
 <?php elseif ( is_month() ) : ?>
-				<?php printf( __( 'Monthly Archives: <span>%s</span>', INFINITY_TEXT_DOMAIN ), get_the_date('F Y') ); ?>
+				<?php printf( __( 'Monthly Archives: <span>%s</span>', infinity_text_domain ), get_the_date('F Y') ); ?>
 <?php elseif ( is_year() ) : ?>
-				<?php printf( __( 'Yearly Archives: <span>%s</span>', INFINITY_TEXT_DOMAIN ), get_the_date('Y') ); ?>
+				<?php printf( __( 'Yearly Archives: <span>%s</span>', infinity_text_domain ), get_the_date('Y') ); ?>
 <?php else : ?>
-				<?php _e( 'Blog Archives', INFINITY_TEXT_DOMAIN ); ?>
+				<?php _e( 'Blog Archives', infinity_text_domain ); ?>
 <?php endif; ?>
 			</h1>
 

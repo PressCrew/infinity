@@ -44,7 +44,7 @@ abstract class Pie_Easy_Init_Directive
 
 	/**
 	 * Initialize the directive
-	 * 
+	 *
 	 * @param string $name Name for this directive (slug format)
 	 * @param mixed $value Value for this directive
 	 * @param string $theme Slug of the theme which is setting this directive
@@ -71,7 +71,7 @@ abstract class Pie_Easy_Init_Directive
 		switch ( $name ) {
 			case 'theme':
 			case 'name':
-			case 'value':	
+			case 'value':
 			case 'read_only':
 				return $this->$name;
 			default:
@@ -94,7 +94,7 @@ abstract class Pie_Easy_Init_Directive
 				throw new Exception( sprintf( 'The "%s" property is not writable', $name ) );
 		}
 	}
-	
+
 	/**
 	 * Set the value
 	 *
@@ -109,7 +109,7 @@ abstract class Pie_Easy_Init_Directive
 				return false;
 			} else {
 				throw new Exception(
-					sprintf( 'The "%s" directive has been set to read only.', $this->name ) );
+					sprintf( 'The "%s" directive has been set to read only', $this->name ) );
 			}
 		}
 

@@ -269,7 +269,7 @@ abstract class Pie_Easy_Options_Option_Renderer
 				break;
 			default:
 				throw new UnexpectedValueException( sprintf(
-					'The option type "%s" does not have a rendering method defined.',
+					'The option type "%s" does not have a rendering method defined',
 					$this->option->field_type ) );
 		}
 	}
@@ -445,7 +445,7 @@ abstract class Pie_Easy_Options_Option_Renderer
 				</div><?php
 			}
 		} else {
-			throw new Exception( sprintf( 'The "%s" option has no array of field options to render.', $this->option->name ) );
+			throw new Exception( sprintf( 'The "%s" option has no array of field options to render', $this->option->name ) );
 		}
 	}
 
@@ -663,7 +663,7 @@ abstract class Pie_Easy_Options_Option_Renderer
 			// render it!
 			$this->uploader->render( $this->option, $this );
 		} else {
-			throw new Exception( 'Uploader support has not been initiated.' );
+			throw new Exception( 'Uploader support has not been initialized' );
 		}
 	}
 
@@ -679,7 +679,7 @@ abstract class Pie_Easy_Options_Option_Renderer
 		if ( $time_updated ) {
 			print date( $format, $time_updated );
 		} else {
-			print 'Never';
+			print __('Never', pie_easy_text);
 		}
 	}
 

@@ -14,9 +14,9 @@ infinity_get_header(); ?>
 <?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 
 				<?php if ( ! empty( $post->post_parent ) ) : ?>
-					<p class="page-title"><a href="<?php echo get_permalink( $post->post_parent ); ?>" title="<?php esc_attr( printf( __( 'Return to %s', INFINITY_TEXT_DOMAIN ), get_the_title( $post->post_parent ) ) ); ?>" rel="gallery"><?php
+					<p class="page-title"><a href="<?php echo get_permalink( $post->post_parent ); ?>" title="<?php esc_attr( printf( __( 'Return to %s', infinity_text_domain ), get_the_title( $post->post_parent ) ) ); ?>" rel="gallery"><?php
 						/* translators: %s - title of parent post */
-						printf( __( '<span class="meta-nav">&larr;</span> %s', INFINITY_TEXT_DOMAIN ), get_the_title( $post->post_parent ) );
+						printf( __( '<span class="meta-nav">&larr;</span> %s', infinity_text_domain ), get_the_title( $post->post_parent ) );
 					?></a></p>
 				<?php endif; ?>
 
@@ -25,18 +25,18 @@ infinity_get_header(); ?>
 
 					<div class="entry-meta">
 						<?php
-							printf(__('<span class="%1$s">By</span> %2$s', INFINITY_TEXT_DOMAIN),
+							printf(__('<span class="%1$s">By</span> %2$s', infinity_text_domain),
 								'meta-prep meta-prep-author',
 								sprintf( '<span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s">%3$s</a></span>',
 									get_author_posts_url( get_the_author_meta( 'ID' ) ),
-									sprintf( esc_attr__( 'View all posts by %s', INFINITY_TEXT_DOMAIN ), get_the_author() ),
+									sprintf( esc_attr__( 'View all posts by %s', infinity_text_domain ), get_the_author() ),
 									get_the_author()
 								)
 							);
 						?>
 						<span class="meta-sep">|</span>
 						<?php
-							printf( __('<span class="%1$s">Published</span> %2$s', INFINITY_TEXT_DOMAIN),
+							printf( __('<span class="%1$s">Published</span> %2$s', infinity_text_domain),
 								'meta-prep meta-prep-entry-date',
 								sprintf( '<span class="entry-date"><abbr class="published" title="%1$s">%2$s</abbr></span>',
 									esc_attr( get_the_time() ),
@@ -46,17 +46,17 @@ infinity_get_header(); ?>
 							if ( wp_attachment_is_image() ) {
 								echo ' <span class="meta-sep">|</span> ';
 								$metadata = wp_get_attachment_metadata();
-								printf( __( 'Full size is %s pixels', INFINITY_TEXT_DOMAIN),
+								printf( __( 'Full size is %s pixels', infinity_text_domain),
 									sprintf( '<a href="%1$s" title="%2$s">%3$s &times; %4$s</a>',
 										wp_get_attachment_url(),
-										esc_attr( __('Link to full-size image', INFINITY_TEXT_DOMAIN) ),
+										esc_attr( __('Link to full-size image', infinity_text_domain) ),
 										$metadata['width'],
 										$metadata['height']
 									)
 								);
 							}
 						?>
-						<?php edit_post_link( __( 'Edit', INFINITY_TEXT_DOMAIN ), '<span class="meta-sep">|</span> <span class="edit-link">', '</span>' ); ?>
+						<?php edit_post_link( __( 'Edit', infinity_text_domain ), '<span class="meta-sep">|</span> <span class="edit-link">', '</span>' ); ?>
 					</div><!-- .entry-meta -->
 
 					<div class="entry-content">
@@ -96,14 +96,14 @@ infinity_get_header(); ?>
 						</div><!-- .entry-attachment -->
 						<div class="entry-caption"><?php if ( !empty( $post->post_excerpt ) ) the_excerpt(); ?></div>
 
-<?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', INFINITY_TEXT_DOMAIN ) ); ?>
-<?php wp_link_pages( array( 'before' => '<div class="page-link">' . __( 'Pages:', INFINITY_TEXT_DOMAIN ), 'after' => '</div>' ) ); ?>
+<?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', infinity_text_domain ) ); ?>
+<?php wp_link_pages( array( 'before' => '<div class="page-link">' . __( 'Pages:', infinity_text_domain ), 'after' => '</div>' ) ); ?>
 
 					</div><!-- .entry-content -->
 
 					<div class="entry-utility">
 						<?php infinity_posted_in(); ?>
-						<?php edit_post_link( __( 'Edit', INFINITY_TEXT_DOMAIN ), ' <span class="edit-link">', '</span>' ); ?>
+						<?php edit_post_link( __( 'Edit', infinity_text_domain ), ' <span class="edit-link">', '</span>' ); ?>
 					</div><!-- .entry-utility -->
 				</div><!-- #post-## -->
 
