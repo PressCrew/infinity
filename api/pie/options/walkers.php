@@ -1,12 +1,12 @@
 <?php
 /**
- * PIE API options walkers class file
+ * PIE API: options walkers class file
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://marshallsorenson.com/
  * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
- * @package pie
+ * @package PIE
  * @subpackage options
  * @since 1.0
  */
@@ -14,7 +14,7 @@
 /**
  * Make category options easy
  *
- * @package pie
+ * @package PIE
  * @subpackage options
  */
 class Pie_Easy_Options_Walker_Category extends Walker_Category
@@ -67,7 +67,7 @@ class Pie_Easy_Options_Walker_Category extends Walker_Category
 /**
  * Make page options easy
  *
- * @package pie
+ * @package PIE
  * @subpackage options
  */
 class Pie_Easy_Options_Walker_Page extends Walker_Page

@@ -1,9 +1,9 @@
 <?php
 /**
- * Infinity Theme functions
+ * Infinity Theme: theme functions
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
- * @link http://bp-tricks.com/
+ * @link http://marshallsorenson.com/
  * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
  * @package functions
@@ -320,7 +320,7 @@ function infinity_remove_recent_comments_style()
 add_action( 'widgets_init', 'infinity_remove_recent_comments_style' );
 
 /**
- * Prints HTML with meta information for the current post—date/time and author.
+ * Prints HTML with meta information for the current postâ€”date/time and author.
  */
 function infinity_posted_on()
 {

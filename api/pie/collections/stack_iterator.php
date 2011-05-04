@@ -1,12 +1,12 @@
 <?php
 /**
- * PIE API stack collection iterator class file
+ * PIE API: stack collection iterator class file
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://marshallsorenson.com/
  * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
- * @package pie
+ * @package PIE
  * @subpackage collections
  * @since 1.0
  */
@@ -20,7 +20,7 @@
  * Copyright 2008-2010 {@link http://www.yiiframework.com/ Yii Software LLC},
  * and released under the {@link http://www.yiiframework.com/license/ Yii License}
  *
- * @package pie
+ * @package PIE
  * @subpackage collections
  */
 class Pie_Easy_Stack_Iterator implements Iterator

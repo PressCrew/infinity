@@ -1,12 +1,12 @@
 <?php
 /**
- * PIE API options uploader class file
+ * PIE API: options uploader class file
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://marshallsorenson.com/
  * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
- * @package pie
+ * @package PIE
  * @subpackage options
  * @since 1.0
  */
@@ -19,7 +19,7 @@ add_action( 'wp_loaded', array( 'Pie_Easy_Options_Uploader', 'async_handler' ) )
 /**
  * Make an uploaded file option easy
  *
- * @package pie
+ * @package PIE
  * @subpackage options
  */
 class Pie_Easy_Options_Uploader

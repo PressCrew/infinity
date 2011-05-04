@@ -1,12 +1,12 @@
 <?php
 /**
- * PIE API init directive class file
+ * PIE API: init directive class file
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://marshallsorenson.com/
  * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
- * @package pie
+ * @package PIE
  * @subpackage init
  * @since 1.0
  */
@@ -14,7 +14,7 @@
 /**
  * Make an init directive easy
  *
- * @package pie
+ * @package PIE
  * @subpackage init
  * @property-read string $name The name of the directive
  * @property mixed $value The value of the directive

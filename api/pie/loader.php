@@ -1,18 +1,18 @@
 <?php
 /**
- * PIE loader class file
+ * PIE API: loader class file
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://marshallsorenson.com/
  * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
- * @package pie
+ * @package PIE
  * @subpackage loader
  * @since 1.0
  */
 
 /**
- * check if pie has been included already
+ * check if PIE has been included already
  * @ignore
  */
 if ( defined( 'PIE_EASY_VERSION' ) ) {
@@ -20,34 +20,34 @@ if ( defined( 'PIE_EASY_VERSION' ) ) {
 }
 
 /**
- * PIE version
+ * PIE API: version
  */
 define( 'PIE_EASY_VERSION', '1.0' );
 /**
- * PIE root directory
+ * PIE API: root directory
  */
 define( 'PIE_EASY_DIR', dirname( __FILE__ ) );
 /**
- * PIE text domain
+ * PIE API: text domain
  */
 define( 'PIE_EASY_TEXT_DOMAIN', 'pie_easy_text' );
 /**
- * PIE text domain shorthand (for code completion purposes)
+ * PIE API: text domain shorthand (for code completion purposes)
  */
 define( 'pie_easy_text', PIE_EASY_TEXT_DOMAIN );
 /**
- * PIE languages directory
+ * PIE API: languages directory
  */
 define( 'PIE_EASY_LANGUAGES_DIR', PIE_EASY_DIR . DIRECTORY_SEPARATOR . 'languages' );
 /**
- * PIE vendors library directory
+ * PIE API: vendors library directory
  */
 define( 'PIE_EASY_VENDORS_DIR', PIE_EASY_DIR . DIRECTORY_SEPARATOR . 'vendors' );
 
 /**
- * Make loading pie features easy
+ * Make loading PIE features easy
  *
- * @package pie
+ * @package PIE
  * @subpackage loader
  */
 final class Pie_Easy_Loader
@@ -94,7 +94,7 @@ final class Pie_Easy_Loader
 	 *
 	 * You must tell PIE at what URL its root directory is located
 	 *
-	 * @param string $pie_url The absolute URL to pie root
+	 * @param string $pie_url The absolute URL to PIE root
 	 */
 	final static public function init( $pie_url )
 	{

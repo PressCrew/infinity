@@ -1,12 +1,12 @@
 <?php
 /**
- * PIE API options section class file
+ * PIE API: options section class file
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://marshallsorenson.com/
  * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
- * @package pie
+ * @package PIE
  * @subpackage options
  * @since 1.0
  */
@@ -14,7 +14,7 @@
 /**
  * Make an option section easy
  *
- * @package pie
+ * @package PIE
  * @subpackage options
  * @property-read string $section The name of the section (slug)
  * @property-read string $title The title of the section

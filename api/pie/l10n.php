@@ -1,12 +1,12 @@
 <?php
 /**
- * PIE localization class file
+ * PIE API: localization class file
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://marshallsorenson.com/
  * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
- * @package pie
+ * @package PIE
  * @subpackage localization
  * @since 1.0
  */
@@ -14,7 +14,7 @@
 /**
  * Make L10n Easy
  *
- * @package pie
+ * @package PIE
  * @subpackage localization
  */
 abstract class Pie_Easy_L10n
