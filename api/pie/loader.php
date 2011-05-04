@@ -30,15 +30,19 @@ define( 'PIE_EASY_DIR', dirname( __FILE__ ) );
 /**
  * PIE API: text domain
  */
-define( 'PIE_EASY_TEXT_DOMAIN', 'pie_easy_text' );
+define( 'PIE_EASY_TEXT_DOMAIN', 'pie-easy-api' );
 /**
  * PIE API: text domain shorthand (for code completion purposes)
  */
-define( 'pie_easy_text', PIE_EASY_TEXT_DOMAIN );
+define( 'pie_easy_text_domain', PIE_EASY_TEXT_DOMAIN );
+/**
+ * PIE API: i18n directory
+ */
+define( 'PIE_EASY_I18N_DIR', PIE_EASY_DIR . DIRECTORY_SEPARATOR . 'i18n' );
 /**
  * PIE API: languages directory
  */
-define( 'PIE_EASY_LANGUAGES_DIR', PIE_EASY_DIR . DIRECTORY_SEPARATOR . 'languages' );
+define( 'PIE_EASY_LANGUAGES_DIR', PIE_EASY_I18N_DIR . DIRECTORY_SEPARATOR . 'languages' );
 /**
  * PIE API: vendors library directory
  */
@@ -109,7 +113,7 @@ final class Pie_Easy_Loader
 			define( 'PIE_EASY_JS_URL', PIE_EASY_ASSETS_URL . '/js' );
 
 			// setup i18n
-			load_theme_textdomain( 'pie-easy-api', PIE_EASY_LANGUAGES_DIR );
+			load_theme_textdomain( PIE_EASY_TEXT_DOMAIN, PIE_EASY_LANGUAGES_DIR );
 
 			// create singleton instance
 			self::$instance = new self();
