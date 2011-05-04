@@ -679,7 +679,7 @@ abstract class Pie_Easy_Options_Option_Renderer
 		if ( $time_updated ) {
 			print date( $format, $time_updated );
 		} else {
-			print __('Never', pie_easy_text);
+			print __('Never', pie_easy_text_domain);
 		}
 	}
 

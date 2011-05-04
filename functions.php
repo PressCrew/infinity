@@ -25,11 +25,16 @@ define( 'INFINITY_EXPORT_DIR', INFINITY_THEME_DIR . DIRECTORY_SEPARATOR . 'expor
 define( 'INFINITY_EXPORT_URL', INFINITY_THEME_URL . '/export' );
 define( 'INFINITY_EXTRAS_DIR', get_theme_root( INFINITY_NAME ) . DIRECTORY_SEPARATOR . INFINITY_NAME . '-extras' );
 define( 'INFINITY_EXTRAS_URL', get_theme_root_uri( INFINITY_NAME ) . '/' . INFINITY_NAME . '-extras' );
-define( 'INFINITY_TEXT_DOMAIN', INFINITY_NAME );
+define( 'INFINITY_TEXT_DOMAIN', INFINITY_NAME . '-theme' );
 define( 'infinity_text_domain', INFINITY_TEXT_DOMAIN ); // for code completion
+define( 'INFINITY_I18N_DIR', INFINITY_THEME_DIR . DIRECTORY_SEPARATOR . 'i18n' );
+define( 'INFINITY_LANGUAGES_DIR', INFINITY_I18N_DIR . DIRECTORY_SEPARATOR . 'languages' );
 define( 'INFINITY_ADMIN_PAGE', INFINITY_NAME . '-theme' );
 define( 'INFINITY_ADMIN_TPLS_DIR', INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'templates' );
 define( 'INFINITY_ADMIN_DOCS_DIR', INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'docs' );
+
+// setup i18n
+load_theme_textdomain( INFINITY_TEXT_DOMAIN, INFINITY_LANGUAGES_DIR );
 
 // load PIE and initialize
 require_once( INFINITY_PIE_DIR . DIRECTORY_SEPARATOR . 'loader.php' );

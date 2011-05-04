@@ -181,7 +181,7 @@ abstract class Pie_Easy_Options_Section
 		<div class="<?php print esc_attr( $this->class ) ?> <?php print esc_attr( $this->class ) ?>-<?php print esc_attr( $this->name ) ?>">
 			<div class="<?php print esc_attr( $this->class_title ) ?>">
 				<h3><?php print $this->title ?></h3>
-				<input name="save_section_<?php print esc_attr( $this->name ) ?>" type="submit" value="<?php _e( 'Save Changes', pie_easy_text ) ?>" />
+				<input name="save_section_<?php print esc_attr( $this->name ) ?>" type="submit" value="<?php _e( 'Save Changes', pie_easy_text_domain ) ?>" />
 			</div>
 			<div class="<?php print esc_attr( $this->class_content ) ?>">
 				<?php print $this->section_content ?>

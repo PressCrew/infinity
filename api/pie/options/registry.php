@@ -808,11 +808,11 @@ abstract class Pie_Easy_Options_Registry
 
 		// any options saved successfuly?
 		if ( $save_count == 1 ) {
-			Pie_Easy_Ajax::responseStd( true, sprintf( __('%d option successfully updated.', pie_easy_text), $save_count ) );
+			Pie_Easy_Ajax::responseStd( true, sprintf( __('%d option successfully updated.', pie_easy_text_domain), $save_count ) );
 		} elseif ( $save_count > 1 ) {
-			Pie_Easy_Ajax::responseStd( true, sprintf( __('%d options successfully updated.', pie_easy_text), $save_count ) );
+			Pie_Easy_Ajax::responseStd( true, sprintf( __('%d options successfully updated.', pie_easy_text_domain), $save_count ) );
 		} else {
-			Pie_Easy_Ajax::responseStd( false, __('An error has occurred. No options were updated.', pie_easy_text) );
+			Pie_Easy_Ajax::responseStd( false, __('An error has occurred. No options were updated.', pie_easy_text_domain) );
 		}
 	}
 
