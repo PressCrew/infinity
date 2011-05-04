@@ -1,12 +1,12 @@
 <?php
 /**
- * PIE docs class file
+ * PIE API: docs class file
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://marshallsorenson.com/
  * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
- * @package pie
+ * @package PIE
  * @subpackage docs
  * @since 1.0
  */
@@ -16,7 +16,7 @@ Pie_Easy_Loader::load( 'files' );
 /**
  * Make documentation easy
  *
- * @package pie
+ * @package PIE
  * @subpackage docs
  */
 class Pie_Easy_Docs

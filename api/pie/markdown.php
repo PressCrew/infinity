@@ -1,12 +1,12 @@
 <?php
 /**
- * PIE markdown class file
+ * PIE API: markdown class file
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://marshallsorenson.com/
  * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
- * @package pie
+ * @package PIE
  * @subpackage parsers
  * @since 1.0
  */
@@ -30,7 +30,7 @@ require_once
 /**
  * Make Markdown parsing easy
  *
- * @package pie
+ * @package PIE
  * @subpackage parsers
  */
 final class Pie_Easy_Markdown

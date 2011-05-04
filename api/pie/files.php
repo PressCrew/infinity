@@ -1,12 +1,12 @@
 <?php
 /**
- * PIE file system helper class file
+ * PIE API: file system helper class file
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://marshallsorenson.com/
  * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
- * @package pie
+ * @package PIE
  * @subpackage files
  * @since 1.0
  */
@@ -14,7 +14,7 @@
 /**
  * Make the File System Easy
  *
- * @package pie
+ * @package PIE
  * @subpackage files
  * @uses Pie_Easy_Files_Exception
  */
@@ -192,7 +192,7 @@ final class Pie_Easy_Files
 /**
  * Pie Easy File Exception
  *
- * @package pie
+ * @package PIE
  * @subpackage files
  */
 final class Pie_Easy_Files_Exception extends Exception {}

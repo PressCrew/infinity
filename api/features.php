@@ -1,9 +1,9 @@
 <?php
 /**
- * Infinity Theme features classes file
+ * Infinity Theme: features classes file
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
- * @link http://bp-tricks.com/
+ * @link http://marshallsorenson.com/
  * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
  * @package api
@@ -14,7 +14,7 @@
 Pie_Easy_Loader::load( 'enqueue', 'features' );
 
 /**
- * Infinity Feature factory class
+ * Infinity Theme: feature factory class
  *
  * @package api
  * @subpackage features
@@ -71,7 +71,7 @@ final class Infinity_Features
 }
 
 /**
- * Infinity Feature base class
+ * Infinity Theme: feature base class
  *
  * @package api
  * @subpackage features
@@ -90,7 +90,7 @@ abstract class Infinity_Feature extends Pie_Easy_Feature
 }
 
 /**
- * Infinity Custom CSS feature
+ * Infinity Theme: Custom CSS feature
  *
  * @package api
  * @subpackage features
@@ -117,7 +117,7 @@ class Infinity_Feature_Custom_Css extends Infinity_Feature
 }
 
 /**
- * Infinity "Header Logo" Feature
+ * Infinity Theme: Header Logo Feature
  *
  * @package api
  * @subpackage features
@@ -170,7 +170,7 @@ class Infinity_Feature_Header_Logo extends Infinity_Feature
 }
 
 /**
- * Infinity "Header Background" Feature
+ * Infinity Theme: Header Background Feature
  *
  * @package api
  * @subpackage features
@@ -220,7 +220,7 @@ class Infinity_Feature_Header_Background extends Infinity_Feature
 }
 
 /**
- * Infinity "Site Background" Feature
+ * Infinity Theme: Site Background Feature
  *
  * @package api
  * @subpackage features

@@ -1,12 +1,12 @@
 <?php
 /**
- * PIE API schemes scheme styles and scripts enqueuer class file
+ * PIE API: schemes scheme styles and scripts enqueuer class file
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://marshallsorenson.com/
  * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
- * @package pie
+ * @package PIE
  * @subpackage schemes
  * @since 1.0
  */
@@ -14,7 +14,7 @@
 /**
  * Make enqueuing scheme styles and scripts easy
  *
- * @package pie
+ * @package PIE
  * @subpackage schemes
  */
 class Pie_Easy_Scheme_Enqueue

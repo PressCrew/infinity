@@ -1,12 +1,12 @@
 <?php
 /**
- * PIE AJAX helpers class file
+ * PIE API: AJAX helpers class file
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://marshallsorenson.com/
  * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
- * @package pie
+ * @package PIE
  * @subpackage ajax
  * @since 1.0
  */
@@ -14,7 +14,7 @@
 /**
  * Make AJAX Easy
  *
- * @package pie
+ * @package PIE
  * @subpackage ajax
  */
 final class Pie_Easy_Ajax

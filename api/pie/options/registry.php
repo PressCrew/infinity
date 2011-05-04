@@ -1,12 +1,12 @@
 <?php
 /**
- * PIE API options registry
+ * PIE API: options registry
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://marshallsorenson.com/
  * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
- * @package pie
+ * @package PIE
  * @subpackage options
  * @since 1.0
  */
@@ -16,7 +16,7 @@ Pie_Easy_Loader::load( 'ajax', 'collections' );
 /**
  * Make keeping track of options easy
  *
- * @package pie
+ * @package PIE
  * @subpackage options
  */
 abstract class Pie_Easy_Options_Registry

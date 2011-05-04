@@ -1,9 +1,9 @@
 <?php
 /**
- * Infinity Theme scheme initilization file
+ * Infinity Theme: scheme initilization file
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
- * @link http://bp-tricks.com/
+ * @link http://marshallsorenson.com/
  * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
  * @package api

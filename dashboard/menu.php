@@ -1,9 +1,9 @@
 <?php
 /**
- * Infinity theme dashboard menu functions
+ * Infinity Theme: dashboard menu functions
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
- * @link http://bp-tricks.com/
+ * @link http://marshallsorenson.com/
  * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
  * @package dashboard
@@ -19,7 +19,7 @@ add_action( 'network_admin_menu', 'infinity_dashboard_menu_setup' );
 ////
 
 /**
- * Adds the Infinity submenu item to the BuddyPress menu
+ * Adds the Infinity submenu item to the WordPress menu
  */
 function infinity_dashboard_menu_setup()
 {
