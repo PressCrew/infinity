@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'ajax', 'files' );
+Pie_Easy_Loader::load( 'utils/ajax', 'utils/files' );
 
 // Special handling for async uploading
 add_action( 'wp_loaded', array( 'Pie_Easy_Options_Uploader', 'async_handler' ) );

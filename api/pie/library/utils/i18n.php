@@ -12,12 +12,12 @@
  */
 
 /**
- * Make L10n Easy
+ * Make i18n Easy
  *
  * @package PIE
- * @subpackage localization
+ * @subpackage i18n
  */
-abstract class Pie_Easy_L10n
+abstract class Pie_Easy_I18n
 {
 	/**
 	 * The text domain to translate for
@@ -25,9 +25,9 @@ abstract class Pie_Easy_L10n
 	 * @var string
 	 */
 	private $domain;
-	
+
 	/**
-	 * @param string $domain 
+	 * @param string $domain
 	 */
 	public function __construct( $domain )
 	{

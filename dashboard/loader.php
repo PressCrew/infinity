@@ -158,7 +158,7 @@ function infinity_dashboard_image( $name )
  */
 function infinity_dashboard_doc_publish( $page = null )
 {
-	Pie_Easy_Loader::load( 'docs' );
+	Pie_Easy_Loader::load( 'utils/docs' );
 	$doc = new Pie_Easy_Docs( Pie_Easy_Scheme::instance()->theme_documentation_dirs(), $page );
 	$doc->set_pre_filter( 'infinity_dashboard_doc_filter' );
 	$doc->publish();
@@ -171,7 +171,7 @@ function infinity_dashboard_doc_publish( $page = null )
  */
 function infinity_dashboard_devdoc_publish( $page = null )
 {
-	Pie_Easy_Loader::load( 'docs' );
+	Pie_Easy_Loader::load( 'utils/docs' );
 	$doc = new Pie_Easy_Docs( INFINITY_ADMIN_DOCS_DIR, $page );
 	$doc->set_pre_filter( 'infinity_dashboard_doc_filter' );
 	$doc->publish();

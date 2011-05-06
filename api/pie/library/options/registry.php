@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'ajax', 'collections' );
+Pie_Easy_Loader::load( 'utils/ajax', 'collections' );
 
 /**
  * Make keeping track of options easy

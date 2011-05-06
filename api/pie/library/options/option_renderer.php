@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'docs' );
+Pie_Easy_Loader::load( 'utils/docs' );
 
 /**
  * Make rendering options easy

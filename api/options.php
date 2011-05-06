@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'ajax', 'options' );
+Pie_Easy_Loader::load( 'utils/ajax', 'options' );
 
 /**
  * Infinity Theme: options section
