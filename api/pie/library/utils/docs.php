@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'files' );
+Pie_Easy_Loader::load( 'utils/files' );
 
 /**
  * Make documentation easy
@@ -131,13 +131,13 @@ class Pie_Easy_Docs
 			// Markdown
 			case self::MARKUP_MARKDOWN:
 			case self::MARKUP_MARKDOWN_LONG:
-				Pie_Easy_Loader::load( 'markdown' );
+				Pie_Easy_Loader::load( 'parsers/markdown' );
 				$contents = Pie_Easy_Markdown::parse( $contents );
 				break;
 			// Textile
 			case self::MARKUP_TEXTILE:
 			case self::MARKUP_TEXTILE_LONG:
-				Pie_Easy_Loader::load( 'textile' );
+				Pie_Easy_Loader::load( 'parsers/textile' );
 				$contents = Pie_Easy_Textile::parse( $contents );
 				break;
 			// Invalid

@@ -28,6 +28,10 @@ define( 'PIE_EASY_VERSION', '1.0' );
  */
 define( 'PIE_EASY_DIR', dirname( __FILE__ ) );
 /**
+ * PIE API: library directory
+ */
+define( 'PIE_EASY_LIB_DIR', PIE_EASY_DIR . DIRECTORY_SEPARATOR . 'library' );
+/**
  * PIE API: text domain
  */
 define( 'PIE_EASY_TEXT_DOMAIN', 'pie-easy-api' );
@@ -36,17 +40,13 @@ define( 'PIE_EASY_TEXT_DOMAIN', 'pie-easy-api' );
  */
 define( 'pie_easy_text_domain', PIE_EASY_TEXT_DOMAIN );
 /**
- * PIE API: i18n directory
- */
-define( 'PIE_EASY_I18N_DIR', PIE_EASY_DIR . DIRECTORY_SEPARATOR . 'i18n' );
-/**
  * PIE API: languages directory
  */
-define( 'PIE_EASY_LANGUAGES_DIR', PIE_EASY_I18N_DIR . DIRECTORY_SEPARATOR . 'languages' );
+define( 'PIE_EASY_LANGUAGES_DIR', PIE_EASY_DIR . DIRECTORY_SEPARATOR . 'languages' );
 /**
  * PIE API: vendors library directory
  */
-define( 'PIE_EASY_VENDORS_DIR', PIE_EASY_DIR . DIRECTORY_SEPARATOR . 'vendors' );
+define( 'PIE_EASY_VENDORS_DIR', PIE_EASY_LIB_DIR . DIRECTORY_SEPARATOR . 'vendors' );
 
 /**
  * Make loading PIE features easy
@@ -69,23 +69,20 @@ final class Pie_Easy_Loader
 	 * @var array
 	 */
 	private $features = array(
-		'ajax',
 		'collections' =>
 			array( 'map', 'map_iterator', 'stack', 'stack_iterator' ),
-		'docs',
-		'enqueue',
 		'features' =>
 			array( 'feature' ),
-		'files',
-		'l10n',
-		'markdown',
 		'options' =>
 			array( 'registry', 'option', 'option_directive', 'option_renderer', 'section', 'uploader', 'walkers' ),
 		'init' =>
 			array( 'directive' ),
+		'parsers' =>
+			array( 'markdown', 'textile' ),
 		'schemes' =>
 			array( 'scheme', 'scheme_directive', 'scheme_enqueue' ),
-		'textile'
+		'utils' =>
+			array( 'ajax', 'docs', 'enqueue', 'files', 'i18n' )
 	);
 
 	/**
@@ -119,7 +116,7 @@ final class Pie_Easy_Loader
 			self::$instance = new self();
 
 			// need the enqueue helper
-			self::$instance->load( 'enqueue' );
+			self::$instance->load( 'utils/enqueue' );
 
 			// init enqueue helper right away
 			Pie_Easy_Enqueue::init();
@@ -193,7 +190,7 @@ final class Pie_Easy_Loader
 		// build up file path
 		$file = sprintf(
 			'%s%s%s%s.php',
-			PIE_EASY_DIR,
+			PIE_EASY_LIB_DIR,
 			DIRECTORY_SEPARATOR,
 			( $feature ) ? $feature . DIRECTORY_SEPARATOR : null,
 			$name

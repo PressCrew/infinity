@@ -11,15 +11,15 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'l10n' );
+Pie_Easy_Loader::load( 'utils/i18n' );
 
 /**
  * Infinity Theme: localization
  *
  * @package api
- * @subpackage localization
+ * @subpackage i18n
  */
-class Infinity_L10n extends Pie_Easy_L10n
+class Infinity_I18n extends Pie_Easy_I18n
 {
 	// no customizations yet
 }

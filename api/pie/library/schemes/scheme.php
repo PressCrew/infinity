@@ -14,7 +14,7 @@
 /**
  * Load reqs
  */
-Pie_Easy_Loader::load( 'files', 'collections' );
+Pie_Easy_Loader::load( 'utils/files', 'collections' );
 
 /**
  * Make Scheming Easy

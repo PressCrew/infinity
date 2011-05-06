@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'enqueue', 'features' );
+Pie_Easy_Loader::load( 'utils/enqueue', 'features' );
 
 /**
  * Infinity Theme: feature factory class
