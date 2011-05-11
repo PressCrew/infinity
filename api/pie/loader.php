@@ -30,7 +30,11 @@ define( 'PIE_EASY_DIR', dirname( __FILE__ ) );
 /**
  * PIE API: library directory
  */
-define( 'PIE_EASY_LIB_DIR', PIE_EASY_DIR . DIRECTORY_SEPARATOR . 'library' );
+define( 'PIE_EASY_LIB_DIR', PIE_EASY_DIR . DIRECTORY_SEPARATOR . 'lib' );
+/**
+ * PIE API: extensions library directory
+ */
+define( 'PIE_EASY_LIBEXT_DIR', PIE_EASY_DIR . DIRECTORY_SEPARATOR . 'libext' );
 /**
  * PIE API: text domain
  */
@@ -49,13 +53,18 @@ define( 'PIE_EASY_LANGUAGES_DIR', PIE_EASY_DIR . DIRECTORY_SEPARATOR . 'language
 define( 'PIE_EASY_VENDORS_DIR', PIE_EASY_LIB_DIR . DIRECTORY_SEPARATOR . 'vendors' );
 
 /**
- * Make loading PIE features easy
+ * Make loading PIE libraries easy
  *
  * @package PIE
  * @subpackage loader
  */
 final class Pie_Easy_Loader
 {
+	/**
+	 * Delimeter at which to split library paths
+	 */
+	const PATH_DELIM = '/';
+
 	/**
 	 * Singleton instance
 	 *
@@ -64,11 +73,11 @@ final class Pie_Easy_Loader
 	private static $instance;
 
 	/**
-	 * Available features
+	 * Available libs
 	 *
 	 * @var array
 	 */
-	private $features = array(
+	private $pkgs = array(
 		'collections' =>
 			array( 'map', 'map_iterator', 'stack', 'stack_iterator' ),
 		'features' =>
@@ -83,6 +92,18 @@ final class Pie_Easy_Loader
 			array( 'scheme', 'scheme_directive', 'scheme_enqueue' ),
 		'utils' =>
 			array( 'ajax', 'docs', 'enqueue', 'files', 'i18n' )
+	);
+
+	/**
+	 * Available lib extensions
+	 *
+	 * @var array
+	 */
+	private $exts = array(
+		'features' => array(),
+		'options' => array(),
+		'shortcodes' => array(),
+		'widgets' => array()
 	);
 
 	/**
@@ -124,81 +145,173 @@ final class Pie_Easy_Loader
 	}
 
 	/**
-	 * Load feature(s) via static call
+	 * Load lib(s) via static call
 	 *
-	 * @param string $feature,... An unlimited number of features to load
+	 * @param string $lib,... An unlimited number of libs to load
 	 */
 	final static public function load()
 	{
 		// handle variable number of args
-		$features = func_get_args();
+		$libs = func_get_args();
 
-		// loop through all features
-		foreach ( $features as $feature ) {
-			self::$instance->load_feature( $feature );
-		}
-	}
-
-	/**
-	 * Load a single feature
-	 *
-	 * @param string $feature
-	 * @return true|void
-	 */
-	final public function load_feature( $feature )
-	{
-		// make sure feature exists
-		if ( array_key_exists( $feature, $this->features ) ) {
-			return $this->load_package( $feature );
-		} elseif ( in_array( $feature, $this->features, true ) ) {
-			return $this->load_file( $feature );
-		} else {
-			$split = explode( '/', $feature );
-			if ( count($split) == 2 ) {
-				return $this->load_file( $split[1], $split[0] );
+		// loop through all libs
+		foreach ( $libs as $lib ) {
+			if ( is_array( $lib ) ) {
+				self::$instance->load_lib( $lib[1], $lib[0] );
+			} else {
+				self::$instance->load_lib( $lib );
 			}
 		}
-
-		// sorry
-		throw new Exception( sprintf( 'The feature "%s" is not valid.', $feature ) );
 	}
 
 	/**
-	 * Load a feature package
+	 * Load library extension(s) via static call
 	 *
-	 * @param string $feature
+	 * @param string $ext,... An unlimited number of lib exts to load
+	 */
+	final static public function load_ext()
+	{
+		// handle variable number of args
+		$exts = func_get_args();
+
+		// loop through all exts
+		foreach ( $exts as $ext ) {
+			if ( is_array( $ext ) ) {
+				self::$instance->load_libext( $ext[1], $ext[0] );
+			} else {
+				self::$instance->load_libext( $ext );
+			}
+		}
+	}
+
+	/**
+	 * Load a single lib
+	 *
+	 * @param string $lib
+	 * @param string $pkg
 	 * @return true|void
 	 */
-	private function load_package( $feature )
+	private function load_lib( $lib, $pkg = null )
 	{
-		foreach ( $this->features[$feature] as $file ) {
-			$this->load_file( $file, $feature );
+		if ( $pkg ) {
+			return $this->load_lib_file( $lib, $pkg );
+		} else {
+			// load an entire package?
+			if ( $this->load_lib_pkg( $lib ) ) {
+				return true;
+			} else {
+				// split at path delim
+				$split = explode( self::PATH_DELIM, $lib );
+				// must have exactly two parts
+				if ( count($split) == 2 ) {
+					return $this->load_lib_file( $split[1], $split[0] );
+				} else {
+					throw new Exception( sprintf( 'The library path "%s" is not formatted correctly.', $lib ) );
+				}
+			}
 		}
-
-		return true;
 	}
 
 	/**
-	 * Load a feature file
+	 * Load a library package
 	 *
-	 * @param string $name
-	 * @param string $feature
+	 * @param string $pkg
+	 * @return true|void
+	 */
+	private function load_lib_pkg( $pkg )
+	{
+		if ( array_key_exists( $pkg, $this->pkgs ) ) {
+			foreach ( $this->pkgs[$pkg] as $lib ) {
+				$this->load_lib_file( $lib, $pkg );
+			}
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Load a library file
+	 *
+	 * @param string $lib
+	 * @param string $pkg
 	 * @return true
 	 */
-	private function load_file( $name, $feature = null )
+	private function load_lib_file( $lib, $pkg )
 	{
-		// build up file path
-		$file = sprintf(
-			'%s%s%s%s.php',
-			PIE_EASY_LIB_DIR,
-			DIRECTORY_SEPARATOR,
-			( $feature ) ? $feature . DIRECTORY_SEPARATOR : null,
-			$name
-		);
+		// check validity of package
+		if ( array_key_exists( $pkg, $this->pkgs ) ) {
+			// check validity of lib
+			if ( in_array( $lib, $this->pkgs[$pkg], true ) ) {
+				// build up file path
+				$file = 
+					PIE_EASY_LIB_DIR .
+					DIRECTORY_SEPARATOR . $pkg .
+					DIRECTORY_SEPARATOR . $lib . '.php';
+				// load it
+				require_once $file;
+				return true;
+			} else {
+				throw new Exception( sprintf( 'The library extension "%s" is not valid for the type "%s".', $lib, $pkg ) );
+			}
+		} else {
+			throw new Exception( sprintf( 'The library package "%s" is not valid.', $pkg ) );
+		}
+	}
 
-		// load it
-		require_once $file;
-		return true;
+	/**
+	 * Load a lib extension
+	 *
+	 * @param string $ext
+	 * @param string $type
+	 * @return true|void
+	 */
+	private function load_libext( $ext, $type = null )
+	{
+		// exact type defined?
+		if ( $type ) {
+			// load without parsing
+			return $this->load_libext_file( $ext, $type );
+		} else {
+			// split at path delim
+			$split = explode( self::PATH_DELIM, $ext );
+			// must be exactly two parts
+			if ( count($split) == 2 ) {
+				// try to load it
+				return $this->load_libext_file( $split[1], $split[0] );
+			} else {
+				throw new Exception( sprintf( 'The library extension "%s" is not formatted correctly.', $ext ) );
+			}
+		}
+	}
+	
+	/**
+	 * Load a lib extension file
+	 *
+	 * @param string $ext
+	 * @param string $type
+	 * @return true|void
+	 */
+	private function load_libext_file( $ext, $type )
+	{
+		// check validity of type
+		if ( array_key_exists( $type, $this->exts ) ) {
+			// check validity of extension
+			if ( in_array( $ext, $this->exts[$type], true ) ) {
+				// build up file path
+				$file =
+					PIE_EASY_LIBEXT_DIR .
+					DIRECTORY_SEPARATOR . $type .
+					DIRECTORY_SEPARATOR . $ext . '.php';
+				// load it
+				require_once $file;
+				return true;
+			} else {
+				throw new Exception( sprintf( 'The library extension "%s" is not valid for the type "%s".', $ext, $type ) );
+			}
+		} else {
+			throw new Exception( sprintf( 'The library extension type "%s" is not valid.', $type ) );
+		}
 	}
 
 }
