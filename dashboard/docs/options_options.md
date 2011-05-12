@@ -91,25 +91,35 @@ This is where you configure what type of option you want to display.
 
 	field_type = "text"
 
-The available types are:
+The available field types are:
 
-* _Basic Fields_
-	* _text_ - Text input
-	* _textarea_ Text area input
-	* _select_ - Select box
-	* _radio_ - Radio buttons
-	* _checkbox_ - Check boxes
-* _Dynamic Fields_
-	* _category_ - Select one category
-	* _categories_ - Select multiple categories
-	* _page_ - Select one page
-	* _pages_ - Select multiple pages
-	* _post_ - Select one post
-	* _posts_ - Select multiple posts
-* _Widget Fields_
-	* _upload_ - Media uploader widget
-	* _colorpicker_ - Color picker widget
-	* _css_ - Custom CSS integration (requires the "infinity-custom-css" theme feauture)
+* __Basic__
+	* __text__ - Text input
+	* __textarea__ Text area input
+	* __select__ - Select box
+	* __radio__ - Radio buttons
+	* __checkbox__ - Check boxes
+* __Dynamic__
+	* __category__ - Select one category
+	* __categories__ - Select multiple categories
+	* __page__ - Select one page
+	* __pages__ - Select multiple pages
+	* __post__ - Select one post
+	* __posts__ - Select multiple posts
+* __Toggles__
+	* __on__ - "On" checkbox
+	* __off__ - "Off" checkbox
+	* __yes__ - "Yes" checkbox
+	* __no__ - "No" checkbox
+	* __enable__ - "Enable" checkbox
+	* __disable__ - "Disable" checkbox
+	* __onoff__ - On/Off radios
+	* __yesno__ - Yes/No radios
+	* __enabledisable__ - Enable/Disable radios
+* __Widgets__
+	* __upload__ - Media uploader widget
+	* __colorpicker__ - Color picker widget
+	* __css__ - Custom CSS integration (requires the "infinity-custom-css" theme feauture)
 
 Child theme can override field\_type: **No**
 

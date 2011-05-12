@@ -105,12 +105,16 @@ final class Pie_Easy_Loader
 		'features' => array(),
 		'options' => array(
 			'category', 'categories', 'checkbox', 'colorpicker', 'css',
+			'disable',
+			'enable', 'enabledisable',
+			'off', 'on', 'onoff',
 			'page', 'pages', 'post', 'posts',
 			'radio',
 			'select',
 			'tag', 'tags',
 			'text', 'textarea',
-			'upload'
+			'upload',
+			'yes', 'yesno'
 		),
 		'shortcodes' => array(),
 		'widgets' => array()

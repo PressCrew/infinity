@@ -14,11 +14,28 @@
 Pie_Easy_Loader::load( 'collections', 'utils/docs', 'schemes' );
 
 /**
+ * Interface to implement if the option defines its own field_options internally
+ */
+interface Pie_Easy_Options_Option_Auto_Field
+{
+	/**
+	 * @return array of field options in [value] => [description] format
+	 */
+	public function load_field_options();
+}
+
+/**
  * Interface to implement if the option is storing an image attachment id
  */
 interface Pie_Easy_Options_Option_Attachment_Image
 {
+	/**
+	 * @return array attachment meta data
+	 */
 	public function get_image_src( $size = 'thumbnail', $attach_id = null );
+	/**
+	 * @return string absolute URL to image file
+	 */
 	public function get_image_url( $size = 'thumbnail' );
 }
 
@@ -156,6 +173,11 @@ abstract class Pie_Easy_Options_Option
 		$this->set_directive( 'title', $title, true );
 		$this->set_directive( 'description', $desc, true );
 		$this->add_capabilities( 'manage_options' );
+
+		// special cases
+		if ( $this instanceof Pie_Easy_Options_Option_Auto_Field ) {
+			$this->field_options = $this->load_field_options();
+		}
 
 		// run init
 		$this->init();
@@ -424,7 +446,11 @@ abstract class Pie_Easy_Options_Option
 	 */
 	public function set_field_options( $field_options )
 	{
-		$this->set_directive( 'field_options', $field_options, true );
+		if ( $this instanceof Pie_Easy_Options_Option_Auto_Field ) {
+			throw new Exception( 'Cannot set field options for an auto field option.' );
+		} else {
+			$this->set_directive( 'field_options', $field_options, true );
+		}
 	}
 
 	/**
