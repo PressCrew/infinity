@@ -80,6 +80,8 @@ final class Pie_Easy_Loader
 	private $pkgs = array(
 		'collections' =>
 			array( 'map', 'map_iterator', 'stack', 'stack_iterator' ),
+		'exts' =>
+			array( 'option_factory' ),
 		'features' =>
 			array( 'feature' ),
 		'options' =>
@@ -101,7 +103,15 @@ final class Pie_Easy_Loader
 	 */
 	private $exts = array(
 		'features' => array(),
-		'options' => array(),
+		'options' => array(
+			'category', 'categories', 'checkbox', 'colorpicker', 'css',
+			'page', 'pages', 'post', 'posts',
+			'radio',
+			'select',
+			'tag', 'tags',
+			'text', 'textarea',
+			'upload'
+		),
 		'shortcodes' => array(),
 		'widgets' => array()
 	);
@@ -244,7 +254,7 @@ final class Pie_Easy_Loader
 			// check validity of lib
 			if ( in_array( $lib, $this->pkgs[$pkg], true ) ) {
 				// build up file path
-				$file = 
+				$file =
 					PIE_EASY_LIB_DIR .
 					DIRECTORY_SEPARATOR . $pkg .
 					DIRECTORY_SEPARATOR . $lib . '.php';
@@ -284,7 +294,7 @@ final class Pie_Easy_Loader
 			}
 		}
 	}
-	
+
 	/**
 	 * Load a lib extension file
 	 *

@@ -240,9 +240,9 @@ final class Pie_Easy_Enqueue
 
 		// register default scripts
 		$this->register_script(
-			'pie-easy-global', 'global.js', array('jquery-ui-button') );
-		$this->register_script(
 			'pie-easy-colorpicker', 'colorpicker.js', array('jquery') );
+		$this->register_script(
+			'pie-easy-global', 'global.js', array('pie-easy-colorpicker', 'jquery-ui-button') );
 		$this->register_script(
 			'pie-easy-jquery-swfupload', 'jquery.swfupload.js', array('jquery', 'swfupload-all') );
 		$this->register_script(

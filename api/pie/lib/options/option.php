@@ -14,17 +14,50 @@
 Pie_Easy_Loader::load( 'collections', 'utils/docs', 'schemes' );
 
 /**
+ * Interface to implement if the option is storing an image attachment id
+ */
+interface Pie_Easy_Options_Option_Attachment_Image
+{
+	public function get_image_src( $size = 'thumbnail', $attach_id = null );
+	public function get_image_url( $size = 'thumbnail' );
+}
+
+/**
+ * This object is passed to each option allowing the implementing API to
+ * customize a few specific varaibles.
+ */
+abstract class Pie_Easy_Options_Option_Conf
+{
+	/**
+	 * Return the name of the implementing API
+	 *
+	 * If you are rolling your own parent theme, this should probably return the
+	 * name of the theme you are creating.
+	 *
+	 * @return string
+	 */
+	abstract public function get_api_slug();
+
+	/**
+	 * Return an instance of the options uploader class to be used
+	 *
+	 * @return Pie_Easy_Options_Uploader
+	 */
+	abstract public function get_options_uploader();
+}
+
+/**
  * Make an option easy
  *
  * @package PIE
  * @subpackage options
+ * @property-read Pie_Easy_Options_Option_Conf
  * @property-read string $section The section to which this options is assigned (slug)
  * @property-read string $title The option title
  * @property-read string $description The option description
  * @property string $class The CSS class to apply to the option's container
  * @property string $field_id The CSS id to apply to the option's input field
  * @property string $field_class The CSS class to apply to the option's input field
- * @property-read string $field_type Type of field to generate for the option
  * @property-read array $field_options An array of field options
  * @property array $capabilities Required capabilities, can only be appended
  * @property mixed $default_value Default value of the option
@@ -54,27 +87,12 @@ abstract class Pie_Easy_Options_Option
 	 */
 	const DEFAULT_SECTION = 'default';
 
-	/**#@+
-	 * Field type enumeration
+	/**
+	 * The option configuration instance
+	 * 
+	 * @var Pie_Easy_Options_Option_Conf
 	 */
-	const FIELD_CATEGORY = 'category';
-	const FIELD_CATEGORIES = 'categories';
-	const FIELD_CHECKBOX = 'checkbox';
-	const FIELD_COLORPICKER = 'colorpicker';
-	const FIELD_CSS = 'css';
-	const FIELD_PAGE = 'page';
-	const FIELD_PAGES = 'pages';
-	const FIELD_POST = 'post';
-	const FIELD_POSTS = 'posts';
-	const FIELD_RADIO = 'radio';
-	const FIELD_SELECT = 'select';
-	const FIELD_TAG = 'tag';
-	const FIELD_TAGS = 'tags';
-	const FIELD_TEXT = 'text';
-	const FIELD_TEXTAREA = 'textarea';
-	const FIELD_TEXTBLOCK = 'textblock';
-	const FIELD_UPLOAD = 'upload';
-	/**#@-*/
+	private $conf;
 
 	/**
 	 * The theme that created this option
@@ -110,14 +128,14 @@ abstract class Pie_Easy_Options_Option
 	private $post_override = false;
 
 	/**
+	 * @param Pie_Easy_Options_Option_Conf $conf The option configuration object
 	 * @param string $theme The theme that created this option
 	 * @param string $name Option name may only contain alphanumeric characters as well as the underscore for use as a word separator.
 	 * @param string $title
 	 * @param string $desc
-	 * @param string $field_type
 	 * @param string $section
 	 */
-	final public function __construct( $theme, $name, $title, $desc, $field_type, $section = self::DEFAULT_SECTION )
+	final public function __construct( Pie_Easy_Options_Option_Conf $conf, $theme, $name, $title, $desc, $section = self::DEFAULT_SECTION  )
 	{
 		// name must adhere to a strict format
 		if ( preg_match( '/^[a-z0-9]+(_[a-z0-9]+)*$/', $name ) ) {
@@ -129,7 +147,8 @@ abstract class Pie_Easy_Options_Option
 		// init directives map
 		$this->directives = new Pie_Easy_Map();
 
-		// set basic string properties
+		// set basic properties
+		$this->conf = $conf;
 		$this->theme = $theme;
 
 		// set directives
@@ -137,7 +156,9 @@ abstract class Pie_Easy_Options_Option
 		$this->set_directive( 'title', $title, true );
 		$this->set_directive( 'description', $desc, true );
 		$this->add_capabilities( 'manage_options' );
-		$this->set_field_type( $field_type );
+
+		// run init
+		$this->init();
 	}
 
 	/**
@@ -153,6 +174,54 @@ abstract class Pie_Easy_Options_Option
 			return $this->$name;
 		}
 	}
+
+	/**
+	 * This template method is called at the end of the constructor
+	 */
+	protected function init()
+	{
+		// override this method to initialize special PHP handling for an option
+	}
+
+	/**
+	 * This template method is called if the current request is AJAX
+	 */
+	public function init_ajax()
+	{
+		// override this method to initialize special AJAX handling for an option
+	}
+
+	/**
+	 * This template method is called on the option renderer init_screen method
+	 */
+	public function init_screen()
+	{
+		// override this method to initialize special screen handling for an option
+	}
+
+	/**
+	 * This template method is called "just in time" to enqueue styles
+	 */
+	public function init_styles()
+	{
+		// override this method to initialize special style handling for an option
+	}
+
+	/**
+	 * This template method is called "just in time" to enqueue scripts
+	 */
+	public function init_scripts()
+	{
+		// override this method to initialize special script handling for an option
+	}
+
+	/**
+	 * This method must be implemented to print the option's field HTML
+	 *
+	 * This method should be used for logic only. The renderer which is passed
+	 * should be called to actually generate the markup when possible.
+	 */
+	abstract protected function render_field( Pie_Easy_Options_Option_Renderer $renderer );
 
 	/**
 	 * Toggle post override ON
@@ -272,95 +341,6 @@ abstract class Pie_Easy_Options_Option
 	}
 
 	/**
-	 * Get the attachment image source details
-	 *
-	 * Returns an array with attachment details
-	 *
-	 * <code>
-	 * Array (
-	 *   [0] => url
-	 *   [1] => width
-	 *   [2] => height
-	 * )
-	 * </code>
-	 *
-	 * @see wp_get_attachment_image_src()
-	 * @link http://codex.wordpress.org/Function_Reference/wp_get_attachment_image_src
-	 * @param string $size Either a string (`thumbnail`, `medium`, `large` or `full`), or a two item array representing width and height in pixels, e.g. array(32,32). The size of media icons are never affected.
-	 * @param integer $attach_id The id of the attachment, defaults to option value.
-	 * @return array|false
-	 */
-	public function get_image_src( $size = 'thumbnail', $attach_id = null )
-	{
-		// attach id was passed?
-		if ( empty( $attach_id ) ) {
-			$attach_id = $this->get();
-		}
-
-		if ( is_numeric( $attach_id ) ) {
-			// try to get the attachment info
-			$src = wp_get_attachment_image_src( $attach_id, $size );
-		} else {
-			// determine theme to use
-			if ( $attach_id == $this->default_value ) {
-				$theme = $this->default_value_theme;
-			} else {
-				$theme = $this->theme;
-			}
-			// mimic the src array
-			$src[0] = Pie_Easy_Files::theme_file_url( $theme, $attach_id );
-			$src[1] = null;
-			$src[2] = null;
-		}
-
-		// did we find one?
-		if ( is_array($src) ) {
-			return $src;
-		} else {
-			return false;
-		}
-	}
-
-	/**
-	 * Return the URL of an image attachment for this option
-	 *
-	 * This method is only useful if the option is storing the id of an attachment
-	 *
-	 * @param string $size Either a string (`thumbnail`, `medium`, `large` or `full`), or a two item array representing width and height in pixels, e.g. array(32,32). The size of media icons are never affected.
-	 * @return string|false
-	 */
-	public function get_image_url( $size = 'thumbnail' )
-	{
-		// get the value
-		$value = $this->get();
-
-		// did we get a number?
-		if ( is_numeric( $value ) && $value >= 1 ) {
-
-			// get the details
-			$src = $this->get_image_src( $size, $value );
-
-			// try to return a url
-			return ( $src ) ? $src[0] : false;
-
-		} elseif ( is_string( $value ) && strlen( $value ) >= 1 ) {
-
-			// determine theme to use
-			if ( $value == $this->default_value ) {
-				$theme = $this->default_value_theme;
-			} else {
-				$theme = $this->theme;
-			}
-
-			// they must have provided an image path
-			return Pie_Easy_Files::theme_file_url( $theme, $value );
-
-		}
-
-		return null;
-	}
-
-	/**
 	 * Check that current user has all required capabilities to view/edit this option
 	 *
 	 * @return boolean
@@ -391,38 +371,6 @@ abstract class Pie_Easy_Options_Option
 	}
 
 	/**
-	 * Check if field type is valid
-	 *
-	 * @param string $type
-	 * @return boolean
-	 */
-	private function check_field_type( $type )
-	{
-		switch ( $type ) {
-			case self::FIELD_CATEGORY:
-			case self::FIELD_CATEGORIES:
-			case self::FIELD_CSS:
-			case self::FIELD_CHECKBOX:
-			case self::FIELD_COLORPICKER:
-			case self::FIELD_PAGE:
-			case self::FIELD_PAGES:
-			case self::FIELD_POST:
-			case self::FIELD_POSTS:
-			case self::FIELD_RADIO:
-			case self::FIELD_SELECT:
-			case self::FIELD_TAG:
-			case self::FIELD_TAGS:
-			case self::FIELD_TEXT:
-			case self::FIELD_TEXTAREA:
-			case self::FIELD_TEXTBLOCK:
-			case self::FIELD_UPLOAD:
-				return true;
-			default:
-				return false;
-		}
-	}
-
-	/**
 	 * Set a directive
 	 *
 	 * @param string $name
@@ -447,28 +395,6 @@ abstract class Pie_Easy_Options_Option
 	public function set_class( $class )
 	{
 		$this->set_directive( 'class', $class );
-	}
-
-	/**
-	 * Set the field type of this option
-	 *
-	 * @param string $type
-	 * @return boolean
-	 */
-	private function set_field_type( $type )
-	{
-		if ( $this->check_field_type( $type ) ) {
-			// set it
-			$this->set_directive( 'field_type', $type, true );
-			// add cap for upload field
-			if ( 'upload' == $type ) {
-				$this->add_capabilities( 'upload_files' );
-			}
-			// done
-			return true;
-		} else {
-			throw new Exception( sprintf( 'The "%s" field type is not valid', $type ) );
-		}
 	}
 
 	/**
@@ -595,7 +521,7 @@ abstract class Pie_Easy_Options_Option
 	 */
 	private function get_api_prefix()
 	{
-		return sprintf( self::PREFIX_TPL, $this->get_api_slug() );
+		return sprintf( self::PREFIX_TPL, $this->conf->get_api_slug() );
 	}
 
 	/**
@@ -607,17 +533,103 @@ abstract class Pie_Easy_Options_Option
 	{
 		return $this->get_api_prefix() . $this->name;
 	}
+}
+
+/**
+ * An option for storing an image (via WordPress attachment API)
+ */
+abstract class Pie_Easy_Options_Option_Image
+	extends Pie_Easy_Options_Option
+		implements Pie_Easy_Options_Option_Attachment_Image
+{
+	/**
+	 * Get the attachment image source details
+	 *
+	 * Returns an array with attachment details
+	 *
+	 * <code>
+	 * Array (
+	 *   [0] => url
+	 *   [1] => width
+	 *   [2] => height
+	 * )
+	 * </code>
+	 *
+	 * @see wp_get_attachment_image_src()
+	 * @link http://codex.wordpress.org/Function_Reference/wp_get_attachment_image_src
+	 * @param string $size Either a string (`thumbnail`, `medium`, `large` or `full`), or a two item array representing width and height in pixels, e.g. array(32,32). The size of media icons are never affected.
+	 * @param integer $attach_id The id of the attachment, defaults to option value.
+	 * @return array|false
+	 */
+	public function get_image_src( $size = 'thumbnail', $attach_id = null )
+	{
+		// attach id was passed?
+		if ( empty( $attach_id ) ) {
+			$attach_id = $this->get();
+		}
+
+		if ( is_numeric( $attach_id ) ) {
+			// try to get the attachment info
+			$src = wp_get_attachment_image_src( $attach_id, $size );
+		} else {
+			// determine theme to use
+			if ( $attach_id == $this->default_value ) {
+				$theme = $this->default_value_theme;
+			} else {
+				$theme = $this->theme;
+			}
+			// mimic the src array
+			$src[0] = Pie_Easy_Files::theme_file_url( $theme, $attach_id );
+			$src[1] = null;
+			$src[2] = null;
+		}
+
+		// did we find one?
+		if ( is_array($src) ) {
+			return $src;
+		} else {
+			return false;
+		}
+	}
 
 	/**
-	 * Return the name of the implementing API
+	 * Return the URL of an image attachment for this option
 	 *
-	 * If you are rolling your own parent theme, this should probably return the
-	 * name of the theme you are creating.
+	 * This method is only useful if the option is storing the id of an attachment
 	 *
-	 * @return string
+	 * @param string $size Either a string (`thumbnail`, `medium`, `large` or `full`), or a two item array representing width and height in pixels, e.g. array(32,32). The size of media icons are never affected.
+	 * @return string|false
 	 */
-	abstract protected function get_api_slug();
+	public function get_image_url( $size = 'thumbnail' )
+	{
+		// get the value
+		$value = $this->get();
 
+		// did we get a number?
+		if ( is_numeric( $value ) && $value >= 1 ) {
+
+			// get the details
+			$src = $this->get_image_src( $size, $value );
+
+			// try to return a url
+			return ( $src ) ? $src[0] : false;
+
+		} elseif ( is_string( $value ) && strlen( $value ) >= 1 ) {
+
+			// determine theme to use
+			if ( $value == $this->default_value ) {
+				$theme = $this->default_value_theme;
+			} else {
+				$theme = $this->theme;
+			}
+
+			// they must have provided an image path
+			return Pie_Easy_Files::theme_file_url( $theme, $value );
+
+		}
+
+		return null;
+	}
 }
 
 ?>
