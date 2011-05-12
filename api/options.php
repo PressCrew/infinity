@@ -25,21 +25,31 @@ class Infinity_Options_Section extends Pie_Easy_Options_Section
 }
 
 /**
- * Infinity Theme: options option
+ * Infinity Theme: options option conf
  *
  * @package api
  * @subpackage options
  */
-class Infinity_Options_Option extends Pie_Easy_Options_Option
+class Infinity_Options_Option_Conf extends Pie_Easy_Options_Option_Conf
 {
 	/**
 	 * Return the name of the implementing API
 	 *
 	 * @return string
 	 */
-	protected function get_api_slug()
+	final public function get_api_slug()
 	{
 		return 'infinity_theme';
+	}
+
+	/**
+	 * Return an instance of the options uploader class to be used
+	 *
+	 * @return Pie_Easy_Options_Uploader
+	 */
+	final public function get_options_uploader()
+	{
+		return new Infinity_Options_Uploader( 'admin_head' );
 	}
 }
 
@@ -86,13 +96,12 @@ class Infinity_Options_Registry extends Pie_Easy_Options_Registry
 			// init theme registry
 			$registry = new self();
 
-			// set section and option classes
+			// set section and option conf
 			$registry->set_section_class('Infinity_Options_Section');
-			$registry->set_option_class('Infinity_Options_Option');
+			$registry->set_option_conf( new Infinity_Options_Option_Conf() );
 
 			// set renderer
 			$renderer = new Infinity_Options_Option_Renderer();
-			$renderer->enable_uploader( new Infinity_Options_Uploader( 'admin_head' ) );
 			$registry->set_option_renderer( $renderer );
 
 			// push this registry onto the map
@@ -241,9 +250,12 @@ function infinity_options_init( $theme = null )
 	// enable option in scheme
 	Pie_Easy_Scheme::instance($theme)->enable_options( Infinity_Options_Registry::instance($theme) );
 
-	// init screen reqs
-	Infinity_Options_Registry::instance($theme)->init_screen();
-	Infinity_Options_Registry::instance($theme)->init_ajax();
+	// init ajax OR screen reqs (not both)
+	if ( defined( 'DOING_AJAX') ) {
+		Infinity_Options_Registry::instance($theme)->init_ajax();
+	} else {
+		Infinity_Options_Registry::instance($theme)->init_screen();
+	}
 
 	do_action( 'infinity_options_init' );
 }

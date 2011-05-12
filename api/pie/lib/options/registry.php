@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'utils/ajax', 'collections' );
+Pie_Easy_Loader::load( 'utils/ajax', 'collections', 'exts/option_factory' );
 
 /**
  * Make keeping track of options easy
@@ -63,11 +63,11 @@ abstract class Pie_Easy_Options_Registry
 	private $section_class;
 
 	/**
-	 * The class use for new options
+	 * The option config instance
 	 *
-	 * @var string
+	 * @var Pie_Easy_Options_Option_Conf
 	 */
-	private $option_class;
+	private $option_conf;
 
 	/**
 	 * The option renderer instance
@@ -116,6 +116,17 @@ abstract class Pie_Easy_Options_Registry
 	}
 
 	/**
+	 * Init ajax requirements
+	 */
+	public function init_ajax()
+	{
+		// init ajax for each registered option
+		foreach ( $this->get_options() as $option ) {
+			$option->init_ajax();
+		}
+	}
+	
+	/**
 	 * Init screen dependencies for all applicable options to be rendered
 	 */
 	public function init_screen()
@@ -128,38 +139,51 @@ abstract class Pie_Easy_Options_Registry
 		add_action( 'pie_easy_enqueue_styles', array($this, 'init_styles') );
 		add_action( 'pie_easy_enqueue_scripts', array($this, 'init_scripts') );
 
-		$this->option_renderer->init_screen();
-	}
-
-	/**
-	 * Init ajax requirements
-	 */
-	public function init_ajax()
-	{
-		$this->option_renderer->init_ajax();
+		// init screen for each registered option
+		foreach ( $this->get_options() as $option ) {
+			$option->init_screen();
+		}
 	}
 
 	/**
 	 * Enqueue required styles
 	 */
-	public function init_styles() {}
+	public function init_styles()
+	{
+		// init styles for each registered option
+		foreach ( $this->get_options() as $option ) {
+			$option->init_styles();
+		}
+	}
 
 	/**
 	 * Enqueue required scripts
 	 */
 	public function init_scripts()
 	{
-		// enqueue any scripts here
-		// BEFORE LOCALIZING!!!
+		// jQuery UI is always needed
+		wp_enqueue_script( 'jquery-ui-accordion' );
+		wp_enqueue_script( 'jquery-ui-button' );
+		wp_enqueue_script( 'jquery-ui-dialog' );
+		wp_enqueue_script( 'jquery-ui-progressbar' );
+		wp_enqueue_script( 'jquery-ui-tabs' );
 
-		// localize the upload wrapper
+		// init scripts for each registered option
+		foreach ( $this->get_options() as $option ) {
+			$option->init_scripts();
+		}
+
+		// call localize script *LAST*
 		$this->localize_script();
 	}
 
 	/**
-	 * Localize the ajax url
+	 * Template method to allow localization of scripts
 	 */
-	protected function localize_script() {}
+	protected function localize_script()
+	{
+		// override this to apply special localizations that apply to your implementation
+	}
 
 	/**
 	 * Set the PHP class to use for creating new sections
@@ -179,19 +203,19 @@ abstract class Pie_Easy_Options_Registry
 	}
 
 	/**
-	 * Set the PHP class to use for creating new options
+	 * Set the option conf object
 	 *
-	 * @param string $class_name
+	 * @param Pie_Easy_Options_Option_Conf $conf
 	 * @return boolean
 	 */
-	public function set_option_class( $class_name )
+	public function set_option_conf( Pie_Easy_Options_Option_Conf $conf )
 	{
-		// set the option class
-		if ( class_exists( $class_name ) ) {
-			$this->option_class = $class_name;
+		// set the option conf
+		if ( empty( $this->option_conf ) ) {
+			$this->option_conf = $conf;
 			return true;
 		} else {
-			throw new Exception( 'Provided option class does not exist' );
+			throw new Exception( 'Cannot overwrite option conf once set' );
 		}
 	}
 
@@ -535,13 +559,16 @@ abstract class Pie_Easy_Options_Registry
 			// get source option, which is on top of the options stack
 			$source_option = $this->get_option_stack($option_name)->peek();
 
+			// get class of source option
+			$source_class = get_class( $source_option );
+
 			// copy option properties (do NOT use cloning)
-			$option = new $this->{option_class}(
+			$option = new $source_class(
+				$this->option_conf,
 				$this->loading_theme,
 				$source_option->name,
 				$source_option->title,
 				$source_option->description,
-				$source_option->field_type,
 				$source_option->section
 			);
 
@@ -559,12 +586,13 @@ abstract class Pie_Easy_Options_Registry
 			}
 
 			// create new option
-			$option = new $this->{option_class}(
+			$option = Pie_Easy_Exts_Option_Factory::create(
+				$option_config['field_type'],
+				$this->option_conf,
 				$this->loading_theme,
 				$option_name,
 				$option_config['title'],
 				$option_config['description'],
-				$option_config['field_type'],
 				$section->name
 			);
 
@@ -715,12 +743,12 @@ abstract class Pie_Easy_Options_Registry
 		}
 
 		// render the option
-		$html = $this->option_renderer->render( $option, $output );
+		$html = $this->option_renderer->render( $option, false );
 
 		// render options that require this one
 		foreach ( $this->get_options() as $sibling_option ) {
 			if ( $option->name == $sibling_option->required_option ) {
-				$html .= $this->option_renderer->render( $sibling_option, $output );
+				$html .= $this->option_renderer->render( $sibling_option, false );
 			}
 		}
 
@@ -828,7 +856,7 @@ abstract class Pie_Easy_Options_Registry
 
 		// loop through and check field type
 		foreach ( $this->get_options() as $option ) {
-			if ( $option->field_type == Pie_Easy_Options_Option::FIELD_CSS ) {
+			if ( $option instanceof Pie_Easy_Exts_Option_Css ) {
 				// append css markup
 				$css .= $option->get() . PHP_EOL;
 			}
