@@ -1,27 +1,26 @@
 <?php
 /**
- * PIE API: options option directive class file
+ * PIE API: section extensions, default section class file
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://marshallsorenson.com/
  * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
  * @package PIE
- * @subpackage options
+ * @subpackage sections-ext
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'init/directive' );
-
 /**
- * Make an option directive easy
+ * Default section
  *
  * @package PIE
- * @subpackage options
+ * @subpackage sections-ext
  */
-class Pie_Easy_Options_Directive extends Pie_Easy_Init_Directive
+class Pie_Easy_Exts_Section_Default
+	extends Pie_Easy_Sections_Section
 {
-	// nothing custom yet!
+	// empty for now
 }
 
 ?>

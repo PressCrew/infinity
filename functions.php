@@ -41,6 +41,7 @@ Pie_Easy_Loader::init( INFINITY_PIE_URL );
 
 // load Infinity API
 require_once( INFINITY_API_DIR . DIRECTORY_SEPARATOR . 'scheme.php' );
+require_once( INFINITY_API_DIR . DIRECTORY_SEPARATOR . 'sections.php' );
 require_once( INFINITY_API_DIR . DIRECTORY_SEPARATOR . 'options.php' );
 require_once( INFINITY_API_DIR . DIRECTORY_SEPARATOR . 'features.php' );
 require_once( INFINITY_API_DIR . DIRECTORY_SEPARATOR . 'i18n.php' );

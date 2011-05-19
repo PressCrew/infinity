@@ -23,7 +23,7 @@ class Pie_Easy_Exts_Option_Pages
 	/**
 	 * Render page checkboxes
 	 */
-	public function render_field( Pie_Easy_Options_Option_Renderer $renderer )
+	public function render_field()
 	{
 		$args = array(
 			'depth'        => 0,

@@ -31,17 +31,17 @@ class Pie_Easy_Exts_Option_Upload
 
 	public function init_screen()
 	{
-		$this->conf->get_options_uploader()->init_screen();
+		$this->policy()->uploader()->init_screen();
 	}
 
 	public function init_ajax()
 	{
-		$this->conf->get_options_uploader()->init_ajax();
+		$this->policy()->uploader()->init_ajax();
 	}
 
-	public function render_field( Pie_Easy_Options_Option_Renderer $renderer )
+	public function render_field()
 	{
-		$this->conf->get_options_uploader()->render( $this, $renderer );
+		$this->policy()->uploader()->render( $this, $this->policy() );
 	}
 }
 

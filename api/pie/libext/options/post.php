@@ -25,7 +25,7 @@ class Pie_Easy_Exts_Option_Post
 	 *
 	 * @see render_select
 	 */
-	public function render_field( Pie_Easy_Options_Option_Renderer $renderer )
+	public function render_field()
 	{
 		// get all posts
 		$posts = get_posts();
@@ -39,7 +39,7 @@ class Pie_Easy_Exts_Option_Post
 		}
 
 		// call the select renderer
-		$renderer->render_select( $options );
+		$this->policy()->renderer()->render_select( $options );
 	}
 }
 

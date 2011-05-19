@@ -78,20 +78,22 @@ final class Pie_Easy_Loader
 	 * @var array
 	 */
 	private $pkgs = array(
+		'base' =>
+			array( 'component', 'factory', 'policeable', 'policy', 'registry', 'renderer' ),
 		'collections' =>
 			array( 'map', 'map_iterator', 'stack', 'stack_iterator' ),
-		'exts' =>
-			array( 'option_factory' ),
 		'features' =>
 			array( 'feature' ),
 		'options' =>
-			array( 'registry', 'option', 'option_directive', 'option_renderer', 'section', 'uploader', 'walkers' ),
+			array( 'factory', 'option', 'renderer', 'policy', 'registry', 'uploader', 'walkers' ),
 		'init' =>
 			array( 'directive' ),
 		'parsers' =>
 			array( 'markdown', 'textile' ),
 		'schemes' =>
 			array( 'scheme', 'scheme_directive', 'scheme_enqueue' ),
+		'sections' =>
+			array( 'factory', 'section', 'renderer', 'policy', 'registry' ),
 		'utils' =>
 			array( 'ajax', 'docs', 'enqueue', 'files', 'i18n' )
 	);
@@ -116,6 +118,7 @@ final class Pie_Easy_Loader
 			'upload',
 			'yes', 'yesno'
 		),
+		'sections' => array( 'default' ),
 		'shortcodes' => array(),
 		'widgets' => array()
 	);

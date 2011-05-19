@@ -20,7 +20,7 @@
  * @property mixed $value The value of the directive
  * @property-read boolean $read_only Whether the value is read only
  */
-abstract class Pie_Easy_Init_Directive
+class Pie_Easy_Init_Directive
 {
 	/**
 	 * @var string The name of this directive

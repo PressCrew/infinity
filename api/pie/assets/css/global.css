@@ -47,18 +47,6 @@ div.pie-easy-flash span.ui-button-text {
 	font-size: 10px;
 }
 
-/* Options */
-div.pie-easy-options-wrapper {
-	line-height: 100%;
-}
-label.pie-easy-options-title {
-	font-weight: bold;
-	line-height: 100%;
-}
-p.pie-easy-options-description {
-	line-height: 100%;
-}
-
 /* Color Picker */
 .colorpicker {
 	z-index: 1000;

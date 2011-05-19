@@ -23,7 +23,7 @@ class Pie_Easy_Exts_Option_Categories
 	/**
 	 * Render category checkboxes
 	 */
-	public function render_field( Pie_Easy_Options_Option_Renderer $renderer )
+	public function render_field()
 	{
 		$args = array(
 			'show_option_all'		=> false,

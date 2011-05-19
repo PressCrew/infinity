@@ -467,23 +467,23 @@ final class Pie_Easy_Scheme
 	}
 
 	/**
-	 * Enable theme options for the scheme by passing a valid options registry object
+	 * Enable components for the scheme by passing a valid policy object
 	 *
-	 * @param Pie_Easy_Options_Registry $registry
+	 * @param Pie_Easy_Policy $policy
 	 * @param string $ini_file_name
 	 * @return boolean
 	 */
-	public function enable_options( Pie_Easy_Options_Registry $registry, $ini_file_name = 'options' )
+	public function enable_component( Pie_Easy_Policy $policy )
 	{
 		// loop through entire theme stack BOTTOM UP and try to load options
 		foreach( $this->themes->to_array() as $theme ) {
 
-			// path to options ini
-			$options_ini = $this->theme_file( $theme, $this->config_dir, $ini_file_name . '.ini' );
+			// path to ini file
+			$ini_file = $this->theme_file( $theme, $this->config_dir, $policy->get_handle() . '.ini' );
 
 			// load the option config if it exists
-			if ( is_readable( $options_ini ) ) {
-				$registry->load_config_file( $options_ini, $theme );
+			if ( is_readable( $ini_file ) ) {
+				$policy->registry()->load_config_file( $ini_file, $theme );
 			}
 
 		}
