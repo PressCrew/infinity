@@ -14,24 +14,22 @@
 Pie_Easy_Loader::load( 'utils/ajax', 'options' );
 
 /**
- * Infinity Theme: options section
+ * Infinity Theme: options policy
  *
  * @package api
  * @subpackage options
  */
-class Infinity_Options_Section extends Pie_Easy_Options_Section
+class Infinity_Options_Policy extends Pie_Easy_Options_Policy
 {
-	// nothing custom yet
-}
-
-/**
- * Infinity Theme: options option conf
- *
- * @package api
- * @subpackage options
- */
-class Infinity_Options_Option_Conf extends Pie_Easy_Options_Option_Conf
-{
+	/**
+	 * @return Pie_Easy_Options_Policy
+	 */
+	static public function instance()
+	{
+		self::$calling_class = __CLASS__;
+		return parent::instance();
+	}
+	
 	/**
 	 * Return the name of the implementing API
 	 *
@@ -43,11 +41,33 @@ class Infinity_Options_Option_Conf extends Pie_Easy_Options_Option_Conf
 	}
 
 	/**
-	 * Return an instance of the options uploader class to be used
-	 *
-	 * @return Pie_Easy_Options_Uploader
+	 * @return Infinity_Options_Registry
 	 */
-	final public function get_options_uploader()
+	final public function new_registry()
+	{
+		return new Infinity_Options_Registry();
+	}
+
+	/**
+	 * @return Infinity_Exts_Option_Factory
+	 */
+	final public function new_factory()
+	{
+		return new Infinity_Exts_Option_Factory();
+	}
+
+	/**
+	 * @return Infinity_Options_Renderer
+	 */
+	final public function new_renderer()
+	{
+		return new Infinity_Options_Renderer();
+	}
+
+	/**
+	 * @return Infinity_Options_Uploader
+	 */
+	final public function new_uploader()
 	{
 		return new Infinity_Options_Uploader( 'admin_head' );
 	}
@@ -61,56 +81,6 @@ class Infinity_Options_Option_Conf extends Pie_Easy_Options_Option_Conf
  */
 class Infinity_Options_Registry extends Pie_Easy_Options_Registry
 {
-	/**
-	 * The singleton instance
-	 *
-	 * Map of Pie_Easy_Options_Registry instances
-	 *
-	 * @var Pie_Easy_Map
-	 */
-	private static $instances;
-
-	/**
-	 * This is a singleton
-	 */
-	private function __constructor() {}
-
-	/**
-	 * Return the registry for a theme ancestory
-	 *
-	 * @param $theme Theme for which to manage options
-	 * @return Pie_Easy_Options_Registry
-	 */
-	static public function instance( $theme = null )
-	{
-		if ( empty( $theme ) ) {
-			$theme = get_stylesheet();
-		}
-
-		if ( !self::$instances instanceof Pie_Easy_Map ) {
-			self::$instances = new Pie_Easy_Map();
-		}
-
-		if ( !self::$instances->contains( $theme ) ) {
-
-			// init theme registry
-			$registry = new self();
-
-			// set section and option conf
-			$registry->set_section_class('Infinity_Options_Section');
-			$registry->set_option_conf( new Infinity_Options_Option_Conf() );
-
-			// set renderer
-			$renderer = new Infinity_Options_Option_Renderer();
-			$registry->set_option_renderer( $renderer );
-
-			// push this registry onto the map
-			self::$instances->add( $theme, $registry );
-		}
-
-		return self::$instances->item_at( $theme );
-	}
-
 	/**
 	 * Set up form handler
 	 *
@@ -137,9 +107,9 @@ class Infinity_Options_Registry extends Pie_Easy_Options_Registry
 
 		// add form processing
 		if ( defined('DOING_AJAX') ) {
-			add_action( 'wp_ajax_infinity_options_update', array( Infinity_Options_Registry::instance($theme), 'process_form_ajax' ) );
+			add_action( 'wp_ajax_infinity_options_update', array( Infinity_Options_Policy::instance()->registry($theme), 'process_form_ajax' ) );
 		} else {
-			add_action( 'load-toplevel_page_' . INFINITY_ADMIN_PAGE, array( Infinity_Options_Registry::instance($theme), 'process_form' ) );
+			add_action( 'load-toplevel_page_' . INFINITY_ADMIN_PAGE, array( Infinity_Options_Policy::instance()->registry($theme), 'process_form' ) );
 		}
 
 		restore_current_blog();
@@ -163,17 +133,28 @@ class Infinity_Options_Registry extends Pie_Easy_Options_Registry
 add_action( 'wp_loaded', array( 'Infinity_Options_Registry', 'init_form_processing' ) );
 
 /**
+ * Infinity Theme: option factory
+ *
+ * @package api
+ * @subpackage exts
+ */
+class Infinity_Exts_Option_Factory extends Pie_Easy_Options_Factory
+{
+	// nothing custom yet
+}
+
+/**
  * Infinity Theme: options renderer
  *
  * @package api
  * @subpackage options
  */
-class Infinity_Options_Option_Renderer extends Pie_Easy_Options_Option_Renderer
+class Infinity_Options_Renderer extends Pie_Easy_Options_Renderer
 {
 	/**
 	 * Override render option method to customize output
 	 */
-	protected function render_option()
+	protected function render_output()
 	{
 		// start rendering ?>
 		<div class="<?php $this->render_classes( 'infinity-cpanel-options-single' ) ?>">
@@ -225,6 +206,29 @@ class Infinity_Options_Option_Renderer extends Pie_Easy_Options_Option_Renderer
 	{
 		return ( infinity_scheme_directive( Pie_Easy_Scheme::DIRECTIVE_OPT_SAVE_SINGLE ) );
 	}
+
+	/**
+	 * Render sample code for this option
+	 */
+	final protected function render_sample_code()
+	{
+// begin rendering ?>
+<strong>Test if option is set</strong>
+<code>&lt;?php if ( infinity_option( '<?php print $this->get_current()->name ?>' ) ): ?&gt;
+    <?php print $this->get_current()->name ?> has a value
+&lt;?php endif; ?&gt;</code>
+
+<strong>Echo an option value</strong>
+<code>&lt;?php echo infinity_option( '<?php print $this->get_current()->name ?>' ); ?&gt;</code><?php
+
+		// special uploader functions
+		if ( $this->get_current() instanceof Pie_Easy_Exts_Option_Upload ) {
+// begin rendering ?>
+<strong>Echo option as image URL</strong>
+<code>&lt;img src="&lt;?php echo infinity_option_image_url( '<?php print $this->get_current()->name ?>' ); ?&gt;"&gt;</code><?php
+		}
+	}
+
 }
 
 /**
@@ -247,14 +251,19 @@ class Infinity_Options_Uploader extends Pie_Easy_Options_Uploader
  */
 function infinity_options_init( $theme = null )
 {
-	// enable option in scheme
-	Pie_Easy_Scheme::instance($theme)->enable_options( Infinity_Options_Registry::instance($theme) );
+	// component policies
+	$sections_policy = Infinity_Sections_Policy::instance();
+	$options_policy = Infinity_Options_Policy::instance();
+
+	// enable components
+	Pie_Easy_Scheme::instance($theme)->enable_component( $sections_policy );
+	Pie_Easy_Scheme::instance($theme)->enable_component( $options_policy );
 
 	// init ajax OR screen reqs (not both)
 	if ( defined( 'DOING_AJAX') ) {
-		Infinity_Options_Registry::instance($theme)->init_ajax();
+		Infinity_Options_Policy::instance()->registry($theme)->init_ajax();
 	} else {
-		Infinity_Options_Registry::instance($theme)->init_screen();
+		Infinity_Options_Policy::instance()->registry($theme)->init_screen();
 	}
 
 	do_action( 'infinity_options_init' );
@@ -268,7 +277,7 @@ function infinity_options_init( $theme = null )
  */
 function infinity_option( $option_name )
 {
-	return Infinity_Options_Registry::instance()->get_option($option_name)->get();
+	return Infinity_Options_Policy::instance()->registry()->get($option_name)->get();
 }
 
 /**
@@ -280,7 +289,7 @@ function infinity_option( $option_name )
  */
 function infinity_option_meta( $option_name, $meta_type )
 {
-	return Infinity_Options_Registry::instance()->get_option( $option_name )->get_meta( $meta_type );
+	return Infinity_Options_Policy::instance()->registry()->get( $option_name )->get_meta( $meta_type );
 }
 
 /**
@@ -292,7 +301,7 @@ function infinity_option_meta( $option_name, $meta_type )
  */
 function infinity_option_image_src( $option_name, $size = 'thumbnail' )
 {
-	return Infinity_Options_Registry::instance()->get_option( $option_name )->get_image_src( $size );
+	return Infinity_Options_Policy::instance()->registry()->get( $option_name )->get_image_src( $size );
 }
 
 /**
@@ -304,7 +313,7 @@ function infinity_option_image_src( $option_name, $size = 'thumbnail' )
  */
 function infinity_option_image_url( $option_name, $size = 'thumbnail' )
 {
-	return Infinity_Options_Registry::instance()->get_option( $option_name )->get_image_url( $size );
+	return Infinity_Options_Policy::instance()->registry()->get( $option_name )->get_image_url( $size );
 }
 
 /**
@@ -336,18 +345,18 @@ function infinity_options_render_menu( $args = null )
 	// current theme
 	$theme = get_stylesheet();
 
-	// get registry for this theme
-	$registry = Infinity_Options_Registry::instance($theme);
+	// get registries for this theme
+	$sections_registry = Infinity_Sections_Policy::instance()->registry($theme);
 
 	// get only "root" sections
-	$sections = $registry->get_root_sections( $get_sections );
+	$sections = $sections_registry->get_roots( $get_sections );
 
 	// begin rendering ?>
 	<div id="menu___root" class="infinity-cpanel-options-menu"><?php
 
 	// loop through fetched sections and render
 	foreach ( $sections as $section ) {
-		infinity_options_render_menu_section( $registry, $section );
+		infinity_options_render_menu_section( $section );
 	}?>
 
 	</div><?php
@@ -358,13 +367,17 @@ function infinity_options_render_menu( $args = null )
  *
  * @ignore
  */
-function infinity_options_render_menu_section( Infinity_Options_Registry $registry, Infinity_Options_Section $section )
+function infinity_options_render_menu_section( Pie_Easy_Sections_Section $section )
 {
+	// get registries for this theme
+	$sections_registry = Infinity_Sections_Policy::instance()->registry($theme);
+	$options_registry = Infinity_Options_Policy::instance()->registry($theme);
+	
 	// get children of this section
-	$children = $registry->get_section_children( $section );
+	$children = $sections_registry->get_children( $section );
 
 	// get options for section
-	$options = $registry->get_menu_options( $section );
+	$options = $options_registry->get_menu_options( $section );
 
 	// check results
 	if ( empty( $children ) && empty( $options ) ) {
@@ -382,7 +395,7 @@ function infinity_options_render_menu_section( Infinity_Options_Registry $regist
 		// render all children sections ?>
 		<div><div id="submenu___<?php print esc_attr( $section->name ) ?>" class="infinity-cpanel-options-menu infinity-cpanel-options-submenu"><?php
 			foreach ( $children as $child ) {
-				infinity_options_render_menu_section( $registry, $child );
+				infinity_options_render_menu_section( $child );
 			}?>
 		</div></div><?php
 	} else {
@@ -448,17 +461,17 @@ function infinity_options_render_options_screen()
 		// load all options in a section
 		case 'section':
 			// look up section
-			$section = Infinity_Options_Registry::instance($theme)->get_section( $load_name );
+			$section = Infinity_Sections_Policy::instance()->registry($theme)->get( $load_name );
 			// did we get a valid section?
-			if ( $section instanceof Pie_Easy_Options_Section ) {
+			if ( $section instanceof Pie_Easy_Sections_Section ) {
 				// get all options for this section
-				$options = Infinity_Options_Registry::instance($theme)->get_menu_options( $section );
+				$options = Infinity_Options_Policy::instance()->registry($theme)->get_menu_options( $section );
 			}
 			break;
 		// load a single option
 		case 'option':
 			// look up the single option
-			$option = Infinity_Options_Registry::instance($theme)->get_option( $load_name );
+			$option = Infinity_Options_Policy::instance()->registry($theme)->get( $load_name );
 			// did we get a valid option?
 			if ( $option instanceof Pie_Easy_Options_Option ) {
 				// add it to options to array
@@ -475,9 +488,14 @@ function infinity_options_render_options_screen()
 
 	// loop through all options and render each one
 	foreach ( $options as $option_to_render ) {
+		// enable post override
+		$option_to_render->enable_post_override();
 		// try to render the option
-		$content .= Infinity_Options_Registry::instance($theme)->render_option( $option_to_render, false );
+		$content .= $option_to_render->render( false );
 	}
+
+	// render manifest
+	$content .= Infinity_Options_Policy::instance()->renderer()->render_manifest( false );
 
 	// restore blog
 	restore_current_blog();

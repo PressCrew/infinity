@@ -25,9 +25,9 @@ class Pie_Easy_Exts_Option_Text
 	 *
 	 * @see render_input
 	 */
-	public function render_field( Pie_Easy_Options_Option_Renderer $renderer )
+	public function render_field()
 	{
-		$renderer->render_input( 'text' );
+		$this->policy()->renderer()->render_input( 'text' );
 	}
 }
 

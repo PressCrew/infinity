@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'utils/ajax', 'collections', 'exts/option_factory' );
+Pie_Easy_Loader::load( 'base/registry', 'options/factory', 'utils/ajax' );
 
 /**
  * Make keeping track of options easy
@@ -19,109 +19,23 @@ Pie_Easy_Loader::load( 'utils/ajax', 'collections', 'exts/option_factory' );
  * @package PIE
  * @subpackage options
  */
-abstract class Pie_Easy_Options_Registry
+abstract class Pie_Easy_Options_Registry extends Pie_Easy_Registry
 {
-	/**
-	 * The prefix that denotes a section name in the config
-	 */
-	const SECTION_PREFIX = '.';
-
 	/**
 	 * The string on which to split field option key => values
 	 */
 	const FIELD_OPTION_DELIM = '=';
 
 	/**
-	 * Name of parameter which passes back blog id
-	 */
-	const PARAM_BLOG_ID = 'pie_easy_options_blog_id';
-
-	/**
-	 * Name of parameter which passes back blog theme
-	 */
-	const PARAM_BLOG_THEME = 'pie_easy_options_blog_theme';
-
-	/**
-	 * Stack of config files that have been loaded
-	 *
-	 * @var Pie_Easy_Stack
-	 */
-	private $files_loaded;
-
-	/**
-	 * Name of the theme currently being loaded
-	 *
-	 * @var string
-	 */
-	private $loading_theme;
-
-	/**
-	 * The class to use for new sections
-	 *
-	 * @var string
-	 */
-	private $section_class;
-
-	/**
-	 * The option config instance
-	 *
-	 * @var Pie_Easy_Options_Option_Conf
-	 */
-	private $option_conf;
-
-	/**
-	 * The option renderer instance
-	 *
-	 * @var Pie_Easy_Options_Option_Renderer
-	 */
-	private $option_renderer;
-
-	/**
-	 * All sections that are currently configured
-	 *
-	 * @var Pie_Easy_Map|null
-	 */
-	private $sections;
-
-	/**
-	 * All options that are currently configured
-	 *
-	 * @var Pie_Easy_Map|null
-	 */
-	private $options;
-
-	/**
-	 * Blog id when screen was initialized
-	 *
-	 * @var integer
-	 */
-	protected $screen_blog_id;
-
-	/**
-	 * Blog theme when screen was initialized
-	 *
-	 * @var string
-	 */
-	protected $screen_blog_theme;
-
-	/**
-	 * Initializes map properties
-	 */
-	public function __construct()
-	{
-		// initiate the maps
-		$this->files_loaded = new Pie_Easy_Stack();
-		$this->sections = new Pie_Easy_Map();
-		$this->options = new Pie_Easy_Map();
-	}
-
-	/**
 	 * Init ajax requirements
 	 */
 	public function init_ajax()
 	{
+		// call parent
+		parent::init_ajax();
+		
 		// init ajax for each registered option
-		foreach ( $this->get_options() as $option ) {
+		foreach ( $this->get_all() as $option ) {
 			$option->init_ajax();
 		}
 	}
@@ -131,16 +45,11 @@ abstract class Pie_Easy_Options_Registry
 	 */
 	public function init_screen()
 	{
-		global $blog_id;
-
-		$this->screen_blog_id = (integer) $blog_id;
-		$this->screen_blog_theme = get_stylesheet();
-
-		add_action( 'pie_easy_enqueue_styles', array($this, 'init_styles') );
-		add_action( 'pie_easy_enqueue_scripts', array($this, 'init_scripts') );
+		// call parent
+		parent::init_screen();
 
 		// init screen for each registered option
-		foreach ( $this->get_options() as $option ) {
+		foreach ( $this->get_all() as $option ) {
 			$option->init_screen();
 		}
 	}
@@ -150,8 +59,11 @@ abstract class Pie_Easy_Options_Registry
 	 */
 	public function init_styles()
 	{
+		// call parent
+		parent::init_styles();
+		
 		// init styles for each registered option
-		foreach ( $this->get_options() as $option ) {
+		foreach ( $this->get_all() as $option ) {
 			$option->init_styles();
 		}
 	}
@@ -161,6 +73,9 @@ abstract class Pie_Easy_Options_Registry
 	 */
 	public function init_scripts()
 	{
+		// call parent
+		parent::init_scripts();
+
 		// jQuery UI is always needed
 		wp_enqueue_script( 'jquery-ui-accordion' );
 		wp_enqueue_script( 'jquery-ui-button' );
@@ -169,7 +84,7 @@ abstract class Pie_Easy_Options_Registry
 		wp_enqueue_script( 'jquery-ui-tabs' );
 
 		// init scripts for each registered option
-		foreach ( $this->get_options() as $option ) {
+		foreach ( $this->get_all() as $option ) {
 			$option->init_scripts();
 		}
 
@@ -186,260 +101,43 @@ abstract class Pie_Easy_Options_Registry
 	}
 
 	/**
-	 * Set the PHP class to use for creating new sections
-	 *
-	 * @param string $class_name
-	 * @return boolean
-	 */
-	public function set_section_class( $class_name )
-	{
-		// set the option class
-		if ( class_exists( $class_name ) ) {
-			$this->section_class = $class_name;
-			return true;
-		} else {
-			throw new Exception( 'Provided section class does not exist' );
-		}
-	}
-
-	/**
-	 * Set the option conf object
-	 *
-	 * @param Pie_Easy_Options_Option_Conf $conf
-	 * @return boolean
-	 */
-	public function set_option_conf( Pie_Easy_Options_Option_Conf $conf )
-	{
-		// set the option conf
-		if ( empty( $this->option_conf ) ) {
-			$this->option_conf = $conf;
-			return true;
-		} else {
-			throw new Exception( 'Cannot overwrite option conf once set' );
-		}
-	}
-
-	/**
-	 * Set the option renderer by passing a valid renderer object
-	 *
-	 * @param Pie_Easy_Options_Option_Renderer $renderer
-	 */
-	public function set_option_renderer( Pie_Easy_Options_Option_Renderer $renderer )
-	{
-		$this->option_renderer = $renderer;
-	}
-
-	/**
-	 * Register an option
+	 * Return sibling options as an array
 	 *
 	 * @param Pie_Easy_Options_Option $option
-	 * @return boolean
-	 */
-	private function register_option( Pie_Easy_Options_Option $option )
-	{
-		// has the option already been registered?
-		if ( $this->has_option( $option->name ) ) {
-
-			// get options stack
-			$options_stack = $this->get_option_stack( $option->name );
-
-			// check if option already registered for this theme
-			if ( $options_stack->contains( $option->theme ) ) {
-				throw new Exception( sprintf(
-					'The "%s" option has already been registered for the "%s" theme',
-					$option->name, $option->theme ) );
-			}
-
-		} else {
-			$options_stack = new Pie_Easy_Stack();
-			$this->options->add( $option->name, $options_stack );
-		}
-
-		// register it
-		$options_stack->push( $option );
-		return true;
-	}
-
-	/**
-	 * Add a section
-	 *
-	 * @param Pie_Easy_Options_Section $section
-	 * @return boolean
-	 */
-	private function register_section( Pie_Easy_Options_Section $section )
-	{
-		// make sure that the section has not already been registered
-		if ( $this->sections->contains( $section->name ) ) {
-			throw new Exception( sprintf( 'The "%s" section has already been registered', $section->name ) );
-		}
-
-		// register it
-		$this->sections->add( $section->name, $section );
-		return true;
-	}
-
-	/**
-	 * Returns true if a section has been registered
-	 *
-	 * @param string $section_name
-	 * @return boolean
-	 */
-	public function has_section( $section_name )
-	{
-		return $this->sections->contains( $section_name );
-	}
-
-	/**
-	 * Return a registered section by name
-	 *
-	 * @param string $section_name
-	 * @return Pie_Easy_Options_Section
-	 */
-	public function get_section( $section_name )
-	{
-		// check section registry
-		if ( $this->sections->contains( $section_name ) ) {
-			// return it
-			return $this->sections->item_at( $section_name );
-		}
-
-		throw new Exception( sprintf( 'Unable to get section "%s": not registered', $section_name ) );
-	}
-
-	/**
-	 * Return all registered sections as an array
-	 *
 	 * @return array
 	 */
-	public function get_sections()
+	public function get_siblings( Pie_Easy_Options_Option $option )
 	{
-		return $this->sections->to_array();
-	}
+		// options to return
+		$options = array();
 
-	/**
-	 * Return all registered child sections of a section
-	 *
-	 * This adheres to parent settings in the options ini file
-	 *
-	 * @param Pie_Easy_Options_Section $section The section object whose children you want to get
-	 * @return array
-	 */
-	public function get_section_children( Pie_Easy_Options_Section $section )
-	{
-		// the sections that will be returned
-		$sections = array();
-
-		// find all registered sections where parent is the target section
-		foreach ( $this->sections as $section_i ) {
-			if ( $section->is_parent_of( $section_i ) ) {
-				$sections[] = $section_i;
+		// render options that require this one
+		foreach ( $this->get_all() as $sibling_option ) {
+			if ( $option->name == $sibling_option->required_option ) {
+				$options[] = $sibling_option;
 			}
 		}
 
-		return $sections;
-	}
-
-	/**
-	 * Get sections that should behave as a root section
-	 *
-	 * This method mostly exists as a helper to use when rendering menus
-	 *
-	 * @param array $section_names An array of section names to include, defaults to all
-	 * @return array
-	 */
-	public function get_root_sections( $section_names = array() )
-	{
-		// sections to be returned
-		$sections = array();
-
-		// loop through all registered sections
-		foreach ( $this->sections as $section ) {
-			// filter on section names
-			if ( empty( $section_names ) || in_array( $section->name, $section_names, true ) ) {
-				$sections[] = $section;
-			}
-		}
-
-		// don't return sections who have a parent in the result
-		foreach( $sections as $key => $section_i ) {
-			foreach( $sections as $section_ii ) {
-				if ( $section_ii->is_parent_of( $section_i ) ) {
-					unset( $sections[$key] );
-				}
-			}
-		}
-
-		return $sections;
-	}
-
-	/**
-	 * Unregister an option
-	 *
-	 * @param string $option_name
-	 * @return boolean
-	 */
-	private function unregister_option( $option_name )
-	{
-		if ( $this->has_option( $option_name ) ) {
-			$this->options->remove( $option_name );
-			return true;
-		}
-
-		return false;
-	}
-
-	/**
-	 * Returns true if an option has been registered
-	 *
-	 * @param string $option_name
-	 * @return boolean
-	 */
-	public function has_option( $option_name )
-	{
-		return $this->options->contains( $option_name );
-	}
-
-	/**
-	 * Return a registered option object by name
-	 *
-	 * @param string $option_name
-	 * @return Pie_Easy_Options_Option
-	 */
-	public function get_option( $option_name )
-	{
-		// check option registry
-		if ( $this->has_option( $option_name ) ) {
-			// from top of options stack
-			return $this->get_option_stack($option_name)->peek();
-		}
-
-		// didn't find the option
-		throw new Exception( sprintf( 'Unable to get option "%s": not registered', $option_name ) );
+		return $options;
 	}
 
 	/**
 	 * Return registered options as an array
 	 *
-	 * @param Pie_Easy_Options_Section $section Limit options to one section by passing a section object
+	 * @param Pie_Easy_Sections_Section $section Limit options to one section by passing a section object
 	 * @return array
 	 */
-	public function get_options( Pie_Easy_Options_Section $section = null )
+	public function get_for_section( Pie_Easy_Sections_Section $section )
 	{
 		// options to return
 		$options = array();
 
 		// loop through and compare names
-		foreach ( $this->options as $option_stack ) {
+		foreach ( parent::get_all() as $option ) {
 
-			// use option on top of stack
-			$option = $option_stack->peek();
-
-			// specific section?
-			if ( $section ) {
-				// do section names match?
-				if ( $section->name != $option->section ) {
-					continue;
-				}
+			// do section names match?
+			if ( $section->name != $option->section ) {
+				continue;
 			}
 
 			// add to array
@@ -451,29 +149,18 @@ abstract class Pie_Easy_Options_Registry
 	}
 
 	/**
-	 * Return options stack for the given option name
-	 *
-	 * @param string $option_name
-	 * @return Pie_Easy_Stack
-	 */
-	private function get_option_stack( $option_name )
-	{
-		return $this->options->item_at( $option_name );
-	}
-
-	/**
 	 * Return registered options that are valid in a menu
 	 *
 	 * It does not make sense to list an option in a menu which requires another option,
 	 * so this helper method will return an array without them.
 	 *
-	 * @param Pie_Easy_Options_Section $section Limit options to one section
+	 * @param Pie_Easy_Sections_Section $section Limit options to one section
 	 * @return array
 	 */
-	public function get_menu_options( Pie_Easy_Options_Section $section = null )
+	public function get_menu_options( Pie_Easy_Sections_Section $section = null )
 	{
 		// get all options for section
-		$options = $this->get_options( $section );
+		$options = $this->get_for_section( $section );
 
 		foreach ( $options as $key => $option ) {
 			// remove options that require another option
@@ -494,77 +181,26 @@ abstract class Pie_Easy_Options_Registry
 	}
 
 	/**
-	 * Load option directives from an ini file
-	 *
-	 * @uses parse_ini_file()
-	 * @param string $filename Absolute path to the options ini file to parse
-	 * @param string $theme The theme to assign the prased option directives to
-	 * @return boolean
-	 */
-	public function load_config_file( $filename, $theme )
-	{
-		// skip loaded files
-		if ( $this->files_loaded->contains( $filename ) ) {
-			return;
-		} else {
-			$this->files_loaded->push( $filename );
-		}
-
-		// set the current theme being loaded
-		$this->loading_theme = $theme;
-
-		// try to parse the file
-		return $this->load_config_array( parse_ini_file( $filename, true ) );
-	}
-
-	/**
-	 * Load options into registry from an array (of parsed ini sections)
-	 *
-	 * @param array $ini_array
-	 * @return boolean
-	 */
-	private function load_config_array( $ini_array )
-	{
-		// an array means successful parse
-		if ( is_array( $ini_array ) ) {
-			// loop through each option
-			foreach ( $ini_array as $s_name => $s_config ) {
-				// is it a section?
-				if ( self::SECTION_PREFIX == $s_name{0} ) {
-					$this->load_config_section( $s_name, $s_config );
-				} else {
-					$this->load_config_option( $s_name, $s_config );
-				}
-			}
-			// all done
-			return true;
-		}
-
-		return false;
-	}
-
-	/**
 	 * Load a single option into the registry (one parsed ini section)
 	 *
 	 * @param string $option_name
 	 * @param array $option_config
 	 * @return boolean
 	 */
-	private function load_config_option( $option_name, $option_config )
+	final protected function load_config_single( $option_name, $option_config )
 	{
 		// if option has already been registered, deep copy that option
 		// and possibly override some values
-		if ( $this->has_option( $option_name ) ) {
+		if ( $this->has( $option_name ) ) {
 
 			// get source option, which is on top of the options stack
-			$source_option = $this->get_option_stack($option_name)->peek();
+			$source_option = $this->get_stack($option_name)->peek();
 
 			// get class of source option
 			$source_class = get_class( $source_option );
 
 			// copy option properties (do NOT use cloning)
 			$option = new $source_class(
-				$this->option_conf,
 				$this->loading_theme,
 				$source_option->name,
 				$source_option->title,
@@ -574,11 +210,14 @@ abstract class Pie_Easy_Options_Registry
 
 		} else {
 
+			// lookup the section registry
+			$section_registry = $section = Pie_Easy_Policy::instance('Pie_Easy_Sections_Policy')->registry();
+
 			// get section from section registry
-			$section = $this->sections->item_at( $option_config['section'] );
+			$section = $section_registry->get( $option_config['section'] );
 
 			// adding options to parent sections is not allowed
-			foreach ( $this->sections as $section_i ) {
+			foreach ( $section_registry->get_all() as $section_i ) {
 				if ( $section->is_parent_of( $section_i ) ) {
 					throw new Exception(
 						sprintf( 'Cannot add options to section "%s" because it is acting as a parent section', $section->name ) );
@@ -586,20 +225,19 @@ abstract class Pie_Easy_Options_Registry
 			}
 
 			// create new option
-			$option = Pie_Easy_Exts_Option_Factory::create(
+			$option = $this->policy()->factory()->create(
 				$option_config['field_type'],
-				$this->option_conf,
 				$this->loading_theme,
 				$option_name,
 				$option_config['title'],
 				$option_config['description'],
-				$section->name
+				$option_config['section']
 			);
 
 		}
 
 		// register it
-		$this->register_option( $option );
+		$this->register( $option );
 
 		// required option
 		if ( isset( $option_config['required_option'] ) ) {
@@ -686,81 +324,6 @@ abstract class Pie_Easy_Options_Registry
 	}
 
 	/**
-	 * Load a section into the registry
-	 *
-	 * @param string $section_name
-	 * @param string $section_config
-	 * @return boolean
-	 */
-	private function load_config_section( $section_name, $section_config )
-	{
-		// create new section
-		$section = new $this->{section_class}(
-			trim( $section_name, self::SECTION_PREFIX ),
-			$section_config['title']
-		);
-
-		// css class
-		if ( isset( $section_config['class'] ) ) {
-			$section->set_class( $section_config['class'] );
-		}
-
-		// css title class
-		if ( isset( $section_config['class_title'] ) ) {
-			$section->set_class_title( $section_config['class_title'] );
-		}
-
-		// css content class
-		if ( isset( $section_config['class_content'] ) ) {
-			$section->set_class_content( $section_config['class_content'] );
-		}
-
-		// section parent
-		if ( isset( $section_config['parent'] ) ) {
-			$section->set_parent( $section_config['parent'] );
-		}
-
-		// register it
-		return $this->register_section( $section );
-	}
-
-	/**
-	 * Render one option given it's name
-	 *
-	 * @uses Pie_Easy_Options_Option_Renderer::render()
-	 * @param string $option The option to render
-	 * @param boolean $output Set to false to return results instead of printing
-	 * @return string|boolean
-	 */
-	public function render_option( $option, $output = true )
-	{
-		if ( is_string( $option ) ) {
-			// get the option from map
-			$option = $this->get_option( $option );
-		} elseif ( !$this->has_option( $option->name ) ) {
-			// not good
-			throw new Exception( sprintf( 'The "%s" option is not registered', $option->name ) );
-		}
-
-		// render the option
-		$html = $this->option_renderer->render( $option, false );
-
-		// render options that require this one
-		foreach ( $this->get_options() as $sibling_option ) {
-			if ( $option->name == $sibling_option->required_option ) {
-				$html .= $this->option_renderer->render( $sibling_option, false );
-			}
-		}
-
-		// render the manifest
-		$html .= $this->option_renderer->render_manifest( $output );
-
-		// return result
-		return ( $output ) ? true : $html;
-
-	}
-
-	/**
 	 * Look through POST vars for options from this registry and try to save them
 	 *
 	 * @return integer Number of options saved
@@ -791,9 +354,9 @@ abstract class Pie_Easy_Options_Registry
 				}
 
 				// is this option registered?
-				if ( $this->has_option( $option_name ) ) {
+				if ( $this->has( $option_name ) ) {
 					// get the option
-					$option = $this->get_option($option_name);
+					$option = $this->get($option_name);
 					// look for option name as POST key
 					if ( array_key_exists( $option->name, $_POST ) ) {
 						// get new value
@@ -855,7 +418,7 @@ abstract class Pie_Easy_Options_Registry
 		$css = null;
 
 		// loop through and check field type
-		foreach ( $this->get_options() as $option ) {
+		foreach ( $this->get_all() as $option ) {
 			if ( $option instanceof Pie_Easy_Exts_Option_Css ) {
 				// append css markup
 				$css .= $option->get() . PHP_EOL;

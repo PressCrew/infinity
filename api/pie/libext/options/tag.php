@@ -22,10 +22,8 @@ class Pie_Easy_Exts_Option_Tag
 {
 	/**
 	 * Render a tag select box
-	 *
-	 * @see render_select
 	 */
-	public function render_field( Pie_Easy_Options_Option_Renderer $renderer )
+	public function render_field()
 	{
 		$args = array(
 			'hide_empty' => false
@@ -43,7 +41,7 @@ class Pie_Easy_Exts_Option_Tag
 		}
 
 		// call the select renderer
-		$renderer->render_select( $options );
+		$this->policy()->renderer()->render_select( $options );
 	}
 }
 

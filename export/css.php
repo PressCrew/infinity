@@ -39,6 +39,6 @@ if ( $if_modified_since > 0 && $last_modified > 0 ) {
 	// output css
 	header('Last-Modified: ' . date('r', $last_modified));
 	require_once( '../../../../wp-load.php' );
-	print Infinity_Options_Registry::instance()->export_css();
+	print Infinity_Options_Policy::instance()->registry()->export_css();
 }
 ?>

@@ -23,7 +23,7 @@ class Pie_Easy_Exts_Option_Page
 	/**
 	 * Render a page select box
 	 */
-	public function render_field( Pie_Easy_Options_Option_Renderer $renderer )
+	public function render_field()
 	{
 		$args = array(
 			'depth'		=> 0,

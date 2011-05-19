@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'collections', 'utils/docs', 'schemes' );
+Pie_Easy_Loader::load( 'base', 'collections', 'utils/docs', 'schemes' );
 
 /**
  * Interface to implement if the option defines its own field_options internally
@@ -40,49 +40,17 @@ interface Pie_Easy_Options_Option_Attachment_Image
 }
 
 /**
- * This object is passed to each option allowing the implementing API to
- * customize a few specific varaibles.
- */
-abstract class Pie_Easy_Options_Option_Conf
-{
-	/**
-	 * Return the name of the implementing API
-	 *
-	 * If you are rolling your own parent theme, this should probably return the
-	 * name of the theme you are creating.
-	 *
-	 * @return string
-	 */
-	abstract public function get_api_slug();
-
-	/**
-	 * Return an instance of the options uploader class to be used
-	 *
-	 * @return Pie_Easy_Options_Uploader
-	 */
-	abstract public function get_options_uploader();
-}
-
-/**
  * Make an option easy
  *
  * @package PIE
  * @subpackage options
- * @property-read Pie_Easy_Options_Option_Conf
  * @property-read string $section The section to which this options is assigned (slug)
- * @property-read string $title The option title
- * @property-read string $description The option description
- * @property string $class The CSS class to apply to the option's container
- * @property string $field_id The CSS id to apply to the option's input field
- * @property string $field_class The CSS class to apply to the option's input field
+ * @property-read string $field_id The CSS id to apply to the option's input field
+ * @property-read string $field_class The CSS class to apply to the option's input field
  * @property-read array $field_options An array of field options
- * @property array $capabilities Required capabilities, can only be appended
  * @property mixed $default_value Default value of the option
- * @property boolean|string $documentation true/false to enable/disable, string for manual page name
- * @property-read string $required_option Sibling option required for this option to display
- * @property-read string $required_feature Feature required for this option to display
  */
-abstract class Pie_Easy_Options_Option
+abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 {
 	/**
 	 * All global options are prepended with this prefix template
@@ -105,32 +73,6 @@ abstract class Pie_Easy_Options_Option
 	const DEFAULT_SECTION = 'default';
 
 	/**
-	 * The option configuration instance
-	 * 
-	 * @var Pie_Easy_Options_Option_Conf
-	 */
-	private $conf;
-
-	/**
-	 * The theme that created this option
-	 *
-	 * @var string
-	 */
-	private $theme;
-
-	/**
-	 * Name of the option
-	 *
-	 * @var string
-	 */
-	private $name;
-
-	/**
-	 * @var Pie_Easy_Map Option directives
-	 */
-	private $directives;
-
-	/**
 	 * Name of the theme which last over wrote the default value
 	 *
 	 * @var string
@@ -145,34 +87,22 @@ abstract class Pie_Easy_Options_Option
 	private $post_override = false;
 
 	/**
-	 * @param Pie_Easy_Options_Option_Conf $conf The option configuration object
 	 * @param string $theme The theme that created this option
 	 * @param string $name Option name may only contain alphanumeric characters as well as the underscore for use as a word separator.
 	 * @param string $title
 	 * @param string $desc
 	 * @param string $section
 	 */
-	final public function __construct( Pie_Easy_Options_Option_Conf $conf, $theme, $name, $title, $desc, $section = self::DEFAULT_SECTION  )
+	final public function __construct( $theme, $name, $title, $desc, $section = self::DEFAULT_SECTION  )
 	{
-		// name must adhere to a strict format
-		if ( preg_match( '/^[a-z0-9]+(_[a-z0-9]+)*$/', $name ) ) {
-			$this->name = $name;
-		} else {
-			throw new Exception( 'Option name does not match the allowed pattern' );
-		}
+		// run parent FIRST
+		parent::__construct( $theme, $name, $title, $desc );
 
-		// init directives map
-		$this->directives = new Pie_Easy_Map();
-
-		// set basic properties
-		$this->conf = $conf;
-		$this->theme = $theme;
-
-		// set directives
-		$this->set_directive( 'section', $section, true );
-		$this->set_directive( 'title', $title, true );
-		$this->set_directive( 'description', $desc, true );
+		// user must be allowed to manage options
 		$this->add_capabilities( 'manage_options' );
+
+		// set section directive
+		$this->set_directive( 'section', $section, true );
 
 		// special cases
 		if ( $this instanceof Pie_Easy_Options_Option_Auto_Field ) {
@@ -184,66 +114,29 @@ abstract class Pie_Easy_Options_Option
 	}
 
 	/**
-	 * @ignore
-	 * @param string $name
-	 * @return mixed
+	 * Render this option AND its required siblings
+	 *
+	 * @param boolean $output Whether to output or return result
+	 * @return string|void
 	 */
-	public function __get( $name )
+	public function render( $output = true )
 	{
-		if ( $this->directives->contains($name) ) {
-			return $this->directives->item_at($name)->value;
-		} else {
-			return $this->$name;
+		// render myself first
+		$html = $this->policy()->renderer()->render( $this, $output );
+
+		// render options that require this one
+		foreach ( $this->policy()->registry()->get_siblings($this) as $sibling_option ) {
+			$html .= $sibling_option->render( $output );
 		}
-	}
 
-	/**
-	 * This template method is called at the end of the constructor
-	 */
-	protected function init()
-	{
-		// override this method to initialize special PHP handling for an option
-	}
-
-	/**
-	 * This template method is called if the current request is AJAX
-	 */
-	public function init_ajax()
-	{
-		// override this method to initialize special AJAX handling for an option
-	}
-
-	/**
-	 * This template method is called on the option renderer init_screen method
-	 */
-	public function init_screen()
-	{
-		// override this method to initialize special screen handling for an option
-	}
-
-	/**
-	 * This template method is called "just in time" to enqueue styles
-	 */
-	public function init_styles()
-	{
-		// override this method to initialize special style handling for an option
-	}
-
-	/**
-	 * This template method is called "just in time" to enqueue scripts
-	 */
-	public function init_scripts()
-	{
-		// override this method to initialize special script handling for an option
+		// return result
+		return ( $output ) ? true : $html;
 	}
 
 	/**
 	 * This method must be implemented to print the option's field HTML
-	 *
-	 * This method should be used for logic only. The renderer which is passed
-	 * should be called to actually generate the markup when possible.
 	 */
-	abstract protected function render_field( Pie_Easy_Options_Option_Renderer $renderer );
+	abstract protected function render_field();
 
 	/**
 	 * Toggle post override ON
@@ -363,63 +256,6 @@ abstract class Pie_Easy_Options_Option
 	}
 
 	/**
-	 * Check that current user has all required capabilities to view/edit this option
-	 *
-	 * @return boolean
-	 */
-	final public function check_caps()
-	{
-		foreach ( $this->capabilities as $cap ) {
-			if ( !current_user_can( $cap ) ) {
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-	/**
-	 * Check that theme has required feature support enabled if applicable
-	 *
-	 * @return boolean
-	 */
-	final public function supported()
-	{
-		if ( $this->required_feature ) {
-			return current_theme_supports( $this->required_feature );
-		}
-
-		return true;
-	}
-
-	/**
-	 * Set a directive
-	 *
-	 * @param string $name
-	 * @param mixed $value
-	 * @param boolean $read_only
-	 */
-	private function set_directive( $name, $value, $read_only = null )
-	{
-		if ( $this->directives->contains($name) ) {
-			$this->directives->item_at($name)->set_value($value, true);
-		} else {
-			$directive = new Pie_Easy_Options_Directive( $name, $value, $read_only );
-			$this->directives->add( $name, $directive );
-		}
-	}
-
-	/**
-	 * Set the CSS class attribute to apply to this option's container element
-	 *
-	 * @param string $class
-	 */
-	public function set_class( $class )
-	{
-		$this->set_directive( 'class', $class );
-	}
-
-	/**
 	 * Set the CSS id attribute to apply to the field of this option
 	 *
 	 * @param string $field_id
@@ -454,26 +290,6 @@ abstract class Pie_Easy_Options_Option
 	}
 
 	/**
-	 * Set an option that is required for this one to display
-	 *
-	 * @param string $option_name
-	 */
-	public function set_required_option( $option_name )
-	{
-		$this->set_directive( 'required_option', $option_name, true );
-	}
-
-	/**
-	 * Set a feature that must be supported/enabled for this option to display
-	 *
-	 * @param string $feature_name
-	 */
-	public function set_required_feature( $feature_name )
-	{
-		$this->set_directive( 'required_feature', $feature_name, true );
-	}
-
-	/**
 	 * Set the default value to be used by this option in the event it has not been set
 	 *
 	 * @param mixed $value New value
@@ -489,39 +305,6 @@ abstract class Pie_Easy_Options_Option
 		$this->set_directive( 'default_value', $value );
 
 		return true;
-	}
-
-	/**
-	 * Set additional capabilities which are required for this option to show
-	 *
-	 * @param string $string A comma separated list of capabilities
-	 */
-	public function add_capabilities( $string )
-	{
-		// split at comma
-		$caps = explode( ',', $string );
-
-		// trim and set each
-		foreach ( $caps as $cap ) {
-			$cap_trimmed = trim( $cap );
-			$capabilities[$cap_trimmed] = $cap_trimmed;
-		}
-
-		if ( $this->capabilities ) {
-			$capabilities = array_merge( $this->capabilities, $capabilities );
-		}
-
-		$this->set_directive( 'capabilities', $capabilities );
-	}
-
-	/**
-	 * Set the documentation file for this option
-	 *
-	 * @param string $rel_path Path to documentation file relative to the theme config docs
-	 */
-	public function set_documentation( $rel_path )
-	{
-		$this->set_directive( 'documentation', trim( $rel_path, '\\/' ) );
 	}
 
 	/**
@@ -547,7 +330,7 @@ abstract class Pie_Easy_Options_Option
 	 */
 	private function get_api_prefix()
 	{
-		return sprintf( self::PREFIX_TPL, $this->conf->get_api_slug() );
+		return sprintf( self::PREFIX_TPL, $this->policy()->get_api_slug() );
 	}
 
 	/**

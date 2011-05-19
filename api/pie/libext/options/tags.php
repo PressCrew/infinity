@@ -22,10 +22,8 @@ class Pie_Easy_Exts_Option_Tags
 {
 	/**
 	 * Render tags checkboxes
-	 *
-	 * @see render_input_group
 	 */
-	public function render_field( Pie_Easy_Options_Option_Renderer $renderer )
+	public function render_field()
 	{
 		$args = array(
 			'hide_empty' => false
@@ -43,7 +41,7 @@ class Pie_Easy_Exts_Option_Tags
 		}
 
 		// call the input group renderer
-		$renderer->render_input_group( 'checkbox', $options );
+		$this->policy()->renderer()->render_input_group( 'checkbox', $options );
 	}
 }
 

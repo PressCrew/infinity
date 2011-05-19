@@ -162,9 +162,9 @@ class Pie_Easy_Options_Uploader
 	 * Render a flash uploader for the given option
 	 *
 	 * @param Pie_Easy_Options_Option $option
-	 * @param Pie_Easy_Options_Option_Renderer $renderer
+	 * @param Pie_Easy_Options_Policy $policy
 	 */
-	public function render( Pie_Easy_Options_Option $option, Pie_Easy_Options_Option_Renderer $renderer )
+	public function render( Pie_Easy_Options_Option $option, Pie_Easy_Options_Policy $policy )
 	{
 		$edit_url = sprintf( 'media.php?attachment_id=%d&action=edit', $option->get() );
 		list( $attach_url, $attach_width, $attach_height ) = $option->get_image_src('full'); ?>
@@ -187,7 +187,7 @@ class Pie_Easy_Options_Uploader
 			</fieldset>
 			<div class="pie-easy-options-fu-btn">
 				<input type="button" /><?php
-				$renderer->render_input( 'hidden' ); ?>
+				$policy->renderer()->render_input( 'hidden' ); ?>
 			</div>
 		</div><?php
 	}

@@ -23,11 +23,11 @@ class Pie_Easy_Exts_Option_Checkbox
 	/**
 	 * Render one or more checkboxes
 	 *
-	 * @see Pie_Easy_Options_Option_Renderer::render_input_group
+	 * @see Pie_Easy_Options_Renderer::render_input_group
 	 */
-	public function render_field( Pie_Easy_Options_Option_Renderer $renderer )
+	public function render_field()
 	{
-		$renderer->render_input_group( 'checkbox' );
+		$this->policy()->renderer()->render_input_group( 'checkbox' );
 	}
 }
 
