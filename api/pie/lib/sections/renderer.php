@@ -1,6 +1,6 @@
 <?php
 /**
- * PIE API: options section renderer class file
+ * PIE API: section renderer class file
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://marshallsorenson.com/
