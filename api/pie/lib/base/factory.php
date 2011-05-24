@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'base/policeable' );
+Pie_Easy_Loader::load( 'base/componentable' );
 
 /**
  * Make creating concrete components easy
@@ -19,7 +19,7 @@ Pie_Easy_Loader::load( 'base/policeable' );
  * @package PIE
  * @subpackage base
  */
-abstract class Pie_Easy_Factory extends Pie_Easy_Policeable
+abstract class Pie_Easy_Factory extends Pie_Easy_Componentable
 {
 	/**
 	 * Return an instance of a component

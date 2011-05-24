@@ -6,8 +6,7 @@
 			$('a#infinity-cpanel-toolbar-menu')
 				.button({icons:{secondary: "ui-icon-triangle-1-s"}});
 		var tb_start =
-			$('a#infinity-cpanel-toolbar-start')
-				.button({icons: {primary: "ui-icon-power"}});
+			$('a#infinity-cpanel-toolbar-start');
 		var tb_refresh =
 			$('a#infinity-cpanel-toolbar-refresh')
 				.button({icons: {primary: "ui-icon-refresh"}})
@@ -24,30 +23,7 @@
 				}).click(function() {
 					initScroll();
 				});
-
-		// more toolbar buttons
-		$('a#infinity-cpanel-toolbar-options').button({icons: {primary: "ui-icon-pencil"}});
-		$('a#infinity-cpanel-toolbar-shortcodes').button({icons: {primary: "ui-icon-copy"}});
-		$('a#infinity-cpanel-toolbar-widgets').button({icons: {primary: "ui-icon-gear"}});
-		$('a#infinity-cpanel-toolbar-docs').button({icons: {primary: "ui-icon-document"}});
-		$('a#infinity-cpanel-toolbar-about').button({icons: {primary: "ui-icon-info"}});
-
-		// cpanel menu buttons
-		$('a#infinity-cpanel-toolbar-menu-item-start').button({icons: {primary: "ui-icon-power"}});
-		$('a#infinity-cpanel-toolbar-menu-item-options').button({icons: {primary: "ui-icon-pencil"}});
-		$('a#infinity-cpanel-toolbar-menu-item-shortcodes').button({icons: {primary: "ui-icon-copy"}});
-		$('a#infinity-cpanel-toolbar-menu-item-widgets').button({icons: {primary: "ui-icon-gear"}});
-		$('a#infinity-cpanel-toolbar-menu-item-docs').button({icons: {primary: "ui-icon-document"}});
-		$('a#infinity-cpanel-toolbar-menu-item-about').button({icons: {primary: "ui-icon-info"}});
-		$('a#infinity-cpanel-toolbar-menu-item-devs').button({icons: {primary: "ui-icon-wrench", secondary: "ui-icon-triangle-1-e"}});
-			$('a#infinity-cpanel-toolbar-menu-item-ddocs').button({icons: {primary: "ui-icon-document"}});
-			$('a#infinity-cpanel-toolbar-menu-item-api').button({icons: {primary: "ui-icon-note"}});
-			$('a#infinity-cpanel-toolbar-menu-item-repo').button({icons: {primary: "ui-icon-link"}}).click(function(){alert('External Link');return false;});
-		$('a#infinity-cpanel-toolbar-menu-item-comm').button({icons: {primary: "ui-icon-person",secondary: "ui-icon-triangle-1-e"}});
-			$('a#infinity-cpanel-toolbar-menu-item-news').button({icons: {primary: "ui-icon-signal-diag"}});
-			$('a#infinity-cpanel-toolbar-menu-item-support').button({icons: {primary: "ui-icon-help"}}).click(function(){alert('External Link');return false;});
-			$('a#infinity-cpanel-toolbar-menu-item-thanks').button({icons: {primary: "ui-icon-heart"}});
-
+	   
 		// menus
 		$('a.infinity-cpanel-context-menu').each(function() {
 			var $this = $(this);

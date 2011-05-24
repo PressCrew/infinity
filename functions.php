@@ -44,6 +44,7 @@ require_once( INFINITY_API_DIR . DIRECTORY_SEPARATOR . 'scheme.php' );
 require_once( INFINITY_API_DIR . DIRECTORY_SEPARATOR . 'sections.php' );
 require_once( INFINITY_API_DIR . DIRECTORY_SEPARATOR . 'options.php' );
 require_once( INFINITY_API_DIR . DIRECTORY_SEPARATOR . 'features.php' );
+require_once( INFINITY_API_DIR . DIRECTORY_SEPARATOR . 'screens.php' );
 require_once( INFINITY_API_DIR . DIRECTORY_SEPARATOR . 'i18n.php' );
 
 // initialize scheme

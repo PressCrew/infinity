@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'init/directive' );
+Pie_Easy_Loader::load( 'base/componentable', 'init/directive' );
 
 /**
  * Make content components easy
@@ -19,6 +19,7 @@ Pie_Easy_Loader::load( 'init/directive' );
  * @package PIE
  * @subpackage base
  * @property-read string $theme The theme that created this concrete component
+ * @property-read string $parent The parent component (slug)
  * @property-read string $name The concrete component name
  * @property-read string $title The concrete component title
  * @property-read string $description The concrete component description
@@ -28,7 +29,7 @@ Pie_Easy_Loader::load( 'init/directive' );
  * @property-read string $required_feature Feature required for this component to run/display
  * @property-read string $required_option Options only required if this component is run/displayed
  */
-abstract class Pie_Easy_Component extends Pie_Easy_Policeable
+abstract class Pie_Easy_Component extends Pie_Easy_Componentable
 {
 	/**
 	 * The theme that created this concrete component
@@ -43,6 +44,13 @@ abstract class Pie_Easy_Component extends Pie_Easy_Policeable
 	 * @var string
 	 */
 	private $name;
+
+	/**
+	 * The parent component
+	 * 
+	 * @var string
+	 */
+	private $parent;
 	
 	/**
 	 * @var Pie_Easy_Map Option directives
@@ -207,6 +215,31 @@ abstract class Pie_Easy_Component extends Pie_Easy_Policeable
 		} else {
 			throw new Exception( 'Option name does not match the allowed pattern' );
 		}
+	}
+
+	/**
+	 * Set the parent component
+	 *
+	 * @param string $parent_name
+	 */
+	public function set_parent( $parent_name )
+	{
+		if ( $this->name != $parent_name ) {
+			$this->parent = trim( $parent_name );
+		} else {
+			throw new Exception( sprintf( 'The component "%s" cannot be a parent of itself', $this->name ) );
+		}
+	}
+
+	/**
+	 * Returns true if component is parent of given component
+	 *
+	 * @param Pie_Easy_Component $component
+	 * @return boolean
+	 */
+	public function is_parent_of( Pie_Easy_Component $component )
+	{
+		return $this->name == $component->parent;
 	}
 
 	/**
