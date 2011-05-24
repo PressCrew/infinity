@@ -45,7 +45,7 @@ function infinity_scheme_directive( $name )
  */
 function infinity_locate_template( $template_name, $load = false )
 {
-	return Pie_Easy_Scheme::instance()->locate_template( $template_name );
+	return Pie_Easy_Scheme::instance()->locate_template( $template_name, $load );
 }
 
 /**

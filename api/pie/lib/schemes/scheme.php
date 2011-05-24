@@ -25,26 +25,6 @@ Pie_Easy_Loader::load( 'utils/files', 'collections' );
 final class Pie_Easy_Scheme
 {
 	/**
-	 * Name of the assets directory
-	 */
-	const DIR_ASSETS = 'assets';
-
-	/**
-	 * Name of the css directory
-	 */
-	const DIR_CSS = 'css';
-
-	/**
-	 * Name of the images directory
-	 */
-	const DIR_IMAGES = 'images';
-
-	/**
-	 * Name of the images directory
-	 */
-	const DIR_JS = 'js';
-
-	/**
 	 * Name of the docs directory (under config)
 	 */
 	const DIR_DOCS = 'docs';

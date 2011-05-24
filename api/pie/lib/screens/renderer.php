@@ -1,6 +1,6 @@
 <?php
 /**
- * PIE API: section renderer class file
+ * PIE API: screen renderer class file
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://marshallsorenson.com/
@@ -12,17 +12,15 @@
  */
 
 /**
- * Make rendering sections easy
+ * Make rendering screens easy
  *
  * @package PIE
- * @subpackage sections
+ * @subpackage screens
  */
-abstract class Pie_Easy_Sections_Renderer extends Pie_Easy_Renderer
+abstract class Pie_Easy_Screens_Renderer extends Pie_Easy_Renderer
 {
 	/**
-	 * Render the section layout around the section's content
-	 *
-	 * If you override this method, make sure you include all of the CSS classes!
+	 * Render the screen
 	 */
 	protected function render_output()
 	{ ?>
@@ -36,19 +34,7 @@ abstract class Pie_Easy_Sections_Renderer extends Pie_Easy_Renderer
 			</div>
 		</div><?php
 	}
-
-	/**
-	 * Render wrapper classes
-	 */
-	public function render_classes()
-	{
-		printf(
-			'%1$s %1$s-%2$s',
-			esc_attr( $this->get_current()->class ),
-			esc_attr( $this->get_current()->name )
-		);
-	}
-
+	
 }
 
 ?>

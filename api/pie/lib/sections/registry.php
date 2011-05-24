@@ -17,66 +17,10 @@ Pie_Easy_Loader::load( 'base/registry', 'sections/factory' );
  * Make keeping track of sections easy
  *
  * @package PIE
- * @subpackage section
+ * @subpackage sections
  */
 abstract class Pie_Easy_Sections_Registry extends Pie_Easy_Registry
 {
-	/**
-	 * Return all registered child sections of a section
-	 *
-	 * This adheres to parent settings in the sections ini file
-	 *
-	 * @param Pie_Easy_Sections_Section $section The section object whose children you want to get
-	 * @return array
-	 */
-	public function get_children( Pie_Easy_Sections_Section $section )
-	{
-		// the sections that will be returned
-		$sections = array();
-
-		// find all registered sections where parent is the target section
-		foreach ( $this->get_all() as $section_i ) {
-			if ( $section->is_parent_of( $section_i ) ) {
-				$sections[] = $section_i;
-			}
-		}
-
-		return $sections;
-	}
-
-	/**
-	 * Get sections that should behave as a root section
-	 *
-	 * This method mostly exists as a helper to use when rendering menus
-	 *
-	 * @param array $section_names An array of section names to include, defaults to all
-	 * @return array
-	 */
-	public function get_roots( $section_names = array() )
-	{
-		// sections to be returned
-		$sections = array();
-
-		// loop through all registered sections
-		foreach ( $this->get_all() as $section ) {
-			// filter on section names
-			if ( empty( $section_names ) || in_array( $section->name, $section_names, true ) ) {
-				$sections[] = $section;
-			}
-		}
-
-		// don't return sections who have a parent in the result
-		foreach( $sections as $key => $section_i ) {
-			foreach( $sections as $section_ii ) {
-				if ( $section_ii->is_parent_of( $section_i ) ) {
-					unset( $sections[$key] );
-				}
-			}
-		}
-
-		return $sections;
-	}
-
 	/**
 	 * Load a section into the registry
 	 *

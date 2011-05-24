@@ -79,7 +79,13 @@ final class Pie_Easy_Loader
 	 */
 	private $pkgs = array(
 		'base' =>
-			array( 'component', 'factory', 'policeable', 'policy', 'registry', 'renderer' ),
+			array(
+				'component', 'componentable',
+				'icon', 'iconable',
+				'factory',
+				'policy', 'policeable', 'position', 'positionable',
+				'registry', 'renderer'
+			),
 		'collections' =>
 			array( 'map', 'map_iterator', 'stack', 'stack_iterator' ),
 		'features' =>
@@ -92,6 +98,8 @@ final class Pie_Easy_Loader
 			array( 'markdown', 'textile' ),
 		'schemes' =>
 			array( 'scheme', 'scheme_directive', 'scheme_enqueue' ),
+		'screens' =>
+			array( 'factory', 'screen', 'renderer', 'policy', 'registry' ),
 		'sections' =>
 			array( 'factory', 'section', 'renderer', 'policy', 'registry' ),
 		'utils' =>
@@ -118,6 +126,7 @@ final class Pie_Easy_Loader
 			'upload',
 			'yes', 'yesno'
 		),
+		'screens' => array( 'cpanel' ),
 		'sections' => array( 'default' ),
 		'shortcodes' => array(),
 		'widgets' => array()

@@ -11,7 +11,8 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'collections' );
+
+Pie_Easy_Loader::load( 'base/componentable', 'collections' );
 
 /**
  * Make keeping track of concrete components
@@ -19,7 +20,7 @@ Pie_Easy_Loader::load( 'collections' );
  * @package PIE
  * @subpackage base
  */
-abstract class Pie_Easy_Registry extends Pie_Easy_Policeable
+abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 {
 	/**
 	 * Name of parameter which passes back blog id
@@ -207,6 +208,62 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Policeable
 	final protected function get_stack( $name )
 	{
 		return $this->components->item_at( $name );
+	}
+
+	/**
+	 * Return all registered child components of a component
+	 *
+	 * This adheres to parent settings in the component ini file
+	 *
+	 * @param Pie_Easy_Component $component The component object whose children you want to get
+	 * @return array
+	 */
+	public function get_children( Pie_Easy_Component $component )
+	{
+		// the components that will be returned
+		$components = array();
+
+		// find all registered component where parent is the target component
+		foreach ( $this->get_all() as $component_i ) {
+			if ( $component->is_parent_of( $component_i ) ) {
+				$components[] = $component_i;
+			}
+		}
+
+		return $components;
+	}
+
+	/**
+	 * Get components that should behave as a root component
+	 *
+	 * This method mostly exists as a helper to use when rendering menus
+	 *
+	 * @param array $component_names An array of component names to include, defaults to all
+	 * @return array
+	 */
+	public function get_roots( $component_names = array() )
+	{
+		// components to be returned
+		$components = array();
+
+		// loop through all registered components
+		foreach ( $this->get_all() as $component ) {
+			// filter on component names
+			if ( empty( $component_names ) || in_array( $component->name, $component_names, true ) ) {
+				$components[] = $component;
+			}
+		}
+
+		// don't return components who have a parent in the result
+		foreach( $components as $key => $component_i ) {
+			foreach( $components as $component_ii ) {
+				if ( $component_ii->is_parent_of( $component_i ) ) {
+					unset( $components[$key] );
+				}
+			}
+		}
+
+		return $components;
 	}
 
 	/**
