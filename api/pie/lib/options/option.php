@@ -122,7 +122,7 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 	public function render( $output = true )
 	{
 		// render myself first
-		$html = $this->policy()->renderer()->render( $this, $output );
+		$html = parent::render( $output );
 
 		// render options that require this one
 		foreach ( $this->policy()->registry()->get_siblings($this) as $sibling_option ) {

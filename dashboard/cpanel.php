@@ -127,6 +127,9 @@ function infinity_dashboard_cpanel_toolbar_menu( $items = null )
 		<ul><?php
 	}
 
+	// sort em
+	$items = Pie_Easy_Position::sort_priority( $items );
+
 	foreach( $items as $item ) {
 		$children = Infinity_Screens_Policy::instance()->registry()->get_children( $item );
 		$children_cnt = count( $children ); ?>

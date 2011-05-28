@@ -28,6 +28,7 @@ Pie_Easy_Loader::load( 'base/componentable', 'init/directive' );
  * @property-read array $capabilities Required capabilities, can only be appended
  * @property-read string $required_feature Feature required for this component to run/display
  * @property-read string $required_option Options only required if this component is run/displayed
+ * @property-read boolean $ignore Whether or not this component should be ignored
  */
 abstract class Pie_Easy_Component extends Pie_Easy_Componentable
 {
@@ -281,6 +282,16 @@ abstract class Pie_Easy_Component extends Pie_Easy_Componentable
 	{
 		$this->set_directive( 'required_option', $option_name, true );
 	}
+
+	/**
+	 * Set ignore toggle
+	 *
+	 * @param boolean $toggle
+	 */
+	final public function set_ignore( $toggle )
+	{
+		$this->set_directive( 'ignore', (boolean) $toggle, true );
+	}
 	
 	/**
 	 * Render this component
@@ -290,7 +301,11 @@ abstract class Pie_Easy_Component extends Pie_Easy_Componentable
 	 */
 	public function render( $output = true )
 	{
-		return $this->policy()->renderer()->render( $this, $output );
+		if ( $this->ignore ) {
+			throw new Exception( 'Cannot render a component that has been ignored' );
+		} else {
+			return $this->policy()->renderer()->render( $this, $output );
+		}
 	}
 }
 

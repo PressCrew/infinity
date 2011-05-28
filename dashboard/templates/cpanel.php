@@ -1,4 +1,3 @@
-<?php infinity_image_url( 'foo.png') ?>
 <div class="wrap nosubsub">
 	<div id="infinity-cpanel">
 		<div id="infinity-cpanel-header">

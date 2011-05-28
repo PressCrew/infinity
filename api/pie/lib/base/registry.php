@@ -184,15 +184,23 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 	 *
 	 * @return array
 	 */
-	final public function get_all( $reverse = false )
+	final public function get_all( $include_ignored = false )
 	{
 		// components to return
 		$components = array();
 
 		// loop through and compare names
 		foreach ( $this->components as $component_stack ) {
-			// add comp on top of stack to array
-			$components[] = $component_stack->peek();
+			// current component is on top of stack
+			$component = $component_stack->peek();
+			// include ignored?
+			if ( ($component->ignore) && (!$include_ignored) ) {
+				// next!
+				continue;
+			} else {
+				// add to array
+				$components[] = $component;
+			}
 		}
 
 		// return them

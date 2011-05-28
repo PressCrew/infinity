@@ -48,6 +48,11 @@ abstract class Pie_Easy_Screens_Registry extends Pie_Easy_Registry
 		$icon_secondary = ( isset( $screen_config['icon_secondary'] ) ) ? $screen_config['icon_secondary'] : null;
 		$screen->icon( new Pie_Easy_Icon( $icon_primary, $icon_secondary ) );
 
+		// priority
+		if ( isset( $screen_config['priority'] ) ) {
+			$screen->position( new Pie_Easy_Position( $screen_config['priority'] ) );
+		}
+
 		// show on toolbar?
 		if ( isset( $screen_config['toolbar'] ) ) {
 			$screen->set_toolbar( $screen_config['toolbar'] );
@@ -56,6 +61,11 @@ abstract class Pie_Easy_Screens_Registry extends Pie_Easy_Registry
 		// template
 		if ( isset( $screen_config['template'] ) ) {
 			$screen->set_template( $screen_config['template'] );
+		}
+
+		// ignore?
+		if ( isset( $screen_config['ignore'] ) ) {
+			$screen->set_ignore( $screen_config['ignore'] );
 		}
 
 		// register it
