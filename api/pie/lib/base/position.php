@@ -18,17 +18,8 @@
  * @subpackage base
  * @property-read null|integer $priority
  */
-abstract class Pie_Easy_Position
+class Pie_Easy_Position
 {
-	/**
-	 * The offset
-	 *
-	 * Negative offsets may work in some situation. Null means "auto" offset.
-	 *
-	 * @var null|integer
-	 */
-	private $offset;
-
 	/**
 	 * The priority
 	 *
@@ -41,12 +32,10 @@ abstract class Pie_Easy_Position
 	/**
 	 * Constructor
 	 *
-	 * @param null|integer $offset If an offset is missing, auto is assumed
 	 * @param null|integer $priority If a priority is missing, auto is assumed
 	 */
-	public function __construct( $offset = null, $priority = null )
+	public function __construct( $priority = null )
 	{
-		$this->offset = $offset;
 		$this->priority = $priority;
 	}
 
@@ -58,8 +47,6 @@ abstract class Pie_Easy_Position
 	public function __get( $name )
 	{
 		switch ( $name ) {
-			case 'offset':
-				return $this->offset;
 			case 'priority':
 				return $this->priority;
 			default:
@@ -76,12 +63,6 @@ abstract class Pie_Easy_Position
 	public function __set( $name, $value )
 	{
 		switch ( $name ) {
-			case 'offset':
-				if ( empty( $this->offset ) ) {
-					return $this->offset = $value;
-				} else {
-					throw new Exception( 'Cannot overwrite offset once set' );
-				}
 			case 'priority':
 				if ( empty( $this->priority ) ) {
 					return $this->priority = $value;
@@ -89,6 +70,37 @@ abstract class Pie_Easy_Position
 					throw new Exception( 'Cannot overwrite priority once set' );
 				}
 		}
+	}
+
+	/**
+	 * Sort an array of positionable components by priority
+	 * 
+	 * @param array $components
+	 * @return array
+	 */
+	final static public function sort_priority( $components )
+	{
+		uasort( $components, array( 'Pie_Easy_Position', '_sort_priority' ) );
+		return $components;
+	}
+
+	/**
+	 * Comparison function for sorting positionable components on priority
+	 *
+	 * @param Pie_Easy_Positionable $a
+	 * @param Pie_Easy_Positionable $b
+	 * @return array
+	 */
+	final static protected function _sort_priority( Pie_Easy_Positionable $a, Pie_Easy_Positionable $b )
+	{
+		$ap = $a->position()->priority;
+		$bp = $b->position()->priority;
+
+		if ( $ap == $bp ) {
+			return 0;
+		}
+		
+		return ($ap < $bp) ? -1 : 1;
 	}
 }
 
