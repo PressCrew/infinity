@@ -127,7 +127,7 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 		if ( $this->components->contains( $component->name ) ) {
 
 			// get component stack
-			$comp_stack = $this->components->get_stack( $component->name );
+			$comp_stack = $this->get_stack( $component->name );
 
 			// check if component already registered for this theme
 			if ( $comp_stack->contains( $component->theme ) ) {
