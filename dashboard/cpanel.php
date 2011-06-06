@@ -96,6 +96,7 @@ function infinity_dashboard_cpanel_tabs_content()
 
 	if ( !empty($action) && !empty($template) ) {
 		Pie_Easy_Ajax::responseBegin();
+		// TODO this should be in the render_output() call
 		infinity_load_template( $template );
 		Pie_Easy_Ajax::responseEnd( true );
 	} else {

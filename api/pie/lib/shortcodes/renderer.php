@@ -1,6 +1,6 @@
 <?php
 /**
- * PIE API: screen renderer class file
+ * PIE API: shortcode renderer class file
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://marshallsorenson.com/
@@ -12,18 +12,20 @@
  */
 
 /**
- * Make rendering screens easy
+ * Make rendering shortcodes easy
  *
  * @package PIE
- * @subpackage screens
+ * @subpackage shortcodes
  */
-abstract class Pie_Easy_Screens_Renderer extends Pie_Easy_Renderer
+abstract class Pie_Easy_Shortcodes_Renderer extends Pie_Easy_Renderer
 {
 	/**
-	 * Render the screen
+	 * Render the shortcode
 	 */
-	protected function render_output() {}
-
+	protected function render_output()
+	{
+		$this->get_current()->load_template();
+	}
 }
 
 ?>

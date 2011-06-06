@@ -22,6 +22,11 @@ function infinity_scheme_init( $theme = null )
 {
 	// initialize the scheme
 	Pie_Easy_Scheme::instance( $theme )->init( INFINITY_NAME );
+
+	// init shortcodes
+	$shortcodes_policy = Infinity_Shortcodes_Policy::instance();
+	Pie_Easy_Scheme::instance( $theme )->enable_component( $shortcodes_policy );
+
 	return true;
 }
 

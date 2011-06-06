@@ -102,6 +102,8 @@ final class Pie_Easy_Loader
 			array( 'factory', 'screen', 'renderer', 'policy', 'registry' ),
 		'sections' =>
 			array( 'factory', 'section', 'renderer', 'policy', 'registry' ),
+		'shortcodes' =>
+			array( 'factory', 'shortcode', 'renderer', 'policy', 'registry' ),
 		'utils' =>
 			array( 'ajax', 'docs', 'enqueue', 'files', 'i18n' )
 	);
@@ -128,7 +130,7 @@ final class Pie_Easy_Loader
 		),
 		'screens' => array( 'cpanel' ),
 		'sections' => array( 'default' ),
-		'shortcodes' => array(),
+		'shortcodes' => array( 'access' ),
 		'widgets' => array()
 	);
 

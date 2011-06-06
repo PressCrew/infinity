@@ -68,9 +68,9 @@
 				<?php
 					// Check if this is a post or page, if it has a thumbnail, and if it's a big one
 					// TODO clean this huge freaking mess up
-					if ( is_singular() && has_post_thumbnail( $post->ID ) ):
-						echo get_the_post_thumbnail( $post->ID, 'post-thumbnail' );
-					endif; ?>
+//					if ( is_singular() && has_post_thumbnail( $post->ID ) ):
+//						echo get_the_post_thumbnail( $post->ID, 'post-thumbnail' );
+//					endif; ?>
 			</div><!-- #branding -->
 
 			<div id="access" role="navigation">
