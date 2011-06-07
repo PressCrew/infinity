@@ -43,11 +43,7 @@ final class Pie_Easy_Enqueue
 	 */
 	private function __construct()
 	{
-		// use our our actions because things get too freaking confusing
-		add_action( 'wp_print_styles', array($this, 'do_enqueue_styles') );
-		add_action( 'wp_print_scripts', array($this, 'do_enqueue_scripts') );
-		add_action( 'admin_print_styles', array($this, 'do_enqueue_styles') );
-		add_action( 'admin_print_scripts', array($this, 'do_enqueue_scripts') );
+		// singleton
 	}
 
 	/**
@@ -73,6 +69,18 @@ final class Pie_Easy_Enqueue
 	{
 		// negative priorities work... shhhh...
 		add_action( 'wp_print_scripts', array( self::instance(), 'override_jui' ), -99999 );
+	}
+
+	/**
+	 * Init screen reqs helper
+	 */
+	final public function init_screen()
+	{
+		// use our own actions because things get too freaking confusing
+		add_action( 'wp_print_styles', array($this, 'do_enqueue_styles') );
+		add_action( 'wp_print_scripts', array($this, 'do_enqueue_scripts') );
+		add_action( 'admin_print_styles', array($this, 'do_enqueue_styles') );
+		add_action( 'admin_print_scripts', array($this, 'do_enqueue_scripts') );
 	}
 
 	/**

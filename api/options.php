@@ -259,14 +259,23 @@ function infinity_options_init( $theme = null )
 	Pie_Easy_Scheme::instance($theme)->enable_component( $sections_policy );
 	Pie_Easy_Scheme::instance($theme)->enable_component( $options_policy );
 
+	do_action( 'infinity_options_init' );
+}
+
+/**
+ * Initialize options screen requirements
+ */
+function infinity_options_init_screen()
+{
 	// init ajax OR screen reqs (not both)
 	if ( defined( 'DOING_AJAX') ) {
 		Infinity_Options_Policy::instance()->registry($theme)->init_ajax();
+		do_action( 'infinity_options_init_ajax' );
 	} else {
+		Pie_Easy_Enqueue::instance()->init_screen();
 		Infinity_Options_Policy::instance()->registry($theme)->init_screen();
+		do_action( 'infinity_options_init_screen' );
 	}
-
-	do_action( 'infinity_options_init' );
 }
 
 /**
