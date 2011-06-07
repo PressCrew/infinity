@@ -240,10 +240,16 @@ class Infinity_Feature_Site_Background extends Infinity_Feature
 	/**
 	 * Inject the style for the custom site background
 	 */
-	final public function style( $selector = 'body' )
+	final public function style( $selector = null )
 	{
 		// only print style if this feature is supported
 		if ( $this->supported() ) {
+
+			// handle empty selector
+			if ( empty( $selector ) ) {
+				// use body as the default selector
+				$selector = 'body';
+			}
 
 			// load attachment image url
 			$url = infinity_option_image_url( 'infinity_site_background', 'full' );
