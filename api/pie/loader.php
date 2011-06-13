@@ -84,12 +84,13 @@ final class Pie_Easy_Loader
 				'icon', 'iconable',
 				'factory',
 				'policy', 'policeable', 'position', 'positionable',
-				'registry', 'renderer'
+				'registry', 'renderer',
+				'style', 'styleable'
 			),
 		'collections' =>
 			array( 'map', 'map_iterator', 'stack', 'stack_iterator' ),
 		'features' =>
-			array( 'feature' ),
+			array( 'factory', 'feature', 'renderer', 'policy', 'registry' ),
 		'options' =>
 			array( 'factory', 'option', 'renderer', 'policy', 'registry', 'uploader', 'walkers' ),
 		'init' =>
@@ -114,7 +115,9 @@ final class Pie_Easy_Loader
 	 * @var array
 	 */
 	private $exts = array(
-		'features' => array(),
+		'features' => array(
+			'css-background', 'custom-css', 'gravatar', 'header-logo'
+		),
 		'options' => array(
 			'category', 'categories', 'checkbox', 'colorpicker', 'css',
 			'disable',

@@ -1,42 +1,48 @@
 <?php
 /**
- * PIE API: shortcodes factory class file
+ * PIE API: features factory class file
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://marshallsorenson.com/
  * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
  * @package PIE
- * @subpackage shortcodes
+ * @subpackage features
  * @since 1.0
  */
 
 Pie_Easy_Loader::load( 'base/factory' );
 
 /**
- * Make creating shortcode objects easy
+ * Make creating feature objects easy
  *
  * @package PIE
- * @subpackage shortcodes
+ * @subpackage features
  */
-class Pie_Easy_Shortcodes_Factory extends Pie_Easy_Factory
+class Pie_Easy_Features_Factory extends Pie_Easy_Factory
 {
 	/**
 	 * @todo sending section through is a temp hack
 	 * @ignore
-	 * @return Pie_Easy_Shortcodes_Shortcode
+	 * @return Pie_Easy_Features_Feature
 	 */
 	public function create( $ext, $theme, $name, $title = null, $desc = null, $section = null )
 	{
 		// load it from alternate location?
 		if ( !$this->policy()->load_ext( $ext ) ) {
-			// nope, load core shortcode
-			Pie_Easy_Loader::load_ext( array('shortcodes', $ext) );
+			// nope, load core feature
+			Pie_Easy_Loader::load_ext( array('features', $ext) );
+		}
+
+		$ext_parts = explode( '-', $ext );
+
+		foreach ( $ext_parts as &$ext_part ) {
+			$ext_part = ucfirst( $ext_part );
 		}
 
 		// determine class name
-		$class_name = 'Pie_Easy_Exts_Shortcode_' . ucfirst( $ext );
-		
+		$class_name = 'Pie_Easy_Exts_Feature_' . implode( '_', $ext_parts );
+
 		// update ext map
 		if ( $this->ext( $class_name, $ext ) ) {
 			// return it

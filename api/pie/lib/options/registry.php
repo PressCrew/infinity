@@ -185,7 +185,7 @@ abstract class Pie_Easy_Options_Registry extends Pie_Easy_Registry
 	 *
 	 * @param string $option_name
 	 * @param array $option_config
-	 * @return boolean
+	 * @return Pie_Easy_Component|false
 	 */
 	final protected function load_config_single( $option_name, $option_config )
 	{
@@ -235,9 +235,6 @@ abstract class Pie_Easy_Options_Registry extends Pie_Easy_Registry
 			);
 
 		}
-
-		// register it
-		$this->register( $option );
 
 		// required option
 		if ( isset( $option_config['required_option'] ) ) {
@@ -320,7 +317,7 @@ abstract class Pie_Easy_Options_Registry extends Pie_Easy_Registry
 			}
 		}
 
-		return true;
+		return $option;
 	}
 
 	/**
@@ -407,26 +404,6 @@ abstract class Pie_Easy_Options_Registry extends Pie_Easy_Registry
 		}
 	}
 
-	/**
-	 * Export CSS markup from all registered options that have the "css" field type
-	 *
-	 * @return string|null
-	 */
-	public function export_css()
-	{
-		// css to export
-		$css = null;
-
-		// loop through and check field type
-		foreach ( $this->get_all() as $option ) {
-			if ( $option instanceof Pie_Easy_Exts_Option_Css ) {
-				// append css markup
-				$css .= $option->get() . PHP_EOL;
-			}
-		}
-
-		return $css;
-	}
 }
 
 ?>

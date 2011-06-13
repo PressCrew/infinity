@@ -88,6 +88,46 @@ abstract class Pie_Easy_Policy
 	}
 
 	/**
+	 * @return Pie_Easy_Features_Policy
+	 */
+	final static public function features()
+	{
+		return self::instance( 'Pie_Easy_Features_Policy' );
+	}
+
+	/**
+	 * @return Pie_Easy_Options_Policy
+	 */
+	final static public function options()
+	{
+		return self::instance( 'Pie_Easy_Options_Policy' );
+	}
+
+	/**
+	 * @return Pie_Easy_Screens_Policy
+	 */
+	final static public function screens()
+	{
+		return self::instance( 'Pie_Easy_Screens_Policy' );
+	}
+
+	/**
+	 * @return Pie_Easy_Sections_Policy
+	 */
+	final static public function sections()
+	{
+		return self::instance( 'Pie_Easy_Sections_Policy' );
+	}
+
+	/**
+	 * @return Pie_Easy_Shortcodes_Policy
+	 */
+	final static public function shortcodes()
+	{
+		return self::instance( 'Pie_Easy_Shortcodes_Policy' );
+	}
+
+	/**
 	 * Return the name of the implementing API
 	 *
 	 * If you are rolling your own parent theme, this should probably return the

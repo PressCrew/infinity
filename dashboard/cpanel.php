@@ -77,6 +77,10 @@ function infinity_dashboard_cpanel_setup()
 		// init options screens
 		infinity_options_init_screen();
 
+		// init features
+		$feature_policy = Infinity_Features_Policy::instance();
+		Pie_Easy_Scheme::instance()->enable_component( $feature_policy );
+
 		// init screens
 		$screen_policy = Infinity_Screens_Policy::instance();
 		Pie_Easy_Scheme::instance()->enable_component( $screen_policy );
