@@ -51,13 +51,14 @@ require_once( INFINITY_API_DIR . DIRECTORY_SEPARATOR . 'i18n.php' );
 // initialize scheme
 infinity_scheme_init();
 infinity_options_init();
+infinity_features_init();
 
 if ( is_admin() ) {
 	// only load admin functionality if the dashboard is actually loaded
 	require_once( INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'loader.php' );
 } else {
-	// some features need initialization
-	add_action( 'after_setup_theme', array('Infinity_Features', 'init') );
+	// some features need screen initialization
+	infinity_features_init_screen();
 }
 
 //
@@ -338,10 +339,11 @@ function infinity_posted_on()
 			esc_attr( get_the_time() ),
 			get_the_date()
 		),
-		sprintf( '<span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s">%3$s</a></span>',
+		sprintf( '<span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s">%3$s %4$s</a></span>',
 			get_author_posts_url( get_the_author_meta( 'ID' ) ),
 			sprintf( esc_attr__( 'View all posts by %s', infinity_text_domain ), get_the_author() ),
-			get_the_author()
+			get_the_author(),
+			infinity_feature( 'post-gravatar', false )
 		)
 	);
 }

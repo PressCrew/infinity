@@ -21,8 +21,12 @@ Pie_Easy_Loader::load_ext( 'options/textarea' );
  */
 class Pie_Easy_Exts_Option_Css
 	extends Pie_Easy_Exts_Option_Textarea
+		implements Pie_Easy_Styleable
 {
-	// empty for now
+	public function export_css()
+	{
+		print $this->get();
+	}
 }
 
 ?>

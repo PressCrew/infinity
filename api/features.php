@@ -11,263 +11,92 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'utils/enqueue', 'features' );
+Pie_Easy_Loader::load( 'features' );
 
 /**
- * Infinity Theme: feature factory class
+ * Infinity Theme: features policy
  *
  * @package api
  * @subpackage features
  */
-final class Infinity_Features
+class Infinity_Features_Policy extends Pie_Easy_Features_Policy
 {
 	/**
-	 * Initialize features that require it
+	 * @return Pie_Easy_Features_Policy
 	 */
-	final static function init()
+	static public function instance()
 	{
-		add_action( 'pie_easy_enqueue_styles', array( self::custom_css(), 'init_styles' ), 999 );
+		self::$calling_class = __CLASS__;
+		return parent::instance();
 	}
-
+	
 	/**
-	 * Custom CSS
-	 *
-	 * @return Infinity_Feature_Custom_Css
-	 */
-	final static public function custom_css()
-	{
-		return new Infinity_Feature_Custom_Css();
-	}
-
-	/**
-	 * Header Logo
-	 *
-	 * @return Infinity_Feature_Header_Logo
-	 */
-	final static public function header_logo()
-	{
-		return new Infinity_Feature_Header_Logo();
-	}
-
-	/**
-	 * Header Background
-	 *
-	 * @return Infinity_Feature_Header_Background
-	 */
-	final static public function header_background()
-	{
-		return new Infinity_Feature_Header_Background();
-	}
-
-	/**
-	 * Site Background
-	 *
-	 * @return Infinity_Feature_Site_Background
-	 */
-	final static public function site_background()
-	{
-		return new Infinity_Feature_Site_Background();
-	}
-}
-
-/**
- * Infinity Theme: feature base class
- *
- * @package api
- * @subpackage features
- */
-abstract class Infinity_Feature extends Pie_Easy_Feature
-{
-	/**
-	 * Define our API slug
+	 * Return the name of the implementing API
 	 *
 	 * @return string
 	 */
-	final protected function get_api_slug()
+	final public function get_api_slug()
 	{
-		return INFINITY_NAME;
+		return 'infinity_theme';
 	}
+
+	/**
+	 * @return Infinity_Features_Registry
+	 */
+	final public function new_registry()
+	{
+		return new Infinity_Features_Registry();
+	}
+
+	/**
+	 * @return Infinity_Exts_Feature_Factory
+	 */
+	final public function new_factory()
+	{
+		return new Infinity_Exts_Feature_Factory();
+	}
+
+	/**
+	 * @return Infinity_Features_Renderer
+	 */
+	final public function new_renderer()
+	{
+		return new Infinity_Features_Renderer();
+	}
+
 }
 
 /**
- * Infinity Theme: Custom CSS feature
+ * Infinity Theme: features registry
  *
  * @package api
  * @subpackage features
  */
-class Infinity_Feature_Custom_Css extends Infinity_Feature
+class Infinity_Features_Registry extends Pie_Easy_Features_Registry
 {
-	final public function __construct() {
-		parent::__construct(
-			'custom-css',
-			'Custom CSS',
-			__('Allow custom CSS to be provided with theme options.', infinity_text_domain)
-		);
-	}
-
-	/**
-	 * Enqueue the css export script
-	 */
-	final public function init_styles()
-	{
-		if ( $this->supported() ) {
-			wp_enqueue_style( 'infinity-custom', INFINITY_EXPORT_URL . '/css.php', null, infinity_option_meta( 'infinity_custom_css', 'time_updated' ) );
-		}
-	}
+	// nothing custom yet
 }
 
 /**
- * Infinity Theme: Header Logo Feature
+ * Infinity Theme: feature factory
+ *
+ * @package api
+ * @subpackage exts
+ */
+class Infinity_Exts_Feature_Factory extends Pie_Easy_Features_Factory
+{
+	// nothing custom yet
+}
+
+/**
+ * Infinity Theme: features renderer
  *
  * @package api
  * @subpackage features
  */
-class Infinity_Feature_Header_Logo extends Infinity_Feature
+class Infinity_Features_Renderer extends Pie_Easy_Features_Renderer
 {
-	final public function __construct()
-	{
-		// run parent constructor
-		parent::__construct(
-			'header-logo',
-			'Header Logo',
-			__('Custom header logo support.', infinity_text_domain)
-		);
-	}
-
-	/**
-	 * Inject the style for the custom logo
-	 */
-	final public function style( $selector = null )
-	{
-		// only print style if this feature is supported
-		if ( $this->supported() ) {
-
-			// fall back to core layout
-			if ( empty( $selector ) ) {
-				$selector = 'div#header h1#site-title a';
-			}
-
-			// load attachment image data
-			list( $url, $width, $height ) = infinity_option_image_src( 'infinity_header_logo', 'full' );
-
-			// only render if we have a url
-			if ( $url ) {
-				// render the styles ?>
-				<style type="text/css">
-					<?php print $selector ?> {
-						display: block;
-						text-indent: -999px;
-						background-image: url('<?php print $url ?>');
-						<?php if ( $width ): ?>width: <?php print $width ?>px;<?php endif; ?>
-						<?php if ( $height ): ?>height: <?php print $height ?>px;<?php endif; ?>
-					}
-				</style><?php
-			}
-		}
-
-		return true;
-	}
-}
-
-/**
- * Infinity Theme: Header Background Feature
- *
- * @package api
- * @subpackage features
- */
-class Infinity_Feature_Header_Background extends Infinity_Feature
-{
-	final public function __construct()
-	{
-		// run parent constructor
-		parent::__construct(
-			'header-background',
-			'Header Background',
-			__('Custom header background support.', infinity_text_domain)
-		);
-	}
-
-	/**
-	 * Inject the style for the custom header background
-	 */
-	final public function style( $selector = null )
-	{
-		// only print style if this feature is supported
-		if ( $this->supported() ) {
-
-			// fall back to core style of layout
-			if ( empty( $selector ) ) {
-				$selector = 'div#header';
-			}
-
-			// load attachment image url
-			$url = infinity_option_image_url( 'infinity_header_background', 'full' );
-
-			// only render if we have a url
-			if ( $url ) {
-				// start rendering ?>
-				<style type="text/css">
-					<?php print $selector ?> {
-						background-image: url('<?php print $url ?>');
-						background-repeat: <?php print infinity_option( 'infinity_header_background_tiling' ) ?>;
-					}
-				</style><?php
-			}
-		}
-
-		return true;
-	}
-}
-
-/**
- * Infinity Theme: Site Background Feature
- *
- * @package api
- * @subpackage features
- */
-class Infinity_Feature_Site_Background extends Infinity_Feature
-{
-	final public function __construct()
-	{
-		// run parent constructor
-		parent::__construct(
-			'site-background',
-			'Site Background',
-			__('Custom site background support.', infinity_text_domain)
-		);
-	}
-
-	/**
-	 * Inject the style for the custom site background
-	 */
-	final public function style( $selector = null )
-	{
-		// only print style if this feature is supported
-		if ( $this->supported() ) {
-
-			// handle empty selector
-			if ( empty( $selector ) ) {
-				// use body as the default selector
-				$selector = 'body';
-			}
-
-			// load attachment image url
-			$url = infinity_option_image_url( 'infinity_site_background', 'full' );
-
-			// only render if we have a url
-			if ( $url ) {
-				// start rendering ?>
-				<style type="text/css">
-					<?php print $selector ?> {
-						background-image: url('<?php print $url ?>');
-						background-repeat: <?php print infinity_option( 'infinity_site_background_tiling' ) ?>;
-					}
-				</style><?php
-			}
-		}
-
-		return true;
-	}
+	// nothing custom yet
 }
 
 //
@@ -275,45 +104,43 @@ class Infinity_Feature_Site_Background extends Infinity_Feature
 //
 
 /**
- * Print header logo style
+ * Display a feature
  *
- * This should be placed inside the <head> element in your theme template
- *
- * @see Infinity_Feature_Header_Logo::style()
- * @param string $selector
- * @return boolean
+ * @param string $feature_name
+ * @return mixed
  */
-function infinity_feature_header_logo_style( $selector = null )
+function infinity_feature( $feature_name, $output = true )
 {
-	return Infinity_Features::header_logo()->style( $selector );
+	return Infinity_Features_Policy::instance()->registry()->get($feature_name)->render( $output );
 }
 
 /**
- * Print header background style
- *
- * This should be placed inside the <head> element in your theme template
- *
- * @see Infinity_Feature_Header_Background::style()
- * @param string $selector
- * @return boolean
+ * Initialize features environment
  */
-function infinity_feature_header_background_style( $selector = null )
+function infinity_features_init( $theme = null )
 {
-	return Infinity_Features::header_background()->style( $selector );
+	// component policies
+	$features_policy = Infinity_Features_Policy::instance();
+
+	// enable components
+	Pie_Easy_Scheme::instance($theme)->enable_component( $features_policy );
+
+	do_action( 'infinity_features_init' );
 }
 
 /**
- * Print site background style
- *
- * This should be placed inside the <head> element in your theme template
- *
- * @see Infinity_Feature_Site_Background::style()
- * @param string $selector
- * @return boolean
+ * Initialize features screen requirements
  */
-function infinity_feature_site_background_style( $selector = null )
+function infinity_features_init_screen()
 {
-	return Infinity_Features::site_background()->style( $selector );
+	// init ajax OR screen reqs (not both)
+	if ( defined( 'DOING_AJAX') ) {
+		Infinity_Features_Policy::instance()->registry()->init_ajax();
+		do_action( 'infinity_features_init_ajax' );
+	} else {
+		Infinity_Features_Policy::instance()->registry()->init_screen();
+		do_action( 'infinity_features_init_screen' );
+	}
 }
 
 ?>

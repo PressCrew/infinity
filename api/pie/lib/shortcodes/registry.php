@@ -26,7 +26,7 @@ abstract class Pie_Easy_Shortcodes_Registry extends Pie_Easy_Registry
 	 *
 	 * @param string $shortcode_name
 	 * @param string $shortcode_config
-	 * @return boolean
+	 * @return Pie_Easy_Component|false
 	 */
 	protected function load_config_single( $shortcode_name, $shortcode_config )
 	{
@@ -54,8 +54,7 @@ abstract class Pie_Easy_Shortcodes_Registry extends Pie_Easy_Registry
 			$shortcode->set_template( $shortcode_config['template'] );
 		}
 
-		// register it
-		return $this->register( $shortcode );
+		return $shortcode;
 	}
 
 }

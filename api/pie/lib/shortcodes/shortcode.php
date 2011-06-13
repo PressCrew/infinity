@@ -70,7 +70,7 @@ abstract class Pie_Easy_Shortcodes_Shortcode extends Pie_Easy_Component
 			PIE_EASY_LIBEXT_DIR,
 			$this->policy()->get_handle(),
 			self::DEFAULT_TEMPLATE_DIR,
-			$this->name . '.php'
+			$this->policy()->factory()->ext($this) . '.php'
 		);
 	}
 

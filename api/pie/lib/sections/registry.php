@@ -26,7 +26,7 @@ abstract class Pie_Easy_Sections_Registry extends Pie_Easy_Registry
 	 *
 	 * @param string $section_name
 	 * @param string $section_config
-	 * @return boolean
+	 * @return Pie_Easy_Component|false
 	 */
 	protected function load_config_single( $section_name, $section_config )
 	{
@@ -58,8 +58,7 @@ abstract class Pie_Easy_Sections_Registry extends Pie_Easy_Registry
 			$section->set_parent( $section_config['parent'] );
 		}
 
-		// register it
-		return $this->register( $section );
+		return $section;
 	}
 
 }

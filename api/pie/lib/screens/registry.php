@@ -26,7 +26,7 @@ abstract class Pie_Easy_Screens_Registry extends Pie_Easy_Registry
 	 *
 	 * @param string $screen_name
 	 * @param string $screen_config
-	 * @return boolean
+	 * @return Pie_Easy_Component|false
 	 */
 	protected function load_config_single( $screen_name, $screen_config )
 	{
@@ -68,8 +68,7 @@ abstract class Pie_Easy_Screens_Registry extends Pie_Easy_Registry
 			$screen->set_ignore( $screen_config['ignore'] );
 		}
 
-		// register it
-		return $this->register( $screen );
+		return $screen;
 	}
 
 }

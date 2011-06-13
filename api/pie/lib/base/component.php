@@ -33,6 +33,11 @@ Pie_Easy_Loader::load( 'base/componentable', 'init/directive' );
 abstract class Pie_Easy_Component extends Pie_Easy_Componentable
 {
 	/**
+	 * Prefix for custom directives (pass thru vars)
+	 */
+	const PREFIX_PASS_THRU = '_';
+
+	/**
 	 * The theme that created this concrete component
 	 *
 	 * @var string
@@ -98,6 +103,7 @@ abstract class Pie_Easy_Component extends Pie_Easy_Componentable
 	 * @param string $name
 	 * @param mixed $value
 	 * @param boolean $read_only
+	 * @return true
 	 */
 	final protected function set_directive( $name, $value, $read_only = null )
 	{
@@ -107,6 +113,25 @@ abstract class Pie_Easy_Component extends Pie_Easy_Componentable
 			$directive = new Pie_Easy_Init_Directive( $name, $value, $read_only );
 			$this->directives->add( $name, $directive );
 		}
+
+		return true;
+	}
+
+	/**
+	 * Set a custom directive (pass thru var)
+	 *
+	 * @param string $name
+	 * @param mixed $value
+	 * @return boolean
+	 */
+	final public function set_directive_var( $name, $value )
+	{
+		// first character match prefix?
+		if ( $name{0} == self::PREFIX_PASS_THRU ) {
+			return $this->set_directive( $name, $value, true );
+		}
+
+		return false;
 	}
 
 	/**
@@ -210,11 +235,11 @@ abstract class Pie_Easy_Component extends Pie_Easy_Componentable
 	private function set_name( $name )
 	{
 		// name must adhere to a strict format
-		if ( preg_match( '/^[a-z0-9]+(_[a-z0-9]+)*$/', $name ) ) {
+		if ( preg_match( '/^[a-z0-9]+((_|-)[a-z0-9]+)*$/', $name ) ) {
 			$this->name = $name;
 			return true;
 		} else {
-			throw new Exception( 'Option name does not match the allowed pattern' );
+			throw new Exception( sprintf( 'Option name "%s" does not match the allowed pattern', $name ) );
 		}
 	}
 

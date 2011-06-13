@@ -1,6 +1,6 @@
 <?php
 /**
- * PIE API: base feature class file
+ * PIE API: feature class file
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://marshallsorenson.com/
@@ -11,114 +11,86 @@
  * @since 1.0
  */
 
+Pie_Easy_Loader::load( 'base/component', 'base/styleable', 'utils/files' );
+
 /**
- * Make a theme feature easy
+ * Make a feature easy
  *
  * @package PIE
  * @subpackage features
- * @property-read string $name The name of the feature
- * @property-read string $title The title of the feature
- * @property-read string $description The description of the feature
+ * @property-read string $template Relative path to feature template file
  */
-abstract class Pie_Easy_Feature
+abstract class Pie_Easy_Features_Feature
+	extends Pie_Easy_Component
 {
 	/**
-	 * All feature handles are prepended with this prefix template
+	 * Config attribute default override delimeter
 	 */
-	const PREFIX_TPL = '%s-';
-
+	const DEFAULT_TEMPLATE_DIR = 'templates';
+	
 	/**
-	 * Name of the feature
-	 * @var string
-	 */
-	private $name;
-
-	/**
-	 * Title of the feature
-	 * @var string
-	 */
-	private $title;
-
-	/**
-	 * Description of the feature
-	 * @var string
-	 */
-	private $description;
-
-	/**
-	 * Initialize the feature.
+	 * Return path to default template
 	 *
-	 * @param string $name Feature name may only contain alphanumeric characters as well as the hyphen for use as a word seperator.
-	 * @param string $title The title of the feature
-	 * @param string $desc A description of the feature
+	 * @return string
 	 */
-	public function __construct( $name, $title, $desc )
+	private function default_template()
 	{
-		// name must adhere to a strict format
-		if ( preg_match( '/^[a-z0-9]+(-[a-z0-9]+)*$/', $name ) ) {
-			$this->name = $name;
-		} else {
-			throw new Exception( 'Feature name does not match the allowed pattern' );
+		return Pie_Easy_Files::path_build(
+			PIE_EASY_LIBEXT_DIR,
+			$this->policy()->get_handle(),
+			self::DEFAULT_TEMPLATE_DIR,
+			$this->policy()->factory()->ext($this) . '.php'
+		);
+	}
+
+	/**
+	 * Extract variables and load the template (if it exists)
+	 */
+	final public function load_template()
+	{
+		// try to locate the template
+		if ( $this->template ) {
+			$__template__ = Pie_Easy_Scheme::instance()->locate_template( $this->template );
 		}
 
-		// set basic string properties
-		$this->title = $title;
-		$this->description = $desc;
+		// need default template?
+		if ( empty( $__template__ ) ) {
+			$__template__ = $this->default_template();
+		}
+
+		// get template vars
+		$__tpl_vars__ = $this->get_template_vars();
+
+		// extract?
+		if ( is_array( $__tpl_vars__ ) && !empty( $__tpl_vars__ ) ) {
+			extract( $__tpl_vars__ );
+		}
+
+		// load template
+		include( $__template__ );
 	}
 
 	/**
-	 * Allow read access to all properties (for now)
+	 * Return array of variables to extract() for use by the template
 	 *
-	 * @ignore
-	 * @param string $name
-	 * @return mixed
+	 * @return array
 	 */
-	public function __get( $name )
+	public function get_template_vars()
 	{
-		return $this->$name;
+		// empty array by default
+		return array();
 	}
-
+	
 	/**
-	 * Returns true if the active theme supports this feature
+	 * Set the template file path
 	 *
-	 * @see current_theme_supports()
-	 * @return boolean
+	 * @param string $path
 	 */
-	public function supported()
+	public function set_template( $path )
 	{
-		return current_theme_supports( $this->get_api_name() );
+		$this->set_directive( 'template', $path );
 	}
-
-	/**
-	 * Get the prefix for API feature
-	 *
-	 * @return string
-	 */
-	private function get_api_prefix()
-	{
-		return sprintf( self::PREFIX_TPL, $this->get_api_slug() );
-	}
-
-	/**
-	 * Get the full name for API feature
-	 *
-	 * @return string
-	 */
-	private function get_api_name()
-	{
-		return $this->get_api_prefix() . $this->name;
-	}
-
-	/**
-	 * Return the name of the implementing API
-	 *
-	 * If you roll your own parent theme using PIE, this would normally be the
-	 * name of that theme. It is used in the prefix of the feature name.
-	 *
-	 * @return string
-	 */
-	abstract protected function get_api_slug();
-
+	
 }
 
 ?>

@@ -310,7 +310,14 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 		if ( is_array( $ini_array ) ) {
 			// loop through each directive
 			foreach ( $ini_array as $s_name => $s_config ) {
-				$this->load_config_single( $s_name, $s_config );
+				// get component
+				$component = $this->load_config_single( $s_name, $s_config );
+				// valid component?
+				if ( $component instanceof Pie_Easy_Component ) {
+					// set component vars and register it
+					$this->set_component_vars( $component, $s_config );
+					$this->register( $component );
+				}
 			}
 			// all done
 			return true;
@@ -327,6 +334,35 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 	 * @return boolean
 	 */
 	abstract protected function load_config_single( $name, $config );
+
+	/**
+	 * Set custom directives for component (pass thru vars)
+	 *
+	 * @param Pie_Easy_Component $component
+	 * @param array $config_array
+	 */
+	private function set_component_vars( Pie_Easy_Component $component, $config_array )
+	{
+		// loop through config
+		foreach( $config_array as $directive => $value ) {
+			// try to set it
+			$component->set_directive_var( $directive, $value );
+		}
+	}
+
+	/**
+	 * Export CSS markup from all registered component that implement the styleable
+	 */
+	public function export_css()
+	{
+		// loop through and check field type
+		foreach ( $this->get_all() as $component ) {
+			if ( $component instanceof Pie_Easy_Styleable ) {
+				// export css markup
+				$component->export_css();
+			}
+		}
+	}
 
 }
 

@@ -36,11 +36,6 @@
 <link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 <?php
-	/* Infinity Theme Feature calls */
-	infinity_feature_header_logo_style();
-	infinity_feature_header_background_style();
-	infinity_feature_site_background_style();
-
 	/* We add some JavaScript to pages with the comment form
 	 * to support sites with threaded comments (when in use).
 	 */
