@@ -122,6 +122,7 @@ final class Pie_Easy_Loader
 			'category', 'categories', 'checkbox', 'colorpicker', 'css',
 			'disable',
 			'enable', 'enabledisable',
+			'leftright',
 			'off', 'on', 'onoff',
 			'page', 'pages', 'post', 'posts',
 			'radio',
