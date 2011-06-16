@@ -1,175 +1,110 @@
 <?php
 /**
- * The loop that displays posts.
+ * Infinity Theme: loop template
  *
- * The loop displays the posts and the post content.  See
- * http://codex.wordpress.org/The_Loop to understand it and
- * http://codex.wordpress.org/Template_Tags to understand
- * the tags used in it.
- *
- * This can be overridden in child themes with loop.php or
- * loop-template.php, where 'template' is the loop context
- * requested by a template. For example, loop-index.php would
- * be used if it exists and we ask for the loop with:
- * <code>get_template_part( 'loop', 'index' );</code>
- *
- * @package themes
+ * The loop that displays posts
+ * 
+ * @author Bowe Frankema <bowromir@gmail.com>
+ * @link http://bp-tricks.com/
+ * @copyright Copyright (C) 2010 Bowe Frankema
+ * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
+ * @package infinity
  * @subpackage templates
+ * @since 1.0
  */
+
+	if ( have_posts() ):
+		while ( have_posts() ):
+			the_post();
+			do_action( 'open_loop' );
 ?>
-
-<?php /* Display navigation to next/previous pages when applicable */ ?>
-<?php if ( $wp_query->max_num_pages > 1 ) : ?>
-	<div id="nav-above" class="navigation">
-		<div class="nav-previous"><?php next_posts_link( __( '<span class="meta-nav">&larr;</span> Older posts', infinity_text_domain ) ); ?></div>
-		<div class="nav-next"><?php previous_posts_link( __( 'Newer posts <span class="meta-nav">&rarr;</span>', infinity_text_domain ) ); ?></div>
-	</div><!-- #nav-above -->
-<?php endif; ?>
-
-<?php /* If there are no posts to display, such as an empty archive page */ ?>
-<?php if ( ! have_posts() ) : ?>
-	<div id="post-0" class="post error404 not-found">
-		<h1 class="entry-title"><?php _e( 'Not Found', infinity_text_domain ); ?></h1>
-		<div class="entry-content">
-			<p><?php _e( 'Apologies, but no results were found for the requested archive. Perhaps searching will help find a related post.', infinity_text_domain ); ?></p>
-			<?php infinity_get_search_form(); ?>
-		</div><!-- .entry-content -->
-	</div><!-- #post-0 -->
-<?php endif; ?>
-
+		<!-- post -->
+		<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+			<?php
+				do_action( 'open_loop_post' );
+			?>
+			<!-- post-content -->
+			<div class="post-content">
+				<?php
+					do_action( 'open_loop_post_content' );
+				?>
+				<!-- post title -->
+				<h2 class="posttitle">
+					<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', infinity_text_domain ) ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a>
+				</h2>
+				<!-- post date -->
+				<p class="date">
+					<span class="post-category">
+						<?php
+							the_category(', ');
+							printf( __( 'by %s', infinity_text_domain ), get_the_author() );
+						?>
+					</span>
+					<span class="time-posted">
+						<?php echo human_time_diff(get_the_time('U'), current_time('timestamp')) . ' ago'; ?>
+					</span>
+				</p>
+				<?php
+					do_action( 'before_post_thumb' );
+				?>
+				<!-- show the post thumb? -->
+				<div class="postthumb">
+					<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', infinity_text_domain ) ?> <?php the_title_attribute(); ?>"><?php the_post_thumbnail('post-image'); ?></a>
+				</div>
+				<!-- show the avatar? -->
+				<div class="entry">
+					<div class="post-author-box">
+						<?php
+							echo get_avatar( get_the_author_meta( 'user_email' ), '50' );
+						?>
+					</div>
+					<?php
+						do_action( 'before_loop_content' );
+						the_content( __( 'Read More', 'infinity' ) );
+						do_action( 'after_loop_content' );
+					?>
+				</div>
+				<p class="postmetadata">
+					<?php
+						do_action( 'open_loop_post_meta_data' );
+					?>
+					<span class="tags">
+						<?php
+							the_tags( __( 'Tags: ', infinity_text_domain ), ', ', '<br />');
+						?>
+					</span>
+					<span class="comments">
+						<?php
+							comments_popup_link(
+								__( 'No Comments &#187;', infinity_text_domain ),
+								__( '1 Comment &#187;', infinity_text_domain ),
+								__( '% Comments &#187;', infinity_text_domain )
+							);
+						?>
+					</span>
+					<?php
+						do_action( 'close_loop_post_meta_data' );
+					?>
+				</p>
+				<?php
+					do_action( 'close_loop_post_content' );
+				?>
+			</div><!-- post-content -->
+			<?php
+				do_action( 'close_loop_post' );
+			?>
+		</div><!-- post -->
+	<?php
+		do_action( 'close_loop' );
+		endwhile;
+		infinity_get_template_part( 'page-navigation' );
+	else:
+?>
+		<h2 class="center">
+			<?php _e( 'Not Found', infinity_text_domain ) ?>
+		</h2>
 <?php
-	/* Start the Loop.
-	 *
-	 * In Infinity we use the same loop in multiple contexts.
-	 * It is broken into three main parts: when we're displaying
-	 * posts that are in the gallery category, when we're displaying
-	 * posts in the asides category, and finally all other posts.
-	 *
-	 * Additionally, we sometimes check for whether we are on an
-	 * archive page, a search page, etc., allowing for small differences
-	 * in the loop on each template without actually duplicating
-	 * the rest of the loop that is shared.
-	 *
-	 * Without further ado, the loop:
-	 */ ?>
-<?php while ( have_posts() ) : the_post(); ?>
-
-<?php /* How to display posts in the Gallery category. */ ?>
-
-	<?php if ( in_category( _x('gallery', 'gallery category slug', infinity_text_domain) ) ) : ?>
-		<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-			<h2 class="entry-title"><a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__( 'Permalink to %s', infinity_text_domain ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
-
-			<div class="entry-meta">
-				<?php infinity_posted_on(); ?>
-			</div><!-- .entry-meta -->
-
-			<div class="entry-content">
-<?php if ( post_password_required() ) : ?>
-				<?php the_content(); ?>
-<?php else : ?>
-				<?php
-					$images = get_children( array( 'post_parent' => $post->ID, 'post_type' => 'attachment', 'post_mime_type' => 'image', 'orderby' => 'menu_order', 'order' => 'ASC', 'numberposts' => 999 ) );
-					if ( $images ) :
-						$total_images = count( $images );
-						$image = array_shift( $images );
-						$image_img_tag = wp_get_attachment_image( $image->ID, 'thumbnail' );
-				?>
-						<div class="gallery-thumb">
-							<a class="size-thumbnail" href="<?php the_permalink(); ?>"><?php echo $image_img_tag; ?></a>
-						</div><!-- .gallery-thumb -->
-						<p><em><?php printf( __( 'This gallery contains <a %1$s>%2$s photos</a>.', infinity_text_domain ),
-								'href="' . get_permalink() . '" title="' . sprintf( esc_attr__( 'Permalink to %s', infinity_text_domain ), the_title_attribute( 'echo=0' ) ) . '" rel="bookmark"',
-								$total_images
-							); ?></em></p>
-				<?php endif; ?>
-						<?php the_excerpt(); ?>
-<?php endif; ?>
-			</div><!-- .entry-content -->
-
-			<div class="entry-utility">
-				<a href="<?php echo get_term_link( _x('gallery', 'gallery category slug', infinity_text_domain), 'category' ); ?>" title="<?php esc_attr_e( 'View posts in the Gallery category', infinity_text_domain ); ?>"><?php _e( 'More Galleries', infinity_text_domain ); ?></a>
-				<span class="meta-sep">|</span>
-				<span class="comments-link"><?php comments_popup_link( __( 'Leave a comment', infinity_text_domain ), __( '1 Comment', infinity_text_domain ), __( '% Comments', infinity_text_domain ) ); ?></span>
-				<?php edit_post_link( __( 'Edit', infinity_text_domain ), '<span class="meta-sep">|</span> <span class="edit-link">', '</span>' ); ?>
-			</div><!-- .entry-utility -->
-		</div><!-- #post-## -->
-
-<?php /* How to display posts in the asides category */ ?>
-
-	<?php elseif ( in_category( _x('asides', 'asides category slug', infinity_text_domain) ) ) : ?>
-		<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-
-		<?php if ( is_archive() || is_search() ) : // Display excerpts for archives and search. ?>
-			<div class="entry-summary">
-				<?php the_excerpt(); ?>
-			</div><!-- .entry-summary -->
-		<?php else : ?>
-			<div class="entry-content">
-				<?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', infinity_text_domain ) ); ?>
-			</div><!-- .entry-content -->
-		<?php endif; ?>
-
-			<div class="entry-utility">
-				<?php infinity_posted_on(); ?>
-				<span class="meta-sep">|</span>
-				<span class="comments-link"><?php comments_popup_link( __( 'Leave a comment', infinity_text_domain ), __( '1 Comment', infinity_text_domain ), __( '% Comments', infinity_text_domain ) ); ?></span>
-				<?php edit_post_link( __( 'Edit', infinity_text_domain ), '<span class="meta-sep">|</span> <span class="edit-link">', '</span>' ); ?>
-			</div><!-- .entry-utility -->
-		</div><!-- #post-## -->
-
-<?php /* How to display all other posts. */ ?>
-
-	<?php else : ?>
-		<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-			<h2 class="entry-title"><a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__( 'Permalink to %s', infinity_text_domain ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
-
-			<div class="entry-meta">
-				<?php infinity_posted_on(); ?>
-			</div><!-- .entry-meta -->
-
-	<?php if ( is_archive() || is_search() ) : // Only display excerpts for archives and search. ?>
-			<div class="entry-summary">
-				<?php the_excerpt(); ?>
-			</div><!-- .entry-summary -->
-	<?php else : ?>
-			<div class="entry-content">
-				<?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', infinity_text_domain ) ); ?>
-				<?php wp_link_pages( array( 'before' => '<div class="page-link">' . __( 'Pages:', infinity_text_domain ), 'after' => '</div>' ) ); ?>
-			</div><!-- .entry-content -->
-	<?php endif; ?>
-
-			<div class="entry-utility">
-				<?php if ( count( get_the_category() ) ) : ?>
-					<span class="cat-links">
-						<?php printf( __( '<span class="%1$s">Posted in</span> %2$s', infinity_text_domain ), 'entry-utility-prep entry-utility-prep-cat-links', get_the_category_list( ', ' ) ); ?>
-					</span>
-					<span class="meta-sep">|</span>
-				<?php endif; ?>
-				<?php
-					$tags_list = get_the_tag_list( '', ', ' );
-					if ( $tags_list ):
-				?>
-					<span class="tag-links">
-						<?php printf( __( '<span class="%1$s">Tagged</span> %2$s', infinity_text_domain ), 'entry-utility-prep entry-utility-prep-tag-links', $tags_list ); ?>
-					</span>
-					<span class="meta-sep">|</span>
-				<?php endif; ?>
-				<span class="comments-link"><?php comments_popup_link( __( 'Leave a comment', infinity_text_domain ), __( '1 Comment', infinity_text_domain ), __( '% Comments', infinity_text_domain ) ); ?></span>
-				<?php edit_post_link( __( 'Edit', infinity_text_domain ), '<span class="meta-sep">|</span> <span class="edit-link">', '</span>' ); ?>
-			</div><!-- .entry-utility -->
-		</div><!-- #post-## -->
-
-		<?php comments_template( '', true ); ?>
-
-	<?php endif; // This was the if statement that broke the loop into three parts based on categories. ?>
-
-<?php endwhile; // End the loop. Whew. ?>
-
-<?php /* Display navigation to next/previous pages when applicable */ ?>
-<?php if (  $wp_query->max_num_pages > 1 ) : ?>
-				<div id="nav-below" class="navigation">
-					<div class="nav-previous"><?php next_posts_link( __( '<span class="meta-nav">&larr;</span> Older posts', infinity_text_domain ) ); ?></div>
-					<div class="nav-next"><?php previous_posts_link( __( 'Newer posts <span class="meta-nav">&rarr;</span>', infinity_text_domain ) ); ?></div>
-				</div><!-- #nav-below -->
-<?php endif; ?>
+		infinity_get_search_form();
+		do_action( 'loop_not_found' );
+	endif;
+?>

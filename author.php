@@ -1,61 +1,35 @@
 <?php
 /**
- * The template for displaying Author Archive pages.
+ * Infinity Theme: author template
  *
- * @package themes
+ * @author Bowe Frankema <bowromir@gmail.com>
+ * @link http://bp-tricks.com/
+ * @copyright Copyright (C) 2010 Bowe Frankema
+ * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
+ * @package infinity
  * @subpackage templates
+ * @since 1.0
  */
 
-infinity_get_header(); ?>
-
-		<div id="container">
-			<div id="content" role="main">
-
-<?php
-	/* Queue the first post, that way we know who
-	 * the author is when we try to get their name,
-	 * URL, description, avatar, etc.
-	 *
-	 * We reset this later so we can run the loop
-	 * properly with a call to rewind_posts().
-	 */
-	if ( have_posts() )
-		the_post();
+	infinity_get_header();
 ?>
-
-				<h1 class="page-title author"><?php printf( __( 'Author Archives: %s', infinity_text_domain ), "<span class='vcard'><a class='url fn n' href='" . get_author_posts_url( get_the_author_meta( 'ID' ) ) . "' title='" . esc_attr( get_the_author() ) . "' rel='me'>" . get_the_author() . "</a></span>" ); ?></h1>
-
+	<div class="grid_8" id="content">
+		<?php
+			do_action( 'open_content' );
+			do_action( 'open_author' );
+		?>
+		<div class="page" id="blog-author">
+			<?php
+				infinity_get_template_part( 'introduction-boxes' );
+				infinity_get_template_part( 'loop', 'author' );
+			?>
+		</div>
+		<?php
+			do_action( 'close_author' );
+			do_action( 'close_content' );
+		?>
+	</div>
 <?php
-// If a user has filled out their description, show a bio on their entries.
-if ( get_the_author_meta( 'description' ) ) : ?>
-					<div id="entry-author-info">
-						<div id="author-avatar">
-							<?php echo get_avatar( get_the_author_meta( 'user_email' ), apply_filters( 'infinity_author_bio_avatar_size', 60 ) ); ?>
-						</div><!-- #author-avatar -->
-						<div id="author-description">
-							<h2><?php printf( __( 'About %s', infinity_text_domain ), get_the_author() ); ?></h2>
-							<?php the_author_meta( 'description' ); ?>
-						</div><!-- #author-description	-->
-					</div><!-- #entry-author-info -->
-<?php endif; ?>
-
-<?php
-	/* Since we called the_post() above, we need to
-	 * rewind the loop back to the beginning that way
-	 * we can run the loop properly, in full.
-	 */
-	rewind_posts();
-
-	/* Run the loop for the author archive page to output the authors posts
-	 * If you want to overload this in a child theme then include a file
-	 * called loop-author.php and that will be used instead.
-	 */
-	 infinity_get_template_part( 'loop', 'author' );
-?>
-			</div><!-- #content -->
-		</div><!-- #container -->
-
-<?php
-infinity_get_sidebar();
-infinity_get_footer();
+	infinity_get_sidebar();
+	infinity_get_footer();
 ?>
