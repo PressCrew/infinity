@@ -1,44 +1,35 @@
 <?php
 /**
- * The template for displaying all pages.
+ * Infinity Theme: page template
  *
- * This is the template that displays all pages by default.
- * Please note that this is the WordPress construct of pages
- * and that other 'pages' on your WordPress site will use a
- * different template.
- *
- * @package themes
+ * @author Bowe Frankema <bowromir@gmail.com>
+ * @link http://bp-tricks.com/
+ * @copyright Copyright (C) 2010 Bowe Frankema
+ * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
+ * @package infinity
  * @subpackage templates
+ * @since 1.0
  */
 
-infinity_get_header(); ?>
+	infinity_get_header();
+?>
+	<div class="grid_8" id="content">
+		<?php
+			do_action( 'open_content' );
+			do_action( 'open_page' );
+		?>
+		<div class="page-<?php the_ID(); ?>" <?php post_class(); ?>>
+			<?php
+				infinity_get_template_part( 'loop', 'page' );
+			?>
+		</div><!-- .page -->
+		<?php
+			do_action( 'close_page' );
+			do_action( 'close_content' );
+		?>
+	</div>
 
-		<div id="container">
-			<div id="content" role="main">
-
-<?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
-
-				<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-					<?php if ( is_front_page() ) { ?>
-						<h2 class="entry-title"><?php the_title(); ?></h2>
-					<?php } else { ?>
-						<h1 class="entry-title"><?php the_title(); ?></h1>
-					<?php } ?>
-
-					<div class="entry-content">
-						<?php the_content(); ?>
-						<?php wp_link_pages( array( 'before' => '<div class="page-link">' . __( 'Pages:', infinity_text_domain ), 'after' => '</div>' ) ); ?>
-						<?php edit_post_link( __( 'Edit', infinity_text_domain ), '<span class="edit-link">', '</span>' ); ?>
-					</div><!-- .entry-content -->
-				</div><!-- #post-## -->
-
-				<?php comments_template( '', true ); ?>
-
-<?php endwhile; ?>
-
-			</div><!-- #content -->
-		</div><!-- #container --><?php
-
-infinity_get_sidebar();
-infinity_get_footer();
+<?php
+	infinity_get_sidebar();
+	infinity_get_footer();
 ?>

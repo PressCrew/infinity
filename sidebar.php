@@ -1,55 +1,79 @@
 <?php
 /**
- * The Sidebar containing the primary and secondary widget areas.
+ * Infinity Theme: sidebar template
  *
- * @package themes
+ * @author Bowe Frankema <bowromir@gmail.com>
+ * @link http://bp-tricks.com/
+ * @copyright Copyright (C) 2010 Bowe Frankema
+ * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
+ * @package infinity
  * @subpackage templates
+ * @since 1.0
  */
+
+	do_action( 'before_sidebar' );
 ?>
-
-		<div id="primary" class="widget-area" role="complementary">
-			<ul class="xoxo">
-
+<!-- sidebar -->
+<div class="grid_4" id="sidebar">
+	<?php
+		do_action( 'open_sidebar' );
+		
+		if ( is_page() ) {
+			global $post;
+			if ( function_exists('bp_is_member') && bp_is_member() ) {
+				if ( is_active_sidebar( 'member-sidebar' ) ) {
+					dynamic_sidebar( 'member-sidebar' );
+				} else { ?>
+					<p class="tips">Member Sidebar</p><?php
+				}
+           } elseif ( function_exists('bp_is_page') && bp_is_page(BP_GROUPS_SLUG) ) {
+                if ( is_active_sidebar( 'groups-sidebar' ) ) {
+                    dynamic_sidebar( 'groups-sidebar');
+				} else { ?>
+                    <p class="tips">Group Sidebar</p><?php
+				}
+            } elseif ( function_exists('bp_is_page') && bp_is_page(BP_FORUMS_SLUG) ) {
+                if ( is_active_sidebar( 'forums-sidebar' ) ) {
+                    dynamic_sidebar( 'forums-sidebar');
+				} else { ?>
+                    <p class="tips">Forums</p><?php
+				}
+            } elseif ( function_exists('bp_is_page') && bp_is_page(BP_BLOGS_SLUG) ) {
+                if ( is_active_sidebar( 'blogs-sidebar' ) ) {
+                    dynamic_sidebar( 'blogs-sidebar');
+				} else { ?>
+                    <p class="tips">Blogs</p><?php
+				}
+			} elseif( is_single() ) {
+				if ( is_active_sidebar( 'single-sidebar' ) ) {
+					dynamic_sidebar( 'single-sidebar');
+				} else { ?>
+					<p class="tips">Single</p><?php
+				}
+			} elseif( is_front_page() ) {
+				if ( is_active_sidebar( 'activity-sidebar' ) ) {
+					dynamic_sidebar( 'activity-sidebar' );
+				} else { ?>
+					<p class="tips">Homepage</p><?php
+				}
+			} else {
+				if ( is_active_sidebar( 'page-sidebar' ) ) {
+					dynamic_sidebar( 'page-sidebar');
+				} else { ?>
+					<p class="tips">Page</p><?php
+				}
+			}
+		} else {
+			if ( is_active_sidebar( 'blog-sidebar' ) ) {
+				dynamic_sidebar( 'blog-sidebar');
+			} else { ?>
+				<p class="tips">Blog Sidebar</p><?php
+			}
+		}
+		
+		do_action( 'close_sidebar' );
+	?>
+</div><!-- sidebar -->
 <?php
-	/* When we call the dynamic_sidebar() function, it'll spit out
-	 * the widgets for that widget area. If it instead returns false,
-	 * then the sidebar simply doesn't exist, so we'll hard-code in
-	 * some default sidebar stuff just in case.
-	 */
-	if ( ! dynamic_sidebar( 'primary-widget-area' ) ) : ?>
-
-			<li id="search" class="widget-container widget_search">
-				<?php infinity_get_search_form(); ?>
-			</li>
-
-			<li id="archives" class="widget-container">
-				<h3 class="widget-title"><?php _e( 'Archives', infinity_text_domain ); ?></h3>
-				<ul>
-					<?php wp_get_archives( 'type=monthly' ); ?>
-				</ul>
-			</li>
-
-			<li id="meta" class="widget-container">
-				<h3 class="widget-title"><?php _e( 'Meta', infinity_text_domain ); ?></h3>
-				<ul>
-					<?php wp_register(); ?>
-					<li><?php wp_loginout(); ?></li>
-					<?php wp_meta(); ?>
-				</ul>
-			</li>
-
-		<?php endif; // end primary widget area ?>
-			</ul>
-		</div><!-- #primary .widget-area -->
-
-<?php
-	// A second sidebar for widgets, just because.
-	if ( is_active_sidebar( 'secondary-widget-area' ) ) : ?>
-
-		<div id="secondary" class="widget-area" role="complementary">
-			<ul class="xoxo">
-				<?php dynamic_sidebar( 'secondary-widget-area' ); ?>
-			</ul>
-		</div><!-- #secondary .widget-area -->
-
-<?php endif; ?>
+	do_action( 'after_sidebar' );
+?>

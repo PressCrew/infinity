@@ -1,32 +1,35 @@
 <?php
 /**
- * The main template file.
+ * Infinity Theme: index template
  *
- * This is the most generic template file in a WordPress theme
- * and one of the two required files for a theme (the other being style.css).
- * It is used to display a page when nothing more specific matches a query.
- * E.g., it puts together the home page when no home.php file exists.
- * Learn more: http://codex.wordpress.org/Template_Hierarchy
- *
- * @package themes
+ * @author Bowe Frankema <bowromir@gmail.com>
+ * @link http://bp-tricks.com/
+ * @copyright Copyright (C) 2010 Bowe Frankema
+ * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
+ * @package infinity
  * @subpackage templates
+ * @since 1.0
  */
 
-infinity_get_header(); ?>
-
-		<div id="container">
-			<div id="content" role="main">
+	infinity_get_header();
+?>
+	<div class="grid_8" id="content">
+		<?php
+			do_action( 'open_content' );
+			do_action( 'open_home' );
+		?>
+		<div id="home-page" role="main" <?php post_class(); ?>>
 			<?php
-			/* Run the loop to output the posts.
-			 * If you want to overload this in a child theme then include a file
-			 * called loop-index.php and that will be used instead.
-			 */
-			 get_template_part( 'loop', 'index' );
+				infinity_get_template_part( 'introduction-boxes', 'index' );
+				infinity_get_template_part( 'loop', 'index' );
 			?>
-			</div><!-- #content -->
-		</div><!-- #container -->
-
+		</div>
+		<?php
+			do_action( 'close_home' );
+			do_action( 'close_content' );
+		?>
+	</div>
 <?php
-infinity_get_sidebar();
-infinity_get_footer();
+	infinity_get_sidebar();
+	infinity_get_footer();
 ?>
