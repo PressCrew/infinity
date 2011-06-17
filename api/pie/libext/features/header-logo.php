@@ -31,11 +31,16 @@ class Pie_Easy_Exts_Feature_Header_Logo
 		// only print style if this feature is supported
 		if ( $this->supported() ) {
 
-			// logo image option name
-			$logo_option = Pie_Easy_Policy::options()->registry()->get( $this->_option_upload );
+			// registry
+			$registry = Pie_Easy_Policy::options()->registry();
+
+			// options
+			$opt_upload = $registry->get( $this->_option_upload );
+			$opt_top = $registry->get( $this->_option_top )->get();
+			$opt_left = $registry->get( $this->_option_left )->get();
 
 			// get attachment image data
-			$data = $logo_option->get_image_src( 'full' );
+			$data = $opt_upload->get_image_src( 'full' );
 
 			// extract image data
 			list( $url, $width, $height ) = $data;
@@ -47,18 +52,16 @@ class Pie_Easy_Exts_Feature_Header_Logo
 				$style = new Pie_Easy_Style( $this->_css_selector );
 
 				// add rules
-				$style->add_rule( 'display', 'block' );
-				$style->add_rule( 'text-indent', '-999px' );
-				$style->add_rule( 'background-image', sprintf( "url('%s')", $url ) );
+				$style->add_rule( 'position', 'absolute' );
 
-				if ( $width ) {
-					$style->add_rule( 'width', $width . 'px' );
+				if ( $opt_top ) {
+					$style->add_rule( 'top', $opt_top . 'px' );
+				}
+
+				if ( $opt_left ) {
+					$style->add_rule( 'left', $opt_left . 'px' );
 				}
 				
-				if ( $height ) {
-					$style->add_rule( 'height', $height . 'px' );
-				}
-
 				// render
 				print $style->export();
 			}
