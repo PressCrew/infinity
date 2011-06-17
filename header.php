@@ -60,14 +60,18 @@
 			<div id="header">
 				<?php
 					do_action( 'open_header' );
+
+					if ( current_theme_supports( 'infinity-header-logo' ) ):
+						infinity_feature( 'infinity-header-logo' );
+					else :
 				?>
-				<h1 id="site-title">
-					<a href="<?php echo home_url( '/' ); ?>" title="<?php bloginfo('name'); ?> - <?php bloginfo('description'); ?>"></a>
-				</h1>
-				<div id="site-description">
-					<?php bloginfo( 'description' ); ?>
-				</div>
+					<h1 id="site-title">
+						<a href="<?php echo home_url( '/' ); ?>" title="<?php bloginfo('name'); ?> - <?php bloginfo('description'); ?>"><?php bloginfo('name'); ?></a>
+						<span id="site-description"><?php bloginfo('description'); ?></span>
+					</h1>
 				<?php
+					endif;
+
 					// show primary menu?
 					if ( has_nav_menu( 'primary-menu'  ) ):
 						infinity_get_template_part( 'main-menu', 'header' );
