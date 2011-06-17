@@ -37,6 +37,23 @@ abstract class Pie_Easy_Sections_Section extends Pie_Easy_Component
 	private $class_content;
 
 	/**
+	 * @ignore
+	 * @param string $name
+	 * @return mixed
+	 */
+	public function __get( $name )
+	{
+		switch ( $name ) {
+			case 'class_title':
+				return $this->class_title;
+			case 'class_content':
+				return $this->class_content;
+			default:
+				return parent::__get( $name );
+		}
+	}
+
+	/**
 	 * Set the title CSS class
 	 *
 	 * @param string $class

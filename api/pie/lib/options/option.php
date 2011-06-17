@@ -114,6 +114,21 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 	}
 
 	/**
+	 * @ignore
+	 * @param string $name
+	 * @return mixed
+	 */
+	public function __get( $name )
+	{
+		switch ( $name ) {
+			case 'default_value_theme':
+				return $this->default_value_theme;
+			default:
+				return parent::__get( $name );
+		}
+	}
+
+	/**
 	 * Render this option AND its required siblings
 	 *
 	 * @param boolean $output Whether to output or return result
