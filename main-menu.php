@@ -17,7 +17,7 @@
 		// Load BuddyPress Menu Template */
 		locate_template( array( '/functions/buddypress/menu.php' ), true );
 	else: ?>
-		<div id="primary-nav" class="main-menu">
+		<div id="base-menu" class="main-menu">
 			<?php
 				if ( has_nav_menu( 'primary-menu' ) ):
 					/* if menu location 'primary-menu' exists then use custom menu */
