@@ -26,7 +26,8 @@ body {
  }
 	
 .container{
-
+background: url("../images/container_bg.jpg") repeat scroll 0 0 transparent;
+text-shadow: 0 -1px 0 #FFFFFF;
 }
 
 #wrapper {
@@ -59,6 +60,9 @@ padding-right: 10px;
 margin-bottom: 20px;
 }
 
+#pattern {
+display: none;
+}
 
 /* #Typography
 ================================================== */
@@ -80,12 +84,12 @@ h2 {
 }
 
 h3 {
-    color: #777;
+    color: #666;
     font-size: 18px;
 }
 
 h4 {
-    color: #777;
+    color: #666;
     font-size: 16px;
  }
 
@@ -124,7 +128,24 @@ small { font-size: 80%; }
 a, a:visited {
     text-decoration: none;
     outline: 0;
+    font-weight: bold;
 }
+
+::selection {
+	background:#F26535;
+	color:#fff;
+}
+
+::-moz-selection {
+	background:#F26535;
+	color:#fff;
+}
+
+::-webkit-selection {
+	background:#F26535;
+	color:#fff;
+}
+
 
 /* #Lists
 ================================================== */
@@ -135,7 +156,6 @@ ul, ol { margin-bottom: 20px; }
 
 ul ul, ul ol, ol ol, ol ul {
     margin: 4px 0 5px 30px;
-    font-size: 90%;
 }
 
 ul ul li, ul ol li, ol ol li, ol ul li { margin-bottom: 6px; }
@@ -166,13 +186,13 @@ ul.large li { line-height: 21px; }
 /* ========================= */
 
 /* Menu Wrappers */
-p#site-slogan {
-    position: relative;
-    margin-top: -8px;
-    padding-left: 10px;
+#site-description {
     color: #999999;
     font-size: 14px;
-    font-style: italic
+    font-style: italic;
+    margin-top: -8px;
+    padding-left: 10px;
+    position: relative;
 }
 
 #header {
@@ -182,20 +202,30 @@ p#site-slogan {
     background: url("../images/header-standard.jpg")
 }
 
-#header h1 {
+#site-title {
     background: none repeat scroll 0 0 #FFFFFF;
     border: 1px solid #DDDDDD;
     border-radius: 4px 4px 4px 4px;
     box-shadow: 0 0 0 8px rgba(0, 0, 0, 0.024), 0 0 3px 0 rgba(0, 0, 0, 0.15), 0 0 0 6px rgba(0, 0, 0, 0.02) inset;
     border: 1px solid #DDD;
-    font-size: 24px;
+    font-size: 22px;
     left: 20px;
-    margin-left: -20px;
-    padding: 5px 28px 5px 20px;
+    margin-left: -32px;
+    padding: 10px 30px 10px 30px;
     position: absolute;
     top: 28%;
-    border-left: 0px;
 	border-radius: 0 4px 4px 0;
+}
+
+#site-title a {
+    display: block;
+    margin-bottom: -12px;
+}
+
+#site-logo {
+top: 32%;
+left: 20px;
+position: absolute;
 }
 
 /* Navigation Styling */
@@ -397,6 +427,61 @@ p#site-slogan {
     font-style: normal
 }
 
+/* Post Meta */
+
+.post p.post-meta-data, .comment-meta, .comment-options {
+    background: #FFF;
+    border: 1px solid #E4E4E4;
+    border-radius: 3px 3px 3px 3px;
+    color: #888888;
+    font-size: 12.8px;
+    font-style: italic;
+    margin: 10px 0;
+    padding: 3px 5px;
+    min-height: 20px;
+}
+
+span.post-author, span.post-category, span.time-posted, span.post-comments {
+    margin-right: 10px;
+}
+
+span.post-author {
+    background: url("../images/icons/black.png") no-repeat scroll -728px -1228px transparent;
+    padding-left: 18px;
+
+}
+
+span.post-category {
+    background: url("../images/icons/black.png") no-repeat scroll -3px -37px transparent;
+    padding-left: 22px;
+}
+
+span.time-posted {
+    background: url("../images/icons/black.png") no-repeat scroll -4px -1703px transparent;
+    padding-left: 19px;
+}
+
+span.post-comments, span.comments a {
+    background: url("../images/icons/black.png") no-repeat scroll -724px -1089px transparent;
+    float: right;
+    padding-left: 22px;
+    margin-right: 5px;
+}
+
+span.post-tags {
+    background: url("../images/icons/black.png") no-repeat scroll -1px -513px transparent;
+    margin-right: 0;
+    padding-left: 23px;
+}
+
+span.edit-link {
+    background: url("../images/icons/black.png") no-repeat scroll 0 -1122px transparent;
+    float: right;
+    margin-right: 9px;
+    padding-left: 23px;
+}
+
+
 /* Entry */
 .entry { 
 min-height: 110px;
@@ -528,24 +613,14 @@ position: relative;
     line-height: 120%
 }
 
-.post h2.pagetitle a, .post h2.posttitle a {
+.post h2.pagetitle a, .post h2.posttitle a,.post h1.pagetitle a, .post h1.posttitle a {
     color: #666;
     text-decoration: none
 }
 
-.post h2.pagetitle a, .post h2.posttitle a, .post h1.pagetitle a, .post h1.posttitle a {
-    color: #555555;
-    font-size: 22px;
-    text-decoration: none;
-    text-shadow: 0 -1px 0 #FFFFFF
-}
-
 .post h1.posttitle {
+    font-size: 24px;
     margin-bottom: -6px;
-    color: #EBA338;
-    font-size: 22px; font-weight: bold;
-    text-decoration: none;
-    text-shadow: 0 0.5px 0 #E7E7E7
 }
 
 .post h2.pagetitle a:hover, .post h2.posttitle a:hover, .post h1.pagetitle a:hover, .post h1.posttitle a:hover { color: #999 }
@@ -590,17 +665,6 @@ position: relative;
     margin-left: 20px;
     padding: 10px 20px 0;
     quotes: none;
-}
-
-.post p.date, .post p.postmetadata, .comment-meta, .comment-options {
-    background: #FFF;
-    border: 1px solid #E4E4E4;
-    border-radius: 3px 3px 3px 3px;
-    color: #888888;
-    font-size: 12px;
-    font-style: italic;
-    margin: 10px 0;
-    padding: 3px 10px 3px 10px;
 }
 
 .page-link {
@@ -694,9 +758,8 @@ h1.posttitle span a, h2.posttitle span a, h1.posttitle span, h2.posttitle span {
 }
 
 /* Authorbox and Category Box */
-.authorbox, .category_box, .tag_box {
+.author-box, .category-box, .tag-box {
 border:1px solid #dddddd;
-padding:20px 20px 3px;
 margin-top:40px;
 -webkit-border-radius:4px;
 -moz-border-radius:4px;
@@ -705,12 +768,7 @@ min-height: 125px;
 background-color: #FFF;
 }
 
-.category_box, tag_box {
-    font-size: 12px;
-    font-style: italic;
-    margin-bottom: 10px;
-    margin-top: 30px;
-    min-height: inherit;
+.category-box, tag-box {
 }
 
 h1#category-title, h1#tag-title {
@@ -736,7 +794,8 @@ h1#category-title span, h1#tag-title span {
 }
 
 #author-description,#category-description {
-    font-size: 12.8px
+    font-size: 12.8px;
+    padding: 20px;
 }
 
 #author-description img {
@@ -748,8 +807,6 @@ h1#category-title span, h1#tag-title span {
     float: right;
     width: 25%
 }
-
-
 
 /* post meta */
 /* Post tags and WordPress SEO Breadcrumbs */
@@ -855,6 +912,10 @@ display: inline;
 #comments .comment-head .name {
     margin: 0;
     font-size: 15px; font-weight: bold
+}
+
+ol.commentlist {
+margin-left: 0px;
 }
 
 #comments ul.children {

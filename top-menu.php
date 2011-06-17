@@ -19,7 +19,7 @@
 <?php
 	else:
 ?>
-		<div id="primary-nav" class="sub-menu">
+		<div id="base-menu" class="sub-menu">
 			<?php
 				// if menu location 'primary-menu' exists then use custom menu
 				wp_nav_menu( array(

@@ -18,7 +18,7 @@
 		locate_template( array( '/functions/buddypress/menu.php' ), true );
 	else:
 ?>
-		<div id="primary-nav" class="sub-menu">
+		<div id="base-menu" class="sub-menu">
 			<?php
 				if ( has_nav_menu( 'sub-menu' ) ):
 					/* if menu location 'primary-menu' exists then use custom menu */

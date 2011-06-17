@@ -79,7 +79,7 @@
 		// buddypress avatars, post thumbnails support and menus hover effect
 		function infinity_overlay()
 		{
-			jQuery('.wp-post-image,img.avatar, ul.item-list li img.avatar, img#header-logo-image, #primary-nav li a span, a.button-callout, #sidebar a img').hover( function() {
+			jQuery('.wp-post-image,img.avatar, ul.item-list li img.avatar, #site-logo, #primary-nav li a span, a.button-callout, #sidebar a img').hover( function() {
 				jQuery(this).stop().animate({opacity : 0.7}, 200);
 			}, function() {
 				jQuery(this).stop().animate({opacity : 1}, 200);
