@@ -3,7 +3,7 @@
  * Infinity Theme: loop template
  *
  * The loop that displays posts
- * 
+ *
  * @author Bowe Frankema <bowromir@gmail.com>
  * @link http://bp-tricks.com/
  * @copyright Copyright (C) 2010 Bowe Frankema
@@ -33,16 +33,42 @@
 					<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', infinity_text_domain ) ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a>
 				</h2>
 				<!-- post date -->
-				<p class="date">
+				<p class="post-meta-data">
+					<?php
+						do_action( 'open_loop_post_meta_data_top' );
+					?>
+					<span class="post-author">
+						<?php
+							the_author_link();
+						?>
+					</span>
 					<span class="post-category">
 						<?php
-							the_category(', ');
-							printf( __( 'by %s', infinity_text_domain ), get_the_author() );
+							the_category(', ')
 						?>
 					</span>
 					<span class="time-posted">
-						<?php echo human_time_diff(get_the_time('U'), current_time('timestamp')) . ' ago'; ?>
+						<?php
+							print human_time_diff(get_the_time('U'), current_time('timestamp')) . ' ago';
+						?>
 					</span>
+					<?php
+						edit_post_link( __( 'Edit', 'twentyeleven' ), '<span class="edit-link">', '</span>' );
+					?>
+					<?php if ( comments_open() ) : ?>
+					<span class="post-comments">
+						<?php
+							comments_popup_link(
+								__( 'No Comments &#187;', infinity_text_domain ),
+								__( '1 Comment &#187;', infinity_text_domain ),
+								__( '% Comments &#187;', infinity_text_domain )
+							);
+						?>
+					<?php endif; ?>
+					</span>
+						<?php
+							do_action( 'open_loop_post_meta_data_top' );
+						?>
 				</p>
 				<?php
 					do_action( 'before_post_thumb' );
@@ -61,30 +87,28 @@
 					<?php
 						do_action( 'before_loop_content' );
 						the_content( __( 'Read More', 'infinity' ) );
+						wp_link_pages( array( 'before' => '<div class="page-link">' . __( '<span>Pages:</span>', 'twentyeleven' ), 'after' => '</div>' ) );
 						do_action( 'after_loop_content' );
 					?>
 				</div>
-				<p class="postmetadata">
-					<?php
-						do_action( 'open_loop_post_meta_data' );
-					?>
-					<span class="tags">
+				<p class="post-meta-data post-bottom">
+				<?php
+							do_action( 'close_loop_post_meta_bottom' );
+				?>
+				<?php if ( has_tag() ) {?>
+					<span class="post-tags">
 						<?php
-							the_tags( __( 'Tags: ', infinity_text_domain ), ', ', '<br />');
+							the_tags( __( 'Tags: ', infinity_text_domain ), ' ', '');
 						?>
 					</span>
-					<span class="comments">
-						<?php
-							comments_popup_link(
-								__( 'No Comments &#187;', infinity_text_domain ),
-								__( '1 Comment &#187;', infinity_text_domain ),
-								__( '% Comments &#187;', infinity_text_domain )
-							);
-						?>
+				<?php } ?>
+				<?php
+						edit_post_link( __( 'Edit', 'twentyeleven' ), '<span class="edit-link">', '</span>' );
+				?>
 					</span>
-					<?php
-						do_action( 'close_loop_post_meta_data' );
-					?>
+						<?php
+							do_action( 'close_loop_post_meta_data_bottom' );
+						?>
 				</p>
 				<?php
 					do_action( 'close_loop_post_content' );
