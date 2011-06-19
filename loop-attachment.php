@@ -1,8 +1,8 @@
 <?php
 /**
- * Infinity Theme: loop single template
+ * Infinity Theme: loop attachment
  *
- * The loop that displays single posts
+ * The loop that displays attachments
  * 
  * @author Bowe Frankema <bowromir@gmail.com>
  * @link http://bp-tricks.com/
@@ -42,17 +42,12 @@
 					<p class="post-meta-data">
 					<?php
 						do_action( 'open_loop_post_meta_data_top' );
-					?>
+					?>					
 						<span class="post-author">
 							<?php
 								the_author_link();
 							?>
-						</span>
-						<span class="post-category">
-							<?php
-								the_category(', ')
-							?>
-						</span>
+						</span>	
 						<span class="time-posted">
 							<?php
 								print human_time_diff(get_the_time('U'), current_time('timestamp')) . ' ago';
@@ -76,32 +71,50 @@
 						do_action( 'before_single_entry' )
 					?>
 					<div class="entry">
-						<?php
-							do_action( 'open_single_entry' );
-							the_content( __( 'Read the rest of this entry &rarr;', infinity_text_domain ) );
-							wp_link_pages( array( 'before' => '<div class="page-link">' . __( '<span>Pages:</span>', 'twentyeleven' ), 'after' => '</div>' ) );
-						?>
+						<a href="#">
+							<?php echo wp_get_attachment_image( $post->ID, 'large', false, array( 'class' => 'size-large aligncenter' ) ); ?>
+						</a>
+
+						<div class="entry-caption">
+							<?php if ( !empty( $post->post_excerpt ) ) the_excerpt(); ?>
+						</div>
+								
+						<?php the_content(); ?>		
+
 						<p class="post-meta-data post-bottom">
 							<?php
 								do_action( 'open_loop_post_meta_data_bottom' );
 							?>
-							<?php if ( has_tag() ) {?>
-								<span class="post-tags">
+							<span class="post-tags">
 									<?php
-										the_tags( __( 'Tags: ', infinity_text_domain ), ' ', '');
-									?>
-								</span>
-							<?php } ?>
-						<?php
+									if ( wp_attachment_is_image() ) :
+										$metadata = wp_get_attachment_metadata();
+										printf( __( 'Full size is %s pixels', infinity_text_domain ),
+											sprintf( '<a href="%1$s" title="%2$s">%3$s &times; %4$s</a>',
+												wp_get_attachment_url(),
+												esc_attr( __( 'Link to full size image', infinity_text_domain ) ),
+												$metadata['width'],
+												$metadata['height']
+											)
+										);
+									endif;
+								?>
+							</span>
+							<span class="post-comments">
+							<?php 
+								comments_popup_link(__('No Comments', infinity_text_domain), __('1 Comment', infinity_text_domain), __('% Comments', infinity_text_domain)); 
+							?>				
+							</span>
+							<?php
 							do_action( 'close_loop_post_meta_data_bottom' );
-						?>
+							?>
 						</p>
 						<?php
 							wp_link_pages( array(
 								'before' => __( '<p><strong>Pages:</strong> ', infinity_text_domain ),
 								'after' => '</p>', 'next_or_number' => 'number')
 							);
-							infinity_get_template_part( 'author-box');
+							infinity_get_template_part( 'author-box');	
 						?>
 					</div>
 				</div>

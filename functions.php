@@ -55,7 +55,7 @@ require_once( INFINITY_INCLUDES_DIR . DIRECTORY_SEPARATOR . 'templatetags.php');
 // set up buddypress functionality
 if ( defined( 'BP_VERSION' ) ) {
 	require_once(
-		INFINITY_FUNCTIONS_DIR .
+		INFINITY_INCLUDES_DIR .
 		DIRECTORY_SEPARATOR . 'buddypress' .
 		DIRECTORY_SEPARATOR . 'setup.php'
 	);
