@@ -597,11 +597,16 @@ final class Pie_Easy_Scheme
 	 * @param string $theme
 	 * @param string $file_names,...
 	 */
-	public function theme_file( $theme )
+	public function theme_file( $theme = null )
 	{
 		// get all args
 		$args = func_get_args();
 		array_shift($args);
+
+		// handle empty theme
+		if ( empty( $theme ) ) {
+			$theme = $this->root_theme;
+		}
 
 		// one or more args left, then we got some file names
 		if ( count($args) >= 1 ) {
