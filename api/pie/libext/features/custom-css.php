@@ -17,17 +17,9 @@
  * @package PIE
  * @subpackage features-ext
  */
-class Pie_Easy_Exts_Feature_Custom_Css extends Pie_Easy_Features_Feature
+abstract class Pie_Easy_Exts_Feature_Custom_Css extends Pie_Easy_Features_Feature
 {
-	/**
-	 * Enqueue the css export script
-	 */
-	final public function init_styles()
-	{
-		if ( $this->supported() ) {
-			wp_enqueue_style( 'infinity-custom', INFINITY_EXPORT_URL . '/css.php', null, infinity_option_meta( 'infinity_custom_css', 'time_updated' ) );
-		}
-	}
+	// this class only exists to create a global "custom css" pseudo interface
 }
 
 ?>
