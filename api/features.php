@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'features' );
+Pie_Easy_Loader::load( 'features', 'utils/files' );
 
 /**
  * Infinity Theme: features policy
@@ -64,6 +64,14 @@ class Infinity_Features_Policy extends Pie_Easy_Features_Policy
 		return new Infinity_Features_Renderer();
 	}
 
+	/**
+	 * @param string $ext
+	 * @return Pie_Easy_Features_Feature
+	 */
+	final public function load_ext( $ext )
+	{
+		return infinity_load_extension( $this->get_handle(), $ext );
+	}
 }
 
 /**

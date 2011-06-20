@@ -65,6 +65,30 @@ function infinity_load_template( $template_name )
 }
 
 /**
+ * Load an extension
+ *
+ * @param string $policy_handle
+ * @param string $ext
+ * @return string|false Name of extension class loaded or false
+ */
+function infinity_load_extension( $policy_handle, $ext )
+{
+	// determine class name
+	$class = Pie_Easy_Files::file_to_class( $ext, 'Infinity_Feature' );
+
+	// make file path
+	$path = Pie_Easy_Scheme::instance()->locate_config_file( 'exts', $policy_handle, $ext . '.php' );
+
+	// exists?
+	if ( $path ) {
+		require_once( $path );
+		return $class;
+	}
+
+	return false;
+}
+
+/**
  * Return absolute path to first image matching path in the scheme stack
  *
  * @param string $path Image file path RELATIVE to your image_root setting

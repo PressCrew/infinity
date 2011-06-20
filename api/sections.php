@@ -64,6 +64,14 @@ class Infinity_Sections_Policy extends Pie_Easy_Sections_Policy
 		return new Infinity_Sections_Renderer();
 	}
 
+	/**
+	 * @param string $ext
+	 * @return Pie_Easy_Sections_Section
+	 */
+	final public function load_ext( $ext )
+	{
+		return infinity_load_extension( $this->get_handle(), $ext );
+	}
 }
 
 /**

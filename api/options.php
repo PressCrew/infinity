@@ -71,6 +71,15 @@ class Infinity_Options_Policy extends Pie_Easy_Options_Policy
 	{
 		return new Infinity_Options_Uploader( 'admin_head' );
 	}
+
+	/**
+	 * @param string $ext
+	 * @return Pie_Easy_Options_Option
+	 */
+	final public function load_ext( $ext )
+	{
+		return infinity_load_extension( $this->get_handle(), $ext );
+	}
 }
 
 /**

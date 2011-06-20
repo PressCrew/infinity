@@ -187,6 +187,35 @@ final class Pie_Easy_Files
 		// return as url
 		return self::theme_file_url( $theme, $file_names );
 	}
+
+	/**
+	 * Create a class name from a file name
+	 * @param string $file_name
+	 * @return type
+	 */
+	static public function file_to_class( $file_name, $prefix = null )
+	{
+		// split at common delimeters
+		$parts = preg_split( '/-|_|\./', $file_name );
+
+		// if last part is php, kill it
+		if ( end( $parts ) == 'php' ) {
+			array_pop( $parts );
+		}
+
+		// upper case the first char of every part
+		foreach ( $parts as &$ext_part ) {
+			$ext_part = ucfirst( $ext_part );
+		}
+
+		// add prefix if necessary
+		if ( strlen( $prefix ) ) {
+			array_unshift( $parts, $prefix );
+		}
+
+		// join them with underscores
+		return implode( '_', $parts );
+	}
 }
 
 /**
