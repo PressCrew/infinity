@@ -28,22 +28,21 @@ class Pie_Easy_Sections_Factory extends Pie_Easy_Factory
 	 */
 	public function create( $ext, $theme, $name, $title = null, $desc = null, $section = null )
 	{
-		// load it from alternate location?
-		if ( !$this->policy()->load_ext( $ext ) ) {
+		// load it from alternate location
+		$class_name = $this->policy()->load_ext( $ext );
+
+		// get one?
+		if ( !$class_name ) {
 			// nope, load core section
 			Pie_Easy_Loader::load_ext( array('sections', $ext) );
+			// determine class name
+			$class_name = Pie_Easy_Files::file_to_class( $ext, 'Pie_Easy_Exts_Section' );
 		}
 
-		// determine class name
-		$class = 'Pie_Easy_Exts_Section_' . ucfirst( $ext );
-		
-		// make sure it exists
-		if ( class_exists( $class ) ) {
+		// update ext map
+		if ( $this->ext( $class_name, $ext ) ) {
 			// return it
-			return new $class( $theme, $name, $title, $desc );
-		} else {
-			// doh!
-			throw new Exception( sprintf( 'The section class "%s" does not exist', $class ) );
+			return new $class_name( $theme, $name, $title, $desc );
 		}
 	}
 }

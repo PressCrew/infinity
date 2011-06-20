@@ -28,20 +28,16 @@ class Pie_Easy_Features_Factory extends Pie_Easy_Factory
 	 */
 	public function create( $ext, $theme, $name, $title = null, $desc = null, $section = null )
 	{
-		// load it from alternate location?
-		if ( !$this->policy()->load_ext( $ext ) ) {
+		// load it from alternate location
+		$class_name = $this->policy()->load_ext( $ext );
+
+		// get one?
+		if ( !$class_name ) {
 			// nope, load core feature
 			Pie_Easy_Loader::load_ext( array('features', $ext) );
+			// determine class name
+			$class_name = Pie_Easy_Files::file_to_class( $ext, 'Pie_Easy_Exts_Feature' );
 		}
-
-		$ext_parts = explode( '-', $ext );
-
-		foreach ( $ext_parts as &$ext_part ) {
-			$ext_part = ucfirst( $ext_part );
-		}
-
-		// determine class name
-		$class_name = 'Pie_Easy_Exts_Feature_' . implode( '_', $ext_parts );
 
 		// update ext map
 		if ( $this->ext( $class_name, $ext ) ) {

@@ -28,15 +28,17 @@ class Pie_Easy_Shortcodes_Factory extends Pie_Easy_Factory
 	 */
 	public function create( $ext, $theme, $name, $title = null, $desc = null, $section = null )
 	{
-		// load it from alternate location?
-		if ( !$this->policy()->load_ext( $ext ) ) {
+		// load it from alternate location
+		$class_name = $this->policy()->load_ext( $ext );
+
+		// get one?
+		if ( !$class_name ) {
 			// nope, load core shortcode
 			Pie_Easy_Loader::load_ext( array('shortcodes', $ext) );
+			// determine class name
+			$class_name = Pie_Easy_Files::file_to_class( $ext, 'Pie_Easy_Exts_Shortcode' );
 		}
 
-		// determine class name
-		$class_name = 'Pie_Easy_Exts_Shortcode_' . ucfirst( $ext );
-		
 		// update ext map
 		if ( $this->ext( $class_name, $ext ) ) {
 			// return it

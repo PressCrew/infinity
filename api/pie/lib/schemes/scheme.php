@@ -684,6 +684,22 @@ final class Pie_Easy_Scheme
 	}
 
 	/**
+	 * Locate a theme config file, giving priority to top themes in the stack
+	 *
+	 * @param string $file_names,... The file names that make up the RELATIVE path to the theme config root
+	 * @return string|false
+	 */
+	public function locate_config_file()
+	{
+		// get all args
+		$args = func_get_args();
+		// image roots is first arg
+		array_unshift( $args, $this->config_dir );
+		// locate it
+		return call_user_func_array( array($this,'locate_file'), $args );
+	}
+
+	/**
 	 * Locate a theme image, giving priority to top themes in the stack
 	 *
 	 * @param string $file_names,... The file names that make up the RELATIVE path to the theme root

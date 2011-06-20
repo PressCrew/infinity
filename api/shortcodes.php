@@ -64,6 +64,14 @@ class Infinity_Shortcodes_Policy extends Pie_Easy_Shortcodes_Policy
 		return new Infinity_Shortcodes_Renderer();
 	}
 
+	/**
+	 * @param string $ext
+	 * @return Pie_Easy_Shortcodes_Shortcode
+	 */
+	final public function load_ext( $ext )
+	{
+		return infinity_load_extension( $this->get_handle(), $ext );
+	}
 }
 
 /**

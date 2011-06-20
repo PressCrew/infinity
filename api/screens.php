@@ -64,6 +64,15 @@ class Infinity_Screens_Policy extends Pie_Easy_Screens_Policy
 		return new Infinity_Screens_Renderer();
 	}
 
+	/**
+	 * @param string $ext
+	 * @return Pie_Easy_Screens_Screen
+	 */
+	final public function load_ext( $ext )
+	{
+		return infinity_load_extension( $this->get_handle(), $ext );
+	}
+
 }
 
 /**
