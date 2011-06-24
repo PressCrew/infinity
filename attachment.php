@@ -13,7 +13,7 @@
 
 	infinity_get_header();
 ?>
-	<div class="grid_8" id="content">
+	<div id="content">
 		<?php
 			do_action( 'before_content' );
 			do_action( 'before_attachment' );
