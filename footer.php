@@ -31,7 +31,7 @@
 			?>
 			<!-- footer widgets -->
 			<div class="grid_12" id="footer-full">
-				<div class="grid_4 footer-widget alpha" id="footer-widget-left">
+				<div class="grid_4 footer-widget" id="footer-widget-left">
 					<?php
 						dynamic_sidebar( 'Footer Left' );
 					?>
@@ -41,17 +41,11 @@
 						dynamic_sidebar( 'Footer Middle' );
 					?>
 				</div>
-				<div class="grid_4 footer-widget omega" id="footer-widget-right">
+				<div class="grid_4 footer-widget" id="footer-widget-right">
 					<?php
 						dynamic_sidebar( 'Footer Right' );
 					?>
 				</div>
-			</div>
-			<!-- footer menu -->
-			<div class="footer-menu">
-				<?php
-					wp_nav_menu( array( 'theme_location' => 'footer-menu' ) );
-				?>
 			</div>
 			<?php
 				do_action( 'close_footer' );
@@ -65,5 +59,6 @@
 	do_action( 'close_body' );
 	wp_footer();
 ?>
+
 </body>
 </html>
