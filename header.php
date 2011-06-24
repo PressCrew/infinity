@@ -18,11 +18,12 @@
 ?>
 <head profile="http://gmpg.org/xfn/11">
 	<!-- basic title -->
-	<title>
-		<?php
-			infinity_base_title();
-		?>
-	</title>
+		<?php if (function_exists('bp_page_title') && !bp_is_blog_page()) { ?>
+ <title><?php bp_page_title() ?></title>
+<?php } else { ?>
+ <title><?php infinity_base_title(); ?></title>
+<?php } ?>
+
 	<!-- core meta tags -->
 	<meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
 	<meta name="generator" content="WordPress <?php bloginfo('version'); ?>" />
@@ -61,18 +62,25 @@
 			<div id="header">
 				<?php
 					do_action( 'open_header' );
-
-					if ( current_theme_supports( 'infinity-header-logo' ) ):
-						infinity_feature( 'infinity-header-logo' );
-					else :
 				?>
-					<h1 id="site-title">
-						<a href="<?php echo home_url( '/' ); ?>" title="<?php bloginfo('name'); ?> - <?php bloginfo('description'); ?>"><?php bloginfo('name'); ?></a>
-						<span id="site-description"><?php bloginfo('description'); ?></span>
-					</h1>
+				
+				
+				<?php  if ( infinity_option( 'infinity_header_logo' ) ): ?>
+				<?php $heading_tag = ( is_home() || is_front_page() ) ? 'h1' : 'div'; ?>
+				<<?php echo $heading_tag; ?> id="site-logo">
+					<a href="<?php echo home_url( '/'  ); ?>" title="<?php bloginfo('name'); ?> - <?php bloginfo('description'); ?>">
+						<img src="<?php echo infinity_option_image_url( 'infinity_header_logo','full' ); ?>">				
+					</a>
+				</<?php echo $heading_tag; ?>>
+				
+				<? else : ?>
+				<?php $heading_tag = ( is_home() || is_front_page() ) ? 'h1' : 'div'; ?>
+				<<?php echo $heading_tag; ?> id="site-title">
+					<a href="<?php echo home_url( '/' ); ?>" title="<?php bloginfo('name'); ?> - <?php bloginfo('description'); ?>"><?php bloginfo('name'); ?></a>
+					<span id="site-description"><?php bloginfo('description'); ?></span>
+				</<?php echo $heading_tag; ?>>
+				<?php endif; ?>
 				<?php
-					endif;
-
 					// show primary menu?
 					if ( has_nav_menu( 'primary-menu'  ) ):
 						infinity_get_template_part( 'main-menu', 'header' );
