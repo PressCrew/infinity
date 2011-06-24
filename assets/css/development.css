@@ -1,257 +1,299 @@
-/* =============== */
-/* ! Core Layout   */
-/* =============== */
+/*
+LAYOUT: Pre and Code
+DESCRIPTION: Fixing these so when scaled down they won't create a scroll bar and break the responsiveness.
+NOTE: Do not use these two together... ie. <pre><code>Something</code></pre>
+*/
 
-#wrapper {
-   	min-width: 960px; 
-	max-width: 1080px; 
-	margin: 25px auto auto;
+#content pre {
+	font-size: 80%;
+	overflow: hidden;
+	padding: 1em;
 }
 
-a, a:visited {
-color: #3F9291;
+#content code {
+	font-size: 70%;
+	margin-bottom: 24px;
 }
 
-a:hover, a:visited:hover {
-color: #777;
+/*
+LAYOUT: Responsive Images & Video
+DESCRIPTION: Responsive.
+*/
+
+.top-wrap img, .main-wrap img {
+	margin: 0;
+	height: auto;
+	max-width: 100%;
+	width: auto;
 }
 
-/* ========== */
-/* ! Header   */
-/* ========== */
-
-
-/* ==================== */
-/* ! The Sub Menu   */
-/* ==================== */
-
-#sub-menu-wrap {
-background: #3F9291;
-border: 1px solid #3F9291;
+iframe, object, embed{
+	max-width: 100%;
 }
 
-/* Menu Hover */
-#sub-menu-wrap ul a:hover, #sub-menu-wrap ul li.sfHover a, #sub-menu-wrap ul li.current-cat a, #sub-menu-wrap ul li.current_page_item a, #sub-menu-wrap ul li.current-menu-item a {
-    background: #333 !important;
+#content .wp-caption{
+	padding: 0px;
+	width: auto !important;
 }
 
-/* Transparant BG for items in the dropdown menu */
-div#sub-menu-wrap ul li ul li a,div#top-menu-wrap ul li ul li a,div#main-menu-wrap ul li ul li a {
-background: transparent;
+#content .wp-caption.alignnone{
+	clear: both;
 }
 
-/* Menu Color and Size */
-#sub-menu-wrap ul li a span {
-color: #DDD;
-text-shadow: 0px -1px 0px #111;
-font-size: 11.5px;
-}
+/*
+Notes: You shouldn't really have to mess with anything down here. Unless you are drastically chaning the Twenty Ten theme.
+	
+/* --------------------------------------------------------*/
+/*-----------------MMMMM----------MMMMM----E---------------*/
+/*-----------------MMMMMM--------MMMMMM------D-------------*/
+/*-----------------MMMMMMM------MMMMMMM----Q---I-----------*/
+/*-----------------MMMMMMMM----MMMMMMMM------U---A---------*/
+/*-----------------MMMMMMMMM--MMMMMMMMM--------E-----------*/
+/*-----------------MMMM-MMMMMMMMMM-MMMM----------R---------*/
+/*-----------------MMMM--MMMMMMMM--MMMM------------I-------*/
+/*-----------------MMMM---MMMMMM---MMMM--------------E-----*/
+/*-----------------MMMM----MMMM----MMMM----------------S---*/
+/*-----------------MMMM------------MMMM--------------------*/
+/*-----------------MMMM------------MMMM--------------------*/
+/*-----------------MMMM------------MMMM--------------------*/
+/*-----------------MMMM------------MMMM--------------------*/
+/*-----------------MMMM------------MMMM--------------------*/
+/* --------------------------------------------------------*/
 
-/* Dropdown Background */
-#sub-menu-wrap ul ul {
-background: #1C8281 !important;
-}
-
-/* ==================== */
-/* ! The Main Menu   */
-/* ==================== */
-
-#main-menu-wrap {
-background: #3F9291;
-border: 1px solid #3F9291;
-}
-
-/* Menu Hover */
-#main-menu-wrap ul a:hover, #main-menu-wrap ul li.sfHover a, #main-menu-wrap ul li.current-cat a, #main-menu-wrap ul li.current_page_item a, #main-menu-wrap ul li.current-menu-item a {
-    background: #1C8281 !important;
-}
-
-/* Transparant BG for items in the dropdown menu */
-div#main-menu-wrap ul li ul li a,div#top-menu-wrap ul li ul li a,div#main-menu-wrap ul li ul li a {
-background: transparent;
-}
-
-/* Menu Color */
-#main-menu-wrap ul li a span {
-color: #DDD;
-text-shadow: 0px -1px 0px #111;
-font-size: 14px;
-}
-
-/* Dropdown Background */
-#main-menu-wrap ul ul {
-background: #1C8281 !important;
-}
-
-/* ==================== */
-/* ! The Top Menu   */
-/* ==================== */
-
-#top-menu-wrap {
-background: none repeat scroll 0 0 #333;
-border: 1px solid #222;
-}
-
-/* Menu Hover */
-#top-menu-wrap ul a:hover, #top-menu-wrap ul li.sfHover a, #top-menu-wrap ul li.current-cat a, #top-menu-wrap ul li.current_page_item a, #top-menu-wrap ul li.current-menu-item a {
-    background: #1C8281 !important;
-}
-
-/* Transparant BG for items in the dropdown menu */
-div#top-menu-wrap ul li ul li a,div#top-menu-wrap ul li ul li a,div#top-menu-wrap ul li ul li a {
-background: transparent;
-}
-
-/* Menu Color */
-#top-menu-wrap ul li a span {
-color: #DDD;
-text-shadow: 0px -1px 0px #111;
-font-size: 11.5px;
-}
-
-/* Dropdown Background */
-#top-menu-wrap ul ul {
-background: #1C8281 !important;
-}
-
-.widget {
-border:1px solid #dddddd;
-padding: 0 20px 20px;
-margin-bottom:20px;
--webkit-border-radius:4px;
--moz-border-radius:4px;
-border-radius:4px;
-}
-
-.widget,.author-box, .category-box, .tag-box, .post-author-box {
-box-shadow:inset 0 0 0 3px rgba(0, 0, 0, 0.025);
--webkit-box-shadow:inset 0 0 0 3px rgba(0, 0, 0, 0.025);
--moz-box-shadow:inset 0 0 0 3px rgba(0, 0, 0, 0.025);background:#fafafa;background:
--webkit-gradient(linear, left top, left bottom, from(#fafafa), to(#ffffff));
-background:-webkit-linear-gradient(#fafafa, #ffffff);
-background:-moz-linear-gradient(center top, #fafafa 0%, #ffffff 100%);
-background:-moz-gradient(center top, #fafafa 0%, #ffffff 100%);
-}
-
-
-
-/************************************************************************************
-smaller than 980
-*************************************************************************************/
-@media screen and (max-width: 940px) {
-
-	/* pagewrap */
+@media only screen and (min-width: 481px) and (max-width: 1024px){
+	#wrapper {
+		margin: 20px auto;
+		width: 90%;
+	}
+	  
+	.top-wrap,
+	.main-wrap,
+	.bottom-wrap,
+	.top-menu-wrap,
+	.main-menu-wrap,
+	.sub-menu-wrap,
+	 {
+	    margin: 0 auto;
+	    width: 100%;
+	}
+	  	
+	/*
+	LAYOUT: Responsive Images & Video
+	DESCRIPTION: Responsive.
+	*/
+	#content img {
+		margin: 0;
+		height: auto;
+		max-width: 100%;
+		width: auto;
+	}
+	
+	img, object, embed, iframe, #content .wp-caption {
+		max-width: 100%;
+	}
+	
+	#content .wp-caption img{
+		max-width: 95%;
+	}
+	  
+	/*
+	LAYOUT: Two columns
+	DESCRIPTION: Responsive.
+	940 = 720 + 220
+	100% = 76.5957447% + 23.40425535% 
+	*/
 	
 	#wrapper {
-		width: 95%!important;
+		float: left;
+		margin: 0 -25.5319149% 0 0;
+		width: 99%;
+	}
+	#content {
+		width: 68.5957447%;
+		/*margin: 0 29.787234% 0 20px;*/
+		margin: 0 29.787234% 0 20px;
+	}
+	#primary,
+	#secondary {
+		overflow: hidden;
+		width: 23.40425535% /* 200px / 940px */ 
 	}
 	
-	.container {
-		width: 95%!important;
+	#site-title, #site-info {
+		width:74.4680851% /* 700px / 940px */
 	}
 	
-	/* embedded videos */
-	.video embed,
-	.video object,
-	.video iframe {
+	#footer-widget-area .widget-area,
+	#site-generator,
+	#site-description  {
+		width: 23.40425535% /* 200px / 940px */ 
+	}
+
+} /* This belongs here. It goes to @media only screen and (min-width: 481px) and (max-width: 1024px) */
+
+@media screen and (max-width: 660px) {
+	#wrapper {
+		margin: 5px auto;
+		width: 90%;
+		padding: 0 3%;
+	}
+	
+	.top-wrap,
+	.main-wrap,
+	.bottom-wrap,
+	.top-menu-wrap,
+	.main-menu-wrap,
+	.sub-menu-wrap,
+	 {
+	    margin: 0 auto;
+	    width: 100%;
+	}	
+	
+	#site-title {
+		width: 100%;
+	}
+	
+	#wrapper {
+		float: left;
+		width: 100%;
+		overflow: auto;
+	}
+	
+	#content {
+		width: 99%;
+		margin: 0 0px 0 0px;
+	}
+	
+	#sidebar,
+	#alt-sidebar {
+		float: left;
+		overflow: hidden;
+		width: 99%; 
+	}
+	#sidebar {
+		clear: left;
+	}
+	
+	#site-logo, #site-title, #site-description, #site-title {
+		clear: left;
+		float: left;
+		width: 95%;
+		padding: 0;
+		margin: 0;
+	}
+	
+	/*
+	LAYOUT: Responsive Images
+	DESCRIPTION: Responsive.
+	*/
+	  
+	#content img {
+		margin: 0;
+		height: auto;
+		max-width: 100%;
+		width: auto;
+	}
+	
+	img, object, embed, #content .wp-caption {
+		max-width: 100%;
+	}
+	
+	#content .wp-caption{
+		width: 100%;
+	}
+	
+	#content .wp-caption img{
+		max-width: 90%;
+	}
+	
+	#content .wp-caption.alignleft{
+		float: left;
+	}
+	#content .wp-caption.alignright{
+		float: right;
+	}
+	#content .alignleft,
+	#content img.alignleft {
+		display: block;
+		float: none;
+		margin: 0px auto;
+		padding: 0px 0px 5px 0px;
+	}
+	#content .alignright,
+	#content img.alignright {
+		display: block;
+		float: none;
+		margin: 0px auto;
+		padding: 0px 0px 5px 0px;
+	}
+
+} /* @media screen and (max-width: 660px) */
+
+
+/*
+/* We left these here for you incase you needed them. You do not need to add anything for the Videos or Images.
+/*
+/*
+/* Media = iPad orientation: landscape */
+
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape) {
+	
+}/* This belongs here. It goes to @media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape) */
+
+/*--------------------------------------------------------------------------------*/
+
+/* Media = iPad orientation: portrait */
+
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait) {
+
+}/* This belongs here. It goes to @media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait) */
+
+/*--------------------------------------------------------------------------------*/
+
+/* Media = Mobile - iPhone */
+
+@media handheld, only screen and (max-device-width: 480px) {
+	iframe, object, embed{
 		width: 100%;
 		height: auto;
-		min-height: 300px;
 	}
+	#content pre {
+		font-size: 60%;
+		overflow: hidden;
+		padding: 1em;
+	}
+	
+	#content code {
+		font-size: 50%;
+		margin-bottom: 24px;
+	}
+}/* This belongs here. It goes to @media handheld, only screen and (max-device-width: 480px) */
+	
+/* Media = Mobile - All Others - orientation:portrait */
 
-}
-
-/************************************************************************************
-smaller than 650
-*************************************************************************************/
-@media screen and (max-width: 650px) {
-
-	/* header */
-	#header {
+@media handheld, only screen and (max-device-width: 480px) and (orientation:portrait) {
+	iframe, object, embed{
+		width: 100%;
 		height: auto;
 	}
-
-	/* search form */
-	#searchform {
-		position: absolute;
-		top: 5px;
-		right: 0;
-		z-index: 100;
-		height: 40px;
-	}
-	#searchform #s {
-		width: 70px;
-	}
-	#searchform #s:focus {
-		width: 150px;
+	
+	#content pre {
+		font-size: 80%;
+		overflow: hidden;
+		padding: 1em;
 	}
 
-	/* main nav */
-	#main-nav {
-		position: static;
+	#content code {
+		font-size: 50%;
+		margin-bottom: 24px;
 	}
+}/* @media handheld, only screen and (max-device-width: 480px) and (orientation:portrait) */
 
-	/* site logo */
-	#site-logo {
-		margin: 15px 100px 5px 0;
-		position: static;
+/* Media = Mobile - All Others - orientation:landscape */
+
+@media handheld, only screen and (max-device-width: 767px) and (orientation:landscape) {
+	iframe, object, embed{
+		width: 100%;
+		height: auto;
 	}
-
-	/* site description */
-	#site-description {
-		margin: 0 0 15px;
-		position: static;
-	}
-
-	/* content */
-	#content,.grid_8 {
-		width: auto !important;
-		float: none !important;
-		margin: 20px 0 !important;
-	}
-
-	/* sidebar */
-	#sidebar,.grid_8  {
-		width: 100%!important;
-		margin: 0!important;
-		float: none!important;
-	}
-	#sidebar .widget {
-		padding: 3% 4%!important;
-		margin: 0 0 10px!important;
-	}
-
-	/* embedded videos */
-	.video embed,
-	.video object,
-	.video iframe {
-		min-height: 250px!important;
-	}
-
-}
-
-/************************************************************************************
-smaller than 560
-*************************************************************************************/
-@media screen and (max-width: 480px) {
-
-	/* disable webkit text size adjust (for iPhone) */
-	html {
-		-webkit-text-size-adjust: none;
-	}
-
-	/* main nav */
-	#main-nav a {
-		font-size: 90%;
-		padding: 10px 8px;
-	}
-
-}
-
-img {
-	max-width: 100%;
-	height: auto;
-	width: auto\9; /* ie8 */
-}
-
-
+}/* This belongs here. It goes to @media handheld, only screen and (max-device-width: 767px) and (orientation:landscape) */
