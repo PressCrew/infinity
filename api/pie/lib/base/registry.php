@@ -12,7 +12,7 @@
  */
 
 
-Pie_Easy_Loader::load( 'base/componentable', 'collections' );
+Pie_Easy_Loader::load( 'base/componentable', 'collections', 'utils/export' );
 
 /**
  * Make keeping track of concrete components
