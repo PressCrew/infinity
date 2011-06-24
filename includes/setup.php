@@ -42,8 +42,8 @@ add_action( 'init', 'infinity_base_post_thumb_sizes' );
  */
 function infinity_base_register_menus()
 {
+	register_nav_menu( 'over-menu', __( 'Top Menu' ) );
 	register_nav_menu( 'primary-menu', __( 'Primary Menu' ) );
-	register_nav_menu( 'over-menu', __( 'Over Menu' ) );
 	register_nav_menu( 'sub-menu', __( 'Sub Menu' ) );
 	register_nav_menu( 'footer-menu', __( 'Footer Menu' ) );
 }
@@ -60,8 +60,8 @@ function infinity_base_register_sidebars()
 		'description' => "The blog widget area",
 		'before_widget' => '<div id="%1$s" class="widget %2$s">',
 		'after_widget' => '</div>',
-		'before_title' => '<h3>',
-		'after_title' => '</h3>'
+		'before_title' => '<h4>',
+		'after_title' => '</h4>'
 	));
  
 	register_sidebar(array(
@@ -70,8 +70,8 @@ function infinity_base_register_sidebars()
 		'description' => "The page widget area",
 		'before_widget' => '<div id="%1$s" class="widget %2$s">',
 		'after_widget' => '</div>',
-		'before_title' => '<h3>',
-		'after_title' => '</h3>'
+		'before_title' => '<h4>',
+		'after_title' => '</h4>'
 	));
 
 	register_sidebar(array(
@@ -80,8 +80,8 @@ function infinity_base_register_sidebars()
 		'description' => "The left footer widget",
 		'before_widget' => '<div id="%1$s" class="%2$s">',
 		'after_widget' => '</div>',
-		'before_title' => '<h3>',
-		'after_title' => '</h3>'
+		'before_title' => '<h4>',
+		'after_title' => '</h4>'
 	));
 
 	register_sidebar(array(
@@ -90,8 +90,8 @@ function infinity_base_register_sidebars()
 		'description' => "The middle footer widget",
 		'before_widget' => '<div id="%1$s" class="%2$s">',
 		'after_widget' => '</div>',
-		'before_title' => '<h3>',
-		'after_title' => '</h3>'
+		'before_title' => '<h4>',
+		'after_title' => '</h4>'
 	));
 
 	register_sidebar(array(
@@ -100,8 +100,8 @@ function infinity_base_register_sidebars()
 		'description' => "The right footer widget",
 		'before_widget' => '<div id="%1$s" class="%2$s">',
 		'after_widget' => '</div>',
-		'before_title' => '<h3>',
-		'after_title' => '</h3>'
+		'before_title' => '<h4>',
+		'after_title' => '</h4>'
 	));
 }
 add_action( 'init', 'infinity_base_register_sidebars' );

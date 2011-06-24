@@ -17,8 +17,8 @@ register_sidebar( array(
 	'description' => "The Activity widget area",
 	'before_widget' => '<div id="%1$s" class="widget %2$s">',
 	'after_widget' => '</div>',
-	'before_title' => '<h3>',
-	'after_title' => '</h3>'
+	'before_title' => '<h4>',
+	'after_title' => '</h4>'
 ));
  
 register_sidebar( array(
@@ -27,8 +27,8 @@ register_sidebar( array(
 	'description' => "The Members widget area",
 	'before_widget' => '<div id="%1$s" class="widget %2$s">',
 	'after_widget' => '</div>',
-	'before_title' => '<h3>',
-	'after_title' => '</h3>'
+	'before_title' => '<h4>',
+	'after_title' => '</h4>'
 ));
 
 register_sidebar( array(
@@ -37,8 +37,8 @@ register_sidebar( array(
 	'description' => "The Blogs Sidebar area",
 	'before_widget' => '<div id="%1$s" class="widget %2$s">',
 	'after_widget' => '</div>',
-	'before_title' => '<h3>',
-	'after_title' => '</h3>'
+	'before_title' => '<h4>',
+	'after_title' => '</h4>'
 ));
  
 register_sidebar( array(
@@ -47,8 +47,8 @@ register_sidebar( array(
 	'description' => "The Groups widget area",
 	'before_widget' => '<div id="%1$s" class="widget %2$s">',
 	'after_widget' => '</div>',
-	'before_title' => '<h3>',
-	'after_title' => '</h3>'
+	'before_title' => '<h4>',
+	'after_title' => '</h4>'
 ));
  
 register_sidebar( array(
@@ -57,8 +57,8 @@ register_sidebar( array(
 	'description' => "The Forums widget area",
 	'before_widget' => '<div id="%1$s" class="widget %2$s">',
 	'after_widget' => '</div>',
-	'before_title' => '<h3>',
-	'after_title' => '</h3>'
+	'before_title' => '<h4>',
+	'after_title' => '</h4>'
 ));
 	
 /**
