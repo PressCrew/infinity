@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'features', 'utils/files' );
+Pie_Easy_Loader::load( 'features' );
 
 /**
  * Infinity Theme: features policy
