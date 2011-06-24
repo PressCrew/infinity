@@ -21,6 +21,7 @@
 		<h1 class="pagetitle">
 			<?php
 				the_title();
+				edit_post_link(' ✍','',' ');
 			?>
 		</h1>
 		<!-- show page thumb -->
