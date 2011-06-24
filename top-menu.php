@@ -19,11 +19,11 @@
 <?php
 	else:
 ?>
-		<div id="base-menu" class="sub-menu">
+		<div id="base-menu" class="top-menu">
 			<?php
 				// if menu location 'primary-menu' exists then use custom menu
 				wp_nav_menu( array(
-					'theme_location' => 'sub-menu',
+					'theme_location' => 'over-menu',
 					'menu_class' => 'sf-menu',
 					'container' => '',
 					'walker' => new menu_walker()
