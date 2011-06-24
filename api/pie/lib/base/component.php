@@ -218,7 +218,7 @@ abstract class Pie_Easy_Component extends Pie_Easy_Componentable
 	 *
 	 * @return boolean
 	 */
-	final public function supported()
+	public function supported()
 	{
 		if ( $this->required_feature ) {
 			return current_theme_supports( $this->required_feature );

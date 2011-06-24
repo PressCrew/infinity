@@ -90,6 +90,20 @@ abstract class Pie_Easy_Features_Feature
 	{
 		$this->set_directive( 'template', $path );
 	}
+
+	/**
+	 * Check if theme supports this feature
+	 *
+	 * @return boolean
+	 */
+	public function supported()
+	{
+		if ( !current_theme_supports( $this->name ) ) {
+			return false;
+		}
+
+		return parent::supported();
+	}
 	
 }
 

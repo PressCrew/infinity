@@ -24,39 +24,35 @@ class Pie_Easy_Exts_Feature_Css_Background
 		implements Pie_Easy_Styleable
 {
 	/**
-	 * Inject the style for the custom background
+	 * Export styles for the custom background
+	 *
+	 * @return string
 	 */
 	final public function export_css()
 	{
-		// only print style if this feature is supported
-		if ( $this->supported() ) {
+		// background image option name
+		$bg_option = Pie_Easy_Policy::options()->registry()->get( $this->_option_upload );
+		$bg_repeat_option = Pie_Easy_Policy::options()->registry()->get( $this->_option_repeat );
 
-			// background image option name
-			$bg_option = Pie_Easy_Policy::options()->registry()->get( $this->_option_upload );
-			$bg_repeat_option = Pie_Easy_Policy::options()->registry()->get( $this->_option_repeat );
+		// get attachment image data
+		$data = $bg_option->get_image_src( 'full' );
 
-			// get attachment image data
-			$data = $bg_option->get_image_src( 'full' );
+		// extract image data
+		list( $url, $width, $height ) = $data;
 
-			// extract image data
-			list( $url, $width, $height ) = $data;
+		// only render if we have a url
+		if ( $url ) {
 
-			// only render if we have a url
-			if ( $url ) {
+			// new style object
+			$style = new Pie_Easy_Style( $this->_css_selector );
 
-				// new style object
-				$style = new Pie_Easy_Style( $this->_css_selector );
+			// add rules
+			$style->add_rule( 'background-image', sprintf( "url('%s')", $url ) );
+			$style->add_rule( 'background-repeat', $bg_repeat_option->get() );
 
-				// add rules
-				$style->add_rule( 'background-image', sprintf( "url('%s')", $url ) );
-				$style->add_rule( 'background-repeat', $bg_repeat_option->get() );
-
-				// render
-				print $style->export();
-			}
+			// render
+			return $style->export();
 		}
-
-		return true;
 	}
 }
 

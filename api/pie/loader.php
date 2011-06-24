@@ -51,6 +51,12 @@ define( 'PIE_EASY_LANGUAGES_DIR', PIE_EASY_DIR . DIRECTORY_SEPARATOR . 'language
  * PIE API: vendors library directory
  */
 define( 'PIE_EASY_VENDORS_DIR', PIE_EASY_LIB_DIR . DIRECTORY_SEPARATOR . 'vendors' );
+/**
+ * PIE API: exported files sub directory name
+ */
+if ( !defined( 'PIE_EASY_EXPORTS_SUBDIR' ) ) {
+	define( 'PIE_EASY_EXPORTS_SUBDIR', 'exports' );
+}
 
 /**
  * Make loading PIE libraries easy
@@ -106,7 +112,7 @@ final class Pie_Easy_Loader
 		'shortcodes' =>
 			array( 'factory', 'shortcode', 'renderer', 'policy', 'registry' ),
 		'utils' =>
-			array( 'ajax', 'docs', 'enqueue', 'files', 'i18n' )
+			array( 'ajax', 'docs', 'enqueue', 'export', 'files', 'i18n' )
 	);
 
 	/**
