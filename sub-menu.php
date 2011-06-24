@@ -20,15 +20,12 @@
 ?>
 		<div id="base-menu" class="sub-menu">
 			<?php
-				if ( has_nav_menu( 'sub-menu' ) ):
-					/* if menu location 'primary-menu' exists then use custom menu */
 					wp_nav_menu( array(
 						'theme_location' => 'sub-menu',
 						'menu_class' => 'sf-menu',
 						'container' => '',
 						'walker' => new menu_walker()
 					));
-				endif;
 			?>
 		</div>
 <?php
