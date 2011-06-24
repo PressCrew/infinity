@@ -68,6 +68,71 @@ function infinity_base_author_box()
 	endif;
 }
 
+/* Show sidebars based on page type (including BP components) */
+function infinity_base_sidebars()
+{
+		if ( is_page() ) {
+			global $post;
+			if ( function_exists('bp_is_member') && bp_is_member() ) {
+				if ( is_active_sidebar( 'member-sidebar' ) ) {
+					dynamic_sidebar( 'member-sidebar' );
+				} else { ?>
+				<div class="widget"><h4>BP Member Sidebar.</h4>
+				<a href="<?php echo home_url( '/'  ); ?>/wp-admin/widgets.php" title="Add Widgets">Add Widgets</a></div><?php
+				}
+           } elseif ( function_exists('bp_is_page') && bp_is_page(BP_GROUPS_SLUG) ) {
+                if ( is_active_sidebar( 'groups-sidebar' ) ) {
+                    dynamic_sidebar( 'groups-sidebar');
+				} else { ?>
+				<div class="widget"><h4>BP Group Sidebar.</h4>
+				<a href="<?php echo home_url( '/'  ); ?>/wp-admin/widgets.php" title="Add Widgets">Add Widgets</a></div><?php
+				}
+            } elseif ( function_exists('bp_is_page') && bp_is_page(BP_FORUMS_SLUG) ) {
+                if ( is_active_sidebar( 'forums-sidebar' ) ) {
+                    dynamic_sidebar( 'forums-sidebar');
+				} else { ?>
+				<div class="widget"><h4>BP Forums Sidebar.</h4>
+				<a href="<?php echo home_url( '/'  ); ?>/wp-admin/widgets.php" title="Add Widgets">Add Widgets</a></div><?php
+				}
+            } elseif ( function_exists('bp_is_page') && bp_is_page(BP_BLOGS_SLUG) ) {
+                if ( is_active_sidebar( 'blogs-sidebar' ) ) {
+                    dynamic_sidebar( 'blogs-sidebar');
+				} else { ?>
+				<div class="widget"><h4>BP Blogs Sidebar.</h4>
+				<a href="<?php echo home_url( '/'  ); ?>/wp-admin/widgets.php" title="Add Widgets">Add Widgets</a></div><?php
+				}
+			} elseif( is_single() ) {
+				if ( is_active_sidebar( 'single-sidebar' ) ) {
+					dynamic_sidebar( 'single-sidebar');
+				} else { ?>
+				<div class="widget"><h4>Single Posts Sidebar.</h4>
+				<a href="<?php echo home_url( '/'  ); ?>/wp-admin/widgets.php" title="Add Widgets">Add Widgets</a></div><?php
+				}
+			} elseif( is_front_page() ) {
+				if ( is_active_sidebar( 'activity-sidebar' ) ) {
+					dynamic_sidebar( 'activity-sidebar' );
+				} else { ?>
+				<div class="widget"><h4>Home Sidebar.</h4>
+				<a href="<?php echo home_url( '/'  ); ?>/wp-admin/widgets.php" title="Add Widgets">Add Widgets</a></div><?php
+				}
+			} else {
+				if ( is_active_sidebar( 'page-sidebar' ) ) {
+					dynamic_sidebar( 'page-sidebar');
+				} else { ?>
+				<div class="widget"><h4>Page Sidebar.</h4>
+				<a href="<?php echo home_url( '/'  ); ?>wp-admin/widgets.php" title="Add Widgets">Add Widgets</a></div><?php
+				}
+			}
+		} else {
+			if ( is_active_sidebar( 'blog-sidebar' ) ) {
+				dynamic_sidebar( 'blog-sidebar');
+			} else { ?>
+				<div class="widget"><h4>Blog Sidebar.</h4>
+				<a href="<?php echo home_url( '/'  ); ?>/wp-admin/widgets.php" title="Add Widgets">Add Widgets</a></div><?php
+			}
+		}
+}
+
 //
 // Custom Conditionals
 //
