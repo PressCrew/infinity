@@ -3,7 +3,7 @@
  * Infinity Theme: loop template
  *
  * The loop that displays posts
- *
+ * 
  * @author Bowe Frankema <bowromir@gmail.com>
  * @link http://bp-tricks.com/
  * @copyright Copyright (C) 2010 Bowe Frankema
@@ -31,6 +31,7 @@
 				<!-- post title -->
 				<h2 class="posttitle">
 					<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', infinity_text_domain ) ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a>
+					<?php edit_post_link(' ✍','',' ');?>
 				</h2>
 				<!-- post date -->
 				<p class="post-meta-data">
@@ -43,18 +44,15 @@
 						?>
 					</span>
 					<span class="post-category">
-						<?php
-							the_category(', ')
-						?>
+						<?php 
+							the_category(', ') 
+						?>						
 					</span>
 					<span class="time-posted">
 						<?php
 							print human_time_diff(get_the_time('U'), current_time('timestamp')) . ' ago';
 						?>
 					</span>
-					<?php
-						edit_post_link( __( 'Edit', 'twentyeleven' ), '<span class="edit-link">', '</span>' );
-					?>
 					<?php if ( comments_open() ) : ?>
 					<span class="post-comments">
 						<?php
@@ -64,7 +62,7 @@
 								__( '% Comments &#187;', infinity_text_domain )
 							);
 						?>
-					<?php endif; ?>
+					<?php endif; ?>	
 					</span>
 						<?php
 							do_action( 'open_loop_post_meta_data_top' );
@@ -87,28 +85,24 @@
 					<?php
 						do_action( 'before_loop_content' );
 						the_content( __( 'Read More', 'infinity' ) );
-						wp_link_pages( array( 'before' => '<div class="page-link">' . __( '<span>Pages:</span>', 'twentyeleven' ), 'after' => '</div>' ) );
+						wp_link_pages( array( 'before' => '<div class="page-link">' . __( '<span>Pages:</span>', 'twentyeleven' ), 'after' => '</div>' ) ); 
 						do_action( 'after_loop_content' );
 					?>
 				</div>
 				<p class="post-meta-data post-bottom">
 				<?php
 							do_action( 'close_loop_post_meta_bottom' );
-				?>
+				?>		
 				<?php if ( has_tag() ) {?>
 					<span class="post-tags">
 						<?php
 							the_tags( __( 'Tags: ', infinity_text_domain ), ' ', '');
 						?>
 					</span>
-				<?php } ?>
-				<?php
-						edit_post_link( __( 'Edit', 'twentyeleven' ), '<span class="edit-link">', '</span>' );
-				?>
-					</span>
+				<?php } ?>	
 						<?php
 							do_action( 'close_loop_post_meta_data_bottom' );
-						?>
+						?>		
 				</p>
 				<?php
 					do_action( 'close_loop_post_content' );

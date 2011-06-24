@@ -38,20 +38,21 @@
 				<div class="post-content">
 					<h1 class="posttitle">
 						<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', infinity_text_domain ) ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a>
+						<?php edit_post_link(' ✍','',' ');?>
 					</h1>
 					<p class="post-meta-data">
 					<?php
 						do_action( 'open_loop_post_meta_data_top' );
-					?>
+					?>					
 						<span class="post-author">
 							<?php
 								the_author_link();
 							?>
 						</span>
 						<span class="post-category">
-							<?php
-								the_category(', ')
-							?>
+							<?php 
+								the_category(', ') 
+							?>						
 						</span>
 						<span class="time-posted">
 							<?php
@@ -79,7 +80,7 @@
 						<?php
 							do_action( 'open_single_entry' );
 							the_content( __( 'Read the rest of this entry &rarr;', infinity_text_domain ) );
-							wp_link_pages( array( 'before' => '<div class="page-link">' . __( '<span>Pages:</span>', 'twentyeleven' ), 'after' => '</div>' ) );
+							wp_link_pages( array( 'before' => '<div class="page-link">' . __( '<span>Pages:</span>', 'twentyeleven' ), 'after' => '</div>' ) ); 
 						?>
 						<p class="post-meta-data post-bottom">
 							<?php
@@ -91,17 +92,18 @@
 										the_tags( __( 'Tags: ', infinity_text_domain ), ' ', '');
 									?>
 								</span>
-							<?php } ?>
+							<?php } ?>	
 						<?php
 							do_action( 'close_loop_post_meta_data_bottom' );
 						?>
 						</p>
+						<?php get_template_part('social-sharing'); ?>
 						<?php
 							wp_link_pages( array(
 								'before' => __( '<p><strong>Pages:</strong> ', infinity_text_domain ),
 								'after' => '</p>', 'next_or_number' => 'number')
 							);
-							infinity_get_template_part( 'author-box');
+							infinity_get_template_part( 'author-box');	
 						?>
 					</div>
 				</div>
