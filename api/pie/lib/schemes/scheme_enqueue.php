@@ -101,6 +101,9 @@ class Pie_Easy_Scheme_Enqueue
 				Pie_Easy_Scheme::DIRECTIVE_STYLE_DEFS
 			);
 
+		// init internal styles
+		$this->setup_internal( $style_defs );
+		
 		// init ui env
 		$this->setup_ui( $style_defs );
 
@@ -154,7 +157,11 @@ class Pie_Easy_Scheme_Enqueue
 	 */
 	private function make_handle( $theme, $handle )
 	{
-		return sprintf( '%s-%s', $theme, trim( $handle ) );
+		if ( strpos( $handle, ':' ) ) {
+			return $handle;
+		}
+
+		return sprintf( '%s:%s', $theme, trim( $handle ) );
 	}
 
 	/**
@@ -212,6 +219,27 @@ class Pie_Easy_Scheme_Enqueue
 	}
 
 	/**
+	 * Inject internal stylesheets into style directives
+	 *
+	 * @ignore
+	 */
+	public function setup_internal( Pie_Easy_Map $style_defs )
+	{
+		$styles = new Pie_Easy_Map();
+		$styles->add( 'features', Pie_Easy_Policy::features()->registry()->export_css_file()->url );
+		$styles->add( 'options', Pie_Easy_Policy::options()->registry()->export_css_file()->url );
+		$styles->add( 'style', get_bloginfo( 'stylesheet_url' ) );
+
+		$directive = new Pie_Easy_Scheme_Directive( 'style', $styles, '@' );
+
+		$style_defs->add( '@', $directive, true );
+
+		// hook up styles internal handler
+		add_action( self::ACTION_HANDLER_STYLES, array( $this, 'handle_style_features' ), 1 );
+		add_action( self::ACTION_HANDLER_STYLES, array( $this, 'handle_style_options' ), 99999 );
+	}
+
+	/**
 	 * Try to define triggers which have been set in the scheme's config
 	 *
 	 * @param Pie_Easy_Map $map
@@ -239,7 +267,9 @@ class Pie_Easy_Scheme_Enqueue
 					$trigger->add( self::TRIGGER_DEPS, new Pie_Easy_Stack() );
 
 					// init empty always toggle
-					$trigger->add( self::TRIGGER_ALWAYS, true );
+					if ( $theme != '@' ) {
+						$trigger->add( self::TRIGGER_ALWAYS, true );
+					}
 
 					// init empty actions stack
 					$trigger->add( self::TRIGGER_ACTS, new Pie_Easy_Stack() );
@@ -304,8 +334,11 @@ class Pie_Easy_Scheme_Enqueue
 								$dep_handle = $dep_theme_handle;
 							}
 
-							// push onto trigger's dep stack
-							$map->item_at($theme_handle)->item_at(self::TRIGGER_DEPS)->push($dep_handle);
+							// make sure theme handle exists in map
+							if ( $map->contains($theme_handle) ) {
+								// push onto trigger's dep stack
+								$map->item_at($theme_handle)->item_at(self::TRIGGER_DEPS)->push($dep_handle);
+							}
 						}
 					}
 				}
@@ -507,12 +540,63 @@ class Pie_Easy_Scheme_Enqueue
 	}
 
 	/**
+	 * Handle enqueing features stylesheet
+	 *
+	 * @ignore
+	 */
+	public function handle_style_features()
+	{
+		global $wp_styles;
+
+		if ( !is_admin() ) {
+
+			// enq features?
+			$features_css = Pie_Easy_Policy::features()->registry()->export_css_file()->path;
+			
+			// check file
+			if ( file_exists( $features_css ) && filesize( $features_css ) > 0 ) {
+				wp_enqueue_style( '@:features' );
+				$wp_styles->query( '@:style' )->deps[] = '@:features';
+				$wp_styles->query( '@:options' )->deps[] = '@:features';
+			}
+
+		}
+	}
+
+	/**
+	 * Handle enqueing options styles
+	 *
+	 * @ignore
+	 */
+	public function handle_style_options()
+	{
+		global $wp_styles;
+
+		if ( !is_admin() ) {
+
+			// enq options?
+			$options_css = Pie_Easy_Policy::features()->registry()->export_css_file()->path;
+			
+			// check file
+			if ( file_exists( $options_css ) && filesize( $options_css ) > 0 ) {
+				$wp_styles->query( '@:options' )->deps[] = '@:style';
+				wp_enqueue_style( '@:options' );
+			}
+		}
+	}
+
+	/**
 	 * Handle enqueing styles that should always be loaded
 	 *
 	 * @ignore
 	 */
 	public function handle_style_always()
 	{
+		// enq active theme stylesheet
+		if ( !is_admin() ) {
+			wp_enqueue_style( '@:style' );
+		}
+
 		// loop through styles and check if always is toggled on
 		foreach( $this->styles as $handle => $config_map ) {
 			// always load?

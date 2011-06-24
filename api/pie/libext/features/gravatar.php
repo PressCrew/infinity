@@ -24,46 +24,42 @@ class Pie_Easy_Exts_Feature_Gravatar
 		implements Pie_Easy_Styleable
 {
 	/**
-	 * Inject the style for the gravatar
+	 * Export styles for the gravatar
+	 *
+	 * @return string
 	 */
 	final public function export_css()
 	{
-		// only print style if this feature is supported
-		if ( $this->supported() ) {
+		// registry
+		$registry = Pie_Easy_Policy::options()->registry();
 
-			// registry
-			$registry = Pie_Easy_Policy::options()->registry();
+		// options
+		$opt_border_width = $registry->get( $this->_option_border_width )->get();
+		$opt_border_color = $registry->get( $this->_option_border_color )->get();
+		$opt_padding = $registry->get( $this->_option_padding )->get();
+		$opt_bg_color = $registry->get( $this->_option_bg_color )->get();
 
-			// options
-			$opt_border_width = $registry->get( $this->_option_border_width )->get();
-			$opt_border_color = $registry->get( $this->_option_border_color )->get();
-			$opt_padding = $registry->get( $this->_option_padding )->get();
-			$opt_bg_color = $registry->get( $this->_option_bg_color )->get();
+		// new style object
+		$style = new Pie_Easy_Style( 'img.' . $this->_image_class );
 
-			// new style object
-			$style = new Pie_Easy_Style( 'img.' . $this->_image_class );
+		// add rules
+		$style->add_rule( 'border-style', 'solid' );
 
-			// add rules
-			$style->add_rule( 'border-style', 'solid' );
-
-			if ( $opt_border_width ) {
-				$style->add_rule( 'border-width', $opt_border_width . 'px' );
-			}
-			if ( $opt_border_color ) {
-				$style->add_rule( 'border-color', $opt_border_color );
-			}
-			if ( $opt_padding ) {
-				$style->add_rule( 'padding', $opt_padding . 'px' );
-			}
-			if ( $opt_bg_color ) {
-				$style->add_rule( 'background-color', $opt_bg_color );
-			}
-
-			// render
-			print $style->export();
+		if ( $opt_border_width ) {
+			$style->add_rule( 'border-width', $opt_border_width . 'px' );
+		}
+		if ( $opt_border_color ) {
+			$style->add_rule( 'border-color', $opt_border_color );
+		}
+		if ( $opt_padding ) {
+			$style->add_rule( 'padding', $opt_padding . 'px' );
+		}
+		if ( $opt_bg_color ) {
+			$style->add_rule( 'background-color', $opt_bg_color );
 		}
 
-		return true;
+		// render
+		return $style->export();
 	}
 
 	public function url()

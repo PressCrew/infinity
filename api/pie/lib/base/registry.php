@@ -33,13 +33,6 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 	const PARAM_BLOG_THEME = 'pie_easy_options_blog_theme';
 
 	/**
-	 * Stack of config files that have been loaded
-	 *
-	 * @var Pie_Easy_Stack
-	 */
-	private $files_loaded;
-
-	/**
 	 * Name of the theme currently being loaded
 	 *
 	 * @var string
@@ -68,6 +61,11 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 	private $components;
 
 	/**
+	 * @var Pie_Easy_Export
+	 */
+	private $export_css_file;
+
+	/**
 	 * Singleton constructor
 	 * @ignore
 	 */
@@ -75,7 +73,6 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 	{
 		// init local collections
 		$this->components = new Pie_Easy_Map();
-		$this->files_loaded = new Pie_Easy_Stack();
 	}
 
 	/**
@@ -284,13 +281,6 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 	 */
 	final public function load_config_file( $filename, $theme )
 	{
-		// skip loaded files
-		if ( $this->files_loaded->contains( $filename ) ) {
-			return;
-		} else {
-			$this->files_loaded->push( $filename );
-		}
-
 		// set the current theme being loaded
 		$this->loading_theme = $theme;
 
@@ -351,17 +341,43 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 	}
 
 	/**
-	 * Export CSS markup from all registered component that implement the styleable
+	 * Export CSS markup from all registered component
+	 * that implement the styleable interface
+	 *
+	 * @return string
 	 */
 	public function export_css()
 	{
+		// css to return
+		$css = '';
+
 		// loop through and check field type
 		foreach ( $this->get_all() as $component ) {
-			if ( $component instanceof Pie_Easy_Styleable ) {
+			if ( $component instanceof Pie_Easy_Styleable && $component->supported() ) {
 				// export css markup
-				$component->export_css();
+				$css .= $component->export_css();
 			}
 		}
+
+		return $css;
+	}
+
+	/**
+	 * Return dynamic css object
+	 *
+	 * @return Pie_Easy_Export
+	 */
+	public function export_css_file()
+	{
+		if ( !$this->export_css_file instanceof Pie_Easy_Export ) {
+			$this->export_css_file =
+				new Pie_Easy_Export(
+					$this->policy()->get_handle() . '.css',
+					array( $this, 'export_css' )
+				);
+		}
+
+		return $this->export_css_file;
 	}
 
 }

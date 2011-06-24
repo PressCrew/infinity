@@ -21,15 +21,7 @@ Pie_Easy_Loader::load_ext( array('features', 'custom-css') );
  */
 class Infinity_Feature_Custom_Css extends Pie_Easy_Exts_Feature_Custom_Css
 {
-	/**
-	 * Enqueue the css export script
-	 */
-	final public function init_styles()
-	{
-		if ( $this->supported() ) {
-			wp_enqueue_style( 'infinity-custom', INFINITY_EXPORT_URL . '/css.php', null, infinity_option_meta( 'infinity_custom_css', 'time_updated' ) );
-		}
-	}
+	// just a place holder for now
 }
 
 ?>

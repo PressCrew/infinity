@@ -103,7 +103,7 @@ class Pie_Easy_Style
 		}
 
 		// close
-		$markup .= '}' . PHP_EOL;
+		$markup .= '}' . PHP_EOL . PHP_EOL;
 
 		// all done
 		return $markup;

@@ -80,6 +80,13 @@ final class Pie_Easy_Scheme
 	private $config_file;
 
 	/**
+	 * Stack of config files that have been loaded
+	 *
+	 * @var Pie_Easy_Stack
+	 */
+	private $config_files_loaded;
+	
+	/**
 	 * Theme stack
 	 *
 	 * @var Pie_Easy_Stack
@@ -104,6 +111,7 @@ final class Pie_Easy_Scheme
 		// initialize themes map
 		$this->themes = new Pie_Easy_Stack();
 		$this->directives = new Pie_Easy_Map();
+		$this->config_files_loaded = new Pie_Easy_Stack();
 	}
 
 	/**
@@ -160,13 +168,25 @@ final class Pie_Easy_Scheme
 		// run theme feature support helper
 		$this->feature_support();
 
-		// enqueue styles and scripts
-		$this->enqueue = new Pie_Easy_Scheme_Enqueue( $this );
-
 		// try to load additional functions files after WP theme setup
+		add_action( 'after_setup_theme', array($this, 'setup_enqueuer') );
 		add_action( 'after_setup_theme', array($this, 'load_functions') );
+		add_action( 'after_setup_theme', array($this, 'export_css_refresh') );
 
 		return true;
+	}
+
+	/**
+	 * Don't ever call this manually
+	 *
+	 * @ignore
+	 */
+	public function setup_enqueuer()
+	{
+		if ( !$this->enqueue instanceof Pie_Easy_Scheme_Enqueue ) {
+			// enqueue styles and scripts
+			$this->enqueue = new Pie_Easy_Scheme_Enqueue( $this );
+		}
 	}
 
 	/**
@@ -360,6 +380,8 @@ final class Pie_Easy_Scheme
 		if ( is_readable( $ini_file ) ) {
 			// parse it
 			$ini = parse_ini_file( $ini_file, true );
+			// push onto loaded stack
+			$this->config_files_loaded->push( $ini_file );
 		} else {
 			// yipes, theme has no ini file.
 			// assume that parent theme is the root theme
@@ -447,6 +469,17 @@ final class Pie_Easy_Scheme
 	}
 
 	/**
+	 * Refresh dynamic css file if necessary
+	 */
+	public function export_css_refresh()
+	{
+		foreach ( $this->config_files_loaded as $file ) {
+			Pie_Easy_Policy::features()->registry()->export_css_file()->refresh( @filemtime( $file ) );
+			Pie_Easy_Policy::options()->registry()->export_css_file()->refresh( @filemtime( $file ) );
+		}
+	}
+
+	/**
 	 * Enable components for the scheme by passing a valid policy object
 	 *
 	 * @param Pie_Easy_Policy $policy
@@ -463,9 +496,18 @@ final class Pie_Easy_Scheme
 
 			// load the option config if it exists
 			if ( is_readable( $ini_file ) ) {
-				$policy->registry()->load_config_file( $ini_file, $theme );
-			}
 
+				// skip loaded files
+				if ( $this->config_files_loaded->contains( $ini_file ) ) {
+					continue;
+				}
+				
+				// try to load ini file
+				if ( $policy->registry()->load_config_file( $ini_file, $theme ) ) {
+					// push onto loaded stack
+					$this->config_files_loaded->push( $ini_file );
+				}
+			}
 		}
 
 		return true;

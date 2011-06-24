@@ -129,7 +129,7 @@ class Infinity_Options_Registry extends Pie_Easy_Options_Registry
 		parent::localize_script();
 
 		wp_localize_script(
-			INFINITY_NAME . '-cpanel',
+			INFINITY_NAME . ':cpanel',
 			'InfinityOptionsL10n',
 			array(
 				'ajax_url' => admin_url( 'admin-ajax.php' ),

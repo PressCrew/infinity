@@ -24,7 +24,7 @@ final class Pie_Easy_Enqueue
 	/**
 	 * Default UI style handle
 	 */
-	const DEFAULT_UI_STYLE = 'pie-easy-ui';
+	const DEFAULT_UI_STYLE = '@:ui';
 
 	/**
 	 * @var Pie_Easy_Enqueue
@@ -200,23 +200,17 @@ final class Pie_Easy_Enqueue
 		// get ui handle
 		$ui_handle = $this->ui_style_handle();
 
-		// register default
+		// register default UI
 		$this->register_style(
 			self::DEFAULT_UI_STYLE,
-			'ui/jquery-ui-1.8.11.custom.css',
-			(is_admin()) ? array('colors') : array()
+			'ui.css'
 		);
 
-		// more core pie styles
+		// core pie styles
 		$this->register_style(
 			'pie-easy-colorpicker',
 			'colorpicker.css',
 			(is_admin()) ? array('colors') : array()
-		);
-		$this->register_style(
-			'pie-easy-global',
-			'global.css',
-			array( $ui_handle, 'pie-easy-colorpicker' )
 		);
 
 		do_action('pie_easy_enqueue_styles');
