@@ -30,18 +30,18 @@
 				do_action( 'open_footer' );
 			?>
 			<!-- footer widgets -->
-			<div class="grid_12" id="footer-full">
-				<div class="grid_4 footer-widget" id="footer-widget-left">
+			<div class="grid_24" id="footer-full">
+				<div class="grid_8 footer-widget" id="footer-widget-left">
 					<?php
 						dynamic_sidebar( 'Footer Left' );
 					?>
 				</div>
-				<div class="grid_4 footer-widget" id="footer-widget-left">
+				<div class="grid_8 footer-widget" id="footer-widget-left">
 					<?php
 						dynamic_sidebar( 'Footer Middle' );
 					?>
 				</div>
-				<div class="grid_4 footer-widget" id="footer-widget-right">
+				<div class="grid_8 footer-widget" id="footer-widget-right">
 					<?php
 						dynamic_sidebar( 'Footer Right' );
 					?>
