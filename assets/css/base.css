@@ -1,15 +1,25 @@
 /*
-Style Name: Infinty Base.css
-This Stylesheet contains absolute bare minimum elements to get the show started
-It's a great starting point for a Infinity Powered theme
--------------------------------------------------------------- */
+INFINITY BASE
+*/
 
+/*-------------------------------------------------------------
+This stylesheet contains the absolute bare minimum elements
+to get the show started. It's a great starting point for an
+Infinity powered theme.
 
+To add additional styles, we strongly encourage you add your
+stylesheets through your config/infinity.ini configuration file.
 
+There are several advantages for to this, most importantly:
 
-/* ============= */
-/* ! The Reset   */
-/* ============= */
+1. You can easily load your stylesheets conditionally which
+   leads to better performance of your theme.
+
+2. Modifying and adding new stylesheets for your theme users
+   is easy, well documented and standardized, which means less
+   support questions for you to answer.
+--------------------------------------------------------------*/
+
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{background:transparent;vertical-align:baseline;margin:0;border:0;padding:0;outline:0}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}label span,legend span{font-weight:normal;color:#444;font-size:13px}a,a:visited{font-weight:bold;text-decoration:none;color:#60a2c1;outline:0}a:hover,a:visited:hover{color:#777}p img{margin:0}a img{border:none}ul ul,ul ol,ol ol,ol ul{margin:4px 0 5px 30px}ul ul li,ul ol li,ol ol li,ol ul li{margin-bottom:6px}li p{line-height:21px}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}:focus{outline:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-spacing:0;border-collapse:collapse}.clearfix{display:inline-block}.clearfix:before,.clearfix:after,.row:before,.row:after{visibility:hidden;width:0;height:0;content:'\0020';display:block;overflow:hidden}.row:after,.clearfix:after{clear:both}.clearfix:after{visibility:hidden;clear:both;height:0;content:".";display:block}some_nowhitespace{nowhitespace:afterproperty}/*\*/.clearfix{display:block}some_nowhitespace{nowhitespace:afterproperty}/**/.none{display:none}
 
 /* ============= */
@@ -36,13 +46,12 @@ body {
     min-width: 960px;
 }
 .top-wrap {
-margin-bottom: 20px;
 }
 .main-wrap {
-    margin-top: 40px;
     overflow: auto;
     padding-left: 10px;
     padding-right: 10px;
+    padding-top: 40px;
 }
 .footer-wrap {
 }
@@ -113,12 +122,6 @@ paste the content of the file into your custom css file. Check out the docs for 
 .alpha{margin-left:0px;}
 .omega{margin-right:0px;}
 
-
-/* @
- * tinyfluidgrid.com
- & girlfriendnyc.com
- */
-
 .clear{clear:both;display:block;overflow:hidden;visibility:hidden;width:0;height:0}.clearfix:after{clear:both;content:' ';display:block;font-size:0;line-height:0;visibility:hidden;width:0;height:0}* html .clearfix,*:first-child+html .clearfix{zoom:1}
 
 /* ============================================= */
@@ -138,7 +141,7 @@ h1 {
 }
 h2 {
     margin-bottom: 10px;
-    color: #444;
+    color: #666;
     font-size: 24px;
 }
 h3 {
@@ -210,6 +213,7 @@ ul.large li { line-height: 21px }
     font-weight: bold;
 }
 #header {
+    border-bottom: 2px solid #E1E1E1;
     height: 140px;
     position: relative;
 }
@@ -325,7 +329,7 @@ ul.large li { line-height: 21px }
 }
 #base-menu ul a:hover, #base-menu ul li.sfHover a, #base-menu ul li.current-cat a, #base-menu ul li.current_page_item a, #base-menu ul li.current-menu-item a {
     text-decoration: none;
-    background-color: #222 !important;
+    background-color: #222;
     /* Left image */
 }
 #base-menu li li a:hover, #base-menu li.sfHover li a { background: none }
@@ -351,6 +355,70 @@ ul.large li { line-height: 21px }
 #base-menu ul li.sfHover li a:hover, #base-menu ul li.sfHover li a span:hover {
 color: #BBB;
 }
+/*  Make sub menus appear */
+#base-menu ul li:hover ul,
+#base-menu ul li.sfHover ul {
+	left: -1px;
+	top: 36px; /* match top ul list item height */
+	z-index: 99;
+}
+
+/* Hide all subs subs (4 levels deep) */
+#base-menu ul li:hover li ul,
+#base-menu ul li.sfHover li ul,
+#base-menu ul li li:hover li ul,
+#base-menu ul li li.sfHover li ul,
+#base-menu ul li li li:hover li ul,
+#base-menu ul li li li.sfHover li ul { top: -9999em; }
+
+/* Displays all subs subs (4 levels deep) */
+#base-menu ul li li:hover ul,
+#base-menu ul li li.sfHover ul,
+#base-menu ul li li li:hover ul,
+#base-menu ul li li li.sfHover ul,
+#base-menu ul li li li li:hover ul,
+#base-menu ul li li li li.sfHover ul {
+	left: 180px; /* match .nav ul width */
+	top: -1px;
+}
+
+/* 2nd level skin */
+#base-menu ul ul {
+	position: absolute;
+	top: -9999em;
+	width: 180px; /* left offset of submenus need to match (see below) */
+    padding: 15px 5px 15px 5px;
+    margin: 3px 0 0 0;
+    -webkit-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+#base-menu ul ul li {
+	float: left;
+	width: 150px;
+	background: none;
+	padding: 0 5px 0 5px;
+}
+
+#base-menu ul ul li:first-child  { border-top: none }
+
+#base-menu ul ul li:last-child { border-bottom: none }
+
+#base-menu ul ul li a {
+	font-size: 13px !important;
+	text-transform: none !important;
+	font-weight: normal;
+	padding: 5px 0 5px 0;
+	width: 150px;
+}
+
+#base-menu ul li a,
+#base-menu ul li a span,
+{ background: none }
 
 /* =========== 
  ! Sidebar   
@@ -384,6 +452,12 @@ color: #BBB;
  ! Footer   
  ========== */
  
+#footer {
+    background: none repeat scroll 0 0 #333333;
+    color: #D6D1D1;
+    overflow: auto;
+    padding: 15px 0;
+}
 #footer {
     background: none repeat scroll 0 0 #333333;
     color: #D6D1D1;
@@ -557,7 +631,7 @@ padding-right: 5px;
 }
 .post h2.pagetitle a, .post h2.posttitle a, .post h1.pagetitle a, .post h1.posttitle a {
     text-decoration: none;
-    color: #666;
+    color: #444;
 }
 .post h2.pagetitle a:hover, .post h2.posttitle a:hover, .post h1.pagetitle a:hover, .post h1.posttitle a:hover { color: #999 }
 .post h2.pagetitle, .post h2.posttitle {
@@ -600,22 +674,7 @@ padding-right: 5px;
     padding: 10px 20px 0;
     font-size: 17px;
 }
-.post table {
-    border-spacing: 0;
-    border-collapse: collapse;
-    border: 1px solid #eee;
-}
-.post table th {
-    background: none repeat scroll 0 0 #F9F9F9;
-    border-top: 1px solid #eee;
-    text-align: left;
-    vertical-align: middle;
-    padding: 8px;
-}
-.post table td {
-    border-top: 1px solid #eee;
-    background: #FFF;
-}
+
 .post code { font-family: "Monaco", courier, sans-serif }
 .post pre, .post code p {
     margin-top: 15px;
@@ -647,7 +706,6 @@ padding-right: 5px;
 }
 .home .sticky .page-link a { background: none repeat scroll 0 0 #D9E8F7 }
 
-/* tables in posts */
 /* code in posts */
 .alignright {
     margin-left: 15px;
@@ -920,8 +978,53 @@ a.button:hover, button:hover, input[type="submit"]:hover, input[type="reset"]:ho
     width: 100%;
 }
 
-/* Default Tabs. Check Base Docs for more info
+/* Default Tables and Tabs. Check Base Docs for more info
 ================================================== */
+
+table {
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+    border: 1px solid #eee;
+}
+table { width: 100% }
+
+table#message-threads {
+    margin: 0 -20px;
+    width: auto;
+}
+
+table.profile-fields { margin-bottom: 20px }
+div.profile { margin-top: 20px }
+table.profile-fields td.data a p { margin: 0px }
+table tr td,
+table tr th {
+    padding: 8px;
+    vertical-align: middle;
+}
+table tr td.label {
+    border-right: 1px solid #eaeaea;
+    font-weight: bold;
+    width: 25%;
+}
+
+table thead tr {
+    background: none repeat scroll 0 0 #EAEAEA;
+}
+
+table th {
+    background: none repeat scroll 0 0 #F9F9F9;
+    border-top: 1px solid #eee;
+    text-align: left;
+    vertical-align: middle;
+    padding: 8px;
+}
+table td {
+    border-top: 1px solid #eee;
+    background: #FFF;
+}
+
+
 ul.tabs {
     border-bottom: solid 1px #ddd;
     margin: 0 0 20px 0;
@@ -1030,3 +1133,23 @@ label, legend {
 }
 select { width: 220px }
 input[type="checkbox"] { display: inline }
+
+/* bbpress avatar fix */
+#content p.bbp-topic-meta img.avatar,
+#content ul.bbp-reply-revision-log img.avatar,
+#content ul.bbp-topic-revision-log img.avatar,
+#content div.bbp-template-notice img.avatar,
+#content .widget_display_topics img.avatar,
+#content .widget_display_replies img.avatar,
+#content p.bbp-topic-meta img.avatar,
+#main ul.bbp-reply-revision-log img.avatar,
+#main ul.bbp-topic-revision-log img.avatar,
+#main div.bbp-template-notice img.avatar,
+#main .widget_display_topics img.avatar,
+#main .widget_display_replies img.avatar,
+#main p.bbp-topic-meta img.avatar,
+#container ul.bbp-reply-revision-log img.avatar,
+#container ul.bbp-topic-revision-log img.avatar,
+#container div.bbp-template-notice img.avatar,
+#container .widget_display_topics img.avatar,
+#container .widget_display_replies img.avatar { padding: 0px }

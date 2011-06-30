@@ -122,7 +122,7 @@ final class Pie_Easy_Loader
 	 */
 	private $exts = array(
 		'features' => array(
-			'css-background', 'custom-css', 'gravatar', 'header-logo'
+			'css-background', 'custom-css', 'default', 'gravatar', 'header-logo'
 		),
 		'options' => array(
 			'category', 'categories', 'checkbox', 'colorpicker', 'css',

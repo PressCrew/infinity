@@ -629,25 +629,6 @@ div#invite-list {
 }
 /* > Data Tables
 -------------------------------------------------------------- */
-table { width: 100% }
-table thead tr { background: #eaeaea }
-table#message-threads {
-    margin: 0 -20px;
-    width: auto;
-}
-table.profile-fields { margin-bottom: 20px }
-div.profile { margin-top: 20px }
-table.profile-fields td.data a p { margin: 0px }
-table tr td,
-table tr th {
-    padding: 8px;
-    vertical-align: middle;
-}
-table tr td.label {
-    border-right: 1px solid #eaeaea;
-    font-weight: bold;
-    width: 25%;
-}
 table tr td.thread-info p { margin: 0 }
 table tr td.thread-info p.thread-excerpt {
     color: #888;
@@ -1167,8 +1148,6 @@ ul.item-list li img.avatar {
     border: 1px solid #CCC;
     margin-left: 0;
     padding: 3px;
-    width: 50px;
-    height: 50px;
 }
 #wp-admin-bar {
     position: fixed;
@@ -1334,22 +1313,3 @@ body#bp-default #admin-bar-logo { padding: 2px 8px }
     -webkit-border-radius: 3px;
     border-radius: 3px;
 }
-/* bbpress */
-#content p.bbp-topic-meta img.avatar,
-#content ul.bbp-reply-revision-log img.avatar,
-#content ul.bbp-topic-revision-log img.avatar,
-#content div.bbp-template-notice img.avatar,
-#content .widget_display_topics img.avatar,
-#content .widget_display_replies img.avatar,
-#content p.bbp-topic-meta img.avatar,
-#main ul.bbp-reply-revision-log img.avatar,
-#main ul.bbp-topic-revision-log img.avatar,
-#main div.bbp-template-notice img.avatar,
-#main .widget_display_topics img.avatar,
-#main .widget_display_replies img.avatar,
-#main p.bbp-topic-meta img.avatar,
-#container ul.bbp-reply-revision-log img.avatar,
-#container ul.bbp-topic-revision-log img.avatar,
-#container div.bbp-template-notice img.avatar,
-#container .widget_display_topics img.avatar,
-#container .widget_display_replies img.avatar { padding: 0px }

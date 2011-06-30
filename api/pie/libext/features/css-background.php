@@ -11,8 +11,6 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'base/style' );
-
 /**
  * Header Background feature
  *
@@ -21,12 +19,9 @@ Pie_Easy_Loader::load( 'base/style' );
  */
 class Pie_Easy_Exts_Feature_Css_Background
 	extends Pie_Easy_Features_Feature
-		implements Pie_Easy_Styleable
 {
 	/**
-	 * Export styles for the custom background
-	 *
-	 * @return string
+	 * @ignore
 	 */
 	final public function export_css()
 	{
@@ -42,17 +37,13 @@ class Pie_Easy_Exts_Feature_Css_Background
 
 		// only render if we have a url
 		if ( $url ) {
-
-			// new style object
-			$style = new Pie_Easy_Style( $this->_css_selector );
-
-			// add rules
-			$style->add_rule( 'background-image', sprintf( "url('%s')", $url ) );
-			$style->add_rule( 'background-repeat', $bg_repeat_option->get() );
-
-			// render
-			return $style->export();
+			// rule for bg styles
+			$bg = $this->style()->new_rule( $this->_css_selector );
+			$bg->ad( 'background-image', sprintf( "url('%s')", $url ) );
+			$bg->ad( 'background-repeat', $bg_repeat_option->get() );
 		}
+
+		return parent::export_css();
 	}
 }
 

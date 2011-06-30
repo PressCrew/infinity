@@ -96,9 +96,6 @@ class Pie_Easy_Options_Uploader
 
 		$this->screen_blog_id = (integer) $blog_id;
 		$this->screen_blog_theme = get_stylesheet();
-
-		add_action( 'pie_easy_enqueue_styles', array($this, 'init_styles') );
-		add_action( 'pie_easy_enqueue_scripts', array($this, 'init_scripts') );
 	}
 
 	/**

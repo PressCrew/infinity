@@ -39,6 +39,11 @@ abstract class Pie_Easy_Features_Registry extends Pie_Easy_Registry
 			$feature_config['description']
 		);
 
+		// stylesheet
+		if ( isset( $feature_config['stylesheet'] ) ) {
+			$feature->set_stylesheet( $feature_config['stylesheet'] );
+		}
+		
 		// template
 		if ( isset( $feature_config['template'] ) ) {
 			$feature->set_template( $feature_config['template'] );

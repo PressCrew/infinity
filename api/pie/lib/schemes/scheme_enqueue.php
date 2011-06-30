@@ -103,26 +103,14 @@ class Pie_Easy_Scheme_Enqueue
 
 		// init internal styles
 		$this->setup_internal( $style_defs );
-		
-		// init ui env
-		$this->setup_ui( $style_defs );
 
 		// define styles
-		if ( $this->define( $this->styles, $style_defs ) ) {
+		$this->define_styles( $style_defs );
 
-			// hook up styles always handler
-			add_action( self::ACTION_HANDLER_STYLES, array( $this, 'handle_style_always' ) );
-
-			// init style depends
-			$this->depends( $this->styles, Pie_Easy_Scheme::DIRECTIVE_STYLE_DEPS );
-
-			// init style triggers
-			$this->triggers( $this->styles, Pie_Easy_Scheme::DIRECTIVE_STYLE_ACTS, self::TRIGGER_ACTS );
-			$this->triggers( $this->styles, Pie_Easy_Scheme::DIRECTIVE_STYLE_CONDS, self::TRIGGER_CONDS );
-
-			// reg em
-			$this->register_styles();
-		}
+		// register styles
+		add_action( self::ACTION_HANDLER_STYLES, array( $this, 'register_styles' ), 0 );
+		// hook up styles always handler
+		add_action( self::ACTION_HANDLER_STYLES, array( $this, 'handle_style_always' ), 10 );
 
 		// init scripts map
 		$this->scripts = new Pie_Easy_Map();
@@ -131,21 +119,12 @@ class Pie_Easy_Scheme_Enqueue
 		$script_defs = $this->scheme->get_directive_map( Pie_Easy_Scheme::DIRECTIVE_SCRIPT_DEFS );
 
 		// define scripts
-		if ( $this->define( $this->scripts, $script_defs ) ) {
+		$this->define_scripts( $script_defs );
 
-			// hook up scripts always handler
-			add_action( self::ACTION_HANDLER_SCRIPTS, array( $this, 'handle_script_always' ) );
-
-			// init script depends
-			$this->depends( $this->scripts, Pie_Easy_Scheme::DIRECTIVE_SCRIPT_DEPS );
-
-			// init script triggers
-			$this->triggers( $this->scripts, Pie_Easy_Scheme::DIRECTIVE_SCRIPT_ACTS, self::TRIGGER_ACTS );
-			$this->triggers( $this->scripts, Pie_Easy_Scheme::DIRECTIVE_SCRIPT_CONDS, self::TRIGGER_CONDS );
-
-			// reg em
-			$this->register_scripts();
-		}
+		// register scripts
+		add_action( self::ACTION_HANDLER_SCRIPTS, array( $this, 'register_scripts' ), 0 );
+		// hook up scripts always handler
+		add_action( self::ACTION_HANDLER_SCRIPTS, array( $this, 'handle_script_always' ), 10 );
 	}
 
 	/**
@@ -237,6 +216,9 @@ class Pie_Easy_Scheme_Enqueue
 		// hook up styles internal handler
 		add_action( self::ACTION_HANDLER_STYLES, array( $this, 'handle_style_features' ), 1 );
 		add_action( self::ACTION_HANDLER_STYLES, array( $this, 'handle_style_options' ), 99999 );
+
+		// init ui env
+		$this->setup_ui( $style_defs );
 	}
 
 	/**
@@ -257,36 +239,69 @@ class Pie_Easy_Scheme_Enqueue
 				// yes, add each handle and URL path to map
 				foreach( $directive->value as $handle => $path ) {
 
-					// new map for this trigger
-					$trigger = new Pie_Easy_Map();
-
-					// add path value
-					$trigger->add( self::TRIGGER_PATH, $this->enqueue_path($theme, $path) );
-
-					// init deps stack
-					$trigger->add( self::TRIGGER_DEPS, new Pie_Easy_Stack() );
-
-					// init empty always toggle
-					if ( $theme != '@' ) {
-						$trigger->add( self::TRIGGER_ALWAYS, true );
-					}
-
-					// init empty actions stack
-					$trigger->add( self::TRIGGER_ACTS, new Pie_Easy_Stack() );
-
-					// init empty conditions stack
-					$trigger->add( self::TRIGGER_CONDS, new Pie_Easy_Stack() );
-
-					// init empty params stack
-					$trigger->add( self::TRIGGER_PARAMS, new Pie_Easy_Stack() );
-
-					// add trigger to main map
-					$map->add( $this->make_handle( $theme, $handle ), $trigger );
+					// define it
+					$this->define_one( $map, $theme, $handle, $path );
 				}
 			}
 		}
 
 		return true;
+	}
+
+	/**
+	 * Define ONE trigger
+	 *
+	 * @param Pie_Easy_Map $map
+	 * @param Pie_Easy_Map $directive_map
+	 * @return boolean
+	 */
+	private function define_one( Pie_Easy_Map $map, $theme, $handle, $path )
+	{
+		// new map for this trigger
+		$trigger = new Pie_Easy_Map();
+
+		// add path value
+		$trigger->add( self::TRIGGER_PATH, $this->enqueue_path($theme, $path) );
+
+		// init deps stack
+		$trigger->add( self::TRIGGER_DEPS, new Pie_Easy_Stack() );
+
+		// init empty always toggle
+		if ( $theme != '@' ) {
+			$trigger->add( self::TRIGGER_ALWAYS, true );
+		}
+
+		// init empty actions stack
+		$trigger->add( self::TRIGGER_ACTS, new Pie_Easy_Stack() );
+
+		// init empty conditions stack
+		$trigger->add( self::TRIGGER_CONDS, new Pie_Easy_Stack() );
+
+		// init empty params stack
+		$trigger->add( self::TRIGGER_PARAMS, new Pie_Easy_Stack() );
+
+		// add trigger to main map
+		$map->add( $this->make_handle( $theme, $handle ), $trigger );
+
+		return $trigger;
+	}
+
+	/**
+	 * @ignore
+	 * @param Pie_Easy_Map $style_defs
+	 */
+	private function define_styles( $style_defs )
+	{
+		return $this->define( $this->styles, $style_defs );
+	}
+
+	/**
+	 * @ignore
+	 * @param Pie_Easy_Map $script_defs
+	 */
+	private function define_scripts( Pie_Easy_Map $script_defs )
+	{
+		return $this->define( $this->scripts, $script_defs );
 	}
 
 	/**
@@ -495,19 +510,34 @@ class Pie_Easy_Scheme_Enqueue
 			return;
 		}
 
+		$deps = array();
+
+		foreach ( $config_map->item_at(self::TRIGGER_DEPS)->to_array() as $dep ) {
+			if ( $this->styles->contains( $dep ) || wp_style_is( $dep, 'registered' ) ) {
+				array_push( $deps, $dep );
+			}
+		}
+
 		// reg it
 		wp_register_style(
 			$handle,
 			$config_map->item_at(self::TRIGGER_PATH),
-			$config_map->item_at(self::TRIGGER_DEPS)->to_array()
+			$deps
 		);
 	}
 
 	/**
 	 * Register all styles
 	 */
-	private function register_styles()
+	final public function register_styles()
 	{
+		// init style depends
+		$this->depends( $this->styles, Pie_Easy_Scheme::DIRECTIVE_STYLE_DEPS );
+
+		// init style triggers
+		$this->triggers( $this->styles, Pie_Easy_Scheme::DIRECTIVE_STYLE_ACTS, self::TRIGGER_ACTS );
+		$this->triggers( $this->styles, Pie_Easy_Scheme::DIRECTIVE_STYLE_CONDS, self::TRIGGER_CONDS );
+
 		foreach ( $this->styles as $handle => $config_map ) {
 			$this->register_style( $handle, $config_map );
 		}
@@ -532,8 +562,15 @@ class Pie_Easy_Scheme_Enqueue
 	/**
 	 * Register all scripts
 	 */
-	private function register_scripts()
+	final public function register_scripts()
 	{
+		// init script depends
+		$this->depends( $this->scripts, Pie_Easy_Scheme::DIRECTIVE_SCRIPT_DEPS );
+
+		// init script triggers
+		$this->triggers( $this->scripts, Pie_Easy_Scheme::DIRECTIVE_SCRIPT_ACTS, self::TRIGGER_ACTS );
+		$this->triggers( $this->scripts, Pie_Easy_Scheme::DIRECTIVE_SCRIPT_CONDS, self::TRIGGER_CONDS );
+
 		foreach ( $this->scripts as $handle => $config_map ) {
 			$this->register_script( $handle, $config_map );
 		}
@@ -724,6 +761,45 @@ class Pie_Easy_Scheme_Enqueue
 		// render it
 		?><script type="text/javascript">document.domain = '<?php print $this->script_domain->value ?>';</script><?php
 		echo PHP_EOL;
+	}
+
+	/**
+	 * Add a style to a theme
+	 *
+	 * @param string $theme
+	 * @param string $handle
+	 * @param string $path
+	 * @param array $deps
+	 */
+	public function style( $theme, $handle, $path, $deps = null )
+	{
+		// inject into style map
+		$trigger = $this->define_one( $this->styles, $theme, $handle, $path );
+
+		// add deps if applicable
+		if ( is_array( $deps ) && count( $deps ) ) {
+			foreach ( $deps as $dep ) {
+				if ( $this->styles->contains( $dep ) ) {
+					$trigger->item_at(self::TRIGGER_DEPS)->push( $dep );
+				}
+			}
+		}
+	}
+
+	/**
+	 * Add dep to an existing style
+	 *
+	 * This only applies to styles handled by this special enqueuer
+	 *
+	 * @param string $handle
+	 * @param string $path
+	 * @param array $deps
+	 */
+	public function style_dep( $handle, $dep )
+	{
+		if ( $this->styles->contains( $dep ) ) {
+			$this->styles->item_at($handle)->item_at(self::TRIGGER_DEPS)->push($dep);
+		}
 	}
 
 }

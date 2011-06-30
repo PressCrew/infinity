@@ -113,6 +113,54 @@ function infinity_image_url( $path )
 }
 
 /**
+ * Return absolute path to first style matching path in the scheme stack
+ *
+ * @param string $path Stylesheet file path RELATIVE to your style_root setting
+ */
+function infinity_style_path( $path )
+{
+	// locate style in scheme stack
+	return Pie_Easy_Scheme::instance()->locate_style( $path );
+}
+
+/**
+ * Return URL to first style matching path in the scheme stack
+ *
+ * @param string $path Stylesheet file path RELATIVE to your style_root setting
+ */
+function infinity_style_url( $path )
+{
+	// locate style in scheme stack
+	$style_path = infinity_style_path( $path );
+	// convert path to url
+	return ($style_path) ? Pie_Easy_Files::theme_file_to_url($style_path) : null;
+}
+
+/**
+ * Return absolute path to first script matching path in the scheme stack
+ *
+ * @param string $path Script file path RELATIVE to your script_root setting
+ */
+function infinity_script_path( $path )
+{
+	// locate script in scheme stack
+	return Pie_Easy_Scheme::instance()->locate_script( $path );
+}
+
+/**
+ * Return URL to first script matching path in the scheme stack
+ *
+ * @param string $path Script file path RELATIVE to your script_root setting
+ */
+function infinity_script_url( $path )
+{
+	// locate script in scheme stack
+	$script_path = infinity_script_path( $path );
+	// convert path to url
+	return ($script_path) ? Pie_Easy_Files::theme_file_to_url($script_path) : null;
+}
+
+/**
  * Load a header from the scheme stack
  *
  * @param string $name

@@ -93,8 +93,8 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 		$this->screen_blog_id = (integer) $blog_id;
 		$this->screen_blog_theme = get_stylesheet();
 
-		add_action( 'pie_easy_enqueue_styles', array($this, 'init_styles') );
-		add_action( 'pie_easy_enqueue_scripts', array($this, 'init_scripts') );
+		add_action( 'pie_easy_init_styles', array($this, 'init_styles') );
+		add_action( 'pie_easy_init_scripts', array($this, 'init_scripts') );
 	}
 
 	/**
@@ -351,10 +351,23 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 		// css to return
 		$css = '';
 
-		// loop through and check field type
+		// loop through for import rules
 		foreach ( $this->get_all() as $component ) {
-			if ( $component instanceof Pie_Easy_Styleable && $component->supported() ) {
-				// export css markup
+			// component must be supported
+			if ( $component->supported() ) {
+				// get import rules
+				$css .= $component->import_css();
+			}
+		}
+
+		// prettyfication
+		$css .= "\n";
+
+		// loop through for inline rules
+		foreach ( $this->get_all() as $component ) {
+			// component must be supported
+			if ( $component->supported() ) {
+				// get inline rules
 				$css .= $component->export_css();
 			}
 		}

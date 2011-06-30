@@ -34,6 +34,16 @@ class Pie_Easy_Exts_Option_Upload
 		$this->policy()->uploader()->init_screen();
 	}
 
+	public function init_styles()
+	{
+		$this->policy()->uploader()->init_styles();
+	}
+
+	public function init_scripts()
+	{
+		$this->policy()->uploader()->init_scripts();
+	}
+
 	public function init_ajax()
 	{
 		$this->policy()->uploader()->init_ajax();

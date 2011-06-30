@@ -34,6 +34,8 @@ final class Pie_Easy_Scheme
 	 */
 	const DIRECTIVE_PARENT_THEME = 'parent_theme';
 	const DIRECTIVE_IMAGE_ROOT = 'image_root';
+	const DIRECTIVE_STYLE_ROOT = 'style_root';
+	const DIRECTIVE_SCRIPT_ROOT = 'script_root';
 	const DIRECTIVE_FEATURE = 'feature';
 	const DIRECTIVE_STYLE_DEFS = 'style';
 	const DIRECTIVE_STYLE_DEPS = 'style_depends';
@@ -169,7 +171,7 @@ final class Pie_Easy_Scheme
 		$this->feature_support();
 
 		// try to load additional functions files after WP theme setup
-		add_action( 'after_setup_theme', array($this, 'setup_enqueuer') );
+		add_action( 'after_setup_theme', array($this, 'init_enqueueing') );
 		add_action( 'after_setup_theme', array($this, 'load_functions') );
 		add_action( 'after_setup_theme', array($this, 'export_css_refresh') );
 
@@ -177,14 +179,27 @@ final class Pie_Easy_Scheme
 	}
 
 	/**
+	 * Get scheme enqueue helper
+	 *
+	 * @return Pie_Easy_Scheme_Enqueue
+	 */
+	public function enqueue()
+	{
+		if ( $this->enqueue instanceof Pie_Easy_Scheme_Enqueue ) {
+			return $this->enqueue;
+		}
+
+		throw new Exception( 'The enqueuer has not been initialized yet' );
+	}
+
+	/**
 	 * Don't ever call this manually
 	 *
 	 * @ignore
 	 */
-	public function setup_enqueuer()
+	public function init_enqueueing()
 	{
 		if ( !$this->enqueue instanceof Pie_Easy_Scheme_Enqueue ) {
-			// enqueue styles and scripts
 			$this->enqueue = new Pie_Easy_Scheme_Enqueue( $this );
 		}
 	}
@@ -747,24 +762,63 @@ final class Pie_Easy_Scheme
 	}
 
 	/**
-	 * Locate a theme image, giving priority to top themes in the stack
+	 * Locate a theme asset, giving priority to top themes in the stack
+	 *
+	 * @param string $file_names,... The file names that make up the RELATIVE path to the theme root
+	 * @return string|false
+	 */
+	private function locate_asset( $path_directive )
+	{
+		// image root must be set
+		if ( $this->has_directive( $path_directive ) ) {
+			// get all args
+			$args = func_get_args();
+			// throw out the first one
+			array_shift( $args );
+			// locate it
+			return call_user_func_array( array($this,'locate_file'), $args );
+		}
+
+		return false;
+	}
+
+	/**
+	 * Locate a theme image
 	 *
 	 * @param string $file_names,... The file names that make up the RELATIVE path to the theme root
 	 * @return string|false
 	 */
 	public function locate_image()
 	{
-		// image root must be set
-		if ( $this->has_directive( self::DIRECTIVE_IMAGE_ROOT) ) {
-			// get all args
-			$args = func_get_args();
-			// image roots is first arg
-			array_unshift( $args, $this->get_directive_map( self::DIRECTIVE_IMAGE_ROOT ) );
-			// locate it
-			return call_user_func_array( array($this,'locate_file'), $args );
-		}
+		$args = func_get_args();
+		array_unshift( $args, self::DIRECTIVE_IMAGE_ROOT );
+		return call_user_func_array( array($this, 'locate_asset'), $args );
+	}
 
-		return false;
+	/**
+	 * Locate a theme style
+	 *
+	 * @param string $file_names,... The file names that make up the RELATIVE path to the theme root
+	 * @return string|false
+	 */
+	public function locate_style()
+	{
+		$args = func_get_args();
+		array_unshift( $args, self::DIRECTIVE_STYLE_ROOT );
+		return call_user_func_array( array($this, 'locate_asset'), $args );
+	}
+
+	/**
+	 * Locate a theme script
+	 *
+	 * @param string $file_names,... The file names that make up the RELATIVE path to the theme root
+	 * @return string|false
+	 */
+	public function locate_script()
+	{
+		$args = func_get_args();
+		array_unshift( $args, self::DIRECTIVE_SCRIPT_ROOT );
+		return call_user_func_array( array($this, 'locate_asset'), $args );
 	}
 
 	/**

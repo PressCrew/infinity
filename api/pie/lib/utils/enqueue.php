@@ -44,10 +44,10 @@ final class Pie_Easy_Enqueue
 	private function __construct()
 	{
 		// use our our actions because things get too freaking confusing
-		add_action( 'wp_print_styles', array($this, 'do_enqueue_styles') );
-		add_action( 'wp_print_scripts', array($this, 'do_enqueue_scripts') );
-		add_action( 'admin_print_styles', array($this, 'do_enqueue_styles') );
-		add_action( 'admin_print_scripts', array($this, 'do_enqueue_scripts') );
+		add_action( 'wp_loaded', array($this, 'do_enqueue_styles'), 99999 );
+		add_action( 'wp_loaded', array($this, 'do_enqueue_scripts'), 99999 );
+		add_action( 'admin_init', array($this, 'do_enqueue_styles'), 99999 );
+		add_action( 'admin_init', array($this, 'do_enqueue_scripts'), 99999 );
 	}
 
 	/**
@@ -71,8 +71,14 @@ final class Pie_Easy_Enqueue
 	 */
 	static public function init()
 	{
+		global $wp_scripts;
+
+		if ( !$wp_scripts instanceof WP_Scripts ) {
+			$wp_scripts = new WP_Scripts();
+		}
+		
 		// negative priorities work... shhhh...
-		add_action( 'wp_print_scripts', array( self::instance(), 'override_jui' ), -99999 );
+		add_action( 'after_setup_theme', array( self::instance(), 'override_jui' ), -99999 );
 	}
 
 	/**
@@ -213,6 +219,7 @@ final class Pie_Easy_Enqueue
 			(is_admin()) ? array('colors') : array()
 		);
 
+		do_action('pie_easy_init_styles');
 		do_action('pie_easy_enqueue_styles');
 	}
 
@@ -240,6 +247,7 @@ final class Pie_Easy_Enqueue
 			'pie-easy-uploader', 'uploader.js', array('pie-easy-global', 'pie-easy-jquery-swfupload', 'jquery-ui-button') );
 
 		// actions!
+		do_action('pie_easy_init_scripts');
 		do_action('pie_easy_enqueue_scripts');
 		do_action('pie_easy_localize_scripts');
 	}
