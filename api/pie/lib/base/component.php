@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'base/componentable', 'init/directive' );
+Pie_Easy_Loader::load( 'base/componentable', 'base/style', 'base/styleable', 'init/directive' );
 
 /**
  * Make content components easy
@@ -30,8 +30,15 @@ Pie_Easy_Loader::load( 'base/componentable', 'init/directive' );
  * @property-read string $required_option Options only required if this component is run/displayed
  * @property-read boolean $ignore Whether or not this component should be ignored
  */
-abstract class Pie_Easy_Component extends Pie_Easy_Componentable
+abstract class Pie_Easy_Component
+	extends Pie_Easy_Componentable
+		implements Pie_Easy_Styleable
 {
+	/**
+	 * Name of the default section
+	 */
+	const DEFAULT_SECTION = 'default';
+	
 	/**
 	 * Prefix for custom directives (pass thru vars)
 	 */
@@ -64,12 +71,19 @@ abstract class Pie_Easy_Component extends Pie_Easy_Componentable
 	private $directives;
 
 	/**
+	 * Component's styling if applicable
+	 *
+	 * @var Pie_Easy_Style
+	 */
+	private $style;
+
+	/**
 	 * @param string $theme The theme that created this option
 	 * @param string $name Option name may only contain alphanumeric characters as well as the underscore for use as a word separator.
 	 * @param string $title
 	 * @param string $desc
 	 */
-	public function __construct( $theme, $name, $title, $desc = null  )
+	public function __construct( $theme, $name, $title, $desc = null, $section = self::DEFAULT_SECTION  )
 	{
 		// set basic properties
 		$this->theme = $theme;
@@ -79,8 +93,12 @@ abstract class Pie_Easy_Component extends Pie_Easy_Componentable
 		$this->directives = new Pie_Easy_Map();
 
 		// set directives
+		$this->set_directive( 'section', $section, true ); // << TODO this is a hack
 		$this->set_directive( 'title', $title, true );
 		$this->set_directive( 'description', $desc, true );
+
+		// run init template method
+		$this->init();
 	}
 
 	/**
@@ -95,6 +113,40 @@ abstract class Pie_Easy_Component extends Pie_Easy_Componentable
 		} else {
 			return $this->$name;
 		}
+	}
+
+	/**
+	 * Return style object
+	 *
+	 * @return Pie_Easy_Style
+	 */
+	public function style()
+	{
+		if ( !$this->style instanceof Pie_Easy_Style ) {
+			$this->style = new Pie_Easy_Style();
+		}
+
+		return $this->style;
+	}
+
+	/**
+	 * Execute style import
+	 *
+	 * @return string
+	 */
+	public function import_css()
+	{
+		return $this->style()->import();
+	}
+
+	/**
+	 * Execute style exporter
+	 *
+	 * @return string
+	 */
+	public function export_css()
+	{
+		return $this->style()->export();
 	}
 	
 	/**
@@ -178,7 +230,7 @@ abstract class Pie_Easy_Component extends Pie_Easy_Componentable
 	 */
 	protected function init()
 	{
-		// override this method to initialize special PHP handling for an option
+		// override this method to initialize special PHP handling for a component
 	}
 
 	/**

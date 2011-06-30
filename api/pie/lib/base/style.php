@@ -11,16 +11,127 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'collections' );
+Pie_Easy_Loader::load( 'collections', 'utils/files' );
 
 /**
  * Make styles for components easy
  *
  * @package PIE
  * @subpackage base
- * @property string $selector CSS selector to which apply rules
  */
 class Pie_Easy_Style
+{
+	/**
+	 * The rules
+	 *
+	 * @var Pie_Easy_Stack
+	 */
+	private $rules;
+
+	/**
+	 * The files
+	 *
+	 * @var Pie_Easy_Stack
+	 */
+	private $files;
+
+	/**
+	 * Constructor
+	 */
+	public function __construct()
+	{
+		// init rules and files maps
+		$this->rules = new Pie_Easy_Stack();
+		$this->files = new Pie_Easy_Stack();
+	}
+
+	/**
+	 * Add a file
+	 *
+	 * @param string $file
+	 */
+	public function add_file( $file )
+	{
+		$this->files->push( $file );
+	}
+
+	/**
+	 * Add a rule
+	 * 
+	 * @param string $rule
+	 * @param mixed $value 
+	 */
+	public function new_rule( $selector )
+	{
+		// new rule object
+		$rule = new Pie_Easy_Style_Rule( $selector );
+
+		// add it to rulemap
+		$this->rules->push( $rule );
+
+		// return it for editing
+		return $rule;
+	}
+
+	/**
+	 * Generate CSS @import markup for this style's files
+	 *
+	 * @return string
+	 */
+	public function import()
+	{
+		// the markup that will be returned
+		$markup = null;
+
+		// render import statements first
+		if ( $this->files->count() ) {
+			// one per line
+			foreach ( $this->files as $file ) {
+				// make sure it actually exists
+				$filepath = Pie_Easy_Scheme::instance()->locate_style( $file );
+				// find it?
+				if ( $filepath ) {
+					$markup .= sprintf( "@import '%s';", Pie_Easy_Files::theme_file_to_url( $filepath ) ) . PHP_EOL;
+				}
+			}
+		}
+
+		// all done
+		return $markup;
+	}
+
+	/**
+	 * Generate CSS markup for this style's dynamic rules
+	 *
+	 * @return string
+	 */
+	public function export()
+	{
+		// the markup that will be returned
+		$markup = null;
+
+		// render rules
+		if ( $this->rules->count() ) {
+			// get markup for each rule
+			foreach ( $this->rules->to_array() as $rule ) {
+				// append output of rule export
+				$markup .= $rule->export() . PHP_EOL;
+			}
+		}
+
+		// all done
+		return $markup;
+	}
+}
+
+/**
+ * Make rules for styles easy
+ *
+ * @package PIE
+ * @subpackage base
+ * @property string $selector CSS selector to which apply declarations
+ */
+class Pie_Easy_Style_Rule
 {
 	/**
 	 * The selector
@@ -30,11 +141,11 @@ class Pie_Easy_Style
 	private $selector;
 
 	/**
-	 * The rules
+	 * The declarations
 	 *
 	 * @var Pie_Easy_Map
 	 */
-	private $rules;
+	private $declarations;
 
 	/**
 	 * Constructor
@@ -46,8 +157,8 @@ class Pie_Easy_Style
 		// set selector
 		$this->selector = $selector;
 
-		// init rules map
-		$this->rules = new Pie_Easy_Map();
+		// init declarations
+		$this->declarations = new Pie_Easy_Map();
 	}
 
 	/**
@@ -66,44 +177,58 @@ class Pie_Easy_Style
 	}
 
 	/**
-	 * Add a rule
-	 * 
-	 * @param string $rule
-	 * @param mixed $value 
+	 * Add a declaration
+	 *
+	 * @param string $property
+	 * @param mixed $value
 	 */
-	public function add_rule( $rule, $value )
+	public function add_declaration( $property, $value )
 	{
-		$this->rules->add( $rule, $value );
+		$this->declarations->add( $property, $value );
 	}
 
 	/**
-	 * Get CSS markup for this style
+	 * Add a declaration (shorthand)
 	 *
-	 * @param array $rules
+	 * @param string $property
+	 * @param mixed $value
+	 */
+	public function ad( $property, $value )
+	{
+		return $this->add_declaration( $property, $value );
+	}
+
+	/**
+	 * Generate CSS markup for this rule
+	 *
+	 * @param array $declarations
 	 * @return string
 	 */
-	public function export( $rules = null )
+	public function export( $declarations = null )
 	{
-		// rules passed in?
-		if ( is_array( $rules ) ) {
-			// merge over existing rules?
-			if ( is_array( $this->rules ) ) {
-				$rules = array_merge( $this->rules->to_array(), $rules );
+		// the markup that will be returned
+		$markup = null;
+
+		// declarations passed in?
+		if ( is_array( $declarations ) ) {
+			// merge over existing decs?
+			if ( is_array( $this->declarations ) ) {
+				$declarations = array_merge( $this->declarations->to_array(), $declarations );
 			}
 		} else {
-			$rules = $this->rules->to_array();
+			$declarations = $this->declarations->to_array();
 		}
 
-		// open with selector
+		// open declarations with the selector
 		$markup = $this->selector . " {" . PHP_EOL;
 
-		// add each rule
-		foreach ( $rules as $rule => $value ) {
-			$markup .= sprintf( "\t%s: %s;%s", $rule, $value, PHP_EOL );
+		// add each dec
+		foreach ( $declarations as $property => $value ) {
+			$markup .= sprintf( "\t%s: %s;", $property, $value ) . PHP_EOL;
 		}
 
 		// close
-		$markup .= '}' . PHP_EOL . PHP_EOL;
+		$markup .= '}' . PHP_EOL;
 
 		// all done
 		return $markup;

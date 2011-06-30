@@ -20,11 +20,11 @@
 interface Pie_Easy_Styleable
 {
 	/**
-	 * Return valid CSS markup
-	 *
-	 * @return string
+	 * Return style object
+	 * 
+	 * @return Pie_Easy_Style
 	 */
-	public function export_css();
+	public function style();
 
 }
 

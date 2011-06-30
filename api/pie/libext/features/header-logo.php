@@ -11,8 +11,6 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'base/style' );
-
 /**
  * Header Logo feature
  *
@@ -21,12 +19,9 @@ Pie_Easy_Loader::load( 'base/style' );
  */
 class Pie_Easy_Exts_Feature_Header_Logo
 	extends Pie_Easy_Features_Feature
-		implements Pie_Easy_Styleable
 {
 	/**
-	 * Export styles for the custom logo
-	 *
-	 * @return string
+	 * @ignore
 	 */
 	final public function export_css()
 	{
@@ -47,23 +42,20 @@ class Pie_Easy_Exts_Feature_Header_Logo
 		// only render if we have a url
 		if ( $url ) {
 
-			// new style object
-			$style = new Pie_Easy_Style( $this->_css_selector );
-
-			// add rules
-			$style->add_rule( 'position', 'absolute' );
+			// add rule
+			$pos = $this->style()->new_rule( $this->_css_selector );
 
 			if ( $opt_top ) {
-				$style->add_rule( 'top', $opt_top . 'px' );
+				$pos->ad( 'top', $opt_top . 'px' );
 			}
 
 			if ( $opt_left ) {
-				$style->add_rule( 'left', $opt_left . 'px' );
+				$pos->ad( 'left', $opt_left . 'px' );
 			}
-
-			// render
-			return $style->export();
+			
 		}
+
+		return parent::export_css();
 	}
 }
 

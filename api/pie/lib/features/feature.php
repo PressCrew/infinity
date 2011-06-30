@@ -82,6 +82,16 @@ abstract class Pie_Easy_Features_Feature
 	}
 	
 	/**
+	 * Set the stylesheet file path
+	 *
+	 * @param string $path
+	 */
+	public function set_stylesheet( $path )
+	{
+		$this->style()->add_file( $path );
+	}
+
+	/**
 	 * Set the template file path
 	 *
 	 * @param string $path

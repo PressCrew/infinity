@@ -68,11 +68,6 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 	const META_TIME_UPDATED = 'time_updated';
 
 	/**
-	 * Name of the default section
-	 */
-	const DEFAULT_SECTION = 'default';
-
-	/**
 	 * Name of the theme which last over wrote the default value
 	 *
 	 * @var string
@@ -87,33 +82,6 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 	private $post_override = false;
 
 	/**
-	 * @param string $theme The theme that created this option
-	 * @param string $name Option name may only contain alphanumeric characters as well as the underscore for use as a word separator.
-	 * @param string $title
-	 * @param string $desc
-	 * @param string $section
-	 */
-	final public function __construct( $theme, $name, $title, $desc, $section = self::DEFAULT_SECTION  )
-	{
-		// run parent FIRST
-		parent::__construct( $theme, $name, $title, $desc );
-
-		// user must be allowed to manage options
-		$this->add_capabilities( 'manage_options' );
-
-		// set section directive
-		$this->set_directive( 'section', $section, true );
-
-		// special cases
-		if ( $this instanceof Pie_Easy_Options_Option_Auto_Field ) {
-			$this->field_options = $this->load_field_options();
-		}
-
-		// run init
-		$this->init();
-	}
-
-	/**
 	 * @ignore
 	 * @param string $name
 	 * @return mixed
@@ -125,6 +93,22 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 				return $this->default_value_theme;
 			default:
 				return parent::__get( $name );
+		}
+	}
+
+	/**
+	 * @ignore
+	 */
+	public function init()
+	{
+		parent::init();
+
+		// user must be allowed to manage options
+		$this->add_capabilities( 'manage_options' );
+
+		// special cases
+		if ( $this instanceof Pie_Easy_Options_Option_Auto_Field ) {
+			$this->field_options = $this->load_field_options();
 		}
 	}
 

@@ -159,7 +159,7 @@ class Pie_Easy_Export
 			// must be a number
 			if ( is_numeric( $timestamp ) ) {
 				// does file exist?
-				if ( file_exists( $filename ) ) {
+				if ( file_exists( $this->path ) ) {
 					// when was file last modified?
 					$mtime = filemtime( $this->path );
 					// is timestamp more recent?

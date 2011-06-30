@@ -11,8 +11,6 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'base/style' );
-
 /**
  * Gravatar feature
  *
@@ -21,12 +19,9 @@ Pie_Easy_Loader::load( 'base/style' );
  */
 class Pie_Easy_Exts_Feature_Gravatar
 	extends Pie_Easy_Features_Feature
-		implements Pie_Easy_Styleable
 {
 	/**
-	 * Export styles for the gravatar
-	 *
-	 * @return string
+	 * @ignore
 	 */
 	final public function export_css()
 	{
@@ -39,27 +34,23 @@ class Pie_Easy_Exts_Feature_Gravatar
 		$opt_padding = $registry->get( $this->_option_padding )->get();
 		$opt_bg_color = $registry->get( $this->_option_bg_color )->get();
 
-		// new style object
-		$style = new Pie_Easy_Style( 'img.' . $this->_image_class );
-
 		// add rules
-		$style->add_rule( 'border-style', 'solid' );
+		$img = $this->style()->new_rule( 'img.' . $this->_image_class );
 
 		if ( $opt_border_width ) {
-			$style->add_rule( 'border-width', $opt_border_width . 'px' );
+			$img->ad( 'border-width', $opt_border_width . 'px' );
 		}
 		if ( $opt_border_color ) {
-			$style->add_rule( 'border-color', $opt_border_color );
+			$img->ad( 'border-color', $opt_border_color );
 		}
 		if ( $opt_padding ) {
-			$style->add_rule( 'padding', $opt_padding . 'px' );
+			$img->ad( 'padding', $opt_padding . 'px' );
 		}
 		if ( $opt_bg_color ) {
-			$style->add_rule( 'background-color', $opt_bg_color );
+			$img->ad( 'background-color', $opt_bg_color );
 		}
 
-		// render
-		return $style->export();
+		return parent::export_css();
 	}
 
 	public function url()
