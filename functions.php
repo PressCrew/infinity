@@ -98,11 +98,4 @@ function infinity_setup()
 }
 add_action( 'after_setup_theme', 'infinity_setup' );
 
-function style_test( $array )
-{
-	var_dump( $array );
-	return $array;
-}
-//add_filter( 'print_styles_array', 'style_test' );
-
 ?>
