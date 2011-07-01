@@ -84,10 +84,10 @@ class Pie_Easy_Scheme_Enqueue
 		$this->scheme = $scheme;
 
 		// define script domain
-		$this->script_domain = $this->scheme->get_directive( Pie_Easy_Scheme::DIRECTIVE_SCRIPT_DOMAIN );
+		$this->script_domain = $this->scheme->directives()->get( Pie_Easy_Scheme::DIRECTIVE_SCRIPT_DOMAIN );
 
 		// hook up script domain handler
-		if ( $this->script_domain instanceof Pie_Easy_Scheme_Directive ) {
+		if ( $this->script_domain instanceof Pie_Easy_Init_Directive ) {
 			add_action( self::ACTION_HANDLER_SCRIPTS, array( $this, 'handle_script_domain' ) );
 		}
 
@@ -97,7 +97,7 @@ class Pie_Easy_Scheme_Enqueue
 
 		// get style defs
 		$style_defs =
-			$this->scheme->get_directive_map(
+			$this->scheme->directives()->get_map(
 				Pie_Easy_Scheme::DIRECTIVE_STYLE_DEFS
 			);
 
@@ -116,7 +116,7 @@ class Pie_Easy_Scheme_Enqueue
 		$this->scripts = new Pie_Easy_Map();
 
 		// get script defs
-		$script_defs = $this->scheme->get_directive_map( Pie_Easy_Scheme::DIRECTIVE_SCRIPT_DEFS );
+		$script_defs = $this->scheme->directives()->get_map( Pie_Easy_Scheme::DIRECTIVE_SCRIPT_DEFS );
 
 		// define scripts
 		$this->define_scripts( $script_defs );
@@ -151,17 +151,17 @@ class Pie_Easy_Scheme_Enqueue
 	private function setup_ui( Pie_Easy_Map $style_defs )
 	{
 		// custom JUI set?
-		$jui_active_theme = $this->scheme->get_directive( Pie_Easy_Scheme::DIRECTIVE_JUI_THEME );
+		$jui_active_theme = $this->scheme->directives()->get( Pie_Easy_Scheme::DIRECTIVE_JUI_THEME );
 
 		// try to make a handle
-		if ( $jui_active_theme instanceof Pie_Easy_Scheme_Directive ) {
+		if ( $jui_active_theme instanceof Pie_Easy_Init_Directive ) {
 			$jui_active_handle = $this->make_handle( $jui_active_theme->theme, $jui_active_theme->value );
 		} else {
 			return false;
 		}
 
 		// get the entire JUI theme map
-		$jui_theme_map = $this->scheme->get_directive_map( Pie_Easy_Scheme::DIRECTIVE_JUI_THEME );
+		$jui_theme_map = $this->scheme->directives()->get_map( Pie_Easy_Scheme::DIRECTIVE_JUI_THEME );
 
 		// loop through all JUI theme maps
 		foreach ( $jui_theme_map as $jui_theme ) {
@@ -209,7 +209,7 @@ class Pie_Easy_Scheme_Enqueue
 		$styles->add( 'options', Pie_Easy_Policy::options()->registry()->export_css_file()->url );
 		$styles->add( 'style', get_bloginfo( 'stylesheet_url' ) );
 
-		$directive = new Pie_Easy_Scheme_Directive( 'style', $styles, '@' );
+		$directive = new Pie_Easy_Init_Directive( 'style', $styles, '@' );
 
 		$style_defs->add( '@', $directive, true );
 
@@ -317,10 +317,10 @@ class Pie_Easy_Scheme_Enqueue
 	private function depends( Pie_Easy_Map $map, $directive_name )
 	{
 		// check if at least one theme defined this dep
-		if ( $this->scheme->has_directive( $directive_name ) ) {
+		if ( $this->scheme->directives()->has( $directive_name ) ) {
 
 			// get dep directives for all themes
-			$directive_map = $this->scheme->get_directive_map( $directive_name );
+			$directive_map = $this->scheme->directives()->get_map( $directive_name );
 
 			// loop through and update triggers map with deps
 			foreach ( $directive_map as $theme => $directive ) {
@@ -377,10 +377,10 @@ class Pie_Easy_Scheme_Enqueue
 	private function triggers( Pie_Easy_Map $map, $directive_name, $trigger_type )
 	{
 		// check if at least one theme defined this trigger
-		if ( $this->scheme->has_directive( $directive_name ) ) {
+		if ( $this->scheme->directives()->has( $directive_name ) ) {
 
 			// get trigger directives for all themes
-			$directive_map = $this->scheme->get_directive_map( $directive_name );
+			$directive_map = $this->scheme->directives()->get_map( $directive_name );
 
 			// loop through and update triggers map
 			foreach ( $directive_map as $theme => $directive ) {

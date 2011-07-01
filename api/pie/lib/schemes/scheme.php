@@ -96,7 +96,7 @@ final class Pie_Easy_Scheme
 	private $themes;
 
 	/**
-	 * @var Pie_Easy_Map Option directives
+	 * @var Pie_Easy_Init_Directive_Registry
 	 */
 	private $directives;
 
@@ -112,7 +112,7 @@ final class Pie_Easy_Scheme
 	{
 		// initialize themes map
 		$this->themes = new Pie_Easy_Stack();
-		$this->directives = new Pie_Easy_Map();
+		$this->directives = new Pie_Easy_Init_Directive_Registry();
 		$this->config_files_loaded = new Pie_Easy_Stack();
 	}
 
@@ -176,6 +176,16 @@ final class Pie_Easy_Scheme
 		add_action( 'after_setup_theme', array($this, 'export_css_refresh') );
 
 		return true;
+	}
+
+	/**
+	 * Return directives registry
+	 *
+	 * @return Pie_Easy_Init_Directive_Registry
+	 */
+	final public function directives()
+	{
+		return $this->directives;
 	}
 
 	/**
@@ -250,95 +260,6 @@ final class Pie_Easy_Scheme
 		}
 
 		return false;
-	}
-
-	/**
-	 * Return true if directive is set
-	 *
-	 * @param string $name
-	 * @return boolean
-	 */
-	public function has_directive( $name )
-	{
-		// check for theme directive
-		return $this->directives->contains( $name );
-	}
-
-	/**
-	 * Get a directive by name
-	 *
-	 * @param string $name Name of directive to retreive (slug)
-	 * @return Pie_Easy_Scheme_Directive
-	 */
-	public function get_directive( $name )
-	{
-		// check for existing map of theme directives
-		if ( $this->has_directive( $name ) ) {
-			// use existing directive map
-			$directive_map = $this->get_directive_map( $name );
-			// check for directive according to theme stack from TOP DOWN
-			foreach ( $this->themes->to_array(true) as $theme ) {
-				// does theme have this directive set?
-				if ( $directive_map->contains( $theme ) ) {
-					return $directive_map->item_at($theme);
-				}
-			}
-		}
-
-		// directive not set
-		return null;
-	}
-
-	/**
-	 * Get a directive's themes map
-	 *
-	 * @param string $name
-	 * @return Pie_Easy_Map|null
-	 */
-	public function get_directive_map( $name )
-	{
-		if ( $this->has_directive( $name ) ) {
-			return $this->directives->item_at( $name );
-		}
-
-		// directive not set
-		return null;
-	}
-
-	/**
-	 * Set a directive
-	 *
-	 * @param string $theme
-	 * @param string $name
-	 * @param mixed $value
-	 * @param boolean $read_only
-	 */
-	private function set_directive( $theme, $name, $value, $read_only = null )
-	{
-		// convert arrays to maps
-		if ( is_array( $value ) ) {
-			$value = new Pie_Easy_Map( $value, $read_only );
-		}
-
-		// check for existing map of theme directives
-		if ( $this->has_directive( $name ) ) {
-			// use existing directive map
-			$directive_map = $this->get_directive_map( $name );
-		} else {
-			// create and add new map
-			$directive_map = new Pie_Easy_Map();
-			$this->directives->add( $name, $directive_map );
-		}
-
-		// check for existing directive for given theme
-		if ( $directive_map->contains( $theme ) ) {
-			return $directive_map->item_at($theme)->set_value( $value );
-		} else {
-			// create new directive
-			$directive = new Pie_Easy_Scheme_Directive( $name, $value, $theme, $read_only );
-			// add it to directive map
-			return $directive_map->add( $theme, $directive );
-		}
 	}
 
 	/**
@@ -426,12 +347,12 @@ final class Pie_Easy_Scheme
 				if ( $name == self::DIRECTIVE_ADVANCED ) {
 					if ( is_array( $value ) ) {
 						foreach ( $value as $name_adv => $value_adv ) {
-							$this->set_directive( $theme, $name_adv, $value_adv, true );
+							$this->directives()->set( $theme, $name_adv, $value_adv, true );
 						}
 					}
 					continue;
 				} else {
-					$this->set_directive( $theme, $name, $value, true );
+					$this->directives()->set( $theme, $name, $value, true );
 				}
 			}
 
@@ -448,9 +369,9 @@ final class Pie_Easy_Scheme
 	private function feature_support()
 	{
 		// any features set?
-		if ( $this->has_directive( self::DIRECTIVE_FEATURE ) ) {
+		if ( $this->directives()->has( self::DIRECTIVE_FEATURE ) ) {
 			// at least one feature was set, get map
-			$map = $this->get_directive_map( self::DIRECTIVE_FEATURE );
+			$map = $this->directives()->get_map( self::DIRECTIVE_FEATURE );
 			// loop through and add theme support for each feature
 			foreach ( $map as $directive ) {
 				foreach( $directive->value as $feature => $toggle ) {
@@ -604,6 +525,17 @@ final class Pie_Easy_Scheme
 	private function active_theme()
 	{
 		return get_stylesheet();
+	}
+
+	/**
+	 * Return theme stack as an array
+	 *
+	 * @param boolean $top_down
+	 * @return array
+	 */
+	public function theme_stack( $top_down = false )
+	{
+		return $this->themes->to_array( $top_down );
 	}
 
 	/**
@@ -770,7 +702,7 @@ final class Pie_Easy_Scheme
 	private function locate_asset( $path_directive )
 	{
 		// image root must be set
-		if ( $this->has_directive( $path_directive ) ) {
+		if ( $this->directives()->has( $path_directive ) ) {
 			// get all args
 			$args = func_get_args();
 			// throw out the first one

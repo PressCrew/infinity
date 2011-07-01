@@ -38,7 +38,7 @@ function infinity_scheme_init( $theme = null )
  */
 function infinity_scheme_directive( $name )
 {
-	return Pie_Easy_Scheme::instance()->get_directive( $name )->value;
+	return Pie_Easy_Scheme::instance()->directives()->get($name)->value;
 }
 
 /**
