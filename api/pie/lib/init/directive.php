@@ -118,4 +118,123 @@ class Pie_Easy_Init_Directive
 	}
 }
 
+/**
+ * Make maps of init directives easy
+ *
+ * @package PIE
+ * @subpackage init
+ */
+class Pie_Easy_Init_Directive_Registry
+{
+	/**
+	 * Registered directives
+	 *
+	 * @var Pie_Easy_Map
+	 */
+	private $directives;
+
+	/**
+	 * Constructor
+	 */
+	public function __construct()
+	{
+		$this->directives = new Pie_Easy_Map();
+	}
+
+	/**
+	 * Set a directive
+	 *
+	 * @param string $theme
+	 * @param string $name
+	 * @param mixed $value
+	 * @param boolean $read_only
+	 */
+	public function set( $theme, $name, $value, $read_only = null )
+	{
+		// convert arrays to maps
+		if ( is_array( $value ) ) {
+			$value = new Pie_Easy_Map( $value, $read_only );
+		}
+
+		// check for existing map of theme directives
+		if ( $this->has( $name ) ) {
+			// use existing directive map
+			$theme_map = $this->get_map( $name );
+		} else {
+			// create and add new map
+			$theme_map = new Pie_Easy_Map();
+			$this->directives->add( $name, $theme_map );
+		}
+
+		// check for existing directive for given theme
+		if ( $theme_map->contains( $theme ) ) {
+			return $theme_map->item_at($theme)->set_value( $value );
+		} else {
+			// create new directive
+			$directive = new Pie_Easy_Init_Directive( $name, $value, $theme, $read_only );
+			// add it to directive map
+			return $theme_map->add( $theme, $directive );
+		}
+	}
+
+	/**
+	 * Return true if directive is set
+	 *
+	 * @param string $name
+	 * @return boolean
+	 */
+	public function has( $name )
+	{
+		// check for theme directive
+		return $this->directives->contains( $name );
+	}
+
+	/**
+	 * Get a directive by name
+	 *
+	 * @param string $name Name of directive to retreive (slug)
+	 * @return Pie_Easy_Init_Directive
+	 */
+	public function get( $name )
+	{
+		// use existing directive map
+		$theme_map = $this->get_map( $name );
+		
+		// get a map?
+		if ( $theme_map ) {
+			// get theme stack TOP DOWN
+			$themes = Pie_Easy_Scheme::instance()->theme_stack( true );
+			// did we get a stack?
+			if ( is_array( $themes ) && count( $themes ) ) {
+				// check for directive according to theme stack
+				foreach ( $themes as $theme ) {
+					// does theme have this directive set?
+					if ( $theme_map->contains( $theme ) ) {
+						// yes, return it
+						return $theme_map->item_at($theme);
+					}
+				}
+			}
+		}
+
+		// directive not set
+		return null;
+	}
+
+	/**
+	 * Get a directive's entire themes map
+	 *
+	 * @param string $name
+	 * @return Pie_Easy_Map|null
+	 */
+	public function get_map( $name )
+	{
+		if ( $this->has( $name ) ) {
+			return $this->directives->item_at( $name );
+		}
+
+		// directive not set
+		return null;
+	}
+}
 ?>

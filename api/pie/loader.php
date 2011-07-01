@@ -104,7 +104,7 @@ final class Pie_Easy_Loader
 		'parsers' =>
 			array( 'markdown', 'textile' ),
 		'schemes' =>
-			array( 'scheme', 'scheme_directive', 'scheme_enqueue' ),
+			array( 'scheme', 'scheme_enqueue' ),
 		'screens' =>
 			array( 'factory', 'screen', 'renderer', 'policy', 'registry' ),
 		'sections' =>
