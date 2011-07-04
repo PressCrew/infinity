@@ -72,14 +72,6 @@ class Infinity_Options_Policy extends Pie_Easy_Options_Policy
 		return new Infinity_Options_Uploader( 'admin_head' );
 	}
 
-	/**
-	 * @param string $ext
-	 * @return Pie_Easy_Options_Option
-	 */
-	final public function load_ext( $ext )
-	{
-		return infinity_load_extension( $this->get_handle(), $ext );
-	}
 }
 
 /**
@@ -149,7 +141,18 @@ add_action( 'wp_loaded', array( 'Infinity_Options_Registry', 'init_form_processi
  */
 class Infinity_Exts_Option_Factory extends Pie_Easy_Options_Factory
 {
-	// nothing custom yet
+	/**
+	 * @param string $ext
+	 * @return string
+	 */
+	final public function load_ext( $ext )
+	{
+		// try to load from theme extensions
+		$class = infinity_load_extension( $this->policy()->get_handle(), $ext, 'Infinity_Option' );
+
+		// run parent
+		return parent::load_ext( $ext, $class );
+	}
 }
 
 /**

@@ -145,6 +145,20 @@ final class Pie_Easy_Loader
 	);
 
 	/**
+	 * Map of exts types to their class prefix
+	 * 
+	 * @var array
+	 */
+	private $exts_prefix = array(
+		'features' => 'Pie_Easy_Exts_Feature',
+		'options' => 'Pie_Easy_Exts_Option',
+		'screens' => 'Pie_Easy_Exts_Screen',
+		'sections' => 'Pie_Easy_Exts_Section',
+		'shortcodes' => 'Pie_Easy_Exts_Shortcode',
+		'widgets' => 'Pie_Easy_Exts_Widget',
+	);
+
+	/**
 	 * This is a singleton
 	 */
 	private function __construct() {}
@@ -206,6 +220,7 @@ final class Pie_Easy_Loader
 	 * Load library extension(s) via static call
 	 *
 	 * @param string $ext,... An unlimited number of lib exts to load
+	 * @return string Name of class that was loaded
 	 */
 	final static public function load_ext()
 	{
@@ -215,9 +230,9 @@ final class Pie_Easy_Loader
 		// loop through all exts
 		foreach ( $exts as $ext ) {
 			if ( is_array( $ext ) ) {
-				self::$instance->load_libext( $ext[1], $ext[0] );
+				return self::$instance->load_libext( $ext[1], $ext[0] );
 			} else {
-				self::$instance->load_libext( $ext );
+				return self::$instance->load_libext( $ext );
 			}
 		}
 	}
@@ -302,7 +317,7 @@ final class Pie_Easy_Loader
 	 *
 	 * @param string $ext
 	 * @param string $type
-	 * @return true|void
+	 * @return string Name of class that was loaded
 	 */
 	private function load_libext( $ext, $type = null )
 	{
@@ -343,7 +358,8 @@ final class Pie_Easy_Loader
 					DIRECTORY_SEPARATOR . $ext . '.php';
 				// load it
 				require_once $file;
-				return true;
+				// return class name
+				return Pie_Easy_Files::file_to_class( $ext, $this->exts_prefix[$type] );
 			} else {
 				throw new Exception( sprintf( 'The library extension "%s" is not valid for the type "%s".', $ext, $type ) );
 			}

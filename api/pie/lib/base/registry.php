@@ -301,7 +301,12 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 			// loop through each directive
 			foreach ( $ini_array as $s_name => $s_config ) {
 				// get component
-				$component = $this->load_config_single( $s_name, $s_config );
+				$component =
+					$this->policy()->factory()->create(
+						$this->loading_theme,
+						$s_name,
+						$s_config
+					);
 				// valid component?
 				if ( $component instanceof Pie_Easy_Component ) {
 					// set component vars and register it
@@ -315,15 +320,6 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 
 		return false;
 	}
-
-	/**
-	 * Load a single component into the registry (one parsed ini section)
-	 *
-	 * @param string $name
-	 * @param array $config
-	 * @return boolean
-	 */
-	abstract protected function load_config_single( $name, $config );
 
 	/**
 	 * Set custom directives for component (pass thru vars)

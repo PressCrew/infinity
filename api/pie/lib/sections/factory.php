@@ -22,28 +22,28 @@ Pie_Easy_Loader::load( 'base/factory' );
 class Pie_Easy_Sections_Factory extends Pie_Easy_Factory
 {
 	/**
-	 * @todo sending section through is a temp hack
-	 * @ignore
+	 * Return an instance of an options component
+	 *
+	 * @param string $theme
+	 * @param string $name
+	 * @param array $config
 	 * @return Pie_Easy_Sections_Section
 	 */
-	public function create( $ext, $theme, $name, $title = null, $desc = null, $section = null )
+	public function create( $theme, $name, $config )
 	{
-		// load it from alternate location
-		$class_name = $this->policy()->load_ext( $ext );
+		$section = parent::create( $theme, $name, $config );
 
-		// get one?
-		if ( !$class_name ) {
-			// nope, load core section
-			Pie_Easy_Loader::load_ext( array('sections', $ext) );
-			// determine class name
-			$class_name = Pie_Easy_Files::file_to_class( $ext, 'Pie_Easy_Exts_Section' );
+		// css title class
+		if ( isset( $config['class_title'] ) ) {
+			$section->set_class_title( $config['class_title'] );
 		}
 
-		// update ext map
-		if ( $this->ext( $class_name, $ext ) ) {
-			// return it
-			return new $class_name( $theme, $name, $title, $desc );
+		// css content class
+		if ( isset( $config['class_content'] ) ) {
+			$section->set_class_content( $config['class_content'] );
 		}
+
+		return $section;
 	}
 }
 

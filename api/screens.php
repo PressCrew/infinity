@@ -64,15 +64,6 @@ class Infinity_Screens_Policy extends Pie_Easy_Screens_Policy
 		return new Infinity_Screens_Renderer();
 	}
 
-	/**
-	 * @param string $ext
-	 * @return Pie_Easy_Screens_Screen
-	 */
-	final public function load_ext( $ext )
-	{
-		return infinity_load_extension( $this->get_handle(), $ext );
-	}
-
 }
 
 /**
@@ -94,7 +85,18 @@ class Infinity_Screens_Registry extends Pie_Easy_Screens_Registry
  */
 class Infinity_Exts_Screen_Factory extends Pie_Easy_Screens_Factory
 {
-	// nothing custom yet
+	/**
+	 * @param string $ext
+	 * @return string
+	 */
+	final public function load_ext( $ext )
+	{
+		// try to load from theme extensions
+		$class = infinity_load_extension( $this->policy()->get_handle(), $ext, 'Infinity_Screen' );
+
+		// run parent
+		return parent::load_ext( $ext, $class );
+	}
 }
 
 /**

@@ -18,19 +18,10 @@ Pie_Easy_Loader::load( 'base/component' );
  *
  * @package PIE
  * @subpackage screens
- * @property-read string $template Relative path to screen template file
  */
 abstract class Pie_Easy_Screens_Screen extends Pie_Easy_Component
 {
-	/**
-	 * Set the template file path
-	 *
-	 * @param string $path
-	 */
-	public function set_template( $path )
-	{
-		$this->set_directive( 'template', $path );
-	}
+	// nothing custom yet
 }
 
 ?>

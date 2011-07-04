@@ -22,6 +22,11 @@ Pie_Easy_Loader::load( 'base/componentable' );
 abstract class Pie_Easy_Factory extends Pie_Easy_Componentable
 {
 	/**
+	 * Name of the default component to use when none configured
+	 */
+	const DEFAULT_COMPONENT_TYPE = 'default';
+	
+	/**
 	 * Map of created classes and their extension type
 	 * 
 	 * @var Pie_Easy_Map
@@ -62,13 +67,90 @@ abstract class Pie_Easy_Factory extends Pie_Easy_Componentable
 	}
 
 	/**
+	 * Load a component extension
+	 *
+	 * Override this class to load component class files which exist outside of PIE's path
+	 *
+	 * @param string $ext Name of the extension
+	 * @param string $class_name Name of class to load (if known)
+	 * @return string Name of the class which was loaded
+	 */
+	public function load_ext( $ext, $class_name = null )
+	{
+		if ( empty( $class_name ) ) {
+			$class_name = Pie_Easy_Loader::load_ext( array( $this->policy()->get_handle(), $ext ) );
+		}
+		
+		$this->ext( $class_name, $ext );
+
+		return $class_name;
+	}
+
+	/**
 	 * Return an instance of a component
 	 *
-	 * @todo sending section through is a temp hack
+	 * @param string $theme
+	 * @param string $name
+	 * @param array $config
 	 * @return Pie_Easy_Component
 	 */
-	abstract public function create( $ext, $theme, $name, $title = null, $desc = null, $section = null );
-	
+	public function create( $theme, $name, $config )
+	{
+		// determine type
+		if ( isset( $config['type'] ) ) {
+			// use one from the config
+			$type = $config['type'];
+		} else {
+			// field type? (backwards compatibility)
+			if ( isset( $config['field_type'] ) ) {
+				// eventually this will be deprecated!
+				$type = $config['field_type'];
+			} else {
+				// use default
+				$type = self::DEFAULT_COMPONENT_TYPE;
+			}
+		}
+
+		// load it from alternate location
+		$class_name = $this->load_ext( $type );
+
+		// create new component
+		$component = new $class_name( $theme, $name, $config['title'] );
+
+		// desc
+		if ( isset( $config['description'] ) ) {
+			$component->set_description( $config['description'] );
+		}
+
+		// parent
+		if ( isset( $config['parent'] ) ) {
+			$component->set_parent( $config['parent'] );
+		}
+
+		// set stylesheet
+		if ( isset( $config['stylesheet'] ) ) {
+			$component->set_stylesheet( $config['stylesheet'] );
+		}
+
+		// set template
+		if ( isset( $config['template'] ) ) {
+			$component->set_template( $config['template'] );
+		}
+
+		// css class
+		if ( isset( $config['class'] ) ) {
+			$component->set_class( $config['class'] );
+		}
+
+		// set ignore
+		if ( isset( $config['ignore'] ) ) {
+			$component->set_ignore( $config['ignore'] );
+		}
+
+		// all done
+		return $component;
+	}
+
 }
 
 ?>

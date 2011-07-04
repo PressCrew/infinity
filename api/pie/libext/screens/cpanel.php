@@ -74,7 +74,7 @@ class Pie_Easy_Exts_Screen_Cpanel
 	 */
 	public function set_toolbar( $toggle )
 	{
-		$this->set_directive( 'toolbar', $toggle );
+		$this->directives()->set( $this->theme, 'toolbar', $toggle );
 	}
 }
 

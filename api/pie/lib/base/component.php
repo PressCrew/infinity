@@ -11,7 +11,13 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'base/componentable', 'base/style', 'base/styleable', 'init/directive' );
+Pie_Easy_Loader::load(
+	'base/componentable',
+	'base/style',
+	'base/styleable',
+	'init/directive',
+	'utils/files'
+);
 
 /**
  * Make content components easy
@@ -19,8 +25,8 @@ Pie_Easy_Loader::load( 'base/componentable', 'base/style', 'base/styleable', 'in
  * @package PIE
  * @subpackage base
  * @property-read string $theme The theme that created this concrete component
- * @property-read string $parent The parent component (slug)
  * @property-read string $name The concrete component name
+ * @property-read string $parent The parent component (slug)
  * @property-read string $title The concrete component title
  * @property-read string $description The concrete component description
  * @property-read string $class The CSS class to apply to the component's container
@@ -29,6 +35,8 @@ Pie_Easy_Loader::load( 'base/componentable', 'base/style', 'base/styleable', 'in
  * @property-read string $required_feature Feature required for this component to run/display
  * @property-read string $required_option Options only required if this component is run/displayed
  * @property-read boolean $ignore Whether or not this component should be ignored
+ * @property-read string $stylesheet Relative path to component stylesheet file
+ * @property-read string $template Relative path to component template file
  */
 abstract class Pie_Easy_Component
 	extends Pie_Easy_Componentable
@@ -38,6 +46,11 @@ abstract class Pie_Easy_Component
 	 * Name of the default section
 	 */
 	const DEFAULT_SECTION = 'default';
+
+	/**
+	 * Name of the default templates subdir
+	 */
+	const DEFAULT_TEMPLATE_DIR = 'templates';
 	
 	/**
 	 * Prefix for custom directives (pass thru vars)
@@ -49,72 +62,105 @@ abstract class Pie_Easy_Component
 	 *
 	 * @var string
 	 */
-	private $theme;
+	private $__theme__;
 
 	/**
 	 * Name of the concrete component
 	 *
 	 * @var string
 	 */
-	private $name;
+	private $__name__;
 
 	/**
 	 * The parent component
 	 * 
 	 * @var string
 	 */
-	private $parent;
+	private $__parent__;
 	
 	/**
-	 * @var Pie_Easy_Map Option directives
+	 * Component directives registry
+	 *
+	 * @var Pie_Easy_Init_Directive_Registry
 	 */
-	private $directives;
+	private $__directives__;
 
 	/**
 	 * Component's styling if applicable
 	 *
 	 * @var Pie_Easy_Style
 	 */
-	private $style;
+	private $__style__;
 
 	/**
 	 * @param string $theme The theme that created this option
 	 * @param string $name Option name may only contain alphanumeric characters as well as the underscore for use as a word separator.
 	 * @param string $title
-	 * @param string $desc
 	 */
-	public function __construct( $theme, $name, $title, $desc = null, $section = self::DEFAULT_SECTION  )
+	public function __construct( $theme, $name, $title )
 	{
 		// set basic properties
-		$this->theme = $theme;
+		$this->__theme__ = $theme;
 		$this->set_name($name);
 
-		// init directives map
-		$this->directives = new Pie_Easy_Map();
+		// init directives registry
+		$this->__directives__ = new Pie_Easy_Init_Directive_Registry();
 
 		// set directives
-		$this->set_directive( 'section', $section, true ); // << TODO this is a hack
-		$this->set_directive( 'title', $title, true );
-		$this->set_directive( 'description', $desc, true );
+		$this->directives()->set( $this->__theme__, 'title', $title );
 
 		// run init template method
 		$this->init();
 	}
 
 	/**
+	 * WARNING! This magic method creates a black hole for properties.
+	 *
+	 * Accessing a property which does not exist will always return null!
+	 *
 	 * @ignore
 	 * @param string $name
 	 * @return mixed
 	 */
 	public function __get( $name )
 	{
-		if ( $this->directives->contains($name) ) {
-			return $this->directives->item_at($name)->value;
-		} else {
-			return $this->$name;
+		switch ( $name ) {
+			case 'theme':
+				return $this->__theme__;
+			case 'name':
+				return $this->__name__;
+			case 'parent':
+				return $this->__parent__;
+			default:
+				if ( $this->directives()->has($name) ) {
+					return $this->directives()->get($name)->value;
+				} else {
+					return null;
+				}
 		}
 	}
 
+	/**
+	 * Return directives registry
+	 *
+	 * @return Pie_Easy_Init_Directive_Registry
+	 */
+	final protected function directives()
+	{
+		return $this->__directives__;
+	}
+
+	/**
+	 * Return one directive
+	 *
+	 * @param string $name
+	 * @return mixed
+	 */
+	final protected function directive( $name )
+	{
+		return $this->directives()->get($name);
+	}
+	
 	/**
 	 * Return style object
 	 *
@@ -122,11 +168,11 @@ abstract class Pie_Easy_Component
 	 */
 	public function style()
 	{
-		if ( !$this->style instanceof Pie_Easy_Style ) {
-			$this->style = new Pie_Easy_Style();
+		if ( !$this->__style__ instanceof Pie_Easy_Style ) {
+			$this->__style__ = new Pie_Easy_Style();
 		}
 
-		return $this->style;
+		return $this->__style__;
 	}
 
 	/**
@@ -150,26 +196,6 @@ abstract class Pie_Easy_Component
 	}
 	
 	/**
-	 * Set a directive
-	 *
-	 * @param string $name
-	 * @param mixed $value
-	 * @param boolean $read_only
-	 * @return true
-	 */
-	final protected function set_directive( $name, $value, $read_only = null )
-	{
-		if ( $this->directives->contains($name) ) {
-			$this->directives->item_at($name)->set_value($value, true);
-		} else {
-			$directive = new Pie_Easy_Init_Directive( $name, $value, $read_only );
-			$this->directives->add( $name, $directive );
-		}
-
-		return true;
-	}
-
-	/**
 	 * Set a custom directive (pass thru var)
 	 *
 	 * @param string $name
@@ -180,7 +206,7 @@ abstract class Pie_Easy_Component
 	{
 		// first character match prefix?
 		if ( $name{0} == self::PREFIX_PASS_THRU ) {
-			return $this->set_directive( $name, $value, true );
+			return $this->directives()->set( $this->__theme__, $name, $value, true );
 		}
 
 		return false;
@@ -189,6 +215,7 @@ abstract class Pie_Easy_Component
 	/**
 	 * Set additional capabilities which are required for this option to show
 	 *
+	 * @todo needs a lot of testing
 	 * @param string $string A comma separated list of capabilities
 	 */
 	final public function add_capabilities( $string )
@@ -202,11 +229,13 @@ abstract class Pie_Easy_Component
 			$capabilities[$cap_trimmed] = $cap_trimmed;
 		}
 
-		if ( $this->capabilities ) {
-			$capabilities = array_merge( $this->capabilities, $capabilities );
+		if ( $this->directives()->has('capabilities') ) {
+			$theme_map = $this->directives()->get_map( 'capabilities' );
+			$theme_caps = $theme_map->item_at($this->__theme__)->value;
+			$theme_caps->merge_with( $capabilities );
+		} else {
+			$this->directives()->set( $this->__theme__, 'capabilities', $capabilities );
 		}
-
-		$this->set_directive( 'capabilities', $capabilities );
 	}
 
 	/**
@@ -266,16 +295,12 @@ abstract class Pie_Easy_Component
 	}
 
 	/**
-	 * Check that theme has required feature support enabled if applicable
+	 * Check that component is supported, varies by component
 	 *
 	 * @return boolean
 	 */
 	public function supported()
 	{
-		if ( $this->required_feature ) {
-			return current_theme_supports( $this->required_feature );
-		}
-
 		return true;
 	}
 
@@ -288,7 +313,7 @@ abstract class Pie_Easy_Component
 	{
 		// name must adhere to a strict format
 		if ( preg_match( '/^[a-z0-9]+((_|-)[a-z0-9]+)*$/', $name ) ) {
-			$this->name = $name;
+			$this->__name__ = $name;
 			return true;
 		} else {
 			throw new Exception( sprintf( 'Option name "%s" does not match the allowed pattern', $name ) );
@@ -302,10 +327,10 @@ abstract class Pie_Easy_Component
 	 */
 	public function set_parent( $parent_name )
 	{
-		if ( $this->name != $parent_name ) {
-			$this->parent = trim( $parent_name );
+		if ( $this->__name__ != $parent_name ) {
+			$this->__parent__ = trim( $parent_name );
 		} else {
-			throw new Exception( sprintf( 'The component "%s" cannot be a parent of itself', $this->name ) );
+			throw new Exception( sprintf( 'The component "%s" cannot be a parent of itself', $this->__name__ ) );
 		}
 	}
 
@@ -317,7 +342,17 @@ abstract class Pie_Easy_Component
 	 */
 	public function is_parent_of( Pie_Easy_Component $component )
 	{
-		return $this->name == $component->parent;
+		return $this->__name__ == $component->parent;
+	}
+
+	/**
+	 * Set the long description
+	 *
+	 * @param string $desc
+	 */
+	final public function set_description( $desc )
+	{
+		$this->directives()->set( $this->__theme__, 'description', $desc );
 	}
 
 	/**
@@ -327,7 +362,7 @@ abstract class Pie_Easy_Component
 	 */
 	final public function set_class( $class )
 	{
-		$this->set_directive( 'class', $class );
+		$this->directives()->set( $this->__theme__, 'class', $class );
 	}
 
 	/**
@@ -337,7 +372,7 @@ abstract class Pie_Easy_Component
 	 */
 	final public function set_documentation( $rel_path )
 	{
-		$this->set_directive( 'documentation', trim( $rel_path, '\\/' ) );
+		$this->directives()->set( $this->__theme__, 'documentation', trim( $rel_path, '\\/' ) );
 	}
 
 	/**
@@ -347,7 +382,7 @@ abstract class Pie_Easy_Component
 	 */
 	final public function set_required_feature( $feature_name )
 	{
-		$this->set_directive( 'required_feature', $feature_name, true );
+		$this->directives()->set( $this->__theme__, 'required_feature', $feature_name, true );
 	}
 
 	/**
@@ -357,9 +392,29 @@ abstract class Pie_Easy_Component
 	 */
 	final public function set_required_option( $option_name )
 	{
-		$this->set_directive( 'required_option', $option_name, true );
+		$this->directives()->set( $this->__theme__, 'required_option', $option_name, true );
 	}
 
+	/**
+	 * Set the stylesheet file path
+	 *
+	 * @param string $path
+	 */
+	public function set_stylesheet( $path )
+	{
+		$this->style()->add_file( $path );
+	}
+
+	/**
+	 * Set the template file path
+	 *
+	 * @param string $path
+	 */
+	public function set_template( $path )
+	{
+		$this->directives()->set( $this->__theme__, 'template', $path );
+	}
+	
 	/**
 	 * Set ignore toggle
 	 *
@@ -367,7 +422,22 @@ abstract class Pie_Easy_Component
 	 */
 	final public function set_ignore( $toggle )
 	{
-		$this->set_directive( 'ignore', (boolean) $toggle, true );
+		$this->directives()->set( $this->__theme__, 'ignore', (boolean) $toggle );
+	}
+
+	/**
+	 * Return path to default template
+	 *
+	 * @return string
+	 */
+	final protected function default_template()
+	{
+		return Pie_Easy_Files::path_build(
+			PIE_EASY_LIBEXT_DIR,
+			$this->policy()->get_handle(),
+			self::DEFAULT_TEMPLATE_DIR,
+			$this->policy()->factory()->ext($this) . '.php'
+		);
 	}
 	
 	/**

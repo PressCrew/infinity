@@ -68,16 +68,17 @@ function infinity_load_template( $template_name )
  * Load an extension
  *
  * @param string $policy_handle
- * @param string $ext
+ * @param string $extension
+ * @param string $class_prefix
  * @return string|false Name of extension class loaded or false
  */
-function infinity_load_extension( $policy_handle, $ext )
+function infinity_load_extension( $policy_handle, $extension, $class_prefix )
 {
 	// determine class name
-	$class = Pie_Easy_Files::file_to_class( $ext, 'Infinity_Feature' );
+	$class = Pie_Easy_Files::file_to_class( $extension, $class_prefix );
 
 	// make file path
-	$path = Pie_Easy_Scheme::instance()->locate_config_file( 'exts', $policy_handle, $ext . '.php' );
+	$path = Pie_Easy_Scheme::instance()->locate_config_file( 'exts', $policy_handle, $extension . '.php' );
 
 	// exists?
 	if ( $path ) {

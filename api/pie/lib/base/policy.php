@@ -221,20 +221,6 @@ abstract class Pie_Easy_Policy
 		}
 		return $this->renderer;
 	}
-
-	/**
-	 * Load a component extension which exists in a custom location
-	 *
-	 * This method will always be tried first, before PIE loads its core component class files
-	 *
-	 * @param string $ext Name of the extension
-	 * @return boolean
-	 */
-	public function load_ext( $ext )
-	{
-		// override this class to load component class files which exist outside of PIE's path
-		return false;
-	}
 }
 
 ?>

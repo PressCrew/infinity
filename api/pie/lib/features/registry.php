@@ -22,37 +22,6 @@ Pie_Easy_Loader::load( 'base/registry', 'features/factory' );
 abstract class Pie_Easy_Features_Registry extends Pie_Easy_Registry
 {
 	/**
-	 * Load a feature into the registry
-	 *
-	 * @param string $feature_name
-	 * @param string $feature_config
-	 * @return Pie_Easy_Component|false
-	 */
-	protected function load_config_single( $feature_name, $feature_config )
-	{
-		// create new feature
-		$feature = $this->policy()->factory()->create(
-			$feature_config['type'],
-			$this->loading_theme,
-			$feature_name,
-			$feature_config['title'],
-			$feature_config['description']
-		);
-
-		// stylesheet
-		if ( isset( $feature_config['stylesheet'] ) ) {
-			$feature->set_stylesheet( $feature_config['stylesheet'] );
-		}
-		
-		// template
-		if ( isset( $feature_config['template'] ) ) {
-			$feature->set_template( $feature_config['template'] );
-		}
-
-		return $feature;
-	}
-
-	/**
 	 * Init ajax requirements
 	 */
 	public function init_ajax()
