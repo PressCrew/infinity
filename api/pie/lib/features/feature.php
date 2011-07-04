@@ -18,31 +18,10 @@ Pie_Easy_Loader::load( 'base/component', 'base/styleable', 'utils/files' );
  *
  * @package PIE
  * @subpackage features
- * @property-read string $template Relative path to feature template file
  */
 abstract class Pie_Easy_Features_Feature
 	extends Pie_Easy_Component
 {
-	/**
-	 * Config attribute default override delimeter
-	 */
-	const DEFAULT_TEMPLATE_DIR = 'templates';
-	
-	/**
-	 * Return path to default template
-	 *
-	 * @return string
-	 */
-	private function default_template()
-	{
-		return Pie_Easy_Files::path_build(
-			PIE_EASY_LIBEXT_DIR,
-			$this->policy()->get_handle(),
-			self::DEFAULT_TEMPLATE_DIR,
-			$this->policy()->factory()->ext($this) . '.php'
-		);
-	}
-
 	/**
 	 * Extract variables and load the template (if it exists)
 	 */
@@ -79,26 +58,6 @@ abstract class Pie_Easy_Features_Feature
 	{
 		// empty array by default
 		return array();
-	}
-	
-	/**
-	 * Set the stylesheet file path
-	 *
-	 * @param string $path
-	 */
-	public function set_stylesheet( $path )
-	{
-		$this->style()->add_file( $path );
-	}
-
-	/**
-	 * Set the template file path
-	 *
-	 * @param string $path
-	 */
-	public function set_template( $path )
-	{
-		$this->set_directive( 'template', $path );
 	}
 
 	/**

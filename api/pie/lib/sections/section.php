@@ -24,43 +24,13 @@ Pie_Easy_Loader::load( 'base' );
 abstract class Pie_Easy_Sections_Section extends Pie_Easy_Component
 {
 	/**
-	 * The CSS class for the title of this section
-	 * @var string
-	 */
-	private $class_title;
-
-	/**
-	 * The CSS class for the content of this section
-	 *
-	 * @var string
-	 */
-	private $class_content;
-
-	/**
-	 * @ignore
-	 * @param string $name
-	 * @return mixed
-	 */
-	public function __get( $name )
-	{
-		switch ( $name ) {
-			case 'class_title':
-				return $this->class_title;
-			case 'class_content':
-				return $this->class_content;
-			default:
-				return parent::__get( $name );
-		}
-	}
-
-	/**
 	 * Set the title CSS class
 	 *
 	 * @param string $class
 	 */
 	public function set_class_title( $class )
 	{
-		$this->class_title = $class;
+		$this->directives()->set( $this->theme, 'class_title', $class );
 	}
 
 	/**
@@ -70,7 +40,7 @@ abstract class Pie_Easy_Sections_Section extends Pie_Easy_Component
 	 */
 	public function set_class_content( $class )
 	{
-		$this->class_content = $class;
+		$this->directives()->set( $this->theme, 'class_content', $class );
 	}
 
 }

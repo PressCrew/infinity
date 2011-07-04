@@ -22,28 +22,33 @@ Pie_Easy_Loader::load( 'base/factory' );
 class Pie_Easy_Screens_Factory extends Pie_Easy_Factory
 {
 	/**
-	 * @todo sending section through is a temp hack
-	 * @ignore
+	 * Return an instance of a screen component
+	 *
+	 * @param string $theme
+	 * @param string $name
+	 * @param array $config
 	 * @return Pie_Easy_Screens_Screen
 	 */
-	public function create( $ext, $theme, $name, $title = null, $desc = null, $section = null )
+	public function create( $theme, $name, $config )
 	{
-		// load it from alternate location
-		$class_name = $this->policy()->load_ext( $ext );
+		$screen = parent::create( $theme, $name, $config );
 
-		// get one?
-		if ( !$class_name ) {
-			// nope, load core screen
-			Pie_Easy_Loader::load_ext( array('screens', $ext) );
-			// determine class name
-			$class_name = Pie_Easy_Files::file_to_class( $ext, 'Pie_Easy_Exts_Screen' );
+		// icons
+		$icon_primary = ( isset( $config['icon_primary'] ) ) ? $config['icon_primary'] : null;
+		$icon_secondary = ( isset( $config['icon_secondary'] ) ) ? $config['icon_secondary'] : null;
+		$screen->icon( new Pie_Easy_Icon( $icon_primary, $icon_secondary ) );
+
+		// priority
+		if ( isset( $config['priority'] ) ) {
+			$screen->position( new Pie_Easy_Position( $config['priority'] ) );
 		}
 
-		// update ext map
-		if ( $this->ext( $class_name, $ext ) ) {
-			// return it
-			return new $class_name( $theme, $name, $title, $desc );
+		// show on toolbar?
+		if ( isset( $config['toolbar'] ) ) {
+			$screen->set_toolbar( $config['toolbar'] );
 		}
+
+		return $screen;
 	}
 }
 

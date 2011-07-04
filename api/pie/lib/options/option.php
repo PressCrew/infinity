@@ -48,7 +48,7 @@ interface Pie_Easy_Options_Option_Attachment_Image
  * @property-read string $field_id The CSS id to apply to the option's input field
  * @property-read string $field_class The CSS class to apply to the option's input field
  * @property-read array $field_options An array of field options
- * @property mixed $default_value Default value of the option
+ * @property-read $default_value Default value of the option
  */
 abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 {
@@ -68,33 +68,11 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 	const META_TIME_UPDATED = 'time_updated';
 
 	/**
-	 * Name of the theme which last over wrote the default value
-	 *
-	 * @var string
-	 */
-	private $default_value_theme;
-
-	/**
 	 * If true, a POST value will override the real option value
 	 *
 	 * @var boolean
 	 */
-	private $post_override = false;
-
-	/**
-	 * @ignore
-	 * @param string $name
-	 * @return mixed
-	 */
-	public function __get( $name )
-	{
-		switch ( $name ) {
-			case 'default_value_theme':
-				return $this->default_value_theme;
-			default:
-				return parent::__get( $name );
-		}
-	}
+	private $__post_override__ = false;
 
 	/**
 	 * @ignore
@@ -110,6 +88,20 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 		if ( $this instanceof Pie_Easy_Options_Option_Auto_Field ) {
 			$this->field_options = $this->load_field_options();
 		}
+	}
+
+	/**
+	 * Check that theme has required feature support enabled if applicable
+	 *
+	 * @return boolean
+	 */
+	public function supported()
+	{
+		if ( $this->required_feature ) {
+			return current_theme_supports( $this->required_feature );
+		}
+
+		return parent::supported();
 	}
 
 	/**
@@ -146,7 +138,7 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 	 */
 	public function enable_post_override()
 	{
-		$this->post_override = true;
+		$this->__post_override__ = true;
 	}
 
 	/**
@@ -156,7 +148,7 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 	 */
 	public function disable_post_override()
 	{
-		$this->post_override = false;
+		$this->__post_override__ = false;
 	}
 
 	/**
@@ -167,7 +159,7 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 	 */
 	public function get()
 	{
-		if ( $this->post_override === true && isset( $_POST[$this->name] ) ) {
+		if ( $this->__post_override__ === true && isset( $_POST[$this->name] ) ) {
 			return $_POST[$this->name];
 		} else {
 			return get_option( $this->get_api_name(), $this->default_value );
@@ -255,13 +247,37 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 	}
 
 	/**
+	 * Set the section
+	 *
+	 * @param string $section
+	 */
+	public function set_section( $section )
+	{
+		// lookup the section registry
+		$section_registry = Pie_Easy_Policy::instance('Pie_Easy_Sections_Policy')->registry();
+
+		// get section from section registry
+		$section = $section_registry->get( $section );
+
+		// adding options to parent sections is not allowed
+		foreach ( $section_registry->get_all() as $section_i ) {
+			if ( $section->is_parent_of( $section_i ) ) {
+				throw new Exception(
+					sprintf( 'Cannot add options to section "%s" because it is acting as a parent section', $section->name ) );
+			}
+		}
+
+		$this->directives()->set( $this->theme, 'section', $section->name );
+	}
+
+	/**
 	 * Set the CSS id attribute to apply to the field of this option
 	 *
 	 * @param string $field_id
 	 */
 	public function set_field_id( $field_id )
 	{
-		$this->set_directive( 'field_id', $field_id );
+		$this->directives()->set( $this->theme, 'field_id', $field_id );
 	}
 
 	/**
@@ -271,7 +287,7 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 	 */
 	public function set_field_class( $field_class )
 	{
-		$this->set_directive( 'field_class', $field_class );
+		$this->directives()->set( $this->theme, 'field_class', $field_class );
 	}
 
 	/**
@@ -284,7 +300,7 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 		if ( $this instanceof Pie_Easy_Options_Option_Auto_Field ) {
 			throw new Exception( 'Cannot set field options for an auto field option.' );
 		} else {
-			$this->set_directive( 'field_options', $field_options, true );
+			$this->directives()->set( $this->theme, 'field_options', $field_options, true );
 		}
 	}
 
@@ -297,11 +313,8 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 	 */
 	public function set_default_value( $value, $theme = null )
 	{
-		// use option's theme if empty
-		$this->default_value_theme = empty( $theme ) ? $this->theme : $theme;
-
 		// set the default value
-		$this->set_directive( 'default_value', $value );
+		$this->directives()->set( $this->theme, 'default_value', $value );
 
 		return true;
 	}
@@ -380,14 +393,10 @@ abstract class Pie_Easy_Options_Option_Image
 			// try to get the attachment info
 			$src = wp_get_attachment_image_src( $attach_id, $size );
 		} else {
-			// determine theme to use
-			if ( $attach_id == $this->default_value ) {
-				$theme = $this->default_value_theme;
-			} else {
-				$theme = $this->theme;
-			}
+			// use default
+			$directive = $this->directives()->get( 'default_value' );
 			// mimic the src array
-			$src[0] = Pie_Easy_Files::theme_file_url( $theme, $attach_id );
+			$src[0] = Pie_Easy_Files::theme_file_url( $directive->theme, $directive->value );
 			$src[1] = null;
 			$src[2] = null;
 		}
@@ -424,15 +433,11 @@ abstract class Pie_Easy_Options_Option_Image
 
 		} elseif ( is_string( $value ) && strlen( $value ) >= 1 ) {
 
-			// determine theme to use
-			if ( $value == $this->default_value ) {
-				$theme = $this->default_value_theme;
-			} else {
-				$theme = $this->theme;
-			}
+			// use default
+			$directive = $this->directives()->get( 'default_value' );
 
 			// they must have provided an image path
-			return Pie_Easy_Files::theme_file_url( $theme, $value );
+			return Pie_Easy_Files::theme_file_url( $directive->theme, $directive->value );
 
 		}
 

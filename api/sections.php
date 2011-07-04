@@ -64,14 +64,6 @@ class Infinity_Sections_Policy extends Pie_Easy_Sections_Policy
 		return new Infinity_Sections_Renderer();
 	}
 
-	/**
-	 * @param string $ext
-	 * @return Pie_Easy_Sections_Section
-	 */
-	final public function load_ext( $ext )
-	{
-		return infinity_load_extension( $this->get_handle(), $ext );
-	}
 }
 
 /**
@@ -93,7 +85,18 @@ class Infinity_Sections_Registry extends Pie_Easy_Sections_Registry
  */
 class Infinity_Exts_Section_Factory extends Pie_Easy_Sections_Factory
 {
-	// nothing custom yet
+	/**
+	 * @param string $ext
+	 * @return string
+	 */
+	final public function load_ext( $ext )
+	{
+		// try to load from theme extensions
+		$class = infinity_load_extension( $this->policy()->get_handle(), $ext, 'Infinity_Section' );
+
+		// run parent
+		return parent::load_ext( $ext, $class );
+	}
 }
 
 /**

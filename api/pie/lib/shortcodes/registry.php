@@ -21,42 +21,7 @@ Pie_Easy_Loader::load( 'base/registry', 'shortcodes/factory' );
  */
 abstract class Pie_Easy_Shortcodes_Registry extends Pie_Easy_Registry
 {
-	/**
-	 * Load a shortcode into the registry
-	 *
-	 * @param string $shortcode_name
-	 * @param string $shortcode_config
-	 * @return Pie_Easy_Component|false
-	 */
-	protected function load_config_single( $shortcode_name, $shortcode_config )
-	{
-		// create new shortcode
-		$shortcode = $this->policy()->factory()->create(
-			$shortcode_config['type'],
-			$this->loading_theme,
-			$shortcode_name,
-			$shortcode_config['title'],
-			$shortcode_config['description']
-		);
-
-		// parent
-		if ( isset( $shortcode_config['parent'] ) ) {
-			$shortcode->set_parent( $shortcode_config['parent'] );
-		}
-
-		// attribute defaults
-		if ( isset( $shortcode_config['attributes'] ) ) {
-			$shortcode->set_attributes( $shortcode_config['attributes'] );
-		}
-
-		// template
-		if ( isset( $shortcode_config['template'] ) ) {
-			$shortcode->set_template( $shortcode_config['template'] );
-		}
-
-		return $shortcode;
-	}
-
+	// nothing custom yet
 }
 
 ?>

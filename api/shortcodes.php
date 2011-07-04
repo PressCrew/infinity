@@ -63,15 +63,6 @@ class Infinity_Shortcodes_Policy extends Pie_Easy_Shortcodes_Policy
 	{
 		return new Infinity_Shortcodes_Renderer();
 	}
-
-	/**
-	 * @param string $ext
-	 * @return Pie_Easy_Shortcodes_Shortcode
-	 */
-	final public function load_ext( $ext )
-	{
-		return infinity_load_extension( $this->get_handle(), $ext );
-	}
 }
 
 /**
@@ -93,7 +84,18 @@ class Infinity_Shortcodes_Registry extends Pie_Easy_Shortcodes_Registry
  */
 class Infinity_Exts_Shortcode_Factory extends Pie_Easy_Shortcodes_Factory
 {
-	// nothing custom yet
+	/**
+	 * @param string $ext
+	 * @return string
+	 */
+	final public function load_ext( $ext )
+	{
+		// try to load from theme extensions
+		$class = infinity_load_extension( $this->policy()->get_handle(), $ext, 'Infinity_Shortcode' );
+
+		// run parent
+		return parent::load_ext( $ext, $class );
+	}
 }
 
 /**

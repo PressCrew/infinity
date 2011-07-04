@@ -18,8 +18,6 @@ Pie_Easy_Loader::load( 'base/component', 'utils/files' );
  *
  * @package PIE
  * @subpackage shortcodes
- * @property-read array $attributes Attribute defaults set in config
- * @property-read string $template Relative path to shortcode template file
  */
 abstract class Pie_Easy_Shortcodes_Shortcode extends Pie_Easy_Component
 {
@@ -29,49 +27,28 @@ abstract class Pie_Easy_Shortcodes_Shortcode extends Pie_Easy_Component
 	const DEFAULT_ATTR_DELIM = '=';
 
 	/**
-	 * Config attribute default override delimeter
-	 */
-	const DEFAULT_TEMPLATE_DIR = 'templates';
-
-	/**
 	 * Attributes passed to handler
 	 *
 	 * @var array
 	 */
-	private $the_atts;
+	private $__the_atts__;
 
 	/**
 	 * Content passed to handler
 	 *
 	 * @var string
 	 */
-	private $the_content;
+	private $__the_content__;
 
 	/**
 	 * @ignore
 	 */
-	public function __construct( $theme, $name, $title, $desc = null  )
+	public function init()
 	{
-		// run parent
-		parent::__construct( $theme, $name, $title, $desc );
-
+		parent::init();
+		
 		// set up handler
 		add_shortcode( $this->name, array( $this, 'render_handler' ) );
-	}
-
-	/**
-	 * Return path to default template
-	 *
-	 * @return string
-	 */
-	private function default_template()
-	{
-		return Pie_Easy_Files::path_build(
-			PIE_EASY_LIBEXT_DIR,
-			$this->policy()->get_handle(),
-			self::DEFAULT_TEMPLATE_DIR,
-			$this->policy()->factory()->ext($this) . '.php'
-		);
 	}
 
 	/**
@@ -109,10 +86,10 @@ abstract class Pie_Easy_Shortcodes_Shortcode extends Pie_Easy_Component
 		}
 
 		// set the attributes
-		$this->the_atts = shortcode_atts( $def_atts, $atts );
+		$this->__the_atts__ = shortcode_atts( $def_atts, $atts );
 
 		// set the content
-		$this->the_content = $content;
+		$this->__the_content__ = $content;
 
 		// render it
 		return $this->render( false );
@@ -124,19 +101,19 @@ abstract class Pie_Easy_Shortcodes_Shortcode extends Pie_Easy_Component
 	final public function load_template()
 	{
 		// try to locate the template
-		$_template = Pie_Easy_Scheme::instance()->locate_template( $this->template );
+		$__template__ = Pie_Easy_Scheme::instance()->locate_template( $this->template );
 
 		// need default template?
-		if ( empty( $_template ) ) {
-			$_template = $this->default_template();
+		if ( empty( $__template__ ) ) {
+			$__template__ = $this->default_template();
 		}
 
 		// set up env
-		extract( $this->the_atts );
+		extract( $this->__the_atts__ );
 		$content = $this->get_content();
 
 		// load template
-		include( $_template );
+		include( $__template__ );
 	}
 
 	/**
@@ -159,8 +136,8 @@ abstract class Pie_Easy_Shortcodes_Shortcode extends Pie_Easy_Component
 	 */
 	protected function get_att( $name )
 	{
-		if ( isset( $this->the_atts[$name] ) ) {
-			return $this->the_atts[$name];
+		if ( isset( $this->__the_atts__[$name] ) ) {
+			return $this->__the_atts__[$name];
 		}
 
 		return null;
@@ -176,7 +153,7 @@ abstract class Pie_Easy_Shortcodes_Shortcode extends Pie_Easy_Component
 	 */
 	protected function get_content()
 	{
-		return $this->the_content;
+		return $this->__the_content__;
 	}
 	
 	/**
@@ -186,17 +163,7 @@ abstract class Pie_Easy_Shortcodes_Shortcode extends Pie_Easy_Component
 	 */
 	public function set_attributes( $atts )
 	{
-		$this->set_directive( 'attributes', $atts );
-	}
-	
-	/**
-	 * Set the template file path
-	 *
-	 * @param string $path
-	 */
-	public function set_template( $path )
-	{
-		$this->set_directive( 'template', $path );
+		$this->directives()->set( $this->theme, 'attributes', $atts );
 	}
 }
 
