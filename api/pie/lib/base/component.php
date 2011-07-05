@@ -451,7 +451,12 @@ abstract class Pie_Easy_Component
 		if ( $this->ignore ) {
 			throw new Exception( 'Cannot render a component that has been ignored' );
 		} else {
-			return $this->policy()->renderer()->render( $this, $output );
+			if ( $output === true ) {
+				$this->policy()->renderer()->render( $this, true );
+				return true;
+			} else {
+				return $this->policy()->renderer()->render( $this, $output );
+			}
 		}
 	}
 }
