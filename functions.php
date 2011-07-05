@@ -47,20 +47,6 @@ require_once( INFINITY_API_DIR . DIRECTORY_SEPARATOR . 'screens.php' );
 require_once( INFINITY_API_DIR . DIRECTORY_SEPARATOR . 'shortcodes.php' );
 require_once( INFINITY_API_DIR . DIRECTORY_SEPARATOR . 'i18n.php' );
 
-// load theme requirements
-require_once( INFINITY_INCLUDES_DIR . DIRECTORY_SEPARATOR . 'setup.php');
-require_once( INFINITY_INCLUDES_DIR . DIRECTORY_SEPARATOR . 'comments.php');
-require_once( INFINITY_INCLUDES_DIR . DIRECTORY_SEPARATOR . 'templatetags.php');
-
-// set up buddypress functionality
-if ( defined( 'BP_VERSION' ) ) {
-	require_once(
-		INFINITY_INCLUDES_DIR .
-		DIRECTORY_SEPARATOR . 'buddypress' .
-		DIRECTORY_SEPARATOR . 'setup.php'
-	);
-}
-
 // initialize scheme
 infinity_scheme_init();
 infinity_options_init();
