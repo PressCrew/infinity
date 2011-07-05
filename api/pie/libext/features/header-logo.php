@@ -52,6 +52,14 @@ class Pie_Easy_Exts_Feature_Header_Logo
 			if ( $opt_left ) {
 				$pos->ad( 'left', $opt_left . 'px' );
 			}
+
+			if ( $width ) {
+				$pos->ad( 'width', $width . 'px' );
+			}
+
+			if ( $height ) {
+				$pos->ad( 'height', $height . 'px' );
+			}
 			
 		}
 

@@ -396,9 +396,11 @@ abstract class Pie_Easy_Options_Option_Image
 			// use default
 			$directive = $this->directives()->get( 'default_value' );
 			// mimic the src array
-			$src[0] = Pie_Easy_Files::theme_file_url( $directive->theme, $directive->value );
-			$src[1] = null;
-			$src[2] = null;
+			$src = array_fill( 0, 3, null );
+			// is a default set?
+			if ( $directive->value ) {
+				$src[0] = Pie_Easy_Files::theme_file_url( $directive->theme, $directive->value );
+			}
 		}
 
 		// did we find one?

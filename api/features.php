@@ -117,11 +117,18 @@ class Infinity_Features_Renderer extends Pie_Easy_Features_Renderer
  * Display a feature
  *
  * @param string $feature_name
- * @return mixed
+ * @return string|false
  */
 function infinity_feature( $feature_name, $output = true )
 {
-	return Infinity_Features_Policy::instance()->registry()->get($feature_name)->render( $output );
+	// is feature supported?
+	if ( current_theme_supports( $feature_name ) ) {
+		// yes, render it
+		return Infinity_Features_Policy::instance()->registry()->get($feature_name)->render( $output );
+	} else {
+		// not supported
+		return false;
+	}
 }
 
 /**

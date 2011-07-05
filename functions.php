@@ -47,6 +47,9 @@ require_once( INFINITY_API_DIR . DIRECTORY_SEPARATOR . 'screens.php' );
 require_once( INFINITY_API_DIR . DIRECTORY_SEPARATOR . 'shortcodes.php' );
 require_once( INFINITY_API_DIR . DIRECTORY_SEPARATOR . 'i18n.php' );
 
+// load theme setup
+require_once( INFINITY_INCLUDES_DIR . DIRECTORY_SEPARATOR . 'setup.php' );
+
 // initialize scheme
 infinity_scheme_init();
 infinity_options_init();
@@ -59,29 +62,5 @@ if ( is_admin() ) {
 	// some features need screen initialization
 	infinity_features_init_screen();
 }
-
-//
-// Actions & Filters
-//
-
-/**
- * Sets up theme
- */
-function infinity_setup()
-{
-	// Make theme available for translation
-	// Translations can be filed in the /languages/ directory
-	load_theme_textdomain( INFINITY_TEXT_DOMAIN, INFINITY_THEME_DIR . '/languages' );
-
-	// format language file path
-	$locale_file = sprintf( '%s/languages/%s.php', INFINITY_THEME_DIR, get_locale() );
-
-	// language file readable?
-	if ( is_readable( $locale_file ) ) {
-		// load it
-		require_once( $locale_file );
-	}
-}
-add_action( 'after_setup_theme', 'infinity_setup' );
 
 ?>
