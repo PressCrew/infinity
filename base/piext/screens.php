@@ -107,4 +107,37 @@ class Infinity_Screens_Renderer extends Pie_Easy_Screens_Renderer
 	// nothing custom yet
 }
 
+//
+// Helpers
+//
+
+/**
+ * Initialize screens environment
+ */
+function infinity_screens_init( $theme = null )
+{
+	// component policy
+	$screens_policy = Infinity_Screens_Policy::instance();
+
+	// enable component
+	Pie_Easy_Scheme::instance($theme)->enable_component( $screens_policy );
+
+	do_action( 'infinity_screens_init' );
+}
+
+/**
+ * Initialize screens screen requirements
+ */
+function infinity_screens_init_screen()
+{
+	// init ajax OR screen reqs (not both)
+	if ( defined( 'DOING_AJAX') ) {
+		Infinity_Screens_Policy::instance()->registry()->init_ajax();
+		do_action( 'infinity_screens_init_ajax' );
+	} else {
+		Infinity_Screens_Policy::instance()->registry()->init_screen();
+		do_action( 'infinity_screens_init_screen' );
+	}
+}
+
 ?>

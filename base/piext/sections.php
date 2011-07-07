@@ -117,4 +117,37 @@ class Infinity_Sections_Renderer extends Pie_Easy_Sections_Renderer
 	}
 }
 
+//
+// Helpers
+//
+
+/**
+ * Initialize sections environment
+ */
+function infinity_sections_init( $theme = null )
+{
+	// component policies
+	$sections_policy = Infinity_Sections_Policy::instance();
+
+	// enable component
+	Pie_Easy_Scheme::instance($theme)->enable_component( $sections_policy );
+
+	do_action( 'infinity_sections_init' );
+}
+
+/**
+ * Initialize sections screen requirements
+ */
+function infinity_sections_init_screen()
+{
+	// init ajax OR screen reqs (not both)
+	if ( defined( 'DOING_AJAX') ) {
+		Infinity_Sections_Policy::instance()->registry()->init_ajax();
+		do_action( 'infinity_sections_init_ajax' );
+	} else {
+		Infinity_Sections_Policy::instance()->registry()->init_screen();
+		do_action( 'infinity_sections_init_screen' );
+	}
+}
+
 ?>

@@ -50,15 +50,25 @@ require_once( INFINITY_BASE_DIR . DIRECTORY_SEPARATOR . 'setup.php' );
 
 // initialize scheme
 infinity_scheme_init();
+
+// initialize components
+infinity_sections_init();
 infinity_options_init();
+infinity_screens_init();
 infinity_features_init();
+infinity_shortcodes_init();
 
 if ( is_admin() ) {
-	// only load admin functionality if the dashboard is actually loaded
+	// init admin only components screens
+	infinity_sections_init_screen();
+	infinity_options_init_screen();
+	infinity_screens_init_screen();
+	// load admin functionality
 	require_once( INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'loader.php' );
 } else {
-	// some features need screen initialization
+	// init blog components screens
 	infinity_features_init_screen();
+	infinity_shortcodes_init_screen();
 }
 
 ?>
