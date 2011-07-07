@@ -426,13 +426,53 @@ abstract class Pie_Easy_Component
 	}
 
 	/**
-	 * Return path to default template
+	 * Return array of variables to extract() for use by the template
+	 *
+	 * @return array
+	 */
+	public function get_template_vars()
+	{
+		// empty array by default
+		return array();
+	}
+	
+	/**
+	 * Return absolute path to default template
 	 *
 	 * @return string
 	 */
-	final protected function default_template()
+	final protected function get_template_path()
 	{
-		return $this->policy()->factory()->ext_tpl( $this );
+		// template path to return
+		$template = null;
+
+		// try to locate the template
+		if ( $this->template ) {
+			$template = Pie_Easy_Scheme::instance()->locate_template( $this->template );
+		}
+
+		if ( $template ) {
+			return $template;
+		} else {
+			return $this->policy()->factory()->ext_tpl( $this );
+		}
+	}
+
+	/**
+	 * Load the template (if it exists)
+	 */
+	final public function load_template()
+	{
+		// get template vars
+		$__tpl_vars__ = $this->get_template_vars();
+
+		// extract?
+		if ( is_array( $__tpl_vars__ ) && !empty( $__tpl_vars__ ) ) {
+			extract( $__tpl_vars__ );
+		}
+
+		// load template
+		include( $this->get_template_path() );
 	}
 	
 	/**
