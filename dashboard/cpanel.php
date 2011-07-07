@@ -66,7 +66,7 @@ function infinity_dashboard_cpanel_setup()
 	// setup dashboard if its active
 	$action = infinity_dashboard_cpanel_action();
 
-	if ( $action ) {
+	if ( $action || defined('DOING_AJAX') ) {
 
 		// init options
 		infinity_scheme_init();
