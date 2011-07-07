@@ -96,27 +96,6 @@ abstract class Pie_Easy_Shortcodes_Shortcode extends Pie_Easy_Component
 	}
 
 	/**
-	 * Extract attributes, content and load the template (if it exists)
-	 */
-	final public function load_template()
-	{
-		// try to locate the template
-		$__template__ = Pie_Easy_Scheme::instance()->locate_template( $this->template );
-
-		// need default template?
-		if ( empty( $__template__ ) ) {
-			$__template__ = $this->default_template();
-		}
-
-		// set up env
-		extract( $this->__the_atts__ );
-		$content = $this->get_content();
-
-		// load template
-		include( $__template__ );
-	}
-
-	/**
 	 * Default attributes defined by the shortcode itself (core defaults)
 	 *
 	 * These can be overridden by config settings
@@ -154,6 +133,20 @@ abstract class Pie_Easy_Shortcodes_Shortcode extends Pie_Easy_Component
 	protected function get_content()
 	{
 		return $this->__the_content__;
+	}
+
+	/**
+	 * Return array of variables to extract() for use by the template
+	 *
+	 * @return array
+	 */
+	public function get_template_vars()
+	{
+		// update content attribute
+		$this->__the_atts__['content'] = $this->get_content();
+
+		// the atts are out vars
+		return $this->__the_atts__;
 	}
 	
 	/**
