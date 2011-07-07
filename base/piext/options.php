@@ -97,10 +97,6 @@ class Infinity_Options_Registry extends Pie_Easy_Options_Registry
 		// current theme name
 		$theme = get_stylesheet();
 
-		// initialize scheme and options
-		infinity_scheme_init( $theme );
-		infinity_options_init( $theme );
-
 		// add form processing
 		if ( defined('DOING_AJAX') ) {
 			add_action( 'wp_ajax_infinity_options_update', array( Infinity_Options_Policy::instance()->registry($theme), 'process_form_ajax' ) );
@@ -451,10 +447,6 @@ function infinity_options_render_options_screen()
 
 	// current theme name
 	$theme = get_stylesheet();
-
-	// initialize scheme and options
-	infinity_scheme_init( $theme );
-	infinity_options_init( $theme );
 
 	// options to render
 	$options = array();
