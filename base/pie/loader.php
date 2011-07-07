@@ -96,9 +96,9 @@ final class Pie_Easy_Loader
 		'collections' =>
 			array( 'map', 'map_iterator', 'stack', 'stack_iterator' ),
 		'features' =>
-			array( 'factory', 'feature', 'renderer', 'policy', 'registry' ),
+			array( 'component', 'factory', 'renderer', 'policy', 'registry' ),
 		'options' =>
-			array( 'factory', 'option', 'renderer', 'policy', 'registry', 'uploader', 'walkers' ),
+			array( 'component', 'factory', 'renderer', 'policy', 'registry', 'uploader', 'walkers' ),
 		'init' =>
 			array( 'directive' ),
 		'parsers' =>
@@ -106,11 +106,11 @@ final class Pie_Easy_Loader
 		'schemes' =>
 			array( 'scheme', 'scheme_enqueue' ),
 		'screens' =>
-			array( 'factory', 'screen', 'renderer', 'policy', 'registry' ),
+			array( 'component', 'factory', 'renderer', 'policy', 'registry' ),
 		'sections' =>
-			array( 'factory', 'section', 'renderer', 'policy', 'registry' ),
+			array( 'component', 'factory', 'renderer', 'policy', 'registry' ),
 		'shortcodes' =>
-			array( 'factory', 'shortcode', 'renderer', 'policy', 'registry' ),
+			array( 'component', 'factory', 'renderer', 'policy', 'registry' ),
 		'utils' =>
 			array( 'ajax', 'docs', 'enqueue', 'export', 'files', 'i18n' )
 	);
