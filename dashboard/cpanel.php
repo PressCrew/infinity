@@ -99,12 +99,11 @@ function infinity_dashboard_cpanel_setup()
 function infinity_dashboard_cpanel_tabs_content()
 {
 	$action = infinity_dashboard_cpanel_action();
-	$template = Infinity_Screens_Policy::instance()->registry()->get($action)->template;
+	$screen = Infinity_Screens_Policy::instance()->registry()->get( $action );
 
-	if ( !empty($action) && !empty($template) ) {
+	if ( $screen instanceof Pie_Easy_Screens_Screen ) {
 		Pie_Easy_Ajax::responseBegin();
-		// TODO this should be in the render_output() call
-		infinity_load_template( $template );
+		$screen->render();
 		Pie_Easy_Ajax::responseEnd( true );
 	} else {
 		Pie_Easy_Ajax::responseStd( false, sprintf( __('There was an error while trying to load the %s tab content.', infinity_text_domain), $action ) );
