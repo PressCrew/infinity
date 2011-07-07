@@ -175,16 +175,4 @@ function infinity_dashboard_cpanel_dynamic_scripts()
 }
 add_action( 'admin_print_footer_scripts', 'infinity_dashboard_cpanel_dynamic_scripts' );
 
-/**
- * Display options form
- *
- * @param array|stdClass Variables to inject into template
- */
-function infinity_dashboard_cpanel_options_content( $args = null )
-{
-	$defaults->menu_args = null;
-
-	infinity_dashboard_load_template( 'cpanel/options.php', $args, $defaults );
-}
-
 ?>
