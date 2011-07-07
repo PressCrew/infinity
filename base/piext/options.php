@@ -253,12 +253,10 @@ class Infinity_Options_Uploader extends Pie_Easy_Options_Uploader
  */
 function infinity_options_init( $theme = null )
 {
-	// component policies
-	$sections_policy = Infinity_Sections_Policy::instance();
+	// component policy
 	$options_policy = Infinity_Options_Policy::instance();
 
-	// enable components
-	Pie_Easy_Scheme::instance($theme)->enable_component( $sections_policy );
+	// enable component
 	Pie_Easy_Scheme::instance($theme)->enable_component( $options_policy );
 
 	do_action( 'infinity_options_init' );

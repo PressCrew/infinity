@@ -66,24 +66,7 @@ function infinity_dashboard_cpanel_setup()
 	// setup dashboard if its active
 	$action = infinity_dashboard_cpanel_action();
 
-	if ( $action || defined('DOING_AJAX') ) {
-
-		// init options
-		infinity_scheme_init();
-
-		// init options
-		infinity_options_init();
-
-		// init options screens
-		infinity_options_init_screen();
-
-		// init features
-		$feature_policy = Infinity_Features_Policy::instance();
-		Pie_Easy_Scheme::instance()->enable_component( $feature_policy );
-
-		// init screens
-		$screen_policy = Infinity_Screens_Policy::instance();
-		Pie_Easy_Scheme::instance()->enable_component( $screen_policy );
+	if ( $action ) {
 
 		// tab action
 		add_action( 'wp_ajax_infinity_tabs_content', 'infinity_dashboard_cpanel_tabs_content' );
