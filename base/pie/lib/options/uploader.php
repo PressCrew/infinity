@@ -13,9 +13,6 @@
 
 Pie_Easy_Loader::load( 'utils/ajax', 'utils/files' );
 
-// Special handling for async uploading
-add_action( 'wp_loaded', array( 'Pie_Easy_Options_Uploader', 'async_handler' ) );
-
 /**
  * Make an uploaded file option easy
  *
@@ -64,26 +61,6 @@ class Pie_Easy_Options_Uploader
 	{
 		if ( $script_action ) {
 			$this->script_action = $script_action;
-		}
-	}
-
-	/**
-	 * Async uploading requires special handling when a file is being
-	 * uploaded for a blog other than the current one.
-	 */
-	static public function async_handler()
-	{
-		if ( isset( $_SERVER['SCRIPT_FILENAME'] ) ) {
-			// script that is executing
-			$script = Pie_Easy_Files::path_pop( $_SERVER['SCRIPT_FILENAME'] );
-			// script must be async script
-			if ( $script === self::SCRIPT_ASYNC ) {
-				if ( !empty($_POST[Pie_Easy_Options_Registry::PARAM_BLOG_ID]) ) {
-					switch_to_blog( $_POST[Pie_Easy_Options_Registry::PARAM_BLOG_ID] );
-				}
-			}
-		} else {
-			throw new Exception( 'SCRIPT_FILENAME not set, not good' );
 		}
 	}
 

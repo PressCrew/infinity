@@ -390,9 +390,7 @@
 					{
 						'action': 'infinity_options_screen',
 						'load_type': load[0],
-						'load_name': load[1],
-						'pie_easy_options_blog_id': InfinityOptionsL10n.blog_id,
-						'pie_easy_options_blog_theme': InfinityOptionsL10n.blog_theme
+						'load_name': load[1]
 					},
 					function(r) {
 						var sr = pieEasyAjax.splitResponseStd(r);
@@ -445,7 +443,6 @@
 					// form data
 					var data =
 						'action=infinity_options_update'
-						+ '&pie_easy_options_blog_id=' + InfinityOptionsL10n.blog_id
 						+ '&option_names=' + option
 						+ '&' + $(this).parents('form').first().serialize()
 
