@@ -23,16 +23,6 @@ Pie_Easy_Loader::load( 'base/componentable', 'collections', 'utils/export' );
 abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 {
 	/**
-	 * Name of parameter which passes back blog id
-	 */
-	const PARAM_BLOG_ID = 'pie_easy_options_blog_id';
-
-	/**
-	 * Name of parameter which passes back blog theme
-	 */
-	const PARAM_BLOG_THEME = 'pie_easy_options_blog_theme';
-
-	/**
 	 * Name of the theme currently being loaded
 	 *
 	 * @var string

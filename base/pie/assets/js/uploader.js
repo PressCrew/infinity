@@ -140,9 +140,7 @@
 			'post_id' : 0,
 			'auth_cookie' : pieEasyFlashUploaderL10n.pp_auth_cookie,
 			'logged_in_cookie': pieEasyFlashUploaderL10n.pp_logged_in_cookie,
-			'_wpnonce' : pieEasyFlashUploaderL10n.pp_wpnonce,
-			'pie_easy_options_blog_id' : pieEasyFlashUploaderL10n.pp_blog_id,
-			'pie_easy_options_blog_theme' : pieEasyFlashUploaderL10n.pp_blog_theme
+			'_wpnonce' : pieEasyFlashUploaderL10n.pp_wpnonce
 		},
 		// file upload
 		file_post_name: "async-upload",
@@ -288,9 +286,7 @@
 							data: {
 								'action': 'pie_easy_options_uploader_media_url',
 								'attachment_id': this.id(),
-								'attachment_size': 'full',
-								'pie_easy_options_blog_id' : pieEasyFlashUploaderL10n.pp_blog_id,
-								'pie_easy_options_blog_theme' : pieEasyFlashUploaderL10n.pp_blog_theme
+								'attachment_size': 'full'
 							},
 							success: function(rs){
 								var r = pieEasyAjax.splitResponse(rs);

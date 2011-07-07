@@ -234,9 +234,6 @@ abstract class Pie_Easy_Options_Registry extends Pie_Easy_Registry
 			// update dynamic feature css
 			Pie_Easy_Policy::features()->registry()->export_css_file()->update();
 			
-			// restore blog
-			restore_current_blog();
-
 			// done saving
 			return $save_count;
 

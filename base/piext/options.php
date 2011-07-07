@@ -94,11 +94,6 @@ class Infinity_Options_Registry extends Pie_Easy_Options_Registry
 			return;
 		}
 
-		// switch blog?
-		if ( !empty($_POST[Pie_Easy_Options_Registry::PARAM_BLOG_ID]) ) {
-			switch_to_blog( $_POST[Pie_Easy_Options_Registry::PARAM_BLOG_ID] );
-		}
-
 		// current theme name
 		$theme = get_stylesheet();
 
@@ -112,8 +107,6 @@ class Infinity_Options_Registry extends Pie_Easy_Options_Registry
 		} else {
 			add_action( 'load-toplevel_page_' . INFINITY_ADMIN_PAGE, array( Infinity_Options_Policy::instance()->registry($theme), 'process_form' ) );
 		}
-
-		restore_current_blog();
 	}
 
 	final protected function localize_script()
@@ -458,11 +451,6 @@ function infinity_options_render_options_screen()
 		Pie_Easy_Ajax::responseStd( false, 'Missing requried "load_name" parameter' );
 	}
 
-	// switch blog?
-	if ( !empty($_POST[Pie_Easy_Options_Registry::PARAM_BLOG_ID]) ) {
-		switch_to_blog( $_POST[Pie_Easy_Options_Registry::PARAM_BLOG_ID] );
-	}
-
 	// current theme name
 	$theme = get_stylesheet();
 
@@ -513,9 +501,6 @@ function infinity_options_render_options_screen()
 
 	// render manifest
 	$content .= Infinity_Options_Policy::instance()->renderer()->render_manifest( false );
-
-	// restore blog
-	restore_current_blog();
 
 	// respond
 	if ( strlen($content) ) {
