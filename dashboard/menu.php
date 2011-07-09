@@ -15,7 +15,6 @@
 // Hooks
 //
 add_action( 'admin_menu', 'infinity_dashboard_menu_setup' );
-add_action( 'network_admin_menu', 'infinity_dashboard_menu_setup' );
 ////
 
 /**
@@ -30,7 +29,7 @@ function infinity_dashboard_menu_setup()
 		INFINITY_ADMIN_PAGE,
 		'infinity_dashboard_cpanel_screen',
 		INFINITY_ADMIN_URL . '/assets/images/icon_16.png',
-		-837 );
+		1 );
 
 	add_action( 'admin_print_styles', 'infinity_dashboard_menu_styler', 99999 );
 	add_action( 'admin_print_scripts', 'infinity_dashboard_menu_shifter', 99999 );
@@ -52,9 +51,8 @@ function infinity_dashboard_menu_styler()
 	// print it ?>
 <style type="text/css">
 #adminmenu li#<?php print infinity_dashboard_menu_selector() ?> a.<?php print infinity_dashboard_menu_selector() ?> {
-	color: #285D92; font-family: Helvetica,Arial,sans-serif; font-weight: bold; text-shadow: -1px -1px #eeeeee, 2px 1px #c2c2c2; letter-spacing: 0.16em;
-	border-color: #dddddd; background: #cccccc url(<?php print INFINITY_ADMIN_URL ?>/assets/images/ui_pattern_bg.png) repeat 0px -3px;
-	box-shadow: 1px 1px #eee, 2px 2px 1px #a5a5a5; -moz-box-shadow: 1px 1px #eee, 2px 2px 1px #a5a5a5; -webkit-box-shadow: 1px 1px #eee, 2px 2px 1px #a5a5a5;
+	color: #285D92; font-family: "Droid Sans","Arial","sans-serif"; font-weight: bold; text-shadow: -1px -1px #eeeeee, 2px 1px #c2c2c2; letter-spacing: 0.16em;
+	border-color: #dedede; background: #ccc url(<?php print INFINITY_ADMIN_URL ?>/assets/images/ui_pattern_bg.png) repeat 0px -3px;
 }
 </style><?php
 }
