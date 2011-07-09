@@ -494,6 +494,20 @@ abstract class Pie_Easy_Component
 			}
 		}
 	}
+
+	/**
+	 * Render this component in bypass mode
+	 *
+	 * @return Pie_Easy_Renderer
+	 */
+	public function render_bypass()
+	{
+		if ( $this->ignore ) {
+			throw new Exception( 'Cannot render a component that has been ignored' );
+		} else {
+			return $this->policy()->renderer()->render_bypass( $this );
+		}
+	}
 }
 
 ?>

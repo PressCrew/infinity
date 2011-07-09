@@ -90,7 +90,7 @@ class Infinity_Options_Registry extends Pie_Easy_Options_Registry
 	 */
 	static public function init_form_processing()
 	{
-		if ( empty( $_POST['_manifest_'] ) ) {
+		if ( empty( $_POST[Infinity_Options_Renderer::FIELD_MANIFEST] ) ) {
 			return;
 		}
 
@@ -150,21 +150,28 @@ class Infinity_Exts_Option_Factory extends Pie_Easy_Options_Factory
 class Infinity_Options_Renderer extends Pie_Easy_Options_Renderer
 {
 	/**
+	 * Returns true if single save button should be displayed
+	 *
+	 * @return boolean
+	 */
+	private function do_save_single_button()
+	{
+		return ( infinity_scheme_directive( Pie_Easy_Scheme::DIRECTIVE_OPT_SAVE_SINGLE ) );
+	}
+
+	/**
 	 * Override render option method to customize output
 	 */
 	protected function render_output()
 	{
-		// start rendering ?>
-		<div class="<?php $this->render_classes( 'infinity-cpanel-options-single' ) ?>">
+		$this->render_begin();
+
+		// start rendering option elements ?>
 			<div class="infinity-cpanel-options-single-header">
-				<?php $this->render_label() ?>
-				<a class="infinity-cpanel-options-save" href="#"><?php _e('Save All', infinity_text_domain) ?></a>
-				<?php if ( $this->do_save_single_button() ): ?>
-					<a class="infinity-cpanel-options-save" href="#<?php $this->render_name() ?>">Save</a>
-				<?php endif; ?>
-			</div>
-			<div class="infinity-cpanel-options-single-flash">
-				<!-- flash messages for this option will render here -->
+				<?php
+					$this->render_label();
+					$this->render_buttons();
+				?>
 			</div>
 			<ul>
 				<li><a href="#<?php $this->render_name() ?>-tabs-1"><?php _e('Edit Setting', infinity_text_domain) ?></a></li>
@@ -177,10 +184,10 @@ class Infinity_Options_Renderer extends Pie_Easy_Options_Renderer
 			</ul>
 			<div id="<?php $this->render_name() ?>-tabs-1">
 				<p><?php $this->render_description() ?></p>
-				<?php $this->render_field() ?>
-				<div class="infinity-cpanel-options-last-modified">
-					<?php _e('Last Modified:', infinity_text_domain) ?> <?php echo $this->render_date_updated() ?>
-				</div>
+				<?php
+					$this->render_field();
+					$this->render_meta();
+				?>
 			</div>
 			<?php if ( $this->has_documentation() ): ?>
 			<div id="<?php $this->render_name() ?>-tabs-2">
@@ -191,18 +198,57 @@ class Infinity_Options_Renderer extends Pie_Easy_Options_Renderer
 			<div id="<?php $this->render_name() ?>-tabs-3">
 				<p><?php $this->render_sample_code() ?></p>
 			</div>
-			<?php endif; ?>
+			<?php endif;
+
+		// all done
+		$this->render_end();
+	}
+
+	/**
+	 * Renders option container opening and flash message elements
+	 *
+	 * @param boolean $transient
+	 */
+	final public function render_begin( $transient = false )
+	{
+		// begin rendering ?>
+		<div class="<?php $this->render_classes( 'infinity-cpanel-options-single' ) ?>">
+			<?php $this->render_manifest() ?>
+			<div class="infinity-cpanel-options-single-flash">
+				<!-- flash messages for this option will render here -->
+			</div><?php
+	}
+
+	/**
+	 * Renders option container closing tag
+	 */
+	final public function render_end()
+	{
+		// begin rendering ?>
 		</div><?php
 	}
 
 	/**
-	 * Returns true if single save button should be displayed
-	 *
-	 * @return boolean
+	 * Renders option save buttons
 	 */
-	private function do_save_single_button()
+	final public function render_buttons()
 	{
-		return ( infinity_scheme_directive( Pie_Easy_Scheme::DIRECTIVE_OPT_SAVE_SINGLE ) );
+		// begin rendering ?>
+		<a class="infinity-cpanel-options-save" href="#"><?php _e('Save All', infinity_text_domain) ?></a>
+		<?php if ( $this->do_save_single_button() ): ?>
+			<a class="infinity-cpanel-options-save" href="#<?php $this->render_name() ?>">Save</a>
+		<?php endif;
+	}
+
+	/**
+	 * Renders option meta info
+	 */
+	final public function render_meta()
+	{
+		// begin rendering ?>
+		<div class="infinity-cpanel-options-last-modified">
+			<?php _e('Last Modified:', infinity_text_domain) ?> <?php echo $this->render_date_updated() ?>
+		</div><?php
 	}
 
 	/**
@@ -254,7 +300,7 @@ function infinity_options_init( $theme = null )
 
 	// enable component
 	Pie_Easy_Scheme::instance($theme)->enable_component( $options_policy );
-
+	
 	do_action( 'infinity_options_init' );
 }
 
@@ -281,7 +327,7 @@ function infinity_options_init_screen()
  */
 function infinity_option( $option_name )
 {
-	return Infinity_Options_Policy::instance()->registry()->get($option_name)->get();
+	return infinity_option_get( $option_name );
 }
 
 /**
@@ -318,6 +364,121 @@ function infinity_option_image_src( $option_name, $size = 'thumbnail' )
 function infinity_option_image_url( $option_name, $size = 'thumbnail' )
 {
 	return Infinity_Options_Policy::instance()->registry()->get( $option_name )->get_image_url( $size );
+}
+
+/**
+ * Fetch and option object from the registry
+ *
+ * @param type $option_name
+ * @return Pie_Easy_Options_Option
+ */
+function infinity_option_fetch( $option_name )
+{
+	return Infinity_Options_Policy::instance()->registry()->get( $option_name );
+}
+
+/**
+ * Get the value of an option
+ *
+ * @param type $option_name
+ * @return Pie_Easy_Options_Option
+ */
+function infinity_option_get( $option_name )
+{
+	return infinity_option_fetch($option_name)->get();
+}
+
+/**
+ * Begin rendering an option
+ *
+ * @param type $option_name
+ */
+function infinity_option_render_begin( $option_name )
+{
+	global $infinity_246f86b591;
+
+	if ( $infinity_246f86b591 instanceof Pie_Easy_Options_Option ) {
+		throw new Exception(
+			'Cannot begin rendering option "%s" because rendering of option "%s" has not ended!',
+			$option_name, $infinity_246f86b591->name
+		);
+	}
+	
+	// fetch it
+	$infinity_246f86b591 = infinity_option_fetch($option_name)->render_bypass();
+
+	// start rendering
+	return $infinity_246f86b591->render_begin();
+}
+
+/**
+ * Render the escaped title text for the option
+ */
+function infinity_option_render_title()
+{
+	global $infinity_246f86b591;
+	return $infinity_246f86b591->render_title();
+}
+
+/**
+ * Render the escaped description text for the option
+ */
+function infinity_option_render_description()
+{
+	global $infinity_246f86b591;
+	return $infinity_246f86b591->render_description();
+}
+
+/**
+ * Render the label element for the option
+ */
+function infinity_option_render_label()
+{
+	global $infinity_246f86b591;
+	return $infinity_246f86b591->render_label();
+}
+
+/**
+ * Render the field element for the option
+ */
+function infinity_option_render_field()
+{
+	global $infinity_246f86b591;
+	return $infinity_246f86b591->render_field();
+}
+
+/**
+ * Render the meta elements for the option
+ */
+function infinity_option_render_meta()
+{
+	global $infinity_246f86b591;
+	return $infinity_246f86b591->render_meta();
+}
+
+/**
+ * Render the button elements for the option
+ */
+function infinity_option_render_buttons()
+{
+	global $infinity_246f86b591;
+	return $infinity_246f86b591->render_buttons();
+}
+
+/**
+ * End rendering the option
+ */
+function infinity_option_render_end()
+{
+	global $infinity_246f86b591;
+
+	// end rendering
+	$result = $infinity_246f86b591->render_end();
+
+	// wipe global
+	unset( $infinity_246f86b591 );
+
+	return $result;
 }
 
 /**
@@ -488,9 +649,6 @@ function infinity_options_render_options_screen()
 		// try to render the option
 		$content .= $option_to_render->render( false );
 	}
-
-	// render manifest
-	$content .= Infinity_Options_Policy::instance()->renderer()->render_manifest( false );
 
 	// respond
 	if ( strlen($content) ) {

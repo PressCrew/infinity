@@ -60,7 +60,7 @@ abstract class Pie_Easy_Renderer extends Pie_Easy_Componentable
 	 *
 	 * @return boolean
 	 */
-	final protected function has_documentation()
+	final public function has_documentation()
 	{
 		return ( $this->current->documentation );
 	}
@@ -93,6 +93,28 @@ abstract class Pie_Easy_Renderer extends Pie_Easy_Componentable
 			if ( $output === false ) {
 				return ob_get_clean();
 			}
+		}
+	}
+
+	/**
+	 * Render a component in bypass mode
+	 *
+	 * @param Pie_Easy_Component $component The component to render
+	 * @return Pie_Easy_Renderer
+	 */
+	final public function render_bypass( Pie_Easy_Component $component )
+	{
+		// check feature support
+		if ( $component->supported() ) {
+
+			// set as currently rendering component
+			$this->current = $component;
+
+			// mark as rendered
+			$this->rendered[] = $component;
+
+			// return myself
+			return $this;
 		}
 	}
 
@@ -144,7 +166,7 @@ abstract class Pie_Easy_Renderer extends Pie_Easy_Componentable
 	 *
 	 * @param array $doc_dirs Directory paths under which to search for doc page file
 	 */
-	final protected function render_documentation( $doc_dirs )
+	final public function render_documentation( $doc_dirs )
 	{
 		// is documentation set?
 		if ( $this->current->documentation ) {

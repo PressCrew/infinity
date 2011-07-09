@@ -127,7 +127,7 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 	/**
 	 * This method must be implemented to print the option's field HTML
 	 */
-	abstract protected function render_field();
+	abstract public function render_field();
 
 	/**
 	 * Toggle post override ON

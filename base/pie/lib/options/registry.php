@@ -184,10 +184,9 @@ abstract class Pie_Easy_Options_Registry extends Pie_Easy_Registry
 	{
 		if ( empty( $_POST ) ) {
 			return false;
-		} elseif ( isset( $_POST['_manifest_'] ) ) {
+		} elseif ( isset( $_POST[Pie_Easy_Options_Renderer::FIELD_MANIFEST] ) ) {
 
-			// load manifest
-			$manifest = explode( ',', $_POST['_manifest_'] );
+			$manifest = $_POST[Pie_Easy_Options_Renderer::FIELD_MANIFEST];
 
 			// "save only these" option names if param is set
 			$save_options =
