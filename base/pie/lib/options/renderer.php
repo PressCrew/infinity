@@ -22,17 +22,23 @@ Pie_Easy_Loader::load( 'utils/docs' );
 abstract class Pie_Easy_Options_Renderer extends Pie_Easy_Renderer
 {
 	/**
+	 * The field which contains all of the options which were rendered
+	 */
+	const FIELD_MANIFEST = '__opt_manifest__';
+
+	/**
 	 * Render form input label
 	 */
 	public function render_label()
-	{ ?>
+	{
+		// begin rendering label tag ?>
 		<label for="<?php $this->render_name() ?>" title="<?php print esc_attr( $this->get_current()->title ) ?>"><?php print esc_attr( $this->get_current()->title ) ?></label><?php
 	}
 
 	/**
 	 * Render the field
 	 */
-	final protected function render_field()
+	final public function render_field()
 	{
 		// call the option's field rendering method
 		return $this->get_current()->render_field();
@@ -144,28 +150,12 @@ abstract class Pie_Easy_Options_Renderer extends Pie_Easy_Renderer
 	}
 
 	/**
-	 * Render a hidden input which is a serialized array of all option names that were rendered
-	 *
-	 * @param boolean $output
+	 * Render a hidden input which appends the current option name to the manifest
 	 */
-	final public function render_manifest( $output = true )
+	final public function render_manifest()
 	{
-		$option_names = array();
-
-		foreach ( $this->get_rendered() as $option ) {
-			$option_names[] = $option->name;
-		}
-
-		$html = sprintf(
-			'<input type="hidden" name="_manifest_" value="%s" />',
-			esc_attr( implode( ',', $option_names ) )
-		);
-
-		if ( $output ) {
-			print $html;
-		} else {
-			return $html;
-		}
+		// begin rendering ?>
+		<input type="hidden" name="<?php print self::FIELD_MANIFEST ?>[]" value="<?php $this->render_name() ?>" /><?php
 	}
 }
 

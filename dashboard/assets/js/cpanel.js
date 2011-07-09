@@ -200,8 +200,8 @@
 						// success
 						message.fadeOut(200, function(){
 							panel.html(sr.content);
-							initOptionsPanel();
-							initDocPage();
+							initOptionsPanel(panel);
+							initDocuments(panel);
 						});
 					} else {
 						// error
@@ -269,7 +269,7 @@
 				tp_ot = panel.offset().top;
 				tp_hc = cp_hc - (tp_ot - cp_ot);
 				cpanel.css({'height': cp_hc});
-				panel.css({'height': tp_hc - 10});
+				panel.css({'height': tp_hc - 40});
 			} else {
 				// kill heights
 				cpanel.height('auto');
@@ -296,18 +296,87 @@
 			}
 		}
 
-		// init options panel
-		function initOptionsPanel()
+		// init one option
+		function initOption(option)
 		{
-			// skip this if not options panel
-			if ( !$('div#infinity-cpanel-options').length ) {
+			var $option = $(option);
+
+			// init uploaders
+			$('div.pie-easy-options-fu', $option).each(function(){
+				$(this).pieEasyUploader();
+			});
+
+			// tabs
+			$option.tabs().css('float', 'left');
+
+			// save buttons
+			$('a.infinity-cpanel-options-save', $option)
+				.first().button({icons: {secondary: "ui-icon-arrowthick-2-n-s"}})
+				.next().button({icons: {secondary: "ui-icon-arrowthick-1-e"}});
+
+			// save buttons click
+			$('a.infinity-cpanel-options-save', $option).click( function(){
+
+				// get option from href
+				var option = $(this).attr('hash').substr(1);
+
+				// form data
+				var data =
+					'action=infinity_options_update'
+					+ '&option_names=' + option
+					+ '&' + $(this).parents('form').first().serialize()
+
+				// message element
+				var message =
+					$(this)
+						.closest('div.infinity-cpanel-options-single')
+						.find('div.infinity-cpanel-options-single-flash');
+
+				// set loading message
+				message.pieEasyFlash('loading', 'Saving changes.');
+
+				// show loading message and exec post
+				message.fadeIn(300, function(){
+					// send request for option save
+					$.post(
+						InfinityOptionsL10n.ajax_url,
+						data,
+						function(r) {
+							var sr = pieEasyAjax.splitResponseStd(r);
+							// flash them ;)
+							message.fadeOut(300, function() {
+								var state = (sr.code >= 1) ? 'alert' : 'error';
+								$(this).pieEasyFlash(state, sr.message).fadeIn();
+						});
+					});
+				});
+
+				return false;
+			});
+		}
+
+		// init all options
+		function initOptions(panel)
+		{
+			$('div.infinity-cpanel-options-single', panel).each(function(){
+				initOption(this);
+			});
+		}
+
+		// init options panel
+		function initOptionsPanel(panel)
+		{
+			// full options panel?
+			if ( !$('div#infinity-cpanel-options', panel).length ) {
+				// no, just init options and quit
+				initOptions(panel);
 				return;
 			}
 
 			// the option form
-			var form = $('div#infinity-cpanel-options form');
+			var form = $('div#infinity-cpanel-options form', panel);
 			// the menu(s)
-			var menu = $('div.infinity-cpanel-options-menu');
+			var menu = $('div.infinity-cpanel-options-menu', panel);
 			// get last option loaded
 			var last = $.cookie('infinity_cpanel_option_loaded');
 
@@ -334,14 +403,14 @@
 			});
 
 			// show all options for section
-			$('a.infinity-cpanel-options-menu-showall').button().click(function(){
+			$('a.infinity-cpanel-options-menu-showall', panel).button().click(function(){
 				return false;
 			});
 
 			// cpanel options page menu item clicks
-			$('div.infinity-cpanel-options-menu a.infinity-cpanel-options-menu-show').bind('click',
+			$('div.infinity-cpanel-options-menu a.infinity-cpanel-options-menu-show', panel).bind('click',
 				function(){
-					optionLoad($(this).attr('id'));
+					loadOption($(this).attr('id'), panel);
 					return false;
 				}
 			);
@@ -369,17 +438,17 @@
 					}
 				}
 				// load last option
-				optionLoad(last);
+				loadOption(last, panel);
 			}
 
 			// load option screen
-			function optionLoad(id)
+			function loadOption(id, panel)
 			{
 				// what to load?
 				var load = id.split('___');
 				// message element
 				var message =
-					$('div#infinity-cpanel-options-flash')
+					$('div#infinity-cpanel-options-flash', panel)
 						.pieEasyFlash('loading', 'Loading option editor.')
 						.fadeIn();
 				// empty the form
@@ -399,16 +468,9 @@
 							$.cookie('infinity_cpanel_option_loaded', id, {expires: 7});
 							// inject options markup
 							form.html(sr.content);
-							// init uploaders
-							$('div.pie-easy-options-fu').each(function(){
-								$(this).pieEasyUploader();
-							});
-							// init docs
-							initDocPage();
-							// init option reqs
-							$('div.infinity-cpanel-options-single').each(function(){
-								optionInit(this);
-							});
+							// init docs and options
+							initDocuments(panel);
+							initOptions(panel);
 							// remove message
 							message.fadeOut().empty();
 						} else {
@@ -420,61 +482,10 @@
 					}
 				);
 			}
-
-			// init an option
-			function optionInit(option)
-			{
-				var $option = $(option);
-
-				// tabs
-				$option.tabs().css('float', 'left');
-
-				// save buttons
-				$('a.infinity-cpanel-options-save', $option)
-					.first().button({icons: {secondary: "ui-icon-arrowthick-2-n-s"}})
-					.next().button({icons: {secondary: "ui-icon-arrowthick-1-e"}});
-
-				// save buttons click
-				$('a.infinity-cpanel-options-save', $option).click( function(){
-
-					// get option from href
-					var option = $(this).attr('href').substr(1);
-
-					// form data
-					var data =
-						'action=infinity_options_update'
-						+ '&option_names=' + option
-						+ '&' + $(this).parents('form').first().serialize()
-
-					// message element
-					var message = $(this).parent().siblings('div.infinity-cpanel-options-single-flash');
-
-					// set loading message
-					message.pieEasyFlash('loading', 'Saving changes.');
-
-					// show loading message and exec post
-					message.fadeIn(300, function(){
-						// send request for option save
-						$.post(
-							InfinityOptionsL10n.ajax_url,
-							data,
-							function(r) {
-								var sr = pieEasyAjax.splitResponseStd(r);
-								// flash them ;)
-								message.fadeOut(300, function() {
-									var state = (sr.code >= 1) ? 'alert' : 'error';
-									$(this).pieEasyFlash(state, sr.message).fadeIn();
-							});
-						});
-					});
-
-					return false;
-				});
-			}
 		}
 
 		// init doc pages
-		function initDocPage()
+		function initDocuments(panel)
 		{
 			// recursive menu builder
 			function buildDocMenu(menu, els_head, anchor)
@@ -512,7 +523,7 @@
 				return did_one;
 			}
 
-			$('div.infinity-docs').each(function(){
+			$('div.infinity-docs', panel).each(function(){
 				var menu = $('ul.infinity-docs-menu', this);
 				var headers = $('h3', this);
 				buildDocMenu(menu, headers, 1);
@@ -523,11 +534,6 @@
 		if ( cpanel.length ) {
 			// initialize tabs
 			initTabs();
-		} else {
-			// init options in case they are displayed on page load
-			initOptionsPanel();
-			//init docs
-			initDocPage();
 		}
 
 	});
