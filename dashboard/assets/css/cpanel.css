@@ -2,18 +2,30 @@
 /* ! Control Panel Styling   */
 /* ========================= */
 
+/*#adminmenu li#toplevel_page_infinity-theme a.toplevel_page_infinity-theme {
+    background: url("../images/cpanel_menu_button.png") no-repeat scroll 0 0 transparent !important;
+    border-color: #DEDEDE;
+    font-family: "Droid Sans","Arial","sans-serif" !important;
+    color: #1AA9A6 !important;
+    font-weight: bold;
+    letter-spacing: 0.16em;
+    margin-left: 0;
+    text-shadow: 0 1px 0 #FFFFFF !important;
+    box-shadow: none !important;
+}*/
+
 div#infinity-cpanel {
 	position: relative;
 	overflow: hidden;
 	min-width: 1000px;
 	min-height: 600px;
 	margin: 25px 0 20px 0;
-    padding: 20px 0 10px 0;
+    padding: 0px 0 10px 20px;
 	border: 1px solid #dddddd;
 	border-radius: 6px;
 	-moz-border-radius: 6px;
 	-webkit-border-radius: 6px;
-    background: url(../images/ui_pattern_bg.png) repeat;
+    background: url(../images/cpanel_bg.png) repeat-x 0 -22px;
 	font-family: "Droid Sans","Arial","sans-serif";
     text-shadow: 0 -1px 0 #ffffff;
 	box-shadow: 1px 1px #eee, 3px 3px 2px #a5a5a5;
@@ -21,40 +33,50 @@ div#infinity-cpanel {
 	-webkit-box-shadow: 1px 1px #eee, 3px 3px 2px #a5a5a5;
 }
 
+div#infinity-cpanel p {
+	line-height: 160%;
+	font-size: 12.8px;
+}
+
+div#infinity-cpanel h1 {
+	border-bottom: 1px solid #E0E0E0;
+	font-size: 22px;
+	line-height: 150%;
+	margin-top: 0;
+}
+
 div#infinity-cpanel-header {
-	position: relative;
-	padding-bottom: 6px;
+	background: transparent;
+    height: 90px;
 }
 	div#infinity-cpanel-header-logo {
-		height: 60px;
-		width: 350px;
-		background: url('../images/cpanel_header_logo.png') no-repeat;
+		background: url("../images/cpanel_header_logo.png") no-repeat 5px 20px;
+		height: 90px;
+		width: 100%;
+		
 	}
-		div#infinity-cpanel-header-logo p {
-			position: absolute;
-			top: 38px;
-			left: 173px;
-			font-family: "Arial","sans-serif";
-			font-size: 10px;
-			opacity: .55;
-			filter: Alpha(Opacity=55);
-			text-shadow: 0 0 0;
-			letter-spacing: .05em;
-		}
+	div#infinity-cpanel-header-logo p {
+		color: #B4B4B4;
+		font-family: "Droid Serif";
+		font-size: 15px;
+		font-style: italic;
+		margin: 0 0 0 0;
+		padding: 45px 0 0 255px;
+		text-shadow: 0 1px 0 #000000;
+	}
 	div#infinity-cpanel-header-slogan {
+		color: #717171;
 		float: right;
+		font-size: 15.5px;
+		font-style: italic;
 		position: relative;
 		top: 38px;
-		right: 30px;
-		height: 20px;
 		width: 200px;
-		background: url('../images/cpanel_header_slogan.png') no-repeat;
 	}
 
 div#infinity-cpanel-toolbar {
 	height: 50px;
-	padding: 0 12px 0 12px;
-	background: url('../images/cpanel_header_toolbar.png') repeat;
+	padding: 0 12px 0 0;
 }
 	div#infinity-cpanel-toolbar .ui-button {
 		top: 10px;
@@ -102,22 +124,41 @@ div#infinity-cpanel-toolbar {
 		div#infinity-cpanel-toolbar .ui-menu .ui-button-text {
 			text-align: left;
 		}
+		div#infinity-cpanel-toolbar .ui-menu li.ui-menu-item {
+			min-width: 120px;
+		}
 
 div#infinity-cpanel-tabs {
 	position: relative;
 	z-index: 2;
 	padding: 8px 10px;
 }
+	div#infinity-cpanel-tabs img {
+		background: url("../images/ui_pattern_bg.png") repeat scroll 0 0 transparent;
+		border: 1px solid #E3E3E3;
+		border-radius: 6px 6px 6px 6px;
+		max-width: 100%;
+		padding: 4px;
+	}
 	div#infinity-cpanel-tabs ul.ui-tabs-nav  {
 		font-size: 12px;
 		margin-left: 2px;
 	}
-	div#infinity-cpanel-tabs ul.ui-tabs-nav li a {
-		padding: 0.25em 1em;
+	div#infinity-cpanel-tabs ul.ui-tabs-nav li.ui-state-active {
+		background-image: none;
+		background-color: #444;
+		border-color: #ddd;
+	}
+	div#infinity-cpanel-tabs ul.ui-tabs-nav li.ui-state-active a {
+		color: #ddd;
+		text-shadow: 0 1px 0 #222222;
 	}
 	div#infinity-cpanel-tabs ul.ui-tabs-nav li .ui-icon-close {
 		float: right;
 		cursor: pointer;
+	}
+	div#infinity-cpanel-tabs ul.ui-tabs-nav li a {
+		padding: 0.25em 1em;
 	}
 	div#infinity-cpanel-tabs div.ui-tabs-panel {
 		box-shadow: inset 1px 0px #eeeeee, inset 2px 0px 2px #aaaaaa, inset 1px 0px 2px #cccccc;
@@ -129,7 +170,8 @@ div#infinity-cpanel-tabs {
 		border-radius: 0 0 8px 8px;
 		-moz-border-radius: 0 0 8px 8px;
 		-webkit-border-radius: 0 0 8px 8px;
-		background: #f4f4f4;
+		box-shadow: 1px 3px 3px rgba(213, 209, 209, 0.5);
+		background: url("../images/cpanel_content_bg.jpg") repeat scroll 0 0 transparent;
 		overflow: hidden;
 	}
 		div#infinity-cpanel-tabs div.infinity-cpanel-tab.infinity-cpanel-tab-scroll {
@@ -159,23 +201,52 @@ div#infinity-cpanel-options {
 div.infinity-cpanel-options-menu {
 	float: left;
 	width: 220px;
+    box-shadow: 1px 3px 3px rgba(213, 209, 209, 0.5);
 }
+/*	div.infinity-cpanel-options-menu .ui-state-active a,*/
+	div.infinity-cpanel-options-menu .ui-widget-content a .ui-state-active a {
+		background: url("../images/cpanel_texture.png") repeat-x scroll 0 -112px transparent;
+		border-bottom: 1px solid #222222;
+		color: #222222;
+	}
 	div.infinity-cpanel-options-menu div.ui-accordion-header {
 		font-size: 13px;
 	}
+	div.infinity-cpanel-options-menu div.ui-accordion-header.ui-state-active {
+		background-image: none;
+		background-color: #444;
+		border-color: #ddd;
+	}
+	div.infinity-cpanel-options-menu div.ui-accordion-header.ui-state-active a {
+		color: #ddd;
+		text-shadow: 0 1px 0 #222222;
+	}
 	div.infinity-cpanel-options-menu ul.ui-accordion-content {
 		padding: 0.8em 0.5em;
-		background: url(../images/ui_pattern_bg.png) repeat;
+		background: url("../images/cpanel_texture.png") repeat scroll 0 0 transparent;
 	}
 	div.infinity-cpanel-options-menu ul.ui-accordion-content li {
 		line-height: 100%;
 		font-size: 14px;
 	}
+		div.infinity-cpanel-options-menu ul.ui-accordion-content li a {
+			background: url("../images/cpanel_sprite.png") no-repeat scroll 0 -110px transparent;
+			color: #666666;
+			font-size: 12px;
+			font-weight: bold;
+			padding: 3px 0 0 18px;
+			text-decoration: none;
+		}
+		div.infinity-cpanel-options-menu ul.ui-accordion-content li a:hover {
+			background: url("../images/cpanel_sprite.png") no-repeat scroll 0 -132px transparent;
+			color: #1AA9A6;
+		}
+
 	.ui-accordion-header a.infinity-cpanel-options-menu-showall {
 		padding: 0;
 		font-size: 10px;
 		position: absolute;
-		top: 8px;
+		top: 7px;
 		right: 4px;
 	}
 	.ui-accordion-header a.infinity-cpanel-options-menu-showall span {
@@ -184,6 +255,7 @@ div.infinity-cpanel-options-menu {
 		margin-bottom: 0;
 		padding: 1px 5px 3px 5px;
 		font-size: 10px;
+		color: #222;
 	}
 
 div.infinity-cpanel-options-submenu {
@@ -222,16 +294,17 @@ div.infinity-cpanel-options-single {
 		div.infinity-cpanel-options-single ul.ui-tabs-nav li {
 		}
 			div.infinity-cpanel-options-single ul.ui-tabs-nav li a {
-				line-height: 90%;
+				line-height: 120%;
 				font-size: 10px;
 			}
 
 	div.infinity-cpanel-options-single div.ui-tabs-panel {
-		background: url(../images/ui_pattern_bg.png) repeat scroll 0 0 #f8f8f8;
+		background: url("../images/cpanel_texture.png") repeat scroll 0 0 transparent;
 		border-radius: 0 0 6px 6px;
 		-moz-border-radius: 0 0 6px 6px;
 		-webkit-border-radius: 0 0 6px 6px;
 		padding: 0.5em 1em 0.25em;
+		box-shadow: 1px 3px 3px rgba(213, 209, 209, 0.5);
 	}
 		div.infinity-cpanel-options-single div.ui-tabs-panel div.infinity-cpanel-options-last-modified {
 			line-height: 9px;
@@ -248,12 +321,18 @@ div.infinity-cpanel-options-single-flash {
 
 div.infinity-cpanel-options-single-header {
 	height: 25px;
-	padding: 5px;
+	padding: 0 5px 5px 5px;
 }
 	div.infinity-cpanel-options-single-header label {
 		display: block;
 		float: left;
 		margin-top: 5px;
+		font-family: "Droid Serif";
+		font-size: 16px;
+		font-style: italic;
+		font-weight: bold;
+		color: #5C9BAD;
+		text-shadow: 1px 2px 0 #eee;
 	}
 	div.infinity-cpanel-options-single-header a.ui-button {
 		display: block;
@@ -264,6 +343,9 @@ div.infinity-cpanel-options-single-header {
 	div.infinity-cpanel-options-single-header a .ui-button-text {
 		font-size: 11px;
 		padding: 0.2em 2.1em 0.2em 1em;
+	}
+	div.infinity-cpanel-options-single-header a.infinity-cpanel-options-save {
+		margin-top: 16px;
 	}
 
 textarea.infinity-cpanel-option-field-css {
@@ -279,7 +361,7 @@ textarea.infinity-cpanel-option-field-css {
     padding: 0;
 }
 .infinity-docs * {
-    font-family: "Helvetica","Arial",sans-serif;
+	font-family: "Droid Sans","Arial","sans-serif";
     font-size: 12px;
 	color: #222222;
 	text-shadow: none;
@@ -327,12 +409,12 @@ textarea.infinity-cpanel-option-field-css {
 .infinity-docs h5,
 .infinity-docs h6 {
 	padding: 0;
-	color: #222222;
+	color: #444;
 	font-family: "Droid Sans","Arial","sans-serif";
+	font-style: italic;
 	font-weight: bolder;
-	font-style: normal;
 	line-height: 110%;
-	border-bottom: 1px solid #dddddd;
+	border-bottom: 1px solid #EEEEEE;
 }
 .infinity-docs h1 { font-size: 2em; margin: .67em 0;}
 .infinity-docs h2 { font-size: 1.5em; margin: .75em 0;}
@@ -370,7 +452,11 @@ textarea.infinity-cpanel-option-field-css {
 }
 .infinity-docs.infinity-docs-toc {
 	float: right;
-	width: 25%;
+    padding: 10px;
+    width: 25%;
+    background: url("../images/cpanel_texture.png") repeat scroll 0 0 transparent;
+    border: 1px solid #EBEBEB;
+    border-radius: 3px 3px 3px 3px;
 }
 .infinity-docs.infinity-docs-page {
 	float: left;
