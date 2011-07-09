@@ -161,7 +161,9 @@
 		button_text_top_padding: 3,
 		// debug
 		debug: false,
-		debug_handler: function (message) {alert(message)}
+		debug_handler: function (message) {
+			console.log(message);
+		}
 	}
 
 	var methods = {
