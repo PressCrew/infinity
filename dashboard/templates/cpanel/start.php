@@ -1,11 +1,12 @@
 <div class="infinity-docs">
-	<h2>Welcome to the Infinity</h2>
+	<h2>Welcome to Infinity</h2>
 
 	<p>
 		We can't tell you how happy we are to finally show a select group of people
 		from the WordPress Community what we've been working on for the last year.
-		What started out small, has quickly evolved into something we are very proud of.
-		We hope that you feel the same after trying Infinity yourself.
+		What started out small, has quickly evolved into something much bigger,
+		something we are very proud of. We hope that you feel the same after trying
+		Infinity yourself.
 	</p>
 
 	<h3>
