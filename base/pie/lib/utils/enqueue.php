@@ -22,6 +22,16 @@ Pie_Easy_Loader::load( 'collections', 'utils/files' );
 final class Pie_Easy_Enqueue
 {
 	/**
+	 * Script which handles the AJAX requests
+	 */
+	const SCRIPT_AJAX = 'admin-ajax.php';
+
+	/**
+	 * Script which accepts the async upload
+	 */
+	const SCRIPT_ASYNC = 'async-upload.php';
+	
+	/**
 	 * Default UI style handle
 	 */
 	const DEFAULT_UI_STYLE = '@:ui';
@@ -246,10 +256,29 @@ final class Pie_Easy_Enqueue
 		$this->register_script(
 			'pie-easy-uploader', 'uploader.js', array('pie-easy-global', 'pie-easy-jquery-swfupload', 'jquery-ui-button') );
 
+		// localize
+		$this->localize_scripts();
+
 		// actions!
 		do_action('pie_easy_init_scripts');
 		do_action('pie_easy_enqueue_scripts');
 		do_action('pie_easy_localize_scripts');
+	}
+
+	/**
+	 * Localize internal scripts
+	 */
+	private function localize_scripts()
+	{
+		wp_localize_script(
+			'pie-easy-global',
+			'pieEasyGlobalL10n',
+			array(
+				'ajax_url' => admin_url( self::SCRIPT_AJAX ),
+				'async_url' => admin_url( self::SCRIPT_ASYNC )
+			)
+		);
+
 	}
 
 	/**

@@ -53,6 +53,10 @@ div.pie-easy-flash span.ui-button-text {
 .colorpicker {
 	z-index: 1000;
 }
+
+div.pie-easy-options-mesg {
+	display: none;
+}
 div.pie-easy-options-cp-box {
 	display: inline-block;
 	position: relative;

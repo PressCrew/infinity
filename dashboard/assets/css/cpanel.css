@@ -312,12 +312,9 @@ div.infinity-cpanel-options-single {
 			text-align: right;
 		}
 
-div.infinity-cpanel-options-single-flash {
-	display: none;
+div.infinity-cpanel-options div.pie-easy-flash {
+	margin-bottom: 10px;
 }
-	div.infinity-cpanel-options-single-flash div.pie-easy-flash {
-		margin-bottom: 10px;
-	}
 
 div.infinity-cpanel-options-single-header {
 	height: 25px;
@@ -344,7 +341,7 @@ div.infinity-cpanel-options-single-header {
 		font-size: 11px;
 		padding: 0.2em 2.1em 0.2em 1em;
 	}
-	div.infinity-cpanel-options-single-header a.infinity-cpanel-options-save {
+	div.infinity-cpanel-options-single-header a.pie-easy-option-save {
 		margin-top: 16px;
 	}
 
