@@ -27,6 +27,45 @@ which explains in what cases each directive can be overridden.
 
 You configure options with the directives below:
 
+#### type
+
+This is where you configure what type of option you want to display.
+
+	type = "text"
+
+The available option types are:
+
+* __Basic__
+	* __text__ - Text input
+	* __textarea__ Text area input
+	* __select__ - Select box
+	* __radio__ - Radio buttons
+	* __checkbox__ - Check boxes
+	* __css__ - Custom CSS textarea
+* __Dynamic__
+	* __category__ - Select one category
+	* __categories__ - Select multiple categories
+	* __page__ - Select one page
+	* __pages__ - Select multiple pages
+	* __post__ - Select one post
+	* __posts__ - Select multiple posts
+* __Toggles__
+	* __on__ - "On" checkbox
+	* __off__ - "Off" checkbox
+	* __yes__ - "Yes" checkbox
+	* __no__ - "No" checkbox
+	* __enable__ - "Enable" checkbox
+	* __disable__ - "Disable" checkbox
+	* __onoff__ - On/Off radios
+	* __yesno__ - Yes/No radios
+	* __enabledisable__ - Enable/Disable radios
+	* __leftright__ - Left/Right radios
+* __Widgets__
+	* __upload__ - Media uploader widget
+	* __colorpicker__ - Color picker widget
+
+Child theme can override field\_type: **No**
+
 #### section
 
 This tells Infinity in which section of the theme options you want to put the option.
@@ -38,7 +77,7 @@ to configure theme.
 
 > *Important* Every option must be assigned to at least one section.
 
-Child theme can override section: **No**
+Child theme can override section: **Yes**
 
 #### title
 
@@ -46,7 +85,7 @@ Use a descriptive name to tell the user what this option does.
 
 	title = "Welcome Text"
 
-Child theme can override title: **No**
+Child theme can override title: **Yes**
 
 #### description
 
@@ -54,7 +93,7 @@ A more detailed description of what the options does inside your theme.
 
 	description = "Edit the welcome text on your home page"
 
-Child theme can override description: **No**
+Child theme can override description: **Yes**
 
 #### class
 
@@ -84,44 +123,6 @@ You can assign an extra CSS class to the option field for customized styling of 
 	field_class = "my-css-class"
 
 Child theme can override field\_class: **Yes**
-
-#### field\_type
-
-This is where you configure what type of option you want to display.
-
-	field_type = "text"
-
-The available field types are:
-
-* __Basic__
-	* __text__ - Text input
-	* __textarea__ Text area input
-	* __select__ - Select box
-	* __radio__ - Radio buttons
-	* __checkbox__ - Check boxes
-* __Dynamic__
-	* __category__ - Select one category
-	* __categories__ - Select multiple categories
-	* __page__ - Select one page
-	* __pages__ - Select multiple pages
-	* __post__ - Select one post
-	* __posts__ - Select multiple posts
-* __Toggles__
-	* __on__ - "On" checkbox
-	* __off__ - "Off" checkbox
-	* __yes__ - "Yes" checkbox
-	* __no__ - "No" checkbox
-	* __enable__ - "Enable" checkbox
-	* __disable__ - "Disable" checkbox
-	* __onoff__ - On/Off radios
-	* __yesno__ - Yes/No radios
-	* __enabledisable__ - Enable/Disable radios
-* __Widgets__
-	* __upload__ - Media uploader widget
-	* __colorpicker__ - Color picker widget
-	* __css__ - Custom CSS integration (requires the "infinity-custom-css" theme feauture)
-
-Child theme can override field\_type: **No**
 
 #### field\_options
 
@@ -153,7 +154,7 @@ and the corresponding value for the keys are the description.
 		);
 	}
 
-Child theme can override field\_options: **No**
+Child theme can override field\_options: **Yes**
 
 #### default\_value
 
@@ -288,3 +289,87 @@ Child theme can override required\_feature: **No**
 
 > Take a look at the options.sample.ini file located in the `wp-content/themes/infinity/config` directory
 to see complete working examples of all the options available to you.
+
+### Edit Anywhere
+
+Infinity handles all of the dirty work for maintaining the options panel. However, there may be
+times when you wish to make it possible to edit an option from a different screen. You can easily
+embed option fields for editing on any Infinity control panel screen by using some simple template
+tags.
+
+#### Basic Example
+
+Embedding options using PHP follows this logic.
+
+1. Opening form tag.
+1. Call render begin function for option A.
+1. Call any number of element renderering functions.
+1. Call render end function.
+1. Call render begin function for option B.
+1. Call any number of element renderering functions.
+1. Call render end function.
+1. Closing form tag.
+
+Here is a basic example which would embed an option field into a screen template.
+
+	<?php
+		<form>
+			infinity_option_render_begin( 'infinity_header_logo' );
+			infinity_option_render_label();
+			infinity_option_render_field();
+			infinity_option_render_buttons();
+			infinity_option_render_end();
+		</form>
+	?>
+
+#### Rendering Functions
+
+* **infinity\_option\_render\_begin**
+
+	Prints opening option block element and flash message element.
+
+		(void) infinity_option_render_begin( string $option_name )
+
+	> _$option\_name_ : Name of option as configured in options.ini
+
+* **infinity\_option\_render\_end**
+
+	Prints closing option block element.
+
+		(void) infinity_option_render_end()
+
+* **infinity\_option\_render\_title**
+
+	Prints option title as plain text
+
+		(void) infinity_option_render_title()
+
+* **infinity\_option\_render\_description**
+
+	Prints option description as plain text
+
+		(void) infinity_option_render_description()
+
+* **infinity\_option\_render\_label**
+
+	Prints option title wrapper in a label tag
+
+		(void) infinity_option_render_label()
+
+* **infinity\_option\_render\_field**
+
+	Prints option form field and related elements
+
+		(void) infinity_option_render_field()
+
+* **infinity\_option\_render\_buttons**
+
+	Prints option save button(s)
+
+		(void) infinity_option_render_buttons()
+
+* **infinity\_option\_render\_meta**
+
+	Prints option meta information. (Currently only last updated date/time)
+
+		(void) infinity_option_render_meta()
