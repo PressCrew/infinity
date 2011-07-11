@@ -108,30 +108,41 @@
 
 	var methods = {
 
-		init: function(form, action)
+		init: function(action)
 		{
-			var $form = $(form);
+			return this.each(function(){
+				$('div.pie-easy-options-block', this).pieEasyOptions('initBlock', action);
+			});
+		},
+		
+		initBlock: function(action)
+		{
+			var $form;
 
 			// maintain chain
 			return this.each(function(){
 
 				var $option = $(this);
 
+				if ( !$form ) {
+					$form = $option.closest('form');
+				}
+
 				// init uploaders
 				$('div.pie-easy-options-fu', $option).each(function(){
 					$(this).pieEasyUploader();
 				});
 
-				// save one button
-				$('a.pie-easy-option-save-one', $option)
-					.button({icons: {secondary: "ui-icon-arrowthick-1-e"}});
-
 				// save all button
-				$('a.pie-easy-option-save-all', $option)
+				$('a.pie-easy-options-save-all', $option)
 					.button({icons: {secondary: "ui-icon-arrowthick-2-n-s"}});
+					
+				// save one button
+				$('a.pie-easy-options-save-one', $option)
+					.button({icons: {secondary: "ui-icon-arrowthick-1-e"}});
 				
 				// save buttons click
-				$('a.pie-easy-option-save', $option).click( function(){
+				$('a.pie-easy-options-save', $option).click( function(){
 
 					// get option from href
 					var opt_names = $(this).attr('hash').substr(1);
@@ -166,13 +177,6 @@
 
 					return false;
 				});
-			});
-		},
-
-		initForm: function(action)
-		{
-			return this.each(function(){
-				$('div.pie-easy-option-block', this).pieEasyOptions('init', this, action);
 			});
 		}
 	}
