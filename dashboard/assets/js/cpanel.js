@@ -296,70 +296,18 @@
 			}
 		}
 
-		// init one option
-		function initOption(option)
-		{
-			var $option = $(option);
-
-			// init uploaders
-			$('div.pie-easy-options-fu', $option).each(function(){
-				$(this).pieEasyUploader();
-			});
-
-			// tabs
-			$option.tabs().css('float', 'left');
-
-			// save buttons
-			$('a.infinity-cpanel-options-save', $option)
-				.first().button({icons: {secondary: "ui-icon-arrowthick-2-n-s"}})
-				.next().button({icons: {secondary: "ui-icon-arrowthick-1-e"}});
-
-			// save buttons click
-			$('a.infinity-cpanel-options-save', $option).click( function(){
-
-				// get option from href
-				var option = $(this).attr('hash').substr(1);
-
-				// form data
-				var data =
-					'action=infinity_options_update'
-					+ '&option_names=' + option
-					+ '&' + $(this).parents('form').first().serialize()
-
-				// message element
-				var message =
-					$(this)
-						.closest('div.infinity-cpanel-options-single')
-						.find('div.infinity-cpanel-options-single-flash');
-
-				// set loading message
-				message.pieEasyFlash('loading', 'Saving changes.');
-
-				// show loading message and exec post
-				message.fadeIn(300, function(){
-					// send request for option save
-					$.post(
-						InfinityOptionsL10n.ajax_url,
-						data,
-						function(r) {
-							var sr = pieEasyAjax.splitResponseStd(r);
-							// flash them ;)
-							message.fadeOut(300, function() {
-								var state = (sr.code >= 1) ? 'alert' : 'error';
-								$(this).pieEasyFlash(state, sr.message).fadeIn();
-						});
-					});
-				});
-
-				return false;
-			});
-		}
-
 		// init all options
 		function initOptions(panel)
 		{
+			// call pie helper
+			$('div#infinity-cpanel-options form', panel).pieEasyOptions(
+				'initForm',
+				'infinity_options_update'
+			);
+
+			// create tabs
 			$('div.infinity-cpanel-options-single', panel).each(function(){
-				initOption(this);
+				$(this).tabs().css('float', 'left');
 			});
 		}
 
@@ -455,7 +403,7 @@
 				form.empty();
 				// send request for option screen
 				$.post(
-					InfinityOptionsL10n.ajax_url,
+					pieEasyGlobalL10n.ajax_url,
 					{
 						'action': 'infinity_options_screen',
 						'load_type': load[0],

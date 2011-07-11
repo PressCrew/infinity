@@ -22,6 +22,8 @@
 
 /* bindAll() helper */
 (function($){
+	
+	/* bindAll() helper */
 	$.fn.bindAll = function(options) {
 		var $this = this;
 		$.each(options, function(key, val){
@@ -97,6 +99,92 @@
 			return methods.init.apply(this, arguments);
 		} else {
 			return $.error('Method ' +  method + ' does not exist on jQuery.pieEasyFlash');
+		}
+	}
+})(jQuery);
+
+/* options helper */
+(function($){
+
+	var methods = {
+
+		init: function(form, action)
+		{
+			var $form = $(form);
+
+			// maintain chain
+			return this.each(function(){
+
+				var $option = $(this);
+
+				// init uploaders
+				$('div.pie-easy-options-fu', $option).each(function(){
+					$(this).pieEasyUploader();
+				});
+
+				// save one button
+				$('a.pie-easy-option-save-one', $option)
+					.button({icons: {secondary: "ui-icon-arrowthick-1-e"}});
+
+				// save all button
+				$('a.pie-easy-option-save-all', $option)
+					.button({icons: {secondary: "ui-icon-arrowthick-2-n-s"}});
+				
+				// save buttons click
+				$('a.pie-easy-option-save', $option).click( function(){
+
+					// get option from href
+					var opt_names = $(this).attr('hash').substr(1);
+
+					// form data
+					var data =
+						'action=' + action +
+						'&option_names=' + opt_names +
+						'&' + $form.serialize()
+
+					// message element
+					var message = $('div.pie-easy-options-mesg', $option);
+
+					// set loading message
+					message.pieEasyFlash('loading', 'Saving changes.');
+
+					// show loading message and exec post
+					message.fadeIn(300, function(){
+						// send request for option save
+						$.post(
+							pieEasyGlobalL10n.ajax_url,
+							data,
+							function(r) {
+								var sr = pieEasyAjax.splitResponseStd(r);
+								// flash them ;)
+								message.fadeOut(300, function() {
+									var state = (sr.code >= 1) ? 'alert' : 'error';
+									$(this).pieEasyFlash(state, sr.message).fadeIn();
+							});
+						});
+					});
+
+					return false;
+				});
+			});
+		},
+
+		initForm: function(action)
+		{
+			return this.each(function(){
+				$('div.pie-easy-option-block', this).pieEasyOptions('init', this, action);
+			});
+		}
+	}
+
+	$.fn.pieEasyOptions = function (method)
+	{
+		if ( methods[method] ) {
+			return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
+		} else if (typeof method === 'object' || ! method) {
+			return methods.init.apply(this, arguments);
+		} else {
+			return $.error('Method ' +  method + ' does not exist on jQuery.pieEasyOptions');
 		}
 	}
 })(jQuery);

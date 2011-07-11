@@ -194,6 +194,27 @@ abstract class Pie_Easy_Renderer extends Pie_Easy_Componentable
 	}
 
 	/**
+	 * Merge and print any number of css classes
+	 *
+	 * @param string $class,...
+	 */
+	protected function merge_classes()
+	{
+		// get unlimited number of class args
+		$classes = func_get_args();
+
+		// check for empties
+		foreach( $classes as $key => $class ) {
+			if ( empty( $class ) ) {
+				unset( $classes[$key] );
+			}
+		}
+		
+		// render them all delimited with a space
+		print esc_attr( join( ' ', $classes ) );
+	}
+
+	/**
 	 * Render component output
 	 *
 	 * @return void

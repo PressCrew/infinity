@@ -22,16 +22,6 @@ Pie_Easy_Loader::load( 'utils/ajax', 'utils/files' );
 class Pie_Easy_Options_Uploader
 {
 	/**
-	 * Script which handles the AJAX requests
-	 */
-	const SCRIPT_AJAX = 'admin-ajax.php';
-
-	/**
-	 * Script which accepts the async upload
-	 */
-	const SCRIPT_ASYNC = 'async-upload.php';
-
-	/**
 	 * The action on which to localize the script
 	 *
 	 * @var string
@@ -93,8 +83,7 @@ class Pie_Easy_Options_Uploader
 			'pie-easy-uploader',
 			'pieEasyFlashUploaderL10n',
 			array(
-				'ajax_url' => admin_url( self::SCRIPT_AJAX ),
-				'upload_url' => admin_url( self::SCRIPT_ASYNC ),
+				'upload_url' => admin_url( Pie_Easy_Enqueue::SCRIPT_ASYNC ),
 				'flash_url' => includes_url('js/swfupload/swfupload.swf'),
 				'pp_auth_cookie' => (is_ssl() ? $_COOKIE[SECURE_AUTH_COOKIE] : $_COOKIE[AUTH_COOKIE]),
 				'pp_logged_in_cookie' => $_COOKIE[LOGGED_IN_COOKIE],

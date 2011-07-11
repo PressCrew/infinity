@@ -104,19 +104,6 @@ class Infinity_Options_Registry extends Pie_Easy_Options_Registry
 			add_action( 'load-toplevel_page_' . INFINITY_ADMIN_PAGE, array( Infinity_Options_Policy::instance()->registry($theme), 'process_form' ) );
 		}
 	}
-
-	final protected function localize_script()
-	{
-		parent::localize_script();
-
-		wp_localize_script(
-			INFINITY_NAME . ':cpanel',
-			'InfinityOptionsL10n',
-			array(
-				'ajax_url' => admin_url( 'admin-ajax.php' )
-			)
-		);
-	}
 }
 add_action( 'wp_loaded', array( 'Infinity_Options_Registry', 'init_form_processing' ) );
 
@@ -162,68 +149,45 @@ class Infinity_Options_Renderer extends Pie_Easy_Options_Renderer
 	 */
 	protected function render_output()
 	{
-		$this->render_begin();
+		// opening elements
+		$this->render_begin( 'infinity-cpanel-options-single' );
 
 		// start rendering option elements ?>
-			<div class="infinity-cpanel-options-single-header">
-				<?php
-					$this->render_label();
-					$this->render_buttons();
-				?>
-			</div>
-			<ul>
-				<li><a href="#<?php $this->render_name() ?>-tabs-1"><?php _e('Edit Setting', infinity_text_domain) ?></a></li>
-				<?php if ( $this->has_documentation() ): ?>
-				<li><a href="#<?php $this->render_name() ?>-tabs-2"><?php _e('Documentation', infinity_text_domain) ?></a></li>
-				<?php endif; ?>
-				<?php if ( is_admin() ): ?>
-				<li><a href="#<?php $this->render_name() ?>-tabs-3"><?php _e('Sample Code', infinity_text_domain) ?></a></li>
-				<?php endif; ?>
-			</ul>
-			<div id="<?php $this->render_name() ?>-tabs-1">
-				<p><?php $this->render_description() ?></p>
-				<?php
-					$this->render_field();
-					$this->render_meta();
-				?>
-			</div>
+		<div class="infinity-cpanel-options-single-header">
+			<?php
+				$this->render_label();
+				$this->render_buttons();
+			?>
+		</div>
+		<ul>
+			<li><a href="#<?php $this->render_name() ?>-tabs-1"><?php _e('Edit Setting', infinity_text_domain) ?></a></li>
 			<?php if ( $this->has_documentation() ): ?>
-			<div id="<?php $this->render_name() ?>-tabs-2">
-				<div class="infinity-docs"><?php $this->render_documentation( Pie_Easy_Scheme::instance()->theme_documentation_dirs() ) ?></div>
-			</div>
+			<li><a href="#<?php $this->render_name() ?>-tabs-2"><?php _e('Documentation', infinity_text_domain) ?></a></li>
 			<?php endif; ?>
 			<?php if ( is_admin() ): ?>
-			<div id="<?php $this->render_name() ?>-tabs-3">
-				<p><?php $this->render_sample_code() ?></p>
-			</div>
-			<?php endif;
+			<li><a href="#<?php $this->render_name() ?>-tabs-3"><?php _e('Sample Code', infinity_text_domain) ?></a></li>
+			<?php endif; ?>
+		</ul>
+		<div id="<?php $this->render_name() ?>-tabs-1">
+			<p><?php $this->render_description() ?></p>
+			<?php
+				$this->render_field();
+				$this->render_meta();
+			?>
+		</div>
+		<?php if ( $this->has_documentation() ): ?>
+		<div id="<?php $this->render_name() ?>-tabs-2">
+			<div class="infinity-docs"><?php $this->render_documentation( Pie_Easy_Scheme::instance()->theme_documentation_dirs() ) ?></div>
+		</div>
+		<?php endif; ?>
+		<?php if ( is_admin() ): ?>
+		<div id="<?php $this->render_name() ?>-tabs-3">
+			<p><?php $this->render_sample_code() ?></p>
+		</div>
+		<?php endif;
 
 		// all done
 		$this->render_end();
-	}
-
-	/**
-	 * Renders option container opening and flash message elements
-	 *
-	 * @param boolean $transient
-	 */
-	final public function render_begin( $transient = false )
-	{
-		// begin rendering ?>
-		<div class="<?php $this->render_classes( 'infinity-cpanel-options-single' ) ?>">
-			<?php $this->render_manifest() ?>
-			<div class="infinity-cpanel-options-single-flash">
-				<!-- flash messages for this option will render here -->
-			</div><?php
-	}
-
-	/**
-	 * Renders option container closing tag
-	 */
-	final public function render_end()
-	{
-		// begin rendering ?>
-		</div><?php
 	}
 
 	/**
@@ -231,11 +195,13 @@ class Infinity_Options_Renderer extends Pie_Easy_Options_Renderer
 	 */
 	final public function render_buttons()
 	{
-		// begin rendering ?>
-		<a class="infinity-cpanel-options-save" href="#"><?php _e('Save All', infinity_text_domain) ?></a>
-		<?php if ( $this->do_save_single_button() ): ?>
-			<a class="infinity-cpanel-options-save" href="#<?php $this->render_name() ?>">Save</a>
-		<?php endif;
+		// save all
+		$this->render_save();
+
+		// save one?
+		if ( $this->do_save_single_button() ) {
+			$this->render_save_one();
+		}
 	}
 
 	/**

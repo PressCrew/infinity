@@ -27,6 +27,28 @@ abstract class Pie_Easy_Options_Renderer extends Pie_Easy_Renderer
 	const FIELD_MANIFEST = '__opt_manifest__';
 
 	/**
+	 * Renders option container opening and flash message elements
+	 */
+	public function render_begin( $block_class = null )
+	{
+		// begin rendering ?>
+		<div class="<?php $this->render_classes( 'pie-easy-option-block', $block_class ) ?>">
+			<?php $this->render_manifest() ?>
+			<div class="pie-easy-options-mesg">
+				<!-- flash messages for this option will render here -->
+			</div><?php
+	}
+
+	/**
+	 * Renders option container closing tag
+	 */
+	public function render_end()
+	{
+		// end rendering ?>
+		</div><?php
+	}
+
+	/**
 	 * Render form input label
 	 */
 	public function render_label()
@@ -147,6 +169,32 @@ abstract class Pie_Easy_Options_Renderer extends Pie_Easy_Renderer
 		} else {
 			print __('Never', pie_easy_text_domain);
 		}
+	}
+
+	/**
+	 * Render save all options button
+	 *
+	 * @param string $class
+	 */
+	public function render_save( $class = null )
+	{
+		// begin rendering ?>
+		<a class="<?php $this->merge_classes('pie-easy-option-save', 'pie-easy-option-save-all', $class) ?>" href="#">
+			<?php _e( 'Save All', pie_easy_text_domain ); ?>
+		</a><?php
+	}
+	
+	/**
+	 * Render save one option button
+	 *
+	 * @param string $class
+	 */
+	public function render_save_one( $class = null )
+	{
+		// begin rendering ?>
+		<a class="<?php $this->merge_classes('pie-easy-option-save', 'pie-easy-option-save-one', $class) ?>" href="#<?php $this->render_name() ?>">
+			<?php _e( 'Save', pie_easy_text_domain ); ?>
+		</a><?php
 	}
 
 	/**
