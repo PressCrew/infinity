@@ -300,10 +300,7 @@
 		function initOptions(panel)
 		{
 			// call pie helper
-			$('div#infinity-cpanel-options form', panel).pieEasyOptions(
-				'initForm',
-				'infinity_options_update'
-			);
+			$(panel).pieEasyOptions( 'init', 'infinity_options_update' );
 
 			// create tabs
 			$('div.infinity-cpanel-options-single', panel).each(function(){
