@@ -30,20 +30,6 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 	protected $loading_theme;
 
 	/**
-	 * Blog id when screen was initialized
-	 *
-	 * @var integer
-	 */
-	protected $screen_blog_id;
-
-	/**
-	 * Blog theme when screen was initialized
-	 *
-	 * @var string
-	 */
-	protected $screen_blog_theme;
-
-	/**
 	 * Registered components map
 	 *
 	 * @var Pie_Easy_Map
@@ -78,11 +64,6 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 	 */
 	public function init_screen()
 	{
-		global $blog_id;
-
-		$this->screen_blog_id = (integer) $blog_id;
-		$this->screen_blog_theme = get_stylesheet();
-
 		add_action( 'pie_easy_init_styles', array($this, 'init_styles') );
 		add_action( 'pie_easy_init_scripts', array($this, 'init_scripts') );
 	}

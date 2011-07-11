@@ -29,11 +29,6 @@ class Pie_Easy_Exts_Option_Upload
 		$this->add_capabilities( 'upload_files' );
 	}
 
-	public function init_screen()
-	{
-		$this->policy()->uploader()->init_screen();
-	}
-
 	public function init_styles()
 	{
 		$this->policy()->uploader()->init_styles();
