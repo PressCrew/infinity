@@ -39,20 +39,6 @@ class Pie_Easy_Options_Uploader
 	private $script_action;
 
 	/**
-	 * Blog id when screen was initialized
-	 *
-	 * @var integer
-	 */
-	private $screen_blog_id;
-
-	/**
-	 * Blog theme when screen was initialized
-	 *
-	 * @var string
-	 */
-	private $screen_blog_theme;
-
-	/**
 	 * Initializes the uploader
 	 *
 	 * @param string $script_action The action on which to localize the script
@@ -62,17 +48,6 @@ class Pie_Easy_Options_Uploader
 		if ( $script_action ) {
 			$this->script_action = $script_action;
 		}
-	}
-
-	/**
-	 * Initialize screen dependancies
-	 */
-	public function init_screen()
-	{
-		global $blog_id;
-
-		$this->screen_blog_id = (integer) $blog_id;
-		$this->screen_blog_theme = get_stylesheet();
 	}
 
 	/**
@@ -121,8 +96,6 @@ class Pie_Easy_Options_Uploader
 				'ajax_url' => admin_url( self::SCRIPT_AJAX ),
 				'upload_url' => admin_url( self::SCRIPT_ASYNC ),
 				'flash_url' => includes_url('js/swfupload/swfupload.swf'),
-				'pp_blog_id' => $this->screen_blog_id,
-				'pp_blog_theme' => $this->screen_blog_theme,
 				'pp_auth_cookie' => (is_ssl() ? $_COOKIE[SECURE_AUTH_COOKIE] : $_COOKIE[AUTH_COOKIE]),
 				'pp_logged_in_cookie' => $_COOKIE[LOGGED_IN_COOKIE],
 				'pp_wpnonce' => wp_create_nonce( 'media-form' ),

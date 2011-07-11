@@ -113,9 +113,7 @@ class Infinity_Options_Registry extends Pie_Easy_Options_Registry
 			INFINITY_NAME . ':cpanel',
 			'InfinityOptionsL10n',
 			array(
-				'ajax_url' => admin_url( 'admin-ajax.php' ),
-				'blog_id' => $this->screen_blog_id,
-				'blog_theme' => $this->screen_blog_theme,
+				'ajax_url' => admin_url( 'admin-ajax.php' )
 			)
 		);
 	}
