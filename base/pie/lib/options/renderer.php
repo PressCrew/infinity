@@ -176,7 +176,7 @@ abstract class Pie_Easy_Options_Renderer extends Pie_Easy_Renderer
 	 *
 	 * @param string $class
 	 */
-	public function render_save( $class = null )
+	public function render_save_all( $class = null )
 	{
 		// begin rendering ?>
 		<a class="<?php $this->merge_classes('pie-easy-options-save', 'pie-easy-options-save-all', $class) ?>" href="#">

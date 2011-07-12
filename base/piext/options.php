@@ -196,7 +196,7 @@ class Infinity_Options_Renderer extends Pie_Easy_Options_Renderer
 	final public function render_buttons()
 	{
 		// save all
-		$this->render_save();
+		$this->render_save_all();
 
 		// save one?
 		if ( $this->do_save_single_button() ) {
@@ -421,12 +421,30 @@ function infinity_option_render_meta()
 }
 
 /**
- * Render the button elements for the option
+ * Render one or both button elements for the option
  */
 function infinity_option_render_buttons()
 {
 	global $infinity_246f86b591;
 	return $infinity_246f86b591->render_buttons();
+}
+
+/**
+ * Render the save all button element for the option
+ */
+function infinity_option_render_save_all()
+{
+	global $infinity_246f86b591;
+	return $infinity_246f86b591->render_save_all();
+}
+
+/**
+ * Render the save one button element for the option
+ */
+function infinity_option_render_save_one()
+{
+	global $infinity_246f86b591;
+	return $infinity_246f86b591->render_save_one();
 }
 
 /**
