@@ -312,15 +312,15 @@ Embedding options using PHP follows this logic.
 
 Here is a basic example which would embed an option field into a screen template.
 
-	<?php
-		<form>
+	<form>
+		<?php
 			infinity_option_render_begin( 'infinity_header_logo' );
 			infinity_option_render_label();
 			infinity_option_render_field();
 			infinity_option_render_buttons();
 			infinity_option_render_end();
-		</form>
-	?>
+		?>
+	</form>
 
 #### Rendering Functions
 
@@ -364,9 +364,21 @@ Here is a basic example which would embed an option field into a screen template
 
 * **infinity\_option\_render\_buttons**
 
-	Prints option save button(s)
+	Prints one or both option save buttons
 
 		(void) infinity_option_render_buttons()
+
+* **infinity\_option\_render\_save_all**
+
+	Prints option save all button
+
+		(void) infinity_option_render_save_all()
+
+* **infinity\_option\_render\_save_one**
+
+	Prints option save one button
+
+		(void) infinity_option_render_save_one()
 
 * **infinity\_option\_render\_meta**
 
