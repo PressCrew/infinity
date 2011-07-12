@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'utils/ajax', 'options' );
+Pie_Easy_Loader::load( 'utils/ajax', 'utils/files', 'options' );
 
 /**
  * Infinity Theme: options policy
@@ -149,45 +149,8 @@ class Infinity_Options_Renderer extends Pie_Easy_Options_Renderer
 	 */
 	protected function render_output()
 	{
-		// opening elements
-		$this->render_begin( 'infinity-cpanel-options-single' );
-
-		// start rendering option elements ?>
-		<div class="infinity-cpanel-options-single-header">
-			<?php
-				$this->render_label();
-				$this->render_buttons();
-			?>
-		</div>
-		<ul>
-			<li><a href="#<?php $this->render_name() ?>-tabs-1"><?php _e('Edit Setting', infinity_text_domain) ?></a></li>
-			<?php if ( $this->has_documentation() ): ?>
-			<li><a href="#<?php $this->render_name() ?>-tabs-2"><?php _e('Documentation', infinity_text_domain) ?></a></li>
-			<?php endif; ?>
-			<?php if ( is_admin() ): ?>
-			<li><a href="#<?php $this->render_name() ?>-tabs-3"><?php _e('Sample Code', infinity_text_domain) ?></a></li>
-			<?php endif; ?>
-		</ul>
-		<div id="<?php $this->render_name() ?>-tabs-1">
-			<p><?php $this->render_description() ?></p>
-			<?php
-				$this->render_field();
-				$this->render_meta();
-			?>
-		</div>
-		<?php if ( $this->has_documentation() ): ?>
-		<div id="<?php $this->render_name() ?>-tabs-2">
-			<div class="infinity-docs"><?php $this->render_documentation( Pie_Easy_Scheme::instance()->theme_documentation_dirs() ) ?></div>
-		</div>
-		<?php endif; ?>
-		<?php if ( is_admin() ): ?>
-		<div id="<?php $this->render_name() ?>-tabs-3">
-			<p><?php $this->render_sample_code() ?></p>
-		</div>
-		<?php endif;
-
-		// all done
-		$this->render_end();
+		// load option block template
+		$this->load_template( 'block' );
 	}
 
 	/**
@@ -209,34 +172,33 @@ class Infinity_Options_Renderer extends Pie_Easy_Options_Renderer
 	 */
 	final public function render_meta()
 	{
-		// begin rendering ?>
-		<div class="infinity-cpanel-options-last-modified">
-			<?php _e('Last Modified:', infinity_text_domain) ?> <?php echo $this->render_date_updated() ?>
-		</div><?php
+		// load meta information template
+		$this->load_template( 'meta' );
 	}
 
 	/**
 	 * Render sample code for this option
 	 */
-	final protected function render_sample_code()
+	final public function render_sample_code()
 	{
-// begin rendering ?>
-<strong>Test if option is set</strong>
-<code>&lt;?php if ( infinity_option( '<?php print $this->get_current()->name ?>' ) ): ?&gt;
-    <?php print $this->get_current()->name ?> has a value
-&lt;?php endif; ?&gt;</code>
-
-<strong>Echo an option value</strong>
-<code>&lt;?php echo infinity_option( '<?php print $this->get_current()->name ?>' ); ?&gt;</code><?php
-
-		// special uploader functions
-		if ( $this->get_current() instanceof Pie_Easy_Exts_Option_Upload ) {
-// begin rendering ?>
-<strong>Echo option as image URL</strong>
-<code>&lt;img src="&lt;?php echo infinity_option_image_url( '<?php print $this->get_current()->name ?>' ); ?&gt;"&gt;</code><?php
-		}
+		// load sample code template
+		$this->load_template( 'sample_code' );
 	}
 
+	/**
+	 * @ignore
+	 * @param string $name
+	 */
+	private function load_template( $name )
+	{
+		infinity_dashboard_load_template(
+			Pie_Easy_Files::path_build( 'options', $name . '.php', true ),
+			array(
+				'option' => $this->get_current(),
+				'renderer' => $this
+			)
+		);
+	}
 }
 
 /**
@@ -466,7 +428,7 @@ function infinity_option_render_end()
 /**
  * Render a menu composed of all the sections with their options.
  *
- * @ignore
+ * @param array $args
  */
 function infinity_options_render_menu( $args = null )
 {
@@ -498,21 +460,17 @@ function infinity_options_render_menu( $args = null )
 	// get only "root" sections
 	$sections = $sections_registry->get_roots( $get_sections );
 
-	// begin rendering ?>
-	<div id="menu___root" class="infinity-cpanel-options-menu"><?php
-
-	// loop through fetched sections and render
-	foreach ( $sections as $section ) {
-		infinity_options_render_menu_section( $section );
-	}?>
-
-	</div><?php
+	// load the menu template
+	infinity_dashboard_load_template(
+		Pie_Easy_Files::path_build( 'options', 'menu.php', true ),
+		array( 'sections' => $sections )
+	);
 }
 
 /**
  * Render a menu section
  *
- * @ignore
+ * @param Pie_Easy_Sections_Section $section
  */
 function infinity_options_render_menu_section( Pie_Easy_Sections_Section $section )
 {
@@ -532,39 +490,29 @@ function infinity_options_render_menu_section( Pie_Easy_Sections_Section $sectio
 		return;
 	}
 
-	// begin rendering ?>
-	<div id="menu___<?php print esc_attr( $section->name ) ?>">
-		<a><?php print esc_html( $section->title ) ?></a>
-		<a id="section___<?php print esc_attr( $section->name ) ?>" class="infinity-cpanel-options-menu-show infinity-cpanel-options-menu-showall" href="#"><?php _e('Show All', infinity_text_domain) ?></a>
-	</div><?php
-
-	if ( $children ) {
-		// render all children sections ?>
-		<div><div id="submenu___<?php print esc_attr( $section->name ) ?>" class="infinity-cpanel-options-menu infinity-cpanel-options-submenu"><?php
-			foreach ( $children as $child ) {
-				infinity_options_render_menu_section( $child );
-			}?>
-		</div></div><?php
-	} else {
-		// render this section's options
-		infinity_options_render_menu_options( $options );
-	}
+	// load the menu section template
+	infinity_dashboard_load_template(
+		Pie_Easy_Files::path_build( 'options', 'menu_section.php', true ),
+		array(
+			'section' => $section,
+			'children' => $children,
+			'options' => $options
+		)
+	);
 }
 
 /**
  * Render options for a menu section
  *
- * @ignore
  * @param array $options
  */
 function infinity_options_render_menu_options( $options )
 {
-	// begin rendering ?>
-	<ul><?php
-	foreach( $options as $option ) { ?>
-		<li><a id="option___<?php print esc_attr( $option->name ) ?>" class="infinity-cpanel-options-menu-show" href="#"><?php print esc_html( $option->title ) ?></a></li><?php
-	}?>
-	</ul><?php
+	// load the menu options template
+	infinity_dashboard_load_template(
+		Pie_Easy_Files::path_build( 'options', 'menu_options.php', true ),
+		array( 'options' => $options )
+	);
 }
 
 /**
