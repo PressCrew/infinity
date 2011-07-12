@@ -46,8 +46,11 @@ function infinity_dashboard_load_template( $rel_path, $args = null, $defaults = 
 	// populate local scope
 	extract( wp_parse_args( $args, (array) $defaults ) );
 
-	// include the template
-	include( INFINITY_ADMIN_TPLS_DIR . DIRECTORY_SEPARATOR . $rel_path );
+	// format template path
+	$template = INFINITY_ADMIN_TPLS_REL . DIRECTORY_SEPARATOR . $rel_path;
+
+	// locate and include the template
+	include( infinity_locate_template( $template ) );
 }
 
 /**

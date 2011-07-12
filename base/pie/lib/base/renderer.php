@@ -226,7 +226,7 @@ abstract class Pie_Easy_Renderer extends Pie_Easy_Componentable
 	 * 
 	 * @todo this should be defined by an interface
 	 */
-	protected function render_sample_code() {}
+	public function render_sample_code() {}
 
 }
 
