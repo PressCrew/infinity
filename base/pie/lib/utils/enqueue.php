@@ -34,7 +34,7 @@ final class Pie_Easy_Enqueue
 	/**
 	 * Default UI style handle
 	 */
-	const DEFAULT_UI_STYLE = '@:ui';
+	const UI_STYLE_HANDLE = '@:ui';
 
 	/**
 	 * @var Pie_Easy_Enqueue
@@ -46,7 +46,7 @@ final class Pie_Easy_Enqueue
 	 *
 	 * @var string
 	 */
-	private $ui_style_handle;
+	private $ui_stylesheet;
 
 	/**
 	 * This is a singleton
@@ -92,29 +92,30 @@ final class Pie_Easy_Enqueue
 	}
 
 	/**
-	 * Set/Get UI style handle
+	 * Set/Get UI style sheet
 	 *
-	 * Get or set the style hande that has the path to the jQuery UI stylesheet that should
+	 * Get or set the style sheet path to the jQuery UI style sheet that should
 	 * be enqueued. This is important to ensure that the UI styles load before everything else.
 	 *
 	 * This method is used internally in PIE. There should be no reason to call this.
 	 *
-	 * @param string $handle
+	 * @ignore
+	 * @param string $stylesheet
 	 */
-	public function ui_style_handle( $handle = null )
+	public function ui_stylesheet( $stylesheet = null )
 	{
-		if ( $handle ) {
-			if ( empty( $this->ui_style_handle ) ) {
-				$this->ui_style_handle = $handle;
+		if ( $stylesheet ) {
+			if ( empty( $this->ui_stylesheet ) ) {
+				$this->ui_stylesheet = $stylesheet;
 			} else {
 				throw new Exception( 'Cannot set style handle once it has been set' );
 			}
 		}
 
-		if ( $this->ui_style_handle ) {
-			return $this->ui_style_handle;
+		if ( $this->ui_stylesheet ) {
+			return $this->ui_stylesheet;
 		} else {
-			return self::DEFAULT_UI_STYLE;
+			return null;
 		}
 	}
 
@@ -213,14 +214,20 @@ final class Pie_Easy_Enqueue
 	 */
 	public function do_enqueue_styles()
 	{
-		// get ui handle
-		$ui_handle = $this->ui_style_handle();
-
-		// register default UI
-		$this->register_style(
-			self::DEFAULT_UI_STYLE,
-			'ui.css'
-		);
+		// have a custom ui stylesheet?
+		if ( $this->ui_stylesheet ) {
+			// register custom ui stylesheet
+			wp_register_style(
+				self::UI_STYLE_HANDLE,
+				$this->ui_stylesheet
+			);
+		} else {
+			// register default ui stylesheet
+			$this->register_style(
+				self::UI_STYLE_HANDLE,
+				'ui.css'
+			);
+		}
 
 		// core pie styles
 		$this->register_style(

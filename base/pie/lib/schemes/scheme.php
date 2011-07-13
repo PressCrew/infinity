@@ -41,7 +41,7 @@ final class Pie_Easy_Scheme
 	const DIRECTIVE_SCRIPT_ACTS = 'script_actions';
 	const DIRECTIVE_SCRIPT_CONDS = 'script_conditions';
 	const DIRECTIVE_ADVANCED = 'advanced';
-	const DIRECTIVE_JUI_THEME = 'jui_theme';
+	const DIRECTIVE_UI_STYLESHEET = 'ui_stylesheet';
 	const DIRECTIVE_SCRIPT_DOMAIN = 'script_domain';
 	const DIRECTIVE_OPT_SAVE_SINGLE = 'options_save_single';
 	/**#@-*/

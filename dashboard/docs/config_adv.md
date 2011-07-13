@@ -4,12 +4,12 @@ Infinity has some additional configuration directives which are available for sp
 
 ### Directives
 
-#### jui\_theme
+#### ui\_stylesheet
 
-The jui\_theme is where you define your jQuery UI theme style sheet handle as defined in
-the `[scripts]` section if you which to override the default theme.
+The ui\_stylesheet is where you define an alternate jQuery UI theme stylesheet if you wish
+to use a theme other than the default which is defined internally.
 
-	jui_theme = "ui_style_handle"
+	ui_stylesheet = "path/to/ui-custom.css"
 
 #### options\_save\_single
 

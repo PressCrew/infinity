@@ -150,50 +150,14 @@ class Pie_Easy_Scheme_Enqueue
 	 */
 	private function setup_ui( Pie_Easy_Map $style_defs )
 	{
-		// custom JUI set?
-		$jui_active_theme = $this->scheme->directives()->get( Pie_Easy_Scheme::DIRECTIVE_JUI_THEME );
-
-		// try to make a handle
-		if ( $jui_active_theme instanceof Pie_Easy_Init_Directive ) {
-			$jui_active_handle = $this->make_handle( $jui_active_theme->theme, $jui_active_theme->value );
-		} else {
-			return false;
-		}
-
-		// get the entire JUI theme map
-		$jui_theme_map = $this->scheme->directives()->get_map( Pie_Easy_Scheme::DIRECTIVE_JUI_THEME );
-
-		// loop through all JUI theme maps
-		foreach ( $jui_theme_map as $jui_theme ) {
-			// jui handle for this iteration
-			$jui_handle = $this->make_handle($jui_theme->theme, $jui_theme->value);
-			// is this the active jui handle?
-			if ( $jui_handle == $jui_active_handle ) {
-				// try to get jui theme settings theme styles
-				if ( $style_defs->contains( $jui_theme->theme ) ) {
-					// ok, we have the styles
-					$theme_styles = $style_defs->item_at($jui_theme->theme)->value;
-					// do the theme styles contain the theme handle
-					if ( $theme_styles->contains( $jui_theme->value ) ) {
-						// yes! register it
-						wp_register_style(
-							$jui_handle,
-							$this->enqueue_path(
-								$jui_theme->theme,
-								$theme_styles->item_at($jui_theme->value)
-							),
-							(is_admin()) ? array('colors') : array()
-						);
-						// set it as the ui style handle in the enqueuer
-						Pie_Easy_Enqueue::instance()->ui_style_handle( $jui_handle );
-						// skip to next loop to avoid the ignore list!
-						continue;
-					}
-				}
-			}
-
-			// jui handle was not used, so add it to the ignore stack
-			$this->styles_ignore->push( $jui_handle );
+		// get custom ui stylesheet directive
+		$ui_stylesheet = $this->scheme->directives()->get( Pie_Easy_Scheme::DIRECTIVE_UI_STYLESHEET );
+		
+		// custom ui stylesheet set?
+		if ( $ui_stylesheet instanceof Pie_Easy_Init_Directive ) {
+			Pie_Easy_Enqueue::instance()->ui_stylesheet(
+				Pie_Easy_Files::theme_file_url( $ui_stylesheet->theme, $ui_stylesheet->value )
+			);
 		}
 	}
 
