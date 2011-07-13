@@ -203,7 +203,6 @@ div.infinity-cpanel-options-menu {
 	width: 220px;
     box-shadow: 1px 3px 3px rgba(213, 209, 209, 0.5);
 }
-/*	div.infinity-cpanel-options-menu .ui-state-active a,*/
 	div.infinity-cpanel-options-menu .ui-widget-content a .ui-state-active a {
 		background: url("../images/cpanel_texture.png") repeat-x scroll 0 -112px transparent;
 		border-bottom: 1px solid #222222;

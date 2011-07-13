@@ -522,63 +522,61 @@ function infinity_options_render_menu_options( $options )
  */
 function infinity_options_render_options_screen()
 {
-	// load type
-	if ( !empty($_POST['load_type']) ) {
-		$load_type = $_POST['load_type'];
+	// section
+	$load_section = null;
+	
+	if ( !empty($_POST['load_section']) ) {
+		$load_section = $_POST['load_section'];
 	} else {
-		Pie_Easy_Ajax::responseStd( false, 'Missing required "load_type" parameter' );
+		Pie_Easy_Ajax::responseStd( false, 'Missing required "load_section" parameter' );
 	}
 
-	// load name
-	if ( !empty($_POST['load_name']) ) {
-		$load_name = $_POST['load_name'];
-	} else {
-		Pie_Easy_Ajax::responseStd( false, 'Missing requried "load_name" parameter' );
-	}
+	// option
+	$load_option = null;
 
-	// current theme name
-	$theme = get_stylesheet();
+	if ( !empty($_POST['load_option']) ) {
+		$load_option = $_POST['load_option'];
+	}
 
 	// options to render
 	$options = array();
 
-	// populate options array
-	switch( $load_type ) {
-		// load all options in a section
-		case 'section':
-			// look up section
-			$section = Infinity_Sections_Policy::instance()->registry($theme)->get( $load_name );
-			// did we get a valid section?
-			if ( $section instanceof Pie_Easy_Sections_Section ) {
-				// get all options for this section
-				$options = Infinity_Options_Policy::instance()->registry($theme)->get_menu_options( $section );
-			}
-			break;
-		// load a single option
-		case 'option':
+	// look up section
+	$section = Infinity_Sections_Policy::instance()->registry()->get( $load_section );
+
+	// did we get a valid section?
+	if ( $section instanceof Pie_Easy_Sections_Section ) {
+		// load specific option?
+		if ( $load_option ) {
 			// look up the single option
-			$option = Infinity_Options_Policy::instance()->registry($theme)->get( $load_name );
+			$option = Infinity_Options_Policy::instance()->registry()->get( $load_option );
 			// did we get a valid option?
 			if ( $option instanceof Pie_Easy_Options_Option ) {
 				// add it to options to array
 				$options[] = $option;
 			}
-			break;
-		// unknown load type
-		default:
-			Pie_Easy_Ajax::responseStd( false, sprintf( 'The load type "%s" is invalid', $load_type ) );
+		} else {
+			// get all options for the section
+			$options = Infinity_Options_Policy::instance()->registry()->get_menu_options( $section );
+		}
 	}
 
 	// content to return
 	$content = null;
+
+	// option content
+	$option_content = null;
 
 	// loop through all options and render each one
 	foreach ( $options as $option_to_render ) {
 		// enable post override
 		$option_to_render->enable_post_override();
 		// try to render the option
-		$content .= $option_to_render->render( false );
+		$section->add_component( $option_to_render );
 	}
+
+	// render the section
+	$content = $section->render( false );
 
 	// respond
 	if ( strlen($content) ) {

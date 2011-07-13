@@ -391,6 +391,7 @@
 			{
 				// what to load?
 				var load = id.split('___');
+
 				// message element
 				var message =
 					$('div#infinity-cpanel-options-flash', panel)
@@ -403,8 +404,8 @@
 					pieEasyGlobalL10n.ajax_url,
 					{
 						'action': 'infinity_options_screen',
-						'load_type': load[0],
-						'load_name': load[1]
+						'load_section': load[1],
+						'load_option': (load[3]) ? load[3] : ''
 					},
 					function(r) {
 						var sr = pieEasyAjax.splitResponseStd(r);

@@ -24,6 +24,54 @@ Pie_Easy_Loader::load( 'base' );
 abstract class Pie_Easy_Sections_Section extends Pie_Easy_Component
 {
 	/**
+	 * Components to render
+	 *
+	 * @var array
+	 */
+	private $__components__;
+
+	/**
+	 * Add component to this section's content
+	 *
+	 * @param Pie_Easy_Component $component
+	 */
+	public function add_component( Pie_Easy_Component $component )
+	{
+		// does component section match my name?
+		if ( $component->section == $this->name ) {
+			// yep, add to components array
+			$this->__components__[] = $component;
+		} else {
+			// not good
+			throw new Exception(
+				sprintf( 'The component "%s" is not assigned to the section "%s"', $component->name, $this->name ) );
+		}
+	}
+
+	/**
+	 * Render all components
+	 */
+	public function render_components()
+	{
+		foreach ( $this->__components__ as $component ) {
+			$component->render();
+		}
+	}
+
+	/**
+	 * @ignore
+	 * @return array
+	 */
+	public function get_template_vars()
+	{
+		return array(
+			'section' => $this,
+			'renderer' => $this->policy()->renderer(),
+			'components' => $this->__components__
+		);
+	}
+
+	/**
 	 * Set the title CSS class
 	 *
 	 * @param string $class
