@@ -22,48 +22,6 @@ Pie_Easy_Loader::load( 'base/registry', 'options/factory', 'utils/ajax' );
 abstract class Pie_Easy_Options_Registry extends Pie_Easy_Registry
 {
 	/**
-	 * Init ajax requirements
-	 */
-	public function init_ajax()
-	{
-		// call parent
-		parent::init_ajax();
-		
-		// init ajax for each registered option
-		foreach ( $this->get_all() as $option ) {
-			$option->init_ajax();
-		}
-	}
-	
-	/**
-	 * Init screen dependencies for all applicable options to be rendered
-	 */
-	public function init_screen()
-	{
-		// call parent
-		parent::init_screen();
-
-		// init screen for each registered option
-		foreach ( $this->get_all() as $option ) {
-			$option->init_screen();
-		}
-	}
-
-	/**
-	 * Enqueue required styles
-	 */
-	public function init_styles()
-	{
-		// call parent
-		parent::init_styles();
-		
-		// init styles for each registered option
-		foreach ( $this->get_all() as $option ) {
-			$option->init_styles();
-		}
-	}
-
-	/**
 	 * Enqueue required scripts
 	 */
 	public function init_scripts()
@@ -77,11 +35,6 @@ abstract class Pie_Easy_Options_Registry extends Pie_Easy_Registry
 		wp_enqueue_script( 'jquery-ui-dialog' );
 		wp_enqueue_script( 'jquery-ui-progressbar' );
 		wp_enqueue_script( 'jquery-ui-tabs' );
-
-		// init scripts for each registered option
-		foreach ( $this->get_all() as $option ) {
-			$option->init_scripts();
-		}
 
 		// call localize script *LAST*
 		$this->localize_script();

@@ -56,7 +56,10 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 	 */
 	public function init_ajax()
 	{
-		// init ajax for each concrete component
+		// init screen for each registered component
+		foreach ( $this->get_all() as $component ) {
+			$component->init_screen();
+		}
 	}
 
 	/**
@@ -66,17 +69,33 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 	{
 		add_action( 'pie_easy_init_styles', array($this, 'init_styles') );
 		add_action( 'pie_easy_init_scripts', array($this, 'init_scripts') );
+
+		// init screen for each registered component
+		foreach ( $this->get_all() as $component ) {
+			$component->init_screen();
+		}
 	}
 
 	/**
 	 * Enqueue required styles
 	 */
-	public function init_styles() {}
+	public function init_styles()
+	{
+		foreach ( $this->get_all() as $component ) {
+			$component->init_styles();
+		}
+	}
 
 	/**
 	 * Enqueue required scripts
 	 */
-	public function init_scripts() {}
+	public function init_scripts()
+	{
+		// init scripts for each registered component
+		foreach ( $this->get_all() as $component ) {
+			$component->init_scripts();
+		}
+	}
 
 	/**
 	 * Template method to allow localization of scripts
