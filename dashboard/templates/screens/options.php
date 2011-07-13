@@ -4,6 +4,7 @@
 		<div id="infinity-cpanel-options-flash">
 		</div>
 		<form action="" method="POST">
+			<!-- section and options markup is injected here via AJAX -->
 		</form>
 	</div>
 </div>
