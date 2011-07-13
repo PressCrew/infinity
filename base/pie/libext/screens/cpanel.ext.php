@@ -28,14 +28,14 @@ class Pie_Easy_Exts_Screen_Cpanel
 	 * 
 	 * @var Pie_Easy_Icon
 	 */
-	private $icon;
+	private $__icon__;
 
 	/**
 	 * The position object
 	 *
 	 * @var Pie_Easy_Position
 	 */
-	private $position;
+	private $__position__;
 
 	/**
 	 * Set/Return the icon object
@@ -43,13 +43,13 @@ class Pie_Easy_Exts_Screen_Cpanel
 	 * @param Pie_Easy_Icon $icon
 	 * @return Pie_Easy_Icon
 	 */
-	public function icon( Pie_Easy_Icon $icon = null )
+	final public function icon( Pie_Easy_Icon $icon = null )
 	{
 		if ( $icon ) {
-			$this->icon = $icon;
+			$this->__icon__ = $icon;
 		}
 
-		return $this->icon;
+		return $this->__icon__;
 	}
 
 	/**
@@ -58,13 +58,13 @@ class Pie_Easy_Exts_Screen_Cpanel
 	 * @param Pie_Easy_Position $position
 	 * @return Pie_Easy_Position
 	 */
-	public function position( Pie_Easy_Position $position = null )
+	final public function position( Pie_Easy_Position $position = null )
 	{
 		if ( $position ) {
-			$this->position = $position;
+			$this->__position__ = $position;
 		}
 
-		return $this->position;
+		return $this->__position__;
 	}
 
 	/**
@@ -72,7 +72,7 @@ class Pie_Easy_Exts_Screen_Cpanel
 	 *
 	 * @param boolean $toggle
 	 */
-	public function set_toolbar( $toggle )
+	final public function set_toolbar( $toggle )
 	{
 		$this->directives()->set( $this->theme, 'toolbar', $toggle );
 	}
