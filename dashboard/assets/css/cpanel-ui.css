@@ -1,7 +1,5 @@
 /* widgets */
-.ui-widget {
-	font-family: "Droid Sans",Arial,sans-serif;
-}
+.ui-widget,
 .ui-widget input,
 .ui-widget select,
 .ui-widget textarea,
@@ -10,12 +8,6 @@
 }
 
 /* interaction */
-
-.ui-state-active a,
-.ui-widget-content a
-.ui-widget-header a {
-	color: #111;
-}
 
 .ui-state-default a,
 .ui-state-default a:link,
@@ -32,9 +24,15 @@
 .ui-state-active,
 .ui-widget-content .ui-state-active,
 .ui-widget-header .ui-state-active {
+	color: #ddd;
 	outline: none;
 	-webkit-box-shadow: none;
 	-moz-box-shadow: none;
+	background-color: #444;
+	background-image: none;
+	border-color: #ddd;
+	text-shadow: 0 1px 0 #222222;
+	font-weight: bold;
 }
 
 .ui-widget-content {
