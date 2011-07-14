@@ -194,6 +194,11 @@ abstract class Pie_Easy_Factory extends Pie_Easy_Componentable
 			$component->set_class( $config['class'] );
 		}
 
+		// capabilities
+		if ( isset( $config['capabilities'] ) ) {
+			$component->add_capabilities( $config['capabilities'] );
+		}
+		
 		// set ignore
 		if ( isset( $config['ignore'] ) ) {
 			$component->set_ignore( $config['ignore'] );
