@@ -58,11 +58,6 @@ class Pie_Easy_Options_Factory extends Pie_Easy_Factory
 			$option->set_default_value( $config['default_value'], $this->loading_theme );
 		}
 
-		// capabilities
-		if ( isset( $config['capabilities'] ) ) {
-			$option->add_capabilities( $config['capabilities'] );
-		}
-
 		// documentation
 		if ( isset( $config['documentation'] ) ) {
 			$option->set_documentation( $config['documentation'] );
