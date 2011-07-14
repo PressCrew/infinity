@@ -119,10 +119,6 @@ abstract class Pie_Easy_Options_Registry extends Pie_Easy_Registry
 			if ( !$option->supported() ) {
 				unset( $options[$key] );
 			}
-			// remove options that fail caps check
-			if ( !$option->check_caps() ) {
-				unset( $options[$key] );
-			}
 		}
 
 		return $options;

@@ -301,7 +301,7 @@ abstract class Pie_Easy_Component
 	 */
 	public function supported()
 	{
-		return true;
+		return $this->check_caps();
 	}
 
 	/**
