@@ -96,6 +96,14 @@ abstract class Pie_Easy_Policy
 	}
 
 	/**
+	 * @return Pie_Easy_Widgets_Policy
+	 */
+	final static public function widgets()
+	{
+		return self::instance( 'Pie_Easy_Widgets_Policy' );
+	}
+
+	/**
 	 * @return Pie_Easy_Options_Policy
 	 */
 	final static public function options()
