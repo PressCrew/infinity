@@ -575,18 +575,14 @@ class Pie_Easy_Scheme_Enqueue
 	{
 		global $wp_styles;
 
-		if ( !is_admin() ) {
+		// enq widgets?
+		$widgets_css = Pie_Easy_Policy::widgets()->registry()->export_css_file()->path;
 
-			// enq widgets?
-			$widgets_css = Pie_Easy_Policy::widgets()->registry()->export_css_file()->path;
-
-			// check file
-			if ( file_exists( $widgets_css ) && filesize( $widgets_css ) > 0 ) {
-				wp_enqueue_style( '@:widgets' );
-				$wp_styles->query( '@:style' )->deps[] = '@:widgets';
-				$wp_styles->query( '@:options' )->deps[] = '@:widgets';
-			}
-
+		// check file
+		if ( file_exists( $widgets_css ) && filesize( $widgets_css ) > 0 ) {
+			wp_enqueue_style( '@:widgets' );
+			$wp_styles->query( '@:style' )->deps[] = '@:widgets';
+			$wp_styles->query( '@:options' )->deps[] = '@:widgets';
 		}
 	}
 
