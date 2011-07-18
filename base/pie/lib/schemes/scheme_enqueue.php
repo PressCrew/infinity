@@ -578,7 +578,7 @@ class Pie_Easy_Scheme_Enqueue
 		if ( !is_admin() ) {
 
 			// enq widgets?
-			$widgets_css = Pie_Easy_Policy::features()->registry()->export_css_file()->path;
+			$widgets_css = Pie_Easy_Policy::widgets()->registry()->export_css_file()->path;
 
 			// check file
 			if ( file_exists( $widgets_css ) && filesize( $widgets_css ) > 0 ) {
@@ -602,7 +602,7 @@ class Pie_Easy_Scheme_Enqueue
 		if ( !is_admin() ) {
 
 			// enq options?
-			$options_css = Pie_Easy_Policy::features()->registry()->export_css_file()->path;
+			$options_css = Pie_Easy_Policy::options()->registry()->export_css_file()->path;
 			
 			// check file
 			if ( file_exists( $options_css ) && filesize( $options_css ) > 0 ) {
