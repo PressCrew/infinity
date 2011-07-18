@@ -368,6 +368,30 @@ final class Pie_Easy_Loader
 		}
 	}
 
+	/**
+	 * Load WordPress wp-include files via static call
+	 *
+	 * @param string $file,... An unlimited number of files to load
+	 */
+	public function load_wp_lib()
+	{
+		foreach( func_get_args() as $file ) {
+			require_once( Pie_Easy_Files::path_build( ABSPATH, 'wp-includes', $file . '.php' ) );
+		}
+	}
+
+	/**
+	 * Load WordPress wp-admin/include files via static call
+	 *
+	 * @param string $file,... An unlimited number of files to load
+	 */
+	public function load_wpadmin_lib()
+	{
+		foreach( func_get_args() as $file ) {
+			require_once( Pie_Easy_Files::path_build( ABSPATH, 'wp-admin', 'includes', $file . '.php' ) );
+		}
+	}
+
 }
 
 ?>
