@@ -77,8 +77,21 @@ final class Pie_Easy_Files
 		}
 
 		// need prefix?
-		if ( $relative == false && $file_names[0]{0} != DIRECTORY_SEPARATOR ) {
+		if ( $relative === false ) {
 			$prefix = DIRECTORY_SEPARATOR;
+		}
+
+		// final files array
+		$file_names_clean = array();
+
+		// clean them up
+		foreach( $file_names as $file_name ) {
+			// split into parts
+			$sub_paths = self::path_split( $file_name );
+			// add to final list
+			foreach( $sub_paths as $sub_path ) {
+				array_push( $file_names_clean, $sub_path );
+			}
 		}
 
 		return $prefix . implode( DIRECTORY_SEPARATOR, $file_names );
