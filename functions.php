@@ -43,6 +43,7 @@ require_once( INFINITY_PIEXT_DIR . DIRECTORY_SEPARATOR . 'scheme.php' );
 require_once( INFINITY_PIEXT_DIR . DIRECTORY_SEPARATOR . 'sections.php' );
 require_once( INFINITY_PIEXT_DIR . DIRECTORY_SEPARATOR . 'options.php' );
 require_once( INFINITY_PIEXT_DIR . DIRECTORY_SEPARATOR . 'features.php' );
+require_once( INFINITY_PIEXT_DIR . DIRECTORY_SEPARATOR . 'widgets.php' );
 require_once( INFINITY_PIEXT_DIR . DIRECTORY_SEPARATOR . 'screens.php' );
 require_once( INFINITY_PIEXT_DIR . DIRECTORY_SEPARATOR . 'shortcodes.php' );
 require_once( INFINITY_PIEXT_DIR . DIRECTORY_SEPARATOR . 'i18n.php' );
@@ -58,6 +59,7 @@ infinity_sections_init();
 infinity_options_init();
 infinity_screens_init();
 infinity_features_init();
+infinity_widgets_init();
 infinity_shortcodes_init();
 
 if ( is_admin() ) {
@@ -65,6 +67,7 @@ if ( is_admin() ) {
 	infinity_sections_init_screen();
 	infinity_options_init_screen();
 	infinity_screens_init_screen();
+	infinity_widgets_init_screen();
 	// load admin functionality
 	require_once( INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'loader.php' );
 } else {
