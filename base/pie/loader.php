@@ -112,7 +112,9 @@ final class Pie_Easy_Loader
 		'shortcodes' =>
 			array( 'component', 'factory', 'renderer', 'policy', 'registry' ),
 		'utils' =>
-			array( 'ajax', 'docs', 'enqueue', 'export', 'files', 'i18n' )
+			array( 'ajax', 'docs', 'enqueue', 'export', 'files', 'i18n' ),
+		'widgets' =>
+			array( 'component', 'factory', 'renderer', 'policy', 'registry' )
 	);
 
 	/**

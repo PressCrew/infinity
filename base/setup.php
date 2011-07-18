@@ -189,12 +189,12 @@ endif;
 /**
  * Register widgetized areas, including two sidebars and four widget-ready columns in the footer.
  *
- * To override infinity_widgets_init() in a child theme, remove the action hook and add your own
+ * To override infinity_widgets_setup() in a child theme, remove the action hook and add your own
  * function tied to the init hook.
  *
  * @uses register_sidebar
  */
-function infinity_widgets_init() {
+function infinity_widgets_setup() {
 	// Area 1, located at the top of the sidebar.
 	register_sidebar( array(
 		'name' => __( 'Primary Widget Area', infinity_text_domain ),
@@ -261,8 +261,8 @@ function infinity_widgets_init() {
 		'after_title' => '</h3>',
 	) );
 }
-/** Register sidebars by running infinity_widgets_init() on the widgets_init hook. */
-add_action( 'widgets_init', 'infinity_widgets_init' );
+/** Register sidebars by running infinity_widgets_setup() on the widgets_init hook. */
+add_action( 'widgets_init', 'infinity_widgets_setup' );
 
 /**
  * Removes the default styles that are packaged with the Recent Comments widget.
