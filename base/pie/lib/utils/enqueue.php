@@ -229,11 +229,11 @@ final class Pie_Easy_Enqueue
 			);
 		}
 
-		// core pie styles
+		// register default styles
+
 		$this->register_style(
 			'pie-easy-colorpicker',
-			'colorpicker.css',
-			(is_admin()) ? array('colors') : array()
+			'colorpicker.css'
 		);
 
 		do_action('pie_easy_init_styles');
@@ -257,11 +257,13 @@ final class Pie_Easy_Enqueue
 		$this->register_script(
 			'pie-easy-colorpicker', 'colorpicker.js', array('jquery') );
 		$this->register_script(
+			'jquery-nestedsortable', 'jquery.ui.nestedSortable.js', array('jquery', 'jquery-ui-sortable') );
+		$this->register_script(
+			'jquery-swfupload', 'jquery.swfupload.js', array('jquery', 'swfupload-all') );
+		$this->register_script(
 			'pie-easy-global', 'global.js', array('pie-easy-colorpicker', 'jquery-ui-button') );
 		$this->register_script(
-			'pie-easy-jquery-swfupload', 'jquery.swfupload.js', array('jquery', 'swfupload-all') );
-		$this->register_script(
-			'pie-easy-uploader', 'uploader.js', array('pie-easy-global', 'pie-easy-jquery-swfupload', 'jquery-ui-button') );
+			'pie-easy-uploader', 'uploader.js', array('pie-easy-global', 'jquery-swfupload', 'jquery-ui-button') );
 
 		// localize
 		$this->localize_scripts();
