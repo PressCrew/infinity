@@ -112,6 +112,17 @@ class Infinity_Widgets_Renderer extends Pie_Easy_Widgets_Renderer
 //
 
 /**
+ * Display a widget
+ *
+ * @param string $widget_name
+ * @return string|false
+ */
+function infinity_widget( $widget_name, $output = true )
+{
+	return Infinity_Widgets_Policy::instance()->registry()->get($widget_name)->render( $output );
+}
+
+/**
  * Initialize widgets environment
  */
 function infinity_widgets_init( $theme = null )
