@@ -170,6 +170,7 @@ class Pie_Easy_Scheme_Enqueue
 	{
 		$styles = new Pie_Easy_Map();
 		$styles->add( 'features', Pie_Easy_Policy::features()->registry()->export_css_file()->url );
+		$styles->add( 'widgets', Pie_Easy_Policy::widgets()->registry()->export_css_file()->url );
 		$styles->add( 'options', Pie_Easy_Policy::options()->registry()->export_css_file()->url );
 		$styles->add( 'style', get_bloginfo( 'stylesheet_url' ) );
 
@@ -179,6 +180,7 @@ class Pie_Easy_Scheme_Enqueue
 
 		// hook up styles internal handler
 		add_action( self::ACTION_HANDLER_STYLES, array( $this, 'handle_style_features' ), 1 );
+		add_action( self::ACTION_HANDLER_STYLES, array( $this, 'handle_style_widgets' ), 1 );
 		add_action( self::ACTION_HANDLER_STYLES, array( $this, 'handle_style_options' ), 99999 );
 
 		// init ui env
@@ -559,6 +561,30 @@ class Pie_Easy_Scheme_Enqueue
 				wp_enqueue_style( '@:features' );
 				$wp_styles->query( '@:style' )->deps[] = '@:features';
 				$wp_styles->query( '@:options' )->deps[] = '@:features';
+			}
+
+		}
+	}
+
+	/**
+	 * Handle enqueing widgets stylesheet
+	 *
+	 * @ignore
+	 */
+	public function handle_style_widgets()
+	{
+		global $wp_styles;
+
+		if ( !is_admin() ) {
+
+			// enq widgets?
+			$widgets_css = Pie_Easy_Policy::features()->registry()->export_css_file()->path;
+
+			// check file
+			if ( file_exists( $widgets_css ) && filesize( $widgets_css ) > 0 ) {
+				wp_enqueue_style( '@:widgets' );
+				$wp_styles->query( '@:style' )->deps[] = '@:widgets';
+				$wp_styles->query( '@:options' )->deps[] = '@:widgets';
 			}
 
 		}
