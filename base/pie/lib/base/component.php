@@ -245,9 +245,11 @@ abstract class Pie_Easy_Component
 	 */
 	final public function check_caps()
 	{
-		foreach ( $this->capabilities as $cap ) {
-			if ( !current_user_can( $cap ) ) {
-				return false;
+		if ( !empty( $this->capabilities ) ) {
+			foreach ( $this->capabilities as $cap ) {
+				if ( !current_user_can( $cap ) ) {
+					return false;
+				}
 			}
 		}
 
