@@ -347,7 +347,9 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 		}
 
 		// prettyfication
-		$css .= "\n";
+		if ( $css ) {
+			$css .= "\n";
+		}
 
 		// loop through for inline rules
 		foreach ( $this->get_all() as $component ) {
