@@ -136,8 +136,17 @@ class Pie_Easy_Export
 	 */
 	public function update()
 	{
-		if ( $this->write( call_user_func( $this->callback ) ) ) {
-			$this->updated = true;
+		// get result of callback
+		$result = call_user_func( $this->callback );
+
+		// any result?
+		if ( $result ) {
+			if ( $this->write( call_user_func( $this->callback ) ) ) {
+				$this->updated = true;
+				return true;
+			}
+		} else {
+			// no content to write, technically not an error
 			return true;
 		}
 
