@@ -452,6 +452,7 @@ final class Pie_Easy_Scheme
 	{
 		foreach ( $this->config_files_loaded as $file ) {
 			Pie_Easy_Policy::features()->registry()->export_css_file()->refresh( @filemtime( $file ) );
+			Pie_Easy_Policy::widgets()->registry()->export_css_file()->refresh( @filemtime( $file ) );
 			Pie_Easy_Policy::options()->registry()->export_css_file()->refresh( @filemtime( $file ) );
 		}
 	}
