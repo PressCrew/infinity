@@ -146,8 +146,8 @@ class Pie_Easy_Export
 				return true;
 			}
 		} else {
-			// no content to write, technically not an error
-			return true;
+			// no content to write, remove it
+			return $this->remove();
 		}
 
 		return false;
@@ -187,6 +187,20 @@ class Pie_Easy_Export
 		}
 	}
 
+	/**
+	 * Remove the export file
+	 *
+	 * @return boolean
+	 */
+	private function remove()
+	{
+		// mark as updated to avoid n+ delete attempts
+		$this->updated = true;
+
+		if ( file_exists( $this->path ) && is_writable( $this->path ) ) {
+			return unlink( $this->path );
+		}
+	}
 }
 
 /**
