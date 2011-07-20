@@ -54,8 +54,8 @@ final class Pie_Easy_Enqueue
 	private function __construct()
 	{
 		// use our our actions because things get too freaking confusing
-		add_action( 'wp_loaded', array($this, 'do_enqueue_styles'), 99999 );
-		add_action( 'wp_loaded', array($this, 'do_enqueue_scripts'), 99999 );
+		add_action( 'template_redirect', array($this, 'do_enqueue_styles'), 99999 );
+		add_action( 'template_redirect', array($this, 'do_enqueue_scripts'), 99999 );
 		add_action( 'admin_init', array($this, 'do_enqueue_styles'), 99999 );
 		add_action( 'admin_init', array($this, 'do_enqueue_scripts'), 99999 );
 	}
