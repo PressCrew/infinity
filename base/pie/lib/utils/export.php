@@ -141,7 +141,7 @@ class Pie_Easy_Export
 
 		// any result?
 		if ( $result ) {
-			if ( $this->write( call_user_func( $this->callback ) ) ) {
+			if ( $this->write( $result ) ) {
 				$this->updated = true;
 				return true;
 			}
