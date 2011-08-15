@@ -31,16 +31,19 @@ class Pie_Easy_Exts_Option_Upload
 
 	public function init_styles()
 	{
+		parent::init_styles();
 		$this->policy()->uploader()->init_styles();
 	}
 
 	public function init_scripts()
 	{
+		parent::init_styles();
 		$this->policy()->uploader()->init_scripts();
 	}
 
 	public function init_ajax()
 	{
+		parent::init_ajax();
 		$this->policy()->uploader()->init_ajax();
 	}
 
