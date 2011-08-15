@@ -22,11 +22,13 @@ class Pie_Easy_Exts_Option_Colorpicker
 {
 	public function init_styles()
 	{
+		parent::init_styles();
 		wp_enqueue_style( 'pie-easy-colorpicker' );
 	}
 
 	public function init_scripts()
 	{
+		parent::init_scripts();
 		wp_enqueue_script( 'pie-easy-colorpicker' );
 	}
 
