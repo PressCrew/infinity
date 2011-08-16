@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'collections', 'utils/files' );
+Pie_Easy_Loader::load( 'base/asset' );
 
 /**
  * Make styles for components easy
@@ -19,7 +19,7 @@ Pie_Easy_Loader::load( 'collections', 'utils/files' );
  * @package PIE
  * @subpackage base
  */
-class Pie_Easy_Style
+class Pie_Easy_Style extends Pie_Easy_Asset
 {
 	/**
 	 * The rules
@@ -29,30 +29,14 @@ class Pie_Easy_Style
 	private $rules;
 
 	/**
-	 * The files
-	 *
-	 * @var Pie_Easy_Stack
-	 */
-	private $files;
-
-	/**
 	 * Constructor
 	 */
 	public function __construct()
 	{
-		// init rules and files maps
-		$this->rules = new Pie_Easy_Stack();
-		$this->files = new Pie_Easy_Stack();
-	}
+		parent::__construct();
 
-	/**
-	 * Add a file
-	 *
-	 * @param string $file
-	 */
-	public function add_file( $file )
-	{
-		$this->files->push( $file );
+		// init rules map
+		$this->rules = new Pie_Easy_Stack();
 	}
 
 	/**
@@ -84,11 +68,11 @@ class Pie_Easy_Style
 		$markup = null;
 
 		// render import statements first
-		if ( $this->files->count() ) {
+		if ( $this->has_files() ) {
 			// one per line
-			foreach ( $this->files as $file ) {
+			foreach ( $this->get_files() as $file ) {
 				// make sure it actually exists
-				$filepath = Pie_Easy_Scheme::instance()->locate_style( $file );
+				$filepath = Pie_Easy_Scheme::instance()->locate_file( $file );
 				// find it?
 				if ( $filepath ) {
 					$markup .= sprintf( "@import '%s';", Pie_Easy_Files::theme_file_to_url( $filepath ) ) . PHP_EOL;

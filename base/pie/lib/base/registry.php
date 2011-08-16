@@ -42,6 +42,11 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 	private $export_css_file;
 
 	/**
+	 * @var Pie_Easy_Export
+	 */
+	private $export_js_file;
+
+	/**
 	 * Singleton constructor
 	 * @ignore
 	 */
@@ -56,9 +61,9 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 	 */
 	public function init_ajax()
 	{
-		// init screen for each registered component
+		// init ajax for each registered component
 		foreach ( $this->get_all() as $component ) {
-			$component->init_screen();
+			$component->init_ajax();
 		}
 	}
 
@@ -69,7 +74,7 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 	{
 		add_action( 'pie_easy_init_styles', array($this, 'init_styles') );
 		add_action( 'pie_easy_init_scripts', array($this, 'init_scripts') );
-
+		
 		// init screen for each registered component
 		foreach ( $this->get_all() as $component ) {
 			$component->init_screen();
@@ -127,9 +132,6 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 			$comp_stack = new Pie_Easy_Stack();
 			$this->components->add( $component->name, $comp_stack );
 		};
-
-		// set policy
-		$component->policy( $this->policy() );
 
 		// register it
 		$comp_stack->push( $component );
@@ -379,6 +381,47 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 		}
 
 		return $this->export_css_file;
+	}
+
+	/**
+	 * Export javascript code from all registered component
+	 * that implement the scriptable interface
+	 *
+	 * @return string
+	 */
+	public function export_script()
+	{
+		// code to return
+		$code = '';
+
+		// loop through all components
+		foreach ( $this->get_all() as $component ) {
+			// component must be supported
+			if ( $component->supported() ) {
+				// get code
+				$code .= $component->export_script();
+			}
+		}
+
+		return $code;
+	}
+	
+	/**
+	 * Return dynamic script object
+	 *
+	 * @return Pie_Easy_Export
+	 */
+	public function export_js_file()
+	{
+		if ( !$this->export_js_file instanceof Pie_Easy_Export ) {
+			$this->export_js_file =
+				new Pie_Easy_Export(
+					$this->policy()->get_handle() . '.js',
+					array( $this, 'export_script' )
+				);
+		}
+
+		return $this->export_js_file;
 	}
 
 }

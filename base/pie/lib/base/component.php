@@ -15,6 +15,8 @@ Pie_Easy_Loader::load(
 	'base/componentable',
 	'base/style',
 	'base/styleable',
+	'base/script',
+	'base/scriptable',
 	'init/directive',
 	'utils/files'
 );
@@ -35,12 +37,11 @@ Pie_Easy_Loader::load(
  * @property-read string $required_feature Feature required for this component to run/display
  * @property-read string $required_option Options only required if this component is run/displayed
  * @property-read boolean $ignore Whether or not this component should be ignored
- * @property-read string $stylesheet Relative path to component stylesheet file
  * @property-read string $template Relative path to component template file
  */
 abstract class Pie_Easy_Component
 	extends Pie_Easy_Componentable
-		implements Pie_Easy_Styleable
+		implements Pie_Easy_Styleable, Pie_Easy_Scriptable
 {
 	/**
 	 * Name of the default section
@@ -91,6 +92,13 @@ abstract class Pie_Easy_Component
 	 * @var Pie_Easy_Style
 	 */
 	private $__style__;
+
+	/**
+	 * Component's scripting if applicable
+	 *
+	 * @var Pie_Easy_Script
+	 */
+	private $__script__;
 
 	/**
 	 * @param string $theme The theme that created this option
@@ -176,6 +184,20 @@ abstract class Pie_Easy_Component
 	}
 
 	/**
+	 * Return script object
+	 *
+	 * @return Pie_Easy_Script
+	 */
+	public function script()
+	{
+		if ( !$this->__script__ instanceof Pie_Easy_Script ) {
+			$this->__script__ = new Pie_Easy_Script();
+		}
+
+		return $this->__script__;
+	}
+
+	/**
 	 * Execute style import
 	 *
 	 * @return string
@@ -194,7 +216,35 @@ abstract class Pie_Easy_Component
 	{
 		return $this->style()->export();
 	}
-	
+
+	/**
+	 * Execute script exporter
+	 *
+	 * @return string
+	 */
+	public function export_script()
+	{
+		return $this->script()->export();
+	}
+
+	/**
+	 * Make a unique js function name
+	 *
+	 * @return string
+	 */
+	public function make_script_function( $suffix = null )
+	{
+		// split comp name at legal delims
+		$parts = preg_split( '/_|-/', $this->name );
+
+		// capitalize each part
+		foreach ( $parts as &$part ) {
+			$part = ucfirst( $part );
+		}
+
+		return $this->policy()->get_handle() . implode('', $parts) . ucfirst( $suffix );
+	}
+
 	/**
 	 * Set a custom directive (pass thru var)
 	 *
@@ -293,7 +343,8 @@ abstract class Pie_Easy_Component
 	 */
 	public function init_scripts()
 	{
-		// override this method to initialize special script handling for an option
+		// enqueue scripts added via scriptable
+		$this->script()->enqueue();
 	}
 
 	/**
@@ -401,10 +452,30 @@ abstract class Pie_Easy_Component
 	 * Set the stylesheet file path
 	 *
 	 * @param string $path
+	 * @param array $deps
 	 */
-	public function set_stylesheet( $path )
+	public function set_style( $path, $deps = null )
 	{
-		$this->style()->add_file( $path );
+		// format a handle name
+		$handle = sprintf( '%s-%s', $this->policy()->get_handle(), $this->name );
+
+		// add the file
+		$this->style()->add_file( $handle, $path, $deps );
+	}
+
+	/**
+	 * Set the script file path
+	 *
+	 * @param string $path
+	 * @param array $deps
+	 */
+	public function set_script( $path, $deps = null )
+	{
+		// format a handle name
+		$handle = sprintf( '%s-%s', $this->policy()->get_handle(), $this->name );
+
+		// add the file
+		$this->script()->add_file( $handle, $path, $deps );
 	}
 
 	/**

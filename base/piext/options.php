@@ -41,6 +41,24 @@ class Infinity_Options_Policy extends Pie_Easy_Options_Policy
 	}
 
 	/**
+	 * @ignore
+	 * @return boolean
+	 */
+	final public function enable_styling()
+	{
+		return ( is_admin() );
+	}
+
+	/**
+	 * @ignore
+	 * @return boolean
+	 */
+	final public function enable_scripting()
+	{
+		return ( is_admin() );
+	}
+	
+	/**
 	 * @return Infinity_Options_Registry
 	 */
 	final public function new_registry()

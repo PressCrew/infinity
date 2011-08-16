@@ -86,11 +86,13 @@ final class Pie_Easy_Loader
 	private $pkgs = array(
 		'base' =>
 			array(
+				'asset',
 				'component', 'componentable',
 				'icon', 'iconable',
 				'factory',
 				'policy', 'policeable', 'position', 'positionable',
 				'registry', 'renderer',
+				'script', 'scriptable',
 				'style', 'styleable'
 			),
 		'collections' =>
@@ -143,7 +145,7 @@ final class Pie_Easy_Loader
 		'screens' => array( 'cpanel' ),
 		'sections' => array( 'default' ),
 		'shortcodes' => array( 'access' ),
-		'widgets' => array()
+		'widgets' => array( 'posts-list' )
 	);
 
 	/**
@@ -157,7 +159,7 @@ final class Pie_Easy_Loader
 		'screens' => 'Pie_Easy_Exts_Screen',
 		'sections' => 'Pie_Easy_Exts_Section',
 		'shortcodes' => 'Pie_Easy_Exts_Shortcode',
-		'widgets' => 'Pie_Easy_Exts_Widget',
+		'widgets' => 'Pie_Easy_Exts_Widget'
 	);
 
 	/**
