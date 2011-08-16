@@ -182,7 +182,7 @@ final class Pie_Easy_Scheme
 		// try to load additional functions files after WP theme setup
 		add_action( 'after_setup_theme', array($this, 'init_enqueueing') );
 		add_action( 'after_setup_theme', array($this, 'load_functions') );
-		add_action( 'after_setup_theme', array($this, 'export_css_refresh') );
+		add_action( 'after_setup_theme', array($this, 'exports_refresh') );
 
 		return true;
 	}
@@ -446,14 +446,18 @@ final class Pie_Easy_Scheme
 	}
 
 	/**
-	 * Refresh dynamic css file if necessary
+	 * Refresh dynamic css/js file if necessary
 	 */
-	public function export_css_refresh()
+	public function exports_refresh()
 	{
 		foreach ( $this->config_files_loaded as $file ) {
-			Pie_Easy_Policy::features()->registry()->export_css_file()->refresh( @filemtime( $file ) );
-			Pie_Easy_Policy::widgets()->registry()->export_css_file()->refresh( @filemtime( $file ) );
-			Pie_Easy_Policy::options()->registry()->export_css_file()->refresh( @filemtime( $file ) );
+			// config was was last modified...
+			$mtime = @filemtime( $file );
+			// try to refresh against every policy
+			foreach( Pie_Easy_Policy::all() as $policy ) {
+				$policy->registry()->export_css_file()->refresh( $mtime );
+				$policy->registry()->export_js_file()->refresh( $mtime );
+			}
 		}
 	}
 
@@ -663,7 +667,7 @@ final class Pie_Easy_Scheme
 	 * @param string $file_names,... The file names that make up the RELATIVE path to the theme root
 	 * @return string|false
 	 */
-	private function locate_file()
+	public function locate_file()
 	{
 		// get all args
 		$file_names = func_get_args();
@@ -765,6 +769,8 @@ final class Pie_Easy_Scheme
 			$args = func_get_args();
 			// throw out the first one
 			array_shift( $args );
+			// add directive path
+			array_unshift( $args, $this->directives()->get($path_directive)->value );
 			// locate it
 			return call_user_func_array( array($this,'locate_file'), $args );
 		}

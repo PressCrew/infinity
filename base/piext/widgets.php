@@ -41,6 +41,24 @@ class Infinity_Widgets_Policy extends Pie_Easy_Widgets_Policy
 	}
 
 	/**
+	 * @ignore
+	 * @return boolean
+	 */
+	final public function enable_styling()
+	{
+		return ( is_admin() );
+	}
+
+	/**
+	 * @ignore
+	 * @return boolean
+	 */
+	final public function enable_scripting()
+	{
+		return ( is_admin() );
+	}
+	
+	/**
 	 * @return Infinity_Widgets_Registry
 	 */
 	final public function new_registry()

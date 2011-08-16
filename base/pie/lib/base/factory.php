@@ -169,6 +169,9 @@ abstract class Pie_Easy_Factory extends Pie_Easy_Componentable
 		// create new component
 		$component = new $class_name( $theme, $name, $config['title'] );
 
+		// set the policy
+		$component->policy( $this->policy() );
+		
 		// desc
 		if ( isset( $config['description'] ) ) {
 			$component->set_description( $config['description'] );
@@ -180,8 +183,27 @@ abstract class Pie_Easy_Factory extends Pie_Easy_Componentable
 		}
 
 		// set stylesheet
-		if ( isset( $config['stylesheet'] ) ) {
-			$component->set_stylesheet( $config['stylesheet'] );
+		if ( isset( $config['style'] ) ) {
+			// no deps by default
+			$deps = array();
+			// any deps?
+			if ( isset( $config['style_depends'] ) ) {
+				$deps = explode( ',', $config['style_depends'] );
+			}
+			// set the stylesheet
+			$component->set_style( $config['style'], $deps );
+		}
+
+		// set script
+		if ( isset( $config['script'] ) ) {
+			// no deps by default
+			$deps = array();
+			// any deps?
+			if ( isset( $config['script_depends'] ) ) {
+				$deps = explode( ',', $config['script_depends'] );
+			}
+			// set the script
+			$component->set_script( $config['script'], $deps );
 		}
 
 		// set template

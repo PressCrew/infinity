@@ -236,6 +236,7 @@ final class Pie_Easy_Enqueue
 			'colorpicker.css'
 		);
 
+		do_action('pie_easy_register_styles');
 		do_action('pie_easy_init_styles');
 		do_action('pie_easy_enqueue_styles');
 	}
@@ -257,7 +258,7 @@ final class Pie_Easy_Enqueue
 		$this->register_script(
 			'pie-easy-colorpicker', 'colorpicker.js', array('jquery') );
 		$this->register_script(
-			'jquery-nestedsortable', 'jquery.ui.nestedSortable.js', array('jquery', 'jquery-ui-sortable') );
+			'jquery-ui-nestedsortable', 'jquery.ui.nestedSortable.js', array('jquery', 'jquery-ui-sortable') );
 		$this->register_script(
 			'jquery-swfupload', 'jquery.swfupload.js', array('jquery', 'swfupload-all') );
 		$this->register_script(
@@ -269,6 +270,7 @@ final class Pie_Easy_Enqueue
 		$this->localize_scripts();
 
 		// actions!
+		do_action('pie_easy_register_scripts');
 		do_action('pie_easy_init_scripts');
 		do_action('pie_easy_enqueue_scripts');
 		do_action('pie_easy_localize_scripts');

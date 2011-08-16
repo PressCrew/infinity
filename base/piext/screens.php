@@ -41,6 +41,24 @@ class Infinity_Screens_Policy extends Pie_Easy_Screens_Policy
 	}
 
 	/**
+	 * @ignore
+	 * @return boolean
+	 */
+	final public function enable_styling()
+	{
+		return ( is_admin() );
+	}
+
+	/**
+	 * @ignore
+	 * @return boolean
+	 */
+	final public function enable_scripting()
+	{
+		return ( is_admin() );
+	}
+
+	/**
 	 * @return Infinity_Screens_Registry
 	 */
 	final public function new_registry()

@@ -88,6 +88,16 @@ abstract class Pie_Easy_Policy
 	}
 
 	/**
+	 * Return array of all policy instances
+	 * 
+	 * @return array 
+	 */
+	final static public function all()
+	{
+		return self::$instances->to_array();
+	}
+
+	/**
 	 * @return Pie_Easy_Features_Policy
 	 */
 	final static public function features()
@@ -151,6 +161,20 @@ abstract class Pie_Easy_Policy
 	 * @return string
 	 */
 	abstract public function get_handle();
+
+	/**
+	 * Return true to enable policy styling
+	 *
+	 * @return boolean
+	 */
+	abstract public function enable_styling();
+
+	/**
+	 * Return true to enable policy scripting
+	 *
+	 * @return boolean
+	 */
+	abstract public function enable_scripting();
 	
 	/**
 	 * Return a new instance of a component registry

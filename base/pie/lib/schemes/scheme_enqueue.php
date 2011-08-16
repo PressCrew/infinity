@@ -37,14 +37,6 @@ class Pie_Easy_Scheme_Enqueue
 	const TRIGGER_CONDS = 'conditions';
 	const TRIGGER_PARAMS = 'params';
 	/**#@-*/
-	/**
-	 * Action on which to enqueue styles
-	 */
-	const ACTION_HANDLER_STYLES = 'pie_easy_enqueue_styles';
-	/**
-	 * Action on which to enqueue scripts
-	 */
-	const ACTION_HANDLER_SCRIPTS = 'pie_easy_enqueue_scripts';
 
 	/**
 	 * @var Pie_Easy_Scheme
@@ -88,7 +80,7 @@ class Pie_Easy_Scheme_Enqueue
 
 		// hook up script domain handler
 		if ( $this->script_domain instanceof Pie_Easy_Init_Directive ) {
-			add_action( self::ACTION_HANDLER_SCRIPTS, array( $this, 'handle_script_domain' ) );
+			add_action( 'pie_easy_enqueue_scripts', array( $this, 'handle_script_domain' ) );
 		}
 
 		// init styles maps
@@ -102,15 +94,16 @@ class Pie_Easy_Scheme_Enqueue
 			);
 
 		// init internal styles
-		$this->setup_internal( $style_defs );
+		$this->setup_internal_styles( $style_defs );
 
 		// define styles
 		$this->define_styles( $style_defs );
 
 		// register styles
-		add_action( self::ACTION_HANDLER_STYLES, array( $this, 'register_styles' ), 0 );
+		add_action( 'pie_easy_register_styles', array( $this, 'register_styles' ) );
+		
 		// hook up styles always handler
-		add_action( self::ACTION_HANDLER_STYLES, array( $this, 'handle_style_always' ), 10 );
+		add_action( 'pie_easy_enqueue_styles', array( $this, 'handle_style_always' ) );
 
 		// init scripts map
 		$this->scripts = new Pie_Easy_Map();
@@ -118,13 +111,17 @@ class Pie_Easy_Scheme_Enqueue
 		// get script defs
 		$script_defs = $this->scheme->directives()->get_map( Pie_Easy_Scheme::DIRECTIVE_SCRIPT_DEFS );
 
+		// init internal scripts
+		$this->setup_internal_scripts( $script_defs );
+		
 		// define scripts
 		$this->define_scripts( $script_defs );
 
 		// register scripts
-		add_action( self::ACTION_HANDLER_SCRIPTS, array( $this, 'register_scripts' ), 0 );
+		add_action( 'pie_easy_register_scripts', array( $this, 'register_scripts' ) );
+		
 		// hook up scripts always handler
-		add_action( self::ACTION_HANDLER_SCRIPTS, array( $this, 'handle_script_always' ), 10 );
+		add_action( 'pie_easy_enqueue_scripts', array( $this, 'handle_script_always' ), 10 );
 	}
 
 	/**
@@ -145,10 +142,8 @@ class Pie_Easy_Scheme_Enqueue
 
 	/**
 	 * Set UI environment
-	 *
-	 * @param Pie_Easy_Map $style_defs
 	 */
-	private function setup_ui( Pie_Easy_Map $style_defs )
+	private function setup_ui()
 	{
 		// get custom ui stylesheet directive
 		$ui_stylesheet = $this->scheme->directives()->get( Pie_Easy_Scheme::DIRECTIVE_UI_STYLESHEET );
@@ -166,25 +161,77 @@ class Pie_Easy_Scheme_Enqueue
 	 *
 	 * @ignore
 	 */
-	public function setup_internal( Pie_Easy_Map $style_defs )
+	private function setup_internal_styles( Pie_Easy_Map $style_defs )
 	{
+		// map of styles and depends
 		$styles = new Pie_Easy_Map();
-		$styles->add( 'features', Pie_Easy_Policy::features()->registry()->export_css_file()->url );
-		$styles->add( 'widgets', Pie_Easy_Policy::widgets()->registry()->export_css_file()->url );
-		$styles->add( 'options', Pie_Easy_Policy::options()->registry()->export_css_file()->url );
+
+		// add internal style for every policy
+		foreach( Pie_Easy_Policy::all() as $policy ) {
+			// styling enabled?
+			if ( $policy->enable_styling() ) {
+				// path to stylesheet for this policy
+				$style_path = $policy->registry()->export_css_file()->path;
+				// register if it exists and has content
+				if (  file_exists( $style_path ) && filesize( $style_path ) > 0 ) {
+					$styles->add(
+						$policy->get_handle(),
+						$policy->registry()->export_css_file()->url
+					);
+				}
+			}
+		}
+
+		// add the theme style.css LAST
 		$styles->add( 'style', get_bloginfo( 'stylesheet_url' ) );
 
+		// add directive
 		$directive = new Pie_Easy_Init_Directive( 'style', $styles, '@' );
-
 		$style_defs->add( '@', $directive, true );
 
 		// hook up styles internal handler
-		add_action( self::ACTION_HANDLER_STYLES, array( $this, 'handle_style_features' ), 1 );
-		add_action( self::ACTION_HANDLER_STYLES, array( $this, 'handle_style_widgets' ), 1 );
-		add_action( self::ACTION_HANDLER_STYLES, array( $this, 'handle_style_options' ), 99999 );
+		add_action( 'pie_easy_enqueue_styles', array( $this, 'handle_style_internal' ), 1 );
 
 		// init ui env
-		$this->setup_ui( $style_defs );
+		$this->setup_ui();
+	}
+
+	/**
+	 * Inject internal scripts into script directives
+	 *
+	 * @ignore
+	 */
+	private function setup_internal_scripts( Pie_Easy_Map $script_defs )
+	{
+		// map of scripts and script depends
+		$script = new Pie_Easy_Map();
+
+		// add internal script for every policy
+		foreach( Pie_Easy_Policy::all() as $policy ) {
+			// styling enabled?
+			if ( $policy->enable_scripting() ) {
+				// path to script source for this policy
+				$script_path = $policy->registry()->export_js_file()->path;
+				// register if it exists and has content
+				if ( file_exists( $script_path ) && filesize( $script_path ) > 0 ) {
+					// add it
+					$script->add(
+						$policy->get_handle(),
+						$policy->registry()->export_js_file()->url
+					);
+				}
+			}
+		}
+
+		// any scripts to add?
+		if ( $script->count() ) {
+			// add directive
+			$directive = new Pie_Easy_Init_Directive( 'script', $script, '@' );
+			$script_defs->add( '@', $directive, true );
+		}
+
+		// hook up scripts internal handler
+		add_action( 'pie_easy_enqueue_scripts', array( $this, 'handle_script_internal' ) );
 	}
 
 	/**
@@ -277,56 +324,52 @@ class Pie_Easy_Scheme_Enqueue
 	 * value being a delimeted string of dependant style or script handles
 	 *
 	 * @param Pie_Easy_Map $map
-	 * @param string $directive_name
+	 * @param Pie_Easy_Map $directive_map
 	 * @return boolean
 	 */
-	private function depends( Pie_Easy_Map $map, $directive_name )
+	private function depends( Pie_Easy_Map $map, Pie_Easy_Map $directive_map )
 	{
-		// check if at least one theme defined this dep
-		if ( $this->scheme->directives()->has( $directive_name ) ) {
+		// loop through and update triggers map with deps
+		foreach ( $directive_map as $theme => $directive ) {
 
-			// get dep directives for all themes
-			$directive_map = $this->scheme->directives()->get_map( $directive_name );
+			// is directive value a map?
+			if ( $directive->value instanceof Pie_Easy_Map ) {
 
-			// loop through and update triggers map with deps
-			foreach ( $directive_map as $theme => $directive ) {
+				// yes, add action to each trigger's dependancy stack
+				foreach( $directive->value as $handle => $dep_handles ) {
 
-				// is directive value a map?
-				if ( $directive->value instanceof Pie_Easy_Map ) {
+					// get theme handle
+					$theme_handle = $this->make_handle( $theme, $handle );
 
-					// yes, add action to each trigger's dependancy stack
-					foreach( $directive->value as $handle => $dep_handles ) {
-
-						// get theme handle
-						$theme_handle = $this->make_handle( $theme, $handle );
-
+					// get a string?
+					if ( is_string( $dep_handles) ) {
 						// split dep handles at delimeter
 						$dep_handles = explode( self::ITEM_DELIM, $dep_handles );
+					}
 
-						// loop through each handle
-						foreach ( $dep_handles as $dep_handle ) {
+					// loop through each handle
+					foreach ( $dep_handles as $dep_handle ) {
 
-							// get dep_theme handle
-							$dep_theme_handle = $this->make_handle( $theme, $dep_handle );
+						// get dep_theme handle
+						$dep_theme_handle = $this->make_handle( $theme, $dep_handle );
 
-							// does dep theme handle exist?
-							if ( $map->item_at( $dep_theme_handle ) ) {
-								// yep, use it
-								$dep_handle = $dep_theme_handle;
-							}
+						// does dep theme handle exist?
+						if ( $map->item_at( $dep_theme_handle ) ) {
+							// yep, use it
+							$dep_handle = $dep_theme_handle;
+						}
 
-							// make sure theme handle exists in map
-							if ( $map->contains($theme_handle) ) {
-								// push onto trigger's dep stack
-								$map->item_at($theme_handle)->item_at(self::TRIGGER_DEPS)->push($dep_handle);
-							}
+						// make sure theme handle exists in map
+						if ( $map->contains($theme_handle) ) {
+							// push onto trigger's dep stack
+							$map->item_at($theme_handle)->item_at(self::TRIGGER_DEPS)->push($dep_handle);
 						}
 					}
 				}
 			}
-			return true;
 		}
-		return false;
+
+		return true;
 	}
 
 	/**
@@ -340,7 +383,7 @@ class Pie_Easy_Scheme_Enqueue
 	 * @param string $trigger_type
 	 * @return boolean
 	 */
-	private function triggers( Pie_Easy_Map $map, $directive_name, $trigger_type )
+	private function triggers( Pie_Easy_Map $map, $directive_name, $trigger_type, $trigger_action = null )
 	{
 		// check if at least one theme defined this trigger
 		if ( $this->scheme->directives()->has( $directive_name ) ) {
@@ -388,33 +431,29 @@ class Pie_Easy_Scheme_Enqueue
 
 							// does trigger handle exist?
 							if ( $map->item_at( $handle ) ) {
-
 								// remove trigger's always toggle
 								$map->item_at($handle)->add(self::TRIGGER_ALWAYS, false);
-
 								// push onto trigger's trigger stack
 								$map->item_at($handle)->item_at($trigger_type)->push($action);
-
 								// push params onto trigger's params stack
 								$map->item_at($handle)->item_at(self::TRIGGER_PARAMS)->copy_from($action_params);
-
-								// is this an actions trigger type?
-								if ( $trigger_type == self::TRIGGER_ACTS ) {
-									// yes, hook it to action handler
-									add_action( $action, array( $this, 'handle_' . $directive_name ) );
-								}
-
 							}
+						}
+						
+						// is this an actions trigger type?
+						if ( $trigger_type == self::TRIGGER_ACTS ) {
+							// yes, hook it to action handler
+							add_action( $action, array( $this, 'handle_' . $directive_name ) );
 						}
 					}
 				}
 			}
 
 			// is this a conditions trigger type?
-			if ( $trigger_type == self::TRIGGER_CONDS ) {
+			if ( $trigger_type == self::TRIGGER_CONDS && $trigger_action ) {
 				// yes, hook up conditions handler
 				add_action(
-					$this->handler_action( $directive_name ),
+					$trigger_action,
 					array( $this, 'handle_' . $directive_name ),
 					11
 				);
@@ -424,28 +463,6 @@ class Pie_Easy_Scheme_Enqueue
 		}
 
 		return false;
-	}
-
-	/**
-	 * Determine handler action based on directive
-	 *
-	 * @param string $directive_name
-	 * @return string
-	 */
-	private function handler_action( $directive_name )
-	{
-		switch ( $directive_name ) {
-			case Pie_Easy_Scheme::DIRECTIVE_STYLE_DEFS:
-			case Pie_Easy_Scheme::DIRECTIVE_STYLE_ACTS:
-			case Pie_Easy_Scheme::DIRECTIVE_STYLE_CONDS:
-				return self::ACTION_HANDLER_STYLES;
-			case Pie_Easy_Scheme::DIRECTIVE_SCRIPT_DEFS:
-			case Pie_Easy_Scheme::DIRECTIVE_SCRIPT_ACTS:
-			case Pie_Easy_Scheme::DIRECTIVE_SCRIPT_CONDS:
-				return self::ACTION_HANDLER_SCRIPTS;
-			default:
-				throw new Exception( 'That directive does not have a handler action' );
-		}
 	}
 
 	/**
@@ -497,12 +514,56 @@ class Pie_Easy_Scheme_Enqueue
 	 */
 	final public function register_styles()
 	{
-		// init style depends
-		$this->depends( $this->styles, Pie_Easy_Scheme::DIRECTIVE_STYLE_DEPS );
+		// check if at least one theme defined this dep
+		if ( $this->scheme->directives()->has( Pie_Easy_Scheme::DIRECTIVE_STYLE_DEPS ) ) {
 
-		// init style triggers
-		$this->triggers( $this->styles, Pie_Easy_Scheme::DIRECTIVE_STYLE_ACTS, self::TRIGGER_ACTS );
-		$this->triggers( $this->styles, Pie_Easy_Scheme::DIRECTIVE_STYLE_CONDS, self::TRIGGER_CONDS );
+			// get dep directives for all themes
+			$style_depends =
+				$this->scheme->directives()->get_map(
+					Pie_Easy_Scheme::DIRECTIVE_STYLE_DEPS
+				);
+
+			// add dynamic style depends for every policy
+			foreach( Pie_Easy_Policy::all() as $policy ) {
+				// make sure styling is enabled
+				if ( $policy->enable_styling() ) {
+					// start with empty stack
+					$dep_stack = new Pie_Easy_Stack();
+					// loop through all registered components
+					foreach ( $policy->registry()->get_all() as $component ) {
+						// any style deps?
+						foreach ( $component->style()->get_deps() as $dep ) {
+							$dep_stack->push( $dep );
+						}
+					}
+					// did we find any addtl dependancies?
+					if ( $dep_stack->count() ) {
+						$dep_map = new Pie_Easy_Map();
+						$dep_map->add( '@:' . $policy->get_handle(), $dep_stack->to_array() );
+						$directive_deps = new Pie_Easy_Init_Directive( 'style_depends', $dep_map, '@' );
+						$style_depends->add( '@', $directive_deps, true );
+					}
+				}
+			}
+
+			// init style depends
+			$this->depends( $this->styles, $style_depends );
+		}
+
+		// init style action triggers
+		$this->triggers(
+			$this->styles,
+			Pie_Easy_Scheme::DIRECTIVE_STYLE_ACTS,
+			self::TRIGGER_ACTS
+		);
+
+		// init style condition triggers
+		$this->triggers(
+			$this->styles,
+			Pie_Easy_Scheme::DIRECTIVE_STYLE_CONDS,
+			self::TRIGGER_CONDS,
+			'pie_easy_enqueue_styles'
+		);
 
 		foreach ( $this->styles as $handle => $config_map ) {
 			$this->register_style( $handle, $config_map );
@@ -530,12 +591,56 @@ class Pie_Easy_Scheme_Enqueue
 	 */
 	final public function register_scripts()
 	{
-		// init script depends
-		$this->depends( $this->scripts, Pie_Easy_Scheme::DIRECTIVE_SCRIPT_DEPS );
+		// check if at least one theme defined this dep
+		if ( $this->scheme->directives()->has( Pie_Easy_Scheme::DIRECTIVE_SCRIPT_DEPS ) ) {
 
-		// init script triggers
-		$this->triggers( $this->scripts, Pie_Easy_Scheme::DIRECTIVE_SCRIPT_ACTS, self::TRIGGER_ACTS );
-		$this->triggers( $this->scripts, Pie_Easy_Scheme::DIRECTIVE_SCRIPT_CONDS, self::TRIGGER_CONDS );
+			// get dep directives for all themes
+			$script_depends =
+				$this->scheme->directives()->get_map(
+					Pie_Easy_Scheme::DIRECTIVE_SCRIPT_DEPS
+				);
+
+			// add dynamic script depends for every policy
+			foreach( Pie_Easy_Policy::all() as $policy ) {
+				// make sure scripting is enabled
+				if ( $policy->enable_scripting() ) {
+					// start with empty stack
+					$dep_stack = new Pie_Easy_Stack();
+					// loop through all registered components
+					foreach ( $policy->registry()->get_all() as $component ) {
+						// any script deps?
+						foreach ( $component->script()->get_deps() as $dep ) {
+							$dep_stack->push( $dep );
+						}
+					}
+					// did we find any addtl dependancies?
+					if ( $dep_stack->count() ) {
+						$dep_map = new Pie_Easy_Map();
+						$dep_map->add( '@:' . $policy->get_handle(), $dep_stack->to_array() );
+						$directive_deps = new Pie_Easy_Init_Directive( 'script_depends', $dep_map, '@' );
+						$script_depends->add( '@', $directive_deps, true );
+					}
+				}
+			}
+
+			// init script depends
+			$this->depends( $this->scripts, $script_depends );
+		}
+
+		// init script action triggers
+		$this->triggers(
+			$this->scripts,
+			Pie_Easy_Scheme::DIRECTIVE_SCRIPT_ACTS,
+			self::TRIGGER_ACTS
+		);
+
+		// init script condition triggers
+		$this->triggers(
+			$this->scripts,
+			Pie_Easy_Scheme::DIRECTIVE_SCRIPT_CONDS,
+			self::TRIGGER_CONDS,
+			'pie_easy_enqueue_scripts'
+		);
 
 		foreach ( $this->scripts as $handle => $config_map ) {
 			$this->register_script( $handle, $config_map );
@@ -543,67 +648,18 @@ class Pie_Easy_Scheme_Enqueue
 	}
 
 	/**
-	 * Handle enqueing features stylesheet
+	 * Handle enqueing internal styles
 	 *
 	 * @ignore
 	 */
-	public function handle_style_features()
+	public function handle_style_internal()
 	{
-		global $wp_styles;
-
-		if ( !is_admin() ) {
-
-			// enq features?
-			$features_css = Pie_Easy_Policy::features()->registry()->export_css_file()->path;
-			
-			// check file
-			if ( file_exists( $features_css ) && filesize( $features_css ) > 0 ) {
-				wp_enqueue_style( '@:features' );
-				$wp_styles->query( '@:style' )->deps[] = '@:features';
-				$wp_styles->query( '@:options' )->deps[] = '@:features';
-			}
-
-		}
-	}
-
-	/**
-	 * Handle enqueing widgets stylesheet
-	 *
-	 * @ignore
-	 */
-	public function handle_style_widgets()
-	{
-		global $wp_styles;
-
-		// enq widgets?
-		$widgets_css = Pie_Easy_Policy::widgets()->registry()->export_css_file()->path;
-
-		// check file
-		if ( file_exists( $widgets_css ) && filesize( $widgets_css ) > 0 ) {
-			wp_enqueue_style( '@:widgets' );
-			$wp_styles->query( '@:style' )->deps[] = '@:widgets';
-			$wp_styles->query( '@:options' )->deps[] = '@:widgets';
-		}
-	}
-
-	/**
-	 * Handle enqueing options styles
-	 *
-	 * @ignore
-	 */
-	public function handle_style_options()
-	{
-		global $wp_styles;
-
-		if ( !is_admin() ) {
-
-			// enq options?
-			$options_css = Pie_Easy_Policy::options()->registry()->export_css_file()->path;
-			
-			// check file
-			if ( file_exists( $options_css ) && filesize( $options_css ) > 0 ) {
-				$wp_styles->query( '@:options' )->deps[] = '@:style';
-				wp_enqueue_style( '@:options' );
+		foreach ( Pie_Easy_Policy::all() as $policy ) {
+			// policy style handle
+			$handle = '@:' . $policy->get_handle();
+			// registered?
+			if ( wp_style_is( $handle, 'registered' ) ) {
+				wp_enqueue_style( $handle );
 			}
 		}
 	}
@@ -671,6 +727,23 @@ class Pie_Easy_Scheme_Enqueue
 						break;
 					}
 				}
+			}
+		}
+	}
+
+	/**
+	 * Handle enqueing internal scripts
+	 *
+	 * @ignore
+	 */
+	public function handle_script_internal()
+	{
+		foreach ( Pie_Easy_Policy::all() as $policy ) {
+			// policy script handle
+			$handle = '@:' . $policy->get_handle();
+			// registered?
+			if ( wp_script_is( $handle, 'registered' ) ) {
+				wp_enqueue_script( $handle );
 			}
 		}
 	}
