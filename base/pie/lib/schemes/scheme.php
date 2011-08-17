@@ -42,6 +42,7 @@ final class Pie_Easy_Scheme
 	const DIRECTIVE_SCRIPT_CONDS = 'script_conditions';
 	const DIRECTIVE_ADVANCED = 'advanced';
 	const DIRECTIVE_UI_STYLESHEET = 'ui_stylesheet';
+	const DIRECTIVE_DEV_MODE = 'development_mode';
 	const DIRECTIVE_SCRIPT_DOMAIN = 'script_domain';
 	const DIRECTIVE_OPT_SAVE_SINGLE = 'options_save_single';
 	/**#@-*/
@@ -172,6 +173,14 @@ final class Pie_Easy_Scheme
 
 		// load it
 		$this->load();
+
+		// dev mode
+		if ( !defined( 'PIE_EASY_DEV_MODE' ) ) {
+			define(
+				'PIE_EASY_DEV_MODE',
+				(boolean) $this->directives->get( self::DIRECTIVE_DEV_MODE )->value
+			);
+		}
 
 		// add filters
 		$this->add_filters();
@@ -451,8 +460,14 @@ final class Pie_Easy_Scheme
 	public function exports_refresh()
 	{
 		foreach ( $this->config_files_loaded as $file ) {
-			// config was was last modified...
-			$mtime = @filemtime( $file );
+			// config was last modified...
+			if ( PIE_EASY_DEV_MODE ) {
+				// in dev mode, use current time
+				$mtime = time();
+			} else {
+				// use file last mod time
+				$mtime = @filemtime( $file );
+			}
 			// try to refresh against every policy
 			foreach( Pie_Easy_Policy::all() as $policy ) {
 				$policy->registry()->export_css_file()->refresh( $mtime );
