@@ -31,7 +31,7 @@ abstract class Pie_Easy_Asset
 	/**
 	 * The files
 	 *
-	 * @var Pie_Easy_Map
+	 * @var Pie_Easy_Stack
 	 */
 	private $files;
 
@@ -40,9 +40,9 @@ abstract class Pie_Easy_Asset
 	 */
 	public function __construct()
 	{
-		// init stacks and maps
+		// init stacks
 		$this->deps = new Pie_Easy_Stack();
-		$this->files = new Pie_Easy_Map();
+		$this->files = new Pie_Easy_Stack();
 	}
 
 	/**
@@ -84,10 +84,10 @@ abstract class Pie_Easy_Asset
 	 * @param string $file
 	 * @param array $deps
 	 */
-	public function add_file( $handle, $file, $deps = null )
+	public function add_file( $file, $deps = null )
 	{
-		// add file to map
-		$this->files->add( $handle, $file );
+		// push file onto stack
+		$this->files->push( $file );
 
 		// add deps to stack
 		if ( is_array($deps) && count($deps) ) {
@@ -115,6 +115,46 @@ abstract class Pie_Easy_Asset
 	public function get_files()
 	{
 		return $this->files->to_array();
+	}
+
+	/**
+	 * Inject static code/markup
+	 *
+	 * @return string
+	 */
+	public function import()
+	{
+		// the code that will be returned
+		$code = null;
+
+		// have any files?
+		if ( $this->has_files() ) {
+
+			// loop through all files
+			foreach ( $this->get_files() as $file ) {
+
+				// resolve file path
+				if ( $file{0} == DIRECTORY_SEPARATOR ) {
+					$filename = $file;
+				} else {
+					$filename = Pie_Easy_Scheme::instance()->locate_file( $file );
+				}
+
+				// inject helpful comment ;)
+				$code .= '/*+++ import source: /../' . Pie_Easy_Files::theme_file_to_rel( $filename ) . ' */' . PHP_EOL;
+
+				// make sure it actually exists
+				if ( is_readable( $filename ) ) {
+					$code .= file_get_contents( $filename ) . PHP_EOL;
+					$code .= '/*--- import complete! */' . PHP_EOL . PHP_EOL;
+				} else {
+					$code .= '/*!!! import failed! */' . PHP_EOL . PHP_EOL;
+				}
+			}
+		}
+
+		// all done
+		return $code;
 	}
 
 	/**

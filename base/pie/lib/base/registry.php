@@ -394,6 +394,20 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 		// code to return
 		$code = '';
 
+		// loop through for code to import
+		foreach ( $this->get_all() as $component ) {
+			// component must be supported
+			if ( $component->supported() ) {
+				// get import rules
+				$code .= $component->import_script();
+			}
+		}
+
+		// prettyfication
+		if ( $code ) {
+			$code .= "\n";
+		}
+
 		// loop through all components
 		foreach ( $this->get_all() as $component ) {
 			// component must be supported

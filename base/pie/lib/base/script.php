@@ -40,29 +40,6 @@ class Pie_Easy_Script extends Pie_Easy_Asset
 	}
 
 	/**
-	 * Enqueue all files
-	 */
-	public function enqueue()
-	{
-		// any files?
-		if ( $this->has_files() ) {
-			// enqueue each one
-			foreach ( $this->get_files() as $handle => $file ) {
-				// make sure it actually exists
-				$filepath = Pie_Easy_Scheme::instance()->locate_file( $file );
-				// find it?
-				if ( $filepath ) {
-					wp_enqueue_script(
-						$handle,
-						Pie_Easy_Files::theme_file_to_url( $filepath ),
-						$this->get_deps()
-					);
-				}
-			}
-		}
-	}
-
-	/**
 	 * Begin new logic string
 	 */
 	public function begin_logic()
@@ -105,7 +82,9 @@ class Pie_Easy_Script extends Pie_Easy_Asset
 			// get markup for each rule
 			foreach ( $this->logic->to_array() as $logic ) {
 				// append output of rule export
-				$code .= $logic->export() . PHP_EOL;
+				$code .= '/*+++ generating script */' . PHP_EOL;
+				$code .= $logic->export();
+				$code .= '/*--- script generation complete! */' . PHP_EOL . PHP_EOL;
 			}
 		}
 

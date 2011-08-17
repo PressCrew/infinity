@@ -193,14 +193,25 @@ final class Pie_Easy_Files
 	}
 
 	/**
+	 * Return path to a theme file relative to theme root
+	 *
+	 * @param string $file_path
+	 */
+	static public function theme_file_to_rel( $file_path )
+	{
+		// convert path to be realtive to themes root
+		return str_replace( get_theme_root() . DIRECTORY_SEPARATOR, '', $file_path );
+	}
+
+	/**
 	 * Return URL to a theme file given an absolute file system path
 	 *
 	 * @param string $file_path
 	 */
 	static public function theme_file_to_url( $file_path )
 	{
-		// convert path to be realtive to themes root
-		$relative_path = str_replace( get_theme_root(), '', $file_path );
+		// convert path to be relative to themes root
+		$relative_path = self::theme_file_to_rel( $file_path );
 		// split it up
 		$file_names = self::path_split( $relative_path );
 		// theme is first arg, beautiful!

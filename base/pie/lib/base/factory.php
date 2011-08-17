@@ -66,12 +66,13 @@ abstract class Pie_Easy_Factory extends Pie_Easy_Componentable
 	}
 
 	/**
-	 * Return path to template for an extension
+	 * Return path to file for an extension
 	 *
 	 * @param Pie_Easy_Component $ext
+	 * @param string $suffix
 	 * @return string
 	 */
-	final public function ext_tpl( Pie_Easy_Component $ext )
+	private function ext_file( Pie_Easy_Component $ext, $suffix )
 	{
 		// get extension that loaded class
 		$loaded_ext = $this->ext( get_class( $ext ) );
@@ -80,7 +81,7 @@ abstract class Pie_Easy_Factory extends Pie_Easy_Componentable
 		if ( $loaded_ext ) {
 
 			// format template file name
-			$file = $loaded_ext . '.tpl.php';
+			$file = $loaded_ext . $suffix;
 
 			// look for scheme files first
 			$file_theme =
@@ -94,15 +95,55 @@ abstract class Pie_Easy_Factory extends Pie_Easy_Componentable
 				return $file_theme;
 			} else {
 				// no, try for default location
-				return Pie_Easy_Files::path_build(
-					PIE_EASY_LIBEXT_DIR,
-					$this->policy()->get_handle(),
-					$file
-				);
+				$file_default =
+					PIE_EASY_LIBEXT_DIR .
+					Pie_Easy_Files::path_build(
+						$this->policy()->get_handle(),
+						$file
+					);
+				// exists?
+				if ( is_readable( $file_default ) ) {
+					return $file_default;
+				} else {
+					return false;
+				}
 			}
 		}
 
 		throw new Exception( sprintf( 'The extension "%s" is not loaded.', $ext->name ) );
+	}
+
+	/**
+	 * Return path to template for an extension
+	 *
+	 * @param Pie_Easy_Component $ext
+	 * @return string
+	 */
+	final public function ext_tpl( Pie_Easy_Component $ext )
+	{
+		return $this->ext_file( $ext, '.tpl.php' );
+	}
+
+	/**
+	 * Return path to style template for an extension
+	 *
+	 * @param Pie_Easy_Component $ext
+	 * @return string
+	 */
+	final public function ext_style( Pie_Easy_Component $ext )
+	{
+		return $this->ext_file( $ext, '.css' );
+	}
+
+	/**
+	 * Return path to script template for an extension
+	 *
+	 * @param Pie_Easy_Component $ext
+	 * @return string
+	 */
+	final public function ext_script( Pie_Easy_Component $ext )
+	{
+		return $this->ext_file( $ext, '.js' );
 	}
 
 	/**
@@ -171,6 +212,20 @@ abstract class Pie_Easy_Factory extends Pie_Easy_Componentable
 
 		// set the policy
 		$component->policy( $this->policy() );
+
+		// default style
+		$default_style = $this->ext_style( $component );
+		// have default style file?
+		if ( $default_style ) {
+			$component->style()->add_file( $default_style );
+		}
+
+		// default script
+		$default_script = $this->ext_script( $component );
+		// have default script file?
+		if ( $default_script ) {
+			$component->script()->add_file( $default_script );
+		}
 		
 		// desc
 		if ( isset( $config['description'] ) ) {
