@@ -48,57 +48,6 @@ class Pie_Easy_Exts_Widget_Posts_List
 			'posts_list' => $posts_list
 		);
 	}
-
-	/**
-	 * @ignore
-	 */
-	public function export_css()
-	{
-		$rule = $this->style()->new_rule( 'div.pie-easy-exts-widget-posts-list ul li' );
-		$rule->ad( 'margin-left', '20px');
-		
-		return parent::export_css();
-	}
-
-	/**
-	 * @ignore
-	 */
-	public function export_script()
-	{
-		$this->script_sortable();
-
-		// run parent!
-		return parent::export_script();
-	}
-
-	/**
-	 * Push nested sortable function onto script logic stack
-	 */
-	protected function script_sortable()
-	{
-		// begin logic capture
-		$this->script()->begin_logic();
-?>
-	jQuery('div.pie-easy-exts-widget-posts-list ul')
-		.nestedSortable({
-			handle: 'div',
-			helper:	'clone',
-			listType: 'ul',
-			items: 'li',
-			maxLevels: 0,
-			opacity: .6,
-			revert: 250,
-			tabSize: 25,
-			tolerance: 'pointer',
-			toleranceElement: '> div'
-	});
-<?php
-		// end logic capture
-		$logic = $this->script()->end_logic();
-		
-		// function wrapper to call from template
-		$logic->function = $this->make_script_function( 'Sortable' );
-	}
 }
 
 //

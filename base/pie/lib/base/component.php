@@ -208,6 +208,16 @@ abstract class Pie_Easy_Component
 	}
 
 	/**
+	 * Execute script import
+	 *
+	 * @return string
+	 */
+	public function import_script()
+	{
+		return $this->script()->import();
+	}
+
+	/**
 	 * Execute style exporter
 	 *
 	 * @return string
@@ -335,7 +345,7 @@ abstract class Pie_Easy_Component
 	 */
 	public function init_styles()
 	{
-		// override this method to initialize special style handling for an option
+		// override this method to initialize special style handling for a component
 	}
 
 	/**
@@ -343,8 +353,7 @@ abstract class Pie_Easy_Component
 	 */
 	public function init_scripts()
 	{
-		// enqueue scripts added via scriptable
-		$this->script()->enqueue();
+		// override this method to initialize special script handling for a component
 	}
 
 	/**
@@ -456,11 +465,8 @@ abstract class Pie_Easy_Component
 	 */
 	public function set_style( $path, $deps = null )
 	{
-		// format a handle name
-		$handle = sprintf( '%s-%s', $this->policy()->get_handle(), $this->name );
-
 		// add the file
-		$this->style()->add_file( $handle, $path, $deps );
+		$this->style()->add_file( $path, $deps );
 	}
 
 	/**
@@ -471,11 +477,8 @@ abstract class Pie_Easy_Component
 	 */
 	public function set_script( $path, $deps = null )
 	{
-		// format a handle name
-		$handle = sprintf( '%s-%s', $this->policy()->get_handle(), $this->name );
-
 		// add the file
-		$this->script()->add_file( $handle, $path, $deps );
+		$this->script()->add_file( $path, $deps );
 	}
 
 	/**

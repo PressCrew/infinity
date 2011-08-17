@@ -58,33 +58,6 @@ class Pie_Easy_Style extends Pie_Easy_Asset
 	}
 
 	/**
-	 * Generate CSS @import markup for this style's files
-	 *
-	 * @return string
-	 */
-	public function import()
-	{
-		// the markup that will be returned
-		$markup = null;
-
-		// render import statements first
-		if ( $this->has_files() ) {
-			// one per line
-			foreach ( $this->get_files() as $file ) {
-				// make sure it actually exists
-				$filepath = Pie_Easy_Scheme::instance()->locate_file( $file );
-				// find it?
-				if ( $filepath ) {
-					$markup .= sprintf( "@import '%s';", Pie_Easy_Files::theme_file_to_url( $filepath ) ) . PHP_EOL;
-				}
-			}
-		}
-
-		// all done
-		return $markup;
-	}
-
-	/**
 	 * Generate CSS markup for this style's dynamic rules
 	 *
 	 * @return string
@@ -99,7 +72,9 @@ class Pie_Easy_Style extends Pie_Easy_Asset
 			// get markup for each rule
 			foreach ( $this->rules->to_array() as $rule ) {
 				// append output of rule export
-				$markup .= $rule->export() . PHP_EOL;
+				$markup .= '/*+++ generating style ***/' . PHP_EOL;
+				$markup .= $rule->export();
+				$markup .= '/*--- style generation complete! */' . PHP_EOL . PHP_EOL;
 			}
 		}
 

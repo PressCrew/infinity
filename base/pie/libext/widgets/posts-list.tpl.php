@@ -20,5 +20,5 @@
 </div>
 
 <script type="text/javascript">
-	widgetsPagesListSortable();
+	widgetPostsListSortable();
 </script>
