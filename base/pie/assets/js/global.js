@@ -208,6 +208,23 @@ pieEasyAjax = {
 			content: sr[2]
 		}
 	},
+	splitDash: function(str, pos)
+	{
+		var split = str.split('-');
+
+		if (split.length) {
+			if (isNaN(pos)) {
+				return split;
+			} else if (pos < 0) {
+				pos = pos + split.length;
+			}
+			if (pos in split) {
+				return split[pos];
+			}
+		}
+
+		return null;
+	},
 	queryParam: function(p, s)
 	{
 		var i, q = s.split('?').pop().split('#').shift().split('&');
