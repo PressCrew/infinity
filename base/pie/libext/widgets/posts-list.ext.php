@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'widgets/component' );
+Pie_Easy_Loader::load( 'widgets/component', 'utils/ajax', 'utils/files' );
 
 /**
  * Posts list widget
@@ -37,6 +37,16 @@ class Pie_Easy_Exts_Widget_Posts_List
 	/**
 	 * @ignore
 	 */
+	public function init_ajax()
+	{
+		add_action( 'wp_ajax_pie_easy_widgets_posts_list_save', array( $this, 'ajax_update_hierarchy' ) );
+		add_action( 'wp_ajax_pie_easy_widgets_posts_list_item_status', array( $this, 'ajax_post_status' ) );
+		add_action( 'wp_ajax_pie_easy_widgets_posts_list_item_trash', array( $this, 'ajax_post_trash' ) );
+	}
+
+	/**
+	 * @ignore
+	 */
 	public function get_template_vars()
 	{
 		// set it up!
@@ -47,6 +57,137 @@ class Pie_Easy_Exts_Widget_Posts_List
 			'widget' => $this,
 			'posts_list' => $posts_list
 		);
+	}
+
+	/**
+	 * Update posts list hiearachy
+	 */
+	public function ajax_update_hierarchy()
+	{
+		// check for hiererachy data
+		if ( isset( $_POST['posts'] ) && is_array( $_POST['posts'] ) ) {
+			// got some posts
+			$posts = $_POST['posts'];
+			// keep track of how many updated
+			$posts_updated = 0;
+			// keep track of how many failed
+			$posts_error = 0;
+			// keep track of the order for menu
+			$menu_order = 0;
+			// check it out
+			if ( count($posts) ) {
+				// loop through and update all posts
+				foreach ( $posts as $post ) {
+					// numeric items are post ids, else invalid
+					$post_id =
+						( is_numeric($post['item_id']) ) ? (integer) $post['item_id'] : false;
+					// numeric parents are post ids, else ZERO
+					$post_parent =
+						( is_numeric($post['parent_id']) ) ? (integer) $post['parent_id'] : 0;
+					// update real posts
+					if ( $post_id ) {
+						// update post order
+						// capture result for comparison
+						$result =
+							wp_update_post(
+								array(
+									'ID' => $post_id,
+									'post_parent' => $post_parent,
+									'menu_order' => ++$menu_order
+								)
+							);
+						// result must match post ID
+						if ( $result == $post_id ) {
+							$posts_updated++;
+						} else {
+							$posts_error++;
+						}
+					}
+				}
+				// any errors?
+				if ( $posts_error ) {
+					Pie_Easy_Ajax::response(
+						false,
+						sprintf(
+							__('%d items updated, %d items failed', pie_easy_text_domain),
+							$posts_updated,
+							$posts_error
+						)
+					);
+				} else {
+					Pie_Easy_Ajax::response(
+						true,
+						sprintf(
+							__('%d items updated', pie_easy_text_domain),
+							$posts_updated
+						)
+					);
+				}
+			} else {
+				Pie_Easy_Ajax::response( false, __('No items received', pie_easy_text_domain) );
+			}
+		} else {
+			Pie_Easy_Ajax::response( false, __('Missing required data', pie_easy_text_domain) );
+		}
+	}
+
+	/**
+	 * Update single post status
+	 */
+	public function ajax_post_status()
+	{
+		// check for req data
+		if ( isset( $_POST['post_id'] ) && isset( $_POST['post_status'] ) ) {
+
+			// got req data
+			$post_id = (integer) $_POST['post_id'];
+			$post_status = (string) $_POST['post_status'];
+
+			// only two status are supported
+			switch ( $post_status ) {
+				case 'draft':
+				case 'publish':
+					// update post status
+					$result =
+						wp_update_post( array(
+							'ID' => $post_id,
+							'post_status' => $post_status
+						));
+					// result must match post ID
+					if ( $result === $post_id ) {
+						Pie_Easy_Ajax::response( true, __('Item status updated', pie_easy_text_domain) );
+					} else {
+						Pie_Easy_Ajax::response( false, __('Item status update failed', pie_easy_text_domain) );
+					}
+				default:
+					Pie_Easy_Ajax::response( false, __('Invalid item status', pie_easy_text_domain) );
+			}
+		} else {
+			Pie_Easy_Ajax::response( false, __('Missing required data', pie_easy_text_domain) );
+		}
+	}
+
+	/**
+	 * Trash a single post
+	 */
+	public function ajax_post_trash()
+	{
+		// check for post id
+		if ( isset( $_POST['post_id'] ) && is_numeric( $_POST['post_id'] ) ) {
+
+			// got one
+			$post_id = (integer) $_POST['post_id'];
+
+			// attempt to trash the post
+			if ( wp_trash_post( $post_id ) !== false ) {
+				Pie_Easy_Ajax::response( true, __('Item moved to trash', pie_easy_text_domain) );
+			} else {
+				Pie_Easy_Ajax::response( false, __('Move item to trash failed', pie_easy_text_domain) );
+			}
+
+		} else {
+			Pie_Easy_Ajax::response( false, __('Missing item id', pie_easy_text_domain) );
+		}
 	}
 }
 
@@ -240,10 +381,12 @@ class Pie_Easy_Posts_List extends WP_Posts_List_Table
 		$can_edit_post = current_user_can( $post_type_object->cap->edit_post, $post->ID );
 
 		if ( $can_edit_post ) {
-			?><div><?php
-				$this->post_title();
-				$this->post_status();
-				$this->post_trash();
+			?><div class="pie-easy-posts-list-item-content"><?php
+				$this->post_title();?>
+				<div class="pie-easy-posts-list-item-actions"><?php
+					$this->post_status();
+					$this->post_trash();?>
+				</div><?php
 			?></div><?php
 		}
 
@@ -258,7 +401,7 @@ class Pie_Easy_Posts_List extends WP_Posts_List_Table
 	private function post_title()
 	{
 		// start rendering ?>
-		<a href="<?php print $this->post_edit_url() ?>"><?php print _draft_or_post_title() ?></a><?php
+		<a class="pie-easy-posts-list-item-title" href="<?php print $this->post_edit_url() ?>"><?php print _draft_or_post_title() ?></a><?php
 	}
 
 	/**
@@ -266,29 +409,38 @@ class Pie_Easy_Posts_List extends WP_Posts_List_Table
 	 */
 	private function post_status()
 	{
-		switch ( $this->post->post_status ) {
-			case 'draft':
-			case 'publish':
-				// render buttons ?>
-				<a href="#draft"><?php _e( 'Draft' ) ?></a>
-				<a href="#publish"><?php _e( 'Published' ) ?></a><?php
-				break;
-			case 'pending':
-				// render text ?>
-				<span><?php _e( 'Pending' ) ?></span><?php
-				break;
-			case 'future':
-				// render text ?>
-				<span><?php _e( 'Scheduled' ) ?></span><?php
-				break;
-			case 'trash':
-				// render text ?>
-				<span><?php _e( 'Trashed' ) ?></span><?php
-				break;
-		}
+		$post_id = $this->post->ID;
+		$post_status = $this->post->post_status;
+
+		// open container ?>
+		<span class="pie-easy-posts-list-item-status"><?php
+			// handle each status type
+			switch ( $post_status ) {
+				case 'draft':
+				case 'publish':
+					// render buttons ?>
+					<input type="radio" id="post-draft-<?php print $post_id ?>" name="pie-easy-posts-list-item-status-<?php print $post_id ?>" <?php if ($post_status == 'draft'): ?> checked="checked"<?php endif; ?>/>
+					<label for="post-draft-<?php print $post_id ?>"><?php _e( 'Draft' ) ?></label>
+					<input type="radio" id="post-publish-<?php print $post_id ?>" name="pie-easy-posts-list-item-status-<?php print $post_id ?>" <?php if ($post_status == 'publish'): ?> checked="checked"<?php endif; ?>/>
+					<label for="post-publish-<?php print $post_id ?>"><?php _e( 'Published' ) ?></label><?php
+					break;
+				case 'pending':
+					// render text ?>
+					<span><?php _e( 'Pending' ) ?></span><?php
+					break;
+				case 'future':
+					// render text ?>
+					<span><?php _e( 'Scheduled' ) ?></span><?php
+					break;
+				case 'trash':
+					// render text ?>
+					<span><?php _e( 'Trashed' ) ?></span><?php
+					break;
+			}
 		
-		// render current status hint ?>
-		<input type="hidden" value="<?php print $this->post->post_status ?>" /><?php
+			// render current status hint and close container ?>
+			<input type="hidden" value="<?php print $post_status ?>" />
+		</span><?php
 	}
 
 	/**
@@ -297,7 +449,7 @@ class Pie_Easy_Posts_List extends WP_Posts_List_Table
 	private function post_trash()
 	{
 		// render button ?>
-		<a href="#trash"><?php _e( 'Trash' ) ?></a><?php
+		<a class="pie-easy-posts-list-item-trash" href="#<?php print $this->post->ID ?>"><?php _e( 'Trash' ) ?></a><?php
 	}
 
 	/**
