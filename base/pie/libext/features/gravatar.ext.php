@@ -25,14 +25,11 @@ class Pie_Easy_Exts_Feature_Gravatar
 	 */
 	final public function export_css()
 	{
-		// registry
-		$registry = Pie_Easy_Policy::options()->registry();
-
 		// options
-		$opt_border_width = $registry->get( $this->_option_border_width )->get();
-		$opt_border_color = $registry->get( $this->_option_border_color )->get();
-		$opt_padding = $registry->get( $this->_option_padding )->get();
-		$opt_bg_color = $registry->get( $this->_option_bg_color )->get();
+		$opt_border_width = $this->get_suboption('border_width')->get();
+		$opt_border_color = $this->get_suboption('border_color')->get();
+		$opt_padding = $this->get_suboption('padding')->get();
+		$opt_bg_color = $this->get_suboption('bg_color')->get();
 
 		// add rules
 		$img = $this->style()->new_rule( 'img.' . $this->_image_class );
@@ -55,15 +52,12 @@ class Pie_Easy_Exts_Feature_Gravatar
 
 	public function url()
 	{
-		// registry
-		$registry = Pie_Easy_Policy::options()->registry();
-		
 		// options
-		$opt_size = $registry->get( $this->_option_size )->get();
-		$opt_default_set = $registry->get( $this->_option_default_set )->get();
-		$opt_default_img = $registry->get( $this->_option_default_img )->get_image_url();
-		$opt_default_force = $registry->get( $this->_option_default_force )->get();
-		$opt_rating = $registry->get( $this->_option_rating )->get();
+		$opt_size = $this->get_suboption('size')->get();
+		$opt_default_set = $this->get_suboption('default_set')->get();
+		$opt_default_img = $this->get_suboption('default_img')->get_image_url();
+		$opt_default_force = $this->get_suboption('default_force')->get();
+		$opt_rating = $this->get_suboption('option_rating')->get();
 
 		// the hash
 		$hash = md5( strtolower( trim( get_the_author_meta( 'user_email' ) ) ) );
