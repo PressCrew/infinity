@@ -26,11 +26,11 @@ class Pie_Easy_Exts_Feature_Css_Background
 	final public function export_css()
 	{
 		// background image option name
-		$bg_option = Pie_Easy_Policy::options()->registry()->get( $this->_option_upload );
-		$bg_repeat_option = Pie_Easy_Policy::options()->registry()->get( $this->_option_repeat );
+		$opt_image = $this->get_suboption('image');
+		$opt_tiling = $this->get_suboption('tiling');
 
 		// get attachment image data
-		$data = $bg_option->get_image_src( 'full' );
+		$data = $opt_image->get_image_src('full');
 
 		// extract image data
 		list( $url, $width, $height ) = $data;
@@ -40,7 +40,7 @@ class Pie_Easy_Exts_Feature_Css_Background
 			// rule for bg styles
 			$bg = $this->style()->new_rule( $this->_css_selector );
 			$bg->ad( 'background-image', sprintf( "url('%s')", $url ) );
-			$bg->ad( 'background-repeat', $bg_repeat_option->get() );
+			$bg->ad( 'background-repeat', $opt_tiling->get() );
 		}
 
 		return parent::export_css();

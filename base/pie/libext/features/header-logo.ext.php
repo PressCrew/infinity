@@ -20,18 +20,27 @@
 class Pie_Easy_Exts_Feature_Header_Logo
 	extends Pie_Easy_Features_Feature
 {
+
+	/**
+	 * Return URL to uploaded logo image
+	 *
+	 * @return string
+	 */
+	public function image_url()
+	{
+		$src = $this->get_suboption('image')->get_image_src('full');
+		return $src[0];
+	}
+
 	/**
 	 * @ignore
 	 */
 	final public function export_css()
 	{
-		// registry
-		$registry = Pie_Easy_Policy::options()->registry();
-
 		// options
-		$opt_upload = $registry->get( $this->_option_upload );
-		$opt_top = $registry->get( $this->_option_top )->get();
-		$opt_left = $registry->get( $this->_option_left )->get();
+		$opt_upload = $this->get_suboption('image');
+		$opt_top = $this->get_suboption('top')->get();
+		$opt_left = $this->get_suboption('left')->get();
 
 		// get attachment image data
 		$data = $opt_upload->get_image_src( 'full' );

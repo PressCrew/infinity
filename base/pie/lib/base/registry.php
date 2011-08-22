@@ -23,6 +23,11 @@ Pie_Easy_Loader::load( 'base/componentable', 'collections', 'utils/export' );
 abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 {
 	/**
+	 * Sub option delimeter
+	 */
+	const SUB_OPTION_DELIM = '.';
+
+	/**
 	 * Name of the theme currently being loaded
 	 *
 	 * @var string
@@ -291,23 +296,75 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 		// an array means successful parse
 		if ( is_array( $ini_array ) ) {
 			// loop through each directive
-			foreach ( $ini_array as $s_name => $s_config ) {
+			foreach ( $ini_array as $name => $config ) {
+				// sub option?
+				if ( $this->load_sub_option( $name, $config ) ) {
+					// yes, skip standard loading
+					continue;
+				}
 				// get component
 				$component =
 					$this->policy()->factory()->create(
 						$this->loading_theme,
-						$s_name,
-						$s_config
+						$name,
+						$config
 					);
 				// valid component?
 				if ( $component instanceof Pie_Easy_Component ) {
 					// set component vars and register it
-					$this->set_component_vars( $component, $s_config );
+					$this->set_component_vars( $component, $config );
 					$this->register( $component );
 				}
 			}
 			// all done
 			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Load config as a sub option if syntax of name calls for it
+	 *
+	 * @param string $name
+	 * @param array $config
+	 * @return boolean
+	 */
+	private function load_sub_option( $name, $config )
+	{
+		// split for possible sub option syntax
+		$parts = explode( self::SUB_OPTION_DELIM, $name );
+
+		// if has exactly two parts it is a sub option
+		if ( count($parts) == 2 ) {
+			// make sure options component has been enabled
+			if ( $this->policy()->options() instanceof Pie_Easy_Policy ) {
+				// feature name is the first string
+				$feature_name = $parts[0];
+				// option name is both strings glued with a hyphen
+				$option_name = implode( '-', $parts );
+				// create component using the option component factory
+				$component =
+					$this->policy()->options()->factory()->create(
+						$this->loading_theme,
+						$option_name,
+						$config
+					);
+				// valid component?
+				if ( $component instanceof Pie_Easy_Component ) {
+					// set component vars and register it
+					$this->set_component_vars( $component, $config );
+					// automagically set required feature if applicable
+					if ( $this instanceof Pie_Easy_Features_Registry ) {
+						$component->set_required_feature( $feature_name );
+					}
+					// register component and return result
+					return $this->policy()->options()->registry()->register( $component );
+				}
+			} else {
+				throw new Exception(
+					'Unable to load sub option because options component has not been enabled' );
+			}
 		}
 
 		return false;

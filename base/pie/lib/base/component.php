@@ -502,6 +502,27 @@ abstract class Pie_Easy_Component
 	}
 
 	/**
+	 * Return sub-option of this component by passing ONLY the sub-option
+	 * portion of the component name.
+	 *
+	 * When a sub-option is registered the delimeter is replaced with a hyphen.
+	 *
+	 * For example [cool-feature.color] results in the option name "cool-feature-color"
+	 *
+	 * To retrieve the option object simply call $feature->get_suboption('color');
+	 *
+	 * @return array
+	 */
+	public function get_suboption( $name )
+	{
+		// build up option name
+		$option_name = sprintf( '%s-%s', $this->name, $name );
+
+		// get and return it
+		return $this->policy()->options()->registry()->get( $option_name );
+	}
+
+	/**
 	 * Return array of variables to extract() for use by the template
 	 *
 	 * @return array
