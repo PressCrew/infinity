@@ -344,7 +344,7 @@ div.infinity-cpanel-options-single-header {
 		margin-top: 16px;
 	}
 
-textarea.infinity-cpanel-option-field-css {
+div.infinity-cpanel-options-single textarea {
 	width: 90%;
 	height: 400px;
 }
