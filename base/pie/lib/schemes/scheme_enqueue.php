@@ -80,7 +80,8 @@ class Pie_Easy_Scheme_Enqueue
 
 		// hook up script domain handler
 		if ( $this->script_domain instanceof Pie_Easy_Init_Directive ) {
-			add_action( 'pie_easy_enqueue_scripts', array( $this, 'handle_script_domain' ) );
+			add_action( 'wp_print_scripts', array( $this, 'handle_script_domain' ) );
+			add_action( 'admin_print_scripts', array( $this, 'handle_script_domain' ) );
 		}
 
 		// init styles maps
