@@ -433,8 +433,10 @@
 		// init doc pages
 		function initDocuments(panel)
 		{
+			var anchor = 0;
+
 			// recursive menu builder
-			function buildDocMenu(menu, els_head, anchor)
+			function buildDocMenu(menu, els_head)
 			{
 				var filter, did_one;
 
@@ -459,7 +461,7 @@
 					// next level headers
 					var next = $(this).nextUntil(this.tagName).filter(filter);
 					// build sub
-					if ( buildDocMenu(item_s, next, anchor) ) {
+					if ( buildDocMenu(item_s, next) ) {
 						item.append(item_s);
 					}
 					// yay
