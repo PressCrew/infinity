@@ -145,7 +145,7 @@ abstract class Pie_Easy_Asset
 
 				// make sure it actually exists
 				if ( is_readable( $filename ) ) {
-					$code .= file_get_contents( $filename ) . PHP_EOL;
+					$code .= $this->get_file_contents( $filename ) . PHP_EOL;
 					$code .= '/*--- import complete! */' . PHP_EOL . PHP_EOL;
 				} else {
 					$code .= '/*!!! import failed! */' . PHP_EOL . PHP_EOL;
@@ -155,6 +155,17 @@ abstract class Pie_Easy_Asset
 
 		// all done
 		return $code;
+	}
+
+	/**
+	 * Return contents of a file that is being imported
+	 *
+	 * @param string $filename
+	 * @return string
+	 */
+	protected function get_file_contents( $filename )
+	{
+		return file_get_contents( $filename );
 	}
 
 	/**
