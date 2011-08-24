@@ -1,22 +1,11 @@
-## Cascading Images: Overview
+## Cascading Assets: Images
 
-Maintaining a large portfolio of themes, particularly in multi-site environments
-can quickly become cumbersome and repetitive. Infinity's cascading architecture
-makes managing template inheritance easy, but with images tightly bound to their
-theme's templates with static image paths you may be forced to duplicate templates
-for minor path differences.
-
-In some cases you may want to have several "master" themes, each of which has
-several child themes which only differ in their styles and content. You need the
-flexibility to override some or all of their parent theme's images without having
-to duplicate the templates.
-
-This is where cascading images comes in. Another powerful Infinity innovation which allows
-extreme control over your theme hierarchy.
+Cascading images allow you to override image files in any theme in the stack without
+having to touch any templates.
 
 <ul class="infinity-docs-menu"></ul>
 
-### The Basics
+### Configuration
 
 Your parent theme has this image root:
 
@@ -38,7 +27,7 @@ you would have code in your parent theme's template similar to this:
 
 	<img src="<?php infinity_image_url('banners/blue.jpg') ?>">
 
-### The Power of Cascading
+### Cascading
 
 Now, you wish to override this in your **child** theme and your **grandparent** theme is the
 one which is activated. Normally you would have to duplicate the template only to tweak the
@@ -67,4 +56,25 @@ Be smart, use at your own risk, YMMV!
 
 ### Helper Functions
 
-Be sure to complete documentation on the [image cascading functions](infinity://admin:doc/images_funcs).
+To take advantage of cascading images you must use these special functions
+to locate the correct image paths and urls. These functions *return* not *echo* values.
+
+> **Important:** The $path argument is the **RELATIVE** path to the image\_root setting
+of the highest level theme that calls the image in its template(s). That means
+**no leading slash!**
+
+#### infinity\_image\_path
+
+Returns absolute filesystem path to image file.
+
+	(string) infinity_image_path( string $path )
+
+> _$path_ : Relative path to theme's image\_root setting.
+
+#### infinity\_image\_url
+
+Returns absolute URL to image file.
+
+	(string) infinity_image_url( string $path )
+
+> _$path_ : Relative path to theme's image\_root setting.
