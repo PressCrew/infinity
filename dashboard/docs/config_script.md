@@ -14,7 +14,7 @@ is called to enqueue the scripts where the configuration calls for it.
 
 The script section is where you define your scripts. A script is a handle (name) of the script
 and the script file's relative path *from your theme's root directory.* Full length URLs to
-style sheets are also supported if the begin with `http`.
+scripts are also supported if they begin with `http`.
 
 The format is:
 
@@ -100,5 +100,55 @@ Here is an example:
 In the above example, the `sliders` script would only be enqueued if the `is_front_page()`
 function returns true.
 
-> All script conditions are evaluated on the `wp_print_styles` and `admin_print_styles` actions
+> All script conditions are evaluated on the `template_redirect` and `admin_init` actions
 at priority 10. This is hard coded in Infinity and cannot be changed via any configuration settings.
+
+### Cross-Referencing Handles
+
+There may be a situation where you want to add a dependency or condition to one of your
+scripts, but the script which your script depends on is defined by the `parent_theme`,
+or maybe even further up the scheme stack.
+
+In this case you simply refer to the handle using this syntax:
+
+	theme-name:handle
+
+Here is an example:
+
+	[script_depends]
+	custom-slider = "my-base-theme:slider"
+
+### Internal Script Handles
+
+Infinity defines many internal script handles which can be used for incredibly precise control
+over the order in which scripts are enqueued. These internal script handles are defined by the
+internal theme **@** (just the atmark).
+
+All internal script handles begin with the characters **@:** (atmark-colon) and can be used
+just like script handles that are defined manually. See the cross-referencing section above to
+understand the significance of the prefix.
+
+#### Dynamic Scripts
+
+The following internal handles refer to scripts that are generated and saved to a cache
+file every time a configuration ini file is modified, or a theme option is saved.
+
+Each infinity component type has its own cache file which is located under the applicable
+uploads folder depending on whether you are running a standard or network install of WordPress.
+
+Standard Location:
+
+	wp-content/uploads/files/exports/[component].js
+
+Network Location:
+
+	wp-content/blogs.dir/[site_id]/files/exports/[component].js
+
+Component Handles:
+
+* __@:features__ Features component js
+* __@:options__ Options component js
+* __@:screens__ Screens component js
+* __@:sections__ Sections component js
+* __@:shortcodes__ Shortcodes component js
+* __@:widgets__ Widgets component js
