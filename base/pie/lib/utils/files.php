@@ -90,11 +90,23 @@ final class Pie_Easy_Files
 			$sub_paths = self::path_split( $file_name );
 			// add to final list
 			foreach( $sub_paths as $sub_path ) {
+				// handle relative traversal in absolute paths
+				if ( !$relative ) {
+					if ( $sub_path == '.' ) {
+						// single dot, skip
+						continue;
+					} elseif ( $sub_path == '..' ) {
+						// two dots, remove last dir "up"
+						array_pop( $file_names_clean );
+						continue;
+					}
+				}
+				// push file name onto final array
 				array_push( $file_names_clean, $sub_path );
 			}
 		}
 
-		return $prefix . implode( DIRECTORY_SEPARATOR, $file_names );
+		return $prefix . implode( DIRECTORY_SEPARATOR, $file_names_clean );
 	}
 
 	/**
