@@ -1,6 +1,6 @@
 ## Configuration: Automatic Style Enqueuing
 
-Infinity allows you to enqueue your theme's style sheets entirely using configuration
+Infinity allows you to enqueue your theme's stylesheets entirely using configuration
 directives without writing any PHP code. The WordPress function `wp_enqueue_styles()`
 is called to enqueue the styles where the configuration calls for it.
 
@@ -12,9 +12,9 @@ is called to enqueue the styles where the configuration calls for it.
 
 #### [style]
 
-The style section is where you define your styles. A style is a handle (name) of the style sheet
-and the style sheet's relative path *from your theme's root directory.* Full length URLs to
-style sheets are also supported if the begin with `http`.
+The style section is where you define your styles. A style is a handle (name) of the stylesheet
+and the stylesheet's relative path *from your theme's root directory.* Full length URLs to
+stylesheets are also supported if they begin with `http://`.
 
 The format is:
 
@@ -28,7 +28,7 @@ Here is an example:
 	page-sidebar = "css/pagesidebars.css"
 	gfonts = "http://fonts.googleapis.com/css?family=Droid+Sans:regular"
 
-The above code would result in the following three syle sheets being enqueued.
+The above code would result in the following three stylesheets being enqueued.
 
 	http://mysite.com/wp-content/themes/my-theme/css/colors.css
 	http://mysite.com/wp-content/themes/my-theme/css/vendors/slider.css
@@ -37,8 +37,8 @@ The above code would result in the following three syle sheets being enqueued.
 
 #### [style\_depends]
 
-The style dependancies section lets you define other style sheets that one of your
-style sheets requires to be loaded before it.
+The style dependancies section lets you define other stylesheets that one of your
+stylesheets requires to be loaded before it.
 
 The format is:
 
@@ -54,8 +54,8 @@ Here is an example:
 	[style_depends]
 	sliders = "colors,gfonts"
 
-In the above example, the `colors` and `gfonts` style sheets would be enqueued before
-the `sliders` style sheet.
+In the above example, the `colors` and `gfonts` stylesheets would be enqueued before
+the `sliders` stylesheet.
 
 #### [style\_actions]
 
@@ -73,7 +73,7 @@ Here is an example:
 	[style_actions]
 	wp = "colors,sliders"
 
-In the above example, the `colors` and `sliders` style sheets would only be enqueued if and when
+In the above example, the `colors` and `sliders` stylesheets would only be enqueued if and when
 the `wp` action is called by WordPress. It is up to you to use actions that are called in time
 for `wp_enqueue_styles()` to work properly.
 
@@ -98,9 +98,74 @@ Here is an example:
 	is_front_page = "sliders"
 	is_page = "page-sidebar"
 
-In the above example, the `sliders` style sheet would only be enqueued if the `is_front_page()`
-function returns true, and the page-sidebar style sheet would only be enqueued if the `is_page()`
+In the above example, the `sliders` stylesheet would only be enqueued if the `is_front_page()`
+function returns true, and the page-sidebar stylesheet would only be enqueued if the `is_page()`
 function returns true.
 
-All style conditions are evaluated on the `wp_print_styles` and `admin_print_styles` actions at
+All style conditions are evaluated on the `template_redirect` and `admin_init` actions at
 priority 10. This is hard coded in Infinity and cannot be changed via any configuration settings.
+
+### Cross-Referencing Handles
+
+There may be a situation where you want to add a dependency or condition to one of your
+stylesheets, but the stylesheet which your stylesheet depends on is defined by the `parent_theme`,
+or maybe even further up the scheme stack.
+
+In this case you simply refer to the handle using this syntax:
+
+	theme-name:handle
+
+Here is an example:
+
+	[style_depends]
+	really-fancy = "my-base-theme:layout"
+
+### Internal Style Handles
+
+Infinity defines many internal style handles which can be used for incredibly precise control
+over the order in which stylesheets are enqueued. These internal style handles are defined by the
+internal theme **@** (just the atmark).
+
+All internal styles begin with the characters **@:** (atmark-colon) and can be used just like
+style handles that are defined manually. See the cross-referencing section above to understand
+the significance of the prefix.
+
+#### Static Stylesheets
+
+The following internal handles refer to static stylesheets that ship with Infinity.
+
+* __@:ui__
+
+	This handle is assigned to the current jQuery UI stylesheet, even if you override the UI
+	stylesheet using the advanced directive `ui_stylesheet`.
+
+* __@:style__
+
+	This handle is assigned to the theme's main stylesheet that is located in the theme's folder.
+
+		themes/my-theme/styles.css
+
+#### Dynamic Stylesheets
+
+The following internal handles refer to stylesheets that are generated and saved to a cache
+file every time a configuration ini file is modified, or a theme option is saved.
+
+Each infinity component type has its own cache file which is located under the applicable
+uploads folder depending on whether you are running a standard or network install of WordPress.
+
+Standard Location:
+
+	wp-content/uploads/files/exports/[component].css
+
+Network Location:
+
+	wp-content/blogs.dir/[site_id]/files/exports/[component].css
+
+Component Handles:
+
+* __@:features__ Features component css
+* __@:options__ Options component css
+* __@:screens__ Screens component css
+* __@:sections__ Sections component css
+* __@:shortcodes__ Shortcodes component css
+* __@:widgets__ Widgets component css

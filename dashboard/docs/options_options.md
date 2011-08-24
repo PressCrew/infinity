@@ -285,6 +285,36 @@ to determine if the option should be visible to the site administrator.
 
 Child theme can override required\_feature: **No**
 
+#### style
+
+Set this to the relative path from your theme's folder to a file containing CSS markup
+and its contents will be injected into the component's dynamic css file. See the Dynamic
+Stylesheets section of [Automatic Style Enqueueing](infinity://admin:doc/config_style) for
+more details.
+
+	style = "path/to/custom.css"
+
+> The paths of any relative `url('path/to/my.png')` values will be automatically resolved
+  to point to the correct location relative to the dynamic CSS file.
+
+A child theme can override the file by creating a file with the identical path and name, or by
+simply overriding the value in the config with a different file path.
+
+Child theme can override style: **Yes**
+
+#### script
+
+Set this to the relative path from your theme's folder to a file containing javascript code
+and its contents will be injected into the component's dynamic js file. See the Dynamic Scripts
+section of [Automatic Script Enqueueing](infinity://admin:doc/config_script) for more details.
+
+	script = "path/to/custom.js"
+
+A child theme can override the file by creating a file with the identical path and name, or by
+simply overriding the value in the config with a different file path.
+
+Child theme can override script: **Yes**
+
 ### Sample Configuration
 
 > Take a look at the options.sample.ini file located in the `wp-content/themes/infinity/config` directory
