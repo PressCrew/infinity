@@ -143,7 +143,7 @@ The following internal handles refer to static stylesheets that ship with Infini
 
 	This handle is assigned to the theme's main stylesheet that is located in the theme's folder.
 
-		themes/my-theme/styles.css
+		themes/my-theme/style.css
 
 #### Dynamic Stylesheets
 
