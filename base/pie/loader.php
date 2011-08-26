@@ -359,7 +359,8 @@ final class Pie_Easy_Loader
 				$file =
 					PIE_EASY_LIBEXT_DIR .
 					DIRECTORY_SEPARATOR . $type .
-					DIRECTORY_SEPARATOR . $ext . '.ext.php';
+					DIRECTORY_SEPARATOR . $ext .
+					DIRECTORY_SEPARATOR . 'class.php';
 				// load it
 				require_once $file;
 				// return class name
