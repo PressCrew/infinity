@@ -93,6 +93,8 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 	/**
 	 * Check that theme has required feature support enabled if applicable
 	 *
+	 * @todo The logic here is suspicious?
+	 * @todo Make required feature available to all components?
 	 * @return boolean
 	 */
 	public function supported()
