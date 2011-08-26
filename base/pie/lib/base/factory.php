@@ -69,10 +69,10 @@ abstract class Pie_Easy_Factory extends Pie_Easy_Componentable
 	 * Return path to file for an extension
 	 *
 	 * @param Pie_Easy_Component $ext
-	 * @param string $suffix
+	 * @param string $filename
 	 * @return string
 	 */
-	private function ext_file( Pie_Easy_Component $ext, $suffix )
+	private function ext_file( Pie_Easy_Component $ext, $filename )
 	{
 		// get extension that loaded class
 		$loaded_ext = $this->ext( get_class( $ext ) );
@@ -80,13 +80,12 @@ abstract class Pie_Easy_Factory extends Pie_Easy_Componentable
 		// make sure the extension was loaded
 		if ( $loaded_ext ) {
 
-			// format template file name
-			$file = $loaded_ext . $suffix;
-
 			// look for scheme files first
 			$file_theme =
 				Pie_Easy_Scheme::instance()->locate_extension_file(
-					$this->policy()->get_handle(), $file
+					$this->policy()->get_handle(),
+					$loaded_ext,
+					$filename
 				);
 
 			// find a theme file?
@@ -99,7 +98,8 @@ abstract class Pie_Easy_Factory extends Pie_Easy_Componentable
 					PIE_EASY_LIBEXT_DIR .
 					Pie_Easy_Files::path_build(
 						$this->policy()->get_handle(),
-						$file
+						$loaded_ext,
+						$filename
 					);
 				// exists?
 				if ( is_readable( $file_default ) ) {
@@ -121,7 +121,7 @@ abstract class Pie_Easy_Factory extends Pie_Easy_Componentable
 	 */
 	final public function ext_tpl( Pie_Easy_Component $ext )
 	{
-		return $this->ext_file( $ext, '.tpl.php' );
+		return $this->ext_file( $ext, 'template.php' );
 	}
 
 	/**
@@ -132,7 +132,7 @@ abstract class Pie_Easy_Factory extends Pie_Easy_Componentable
 	 */
 	final public function ext_style( Pie_Easy_Component $ext )
 	{
-		return $this->ext_file( $ext, '.css' );
+		return $this->ext_file( $ext, 'style.css' );
 	}
 
 	/**
@@ -143,7 +143,7 @@ abstract class Pie_Easy_Factory extends Pie_Easy_Componentable
 	 */
 	final public function ext_script( Pie_Easy_Component $ext )
 	{
-		return $this->ext_file( $ext, '.js' );
+		return $this->ext_file( $ext, 'script.js' );
 	}
 
 	/**
@@ -158,7 +158,7 @@ abstract class Pie_Easy_Factory extends Pie_Easy_Componentable
 	public function load_ext( $ext, $class_prefix = null )
 	{
 		// format extension file name
-		$file = $ext . '.ext.php';
+		$file = $ext . DIRECTORY_SEPARATOR . 'extension.php';
 
 		// look for scheme files first
 		$file_theme =
