@@ -35,7 +35,6 @@ Pie_Easy_Loader::load(
  * @property-read boolean|string $documentation true/false to enable/disable, string for manual page name
  * @property-read array $capabilities Required capabilities, can only be appended
  * @property-read string $required_feature Feature required for this component to run/display
- * @property-read string $required_option Options only required if this component is run/displayed
  * @property-read boolean $ignore Whether or not this component should be ignored
  * @property-read string $template Relative path to component template file
  */
@@ -445,16 +444,6 @@ abstract class Pie_Easy_Component
 	final public function set_required_feature( $feature_name )
 	{
 		$this->directives()->set( $this->__theme__, 'required_feature', $feature_name, true );
-	}
-
-	/**
-	 * Set an option that is required for this component to display
-	 *
-	 * @param string $option_name
-	 */
-	final public function set_required_option( $option_name )
-	{
-		$this->directives()->set( $this->__theme__, 'required_option', $option_name, true );
 	}
 
 	/**

@@ -43,11 +43,6 @@ class Pie_Easy_Options_Factory extends Pie_Easy_Factory
 			$option->set_section( $config['section'] );
 		}
 
-		// required option
-		if ( isset( $config['required_option'] ) ) {
-			$option->set_required_option( $config['required_option'] );
-		}
-
 		// required feature
 		if ( isset( $config['required_feature'] ) ) {
 			$option->set_required_feature( $config['required_feature'] );

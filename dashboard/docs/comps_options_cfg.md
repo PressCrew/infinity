@@ -150,16 +150,16 @@ You can provide a default value for the option here. This will be returned by ca
 
 Child theme can override default\_value: **Yes**
 
-#### required\_option
+#### parent
 
 Providing the name of another option will cause this "dependant option" to always
-be displayed when the required option is displayed.
+be displayed when the parent option is displayed.
 
-	required_option = "option_name"
+	parent = "option-name"
 
 > This option will not be displayed in the theme options menu.
 
-Child theme can override required\_option: **No**
+Child theme can override parent: **Yes**
 
 #### required\_feature
 
