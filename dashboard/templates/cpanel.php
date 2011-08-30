@@ -1,11 +1,11 @@
 <div class="wrap nosubsub">
 	<div id="infinity-cpanel">
 		<div id="infinity-cpanel-header">
-			<div id="infinity-cpanel-header-slogan">
+			<div id="infinity-cpanel-header-version">
+				<?php _e( 'Version:', infinity_text_domain ) ?> <?php print INFINITY_VERSION ?> ~
+				<a id="infinity-cpanel-header-link" href="http://infinity.presscrew.com/" target="_blank">http://infinity.presscrew.com</a>
 			</div>
-			<div id="infinity-cpanel-header-logo">
-				<p><?php print INFINITY_VERSION ?></p>
-			</div>
+			<div id="infinity-cpanel-header-logo"></div>
 		</div>
 		<div id="infinity-cpanel-toolbar">
 			<a id="infinity-cpanel-toolbar-menu" class="infinity-cpanel-context-menu" title="<?php _e('Infinity', infinity_text_domain) ?>"><?php _e('Infinity', infinity_text_domain) ?></a>
