@@ -76,12 +76,14 @@ div.pie-easy-options-cp-box div {
 
 /* Uploader */
 div.pie-easy-options-fu fieldset {
+	margin-top: 18px\9; /* IE hack part 1 of 2 */
 	min-height: 150px;
 	padding: 10px;
 	border: 1px solid gray;
 	background-color: white;
 }
 	div.pie-easy-options-fu fieldset legend {
+		margin-top: -24px\9; /* IE hack part 2 of 2 */
 		margin-left: 3px;
 		padding: 3px 5px 3px 3px;
 		border: 1px solid gray;
