@@ -244,7 +244,7 @@ class Pie_Easy_Posts_List extends WP_Posts_List_Table
 		$_GET['post_type'] = $this->post_type;
 
 		// run parent constructor
-		parent::WP_Posts_List_Table();
+		parent::__construct();
 	}
 
 	/**
