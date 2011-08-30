@@ -67,7 +67,7 @@ function widgetPostsListSortable()
 		}
 
 		var $this = jQuery(this),
-			p_id = $this.attr('hash').substr(1);
+			p_id = $this.prop('hash').substr(1);
 
 		// show spinner
 		message.pieEasyFlash('loading', 'Moving item to trash').fadeIn();

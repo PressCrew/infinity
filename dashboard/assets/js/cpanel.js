@@ -138,7 +138,7 @@
 		{
 			var $anchor = $(anchor);
 			var href = $anchor.attr('href');
-			var hash = $anchor.attr('hash');
+			var hash = $anchor.prop('hash');
 			var message = $('<div></div>');
 
 			saveTab('add', $anchor);
@@ -160,7 +160,7 @@
 				var title = '';
 				// find title from toolbar
 				$('div#infinity-cpanel-toolbar a').each(function(){
-					if ( $(this).attr('hash') == hash ) {
+					if ( $(this).prop('hash') == hash ) {
 						title = $(this).attr('title');
 						return false; // break!
 					}
@@ -226,11 +226,11 @@
 				return t;
 			} else {
 				// must have a hash
-				if ($a.attr('hash')) {
-					id = $a.attr('hash').substr(1);
+				if ($a.prop('hash')) {
+					id = $a.prop('hash').substr(1);
 				} else {
 					id = $a.closest('div.ui-tabs-panel').attr('id');
-					$a.attr('hash', id);
+					$a.prop('hash', id);
 				}
 				// remove anchor from tabs
 				for (i in t) {

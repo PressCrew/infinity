@@ -145,7 +145,7 @@
 				$('a.pie-easy-options-save', $option).click( function(){
 
 					// get option from href
-					var opt_names = $(this).attr('hash').substr(1);
+					var opt_names = $(this).prop('hash').substr(1);
 
 					// form data
 					var data =
