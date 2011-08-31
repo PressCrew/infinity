@@ -7,7 +7,7 @@
  * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
  * @package api
- * @subpackage localization
+ * @subpackage scheme
  * @since 1.0
  */
 

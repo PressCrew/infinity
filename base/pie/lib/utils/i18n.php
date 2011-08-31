@@ -1,13 +1,13 @@
 <?php
 /**
- * PIE API: localization class file
+ * PIE API: i18n class file
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://marshallsorenson.com/
  * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
  * @package PIE
- * @subpackage localization
+ * @subpackage i18n
  * @since 1.0
  */
 

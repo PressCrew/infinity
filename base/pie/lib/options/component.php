@@ -15,6 +15,9 @@ Pie_Easy_Loader::load( 'base', 'collections', 'utils/docs', 'schemes' );
 
 /**
  * Interface to implement if the option defines its own field_options internally
+ *
+ * @package PIE
+ * @subpackage options
  */
 interface Pie_Easy_Options_Option_Auto_Field
 {
@@ -26,6 +29,9 @@ interface Pie_Easy_Options_Option_Auto_Field
 
 /**
  * Interface to implement if the option is storing an image attachment id
+ *
+ * @package PIE
+ * @subpackage options
  */
 interface Pie_Easy_Options_Option_Attachment_Image
 {
@@ -48,7 +54,7 @@ interface Pie_Easy_Options_Option_Attachment_Image
  * @property-read string $field_id The CSS id to apply to the option's input field
  * @property-read string $field_class The CSS class to apply to the option's input field
  * @property-read array $field_options An array of field options
- * @property-read $default_value Default value of the option
+ * @property-read mixed $default_value Default value of the option
  */
 abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 {
@@ -360,6 +366,9 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 
 /**
  * An option for storing an image (via WordPress attachment API)
+ *
+ * @package PIE
+ * @subpackage options
  */
 abstract class Pie_Easy_Options_Option_Image
 	extends Pie_Easy_Options_Option
