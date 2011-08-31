@@ -6,8 +6,8 @@
  * @link http://marshallsorenson.com/
  * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
- * @package PIE
- * @subpackage screens-ext
+ * @package PIE-extensions
+ * @subpackage screens
  * @since 1.0
  */
 
@@ -16,8 +16,8 @@ Pie_Easy_Loader::load( 'base/iconable', 'base/positionable' );
 /**
  * Cpanel screen
  *
- * @package PIE
- * @subpackage screens-ext
+ * @package PIE-extensions
+ * @subpackage screens
  */
 class Pie_Easy_Exts_Screen_Cpanel
 	extends Pie_Easy_Screens_Screen

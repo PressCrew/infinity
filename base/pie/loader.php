@@ -7,7 +7,6 @@
  * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
  * @package PIE
- * @subpackage loader
  * @since 1.0
  */
 
@@ -62,7 +61,6 @@ if ( !defined( 'PIE_EASY_EXPORTS_SUBDIR' ) ) {
  * Make loading PIE libraries easy
  *
  * @package PIE
- * @subpackage loader
  */
 final class Pie_Easy_Loader
 {
@@ -97,26 +95,29 @@ final class Pie_Easy_Loader
 			),
 		'collections' =>
 			array( 'map', 'map_iterator', 'stack', 'stack_iterator' ),
-		'features' =>
-			array( 'component', 'factory', 'renderer', 'policy', 'registry' ),
-		'options' =>
-			array( 'component', 'factory', 'renderer', 'policy', 'registry', 'uploader', 'walkers' ),
+		'components' =>
+			array(
+				'features' =>
+					array( 'component', 'factory', 'renderer', 'policy', 'registry' ),
+				'options' =>
+					array( 'component', 'factory', 'renderer', 'policy', 'registry', 'uploader', 'walkers' ),
+				'screens' =>
+					array( 'component', 'factory', 'renderer', 'policy', 'registry' ),
+				'sections' =>
+					array( 'component', 'factory', 'renderer', 'policy', 'registry' ),
+				'shortcodes' =>
+					array( 'component', 'factory', 'renderer', 'policy', 'registry' ),
+				'widgets' =>
+					array( 'component', 'factory', 'renderer', 'policy', 'registry' )
+			),
 		'init' =>
 			array( 'directive' ),
 		'parsers' =>
 			array( 'markdown', 'textile' ),
 		'schemes' =>
 			array( 'scheme', 'scheme_enqueue' ),
-		'screens' =>
-			array( 'component', 'factory', 'renderer', 'policy', 'registry' ),
-		'sections' =>
-			array( 'component', 'factory', 'renderer', 'policy', 'registry' ),
-		'shortcodes' =>
-			array( 'component', 'factory', 'renderer', 'policy', 'registry' ),
 		'utils' =>
-			array( 'ajax', 'docs', 'enqueue', 'export', 'files', 'i18n' ),
-		'widgets' =>
-			array( 'component', 'factory', 'renderer', 'policy', 'registry' )
+			array( 'ajax', 'docs', 'enqueue', 'export', 'files', 'i18n' )
 	);
 
 	/**
@@ -212,11 +213,7 @@ final class Pie_Easy_Loader
 
 		// loop through all libs
 		foreach ( $libs as $lib ) {
-			if ( is_array( $lib ) ) {
-				self::$instance->load_lib( $lib[1], $lib[0] );
-			} else {
-				self::$instance->load_lib( $lib );
-			}
+			self::$instance->load_lib( $lib );
 		}
 	}
 
@@ -245,75 +242,62 @@ final class Pie_Easy_Loader
 	 * Load a single lib
 	 *
 	 * @param string $lib
-	 * @param string $pkg
 	 * @return true|void
 	 */
-	private function load_lib( $lib, $pkg = null )
+	private function load_lib( $lib )
 	{
-		if ( $pkg ) {
-			return $this->load_lib_file( $lib, $pkg );
-		} else {
-			// load an entire package?
-			if ( $this->load_lib_pkg( $lib ) ) {
-				return true;
-			} else {
-				// split at path delim
-				$split = explode( self::PATH_DELIM, $lib );
-				// must have exactly two parts
-				if ( count($split) == 2 ) {
-					return $this->load_lib_file( $split[1], $split[0] );
+		// set files
+		$files = is_array( $lib ) ? $lib : explode( self::PATH_DELIM, $lib );
+
+		// files can't be empty
+		if ( count( $files ) ) {
+			// base pkg
+			$pkg = $this->pkgs;
+			// check all libs
+			foreach ( $files as $file ) {
+				// is file a pkg key?
+				if ( isset( $pkg[$file] ) ) {
+					// its a pkg, go to next level
+					$pkg = $pkg[$file];
+				} elseif ( in_array( $file, $pkg ) ) {
+					// its a lib
+					return $this->load_lib_file( array_pop( $files ), $files );
 				} else {
-					throw new Exception( sprintf( 'The library path "%s" is not formatted correctly.', $lib ) );
+					throw new Exception(
+						sprintf( 'The library path "%s" is not valid.', $lib ) );
 				}
 			}
+		} else {
+			throw new Exception( 'The library path is empty.' );
 		}
-	}
 
-	/**
-	 * Load a library package
-	 *
-	 * @param string $pkg
-	 * @return true|void
-	 */
-	private function load_lib_pkg( $pkg )
-	{
-		if ( array_key_exists( $pkg, $this->pkgs ) ) {
-			foreach ( $this->pkgs[$pkg] as $lib ) {
-				$this->load_lib_file( $lib, $pkg );
+		// loading entire pkg
+		if ( is_array( $pkg ) ) {
+			// yep
+			foreach( $pkg as $file ) {
+				$this->load_lib_file( $file, $files );
 			}
-			return true;
 		}
-
-		return false;
 	}
 
 	/**
 	 * Load a library file
 	 *
-	 * @param string $lib
-	 * @param string $pkg
+	 * @param string $file
+	 * @param array|string $pkg
 	 * @return true
 	 */
-	private function load_lib_file( $lib, $pkg )
+	private function load_lib_file( $file, $pkg )
 	{
-		// check validity of package
-		if ( array_key_exists( $pkg, $this->pkgs ) ) {
-			// check validity of lib
-			if ( in_array( $lib, $this->pkgs[$pkg], true ) ) {
-				// build up file path
-				$file =
-					PIE_EASY_LIB_DIR .
-					DIRECTORY_SEPARATOR . $pkg .
-					DIRECTORY_SEPARATOR . $lib . '.php';
-				// load it
-				require_once $file;
-				return true;
-			} else {
-				throw new Exception( sprintf( 'The library extension "%s" is not valid for the type "%s".', $lib, $pkg ) );
-			}
-		} else {
-			throw new Exception( sprintf( 'The library package "%s" is not valid.', $pkg ) );
-		}
+		// build up file path
+		$path =
+			PIE_EASY_LIB_DIR .
+			DIRECTORY_SEPARATOR . implode( DIRECTORY_SEPARATOR, $pkg ) .
+			DIRECTORY_SEPARATOR . $file . '.php';
+
+		// load it
+		require_once $path;
+		return true;
 	}
 
 	/**

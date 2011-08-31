@@ -6,17 +6,17 @@
  * @link http://marshallsorenson.com/
  * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
- * @package api
+ * @package Infinity
  * @subpackage options
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'utils/ajax', 'utils/files', 'options' );
+Pie_Easy_Loader::load( 'utils/ajax', 'utils/files', 'components/options' );
 
 /**
  * Infinity Theme: options policy
  *
- * @package api
+ * @package Infinity
  * @subpackage options
  */
 class Infinity_Options_Policy extends Pie_Easy_Options_Policy
@@ -95,7 +95,7 @@ class Infinity_Options_Policy extends Pie_Easy_Options_Policy
 /**
  * Infinity Theme: options registry
  *
- * @package api
+ * @package Infinity
  * @subpackage options
  */
 class Infinity_Options_Registry extends Pie_Easy_Options_Registry
@@ -128,7 +128,7 @@ add_action( 'wp_loaded', array( 'Infinity_Options_Registry', 'init_form_processi
 /**
  * Infinity Theme: option factory
  *
- * @package api
+ * @package Infinity
  * @subpackage exts
  */
 class Infinity_Exts_Option_Factory extends Pie_Easy_Options_Factory
@@ -147,7 +147,7 @@ class Infinity_Exts_Option_Factory extends Pie_Easy_Options_Factory
 /**
  * Infinity Theme: options renderer
  *
- * @package api
+ * @package Infinity
  * @subpackage options
  */
 class Infinity_Options_Renderer extends Pie_Easy_Options_Renderer
@@ -222,7 +222,7 @@ class Infinity_Options_Renderer extends Pie_Easy_Options_Renderer
 /**
  * Infinity Theme: options uploader
  *
- * @package api
+ * @package Infinity
  * @subpackage options
  */
 class Infinity_Options_Uploader extends Pie_Easy_Options_Uploader

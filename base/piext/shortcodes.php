@@ -6,17 +6,17 @@
  * @link http://marshallsorenson.com/
  * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
- * @package api
+ * @package Infinity
  * @subpackage shortcodes
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'shortcodes' );
+Pie_Easy_Loader::load( 'components/shortcodes' );
 
 /**
  * Infinity Theme: shortcodes policy
  *
- * @package api
+ * @package Infinity
  * @subpackage shortcodes
  */
 class Infinity_Shortcodes_Policy extends Pie_Easy_Shortcodes_Policy
@@ -86,7 +86,7 @@ class Infinity_Shortcodes_Policy extends Pie_Easy_Shortcodes_Policy
 /**
  * Infinity Theme: shortcodes registry
  *
- * @package api
+ * @package Infinity
  * @subpackage shortcodes
  */
 class Infinity_Shortcodes_Registry extends Pie_Easy_Shortcodes_Registry
@@ -97,7 +97,7 @@ class Infinity_Shortcodes_Registry extends Pie_Easy_Shortcodes_Registry
 /**
  * Infinity Theme: section factory
  *
- * @package api
+ * @package Infinity
  * @subpackage exts
  */
 class Infinity_Exts_Shortcode_Factory extends Pie_Easy_Shortcodes_Factory
@@ -116,7 +116,7 @@ class Infinity_Exts_Shortcode_Factory extends Pie_Easy_Shortcodes_Factory
 /**
  * Infinity Theme: shortcodes renderer
  *
- * @package api
+ * @package Infinity
  * @subpackage shortcodes
  */
 class Infinity_Shortcodes_Renderer extends Pie_Easy_Shortcodes_Renderer

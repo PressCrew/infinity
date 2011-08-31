@@ -6,17 +6,17 @@
  * @link http://marshallsorenson.com/
  * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
- * @package api
+ * @package Infinity
  * @subpackage features
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'features' );
+Pie_Easy_Loader::load( 'components/features' );
 
 /**
  * Infinity Theme: features policy
  *
- * @package api
+ * @package Infinity
  * @subpackage features
  */
 class Infinity_Features_Policy extends Pie_Easy_Features_Policy
@@ -86,7 +86,7 @@ class Infinity_Features_Policy extends Pie_Easy_Features_Policy
 /**
  * Infinity Theme: features registry
  *
- * @package api
+ * @package Infinity
  * @subpackage features
  */
 class Infinity_Features_Registry extends Pie_Easy_Features_Registry
@@ -97,7 +97,7 @@ class Infinity_Features_Registry extends Pie_Easy_Features_Registry
 /**
  * Infinity Theme: feature factory
  *
- * @package api
+ * @package Infinity
  * @subpackage exts
  */
 class Infinity_Exts_Feature_Factory extends Pie_Easy_Features_Factory
@@ -116,7 +116,7 @@ class Infinity_Exts_Feature_Factory extends Pie_Easy_Features_Factory
 /**
  * Infinity Theme: features renderer
  *
- * @package api
+ * @package Infinity
  * @subpackage features
  */
 class Infinity_Features_Renderer extends Pie_Easy_Features_Renderer

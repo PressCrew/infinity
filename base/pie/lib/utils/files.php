@@ -7,7 +7,7 @@
  * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
  * @package PIE
- * @subpackage files
+ * @subpackage utils
  * @since 1.0
  */
 
@@ -15,7 +15,7 @@
  * Make the File System Easy
  *
  * @package PIE
- * @subpackage files
+ * @subpackage utils
  * @uses Pie_Easy_Files_Exception
  */
 final class Pie_Easy_Files
@@ -86,8 +86,14 @@ final class Pie_Easy_Files
 
 		// clean them up
 		foreach( $file_names as $file_name ) {
-			// split into parts
-			$sub_paths = self::path_split( $file_name );
+			// handle string
+			if ( is_string( $file_name ) ) {
+				// split into parts
+				$sub_paths = self::path_split( $file_name );
+			} else {
+				// should already be an array
+				$sub_paths = $file_name;
+			}
 			// add to final list
 			foreach( $sub_paths as $sub_path ) {
 				// handle relative traversal in absolute paths
@@ -266,7 +272,7 @@ final class Pie_Easy_Files
  * Pie Easy File Exception
  *
  * @package PIE
- * @subpackage files
+ * @subpackage utils
  */
 final class Pie_Easy_Files_Exception extends Exception {}
 

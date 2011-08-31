@@ -7,7 +7,7 @@
  * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
  * @package PIE
- * @subpackage i18n
+ * @subpackage utils
  * @since 1.0
  */
 
@@ -15,7 +15,7 @@
  * Make i18n Easy
  *
  * @package PIE
- * @subpackage i18n
+ * @subpackage utils
  */
 abstract class Pie_Easy_I18n
 {

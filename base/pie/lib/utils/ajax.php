@@ -7,7 +7,7 @@
  * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
  * @package PIE
- * @subpackage ajax
+ * @subpackage utils
  * @since 1.0
  */
 
@@ -15,7 +15,7 @@
  * Make AJAX Easy
  *
  * @package PIE
- * @subpackage ajax
+ * @subpackage utils
  */
 final class Pie_Easy_Ajax
 {

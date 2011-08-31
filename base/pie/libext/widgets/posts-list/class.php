@@ -6,18 +6,18 @@
  * @link http://marshallsorenson.com/
  * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
- * @package PIE
- * @subpackage widgets-ext
+ * @package PIE-extensions
+ * @subpackage widgets
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'widgets/component', 'utils/ajax', 'utils/files' );
+Pie_Easy_Loader::load( 'components/widgets/component', 'utils/ajax', 'utils/files' );
 
 /**
  * Posts list widget
  *
- * @package PIE
- * @subpackage widgets-ext
+ * @package PIE-extensions
+ * @subpackage widgets
  */
 class Pie_Easy_Exts_Widget_Posts_List
 	 extends Pie_Easy_Widgets_Widget
@@ -198,8 +198,8 @@ class Pie_Easy_Exts_Widget_Posts_List
 Pie_Easy_Loader::load_wpadmin_lib( 'class-wp-list-table', 'class-wp-posts-list-table' );
 
 /**
- * @package PIE
- * @subpackage widgets-ext
+ * @package PIE-extensions
+ * @subpackage widgets
  * @todo find a home for this
  */
 class Pie_Easy_Posts_List extends WP_Posts_List_Table
