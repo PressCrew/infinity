@@ -198,6 +198,8 @@ class Pie_Easy_Exts_Widget_Posts_List
 Pie_Easy_Loader::load_wpadmin_lib( 'class-wp-list-table', 'class-wp-posts-list-table' );
 
 /**
+ * @package PIE
+ * @subpackage widgets-ext
  * @todo find a home for this
  */
 class Pie_Easy_Posts_List extends WP_Posts_List_Table
