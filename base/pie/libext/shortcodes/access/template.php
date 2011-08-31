@@ -6,8 +6,8 @@
  * @link http://marshallsorenson.com/
  * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
- * @package PIE
- * @subpackage shortcodes-ext
+ * @package PIE-extensions
+ * @subpackage shortcodes
  * @since 1.0
  */
 ?>

@@ -6,17 +6,17 @@
  * @link http://marshallsorenson.com/
  * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
- * @package api
+ * @package Infinity
  * @subpackage screens
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'screens' );
+Pie_Easy_Loader::load( 'components/screens' );
 
 /**
  * Infinity Theme: screens policy
  *
- * @package api
+ * @package Infinity
  * @subpackage screens
  */
 class Infinity_Screens_Policy extends Pie_Easy_Screens_Policy
@@ -87,7 +87,7 @@ class Infinity_Screens_Policy extends Pie_Easy_Screens_Policy
 /**
  * Infinity Theme: screens registry
  *
- * @package api
+ * @package Infinity
  * @subpackage screens
  */
 class Infinity_Screens_Registry extends Pie_Easy_Screens_Registry
@@ -98,7 +98,7 @@ class Infinity_Screens_Registry extends Pie_Easy_Screens_Registry
 /**
  * Infinity Theme: section factory
  *
- * @package api
+ * @package Infinity
  * @subpackage exts
  */
 class Infinity_Exts_Screen_Factory extends Pie_Easy_Screens_Factory
@@ -117,7 +117,7 @@ class Infinity_Exts_Screen_Factory extends Pie_Easy_Screens_Factory
 /**
  * Infinity Theme: screens renderer
  *
- * @package api
+ * @package Infinity
  * @subpackage screens
  */
 class Infinity_Screens_Renderer extends Pie_Easy_Screens_Renderer

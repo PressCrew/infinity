@@ -6,17 +6,17 @@
  * @link http://marshallsorenson.com/
  * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
- * @package api
+ * @package Infinity
  * @subpackage widgets
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'widgets' );
+Pie_Easy_Loader::load( 'components/widgets' );
 
 /**
  * Infinity Theme: widgets policy
  *
- * @package api
+ * @package Infinity
  * @subpackage widgets
  */
 class Infinity_Widgets_Policy extends Pie_Easy_Widgets_Policy
@@ -87,7 +87,7 @@ class Infinity_Widgets_Policy extends Pie_Easy_Widgets_Policy
 /**
  * Infinity Theme: widgets registry
  *
- * @package api
+ * @package Infinity
  * @subpackage widgets
  */
 class Infinity_Widgets_Registry extends Pie_Easy_Widgets_Registry
@@ -98,7 +98,7 @@ class Infinity_Widgets_Registry extends Pie_Easy_Widgets_Registry
 /**
  * Infinity Theme: section factory
  *
- * @package api
+ * @package Infinity
  * @subpackage exts
  */
 class Infinity_Exts_Widget_Factory extends Pie_Easy_Widgets_Factory
@@ -117,7 +117,7 @@ class Infinity_Exts_Widget_Factory extends Pie_Easy_Widgets_Factory
 /**
  * Infinity Theme: widgets renderer
  *
- * @package api
+ * @package Infinity
  * @subpackage widgets
  */
 class Infinity_Widgets_Renderer extends Pie_Easy_Widgets_Renderer

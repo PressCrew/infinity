@@ -6,17 +6,17 @@
  * @link http://marshallsorenson.com/
  * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
- * @package api
+ * @package Infinity
  * @subpackage sections
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'sections' );
+Pie_Easy_Loader::load( 'components/sections' );
 
 /**
  * Infinity Theme: sections policy
  *
- * @package api
+ * @package Infinity
  * @subpackage sections
  */
 class Infinity_Sections_Policy extends Pie_Easy_Sections_Policy
@@ -87,7 +87,7 @@ class Infinity_Sections_Policy extends Pie_Easy_Sections_Policy
 /**
  * Infinity Theme: sections registry
  *
- * @package api
+ * @package Infinity
  * @subpackage sections
  */
 class Infinity_Sections_Registry extends Pie_Easy_Sections_Registry
@@ -98,7 +98,7 @@ class Infinity_Sections_Registry extends Pie_Easy_Sections_Registry
 /**
  * Infinity Theme: section factory
  *
- * @package api
+ * @package Infinity
  * @subpackage exts
  */
 class Infinity_Exts_Section_Factory extends Pie_Easy_Sections_Factory
@@ -117,7 +117,7 @@ class Infinity_Exts_Section_Factory extends Pie_Easy_Sections_Factory
 /**
  * Infinity Theme: sections renderer
  *
- * @package api
+ * @package Infinity
  * @subpackage sections
  */
 class Infinity_Sections_Renderer extends Pie_Easy_Sections_Renderer

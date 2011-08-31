@@ -7,7 +7,7 @@
  * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
  * @package PIE
- * @subpackage docs
+ * @subpackage utils
  * @since 1.0
  */
 
@@ -17,7 +17,7 @@ Pie_Easy_Loader::load( 'utils/files' );
  * Make documentation easy
  *
  * @package PIE
- * @subpackage docs
+ * @subpackage utils
  */
 class Pie_Easy_Docs
 {
