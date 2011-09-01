@@ -112,14 +112,11 @@ class Infinity_Options_Registry extends Pie_Easy_Options_Registry
 			return;
 		}
 
-		// current theme name
-		$theme = get_stylesheet();
-
 		// add form processing
 		if ( defined('DOING_AJAX') ) {
-			add_action( 'wp_ajax_infinity_options_update', array( Infinity_Options_Policy::instance()->registry($theme), 'process_form_ajax' ) );
+			add_action( 'wp_ajax_infinity_options_update', array( Infinity_Options_Policy::instance()->registry(), 'process_form_ajax' ) );
 		} else {
-			add_action( 'load-toplevel_page_' . INFINITY_ADMIN_PAGE, array( Infinity_Options_Policy::instance()->registry($theme), 'process_form' ) );
+			add_action( 'load-toplevel_page_' . INFINITY_ADMIN_PAGE, array( Infinity_Options_Policy::instance()->registry(), 'process_form' ) );
 		}
 	}
 }
@@ -469,11 +466,8 @@ function infinity_options_render_menu( $args = null )
 		}
 	}
 
-	// current theme
-	$theme = get_stylesheet();
-
-	// get registries for this theme
-	$sections_registry = Infinity_Sections_Policy::instance()->registry($theme);
+	// get section registriy for this theme
+	$sections_registry = Infinity_Sections_Policy::instance()->registry();
 
 	// get only "root" sections
 	$sections = $sections_registry->get_roots( $get_sections );
@@ -493,8 +487,8 @@ function infinity_options_render_menu( $args = null )
 function infinity_options_render_menu_section( Pie_Easy_Sections_Section $section )
 {
 	// get registries for this theme
-	$sections_registry = Infinity_Sections_Policy::instance()->registry($theme);
-	$options_registry = Infinity_Options_Policy::instance()->registry($theme);
+	$sections_registry = Infinity_Sections_Policy::instance()->registry();
+	$options_registry = Infinity_Options_Policy::instance()->registry();
 	
 	// get children of this section
 	$children = $sections_registry->get_children( $section );

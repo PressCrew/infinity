@@ -33,11 +33,9 @@ abstract class Pie_Easy_Policy
 	static protected $calling_class;
 
 	/**
-	 * Map of Pie_Easy_Registry instances
-	 *
-	 * @var Pie_Easy_Map
+	 * @var Pie_Easy_Registry
 	 */
-	private $registries;
+	private $registry;
 
 	/**
 	 * @var Pie_Easy_Factory
@@ -198,32 +196,18 @@ abstract class Pie_Easy_Policy
 	abstract public function new_renderer();
 
 	/**
-	 * Return the registry for a specific point in the theme ancestory
+	 * Return the registry instance
 	 *
-	 * @param $theme Theme for which to return the registry
 	 * @return Pie_Easy_Registry
 	 */
-	final public function registry( $theme = null )
+	final public function registry()
 	{
-		// handle empty theme
-		if ( empty( $theme ) ) {
-			$theme = get_stylesheet();
+		// handle empty registry
+		if ( !$this->registry instanceof Pie_Easy_Registry ) {
+			$this->registry = $this->new_registry();
+			$this->registry->policy( $this );
 		}
-
-		// handle empty registry map
-		if ( !$this->registries instanceof Pie_Easy_Map ) {
-			$this->registries = new Pie_Easy_Map();
-		}
-
-		// need new instance?
-		if ( !$this->registries->contains( $theme ) ) {
-			// push this registry onto the map
-			$registry = $this->new_registry();
-			$registry->policy( $this );
-			$this->registries->add( $theme, $registry );
-		}
-
-		return $this->registries->item_at( $theme );
+		return $this->registry;
 	}
 	
 	/**
@@ -235,7 +219,7 @@ abstract class Pie_Easy_Policy
 	{
 		if ( !$this->factory instanceof Pie_Easy_Factory ) {
 			$this->factory = $this->new_factory();
-			$this->factory()->policy( $this );
+			$this->factory->policy( $this );
 		}
 		return $this->factory;
 	}
