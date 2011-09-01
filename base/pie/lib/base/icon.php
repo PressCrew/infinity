@@ -76,17 +76,9 @@ class Pie_Easy_Icon
 	{
 		switch ( $name ) {
 			case 'primary':
-				if ( empty( $this->primary ) ) {
-					return $this->primary = $value;
-				} else {
-					throw new Exception( 'Cannot overwrite primary icon once set' );
-				}
+				return $this->primary = $value;
 			case 'secondary':
-				if ( empty( $this->secondary ) ) {
-					return $this->secondary = $value;
-				} else {
-					throw new Exception( 'Cannot overwrite secondary icon once set' );
-				}
+				return $this->secondary = $value;
 		}
 	}
 
