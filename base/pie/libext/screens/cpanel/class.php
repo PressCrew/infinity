@@ -45,7 +45,17 @@ class Pie_Easy_Exts_Screen_Cpanel
 		// icons
 		$icon_primary = ( isset( $config['icon_primary'] ) ) ? $config['icon_primary'] : null;
 		$icon_secondary = ( isset( $config['icon_secondary'] ) ) ? $config['icon_secondary'] : null;
-		$this->icon( new Pie_Easy_Icon( $icon_primary, $icon_secondary ) );
+
+		if ( $this->icon() ) {
+			if ( $icon_primary ) {
+				$this->icon()->primary = $icon_primary;
+			}
+			if ( $icon_secondary ) {
+				$this->icon()->secondary = $icon_secondary;
+			}
+		} else {
+			$this->icon( new Pie_Easy_Icon( $icon_primary, $icon_secondary ) );
+		}
 
 		// priority
 		if ( isset( $config['priority'] ) ) {
