@@ -64,6 +64,11 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 	const PREFIX_TPL = '%s_opt_';
 
 	/**
+	 * The string on which to split field option key => values
+	 */
+	const FIELD_OPTION_DELIM = '=';
+
+	/**
 	 * Special meta options use this as a delimeter
 	 */
 	const META_DELIM = '.';
@@ -93,6 +98,77 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 		// special cases
 		if ( $this instanceof Pie_Easy_Options_Option_Auto_Field ) {
 			$this->field_options = $this->load_field_options();
+		}
+	}
+
+	public function configure( $config, $theme )
+	{
+		// RUN PARENT FIRST!
+		parent::configure( $config, $theme );
+
+		// section
+		if ( isset( $config['section'] ) ) {
+			$this->set_section( $config['section'], $theme );
+		}
+
+		// default value
+		if ( isset( $config['default_value'] ) ) {
+			$this->directives()->set( $theme, 'default_value', $config['default_value'] );
+		}
+
+		// css id
+		if ( isset( $config['field_id'] ) ) {
+			$this->directives()->set( $theme, 'field_id', $config['field_id'] );
+		}
+
+		// css class
+		if ( isset( $config['field_class'] ) ) {
+			$this->directives()->set( $theme, 'field_class', $config['field_class'] );
+		}
+
+		// field options
+		if ( isset( $config['field_options'] ) ) {
+
+			if ( $this instanceof Pie_Easy_Options_Option_Auto_Field ) {
+				throw new Exception( 'Cannot set field options for an auto field option.' );
+			}
+
+			if ( is_array( $config['field_options'] ) ) {
+
+				// loop through all field options
+				foreach ( $config['field_options'] as $field_option ) {
+					// split each one at the delimeter
+					$field_option = explode( self::FIELD_OPTION_DELIM, $field_option, 2 );
+					// add to array
+					$field_options[trim($field_option[0])] = trim($field_option[1]);
+				}
+
+			} elseif ( strlen( $config['field_options'] ) ) {
+
+				// possibly a function
+				$callback = $config['field_options'];
+
+				// check if the function exists
+				if ( function_exists( $callback ) ) {
+					// call it
+					$field_options = $callback();
+					// make sure we got an array
+					if ( !is_array( $field_options ) ) {
+						throw new Exception( sprintf( 'The field options callback function "%s" did not return an array', $callback ) );
+					}
+				} else {
+					throw new Exception( sprintf( 'The field options callback function "%s" does not exist', $callback ) );
+				}
+
+			} else {
+				throw new Exception( sprintf( 'The field options for the "%s" option is not configured correctly', $name ) );
+			}
+
+			// make sure we ended up with some options
+			if ( count( $field_options ) >= 1 ) {
+				// finally set them for the option
+				$this->directives()->set( $theme, 'field_options', $field_options, true );
+			}
 		}
 	}
 
@@ -258,8 +334,9 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 	 * Set the section
 	 *
 	 * @param string $section
+	 * @param string $theme
 	 */
-	public function set_section( $section )
+	protected function set_section( $section, $theme )
 	{
 		// lookup the section registry
 		$section_registry = Pie_Easy_Policy::instance('Pie_Easy_Sections_Policy')->registry();
@@ -275,56 +352,7 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 			}
 		}
 
-		$this->directives()->set( $this->theme, 'section', $section->name );
-	}
-
-	/**
-	 * Set the CSS id attribute to apply to the field of this option
-	 *
-	 * @param string $field_id
-	 */
-	public function set_field_id( $field_id )
-	{
-		$this->directives()->set( $this->theme, 'field_id', $field_id );
-	}
-
-	/**
-	 * Set the CSS class attribute to apply to the field of this option
-	 *
-	 * @param string $field_class
-	 */
-	public function set_field_class( $field_class )
-	{
-		$this->directives()->set( $this->theme, 'field_class', $field_class );
-	}
-
-	/**
-	 * Set the field options for this option
-	 *
-	 * @param array $field_options
-	 */
-	public function set_field_options( $field_options )
-	{
-		if ( $this instanceof Pie_Easy_Options_Option_Auto_Field ) {
-			throw new Exception( 'Cannot set field options for an auto field option.' );
-		} else {
-			$this->directives()->set( $this->theme, 'field_options', $field_options, true );
-		}
-	}
-
-	/**
-	 * Set the default value to be used by this option in the event it has not been set
-	 *
-	 * @param mixed $value New value
-	 * @param string $theme The theme that last update the default value
-	 * @return true
-	 */
-	public function set_default_value( $value, $theme = null )
-	{
-		// set the default value
-		$this->directives()->set( $this->theme, 'default_value', $value );
-
-		return true;
+		$this->directives()->set( $theme, 'section', $section->name );
 	}
 
 	/**

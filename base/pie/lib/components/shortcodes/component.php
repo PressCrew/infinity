@@ -51,6 +51,17 @@ abstract class Pie_Easy_Shortcodes_Shortcode extends Pie_Easy_Component
 		add_shortcode( $this->name, array( $this, 'render_handler' ) );
 	}
 
+	public function configure( $config, $theme )
+	{
+		// RUN PARENT FIRST!
+		parent::configure( $config, $theme );
+
+		// attribute defaults
+		if ( isset( $config['attributes'] ) ) {
+			$this->directives()->set( $theme, 'attributes', $config['attributes'] );
+		}
+	}
+
 	/**
 	 * This method handles all shortcode calls
 	 *
@@ -149,15 +160,6 @@ abstract class Pie_Easy_Shortcodes_Shortcode extends Pie_Easy_Component
 		return $this->__the_atts__;
 	}
 	
-	/**
-	 * Set the attribute defaults as defined in the config
-	 *
-	 * @param array $atts
-	 */
-	public function set_attributes( $atts )
-	{
-		$this->directives()->set( $this->theme, 'attributes', $atts );
-	}
 }
 
 ?>

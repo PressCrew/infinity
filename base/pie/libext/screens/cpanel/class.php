@@ -37,6 +37,27 @@ class Pie_Easy_Exts_Screen_Cpanel
 	 */
 	private $__position__;
 
+	public function configure( $config, $theme )
+	{
+		// RUN PARENT FIRST!
+		parent::configure( $config, $theme );
+
+		// icons
+		$icon_primary = ( isset( $config['icon_primary'] ) ) ? $config['icon_primary'] : null;
+		$icon_secondary = ( isset( $config['icon_secondary'] ) ) ? $config['icon_secondary'] : null;
+		$this->icon( new Pie_Easy_Icon( $icon_primary, $icon_secondary ) );
+
+		// priority
+		if ( isset( $config['priority'] ) ) {
+			$this->position( new Pie_Easy_Position( $config['priority'] ) );
+		}
+
+		// show on toolbar?
+		if ( isset( $config['toolbar'] ) ) {
+			$this->directives()->set( $theme, 'toolbar', (boolean) $config['toolbar'] );
+		}
+	}
+
 	/**
 	 * Set/Return the icon object
 	 *
@@ -65,16 +86,6 @@ class Pie_Easy_Exts_Screen_Cpanel
 		}
 
 		return $this->__position__;
-	}
-
-	/**
-	 * Set toolbar toggle
-	 *
-	 * @param boolean $toggle
-	 */
-	final public function set_toolbar( $toggle )
-	{
-		$this->directives()->set( $this->theme, 'toolbar', $toggle );
 	}
 }
 

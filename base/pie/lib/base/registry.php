@@ -23,6 +23,11 @@ Pie_Easy_Loader::load( 'base/componentable', 'collections', 'utils/export' );
 abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 {
 	/**
+	 * Name of the default component to use when none configured
+	 */
+	const DEFAULT_COMPONENT_TYPE = 'default';
+	
+	/**
 	 * Sub option delimeter
 	 */
 	const SUB_OPTION_DELIM = '.';
@@ -279,19 +284,23 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 					// yes, skip standard loading
 					continue;
 				}
-				// get component
-				$component =
-					$this->policy()->factory()->create(
-						$this->loading_theme,
-						$name,
-						$config
-					);
-				// valid component?
-				if ( $component instanceof Pie_Easy_Component ) {
-					// set component vars and register it
-					$this->set_component_vars( $component, $config );
+				// get or create component
+				if ( $this->has( $name ) ) {
+					// get it from registry
+					$component = $this->get( $name );
+				} else {
+					// use factory to create one
+					$component =
+						$this->policy()->factory()->create(
+							$this->loading_theme,
+							$name,
+							isset( $config['type'] ) ? $config['type'] : self::DEFAULT_COMPONENT_TYPE
+						);
+					// register component
 					$this->register( $component );
 				}
+				// configure component
+				$component->configure( $config, $this->loading_theme );
 			}
 			// all done
 			return true;
@@ -320,24 +329,29 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 				$feature_name = $parts[0];
 				// option name is both strings glued with a hyphen
 				$option_name = implode( '-', $parts );
-				// create component using the option component factory
-				$component =
-					$this->policy()->options()->factory()->create(
-						$this->loading_theme,
-						$option_name,
-						$config
-					);
-				// valid component?
-				if ( $component instanceof Pie_Easy_Component ) {
-					// set component vars and register it
-					$this->set_component_vars( $component, $config );
-					// automagically set required feature if applicable
-					if ( $this instanceof Pie_Easy_Features_Registry ) {
-						$component->set_required_feature( $feature_name );
-					}
-					// register component and return result
-					return $this->policy()->options()->registry()->register( $component );
+				// get or create component
+				if ( $this->policy()->options()->registry()->has( $name ) ) {
+					// get it from registry
+					$component = $this->get( $name );
+				} else {
+					// create option using the option component factory
+					$component =
+						$this->policy()->options()->factory()->create(
+							$this->loading_theme,
+							$option_name,
+							isset( $config['type'] ) ? $config['type'] : self::DEFAULT_COMPONENT_TYPE
+						);
+					// register option
+					$this->policy()->options()->registry()->register( $component );
 				}
+				// automagically set required feature if applicable
+				if ( $this instanceof Pie_Easy_Features_Registry ) {
+					$config['required_feature'] = $feature_name;
+				}
+				// configure component
+				$component->configure( $config, $this->loading_theme );
+				// all done
+				return true;
 			} else {
 				throw new Exception(
 					'Unable to load sub option because options component has not been enabled' );
@@ -345,21 +359,6 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 		}
 
 		return false;
-	}
-
-	/**
-	 * Set custom directives for component (pass thru vars)
-	 *
-	 * @param Pie_Easy_Component $component
-	 * @param array $config_array
-	 */
-	private function set_component_vars( Pie_Easy_Component $component, $config_array )
-	{
-		// loop through config
-		foreach( $config_array as $directive => $value ) {
-			// try to set it
-			$component->set_directive_var( $directive, $value );
-		}
 	}
 
 	/**

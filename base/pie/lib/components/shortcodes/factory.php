@@ -21,25 +21,7 @@ Pie_Easy_Loader::load( 'base/factory' );
  */
 class Pie_Easy_Shortcodes_Factory extends Pie_Easy_Factory
 {
-	/**
-	 * Return an instance of an options component
-	 *
-	 * @param string $theme
-	 * @param string $name
-	 * @param array $config
-	 * @return Pie_Easy_Shortcodes_Shortcode
-	 */
-	public function create( $theme, $name, $config )
-	{
-		$shortcode = parent::create( $theme, $name, $config );
-
-		// attribute defaults
-		if ( isset( $config['attributes'] ) ) {
-			$shortcode->set_attributes( $config['attributes'] );
-		}
-
-		return $shortcode;
-	}
+	// nothing custom yet
 }
 
 ?>
