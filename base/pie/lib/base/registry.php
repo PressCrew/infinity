@@ -121,25 +121,15 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 	final protected function register( Pie_Easy_Component $component )
 	{
 		// has the component already been registered?
-		if ( $this->components->contains( $component->name ) ) {
-
-			// get component stack
-			$comp_stack = $this->get_stack( $component->name );
-
-			// check if component already registered for this theme
-			if ( $comp_stack->contains( $component->theme ) ) {
-				throw new Exception( sprintf(
-					'The "%s" component has already been registered for the "%s" theme',
-					$component->name, $component->theme ) );
-			}
-
-		} else {
-			$comp_stack = new Pie_Easy_Stack();
-			$this->components->add( $component->name, $comp_stack );
-		};
-
+		if ( $this->has( $component->name ) ) {
+			// can't register same component name twice
+			throw new Exception( sprintf(
+				'The "%s" component has already been registered for the "%s" theme',
+				$component->name, $component->theme ) );
+		}
+		
 		// register it
-		$comp_stack->push( $component );
+		$this->components->add( $component->name, $component );
 
 		return true;
 	}
@@ -166,7 +156,7 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 		// check registry
 		if ( $this->has( $name ) ) {
 			// from top of stack
-			return $this->get_stack($name)->peek();
+			return $this->components->item_at( $name );
 		}
 
 		// didn't find it
@@ -184,9 +174,7 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 		$components = array();
 
 		// loop through and compare names
-		foreach ( $this->components as $component_stack ) {
-			// current component is on top of stack
-			$component = $component_stack->peek();
+		foreach ( $this->components as $component ) {
 			// include ignored?
 			if ( ($component->ignore) && (!$include_ignored) ) {
 				// next!
@@ -199,17 +187,6 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 
 		// return them
 		return $components;
-	}
-
-	/**
-	 * Return stack for the given component name
-	 *
-	 * @param string $name
-	 * @return Pie_Easy_Stack
-	 */
-	final protected function get_stack( $name )
-	{
-		return $this->components->item_at( $name );
 	}
 
 	/**
