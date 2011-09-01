@@ -30,6 +30,22 @@ abstract class Pie_Easy_Sections_Section extends Pie_Easy_Component
 	 */
 	private $__components__;
 
+	public function configure( $config, $theme )
+	{
+		// RUN PARENT FIRST!
+		parent::configure( $config, $theme );
+
+		// css title class
+		if ( isset( $config['class_title'] ) ) {
+			$this->directives()->set( $theme, 'class_title', $config['class_title'] );
+		}
+
+		// css content class
+		if ( isset( $config['class_content'] ) ) {
+			$this->directives()->set( $theme, 'class_content', $config['class_content'] );
+		}
+	}
+
 	/**
 	 * Add component to this section's content
 	 *
@@ -70,27 +86,6 @@ abstract class Pie_Easy_Sections_Section extends Pie_Easy_Component
 			'components' => $this->__components__
 		);
 	}
-
-	/**
-	 * Set the title CSS class
-	 *
-	 * @param string $class
-	 */
-	public function set_class_title( $class )
-	{
-		$this->directives()->set( $this->theme, 'class_title', $class );
-	}
-
-	/**
-	 * Set the content CSS class
-	 *
-	 * @param string $class
-	 */
-	public function set_class_content( $class )
-	{
-		$this->directives()->set( $this->theme, 'class_content', $class );
-	}
-
 }
 
 ?>

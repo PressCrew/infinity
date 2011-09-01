@@ -22,11 +22,6 @@ Pie_Easy_Loader::load( 'base/componentable', 'utils/files' );
 abstract class Pie_Easy_Factory extends Pie_Easy_Componentable
 {
 	/**
-	 * Name of the default component to use when none configured
-	 */
-	const DEFAULT_COMPONENT_TYPE = 'default';
-	
-	/**
 	 * Map of created classes and their extension type
 	 * 
 	 * @var Pie_Easy_Map
@@ -184,31 +179,16 @@ abstract class Pie_Easy_Factory extends Pie_Easy_Componentable
 	 *
 	 * @param string $theme
 	 * @param string $name
-	 * @param array $config
+	 * @param string $type
 	 * @return Pie_Easy_Component
 	 */
-	public function create( $theme, $name, $config )
+	public function create( $theme, $name, $type )
 	{
-		// determine type
-		if ( isset( $config['type'] ) ) {
-			// use one from the config
-			$type = $config['type'];
-		} else {
-			// field type? (backwards compatibility)
-			if ( isset( $config['field_type'] ) ) {
-				// eventually this will be deprecated!
-				$type = $config['field_type'];
-			} else {
-				// use default
-				$type = self::DEFAULT_COMPONENT_TYPE;
-			}
-		}
-
 		// load it from alternate location
 		$class_name = $this->load_ext( $type );
 
 		// create new component
-		$component = new $class_name( $theme, $name, $config['title'] );
+		$component = new $class_name( $theme, $name );
 
 		// set the policy
 		$component->policy( $this->policy() );
@@ -225,60 +205,6 @@ abstract class Pie_Easy_Factory extends Pie_Easy_Componentable
 		// have default script file?
 		if ( $default_script ) {
 			$component->script()->add_file( $default_script );
-		}
-		
-		// desc
-		if ( isset( $config['description'] ) ) {
-			$component->set_description( $config['description'] );
-		}
-
-		// parent
-		if ( isset( $config['parent'] ) ) {
-			$component->set_parent( $config['parent'] );
-		}
-
-		// set stylesheet
-		if ( isset( $config['style'] ) ) {
-			// no deps by default
-			$deps = array();
-			// any deps?
-			if ( isset( $config['style_depends'] ) ) {
-				$deps = explode( ',', $config['style_depends'] );
-			}
-			// set the stylesheet
-			$component->set_style( $config['style'], $deps );
-		}
-
-		// set script
-		if ( isset( $config['script'] ) ) {
-			// no deps by default
-			$deps = array();
-			// any deps?
-			if ( isset( $config['script_depends'] ) ) {
-				$deps = explode( ',', $config['script_depends'] );
-			}
-			// set the script
-			$component->set_script( $config['script'], $deps );
-		}
-
-		// set template
-		if ( isset( $config['template'] ) ) {
-			$component->set_template( $config['template'] );
-		}
-
-		// css class
-		if ( isset( $config['class'] ) ) {
-			$component->set_class( $config['class'] );
-		}
-
-		// capabilities
-		if ( isset( $config['capabilities'] ) ) {
-			$component->add_capabilities( $config['capabilities'] );
-		}
-		
-		// set ignore
-		if ( isset( $config['ignore'] ) ) {
-			$component->set_ignore( $config['ignore'] );
 		}
 
 		// all done

@@ -102,9 +102,8 @@ abstract class Pie_Easy_Component
 	/**
 	 * @param string $theme The theme that created this option
 	 * @param string $name Option name may only contain alphanumeric characters as well as the underscore for use as a word separator.
-	 * @param string $title
 	 */
-	public function __construct( $theme, $name, $title )
+	public function __construct( $theme, $name )
 	{
 		// set basic properties
 		$this->__theme__ = $theme;
@@ -112,9 +111,6 @@ abstract class Pie_Easy_Component
 
 		// init directives registry
 		$this->__directives__ = new Pie_Easy_Init_Directive_Registry();
-
-		// set directives
-		$this->directives()->set( $this->__theme__, 'title', $title );
 
 		// run init template method
 		$this->init();
@@ -237,20 +233,95 @@ abstract class Pie_Easy_Component
 	}
 
 	/**
-	 * Set a custom directive (pass thru var)
+	 * Configure this component from an array of values
 	 *
-	 * @param string $name
-	 * @param mixed $value
-	 * @return boolean
+	 * @param array $config
+	 * @param string $theme
 	 */
-	final public function set_directive_var( $name, $value )
+	public function configure( $config, $theme )
 	{
-		// first character match prefix?
-		if ( $name{0} == self::PREFIX_PASS_THRU ) {
-			return $this->directives()->set( $this->__theme__, $name, $value, true );
+		// parent
+		if ( isset( $config['parent'] ) ) {
+			if ( $this->__name__ != $config['parent'] ) {
+				$this->__parent__ = trim( $config['parent'] );
+			} else {
+				throw new Exception( sprintf( 'The component "%s" cannot be a parent of itself', $this->__name__ ) );
+			}
+		}
+		
+		// title
+		if ( isset( $config['title'] ) ) {
+			$this->directives()->set( $theme, 'title', $config['title'] );
+		} elseif ( !$this->directives()->has( 'title' ) ) {
+			throw new Exception( 'The "title" directive is required' );
+		}
+		
+		// desc
+		if ( isset( $config['description'] ) ) {
+			$this->directives()->set( $theme, 'description', $config['description'] );
 		}
 
-		return false;
+		// documentation
+		if ( isset( $config['documentation'] ) ) {
+			$this->directives()->set( $theme, 'documentation', $config['documentation'] );
+		}
+
+		// set stylesheet
+		if ( isset( $config['style'] ) ) {
+			// no deps by default
+			$deps = array();
+			// any deps?
+			if ( isset( $config['style_depends'] ) ) {
+				$deps = explode( ',', $config['style_depends'] );
+			}
+			// set the stylesheet
+			$this->style()->add_file( $config['style'], $deps );
+		}
+
+		// set script
+		if ( isset( $config['script'] ) ) {
+			// no deps by default
+			$deps = array();
+			// any deps?
+			if ( isset( $config['script_depends'] ) ) {
+				$deps = explode( ',', $config['script_depends'] );
+			}
+			// set the script
+			$this->script()->add_file( $config['script'], $deps );
+		}
+
+		// set template
+		if ( isset( $config['template'] ) ) {
+			$this->directives()->set( $theme, 'template', $config['template'] );
+		}
+
+		// css class
+		if ( isset( $config['class'] ) ) {
+			$this->directives()->set( $theme, 'class', $config['class'] );
+		}
+
+		// capabilities
+		if ( isset( $config['capabilities'] ) ) {
+			$this->add_capabilities( $config['capabilities'] );
+		}
+
+		// required feature
+		if ( isset( $config['required_feature'] ) ) {
+			$this->directives()->set( $theme, 'required_feature', $config['required_feature'] );
+		}
+
+		// set ignore
+		if ( isset( $config['ignore'] ) ) {
+			$this->directives()->set( $theme, 'ignore', (boolean) $config['ignore'] );
+		}
+
+		// set directive vars
+		foreach( $config as $directive => $value ) {
+			// try to set it
+			if ( $directive{0} == self::PREFIX_PASS_THRU ) {
+				$this->directives()->set( $theme, $directive, $value );
+			}
+		}
 	}
 
 	/**
@@ -364,20 +435,6 @@ abstract class Pie_Easy_Component
 	}
 
 	/**
-	 * Set the parent component
-	 *
-	 * @param string $parent_name
-	 */
-	public function set_parent( $parent_name )
-	{
-		if ( $this->__name__ != $parent_name ) {
-			$this->__parent__ = trim( $parent_name );
-		} else {
-			throw new Exception( sprintf( 'The component "%s" cannot be a parent of itself', $this->__name__ ) );
-		}
-	}
-
-	/**
 	 * Returns true if component is parent of given component
 	 *
 	 * @param Pie_Easy_Component $component
@@ -386,90 +443,6 @@ abstract class Pie_Easy_Component
 	public function is_parent_of( Pie_Easy_Component $component )
 	{
 		return $this->__name__ == $component->parent;
-	}
-
-	/**
-	 * Set the long description
-	 *
-	 * @param string $desc
-	 */
-	final public function set_description( $desc )
-	{
-		$this->directives()->set( $this->__theme__, 'description', $desc );
-	}
-
-	/**
-	 * Set the CSS class attribute to apply to this component's container element
-	 *
-	 * @param string $class
-	 */
-	final public function set_class( $class )
-	{
-		$this->directives()->set( $this->__theme__, 'class', $class );
-	}
-
-	/**
-	 * Set the documentation file for this option
-	 *
-	 * @param string $rel_path Path to documentation file relative to the theme config docs
-	 */
-	final public function set_documentation( $rel_path )
-	{
-		$this->directives()->set( $this->__theme__, 'documentation', trim( $rel_path, '\\/' ) );
-	}
-
-	/**
-	 * Set a feature that must be supported/enabled for this option to display
-	 *
-	 * @param string $feature_name
-	 */
-	final public function set_required_feature( $feature_name )
-	{
-		$this->directives()->set( $this->__theme__, 'required_feature', $feature_name, true );
-	}
-
-	/**
-	 * Set the stylesheet file path
-	 *
-	 * @param string $path
-	 * @param array $deps
-	 */
-	public function set_style( $path, $deps = null )
-	{
-		// add the file
-		$this->style()->add_file( $path, $deps );
-	}
-
-	/**
-	 * Set the script file path
-	 *
-	 * @param string $path
-	 * @param array $deps
-	 */
-	public function set_script( $path, $deps = null )
-	{
-		// add the file
-		$this->script()->add_file( $path, $deps );
-	}
-
-	/**
-	 * Set the template file path
-	 *
-	 * @param string $path
-	 */
-	public function set_template( $path )
-	{
-		$this->directives()->set( $this->__theme__, 'template', $path );
-	}
-	
-	/**
-	 * Set ignore toggle
-	 *
-	 * @param boolean $toggle
-	 */
-	final public function set_ignore( $toggle )
-	{
-		$this->directives()->set( $this->__theme__, 'ignore', (boolean) $toggle );
 	}
 
 	/**
