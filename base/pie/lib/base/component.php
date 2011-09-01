@@ -237,24 +237,6 @@ abstract class Pie_Easy_Component
 	}
 
 	/**
-	 * Make a unique js function name
-	 *
-	 * @return string
-	 */
-	public function make_script_function( $suffix = null )
-	{
-		// split comp name at legal delims
-		$parts = preg_split( '/_|-/', $this->name );
-
-		// capitalize each part
-		foreach ( $parts as &$part ) {
-			$part = ucfirst( $part );
-		}
-
-		return $this->policy()->get_handle() . implode('', $parts) . ucfirst( $suffix );
-	}
-
-	/**
 	 * Set a custom directive (pass thru var)
 	 *
 	 * @param string $name
