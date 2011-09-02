@@ -446,6 +446,35 @@ abstract class Pie_Easy_Component
 	}
 
 	/**
+	 * Return the parent component (if set)
+	 *
+	 * Always check if parent is set first to avoid an exception being thrown
+	 *
+	 * @return Pie_Easy_Component
+	 */
+	public function get_parent()
+	{
+		// is a parent set
+		if ( $this->parent ) {
+			// yes, look it up from the registry and return
+			return $this->policy()->registry()->get( $this->parent );
+		} else {
+			throw new Exception(
+				sprintf( 'The "%s" component does not have a parent set', $this->name ) );
+		}
+	}
+
+	/**
+	 * Return all child components of this component
+	 *
+	 * @return array
+	 */
+	public function get_children()
+	{
+		return $this->policy()->registry()->get_children( $this );
+	}
+
+	/**
 	 * Return sub-option of this component by passing ONLY the sub-option
 	 * portion of the component name.
 	 *
