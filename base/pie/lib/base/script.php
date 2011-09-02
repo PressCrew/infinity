@@ -98,6 +98,7 @@ class Pie_Easy_Script extends Pie_Easy_Asset
  *
  * @property boolean $alias
  * @property boolean $ready
+ * @property string $function
  * @package PIE
  * @subpackage base
  */
