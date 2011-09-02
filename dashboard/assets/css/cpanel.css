@@ -2,11 +2,6 @@
 /* !    jQuery UI Tweaks     */
 /* ========================= */
 
-div#infinity-cpanel .ui-widget-content {
-	border: none;
-    background: transparent;
-}
-
 /* accordion */
 div#infinity-cpanel .ui-accordion .ui-accordion-header,
 div#infinity-cpanel .ui-accordion .ui-accordion-content {
@@ -153,6 +148,8 @@ div#infinity-cpanel-tabs {
 	position: relative;
 	z-index: 2;
 	padding: 8px 10px;
+	border: 0;
+	background: transparent;
 }
 	div#infinity-cpanel-tabs ul.ui-tabs-nav  {
 		font-size: 12px;
@@ -262,6 +259,7 @@ div#infinity-cpanel div.infinity-cpanel-options-single {
 	border: 0px;
 	padding-left: 7px;
 	margin-bottom: 15px;
+	background: transparent;
 }
 	div#infinity-cpanel div.infinity-cpanel-options-single ul.ui-tabs-nav {
 		padding-top: 0.1em;
