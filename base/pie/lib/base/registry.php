@@ -181,13 +181,18 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 		// loop through and compare names
 		foreach ( $this->components as $component ) {
 			// include ignored?
-			if ( ($component->ignore) && (!$include_ignored) ) {
-				// next!
-				continue;
-			} else {
-				// add to array
-				$components[] = $component;
+			if ( !$include_ignored ) {
+				// check ignore toggle
+				if ( $component->ignore ) {
+					// component is explicitly ignored
+					continue;
+				} elseif ( $component->parent && $component->get_parent()->ignore ) {
+					// component parent is ignored, applies to this child
+					continue;
+				}
 			}
+			// add to array
+			$components[] = $component;
 		}
 
 		// return them
