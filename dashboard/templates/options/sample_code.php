@@ -16,12 +16,12 @@
  */
 ?>
 <strong>Test if option is set</strong>
-<code>&lt;?php if ( infinity_option( '<?php print $option->name ?>' ) ): ?&gt;
+<code>&lt;?php if ( infinity_option_get( '<?php print $option->name ?>' ) ): ?&gt;
     <?php print $option->name ?> has a value
 &lt;?php endif; ?&gt;</code>
 
 <strong>Echo an option value</strong>
-<code>&lt;?php echo infinity_option( '<?php print $option->name ?>' ); ?&gt;</code>
+<code>&lt;?php echo infinity_option_get( '<?php print $option->name ?>' ); ?&gt;</code>
 
 <?php if ( $option instanceof Pie_Easy_Exts_Option_Upload ): ?>
 <strong>Echo option as image URL</strong>

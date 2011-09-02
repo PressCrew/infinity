@@ -144,7 +144,7 @@ Child theme can override field\_options: **Yes**
 #### default\_value
 
 You can provide a default value for the option here. This will be returned by calls to
-`infinity_option()` if the option has not been set by the site administrator.
+`infinity_option_get()` if the option has not been set by the site administrator.
 
 	default_value = "blue"
 
