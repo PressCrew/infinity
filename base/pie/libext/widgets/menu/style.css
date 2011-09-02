@@ -1,0 +1,13 @@
+ul.pie-easy-exts-widget-menu.ui-menu {
+	padding: 4px 6px 6px 8px;
+}
+	ul.pie-easy-exts-widget-menu.ui-menu a,
+	ul.pie-easy-exts-widget-menu.ui-menu a.ui-state-hover {
+		margin: 1px;
+	}
+	ul.pie-easy-exts-widget-menu.ui-menu .ui-button {
+		min-width: 120px;
+	}
+	ul.pie-easy-exts-widget-menu.ui-menu .ui-button-text {
+		text-align: left;
+	}
