@@ -38,7 +38,7 @@ panel.
 
 Now you can add the following markup to your theme template to ouput the bio text:
 
-	<img src="<?php echo infinity_option( 'mytheme_business_bio' ) ?>">
+	<img src="<?php echo infinity_option_get( 'mytheme_business_bio' ) ?>">
 
 That's all there is to it! Infinity handles all the hard stuff behind the scenes so you
 can focus on making your theme awesome, instead of making it work.

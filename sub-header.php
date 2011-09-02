@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-if ( infinity_option( 'infinity_base_sub_header' ) ): ?>
+if ( infinity_option_get( 'infinity_base_sub_header' ) ): ?>
 	<!-- featured image-->
 	<div id="featured-image">
 		<?php

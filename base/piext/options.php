@@ -261,14 +261,15 @@ function infinity_options_init_screen()
 }
 
 /**
- * Get an option value
+ * Render an option (field only)
  *
  * @param string $option_name
+ * @param boolean $output
  * @return mixed
  */
-function infinity_option( $option_name )
+function infinity_option( $option_name, $output = true )
 {
-	return infinity_option_get( $option_name );
+	return infinity_option_fetch( $option_name )->render( $output );
 }
 
 /**
