@@ -139,6 +139,7 @@ function infinity_dashboard_cpanel_toolbar_menu( $items = null )
 function infinity_dashboard_cpanel_toolbar_buttons()
 {
 	$items = Infinity_Screens_Policy::instance()->registry()->get_all();
+	$items = Pie_Easy_Position::sort_priority( $items );
 
 	foreach( $items as $item ): ?>
 		<?php if ( $item->toolbar ): ?>
