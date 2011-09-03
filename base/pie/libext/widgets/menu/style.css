@@ -1,5 +1,8 @@
 ul.pie-easy-exts-widget-menu.ui-menu {
-	padding: 4px 6px 6px 8px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background: transparent;
 }
 	ul.pie-easy-exts-widget-menu.ui-menu a,
 	ul.pie-easy-exts-widget-menu.ui-menu a.ui-state-hover {
