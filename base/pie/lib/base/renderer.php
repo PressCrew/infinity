@@ -144,21 +144,10 @@ abstract class Pie_Easy_Renderer extends Pie_Easy_Componentable
 
 	/**
 	 * Render wrapper classes
-	 *
-	 * @param string $class,...
 	 */
 	public function render_classes()
 	{
-		// get unlimited number of class args
-		$classes = func_get_args();
-
-		// append custom class if set
-		if ( $this->current->class ) {
-			$classes[] = $this->current->class;
-		}
-
-		// render them all delimited with a space
-		print esc_attr( join( ' ', $classes ) );
+		return $this->current->render_classes();
 	}
 
 	/**

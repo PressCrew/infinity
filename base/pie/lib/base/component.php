@@ -578,6 +578,25 @@ abstract class Pie_Easy_Component
 			return $this->policy()->renderer()->render_bypass( $this );
 		}
 	}
+
+	/**
+	 * Render wrapper classes
+	 *
+	 * @param string $class,...
+	 */
+	public function render_classes()
+	{
+		// get unlimited number of class args
+		$classes = func_get_args();
+
+		// append custom class if set
+		if ( $this->class ) {
+			$classes[] = $this->class;
+		}
+
+		// render them all delimited with a space
+		print esc_attr( join( ' ', $classes ) );
+	}
 }
 
 ?>
