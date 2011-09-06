@@ -284,8 +284,10 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 		if ( is_array( $ini_array ) ) {
 			// loop through each directive
 			foreach ( $ini_array as $name => $config ) {
+				// convert config array to map
+				$conf_map = new Pie_Easy_Map( $config );
 				// sub option?
-				if ( $this->load_sub_option( $name, $config ) ) {
+				if ( $this->load_sub_option( $name, $conf_map ) ) {
 					// yes, skip standard loading
 					continue;
 				}
@@ -299,13 +301,13 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 						$this->policy()->factory()->create(
 							$this->loading_theme,
 							$name,
-							isset( $config['type'] ) ? $config['type'] : self::DEFAULT_COMPONENT_TYPE
+							$conf_map->type ? $conf_map->type : self::DEFAULT_COMPONENT_TYPE
 						);
 					// register component
 					$this->register( $component );
 				}
 				// configure component
-				$component->configure( $config, $this->loading_theme );
+				$component->configure( $conf_map, $this->loading_theme );
 			}
 			// all done
 			return true;
@@ -318,10 +320,10 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 	 * Load config as a sub option if syntax of name calls for it
 	 *
 	 * @param string $name
-	 * @param array $config
+	 * @param Pie_Easy_Map $conf_map
 	 * @return boolean
 	 */
-	private function load_sub_option( $name, $config )
+	private function load_sub_option( $name, Pie_Easy_Map $conf_map )
 	{
 		// split for possible sub option syntax
 		$parts = explode( self::SUB_OPTION_DELIM, $name );
@@ -344,17 +346,17 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 						$this->policy()->options()->factory()->create(
 							$this->loading_theme,
 							$option_name,
-							isset( $config['type'] ) ? $config['type'] : self::DEFAULT_COMPONENT_TYPE
+							$conf_map->type ? $conf_map->type : self::DEFAULT_COMPONENT_TYPE
 						);
 					// register option
 					$this->policy()->options()->registry()->register( $component );
 				}
 				// automagically set required feature if applicable
 				if ( $this instanceof Pie_Easy_Features_Registry ) {
-					$config['required_feature'] = $feature_name;
+					$conf_map->required_feature = $feature_name;
 				}
 				// configure component
-				$component->configure( $config, $this->loading_theme );
+				$component->configure( $conf_map, $this->loading_theme );
 				// all done
 				return true;
 			} else {
