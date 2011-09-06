@@ -147,7 +147,9 @@ abstract class Pie_Easy_Renderer extends Pie_Easy_Componentable
 	 */
 	public function render_classes()
 	{
-		return $this->current->render_classes();
+		$args = func_get_args();
+
+		return call_user_func_array( array($this->current, 'render_classes'), $args );
 	}
 
 	/**
