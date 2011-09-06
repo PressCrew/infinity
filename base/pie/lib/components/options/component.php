@@ -246,8 +246,18 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 		if ( $this->__post_override__ === true && isset( $_POST[$this->name] ) ) {
 			return $_POST[$this->name];
 		} else {
-			return get_option( $this->get_api_name(), $this->default_value );
+			return $this->get_option();
 		}
+	}
+
+	/**
+	 * Get (read) the value of this option from the database
+	 *
+	 * @return mixed
+	 */
+	protected function get_option()
+	{
+		return get_option( $this->get_api_name(), $this->default_value );
 	}
 
 	/**
@@ -281,7 +291,7 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 				return $this->delete();
 			} else {
 				// create or update it
-				if ( update_option( $this->get_api_name(), $value ) ) {
+				if ( $this->update_option( $value ) ) {
 					$this->update_meta( self::META_TIME_UPDATED, time() );
 					return true;
 				}
@@ -289,6 +299,17 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 		}
 
 		return false;
+	}
+
+	/**
+	 * Update the real option in the database
+	 *
+	 * @param mixed $value New option value
+	 * @return boolean
+	 */
+	protected function update_option( $value )
+	{
+		return update_option( $this->get_api_name(), $value );
 	}
 
 	/**
