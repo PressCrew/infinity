@@ -166,7 +166,7 @@ abstract class Pie_Easy_Factory extends Pie_Easy_Componentable
 			$class_name = Pie_Easy_Files::file_to_class( $ext, $class_prefix );
 			require_once $file_theme;
 		} else {
-			$class_name = Pie_Easy_Loader::load_ext( array( $this->policy()->get_handle(), $ext ) );
+			$class_name = Pie_Easy_Loader::load_ext( sprintf('%s/%s', $this->policy()->get_handle(), $ext ) );
 		}
 		
 		$this->ext( $class_name, $ext );
