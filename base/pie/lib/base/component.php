@@ -235,88 +235,88 @@ abstract class Pie_Easy_Component
 	/**
 	 * Configure this component from an array of values
 	 *
-	 * @param array $config
+	 * @param Pie_Easy_Map $conf_map
 	 * @param string $theme
 	 */
-	public function configure( $config, $theme )
+	public function configure( $conf_map, $theme )
 	{
 		// parent
-		if ( isset( $config['parent'] ) ) {
-			if ( $this->__name__ != $config['parent'] ) {
-				$this->__parent__ = trim( $config['parent'] );
+		if ( $conf_map->parent ) {
+			if ( $this->__name__ != $conf_map->parent ) {
+				$this->__parent__ = trim( $conf_map->parent );
 			} else {
 				throw new Exception( sprintf( 'The component "%s" cannot be a parent of itself', $this->__name__ ) );
 			}
 		}
 		
 		// title
-		if ( isset( $config['title'] ) ) {
-			$this->directives()->set( $theme, 'title', $config['title'] );
+		if ( isset( $conf_map->title ) ) {
+			$this->directives()->set( $theme, 'title', $conf_map->title );
 		} elseif ( !$this->directives()->has( 'title' ) ) {
 			throw new Exception( 'The "title" directive is required' );
 		}
 		
 		// desc
-		if ( isset( $config['description'] ) ) {
-			$this->directives()->set( $theme, 'description', $config['description'] );
+		if ( isset( $conf_map->description ) ) {
+			$this->directives()->set( $theme, 'description', $conf_map->description );
 		}
 
 		// documentation
-		if ( isset( $config['documentation'] ) ) {
-			$this->directives()->set( $theme, 'documentation', $config['documentation'] );
+		if ( isset( $conf_map->documentation ) ) {
+			$this->directives()->set( $theme, 'documentation', $conf_map->documentation );
 		}
 
 		// set stylesheet
-		if ( isset( $config['style'] ) ) {
+		if ( isset( $conf_map->style ) ) {
 			// no deps by default
 			$deps = array();
 			// any deps?
-			if ( isset( $config['style_depends'] ) ) {
-				$deps = explode( ',', $config['style_depends'] );
+			if ( isset( $conf_map->style_depends ) ) {
+				$deps = explode( ',', $conf_map->style_depends );
 			}
 			// set the stylesheet
-			$this->style()->add_file( $config['style'], $deps );
+			$this->style()->add_file( $conf_map->style, $deps );
 		}
 
 		// set script
-		if ( isset( $config['script'] ) ) {
+		if ( isset( $conf_map->script ) ) {
 			// no deps by default
 			$deps = array();
 			// any deps?
-			if ( isset( $config['script_depends'] ) ) {
-				$deps = explode( ',', $config['script_depends'] );
+			if ( isset( $conf_map['script_depends'] ) ) {
+				$deps = explode( ',', $conf_map['script_depends'] );
 			}
 			// set the script
-			$this->script()->add_file( $config['script'], $deps );
+			$this->script()->add_file( $conf_map->script, $deps );
 		}
 
 		// set template
-		if ( isset( $config['template'] ) ) {
-			$this->directives()->set( $theme, 'template', $config['template'] );
+		if ( isset( $conf_map->template ) ) {
+			$this->directives()->set( $theme, 'template', $conf_map->template );
 		}
 
 		// css class
-		if ( isset( $config['class'] ) ) {
-			$this->directives()->set( $theme, 'class', $config['class'] );
+		if ( isset( $conf_map->class ) ) {
+			$this->directives()->set( $theme, 'class', $conf_map->class );
 		}
 
 		// capabilities
-		if ( isset( $config['capabilities'] ) ) {
-			$this->add_capabilities( $config['capabilities'] );
+		if ( isset( $conf_map->capabilities ) ) {
+			$this->add_capabilities( $conf_map->capabilities );
 		}
 
 		// required feature
-		if ( isset( $config['required_feature'] ) ) {
-			$this->directives()->set( $theme, 'required_feature', $config['required_feature'] );
+		if ( isset( $conf_map->required_feature ) ) {
+			$this->directives()->set( $theme, 'required_feature', $conf_map->required_feature );
 		}
 
 		// set ignore
-		if ( isset( $config['ignore'] ) ) {
-			$this->directives()->set( $theme, 'ignore', (boolean) $config['ignore'] );
+		if ( isset( $conf_map->ignore ) ) {
+			$this->directives()->set( $theme, 'ignore', (boolean) $conf_map->ignore );
 		}
 
 		// set directive vars
-		foreach( $config as $directive => $value ) {
+		foreach( $conf_map as $directive => $value ) {
 			// try to set it
 			if ( $directive{0} == self::PREFIX_PASS_THRU ) {
 				$this->directives()->set( $theme, $directive, $value );
