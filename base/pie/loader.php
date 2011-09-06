@@ -141,6 +141,8 @@ final class Pie_Easy_Loader
 			'tag', 'tags',
 			'text', 'textarea',
 			'upload',
+			'wp' =>
+				array('blogname', 'blogdescription', 'page-on-front'),
 			'yes', 'yesno'
 		),
 		'screens' => array( 'cpanel' ),
@@ -230,11 +232,7 @@ final class Pie_Easy_Loader
 
 		// loop through all exts
 		foreach ( $exts as $ext ) {
-			if ( is_array( $ext ) ) {
-				return self::$instance->load_libext( $ext[1], $ext[0] );
-			} else {
-				return self::$instance->load_libext( $ext );
-			}
+			return self::$instance->load_libext( $ext );
 		}
 	}
 
@@ -304,57 +302,61 @@ final class Pie_Easy_Loader
 	 * Load a lib extension
 	 *
 	 * @param string $ext
-	 * @param string $type
 	 * @return string Name of class that was loaded
 	 */
-	private function load_libext( $ext, $type = null )
+	private function load_libext( $ext )
 	{
-		// exact type defined?
-		if ( $type ) {
-			// load without parsing
-			return $this->load_libext_file( $ext, $type );
-		} else {
-			// split at path delim
-			$split = explode( self::PATH_DELIM, $ext );
-			// must be exactly two parts
-			if ( count($split) == 2 ) {
-				// try to load it
-				return $this->load_libext_file( $split[1], $split[0] );
-			} else {
-				throw new Exception( sprintf( 'The library extension "%s" is not formatted correctly.', $ext ) );
+		// set files
+		$files = is_array( $ext ) ? $ext : explode( self::PATH_DELIM, $ext );
+
+		// files can't be empty
+		if ( count( $files ) ) {
+			// base pkg
+			$exts = $this->exts;
+			// check all libs
+			foreach ( $files as $file ) {
+				// is file a pkg key?
+				if ( isset( $exts[$file] ) ) {
+					// its a pkg, go to next level
+					$exts = $exts[$file];
+				} elseif ( in_array( $file, $exts ) ) {
+					// its a lib
+					return $this->load_libext_file( $files );
+				}
 			}
+			// not found
+			throw new Exception(
+				sprintf( 'The extension path "%s" is not valid.', $ext ) );
+		} else {
+			throw new Exception( 'The extension path is empty.' );
 		}
 	}
 
 	/**
-	 * Load a lib extension file
+	 * Load a library extension file
 	 *
-	 * @param string $ext
-	 * @param string $type
-	 * @return true|void
+	 * @param string $file
+	 * @param array|string $files
+	 * @return true
 	 */
-	private function load_libext_file( $ext, $type )
+	private function load_libext_file( $files )
 	{
-		// check validity of type
-		if ( array_key_exists( $type, $this->exts ) ) {
-			// check validity of extension
-			if ( in_array( $ext, $this->exts[$type], true ) ) {
-				// build up file path
-				$file =
-					PIE_EASY_LIBEXT_DIR .
-					DIRECTORY_SEPARATOR . $type .
-					DIRECTORY_SEPARATOR . $ext .
-					DIRECTORY_SEPARATOR . 'class.php';
-				// load it
-				require_once $file;
-				// return class name
-				return Pie_Easy_Files::file_to_class( $ext, $this->exts_prefix[$type] );
-			} else {
-				throw new Exception( sprintf( 'The library extension "%s" is not valid for the type "%s".', $ext, $type ) );
-			}
-		} else {
-			throw new Exception( sprintf( 'The library extension type "%s" is not valid.', $type ) );
-		}
+		// relative file
+		$file = implode( DIRECTORY_SEPARATOR, $files );
+		
+		// build up file path
+		$path =
+			PIE_EASY_LIBEXT_DIR .
+			DIRECTORY_SEPARATOR . implode( DIRECTORY_SEPARATOR, $files ) .
+			DIRECTORY_SEPARATOR . 'class.php';
+
+		// component type is first item
+		$component_type = array_shift( $files );
+
+		// load it
+		require_once $path;
+		// return class name
+		return Pie_Easy_Files::file_to_class( implode( '_', $files ), $this->exts_prefix[$component_type] );
 	}
 
 	/**
