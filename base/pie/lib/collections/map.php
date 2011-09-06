@@ -28,12 +28,12 @@ class Pie_Easy_Map implements IteratorAggregate,ArrayAccess,Countable
 	/**
 	 * @var array Internal data storage
 	 */
-	private $data = array();
+	private $__data__ = array();
 
 	/**
 	 * @var boolean Whether this list is read-only
 	 */
-	private $read_only = false;
+	private $__read_only__ = false;
 
 	/**
 	 * Initializes the list with an array or an iterable object.
@@ -52,13 +52,63 @@ class Pie_Easy_Map implements IteratorAggregate,ArrayAccess,Countable
 	}
 
 	/**
+	 * Getter
+	 *
+	 * @ignore
+	 * @param mixed $key
+	 * @return mixed
+	 */
+	public function __get( $key )
+	{
+		if ( $this->contains( $key ) ) {
+			return $this->item_at( $key );
+		} else {
+			return null;
+		}
+	}
+
+	/**
+	 * Setter
+	 *
+	 * @ignore
+	 * @param string $name
+	 * @param mixed $value
+	 */
+	public function __set( $key, $value )
+	{
+		$this->add( $key, $value );
+	}
+
+	/**
+	 * Issetter
+	 *
+	 * @ignore
+	 * @param string $name
+	 */
+	public function __isset( $key )
+	{
+		return $this->contains( $key );
+	}
+
+	/**
+	 * Unsetter
+	 *
+	 * @ignore
+	 * @param string $name
+	 */
+	public function __unset( $key )
+	{
+		return $this->remove( $key );
+	}
+
+	/**
 	 * Check whether this map is read-only or not. Defaults to false.
 	 *
 	 * @return boolean
 	 */
 	public function get_read_only()
 	{
-		return $this->read_only;
+		return $this->__read_only__;
 	}
 
 	/**
@@ -68,7 +118,7 @@ class Pie_Easy_Map implements IteratorAggregate,ArrayAccess,Countable
 	 */
 	protected function set_read_only( $value )
 	{
-		$this->read_only = $value;
+		$this->__read_only__ = $value;
 	}
 
 	/**
@@ -78,7 +128,7 @@ class Pie_Easy_Map implements IteratorAggregate,ArrayAccess,Countable
 	 */
 	public function count()
 	{
-		return count( $this->data );
+		return count( $this->__data__ );
 	}
 
 	/**
@@ -88,7 +138,7 @@ class Pie_Easy_Map implements IteratorAggregate,ArrayAccess,Countable
 	 */
 	public function get_keys()
 	{
-		return array_keys( $this->data );
+		return array_keys( $this->__data__ );
 	}
 
 	/**
@@ -99,8 +149,8 @@ class Pie_Easy_Map implements IteratorAggregate,ArrayAccess,Countable
 	 */
 	public function item_at( $key )
 	{
-		if( isset( $this->data[$key] ) ) {
-			return $this->data[$key];
+		if( isset( $this->__data__[$key] ) ) {
+			return $this->__data__[$key];
 		} else {
 			return null;
 		}
@@ -118,18 +168,18 @@ class Pie_Easy_Map implements IteratorAggregate,ArrayAccess,Countable
 	 */
 	public function add( $key, $value, $prepend = false )
 	{
-		if( !$this->read_only ) {
+		if( !$this->__read_only__ ) {
 			if ( $prepend ) {
 				if ( !is_null($key) ) {
-					$this->data = array_merge( array( $key => $value ), $this->data );
+					$this->__data__ = array_merge( array( $key => $value ), $this->__data__ );
 				} else {
 					throw new Exception( 'Prepend requires a non-null key' );
 				}
 			} else {
 				if ( $key === null ) {
-					$this->data[] = $value;
+					$this->__data__[] = $value;
 				} else {
-					$this->data[$key] = $value;
+					$this->__data__[$key] = $value;
 				}
 			}
 		} else {
@@ -146,14 +196,14 @@ class Pie_Easy_Map implements IteratorAggregate,ArrayAccess,Countable
 	 */
 	public function remove( $key )
 	{
-		if( !$this->read_only ) {
-			if( isset( $this->data[$key] ) ) {
-				$value = $this->data[$key];
-				unset( $this->data[$key] );
+		if( !$this->__read_only__ ) {
+			if( isset( $this->__data__[$key] ) ) {
+				$value = $this->__data__[$key];
+				unset( $this->__data__[$key] );
 				return $value;
 			} else {
 				// it is possible the value is null, which is not detected by isset
-				unset( $this->data[$key] );
+				unset( $this->__data__[$key] );
 				return null;
 			}
 		} else {
@@ -166,7 +216,7 @@ class Pie_Easy_Map implements IteratorAggregate,ArrayAccess,Countable
 	 */
 	public function clear()
 	{
-		foreach( array_keys( $this->data ) as $key ) {
+		foreach( array_keys( $this->__data__ ) as $key ) {
 			$this->remove( $key );
 		}
 	}
@@ -179,7 +229,7 @@ class Pie_Easy_Map implements IteratorAggregate,ArrayAccess,Countable
 	 */
 	public function contains( $key )
 	{
-		return isset( $this->data[$key] ) || array_key_exists( $key, $this->data );
+		return isset( $this->__data__[$key] ) || array_key_exists( $key, $this->__data__ );
 	}
 
 	/**
@@ -191,9 +241,9 @@ class Pie_Easy_Map implements IteratorAggregate,ArrayAccess,Countable
 	public function to_array( $reverse = false )
 	{
 		if ( $reverse ) {
-			return array_reverse( $this->data, true );
+			return array_reverse( $this->__data__, true );
 		} else {
-			return $this->data;
+			return $this->__data__;
 		}
 	}
 
@@ -252,9 +302,9 @@ class Pie_Easy_Map implements IteratorAggregate,ArrayAccess,Countable
 					foreach( $data as $key => $value ) {
 						$d[$key] = $value;
 					}
-					$this->data = self::merge_array( $this->data, $d );
+					$this->__data__ = self::merge_array( $this->__data__, $d );
 				} else {
-					$this->data = self::merge_array( $this->data, $data);
+					$this->__data__ = self::merge_array( $this->__data__, $data);
 				}
 			} else {
 				foreach( $data as $key => $value ) {
@@ -339,7 +389,7 @@ class Pie_Easy_Map implements IteratorAggregate,ArrayAccess,Countable
 	 */
 	public function getIterator()
 	{
-		return new Pie_Easy_Map_Iterator( $this->data );
+		return new Pie_Easy_Map_Iterator( $this->__data__ );
 	}
 }
 
