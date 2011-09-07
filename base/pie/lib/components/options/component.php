@@ -332,13 +332,23 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 	public function delete()
 	{
 		if ( $this->check_caps() ) {
-			if ( delete_option( $this->get_api_name() ) ) {
+			if ( $this->delete_option() ) {
 				$this->delete_meta();
 				return true;
 			}
 		}
 
 		return false;
+	}
+
+	/**
+	 * Delete the option from the database
+	 *
+	 * @return boolean
+	 */
+	protected function delete_option()
+	{
+		return delete_option( $this->get_api_name() );
 	}
 
 	/**
