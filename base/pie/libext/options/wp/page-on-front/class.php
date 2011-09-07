@@ -42,11 +42,22 @@ class Pie_Easy_Exts_Option_Wp_Page_On_Front
 
 	protected function update_option( $value )
 	{
-		// make sure show on fron it set correctly
+		// make sure show on front is set correctly
 		update_option( 'show_on_front', 'page' );
 
 		// now its safe to set the page
 		return update_option( 'page_on_front', $value );
+	}
+
+	protected function delete_option()
+	{
+		// revert show on front to posts
+		update_option( 'show_on_front', 'posts' );
+		
+		// set page on front to zero
+		update_option( 'page_on_front', 0 );
+
+		return true;
 	}
 }
 
