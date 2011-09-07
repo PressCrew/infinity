@@ -40,6 +40,11 @@ class Pie_Easy_Exts_Option_Wp_Blogname
 	{
 		return update_option( 'blogname', $value );
 	}
+	
+	protected function delete_option()
+	{
+		return delete_option( 'blogname' );
+	}
 }
 
 ?>
