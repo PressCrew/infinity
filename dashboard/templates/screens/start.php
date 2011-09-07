@@ -15,7 +15,7 @@
 
 	<p>
 		The developer documentation is lengthy, but still incomplete. Even so, its the best place to start.
-		<a href="<?php print infinity_dashboard_route( 'cpanel', 'ddocs', 'index' ) ?>#infinity-cpanel-tab-ddocs">Developer Docs are Here &raquo;</a>
+		<a target="infinity-cpanel-tab-ddocs" href="<?php print infinity_dashboard_route( 'cpanel', 'ddocs', 'index' ) ?>">Developer Docs are Here &raquo;</a>
 	</p>
 
 	<h3>
