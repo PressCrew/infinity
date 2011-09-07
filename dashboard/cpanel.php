@@ -124,7 +124,7 @@ function infinity_dashboard_cpanel_toolbar_menu( $items = null )
 		$children = Infinity_Screens_Policy::instance()->registry()->get_children( $item );
 		$children_cnt = count( $children ); ?>
 		<li>
-			<a id="infinity-cpanel-toolbar-menu-item-<?php print esc_attr( $item->name ) ?>"<?php if ( $children_cnt ): ?> class="infinity-cpanel-context-menu"<?php endif; ?> href="<?php print infinity_dashboard_route( 'cpanel', $item->name ) ?>#infinity-cpanel-tab-<?php print esc_attr( $item->name ) ?>" title="<?php print esc_attr( $item->title ) ?>"><?php print esc_attr( $item->title ) ?></a>
+			<a target="infinity-cpanel-tab-<?php print esc_attr( $item->name ) ?>" id="infinity-cpanel-toolbar-menu-item-<?php print esc_attr( $item->name ) ?>"<?php if ( $children_cnt ): ?> class="infinity-cpanel-context-menu"<?php endif; ?> href="<?php print infinity_dashboard_route( 'cpanel', $item->name ) ?>" title="<?php print esc_attr( $item->title ) ?>"><?php print esc_attr( $item->title ) ?></a>
 			<?php if ( $children_cnt ): ?>
 				<?php infinity_dashboard_cpanel_toolbar_menu( $children ) ?>
 			<?php endif; ?>
@@ -143,7 +143,7 @@ function infinity_dashboard_cpanel_toolbar_buttons()
 
 	foreach( $items as $item ): ?>
 		<?php if ( $item->toolbar ): ?>
-			<a id="infinity-cpanel-toolbar-<?php print esc_attr( $item->name ) ?>" href="<?php print infinity_dashboard_route( 'cpanel', $item->name ) ?>#infinity-cpanel-tab-<?php print esc_attr( $item->name ) ?>" title="<?php print esc_attr( $item->title ) ?>"><?php print esc_attr( $item->title ) ?></a>
+			<a target="infinity-cpanel-tab-<?php print esc_attr( $item->name ) ?>" id="infinity-cpanel-toolbar-<?php print esc_attr( $item->name ) ?>" href="<?php print infinity_dashboard_route( 'cpanel', $item->name ) ?>" title="<?php print esc_attr( $item->title ) ?>"><?php print esc_attr( $item->title ) ?></a>
 		<?php endif;
 	endforeach;
 }

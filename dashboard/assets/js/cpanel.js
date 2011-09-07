@@ -109,20 +109,16 @@
 
 		// add and/or select cpanel tab
 		$('a', cpanel).live('click', function() {
-			if ( $(this).attr('href') ) {
-				if ( $(this).attr('target') ) {
-					return true;
-				} else {
-					loadTab(this);
-					return false;
-				}
+			if ( identTab(this) ) {
+				loadTab(this);
+				return false;
 			}
 			return true;
 		})
 
 		// close cpanel tab
 		$( 'ul.ui-tabs-nav span.ui-icon-close', cpanel_t ).live( "click", function() {
-			var index = $(this).siblings('a').first().attr('href').substring(1);
+			var index = identTab($(this).siblings('a').first());
 			cpanel_t.tabs( "remove", index );
 			return false;
 		});
@@ -133,34 +129,47 @@
 
 		});
 
+		// return tab id that is being targeted by an anchor
+		function identTab(anchor)
+		{
+			var $a = $(anchor),
+				$targ = $a.attr('target');
+
+			if ( ($targ) && $targ.substring(0, 20) == 'infinity-cpanel-tab-') {
+				return $targ;
+			} else {
+				return false;
+			}
+		}
+
 		// load content into a tab panel
 		function loadTab(anchor)
 		{
 			var $anchor = $(anchor);
 			var href = $anchor.attr('href');
-			var hash = $anchor.prop('hash');
+			var tab_id = identTab($anchor);
 			var message = $('<div></div>');
 
 			saveTab('add', $anchor);
 
-			if ( !hash.length ) {
+			if ( !tab_id ) {
 				var panel_id = $('div.infinity-cpanel-tab:visible').attr('id');
-				if ( panel_id.length ) {
-					hash = '#' + panel_id;
+				if ( (panel_id) && panel_id.length ) {
+					tab_id = panel_id;
 				} else {
 					return;
 				}
 			}
 
-			if ( $('div' + hash).length ) {
+			if ( $('div#' + tab_id).length ) {
 				// panel exists
-				cpanel_t.tabs('select', hash);
+				cpanel_t.tabs('select', '#' + tab_id);
 			} else {
 				// the title
 				var title = '';
 				// find title from toolbar
 				$('div#infinity-cpanel-toolbar a').each(function(){
-					if ( $(this).prop('hash') == hash ) {
+					if ( identTab(this) == tab_id ) {
 						title = $(this).attr('title');
 						return false; // break!
 					}
@@ -168,10 +177,10 @@
 				// find a title?
 				if (title.length) {
 					// create new panel
-					cpanel_t.tabs('add', hash, title);
+					cpanel_t.tabs('add', '#' + tab_id, title);
 				} else {
 					// not good
-					alert('A tab for ' + hash + 'does not exist');
+					alert('A tab for ' + tab_id + 'does not exist');
 				}
 			}
 
@@ -179,7 +188,7 @@
 			tb_refresh.attr('href', href);
 
 			// find active panel
-			var panel = $('div' + hash).empty();
+			var panel = $('div#' + tab_id).empty();
 
 			// store href
 			panel.data('infinity.href.loaded', href);
@@ -217,34 +226,37 @@
 		// valid cmds: 'get', 'add', 'rem'
 		function saveTab(cmd, a)
 		{
-			var $a = $(a);
-			var c = $.cookie('infinity_cpanel_tabs_open');
-			var t = (c) ? c.split('|') : [];
-			var i, id;
+			var $a = $(a),
+				c = $.cookie('infinity_cpanel_tabs_open'),
+				t = (c) ? c.split('[@@]') : [],
+				h = $a.attr('href'),
+				m = false,
+				i, id;
 
 			if (cmd == 'get') {
 				return t;
 			} else {
-				// must have a hash
-				if ($a.prop('hash')) {
-					id = $a.prop('hash').substr(1);
-				} else {
+				id = identTab($a);
+				// must id as a tab
+				if (!id) {
 					id = $a.closest('div.ui-tabs-panel').attr('id');
-					$a.prop('hash', id);
+					$a.prop('target', id);
 				}
-				// remove anchor from tabs
+				// loop all items
 				for (i in t) {
-					if (t[i].split('#')[1] == id) {
-						t.splice(i, 1);
+					if (t[i] == h) {
+						m = true;
+						if (cmd == 'rem') {
+							delete t[i];
+						}
 						break;
 					}
 				}
-				// add it if applies
-				if (cmd == 'add') {
-					t.push($a.attr('href'));
+				if (!m && cmd == 'add') {
+					t.push(id + '[@]' + h);
 				}
 				// update cookie
-				return $.cookie('infinity_cpanel_tabs_open', t.join('|'), {expires: 7});
+				return $.cookie('infinity_cpanel_tabs_open', t.join('[@@]'), {expires: 7});
 			}
 		}
 
@@ -281,11 +293,13 @@
 		function initTabs()
 		{
 			var t = saveTab('get'),
-				ts = $.cookie('infinity_cpanel_tab_selected');
+				ts = $.cookie('infinity_cpanel_tab_selected'),
+				i, s;
 
 			if (t.length) {
 				for (i in t) {
-					loadTab($('<a></a>').attr('href', t[i]));
+					s = t[i].split('[@]');
+					loadTab($('<a></a>').attr('target', s[0]).attr('href', s[1]));
 				}
 				if (ts) {
 					cpanel_t.tabs('option', 'selected', ts);
