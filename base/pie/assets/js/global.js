@@ -117,16 +117,11 @@
 		
 		initBlock: function(action)
 		{
-			var $form;
-
 			// maintain chain
 			return this.each(function(){
 
-				var $option = $(this);
-
-				if ( !$form ) {
+				var $option = $(this),
 					$form = $option.closest('form');
-				}
 
 				// init uploaders
 				$('div.pie-easy-options-fu', $option).each(function(){
