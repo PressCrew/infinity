@@ -136,13 +136,17 @@ final class Pie_Easy_Loader
 			'leftright',
 			'off', 'on', 'onoff',
 			'page', 'pages', 'post', 'posts',
+			'plugins' => array(
+				'domain-mapping'
+			),
 			'radio',
 			'select',
 			'tag', 'tags',
 			'text', 'textarea',
 			'upload',
-			'wp' =>
-				array('blogname', 'blogdescription', 'page-on-front'),
+			'wp' => array(
+				'blogname', 'blogdescription', 'page-on-front'
+			),
 			'yes', 'yesno'
 		),
 		'screens' => array( 'cpanel' ),
