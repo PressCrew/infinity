@@ -19,7 +19,7 @@ Pie_Easy_Loader::load( 'components/widgets/component' );
  * @package PIE-extensions
  * @subpackage widgets
  */
-class Pie_Easy_Exts_Widget_Title_Block
+class Pie_Easy_Exts_Widgets_Title_Block
 	 extends Pie_Easy_Widgets_Widget
 {
 	public function render( $output = true )

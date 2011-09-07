@@ -19,8 +19,8 @@ Pie_Easy_Loader::load_ext( 'options/textarea' );
  * @package PIE-extensions
  * @subpackage options
  */
-class Pie_Easy_Exts_Option_Css
-	extends Pie_Easy_Exts_Option_Textarea
+class Pie_Easy_Exts_Options_Css
+	extends Pie_Easy_Exts_Options_Textarea
 {
 	// nothing custom yet, this is a pseudo interface
 }

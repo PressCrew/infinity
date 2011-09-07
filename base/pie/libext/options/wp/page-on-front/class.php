@@ -19,8 +19,8 @@ Pie_Easy_Loader::load_ext( 'options/page' );
  * @package PIE-extensions
  * @subpackage options
  */
-class Pie_Easy_Exts_Option_Wp_Page_On_Front
-	extends Pie_Easy_Exts_Option_Page
+class Pie_Easy_Exts_Options_Wp_Page_On_Front
+	extends Pie_Easy_Exts_Options_Page
 {
 	public function configure( $conf_map, $theme )
 	{

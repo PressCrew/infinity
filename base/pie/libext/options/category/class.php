@@ -17,7 +17,7 @@
  * @package PIE-extensions
  * @subpackage options
  */
-class Pie_Easy_Exts_Option_Category
+class Pie_Easy_Exts_Options_Category
 	extends Pie_Easy_Options_Option
 {
 	/**

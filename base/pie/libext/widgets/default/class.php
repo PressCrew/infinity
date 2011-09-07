@@ -19,7 +19,7 @@
  * @package PIE-extensions
  * @subpackage widgets
  */
-class Pie_Easy_Exts_Widget_Default
+class Pie_Easy_Exts_Widgets_Default
 	extends Pie_Easy_Widgets_Widget
 {
 	// nothing special here

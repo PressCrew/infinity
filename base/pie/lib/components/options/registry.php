@@ -222,7 +222,7 @@ abstract class Pie_Easy_Options_Registry extends Pie_Easy_Registry
 
 		// loop through and check field type
 		foreach ( $this->get_all() as $component ) {
-			if ( $component instanceof Pie_Easy_Exts_Option_Css ) {
+			if ( $component instanceof Pie_Easy_Exts_Options_Css ) {
 				$css .= $component->get() . PHP_EOL;
 			}
 		}

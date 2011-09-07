@@ -21,7 +21,7 @@ Pie_Easy_Loader::load( 'base/style' );
  * @package PIE-extensions
  * @subpackage features
  */
-class Pie_Easy_Exts_Feature_Default
+class Pie_Easy_Exts_Features_Default
 	extends Pie_Easy_Features_Feature
 {
 	// nothing special here

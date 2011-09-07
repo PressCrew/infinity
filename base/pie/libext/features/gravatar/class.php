@@ -17,7 +17,7 @@
  * @package PIE-extensions
  * @subpackage features
  */
-class Pie_Easy_Exts_Feature_Gravatar
+class Pie_Easy_Exts_Features_Gravatar
 	extends Pie_Easy_Features_Feature
 {
 	/**

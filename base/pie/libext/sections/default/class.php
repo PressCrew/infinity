@@ -17,7 +17,7 @@
  * @package PIE-extensions
  * @subpackage sections
  */
-class Pie_Easy_Exts_Section_Default
+class Pie_Easy_Exts_Sections_Default
 	extends Pie_Easy_Sections_Section
 {
 	// empty for now

@@ -17,7 +17,7 @@
  * @package PIE-extensions
  * @subpackage shortcodes
  */
-class Pie_Easy_Exts_Shortcode_Access extends Pie_Easy_Shortcodes_Shortcode
+class Pie_Easy_Exts_Shortcodes_Access extends Pie_Easy_Shortcodes_Shortcode
 {
 	public function default_atts()
 	{

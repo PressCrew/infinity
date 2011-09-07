@@ -156,20 +156,6 @@ final class Pie_Easy_Loader
 	);
 
 	/**
-	 * Map of exts types to their class prefix
-	 * 
-	 * @var array
-	 */
-	private $exts_prefix = array(
-		'features' => 'Pie_Easy_Exts_Feature',
-		'options' => 'Pie_Easy_Exts_Option',
-		'screens' => 'Pie_Easy_Exts_Screen',
-		'sections' => 'Pie_Easy_Exts_Section',
-		'shortcodes' => 'Pie_Easy_Exts_Shortcode',
-		'widgets' => 'Pie_Easy_Exts_Widget'
-	);
-
-	/**
 	 * This is a singleton
 	 */
 	private function __construct() {}
@@ -354,13 +340,10 @@ final class Pie_Easy_Loader
 			DIRECTORY_SEPARATOR . implode( DIRECTORY_SEPARATOR, $files ) .
 			DIRECTORY_SEPARATOR . 'class.php';
 
-		// component type is first item
-		$component_type = array_shift( $files );
-
 		// load it
 		require_once $path;
 		// return class name
-		return Pie_Easy_Files::file_to_class( implode( '_', $files ), $this->exts_prefix[$component_type] );
+		return Pie_Easy_Files::file_to_class( implode( '_', $files ), 'Pie_Easy_Exts' );
 	}
 
 	/**

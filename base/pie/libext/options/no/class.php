@@ -19,8 +19,8 @@ Pie_Easy_Loader::load_ext( 'options/checkbox' );
  * @package PIE-extensions
  * @subpackage options
  */
-class Pie_Easy_Exts_Option_No
-	extends Pie_Easy_Exts_Option_Checkbox
+class Pie_Easy_Exts_Options_No
+	extends Pie_Easy_Exts_Options_Checkbox
 		implements Pie_Easy_Options_Option_Auto_Field
 {
 	public function load_field_options()
