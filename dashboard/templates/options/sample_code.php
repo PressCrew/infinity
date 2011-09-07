@@ -23,7 +23,7 @@
 <strong>Echo an option value</strong>
 <code>&lt;?php echo infinity_option_get( '<?php print $option->name ?>' ); ?&gt;</code>
 
-<?php if ( $option instanceof Pie_Easy_Exts_Option_Upload ): ?>
+<?php if ( $option instanceof Pie_Easy_Exts_Options_Upload ): ?>
 <strong>Echo option as image URL</strong>
 <code>&lt;img src="&lt;?php echo infinity_option_image_url( '<?php print $option->name ?>' ); ?&gt;"&gt;</code>
 <?php endif ?>

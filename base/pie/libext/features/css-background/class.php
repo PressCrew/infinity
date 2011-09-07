@@ -17,7 +17,7 @@
  * @package PIE-extensions
  * @subpackage features
  */
-class Pie_Easy_Exts_Feature_Css_Background
+class Pie_Easy_Exts_Features_Css_Background
 	extends Pie_Easy_Features_Feature
 {
 	/**

@@ -17,7 +17,7 @@
  * @package PIE-extensions
  * @subpackage options
  */
-class Pie_Easy_Exts_Option_Checkbox
+class Pie_Easy_Exts_Options_Checkbox
 	extends Pie_Easy_Options_Option
 {
 	/**

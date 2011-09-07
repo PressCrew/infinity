@@ -19,7 +19,7 @@ Pie_Easy_Loader::load( 'components/widgets/component', 'utils/ajax', 'utils/file
  * @package PIE-extensions
  * @subpackage widgets
  */
-class Pie_Easy_Exts_Widget_Posts_List
+class Pie_Easy_Exts_Widgets_Posts_List
 	 extends Pie_Easy_Widgets_Widget
 {
 	protected function init()

@@ -17,7 +17,7 @@
  * @package PIE-extensions
  * @subpackage features
  */
-class Pie_Easy_Exts_Feature_Custom_Css extends Pie_Easy_Features_Feature
+class Pie_Easy_Exts_Features_Custom_Css extends Pie_Easy_Features_Feature
 {
 	// this class only exists to create a global "custom css" pseudo interface
 }

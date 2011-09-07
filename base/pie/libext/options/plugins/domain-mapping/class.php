@@ -19,8 +19,8 @@ Pie_Easy_Loader::load_ext( 'options/text' );
  * @package PIE-extensions
  * @subpackage options
  */
-class Pie_Easy_Exts_Option_Plugins_Domain_Mapping
-	extends Pie_Easy_Exts_Option_Text
+class Pie_Easy_Exts_Options_Plugins_Domain_Mapping
+	extends Pie_Easy_Exts_Options_Text
 {
 	public function init()
 	{

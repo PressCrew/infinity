@@ -17,7 +17,7 @@
  * @package PIE-extensions
  * @subpackage features
  */
-class Pie_Easy_Exts_Feature_Header_Logo
+class Pie_Easy_Exts_Features_Header_Logo
 	extends Pie_Easy_Features_Feature
 {
 

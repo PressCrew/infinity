@@ -19,7 +19,7 @@ Pie_Easy_Loader::load( 'base/iconable', 'base/positionable' );
  * @package PIE-extensions
  * @subpackage screens
  */
-class Pie_Easy_Exts_Screen_Cpanel
+class Pie_Easy_Exts_Screens_Cpanel
 	extends Pie_Easy_Screens_Screen
 		implements Pie_Easy_Iconable, Pie_Easy_Positionable
 {
