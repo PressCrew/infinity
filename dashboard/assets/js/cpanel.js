@@ -228,7 +228,8 @@
 			var t = (c) ? c.split('||') : [];
 			var tt = new Array();
 			var h = $a.attr('href');
-			var i, s, m, id;
+			var i, s, id;
+			var m = false;
 
 			if (cmd == 'get') {
 				return t;
@@ -242,9 +243,11 @@
 				// loop all items
 				for (i in t) {
 					s = t[i].split('|');
-					if (s[0] == id && cmd == 'rem') {
+					if (s[0] == id) {
 						m = true;
-						continue;
+						if (cmd == 'rem') {
+							continue;
+						}
 					}
 					tt.push(t[i]);
 				}
