@@ -10,7 +10,8 @@
 		var tb_refresh =
 			$('a#infinity-cpanel-toolbar-refresh')
 				.button({icons: {primary: "ui-icon-refresh"}})
-				.attr('href', tb_start.attr('href'));
+				.attr('href', tb_start.attr('href'))
+				.attr('target', tb_start.attr('target'));
 		var tb_scroll =
 			$('input#infinity-cpanel-toolbar-scroll')
 				.button({
@@ -99,6 +100,7 @@
 			select: function(event, ui) {
 				$.cookie('infinity_cpanel_tab_selected', ui.panel.id, {expires: 7});
 				tb_refresh.attr('href', $(ui.panel).data('infinity.href.loaded'));
+				tb_refresh.attr('target', $(ui.tab).attr('target'));
 			},
 			show: function(event, ui) {
 				initScroll($(ui.panel));
