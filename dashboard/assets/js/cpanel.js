@@ -182,7 +182,7 @@
 			}
 
 			// update refr button
-			tb_refresh.attr('href', href);
+			tb_refresh.attr('href', href).attr('target', tab_id);
 
 			// find active panel
 			var panel = $('div#' + tab_id).empty();
