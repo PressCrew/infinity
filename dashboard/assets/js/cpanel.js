@@ -132,6 +132,10 @@
 			var $a = $(anchor),
 				$targ = $a.attr('target');
 
+			if (!$targ) {
+				$targ = $a.closest('div.ui-tabs-panel').attr('id');
+			}
+
 			if ( ($targ) && $targ.substring(0, 20) == 'infinity-cpanel-tab-') {
 				return $targ;
 			} else {
