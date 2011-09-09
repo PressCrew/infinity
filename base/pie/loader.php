@@ -100,7 +100,7 @@ final class Pie_Easy_Loader
 				'features' =>
 					array( 'component', 'factory', 'renderer', 'policy', 'registry' ),
 				'options' =>
-					array( 'component', 'factory', 'renderer', 'policy', 'registry', 'uploader', 'walkers' ),
+					array( 'component', 'factory', 'renderer', 'policy', 'registry', 'walkers' ),
 				'screens' =>
 					array( 'component', 'factory', 'renderer', 'policy', 'registry' ),
 				'sections' =>
