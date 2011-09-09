@@ -20,6 +20,17 @@
 class Pie_Easy_Exts_Features_Css_Background
 	extends Pie_Easy_Features_Feature
 {
+	public function configure( $conf_map, $theme )
+	{
+		// RUN PARENT FIRST!
+		parent::configure( $conf_map, $theme );
+
+		// css title class
+		if ( isset( $conf_map['css_selector'] ) ) {
+			$this->directives()->set( $theme, 'css_selector', $conf_map['css_selector'] );
+		}
+	}
+	
 	/**
 	 * @ignore
 	 */
@@ -38,7 +49,7 @@ class Pie_Easy_Exts_Features_Css_Background
 		// only render if we have a url
 		if ( $url ) {
 			// rule for bg styles
-			$bg = $this->style()->new_rule( $this->_css_selector );
+			$bg = $this->style()->new_rule( $this->css_selector );
 			$bg->ad( 'background-image', sprintf( "url('%s')", $url ) );
 			$bg->ad( 'background-repeat', $opt_tiling->get() );
 		}
