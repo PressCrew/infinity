@@ -34,6 +34,17 @@ class Pie_Easy_Exts_Widgets_Posts_List
 		$this->script()->add_dep( 'jquery-ui-nestedsortable' );
 	}
 
+	public function configure( $conf_map, $theme )
+	{
+		// RUN PARENT FIRST!
+		parent::configure( $conf_map, $theme );
+
+		// css title class
+		if ( isset( $conf_map['post_type'] ) ) {
+			$this->directives()->set( $theme, 'post_type', $conf_map['post_type'] );
+		}
+	}
+
 	/**
 	 * @ignore
 	 */
@@ -50,7 +61,7 @@ class Pie_Easy_Exts_Widgets_Posts_List
 	public function get_template_vars()
 	{
 		// set it up!
-		$posts_list = new Pie_Easy_Posts_List( $this->_post_type );
+		$posts_list = new Pie_Easy_Posts_List( $this->post_type );
 		$posts_list->prepare_items();
 
 		return array(
