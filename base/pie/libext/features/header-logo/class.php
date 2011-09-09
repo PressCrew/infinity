@@ -21,6 +21,17 @@ class Pie_Easy_Exts_Features_Header_Logo
 	extends Pie_Easy_Features_Feature
 {
 
+	public function configure( $conf_map, $theme )
+	{
+		// RUN PARENT FIRST!
+		parent::configure( $conf_map, $theme );
+
+		// css title class
+		if ( isset( $conf_map['css_selector'] ) ) {
+			$this->directives()->set( $theme, 'css_selector', $conf_map['css_selector'] );
+		}
+	}
+
 	/**
 	 * Return URL to uploaded logo image
 	 *
@@ -52,7 +63,7 @@ class Pie_Easy_Exts_Features_Header_Logo
 		if ( $url ) {
 
 			// add rule
-			$pos = $this->style()->new_rule( $this->_css_selector );
+			$pos = $this->style()->new_rule( $this->css_selector );
 
 			if ( $opt_top ) {
 				$pos->ad( 'top', $opt_top . 'px' );
