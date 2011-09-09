@@ -15,7 +15,7 @@ To define a widget, you add something like this to your widgets.ini file.
 	type = "posts-list"
 	title = "Edit Blog Pages"
 	description = "Edit your blog pages and modify the order"
-	_post_type = "page"
+	post_type = "page"
 
 Now you have a "Pages List" widget named "pages-list" which will display all of the
 posts with the type of "page".
