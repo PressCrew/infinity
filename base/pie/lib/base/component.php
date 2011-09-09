@@ -53,11 +53,6 @@ abstract class Pie_Easy_Component
 	const DEFAULT_TEMPLATE_DIR = 'templates';
 	
 	/**
-	 * Prefix for custom directives (pass thru vars)
-	 */
-	const PREFIX_PASS_THRU = '_';
-
-	/**
 	 * The theme that created this concrete component
 	 *
 	 * @var string
@@ -313,14 +308,6 @@ abstract class Pie_Easy_Component
 		// set ignore
 		if ( isset( $conf_map->ignore ) ) {
 			$this->directives()->set( $theme, 'ignore', (boolean) $conf_map->ignore );
-		}
-
-		// set directive vars
-		foreach( $conf_map as $directive => $value ) {
-			// try to set it
-			if ( $directive{0} == self::PREFIX_PASS_THRU ) {
-				$this->directives()->set( $theme, $directive, $value );
-			}
 		}
 	}
 
