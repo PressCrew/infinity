@@ -253,6 +253,8 @@ final class Pie_Easy_Enqueue
 		// register popular jQuery plugins
 		$this->register_script(
 			'jquery-cookie', 'jquery.cookie.js', array('jquery') );
+		$this->register_script(
+			'jquery-jstree', 'jquery.jstree.js', array('jquery','jquery-cookie') );
 
 		// register default scripts
 		$this->register_script(
