@@ -20,6 +20,18 @@
 class Pie_Easy_Exts_Features_Gravatar
 	extends Pie_Easy_Features_Feature
 {
+	
+	public function configure( $conf_map, $theme )
+	{
+		// RUN PARENT FIRST!
+		parent::configure( $conf_map, $theme );
+
+		// css title class
+		if ( isset( $conf_map['image_class'] ) ) {
+			$this->directives()->set( $theme, 'image_class', $conf_map['image_class'] );
+		}
+	}
+
 	/**
 	 * @ignore
 	 */
@@ -32,7 +44,7 @@ class Pie_Easy_Exts_Features_Gravatar
 		$opt_bg_color = $this->get_suboption('bg_color')->get();
 
 		// add rules
-		$img = $this->style()->new_rule( 'img.' . $this->_image_class );
+		$img = $this->style()->new_rule( 'img.' . $this->image_class );
 
 		if ( $opt_border_width ) {
 			$img->ad( 'border-width', $opt_border_width . 'px' );
