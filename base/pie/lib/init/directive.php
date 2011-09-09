@@ -236,5 +236,15 @@ class Pie_Easy_Init_Directive_Registry
 		// directive not set
 		return null;
 	}
+
+	/**
+	 * Return all directives as an array
+	 *
+	 * @return array
+	 */
+	public function get_all()
+	{
+		return $this->directives->to_array();
+	}
 }
 ?>
