@@ -25,38 +25,12 @@ Pie_Easy_Loader::load( 'base/policy' );
 abstract class Pie_Easy_Options_Policy extends Pie_Easy_Policy
 {
 	/**
-	 * @var Pie_Easy_Options_Uploader
-	 */
-	private $uploader;
-
-	/**
 	 * @return string
 	 */
 	public function get_handle()
 	{
 		return 'options';
 	}
-
-	/**
-	 * Return a new instance of the options uploader class
-	 *
-	 * @return Pie_Easy_Options_Uploader
-	 */
-	abstract public function new_uploader();
-	
-	/**
-	 * Return the options uploader instance
-	 *
-	 * @return Pie_Easy_Options_Uploader
-	 */
-	final public function uploader()
-	{
-		if ( !$this->uploader instanceof Pie_Easy_Options_Uploader ) {
-			$this->uploader = $this->new_uploader();
-		}
-		return $this->uploader;
-	}
-	
 }
 
 ?>

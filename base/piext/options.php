@@ -82,14 +82,6 @@ class Infinity_Options_Policy extends Pie_Easy_Options_Policy
 		return new Infinity_Options_Renderer();
 	}
 
-	/**
-	 * @return Infinity_Options_Uploader
-	 */
-	final public function new_uploader()
-	{
-		return new Infinity_Options_Uploader( 'admin_head' );
-	}
-
 }
 
 /**
@@ -214,17 +206,6 @@ class Infinity_Options_Renderer extends Pie_Easy_Options_Renderer
 			)
 		);
 	}
-}
-
-/**
- * Infinity Theme: options uploader
- *
- * @package Infinity
- * @subpackage options
- */
-class Infinity_Options_Uploader extends Pie_Easy_Options_Uploader
-{
-	// nothing custom yet
 }
 
 //
