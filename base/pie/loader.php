@@ -152,7 +152,9 @@ final class Pie_Easy_Loader
 		'screens' => array( 'cpanel' ),
 		'sections' => array( 'default' ),
 		'shortcodes' => array( 'access' ),
-		'widgets' => array( 'default', 'menu', 'posts-list', 'title-block' )
+		'widgets' => array(
+			'debugger', 'default', 'menu', 'posts-list', 'title-block'
+		)
 	);
 
 	/**
