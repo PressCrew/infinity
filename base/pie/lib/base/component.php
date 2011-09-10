@@ -309,6 +309,22 @@ abstract class Pie_Easy_Component
 		if ( isset( $conf_map->ignore ) ) {
 			$this->directives()->set( $theme, 'ignore', (boolean) $conf_map->ignore );
 		}
+
+		// default style
+		$default_style = $this->locate_ext_file( 'style.css' );
+
+		// have default style file?
+		if ( $default_style ) {
+			$this->style()->add_file( $default_style );
+		}
+
+		// default script
+		$default_script = $this->locate_ext_file( 'script.js' );
+
+		// have default script file?
+		if ( $default_script ) {
+			$this->script()->add_file( $default_script );
+		}
 	}
 
 	/**
@@ -511,7 +527,7 @@ abstract class Pie_Easy_Component
 		if ( $template ) {
 			return $template;
 		} else {
-			return $this->policy()->factory()->ext_tpl( $this );
+			return $this->locate_ext_file( 'template.php' );
 		}
 	}
 
@@ -530,6 +546,56 @@ abstract class Pie_Easy_Component
 
 		// load template
 		include( $this->get_template_path() );
+	}
+	
+	/**
+	 * Return path to an ext file
+	 *
+	 * @param string $filename
+	 * @return string
+	 */
+	final protected function locate_ext_file( $filename )
+	{
+		// what class am i?
+		$this_class = get_class( $this );
+
+		// get extension that loaded class
+		$loaded_ext = $this->policy()->factory()->ext( $this_class );
+
+		// make sure the extension was loaded
+		if ( $loaded_ext ) {
+
+			// look for scheme files first
+			$file_theme =
+				Pie_Easy_Scheme::instance()->locate_extension_file(
+					$this->policy()->get_handle(),
+					$loaded_ext,
+					$filename
+				);
+
+			// find a theme file?
+			if ( $file_theme ) {
+				// yes, use that one
+				return $file_theme;
+			} else {
+				// no, try for default location
+				$file_default =
+					PIE_EASY_LIBEXT_DIR .
+					Pie_Easy_Files::path_build(
+						$this->policy()->get_handle(),
+						$loaded_ext,
+						$filename
+					);
+				// exists?
+				if ( is_readable( $file_default ) ) {
+					return $file_default;
+				} else {
+					return false;
+				}
+			}
+		}
+
+		throw new Exception( sprintf( 'The extension "%s" is not loaded.', $this->name ) );
 	}
 	
 	/**
