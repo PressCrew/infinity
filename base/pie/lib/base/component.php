@@ -28,6 +28,7 @@ Pie_Easy_Loader::load(
  * @subpackage base
  * @property-read string $theme The theme that created this concrete component
  * @property-read string $name The concrete component name
+ * @property-read string $type The concrete component type
  * @property-read string $parent The parent component (slug)
  * @property-read string $title The concrete component title
  * @property-read string $description The concrete component description
@@ -59,6 +60,13 @@ abstract class Pie_Easy_Component
 	 */
 	private $__theme__;
 
+	/**
+	 * Type of the concrete component
+	 *
+	 * @var string
+	 */
+	private $__type__;
+	
 	/**
 	 * Name of the concrete component
 	 *
@@ -97,12 +105,14 @@ abstract class Pie_Easy_Component
 	/**
 	 * @param string $theme The theme that created this option
 	 * @param string $name Option name may only contain alphanumeric characters as well as the underscore for use as a word separator.
+	 * @param string $type The type (component extension) of this component
 	 */
-	public function __construct( $theme, $name )
-	{
+	final public function __construct( $theme, $name, $type )
+	{	
 		// set basic properties
 		$this->__theme__ = $theme;
 		$this->set_name($name);
+		$this->__type__ = $type;
 
 		// init directives registry
 		$this->__directives__ = new Pie_Easy_Init_Directive_Registry();
@@ -127,6 +137,8 @@ abstract class Pie_Easy_Component
 				return $this->__theme__;
 			case 'name':
 				return $this->__name__;
+			case 'type':
+				return $this->__type__;
 			case 'parent':
 				return $this->__parent__;
 			default:
@@ -558,6 +570,8 @@ abstract class Pie_Easy_Component
 	{
 		// what class am i?
 		$this_class = get_class( $this );
+
+		$parent_class = get_parent_class( $this_class );
 
 		// get extension that loaded class
 		$loaded_ext = $this->policy()->factory()->ext( $this_class );

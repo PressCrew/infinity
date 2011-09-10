@@ -107,7 +107,7 @@ abstract class Pie_Easy_Factory extends Pie_Easy_Componentable
 		$class_name = $this->load_ext( $type );
 
 		// create new component
-		$component = new $class_name( $theme, $name );
+		$component = new $class_name( $theme, $name, $type );
 
 		// set the policy
 		$component->policy( $this->policy() );
