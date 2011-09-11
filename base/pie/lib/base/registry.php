@@ -337,9 +337,9 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 				// option name is both strings glued with a hyphen
 				$option_name = implode( '-', $parts );
 				// get or create component
-				if ( $this->policy()->options()->registry()->has( $name ) ) {
+				if ( $this->policy()->options()->registry()->has( $option_name ) ) {
 					// get it from registry
-					$component = $this->get( $name );
+					$component = $this->policy()->options()->registry()->get( $option_name );
 				} else {
 					// create option using the option component factory
 					$component =
