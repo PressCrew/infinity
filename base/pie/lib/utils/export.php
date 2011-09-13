@@ -111,9 +111,11 @@ class Pie_Easy_Export
 		// make sure the export dir exists
 		if ( wp_mkdir_p( self::$export_dir ) ) {
 			// can we write to the export dir?
-			if ( is_writable( self::$export_dir ) ) {
+			if ( Pie_Easy_Files::cache(self::$export_dir)->is_writable() ) {
+				// get file instance
+				$file = Pie_Easy_Files::cache( $this->path );
 				// if file already exists, puke if not writeable
-				if ( file_exists( $this->path ) && !is_writable( $this->path ) ) {
+				if ( !$file->is_writable() ) {
 					throw new Pie_Easy_Export_Exception(
 						'Unable to write to the file: ' . $this->path );
 				}
@@ -168,7 +170,7 @@ class Pie_Easy_Export
 			// must be a number
 			if ( is_numeric( $timestamp ) ) {
 				// does file exist?
-				if ( file_exists( $this->path ) ) {
+				if ( Pie_Easy_Files::cache($this->path)->is_readable() ) {
 					// when was file last modified?
 					$mtime = filemtime( $this->path );
 					// is timestamp more recent?
@@ -197,7 +199,7 @@ class Pie_Easy_Export
 		// mark as updated to avoid n+ delete attempts
 		$this->updated = true;
 
-		if ( file_exists( $this->path ) && is_writable( $this->path ) ) {
+		if ( Pie_Easy_Files::cache($this->path)->is_writable() ) {
 			return unlink( $this->path );
 		}
 	}

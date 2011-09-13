@@ -117,7 +117,7 @@ final class Pie_Easy_Loader
 		'schemes' =>
 			array( 'scheme', 'scheme_enqueue' ),
 		'utils' =>
-			array( 'ajax', 'docs', 'enqueue', 'export', 'files', 'i18n' )
+			array( 'ajax', 'docs', 'enqueue', 'export', 'file', 'files', 'file_cache', 'i18n' )
 	);
 
 	/**

@@ -363,7 +363,7 @@ final class Pie_Easy_Scheme
 		$ini_file = $this->theme_file( $theme, $this->config_dir, $this->config_file . '.ini' );
 
 		// does ini file exist?
-		if ( is_readable( $ini_file ) ) {
+		if ( Pie_Easy_Files::cache($ini_file)->is_readable() ) {
 			// parse it
 			$ini = parse_ini_file( $ini_file, true );
 			// push onto loaded stack
@@ -448,7 +448,7 @@ final class Pie_Easy_Scheme
 			// load functions file if it exists
 			$filename = $this->theme_file( $theme, 'functions.php' );
 			// try to load it
-			if ( is_readable( $filename ) ) {
+			if ( Pie_Easy_Files::cache($filename)->is_readable() ) {
 				require_once $filename;
 			}
 		}
@@ -492,7 +492,7 @@ final class Pie_Easy_Scheme
 			$ini_file = $this->theme_file( $theme, $this->config_dir, $policy->get_handle() . '.ini' );
 
 			// load the option config if it exists
-			if ( is_readable( $ini_file ) ) {
+			if ( Pie_Easy_Files::cache($ini_file)->is_readable() ) {
 
 				// skip loaded files
 				if ( $this->config_files_loaded->contains( $ini_file ) ) {
@@ -562,7 +562,7 @@ final class Pie_Easy_Scheme
 				foreach ( $template_paths as $template_path ) {
 
 					// does it exist?
-					if ( file_exists( $template_path ) ) {
+					if ( Pie_Easy_Files::cache($template_path)->is_readable() ) {
 						// load it?
 						if ($load) {
 							load_template( $template_path );
@@ -730,7 +730,7 @@ final class Pie_Easy_Scheme
 			$stack_file .= Pie_Easy_Files::path_build( $locate_names );
 
 			// does stack file exist?
-			if ( is_readable( $stack_file ) ) {
+			if ( Pie_Easy_Files::cache($stack_file)->is_readable() ) {
 				return $stack_file;
 			}
 		}

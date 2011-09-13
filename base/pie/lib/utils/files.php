@@ -11,6 +11,8 @@
  * @since 1.0
  */
 
+Pie_Easy_Loader::load( 'utils/file_cache' );
+
 /**
  * Make the File System Easy
  *
@@ -20,6 +22,13 @@
  */
 final class Pie_Easy_Files
 {
+	/**
+	 * File cache instance
+	 * 
+	 * @var Pie_Easy_File_Cache
+	 */
+	private static $fcache;
+
 	/**
 	 * Split a path at forward '/' OR backward '\' slashes
 	 *
@@ -135,6 +144,31 @@ final class Pie_Easy_Files
 
 		// return the path
 		return self::path_build( self::path_split( $path ), $relative );
+	}
+
+	/**
+	 * Returns fstat instance for a file from the cache
+	 *
+	 * @param string $filename
+	 * @return Pie_Easy_File
+	 */
+	public static function cache( $filename )
+	{
+		return self::file_cache()->get($filename);
+	}
+	
+	/**
+	 * Return file cache instance
+	 *
+	 * @return Pie_Easy_File_Cache
+	 */
+	private static function file_cache()
+	{
+		if ( !self::$fcache instanceof Pie_Easy_File_Cache ) {
+			self::$fcache = new Pie_Easy_File_Cache();
+		}
+		
+		return self::$fcache;
 	}
 
 	/**

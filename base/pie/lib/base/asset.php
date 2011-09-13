@@ -144,7 +144,7 @@ abstract class Pie_Easy_Asset
 				$code .= '/*+++ import source: /../' . Pie_Easy_Files::theme_file_to_rel( $filename ) . ' */' . PHP_EOL;
 
 				// make sure it actually exists
-				if ( is_readable( $filename ) ) {
+				if ( Pie_Easy_Files::cache($filename)->is_readable() ) {
 					$code .= $this->get_file_contents( $filename ) . PHP_EOL;
 					$code .= '/*--- import complete! */' . PHP_EOL . PHP_EOL;
 				} else {
