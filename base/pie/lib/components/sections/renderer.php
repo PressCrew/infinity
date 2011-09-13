@@ -20,16 +20,6 @@
 abstract class Pie_Easy_Sections_Renderer extends Pie_Easy_Renderer
 {
 	/**
-	 * Render the section layout
-	 *
-	 * If you override this method, make sure you include all of the CSS classes!
-	 */
-	protected function render_output()
-	{
-		$this->get_current()->load_template();
-	}
-
-	/**
 	 * Render the title class
 	 */
 	public function render_class_title( $class = null )

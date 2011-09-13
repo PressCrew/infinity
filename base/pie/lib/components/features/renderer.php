@@ -19,13 +19,7 @@
  */
 abstract class Pie_Easy_Features_Renderer extends Pie_Easy_Renderer
 {
-	/**
-	 * Render the feature
-	 */
-	protected function render_output()
-	{
-		$this->get_current()->load_template();
-	}
+	// nothing custom yet
 }
 
 ?>

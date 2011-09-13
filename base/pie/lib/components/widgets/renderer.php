@@ -19,14 +19,7 @@
  */
 abstract class Pie_Easy_Widgets_Renderer extends Pie_Easy_Renderer
 {
-	/**
-	 * Render the widget
-	 */
-	protected function render_output()
-	{
-		$this->get_current()->load_template();
-	}
-
+	// nothing custom yet
 }
 
 ?>
