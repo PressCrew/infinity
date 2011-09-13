@@ -617,7 +617,7 @@ abstract class Pie_Easy_Component
 						$filename
 					);
 				// exists?
-				if ( is_readable( $file_default ) ) {
+				if ( Pie_Easy_Files::cache($file_default)->is_readable() ) {
 					return $file_default;
 				}
 			}

@@ -52,9 +52,9 @@ abstract class Pie_Easy_I18n
 		$mofile_custom = ( $custom_dir_path ) ? $custom_dir_path . DIRECTORY_SEPARATOR . $mofile : null;
 
 		// try to load it
-		if ( file_exists( $mofile_global ) ) {
+		if ( Pie_Easy_Files::cache($mofile_global)->is_readable() ) {
 			return load_textdomain( $domain, $mofile_global );
-		} elseif ( ( $mofile_custom ) && file_exists( $mofile_custom ) ) {
+		} elseif ( ( $mofile_custom ) && Pie_Easy_Files::cache($mofile_custom)->is_readable() ) {
 			return load_textdomain( $domain, $mofile_custom );
 		} else {
 			return false;

@@ -174,7 +174,7 @@ class Pie_Easy_Scheme_Enqueue
 				// path to stylesheet for this policy
 				$style_path = $policy->registry()->export_css_file()->path;
 				// register if it exists and has content
-				if (  file_exists( $style_path ) && filesize( $style_path ) > 0 ) {
+				if (  Pie_Easy_Files::cache($style_path)->is_readable() && filesize( $style_path ) > 0 ) {
 					$styles->add(
 						$policy->get_handle(),
 						$policy->registry()->export_css_file()->url
@@ -214,7 +214,7 @@ class Pie_Easy_Scheme_Enqueue
 				// path to script source for this policy
 				$script_path = $policy->registry()->export_js_file()->path;
 				// register if it exists and has content
-				if ( file_exists( $script_path ) && filesize( $script_path ) > 0 ) {
+				if ( Pie_Easy_Files::cache($script_path)->is_readable() && filesize( $script_path ) > 0 ) {
 					// add it
 					$script->add(
 						$policy->get_handle(),
