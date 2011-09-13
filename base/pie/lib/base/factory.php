@@ -22,75 +22,44 @@ Pie_Easy_Loader::load( 'base/componentable', 'utils/files' );
 abstract class Pie_Easy_Factory extends Pie_Easy_Componentable
 {
 	/**
-	 * Map of created classes and their extension type
-	 * 
-	 * @var Pie_Easy_Map
-	 */
-	private $ext_map;
-
-	/**
-	 * Set or get the ext that triggered a class to be loaded
-	 *
-	 * @param object|string $class_name
-	 * @param string $ext
-	 * @return string|false
-	 */
-	final public function ext( $class, $ext = null )
-	{
-		// handle map initialization
-		if ( !$this->ext_map instanceof Pie_Easy_Map ) {
-			$this->ext_map = new Pie_Easy_Map();
-		}
-
-		// class name
-		$class_name = ( is_object( $class ) ) ? get_class( $class ) : $class;
-
-		// set or get
-		if ( $ext ) {
-			// class must exist
-			if ( class_exists( $class_name ) ) {
-				// update map
-				$this->ext_map->add( $class_name, $ext );
-				return true;
-			} else {
-				throw new Exception( sprintf( 'The class "%s" does not exist', $class_name ) );
-			}
-		} else {
-			return $this->ext_map->item_at( $class_name );
-		}
-	}
-
-	/**
 	 * Load a component extension
 	 *
 	 * Override this class to load component class files which exist outside of PIE's path
 	 *
 	 * @param string $ext Name of the extension
-	 * @param string $class_prefix Prefix of class to load (if known)
 	 * @return string Name of the class which was loaded
 	 */
-	public function load_ext( $ext, $class_prefix = null )
+	public function load_ext( $ext )
 	{
+		// expand extension path
+		$ext = sprintf('%s/%s', $this->policy()->get_handle(), $ext );
+
 		// format extension file name
-		$file = $ext . DIRECTORY_SEPARATOR . 'extension.php';
+		$ext_file = $ext . DIRECTORY_SEPARATOR . 'class.php';
 
 		// look for scheme files first
 		$file_theme =
-			Pie_Easy_Scheme::instance()->locate_extension_file(
-				$this->policy()->get_handle(), $file
-			);
+			Pie_Easy_Scheme::instance()->locate_extension_file( $ext_file );
 
 		// find a theme file?
 		if ( $file_theme ) {
-			$class_name = Pie_Easy_Files::file_to_class( $ext, $class_prefix );
-			require_once $file_theme;
-		} else {
-			$class_name = Pie_Easy_Loader::load_ext( sprintf('%s/%s', $this->policy()->get_handle(), $ext ) );
-		}
-		
-		$this->ext( $class_name, $ext );
 
-		return $class_name;
+			// format class name
+			$class_name = Pie_Easy_Files::file_to_class( $ext, PIE_EASY_EXT_PREFIX_API );
+
+			// load the file
+			require_once $file_theme;
+
+			// class must exist
+			if ( class_exists( $class_name ) ) {
+				return $class_name;
+			} else {
+				throw new Exception( sprintf( 'The class "%s" does not exist', $class_name ) );
+			}
+
+		} else {
+			return Pie_Easy_Loader::load_libext( $ext );
+		}
 	}
 
 	/**

@@ -81,7 +81,7 @@ final class Pie_Easy_Loader
 	 *
 	 * @var array
 	 */
-	private $pkgs = array(
+	private static $pkgs = array(
 		'base' =>
 			array(
 				'asset',
@@ -125,7 +125,7 @@ final class Pie_Easy_Loader
 	 *
 	 * @var array
 	 */
-	private $exts = array(
+	private static $exts = array(
 		'features' => array(
 			'css-background', 'custom-css', 'default', 'gravatar', 'header-logo'
 		),
@@ -168,11 +168,16 @@ final class Pie_Easy_Loader
 	 * You must tell PIE at what URL its root directory is located
 	 *
 	 * @param string $pie_url The absolute URL to PIE root
+	 * @param string $ext_prefix The prefix for ext class names defined in the implementing API
 	 */
-	final static public function init( $pie_url )
+	final static public function init( $pie_url, $ext_prefix )
 	{
 		// new instance if necessary
 		if ( !self::$instance instanceof self ) {
+
+			// define api ext prefixes
+			define( 'PIE_EASY_EXT_PREFIX', 'Pie_Easy_Exts' );
+			define( 'PIE_EASY_EXT_PREFIX_API', $ext_prefix );
 
 			// define PIE urls
 			define( 'PIE_EASY_URL', $pie_url );
@@ -241,15 +246,15 @@ final class Pie_Easy_Loader
 
 		// files can't be empty
 		if ( count( $files ) ) {
-			// base pkg
-			$pkg = $this->pkgs;
+			// base pkgs
+			$pkgs = self::$pkgs;
 			// check all libs
 			foreach ( $files as $file ) {
 				// is file a pkg key?
-				if ( isset( $pkg[$file] ) ) {
+				if ( isset( $pkgs[$file] ) ) {
 					// its a pkg, go to next level
-					$pkg = $pkg[$file];
-				} elseif ( in_array( $file, $pkg ) ) {
+					$pkgs = $pkgs[$file];
+				} elseif ( in_array( $file, $pkgs ) ) {
 					// its a lib
 					return $this->load_lib_file( array_pop( $files ), $files );
 				} else {
@@ -262,9 +267,9 @@ final class Pie_Easy_Loader
 		}
 
 		// loading entire pkg
-		if ( is_array( $pkg ) ) {
+		if ( is_array( $pkgs ) ) {
 			// yep
-			foreach( $pkg as $file ) {
+			foreach( $pkgs as $file ) {
 				$this->load_lib_file( $file, $files );
 			}
 		}
@@ -291,20 +296,20 @@ final class Pie_Easy_Loader
 	}
 
 	/**
-	 * Load a lib extension
+	 * Load ONE lib extension
 	 *
 	 * @param string $ext
 	 * @return string Name of class that was loaded
 	 */
-	private function load_libext( $ext )
+	final static public function load_libext( $ext )
 	{
 		// set files
 		$files = is_array( $ext ) ? $ext : explode( self::PATH_DELIM, $ext );
 
 		// files can't be empty
 		if ( count( $files ) ) {
-			// base pkg
-			$exts = $this->exts;
+			// base extension
+			$exts = self::$exts;
 			// check all libs
 			foreach ( $files as $file ) {
 				// is file a pkg key?
@@ -313,15 +318,15 @@ final class Pie_Easy_Loader
 					$exts = $exts[$file];
 				} elseif ( in_array( $file, $exts ) ) {
 					// its a lib
-					return $this->load_libext_file( $files );
+					return self::load_libext_file( $files );
 				}
 			}
-			// not found
-			throw new Exception(
-				sprintf( 'The extension path "%s" is not valid.', $ext ) );
 		} else {
 			throw new Exception( 'The extension path is empty.' );
 		}
+
+		// ext not found
+		return null;
 	}
 
 	/**
@@ -331,21 +336,37 @@ final class Pie_Easy_Loader
 	 * @param array|string $files
 	 * @return true
 	 */
-	private function load_libext_file( $files )
+	private static function load_libext_file( $files )
 	{
+		// determine class name
+		$class_name =
+			Pie_Easy_Files::file_to_class( implode( '_', $files ), PIE_EASY_EXT_PREFIX );
+
+		// if class already exists, just return it
+		if ( class_exists( $class_name ) ) {
+			// already loaded, woot
+			return $class_name;
+		}
+
 		// relative file
 		$file = implode( DIRECTORY_SEPARATOR, $files );
 		
 		// build up file path
 		$path =
 			PIE_EASY_LIBEXT_DIR .
-			DIRECTORY_SEPARATOR . implode( DIRECTORY_SEPARATOR, $files ) .
+			DIRECTORY_SEPARATOR . $file .
 			DIRECTORY_SEPARATOR . 'class.php';
 
 		// load it
 		require_once $path;
-		// return class name
-		return Pie_Easy_Files::file_to_class( implode( '_', $files ), 'Pie_Easy_Exts' );
+
+		// did the file we just loaded define the class we were expecting?
+		if ( class_exists( $class_name ) ) {
+			// return class name
+			return $class_name;
+		} else {
+			throw new Exception( sprintf( 'The class "%s" does not exist', $class_name ) );
+		}
 	}
 
 	/**

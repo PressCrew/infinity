@@ -102,15 +102,7 @@ class Infinity_Features_Registry extends Pie_Easy_Features_Registry
  */
 class Infinity_Exts_Feature_Factory extends Pie_Easy_Features_Factory
 {
-	/**
-	 * @param string $ext
-	 * @return string
-	 */
-	final public function load_ext( $ext )
-	{
-		// run parent
-		return parent::load_ext( $ext, 'Infinity_Feature' );
-	}
+	// nothing custom yet
 }
 
 /**

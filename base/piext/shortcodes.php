@@ -102,15 +102,7 @@ class Infinity_Shortcodes_Registry extends Pie_Easy_Shortcodes_Registry
  */
 class Infinity_Exts_Shortcode_Factory extends Pie_Easy_Shortcodes_Factory
 {
-	/**
-	 * @param string $ext
-	 * @return string
-	 */
-	final public function load_ext( $ext )
-	{
-		// run parent
-		return parent::load_ext( $ext, 'Infinity_Shortcode' );
-	}
+	// nothing custom yet
 }
 
 /**
