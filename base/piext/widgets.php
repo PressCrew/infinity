@@ -103,15 +103,7 @@ class Infinity_Widgets_Registry extends Pie_Easy_Widgets_Registry
  */
 class Infinity_Exts_Widget_Factory extends Pie_Easy_Widgets_Factory
 {
-	/**
-	 * @param string $ext
-	 * @return string
-	 */
-	final public function load_ext( $ext )
-	{
-		// run parent
-		return parent::load_ext( $ext, 'Infinity_Widget' );
-	}
+	// nothing custom yet
 }
 
 /**

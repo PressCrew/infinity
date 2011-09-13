@@ -36,7 +36,7 @@ define( 'INFINITY_ADMIN_DOCS_DIR', INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'd
 
 // load PIE and initialize
 require_once( INFINITY_PIE_DIR . DIRECTORY_SEPARATOR . 'loader.php' );
-Pie_Easy_Loader::init( INFINITY_PIE_URL );
+Pie_Easy_Loader::init( INFINITY_PIE_URL, 'Infinity_Exts' );
 
 // load Infinity API
 require_once( INFINITY_PIEXT_DIR . DIRECTORY_SEPARATOR . 'scheme.php' );

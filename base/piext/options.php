@@ -122,15 +122,7 @@ add_action( 'wp_loaded', array( 'Infinity_Options_Registry', 'init_form_processi
  */
 class Infinity_Exts_Option_Factory extends Pie_Easy_Options_Factory
 {
-	/**
-	 * @param string $ext
-	 * @return string
-	 */
-	final public function load_ext( $ext )
-	{
-		// run parent
-		return parent::load_ext( $ext, 'Infinity_Option' );
-	}
+	// nothing custom yet
 }
 
 /**

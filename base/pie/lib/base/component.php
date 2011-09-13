@@ -569,21 +569,38 @@ abstract class Pie_Easy_Component
 	final protected function locate_ext_file( $filename )
 	{
 		// what class am i?
-		$this_class = get_class( $this );
+		$r = new ReflectionClass($this);
 
-		$parent_class = get_parent_class( $this_class );
+		// i am the first class to check
+		$ext_paths = array( $r->getFileName() );
 
-		// get extension that loaded class
-		$loaded_ext = $this->policy()->factory()->ext( $this_class );
+		// loop class ancestry
+		while( $parent_class = $r->getParentClass() ) {
+			// load next ancestory
+			$r = new ReflectionClass( $parent_class->name );
+			// grandparent class
+			$grandparent_class = $r->getParentClass();
+			// break if grandparent class is base component
+			if ( $grandparent_class->name == 'Pie_Easy_Component') {
+				break;
+			}
+			// push parent class onto classes
+			array_push( $ext_paths, $parent_class->getFileName() );
+		}
 
-		// make sure the extension was loaded
-		if ( $loaded_ext ) {
+		// loop all ext paths
+		foreach( $ext_paths as $ext_path ) {
+
+			// get parent directory of class file path
+			$ext_dir = dirname( $ext_path );
+
+			// get extension type from path
+			$ext_type = substr( $ext_dir, strrpos( $ext_dir, $this->policy()->get_handle() ) );
 
 			// look for scheme files first
 			$file_theme =
 				Pie_Easy_Scheme::instance()->locate_extension_file(
-					$this->policy()->get_handle(),
-					$loaded_ext,
+					$ext_type,
 					$filename
 				);
 
@@ -596,20 +613,17 @@ abstract class Pie_Easy_Component
 				$file_default =
 					PIE_EASY_LIBEXT_DIR .
 					Pie_Easy_Files::path_build(
-						$this->policy()->get_handle(),
-						$loaded_ext,
+						$ext_type,
 						$filename
 					);
 				// exists?
 				if ( is_readable( $file_default ) ) {
 					return $file_default;
-				} else {
-					return false;
 				}
 			}
 		}
 
-		throw new Exception( sprintf( 'The extension "%s" is not loaded.', $this->name ) );
+		return false;
 	}
 	
 	/**

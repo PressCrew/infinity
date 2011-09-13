@@ -246,7 +246,7 @@ final class Pie_Easy_Files
 	static public function file_to_class( $file_name, $prefix = null )
 	{
 		// split at common delimeters
-		$parts = preg_split( '/-|_|\./', $file_name );
+		$parts = preg_split( '/[_.\/\\-]/', $file_name );
 
 		// if last part is php, kill it
 		if ( end( $parts ) == 'php' ) {

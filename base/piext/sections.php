@@ -103,15 +103,7 @@ class Infinity_Sections_Registry extends Pie_Easy_Sections_Registry
  */
 class Infinity_Exts_Section_Factory extends Pie_Easy_Sections_Factory
 {
-	/**
-	 * @param string $ext
-	 * @return string
-	 */
-	final public function load_ext( $ext )
-	{
-		// run parent
-		return parent::load_ext( $ext, 'Infinity_Section' );
-	}
+	// nothing custom yet
 }
 
 /**
