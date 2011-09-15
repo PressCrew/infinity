@@ -12,9 +12,9 @@
  */
 ?>
 
-<div id="<?php $this->component()->render_debugger_id() ?>" class="pie-easy-exts-widget-debugger ui-widget">
+<div id="<?php print $element_id ?>" class="pie-easy-exts-widget-debugger ui-widget">
 	<div class="ui-widget-header">
-		<?php print $this->title ?>
+		<?php $this->render_title() ?>
 	</div>
 	<div class="ui-widget-content">
 		<?php $this->component()->render_items() ?>
@@ -22,7 +22,9 @@
 </div>
 
 <script type="text/javascript">
-	jQuery(document).ready( function(){
-		widgetsDebuggerInit('div#<?php $this->component()->render_debugger_id() ?> div.ui-widget-content');
-	});
+	jQuery('div#<?php print $element_id ?> div.ui-widget-content')
+		.jstree({
+			'plugins': ['html_data','themeroller'],
+			'core': {'animation': 0}
+		});
 </script>
