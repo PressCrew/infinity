@@ -12,15 +12,13 @@
  */
 ?>
 
-<ul class="pie-easy-exts-widget-menu" id="<?php print $this->component()->get_menu_id() ?>">
+<ul class="pie-easy-exts-widget-menu" id="<?php print $element_id ?>">
 	<?php $this->component()->render_items() ?>
 </ul>
 
 <script type="text/javascript">
-	jQuery(document).ready( function(){
-		widgetMenuInit(
-			'ul#<?php print $this->component()->get_menu_id() ?>',
-			<?php print $this->component()->get_menu_buttons_func(); ?>
-		);
-	});
+	// init menu
+	jQuery('ul#<?php print $element_id ?>').menu();
+	// render all of the button script logic
+	<?php print $button_script->export(); ?>
 </script>
