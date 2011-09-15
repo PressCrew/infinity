@@ -22,12 +22,10 @@ Pie_Easy_Loader::load( 'components/widgets/component', 'utils/ajax', 'utils/file
 class Pie_Easy_Exts_Widgets_Menu
 	 extends Pie_Easy_Widgets_Widget
 {
-	protected function init()
+	public function init_scripts()
 	{
-		parent::init();
-
-		// requires ui menu
-		$this->script()->add_dep( 'jquery-ui-menu' );
+		parent::init_scripts();
+		wp_enqueue_script( 'jquery-ui-menu' );
 	}
 
 	public function configure( $config, $theme )
@@ -41,6 +39,19 @@ class Pie_Easy_Exts_Widgets_Menu
 		}
 	}
 
+	public function get_template_vars()
+	{
+		return array(
+			'element_id' => $this->get_menu_id(),
+			'button_script' => $this->get_button_script()
+		);
+	}
+
+	/**
+	 * Execute configured menu_items callback and return results
+	 *
+	 * @return array
+	 */
 	protected function get_items()
 	{
 		$callback = $this->directive('menu_items')->value;
@@ -53,52 +64,67 @@ class Pie_Easy_Exts_Widgets_Menu
 		}
 	}
 
-	public function get_menu_id()
+	/**
+	 * Format and return the menu element id
+	 *
+	 * @return string
+	 */
+	protected function get_menu_id()
 	{
 		return 'pie-easy-exts-widget-menu-' . esc_attr( $this->name );
 	}
 
-	public function get_menu_item_id( $slug )
+	/**
+	 * Format and return a menu item element id
+	 *
+	 * @return string
+	 */
+	protected function get_menu_item_id( $slug )
 	{
-		return 'pie-easy-exts-widget-menu-item-' . esc_attr( $slug );
+		return 'pie-easy-exts-widget-menu-item---' . esc_attr( $slug );
 	}
 
-	public function get_menu_buttons_func()
-	{
-		return 'widgetMenuInitButtons_' . str_replace('-', '_', $this->name );
-	}
-
+	/**
+	 * Render the list element that will be menufied
+	 */
 	public function render_items()
 	{
+		// render list
 		foreach( $this->get_items() as $item_slug => $item ) { ?>
 			<li>
 				<a id="<?php print $this->get_menu_item_id( $item_slug ) ?>" href="<?php print esc_attr( $item['href'] ) ?>"><?php print esc_attr( $item['text'] ) ?></a>
 			</li><?php
-		} ?>
-		</ul><?php
+		}
 	}
 
-	public function export_script()
+	/**
+	 * Generate all script for creating buttons and return script object
+	 *
+	 * @return Pie_Easy_Script
+	 */
+	protected function get_button_script()
 	{
-		$items = $this->get_items();
-
-		// start script
-		$this->script()->begin_logic();
+		// script object
+		$script = new Pie_Easy_Script();
 
 		// loop all items
 		foreach( $this->get_items() as $item_slug => $item ) {
+
 			// reset vars
 			$conf = null;
 			$icon_primary = null;
 			$icon_secondary = null;
+
 			// check for primary
 			if ( isset( $item['icon_primary'] ) ) {
 				$icon_primary = $item['icon_primary'];
 			}
+
 			// check for secondary
 			if ( isset( $item['icon_secondary'] ) ) {
 				$icon_secondary = $item['icon_secondary'];
 			}
+
 			// get any?
 			if ( $icon_primary || $icon_secondary) {
 				// new icon object
@@ -106,18 +132,18 @@ class Pie_Easy_Exts_Widgets_Menu
 				// format conf
 				$conf = sprintf( '{%s}', $icon->config() );
 			}
-			// render the button script ?>
+
+			// start capturing
+			$script->begin_logic();
+			
+			// the button statement (one liner) ?>
 			jQuery('a#<?php print $this->get_menu_item_id( $item_slug ) ?>').button(<?php print $conf ?>); <?php
+
+			// end capturing
+			$script->end_logic();
 		}
 
-		// capture the logic object
-		$logic = $this->script()->end_logic();
-
-		// wrap logic in a function
-		$logic->function = $this->get_menu_buttons_func();
-
-		// run parent when done, stupid important
-		return parent::export_script();
+		return $script;
 	}
 }
 
