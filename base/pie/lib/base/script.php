@@ -22,6 +22,20 @@ Pie_Easy_Loader::load( 'base/asset' );
 class Pie_Easy_Script extends Pie_Easy_Asset
 {
 	/**
+	 * Keep track of objects for debugging
+	 *
+	 * @var integer
+	 */
+	private static $next_token = 1;
+
+	/**
+	 * The token of this object
+	 *
+	 * @var integer
+	 */
+	private $token;
+	
+	/**
 	 * The blocks of logic
 	 *
 	 * @var Pie_Easy_Stack
@@ -34,6 +48,9 @@ class Pie_Easy_Script extends Pie_Easy_Asset
 	public function __construct()
 	{
 		parent::__construct();
+
+		// set token and bump it
+		$this->token = self::$next_token++;
 
 		// init logic stack
 		$this->logic = new Pie_Easy_Stack();
@@ -79,13 +96,18 @@ class Pie_Easy_Script extends Pie_Easy_Asset
 
 		// render rules
 		if ( $this->logic->count() ) {
-			// get markup for each rule
+			
+			// begin script generation
+			$code = sprintf( '/*+++ begin script: %s */', $this->token ) . PHP_EOL;
+			
+			// loop all logic objects
 			foreach ( $this->logic->to_array() as $logic ) {
-				// append output of rule export
-				$code .= '/*+++ generating script */' . PHP_EOL;
+				// append output of logic export
 				$code .= $logic->export();
-				$code .= '/*--- script generation complete! */' . PHP_EOL . PHP_EOL;
 			}
+			
+			// end script generation
+			$code .= sprintf( '/*+++ end script: %s */', $this->token ) . PHP_EOL . PHP_EOL;
 		}
 
 		// all done
@@ -104,6 +126,20 @@ class Pie_Easy_Script extends Pie_Easy_Asset
  */
 class Pie_Easy_Script_Logic
 {
+	/**
+	 * Keep track of objects for debugging
+	 *
+	 * @var integer
+	 */
+	private static $next_token = 1;
+
+	/**
+	 * The token of this object
+	 *
+	 * @var integer
+	 */
+	private $token;
+	
 	/**
 	 * Set to true to wrap this logic block with the dollar sign alias
 	 *
@@ -142,9 +178,15 @@ class Pie_Easy_Script_Logic
 
 	/**
 	 * Constructor
+	 *
+	 * @param string $logic Intial logic
 	 */
 	public function __construct( $logic = null )
 	{
+		// set token and bump it
+		$this->token = self::$next_token++;
+
+		// assign any initial logic
 		$this->logic = $logic;
 
 		// init variables
@@ -222,9 +264,6 @@ class Pie_Easy_Script_Logic
 	 */
 	public function export( $variables = null )
 	{
-		// the markup that will be returned
-		$code = null;
-
 		// variables passed in?
 		if ( is_array( $variables ) ) {
 			// merge over existing vars?
@@ -235,8 +274,8 @@ class Pie_Easy_Script_Logic
 			$variables = $this->variables->to_array();
 		}
 
-		// the code to be returned
-		$code = '';
+		// begin logic generation
+		$code = sprintf( '/*+++ begin logic: %s */', $this->token ) . PHP_EOL;
 
 		// wrap with alias?
 		if ( $this->alias ) {
@@ -296,6 +335,9 @@ class Pie_Easy_Script_Logic
 		if ( $this->alias ) {
 			$code .= '})(jQuery);' . PHP_EOL;
 		}
+		
+		// end logic generation
+		$code .= sprintf( '/*+++ end logic: %s */', $this->token ) . PHP_EOL;
 
 		// all done
 		return $code;
