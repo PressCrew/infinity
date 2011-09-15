@@ -469,7 +469,7 @@ class Pie_Easy_Posts_List extends WP_Posts_List_Table
 	 */
 	private function post_edit_url()
 	{
-		return '?post_id=' . $this->post->ID;
+		return get_edit_post_link( $this->post->ID );
 	}
 }
 
