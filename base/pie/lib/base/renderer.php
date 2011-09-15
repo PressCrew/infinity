@@ -26,7 +26,7 @@ abstract class Pie_Easy_Renderer extends Pie_Easy_Componentable
 	 *
 	 * @var Pie_Easy_Component
 	 */
-	private $current;
+	private $component;
 
 	/**
 	 * All components that have been rendered
@@ -40,9 +40,9 @@ abstract class Pie_Easy_Renderer extends Pie_Easy_Componentable
 	 *
 	 * @return Pie_Easy_Component
 	 */
-	final protected function get_current()
+	final protected function component()
 	{
-		return $this->current;
+		return $this->component;
 	}
 
 	/**
@@ -62,7 +62,7 @@ abstract class Pie_Easy_Renderer extends Pie_Easy_Componentable
 	 */
 	final public function has_documentation()
 	{
-		return ( $this->current->documentation );
+		return ( $this->component->documentation );
 	}
 
 	/**
@@ -78,7 +78,7 @@ abstract class Pie_Easy_Renderer extends Pie_Easy_Componentable
 		if ( $component->supported() ) {
 
 			// set as currently rendering component
-			$this->current = $component;
+			$this->component = $component;
 
 			// handle output buffering if applicable
 			if ( $output === false ) {
@@ -108,7 +108,7 @@ abstract class Pie_Easy_Renderer extends Pie_Easy_Componentable
 		if ( $component->supported() ) {
 
 			// set as currently rendering component
-			$this->current = $component;
+			$this->component = $component;
 
 			// mark as rendered
 			$this->rendered[] = $component;
@@ -123,7 +123,7 @@ abstract class Pie_Easy_Renderer extends Pie_Easy_Componentable
 	 */
 	public function render_name()
 	{
-		print esc_attr( $this->current->name );
+		print esc_attr( $this->component->name );
 	}
 
 	/**
@@ -131,7 +131,7 @@ abstract class Pie_Easy_Renderer extends Pie_Easy_Componentable
 	 */
 	public function render_title()
 	{
-		print esc_html( $this->current->title );
+		print esc_html( $this->component->title );
 	}
 
 	/**
@@ -139,7 +139,7 @@ abstract class Pie_Easy_Renderer extends Pie_Easy_Componentable
 	 */
 	public function render_description()
 	{
-		print esc_html( $this->current->description );
+		print esc_html( $this->component->description );
 	}
 
 	/**
@@ -149,7 +149,7 @@ abstract class Pie_Easy_Renderer extends Pie_Easy_Componentable
 	{
 		$args = func_get_args();
 
-		return call_user_func_array( array($this->current, 'render_classes'), $args );
+		return call_user_func_array( array($this->component, 'render_classes'), $args );
 	}
 
 	/**
@@ -160,20 +160,20 @@ abstract class Pie_Easy_Renderer extends Pie_Easy_Componentable
 	final public function render_documentation( $doc_dirs )
 	{
 		// is documentation set?
-		if ( $this->current->documentation ) {
+		if ( $this->component->documentation ) {
 			// boolean value?
-			if ( is_numeric( $this->current->documentation ) ) {
+			if ( is_numeric( $this->component->documentation ) ) {
 				// use auto naming?
-				if ( (boolean) $this->current->documentation == true ) {
+				if ( (boolean) $this->component->documentation == true ) {
 					// yes, page is component name
-					$page = $this->policy()->get_handle() . '/' . $this->current->name;
+					$page = $this->policy()->get_handle() . '/' . $this->component->name;
 				} else {
 					// no, documentation disabled
 					return;
 				}
 			} else {
 				// page name was set manually
-				$page = $this->current->documentation;
+				$page = $this->component->documentation;
 			}
 
 			// new easy doc object
@@ -212,7 +212,7 @@ abstract class Pie_Easy_Renderer extends Pie_Easy_Componentable
 	 */
 	protected function render_output()
 	{
-		$this->get_current()->load_template();
+		$this->load_template();
 	}
 	
 	/**
@@ -221,6 +221,23 @@ abstract class Pie_Easy_Renderer extends Pie_Easy_Componentable
 	 * @todo this should be defined by an interface
 	 */
 	public function render_sample_code() {}
+
+	/**
+	 * Load the component template
+	 */
+	final public function load_template()
+	{
+		// get template vars
+		$__tpl_vars__ = $this->component()->get_template_vars();
+
+		// extract?
+		if ( is_array( $__tpl_vars__ ) && !empty( $__tpl_vars__ ) ) {
+			extract( $__tpl_vars__ );
+		}
+
+		// load template
+		include( $this->component()->get_template_path() );
+	}
 
 }
 

@@ -526,7 +526,7 @@ abstract class Pie_Easy_Component
 	 *
 	 * @return string
 	 */
-	final protected function get_template_path()
+	final public function get_template_path()
 	{
 		// template path to return
 		$template = null;
@@ -541,23 +541,6 @@ abstract class Pie_Easy_Component
 		} else {
 			return $this->locate_ext_file( 'template.php' );
 		}
-	}
-
-	/**
-	 * Load the template (if it exists)
-	 */
-	final public function load_template()
-	{
-		// get template vars
-		$__tpl_vars__ = $this->get_template_vars();
-
-		// extract?
-		if ( is_array( $__tpl_vars__ ) && !empty( $__tpl_vars__ ) ) {
-			extract( $__tpl_vars__ );
-		}
-
-		// load template
-		include( $this->get_template_path() );
 	}
 	
 	/**

@@ -24,7 +24,7 @@ abstract class Pie_Easy_Sections_Renderer extends Pie_Easy_Renderer
 	 */
 	public function render_class_title( $class = null )
 	{
-		$classes = $this->merge_classes( $class, $this->get_current()->class_title );
+		$classes = $this->merge_classes( $class, $this->component()->class_title );
 
 		if ( $classes ) {
 			print esc_attr( $classes );
@@ -36,7 +36,7 @@ abstract class Pie_Easy_Sections_Renderer extends Pie_Easy_Renderer
 	 */
 	public function render_class_content( $class = null )
 	{
-		$classes = $this->merge_classes( $class, $this->get_current()->class_content );
+		$classes = $this->merge_classes( $class, $this->component()->class_content );
 
 		if ( $classes ) {
 			print esc_attr( $classes );

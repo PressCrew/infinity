@@ -11,6 +11,8 @@
  * @since 1.0
  */
 
+Pie_Easy_Loader::load_ext( 'options/checkbox' );
+
 /**
  * Tags option
  *
@@ -18,12 +20,11 @@
  * @subpackage options
  */
 class Pie_Easy_Exts_Options_Tags
-	extends Pie_Easy_Options_Option
+	extends Pie_Easy_Exts_Options_Checkbox
+		implements Pie_Easy_Options_Option_Auto_Field
 {
-	/**
-	 * Render tags checkboxes
-	 */
-	public function render_field()
+	
+	public function load_field_options()
 	{
 		$args = array(
 			'hide_empty' => false
@@ -40,8 +41,7 @@ class Pie_Easy_Exts_Options_Tags
 			$options[$tag->term_id] = $tag->name;
 		}
 
-		// call the input group renderer
-		$this->policy()->renderer()->render_input_group( 'checkbox', $options );
+		return $options;
 	}
 }
 

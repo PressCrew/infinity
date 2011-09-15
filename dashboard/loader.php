@@ -35,6 +35,21 @@ require_once( INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'cpanel.php' );
 //
 
 /**
+ * Locate a dashboard template relative to the template dir root
+ *
+ * @param string $rel_path Relative path to template from dashboard template root
+ * @return string
+ */
+function infinity_dashboard_locate_template( $rel_path )
+{
+	// format template path
+	$template = INFINITY_ADMIN_TPLS_REL . DIRECTORY_SEPARATOR . $rel_path;
+
+	// locate the template
+	return infinity_locate_template( $template );
+}
+
+/**
  * Load a dashboard template relative to the template dir root
  *
  * @param string $rel_path Relative path to template from dashboard template root
@@ -46,11 +61,8 @@ function infinity_dashboard_load_template( $rel_path, $args = null, $defaults = 
 	// populate local scope
 	extract( wp_parse_args( $args, (array) $defaults ) );
 
-	// format template path
-	$template = INFINITY_ADMIN_TPLS_REL . DIRECTORY_SEPARATOR . $rel_path;
-
 	// locate and include the template
-	include( infinity_locate_template( $template ) );
+	include( infinity_dashboard_locate_template( $rel_path ) );
 }
 
 /**

@@ -11,6 +11,8 @@
  * @since 1.0
  */
 
+Pie_Easy_Loader::load_ext( 'options/select' );
+
 /**
  * Post option
  *
@@ -18,14 +20,11 @@
  * @subpackage options
  */
 class Pie_Easy_Exts_Options_Post
-	extends Pie_Easy_Options_Option
+	extends Pie_Easy_Exts_Options_Select
+		implements Pie_Easy_Options_Option_Auto_Field
 {
-	/**
-	 * Render a post select box
-	 *
-	 * @see render_select
-	 */
-	public function render_field()
+
+	public function load_field_options()
 	{
 		// get all posts
 		$posts = get_posts();
@@ -38,8 +37,7 @@ class Pie_Easy_Exts_Options_Post
 			$options[$post->ID] = apply_filters( 'the_title', $post->post_title, $post->ID );
 		}
 
-		// call the select renderer
-		$this->policy()->renderer()->render_select( $options );
+		return $options;
 	}
 }
 

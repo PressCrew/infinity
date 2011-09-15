@@ -22,6 +22,8 @@ Pie_Easy_Loader::load( 'base', 'collections', 'utils/docs', 'schemes' );
 interface Pie_Easy_Options_Option_Auto_Field
 {
 	/**
+	 * Generate custom field options
+	 *
 	 * @return array of field options in [value] => [description] format
 	 */
 	public function load_field_options();
@@ -207,11 +209,6 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 		// return result
 		return ( $output ) ? true : $html;
 	}
-
-	/**
-	 * This method must be implemented to print the option's field HTML
-	 */
-	abstract public function render_field();
 
 	/**
 	 * Toggle post override ON

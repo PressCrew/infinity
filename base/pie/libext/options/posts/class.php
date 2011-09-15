@@ -11,6 +11,8 @@
  * @since 1.0
  */
 
+Pie_Easy_Loader::load_ext( 'options/checkbox' );
+
 /**
  * Posts option
  *
@@ -18,14 +20,11 @@
  * @subpackage options
  */
 class Pie_Easy_Exts_Options_Posts
-	extends Pie_Easy_Options_Option
+	extends Pie_Easy_Exts_Options_Checkbox
+		implements Pie_Easy_Options_Option_Auto_Field
 {
-	/**
-	 * Render posts checkboxes
-	 *
-	 * @see Pie_Easy_Options_Renderer::render_input_group
-	 */
-	public function render_field()
+	
+	public function load_field_options()
 	{
 		// get all posts
 		$posts = get_posts();
@@ -38,8 +37,7 @@ class Pie_Easy_Exts_Options_Posts
 			$options[$post->ID] = apply_filters( 'the_title', $post->post_title, $post->ID );
 		}
 
-		// call the input group renderer
-		$this->policy()->renderer()->render_input_group( 'checkbox', $options );
+		return $options;
 	}
 }
 

@@ -149,7 +149,7 @@ class Infinity_Options_Renderer extends Pie_Easy_Options_Renderer
 	protected function render_output()
 	{
 		// load option block template
-		$this->load_template( 'block' );
+		$this->load_dash_template( 'block' );
 	}
 
 	/**
@@ -172,7 +172,7 @@ class Infinity_Options_Renderer extends Pie_Easy_Options_Renderer
 	final public function render_meta()
 	{
 		// load meta information template
-		$this->load_template( 'meta' );
+		$this->load_dash_template( 'meta' );
 	}
 
 	/**
@@ -181,22 +181,23 @@ class Infinity_Options_Renderer extends Pie_Easy_Options_Renderer
 	final public function render_sample_code()
 	{
 		// load sample code template
-		$this->load_template( 'sample_code' );
+		$this->load_dash_template( 'sample_code' );
 	}
 
 	/**
 	 * @ignore
 	 * @param string $name
 	 */
-	private function load_template( $name )
+	protected function load_dash_template( $name )
 	{
-		infinity_dashboard_load_template(
-			Pie_Easy_Files::path_build( 'options', $name . '.php', true ),
-			array(
-				'option' => $this->get_current(),
-				'renderer' => $this
-			)
-		);
+		// find template
+		$template =
+			infinity_dashboard_locate_template(
+				Pie_Easy_Files::path_build( 'options', $name . '.php', true )
+			);
+
+		// include it
+		include( $template );
 	}
 }
 
@@ -359,7 +360,7 @@ function infinity_option_render_label()
 function infinity_option_render_field()
 {
 	global $infinity_246f86b591;
-	return $infinity_246f86b591->render_field();
+	return $infinity_246f86b591->load_template();
 }
 
 /**

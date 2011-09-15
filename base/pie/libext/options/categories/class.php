@@ -52,18 +52,8 @@ class Pie_Easy_Exts_Options_Categories
 			'walker'				=> new Pie_Easy_Options_Walker_Category(),
 			'pie_easy_option'		=> $this );
 
-		// render div wrapper if applicable
-		if ( $this->field_id ) { ?>
-			<div id="<?php print $this->field_id ?>"><?php
-		}
-
 		// call the WordPress function
 		wp_list_categories( $args );
-
-		// close div wrapper if applicable
-		if ( $this->field_id ) { ?>
-			</div><?php
-		}
 	}
 }
 

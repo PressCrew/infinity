@@ -124,34 +124,20 @@ class Pie_Easy_Exts_Options_Upload
 		}
 	}
 
-	public function render_field()
+	public function get_template_vars()
 	{
-		$edit_url = sprintf( 'media.php?attachment_id=%d&action=edit', $this->get() );
-		list( $attach_url, $attach_width, $attach_height ) = $this->get_image_src('full');
+		list( $url, $width, $height ) = $this->get_image_src('full');
 
-		// render the markup ?>
-		<div class="pie-easy-options-fu">
-			<fieldset class="pie-easy-options-fu-img ui-corner-all">
-				<legend class="ui-corner-all"><?php _e('Current Image', pie_easy_text_domain) ?></legend>
-				<p><img src="<?php print esc_attr( $attach_url ) ?>" alt="" /></p>
-				<div class="pie-easy-options-fu-ibar">
-					<a><?php _e('Zoom', pie_easy_text_domain) ?></a>
-					<a><?php _e('Edit', pie_easy_text_domain) ?></a>
-					<a><?php _e('Trash', pie_easy_text_domain) ?></a>
-				</div>
-				<div class="pie-easy-options-fu-zoom" title="<?php _e('Full Size Image', pie_easy_text_domain) ?>">
-					<img src="<?php print esc_attr( $attach_url ) ?>"  height="<?php print $attach_height ?>" width="<?php print $attach_width ?>" alt="">
-				</div>
-			</fieldset>
-			<fieldset class="pie-easy-options-fu-stat ui-corner-all">
-				<legend class="ui-corner-all"><?php _e('Upload Status', pie_easy_text_domain) ?></legend>
-				<textarea></textarea><div><p></p></div>
-			</fieldset>
-			<div class="pie-easy-options-fu-btn">
-				<input type="button" /><?php
-				$this->policy()->renderer()->render_input( 'hidden' ); ?>
-			</div>
-		</div><?php
+		return array(
+			'attach_url' => $url,
+			'attach_width' => $width,
+			'attach_height' => $height,
+			'edit_url' =>
+				sprintf(
+					'media.php?attachment_id=%d&action=edit',
+					$this->get()
+				)
+		);
 	}
 }
 

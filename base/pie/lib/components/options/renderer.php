@@ -54,105 +54,77 @@ abstract class Pie_Easy_Options_Renderer extends Pie_Easy_Renderer
 	public function render_label()
 	{
 		// begin rendering label tag ?>
-		<label for="<?php $this->render_name() ?>" title="<?php print esc_attr( $this->get_current()->title ) ?>"><?php print esc_attr( $this->get_current()->title ) ?></label><?php
-	}
-
-	/**
-	 * Render the field
-	 */
-	final public function render_field()
-	{
-		// call the option's field rendering method
-		return $this->get_current()->render_field();
+		<label for="<?php $this->render_name() ?>" title="<?php print esc_attr( $this->component()->title ) ?>"><?php print esc_attr( $this->component()->title ) ?></label><?php
 	}
 
 	/**
 	 * Render a simple form input tag
 	 *
 	 * @param string $type A valid form input element "type" attribute value (see HTML spec)
+	 * @param string $value A value attribute to use instead of the option's stored value
+	 * @param string $element_id The input element's id attribute
 	 */
-	public function render_input( $type )
-	{ ?>
-		<input type="<?php print $type ?>" name="<?php $this->render_name() ?>" id="<?php print esc_attr(  $this->get_current()->field_id ) ?>" class="<?php print esc_attr( $this->get_current()->field_class ) ?>" value="<?php print esc_attr( $this->get_current()->get() ) ?>" /> <?php
-	}
-
-	/**
-	 * Render a group of inputs with the same name
-	 *
-	 * @param string $type Valid types are 'checkbox' and 'radio'
-	 * @param array $field_options
-	 * @param mixed $selected_value
-	 */
-	public function render_input_group( $type, $field_options = null, $selected_value = null )
+	public function render_input( $type, $value = null, $element_id = null )
 	{
-		// field options defaults to rendered option config
-		if ( empty( $field_options ) ) {
-			$field_options = $this->get_current()->field_options;
-		}
+		// checked is null by default
+		$checked = null;
 
-		// select value defaults to rendered option setting
-		if ( empty( $selected_value ) ) {
-			$selected_value = $this->get_current()->get();
-		}
+		// the stored option value
+		$real_value = $this->component()->get();
 
-		// force the selected value to an array
-		if ( !is_array( $selected_value ) ) {
-			$selected_value = array( $selected_value );
-		}
-
-		if ( is_array( $field_options ) ) {
-			// render div wrapper if applicable
-			if ( $this->get_current()->field_id ) { ?>
-				<div id="<?php print $this->get_current()->field_id ?>"><?php
-			}
-			// loop through all field options
-			foreach ( $field_options as $value => $display ) {
-				$loop = ($loop) ? $loop + 1 : 1;
-				$checked = ( in_array( $value, $selected_value ) ) ? ' checked=checked' : null; ?>
-				<input type="<?php print $type ?>" name="<?php $this->render_name() ?><?php if ( $type == 'checkbox' ): ?>[]<?php endif; ?>" value="<?php print esc_attr( $value ) ?>"<?php print $checked ?> /><label for="<?php print $element_id ?>"><?php print $display ?></label><?php
-			}
-			// close div wrapper if applicable
-			if ( $this->get_current()->field_id ) { ?>
-				</div><?php
-			}
+		// overriding value?
+		if ( is_null( $value ) ) {
+			// use real value
+			$input_value = $real_value;
 		} else {
-			throw new Exception( sprintf( 'The "%s" option has no array of field options to render', $this->get_current()->name ) );
+			// use passed  value
+			$input_value = $value;
+			// determine checkiness
+			if ( $type == 'radio' ) {
+				$checked = ( $value == $real_value );
+			} elseif ( $type == 'checkbox' ) {
+				$checked = in_array( $input_value, (array) $real_value );
+			}
 		}
+
+		// render the input ?>
+		<input type="<?php print esc_attr( $type ) ?>" name="<?php $this->render_name() ?><?php if ( $type == 'checkbox' ): ?>[]<?php endif; ?>" id="<?php $this->render_field_id( $element_id ) ?>" class="<?php $this->render_field_class() ?>" value="<?php $this->render_field_value( $input_value ) ?>"<?php if ($checked): ?> checked="checked"<?php endif; ?> /> <?php
 	}
 
 	/**
-	 * Render a select tag
-	 *
-	 * @param array $field_options Multi-dimensional array of options to render (value => description)
-	 * @param mixed $selected_value The value to render as selected
+	 * Render the option value
+	 * 
+	 * @param mixed $value Pass this to override the real value of the option
 	 */
-	public function render_select( $field_options = null, $selected_value = null )
+	final public function render_field_value( $value = null )
 	{
-		// field options defaults to rendered option config
-		if ( empty( $field_options ) ) {
-			$field_options = $this->get_current()->field_options;
+		if ( empty( $value ) ) {
+			$value = $this->component()->get();
 		}
-
-		// select value defaults to rendered option setting
-		if ( empty( $selected_value ) ) {
-			$selected_value = $this->get_current()->get();
-		} ?>
-
-		<select name="<?php $this->render_name() ?>" id="<?php print esc_attr( $this->get_current()->field_id ) ?>" class="<?php print esc_attr( $this->get_current()->field_class ) ?>">
-			<option value="">--- Select One ---</option>
-			<?php foreach ( $field_options as $value => $text ):
-				$selected = ( $value == $selected_value ) ? ' selected="selected"' : null; ?>
-				<option value="<?php print esc_attr( $value ) ?>"<?php print $selected ?>><?php print esc_html( $text ) ?></option>
-			<?php endforeach; ?>
-		</select><?php
+		
+		print esc_attr( $value );
 	}
 
 	/**
-	 * Render textarea input tag
+	 * Render the field id
+	 *
+	 * @param string $css_id Pass a CSS id to override the field id set by the configuration
 	 */
-	public function render_textarea()
-	{ ?>
-		<textarea name="<?php $this->render_name() ?>" id="<?php print esc_attr(  $this->get_current()->field_id ) ?>" class="<?php print esc_attr( $this->get_current()->field_class ) ?>" rows="5" cols="50"><?php print esc_attr( $this->get_current()->get() ) ?></textarea> <?php
+	final public function render_field_id( $css_id = null )
+	{
+		if ( empty( $css_id ) ) {
+			$css_id = $this->component()->field_id;
+		}
+
+		print esc_attr( $css_id );
+	}
+
+	/**
+	 * Render the field class
+	 */
+	final public function render_field_class()
+	{
+		print esc_attr( $this->component()->field_class );
 	}
 
 	/**
@@ -162,7 +134,7 @@ abstract class Pie_Easy_Options_Renderer extends Pie_Easy_Renderer
 	 */
 	public function render_date_updated( $format = 'F j, Y, g:i a' )
 	{
-		$time_updated = $this->get_current()->get_meta( Pie_Easy_Options_Option::META_TIME_UPDATED );
+		$time_updated = $this->component()->get_meta( Pie_Easy_Options_Option::META_TIME_UPDATED );
 
 		if ( $time_updated ) {
 			print date( $format, $time_updated );

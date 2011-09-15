@@ -11,6 +11,8 @@
  * @since 1.0
  */
 
+Pie_Easy_Loader::load_ext( 'options/input-group' );
+
 /**
  * Radio option
  *
@@ -18,16 +20,12 @@
  * @subpackage options
  */
 class Pie_Easy_Exts_Options_Radio
-	extends Pie_Easy_Options_Option
+	extends Pie_Easy_Exts_Options_Input_Group
 {
-	/**
-	 * Render one or more radio button tags
-	 *
-	 * @see Pie_Easy_Options_Renderer::render_input_group
-	 */
-	public function render_field()
+	public function init()
 	{
-		$this->policy()->renderer()->render_input_group( 'radio' );
+		parent::init();
+		$this->input_type( 'radio' );
 	}
 }
 

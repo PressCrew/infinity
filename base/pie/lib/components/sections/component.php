@@ -73,19 +73,6 @@ abstract class Pie_Easy_Sections_Section extends Pie_Easy_Component
 			$component->render();
 		}
 	}
-
-	/**
-	 * @ignore
-	 * @return array
-	 */
-	public function get_template_vars()
-	{
-		return array(
-			'section' => $this,
-			'renderer' => $this->policy()->renderer(),
-			'components' => $this->__components__
-		);
-	}
 }
 
 ?>

@@ -34,7 +34,7 @@ class Pie_Easy_Exts_Widgets_Debugger
 		$this->script()->add_dep( 'jquery-jstree' );
 	}
 	
-	protected function render_items()
+	public function render_items()
 	{
 		// render scheme stuff
 		$this->render_scheme(
@@ -230,7 +230,7 @@ class Pie_Easy_Exts_Widgets_Debugger
 		}
 	}
 
-	protected function render_item_id( $string = null )
+	public function render_item_id( $string = null )
 	{
 		if ( !is_null( $string ) ) {
 			$this->__id_stack__->push( $string );
@@ -240,7 +240,7 @@ class Pie_Easy_Exts_Widgets_Debugger
 		}
 	}
 
-	protected function render_debugger_id()
+	public function render_debugger_id()
 	{
 		print 'pie-easy-exts-widgets-debugger---' . esc_attr( $this->name );
 	}

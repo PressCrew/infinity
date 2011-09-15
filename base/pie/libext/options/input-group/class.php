@@ -1,6 +1,6 @@
 <?php
 /**
- * PIE API: option extensions, text class file
+ * PIE API: option extensions, generic input class file
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://marshallsorenson.com/
@@ -14,19 +14,16 @@
 Pie_Easy_Loader::load_ext( 'options/input' );
 
 /**
- * Text option
+ * Input element base class
  *
  * @package PIE-extensions
  * @subpackage options
+ * @property-read string $input_type The type attribute for the input element
  */
-class Pie_Easy_Exts_Options_Text
+abstract class Pie_Easy_Exts_Options_Input_Group
 	extends Pie_Easy_Exts_Options_Input
 {
-	public function init()
-	{
-		parent::init();
-		$this->input_type( 'text' );
-	}
+	// nothing custom yet
 }
 
 ?>
