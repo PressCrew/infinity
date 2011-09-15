@@ -4,7 +4,7 @@
 function widgetPostsListSortable()
 {
 	// init objects
-	var cont = jQuery('div.pie-easy-exts-widget-posts-list'),
+	var cont = jQuery('div.pie-easy-exts-widget-posts-list div.ui-widget-content'),
 		posts = jQuery('ul', cont).first(),
 		message =
 			jQuery('<div></div>')

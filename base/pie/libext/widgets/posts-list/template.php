@@ -14,8 +14,13 @@
  * @since 1.0
  */
 ?>
-<div class="pie-easy-exts-widget-posts-list">
-	<?php $posts_list->display() ?>
+<div class="pie-easy-exts-widget-posts-list ui-widget">
+	<div class="ui-widget-header">
+		<?php $this->render_title() ?>
+	</div>
+	<div class="ui-widget-content">
+		<?php $posts_list->display() ?>
+	</div>
 </div>
 
 <script type="text/javascript">
