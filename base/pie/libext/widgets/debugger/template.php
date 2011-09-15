@@ -12,17 +12,17 @@
  */
 ?>
 
-<div id="<?php $this->render_debugger_id() ?>" class="pie-easy-exts-widget-debugger ui-widget">
+<div id="<?php $this->component()->render_debugger_id() ?>" class="pie-easy-exts-widget-debugger ui-widget">
 	<div class="ui-widget-header">
 		<?php print $this->title ?>
 	</div>
 	<div class="ui-widget-content">
-		<?php $this->render_items() ?>
+		<?php $this->component()->render_items() ?>
 	</div>
 </div>
 
 <script type="text/javascript">
 	jQuery(document).ready( function(){
-		widgetsDebuggerInit('div#<?php $this->render_debugger_id() ?> div.ui-widget-content');
+		widgetsDebuggerInit('div#<?php $this->component()->render_debugger_id() ?> div.ui-widget-content');
 	});
 </script>

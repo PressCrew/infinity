@@ -20,10 +20,7 @@
 class Pie_Easy_Exts_Options_Select
 	extends Pie_Easy_Options_Option
 {
-	public function render_field()
-	{
-		$this->policy()->renderer()->render_select();
-	}
+	// nothing fancy here
 }
 
 ?>

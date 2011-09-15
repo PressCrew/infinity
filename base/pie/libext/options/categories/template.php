@@ -1,6 +1,6 @@
 <?php
 /**
- * PIE API: option extensions, textarea class file
+ * PIE API: option extensions, categories template file
  *
  * @author Marshall Sorenson <marshall.sorenson@gmail.com>
  * @link http://marshallsorenson.com/
@@ -10,17 +10,7 @@
  * @subpackage options
  * @since 1.0
  */
-
-/**
- * Textarea option
- *
- * @package PIE-extensions
- * @subpackage options
- */
-class Pie_Easy_Exts_Options_Textarea
-	extends Pie_Easy_Options_Option
-{
-	// nothing fancy here
-}
-
 ?>
+<div class="pie-easy-options-input-group" id="<?php $this->render_field_id() ?>">
+	<?php $this->component()->render_field() ?>
+</div>

@@ -53,22 +53,22 @@ class Pie_Easy_Exts_Widgets_Menu
 		}
 	}
 
-	protected function get_menu_id()
+	public function get_menu_id()
 	{
 		return 'pie-easy-exts-widget-menu-' . esc_attr( $this->name );
 	}
 
-	protected function get_menu_item_id( $slug )
+	public function get_menu_item_id( $slug )
 	{
 		return 'pie-easy-exts-widget-menu-item-' . esc_attr( $slug );
 	}
 
-	protected function get_menu_buttons_func()
+	public function get_menu_buttons_func()
 	{
 		return 'widgetMenuInitButtons_' . str_replace('-', '_', $this->name );
 	}
 
-	protected function render_items()
+	public function render_items()
 	{
 		foreach( $this->get_items() as $item_slug => $item ) { ?>
 			<li>

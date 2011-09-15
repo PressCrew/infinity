@@ -41,18 +41,8 @@ class Pie_Easy_Exts_Options_Pages
 			'walker'			=> new Pie_Easy_Options_Walker_Page(),
 			'pie_easy_option'	=> $this );
 
-		// render div wrapper if applicable
-		if ( $this->field_id ) { ?>
-			<div id="<?php print $this->field_id ?>"><?php
-		}
-
 		// call the WordPress function
 		wp_list_pages( $args );
-
-		// close div wrapper if applicable
-		if ( $this->field_id ) { ?>
-			</div><?php
-		}
 	}
 }
 
