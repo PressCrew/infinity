@@ -230,18 +230,20 @@ class Pie_Easy_Exts_Widgets_Debugger
 		}
 	}
 
-	public function render_item_id( $string = null )
+	protected function render_item_id( $string = null )
 	{
 		if ( !is_null( $string ) ) {
 			$this->__id_stack__->push( $string );
-			print 'pie-easy-exts-widgets-debugger---item-' . implode('-', $this->__id_stack__->to_array() );
+			print 'pie-easy-exts-widgets-debugger-item---' . implode('-', $this->__id_stack__->to_array() );
 		} else {
 			$this->__id_stack__->pop();
 		}
 	}
 
-	public function render_debugger_id()
+	public function get_template_vars()
 	{
-		print 'pie-easy-exts-widgets-debugger---' . esc_attr( $this->name );
+		return array(
+			'element_id' => 'pie-easy-exts-widgets-debugger---' . esc_attr( $this->name )
+		);
 	}
 }
