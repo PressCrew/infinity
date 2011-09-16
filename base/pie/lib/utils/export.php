@@ -115,7 +115,7 @@ class Pie_Easy_Export
 				// get file instance
 				$file = Pie_Easy_Files::cache( $this->path );
 				// if file already exists, puke if not writeable
-				if ( !$file->is_writable() ) {
+				if ( $file->exists() && !$file->is_writable() ) {
 					throw new Pie_Easy_Export_Exception(
 						'Unable to write to the file: ' . $this->path );
 				}
