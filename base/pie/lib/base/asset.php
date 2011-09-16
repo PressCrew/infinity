@@ -34,6 +34,13 @@ abstract class Pie_Easy_Asset
 	 * @var Pie_Easy_Stack
 	 */
 	private $files;
+	
+	/**
+	 * Files that have already been imported
+	 *
+	 * @var Pie_Easy_Stack
+	 */
+	private static $files_imported;
 
 	/**
 	 * Constructor
@@ -43,6 +50,10 @@ abstract class Pie_Easy_Asset
 		// init stacks
 		$this->deps = new Pie_Easy_Stack();
 		$this->files = new Pie_Easy_Stack();
+
+		if ( !self::$files_imported instanceof Pie_Easy_Stack ) {
+			self::$files_imported = new Pie_Easy_Stack();
+		}
 	}
 
 	/**
@@ -140,6 +151,15 @@ abstract class Pie_Easy_Asset
 					$filename = Pie_Easy_Scheme::instance()->locate_file( $file );
 				}
 
+				// only import each file once!
+				if ( self::$files_imported->contains( $filename ) ) {
+					// already imported that one
+					continue;
+				} else {
+					// push it on to imported stack
+					self::$files_imported->push( $filename );
+				}
+				
 				// inject helpful comment ;)
 				$code .= '/*+++ import source: /../' . Pie_Easy_Files::theme_file_to_rel( $filename ) . ' */' . PHP_EOL;
 
