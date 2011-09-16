@@ -225,11 +225,17 @@ final class Pie_Easy_Enqueue
 			// register default ui stylesheet
 			$this->register_style(
 				self::UI_STYLE_HANDLE,
-				'ui.css'
+				'ui/jquery-ui-1.8.16.custom.css'
 			);
 		}
 
 		// register default styles
+
+		$this->register_style(
+			'pie-easy-ui',
+			'ui.css',
+			array( '@:ui' )
+		);
 
 		$this->register_style(
 			'pie-easy-colorpicker',
