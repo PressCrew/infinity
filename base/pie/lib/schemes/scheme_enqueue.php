@@ -579,11 +579,19 @@ class Pie_Easy_Scheme_Enqueue
 	 */
 	private function register_script( $handle, $config_map )
 	{
+		$deps = array();
+
+		foreach ( $config_map->item_at(self::TRIGGER_DEPS)->to_array() as $dep ) {
+			if ( $this->scripts->contains( $dep ) || wp_script_is( $dep, 'registered' ) ) {
+				array_push( $deps, $dep );
+			}
+		}
+
 		// do it
 		wp_register_script(
 			$handle,
 			$config_map->item_at(self::TRIGGER_PATH),
-			$config_map->item_at(self::TRIGGER_DEPS)->to_array()
+			$deps
 		);
 	}
 
