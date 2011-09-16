@@ -14,15 +14,13 @@
 
 <?php $this->render_input( 'text' ) ?>
 
-<div id="pie-easy-options-cp-wrapper-<?php $this->render_name() ?>" class="pie-easy-options-cp-box">
+<div id="<?php print $element_id ?>" class="pie-easy-exts-options-colorpicker">
 	<div style="background-color: <?php $this->render_field_value() ?>;"></div>
 </div>
 
 <script type="text/javascript">
-	jQuery(document).ready(function() {
-		pieEasyColorPicker.init(
-			'input[name=<?php $this->render_name() ?>]',
-			'div#pie-easy-options-cp-wrapper-<?php $this->render_name() ?>'
-		);
-	});
+	pieEasyColorPicker.init(
+		'input[name=<?php $this->render_name() ?>]',
+		'div#<?php print $element_id ?>'
+	);
 </script>
