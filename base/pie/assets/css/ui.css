@@ -49,29 +49,9 @@ div.pie-easy-flash span.ui-button-text {
 	font-size: 10px;
 }
 
-/* Color Picker */
-.colorpicker {
-	z-index: 1000;
-}
-
+/* Options message container */
 div.pie-easy-options-mesg {
 	display: none;
-}
-div.pie-easy-options-cp-box {
-	display: inline-block;
-	position: relative;
-	width: 36px;
-	height: 36px;
-	vertical-align: top;
-	background: url(../images/colorpicker_launch.png);
-}
-div.pie-easy-options-cp-box div {
-	position: absolute;
-	top: 3px;
-	left: 3px;
-	width: 30px;
-	height: 30px;
-	background: url(../images/colorpicker_launch.png) center;
 }
 
 /* Uploader */

@@ -33,6 +33,13 @@ class Pie_Easy_Exts_Options_Colorpicker
 		parent::init_scripts();
 		wp_enqueue_script( 'pie-easy-colorpicker' );
 	}
+
+	public function get_template_vars()
+	{
+		return array(
+			'element_id' => 'pie-easy-exts-options-colorpicker---' . esc_attr( $this->name )
+		);
+	}
 }
 
 ?>
