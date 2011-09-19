@@ -67,19 +67,26 @@ abstract class Pie_Easy_Factory extends Pie_Easy_Componentable
 	 *
 	 * @param string $theme
 	 * @param string $name
-	 * @param string $type
+	 * @param Pie_Easy_Map $conf
 	 * @return Pie_Easy_Component
 	 */
-	public function create( $theme, $name, $type )
+	public function create( $theme, $name, $conf )
 	{
-		// load it from alternate location
-		$class_name = $this->load_ext( $type );
+		// check if already registered
+		if ( $this->policy()->registry()->has( $name ) ) {
+			// use that one
+			$component = $this->policy()->registry()->get( $name );
+		} else {
+			// make sure the extension is loaded
+			$class_name = $this->load_ext( $conf->type );
+			// create new component
+			$component = new $class_name( $theme, $name, $conf->type );
+			// set the policy
+			$component->policy( $this->policy() );
+		}
 
-		// create new component
-		$component = new $class_name( $theme, $name, $type );
-
-		// set the policy
-		$component->policy( $this->policy() );
+		// configure it
+		$component->configure( $conf, $theme );
 
 		// all done
 		return $component;

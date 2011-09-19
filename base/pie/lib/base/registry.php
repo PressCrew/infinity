@@ -126,15 +126,10 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 	final protected function register( Pie_Easy_Component $component )
 	{
 		// has the component already been registered?
-		if ( $this->has( $component->name ) ) {
-			// can't register same component name twice
-			throw new Exception( sprintf(
-				'The "%s" component has already been registered for the "%s" theme',
-				$component->name, $component->theme ) );
+		if ( !$this->has( $component->name ) ) {
+			// register it
+			$this->components->add( $component->name, $component );
 		}
-		
-		// register it
-		$this->components->add( $component->name, $component );
 
 		return true;
 	}
@@ -282,32 +277,34 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 	{
 		// an array means successful parse
 		if ( is_array( $ini_array ) ) {
+			
 			// loop through each directive
 			foreach ( $ini_array as $name => $config ) {
+				
 				// convert config array to map
 				$conf_map = new Pie_Easy_Map( $config );
+
+				// set default type if necessary
+				if ( empty( $conf_map->type ) ) {
+					$conf_map->type = self::DEFAULT_COMPONENT_TYPE;
+				}
+
 				// sub option?
 				if ( $this->load_sub_option( $name, $conf_map ) ) {
 					// yes, skip standard loading
 					continue;
 				}
-				// get or create component
-				if ( $this->has( $name ) ) {
-					// get it from registry
-					$component = $this->get( $name );
-				} else {
-					// use factory to create one
-					$component =
-						$this->policy()->factory()->create(
-							$this->loading_theme,
-							$name,
-							$conf_map->type ? $conf_map->type : self::DEFAULT_COMPONENT_TYPE
-						);
-					// register component
-					$this->register( $component );
-				}
-				// configure component
-				$component->configure( $conf_map, $this->loading_theme );
+
+				// use factory to create/get component
+				$component =
+					$this->policy()->factory()->create(
+						$this->loading_theme,
+						$name,
+						$conf_map
+					);
+
+				// register component
+				$this->register( $component );
 			}
 			// all done
 			return true;
@@ -330,33 +327,32 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 
 		// if has exactly two parts it is a sub option
 		if ( count($parts) == 2 ) {
+
 			// make sure options component has been enabled
 			if ( $this->policy()->options() instanceof Pie_Easy_Policy ) {
+
 				// feature name is the first string
 				$feature_name = $parts[0];
-				// option name is both strings glued with a hyphen
-				$option_name = implode( '-', $parts );
-				// get or create component
-				if ( $this->policy()->options()->registry()->has( $option_name ) ) {
-					// get it from registry
-					$component = $this->policy()->options()->registry()->get( $option_name );
-				} else {
-					// create option using the option component factory
-					$component =
-						$this->policy()->options()->factory()->create(
-							$this->loading_theme,
-							$option_name,
-							$conf_map->type ? $conf_map->type : self::DEFAULT_COMPONENT_TYPE
-						);
-					// register option
-					$this->policy()->options()->registry()->register( $component );
-				}
+
 				// automagically set required feature if applicable
 				if ( $this instanceof Pie_Easy_Features_Registry ) {
 					$conf_map->required_feature = $feature_name;
 				}
-				// configure component
-				$component->configure( $conf_map, $this->loading_theme );
+				
+				// option name is both strings glued with a hyphen
+				$option_name = implode( '-', $parts );
+
+				// create/get option using the option component factory
+				$component =
+					$this->policy()->options()->factory()->create(
+						$this->loading_theme,
+						$option_name,
+						$conf_map
+					);
+
+				// register option
+				$this->policy()->options()->registry()->register( $component );
+
 				// all done
 				return true;
 			} else {
