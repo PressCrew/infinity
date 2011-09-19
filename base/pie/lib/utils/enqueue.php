@@ -270,7 +270,9 @@ final class Pie_Easy_Enqueue
 		$this->register_script(
 			'jquery-swfupload', 'jquery.swfupload.js', array('jquery', 'swfupload-all') );
 		$this->register_script(
-			'pie-easy-global', 'global.js', array('pie-easy-colorpicker', 'jquery-ui-button') );
+			'pie-easy-global', 'global.js', array('pie-easy-colorpicker') );
+		$this->register_script(
+			'pie-easy-cpanel', 'cpanel.js', array('pie-easy-global', 'jquery-cookie', 'jquery-ui-button', 'jquery-ui-accordion', 'jquery-ui-menu', 'jquery-ui-position', 'jquery-ui-tabs', 'jquery-ui-sortable', 'jquery-ui-resizable' ) );
 		$this->register_script(
 			'pie-easy-uploader', 'uploader.js', array('pie-easy-global', 'jquery-swfupload', 'jquery-ui-button') );
 

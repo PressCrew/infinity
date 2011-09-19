@@ -1,196 +1,59 @@
 /* ========================= */
-/* !    jQuery UI Tweaks     */
+/* ! Control Panel Styling   */
 /* ========================= */
 
-/* accordion */
+/* accordion tweaks */
 div#infinity-cpanel .ui-accordion .ui-accordion-header,
 div#infinity-cpanel .ui-accordion .ui-accordion-content {
 	-moz-border-radius: 0;
 	-webkit-border-radius: 0;
 	border-radius: 0;
 }
-div#infinity-cpanel .ui-accordion .ui-accordion-header a {
-	font-weight: bold;
-}
 
-/* buttons */
-div#infinity-cpanel .ui-button .ui-button-text {
-	font-weight: bold;
-}
-
-/* dialog */
-div#infinity-cpanel .ui-dialog {
-	padding: 0;
-	background: none;
-	-webkit-box-shadow: 0 2px 12px rgba(0,0,0,0.6);
-	-moz-box-shadow: 0 2px 12px rgba(0,0,0,0.6);
-}
-div#infinity-cpanel .ui-dialog .ui-dialog-titlebar-close {
-	right: .8em;
-	top: 55%;
-	width: 16px;
-	padding: 0;
-	height: 16px;
-}
-
-/* tabs */
-div#infinity-cpanel .ui-tabs .ui-tabs-nav {
-	padding: 0;
-	background: transparent;
-	border-width: 0 0 1px 0;
-}
-div#infinity-cpanel .ui-tabs .ui-tabs-nav li a {
-	font-size: 1.1em;
-	font-weight: bold;
-}
-
-/* ========================= */
-/* ! Control Panel Styling   */
-/* ========================= */
-
+/* main container */
 div#infinity-cpanel {
-	position: relative;
-	overflow: hidden;
-	min-width: 1000px;
-	min-height: 600px;
-	margin: 25px 0 20px 0;
-    padding: 20px 0 10px 0;
-	border: 1px solid #dddddd;
-	border-radius: 6px;
-	-moz-border-radius: 6px;
-	-webkit-border-radius: 6px;
     background: url(../images/ui_pattern_bg.png) repeat;
 	box-shadow: 1px 1px #eee, 3px 3px 2px #a5a5a5;
 	-moz-box-shadow: 1px 1px #eee, 3px 3px 2px #a5a5a5;
 	-webkit-box-shadow: 1px 1px #eee, 3px 3px 2px #a5a5a5;
 }
 
-div#infinity-cpanel-header {
-	position: relative;
-	padding-bottom: 6px;
+div#infinity-cpanel-header-logo {
+	height: 60px;
+	width: 350px;
+	background: url('../images/cpanel_header_logo.png') no-repeat;
 }
-	div#infinity-cpanel-header-logo {
-		height: 60px;
-		width: 350px;
-		background: url('../images/cpanel_header_logo.png') no-repeat;
-	}
-	div#infinity-cpanel-header-version {
-		float: right;
-		clear: right;
-		position: relative;
-		top: 42px;
-		right: 20px;
-		font-size: 10px;
-		opacity: .65;
-		filter: Alpha(Opacity=55);
-		letter-spacing: .05em;
-	}
+div#infinity-cpanel-header-version {
+	float: right;
+	clear: right;
+	position: relative;
+	top: 42px;
+	right: 20px;
+	font-size: 10px;
+	opacity: .65;
+	filter: Alpha(Opacity=55);
+	letter-spacing: .05em;
+}
 
 div#infinity-cpanel-toolbar {
-	height: 50px;
-	padding: 0 12px 0 12px;
 	background: url('../images/cpanel_header_toolbar.png') repeat;
 }
-	div#infinity-cpanel-toolbar .ui-button {
-		top: 10px;
-		margin-right: 8px;
-	}
-	div#infinity-cpanel-toolbar .ui-button-icon-primary {
-		left: 0.2em;
-	}
-	div#infinity-cpanel-toolbar .ui-button-text {
-		line-height: 100%;
-		font-size: 10px;
-		font-weight: bold;
-	}
-	a#infinity-cpanel-toolbar-menu.ui-button {
-		margin: 0;
-		padding: 0;
-		margin-right: 0.8em;
-	}
-		a#infinity-cpanel-toolbar-menu .ui-button-text {
-			font-size: 14px;
-		}
-	a#infinity-cpanel-toolbar-refresh.ui-button,
-	input#infinity-cpanel-toolbar-scroll + label.ui-button {
-		float: right;
-		top: 12px;
-		right: 8px;
-		padding: 0;
-	}
-		a#infinity-cpanel-toolbar-refresh.ui-button .ui-button-text,
-		input#infinity-cpanel-toolbar-scroll + label.ui-button .ui-button-text {
-			font-size: 12px;
-			padding-left: 20px;
-		}
-	div#infinity-cpanel-toolbar .ui-menu {
-		position: absolute;
-		z-index: 3;
-		padding: 4px 6px 6px 8px;
-		background: url(../images/ui_pattern_bg.png) repeat;
-		border: 1px dotted #b6b6b6;
-	}
-		div#infinity-cpanel-toolbar .ui-menu .ui-button {
-			top: 0;
-			margin: 2px;
-			min-width: 120px;
-		}
-		div#infinity-cpanel-toolbar .ui-menu .ui-button-text {
-			text-align: left;
-		}
+
 div#infinity-cpanel-toolbar ul.ui-menu {
 	box-shadow: 1px 1px 6px #888888;
 	-moz-box-shadow: 1px 1px 6px #888888;
 	-webkit-box-shadow: 1px 1px 6px #888888;
 }
 
-div#infinity-cpanel-tabs {
-	position: relative;
-	z-index: 2;
-	padding: 8px 10px;
-	border: 0;
-	background: transparent;
+div#infinity-cpanel-tabs div.ui-tabs-panel {
+	box-shadow: inset 1px 0px #eeeeee, inset 2px 0px 2px #aaaaaa, inset 1px 0px 2px #cccccc;
+	-moz-box-shadow: inset 1px 0px #eeeeee, inset 2px 0px 2px #aaaaaa, inset 1px 0px 2px #cccccc;
+	-webkit-box-shadow: inset 1px 0px #eeeeee, inset 2px 0px 2px #aaaaaa, inset 1px 0px 2px #cccccc;
 }
-	div#infinity-cpanel-tabs ul.ui-tabs-nav  {
-		font-size: 12px;
-		margin-left: 2px;
-	}
-	div#infinity-cpanel-tabs ul.ui-tabs-nav li a {
-		padding: 0.4em 1em 0.5em 1em;
-	}
-	div#infinity-cpanel-tabs ul.ui-tabs-nav li .ui-icon-close {
-		float: right;
-		cursor: pointer;
-	}
-	div#infinity-cpanel-tabs div.ui-tabs-panel {
-		border-bottom: 1px solid #aaaaaa;
-		box-shadow: inset 1px 0px #eeeeee, inset 2px 0px 2px #aaaaaa, inset 1px 0px 2px #cccccc;
-		-moz-box-shadow: inset 1px 0px #eeeeee, inset 2px 0px 2px #aaaaaa, inset 1px 0px 2px #cccccc;
-		-webkit-box-shadow: inset 1px 0px #eeeeee, inset 2px 0px 2px #aaaaaa, inset 1px 0px 2px #cccccc;
-	}
-	div#infinity-cpanel-tabs div.infinity-cpanel-tab {
-		min-height: 400px;
-		border-radius: 0 0 8px 8px;
-		-moz-border-radius: 0 0 8px 8px;
-		-webkit-border-radius: 0 0 8px 8px;
-		background: #f4f4f4;
-		overflow: hidden;
-	}
-		div#infinity-cpanel-tabs div.infinity-cpanel-tab.infinity-cpanel-tab-scroll {
-			overflow: auto;
-		}
-	div#infinity-cpanel-tabs div.infinity-docs {
-		padding: 0 1.5em 1.5em 1.5em;
-	}
 
-/* ================ */
-/* ! PIE Tweaks     */
-/* ================ */
-
-/*div#infinity-cpanel div.pie-easy-options-fu fieldset {
-	background: url("../images/ui_upload_bg.jpg") no-repeat center center scroll #cccccc;
-    background-color: transparent;
-}*/
+div#infinity-cpanel-tabs div.infinity-docs {
+	padding: 0 1.5em 1.5em 1.5em;
+}
 
 /* ================ */
 /* ! Theme Options  */
@@ -324,12 +187,9 @@ div#infinity-cpanel input[type="password"],
 div#infinity-cpanel input[type="reset"],
 div#infinity-cpanel input[type="submit"],
 div#infinity-cpanel input[type="text"] {
-	padding: 3px;
 	-webkit-border-radius: 2px;
 	-moz-border-radius: 2px;
 	border-radius: 2px;
-	border: 1px solid #cecece;
-	outline: none;
 	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.1) inset, 0 1px 0 rgba(255,255,255,0.2);
 	-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.1) inset, 0 1px 0 rgba(255,255,255,0.2);
 	box-shadow: 0 1px 3px rgba(0,0,0,0.1) inset, 0 1px 0 rgba(255,255,255,0.2);

@@ -116,6 +116,8 @@ final class Pie_Easy_Loader
 			array( 'markdown', 'textile' ),
 		'schemes' =>
 			array( 'scheme', 'scheme_enqueue' ),
+		'ui' =>
+			array( 'cpanel' ),
 		'utils' =>
 			array( 'ajax', 'docs', 'enqueue', 'export', 'file', 'files', 'file_cache', 'i18n' )
 	);
