@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'base/style' );
+Pie_Easy_Loader::load( 'ui/style' );
 
 /**
  * Default feature

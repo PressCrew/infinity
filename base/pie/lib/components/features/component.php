@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'base/component', 'base/styleable', 'utils/files' );
+Pie_Easy_Loader::load( 'base/component', 'ui/styleable', 'utils/files' );
 
 /**
  * Make a feature easy

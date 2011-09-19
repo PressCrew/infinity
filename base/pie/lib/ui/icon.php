@@ -7,7 +7,7 @@
  * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
  * @package PIE
- * @subpackage base
+ * @subpackage ui
  * @since 1.0
  */
 
@@ -15,7 +15,7 @@
  * Make icons for component navigation easy
  *
  * @package PIE
- * @subpackage base
+ * @subpackage ui
  * @property-read string $primary
  * @property-read string $secondary
  */
