@@ -84,15 +84,10 @@ final class Pie_Easy_Loader
 	private static $pkgs = array(
 		'base' =>
 			array(
-				'asset',
 				'component', 'componentable',
-				'icon', 'iconable',
 				'factory',
-				'policy', 'policeable', 'position', 'positionable',
-				'registry', 'renderer',
-				'script', 'scriptable',
-				'style', 'styleable'
-			),
+				'policy', 'policeable',
+				'registry', 'renderer' ),
 		'collections' =>
 			array( 'map', 'map_iterator', 'stack', 'stack_iterator' ),
 		'components' =>
@@ -117,7 +112,13 @@ final class Pie_Easy_Loader
 		'schemes' =>
 			array( 'scheme', 'scheme_enqueue' ),
 		'ui' =>
-			array( 'cpanel' ),
+			array(
+				'asset',
+				'cpanel',
+				'icon', 'iconable',
+				'position', 'positionable',
+				'script', 'scriptable',
+				'style', 'styleable' ),
 		'utils' =>
 			array( 'ajax', 'docs', 'enqueue', 'export', 'file', 'files', 'file_cache', 'i18n' )
 	);

@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'base/script' );
+Pie_Easy_Loader::load( 'ui/script' );
 
 /**
  * Make cool control panels easy

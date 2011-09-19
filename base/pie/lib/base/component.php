@@ -13,10 +13,8 @@
 
 Pie_Easy_Loader::load(
 	'base/componentable',
-	'base/style',
-	'base/styleable',
-	'base/script',
-	'base/scriptable',
+	'ui/styleable',
+	'ui/scriptable',
 	'init/directive',
 	'utils/files'
 );

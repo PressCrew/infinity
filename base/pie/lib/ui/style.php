@@ -7,17 +7,17 @@
  * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
  * @package PIE
- * @subpackage base
+ * @subpackage ui
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'base/asset' );
+Pie_Easy_Loader::load( 'ui/asset' );
 
 /**
  * Make styles for components easy
  *
  * @package PIE
- * @subpackage base
+ * @subpackage ui
  */
 class Pie_Easy_Style extends Pie_Easy_Asset
 {
@@ -136,7 +136,7 @@ class Pie_Easy_Style extends Pie_Easy_Asset
  * Make rules for styles easy
  *
  * @package PIE
- * @subpackage base
+ * @subpackage ui
  * @property string $selector CSS selector to which apply declarations
  */
 class Pie_Easy_Style_Rule

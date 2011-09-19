@@ -7,15 +7,17 @@
  * @copyright Copyright (C) 2010 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
  * @package PIE
- * @subpackage base
+ * @subpackage ui
  * @since 1.0
  */
+
+Pie_Easy_Loader::load( 'ui/icon' );
 
 /**
  * Make icon implementation easy
  *
  * @package PIE
- * @subpackage base
+ * @subpackage ui
  */
 interface Pie_Easy_Iconable
 {

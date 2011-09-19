@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'base/iconable', 'base/positionable' );
+Pie_Easy_Loader::load( 'ui/iconable', 'ui/positionable' );
 
 /**
  * Cpanel screen
