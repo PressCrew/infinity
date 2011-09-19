@@ -13,6 +13,12 @@
 
 Pie_Easy_Loader::load( 'components/screens' );
 
+//
+// Constants
+//
+define( 'INFINITY_ROUTE_PARAM', 'route' );
+define( 'INFINITY_ROUTE_DELIM', '/' );
+
 /**
  * Infinity Theme: screens policy
  *
@@ -103,7 +109,25 @@ class Infinity_Screens_Registry extends Pie_Easy_Screens_Registry
  */
 class Infinity_Exts_Screen_Factory extends Pie_Easy_Screens_Factory
 {
-	// nothing custom yet
+	public function create( $theme, $name, $conf )
+	{
+		// DO NOT TRY THIS YOURSELF
+		// @todo this is a temporary solution until the configuration strategy is improved
+
+		// call parent to create component
+		$component = parent::create( $theme, $name, $conf );
+
+		// check if URL is set
+		if ( !$component->url ) {
+			// set url
+			$def_map = new Pie_Easy_Map();
+			$def_map->add( 'url', infinity_screens_route( 'cpanel', $component->name ) );
+			// configure it
+			$component->configure( $def_map, $theme );
+		}
+
+		return $component;
+	}
 }
 
 /**
@@ -148,6 +172,99 @@ function infinity_screens_init_screen()
 		Infinity_Screens_Policy::instance()->registry()->init_screen();
 		do_action( 'infinity_screens_init_screen' );
 	}
+}
+
+/**
+ * Build a page/route URL
+ *
+ * @param string|array $params,...
+ * @return array
+ */
+function infinity_screens_route()
+{
+	// build the base URL
+	$url = sprintf( '%sadmin.php?page=%s', admin_url(), INFINITY_ADMIN_PAGE );
+
+	// use variable args
+	$params = func_get_args();
+
+	// check if first is an array
+	if ( is_array( current($params) ) ) {
+		$params = $params[0];
+	}
+
+	// add route if necessary
+	if ( count( $params ) ) {
+		$url .= sprintf( '&%s=%s', INFINITY_ROUTE_PARAM, implode( INFINITY_ROUTE_DELIM, $params ) );
+	}
+
+	return $url;
+}
+
+/**
+ * Parse the page/route into screen, action, and params
+ *
+ * @return array
+ */
+function infinity_screens_route_parse()
+{
+	// the route string
+	$route_string = '';
+
+	// look for route string in request
+	if ( ( isset( $_REQUEST['page'] ) && $_REQUEST['page'] == INFINITY_ADMIN_PAGE ) ) {
+		// look for route in request, post has priority
+		if ( isset( $_POST[INFINITY_ROUTE_PARAM] ) )  {
+			$route_string = $_POST[INFINITY_ROUTE_PARAM];
+		} elseif ( isset( $_GET[INFINITY_ROUTE_PARAM] ) )  {
+			$route_string = $_GET[INFINITY_ROUTE_PARAM];
+		}
+	} else {
+		return false;
+	}
+
+	// have a route string?
+	if ( strlen($route_string) ) {
+		// get route tokens
+		$route_toks = explode( INFINITY_ROUTE_DELIM, $route_string );
+		// get at least one token?
+		if ( count( $route_toks ) ) {
+			// first token is the screen
+			$route['screen'] = array_shift($route_toks);
+			// second token is the action
+			$route['action'] = array_shift($route_toks);
+			// remaining tokens are params
+			$route['params'] = $route_toks;
+			// done
+			return $route;
+		}
+	} else {
+
+		// use route defaults
+		return array(
+			'screen' => 'cpanel',
+			'action' => null,
+			'params' => null,
+		);
+
+	}
+}
+
+/**
+ * Retrieve a specific route param by offset
+ *
+ * @param integer $offset
+ * @return mixed
+ */
+function infinity_screens_route_param( $offset )
+{
+	$route = infinity_screens_route_parse();
+
+	if ( isset( $route['params'][--$offset] ) ) {
+		return $route['params'][$offset];
+	}
+
+	return null;
 }
 
 ?>

@@ -24,7 +24,7 @@ add_action( 'admin_init', 'infinity_dashboard_cpanel_setup' );
  */
 function infinity_dashboard_cpanel_action()
 {
-	$route = infinity_dashboard_route_parse();
+	$route = infinity_screens_route_parse();
 
 	if ( ($route) && $route['screen'] == 'cpanel' ) {
 		if ( $route['action'] ) {
@@ -52,6 +52,36 @@ function infinity_dashboard_cpanel_actions()
 		// community
 		'news', 'thanks'
 	);
+}
+
+/**
+ * Initialize and render the control panel markup
+ */
+function infinity_dashboard_cpanel_ui( $header_template = null )
+{
+	Pie_Easy_Loader::load( 'ui/cpanel' );
+
+	// handle empty header template
+	if ( empty( $header_template ) ) {
+		$header_template = 'dashboard/templates/cpanel_header.php';
+	}
+
+	// new control panel instance using screens policy
+	$cpanel = new Pie_Easy_Ui_Cpanel( Infinity_Screens_Policy::instance() );
+
+	// start rendering
+	$cpanel->render_begin(
+		__( 'infinity', infinity_text_domain ),
+		'infinity-cpanel'
+	);
+
+	// render the required elements
+	$cpanel->render_header( $header_template );
+	$cpanel->render_toolbar();
+	$cpanel->render_tabs();
+
+	// all done
+	$cpanel->render_end();
 }
 
 //
@@ -104,76 +134,5 @@ function infinity_dashboard_cpanel_screen()
 {
 	infinity_dashboard_load_template( 'cpanel.php' );
 }
-
-/**
- * Print cpanel dropdown menu
- */
-function infinity_dashboard_cpanel_toolbar_menu( $items = null )
-{
-	if ( empty( $items ) ) {
-		$items = Infinity_Screens_Policy::instance()->registry()->get_roots(); ?>
-		<ul id="infinity-cpanel-toolbar-menu-items"><?php
-	} else { ?>
-		<ul><?php
-	}
-
-	// sort em
-	$items = Pie_Easy_Position::sort_priority( $items );
-
-	foreach( $items as $item ) {
-		$children = Infinity_Screens_Policy::instance()->registry()->get_children( $item );
-		$children_cnt = count( $children ); ?>
-		<li>
-			<a target="infinity-cpanel-tab-<?php print esc_attr( $item->name ) ?>" id="infinity-cpanel-toolbar-menu-item-<?php print esc_attr( $item->name ) ?>"<?php if ( $children_cnt ): ?> class="infinity-cpanel-context-menu"<?php endif; ?> href="<?php print infinity_dashboard_route( 'cpanel', $item->name ) ?>" title="<?php print esc_attr( $item->title ) ?>"><?php print esc_attr( $item->title ) ?></a>
-			<?php if ( $children_cnt ): ?>
-				<?php infinity_dashboard_cpanel_toolbar_menu( $children ) ?>
-			<?php endif; ?>
-		</li><?php
-	} ?>
-	</ul><?php
-}
-
-/**
- * Print cpanel quick buttons
- */
-function infinity_dashboard_cpanel_toolbar_buttons()
-{
-	$items = Infinity_Screens_Policy::instance()->registry()->get_all();
-	$items = Pie_Easy_Position::sort_priority( $items );
-
-	foreach( $items as $item ): ?>
-		<?php if ( $item->toolbar ): ?>
-			<a target="infinity-cpanel-tab-<?php print esc_attr( $item->name ) ?>" id="infinity-cpanel-toolbar-<?php print esc_attr( $item->name ) ?>" href="<?php print infinity_dashboard_route( 'cpanel', $item->name ) ?>" title="<?php print esc_attr( $item->title ) ?>"><?php print esc_attr( $item->title ) ?></a>
-		<?php endif;
-	endforeach;
-}
-
-/**
- * Print cpanel dropdown menu javascript
- */
-function infinity_dashboard_cpanel_dynamic_scripts()
-{
-	$items = Infinity_Screens_Policy::instance()->registry()->get_all();
-
-	// begin rendering ?>
-	<script type="text/javascript">
-		(function($){
-			$(document).ready(function() {
-			<?php foreach( $items as $item ):
-				$conf = null;
-				$icons = $item->icon()->config();
-				if ( $icons ):
-					$conf = sprintf( '{%s}', $icons );
-				endif; ?>
-				$('a#infinity-cpanel-toolbar-menu-item-<?php print $item->name ?>').button(<?php print $conf ?>);
-				<?php if ( $item->toolbar ): ?>
-					$('a#infinity-cpanel-toolbar-<?php print $item->name ?>').button(<?php print $conf ?>);
-				<?php endif; ?>
-			<?php endforeach; ?>
-			});
-		})(jQuery);
-	</script><?php
-}
-add_action( 'admin_print_footer_scripts', 'infinity_dashboard_cpanel_dynamic_scripts' );
 
 ?>
