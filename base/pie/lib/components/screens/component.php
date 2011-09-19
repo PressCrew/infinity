@@ -21,7 +21,17 @@ Pie_Easy_Loader::load( 'base/component' );
  */
 abstract class Pie_Easy_Screens_Screen extends Pie_Easy_Component
 {
-	// nothing custom yet
+	public function configure( $config, $theme )
+	{
+		// RUN PARENT FIRST!
+		parent::configure( $config, $theme );
+
+		// url where to find the screen
+		// @todo add this to documentation when stable
+		if ( isset( $config['url'] ) ) {
+			$this->directives()->set( $theme, 'url', $config['url'] );
+		}
+	}
 }
 
 ?>
