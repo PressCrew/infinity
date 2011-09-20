@@ -19,7 +19,7 @@ Pie_Easy_Loader::load( 'collections', 'utils/files' );
  * @package PIE
  * @subpackage ui
  */
-abstract class Pie_Easy_Asset
+abstract class Pie_Easy_Asset extends Pie_Easy_Base
 {
 	/**
 	 * Script dependancies

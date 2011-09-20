@@ -16,11 +16,12 @@ Pie_Easy_Loader::load( 'utils/files' );
 /**
  * Make exporting dynamic files easy
  *
+ * @todo this should extend Pie_Easy_File
  * @package PIE
  * @subpackage utils
  * @uses Pie_Easy_Export_Exception
  */
-class Pie_Easy_Export
+class Pie_Easy_Export extends Pie_Easy_Base
 {
 	static private $populated = false;
 	static private $upload_dir;
@@ -50,11 +51,6 @@ class Pie_Easy_Export
 		$this->callback = $callback;
 	}
 
-	/**
-	 * @ignore
-	 * @param string $name
-	 * @return mixed
-	 */
 	public function __get( $name )
 	{
 		switch( $name ) {
@@ -62,7 +58,18 @@ class Pie_Easy_Export
 			case 'url':
 				return $this->$name;
 			default:
-				throw new Exception( sprintf( 'Property "%s" does not exist or is not writable', $name ) );
+				return parent::__get( $name );
+		}
+	}
+
+	public function __isset( $name )
+	{
+		switch( $name ) {
+			case 'path':
+			case 'url':
+				return isset( $this->$name );
+			default:
+				return parent::__isset( $name );
 		}
 	}
 

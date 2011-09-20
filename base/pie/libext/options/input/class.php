@@ -30,13 +30,7 @@ abstract class Pie_Easy_Exts_Options_Input
 	 */
 	private $input_type = 'text';
 
-	/**
-	 * Getter
-	 *
-	 * @ignore
-	 * @param string $name
-	 * @return mixed
-	 */
+	
 	public function __get( $name )
 	{
 		switch ( $name ) {
@@ -44,6 +38,16 @@ abstract class Pie_Easy_Exts_Options_Input
 				return $this->input_type;
 			default:
 				return parent::__get( $name );
+		}
+	}
+
+	public function __isset( $name )
+	{
+		switch ( $name ) {
+			case 'input_type':
+				return isset( $this->input_type );
+			default:
+				return parent::__isset( $name );
 		}
 	}
 

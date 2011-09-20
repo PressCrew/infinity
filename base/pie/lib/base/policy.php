@@ -20,7 +20,7 @@
  * @package PIE
  * @subpackage base
  */
-abstract class Pie_Easy_Policy
+abstract class Pie_Easy_Policy extends Pie_Easy_Base
 {
 	/**
 	 * @var Pie_Easy_Map 

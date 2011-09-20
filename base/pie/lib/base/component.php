@@ -119,15 +119,7 @@ abstract class Pie_Easy_Component
 		$this->init();
 	}
 
-	/**
-	 * WARNING! This magic method creates a black hole for properties.
-	 *
-	 * Accessing a property which does not exist will always return null!
-	 *
-	 * @ignore
-	 * @param string $name
-	 * @return mixed
-	 */
+	
 	public function __get( $name )
 	{
 		switch ( $name ) {
@@ -145,6 +137,23 @@ abstract class Pie_Easy_Component
 				} else {
 					return null;
 				}
+		}
+	}
+
+	
+	public function __isset( $name )
+	{
+		switch ( $name ) {
+			case 'theme':
+				return isset( $this->__theme__ );
+			case 'name':
+				return isset( $this->__name__ );
+			case 'type':
+				return isset( $this->__type__ );
+			case 'parent':
+				return isset( $this->__parent__ );
+			default:
+				return $this->directives()->has( $name );
 		}
 	}
 

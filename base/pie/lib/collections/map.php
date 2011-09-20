@@ -23,7 +23,9 @@
  * @package PIE
  * @subpackage collections
  */
-class Pie_Easy_Map implements IteratorAggregate,ArrayAccess,Countable
+class Pie_Easy_Map
+	extends Pie_Easy_Base
+		implements IteratorAggregate,ArrayAccess,Countable
 {
 	/**
 	 * @var array Internal data storage
@@ -51,51 +53,21 @@ class Pie_Easy_Map implements IteratorAggregate,ArrayAccess,Countable
 		$this->set_read_only( $read_only );
 	}
 
-	/**
-	 * Getter
-	 *
-	 * @ignore
-	 * @param mixed $key
-	 * @return mixed
-	 */
-	public function __get( $key )
+	public function __get( $name )
 	{
-		if ( $this->contains( $key ) ) {
-			return $this->item_at( $key );
-		} else {
-			return null;
-		}
+		return $this->item_at( $name );
 	}
 
-	/**
-	 * Setter
-	 *
-	 * @ignore
-	 * @param string $name
-	 * @param mixed $value
-	 */
 	public function __set( $key, $value )
 	{
 		$this->add( $key, $value );
 	}
 
-	/**
-	 * Issetter
-	 *
-	 * @ignore
-	 * @param string $name
-	 */
-	public function __isset( $key )
+	public function __isset( $name )
 	{
-		return $this->contains( $key );
+		return $this->contains( $name );
 	}
 
-	/**
-	 * Unsetter
-	 *
-	 * @ignore
-	 * @param string $name
-	 */
 	public function __unset( $key )
 	{
 		return $this->remove( $key );

@@ -33,7 +33,7 @@ require_once
  * @package PIE
  * @subpackage parsers
  */
-final class Pie_Easy_Markdown
+final class Pie_Easy_Markdown extends Pie_Easy_Base
 {
 	/**
 	 * Parse markdown markup and return HTML

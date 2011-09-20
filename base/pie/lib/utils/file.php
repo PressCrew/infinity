@@ -17,7 +17,7 @@
  * @package PIE
  * @subpackage utils
  */
-final class Pie_Easy_File
+final class Pie_Easy_File extends Pie_Easy_Base
 {
 	/**
 	 * File path

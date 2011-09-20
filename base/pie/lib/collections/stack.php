@@ -23,7 +23,9 @@
  * @package PIE
  * @subpackage collections
  */
-class Pie_Easy_Stack implements IteratorAggregate,Countable
+class Pie_Easy_Stack
+	extends Pie_Easy_Base
+		implements IteratorAggregate,Countable
 {
 	/**
 	 * Internal data storage
