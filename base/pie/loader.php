@@ -57,12 +57,17 @@ if ( !defined( 'PIE_EASY_EXPORTS_SUBDIR' ) ) {
 	define( 'PIE_EASY_EXPORTS_SUBDIR', 'exports' );
 }
 
+// include the base class
+require_once
+	PIE_EASY_LIB_DIR .
+	DIRECTORY_SEPARATOR . 'base/base.php';
+
 /**
  * Make loading PIE libraries easy
  *
  * @package PIE
  */
-final class Pie_Easy_Loader
+final class Pie_Easy_Loader extends Pie_Easy_Base
 {
 	/**
 	 * Delimeter at which to split library paths

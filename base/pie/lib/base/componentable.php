@@ -22,7 +22,9 @@ Pie_Easy_Loader::load( 'base/policeable' );
  * @package PIE
  * @subpackage base
  */
-abstract class Pie_Easy_Componentable implements Pie_Easy_Policeable
+abstract class Pie_Easy_Componentable
+	extends Pie_Easy_Base
+		implements Pie_Easy_Policeable
 {
 	/**
 	 * Policy instance

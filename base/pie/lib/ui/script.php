@@ -124,7 +124,7 @@ class Pie_Easy_Script extends Pie_Easy_Asset
  * @package PIE
  * @subpackage ui
  */
-class Pie_Easy_Script_Logic
+class Pie_Easy_Script_Logic extends Pie_Easy_Base
 {
 	/**
 	 * Keep track of objects for debugging
@@ -193,44 +193,53 @@ class Pie_Easy_Script_Logic
 		$this->variables = new Pie_Easy_Map();
 	}
 
-	/**
-	 * @ignore
-	 * @param string $name
-	 * @return mixed
-	 */
 	public function __get( $name )
 	{
 		switch ( $name ) {
 			case 'alias':
-				return $this->alias;
 			case 'ready':
-				return $this->ready;
 			case 'function':
-				return $this->function;
+				return $this->$name;
 			default:
-				throw new Exception( 'Invalid property' );
+				return parent::__get( $name );
 		}
 	}
 
-	/**
-	 * @ignore
-	 * @param string $name
-	 * @param mixed $value
-	 */
 	public function __set( $name, $value )
 	{
 		switch ( $name ) {
 			case 'alias':
-				$this->alias = (boolean) $value;
-				break;
+				return $this->alias = (boolean) $value;
 			case 'ready':
-				$this->ready = (boolean) $value;
-				break;
+				return $this->ready = (boolean) $value;
 			case 'function':
-				$this->function = trim($value);
-				break;
+				return $this->function = trim($value);
 			default:
-				throw new Exception( 'Invalid property' );
+				return parent::__set( $name, $value );
+		}
+	}
+
+	public function __isset( $name )
+	{
+		switch ( $name ) {
+			case 'alias':
+			case 'ready':
+			case 'function':
+				return isset( $this->$name );
+			default:
+				return parent::__isset( $name );
+		}
+	}
+
+	public function __unset( $name )
+	{
+		switch ( $name ) {
+			case 'alias':
+			case 'ready':
+			case 'function':
+				return $this->$name = null;
+			default:
+				return parent::__unset( $name );
 		}
 	}
 

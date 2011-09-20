@@ -18,7 +18,7 @@
  * @subpackage ui
  * @property-read null|integer $priority
  */
-class Pie_Easy_Position
+class Pie_Easy_Position extends Pie_Easy_Base
 {
 	/**
 	 * The priority
@@ -39,27 +39,16 @@ class Pie_Easy_Position
 		$this->priority = $priority;
 	}
 
-	/**
-	 * @ignore
-	 * @param string $name
-	 * @return mixed
-	 */
 	public function __get( $name )
 	{
 		switch ( $name ) {
 			case 'priority':
 				return $this->priority;
 			default:
-				throw new Exception( 'Invalid property' );
+				return parent::__get( $name );
 		}
 	}
 
-	/**
-	 * @ignore
-	 * @param string $name
-	 * @param mixed $value
-	 * @return mixed
-	 */
 	public function __set( $name, $value )
 	{
 		switch ( $name ) {
@@ -69,6 +58,30 @@ class Pie_Easy_Position
 				} else {
 					throw new Exception( 'Cannot overwrite priority once set' );
 				}
+			default:
+				return parent::__set( $name, $value );
+		}
+	}
+
+	public function __isset( $name )
+	{
+		switch ( $name ) {
+			case 'priority':
+				return isset( $this->priority );
+			default:
+				return parent::__isset( $name );
+		}
+	}
+
+	public function __unset( $name )
+	{
+		switch ( $name ) {
+			case 'priority':
+				if ( $this->priority !== null ) {
+					throw new Exception( 'Cannot unset priority once set' );
+				}
+			default:
+				return parent::__unset( $name );
 		}
 	}
 

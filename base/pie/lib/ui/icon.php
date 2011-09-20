@@ -19,7 +19,7 @@
  * @property-read string $primary
  * @property-read string $secondary
  */
-class Pie_Easy_Icon
+class Pie_Easy_Icon extends Pie_Easy_Base
 {
 	/**
 	 * The primary icon name
@@ -49,36 +49,47 @@ class Pie_Easy_Icon
 		$this->secondary = $secondary;
 	}
 
-	/**
-	 * @ignore
-	 * @param string $name
-	 * @return mixed
-	 */
 	public function __get( $name )
 	{
 		switch ( $name ) {
 			case 'primary':
-				return $this->primary;
 			case 'secondary':
-				return $this->secondary;
+				return $this->$name;
 			default:
-				throw new Exception( 'Invalid property' );
+				return parent::__get( $name );
 		}
 	}
 
-	/**
-	 * @ignore
-	 * @param string $name
-	 * @param mixed $value
-	 * @return mixed
-	 */
+	public function __isset( $name )
+	{
+		switch ( $name ) {
+			case 'primary':
+			case 'secondary':
+				return isset( $this->$name );
+			default:
+				return parent::__isset( $name );
+		}
+	}
+
 	public function __set( $name, $value )
 	{
 		switch ( $name ) {
 			case 'primary':
-				return $this->primary = $value;
 			case 'secondary':
-				return $this->secondary = $value;
+				return $this->$name = $value;
+			default:
+				return parent::__set( $name, $value );
+		}
+	}
+
+	public function __unset( $name )
+	{
+		switch ( $name ) {
+			case 'primary':
+			case 'secondary':
+				return $this->$name = null;
+			default:
+				return parent::__unset( $name );
 		}
 	}
 

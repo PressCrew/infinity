@@ -17,7 +17,7 @@
  * @package PIE
  * @subpackage utils
  */
-abstract class Pie_Easy_I18n
+abstract class Pie_Easy_I18n extends Pie_Easy_Base
 {
 	/**
 	 * The text domain to translate for

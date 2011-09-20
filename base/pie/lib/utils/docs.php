@@ -19,7 +19,7 @@ Pie_Easy_Loader::load( 'utils/files' );
  * @package PIE
  * @subpackage utils
  */
-class Pie_Easy_Docs
+class Pie_Easy_Docs extends Pie_Easy_Base
 {
 	/**
 	 * The default page name

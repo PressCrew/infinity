@@ -20,7 +20,7 @@
  * @property mixed $value The value of the directive
  * @property-read boolean $read_only Whether the value is read only
  */
-class Pie_Easy_Init_Directive
+class Pie_Easy_Init_Directive extends Pie_Easy_Base
 {
 	/**
 	 * @var string The name of this directive
@@ -61,11 +61,6 @@ class Pie_Easy_Init_Directive
 		}
 	}
 
-	/**
-	 * @ignore
-	 * @param string $name
-	 * @return mixed
-	 */
 	public function __get( $name )
 	{
 		switch ( $name ) {
@@ -75,23 +70,40 @@ class Pie_Easy_Init_Directive
 			case 'read_only':
 				return $this->$name;
 			default:
-				throw new Exception(
-					sprintf( 'The property "%s" does not exist', $name ) );
+				return parent::__get( $name );
 		}
 	}
 
-	/**
-	 * @ignore
-	 * @param string $name
-	 * @param mixed $value
-	 */
+	public function __isset( $name )
+	{
+		switch ( $name ) {
+			case 'theme':
+			case 'name':
+			case 'value':
+			case 'read_only':
+				return isset( $this->$name );
+			default:
+				return parent::__isset( $name );
+		}
+	}
+
 	public function __set( $name, $value )
 	{
 		switch ( $name ) {
 			case 'value':
 				return $this->set_value( $value );
 			default:
-				throw new Exception( sprintf( 'The "%s" property is not writable', $name ) );
+				return parent::__set( $name, $value );
+		}
+	}
+
+	public function __unset( $name )
+	{
+		switch ( $name ) {
+			case 'value':
+				return $this->set_value( null );
+			default:
+				return parent::__unset( $name );
 		}
 	}
 
@@ -124,7 +136,7 @@ class Pie_Easy_Init_Directive
  * @package PIE
  * @subpackage init
  */
-class Pie_Easy_Init_Directive_Registry
+class Pie_Easy_Init_Directive_Registry extends Pie_Easy_Base
 {
 	/**
 	 * Registered directives

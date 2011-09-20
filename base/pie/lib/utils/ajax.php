@@ -17,7 +17,7 @@
  * @package PIE
  * @subpackage utils
  */
-final class Pie_Easy_Ajax
+final class Pie_Easy_Ajax extends Pie_Easy_Base
 {
 	/**
 	 * Delimiter on which to split AJAX responses

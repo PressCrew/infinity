@@ -139,7 +139,7 @@ class Pie_Easy_Style extends Pie_Easy_Asset
  * @subpackage ui
  * @property string $selector CSS selector to which apply declarations
  */
-class Pie_Easy_Style_Rule
+class Pie_Easy_Style_Rule extends Pie_Easy_Base
 {
 	/**
 	 * The selector
@@ -169,18 +169,23 @@ class Pie_Easy_Style_Rule
 		$this->declarations = new Pie_Easy_Map();
 	}
 
-	/**
-	 * @ignore
-	 * @param string $name
-	 * @return mixed
-	 */
 	public function __get( $name )
 	{
 		switch ( $name ) {
 			case 'selector':
 				return $this->selector;
 			default:
-				throw new Exception( 'Invalid property' );
+				return parent::__get( $name );
+		}
+	}
+
+	public function __isset( $name )
+	{
+		switch ( $name ) {
+			case 'selector':
+				return isset( $this->selector );
+			default:
+				return parent::__isset( $name );
 		}
 	}
 

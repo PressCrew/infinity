@@ -25,7 +25,7 @@ require_once
  * @package PIE
  * @subpackage parsers
  */
-final class Pie_Easy_Textile
+final class Pie_Easy_Textile extends Pie_Easy_Base
 {
 	/**
 	 * Parse textile markup and return HTML

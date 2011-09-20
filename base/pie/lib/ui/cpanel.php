@@ -19,7 +19,7 @@ Pie_Easy_Loader::load( 'ui/script' );
  * @package PIE
  * @subpackage ui
  */
-final class Pie_Easy_Ui_Cpanel
+final class Pie_Easy_Ui_Cpanel extends Pie_Easy_Base
 {
 	private $policy;
 	private $title;

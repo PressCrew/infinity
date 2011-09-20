@@ -22,7 +22,7 @@ Pie_Easy_Loader::load( 'utils/files', 'collections' );
  * @package PIE
  * @subpackage schemes
  */
-final class Pie_Easy_Scheme
+final class Pie_Easy_Scheme extends Pie_Easy_Base
 {
 	/**#@+
 	 * ini directive enumeration

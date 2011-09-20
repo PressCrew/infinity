@@ -96,11 +96,6 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 
 		// user must be allowed to manage options
 		$this->add_capabilities( 'manage_options' );
-
-		// special cases
-		if ( $this instanceof Pie_Easy_Options_Option_Auto_Field ) {
-			$this->field_options = $this->load_field_options();
-		}
 	}
 
 	public function configure( $config, $theme )
@@ -129,11 +124,13 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 		}
 
 		// field options
-		if ( isset( $config['field_options'] ) ) {
+		// @todo this grew too big, move to private method
+		if ( $this instanceof Pie_Easy_Options_Option_Auto_Field ) {
 
-			if ( $this instanceof Pie_Easy_Options_Option_Auto_Field ) {
-				throw new Exception( 'Cannot set field options for an auto field option.' );
-			}
+			// call template method to load options
+			$field_options = $this->load_field_options();
+
+		} elseif ( isset( $config['field_options'] ) ) {
 
 			if ( is_array( $config['field_options'] ) ) {
 
@@ -165,12 +162,12 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 			} else {
 				throw new Exception( sprintf( 'The field options for the "%s" option is not configured correctly', $name ) );
 			}
+		}
 
-			// make sure we ended up with some options
-			if ( count( $field_options ) >= 1 ) {
-				// finally set them for the option
-				$this->directives()->set( $theme, 'field_options', $field_options, true );
-			}
+		// make sure we ended up with some options
+		if ( count( $field_options ) >= 1 ) {
+			// finally set them for the option
+			$this->directives()->set( $theme, 'field_options', $field_options, true );
 		}
 	}
 

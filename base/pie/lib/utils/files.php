@@ -20,7 +20,7 @@ Pie_Easy_Loader::load( 'utils/file_cache' );
  * @subpackage utils
  * @uses Pie_Easy_Files_Exception
  */
-final class Pie_Easy_Files
+final class Pie_Easy_Files extends Pie_Easy_Base
 {
 	/**
 	 * File cache instance

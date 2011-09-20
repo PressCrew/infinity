@@ -14,10 +14,11 @@
 /**
  * Make enqueuing scheme styles and scripts easy
  *
+ * @todo this class needs to be split into three classes (pyramid)
  * @package PIE
  * @subpackage schemes
  */
-class Pie_Easy_Scheme_Enqueue
+class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 {
 	/**
 	 * String on which to split "string packed" values

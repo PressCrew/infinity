@@ -19,7 +19,7 @@ Pie_Easy_Loader::load( 'collections', 'utils/files' );
  * @package PIE
  * @subpackage utils
  */
-final class Pie_Easy_Enqueue
+final class Pie_Easy_Enqueue extends Pie_Easy_Base
 {
 	/**
 	 * Script which handles the AJAX requests

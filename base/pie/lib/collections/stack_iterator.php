@@ -23,7 +23,9 @@
  * @package PIE
  * @subpackage collections
  */
-class Pie_Easy_Stack_Iterator implements Iterator
+class Pie_Easy_Stack_Iterator
+	extends Pie_Easy_Base
+		implements Iterator
 {
 	/**
 	 * @var array The data to be iterated through
