@@ -15,7 +15,7 @@
 <?php
 	$heading_tag = ( is_home() || is_front_page() ) ? 'h1' : 'div';
 ?>
-<<?php print $heading_tag; ?> id="site-logo">
+<<?php print $heading_tag; ?> id="<?php $this->render_id() ?>" class="<?php $this->render_classes() ?>">
 	<a href="<?php echo home_url( '/'  ); ?>" title="<?php bloginfo('name'); ?> - <?php bloginfo('description'); ?>">
 		<img src="<?php print $this->component()->image_url(); ?>">
 	</a>

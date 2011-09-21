@@ -12,13 +12,13 @@
  */
 ?>
 
-<ul class="pie-easy-exts-widget-menu" id="<?php print $element_id ?>">
+<ul id="<?php $this->render_id() ?>" class="<?php $this->render_classes() ?>">
 	<?php $this->component()->render_items() ?>
 </ul>
 
 <script type="text/javascript">
 	// init menu
-	jQuery('ul#<?php print $element_id ?>').menu();
+	jQuery('ul#<?php $this->render_id() ?>').menu();
 	// render all of the button script logic
 	<?php print $button_script->export(); ?>
 </script>

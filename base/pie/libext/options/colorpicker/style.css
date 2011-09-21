@@ -2,7 +2,7 @@
 	z-index: 1000;
 }
 
-div.pie-easy-exts-options-colorpicker {
+div.pie-easy-exts-options-colorpicker-launcher {
 	display: inline-block;
 	position: relative;
 	width: 36px;
@@ -10,7 +10,7 @@ div.pie-easy-exts-options-colorpicker {
 	vertical-align: top;
 	background: url(images/launch.png);
 }
-div.pie-easy-exts-options-colorpicker div {
+div.pie-easy-exts-options-colorpicker-launcher div {
 	position: absolute;
 	top: 3px;
 	left: 3px;

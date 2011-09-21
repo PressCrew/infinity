@@ -14,7 +14,7 @@
  * @since 1.0
  */
 ?>
-<div class="pie-easy-exts-widget-posts-list ui-widget">
+<div id="<?php $this->render_id() ?>" class="<?php $this->render_classes() ?> ui-widget">
 	<div class="ui-widget-header">
 		<?php $this->render_title() ?>
 	</div>
@@ -24,5 +24,5 @@
 </div>
 
 <script type="text/javascript">
-	widgetPostsListSortable();
+	widgetPostsListSortable('div#<?php $this->render_id() ?> div.ui-widget-content');
 </script>

@@ -143,13 +143,52 @@ abstract class Pie_Easy_Renderer extends Pie_Easy_Componentable
 	}
 
 	/**
-	 * Render wrapper classes
+	 * Render element id
 	 */
-	public function render_classes()
+	public function render_id()
 	{
 		$args = func_get_args();
 
-		return call_user_func_array( array($this->component, 'render_classes'), $args );
+		print call_user_func_array(
+			array( $this->component, 'get_element_id' ),
+			$args
+		);
+	}
+
+	/**
+	 * Render a special one-off class
+	 *
+	 * @param string $suffix,...
+	 */
+	public function render_class( $suffix )
+	{
+		$args = func_get_args();
+
+		print call_user_func_array(
+			array( $this->component, 'get_element_class' ), $args
+		);
+	}
+
+	/**
+	 * Render wrapper classes
+	 *
+	 * @param string $addtl,...
+	 */
+	public function render_classes()
+	{
+		// get unlimited number of class args
+		$classes = func_get_args();
+
+		// custom class if set
+		if ( $this->component->class ) {
+			array_unshift( $classes, $this->component->class );
+		}
+		
+		// component generic class
+		array_unshift( $classes, $this->component->get_element_class() );
+
+		// render them all delimited with a space
+		print esc_attr( join( ' ', $classes ) );
 	}
 
 	/**

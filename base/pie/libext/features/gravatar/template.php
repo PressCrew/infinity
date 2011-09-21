@@ -12,5 +12,5 @@
  */
 ?>
 <?php if ( in_the_loop() ): ?>
-	<img src="<?php print $this->url() ?>" class="<?php print $this->component()->image_class ?>">
+	<img src="<?php print $this->url() ?>" id="<?php $this->render_id() ?>" class="<?php $this->render_classes( $this->component()->image_class ) ?>">
 <?php endif; ?>

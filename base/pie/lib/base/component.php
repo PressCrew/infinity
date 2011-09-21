@@ -50,7 +50,17 @@ abstract class Pie_Easy_Component
 	 * Name of the default templates subdir
 	 */
 	const DEFAULT_TEMPLATE_DIR = 'templates';
-	
+
+	/**
+	 * The delimeter used for element ids.
+	 */
+	const ELEMENT_ID_DELIM = '-';
+
+	/**
+	 * The delimeter used for element classes.
+	 */
+	const ELEMENT_CLASS_DELIM = '-';
+
 	/**
 	 * The theme that created this concrete component
 	 *
@@ -518,6 +528,65 @@ abstract class Pie_Easy_Component
 	}
 
 	/**
+	 * Return unique css element id for this component
+	 *
+	 * @param string $suffix,...
+	 * @return string
+	 */
+	final public function get_element_id()
+	{
+		// every id has at least these pieces
+		$id = array(
+			'pie',
+			'easy',
+			'exts',
+			$this->policy()->get_handle(),
+			str_replace( '/', self::ELEMENT_ID_DELIM, $this->type ),
+			$this->name
+		);
+		
+		// any additional args?
+		if ( func_num_args() ) {
+			// push extra delimeter so we get a triple char
+			array_push( $id, self::ELEMENT_ID_DELIM );
+			// add each suffix
+			foreach( func_get_args() as $arg ) {
+				array_push( $id, $arg );
+			}
+		}
+
+		return esc_attr( implode( self::ELEMENT_ID_DELIM, $id ) );
+	}
+
+	/**
+	 * Return css class for this component
+	 *
+	 * @param string $suffix,...
+	 * @return string
+	 */
+	final public function get_element_class()
+	{
+		// every id has at least these pieces
+		$class = array(
+			'pie',
+			'easy',
+			'exts',
+			$this->policy()->get_handle(),
+			str_replace( '/', self::ELEMENT_CLASS_DELIM, $this->type ),
+		);
+
+		// any additional args?
+		if ( func_num_args() ) {
+			// add each suffix
+			foreach( func_get_args() as $arg ) {
+				array_push( $class, $arg );
+			}
+		}
+
+		return esc_attr( implode( self::ELEMENT_CLASS_DELIM, $class ) );
+	}
+	
+	/**
 	 * Return array of variables to extract() for use by the template
 	 *
 	 * @return array
@@ -650,24 +719,6 @@ abstract class Pie_Easy_Component
 		}
 	}
 
-	/**
-	 * Render wrapper classes
-	 *
-	 * @param string $class,...
-	 */
-	public function render_classes()
-	{
-		// get unlimited number of class args
-		$classes = func_get_args();
-
-		// append custom class if set
-		if ( $this->class ) {
-			$classes[] = $this->class;
-		}
-
-		// render them all delimited with a space
-		print esc_attr( join( ' ', $classes ) );
-	}
 }
 
 ?>

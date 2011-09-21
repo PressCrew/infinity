@@ -11,7 +11,7 @@
  * @since 1.0
  */
 ?>
-<div class="pie-easy-options-input-group" id="<?php $this->render_field_id() ?>">
+<div id="<?php $this->render_field_id() ?>" class="<?php $this->render_class( 'field' ) ?>">
 	<?php
 		// loop all field options
 		foreach ( $this->component()->field_options as $value => $display ) {
@@ -19,14 +19,11 @@
 			// keep track of current loop for element id
 			$loop = ($loop) ? $loop + 1 : 1;
 
-			// generate a unique element id
-			$element_id = sprintf( 'pie-easy-option-input-group-%s-%d', $this->component()->name, $loop );
-
 			// finally render the input element
-			$this->render_input( $this->component()->input_type, $value, $element_id );
+			$this->render_input( $this->component()->input_type, $value, $this->component()->get_element_id( $loop ) );
 
 			// render the label ?>
-			<label for="<?php print esc_attr( $element_id ) ?>"><?php print esc_html( $display ) ?></label><?php
+			<label for="<?php print esc_attr( $this->component()->get_element_id( $loop ) ) ?>"><?php print esc_html( $display ) ?></label><?php
 		}
 	?>
 </div>

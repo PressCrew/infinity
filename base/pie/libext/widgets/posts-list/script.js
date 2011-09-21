@@ -1,10 +1,10 @@
 /**
  * Enable nested sortable for posts list widget
  */
-function widgetPostsListSortable()
+function widgetPostsListSortable(selector)
 {
 	// init objects
-	var cont = jQuery('div.pie-easy-exts-widget-posts-list div.ui-widget-content'),
+	var cont = jQuery(selector),
 		posts = jQuery('ul', cont).first(),
 		message =
 			jQuery('<div></div>')
