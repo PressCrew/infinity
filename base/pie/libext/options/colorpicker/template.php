@@ -14,13 +14,13 @@
 
 <?php $this->render_input( 'text' ) ?>
 
-<div id="<?php print $element_id ?>" class="pie-easy-exts-options-colorpicker">
+<div id="<?php $this->render_id() ?>" class="<?php $this->render_class( 'launcher' ) ?>">
 	<div style="background-color: <?php $this->render_field_value() ?>;"></div>
 </div>
 
 <script type="text/javascript">
 	pieEasyColorPicker.init(
 		'input[name=<?php $this->render_name() ?>]',
-		'div#<?php print $element_id ?>'
+		'div#<?php $this->render_id() ?>'
 	);
 </script>

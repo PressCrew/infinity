@@ -32,7 +32,7 @@ abstract class Pie_Easy_Options_Renderer extends Pie_Easy_Renderer
 	public function render_begin( $block_class = null )
 	{
 		// begin rendering ?>
-		<div class="<?php $this->render_classes( 'pie-easy-options-block', $block_class ) ?>">
+		<div id="<?php $this->render_id() ?>" class="pie-easy-options-block <?php $this->render_classes() ?> <?php print $block_class ?>">
 			<?php $this->render_manifest() ?>
 			<div class="pie-easy-options-mesg">
 				<!-- flash messages for this option will render here -->

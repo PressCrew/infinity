@@ -1,16 +1,16 @@
-ul.pie-easy-exts-widget-menu.ui-menu {
+ul.pie-easy-exts-widgets-menu.ui-menu {
 	margin: 0;
 	padding: 0;
 	border: 0;
 	background: transparent;
 }
-	ul.pie-easy-exts-widget-menu.ui-menu a,
-	ul.pie-easy-exts-widget-menu.ui-menu a.ui-state-hover {
+	ul.pie-easy-exts-widgets-menu.ui-menu a,
+	ul.pie-easy-exts-widgets-menu.ui-menu a.ui-state-hover {
 		margin: 1px;
 	}
-	ul.pie-easy-exts-widget-menu.ui-menu .ui-button {
+	ul.pie-easy-exts-widgets-menu.ui-menu .ui-button {
 		min-width: 120px;
 	}
-	ul.pie-easy-exts-widget-menu.ui-menu .ui-button-text {
+	ul.pie-easy-exts-widgets-menu.ui-menu .ui-button-text {
 		text-align: left;
 	}

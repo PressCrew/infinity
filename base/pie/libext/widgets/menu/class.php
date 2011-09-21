@@ -42,7 +42,6 @@ class Pie_Easy_Exts_Widgets_Menu
 	public function get_template_vars()
 	{
 		return array(
-			'element_id' => $this->get_menu_id(),
 			'button_script' => $this->get_button_script()
 		);
 	}
@@ -65,26 +64,6 @@ class Pie_Easy_Exts_Widgets_Menu
 	}
 
 	/**
-	 * Format and return the menu element id
-	 *
-	 * @return string
-	 */
-	protected function get_menu_id()
-	{
-		return 'pie-easy-exts-widget-menu-' . esc_attr( $this->name );
-	}
-
-	/**
-	 * Format and return a menu item element id
-	 *
-	 * @return string
-	 */
-	protected function get_menu_item_id( $slug )
-	{
-		return 'pie-easy-exts-widget-menu-item---' . esc_attr( $slug );
-	}
-
-	/**
 	 * Render the list element that will be menufied
 	 */
 	public function render_items()
@@ -92,7 +71,7 @@ class Pie_Easy_Exts_Widgets_Menu
 		// render list
 		foreach( $this->get_items() as $item_slug => $item ) { ?>
 			<li>
-				<a id="<?php print $this->get_menu_item_id( $item_slug ) ?>" href="<?php print esc_attr( $item['href'] ) ?>"><?php print esc_attr( $item['text'] ) ?></a>
+				<a id="<?php print $this->get_element_id( $item_slug ) ?>" href="<?php print esc_attr( $item['href'] ) ?>"><?php print esc_attr( $item['text'] ) ?></a>
 			</li><?php
 		}
 	}
@@ -137,7 +116,7 @@ class Pie_Easy_Exts_Widgets_Menu
 			$script->begin_logic();
 			
 			// the button statement (one liner) ?>
-			jQuery('a#<?php print $this->get_menu_item_id( $item_slug ) ?>').button(<?php print $conf ?>); <?php
+			jQuery('a#<?php print $this->get_element_id( $item_slug ) ?>').button(<?php print $conf ?>); <?php
 
 			// end capturing
 			$script->end_logic();

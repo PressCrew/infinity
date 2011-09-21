@@ -233,17 +233,17 @@ class Pie_Easy_Exts_Widgets_Debugger
 	protected function render_item_id( $string = null )
 	{
 		if ( !is_null( $string ) ) {
+
 			$this->__id_stack__->push( $string );
-			print 'pie-easy-exts-widgets-debugger-item---' . implode('-', $this->__id_stack__->to_array() );
+			
+			print call_user_func_array(
+				array( $this, 'get_element_id' ),
+				$this->__id_stack__->to_array()
+			);
+			
 		} else {
 			$this->__id_stack__->pop();
 		}
 	}
 
-	public function get_template_vars()
-	{
-		return array(
-			'element_id' => 'pie-easy-exts-widgets-debugger---' . esc_attr( $this->name )
-		);
-	}
 }

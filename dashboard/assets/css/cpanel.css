@@ -56,6 +56,15 @@ div#infinity-cpanel-tabs div.infinity-docs {
 }
 
 /* ================ */
+/* ! Sections       */
+/* ================ */
+
+div.pie-easy-exts-sections-default-title {
+	margin: 0 0 12px 10px;
+	padding: 5px 10px;
+}
+
+/* ================ */
 /* ! Theme Options  */
 /* ================ */
 

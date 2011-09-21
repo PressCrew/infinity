@@ -129,11 +129,6 @@ div.pie-easy-options-fu div.pie-easy-options-fu-btn {
 	text-align: center;
 }
 
-div.pie-easy-sections-title {
-	margin: 0 0 12px 10px;
-	padding: 5px 10px;
-}
-
 /* make image editor elements align to top of JUI dialog */
 .ui-dialog-content div.image-editor table td {
 	vertical-align: top;

@@ -11,11 +11,11 @@
  * @since 1.0
  */
 ?>
-<div class="<?php $this->render_classes( 'pie-easy-sections-block' ) ?>">
-	<div class="ui-widget-header ui-state-active <?php $this->render_class_title( 'pie-easy-sections-title' ) ?>">
+<div class="<?php $this->render_classes() ?> <?php $this->render_class( 'block' ) ?>">
+	<div class="ui-widget-header ui-state-active <?php $this->render_class( 'title' ) ?> <?php $this->render_class_title() ?>">
 		<?php $this->render_title(); ?> <?php _e( 'Options', pie_easy_text_domain ); ?>
 	</div>
-	<div class="<?php $this->render_class_content( 'pie-easy-sections-content' ) ?>">
+	<div class="<?php $this->render_class( 'content' ) ?> <?php $this->render_class_content() ?>">
 		<?php $this->component()->render_components() ?>
 	</div>
 </div>

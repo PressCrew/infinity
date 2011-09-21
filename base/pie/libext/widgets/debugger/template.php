@@ -12,7 +12,7 @@
  */
 ?>
 
-<div id="<?php print $element_id ?>" class="pie-easy-exts-widget-debugger ui-widget">
+<div id="<?php $this->render_id() ?>" class="<?php $this->render_classes() ?> ui-widget">
 	<div class="ui-widget-header">
 		<?php $this->render_title() ?>
 	</div>
@@ -22,7 +22,7 @@
 </div>
 
 <script type="text/javascript">
-	jQuery('div#<?php print $element_id ?> div.ui-widget-content')
+	jQuery('div#<?php $this->render_id() ?> div.ui-widget-content')
 		.jstree({
 			'plugins': ['html_data','themeroller'],
 			'core': {'animation': 0}

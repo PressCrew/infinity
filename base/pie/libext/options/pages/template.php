@@ -11,6 +11,6 @@
  * @since 1.0
  */
 ?>
-<div class="pie-easy-options-input-group" id="<?php $this->render_field_id() ?>">
+<div class="<?php $this->render_class( 'field' ) ?>" id="<?php $this->render_field_id() ?>">
 	<?php $this->component()->render_field() ?>
 </div>

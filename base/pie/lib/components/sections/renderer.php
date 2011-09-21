@@ -22,24 +22,20 @@ abstract class Pie_Easy_Sections_Renderer extends Pie_Easy_Renderer
 	/**
 	 * Render the title class
 	 */
-	public function render_class_title( $class = null )
+	public function render_class_title()
 	{
-		$classes = $this->merge_classes( $class, $this->component()->class_title );
-
-		if ( $classes ) {
-			print esc_attr( $classes );
+		if ( $this->component()->class_title ) {
+			print esc_attr( $this->component()->class_title );
 		}
 	}
 
 	/**
 	 * Render the content class
 	 */
-	public function render_class_content( $class = null )
+	public function render_class_content()
 	{
-		$classes = $this->merge_classes( $class, $this->component()->class_content );
-
-		if ( $classes ) {
-			print esc_attr( $classes );
+		if ( $this->component()->class_content ) {
+			print esc_attr( $this->component()->class_content );
 		}
 	}
 
