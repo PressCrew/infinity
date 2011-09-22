@@ -7,7 +7,7 @@
  * This template is called from the renderer. All rendering methods
  * are available from the $this variable.
  *
- * @package infinity
+ * @package Infinity
  * @subpackage dashboard-templates
  */
 

@@ -2,15 +2,18 @@
 /**
  * Infinity Theme: WordPress setup
  *
- * @author Bowe Frankema <bowromir@gmail.com>
- * @link http://bp-tricks.com/
- * @copyright Copyright (C) 2010 Bowe Frankema
+ * @author Bowe Frankema <bowe@presscrew.com>
+ * @link http://infinity.presscrew.com/
+ * @copyright Copyright (C) 2010-2011 Bowe Frankema
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
- * @package infinity
+ * @package Infinity
  * @subpackage base
  * @since 1.0
  */
 
+/**
+ * Include custom comments, template tags, and walker classes
+ */
 require_once( INFINITY_BASE_DIR . DIRECTORY_SEPARATOR . 'comments.php' );
 require_once( INFINITY_BASE_DIR . DIRECTORY_SEPARATOR . 'templatetags.php' );
 require_once( INFINITY_BASE_DIR . DIRECTORY_SEPARATOR . 'walkers.php' );

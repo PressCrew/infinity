@@ -11,7 +11,7 @@
  *		$option		The current Pie_Easy_Options_Option object being rendered
  *		$renderer	The Pie_Easy_Options_Renderer object that is rendering the option
  *
- * @package infinity
+ * @package Infinity
  * @subpackage dashboard-templates
  */
 ?>

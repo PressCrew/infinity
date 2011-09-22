@@ -4,7 +4,7 @@
  *
  * DO NOT call template tags to render elements in this template!
  *
- * @package infinity
+ * @package Infinity
  * @subpackage dashboard-templates
  */
 ?>

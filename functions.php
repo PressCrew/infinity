@@ -2,15 +2,19 @@
 /**
  * Infinity Theme: theme functions
  *
- * @author Marshall Sorenson <marshall.sorenson@gmail.com>
- * @link http://marshallsorenson.com/
- * @copyright Copyright (C) 2010 Marshall Sorenson
+ * @author Marshall Sorenson <marshall@presscrew.com>
+ * @link http://infinity.presscrew.com/
+ * @copyright Copyright (C) 2010-2011 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
- * @package infinity
+ * @package Infinity
  * @since 1.0
  */
 
-// DO NOT EDIT these constants for any reason
+/**#@+
+ * Read only configuration constants
+ * 
+ * DO NOT EDIT these constants for any reason
+ */
 define( 'INFINITY_VERSION', '1.0b1' );
 define( 'INFINITY_NAME', 'infinity' );
 define( 'INFINITY_THEME_DIR', get_theme_root( INFINITY_NAME ) . DIRECTORY_SEPARATOR . INFINITY_NAME );
@@ -33,6 +37,7 @@ define( 'INFINITY_ADMIN_PAGE', INFINITY_NAME . '-theme' );
 define( 'INFINITY_ADMIN_TPLS_REL', INFINITY_ADMIN_REL . DIRECTORY_SEPARATOR . 'templates' );
 define( 'INFINITY_ADMIN_TPLS_DIR', INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'templates' );
 define( 'INFINITY_ADMIN_DOCS_DIR', INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'docs' );
+/**#@-*/
 
 // load PIE loader
 require_once( INFINITY_PIE_DIR . DIRECTORY_SEPARATOR . 'loader.php' );

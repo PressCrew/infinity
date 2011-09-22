@@ -2,11 +2,11 @@
 /**
  * Infinity Theme: template tags
  *
- * @author Marshall Sorenson <marshall.sorenson@gmail.com>
- * @link http://marshallsorenson.com/
- * @copyright Copyright (C) 2010 Marshall Sorenson
+ * @author Marshall Sorenson <marshall@presscrew.com>
+ * @link http://infinity.presscrew.com/
+ * @copyright Copyright (C) 2010-2011 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
- * @package infinity
+ * @package Infinity
  * @subpackage base
  * @since 1.0
  */

@@ -2,12 +2,12 @@
 /**
  * Infinity Theme: dashboard loader
  *
- * @author Marshall Sorenson <marshall.sorenson@gmail.com>
- * @link http://marshallsorenson.com/
- * @copyright Copyright (C) 2010 Marshall Sorenson
+ * @author Marshall Sorenson <marshall@presscrew.com>
+ * @link http://infinity.presscrew.com/
+ * @copyright Copyright (C) 2010-2011 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
- * @package dashboard
- * @subpackage loader
+ * @package Infinity
+ * @subpackage dashboard
  * @since 1.0
  */
 
@@ -17,10 +17,15 @@
 
 // admin menu
 if ( is_admin() ) {
+	/**
+	 * Include admin menu functions
+	 */
 	require_once( INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'menu.php' );
 }
 
-// control panel
+/**
+ * Include control panel functions
+ */
 require_once( INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'cpanel.php' );
 
 

@@ -2,8 +2,8 @@
  * Copyright (C) 2011 Bowe Frankema
  *
  * Contact Information:
- *     bowromir@gmail.com
- *     http://bp-tricks.com
+ *     bowe@presscrew.com
+ *     http://infinity.presscrew.com/
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
