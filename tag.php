@@ -1,33 +1,35 @@
 <?php
 /**
- * Infinity Theme: tag archive template
+ * Infinity Theme: tag template
  *
- * This template is a fork of the same template from
- * the Twenty Ten theme which ships with WordPress.
- *
+ * @author Bowe Frankema <bowromir@gmail.com>
+ * @link http://bp-tricks.com/
+ * @copyright Copyright (C) 2010 Bowe Frankema
+ * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
  * @package infinity
  * @subpackage templates
  * @since 1.0
  */
 
-infinity_get_header(); ?>
-
-		<div id="container">
-			<div id="content" role="main">
-
-				<h1 class="page-title"><?php
-					printf( __( 'Tag Archives: %s', infinity_text_domain ), '<span>' . single_tag_title( '', false ) . '</span>' );
-				?></h1>
-
-<?php
-/* Run the loop for the tag archive to output the posts
- * If you want to overload this in a child theme then include a file
- * called loop-tag.php and that will be used instead.
- */
- infinity_get_template_part( 'loop', 'tag' );
+	infinity_get_header();
 ?>
-			</div><!-- #content -->
-		</div><!-- #container -->
-
-<?php infinity_get_sidebar(); ?>
-<?php infinity_get_footer(); ?>
+	<div id="content" role="main">
+		<?php
+			do_action( 'open_content' );
+			do_action( 'open_tag' );
+		?>
+		<div class="page" id="blog-tag">
+			<?php
+				infinity_get_template_part( 'templates/parts/introduction-boxes' );
+				infinity_get_template_part( 'templates/loops/loop', 'tag' );
+			?>
+		</div>
+		<?php
+			do_action( 'close_tag' );
+			do_action( 'close_content' );
+		?>
+	</div><!-- #content -->
+<?php
+	infinity_get_sidebar();
+	infinity_get_footer();
+?>

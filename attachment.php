@@ -2,28 +2,33 @@
 /**
  * Infinity Theme: attachment template
  *
- * This template is a fork of the same template from
- * the Twenty Ten theme which ships with WordPress.
- *
+ * @author Bowe Frankema <bowromir@gmail.com>
+ * @link http://bp-tricks.com/
+ * @copyright Copyright (C) 2010 Bowe Frankema
+ * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
  * @package infinity
  * @subpackage templates
  * @since 1.0
  */
 
-infinity_get_header(); ?>
-
-		<div id="container" class="single-attachment">
-			<div id="content" role="main">
-
+	infinity_get_header();
+?>
+	<div id="content" role="main">
+		<?php
+			do_action( 'before_content' );
+			do_action( 'before_attachment' );
+		?>
+		<div class="page" id="single-attachment">
 			<?php
-			/* Run the loop to output the attachment.
-			 * If you want to overload this in a child theme then include a file
-			 * called loop-attachment.php and that will be used instead.
-			 */
-			infinity_get_template_part( 'loop', 'attachment' );
+				infinity_get_template_part( 'templates/loops/loop', 'attachment' );
 			?>
-
-			</div><!-- #content -->
-		</div><!-- #container -->
-
-<?php infinity_get_footer(); ?>
+		</div>	
+		<?php
+			do_action( 'after_attachment' );
+			do_action( 'after_content' );
+		?>
+	</div>
+<?php
+	infinity_get_sidebar();
+	infinity_get_footer();
+?>
