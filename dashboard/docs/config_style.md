@@ -8,7 +8,7 @@ is called to enqueue the styles where the configuration calls for it.
 
 ### Directives
 
-> *Important:* All styles will ALWAYS be enqueued, UNLESS an action or condition is set (see below)
+> *Important:* Styles will NEVER be enqueued, UNLESS an action or condition is set (see below)
 
 #### [style]
 
@@ -27,13 +27,6 @@ Here is an example:
 	sliders = "css/vendors/slider.css"
 	page-sidebar = "css/pagesidebars.css"
 	gfonts = "http://fonts.googleapis.com/css?family=Droid+Sans:regular"
-
-The above code would result in the following three stylesheets being enqueued.
-
-	http://mysite.com/wp-content/themes/my-theme/css/colors.css
-	http://mysite.com/wp-content/themes/my-theme/css/vendors/slider.css
-	http://mysite.com/wp-content/themes/my-theme/css/pagesidebars.css
-	http://fonts.googleapis.com/css?family=Droid+Sans:regular
 
 #### [style\_depends]
 
@@ -72,6 +65,11 @@ Here is an example:
 
 	[style_actions]
 	wp = "colors,sliders"
+
+The above code would result in the following three stylesheets being enqueued.
+
+	http://mysite.com/wp-content/themes/my-theme/css/colors.css
+	http://mysite.com/wp-content/themes/my-theme/css/vendors/slider.css
 
 In the above example, the `colors` and `sliders` stylesheets would only be enqueued if and when
 the `wp` action is called by WordPress. It is up to you to use actions that are called in time

@@ -33,7 +33,6 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 	 */
 	const TRIGGER_PATH = 'path';
 	const TRIGGER_DEPS = 'deps';
-	const TRIGGER_ALWAYS = 'always';
 	const TRIGGER_ACTS = 'actions';
 	const TRIGGER_CONDS = 'conditions';
 	const TRIGGER_PARAMS = 'params';
@@ -104,9 +103,6 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 		// register styles
 		add_action( 'pie_easy_register_styles', array( $this, 'register_styles' ) );
 		
-		// hook up styles always handler
-		add_action( 'pie_easy_enqueue_styles', array( $this, 'handle_style_always' ) );
-
 		// init scripts map
 		$this->scripts = new Pie_Easy_Map();
 
@@ -121,9 +117,6 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 
 		// register scripts
 		add_action( 'pie_easy_register_scripts', array( $this, 'register_scripts' ) );
-		
-		// hook up scripts always handler
-		add_action( 'pie_easy_enqueue_scripts', array( $this, 'handle_script_always' ), 10 );
 	}
 
 	/**
@@ -281,11 +274,6 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 		// init deps stack
 		$trigger->add( self::TRIGGER_DEPS, new Pie_Easy_Stack() );
 
-		// init empty always toggle
-		if ( $theme != '@' ) {
-			$trigger->add( self::TRIGGER_ALWAYS, true );
-		}
-
 		// init empty actions stack
 		$trigger->add( self::TRIGGER_ACTS, new Pie_Easy_Stack() );
 
@@ -433,8 +421,6 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 
 							// does trigger handle exist?
 							if ( $map->item_at( $handle ) ) {
-								// remove trigger's always toggle
-								$map->item_at($handle)->add(self::TRIGGER_ALWAYS, false);
 								// push onto trigger's trigger stack
 								$map->item_at($handle)->item_at($trigger_type)->push($action);
 								// push params onto trigger's params stack
@@ -664,33 +650,16 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 	 */
 	public function handle_style_internal()
 	{
+		// enq active theme stylesheet
+		if ( !is_admin() ) {
+			wp_enqueue_style( '@:style' );
+		}
+		
 		foreach ( Pie_Easy_Policy::all() as $policy ) {
 			// policy style handle
 			$handle = '@:' . $policy->get_handle();
 			// registered?
 			if ( wp_style_is( $handle, 'registered' ) ) {
-				wp_enqueue_style( $handle );
-			}
-		}
-	}
-
-	/**
-	 * Handle enqueing styles that should always be loaded
-	 *
-	 * @ignore
-	 */
-	public function handle_style_always()
-	{
-		// enq active theme stylesheet
-		if ( !is_admin() ) {
-			wp_enqueue_style( '@:style' );
-		}
-
-		// loop through styles and check if always is toggled on
-		foreach( $this->styles as $handle => $config_map ) {
-			// always load?
-			if ( $config_map->item_at(self::TRIGGER_ALWAYS) == true ) {
-				// yes, enqueue it!
 				wp_enqueue_style( $handle );
 			}
 		}
@@ -753,23 +722,6 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 			$handle = '@:' . $policy->get_handle();
 			// registered?
 			if ( wp_script_is( $handle, 'registered' ) ) {
-				wp_enqueue_script( $handle );
-			}
-		}
-	}
-
-	/**
-	 * Handle enqueing scripts that should always be loaded
-	 *
-	 * @ignore
-	 */
-	public function handle_script_always()
-	{
-		// loop through scripts and check if always is toggled on
-		foreach( $this->scripts as $handle => $config_map ) {
-			// always load?
-			if ( $config_map->item_at(self::TRIGGER_ALWAYS) == true ) {
-				// yes, enqueue it!
 				wp_enqueue_script( $handle );
 			}
 		}
