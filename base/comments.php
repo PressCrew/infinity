@@ -3,9 +3,9 @@
  * Infinity Theme: comments formatting
  *
  * @todo clean this up
- * @author Bowe Frankema <bowromir@gmail.com>
- * @link http://bp-tricks.com/
- * @package infinity
+ * @author Bowe Frankema <bowe@presscrew.com>
+ * @link http://infinity.presscrew.com/
+ * @package Infinity
  * @subpackage base
  * @since 1.0
  */
@@ -13,6 +13,13 @@
 // Fist full of comments
 if (!function_exists("custom_comment"))
 {
+	/**
+	 * Render a custom comment
+	 * 
+	 * @param string $comment
+	 * @param array $args
+	 * @param integer $depth
+	 */
 	function custom_comment( $comment, $args, $depth )
 	{
 		$GLOBALS['comment'] = $comment;

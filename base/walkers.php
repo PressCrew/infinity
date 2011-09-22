@@ -2,12 +2,12 @@
 /**
  * Infinity Theme: Custom Walkers
  *
- * @author Bowe Frankema <bowromir@gmail.com>
- * @link http://bp-tricks.com/
- * @copyright Copyright (C) 2010 Bowe Frankema
+ * @author Bowe Frankema <bowe@presscrew.com>
+ * @link http://infinity.presscrew.com/
+ * @copyright Copyright (C) 2010-2011 Bowe Frankema
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
- * @package infinity
- * @subpackage includes
+ * @package Infinity
+ * @subpackage base
  * @since 1.0
  */
 
@@ -17,7 +17,7 @@
  * Kudos to Kriesi (Kriesi.at) and Orman Clark (PremiumPixels.com)
  *
  * @package Infinity
- * @subpackage includes
+ * @subpackage base
  */
 class Infinity_Base_Walker_Nav_Menu extends Walker_Nav_Menu
 {

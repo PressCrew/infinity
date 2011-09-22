@@ -5,11 +5,11 @@
  * This template contains the Header Content. Fork this in your Child THeme
  * if you want to change the markup but don't want to mess around doctypes/meta etc!
  *
- * @author Bowe Frankema <bowromir@gmail.com>
- * @link http://bp-tricks.com/
- * @copyright Copyright (C) 2010 Bowe Frankema
+ * @author Bowe Frankema <bowe@presscrew.com>
+ * @link http://infinity.presscrew.com/
+ * @copyright Copyright (C) 2010-2011 Bowe Frankema
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
- * @package infinity
+ * @package Infinity
  * @subpackage templates
  * @since 1.0
  */

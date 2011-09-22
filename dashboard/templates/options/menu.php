@@ -5,7 +5,7 @@
  * Variables:
  *		$sections	Array of Pie_Easy_Sections_Section objects registered for options
  *
- * @package infinity
+ * @package Infinity
  * @subpackage dashboard-templates
  */
 ?>

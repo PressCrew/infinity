@@ -5,7 +5,7 @@
  * Variables:
  *		$options	Array of Pie_Easy_Options_Option objects that need to be rendered
  *
- * @package infinity
+ * @package Infinity
  * @subpackage dashboard-templates
  */
 ?>

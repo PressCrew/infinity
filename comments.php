@@ -4,7 +4,7 @@
  *
  * comments template
  *
- * @package infinity
+ * @package Infinity
  * @subpackage templates
  * @since 1.0
  */

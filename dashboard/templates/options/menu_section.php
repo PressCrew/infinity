@@ -7,7 +7,7 @@
  *		$children	Array of Pie_Easy_Sections_Section objects that are children of the section object
  *		$options	Array of Pie_Easy_Options_Option objects that are assigned to the section object
  *
- * @package infinity
+ * @package Infinity
  * @subpackage dashboard-templates
  */
 ?>

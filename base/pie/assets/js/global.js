@@ -1,9 +1,9 @@
 /**
- * Copyright (C) 2010  Marshall Sorenson
+ * Copyright (C) 2010-2011 Marshall Sorenson
  *
  * Contact Information:
- *     marshall.sorenson@gmail.com
- *     http://marshallsorenson.com
+ *     marshall@presscrew.com
+ *     http://infinity.presscrew.com/
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License

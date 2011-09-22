@@ -2,9 +2,9 @@
 /**
  * PIE API: loader class file
  *
- * @author Marshall Sorenson <marshall.sorenson@gmail.com>
- * @link http://marshallsorenson.com/
- * @copyright Copyright (C) 2010 Marshall Sorenson
+ * @author Marshall Sorenson <marshall@presscrew.com>
+ * @link http://infinity.presscrew.com/
+ * @copyright Copyright (C) 2010-2011 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
  * @package PIE
  * @since 1.0
@@ -57,7 +57,9 @@ if ( !defined( 'PIE_EASY_EXPORTS_SUBDIR' ) ) {
 	define( 'PIE_EASY_EXPORTS_SUBDIR', 'exports' );
 }
 
-// include the base class
+/**
+ * include the base class
+ */
 require_once
 	PIE_EASY_LIB_DIR .
 	DIRECTORY_SEPARATOR . 'base/base.php';
