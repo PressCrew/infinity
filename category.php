@@ -1,37 +1,35 @@
 <?php
 /**
- * Infinity Theme: category archive template
+ * Infinity Theme: category template
  *
- * This template is a fork of the same template from
- * the Twenty Ten theme which ships with WordPress.
- *
+ * @author Bowe Frankema <bowromir@gmail.com>
+ * @link http://bp-tricks.com/
+ * @copyright Copyright (C) 2010 Bowe Frankema
+ * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
  * @package infinity
  * @subpackage templates
  * @since 1.0
  */
 
-infinity_get_header(); ?>
-
-		<div id="container">
-			<div id="content" role="main">
-
-				<h1 class="page-title"><?php
-					printf( __( 'Category Archives: %s', infinity_text_domain ), '<span>' . single_cat_title( '', false ) . '</span>' );
-				?></h1>
-				<?php
-					$category_description = category_description();
-					if ( ! empty( $category_description ) )
-						echo '<div class="archive-meta">' . $category_description . '</div>';
-
-				/* Run the loop for the category page to output the posts.
-				 * If you want to overload this in a child theme then include a file
-				 * called loop-category.php and that will be used instead.
-				 */
-				infinity_get_template_part( 'loop', 'category' );
-				?>
-
-			</div><!-- #content -->
-		</div><!-- #container -->
-
-<?php infinity_get_sidebar(); ?>
-<?php infinity_get_footer(); ?>
+	infinity_get_header();
+?>
+	<div id="content" role="main">
+		<?php
+			do_action( 'open_content' );
+			do_action( 'open_category' );
+		?>
+		<div class="page" id="blog-category">
+			<?php
+				infinity_get_template_part( 'templates/parts/introduction-boxes' );
+				infinity_get_template_part( 'templates/loops/loop', 'category' );
+			?>
+		</div>
+		<?php
+			do_action( 'close_category' );
+			do_action( 'close_content' );
+		?>
+	</div>
+<?php
+	infinity_get_sidebar();
+	infinity_get_footer();
+?>

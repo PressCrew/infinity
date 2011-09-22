@@ -2,49 +2,67 @@
 /**
  * Infinity Theme: footer template
  *
- * This template is a fork of the same template from
- * the Twenty Ten theme which ships with WordPress.
- *
+ * @author Bowe Frankema <bowromir@gmail.com>
+ * @link http://bp-tricks.com/
+ * @copyright Copyright (C) 2010 Bowe Frankema
+ * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
  * @package infinity
  * @subpackage templates
  * @since 1.0
  */
 ?>
-	</div><!-- #main -->
 
-	<div id="footer" role="contentinfo">
-		<div id="colophon">
-
+		<?php
+			do_action( 'close_main_wrap' );
+		?>
+		</div>
+		<div class="footer-wrap">
+		<?php
+			do_action( 'open_footer_wrap' );
+		?>
+		<!-- begin footer -->
+		<div id="footer">
+			<?php
+				do_action( 'open_footer' );
+			?>
+			<!-- footer widgets -->
+			<div class="footer-widgets grid_24">
+				<div class="grid_8 footer-widget alpha" id="footer-widget-left">
+					<?php
+						dynamic_sidebar( 'Footer Left' );
+					?>
+				</div>
+				<div class="grid_8 footer-widget" id="footer-widget-middle">
+					<?php
+						dynamic_sidebar( 'Footer Middle' );
+					?>
+				</div>
+				<div class="grid_8 footer-widget omega" id="footer-widget-right">
+					<?php
+						dynamic_sidebar( 'Footer Right' );
+					?>
+				</div>
+			</div>
+			<div style="clear: both;"></div>
+			<div class="footer-menu" role="navigation">
+					<?php wp_nav_menu( array( 'theme_location' => 'footer-menu' ) ); ?>	
+			</div>
+			<div id="footer-info">
+				Theme: <a href="http://infinity.presscrew.com">Infinity</a><span class="footer-logo"></span>	<a rel="generator" href="http://infinity.presscrew.com">More freedom to create</a>. 
+			</div>
+			<?php
+				do_action( 'close_footer' );
+			?>
+		</div>
+		<?php
+			do_action( 'close_footer_wrap' );
+		?>
+		</div><!-- close container -->
+	</div>
 <?php
-	/* A sidebar in the footer? Yep. You can can customize
-	 * your footer with four columns of widgets.
-	 */
-	infinity_get_sidebar( 'footer' );
-?>
-
-			<div id="site-info">
-				<a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
-					<?php bloginfo( 'name' ); ?>
-				</a>
-			</div><!-- #site-info -->
-
-			<div id="site-generator">
-				<?php do_action( 'infinity_credits' ); ?>
-				<a href="<?php echo esc_url( __( 'http://wordpress.org/', infinity_text_domain ) ); ?>" title="<?php esc_attr_e( 'Semantic Personal Publishing Platform', infinity_text_domain ); ?>" rel="generator"><?php printf( __( 'Proudly powered by %s.', infinity_text_domain ), 'WordPress' ); ?></a>
-			</div><!-- #site-generator -->
-
-		</div><!-- #colophon -->
-	</div><!-- #footer -->
-
-</div><!-- #wrapper -->
-
-<?php
-	/* Always have wp_footer() just before the closing </body>
-	 * tag of your theme, or you will break many plugins, which
-	 * generally use this hook to reference JavaScript files.
-	 */
-
+	do_action( 'close_body' );
 	wp_footer();
 ?>
+
 </body>
 </html>

@@ -2,58 +2,32 @@
 /**
  * Infinity Theme: sidebar template
  *
- * This template is a fork of the same template from
- * the Twenty Ten theme which ships with WordPress.
- *
+ * @author Bowe Frankema <bowromir@gmail.com>
+ * @link http://bp-tricks.com/
+ * @copyright Copyright (C) 2010 Bowe Frankema
+ * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
  * @package infinity
  * @subpackage templates
  * @since 1.0
  */
+
+	do_action( 'before_sidebar' );
 ?>
 
-		<div id="primary" class="widget-area" role="complementary">
-			<ul class="xoxo">
-
-<?php
-	/* When we call the dynamic_sidebar() function, it'll spit out
-	 * the widgets for that widget area. If it instead returns false,
-	 * then the sidebar simply doesn't exist, so we'll hard-code in
-	 * some default sidebar stuff just in case.
-	 */
-	if ( ! dynamic_sidebar( 'primary-widget-area' ) ) : ?>
-
-			<li id="search" class="widget-container widget_search">
-				<?php infinity_get_search_form(); ?>
-			</li>
-
-			<li id="archives" class="widget-container">
-				<h3 class="widget-title"><?php _e( 'Archives', infinity_text_domain ); ?></h3>
-				<ul>
-					<?php wp_get_archives( 'type=monthly' ); ?>
-				</ul>
-			</li>
-
-			<li id="meta" class="widget-container">
-				<h3 class="widget-title"><?php _e( 'Meta', infinity_text_domain ); ?></h3>
-				<ul>
-					<?php wp_register(); ?>
-					<li><?php wp_loginout(); ?></li>
-					<?php wp_meta(); ?>
-				</ul>
-			</li>
-
-		<?php endif; // end primary widget area ?>
-			</ul>
-		</div><!-- #primary .widget-area -->
-
-<?php
-	// A second sidebar for widgets, just because.
-	if ( is_active_sidebar( 'secondary-widget-area' ) ) : ?>
-
-		<div id="secondary" class="widget-area" role="complementary">
-			<ul class="xoxo">
-				<?php dynamic_sidebar( 'secondary-widget-area' ); ?>
-			</ul>
-		</div><!-- #secondary .widget-area -->
-
-<?php endif; ?>
+<div id="sidebar">
+	<div id="inner-sidebar">
+	<!-- sidebar -->
+		<?php
+			do_action( 'open_sidebar' );?>
+			
+		<?php	
+			// Load Sidebars
+			infinity_base_sidebars();
+			do_action( 'close_sidebar' );
+		?>
+	
+	<?php
+		do_action( 'after_sidebar' );
+	?>
+	</div>
+</div>

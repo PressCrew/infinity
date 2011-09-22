@@ -1,30 +1,34 @@
 <?php
 /**
- * Infinity Theme: single posts template
+ * Infinity Theme: single template
  *
- * This template is a fork of the same template from
- * the Twenty Ten theme which ships with WordPress.
- *
+ * @author Bowe Frankema <bowromir@gmail.com>
+ * @link http://bp-tricks.com/
+ * @copyright Copyright (C) 2010 Bowe Frankema
+ * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
  * @package infinity
  * @subpackage templates
  * @since 1.0
  */
 
-infinity_get_header(); ?>
-
-		<div id="container">
-			<div id="content" role="main">
-
+	infinity_get_header();
+?>
+	<div id="content" role="main">
+		<?php
+			do_action( 'open_content' );
+			do_action( 'open_single' );
+		?>
+		<div class="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 			<?php
-			/* Run the loop to output the post.
-			 * If you want to overload this in a child theme then include a file
-			 * called loop-single.php and that will be used instead.
-			 */
-			infinity_get_template_part( 'loop', 'single' );
+				infinity_get_template_part( 'templates/loops/loop', 'single' );
 			?>
-
-			</div><!-- #content -->
-		</div><!-- #container -->
-
-<?php infinity_get_sidebar(); ?>
-<?php infinity_get_footer(); ?>
+		</div>
+		<?php
+			do_action( 'close_single' );
+			do_action( 'close_content' );
+		?>
+	</div>
+<?php
+	infinity_get_sidebar();
+	infinity_get_footer();
+?>

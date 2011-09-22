@@ -1,0 +1,48 @@
+<?php
+/**
+ * Infinity Theme: Post Meta Top Template
+ *
+ * @author Bowe Frankema <bowromir@gmail.com>
+ * @link http://bp-tricks.com/
+ * @copyright Copyright (C) 2010 Bowe Frankema
+ * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
+ * @package infinity
+ * @subpackage templates
+ * @since 1.0
+ *
+ * This template display the post meta date attached to a post. You can hook into this section 
+ * to add your own stuff as well!
+ */
+?>
+<p class="post-meta-data">
+<?php
+	do_action( 'open_loop_post_meta_data_top' );
+?>					
+	<span class="post-author">
+		<?php
+			the_author_link();
+		?>
+	</span>
+	<span class="post-category">
+		<?php 
+			the_category(', ') 
+		?>						
+	</span>
+	<span class="time-posted">
+		<?php
+			print human_time_diff(get_the_time('U'), current_time('timestamp')) . ' ago';
+		?>
+	</span>
+	<span class="post-comments">
+		<?php
+			comments_popup_link(
+				__( 'No Comments &#187;', infinity_text_domain ),
+				__( '1 Comment &#187;', infinity_text_domain ),
+				__( '% Comments &#187;', infinity_text_domain )
+			);
+		?>
+	</span>
+<?php
+	do_action( 'close_loop_post_meta_data_top' );
+?>
+</p>
