@@ -8,7 +8,7 @@ is called to enqueue the scripts where the configuration calls for it.
 
 ### Directives
 
-> *Important:* All scripts will ALWAYS be enqueued, UNLESS an action or condition is set (see below)
+> *Important:* Scripts will NEVER be enqueued, UNLESS an action or condition is set (see below)
 
 #### [script]
 
@@ -23,17 +23,10 @@ The format is:
 Here is an example:
 
 	[script]
-	sliders = "js/vendors/slider.js"
+	sliders = "js/vendors/sliders.js"
 	ajax = "js/ajax.js"
 	custom = "js/custom.js"
 	gmaps = http://maps.google.com/maps/api/js
-
-The above code would result in the following three scripts being enqueued.
-
-	http://mysite.com/wp-content/themes/my-theme/js/vendors/slider.js
-	http://mysite.com/wp-content/themes/my-theme/js/ajax.js
-	http://mysite.com/wp-content/themes/my-theme/js/custom.js
-	http://maps.google.com/maps/api/js
 
 #### [script\_depends]
 
@@ -72,6 +65,11 @@ Here is an example:
 
 	[script_actions]
 	wp = "sliders,custom"
+
+The above code would result in the following three scripts being enqueued.
+
+	http://mysite.com/wp-content/themes/my-theme/js/vendors/sliders.js
+	http://mysite.com/wp-content/themes/my-theme/js/custom.js
 
 In the above example, the `sliders` and `custom` scripts would only be enqueued if and when
 the `wp` action is called by WordPress. It is up to you to use actions that are called in time

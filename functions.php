@@ -34,9 +34,16 @@ define( 'INFINITY_ADMIN_TPLS_REL', INFINITY_ADMIN_REL . DIRECTORY_SEPARATOR . 't
 define( 'INFINITY_ADMIN_TPLS_DIR', INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'templates' );
 define( 'INFINITY_ADMIN_DOCS_DIR', INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'docs' );
 
-// load PIE and initialize
+// load PIE loader
 require_once( INFINITY_PIE_DIR . DIRECTORY_SEPARATOR . 'loader.php' );
+
+// initialize PIE
 Pie_Easy_Loader::init( INFINITY_PIE_URL, 'Infinity_Exts' );
+
+// initialize enqueuer and configure actions
+Pie_Easy_Enqueue::instance()
+	->on_action( 'template_redirect' )
+	->on_action( 'load-toplevel_page_' . INFINITY_ADMIN_PAGE );
 
 // load Infinity API
 require_once( INFINITY_PIEXT_DIR . DIRECTORY_SEPARATOR . 'scheme.php' );

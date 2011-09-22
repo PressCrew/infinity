@@ -49,15 +49,11 @@ final class Pie_Easy_Enqueue extends Pie_Easy_Base
 	private $ui_stylesheet;
 
 	/**
-	 * This is a singleton
+	 * @ignore
 	 */
 	private function __construct()
 	{
-		// use our our actions because things get too freaking confusing
-		add_action( 'template_redirect', array($this, 'do_enqueue_styles'), 99999 );
-		add_action( 'template_redirect', array($this, 'do_enqueue_scripts'), 99999 );
-		add_action( 'admin_init', array($this, 'do_enqueue_styles'), 99999 );
-		add_action( 'admin_init', array($this, 'do_enqueue_scripts'), 99999 );
+		// this is a singleton
 	}
 
 	/**
@@ -69,6 +65,7 @@ final class Pie_Easy_Enqueue extends Pie_Easy_Base
 	{
 		if ( !self::$instance instanceof self ) {
 			self::$instance = new self();
+			self::$instance->init();
 		}
 
 		return self::$instance;
@@ -76,19 +73,31 @@ final class Pie_Easy_Enqueue extends Pie_Easy_Base
 
 	/**
 	 * Initialize actions required for enqueueing to work properly.
-	 *
-	 * This must be called before anything has created the $wp_scripts global
 	 */
-	static public function init()
+	private function init()
 	{
-		global $wp_scripts;
+		// negative priorities work... shhhh...
+		add_action( 'after_setup_theme', array( self::instance(), 'register_ui_scripts' ), -99999 );
+	}
 
-		if ( !$wp_scripts instanceof WP_Scripts ) {
-			$wp_scripts = new WP_Scripts();
+	/**
+	 * Add an action on which to attach the enqueuer
+	 *
+	 * @param string $action
+	 * @param integer $priority
+	 */
+	public function on_action( $action, $priority = null )
+	{
+		// handle empty priority
+		if ( empty( $priority ) ) {
+			$priority = 99999;
 		}
 		
-		// negative priorities work... shhhh...
-		add_action( 'after_setup_theme', array( self::instance(), 'override_jui' ), -99999 );
+		// use our our actions because things get too freaking confusing
+		add_action( $action, array($this, 'do_enqueue_styles'), $priority );
+		add_action( $action, array($this, 'do_enqueue_scripts'), $priority );
+
+		return $this;
 	}
 
 	/**
@@ -303,15 +312,19 @@ final class Pie_Easy_Enqueue extends Pie_Easy_Base
 	}
 
 	/**
-	 * Replace all registered jQuery UI scripts with the most recent version
+	 * Register additional jQuery UI scripts
 	 *
 	 * Never call this manually unless you really know what you are doing!
 	 *
 	 * @ignore
 	 */
-	public function override_jui()
+	public function register_ui_scripts()
 	{
 		global $wp_scripts;
+
+		if ( !$wp_scripts instanceof WP_Scripts ) {
+			$wp_scripts = new WP_Scripts();
+		}
 
 		$deps_c = array( 'jquery-ui-core' );
 		$deps_cw = array_merge( $deps_c, array( 'jquery-ui-widget' ) );
@@ -319,68 +332,31 @@ final class Pie_Easy_Enqueue extends Pie_Easy_Base
 		$deps_cwp = array_merge( $deps_cw, array( 'jquery-ui-position' ) );
 
 		$jui = array(
-			// core
-			'jquery-ui-core' =>
-				array( 'src' => 'jquery.ui.core.min.js', 'deps' => array('jquery') ),
-			'jquery-ui-widget' =>
-				array( 'src' => 'jquery.ui.widget.min.js', 'deps' => array('jquery') ),
-			'jquery-ui-position' =>
-				array( 'src' => 'jquery.ui.position.min.js', 'deps' => array('jquery') ),
-			'jquery-ui-mouse' =>
-				array( 'src' => 'jquery.ui.mouse.min.js', 'deps' => $deps_cw ),
-			// interactions
-			'jquery-ui-draggable' =>
-				array( 'src' => 'jquery.ui.draggable.min.js', 'deps' => $deps_cwm ),
-			'jquery-ui-droppable' =>
-				array( 'src' => 'jquery.ui.droppable.min.js', 'deps' => $deps_cwm ),
-			'jquery-ui-resizable' =>
-				array( 'src' => 'jquery.ui.resizable.min.js', 'deps' => $deps_cwm ),
-			'jquery-ui-selectable' =>
-				array( 'src' => 'jquery.ui.selectable.min.js', 'deps' => $deps_cwm ),
-			'jquery-ui-sortable' =>
-				array( 'src' => 'jquery.ui.sortable.min.js', 'deps' => $deps_cwm ),
 			// widgets
 			'jquery-ui-accordion' =>
 				array( 'src' => 'jquery.ui.accordion.min.js', 'deps' => $deps_cw ),
 			'jquery-ui-autocomplete' =>
 				array( 'src' => 'jquery.ui.autocomplete.min.js', 'deps' => $deps_cwp ),
-			'jquery-ui-button' =>
-				array( 'src' => 'jquery.ui.button.min.js', 'deps' => $deps_cw ),
 			'jquery-ui-datepicker' =>
 				array( 'src' => 'jquery.ui.datepicker.min.js', 'deps' => $deps_c ),
-			'jquery-ui-dialog' =>
-				array( 'src' => 'jquery.ui.dialog.min.js', 'deps' => $deps_cwp ),
+			'jquery-ui-menu' =>
+				array( 'src' => 'jquery.ui.menu.min.js', 'deps' => $deps_cw ),
 			'jquery-ui-progressbar' =>
 				array( 'src' => 'jquery.ui.progressbar.min.js', 'deps' => $deps_cw ),
 			'jquery-ui-slider' =>
-				array( 'src' => 'jquery.ui.slider.min.js', 'deps' => $deps_cwm ),
-			'jquery-ui-tabs' =>
-				array( 'src' => 'jquery.ui.tabs.min.js', 'deps' => $deps_cw )
+				array( 'src' => 'jquery.ui.slider.min.js', 'deps' => $deps_cwm )
 		);
 
-		// override stable scripts
+		// register more scripts
 		foreach ( $jui as $handle => $cfg ) {
-			$this->override_script(
-				$wp_scripts,
-				$handle,
-				PIE_EASY_JS_URL . '/' . $cfg['src'],
-				$cfg['deps'],
-				'1.8.11',
-				false,
-				1
-			);
+			// make sure not registered already
+			if ( !$wp_scripts->query( $handle ) ) {
+				// register it
+				$wp_scripts->add( $handle, PIE_EASY_JS_URL . '/' . $cfg['src'], $cfg['deps'], '1.8.12' );
+				// put in footer group
+				$wp_scripts->add_data( $handle, 'group', 1 );
+			}
 		}
-
-		// menu is experimental!
-		$this->override_script(
-			$wp_scripts,
-			'jquery-ui-menu',
-			PIE_EASY_JS_URL . '/' . 'jquery.ui.menu.min.js',
-			$deps_cw,
-			'1.9m2',
-			false,
-			1
-		);
 	}
 
 	/**
