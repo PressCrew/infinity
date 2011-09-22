@@ -222,14 +222,14 @@ body {
     position: absolute;
     top: 30%;
 }
-#site-title a {
-    margin-bottom: -29px;
-    display: block;
+#pie-easy-exts-features-header-logo-infinity-header-logo {
+	margin-bottom: 0px;
 }
-#site-logo {
-    top: 23%;
-    left: 20px;
-    position: absolute;
+#pie-easy-exts-features-header-logo-infinity-header-logo a {
+position: absolute;
+top: 40%;
+left: 20px;
+margin-bottom: 0px;
 }
 /* Navigation Styling */
 /* Menu Wrappers */
