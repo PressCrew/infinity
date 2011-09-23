@@ -100,7 +100,7 @@ function pieEasyCpanel(options)
 	// init cpanel tabs
 	cpanel_t.tabs({
 		tabTemplate: "<li><a href='#{href}'>#{label}</a><span class='ui-icon ui-icon-close'></span></li>",
-		panelTemplate: '<div class="pie-easy-ui-cpanel-tab"></div>',
+		panelTemplate: '<div class="pie-easy-ui-cpanel-tab ui-corner-bottom"></div>',
 		add: function(event, ui) {
 			// update tab target
 			$(ui.tab).attr('target', $(ui.tab).prop('hash').substring(1));
@@ -301,7 +301,7 @@ function pieEasyCpanel(options)
 			tp_ot = panel.offset().top;
 			tp_hc = cp_hc - (tp_ot - cp_ot);
 			cpanel.css({'height': cp_hc});
-			panel.css({'height': tp_hc - 40});
+			panel.css({'height': tp_hc - 36});
 		} else {
 			// kill heights
 			cpanel.height('auto');

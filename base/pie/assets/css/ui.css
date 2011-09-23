@@ -138,16 +138,6 @@ div.pie-easy-options-fu div.pie-easy-options-fu-btn {
 /* ! Control Panel Styling   */
 /* ========================= */
 
-/* accordion tweaks */
-div.pie-easy-ui-cpanel .ui-accordion .ui-accordion-header a {
-	font-weight: bold;
-}
-
-/* button tweaks */
-div.pie-easy-ui-cpanel .ui-button .ui-button-text {
-	font-weight: bold;
-}
-
 /* dialog tweaks */
 div.pie-easy-ui-cpanel .ui-dialog {
 	padding: 0;
@@ -167,39 +157,30 @@ div.pie-easy-ui-cpanel .ui-tabs .ui-tabs-nav {
 	background: transparent;
 	border-width: 0 0 1px 0;
 }
-	div.pie-easy-ui-cpanel .ui-tabs .ui-tabs-nav li a {
-		font-size: 1.1em;
-		font-weight: bold;
-	}
 
 /* main container */
 div.pie-easy-ui-cpanel {
 	position: relative;
 	overflow: hidden;
-	min-width: 1000px;
+	width: 1000px;
+	min-width: 850px;
 	min-height: 600px;
 	margin: 25px 0 20px 0;
-    padding: 20px 0 10px 0;
-	border: 1px solid #dddddd;
-	border-radius: 6px;
-	-moz-border-radius: 6px;
-	-webkit-border-radius: 6px;
-	background-color: #dedede;
 }
 
 /* header */
 div.pie-easy-ui-cpanel-header {
 	position: relative;
 	padding-bottom: 6px;
+	min-height: 50px;
 }
 
 div.pie-easy-ui-cpanel-toolbar {
-	height: 50px;
+	height: 36px;
 	padding: 0 12px 0 12px;
-	background-color: #555555;
 }
 	div.pie-easy-ui-cpanel-toolbar .ui-button {
-		top: 10px;
+		top: 6px;
 		margin-right: 8px;
 	}
 	div.pie-easy-ui-cpanel-toolbar .ui-button-icon-primary {
@@ -221,7 +202,7 @@ div.pie-easy-ui-cpanel-toolbar {
 	a.pie-easy-ui-cpanel-toolbar-refresh.ui-button,
 	input.pie-easy-ui-cpanel-toolbar-scroll + label.ui-button {
 		float: right;
-		top: 12px;
+		top: 6px;
 		right: 8px;
 		padding: 0;
 	}
@@ -234,8 +215,6 @@ div.pie-easy-ui-cpanel-toolbar {
 		position: absolute;
 		z-index: 3;
 		padding: 4px 6px 6px 8px;
-		background-color: #dedede;
-		border: 1px dotted #b6b6b6;
 	}
 		div.pie-easy-ui-cpanel-toolbar .ui-menu .ui-button {
 			top: 0;
@@ -249,9 +228,7 @@ div.pie-easy-ui-cpanel-toolbar {
 div.pie-easy-ui-cpanel-tabs {
 	position: relative;
 	z-index: 2;
-	padding: 8px 10px;
-	border: 0;
-	background: transparent;
+	padding: 12px 12px 8px 12px;
 }
 	div.pie-easy-ui-cpanel-tabs ul.ui-tabs-nav  {
 		font-size: 12px;
@@ -264,15 +241,8 @@ div.pie-easy-ui-cpanel-tabs {
 		float: right;
 		cursor: pointer;
 	}
-	div.pie-easy-ui-cpanel-tabs div.ui-tabs-panel {
-		border-bottom: 1px solid #aaaaaa;
-	}
 	div.pie-easy-ui-cpanel-tabs div.pie-easy-ui-cpanel-tab {
-		min-height: 400px;
-		border-radius: 0 0 8px 8px;
-		-moz-border-radius: 0 0 8px 8px;
-		-webkit-border-radius: 0 0 8px 8px;
-		background: #f4f4f4;
+		min-height: 450px;
 		overflow: hidden;
 	}
 		div.pie-easy-ui-cpanel-tabs div.pie-easy-ui-cpanel-tab.pie-easy-ui-cpanel-tab-scroll {
@@ -280,6 +250,7 @@ div.pie-easy-ui-cpanel-tabs {
 		}
 
 /* input styling */
+/* TODO move these to options css */
 div.pie-easy-ui-cpanel select,
 div.pie-easy-ui-cpanel textarea,
 div.pie-easy-ui-cpanel input[type="button"],
@@ -289,6 +260,7 @@ div.pie-easy-ui-cpanel input[type="reset"],
 div.pie-easy-ui-cpanel input[type="submit"],
 div.pie-easy-ui-cpanel input[type="text"] {
 	padding: 3px;
-	border: 1px solid #cecece;
+	border-width: 1px;
+	border-style: solid;
 	outline: none;
 }
