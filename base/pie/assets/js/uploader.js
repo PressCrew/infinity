@@ -180,8 +180,8 @@
 		ibar: function(){
 			var
 				$this = this,
-				_bar = $('fieldset.pie-easy-options-fu-img div.pie-easy-options-fu-ibar', $this),
-				_diaZoom = $('fieldset.pie-easy-options-fu-img div.pie-easy-options-fu-zoom', $this),
+				_bar = $('fieldset.pie-easy-uploader-img div.pie-easy-uploader-ibar', $this),
+				_diaZoom = $('fieldset.pie-easy-uploader-img div.pie-easy-uploader-zoom', $this),
 				_btnZoom = _bar.children().eq(0),
 				_btnEdit = _bar.children().eq(1),
 				_btnRem = _bar.children().eq(2);
@@ -267,8 +267,8 @@
 		attach: function(){
 			var
 				$this = this,
-				_input = $('div.pie-easy-options-fu-btn input[type=hidden]', this),
-				_image = $('fieldset.pie-easy-options-fu-img p img', this);
+				_input = $('div.pie-easy-uploader-btn input[type=hidden]', this),
+				_image = $('fieldset.pie-easy-uploader-img p img', this);
 			return {
 				id: function (value) {
 					if (typeof value == 'undefined') {
@@ -308,8 +308,8 @@
 		},
 		status: function(){
 			var
-				_stat = $('fieldset.pie-easy-options-fu-stat', this),
-				_log = $('fieldset.pie-easy-options-fu-stat textarea', this),
+				_stat = $('fieldset.pie-easy-uploader-stat', this),
+				_log = $('fieldset.pie-easy-uploader-stat textarea', this),
 				_prg = $('div', _stat),
 				_prgTxt = $('p', _prg);
 			return {
