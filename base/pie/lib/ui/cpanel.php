@@ -36,7 +36,7 @@ final class Pie_Easy_Ui_Cpanel extends Pie_Easy_Base
 		$this->css_id = esc_attr( $css_id );
 		
 		// render opening markup ?>
-		<div id="<?php $this->render_id() ?>" class="pie-easy-ui-cpanel"><?php
+		<div id="<?php $this->render_id() ?>" class="pie-easy-ui-cpanel ui-widget"><?php
 	}
 
 	public function render_end()
@@ -68,7 +68,7 @@ final class Pie_Easy_Ui_Cpanel extends Pie_Easy_Base
 	public function render_header( $template )
 	{
 		// render the header container ?>
-		<div id="<?php $this->render_id('header') ?>" class="pie-easy-ui-cpanel-header">
+		<div id="<?php $this->render_id('header') ?>" class="pie-easy-ui-cpanel-header ui-widget-header ui-corner-top">
 			<?php Pie_Easy_Scheme::instance()->locate_template( $template, true ) ?>
 		</div><?php
 	}
@@ -76,7 +76,7 @@ final class Pie_Easy_Ui_Cpanel extends Pie_Easy_Base
 	public function render_toolbar()
 	{
 		// render the toolbar container ?>
-		<div id="<?php $this->render_id('toolbar') ?>" class="pie-easy-ui-cpanel-toolbar">
+		<div id="<?php $this->render_id('toolbar') ?>" class="pie-easy-ui-cpanel-toolbar ui-widget-header">
 			<a id="<?php $this->render_id('toolbar','menu') ?>" class="pie-easy-ui-cpanel-toolbar-menu pie-easy-ui-cpanel-context-menu" title="<?php print esc_attr( $this->title ) ?>"><?php print esc_html( $this->title ) ?></a>
 			<?php $this->render_toolbar_menu() ?>
 			<?php $this->render_toolbar_buttons() ?>
@@ -128,7 +128,7 @@ final class Pie_Easy_Ui_Cpanel extends Pie_Easy_Base
 	public function render_tabs()
 	{
 		// render tabs container ?>
-		<div id="<?php $this->render_id('tabs') ?>" class="pie-easy-ui-cpanel-tabs">
+		<div id="<?php $this->render_id('tabs') ?>" class="pie-easy-ui-cpanel-tabs ui-widget-content">
 			<ul><!-- tabs are injected here --></ul>
 		</div><?php
 	}
