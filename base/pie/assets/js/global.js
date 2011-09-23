@@ -124,7 +124,7 @@
 					$form = $option.closest('form');
 
 				// init uploaders
-				$('div.pie-easy-options-fu', $option).each(function(){
+				$('div.pie-easy-uploader', $option).each(function(){
 					$(this).pieEasyUploader();
 				});
 

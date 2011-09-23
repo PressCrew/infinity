@@ -53,14 +53,14 @@ div.pie-easy-options-mesg {
 }
 
 /* Uploader */
-div.pie-easy-options-fu fieldset {
+div.pie-easy-uploader fieldset {
 	margin-top: 18px\9; /* IE hack part 1 of 2 */
 	min-height: 150px;
 	padding: 10px;
 	border: 1px solid gray;
 	background-color: white;
 }
-	div.pie-easy-options-fu fieldset legend {
+	div.pie-easy-uploader fieldset legend {
 		margin-top: -24px\9; /* IE hack part 2 of 2 */
 		margin-left: 3px;
 		padding: 3px 5px 3px 3px;
@@ -73,7 +73,7 @@ div.pie-easy-options-fu fieldset {
 		font-style: italic;
 		
 	}
-div.pie-easy-options-fu fieldset.pie-easy-options-fu-img {
+div.pie-easy-uploader fieldset.pie-easy-uploader-img {
 	float: left;
 	width: 170px;
 	margin-right: 20px;
@@ -82,48 +82,48 @@ div.pie-easy-options-fu fieldset.pie-easy-options-fu-img {
 	-webkit-border-radius: 6px;
 	text-align: center;
 }
-	div.pie-easy-options-fu fieldset.pie-easy-options-fu-img p {
+	div.pie-easy-uploader fieldset.pie-easy-uploader-img p {
 		min-height: 70px;
 	}
-	div.pie-easy-options-fu fieldset.pie-easy-options-fu-img p img {
+	div.pie-easy-uploader fieldset.pie-easy-uploader-img p img {
 		max-height: 150px;
 		max-width: 150px;
 	}
-	div.pie-easy-options-fu fieldset.pie-easy-options-fu-img div {
+	div.pie-easy-uploader fieldset.pie-easy-uploader-img div {
 		padding: 5px 0 0 5px;
 		text-align: center;
 		display: none;
 	}
-		div.pie-easy-options-fu fieldset.pie-easy-options-fu-img div a span.ui-icon {
+		div.pie-easy-uploader fieldset.pie-easy-uploader-img div a span.ui-icon {
 			left: 0.1em;
 		}
-		div.pie-easy-options-fu fieldset.pie-easy-options-fu-img div a span.ui-button-text {
+		div.pie-easy-uploader fieldset.pie-easy-uploader-img div a span.ui-button-text {
 			font-size: 10px;
 			padding-left: 1.8em;
 			padding-right: 0.5em;
 		}
-div.pie-easy-options-fu fieldset.pie-easy-options-fu-stat {
+div.pie-easy-uploader fieldset.pie-easy-uploader-stat {
 	float: left;
 	height: 180px;
 	width: 300px;
 	padding-bottom: 30px;
 	display: none;
 }
-	div.pie-easy-options-fu fieldset.pie-easy-options-fu-stat textarea {
+	div.pie-easy-uploader fieldset.pie-easy-uploader-stat textarea {
 		height: 80%;
 		width: 100%;
 		margin-bottom: 5px;
 		font-size: 10px;
 	}
-	div.pie-easy-options-fu fieldset.pie-easy-options-fu-stat div {
+	div.pie-easy-uploader fieldset.pie-easy-uploader-stat div {
 	}
-	div.pie-easy-options-fu fieldset.pie-easy-options-fu-stat div p {
+	div.pie-easy-uploader fieldset.pie-easy-uploader-stat div p {
 		float: left;
 		margin: 0 0 0 0;
 		padding: 6px 0 0 10px;
 		color: black;
 	}
-div.pie-easy-options-fu div.pie-easy-options-fu-btn {
+div.pie-easy-uploader div.pie-easy-uploader-btn {
 	clear: left;
 	width: 190px;
 	text-align: center;
