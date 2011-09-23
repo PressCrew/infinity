@@ -134,7 +134,7 @@ div.pie-easy-ui-cpanel {
 }
 
 /* tabs tweaks */
-div.pie-easy-ui-cpanel .ui-tabs .ui-tabs-nav {
+div.pie-easy-ui-cpanel > div.ui-tabs > ul.ui-tabs-nav {
 	padding: 0;
 	background: transparent;
 	border-width: 0 0 1px 0;
@@ -213,7 +213,7 @@ div.pie-easy-ui-cpanel-toolbar {
 div.pie-easy-ui-cpanel-tabs {
 	position: relative;
 	z-index: 2;
-	padding: 12px 12px 8px 12px;
+	padding: 12px;
 }
 	div.pie-easy-ui-cpanel-tabs > ul.ui-tabs-nav  {
 		font-size: 12px;
