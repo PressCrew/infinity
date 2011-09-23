@@ -15,13 +15,10 @@
 // Files
 //
 
-// admin menu
-if ( is_admin() ) {
-	/**
-	 * Include admin menu functions
-	 */
-	require_once( INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'menu.php' );
-}
+/**
+ * Include admin menu functions
+ */
+require_once( INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'menu.php' );
 
 /**
  * Include control panel functions
