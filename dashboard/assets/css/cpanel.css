@@ -2,189 +2,79 @@
 /* ! Control Panel Styling   */
 /* ========================= */
 
-/* accordion tweaks */
-div#infinity-cpanel .ui-accordion .ui-accordion-header,
-div#infinity-cpanel .ui-accordion .ui-accordion-content {
-	-moz-border-radius: 0;
-	-webkit-border-radius: 0;
-	border-radius: 0;
-}
-
 /* main container */
 div#infinity-cpanel {
     background: url(../images/ui_pattern_bg.png) repeat;
-	box-shadow: 1px 1px #eee, 3px 3px 2px #a5a5a5;
-	-moz-box-shadow: 1px 1px #eee, 3px 3px 2px #a5a5a5;
-	-webkit-box-shadow: 1px 1px #eee, 3px 3px 2px #a5a5a5;
+	box-shadow: 1px 1px 1px #bbbbbb, 3px 3px 8px #cccccc;
+	-moz-box-shadow: 1px 1px 1px #bbbbbb, 3px 3px 8px #cccccc;
+	-webkit-box-shadow: 1px 1px 1px #bbbbbb, 3px 3px 8px #cccccc;
+}
+
+div.infinity-cpanel .ui-button .ui-button-text {
+	font-weight: bold;
+}
+
+div#infinity-cpanel-header {
+    height: 85px;
+	margin: 3px;
+	background: url('../images/cpanel_header_bg.png') repeat-x;
 }
 
 div#infinity-cpanel-header-logo {
-	height: 60px;
-	width: 350px;
+	position: absolute;
+	top: 20px;
+	left: 30px;
+	height: 57px;
+	width: 225px;
 	background: url('../images/cpanel_header_logo.png') no-repeat;
 }
+
 div#infinity-cpanel-header-version {
 	float: right;
 	clear: right;
 	position: relative;
-	top: 42px;
+	top: 65px;
 	right: 20px;
 	font-size: 10px;
-	opacity: .65;
-	filter: Alpha(Opacity=55);
 	letter-spacing: .05em;
+	color: #dddddd;
 }
+	div#infinity-cpanel-header-version a,
+	div#infinity-cpanel-header-version a:visited {
+		color: #dddddd;
+	}
 
 div#infinity-cpanel-toolbar {
-	background: url('../images/cpanel_header_toolbar.png') repeat;
+	margin: 3px;
 }
 
 div#infinity-cpanel-toolbar ul.ui-menu {
-	box-shadow: 1px 1px 6px #888888;
-	-moz-box-shadow: 1px 1px 6px #888888;
-	-webkit-box-shadow: 1px 1px 6px #888888;
+	background: #fafafa;
+	border: 1px dotted #b6b6b6;
+	box-shadow: 2px 2px 6px #aaaaaa;
+	-moz-box-shadow: 2px 2px 6px #aaaaaa;
+	-webkit-box-shadow: 2px 2px 6px #aaaaaa;
+}
+
+div#infinity-cpanel-tabs {
+	margin: 3px;
+	background: #f9f9f9;
 }
 
 div#infinity-cpanel-tabs div.ui-tabs-panel {
-	box-shadow: inset 1px 0px #eeeeee, inset 2px 0px 2px #aaaaaa, inset 1px 0px 2px #cccccc;
-	-moz-box-shadow: inset 1px 0px #eeeeee, inset 2px 0px 2px #aaaaaa, inset 1px 0px 2px #cccccc;
-	-webkit-box-shadow: inset 1px 0px #eeeeee, inset 2px 0px 2px #aaaaaa, inset 1px 0px 2px #cccccc;
+	background: white;
+	box-shadow: inset 0px -1px 2px 2px #dddddd;
+	-moz-box-shadow: inset 0px -1px 2px 2px #dddddd;
+	-webkit-box-shadow: inset 0px -1px 2px 2px #dddddd;
+}
+
+div#infinity-cpanel-tabs > ul.ui-tabs-nav li a {
+	font-size: 1.1em;
+	font-weight: bold;
 }
 
 div#infinity-cpanel-tabs div.infinity-docs {
-	padding: 0 1.5em 1.5em 1.5em;
-}
-
-/* ================ */
-/* ! Sections       */
-/* ================ */
-
-div.pie-easy-exts-sections-default-title {
-	margin: 0 0 12px 10px;
-	padding: 5px 10px;
-}
-
-/* ================ */
-/* ! Theme Options  */
-/* ================ */
-
-div#infinity-cpanel-options {
-	border: 0;
-}
-
-div#infinity-cpanel div.infinity-cpanel-options-menu {
-	float: left;
-	width: 220px;
-}
-	div#infinity-cpanel div.infinity-cpanel-options-menu div.ui-accordion-header {
-		font-size: 13px;
-	}
-	div#infinity-cpanel div.infinity-cpanel-options-menu ul.ui-accordion-content {
-		padding: 0.8em 0.5em;
-		background: url(../images/ui_pattern_bg.png) repeat;
-	}
-	div#infinity-cpanel div.infinity-cpanel-options-menu ul.ui-accordion-content li {
-		line-height: 100%;
-		font-size: 14px;
-	}
-	div#infinity-cpanel .ui-accordion-header a.infinity-cpanel-options-menu-showall {
-		padding: 0;
-		font-size: 10px;
-		position: absolute;
-		top: 8px;
-		right: 4px;
-	}
-	div#infinity-cpanel .ui-accordion-header a.infinity-cpanel-options-menu-showall span {
-		height: 11px;
-		line-height: 14px;
-		margin-bottom: 0;
-		padding: 1px 5px 3px 5px;
-		font-size: 10px;
-	}
-
-div#infinity-cpanel div.infinity-cpanel-options-submenu {
-	float: none;
-	width: auto;
-}
-
-div#infinity-cpanel-options-content {
-	padding: 0px 10px 10px 235px;
-}
-div#infinity-cpanel-options-content code {
-	display: block;
-	margin-bottom: 10px;
-	padding: 4px;
-	white-space: pre;
-	background: none repeat scroll 0 0 #ffffff;
-	border: 1px solid #dddddd;
-	border-radius: 3px;
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
-}
-
-div#infinity-cpanel-options-flash {
-	display: none;
-}
-
-div#infinity-cpanel div.infinity-cpanel-options-single {
-	width: 100%;
-	border: 0px;
-	padding-left: 7px;
-	margin-bottom: 15px;
-	background: transparent;
-}
-	div#infinity-cpanel div.infinity-cpanel-options-single ul.ui-tabs-nav {
-		padding-top: 0.1em;
-	}
-		div#infinity-cpanel div.infinity-cpanel-options-single ul.ui-tabs-nav li {
-		}
-			div#infinity-cpanel div.infinity-cpanel-options-single ul.ui-tabs-nav li a {
-				line-height: 90%;
-				font-size: 10px;
-			}
-
-	div#infinity-cpanel div.infinity-cpanel-options-single div.ui-tabs-panel {
-		background: url(../images/ui_pattern_bg.png) repeat scroll 0 0 #f8f8f8;
-		border-radius: 0 0 6px 6px;
-		-moz-border-radius: 0 0 6px 6px;
-		-webkit-border-radius: 0 0 6px 6px;
-		padding: 0.5em 1em 0.25em;
-	}
-		div#infinity-cpanel div.infinity-cpanel-options-single div.ui-tabs-panel div.infinity-cpanel-options-last-modified {
-			line-height: 9px;
-			font-size: 9px;
-			text-align: right;
-		}
-
-div#infinity-cpanel div.infinity-cpanel-options-single-flash {
-	display: none;
-}
-	div#infinity-cpanel div.infinity-cpanel-options-single-flash div.pie-easy-flash {
-		margin-bottom: 10px;
-	}
-
-div#infinity-cpanel div.infinity-cpanel-options-single-header {
-	height: 25px;
-	padding: 5px;
-}
-	div#infinity-cpanel div.infinity-cpanel-options-single-header label {
-		display: block;
-		float: left;
-		margin-top: 5px;
-	}
-	div#infinity-cpanel div.infinity-cpanel-options-single-header a.ui-button {
-		display: block;
-		float: right;
-		top: 18px;
-		margin-left: 7px;
-	}
-	div#infinity-cpanel div.infinity-cpanel-options-single-header a .ui-button-text {
-		font-size: 11px;
-		padding: 0.2em 2.1em 0.2em 1em;
-	}
-
-div#infinity-cpanel div.infinity-cpanel-options-single textarea {
-	width: 90%;
+	padding: 0 1.5em 1.5em 1em;
 }
 
 /* input styling */
@@ -230,118 +120,4 @@ div#infinity-cpanel input[type="text"]:focus {
 	-webkit-box-shadow: 0 2px 3px rgba(161,202,226,0.5) inset, 0 1px 0 rgba(255,255,255,0.2);
 	-moz-box-shadow: 0 2px 3px rgba(161,202,226,0.5) inset, 0 1px 0 rgba(255,255,255,0.2);
 	box-shadow: 0 2px 3px rgba(161,202,226,0.5) inset, 0 1px 0 rgba(255,255,255,0.2);
-}
-
-/* ====================== */
-/* ! Theme Documentation  */
-/* ====================== */
-
-.infinity-docs {
-    padding: 0;
-}
-.infinity-docs * {
-    font-family: "Helvetica","Arial",sans-serif;
-    font-size: 12px;
-	color: #222222;
-}
-.infinity-docs p,
-.infinity-docs ul,
-.infinity-docs ol {
-	margin: 0 0 1.5em 0;
-}
-.infinity-docs blockquote {
-	margin: 0 0 1.5em 1em;
-	padding: 6px 12px;
-	color: #111111;
-	font-style: italic;
-	letter-spacing: 1px;
-	max-width: 70%;
-	background-color: #e4f2fd;
-	border: 1px dotted #869edf;
-	border-radius: 3px;
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
-}
-.infinity-docs blockquote p {
-	margin: 0;
-}
-.infinity-docs pre code {
-	display: inline-block;
-	margin: 0;
-	padding: 6px 12px;
-	color: #864304;
-	font-family: "Lucida Console","Courier New",monospace;
-	background-color: #fff;
-	border: 1px dashed darkgray;
-	border-radius: 3px;
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
-}
-.infinity-docs pre {
-	margin: 0 0 1.5em 1em;
-}
-.infinity-docs h1,
-.infinity-docs h2,
-.infinity-docs h3,
-.infinity-docs h4,
-.infinity-docs h5,
-.infinity-docs h6 {
-	padding: 0;
-	color: #222222;
-	font-family: "Helvetica","Arial",sans-serif;
-	font-weight: bolder;
-	font-style: normal;
-	line-height: 110%;
-	border-bottom: 1px solid #dddddd;
-}
-.infinity-docs h1 { font-size: 2em; margin: .67em 0;}
-.infinity-docs h2 { font-size: 1.5em; margin: .75em 0;}
-.infinity-docs h3 { font-size: 1.17em; margin: .83em 0; }
-.infinity-docs h4 { font-size: 1em; margin: 1.12em 0; }
-.infinity-docs h5 { font-size: .83em; margin: 1.5em 0; }
-.infinity-docs h6 { font-size: .75em; margin: 1.67em 0; }
-.infinity-docs ul,
-.infinity-docs ol {
-	margin: .3em 0 1.5em 1em;
-}
-.infinity-docs ol {
-	list-style-type: decimal;
-}
-.infinity-docs ul {
-	list-style-type: disc;
-}
-.infinity-docs ul li,
-.infinity-docs ol li {
-	margin-left: 1.4em;
-	padding-left: 0;
-}
-	.infinity-docs ul li ul,
-	.infinity-docs ol li ol {
-		margin-bottom: 0.5em;
-	}
-.infinity-docs ul.infinity-docs-menu {
-	margin-bottom: 3em;
-}
-.infinity-docs ul.infinity-docs-menu li a {
-	font-size: 1.2em;
-}
-.infinity-docs em {
-	font-weight: bold;
-}
-.infinity-docs.infinity-docs-toc {
-	float: right;
-	width: 25%;
-}
-.infinity-docs.infinity-docs-page {
-	float: left;
-	width: 65%;
-}
-
-/* ================== */
-/* ! WordPress Tweaks */
-/* ================== */
-
-/* burn in hell update nag */
-div.update-nag {
-	display: none;
 }

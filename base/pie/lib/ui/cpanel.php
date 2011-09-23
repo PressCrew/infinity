@@ -36,7 +36,7 @@ final class Pie_Easy_Ui_Cpanel extends Pie_Easy_Base
 		$this->css_id = esc_attr( $css_id );
 		
 		// render opening markup ?>
-		<div id="<?php $this->render_id() ?>" class="pie-easy-ui-cpanel ui-widget"><?php
+		<div id="<?php $this->render_id() ?>" class="pie-easy-ui-cpanel ui-widget ui-corner-all"><?php
 	}
 
 	public function render_end()
