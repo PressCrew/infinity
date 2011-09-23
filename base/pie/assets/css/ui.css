@@ -230,9 +230,12 @@ div.pie-easy-ui-cpanel-tabs {
 	z-index: 2;
 	padding: 12px 12px 8px 12px;
 }
-	div.pie-easy-ui-cpanel-tabs ul.ui-tabs-nav  {
+	div.pie-easy-ui-cpanel-tabs > ul.ui-tabs-nav  {
 		font-size: 12px;
 		margin-left: 2px;
+		border-radius: 0;
+		-moz-border-radius: 0;
+		-webkit-border-radius: 0;
 	}
 	div.pie-easy-ui-cpanel-tabs ul.ui-tabs-nav li a {
 		padding: 0.4em 1em 0.5em 1em;
