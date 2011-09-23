@@ -22,9 +22,9 @@
 
 ?>
 
-<div class="pie-easy-uploader">
-	<fieldset class="pie-easy-uploader-img ui-corner-all">
-		<legend class="ui-corner-all"><?php _e('Current Image', pie_easy_text_domain) ?></legend>
+<div class="pie-easy-uploader ui-widget">
+	<fieldset class="pie-easy-uploader-img ui-widget-content ui-corner-all">
+		<legend class="ui-widget-header ui-corner-all"><?php _e('Current Image', pie_easy_text_domain) ?></legend>
 		<p><img src="<?php print esc_attr( $attach_url ) ?>" alt="" /></p>
 		<div class="pie-easy-uploader-ibar">
 			<a><?php _e('Zoom', pie_easy_text_domain) ?></a>
@@ -35,8 +35,8 @@
 			<img src="<?php print esc_attr( $attach_url ) ?>"  height="<?php print esc_attr( $attach_height ) ?>" width="<?php print esc_attr( $attach_width ) ?>" alt="">
 		</div>
 	</fieldset>
-	<fieldset class="pie-easy-uploader-stat ui-corner-all">
-		<legend class="ui-corner-all"><?php _e( 'Upload Status', pie_easy_text_domain ) ?></legend>
+	<fieldset class="pie-easy-uploader-stat ui-widget-content ui-corner-all">
+		<legend class="ui-widget-header ui-corner-all"><?php _e( 'Upload Status', pie_easy_text_domain ) ?></legend>
 		<textarea></textarea><div><p></p></div>
 	</fieldset>
 	<div class="pie-easy-uploader-btn">

@@ -57,29 +57,18 @@ div.pie-easy-uploader fieldset {
 	margin-top: 18px\9; /* IE hack part 1 of 2 */
 	min-height: 150px;
 	padding: 10px;
-	border: 1px solid gray;
-	background-color: white;
 }
 	div.pie-easy-uploader fieldset legend {
 		margin-top: -24px\9; /* IE hack part 2 of 2 */
 		margin-left: 3px;
 		padding: 3px 5px 3px 3px;
-		border: 1px solid gray;
-		border-radius: 5px;
-		-moz-border-radius: 5px;
-		-webkit-border-radius: 5px;
-		background-color: #efefef;
 		font-size: 11px;
 		font-style: italic;
-		
 	}
 div.pie-easy-uploader fieldset.pie-easy-uploader-img {
 	float: left;
 	width: 170px;
 	margin-right: 20px;
-	border-radius: 6px;
-	-moz-border-radius: 6px;
-	-webkit-border-radius: 6px;
 	text-align: center;
 }
 	div.pie-easy-uploader fieldset.pie-easy-uploader-img p {
@@ -90,7 +79,6 @@ div.pie-easy-uploader fieldset.pie-easy-uploader-img {
 		max-width: 150px;
 	}
 	div.pie-easy-uploader fieldset.pie-easy-uploader-img div {
-		padding: 5px 0 0 5px;
 		text-align: center;
 		display: none;
 	}
@@ -115,13 +103,10 @@ div.pie-easy-uploader fieldset.pie-easy-uploader-stat {
 		margin-bottom: 5px;
 		font-size: 10px;
 	}
-	div.pie-easy-uploader fieldset.pie-easy-uploader-stat div {
-	}
 	div.pie-easy-uploader fieldset.pie-easy-uploader-stat div p {
 		float: left;
 		margin: 0 0 0 0;
 		padding: 6px 0 0 10px;
-		color: black;
 	}
 div.pie-easy-uploader div.pie-easy-uploader-btn {
 	clear: left;
@@ -138,6 +123,23 @@ div.pie-easy-uploader div.pie-easy-uploader-btn {
 /* ! Control Panel Styling   */
 /* ========================= */
 
+/* main container */
+div.pie-easy-ui-cpanel {
+	position: relative;
+	overflow: hidden;
+	width: 1000px;
+	min-width: 850px;
+	min-height: 600px;
+	margin: 25px 0 20px 0;
+}
+
+/* tabs tweaks */
+div.pie-easy-ui-cpanel .ui-tabs .ui-tabs-nav {
+	padding: 0;
+	background: transparent;
+	border-width: 0 0 1px 0;
+}
+
 /* dialog tweaks */
 div.pie-easy-ui-cpanel .ui-dialog {
 	padding: 0;
@@ -150,23 +152,6 @@ div.pie-easy-ui-cpanel .ui-dialog {
 		padding: 0;
 		height: 16px;
 	}
-
-/* tabs tweaks */
-div.pie-easy-ui-cpanel .ui-tabs .ui-tabs-nav {
-	padding: 0;
-	background: transparent;
-	border-width: 0 0 1px 0;
-}
-
-/* main container */
-div.pie-easy-ui-cpanel {
-	position: relative;
-	overflow: hidden;
-	width: 1000px;
-	min-width: 850px;
-	min-height: 600px;
-	margin: 25px 0 20px 0;
-}
 
 /* header */
 div.pie-easy-ui-cpanel-header {
