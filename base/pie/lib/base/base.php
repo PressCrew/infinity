@@ -22,8 +22,7 @@ abstract class Pie_Easy_Base
 	/**
 	 * Getter
 	 *
-	 * @ignore
-	 * @param string $name
+	 * @param string $name Property name
 	 */
 	public function __get( $name )
 	{
@@ -34,9 +33,8 @@ abstract class Pie_Easy_Base
 	/**
 	 * Setter
 	 * 
-	 * @ignore
-	 * @param string $name
-	 * @param mixed $value
+	 * @param string $name Property name
+	 * @param mixed $value Property value
 	 */
 	public function __set( $name, $value )
 	{
@@ -47,8 +45,7 @@ abstract class Pie_Easy_Base
 	/**
 	 * Issetter
 	 *
-	 * @ignore
-	 * @param string $name
+	 * @param string $name Property name
 	 */
 	public function __isset( $name )
 	{
@@ -59,8 +56,7 @@ abstract class Pie_Easy_Base
 	/**
 	 * Issetter
 	 *
-	 * @ignore
-	 * @param string $name
+	 * @param string $name Property name
 	 */
 	public function __unset( $name )
 	{
@@ -71,9 +67,8 @@ abstract class Pie_Easy_Base
 	/**
 	 * Caller
 	 *
-	 * @ignore
-	 * @param string $name
-	 * @param array $arguments 
+	 * @param string $name Method name
+	 * @param array $arguments Method arguments
 	 */
 	public function __call( $name, $arguments )
 	{
@@ -84,7 +79,7 @@ abstract class Pie_Easy_Base
 	/**
 	 * toStringer
 	 *
-	 * @ignore
+	 * @return string
 	 */
 	public function __toString()
 	{

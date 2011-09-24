@@ -23,6 +23,8 @@ class Pie_Easy_Exts_Options_Yes
 	extends Pie_Easy_Exts_Options_Checkbox
 		implements Pie_Easy_Options_Option_Auto_Field
 {
+	/**
+	 */
 	public function load_field_options()
 	{
 		return array(

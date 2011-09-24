@@ -24,19 +24,36 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 	 * String on which to split "string packed" values
 	 */
 	const ITEM_DELIM = ',';
+
 	/**
 	 * String on which to split "string packed" parameters
 	 */
 	const PARAM_DELIM = ':';
-	/**#@+
-	 *  Trigger map key
+
+	/**
+	 *  Trigger map path key
 	 */
 	const TRIGGER_PATH = 'path';
+
+	/**
+	 *  Trigger map dependencies key
+	 */
 	const TRIGGER_DEPS = 'deps';
+
+	/**
+	 *  Trigger map actions key
+	 */
 	const TRIGGER_ACTS = 'actions';
+
+	/**
+	 *  Trigger map conditions key
+	 */
 	const TRIGGER_CONDS = 'conditions';
+
+	/**
+	 *  Trigger map parameters key
+	 */
 	const TRIGGER_PARAMS = 'params';
-	/**#@-*/
 
 	/**
 	 * @var Pie_Easy_Scheme
@@ -154,7 +171,8 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 	/**
 	 * Inject internal stylesheets into style directives
 	 *
-	 * @ignore
+	 * @internal
+	 * @param Pie_Easy_Map $style_defs
 	 */
 	private function setup_internal_styles( Pie_Easy_Map $style_defs )
 	{
@@ -194,7 +212,8 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 	/**
 	 * Inject internal scripts into script directives
 	 *
-	 * @ignore
+	 * @internal
+	 * @param Pie_Easy_Map $script_defs
 	 */
 	private function setup_internal_scripts( Pie_Easy_Map $script_defs )
 	{
@@ -260,7 +279,9 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 	 * Define ONE trigger
 	 *
 	 * @param Pie_Easy_Map $map
-	 * @param Pie_Easy_Map $directive_map
+	 * @param string $theme
+	 * @param string $handle
+	 * @param string $path
 	 * @return boolean
 	 */
 	private function define_one( Pie_Easy_Map $map, $theme, $handle, $path )
@@ -290,16 +311,15 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 	}
 
 	/**
-	 * @ignore
+	 * @internal
 	 * @param Pie_Easy_Map $style_defs
 	 */
-	private function define_styles( $style_defs )
+	private function define_styles( Pie_Easy_Map $style_defs )
 	{
 		return $this->define( $this->styles, $style_defs );
 	}
 
 	/**
-	 * @ignore
 	 * @param Pie_Easy_Map $script_defs
 	 */
 	private function define_scripts( Pie_Easy_Map $script_defs )
@@ -371,6 +391,7 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 	 * @param Pie_Easy_Map $map
 	 * @param string $directive_name
 	 * @param string $trigger_type
+	 * @param string $trigger_action
 	 * @return boolean
 	 */
 	private function triggers( Pie_Easy_Map $map, $directive_name, $trigger_type, $trigger_action = null )
@@ -646,7 +667,7 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 	/**
 	 * Handle enqueing internal styles
 	 *
-	 * @ignore
+	 * @internal
 	 */
 	public function handle_style_internal()
 	{
@@ -668,7 +689,7 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 	/**
 	 * Handle enqueing styles on configured actions
 	 *
-	 * @ignore
+	 * @internal
 	 */
 	public function handle_style_actions()
 	{
@@ -688,7 +709,7 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 	/**
 	 * Handle enqueing styles when specific conditions are met
 	 *
-	 * @ignore
+	 * @internal
 	 */
 	public function handle_style_conditions()
 	{
@@ -713,7 +734,7 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 	/**
 	 * Handle enqueing internal scripts
 	 *
-	 * @ignore
+	 * @internal
 	 */
 	public function handle_script_internal()
 	{
@@ -730,7 +751,7 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 	/**
 	 * Handle enqueing scripts on configured actions
 	 *
-	 * @ignore
+	 * @internal
 	 */
 	public function handle_script_actions()
 	{
@@ -750,7 +771,7 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 	/**
 	 * Handle enqueing scripts when specific conditions are met
 	 *
-	 * @ignore
+	 * @internal
 	 */
 	public function handle_script_conditions()
 	{
@@ -775,7 +796,7 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 	/**
 	 * Handle setting of the document domain
 	 *
-	 * @ignore
+	 * @internal
 	 */
 	public function handle_script_domain()
 	{
@@ -813,8 +834,7 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 	 * This only applies to styles handled by this special enqueuer
 	 *
 	 * @param string $handle
-	 * @param string $path
-	 * @param array $deps
+	 * @param string $dep
 	 */
 	public function style_dep( $handle, $dep )
 	{

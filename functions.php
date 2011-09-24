@@ -10,36 +10,98 @@
  * @since 1.0
  */
 
-/**#@+
- * Read only configuration constants
- * 
- * DO NOT EDIT these constants for any reason
+//
+// Read only onfiguration constants
+//
+// DO NOT EDIT these constants for any reason
+//
+
+/**
+ * Infinity version number
  */
 define( 'INFINITY_VERSION', '1.0b1' );
-define( 'INFINITY_NAME', 'infinity' );
-define( 'INFINITY_THEME_DIR', get_theme_root( INFINITY_NAME ) . DIRECTORY_SEPARATOR . INFINITY_NAME );
-define( 'INFINITY_THEME_URL', get_theme_root_uri( INFINITY_NAME ) . '/' . INFINITY_NAME );
-define( 'INFINITY_BASE_DIR', INFINITY_THEME_DIR . DIRECTORY_SEPARATOR . 'base' );
-define( 'INFINITY_BASE_URL', INFINITY_THEME_URL . '/base' );
-define( 'INFINITY_PIE_DIR', INFINITY_BASE_DIR . DIRECTORY_SEPARATOR . 'pie' );
-define( 'INFINITY_PIE_URL', INFINITY_BASE_URL . '/pie' );
-define( 'INFINITY_PIEXT_DIR', INFINITY_BASE_DIR . DIRECTORY_SEPARATOR . 'piext' );
-define( 'INFINITY_PIEXT_URL', INFINITY_BASE_URL . '/piext' );
-define( 'INFINITY_ADMIN_REL', 'dashboard' );
-define( 'INFINITY_ADMIN_DIR', INFINITY_THEME_DIR . DIRECTORY_SEPARATOR . 'dashboard' );
-define( 'INFINITY_ADMIN_URL', INFINITY_THEME_URL . '/dashboard' );
-define( 'INFINITY_EXPORT_DIR', INFINITY_THEME_DIR . DIRECTORY_SEPARATOR . 'export' );
-define( 'INFINITY_EXPORT_URL', INFINITY_THEME_URL . '/export' );
-define( 'INFINITY_LANGUAGES_DIR', INFINITY_THEME_DIR . DIRECTORY_SEPARATOR . 'languages' );
-define( 'INFINITY_TEXT_DOMAIN', INFINITY_NAME . '-theme' );
-define( 'infinity_text_domain', INFINITY_TEXT_DOMAIN ); // for code completion
-define( 'INFINITY_ADMIN_PAGE', INFINITY_NAME . '-theme' );
-define( 'INFINITY_ADMIN_TPLS_REL', INFINITY_ADMIN_REL . DIRECTORY_SEPARATOR . 'templates' );
-define( 'INFINITY_ADMIN_TPLS_DIR', INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'templates' );
-define( 'INFINITY_ADMIN_DOCS_DIR', INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'docs' );
-/**#@-*/
 
-// load PIE loader
+/**
+ * Infinity theme name (slug)
+ */
+define( 'INFINITY_NAME', 'infinity' );
+
+/**
+ * Infinity theme directory path
+ */
+define( 'INFINITY_THEME_DIR', get_theme_root( INFINITY_NAME ) . DIRECTORY_SEPARATOR . INFINITY_NAME );
+/**
+ * Infinity theme directory url
+ */
+define( 'INFINITY_THEME_URL', get_theme_root_uri( INFINITY_NAME ) . '/' . INFINITY_NAME );
+/**
+ * Infinity "base" (includes) directory path
+ */
+define( 'INFINITY_BASE_DIR', INFINITY_THEME_DIR . DIRECTORY_SEPARATOR . 'base' );
+/**
+ * Infinity "base" (includes) url
+ */
+define( 'INFINITY_BASE_URL', INFINITY_THEME_URL . '/base' );
+/**
+ * PIE directory path
+ */
+define( 'INFINITY_PIE_DIR', INFINITY_BASE_DIR . DIRECTORY_SEPARATOR . 'pie' );
+/**
+ * PIE directory URL
+ */
+define( 'INFINITY_PIE_URL', INFINITY_BASE_URL . '/pie' );
+/**
+ * Infinity's PIE implementation directory path
+ */
+define( 'INFINITY_PIEXT_DIR', INFINITY_BASE_DIR . DIRECTORY_SEPARATOR . 'piext' );
+/**
+ * Infinity's PIE implementation url
+ */
+define( 'INFINITY_PIEXT_URL', INFINITY_BASE_URL . '/piext' );
+/**
+ * Infinity admin directory relative path
+ */
+define( 'INFINITY_ADMIN_REL', 'dashboard' );
+/**
+ * Infinity admin directory absolute path
+ */
+define( 'INFINITY_ADMIN_DIR', INFINITY_THEME_DIR . DIRECTORY_SEPARATOR . INFINITY_ADMIN_REL );
+/**
+ * Infinity admin directory url
+ */
+define( 'INFINITY_ADMIN_URL', INFINITY_THEME_URL . '/' . INFINITY_ADMIN_REL );
+/**
+ * Infinity languages directory path
+ */
+define( 'INFINITY_LANGUAGES_DIR', INFINITY_THEME_DIR . DIRECTORY_SEPARATOR . 'languages' );
+/**
+ * Infinity text domain
+ */
+define( 'INFINITY_TEXT_DOMAIN', INFINITY_NAME . '-theme' );
+/**
+ * Infinity text domain alias (for code completion)
+ */
+define( 'infinity_text_domain', INFINITY_TEXT_DOMAIN );
+/**
+ * Infinity admin page name
+ */
+define( 'INFINITY_ADMIN_PAGE', INFINITY_NAME . '-theme' );
+/**
+ * Infinity admin templates relative directory path
+ */
+define( 'INFINITY_ADMIN_TPLS_REL', INFINITY_ADMIN_REL . DIRECTORY_SEPARATOR . 'templates' );
+/**
+ * Infinity admin templates absolute directory path
+ */
+define( 'INFINITY_ADMIN_TPLS_DIR', INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'templates' );
+/**
+ * Infinity admin documentation directory path
+ */
+define( 'INFINITY_ADMIN_DOCS_DIR', INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'docs' );
+
+/**
+ * Load the PIE lib loader
+ */
 require_once( INFINITY_PIE_DIR . DIRECTORY_SEPARATOR . 'loader.php' );
 
 // initialize PIE

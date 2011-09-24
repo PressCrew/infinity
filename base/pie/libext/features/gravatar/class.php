@@ -20,7 +20,8 @@
 class Pie_Easy_Exts_Features_Gravatar
 	extends Pie_Easy_Features_Feature
 {
-	
+	/**
+	 */
 	public function configure( $conf_map, $theme )
 	{
 		// RUN PARENT FIRST!
@@ -33,7 +34,6 @@ class Pie_Easy_Exts_Features_Gravatar
 	}
 
 	/**
-	 * @ignore
 	 */
 	final public function export_css()
 	{
@@ -62,6 +62,11 @@ class Pie_Easy_Exts_Features_Gravatar
 		return parent::export_css();
 	}
 
+	/**
+	 * Format the gravatar URL
+	 * 
+	 * @return string
+	 */
 	public function url()
 	{
 		// options

@@ -22,6 +22,8 @@ Pie_Easy_Loader::load( 'utils/ajax', 'utils/files' );
 class Pie_Easy_Exts_Options_Upload
 	extends Pie_Easy_Options_Option_Image
 {
+	/**
+	 */
 	public function init()
 	{
 		// always run parent first
@@ -32,7 +34,6 @@ class Pie_Easy_Exts_Options_Upload
 	}
 
 	/**
-	 * Enqueue required styles
 	 */
 	public function init_styles()
 	{
@@ -43,7 +44,6 @@ class Pie_Easy_Exts_Options_Upload
 	}
 
 	/**
-	 * Enqueue required scripts
 	 */
 	public function init_scripts()
 	{
@@ -60,6 +60,8 @@ class Pie_Easy_Exts_Options_Upload
 		$this->localize_script();
 	}
 
+	/**
+	 */
 	public function init_ajax()
 	{
 		parent::init_ajax();
@@ -124,6 +126,8 @@ class Pie_Easy_Exts_Options_Upload
 		}
 	}
 
+	/**
+	 */
 	public function get_template_vars()
 	{
 		list( $url, $width, $height ) = $this->get_image_src('full');

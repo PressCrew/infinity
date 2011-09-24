@@ -22,6 +22,8 @@ Pie_Easy_Loader::load_ext( 'options/text' );
 class Pie_Easy_Exts_Options_Wp_Blogname
 	extends Pie_Easy_Exts_Options_Text
 {
+	/**
+	 */
 	public function configure( $conf_map, $theme )
 	{
 		if ( !$conf_map->title ) {
@@ -31,16 +33,22 @@ class Pie_Easy_Exts_Options_Wp_Blogname
 		parent::configure( $conf_map, $theme );
 	}
 
+	/**
+	 */
 	protected function get_option()
 	{
 		return get_option( 'blogname' );
 	}
 
+	/**
+	 */
 	protected function update_option( $value )
 	{
 		return update_option( 'blogname', $value );
 	}
-	
+
+	/**
+	 */
 	protected function delete_option()
 	{
 		return delete_option( 'blogname' );

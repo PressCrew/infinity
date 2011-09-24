@@ -41,9 +41,6 @@ class Infinity_Screens_Policy extends Pie_Easy_Screens_Policy
 	}
 	
 	/**
-	 * Return the name of the implementing API
-	 *
-	 * @return string
 	 */
 	final public function get_api_slug()
 	{
@@ -51,8 +48,6 @@ class Infinity_Screens_Policy extends Pie_Easy_Screens_Policy
 	}
 
 	/**
-	 * @ignore
-	 * @return boolean
 	 */
 	final public function enable_styling()
 	{
@@ -60,8 +55,6 @@ class Infinity_Screens_Policy extends Pie_Easy_Screens_Policy
 	}
 
 	/**
-	 * @ignore
-	 * @return boolean
 	 */
 	final public function enable_scripting()
 	{
@@ -113,6 +106,8 @@ class Infinity_Screens_Registry extends Pie_Easy_Screens_Registry
  */
 class Infinity_Exts_Screen_Factory extends Pie_Easy_Screens_Factory
 {
+	/**
+	 */
 	public function create( $theme, $name, $conf )
 	{
 		// DO NOT TRY THIS YOURSELF
@@ -152,13 +147,13 @@ class Infinity_Screens_Renderer extends Pie_Easy_Screens_Renderer
 /**
  * Initialize screens environment
  */
-function infinity_screens_init( $theme = null )
+function infinity_screens_init()
 {
 	// component policy
 	$screens_policy = Infinity_Screens_Policy::instance();
 
 	// enable component
-	Pie_Easy_Scheme::instance($theme)->enable_component( $screens_policy );
+	Pie_Easy_Scheme::instance()->enable_component( $screens_policy );
 
 	do_action( 'infinity_screens_init' );
 }

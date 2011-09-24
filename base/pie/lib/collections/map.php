@@ -53,24 +53,32 @@ class Pie_Easy_Map
 		$this->set_read_only( $read_only );
 	}
 
+	/**
+	 */
 	public function __get( $name )
 	{
 		return $this->item_at( $name );
 	}
 
-	public function __set( $key, $value )
+	/**
+	 */
+	public function __set( $name, $value )
 	{
-		$this->add( $key, $value );
+		$this->add( $name, $value );
 	}
 
+	/**
+	 */
 	public function __isset( $name )
 	{
 		return $this->contains( $name );
 	}
 
-	public function __unset( $key )
+	/**
+	 */
+	public function __unset( $name )
 	{
-		return $this->remove( $key );
+		return $this->remove( $name );
 	}
 
 	/**

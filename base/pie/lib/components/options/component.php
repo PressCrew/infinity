@@ -38,11 +38,33 @@ interface Pie_Easy_Options_Option_Auto_Field
 interface Pie_Easy_Options_Option_Attachment_Image
 {
 	/**
-	 * @return array attachment meta data
+	 * Get the attachment image source details
+	 *
+	 * Returns an array with attachment details
+	 *
+	 * <code>
+	 * Array (
+	 *   [0] => url
+	 *   [1] => width
+	 *   [2] => height
+	 * )
+	 * </code>
+	 *
+	 * @see wp_get_attachment_image_src()
+	 * @link http://codex.wordpress.org/Function_Reference/wp_get_attachment_image_src
+	 * @param string $size Either a string (`thumbnail`, `medium`, `large` or `full`), or a two item array representing width and height in pixels, e.g. array(32,32). The size of media icons are never affected.
+	 * @param integer $attach_id The id of the attachment, defaults to option value.
+	 * @return array|false Attachment meta data
 	 */
 	public function get_image_src( $size = 'thumbnail', $attach_id = null );
+
 	/**
-	 * @return string absolute URL to image file
+	 * Return the URL of an image attachment for this option
+	 *
+	 * This method is only useful if the option is storing the id of an attachment
+	 *
+	 * @param string $size Either a string (`thumbnail`, `medium`, `large` or `full`), or a two item array representing width and height in pixels, e.g. array(32,32). The size of media icons are never affected.
+	 * @return string|false absolute URL to image file
 	 */
 	public function get_image_url( $size = 'thumbnail' );
 }
@@ -88,7 +110,6 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 	private $__post_override__ = false;
 
 	/**
-	 * @ignore
 	 */
 	public function init()
 	{
@@ -98,6 +119,8 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 		$this->add_capabilities( 'manage_options' );
 	}
 
+	/**
+	 */
 	public function configure( $config, $theme )
 	{
 		// RUN PARENT FIRST!
@@ -428,23 +451,6 @@ abstract class Pie_Easy_Options_Option_Image
 		implements Pie_Easy_Options_Option_Attachment_Image
 {
 	/**
-	 * Get the attachment image source details
-	 *
-	 * Returns an array with attachment details
-	 *
-	 * <code>
-	 * Array (
-	 *   [0] => url
-	 *   [1] => width
-	 *   [2] => height
-	 * )
-	 * </code>
-	 *
-	 * @see wp_get_attachment_image_src()
-	 * @link http://codex.wordpress.org/Function_Reference/wp_get_attachment_image_src
-	 * @param string $size Either a string (`thumbnail`, `medium`, `large` or `full`), or a two item array representing width and height in pixels, e.g. array(32,32). The size of media icons are never affected.
-	 * @param integer $attach_id The id of the attachment, defaults to option value.
-	 * @return array|false
 	 */
 	public function get_image_src( $size = 'thumbnail', $attach_id = null )
 	{
@@ -476,12 +482,6 @@ abstract class Pie_Easy_Options_Option_Image
 	}
 
 	/**
-	 * Return the URL of an image attachment for this option
-	 *
-	 * This method is only useful if the option is storing the id of an attachment
-	 *
-	 * @param string $size Either a string (`thumbnail`, `medium`, `large` or `full`), or a two item array representing width and height in pixels, e.g. array(32,32). The size of media icons are never affected.
-	 * @return string|false
 	 */
 	public function get_image_url( $size = 'thumbnail' )
 	{

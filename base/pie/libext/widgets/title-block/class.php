@@ -22,6 +22,8 @@ Pie_Easy_Loader::load( 'components/widgets/component' );
 class Pie_Easy_Exts_Widgets_Title_Block
 	 extends Pie_Easy_Widgets_Widget
 {
+	/**
+	 */
 	public function render( $output = true )
 	{
 		if ( !$output ) {
@@ -37,6 +39,9 @@ class Pie_Easy_Exts_Widgets_Title_Block
 		}
 	}
 
+	/**
+	 * Render opening block elements
+	 */
 	protected function open_block()
 	{
 		// render the opening block html ?>
@@ -45,6 +50,9 @@ class Pie_Easy_Exts_Widgets_Title_Block
 			<div class="ui-widget-content"><?php
 	}
 	
+	/**
+	 * Render closing block elements
+	 */
 	protected function close_block()
 	{
 		// render the closing block html ?>

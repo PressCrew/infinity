@@ -48,7 +48,7 @@ abstract class Pie_Easy_Policy extends Pie_Easy_Base
 	private $renderer;
 
 	/**
-	 * @ignore
+	 * @internal
 	 */
 	private function __construct()
 	{

@@ -23,6 +23,8 @@ class Pie_Easy_Exts_Options_Enabledisable
 	extends Pie_Easy_Exts_Options_Radio
 		implements Pie_Easy_Options_Option_Auto_Field
 {
+	/**
+	 */
 	public function load_field_options()
 	{
 		return array(

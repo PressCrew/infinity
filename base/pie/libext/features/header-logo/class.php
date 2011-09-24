@@ -20,7 +20,8 @@
 class Pie_Easy_Exts_Features_Header_Logo
 	extends Pie_Easy_Features_Feature
 {
-
+	/**
+	 */
 	public function configure( $conf_map, $theme )
 	{
 		// RUN PARENT FIRST!
@@ -44,7 +45,6 @@ class Pie_Easy_Exts_Features_Header_Logo
 	}
 
 	/**
-	 * @ignore
 	 */
 	final public function export_css()
 	{

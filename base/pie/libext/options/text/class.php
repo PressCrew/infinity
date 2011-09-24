@@ -22,6 +22,8 @@ Pie_Easy_Loader::load_ext( 'options/input' );
 class Pie_Easy_Exts_Options_Text
 	extends Pie_Easy_Exts_Options_Input
 {
+	/**
+	 */
 	public function init()
 	{
 		parent::init();

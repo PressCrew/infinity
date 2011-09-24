@@ -22,6 +22,8 @@ Pie_Easy_Loader::load_ext( 'options/input-group' );
 class Pie_Easy_Exts_Options_Checkbox
 	extends Pie_Easy_Exts_Options_Input_Group
 {
+	/**
+	 */
 	public function init()
 	{
 		parent::init();

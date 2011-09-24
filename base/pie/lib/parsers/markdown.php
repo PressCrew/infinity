@@ -11,13 +11,17 @@
  * @since 1.0
  */
 
-/**#@+
- * Try to set these to false before loading markdown lib
- * @ignore
+/**
+ * Disable automatic WP post parsing
+ * @internal
  */
 @define( 'MARKDOWN_WP_POSTS', false );
+
+/**
+ * Disable automatic WP comment parsing
+ * @internal
+ */
 @define( 'MARKDOWN_WP_COMMENTS', false );
-/**#@-*/
 
 /**
  * Load the markdown lib

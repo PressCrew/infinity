@@ -61,6 +61,8 @@ class Pie_Easy_Init_Directive extends Pie_Easy_Base
 		}
 	}
 
+	/**
+	 */
 	public function __get( $name )
 	{
 		switch ( $name ) {
@@ -74,6 +76,8 @@ class Pie_Easy_Init_Directive extends Pie_Easy_Base
 		}
 	}
 
+	/**
+	 */
 	public function __isset( $name )
 	{
 		switch ( $name ) {
@@ -87,6 +91,8 @@ class Pie_Easy_Init_Directive extends Pie_Easy_Base
 		}
 	}
 
+	/**
+	 */
 	public function __set( $name, $value )
 	{
 		switch ( $name ) {
@@ -97,6 +103,8 @@ class Pie_Easy_Init_Directive extends Pie_Easy_Base
 		}
 	}
 
+	/**
+	 */
 	public function __unset( $name )
 	{
 		switch ( $name ) {

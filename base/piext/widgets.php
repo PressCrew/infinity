@@ -31,9 +31,6 @@ class Infinity_Widgets_Policy extends Pie_Easy_Widgets_Policy
 	}
 	
 	/**
-	 * Return the name of the implementing API
-	 *
-	 * @return string
 	 */
 	final public function get_api_slug()
 	{
@@ -41,8 +38,6 @@ class Infinity_Widgets_Policy extends Pie_Easy_Widgets_Policy
 	}
 
 	/**
-	 * @ignore
-	 * @return boolean
 	 */
 	final public function enable_styling()
 	{
@@ -50,8 +45,6 @@ class Infinity_Widgets_Policy extends Pie_Easy_Widgets_Policy
 	}
 
 	/**
-	 * @ignore
-	 * @return boolean
 	 */
 	final public function enable_scripting()
 	{
@@ -125,6 +118,7 @@ class Infinity_Widgets_Renderer extends Pie_Easy_Widgets_Renderer
  * Display a widget
  *
  * @param string $widget_name
+ * @param boolean $output
  * @return string|false
  */
 function infinity_widget( $widget_name, $output = true )
@@ -135,13 +129,13 @@ function infinity_widget( $widget_name, $output = true )
 /**
  * Initialize widgets environment
  */
-function infinity_widgets_init( $theme = null )
+function infinity_widgets_init()
 {
 	// component policy
 	$widgets_policy = Infinity_Widgets_Policy::instance();
 
 	// enable component
-	Pie_Easy_Scheme::instance($theme)->enable_component( $widgets_policy );
+	Pie_Easy_Scheme::instance()->enable_component( $widgets_policy );
 
 	do_action( 'infinity_widgets_init' );
 }

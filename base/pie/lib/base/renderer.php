@@ -160,7 +160,7 @@ abstract class Pie_Easy_Renderer extends Pie_Easy_Componentable
 	 *
 	 * @param string $suffix,...
 	 */
-	public function render_class( $suffix )
+	public function render_class()
 	{
 		$args = func_get_args();
 

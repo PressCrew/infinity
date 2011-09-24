@@ -22,13 +22,18 @@ Pie_Easy_Loader::load( 'components/widgets/component', 'utils/ajax', 'utils/file
 class Pie_Easy_Exts_Widgets_Menu
 	 extends Pie_Easy_Widgets_Widget
 {
+	/**
+	 */
 	public function init_scripts()
 	{
 		parent::init_scripts();
 		wp_enqueue_script( 'jquery-ui-menu' );
 	}
 
-	public function configure( $config, $theme )
+
+	/**
+	 */
+	public function configure( Pie_Easy_Map $config, $theme )
 	{
 		// RUN PARENT FIRST!
 		parent::configure( $config, $theme );
@@ -39,6 +44,8 @@ class Pie_Easy_Exts_Widgets_Menu
 		}
 	}
 
+	/**
+	 */
 	public function get_template_vars()
 	{
 		return array(

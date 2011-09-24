@@ -11,7 +11,7 @@
  */
 
 /**
- * check if PIE has been included already
+ * Check if PIE has been included already
  * @ignore
  */
 if ( defined( 'PIE_EASY_VERSION' ) ) {
@@ -340,8 +340,7 @@ final class Pie_Easy_Loader extends Pie_Easy_Base
 	/**
 	 * Load a library extension file
 	 *
-	 * @param string $file
-	 * @param array|string $files
+	 * @param array $files
 	 * @return true
 	 */
 	private static function load_libext_file( $files )

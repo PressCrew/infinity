@@ -78,6 +78,12 @@ add_action( 'init', 'infinity_base_register_menus' );
 
 /**
  * Register one sidebar
+ *
+ * @author Marshall Sorenson <marshall@presscrew.com>
+ * @see register_sidebar()
+ * @param string $id Sidebar ID, 'id' arg passed to register_sidebar()
+ * @param string $name Sidebar name, 'name' arg passed to register_sidebar()
+ * @param string $desc Sedebar description, 'description' arg passed to register_sidebar()
  */
 function infinity_base_register_sidebar( $id, $name, $desc )
 {
@@ -132,6 +138,10 @@ add_action( 'init', 'infinity_base_register_sidebars' );
 
 /**
  * Display a nav menu using a custom walker
+ *
+ * @author Marshall Sorenson <marshall@presscrew.com>
+ * @see wp_nav_menu()
+ * @param string $theme_location Theme location, 'theme_location' arg passed to wp_nav_menu()
  */
 function infinity_base_nav_menu( $theme_location )
 {
