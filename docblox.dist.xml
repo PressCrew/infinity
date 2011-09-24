@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<docblox>
+  <title>Infinity API Manual</title>
+  <parser>
+    <default-package-name>Infinity</default-package-name>
+    <target>etc/docblox/output</target>
+    <markers>
+      <item>TODO</item>
+      <item>FIXME</item>
+    </markers>
+    <extensions>
+      <extension>php</extension>
+      <extension>php3</extension>
+      <extension>phtml</extension>
+    </extensions>
+    <visibility></visibility>
+  </parser>
+  <transformer>
+    <target>etc/docblox/output</target>
+  </transformer>
+  <logging>
+    <level>warn</level>
+    <paths>
+      <default>{APP_ROOT}/data/log/{DATE}.log</default>
+      <errors>{APP_ROOT}/data/log/{DATE}.errors.log</errors>
+    </paths>
+  </logging>
+  <transformations>
+    <template name="default" />
+  </transformations>
+  <files>
+    <directory>.</directory>
+    <ignore>assets/*</ignore>
+    <ignore>base/pie/assets/*</ignore>
+    <ignore>base/pie/lib/vendors/*</ignore>
+    <ignore>dashboard/assets/*</ignore>
+    <ignore>dashboard/docs/*</ignore>
+    <ignore>dashboard/templates/*</ignore>
+    <ignore>documents/*</ignore>
+    <ignore>etc/*</ignore>
+  </files>
+</docblox>
