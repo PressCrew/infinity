@@ -30,7 +30,8 @@ abstract class Pie_Easy_Exts_Options_Input
 	 */
 	private $input_type = 'text';
 
-	
+	/**
+	 */
 	public function __get( $name )
 	{
 		switch ( $name ) {
@@ -41,6 +42,8 @@ abstract class Pie_Easy_Exts_Options_Input
 		}
 	}
 
+	/**
+	 */
 	public function __isset( $name )
 	{
 		switch ( $name ) {

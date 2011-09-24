@@ -147,6 +147,7 @@ class Pie_Easy_Stack
 	 * Pushes an item into the stack.
 	 *
 	 * @param mixed $item The item to be pushed into the stack
+	 * @param boolean $prepend Set to true to prepend item (base of stack)
 	 */
 	public function push( $item, $prepend = false )
 	{

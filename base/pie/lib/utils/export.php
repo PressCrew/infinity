@@ -23,15 +23,67 @@ Pie_Easy_Loader::load( 'utils/files' );
  */
 class Pie_Easy_Export extends Pie_Easy_Base
 {
+	/**
+	 * Set to true once dir props have been populated
+	 *
+	 * @var boolean
+	 */
 	static private $populated = false;
+
+	/**
+	 * Upload directory path for current request
+	 *
+	 * @var string
+	 */
 	static private $upload_dir;
+
+	/**
+	 * Upload directory URL for current request
+	 *
+	 * @var string
+	 */
 	static private $upload_url;
+
+	/**
+	 * Export directory path for current request
+	 *
+	 * @var string
+	 */
 	static private $export_dir;
+
+	/**
+	 * Export URL for current request
+	 *
+	 * @var string
+	 */
 	static private $export_url;
 
+	/**
+	 * Export file path
+	 *
+	 * @var string
+	 */
 	private $path;
+
+	/**
+	 * Export file URL
+	 *
+	 * @var string
+	 */
 	private $url;
+
+	/**
+	 * Callback which will update the file's contents
+	 *
+	 * @var string|array
+	 */
 	private $callback;
+
+	/**
+	 * Set to true the file has been updated
+	 *
+	 * @var boolean
+	 */
 	private $updated = false;
 
 	/**
@@ -51,6 +103,8 @@ class Pie_Easy_Export extends Pie_Easy_Base
 		$this->callback = $callback;
 	}
 
+	/**
+	 */
 	public function __get( $name )
 	{
 		switch( $name ) {
@@ -62,6 +116,8 @@ class Pie_Easy_Export extends Pie_Easy_Base
 		}
 	}
 
+	/**
+	 */
 	public function __isset( $name )
 	{
 		switch( $name ) {
@@ -76,7 +132,7 @@ class Pie_Easy_Export extends Pie_Easy_Base
 	/**
 	 * Set static upload directory properties
 	 *
-	 * @ignore
+	 * @internal
 	 * @return boolean
 	 */
 	private function populate_dir_props()

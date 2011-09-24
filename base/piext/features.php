@@ -31,9 +31,6 @@ class Infinity_Features_Policy extends Pie_Easy_Features_Policy
 	}
 	
 	/**
-	 * Return the name of the implementing API
-	 *
-	 * @return string
 	 */
 	final public function get_api_slug()
 	{
@@ -41,8 +38,6 @@ class Infinity_Features_Policy extends Pie_Easy_Features_Policy
 	}
 
 	/**
-	 * @ignore
-	 * @return boolean
 	 */
 	final public function enable_styling()
 	{
@@ -50,8 +45,6 @@ class Infinity_Features_Policy extends Pie_Easy_Features_Policy
 	}
 
 	/**
-	 * @ignore
-	 * @return boolean
 	 */
 	final public function enable_scripting()
 	{
@@ -124,6 +117,7 @@ class Infinity_Features_Renderer extends Pie_Easy_Features_Renderer
  * Display a feature
  *
  * @param string $feature_name
+ * @param boolean $output
  * @return string|false
  */
 function infinity_feature( $feature_name, $output = true )
@@ -141,13 +135,13 @@ function infinity_feature( $feature_name, $output = true )
 /**
  * Initialize features environment
  */
-function infinity_features_init( $theme = null )
+function infinity_features_init()
 {
 	// component policies
 	$features_policy = Infinity_Features_Policy::instance();
 
 	// enable components
-	Pie_Easy_Scheme::instance($theme)->enable_component( $features_policy );
+	Pie_Easy_Scheme::instance()->enable_component( $features_policy );
 
 	do_action( 'infinity_features_init' );
 }

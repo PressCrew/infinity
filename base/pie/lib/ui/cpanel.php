@@ -21,15 +21,43 @@ Pie_Easy_Loader::load( 'ui/script' );
  */
 final class Pie_Easy_Ui_Cpanel extends Pie_Easy_Base
 {
+	/**
+	 * The screens policy instance
+	 *
+	 * @var Pie_Easy_Screens_Policy
+	 */
 	private $policy;
+
+	/**
+	 * The title of the control panel
+	 *
+	 * @var string
+	 */
 	private $title;
+
+	/**
+	 * The CSS id of the control panel (also used as a prefix)
+	 *
+	 * @var string
+	 */
 	private $css_id;
 
+	/**
+	 * Constructor
+	 *
+	 * @param Pie_Easy_Screens_Policy $policy
+	 */
 	public function __construct( Pie_Easy_Screens_Policy $policy )
 	{
 		$this->policy = $policy;
 	}
 
+	/**
+	 * Render the opening element of the control panel
+	 *
+	 * @param string $title The title of the control panel
+	 * @param string $css_id The CSS id of the control panel (also used as a prefix)
+	 */
 	public function render_begin( $title, $css_id )
 	{
 		$this->title = $title;
@@ -39,6 +67,9 @@ final class Pie_Easy_Ui_Cpanel extends Pie_Easy_Base
 		<div id="<?php $this->render_id() ?>" class="pie-easy-ui-cpanel ui-widget ui-corner-all"><?php
 	}
 
+	/**
+	 * Render the closing element of the control panel
+	 */
 	public function render_end()
 	{
 		// render closing markup ?>
@@ -47,7 +78,12 @@ final class Pie_Easy_Ui_Cpanel extends Pie_Easy_Base
 		// buttons script
 		$this->render_scripts();
 	}
-	
+
+	/**
+	 * Render a css id for a control panel element
+	 *
+	 * @param string $token,... Suffix tokens
+	 */
 	public function render_id()
 	{
 		$tokens = func_get_args();
@@ -65,6 +101,11 @@ final class Pie_Easy_Ui_Cpanel extends Pie_Easy_Base
 		print implode( '-', $tokens );
 	}
 
+	/**
+	 * Render the control panel header
+	 *
+	 * @param string $template Path to header contents template, relative to theme's root
+	 */
 	public function render_header( $template )
 	{
 		// render the header container ?>
@@ -73,6 +114,9 @@ final class Pie_Easy_Ui_Cpanel extends Pie_Easy_Base
 		</div><?php
 	}
 
+	/**
+	 * Render the control panel toolbar
+	 */
 	public function render_toolbar()
 	{
 		// render the toolbar container ?>
@@ -88,6 +132,11 @@ final class Pie_Easy_Ui_Cpanel extends Pie_Easy_Base
 		</div><?php
 	}
 
+	/**
+	 * Render the control panel toolbar menu
+	 *
+	 * @param array $items An array of screen objects to render
+	 */
 	protected function render_toolbar_menu( $items = null )
 	{
 		if ( empty( $items ) ) {
@@ -112,7 +161,10 @@ final class Pie_Easy_Ui_Cpanel extends Pie_Easy_Base
 		} ?>
 		</ul><?php
 	}
-	
+
+	/**
+	 * Render the control panel toolbar buttons
+	 */
 	protected function render_toolbar_buttons()
 	{
 		$items = $this->policy->registry()->get_all();
@@ -125,6 +177,9 @@ final class Pie_Easy_Ui_Cpanel extends Pie_Easy_Base
 		endforeach;
 	}
 
+	/**
+	 * Render the control panel tabs container
+	 */
 	public function render_tabs()
 	{
 		// render tabs container ?>

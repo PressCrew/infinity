@@ -37,6 +37,8 @@ class Pie_Easy_Exts_Screens_Cpanel
 	 */
 	private $__position__;
 
+	/**
+	 */
 	public function configure( $config, $theme )
 	{
 		// RUN PARENT FIRST!

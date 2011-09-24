@@ -49,7 +49,7 @@ final class Pie_Easy_Enqueue extends Pie_Easy_Base
 	private $ui_stylesheet;
 
 	/**
-	 * @ignore
+	 * @internal
 	 */
 	private function __construct()
 	{
@@ -108,10 +108,10 @@ final class Pie_Easy_Enqueue extends Pie_Easy_Base
 	 *
 	 * This method is used internally in PIE. There should be no reason to call this.
 	 *
-	 * @ignore
-	 * @param string $stylesheet
+	 * @internal
+	 * @param string $stylesheet Relative path to jQuery UI stylesheet
 	 */
-	public function ui_stylesheet( $stylesheet = null )
+	final public function ui_stylesheet( $stylesheet = null )
 	{
 		if ( $stylesheet ) {
 			if ( empty( $this->ui_stylesheet ) ) {
@@ -219,7 +219,7 @@ final class Pie_Easy_Enqueue extends Pie_Easy_Base
 	 *
 	 * Never call this manually unless you really know what you are doing!
 	 *
-	 * @ignore
+	 * @internal
 	 */
 	public function do_enqueue_styles()
 	{
@@ -261,7 +261,7 @@ final class Pie_Easy_Enqueue extends Pie_Easy_Base
 	 *
 	 * Never call this manually unless you really know what you are doing!
 	 *
-	 * @ignore
+	 * @internal
 	 */
 	public function do_enqueue_scripts()
 	{
@@ -316,7 +316,7 @@ final class Pie_Easy_Enqueue extends Pie_Easy_Base
 	 *
 	 * Never call this manually unless you really know what you are doing!
 	 *
-	 * @ignore
+	 * @internal
 	 */
 	public function register_ui_scripts()
 	{

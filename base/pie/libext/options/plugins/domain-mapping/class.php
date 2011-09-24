@@ -22,6 +22,8 @@ Pie_Easy_Loader::load_ext( 'options/text' );
 class Pie_Easy_Exts_Options_Plugins_Domain_Mapping
 	extends Pie_Easy_Exts_Options_Text
 {
+	/**
+	 */
 	public function init()
 	{
 		// is the plugin active?
@@ -34,6 +36,8 @@ class Pie_Easy_Exts_Options_Plugins_Domain_Mapping
 		}
 	}
 
+	/**
+	 */
 	public function configure( $conf_map, $theme )
 	{
 		if ( !$conf_map->title ) {
@@ -47,6 +51,8 @@ class Pie_Easy_Exts_Options_Plugins_Domain_Mapping
 		parent::configure( $conf_map, $theme );
 	}
 
+	/**
+	 */
 	protected function get_option()
 	{
 		global $wpdb;
@@ -66,6 +72,8 @@ class Pie_Easy_Exts_Options_Plugins_Domain_Mapping
 		return $wpdb->get_var( $statement );
 	}
 
+	/**
+	 */
 	protected function update_option( $value )
 	{
 		global $wpdb;
@@ -108,6 +116,8 @@ class Pie_Easy_Exts_Options_Plugins_Domain_Mapping
 		return false;
 	}
 
+	/**
+	 */
 	public function delete_option()
 	{
 		global $wpdb;

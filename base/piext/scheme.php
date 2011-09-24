@@ -18,14 +18,14 @@ Pie_Easy_Loader::load( 'schemes' );
  *
  * @return boolean
  */
-function infinity_scheme_init( $theme = null )
+function infinity_scheme_init()
 {
 	// initialize the scheme
-	Pie_Easy_Scheme::instance( $theme )->init( INFINITY_NAME );
+	Pie_Easy_Scheme::instance()->init( INFINITY_NAME );
 	
 	// set docs and exts dirs
-	Pie_Easy_Scheme::instance( $theme )->set_docs_dir( 'documents' );
-	Pie_Easy_Scheme::instance( $theme )->set_exts_dir( 'extensions' );
+	Pie_Easy_Scheme::instance()->set_docs_dir( 'documents' );
+	Pie_Easy_Scheme::instance()->set_exts_dir( 'extensions' );
 
 	return true;
 }
@@ -44,7 +44,7 @@ function infinity_scheme_directive( $name )
 /**
  * Check if template exists anywhere in the scheme
  *
- * @param string|array $template_names
+ * @param string|array $template_name
  * @param boolean $load Auto load template if set to true
  * @return string
  */

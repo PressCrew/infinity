@@ -49,8 +49,8 @@ class Pie_Easy_Style extends Pie_Easy_Asset
 	/**
 	 * Add a rule
 	 * 
-	 * @param string $rule
-	 * @param mixed $value 
+	 * @param string $selector CSS selector to affect
+	 * @return Pie_Easy_Style_Rule
 	 */
 	public function new_rule( $selector )
 	{
@@ -89,6 +89,8 @@ class Pie_Easy_Style extends Pie_Easy_Asset
 		return $markup;
 	}
 
+	/**
+	 */
 	protected function get_file_contents( $filename )
 	{
 		// run parent to get content
@@ -104,7 +106,7 @@ class Pie_Easy_Style extends Pie_Easy_Asset
 	}
 
 	/**
-	 * @ignore
+	 * @internal
 	 * @param array $matches
 	 * @return string
 	 */
@@ -169,6 +171,8 @@ class Pie_Easy_Style_Rule extends Pie_Easy_Base
 		$this->declarations = new Pie_Easy_Map();
 	}
 
+	/**
+	 */
 	public function __get( $name )
 	{
 		switch ( $name ) {
@@ -179,6 +183,8 @@ class Pie_Easy_Style_Rule extends Pie_Easy_Base
 		}
 	}
 
+	/**
+	 */
 	public function __isset( $name )
 	{
 		switch ( $name ) {

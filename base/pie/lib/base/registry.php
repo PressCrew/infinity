@@ -58,7 +58,8 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 
 	/**
 	 * Singleton constructor
-	 * @ignore
+	 * 
+	 * @internal
 	 */
 	public function __construct()
 	{
@@ -166,6 +167,7 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 	/**
 	 * Return all registered components as an array
 	 *
+	 * @param boolean $include_ignored Set to true to also return components which have ignore set to true
 	 * @return array
 	 */
 	final public function get_all( $include_ignored = false )

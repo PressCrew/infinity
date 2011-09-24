@@ -78,6 +78,7 @@ class Pie_Easy_Options_Walker_Page extends Walker_Page
 	 * @param string $output Passed by reference. Used to append additional content.
 	 * @param object $page Page data object.
 	 * @param int $depth Depth of page. Used for padding.
+	 * @param array $args
 	 * @param int $current_page Page ID.
 	 * @param array $args
 	 */

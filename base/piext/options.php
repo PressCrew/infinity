@@ -31,9 +31,6 @@ class Infinity_Options_Policy extends Pie_Easy_Options_Policy
 	}
 	
 	/**
-	 * Return the name of the implementing API
-	 *
-	 * @return string
 	 */
 	final public function get_api_slug()
 	{
@@ -41,8 +38,6 @@ class Infinity_Options_Policy extends Pie_Easy_Options_Policy
 	}
 
 	/**
-	 * @ignore
-	 * @return boolean
 	 */
 	final public function enable_styling()
 	{
@@ -50,8 +45,6 @@ class Infinity_Options_Policy extends Pie_Easy_Options_Policy
 	}
 
 	/**
-	 * @ignore
-	 * @return boolean
 	 */
 	final public function enable_scripting()
 	{
@@ -95,7 +88,7 @@ class Infinity_Options_Registry extends Pie_Easy_Options_Registry
 	/**
 	 * Set up form handler
 	 *
-	 * @ignore
+	 * @internal
 	 * @return void
 	 */
 	static public function init_form_processing()
@@ -185,8 +178,9 @@ class Infinity_Options_Renderer extends Pie_Easy_Options_Renderer
 	}
 
 	/**
-	 * @ignore
-	 * @param string $name
+	 * Load a dashboard template
+	 *
+	 * @param string $name Template name
 	 */
 	protected function load_dash_template( $name )
 	{
@@ -208,13 +202,13 @@ class Infinity_Options_Renderer extends Pie_Easy_Options_Renderer
 /**
  * Initialize options environment
  */
-function infinity_options_init( $theme = null )
+function infinity_options_init()
 {
 	// component policy
 	$options_policy = Infinity_Options_Policy::instance();
 
 	// enable component
-	Pie_Easy_Scheme::instance($theme)->enable_component( $options_policy );
+	Pie_Easy_Scheme::instance()->enable_component( $options_policy );
 	
 	do_action( 'infinity_options_init' );
 }
@@ -504,8 +498,6 @@ function infinity_options_render_menu_options( $options )
 
 /**
  * Render options according to the option name POST var
- *
- * @ignore
  */
 function infinity_options_render_options_screen()
 {

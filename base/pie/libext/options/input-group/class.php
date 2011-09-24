@@ -18,7 +18,6 @@ Pie_Easy_Loader::load_ext( 'options/input' );
  *
  * @package PIE-extensions
  * @subpackage options
- * @property-read string $input_type The type attribute for the input element
  */
 abstract class Pie_Easy_Exts_Options_Input_Group
 	extends Pie_Easy_Exts_Options_Input

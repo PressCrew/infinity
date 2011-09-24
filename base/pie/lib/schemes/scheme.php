@@ -24,28 +24,78 @@ Pie_Easy_Loader::load( 'utils/files', 'collections' );
  */
 final class Pie_Easy_Scheme extends Pie_Easy_Base
 {
-	/**#@+
-	 * ini directive enumeration
+	/**
+	 * Parent theme directive
 	 */
 	const DIRECTIVE_PARENT_THEME = 'parent_theme';
+	/**
+	 * Image root directive
+	 */
 	const DIRECTIVE_IMAGE_ROOT = 'image_root';
+	/**
+	 * Style root directive
+	 */
 	const DIRECTIVE_STYLE_ROOT = 'style_root';
+	/**
+	 * Script root directive
+	 */
 	const DIRECTIVE_SCRIPT_ROOT = 'script_root';
+	/**
+	 * Feature ini section
+	 */
 	const DIRECTIVE_FEATURE = 'feature';
+	/**
+	 * Style ini section
+	 */
 	const DIRECTIVE_STYLE_DEFS = 'style';
+	/**
+	 * Style depends ini section
+	 */
 	const DIRECTIVE_STYLE_DEPS = 'style_depends';
+	/**
+	 * Style actions ini section
+	 */
 	const DIRECTIVE_STYLE_ACTS = 'style_actions';
+	/**
+	 * Style conditions ini section
+	 */
 	const DIRECTIVE_STYLE_CONDS = 'style_conditions';
+	/**
+	 * Script ini section
+	 */
 	const DIRECTIVE_SCRIPT_DEFS = 'script';
+	/**
+	 * Script depends ini section
+	 */
 	const DIRECTIVE_SCRIPT_DEPS = 'script_depends';
+	/**
+	 * Script actions ini section
+	 */
 	const DIRECTIVE_SCRIPT_ACTS = 'script_actions';
+	/**
+	 * Script conditions ini section
+	 */
 	const DIRECTIVE_SCRIPT_CONDS = 'script_conditions';
+	/**
+	 * Advanced settings ini section
+	 */
 	const DIRECTIVE_ADVANCED = 'advanced';
+	/**
+	 * jQuery UI stylesheet path directive
+	 */
 	const DIRECTIVE_UI_STYLESHEET = 'ui_stylesheet';
+	/**
+	 * Development mode directive
+	 */
 	const DIRECTIVE_DEV_MODE = 'development_mode';
+	/**
+	 * Script domain directive
+	 */
 	const DIRECTIVE_SCRIPT_DOMAIN = 'script_domain';
+	/**
+	 * Options save single directive
+	 */
 	const DIRECTIVE_OPT_SAVE_SINGLE = 'options_save_single';
-	/**#@-*/
 
 	/**
 	 * Singleton instances
@@ -223,7 +273,7 @@ final class Pie_Easy_Scheme extends Pie_Easy_Base
 	/**
 	 * Don't ever call this manually
 	 *
-	 * @ignore
+	 * @internal
 	 */
 	public function init_enqueueing()
 	{
@@ -413,8 +463,6 @@ final class Pie_Easy_Scheme extends Pie_Easy_Base
 
 	/**
 	 * Enable/disable feature support
-	 *
-	 * @ignore
 	 */
 	private function feature_support()
 	{
@@ -439,7 +487,7 @@ final class Pie_Easy_Scheme extends Pie_Easy_Base
 	/**
 	 * Try to load function files for themes in stack
 	 *
-	 * @ignore
+	 * @internal
 	 */
 	public function load_functions()
 	{
@@ -513,7 +561,7 @@ final class Pie_Easy_Scheme extends Pie_Easy_Base
 	/**
 	 * If template exists in scheme, return it, otherwise return the original template
 	 *
-	 * @ignore
+	 * @internal
 	 * @param string $template
 	 * @return string
 	 */
@@ -773,7 +821,7 @@ final class Pie_Easy_Scheme extends Pie_Easy_Base
 	/**
 	 * Locate a theme asset, giving priority to top themes in the stack
 	 *
-	 * @param string $file_names,... The file names that make up the RELATIVE path to the theme root
+	 * @param string $path_directive The scheme directive which contains the asset path
 	 * @return string|false
 	 */
 	private function locate_asset( $path_directive )
@@ -934,8 +982,8 @@ final class Pie_Easy_Scheme extends Pie_Easy_Base
 	/**
 	 * Look for a search form in the scheme stack
 	 *
-	 * @param string $slug The slug name for the generic template.
-	 * @param string $name The name of the specialised template.
+	 * @param boolean $echo Set to false to return markup instead of printing
+	 * @return mixed
 	 */
 	function get_search_form( $echo = true )
 	{

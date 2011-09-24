@@ -30,6 +30,8 @@ abstract class Pie_Easy_Sections_Section extends Pie_Easy_Component
 	 */
 	private $__components__;
 
+	/**
+	 */
 	public function configure( $config, $theme )
 	{
 		// RUN PARENT FIRST!

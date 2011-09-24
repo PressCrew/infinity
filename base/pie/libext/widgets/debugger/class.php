@@ -25,6 +25,8 @@ class Pie_Easy_Exts_Widgets_Debugger
 	 */
 	private $__id_stack__;
 
+	/**
+	 */
 	public function init()
 	{
 		parent::init();
@@ -33,7 +35,10 @@ class Pie_Easy_Exts_Widgets_Debugger
 		
 		$this->script()->add_dep( 'jquery-jstree' );
 	}
-	
+
+	/**
+	 * Render all items
+	 */
 	public function render_items()
 	{
 		// render scheme stuff
@@ -47,6 +52,11 @@ class Pie_Easy_Exts_Widgets_Debugger
 		);
 	}
 
+	/**
+	 * Render an array of directives
+	 *
+	 * @param array $directives
+	 */
 	protected function render_directives( $directives )
 	{
 		// open list ?>
@@ -82,6 +92,11 @@ class Pie_Easy_Exts_Widgets_Debugger
 		</ul><?php
 	}
 
+	/**
+	 * Render values of one directive for each scheme in stack
+	 *
+	 * @param Pie_Easy_Map $directive_map
+	 */
 	protected function render_directive( Pie_Easy_Map $directive_map )
 	{
 		// get the theme stack from the scheme
@@ -110,6 +125,11 @@ class Pie_Easy_Exts_Widgets_Debugger
 		</ul><?php
 	}
 
+	/**
+	 * Render scheme configuration items
+	 *
+	 * @param array $directives
+	 */
 	protected function render_scheme( $directives )
 	{
 		// open list ?>
@@ -123,6 +143,11 @@ class Pie_Easy_Exts_Widgets_Debugger
 		$this->render_item_id();
 	}
 
+	/**
+	 * Render all component items for an array of policies
+	 *
+	 * @param array $policies
+	 */
 	protected function render_components( $policies )
 	{
 		// open list ?>
@@ -140,9 +165,14 @@ class Pie_Easy_Exts_Widgets_Debugger
 		}
 
 		// close list ?>
-		</ul><?
+		</ul><?php
 	}
 
+	/**
+	 * Render all components for one component registry
+	 * 
+	 * @param type $registry
+	 */
 	protected function render_component( $registry )
 	{
 		// open list ?>
@@ -160,9 +190,15 @@ class Pie_Easy_Exts_Widgets_Debugger
 		}
 		
 		// close list ?>
-		</ul><?
+		</ul><?php
 	}
 
+	/**
+	 * Recursively render a map of values
+	 *
+	 * @param Pie_Easy_Map $map
+	 * @param Pie_Easy_Map $map_last
+	 */
 	protected function render_value_map( Pie_Easy_Map $map, Pie_Easy_Map $map_last = null )
 	{
 		// open list ?>
@@ -215,6 +251,11 @@ class Pie_Easy_Exts_Widgets_Debugger
 		</ul><?php
 	}
 
+	/**
+	 * Render the value of a directive
+	 *
+	 * @param string $value
+	 */
 	protected function render_value( $value )
 	{
 		if ( $value == "1" ) {
@@ -230,6 +271,11 @@ class Pie_Easy_Exts_Widgets_Debugger
 		}
 	}
 
+	/**
+	 * Render a unique item element id based on depth
+	 *
+	 * @param string $string
+	 */
 	protected function render_item_id( $string = null )
 	{
 		if ( !is_null( $string ) ) {

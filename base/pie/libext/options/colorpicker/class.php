@@ -22,12 +22,16 @@ Pie_Easy_Loader::load_ext( 'options/text' );
 class Pie_Easy_Exts_Options_Colorpicker
 	extends Pie_Easy_Exts_Options_Text
 {
+	/**
+	 */
 	public function init_styles()
 	{
 		parent::init_styles();
 		wp_enqueue_style( 'pie-easy-colorpicker' );
 	}
 
+	/**
+	 */
 	public function init_scripts()
 	{
 		parent::init_scripts();

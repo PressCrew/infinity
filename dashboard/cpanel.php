@@ -56,6 +56,8 @@ function infinity_dashboard_cpanel_actions()
 
 /**
  * Initialize and render the control panel markup
+ *
+ * @param string $header_template Path to header template relative to theme directory
  */
 function infinity_dashboard_cpanel_ui( $header_template = null )
 {

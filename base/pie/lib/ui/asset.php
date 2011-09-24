@@ -58,6 +58,8 @@ abstract class Pie_Easy_Asset extends Pie_Easy_Base
 
 	/**
 	 * Add a dependancy
+	 *
+	 * @param string $dep_handle Handle of the dependancy to add
 	 */
 	public function add_dep( $dep_handle )
 	{

@@ -19,6 +19,8 @@
  */
 class Pie_Easy_Exts_Shortcodes_Access extends Pie_Easy_Shortcodes_Shortcode
 {
+	/**
+	 */
 	public function default_atts()
 	{
 		return array(
@@ -26,6 +28,8 @@ class Pie_Easy_Exts_Shortcodes_Access extends Pie_Easy_Shortcodes_Shortcode
 		);
 	}
 
+	/**
+	 */
 	public function get_content()
 	{
 		if ( !is_null( parent::get_content() ) && !is_feed() && current_user_can( $this->get_att('capability') ) ) {

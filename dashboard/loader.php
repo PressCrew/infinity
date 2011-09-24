@@ -63,6 +63,9 @@ function infinity_dashboard_load_template( $rel_path, $args = null, $defaults = 
 
 /**
  * Return path to a dashboard image
+ *
+ * @param string $name image file name
+ * @return string
  */
 function infinity_dashboard_image( $name )
 {

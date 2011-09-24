@@ -22,6 +22,8 @@ Pie_Easy_Loader::load_ext( 'options/page' );
 class Pie_Easy_Exts_Options_Wp_Page_On_Front
 	extends Pie_Easy_Exts_Options_Page
 {
+	/**
+	 */
 	public function configure( $conf_map, $theme )
 	{
 		if ( !$conf_map->title ) {
@@ -35,11 +37,15 @@ class Pie_Easy_Exts_Options_Wp_Page_On_Front
 		parent::configure( $conf_map, $theme );
 	}
 
+	/**
+	 */
 	protected function get_option()
 	{
 		return get_option( 'page_on_front' );
 	}
 
+	/**
+	 */
 	protected function update_option( $value )
 	{
 		// make sure show on front is set correctly
@@ -49,6 +55,8 @@ class Pie_Easy_Exts_Options_Wp_Page_On_Front
 		return update_option( 'page_on_front', $value );
 	}
 
+	/**
+	 */
 	protected function delete_option()
 	{
 		// revert show on front to posts

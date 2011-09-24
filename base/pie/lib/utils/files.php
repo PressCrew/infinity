@@ -274,7 +274,9 @@ final class Pie_Easy_Files extends Pie_Easy_Base
 
 	/**
 	 * Create a class name from a file name
-	 * @param string $file_name
+	 *
+	 * @param string $file_name File name
+	 * @param string $prefix Optional class prefix
 	 * @return type
 	 */
 	static public function file_to_class( $file_name, $prefix = null )

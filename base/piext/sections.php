@@ -31,9 +31,6 @@ class Infinity_Sections_Policy extends Pie_Easy_Sections_Policy
 	}
 	
 	/**
-	 * Return the name of the implementing API
-	 *
-	 * @return string
 	 */
 	final public function get_api_slug()
 	{
@@ -41,8 +38,6 @@ class Infinity_Sections_Policy extends Pie_Easy_Sections_Policy
 	}
 
 	/**
-	 * @ignore
-	 * @return boolean
 	 */
 	final public function enable_styling()
 	{
@@ -50,8 +45,6 @@ class Infinity_Sections_Policy extends Pie_Easy_Sections_Policy
 	}
 
 	/**
-	 * @ignore
-	 * @return boolean
 	 */
 	final public function enable_scripting()
 	{
@@ -134,13 +127,13 @@ class Infinity_Sections_Renderer extends Pie_Easy_Sections_Renderer
 /**
  * Initialize sections environment
  */
-function infinity_sections_init( $theme = null )
+function infinity_sections_init()
 {
 	// component policies
 	$sections_policy = Infinity_Sections_Policy::instance();
 
 	// enable component
-	Pie_Easy_Scheme::instance($theme)->enable_component( $sections_policy );
+	Pie_Easy_Scheme::instance()->enable_component( $sections_policy );
 
 	do_action( 'infinity_sections_init' );
 }

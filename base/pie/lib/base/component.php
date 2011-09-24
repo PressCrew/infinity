@@ -129,7 +129,8 @@ abstract class Pie_Easy_Component
 		$this->init();
 	}
 
-	
+	/**
+	 */
 	public function __get( $name )
 	{
 		switch ( $name ) {
@@ -150,7 +151,8 @@ abstract class Pie_Easy_Component
 		}
 	}
 
-	
+	/**
+	 */
 	public function __isset( $name )
 	{
 		switch ( $name ) {
@@ -259,10 +261,10 @@ abstract class Pie_Easy_Component
 	/**
 	 * Configure this component from an array of values
 	 *
-	 * @param Pie_Easy_Map $conf_map
-	 * @param string $theme
+	 * @param Pie_Easy_Map $conf_map A configuration map
+	 * @param string $theme Theme for which to configure
 	 */
-	public function configure( $conf_map, $theme )
+	public function configure( Pie_Easy_Map $conf_map, $theme )
 	{
 		// parent
 		if ( $conf_map->parent ) {
@@ -516,6 +518,7 @@ abstract class Pie_Easy_Component
 	 *
 	 * To retrieve the option object simply call $feature->get_suboption('color');
 	 *
+	 * @param string $name Name of the sub-option
 	 * @return array
 	 */
 	public function get_suboption( $name )

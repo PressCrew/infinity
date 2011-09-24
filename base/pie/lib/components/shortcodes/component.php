@@ -41,7 +41,6 @@ abstract class Pie_Easy_Shortcodes_Shortcode extends Pie_Easy_Component
 	private $__the_content__;
 
 	/**
-	 * @ignore
 	 */
 	public function init()
 	{
@@ -51,6 +50,8 @@ abstract class Pie_Easy_Shortcodes_Shortcode extends Pie_Easy_Component
 		add_shortcode( $this->name, array( $this, 'render_handler' ) );
 	}
 
+	/**
+	 */
 	public function configure( $config, $theme )
 	{
 		// RUN PARENT FIRST!
@@ -65,9 +66,8 @@ abstract class Pie_Easy_Shortcodes_Shortcode extends Pie_Easy_Component
 	/**
 	 * This method handles all shortcode calls
 	 *
-	 * @ignore
-	 * @param array $atts
-	 * @param string $content
+	 * @param array $atts The shortcode attributes
+	 * @param string $content The shortcode content
 	 */
 	final public function render_handler( $atts, $content = null )
 	{

@@ -28,6 +28,8 @@ abstract class Pie_Easy_Options_Renderer extends Pie_Easy_Renderer
 
 	/**
 	 * Renders option container opening and flash message elements
+	 *
+	 * @param string $block_class Additonal class(es) for the options block container
 	 */
 	public function render_begin( $block_class = null )
 	{

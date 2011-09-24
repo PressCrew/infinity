@@ -21,6 +21,8 @@ Pie_Easy_Loader::load( 'base/component' );
  */
 abstract class Pie_Easy_Screens_Screen extends Pie_Easy_Component
 {
+	/**
+	 */
 	public function configure( $config, $theme )
 	{
 		// RUN PARENT FIRST!

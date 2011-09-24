@@ -31,9 +31,6 @@ class Infinity_Shortcodes_Policy extends Pie_Easy_Shortcodes_Policy
 	}
 	
 	/**
-	 * Return the name of the implementing API
-	 *
-	 * @return string
 	 */
 	final public function get_api_slug()
 	{
@@ -41,8 +38,6 @@ class Infinity_Shortcodes_Policy extends Pie_Easy_Shortcodes_Policy
 	}
 
 	/**
-	 * @ignore
-	 * @return boolean
 	 */
 	final public function enable_styling()
 	{
@@ -50,8 +45,6 @@ class Infinity_Shortcodes_Policy extends Pie_Easy_Shortcodes_Policy
 	}
 
 	/**
-	 * @ignore
-	 * @return boolean
 	 */
 	final public function enable_scripting()
 	{
@@ -123,13 +116,13 @@ class Infinity_Shortcodes_Renderer extends Pie_Easy_Shortcodes_Renderer
 /**
  * Initialize shortcodes environment
  */
-function infinity_shortcodes_init( $theme = null )
+function infinity_shortcodes_init()
 {
 	// component policy
 	$shortcodes_policy = Infinity_Shortcodes_Policy::instance();
 
 	// enable component
-	Pie_Easy_Scheme::instance($theme)->enable_component( $shortcodes_policy );
+	Pie_Easy_Scheme::instance()->enable_component( $shortcodes_policy );
 
 	do_action( 'infinity_shortcodes_init' );
 }

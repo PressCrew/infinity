@@ -21,9 +21,20 @@
  */
 class Infinity_Base_Walker_Nav_Menu extends Walker_Nav_Menu
 {
+	/**
+	 * Start rendering an item element
+	 *
+	 * This overrides the parent method.
+	 *
+	 * @param string $output Passed by reference. Used to append additional content.
+	 * @param object $item Menu item data object.
+	 * @param int $depth Depth of menu item. Used for padding.
+	 * @param object $args
+	 */
 	function start_el(&$output, $item, $depth, $args)
 	{
 		global $wp_query;
+		parent::start_el($output, $item, $depth, $args);
 
 		$indent = ( $depth ) ? str_repeat( "", $depth ) : '';
 
