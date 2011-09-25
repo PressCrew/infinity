@@ -45,6 +45,9 @@ if ( ! isset( $content_width ) ) {
 
 /**
  * Setup post thumbnail sizes
+ *
+ * @package Infinity
+ * @subpackage base
  */
 function infinity_base_post_thumb_sizes()
 {
@@ -66,6 +69,9 @@ add_action( 'init', 'infinity_base_post_thumb_sizes' );
 
 /**
  * Register menus
+ *
+ * @package Infinity
+ * @subpackage base
  */
 function infinity_base_register_menus()
 {
@@ -80,6 +86,8 @@ add_action( 'init', 'infinity_base_register_menus' );
  * Register one sidebar
  *
  * @author Marshall Sorenson <marshall@presscrew.com>
+ * @package Infinity
+ * @subpackage base
  * @see register_sidebar()
  * @param string $id Sidebar ID, 'id' arg passed to register_sidebar()
  * @param string $name Sidebar name, 'name' arg passed to register_sidebar()
@@ -100,6 +108,9 @@ function infinity_base_register_sidebar( $id, $name, $desc )
 
 /**
  * Register all sidebars
+ *
+ * @package Infinity
+ * @subpackage base
  */
 function infinity_base_register_sidebars()
 {
@@ -140,6 +151,8 @@ add_action( 'init', 'infinity_base_register_sidebars' );
  * Display a nav menu using a custom walker
  *
  * @author Marshall Sorenson <marshall@presscrew.com>
+ * @package Infinity
+ * @subpackage base
  * @see wp_nav_menu()
  * @param string $theme_location Theme location, 'theme_location' arg passed to wp_nav_menu()
  */
@@ -156,6 +169,8 @@ function infinity_base_nav_menu( $theme_location )
 /**
  * Add Pagination
  *
+ * @package Infinity
+ * @subpackage base
  * @todo write a paginator from scratch, this is mental
  */
 function infinity_base_paginate() {
@@ -192,7 +207,9 @@ function infinity_base_paginate() {
 
 /**
  * Add Breadcrumb functionality for WordPress SEO
- * 
+ *
+ * @package Infinity
+ * @subpackage base
  * @todo move this to a feature extension, no direct plugin support
  */
 function infinity_base_yoast_breadcrumbs() {

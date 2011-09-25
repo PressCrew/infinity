@@ -6,7 +6,7 @@
  * @link http://infinity.presscrew.com/
  * @copyright Copyright (C) 2010-2011 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
- * @package Infinity
+ * @package Infinity-components
  * @subpackage sections
  * @since 1.0
  */
@@ -16,7 +16,7 @@ Pie_Easy_Loader::load( 'components/sections' );
 /**
  * Infinity Theme: sections policy
  *
- * @package Infinity
+ * @package Infinity-components
  * @subpackage sections
  */
 class Infinity_Sections_Policy extends Pie_Easy_Sections_Policy
@@ -80,7 +80,7 @@ class Infinity_Sections_Policy extends Pie_Easy_Sections_Policy
 /**
  * Infinity Theme: sections registry
  *
- * @package Infinity
+ * @package Infinity-components
  * @subpackage sections
  */
 class Infinity_Sections_Registry extends Pie_Easy_Sections_Registry
@@ -91,8 +91,8 @@ class Infinity_Sections_Registry extends Pie_Easy_Sections_Registry
 /**
  * Infinity Theme: section factory
  *
- * @package Infinity
- * @subpackage exts
+ * @package Infinity-extensions
+ * @subpackage sections
  */
 class Infinity_Exts_Section_Factory extends Pie_Easy_Sections_Factory
 {
@@ -102,7 +102,7 @@ class Infinity_Exts_Section_Factory extends Pie_Easy_Sections_Factory
 /**
  * Infinity Theme: sections renderer
  *
- * @package Infinity
+ * @package Infinity-components
  * @subpackage sections
  */
 class Infinity_Sections_Renderer extends Pie_Easy_Sections_Renderer
@@ -126,6 +126,9 @@ class Infinity_Sections_Renderer extends Pie_Easy_Sections_Renderer
 
 /**
  * Initialize sections environment
+ *
+ * @package Infinity-components
+ * @subpackage sections
  */
 function infinity_sections_init()
 {
@@ -140,6 +143,9 @@ function infinity_sections_init()
 
 /**
  * Initialize sections screen requirements
+ *
+ * @package Infinity-components
+ * @subpackage sections
  */
 function infinity_sections_init_screen()
 {
