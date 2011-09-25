@@ -6,7 +6,7 @@
  * @link http://infinity.presscrew.com/
  * @copyright Copyright (C) 2010-2011 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
- * @package Infinity
+ * @package Infinity-components
  * @subpackage features
  * @since 1.0
  */
@@ -16,7 +16,7 @@ Pie_Easy_Loader::load( 'components/features' );
 /**
  * Infinity Theme: features policy
  *
- * @package Infinity
+ * @package Infinity-components
  * @subpackage features
  */
 class Infinity_Features_Policy extends Pie_Easy_Features_Policy
@@ -79,7 +79,7 @@ class Infinity_Features_Policy extends Pie_Easy_Features_Policy
 /**
  * Infinity Theme: features registry
  *
- * @package Infinity
+ * @package Infinity-components
  * @subpackage features
  */
 class Infinity_Features_Registry extends Pie_Easy_Features_Registry
@@ -90,8 +90,8 @@ class Infinity_Features_Registry extends Pie_Easy_Features_Registry
 /**
  * Infinity Theme: feature factory
  *
- * @package Infinity
- * @subpackage exts
+ * @package Infinity-extensions
+ * @subpackage features
  */
 class Infinity_Exts_Feature_Factory extends Pie_Easy_Features_Factory
 {
@@ -101,7 +101,7 @@ class Infinity_Exts_Feature_Factory extends Pie_Easy_Features_Factory
 /**
  * Infinity Theme: features renderer
  *
- * @package Infinity
+ * @package Infinity-components
  * @subpackage features
  */
 class Infinity_Features_Renderer extends Pie_Easy_Features_Renderer
@@ -116,6 +116,8 @@ class Infinity_Features_Renderer extends Pie_Easy_Features_Renderer
 /**
  * Display a feature
  *
+ * @package Infinity-components
+ * @subpackage features
  * @param string $feature_name
  * @param boolean $output
  * @return string|false
@@ -134,6 +136,9 @@ function infinity_feature( $feature_name, $output = true )
 
 /**
  * Initialize features environment
+ *
+ * @package Infinity-components
+ * @subpackage features
  */
 function infinity_features_init()
 {
@@ -148,6 +153,9 @@ function infinity_features_init()
 
 /**
  * Initialize features screen requirements
+ *
+ * @package Infinity-components
+ * @subpackage features
  */
 function infinity_features_init_screen()
 {

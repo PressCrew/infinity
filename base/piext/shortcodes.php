@@ -6,7 +6,7 @@
  * @link http://infinity.presscrew.com/
  * @copyright Copyright (C) 2010-2011 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
- * @package Infinity
+ * @package Infinity-components
  * @subpackage shortcodes
  * @since 1.0
  */
@@ -16,7 +16,7 @@ Pie_Easy_Loader::load( 'components/shortcodes' );
 /**
  * Infinity Theme: shortcodes policy
  *
- * @package Infinity
+ * @package Infinity-components
  * @subpackage shortcodes
  */
 class Infinity_Shortcodes_Policy extends Pie_Easy_Shortcodes_Policy
@@ -79,7 +79,7 @@ class Infinity_Shortcodes_Policy extends Pie_Easy_Shortcodes_Policy
 /**
  * Infinity Theme: shortcodes registry
  *
- * @package Infinity
+ * @package Infinity-components
  * @subpackage shortcodes
  */
 class Infinity_Shortcodes_Registry extends Pie_Easy_Shortcodes_Registry
@@ -88,10 +88,10 @@ class Infinity_Shortcodes_Registry extends Pie_Easy_Shortcodes_Registry
 }
 
 /**
- * Infinity Theme: section factory
+ * Infinity Theme: shortcode factory
  *
- * @package Infinity
- * @subpackage exts
+ * @package Infinity-extensions
+ * @subpackage shortcodes
  */
 class Infinity_Exts_Shortcode_Factory extends Pie_Easy_Shortcodes_Factory
 {
@@ -101,7 +101,7 @@ class Infinity_Exts_Shortcode_Factory extends Pie_Easy_Shortcodes_Factory
 /**
  * Infinity Theme: shortcodes renderer
  *
- * @package Infinity
+ * @package Infinity-components
  * @subpackage shortcodes
  */
 class Infinity_Shortcodes_Renderer extends Pie_Easy_Shortcodes_Renderer
@@ -115,6 +115,9 @@ class Infinity_Shortcodes_Renderer extends Pie_Easy_Shortcodes_Renderer
 
 /**
  * Initialize shortcodes environment
+ *
+ * @package Infinity-components
+ * @subpackage shortcodes
  */
 function infinity_shortcodes_init()
 {
@@ -129,6 +132,9 @@ function infinity_shortcodes_init()
 
 /**
  * Initialize shortcodes screen requirements
+ *
+ * @package Infinity-components
+ * @subpackage shortcodes
  */
 function infinity_shortcodes_init_screen()
 {

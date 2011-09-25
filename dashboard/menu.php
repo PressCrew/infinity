@@ -9,6 +9,7 @@
  * @package Infinity
  * @subpackage dashboard
  * @since 1.0
+ * @internal
  */
 
 //
@@ -19,6 +20,9 @@ add_action( 'admin_menu', 'infinity_dashboard_menu_setup' );
 
 /**
  * Adds the Infinity submenu item to the WordPress menu
+ *
+ * @package Infinity
+ * @subpackage dashboard
  */
 function infinity_dashboard_menu_setup()
 {
@@ -37,6 +41,9 @@ function infinity_dashboard_menu_setup()
 
 /**
  * Make admin menu pretty
+ *
+ * @package Infinity
+ * @subpackage dashboard
  */
 function infinity_dashboard_menu_selector()
 {
@@ -45,6 +52,9 @@ function infinity_dashboard_menu_selector()
 
 /**
  * Make admin menu pretty
+ *
+ * @package Infinity
+ * @subpackage dashboard
  */
 function infinity_dashboard_menu_styler()
 {
@@ -59,6 +69,9 @@ function infinity_dashboard_menu_styler()
 
 /**
  * Make admin menu our b*tch
+ *
+ * @package Infinity
+ * @subpackage dashboard
  */
 function infinity_dashboard_menu_shifter()
 {

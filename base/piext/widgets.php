@@ -6,7 +6,7 @@
  * @link http://infinity.presscrew.com/
  * @copyright Copyright (C) 2010-2011 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
- * @package Infinity
+ * @package Infinity-components
  * @subpackage widgets
  * @since 1.0
  */
@@ -16,7 +16,7 @@ Pie_Easy_Loader::load( 'components/widgets' );
 /**
  * Infinity Theme: widgets policy
  *
- * @package Infinity
+ * @package Infinity-components
  * @subpackage widgets
  */
 class Infinity_Widgets_Policy extends Pie_Easy_Widgets_Policy
@@ -80,7 +80,7 @@ class Infinity_Widgets_Policy extends Pie_Easy_Widgets_Policy
 /**
  * Infinity Theme: widgets registry
  *
- * @package Infinity
+ * @package Infinity-components
  * @subpackage widgets
  */
 class Infinity_Widgets_Registry extends Pie_Easy_Widgets_Registry
@@ -91,8 +91,8 @@ class Infinity_Widgets_Registry extends Pie_Easy_Widgets_Registry
 /**
  * Infinity Theme: section factory
  *
- * @package Infinity
- * @subpackage exts
+ * @package Infinity-extensions
+ * @subpackage widgets
  */
 class Infinity_Exts_Widget_Factory extends Pie_Easy_Widgets_Factory
 {
@@ -102,7 +102,7 @@ class Infinity_Exts_Widget_Factory extends Pie_Easy_Widgets_Factory
 /**
  * Infinity Theme: widgets renderer
  *
- * @package Infinity
+ * @package Infinity-components
  * @subpackage widgets
  */
 class Infinity_Widgets_Renderer extends Pie_Easy_Widgets_Renderer
@@ -117,6 +117,8 @@ class Infinity_Widgets_Renderer extends Pie_Easy_Widgets_Renderer
 /**
  * Display a widget
  *
+ * @package Infinity-components
+ * @subpackage widgets
  * @param string $widget_name
  * @param boolean $output
  * @return string|false
@@ -128,6 +130,9 @@ function infinity_widget( $widget_name, $output = true )
 
 /**
  * Initialize widgets environment
+ *
+ * @package Infinity-components
+ * @subpackage widgets
  */
 function infinity_widgets_init()
 {
@@ -142,6 +147,9 @@ function infinity_widgets_init()
 
 /**
  * Initialize widgets screen requirements
+ *
+ * @package Infinity-components
+ * @subpackage widgets
  */
 function infinity_widgets_init_screen()
 {

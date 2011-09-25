@@ -33,6 +33,8 @@ require_once( INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'cpanel.php' );
 /**
  * Locate a dashboard template relative to the template dir root
  *
+ * @package Infinity
+ * @subpackage dashboard
  * @param string $rel_path Relative path to template from dashboard template root
  * @return string
  */
@@ -48,6 +50,8 @@ function infinity_dashboard_locate_template( $rel_path )
 /**
  * Load a dashboard template relative to the template dir root
  *
+ * @package Infinity
+ * @subpackage dashboard
  * @param string $rel_path Relative path to template from dashboard template root
  * @param array|stdClass $args Variables to inject into template
  * @param array|stdClass $defaults Default values of variables being injected into template
@@ -64,6 +68,8 @@ function infinity_dashboard_load_template( $rel_path, $args = null, $defaults = 
 /**
  * Return path to a dashboard image
  *
+ * @package Infinity
+ * @subpackage dashboard
  * @param string $name image file name
  * @return string
  */
@@ -75,6 +81,8 @@ function infinity_dashboard_image( $name )
 /**
  * Publish a document page
  *
+ * @package Infinity
+ * @subpackage dashboard
  * @param string $page Name of page to publish
  */
 function infinity_dashboard_doc_publish( $page = null )
@@ -88,6 +96,8 @@ function infinity_dashboard_doc_publish( $page = null )
 /**
  * Publish a developer (core) document page
  *
+ * @package Infinity
+ * @subpackage dashboard
  * @param string $page Name of page to publish
  */
 function infinity_dashboard_devdoc_publish( $page = null )
@@ -101,6 +111,8 @@ function infinity_dashboard_devdoc_publish( $page = null )
 /**
  * Pre filter doc contents before parsing
  *
+ * @package Infinity
+ * @subpackage dashboard
  * @param string $contents
  * @return string
  */
@@ -113,6 +125,8 @@ function infinity_dashboard_doc_filter( $contents )
 /**
  * Pre filter callback
  *
+ * @package Infinity
+ * @subpackage dashboard
  * @param array $match
  * @return string
  */

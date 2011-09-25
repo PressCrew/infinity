@@ -13,6 +13,9 @@
 
 /**
  * Print a basic title
+ *
+ * @package Infinity
+ * @subpackage base
  */
 function infinity_base_title()
 {
@@ -38,6 +41,9 @@ function infinity_base_title()
 
 /**
  * Show author box (if on an author page)
+ *
+ * @package Infinity
+ * @subpackage base
  */
 function infinity_base_author_box()
 {
@@ -60,6 +66,9 @@ function infinity_base_author_box()
 
 /**
  * Show sidebars based on page type (including BP components)
+ *
+ * @package Infinity
+ * @subpackage base
  */
 function infinity_base_sidebars()
 {
@@ -132,6 +141,8 @@ function infinity_base_sidebars()
 /**
  * Returns true if not in admin dir
  *
+ * @package Infinity
+ * @subpackage conditionals
  * @return boolean
  */
 function is_not_admin() {

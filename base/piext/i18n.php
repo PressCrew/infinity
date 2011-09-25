@@ -9,6 +9,7 @@
  * @package Infinity
  * @subpackage i18n
  * @since 1.0
+ * @ignore
  */
 
 Pie_Easy_Loader::load( 'utils/i18n' );

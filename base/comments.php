@@ -15,7 +15,9 @@ if (!function_exists("custom_comment"))
 {
 	/**
 	 * Render a custom comment
-	 * 
+	 *
+	 * @package Infinity
+	 * @subpackage misc
 	 * @param string $comment
 	 * @param array $args
 	 * @param integer $depth
@@ -57,6 +59,13 @@ if (!function_exists("custom_comment"))
 // PINGBACK / TRACKBACK OUTPUT
 if (!function_exists("list_pings"))
 {
+	/**
+	 * @package Infinity
+	 * @subpackage misc
+	 * @param type $comment
+	 * @param type $args
+	 * @param type $depth
+	 */
 	function list_pings($comment, $args, $depth)
 	{
 		$GLOBALS['comment'] = $comment;
@@ -72,6 +81,10 @@ if (!function_exists("list_pings"))
 		
 if (!function_exists("the_commenter_link"))
 {
+	/**
+	 * @package Infinity
+	 * @subpackage misc
+	 */
 	function the_commenter_link()
 	{
 		$commenter = get_comment_author_link();
@@ -88,6 +101,10 @@ if (!function_exists("the_commenter_link"))
 
 if (!function_exists("the_commenter_avatar"))
 {
+	/**
+	 * @package Infinity
+	 * @subpackage misc
+	 */
 	function the_commenter_avatar($args)
 	{
 	    $email = get_comment_author_email();

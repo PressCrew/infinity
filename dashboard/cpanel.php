@@ -20,6 +20,8 @@ add_action( 'admin_init', 'infinity_dashboard_cpanel_setup' );
 /**
  * Return the current dashboard action
  *
+ * @package Infinity
+ * @subpackage dashboard
  * @return string|null
  */
 function infinity_dashboard_cpanel_action()
@@ -40,6 +42,8 @@ function infinity_dashboard_cpanel_action()
 /**
  * Return actions configuration array
  *
+ * @package Infinity
+ * @subpackage dashboard
  * @return array
  */
 function infinity_dashboard_cpanel_actions()
@@ -57,6 +61,8 @@ function infinity_dashboard_cpanel_actions()
 /**
  * Initialize and render the control panel markup
  *
+ * @package Infinity
+ * @subpackage dashboard
  * @param string $header_template Path to header template relative to theme directory
  */
 function infinity_dashboard_cpanel_ui( $header_template = null )
@@ -92,6 +98,9 @@ function infinity_dashboard_cpanel_ui( $header_template = null )
 
 /**
  * Handle setup of the control panel environment
+ *
+ * @package Infinity
+ * @subpackage dashboard
  */
 function infinity_dashboard_cpanel_setup()
 {
@@ -110,6 +119,9 @@ function infinity_dashboard_cpanel_setup()
 
 /**
  * Output cpanel tab content
+ *
+ * @package Infinity
+ * @subpackage dashboard
  */
 function infinity_dashboard_cpanel_tabs_content()
 {
@@ -131,6 +143,9 @@ function infinity_dashboard_cpanel_tabs_content()
 
 /**
  * Route requests and display the control panel
+ *
+ * @package Infinity
+ * @subpackage dashboard
  */
 function infinity_dashboard_cpanel_screen()
 {
