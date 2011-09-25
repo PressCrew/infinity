@@ -34,7 +34,6 @@ class Infinity_Base_Walker_Nav_Menu extends Walker_Nav_Menu
 	function start_el(&$output, $item, $depth, $args)
 	{
 		global $wp_query;
-		parent::start_el($output, $item, $depth, $args);
 
 		$indent = ( $depth ) ? str_repeat( "", $depth ) : '';
 
