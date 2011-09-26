@@ -37,7 +37,14 @@ final class Pie_Easy_Files extends Pie_Easy_Base
 	 */
 	public static function path_split ( $path )
 	{
-		return preg_split( '/\/|\\\/', $path, null, PREG_SPLIT_NO_EMPTY );
+		// strip out leading drive letters (Windows)
+		$path_clean = preg_replace( '/^[a-z]{1}:/i', '', $path );
+
+		// replace double back slashes with single backslash
+		$path_clean = str_replace( '\\', DIRECTORY_SEPARATOR, $path_clean );
+
+		// split at forward and back slashes
+		return preg_split( '/\/|\\\/', $path_clean, null, PREG_SPLIT_NO_EMPTY );
 	}
 
 	/**
