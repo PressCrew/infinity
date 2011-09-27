@@ -20,18 +20,6 @@
 class Pie_Easy_Exts_Features_Header_Logo
 	extends Pie_Easy_Features_Feature
 {
-	/**
-	 */
-	public function configure( $conf_map, $theme )
-	{
-		// RUN PARENT FIRST!
-		parent::configure( $conf_map, $theme );
-
-		// css title class
-		if ( isset( $conf_map['css_selector'] ) ) {
-			$this->directives()->set( $theme, 'css_selector', $conf_map['css_selector'] );
-		}
-	}
 
 	/**
 	 * Return URL to uploaded logo image
@@ -62,8 +50,13 @@ class Pie_Easy_Exts_Features_Header_Logo
 		// only render if we have a url
 		if ( $url ) {
 
+			// selectors to target
+			$selectors =
+				'div#' . $this->get_element_id() . ' a,' .
+				'h1#' . $this->get_element_id() . ' a';
+
 			// add rule
-			$pos = $this->style()->new_rule( $this->css_selector );
+			$pos = $this->style()->new_rule( $selectors );
 
 			if ( $opt_top ) {
 				$pos->ad( 'top', $opt_top . 'px' );
