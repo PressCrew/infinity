@@ -1,0 +1,10 @@
+h1.pie-easy-exts-features-header-logo,
+div.pie-easy-exts-features-header-logo {
+    margin: 0;
+}
+h1.pie-easy-exts-features-header-logo a,
+div.pie-easy-exts-features-header-logo a {
+	display: block;
+	position: absolute;
+	margin: 0;
+}
