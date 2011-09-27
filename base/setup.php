@@ -61,8 +61,6 @@ function infinity_base_post_thumb_sizes()
 		add_image_size( 'small', 125, '', true );
 		add_image_size( 'thumbnail-large', 600, 200, true );
 		add_image_size( 'thumbnail-post', 210, 160, true );
-		add_image_size( 'thumbnail-archive', 680, 180, true );
-		add_image_size( 'thumbnail-portfolio', 700, '', true );
 	}
 }
 add_action( 'init', 'infinity_base_post_thumb_sizes' );
@@ -162,6 +160,7 @@ function infinity_base_nav_menu( $theme_location )
 		'theme_location' => $theme_location,
 		'menu_class' => 'sf-menu',
 		'container' => '',
+		'fallback_cb'     => 'false',
 		'walker' => new Infinity_Base_Walker_Nav_Menu()
 	));
 }
