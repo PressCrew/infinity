@@ -36,7 +36,6 @@
 		</<?php echo $heading_tag; ?>>
 		<?php
 			endif;
-
 			// show primary menu?
 			if ( has_nav_menu( 'main-menu'  ) ):
 				infinity_get_template_part( 'templates/parts/main-menu', 'header' );
@@ -52,3 +51,4 @@
 		endif;
 	?>
 </div><!-- end top wrap -->
+			<div style="clear: both;"></div>

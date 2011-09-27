@@ -44,11 +44,13 @@
 				</div>
 			</div>
 			<div style="clear: both;"></div>
-			<div class="footer-menu" role="navigation">
-					<?php wp_nav_menu( array( 'theme_location' => 'footer-menu' ) ); ?>	
-			</div>
 			<div id="footer-info">
-				Theme: <a href="http://infinity.presscrew.com">Infinity</a><span class="footer-logo"></span>	<a rel="generator" href="http://infinity.presscrew.com">More freedom to create</a>. 
+				<div id="footer-menu" role="navigation">
+						<?php wp_nav_menu( array( 'theme_location' => 'footer-menu' ) ); ?>	
+				</div>	
+				<div id="powered-by">
+					Built on <a href="http://infinity.presscrew.com">Infinity</a> and powered by <a href="http://wordpress.org">WordPress</a>.
+				</div>
 			</div>
 			<?php
 				do_action( 'close_footer' );
