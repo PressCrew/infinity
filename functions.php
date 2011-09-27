@@ -109,8 +109,10 @@ Pie_Easy_Loader::init( INFINITY_PIE_URL, 'Infinity_Exts' );
 
 // initialize enqueuer and configure actions
 Pie_Easy_Enqueue::instance()
-	->on_action( 'template_redirect' )
-	->on_action( 'load-toplevel_page_' . INFINITY_ADMIN_PAGE );
+	->styles_on_action( 'wp_print_styles' )
+	->scripts_on_action( 'wp_print_scripts' )
+	->styles_on_action( 'load-toplevel_page_' . INFINITY_ADMIN_PAGE )
+	->scripts_on_action( 'load-toplevel_page_' . INFINITY_ADMIN_PAGE );
 
 // load Infinity API
 require_once( INFINITY_PIEXT_DIR . DIRECTORY_SEPARATOR . 'scheme.php' );

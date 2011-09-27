@@ -81,20 +81,38 @@ final class Pie_Easy_Enqueue extends Pie_Easy_Base
 	}
 
 	/**
-	 * Add an action on which to attach the enqueuer
+	 * Add an action on which to attach the style enqueuer
 	 *
 	 * @param string $action
 	 * @param integer $priority
 	 */
-	public function on_action( $action, $priority = null )
+	public function styles_on_action( $action, $priority = null )
 	{
 		// handle empty priority
 		if ( empty( $priority ) ) {
 			$priority = 99999;
 		}
 		
-		// use our our actions because things get too freaking confusing
+		// enqueue styles on given action
 		add_action( $action, array($this, 'do_enqueue_styles'), $priority );
+
+		return $this;
+	}
+
+	/**
+	 * Add an action on which to attach the script enqueuer
+	 *
+	 * @param string $action
+	 * @param integer $priority
+	 */
+	public function scripts_on_action( $action, $priority = null )
+	{
+		// handle empty priority
+		if ( empty( $priority ) ) {
+			$priority = 99999;
+		}
+
+		// enqueue scripts on given action
 		add_action( $action, array($this, 'do_enqueue_scripts'), $priority );
 
 		return $this;
