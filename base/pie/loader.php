@@ -164,7 +164,8 @@ final class Pie_Easy_Loader extends Pie_Easy_Base
 		'sections' => array( 'default' ),
 		'shortcodes' => array( 'access' ),
 		'widgets' => array(
-			'debugger', 'default', 'menu', 'posts-list', 'title-block'
+			'debugger', 'default', 'menu',
+			'posts-list', 'theme-picker', 'title-block'
 		)
 	);
 
