@@ -1,9 +1,11 @@
-INFINITY BASE
-*/
-
 /*-------------------------------------------------------------
+
+DO NOT MODIY THS STYLESHEET, INSTEAD OVERWRITE ANY STYLING
+IN YOUR INFINITY CHILD THEME
+
+----------------------------------------------------------------
 This stylesheet contains the absolute bare minimum elements
-to get the show started. It's a great starting point for an
+to get the show started. It's a great starting point for any
 Infinity powered theme.
 
 To add additional styles, we strongly encourage you add your
@@ -24,6 +26,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 /* ============================================= */
 ol, ul {
     display: inline;
+    padding: 0;
 }
 p {
     font-weight: normal;
@@ -52,12 +55,12 @@ h6 small { color: #bfbfbf }
 h1 {
     margin-bottom: 18px;
     font-size: 30px;
-    line-height: 36px;
+    line-height: 32px;
 }
 h1 small { font-size: 18px }
 h2 {
     font-size: 24px;
-    line-height: 36px;
+    line-height: 26px;
 }
 h2 small { font-size: 14px }
 h3,
@@ -196,12 +199,11 @@ body {
     padding-top: 40px;
     position: relative;
     overflow: hidden;
-    padding-left: 20px;
-    padding-right: 20px;
 }
 .footer-wrap {
-    padding: 20px;
+    padding-: 20px;
     position: relative;
+    background: #F8F8F8;
 }
 /* From top to bottom */
 #header {
@@ -217,33 +219,51 @@ body {
     line-height: 180%;
     font-weight: bold;
 }
-#site-title {
+h1#site-title {
     font-size: 26px;
-    left: 20px;
     line-height: 180%;
     position: absolute;
-    top: 30%;
+    top: 11%;
+    padding-left: 20px;
 }
+div#site-title {
+    font-size: 26px;
+    line-height: 180%;
+    position: absolute;
+    top: 25%;
+    padding-left: 20px;
+}
+
 #site-title a {
     margin-bottom: -29px;
     display: block;
 }
 #pie-easy-exts-features-header-logo-infinity-header-logo {
-	margin-bottom: 0px;
+    margin-bottom: 0;
+    margin-top: 0;
 }
 #pie-easy-exts-features-header-logo-infinity-header-logo a {
 position: absolute;
 left: 20px;
 margin-bottom: 0px;
+top: 33%;
 }
 
 /* Navigation Styling */
 /* Menu Wrappers */
+#top-menu-wrap, #sub-menu-wrap {
+    border-bottom: 2px solid #DDD;
+    background: none repeat scroll 0 0 #F8F8F8;
+    border-top: 1px solid #DDDDDD;
+    position: relative;        
+    height: 30px;
+    padding-bottom: 5px;
+    padding-right: 0;
+    padding-top: 5px;
+}
+
 #top-menu-wrap {
-    height: 25px;
-    padding: 1px 0 5px;
     z-index: 1;
-    position: relative;
 }
 #main-menu-wrap {
     top: 34%;
@@ -255,15 +275,8 @@ margin-bottom: 0px;
 #main-menu-wrap ul.sub-menu { z-index: 99 }
 .main-menu { padding-left: 0px !important }
 /* Change font styling for the top and sub menus */
-#sub-menu-wrap {
-    margin-bottom: 0;
-    height: 25px;
-    padding: 1px 0 5px;
-    position: relative;
-}
 #sub-menu-wrap ul a span,
 #top-menu-wrap ul a span {
-    font-weight: bold;
     text-transform: uppercase;
     font-size: 10.5px;
 }
@@ -278,6 +291,10 @@ padding-right: 10px; }
 .base-menu ul li {
     float: left;
     position: relative;
+}
+.base-menu ul li:first-child {
+    margin-left: -0.416667%;
+    margin-right:-0.416667%; 
 }
 .base-menu ul li.right {
 float: right;	
@@ -347,7 +364,7 @@ float: right;
 .base-menu ul li.current_page_item a,
 .base-menu ul li.current-menu-item a {
     text-decoration: none;
-    background-color: #222;
+    background-color: #EFEFEF;
     /* Left image */
 }
 .base-menu li li a:hover,
@@ -412,12 +429,16 @@ float: right;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
+    background: #FFF;
 }
 .base-menu ul ul li {
     float: left;
     width: 150px;
     background: none;
     padding: 0 5px 0 5px;
+}
+.base-menu ul li a span {
+    color: #777777;
 }
 .base-menu ul ul li:first-child { border-top: none }
 .base-menu ul ul li:last-child { border-bottom: none }
@@ -428,7 +449,8 @@ float: right;
     padding: 5px 0 5px 0;
     width: 150px;
 }
-.base-menu ul li a{ background: none }
+.base-menu ul li a{ background: none;
+    border-radius: 5px 5px 5px 5px; }
 /* =========== 
  ! Sidebar   
  =========== */
@@ -448,24 +470,22 @@ float: right;
 .widget { margin-bottom: 30px }
 .widget h4 {
     border-bottom: 1px solid #EFEFEF;
-    margin-bottom: 10px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
     color: #999999;
     font-size: 11.8px;
+    letter-spacing: 1px;
+    line-height: 24px;
+    text-transform: uppercase;
 }
 /* ========== 
  ! Footer   
  ========== */
 #footer h4 { color: #60A2C1 }
 #footer p:last-child { margin-bottom: 0 }
-#footer-full { margin-bottom: 10px }
-#footer-content {
-    margin-left: auto;
-    margin-right: auto;
-    width: 980px;
-}
 .footer-widgets { margin-bottom: 20px }
+#footer .widget {
+    margin-bottom: 0;
+    padding: 20px;
+}
 .footer-widget h3 {
     margin-bottom: 10px;
     color: #FEDA71;
@@ -473,28 +493,25 @@ float: right;
 }
 #footer-widget-right { border-right: none }
 #footer-widget-left { border-left: none }
-.footer-menu { }
-.footer-menu ul { margin: 0px }
-.footer-menu  ul li a:hover { color: #777 }
-.footer-menu ul li { display: inline }
-.footer-menu ul li a {
-    border-left: 1px solid #676767;
-    border-right: 1px solid #343232;
+#footer-menu  ul li a:hover { color: #777 }
+#footer-menu ul li { display: inline }
+#footer-menu ul li a {
     font-weight: bold;
-    margin-right: -4px;
-    padding-left: 8px;
     padding-right: 8px;
 }
-.footer-menu ul li:first-child a {
-    border-left: 0px;
-    padding-left: 0;
-}
 .footer-menu ul li:last-child a { border-right: 0px }
-
 #footer-info {
-    font-size: 13px;
-    margin-top: -21px;
-    text-align: right;
+    background: none repeat scroll 0 0 #444444;
+    color: #EFEFEF;
+    overflow: auto;
+    padding: 10px;
+}
+#footer-menu {
+width: 70%;
+}
+#powered-by {
+float: right;
+margin-top: -20px;
 }
 
 /* ============== 
@@ -563,6 +580,9 @@ span.edit-link {
 }
 span.edit-link a { color: #999 }
 /* The actual Posts*/
+.posttitle {
+
+}
 .entry {
     min-height: 110px;
     margin-top: 10px;
