@@ -51,6 +51,7 @@ This is where you configure what type of shortcode you want to display.
 The available shortcode types are:
 
 * __access__ - A basic content protector
+* __visitor__ - Show content only to non-authenticated users
 
 > Eventually there will be dozens of built-in shortcodes.
 

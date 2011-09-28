@@ -179,7 +179,7 @@ final class Pie_Easy_Loader extends Pie_Easy_Base
 			),
 		'shortcodes' =>
 			array(
-				'access'
+				'access', 'visitor'
 			),
 		'widgets' =>
 			array(
