@@ -1,6 +1,6 @@
 <?php
 /**
- * PIE API: option extensions, left/right radio class file
+ * PIE API: option extensions, top/bottom radio class file
  *
  * @author Marshall Sorenson <marshall@presscrew.com>
  * @link http://infinity.presscrew.com/
@@ -14,12 +14,12 @@
 Pie_Easy_Loader::load_ext( 'options/radio' );
 
 /**
- * Left/Right radio option
+ * Top/Bottom radio option
  *
  * @package PIE-extensions
  * @subpackage options
  */
-class Pie_Easy_Exts_Options_Leftright
+class Pie_Easy_Exts_Options_Position_Top_Bottom
 	extends Pie_Easy_Exts_Options_Radio
 		implements Pie_Easy_Options_Option_Auto_Field
 {
@@ -28,8 +28,8 @@ class Pie_Easy_Exts_Options_Leftright
 	public function load_field_options()
 	{
 		return array(
-			'l' => __( 'Left', pie_easy_text_domain ),
-			'r' => __( 'Right', pie_easy_text_domain )
+			't' => __( 'Top', pie_easy_text_domain ),
+			'b' => __( 'Bottom', pie_easy_text_domain )
 		);
 	}
 }

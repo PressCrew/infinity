@@ -1,6 +1,6 @@
 <?php
 /**
- * PIE API: option extensions, yes/no radio class file
+ * PIE API: option extensions, "enable" checkbox class file
  *
  * @author Marshall Sorenson <marshall@presscrew.com>
  * @link http://infinity.presscrew.com/
@@ -11,16 +11,16 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load_ext( 'options/radio' );
+Pie_Easy_Loader::load_ext( 'options/checkbox' );
 
 /**
- * Yes/No radio option
+ * Enable checkbox option
  *
  * @package PIE-extensions
  * @subpackage options
  */
-class Pie_Easy_Exts_Options_Yesno
-	extends Pie_Easy_Exts_Options_Radio
+class Pie_Easy_Exts_Options_Toggle_Enable
+	extends Pie_Easy_Exts_Options_Checkbox
 		implements Pie_Easy_Options_Option_Auto_Field
 {
 	/**
@@ -28,8 +28,7 @@ class Pie_Easy_Exts_Options_Yesno
 	public function load_field_options()
 	{
 		return array(
-			true => __( 'Yes', pie_easy_text_domain ),
-			false => __( 'No', pie_easy_text_domain )
+			true => __( 'Enable', pie_easy_text_domain )
 		);
 	}
 }
