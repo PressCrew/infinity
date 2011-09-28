@@ -60,17 +60,19 @@ The available option types are:
 	* __posts__ - Select multiple posts
 	* __tag__ - Select one tag
 	* __tags__ - Select multiple tags
-* Toggles
-	* __on__ - "On" checkbox
-	* __off__ - "Off" checkbox
-	* __yes__ - "Yes" checkbox
-	* __no__ - "No" checkbox
-	* __enable__ - "Enable" checkbox
-	* __disable__ - "Disable" checkbox
-	* __onoff__ - On/Off radios
-	* __yesno__ - Yes/No radios
-	* __enabledisable__ - Enable/Disable radios
-	* __leftright__ - Left/Right radios
+* Position
+	* __position/left-right__ - Left/Right radios
+	* __position/top-bottom__ - Top/Bottom radios
+* Toggle
+	* __toggle/on__ - "On" checkbox
+	* __toggle/off__ - "Off" checkbox
+	* __toggle/on-off__ - On/Off radios
+	* __toggle/yes__ - "Yes" checkbox
+	* __toggle/no__ - "No" checkbox
+	* __toggle/yes-no__ - Yes/No radios
+	* __toggle/enable__ - "Enable" checkbox
+	* __toggle/disable__ - "Disable" checkbox
+	* __toggle/enable-disable__ - Enable/Disable radios
 * Advanced
 	* __upload__ - Media uploader
 	* __colorpicker__ - Color picker

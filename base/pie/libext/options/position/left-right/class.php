@@ -1,6 +1,6 @@
 <?php
 /**
- * PIE API: option extensions, "on" checkbox class file
+ * PIE API: option extensions, left/right radio class file
  *
  * @author Marshall Sorenson <marshall@presscrew.com>
  * @link http://infinity.presscrew.com/
@@ -11,16 +11,16 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load_ext( 'options/checkbox' );
+Pie_Easy_Loader::load_ext( 'options/radio' );
 
 /**
- * On checkbox option
+ * Left/Right radio option
  *
  * @package PIE-extensions
  * @subpackage options
  */
-class Pie_Easy_Exts_Options_On
-	extends Pie_Easy_Exts_Options_Checkbox
+class Pie_Easy_Exts_Options_Position_Left_Right
+	extends Pie_Easy_Exts_Options_Radio
 		implements Pie_Easy_Options_Option_Auto_Field
 {
 	/**
@@ -28,7 +28,8 @@ class Pie_Easy_Exts_Options_On
 	public function load_field_options()
 	{
 		return array(
-			true => __( 'On', pie_easy_text_domain )
+			'l' => __( 'Left', pie_easy_text_domain ),
+			'r' => __( 'Right', pie_easy_text_domain )
 		);
 	}
 }

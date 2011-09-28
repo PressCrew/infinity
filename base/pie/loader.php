@@ -136,37 +136,56 @@ final class Pie_Easy_Loader extends Pie_Easy_Base
 	 * @var array
 	 */
 	private static $exts = array(
-		'features' => array(
-			'css-background', 'custom-css', 'default', 'gravatar', 'header-logo'
-		),
-		'options' => array(
-			'category', 'categories', 'checkbox', 'colorpicker', 'css',
-			'disable',
-			'enable', 'enabledisable',
-			'input', 'input-group',
-			'leftright',
-			'off', 'on', 'onoff',
-			'page', 'pages', 'post', 'posts',
-			'plugins' => array(
-				'domain-mapping'
+		'features' =>
+			array(
+				'css-background', 'custom-css', 'default', 'gravatar', 'header-logo'
 			),
-			'radio',
-			'select',
-			'tag', 'tags',
-			'text', 'textarea',
-			'upload',
-			'wp' => array(
-				'blogname', 'blogdescription', 'page-on-front'
+		'options' =>
+			array(
+				'category', 'categories', 'checkbox', 'colorpicker', 'css',
+				'input', 'input-group',
+				'page', 'pages', 'post', 'posts',
+				'plugins' =>
+					array(
+						'domain-mapping'
+					),
+				'position' =>
+					array(
+						'left-right', 'top-bottom'
+					),
+				'radio',
+				'select',
+				'tag', 'tags',
+				'text', 'textarea',
+				'toggle' =>
+					array(
+						'enable', 'disable', 'enable-disable',
+						'on', 'off', 'on-off',
+						'yes', 'no', 'yes-no'
+					),
+				'upload',
+				'wp' =>
+					array(
+						'blogname', 'blogdescription', 'page-on-front'
+					)
 			),
-			'yes', 'yesno'
-		),
-		'screens' => array( 'cpanel' ),
-		'sections' => array( 'default' ),
-		'shortcodes' => array( 'access' ),
-		'widgets' => array(
-			'debugger', 'default', 'menu',
-			'posts-list', 'theme-picker', 'title-block'
-		)
+		'screens' =>
+			array(
+				'cpanel'
+			),
+		'sections' =>
+			array(
+				'default'
+			),
+		'shortcodes' =>
+			array(
+				'access'
+			),
+		'widgets' =>
+			array(
+				'debugger', 'default', 'menu',
+				'posts-list', 'theme-picker', 'title-block'
+			)
 	);
 
 	/**
