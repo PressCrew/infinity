@@ -190,7 +190,7 @@ function infinity_screens_init_screen()
 function infinity_screens_route()
 {
 	// build the base URL
-	$url = sprintf( '%sadmin.php?page=%s', admin_url(), INFINITY_ADMIN_PAGE );
+	$url = sprintf( '?page=%s', INFINITY_ADMIN_PAGE );
 
 	// use variable args
 	$params = func_get_args();
