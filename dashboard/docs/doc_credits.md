@@ -9,8 +9,6 @@ Shameless plugs are certainly not out of order :)
 	* Website: <a href="http://marshallsorenson.com/" target="_blank">http://marshallsorenson.com/</a>
 	* Twitter: <a href="http://twitter.com/mazftw" target="_blank">@mazftw</a>
 
-### Contributors
-
 * **Bowe Frankema**
 	* Website: <a href="http://bp-tricks.com/" target="_blank">http://bp-tricks.com/</a>
 	* Twitter: <a href="http://twitter.com/BoweFrankema" target="_blank">@BoweFrankema</a>
