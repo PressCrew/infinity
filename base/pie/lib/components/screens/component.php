@@ -33,6 +33,12 @@ abstract class Pie_Easy_Screens_Screen extends Pie_Easy_Component
 		if ( isset( $config['url'] ) ) {
 			$this->directives()->set( $theme, 'url', $config['url'] );
 		}
+
+		// target of the screen menu link
+		// @todo add this to documentation when stable
+		if ( isset( $config['target'] ) ) {
+			$this->directives()->set( $theme, 'target', $config['target'] );
+		}
 	}
 }
 

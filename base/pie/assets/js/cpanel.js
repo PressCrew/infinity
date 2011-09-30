@@ -133,7 +133,8 @@ function pieEasyCpanel(options)
 			loadTab(this);
 			return false;
 		}
-		return true;
+		window.open($(this).attr('href'), $(this).attr('target'));
+		return false;
 	})
 
 	// close cpanel tab
