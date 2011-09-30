@@ -1,1 +1,0 @@
-This directory is for screen component extensions class and template files.
