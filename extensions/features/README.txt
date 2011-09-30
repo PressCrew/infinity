@@ -1,1 +1,0 @@
-This directory is for feature component extensions class and template files.

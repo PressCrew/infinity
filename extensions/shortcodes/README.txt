@@ -1,1 +1,0 @@
-This directory is for shortcode component extensions class and template files.

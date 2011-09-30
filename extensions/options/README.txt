@@ -1,1 +1,0 @@
-This directory is for option component extensions class and template files.

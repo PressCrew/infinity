@@ -1,1 +1,0 @@
-This directory is for section component extensions class and template files.
