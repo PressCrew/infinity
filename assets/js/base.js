@@ -28,8 +28,8 @@
 		});
 
 		// add grid class to content for buddypress and bbpress combatibilty
-		jQuery('#content').addClass('grid_17');
-		jQuery('#sidebar').addClass('grid_7 omega');
+		jQuery('#content').addClass('grid_16');
+		jQuery('#sidebar').addClass('grid_8 omega');
 
 	/*-----------------------------------------------------------------------------------*/
 	/*	Superfish Settings - http://users.tpg.com.au/j_birch/plugins/superfish/
