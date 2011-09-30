@@ -240,6 +240,7 @@ body {
     padding-top: 40px;
     position: relative;
     overflow: hidden;
+    padding-bottom: 40px;
 }
 .footer-wrap {
     padding-: 20px;
@@ -254,9 +255,7 @@ body {
     border-top: 1px solid #DDDDDD;
     position: relative;        
     height: 30px;
-    padding-bottom: 5px;
-    padding-right: 0;
-    padding-top: 5px;
+    padding: 5px 10px;
 }
 
 #top-menu-wrap {
@@ -328,10 +327,6 @@ padding-right: 10px; }
 .base-menu ul li {
     float: left;
     position: relative;
-}
-.base-menu ul li:first-child {
-    margin-left: -0.416667%;
-    margin-right:-0.416667%; 
 }
 .base-menu ul li.right {
 float: right;	
