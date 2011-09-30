@@ -58,6 +58,7 @@ This is where you configure what type of feature you want to display.
 The available feature types are:
 
 * __default__ -			An empty feature
+* __bp-support__ -		Enables BuddyPress support
 * __css-background__ -	Attach an uploader option to any css selector to allow users to manage
 						the background image and tiling.
 * __custom-css__ -		Give custom CSS editing power to users
