@@ -1,8 +1,6 @@
 /*-------------------------------------------------------------
-
-DO NOT MODIY THS STYLESHEET, INSTEAD OVERWRITE ANY STYLING
+DO NOT MODIFY THS STYLESHEET, INSTEAD OVERWRITE ANY STYLING
 IN YOUR INFINITY CHILD THEME
-
 ----------------------------------------------------------------
 This stylesheet contains the absolute bare minimum elements
 to get the show started. It's a great starting point for any
@@ -20,7 +18,37 @@ There are several advantages for to this, most importantly:
    is easy, well documented and standardized, which means less
    support questions for you to answer.
 --------------------------------------------------------------*/
+/*----------------------------------------------------------------
+>>> Base.css setup
+----------------------------------------------------------------
+//CORE
+	+ CSS Reset
+	+ Typography 
+	+ Tags
+//LAYOUT
+	+ Global & Wraps
+	+ Header
+	+ Navigation Menus
+	+ Content
+	+ Sidebar
+	+ Footer
+//Posts & Pages	
+	+ Display
+	+ Meta & Breadcrumbs
+	+ Author/Category/Tag Boxes
+	+ Comments
+//Misc
+   + Buttons
+   + Tables
+   + Forms
+   + The Grid
+--------------------------------------------------------------*/
+/* ========= */
+/* ! Reset   */
+/* ========= */
+
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{background:transparent;vertical-align:baseline;margin:0;border:0;padding:0;outline:0}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}label span,legend span{font-weight:normal;color:#444;font-size:13px}a,a:visited{font-weight:bold;text-decoration:none;color:#60a2c1;outline:0}a:hover,a:visited:hover{color:#777}p img{margin:0}a img{border:none}ul ul,ul ol,ol ol,ol ul{margin:4px 0 5px 30px}ul ul li,ul ol li,ol ol li,ol ul li{margin-bottom:6px}li p{line-height:21px}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}:focus{outline:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-spacing:0;border-collapse:collapse}.clearfix{display:inline-block}.clearfix:before,.clearfix:after,.row:before,.row:after{visibility:hidden;width:0;height:0;content:'\0020';display:block;overflow:hidden}.row:after,.clearfix:after{clear:both}.clearfix:after{visibility:hidden;clear:both;height:0;content:".";display:block}some_nowhitespace{nowhitespace:afterproperty}/*\*/.clearfix{display:block}some_nowhitespace{nowhitespace:afterproperty}/**/.none{display:none}
+
 /* ============================================= */
 /* ! Typography and Tags (ul, li,a, input etc)   */
 /* ============================================= */
@@ -60,13 +88,16 @@ h1 {
 h1 small { font-size: 18px }
 h2 {
     font-size: 24px;
-    line-height: 26px;
+    line-height: 36px;
+    margin-bottom: 10px;
 }
 h2 small { font-size: 14px }
 h3,
 h4,
 h5,
-h6 { line-height: 16px }
+h6 { 
+    line-height: 36px;
+    margin-bottom: 10px; }
 h3 { font-size: 18px }
 h3 small { font-size: 14px }
 h4 { font-size: 16px }
@@ -179,9 +210,19 @@ pre {
     white-space: pre-wrap;
     word-wrap: break-word;
 }
-/* ============= */
-/* ! Layout!   */
-/* ============= */
+.clear {
+	clear: both;
+	display: block;
+	font-size: 0;
+	height: 0;
+	line-height: 0;
+	width:100%;
+}
+
+/* ================== */
+/* ! Global & Wraps   */
+/* ================== */
+
 body {
     -webkit-font-smoothing: antialiased;
     -webkit-text-size-adjust: none;
@@ -205,42 +246,8 @@ body {
     position: relative;
     background: #F8F8F8;
 }
-/* From top to bottom */
-#header {
-    height: 120px;
-    position: relative;
-}
-#site-description {
-    font-style: italic;
-    padding-left: 10px;
-    color: #999999;
-    position: relative;
-    font-size: 14px;
-    line-height: 180%;
-    font-weight: bold;
-}
-h1#site-title {
-    font-size: 26px;
-    line-height: 180%;
-    position: absolute;
-    top: 11%;
-    padding-left: 20px;
-}
-div#site-title {
-    font-size: 26px;
-    line-height: 180%;
-    position: absolute;
-    top: 25%;
-    padding-left: 20px;
-}
 
-#site-title a {
-    margin-bottom: -29px;
-    display: block;
-}
-
-/* Navigation Styling */
-/* Menu Wrappers */
+/* Top Menu */
 #top-menu-wrap, #sub-menu-wrap {
     border-bottom: 2px solid #DDD;
     background: none repeat scroll 0 0 #F8F8F8;
@@ -270,7 +277,47 @@ div#site-title {
     text-transform: uppercase;
     font-size: 10.5px;
 }
-/* Basic Menu Styling */
+
+/* ========== */
+/* ! Header   */
+/* ========== */
+
+#header {
+    height: 120px;
+    position: relative;
+}
+#site-description {
+    font-style: italic;
+    padding-left: 10px;
+    color: #999999;
+    position: relative;
+    font-size: 14px;
+    line-height: 180%;
+    font-weight: bold;
+}
+h1#site-title {
+    font-size: 26px;
+    line-height: 180%;
+    position: absolute;
+    top: 11%;
+    padding-left: 20px;
+}
+div#site-title {
+    font-size: 26px;
+    line-height: 180%;
+    position: absolute;
+    top: 25%;
+    padding-left: 20px;
+}
+#site-title a {
+    margin-bottom: -29px;
+    display: block;
+}
+
+/* ========================== */
+/* ! /* Navigation Menus */   */
+/* ========================== */
+
 .base-menu { padding-left: 10px;
 padding-right: 10px; }
 .base-menu ul {
@@ -441,9 +488,33 @@ float: right;
 }
 .base-menu ul li a{ background: none;
     border-radius: 5px 5px 5px 5px; }
+    
+/* =========== 
+ ! Content  
+ =========== */
+ 
+/* Fallback for browsers who don't have JS enabled */
+
+#content, #sidebar {
+	margin-left: 0.41666666666667%;
+	margin-right: 0.41666666666667%;
+	float: left;
+	display: block;
+}
+
+#content {
+width: 65.833333333333%;
+}   
+     
 /* =========== 
  ! Sidebar   
  =========== */
+
+/* Fallback for browsers who don't have JS enabled */ 
+#sidebar {
+width: 32.5%;
+} 
+ 
 #sidebar h4 a.widgettitle { color: #F4F4F4!important }
 #sidebar .widget_search { margin-top: 20px }
 #sidebar .widget_search input[type=text] {
@@ -466,9 +537,11 @@ float: right;
     line-height: 24px;
     text-transform: uppercase;
 }
+
 /* ========== 
  ! Footer   
  ========== */
+ 
 #footer h4 { color: #60A2C1 }
 #footer p:last-child { margin-bottom: 0 }
 .footer-widgets { margin-bottom: 20px }
@@ -507,61 +580,6 @@ margin-top: -20px;
 /* ============== 
  ! Posts and Page
  ============== */
-/* Intro Boxes for authors, categories and tags */
-.post-author-box {
-    float: right;
-    padding: 3px;
-    display: none;
-}
-.post-author-box img {
-    width: 50px;
-    height: 50px;
-}
-.author-box,
-.category-box,
-.tag-box {
-    margin-bottom: 20px;
-    border: 1px solid #DDDDDD;
-    background: #F9F9F9;
-    border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-}
-h1#category-title,
-h1#tag-title {
-    font-style: normal;
-    color: #999;
-    font-size: 16px;
-    line-height: 18px;
-}
-h1#category-title span,
-h1#tag-title span { color: #555 }
-.authorbox h3 {
-    font-style: normal;
-    font-weight: 700;
-    margin-bottom: 10px;
-    color: #555555;
-    font-size: 16px;
-}
-#author-description {
-    overflow: auto;
-    padding: 10px 20px 20px;
-    font-size: 12.8px;
-}
-#author-description img {
-    margin-top: 2px;
-    margin-right: 10px;
-    float: left;
-}
-#category-description,
-#tag-description {
-    padding: 20px 20px 0;
-    font-size: 12.8px;
-}
-#author-social {
-    float: right;
-    width: 25%;
-}
 /* Post Meta */
 span.edit-link {
     margin-left: 1px;
@@ -585,21 +603,6 @@ span.edit-link a { color: #999 }
     padding: 0 4px 5px 0;
     font-size: 12px;
 }
-.post .post-meta-data,
-.comment-meta,
-.comment-options,
-p#breadcrumbs {
-    border-bottom: 1px solid #EFEFEF;
-    border-top: 1px solid #EFEFEF;
-    color: #AAAAAA;
-    font-size: 11.5px;
-    font-weight: bold;
-    margin-top: 10px;
-    min-height: 20px;
-    padding: 3px 0;
-    margin-bottom: 10px;
-}
-p#breadcrumbs { margin-top: 0px }
 .post-meta-data span {
     border-right: 1px solid #DDD;
     margin-right: 5px;
@@ -661,6 +664,9 @@ img.aligncenter {
     margin-right: auto;
     display: block;
 }
+.post img {
+    max-width: 100%;
+}
 .post .wp-caption {
     text-align: center;
     padding-top: 4px;
@@ -704,10 +710,15 @@ img.aligncenter {
 .postthumb img {
     border: 1px solid #DDDDDD;
     padding: 5px;
+    max-width: 98%;
 }
 .post img a:hover { background: #EFEFEF }
 .post p { margin: 0 0 20px 0 }
 .post .gallery-caption { }
+#single-attachment img {
+margin-top: 25px;
+margin-bottom: 25px;
+}
 /* Post Titles */
 /* Captions */
 /* Block Quotes */
@@ -725,7 +736,7 @@ img.aligncenter {
     border: 1px solid #DDD;
     padding: 5px 8px;
 }
-.home .sticky .page-link a { background: none repeat scroll 0 0 #D9E8F7 }
+.home .sticky .page-link a {}
 /* code in posts */
 .post .alignright {
     margin-left: 15px;
@@ -766,15 +777,76 @@ ul.page-numbers li { display: inline }
     border: none;
     padding: 8px 15px;
 }
-ul.social {
-    height: 30px;
-    margin: 0 auto;
-    padding: 0 !important;
+/*Post Meta */
+.post .post-meta-data,
+.comment-meta,
+.comment-options,
+p#breadcrumbs {
+    border-bottom: 1px solid #EFEFEF;
+    border-top: 1px solid #EFEFEF;
+    color: #AAAAAA;
+    font-size: 11.5px;
+    font-weight: bold;
+    margin-top: 10px;
+    min-height: 20px;
+    padding: 3px 0;
+    margin-bottom: 10px;
 }
-ul.social li {
+p#breadcrumbs { margin-top: 0px }
+/* Intro Boxes for authors, categories and tags */
+.post-author-box {
+    float: right;
+    padding: 3px;
+    display: none;
+}
+.post-author-box img {
+    width: 50px;
+    height: 50px;
+}
+.author-box,
+.category-box,
+.tag-box {
+    margin-bottom: 20px;
+    border: 1px solid #DDDDDD;
+    background: #F9F9F9;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+}
+h1#category-title,
+h1#tag-title {
+    font-style: normal;
+    color: #999;
+    font-size: 16px;
+    line-height: 18px;
+}
+h1#category-title span,
+h1#tag-title span { color: #555 }
+.authorbox h3 {
+    font-style: normal;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #555555;
+    font-size: 16px;
+}
+#author-description {
+    overflow: auto;
+    padding: 10px 20px 20px;
+    font-size: 12.8px;
+}
+#author-description img {
+    margin-top: 2px;
+    margin-right: 10px;
     float: left;
-    list-style: none outside none;
-    padding: 5px 9px 0 0;
+}
+#category-description,
+#tag-description {
+    padding: 20px 20px 0;
+    font-size: 12.8px;
+}
+#author-social {
+    float: right;
+    width: 25%;
 }
 /* ============ */
 /* ! Comments   */
@@ -922,6 +994,7 @@ h3#pings { margin: 25px 0 10px 0 }
 }
 .pinglist li .date { font-size: 11px }
 p.form-allowed-tags { width: 70% }
+
 /* ======== */
 /* ! Misc   */
 /* ======== */
@@ -1207,8 +1280,8 @@ paste the content of the file into the style.css file of your Child Theme. Check
 	display: block !important;
 }
 
-.alpha{margin-left:0px;}
-.omega{margin-right:0px;}
+.alpha{margin-left:0px !important;}
+.omega{margin-right:0px !important;}
 
 /* bbpress avatar fix */
 #content p.bbp-topic-meta img.avatar,
