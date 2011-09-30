@@ -178,7 +178,7 @@ div#top-menu-wrap ul li ul li a { background: transparent }
 /* Transparant BG for items in the dropdown menu */
 div#main-menu-wrap ul li ul li a,
 div#top-menu-wrap ul li ul li a,
-div#main-menu-wrap ul li ul li a { background: transparent }
+div#main-menu-wrap ul li ul li a { background: transparent !important }
 /* Menu Color */
 #main-menu-wrap ul li a span {
     color: #EFEFEF;
@@ -200,9 +200,11 @@ div#main-menu-wrap ul li ul li a { background: transparent }
     padding: 5px 0 5px 15px;
 }
 /* Menu Hover */
-#sub-menu-wrap ul a:hover,
-#sub-menu-wrap ul li.sfHover a {
+#sub-menu-wrap ul a:hover {
 background: #000;
+}
+#sub-menu-wrap ul li.sfHover a {
+background: transparent;
 }
 #sub-menu-wrap ul li.current-cat a,
 #sub-menu-wrap ul li.current_page_item a,
