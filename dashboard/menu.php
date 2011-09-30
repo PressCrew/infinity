@@ -61,8 +61,7 @@ function infinity_dashboard_menu_styler()
 	// print it ?>
 <style type="text/css">
 #adminmenu li#<?php print infinity_dashboard_menu_selector() ?> a.<?php print infinity_dashboard_menu_selector() ?> {
-	color: #285D92; font-family: "Droid Sans","Arial","sans-serif"; font-weight: bold; text-shadow: -1px -1px #eeeeee, 2px 1px #c2c2c2; letter-spacing: 0.16em;
-	border-color: #dedede; background: #ccc url(<?php print INFINITY_ADMIN_URL ?>/assets/images/ui_pattern_bg.png) repeat 0px -3px;
+	font-weight: bold; letter-spacing: 0.16em;
 }
 </style><?php
 }
