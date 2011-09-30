@@ -29,7 +29,8 @@ class Pie_Easy_Exts_Features_Header_Logo
 	public function image_url()
 	{
 		$src = $this->get_suboption('image')->get_image_src('full');
-		return $src[0];
+
+		return ( isset($src[0]) ) ? $src[0] : null;
 	}
 
 	/**
