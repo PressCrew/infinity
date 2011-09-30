@@ -1,4 +1,5 @@
 <div class="infinity-docs">
+
 	<h2>Welcome to Infinity</h2>
 
 	<p>
@@ -14,28 +15,80 @@
 	</h3>
 
 	<p>
-		The developer documentation is lengthy, but still incomplete. Even so, its the best place to start.
-		<a target="infinity-cpanel-tab-ddocs" href="<?php print infinity_screens_route( 'cpanel', 'ddocs', 'index' ) ?>">Developer Docs are Here &raquo;</a>
+		The theme developer documentation is available right in the theme, as well as online!
+		Its the best place to start.
+		<ul>
+			<li>
+				<a target="infinity-cpanel-tab-ddocs" href="<?php print infinity_screens_route( 'cpanel', 'ddocs', 'index' ) ?>">Built-In Docs &raquo;</a>
+			</li>
+			<li>
+				<a target="_blank" href="http://infinity.presscrew.com/docs">Online Docs &raquo;</a>
+			</li>
+			<li>
+				<a target="_blank" href="http://infinity.presscrew.com/api">Online API Manual &raquo;</a>
+			</li>
+		</ul>
 	</p>
 
 	<h3>
-		60 Second Primer
+		Community & Support
+	</h3>
+
+	<p>
+		Join our online community! The authors of Infinity are available to help you get going.
+	</p>
+
+	<ul>
+		<li>
+			<a target="_blank" href="http://infinity.presscrew.com/api">PressCrew Community Site &raquo;</a>
+		</li>
+		<li>
+			<a target="_blank" href="http://community.presscrew.com/discussions/">Discussion Forums &raquo;</a>
+		</li>
+	</ul>
+
+	<h3>
+		Infinity Articles
+	</h3>
+
+	<p>
+		About the authors, and some awesome use cases and primers. Check them out!
+	</p>
+
+	<ul>
+		<li>
+			<a target="_blank" href="http://community.presscrew.com/developer-introduction/">A Word From the Authors</a>
+		</li>
+		<li>
+			<a target="_blank" href="http://community.presscrew.com/multisite-and-infinity-a-great-combination/">MultiSite and Infinity: A Great Combination</a>
+		</li>
+		<li>
+			<a target="_blank" href="http://community.presscrew.com/buddypress-introduction/">BuddyPress Support Introduction</a>
+		</li>
+	</ul>
+
+	<h3>
+		60 Second Primer (for the impatient hacker)
 	</h3>
 
 	<ul>
-		<li>The first rule of Infinity, don't touch Infinity! (Unless you are just playing around)</li>
+		<li>The first rule of Infinity, don't touch Infinity itself! (Unless you are just playing around)</li>
 		<li>Always extend Infinity with a child theme, and activate that child theme.</li>
 		<li>Create the identical path/to/file to extend and/or override it.</li>
 		<li>The best place to start poking around is the config/ dir.</li>
-		<li>Don't get caught up in the boring templates. They are mostly just placeholders for now.</li>
+		<li>Don't get caught up in the boring templates. They are built for flexibility, not fancy (that is your job).</li>
 		<li>Infinity is extrememly powerful. It does more than you can imagine. Don't bail early.</li>
 	</ul>
 
 	<h3>Features that work NOW</h3>
 
 	<p>
-		Unless otherwise noted, none of the features require any PHP code to be written
+		Unless otherwise noted, none of the features require any PHP code to be written.
 	</p>
+
+	<blockquote>
+		This is not a complete list. Always refer to the documentation for the full monty.
+	</blockquote>
 
 	<ul>
 		<li>
@@ -83,7 +136,7 @@
 			</ul>
 		</li>
 		<li>
-			Theme features (add_theme_support())
+			Features (add_theme_support())
 			<ul>
 				<li>Custom CSS</li>
 				<li>Custom header logo</li>
