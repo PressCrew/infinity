@@ -153,13 +153,30 @@ final class Pie_Easy_Ui_Cpanel extends Pie_Easy_Base
 			$children = $this->policy->registry()->get_children( $item );
 			$children_cnt = count( $children ); ?>
 			<li>
-				<a target="<?php $this->render_id('tab',$item->name) ?>" id="<?php $this->render_id('toolbar','menu','item',$item->name) ?>" class="pie-easy-ui-cpanel<?php if ( $children_cnt ): ?> pie-easy-ui-cpanel-context-menu<?php endif; ?>" href="<?php print esc_attr( $item->url ) ?>" title="<?php print esc_attr( $item->title ) ?>"><?php print esc_attr( $item->title ) ?></a>
+				<a target="<?php $this->render_button_target( $item ) ?>" id="<?php $this->render_id('toolbar','menu','item',$item->name) ?>" class="pie-easy-ui-cpanel<?php if ( $children_cnt ): ?> pie-easy-ui-cpanel-context-menu<?php endif; ?>" href="<?php print esc_attr( $item->url ) ?>" title="<?php print esc_attr( $item->title ) ?>"><?php print esc_attr( $item->title ) ?></a>
 				<?php if ( $children_cnt ): ?>
 					<?php $this->render_toolbar_menu( $children ) ?>
 				<?php endif; ?>
 			</li><?php
 		} ?>
 		</ul><?php
+	}
+
+	/**
+	 * Render a button target
+	 *
+	 * @param Pie_Easy_Component $item
+	 */
+	protected function render_button_target( Pie_Easy_Component $item )
+	{
+		// was a target set explicitly?
+		if ( $item->target ) {
+			// use that target
+			print esc_attr( $item->target );
+		} else {
+			// generate a tab target from the name
+			$this->render_id( 'tab', $item->name );
+		}
 	}
 
 	/**
