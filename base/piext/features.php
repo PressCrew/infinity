@@ -135,6 +135,26 @@ function infinity_feature( $feature_name, $output = true )
 }
 
 /**
+ * Fetch a feature
+ *
+ * @package Infinity-components
+ * @subpackage features
+ * @param string $feature_name
+ * @return Pie_Easy_Features_Feature|false
+ */
+function infinity_feature_fetch( $feature_name )
+{
+	// is feature supported?
+	if ( current_theme_supports( $feature_name ) ) {
+		// yes, return it
+		return Infinity_Features_Policy::instance()->registry()->get($feature_name);
+	} else {
+		// not supported
+		return false;
+	}
+}
+
+/**
  * Initialize features environment
  *
  * @package Infinity-components
