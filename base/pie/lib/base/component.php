@@ -698,7 +698,7 @@ abstract class Pie_Easy_Component
 	{
 		if ( $this->ignore ) {
 			throw new Exception( 'Cannot render a component that has been ignored' );
-		} else {
+		} elseif ( $this->renderable() ) {
 			if ( $output === true ) {
 				$this->policy()->renderer()->render( $this, true );
 				return true;
@@ -720,6 +720,19 @@ abstract class Pie_Easy_Component
 		} else {
 			return $this->policy()->renderer()->render_bypass( $this );
 		}
+	}
+
+	/**
+	 * Returns true if the component believes rendering will be successful
+	 *
+	 * Override this method to do a last second check to make sure all
+	 * necessary data is available to execute a successful render.
+	 *
+	 * @return boolean
+	 */
+	public function renderable()
+	{
+		return true;
 	}
 
 }
