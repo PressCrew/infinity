@@ -138,7 +138,11 @@ final class Pie_Easy_Loader extends Pie_Easy_Base
 	private static $exts = array(
 		'features' =>
 			array(
-				'bp-support',
+				'bp' =>
+					array(
+						'activity-intro',
+						'support'
+					),
 				'css-background',
 				'custom-css',
 				'default',
