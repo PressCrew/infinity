@@ -57,12 +57,13 @@ This is where you configure what type of feature you want to display.
 
 The available feature types are:
 
-* __default__ -			An empty feature
-* __bp-support__ -		Enables BuddyPress support
-* __css-background__ -	Attach an uploader option to any css selector to allow users to manage
-						the background image and tiling.
-* __custom-css__ -		Give custom CSS editing power to users
-* __gravatar__ -		Add a gravatar just about anywhere and give users the power to
-						control the output.
-* __header-logo__ -		Attach an uploader option to any css selector to allow users to manage
-						the image file and positioning in the output.
+* __default__				- An empty feature
+* __bp/support__			- Enables BuddyPress support
+* __bp/activity-intro__		- Enables custom content before activity stream
+* __css-background__		- Attach an uploader option to any css selector to allow users to manage
+							the background image and tiling.
+* __custom-css__			- Give custom CSS editing power to users
+* __gravatar__				- Add a gravatar just about anywhere and give users the power to
+							control the output.
+* __header-logo__			- Attach an uploader option to any css selector to allow users to manage
+							the image file and positioning in the output.
