@@ -11,6 +11,8 @@
  * @since 1.0
  */
 
+Pie_Easy_Loader::load( 'components/features/component_bp' );
+
 /**
  * BuddyPress support feature
  *
@@ -18,7 +20,7 @@
  * @subpackage features
  */
 class Pie_Easy_Exts_Features_Bp_Support
-	extends Pie_Easy_Features_Feature
+	extends Pie_Easy_Features_Feature_Bp
 {
 	/**
 	 */
