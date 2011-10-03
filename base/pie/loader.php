@@ -100,7 +100,7 @@ final class Pie_Easy_Loader extends Pie_Easy_Base
 		'components' =>
 			array(
 				'features' =>
-					array( 'component', 'factory', 'renderer', 'policy', 'registry' ),
+					array( 'component', 'component_bp', 'factory', 'renderer', 'policy', 'registry' ),
 				'options' =>
 					array( 'component', 'factory', 'renderer', 'policy', 'registry', 'walkers' ),
 				'screens' =>
