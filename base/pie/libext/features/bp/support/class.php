@@ -35,36 +35,56 @@ class Pie_Easy_Exts_Features_Bp_Support
 	}
 
 	/**
+	 * Register one sidebar
+	 *
+	 * @param string $id Sidebar ID, 'id' arg passed to register_sidebar()
+	 * @param string $name Sidebar name, 'name' arg passed to register_sidebar()
+	 * @param string $desc Sedebar description, 'description' arg passed to register_sidebar()
+	 */
+	public function register_sidebar( $id, $name, $desc )
+	{
+		register_sidebar( array(
+			'id' => $id,
+			'name' => $name,
+			'description' => $desc,
+			'before_widget' => '<div id="%1$s" class="widget %2$s">',
+			'after_widget' => '</div>',
+			'before_title' => '<h4>',
+			'after_title' => '</h4>'
+		));
+	}
+
+	/**
 	 * Register special BuddyPress sidebars
 	 */
 	public function register_sidebars()
 	{
 		// activity sidebar
-		infinity_base_register_sidebar(
+		$this->register_sidebar(
 			'activity-sidebar',
 			'Activity Sidebar',
 			'The Activity widget area'
 		);
 		// member sidebar
-		infinity_base_register_sidebar(
+		$this->register_sidebar(
 			'member-sidebar',
 			'Member Sidebar',
 			'The Members widget area'
 		);
 		// blogs sidebar
-		infinity_base_register_sidebar(
+		$this->register_sidebar(
 			'blogs-sidebar',
 			'Blogs Sidebar',
 			'The Blogs Sidebar area'
 		);
 		// groups sidebar
-		infinity_base_register_sidebar(
+		$this->register_sidebar(
 			'groups-sidebar',
 			'Groups Sidebar',
 			'The Groups widget area'
 		);
 		// forums sidebar
-		infinity_base_register_sidebar(
+		$this->register_sidebar(
 			'forums-sidebar',
 			'Forums Sidebar',
 			'The Forums widget area'
