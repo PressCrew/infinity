@@ -8,7 +8,7 @@ simply adding a few lines in the options.ini configuration file.
 
 <ul class="infinity-docs-menu"></ul>
 
-### Sample Configuration
+### Configuration Example
 
 If you would like to add a file uploader to your theme to let people upload
 an image of their storefront, you simply add this to your options.ini file:
@@ -22,7 +22,7 @@ an image of their storefront, you simply add this to your options.ini file:
 Your users can now upload an image using our highly advanced uploader
 tool, and use the built in WordPress editor to crop and edit their image.
 
-### Sample Output
+### Output Example
 
 Now you can add the following markup to your theme template to ouput
 the uploaded image:
@@ -73,11 +73,16 @@ The available option types are:
 	* __toggle/enable__ - "Enable" checkbox
 	* __toggle/disable__ - "Disable" checkbox
 	* __toggle/enable-disable__ - Enable/Disable radios
+* jQuery UI
+	* __ui/slider__ - Slider with range support
 * Advanced
 	* __upload__ - Media uploader
 	* __colorpicker__ - Color picker
 
-Child theme can override field\_type: **No**
+> To learn more about what can be done with the different option types,
+  check out the configuration examples in `infinity/config/options.examples.ini`
+
+Child theme can override type: **No**
 
 #### section (required)
 

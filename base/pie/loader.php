@@ -172,6 +172,10 @@ final class Pie_Easy_Loader extends Pie_Easy_Base
 						'on', 'off', 'on-off',
 						'yes', 'no', 'yes-no'
 					),
+				'ui' =>
+					array(
+						'slider'
+					),
 				'upload',
 				'wp' =>
 					array(
