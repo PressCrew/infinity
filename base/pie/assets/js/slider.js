@@ -57,7 +57,7 @@
 		{
 			var items = new Array();
 
-			if ( typeof vals == 'object' ) {
+			if ( typeof vals == 'object' && (vals) ) {
 				for (i in vals) {
 					items.push( settings.prefix + vals[i] + settings.suffix );
 				}
