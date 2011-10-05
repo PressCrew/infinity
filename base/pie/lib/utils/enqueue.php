@@ -301,6 +301,8 @@ final class Pie_Easy_Enqueue extends Pie_Easy_Base
 		$this->register_script(
 			'pie-easy-cpanel', 'cpanel.js', array('pie-easy-global', 'jquery-cookie', 'jquery-ui-button', 'jquery-ui-accordion', 'jquery-ui-menu', 'jquery-ui-position', 'jquery-ui-tabs', 'jquery-ui-sortable', 'jquery-ui-resizable' ) );
 		$this->register_script(
+			'pie-easy-slider', 'slider.js', array('pie-easy-global', 'jquery-ui-slider') );
+		$this->register_script(
 			'pie-easy-uploader', 'uploader.js', array('pie-easy-global', 'jquery-swfupload', 'jquery-ui-button') );
 
 		// localize
