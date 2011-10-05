@@ -100,81 +100,9 @@ input#send:hover {
     -moz-box-shadow: 0 1px 1px #d5d5d5, inset 0 1px 0 #cae295;
     box-shadow: 0 1px 1px #d5d5d5, inset 0 1px 0 #cae295;
 }
-
-#buddypress-nav { }
-#buddypress-nav ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+.activity-read-more {
+margin-left: 5px;
 }
-#buddypress-nav ul a {
-    background: none repeat scroll 0 0 #222222;
-    border-radius: 4px 4px 4px 4px;
-    color: #F1EEE5;
-    float: left;
-    font-size: 13px;
-    font-weight: bold;
-    padding: 5px 8px;
-    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
-}
-#buddypress-nav ul a:hover {
-    background: none repeat scroll 0 0 #c80a14;
-    color: #F1EEE5;
-}
-#buddypress-nav .selected a {
-    background: -moz-linear-gradient(center top , #C80A14, #990606) repeat scroll 0 0 transparent;
-    border: 1px solid #2F0505;
-    margin-top: -1px;
-}
-#buddypress-nav ul li {
-    position: relative;
-    z-index: 40;
-    float: left;
-    margin: 0 0 0 10px;
-    cursor: pointer;
-    display: block;
-    float: left;
-    padding: 5px 10px 5px 0;
-}
-#buddypress-nav ul li:hover {
-    visibility: inherit; /* fixes IE7 'sticky bug' */
-}
-#buddypress-nav ul ul li { width: 100% }
-#buddypress-nav ul li.sfHover li a,
-#buddypress-nav ul li.sfHover li a span { background: #222 }
-#buddypress-nav li li a:hover,
-#buddypress-nav li.sfHover li a { background: none }
-#buddypress-nav li a span {
-    display: block;
-    padding: 5px 10px 5px 0;
-    float: left;
-    cursor: pointer;
-}
-#buddypress-nav li li a span { padding: 0 }
-#buddypress-nav li a span.sf-sub-indicator {
-    background: url(../../_inc/images/nav_sprite.png) 29px 120px;
-    width: 29px;
-    height: 30px;
-    float: left;
-    margin: 0 0 0 -7px;
-    padding: 0;
-}
-#buddypress-nav ul a:hover span.sf-sub-indicator,
-#buddypress-nav ul li.sfHover a span.sf-sub-indicator,
-#buddypress-nav ul li.current-cat a span.sf-sub-indicator,
-#buddypress-nav ul li.current_page_item a span.sf-sub-indicator,
-#buddypress-nav ul li.current-menu-item a span.sf-sub-indicator { background: url(../../../../_inc/images/nav_sprite.png) 29px 90px }
-#buddypress-nav li li a span.sf-sub-indicator,
-#buddypress-nav li.sfHover li a span.sf-sub-indicator {
-    background: url(../../_inc/images/nav_sprite.png) 37px 84px;
-    height: 12px;
-    margin: 5px 0 0 0;
-    width: 10px;
-    float: right;
-}
-#buddypress-nav li.sfHover li.sfHover li a span.sf-sub-indicator { background: url(../../_inc/images/nav_sprite.png) 37px 84px }
-#buddypress-nav li li.sfHover a span.sf-sub-indicator,
-#buddypress-nav li li.sfHover li.sfHover a span.sf-sub-indicator { background: url(../../_inc/images/nav_sprite.png) 37px 72px }
 /* ================================================================================================
 /* ! BuddyPress Default Styling. This has been taken directly from latest version of BP-Default.css   */
 /* ================================================================================================== */
@@ -358,12 +286,13 @@ div.item-list-tabs ul li.last {
     margin: 10px 20px 0 0;
     text-transform: inherit;
 }
-div.item-list-tabs#subnav ul li.last { margin-top: 4px }
+div.item-list-tabs#subnav ul li.last { margin-top: -4px; }
 div.item-list-tabs ul li.last select {
     float: right;
     margin-left: 8px;
     max-width: 110px;
-}
+    margin-top: 10px;
+    }
 div.item-list-tabs ul li a,
 div.item-list-tabs ul li span {
     display: block;
