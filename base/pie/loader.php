@@ -160,7 +160,7 @@ final class Pie_Easy_Loader extends Pie_Easy_Base
 					),
 				'position' =>
 					array(
-						'left-right', 'top-bottom'
+						'left-right', 'left-center-right', 'top-bottom'
 					),
 				'radio',
 				'select',
