@@ -277,6 +277,7 @@ class Pie_Easy_Script_Logic extends Pie_Easy_Base
 	 * Add a variable (shorthand)
 	 *
 	 * @param string $name
+	 * @param mixed $value
 	 * @param boolean $nulls
 	 */
 	public function av( $name, $value, $nulls = false )
