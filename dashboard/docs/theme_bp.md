@@ -57,7 +57,11 @@ huge set of options to customize the BuddyPress pages are all included.
 Infinity makes it easy.. very easy! Check out the BuddyPress Theming section
 for a complete guide!
 
-### Installation
+## Installation
+<br>
+<iframe width="560" height="315" src="http://www.youtube.com/embed/bOyT3OXZt-M?rel=0&amp;hd=1" frameborder="0" allowfullscreen></iframe>
+<br>
+
 
 Adding BuddyPress compatibility is a matter of following a few easy steps. 
 
@@ -72,23 +76,22 @@ Install the <a target="_blank" href="http://wordpress.org/extend/plugins/bp-temp
 
 #### Step 3:
 
-Go through the Template Pack setup.
+Go through the Template Pack setup as described below.
 
-> Found under **Appearance > BP Compatibility**
+> This setup screen is found under **Appearance > BP Compatibility** in your WordPress Dashboard
 
-1. Click on Move Template files
-   ![BuddyPress example 1](infinity://admin:image/docs/bp-setup-1.png)
+**1. Click on Move Template files**   ![BuddyPress example 1](infinity://admin:image/docs/bp-setup-1.png)
 
-1. Click on **Move to Step Three**
+**2.Click on Move to Step Three**
 
-1. Skip to the bottom and click Finish!
+**3. Skip to the bottom and click Finish!**
 
-1. Make sure to tick the box next to "Disable Template Pack CSS"
+**4. Make sure to tick the box next to "Disable Template Pack CSS"**
    ![BuddyPress Example](infinity://admin:image/docs/bp-setup-2.png)
 
-You're done! That's all there is to it.
+###You're done! That's all there is to it.
 
-### Upgrades
+## Upgrades
 
 When the BP-Template pack plugin is updated it means that your BuddyPress templates
 need to be updated. Here's what you need to do:
@@ -114,25 +117,16 @@ Repeat the setup steps described at installation (start at Step Three)
 
 You're done!
 
-### BuddyPress Theming
+## BuddyPress Theming
 
 We'd love to see more BuddyPress compatible themes appear, and we're happy to say
-that all of the Infinity Child Themes work 100% with BuddyPress!
+that all of the Child Themes based on Infinity Base work 100% with BuddyPress!
 
-By default the `buddypress.css` stylesheet is not being loaded, so your BuddyPress
-content is not being styled. To load the BuddyPress CSS add the following snippet to your
-infinity.ini file.
+When BuddyPress is active Infinity will automatically load the BuddyPress.css file. If you want to roll a completely custom BuddyPress stylesheet you can disable the BuddyPress feature by adding:
 
-	[style]
-	buddypress = "assets/css/buddypress.css"
-	
-	[style_conditions]
-	bp_is_active = "buddypress"
+	infinity-bp-support = off
 
-Adding the above snippet to config.ini of your Child Theme would load a BuddyPress
-stylesheet only when BuddyPress is active. It's that easy! You don't have to worry
-about modifying any templates because they work out of the box, just like all
-the 3rd Party plugins! 
+to your Child Themes infinity.ini configuration file.
 
 > Do not modify the standard `buddypress.css` file included with Infinity. Instead add
 your custom BuddyPress CSS to the `style.css` of your Child Theme. This ensures that your
