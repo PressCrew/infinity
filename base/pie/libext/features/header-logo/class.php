@@ -20,6 +20,13 @@
 class Pie_Easy_Exts_Features_Header_Logo
 	extends Pie_Easy_Features_Feature
 {
+	public function init_styles()
+	{
+		// run parent
+		parent::init_styles();
+
+		// add positioning styles
+	}
 
 	/**
 	 * Return URL to uploaded logo image
@@ -35,12 +42,14 @@ class Pie_Easy_Exts_Features_Header_Logo
 
 	/**
 	 */
-	final public function export_css()
+	public function export_css()
 	{
 		// options
 		$opt_upload = $this->get_suboption('image');
+		$opt_pos = $this->get_suboption('pos')->get();
 		$opt_top = $this->get_suboption('top')->get();
 		$opt_left = $this->get_suboption('left')->get();
+		$opt_right = $this->get_suboption('right')->get();
 
 		// get attachment image data
 		$data = $opt_upload->get_image_src( 'full' );
@@ -63,16 +72,47 @@ class Pie_Easy_Exts_Features_Header_Logo
 				$pos->ad( 'top', $opt_top . 'px' );
 			}
 
-			if ( $opt_left ) {
-				$pos->ad( 'left', $opt_left . 'px' );
-			}
-
 			if ( $width ) {
 				$pos->ad( 'width', $width . 'px' );
 			}
 
 			if ( $height ) {
 				$pos->ad( 'height', $height . 'px' );
+			}
+
+			if ( $opt_pos ) {
+				
+				// use absolute positioning
+				$pos->ad( 'position', 'absolute' );
+
+				// this gets tricky!
+				switch ( $opt_pos ) {
+					// left position
+					case 'l':
+						if ( $opt_left ) {
+							$pos->ad( 'left', $opt_left . 'px' );
+						} else {
+							$pos->ad( 'left', '0px' );
+						}
+						break;
+					// center position
+					case 'c':
+						// put in middle
+						$pos->ad( 'left', '50%' );
+						// if we have a width, offset the margin by half
+						if ( $width ) {
+							$pos->ad( 'margin-left', sprintf( '-%dpx', $width / 2 ) );
+						}
+						break;
+					// right position
+					case 'r':
+						if ( $opt_right ) {
+							$pos->ad( 'right', $opt_right . 'px' );
+						} else {
+							$pos->ad( 'right', '0px' );
+						}
+						break;
+				}
 			}
 			
 		}
