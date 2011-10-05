@@ -62,6 +62,7 @@ The available option types are:
 	* __tags__ - Select multiple tags
 * Position
 	* __position/left-right__ - Left/Right radios
+	* __position/left-center-right__ - Left/Center/Right radios
 	* __position/top-bottom__ - Top/Bottom radios
 * Toggle
 	* __toggle/on__ - "On" checkbox
