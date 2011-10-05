@@ -415,10 +415,10 @@ div.item-list-tabs ul li a:hover {
     border-radius: 3px;
 }
 div#sidebar div.item-options {
-    left: 48%;
+    left: 47%;
     margin-bottom: -40px;
     position: relative;
-    top: -31px;
+    top: -34px;
 }
 /* Stream Icons. no shorthand CSS to maintain hover effects */
 li#activity-all a {
