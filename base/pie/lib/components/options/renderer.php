@@ -71,9 +71,12 @@ abstract class Pie_Easy_Options_Renderer extends Pie_Easy_Renderer
 		// checked is null by default
 		$checked = null;
 
+		// multi is false by default
+		$multi = false;
+
 		// the stored option value
 		$real_value = $this->component()->get();
-
+		
 		// overriding value?
 		if ( is_null( $value ) ) {
 			// use real value
@@ -86,11 +89,15 @@ abstract class Pie_Easy_Options_Renderer extends Pie_Easy_Renderer
 				$checked = ( $value == $real_value );
 			} elseif ( $type == 'checkbox' ) {
 				$checked = in_array( $input_value, (array) $real_value );
+				$multi = true;
+			} elseif ( $type == 'hidden-multi' ) {
+				$type = 'hidden';
+				$multi = true;
 			}
 		}
 
 		// render the input ?>
-		<input type="<?php print esc_attr( $type ) ?>" name="<?php $this->render_name() ?><?php if ( $type == 'checkbox' ): ?>[]<?php endif; ?>" id="<?php $this->render_field_id( $element_id ) ?>" class="<?php $this->render_field_class() ?>" value="<?php $this->render_field_value( $input_value ) ?>"<?php if ($checked): ?> checked="checked"<?php endif; ?> /> <?php
+		<input type="<?php print esc_attr( $type ) ?>" name="<?php $this->render_name() ?><?php if ( $multi ): ?>[]<?php endif; ?>" id="<?php $this->render_field_id( $element_id ) ?>" class="<?php $this->render_field_class() ?>" value="<?php $this->render_field_value( $input_value ) ?>"<?php if ($checked): ?> checked="checked"<?php endif; ?> /> <?php
 	}
 
 	/**
@@ -100,7 +107,7 @@ abstract class Pie_Easy_Options_Renderer extends Pie_Easy_Renderer
 	 */
 	final public function render_field_value( $value = null )
 	{
-		if ( empty( $value ) ) {
+		if ( is_null( $value ) ) {
 			$value = $this->component()->get();
 		}
 		
