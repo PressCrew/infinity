@@ -144,6 +144,7 @@ final class Pie_Easy_Loader extends Pie_Easy_Base
 						'support'
 					),
 				'css-background',
+				'css-block',
 				'custom-css',
 				'default',
 				'gravatar',
@@ -151,7 +152,11 @@ final class Pie_Easy_Loader extends Pie_Easy_Base
 			),
 		'options' =>
 			array(
-				'category', 'categories', 'checkbox', 'colorpicker', 'css',
+				'category', 'categories', 'checkbox', 'colorpicker',
+				'css' =>
+					array(
+						'custom', 'repeat'
+					),
 				'input', 'input-group',
 				'page', 'pages', 'post', 'posts',
 				'plugins' =>

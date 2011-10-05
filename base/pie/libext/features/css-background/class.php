@@ -37,22 +37,33 @@ class Pie_Easy_Exts_Features_Css_Background
 	 */
 	final public function export_css()
 	{
-		// background image option name
-		$opt_image = $this->get_suboption('image');
-		$opt_tiling = $this->get_suboption('tiling');
+		// rule for bg
+		$bg = $this->style()->new_rule( $this->css_selector );
 
-		// get attachment image data
-		$data = $opt_image->get_image_src('full');
+		// color
+		if ( $this->has_suboption('color') ) {
+			$bg->ad( 'background-color', $this->get_suboption('color')->get() );
+		}
 
-		// extract image data
-		list( $url, $width, $height ) = $data;
+		// image/tiling
+		if ( $this->has_suboption('image') ) {
 
-		// only render if we have a url
-		if ( $url ) {
-			// rule for bg styles
-			$bg = $this->style()->new_rule( $this->css_selector );
-			$bg->ad( 'background-image', sprintf( "url('%s')", $url ) );
-			$bg->ad( 'background-repeat', $opt_tiling->get() );
+			// try to get options
+			$opt_image = $this->get_suboption('image');
+			$opt_tiling = $this->get_suboption('tiling');
+
+			// get attachment image data
+			$data = $opt_image->get_image_src('full');
+
+			// extract image data
+			list( $url, $width, $height ) = $data;
+
+			// only render if we have a url
+			if ( $url ) {
+				$bg->ad( 'background-image', sprintf( "url('%s')", $url ) );
+				$bg->ad( 'background-repeat', $opt_tiling->get() );
+			}
+
 		}
 
 		return parent::export_css();
