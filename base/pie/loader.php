@@ -51,6 +51,24 @@ define( 'PIE_EASY_LANGUAGES_DIR', PIE_EASY_DIR . DIRECTORY_SEPARATOR . 'language
  */
 define( 'PIE_EASY_VENDORS_DIR', PIE_EASY_LIB_DIR . DIRECTORY_SEPARATOR . 'vendors' );
 /**
+ * PIE API: exports caching toggle
+ */
+if ( !defined( 'PIE_EASY_CACHE_EXPORTS' ) ) {
+	define( 'PIE_EASY_CACHE_EXPORTS', false );
+}
+/**
+ * PIE API: error handling support toggle
+ */
+if ( !defined( 'PIE_EASY_ERROR_HANDLING' ) ) {
+	define( 'PIE_EASY_ERROR_HANDLING', true );
+}
+/**
+ * PIE API: error reproting support toggle
+ */
+if ( !defined( 'PIE_EASY_ERROR_REPORTING' ) ) {
+	define( 'PIE_EASY_ERROR_REPORTING', false );
+}
+/**
  * PIE API: exported files sub directory name
  */
 if ( !defined( 'PIE_EASY_EXPORTS_SUBDIR' ) ) {
@@ -58,11 +76,22 @@ if ( !defined( 'PIE_EASY_EXPORTS_SUBDIR' ) ) {
 }
 
 /**
+ *  load error handler if applicable
+ */
+if ( PIE_EASY_ERROR_HANDLING ) {
+	require_once
+		PIE_EASY_LIB_DIR .
+		DIRECTORY_SEPARATOR . 'errors' .
+		DIRECTORY_SEPARATOR . 'handler.php';
+}
+
+/**
  * include the base class
  */
 require_once
 	PIE_EASY_LIB_DIR .
-	DIRECTORY_SEPARATOR . 'base/base.php';
+	DIRECTORY_SEPARATOR . 'base' .
+	DIRECTORY_SEPARATOR . 'base.php';
 
 /**
  * Make loading PIE libraries easy
@@ -232,8 +261,12 @@ final class Pie_Easy_Loader extends Pie_Easy_Base
 			define( 'PIE_EASY_URL', $pie_url );
 			define( 'PIE_EASY_ASSETS_URL', PIE_EASY_URL . '/assets' );
 			define( 'PIE_EASY_CSS_URL', PIE_EASY_ASSETS_URL . '/css' );
+			define( 'PIE_EASY_ERRORS_URL', PIE_EASY_ASSETS_URL . '/errors' );
 			define( 'PIE_EASY_IMAGES_URL', PIE_EASY_ASSETS_URL . '/images' );
 			define( 'PIE_EASY_JS_URL', PIE_EASY_ASSETS_URL . '/js' );
+
+			// is this an AJAX request?
+			define( 'PIE_EASY_AJAX_REQUEST', defined( 'DOING_AJAX' ) );
 
 			// setup i18n
 			load_theme_textdomain( PIE_EASY_TEXT_DOMAIN, PIE_EASY_LANGUAGES_DIR );
@@ -402,8 +435,14 @@ final class Pie_Easy_Loader extends Pie_Easy_Base
 			DIRECTORY_SEPARATOR . $file .
 			DIRECTORY_SEPARATOR . 'class.php';
 
-		// load it
-		require_once $path;
+		// make sure it exists
+		if ( Pie_Easy_Files::cache($path)->is_readable() ) {
+			// load it
+			require_once $path;
+		} else {
+			// not good
+			throw new Exception( sprintf( 'The extension "%s" does not exist. Please check your config file!', $file ) );
+		}
 
 		// did the file we just loaded define the class we were expecting?
 		if ( class_exists( $class_name ) ) {
