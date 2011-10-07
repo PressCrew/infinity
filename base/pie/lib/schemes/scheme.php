@@ -85,10 +85,6 @@ final class Pie_Easy_Scheme extends Pie_Easy_Base
 	 */
 	const DIRECTIVE_UI_STYLESHEET = 'ui_stylesheet';
 	/**
-	 * Development mode directive
-	 */
-	const DIRECTIVE_DEV_MODE = 'development_mode';
-	/**
 	 * Script domain directive
 	 */
 	const DIRECTIVE_SCRIPT_DOMAIN = 'script_domain';
@@ -223,14 +219,6 @@ final class Pie_Easy_Scheme extends Pie_Easy_Base
 
 		// load it
 		$this->load();
-
-		// dev mode
-		if ( !defined( 'PIE_EASY_DEV_MODE' ) ) {
-			define(
-				'PIE_EASY_DEV_MODE',
-				(boolean) $this->directives->get( self::DIRECTIVE_DEV_MODE )->value
-			);
-		}
 
 		// add filters
 		$this->add_filters();
@@ -509,8 +497,8 @@ final class Pie_Easy_Scheme extends Pie_Easy_Base
 	{
 		foreach ( $this->config_files_loaded as $file ) {
 			// config was last modified...
-			if ( PIE_EASY_DEV_MODE ) {
-				// in dev mode, use current time
+			if ( PIE_EASY_CACHE_EXPORTS ) {
+				// in cache mode, use current time
 				$mtime = time();
 			} else {
 				// use file last mod time
