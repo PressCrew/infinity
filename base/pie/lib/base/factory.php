@@ -54,7 +54,7 @@ abstract class Pie_Easy_Factory extends Pie_Easy_Componentable
 			if ( class_exists( $class_name ) ) {
 				return $class_name;
 			} else {
-				throw new Exception( sprintf( 'The class "%s" does not exist', $class_name ) );
+				throw new Exception( sprintf( 'The class "%s" does not exist in the file %s', $class_name, $file_theme ) );
 			}
 
 		} else {
