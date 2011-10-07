@@ -234,7 +234,7 @@ function pieEasyCpanel(options)
 				} else {
 					// error
 					message.fadeOut(300, function(){
-						message.pieEasyFlash('error', sr.content).fadeIn();
+						message.pieEasyFlash('error', sr.message).fadeIn();
 					});
 				}
 			}
