@@ -53,7 +53,6 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 /* ! Typography and Tags (ul, li,a, input etc)   */
 /* ============================================= */
 ol, ul {
-    display: inline;
     padding: 0;
 }
 p {
@@ -232,8 +231,7 @@ body {
 }
 #wrapper {
     margin: 30px auto;
-    max-width: 1080px;
-    min-width: 960px;
+    max-width: 1150px;
 }
 .top-wrap { position: relative }
 .main-wrap {

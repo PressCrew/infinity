@@ -39,10 +39,9 @@ body {
 #wrapper {
     box-shadow: 0 0 0 12px rgba(0, 0, 0, 0.024), 0 0 3px 0 rgba(0, 0, 0, 0.15), 0 0 0 6px rgba(0, 0, 0, 0.02) inset;
     border: 1px solid #EEE;
-    max-width: 1020px;
-    min-width: 960px;
     background: #FFF;
     border-radius: 12px 12px 12px 12px;
+    max-width: 1020px;
 }
 .main-wrap {
     padding-left: 20px;
@@ -416,9 +415,9 @@ div.item-list-tabs ul li a:hover {
 }
 div#sidebar div.item-options {
     left: 47%;
-    margin-bottom: -40px;
+    margin-bottom: -25px;
     position: relative;
-    top: -34px;
+    top: -22px;
 }
 /* Stream Icons. no shorthand CSS to maintain hover effects */
 li#activity-all a {
