@@ -54,13 +54,8 @@ div#sidebar-me h4 {
     margin: 6px 0 20px;
     padding-top: 4px;
 }
-div#top-menu-wrap #buddypress-nav ul a,
-div#sub-menu-wrap #buddypress-nav ul a {
-    font-size: 11.5px !important;
-    font-weight: bold;
-    margin-right: -10px !important;
-    padding: 0 8px !important;
-    text-transform: uppercase;
+div#sidebar ol,div#sidebar ul {
+    display: inherit;
 }
 #group-creation-next,
 .not_friends,
@@ -288,7 +283,7 @@ div.item-list-tabs ul li.last {
 }
 div.item-list-tabs#subnav ul li.last { margin-top: -4px; }
 div.item-list-tabs ul li.last select {
-    float: right;
+    display: inline-block;
     margin-left: 8px;
     max-width: 110px;
     margin-top: 10px;
@@ -398,7 +393,7 @@ div#sidebar div.item-options {
     color: #73C1E6;
     font-size: 9.8px;
     font-weight: bold;
-    margin: -10px 0 0 0;
+    margin: -10px 0 -20px;
     text-transform: uppercase;
 }
 div#sidebar div.item-avatar img {
@@ -464,8 +459,10 @@ ul.button-nav li.current a { font-weight: bold }
 /* > AJAX Loaders
 -------------------------------------------------------------- */
 .ajax-loader {
-    background: url( ../images/buddypress/ajax-loader.gif ) center left no-repeat !important;
-    padding: 8px;
+    background-image: url( ../images/buddypress/ajax-loader.gif ) !important;
+    background-position: 95% 50% !important;
+    background-repeat: no-repeat !important;
+    padding-right: 25px !important;
     display: none;
 }
 a.loading {
@@ -722,7 +719,7 @@ body.activity-permalink .activity-list li .activity-avatar img.FB_profile_pic {
 }
 .activity-list li.mini .activity-content { margin-right: 175px }
 .activity-list li.mini .activity-content p {
-    margin: 0;
+    margin: 14px 0 0;
     float: left;
 }
 .activity-list li.mini .activity-meta {
@@ -739,9 +736,8 @@ body.activity-permalink .activity-list li.mini .activity-meta {
     margin-top: 30px;
 }
 .activity-list li .activity-inreplyto {
-    font-size: 11px;
+    font-size: 11.5px;
     color: #888;
-    margin-left: 70px;
     margin-bottom: 15px;
     padding-left: 25px;
     background: url( ../images/buddypress/replyto_arrow.gif ) 7px 0 no-repeat;
@@ -758,10 +754,6 @@ body.activity-permalink .activity-list li.mini .activity-meta {
     padding: 0;
     margin: 0;
     overflow: hidden;
-}
-.activity-list .activity-avatar img {
-    width: 60px;
-    height: 60px;
 }
 body.activity-permalink .activity-list .activity-avatar img {
     width: 100px;
@@ -816,8 +808,16 @@ body.activity-permalink .activity-list li .activity-header > p {
 }
 .activity-list .activity-content .activity-inner,
 .activity-list .activity-content blockquote {
+    background: none repeat scroll 0 0 #FBFBFB;
+    border: 1px solid #F4F4F4;
+    border-radius: 4px 4px 4px 4px;
     margin: 15px 0 15px 5px;
     overflow: hidden;
+    padding: 10px;
+}
+.activity-list .activity-content .activity-inner p
+{
+margin: 0;
 }
 body.activity-permalink .activity-content .activity-inner,
 body.activity-permalink .activity-content blockquote { margin-top: 5px }
@@ -899,12 +899,6 @@ body.activity-permalink div.activity-comments {
     margin-left: 135px;
     background: none;
 }
-div.activity-comments > ul {
-    background: #f5f5f5;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    padding: 0 10px 0;
-}
 div.activity-comments ul,
 div.activity-comments ul li {
     border: none;
@@ -912,8 +906,9 @@ div.activity-comments ul li {
 }
 div.activity-comments ul { clear: left }
 div.activity-comments ul li {
-    border-top: 2px solid #fff;
-    padding: 10px 0 0;
+    background: none repeat scroll 0 0 #FBFBFB;
+    border: 1px solid #F4F4F4;
+    padding: 5px;
 }
 body.activity-permalink div.activity-comments ul li {
     border-width: 1px;
@@ -928,12 +923,11 @@ div.activity-comments ul li > ul {
 }
 body.activity-permalink div.activity-comments ul li > ul { margin-top: 15px }
 div.activity-comments div.acomment-avatar img {
-    border-width: 2px !important;
     float: left;
     margin-right: 10px;
 }
 div.activity-comments div.acomment-content {
-    font-size: 11px;
+    font-size: 13.5px;
     margin-left: 39px;
     margin-top: 5px;
 }
@@ -944,6 +938,10 @@ body.activity-permalink div.activity-comments div.acomment-content { font-size: 
 div.activity-comments div.acomment-meta {
     font-size: 11px;
     color: #888;
+}
+div.acomment-options a {
+	font-size: 10px;
+	text-transform: uppercase;
 }
 div.activity-comments form.ac-form {
     background: none repeat scroll 0 0 #FAFAFA;
@@ -987,6 +985,10 @@ div.activity-comments form div.ac-reply-avatar {
     float: left;
     height: 25px;
     width: 25px;
+}
+div.acomment-avatar img {
+    height: 40px;
+    width: 40px;
 }
 div.ac-reply-avatar img {
     height: 25px;
@@ -1259,4 +1261,198 @@ body#bp-default #admin-bar-logo { padding: 2px 8px }
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     border-radius: 3px;
+}
+/*--------------------------------------------------------------
+Hello, this is the BuddyPress Responsive theme stylesheet
+
+----------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+1.0 - iPad
+	1.1 - Landscape
+	1.2 - Portrait
+2.0 - Smartphone
+3.0 - iPhone
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+1.1 - iPad Landscape
+--------------------------------------------------------------*/
+@media only screen and (max-width: 768px) {
+	html {
+		background-color: #eaeaea;
+	}
+	body {
+		margin-top: -28px !important;
+		background: #eaeaea;
+	}
+	#wpadminbar {
+		display: none;
+	}
+	div#content .padder {
+		margin-right: 0;
+		width: auto;
+		float: none;
+		border: none;
+	}
+	div#sidebar {
+		width: auto;
+		float: none;
+		margin: 2em 0 0 0;
+		border: none;
+	}
+	ul#nav {
+		padding-bottom: 1em;
+	}
+	ul#nav li {
+		width: 46%;
+		margin-bottom: 1em;
+		margin-right: 0;
+	}
+	ul#nav li:nth-child(even) {
+		margin-left: 3%;
+		margin-right: 0;
+	}
+	ul#nav li a {
+		-moz-border-radius: 0.25em;
+		-webkit-border-radius: 0.25em;
+		border-radius: 0.25em;
+		margin-bottom: 0;
+	}
+}
+
+
+/*--------------------------------------------------------------
+1.2 - iPad Portrait
+--------------------------------------------------------------*/
+@media only screen and (max-width: 640px) {
+	div.dir-search {
+		float: none;
+		margin: 1.25em 0 0;
+	}
+	ul.item-list li div.action {
+		padding-left: 64px;
+		position: relative;
+		right: auto;
+		text-align: left;
+		top: 1em;
+		margin-bottom: 1.25em;
+	}
+}
+
+
+/*--------------------------------------------------------------
+2.0 - Smartphone (any)
+--------------------------------------------------------------*/
+@media screen and (max-device-width: 480px), screen and (-webkit-min-device-pixel-ratio: 2) {
+	-webkit-text-size-adjust: none;
+}
+
+@media only screen and (max-width: 480px) {
+	body {
+		width: 100%;
+		margin: 0;
+	}
+	#container {
+		border: none;
+	}
+	div.item-list-tabs ul li {
+		float: none;
+		margin: 0.3em 0.6em;
+		background:none;
+	}
+	div.item-list-tabs ul li.last {
+		float: none;
+		margin: 0.3em 0.6em;
+	}
+	div#subnav.item-list-tabs ul li.last {
+		margin-top: 1em;
+	}
+	div.item-list-tabs ul li.selected,
+	div.item-list-tabs ul li.current {
+		margin: 0.3em 0.6em;
+	}
+	div.item-list-tabs ul li.selected a,
+	div.item-list-tabs ul li.current a {
+		background: #eee;
+		font-weight: bold;
+	}
+	div.item-list-tabs ul li:first-child {
+		margin: 0.6em 0.6em 0.5em 0.6em;
+	}
+	div.item-list-tabs ul li a,
+	div.item-list-tabs ul li span {
+		padding: 0.3em;
+	}
+	div#subnav ul {
+		padding-top: 0.6em;
+	}
+	div.pagination {
+		padding: 0.6em;
+	}
+	div.item-list-tabs ul {
+		border-top: 1px solid #EAEAEA;
+		padding-top: 0;
+	}
+	div.item-list-tabs ul li {
+		margin-top: 0;
+	}
+	form.standard-form #basic-details-section,
+	form.standard-form #blog-details-section,
+	form.standard-form #profile-details-section {
+		float: none;
+		width: 100%;
+	}
+}
+
+
+/*--------------------------------------------------------------
+3.0 - iPhone
+--------------------------------------------------------------*/
+@media only screen and (max-width: 320px) {
+	ul#nav li {
+		float: none;
+		width: 100%;
+		margin-bottom: 0.6em;
+		margin-right: 0;
+		margin-left: 0;
+	}
+	ul#nav li:nth-child(even) {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	ul#nav li a {
+		-moz-border-radius: 0.25em;
+		-webkit-border-radius: 0.25em;
+		border-radius: 0.25em;
+		margin-bottom: 0;
+	}
+	form#groups-directory-form h3 a {
+		display: block;
+		margin-top: 0.6em;
+	}
+	div.post div.author-box,
+	div.comment-avatar-box {
+		display: none;
+	}
+	div.post div.post-content,
+	div.comment-content {
+		margin-left: 0px;
+	}
+	form#whats-new-form div#whats-new-avatar {
+		display:none;
+	}
+	form#whats-new-form h5 {
+		margin: 0 0 0 0px;
+	}
+	form#whats-new-form #whats-new-content {
+		margin-left: 0px;
+		padding-left: 0px;
+	}
+	body.activity-permalink .activity-list li .activity-content {
+		margin-left: 0;
+	}
+	body.activity-permalink .activity-list li.mini .activity-meta {
+		left: 0;
+	}
 }
