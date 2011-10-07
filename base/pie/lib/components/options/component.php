@@ -188,7 +188,7 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 		}
 
 		// make sure we ended up with some options
-		if ( count( $field_options ) >= 1 ) {
+		if ( isset( $field_options ) && count( $field_options ) >= 1 ) {
 			// finally set them for the option
 			$this->directives()->set( $theme, 'field_options', $field_options, true );
 		}
@@ -459,17 +459,24 @@ abstract class Pie_Easy_Options_Option_Image
 			$attach_id = $this->get();
 		}
 
+		// src is null by default
+		$src = null;
+
+		// did we get an attachement id?
 		if ( is_numeric( $attach_id ) ) {
 			// try to get the attachment info
 			$src = wp_get_attachment_image_src( $attach_id, $size );
 		} else {
-			// use default
-			$directive = $this->directives()->get( 'default_value' );
-			// mimic the src array
-			$src = array_fill( 0, 3, null );
-			// is a default set?
-			if ( $directive->value ) {
-				$src[0] = Pie_Easy_Files::theme_file_url( $directive->theme, $directive->value );
+			// was a default set?
+			if ( $this->directives()->has( 'default_value' ) ) {
+				// use default
+				$directive = $this->directives()->get( 'default_value' );
+				// mimic the src array
+				$src = array_fill( 0, 3, null );
+				// is a default set?
+				if ( $directive->value ) {
+					$src[0] = Pie_Easy_Files::theme_file_url( $directive->theme, $directive->value );
+				}
 			}
 		}
 
