@@ -226,10 +226,10 @@ final class Pie_Easy_Scheme extends Pie_Easy_Base
 		// run theme feature support helper
 		$this->feature_support();
 
-		// try to load additional functions files after WP theme setup
+		// some scheme initializations must occur after WP theme setup
+		add_action( 'after_setup_theme', array($this, 'exports_refresh') );
 		add_action( 'after_setup_theme', array($this, 'init_enqueueing') );
 		add_action( 'after_setup_theme', array($this, 'load_functions') );
-		add_action( 'after_setup_theme', array($this, 'exports_refresh') );
 
 		return true;
 	}
