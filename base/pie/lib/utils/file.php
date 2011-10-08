@@ -55,12 +55,26 @@ final class Pie_Easy_File extends Pie_Easy_Base
 	public function __construct( $filename )
 	{
 		$this->f = $filename;
-		$this->e = file_exists( $filename );
+		$this->refresh();
+	}
+
+	/**
+	 * Set/refresh file information
+	 *
+	 * @return Pie_Easy_File
+	 */
+	public function refresh()
+	{
+		clearstatcache( true, $this->f );
+
+		$this->e = file_exists( $this->f );
 
 		if ( $this->e ) {
-			$this->r = is_readable( $filename );
-			$this->w = is_writable( $filename );
+			$this->r = is_readable( $this->f  );
+			$this->w = is_writable( $this->f  );
 		}
+
+		return $this;
 	}
 
 	/**
