@@ -23,8 +23,8 @@ function _print_string_safely( $string, $htmlentities = true ) {
 <html>
 <head>
 	<title>
-		PHP <?php _print_string_safely(Pie_Easy_Error_Handler::$type); ?> -
-		<?php _print_string_safely(Pie_Easy_Error_Handler::$message); ?>
+		PHP <?php _print_string_safely( Pie_Easy_Error_Handler::$type ); ?> -
+		<?php _print_string_safely( Pie_Easy_Error_Handler::$message ); ?>
 	</title>
 	<style>
 		body {
@@ -121,29 +121,29 @@ function _print_string_safely( $string, $htmlentities = true ) {
 		<tr>
 			<td nowrap="nowrap" class="heading-left">
 				<span class="heading-left-small">
-					<?php _print_string_safely(Pie_Easy_Error_Handler::$type); ?> in PHP Script<br />
+					<?php _print_string_safely( Pie_Easy_Error_Handler::$type ); ?> in PHP Script<br />
 				</span>
-				<?php _print_string_safely($_SERVER["PHP_SELF"]); ?>
+				<?php _print_string_safely( $_SERVER["PHP_SELF"] ); ?>
 			</td>
 			<td nowrap="nowrap" class="heading-right">
 				<div>
-					<b>PHP Version:</b> <?php _print_string_safely(PHP_VERSION); ?>
-					<b>Zend Engine Version:</b> <?php _print_string_safely(zend_version()); ?>
+					<b>PHP Version:</b> <?php _print_string_safely( PHP_VERSION ); ?>
+					<b>Zend Engine Version:</b> <?php _print_string_safely( zend_version() ); ?>
 				</div>
 				<div>
 					<b>PIE Version:</b> <?php _print_string_safely( PIE_EASY_VERSION ); ?>
 				</div>
 				<?php
-					if ( array_key_exists( 'OS', $_SERVER ) ):
-						printf('<b>Operating System:</b> %s;&nbsp;&nbsp;', $_SERVER['OS']);
-					endif;
+				if ( array_key_exists( 'OS', $_SERVER ) ):
+					printf( '<b>Operating System:</b> %s;&nbsp;&nbsp;', $_SERVER['OS'] );
+				endif;
 				?>
 				<div>
-					<b>Application:</b> <?php _print_string_safely($_SERVER['SERVER_SOFTWARE']); ?>
-					<b>Server Name:</b> <?php _print_string_safely($_SERVER['SERVER_NAME']); ?>
+					<b>Application:</b> <?php _print_string_safely( $_SERVER['SERVER_SOFTWARE'] ); ?>
+					<b>Server Name:</b> <?php _print_string_safely( $_SERVER['SERVER_NAME'] ); ?>
 				</div>
 				<div>
-					<b>HTTP User Agent:</b> <?php _print_string_safely($_SERVER['HTTP_USER_AGENT']); ?>
+					<b>HTTP User Agent:</b> <?php _print_string_safely( $_SERVER['HTTP_USER_AGENT'] ); ?>
 				</div>
 			</td>
 		</tr>
@@ -152,10 +152,10 @@ function _print_string_safely( $string, $htmlentities = true ) {
 	<div class="page">
 
 		<h3 class="title">
-			<?php _print_string_safely(Pie_Easy_Error_Handler::$message_body, false); ?>
+			<?php _print_string_safely( Pie_Easy_Error_Handler::$message_body, false ); ?>
 		</h3>
 
-		<form method="post" action="<?php print PIE_EASY_ERRORS_URL ;?>/partial-page.php" target="blank" name="rendered">
+		<form method="post" action="<?php print PIE_EASY_ERRORS_URL; ?>/partial-page.php" target="blank" name="rendered">
 			<input type="hidden" name="html" value="">
 		</form>
 
@@ -166,7 +166,7 @@ function _print_string_safely( $string, $htmlentities = true ) {
 
 		<?php if ( isset( Pie_Easy_Error_Handler::$rendered_page ) ): ?>
 			<script type="text/javascript">
-				RenderedPage = "<?php _print_string_safely(Pie_Easy_Error_Handler::prep_data_for_script(Pie_Easy_Error_Handler::$rendered_page), false); ?>";
+				RenderedPage = "<?php _print_string_safely( Pie_Easy_Error_Handler::prep_data_for_script( Pie_Easy_Error_Handler::$rendered_page ), false ); ?>";
 			</script>
 			<h4>
 				Rendered Page:
@@ -176,48 +176,50 @@ function _print_string_safely( $string, $htmlentities = true ) {
 
 		<h4>
 			Source File:
-			<span><?php _print_string_safely(Pie_Easy_Error_Handler::$filename); ?></span>
+			<span><?php _print_string_safely( Pie_Easy_Error_Handler::$filename ); ?></span>
 			Line:
-			<span><?php _print_string_safely(Pie_Easy_Error_Handler::$line_number); ?></span>
+			<span><?php _print_string_safely( Pie_Easy_Error_Handler::$line_number ); ?></span>
 		</h4>
 
 		<div class="code">
 		<?php
-			_print_string_safely('<pre>', false);
-			for ($__exc_IntLine = max(1, Pie_Easy_Error_Handler::$line_number - 5); $__exc_IntLine <= min(count(Pie_Easy_Error_Handler::$file_lines_array), Pie_Easy_Error_Handler::$line_number + 5); $__exc_IntLine++) {
-				if (Pie_Easy_Error_Handler::$line_number == $__exc_IntLine)
-					printf('<span style="color: #f00;">Line %s:    %s</span>', $__exc_IntLine, htmlentities(Pie_Easy_Error_Handler::$file_lines_array[$__exc_IntLine - 1]));
-				else
-					printf("Line %s:    %s", $__exc_IntLine, htmlentities(Pie_Easy_Error_Handler::$file_lines_array[$__exc_IntLine - 1]));
+			_print_string_safely( '<pre>', false );
+
+			for ( $line_number = max( 1, Pie_Easy_Error_Handler::$line_number - 5 ); $line_number <= min( count( Pie_Easy_Error_Handler::$file_lines_array ), Pie_Easy_Error_Handler::$line_number + 5 ); $line_number++ ) {
+				if ( Pie_Easy_Error_Handler::$line_number == $line_number ) {
+					printf( '<span style="color: #f00;">Line %s:    %s</span>', $line_number, htmlentities( Pie_Easy_Error_Handler::$file_lines_array[$line_number - 1] ) );
+				} else {
+					printf( "Line %s:    %s", $line_number, htmlentities( Pie_Easy_Error_Handler::$file_lines_array[$line_number - 1] ) );
+				}
 			}
-			_print_string_safely('</pre>', false);
-			unset($__exc_IntLine);
+
+			_print_string_safely( '</pre>', false );
+			
+			unset( $line_number );
 		?>
 		</div>
 
 		<?php
-			if (isset(Pie_Easy_Error_Handler::$error_attribute_array)) {
-				foreach (Pie_Easy_Error_Handler::$error_attribute_array as $__exc_ObjErrorAttribute) {
-					printf("<b>%s:</b>&nbsp;&nbsp;", $__exc_ObjErrorAttribute->label);
-					$__exc_StrJavascriptLabel = str_replace(" ", "", $__exc_ObjErrorAttribute->label);
-					if ($__exc_ObjErrorAttribute->MultiLine) {
-						printf("\n<a href=\"javascript:toggleHidden('%s')\">Show/Hide</a>",
-							$__exc_StrJavascriptLabel);
-						printf('<br /><br /><div id="%s" class="code" style="Display: none;"><pre>%s</pre></div><br />',
-							$__exc_StrJavascriptLabel,
-							htmlentities($__exc_ObjErrorAttribute->contents));
-					} else
-						printf("%s\n<br /><br />\n", htmlentities($__exc_ObjErrorAttribute->contents));
+			if ( isset( Pie_Easy_Error_Handler::$error_attribute_array ) ) {
+				foreach ( Pie_Easy_Error_Handler::$error_attribute_array as $error_attribute ) {
+					printf( "<b>%s:</b>&nbsp;&nbsp;", $error_attribute->label );
+					$javascript_label = str_replace( " ", "", $error_attribute->label );
+					if ( $error_attribute->MultiLine ) {
+						printf( "\n<a href=\"javascript:toggleHidden('%s')\">Show/Hide</a>", $javascript_label );
+						printf( '<br /><br /><div id="%s" class="code" style="Display: none;"><pre>%s</pre></div><br />', $javascript_label, htmlentities( $error_attribute->contents ) );
+					} else {
+						printf( "%s\n<br /><br />\n", htmlentities( $error_attribute->contents ) );
+					}
 				}
-				unset($__exc_StrJavascriptLabel);
-				unset($__exc_ObjErrorAttribute);
+				unset( $javascript_label );
+				unset( $error_attribute );
 			}
 		?>
 
 		<h4>Call Stack:</h4>
 
 		<div class="code">
-			<pre><?php _print_string_safely(Pie_Easy_Error_Handler::$stack_trace); ?></pre>
+			<pre><?php _print_string_safely( Pie_Easy_Error_Handler::$stack_trace ); ?></pre>
 		</div>
 
 		<h4>
