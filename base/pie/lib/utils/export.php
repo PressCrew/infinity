@@ -174,16 +174,24 @@ class Pie_Easy_Export extends Pie_Easy_Base
 		// make sure the export dir exists
 		if ( wp_mkdir_p( self::$export_dir ) ) {
 			// can we write to the export dir?
-			if ( Pie_Easy_Files::cache(self::$export_dir)->is_writable() ) {
+			if ( Pie_Easy_Files::cache(self::$export_dir)->refresh()->is_writable() ) {
 				// get file instance
-				$file = Pie_Easy_Files::cache( $this->path );
+				$file = Pie_Easy_Files::cache($this->path)->refresh();
 				// if file already exists, puke if not writeable
 				if ( $file->exists() && !$file->is_writable() ) {
 					throw new Pie_Easy_Export_Exception(
 						'Unable to write to the file: ' . $this->path );
 				}
-				// write it
-				return file_put_contents( $this->path, $data );
+				// try to write it
+				$bytes = file_put_contents( $file->filename(), $data );
+				// any bytes written
+				if ( $bytes ) {
+					// yep, refresh file
+					$file->refresh();
+					// return bytes written
+					return $bytes;
+				}
+				return false;
 			} else {
 				throw new Pie_Easy_Export_Exception(
 					'Unable to create the file: ' . $this->path );
