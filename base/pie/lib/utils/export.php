@@ -146,7 +146,7 @@ class Pie_Easy_Export extends Pie_Easy_Base
 			// make sure we didn't get an error
 			if ( $upload_dir['error'] == false ) {
 				// set upload dir path and url
-				self::$upload_dir = $upload_dir['basedir'];
+				self::$upload_dir = realpath( $upload_dir['basedir'] );
 				self::$upload_url = $upload_dir['baseurl'];
 				// determine export path and url
 				self::$export_dir = self::$upload_dir . Pie_Easy_Files::path_build( PIE_EASY_EXPORTS_SUBDIR, get_stylesheet() );

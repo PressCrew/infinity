@@ -147,7 +147,7 @@ abstract class Pie_Easy_Asset extends Pie_Easy_Base
 			foreach ( $this->get_files() as $file ) {
 
 				// resolve file path
-				if ( $file{0} == DIRECTORY_SEPARATOR ) {
+				if ( path_is_absolute( $file ) ) {
 					$filename = $file;
 				} else {
 					$filename = Pie_Easy_Scheme::instance()->locate_file( $file );

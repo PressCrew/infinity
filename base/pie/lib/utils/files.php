@@ -37,12 +37,17 @@ final class Pie_Easy_Files extends Pie_Easy_Base
 	 */
 	public static function path_split ( $path )
 	{
-		// strip out leading drive letters (Windows)
-		$path_clean = preg_replace( '/^[a-z]{1}:/i', '', $path );
+		// the path which will be clean
+		$path_clean = $path;
 
-		// replace double back slashes with single backslash
-		$path_clean = str_replace( '\\', DIRECTORY_SEPARATOR, $path_clean );
-
+		// windows install?
+		if ( DIRECTORY_SEPARATOR == '\\' ) {
+			// strip out leading drive letters (Windows)
+			$path_clean = preg_replace( '/^[a-z]{1}:/i', '', $path );
+			// replace double back slashes with single backslash
+			$path_clean = str_replace( '\\', DIRECTORY_SEPARATOR, $path_clean );
+		}
+			
 		// split at forward and back slashes
 		return preg_split( '/\/|\\\/', $path_clean, null, PREG_SPLIT_NO_EMPTY );
 	}
@@ -72,9 +77,6 @@ final class Pie_Easy_Files extends Pie_Easy_Base
 		// get all args
 		$args = func_get_args();
 
-		// prefix is null by default
-		$prefix = null;
-
 		// relative is false by default
 		$relative = false;
 
@@ -90,11 +92,6 @@ final class Pie_Easy_Files extends Pie_Easy_Base
 			$file_names = $args[0];
 		} else {
 			$file_names = $args;
-		}
-
-		// need prefix?
-		if ( $relative === false ) {
-			$prefix = DIRECTORY_SEPARATOR;
 		}
 
 		// final files array
@@ -128,29 +125,15 @@ final class Pie_Easy_Files extends Pie_Easy_Base
 			}
 		}
 
-		return $prefix . implode( DIRECTORY_SEPARATOR, $file_names_clean );
-	}
+		// format the final path
+		$final_path = implode( DIRECTORY_SEPARATOR, $file_names_clean );
 
-	/**
-	 * Normalize a filesystem path
-	 *
-	 * This will remove useless slashes and convert invalid directory separators
-	 * with the correct separator for the local system
-	 *
-	 * @param string $path
-	 * @return string
-	 */
-	public static function path_normalize( $path )
-	{
-		// is this a relative path?
-		if ( $path{0} == '/' || $path{0} == '\\' ) {
-			$relative = false;
+		// relative
+		if ( $relative ) {
+			return $final_path;
 		} else {
-			$relative = true;
+			return DIRECTORY_SEPARATOR . $final_path;
 		}
-
-		// return the path
-		return self::path_build( self::path_split( $path ), $relative );
 	}
 
 	/**
@@ -221,6 +204,39 @@ final class Pie_Easy_Files extends Pie_Easy_Base
 	}
 
 	/**
+	 * Return path to a theme's root (parent directory)
+	 *
+	 * @param string $theme
+	 * @return string
+	 */
+	static public function theme_root( $theme )
+	{
+		return realpath( get_theme_root( $theme ) );
+	}
+
+	/**
+	 * Return URL to a theme directory's root (parent directory) URL
+	 *
+	 * @param string $theme
+	 * @return string
+	 */
+	static public function theme_root_url( $theme )
+	{
+		return get_theme_root_uri( $theme );
+	}
+	
+	/**
+	 * Return path to a theme directory
+	 *
+	 * @param string $theme
+	 * @return string
+	 */
+	static public function theme_dir( $theme )
+	{
+		return self::theme_root( $theme ) . DIRECTORY_SEPARATOR . $theme;
+	}
+
+	/**
 	 * Return URL to a theme directory
 	 *
 	 * @param string $theme
@@ -228,7 +244,7 @@ final class Pie_Easy_Files extends Pie_Easy_Base
 	 */
 	static public function theme_dir_url( $theme )
 	{
-		return get_theme_root_uri( $theme ) . '/' . $theme;
+		return self::theme_root_url( $theme ) . '/' . $theme;
 	}
 
 	/**
@@ -259,7 +275,7 @@ final class Pie_Easy_Files extends Pie_Easy_Base
 	static public function theme_file_to_rel( $file_path )
 	{
 		// convert path to be realtive to themes root
-		return str_replace( get_theme_root() . DIRECTORY_SEPARATOR, '', $file_path );
+		return str_replace( realpath( get_theme_root() ) . DIRECTORY_SEPARATOR, '', $file_path );
 	}
 
 	/**

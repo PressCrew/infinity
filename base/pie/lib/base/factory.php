@@ -31,11 +31,14 @@ abstract class Pie_Easy_Factory extends Pie_Easy_Componentable
 	 */
 	public function load_ext( $ext )
 	{
-		// expand extension path
-		$ext = sprintf('%s/%s', $this->policy()->get_handle(), $ext );
+		// expand extension name
+		$ext_full = sprintf('%s/%s', $this->policy()->get_handle(), $ext );
 
 		// format extension file name
-		$ext_file = $ext . DIRECTORY_SEPARATOR . 'class.php';
+		$ext_file =
+			Pie_Easy_Files::path_build(
+				$this->policy()->get_handle(), $ext, 'class.php', true
+			);
 
 		// look for scheme files first
 		$file_theme =
@@ -45,7 +48,7 @@ abstract class Pie_Easy_Factory extends Pie_Easy_Componentable
 		if ( $file_theme ) {
 
 			// format class name
-			$class_name = Pie_Easy_Files::file_to_class( $ext, PIE_EASY_EXT_PREFIX_API );
+			$class_name = Pie_Easy_Files::file_to_class( $ext_full, PIE_EASY_EXT_PREFIX_API );
 
 			// load the file
 			require_once $file_theme;
@@ -58,7 +61,7 @@ abstract class Pie_Easy_Factory extends Pie_Easy_Componentable
 			}
 
 		} else {
-			return Pie_Easy_Loader::load_libext( $ext );
+			return Pie_Easy_Loader::load_libext( $ext_full );
 		}
 	}
 
