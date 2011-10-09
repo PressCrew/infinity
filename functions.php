@@ -29,7 +29,7 @@ define( 'INFINITY_NAME', 'infinity' );
 /**
  * Infinity theme directory path
  */
-define( 'INFINITY_THEME_DIR', get_theme_root( INFINITY_NAME ) . DIRECTORY_SEPARATOR . INFINITY_NAME );
+define( 'INFINITY_THEME_DIR', realpath( get_theme_root( INFINITY_NAME ) ) . DIRECTORY_SEPARATOR . INFINITY_NAME );
 
 /**
  * Infinity theme directory url
@@ -122,6 +122,12 @@ define( 'INFINITY_ADMIN_DOCS_DIR', INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'd
 if ( !defined( 'INFINITY_DEV_MODE' ) ) {
 	define( 'INFINITY_DEV_MODE', false );
 }
+	/**
+	 * PIE exports caching toggle
+	 */
+	if ( !defined( 'PIE_EASY_CACHE_EXPORTS' ) ) {
+		define( 'PIE_EASY_CACHE_EXPORTS', !INFINITY_DEV_MODE );
+	}
 
 /**
  * Infinity error handling

@@ -54,7 +54,7 @@ define( 'PIE_EASY_VENDORS_DIR', PIE_EASY_LIB_DIR . DIRECTORY_SEPARATOR . 'vendor
  * PIE API: exports caching toggle
  */
 if ( !defined( 'PIE_EASY_CACHE_EXPORTS' ) ) {
-	define( 'PIE_EASY_CACHE_EXPORTS', false );
+	define( 'PIE_EASY_CACHE_EXPORTS', true );
 }
 /**
  * PIE API: error handling support toggle

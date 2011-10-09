@@ -498,11 +498,11 @@ final class Pie_Easy_Scheme extends Pie_Easy_Base
 		foreach ( $this->config_files_loaded as $file ) {
 			// config was last modified...
 			if ( PIE_EASY_CACHE_EXPORTS ) {
-				// in cache mode, use current time
-				$mtime = time();
-			} else {
-				// use file last mod time
+				// in cache mode, use file last mod time
 				$mtime = @filemtime( $file );
+			} else {
+				// use current time
+				$mtime = time();
 			}
 			// try to refresh against every policy
 			foreach( Pie_Easy_Policy::all() as $policy ) {
@@ -643,7 +643,7 @@ final class Pie_Easy_Scheme extends Pie_Easy_Base
 	 */
 	public function theme_dir( $theme )
 	{
-		return get_theme_root( $theme ) . DIRECTORY_SEPARATOR . $theme;
+		return Pie_Easy_Files::theme_dir( $theme );
 	}
 
 	/**
