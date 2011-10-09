@@ -214,7 +214,7 @@ class Pie_Easy_Docs extends Pie_Easy_Base
 				$page .= self::DEFAULT_PAGE;
 			}
 			// split page at static directory separators
-			$splits = Pie_Easy_Files::path_split( $page );
+			$splits = explode( '/', $page );
 			// page is last item
 			$page = array_pop( $splits );
 			// anything left?
