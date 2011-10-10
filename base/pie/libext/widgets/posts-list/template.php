@@ -17,6 +17,9 @@
 <div id="<?php $this->render_id() ?>" class="<?php $this->render_classes() ?> ui-widget">
 	<div class="ui-widget-header">
 		<?php $this->render_title() ?>
+		<a href="<?php print admin_url( 'post-new.php' ) ?>?post_type=<?php print $post_type ?>" target="_parent" class="<?php $this->render_class('new') ?>">
+			<?php _e( 'Create New', pie_easy_text_domain ) ?>
+		</a>
 	</div>
 	<div class="ui-widget-content">
 		<?php $posts_list->display() ?>
