@@ -67,6 +67,7 @@ class Pie_Easy_Exts_Widgets_Posts_List
 		$posts_list->prepare_items();
 
 		return array(
+			'post_type' => $this->post_type,
 			'posts_list' => $posts_list
 		);
 	}
