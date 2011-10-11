@@ -47,7 +47,7 @@
 						?>
 						<?php 
 							get_template_part('templates/parts/post-meta-bottom'); 
-							get_template_part('templates/parts/social-sharing'); 
+							do_action('after_single_entry');
 						?>
 						<?php
 							wp_link_pages( array(
