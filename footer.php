@@ -46,7 +46,11 @@
 			<div style="clear: both;"></div>
 			<div id="footer-info">
 				<div id="footer-menu" role="navigation">
-						<?php wp_nav_menu( array( 'theme_location' => 'footer-menu' ) ); ?>	
+					<?php
+						do_action('open_footer_menu');
+						wp_nav_menu( array( 'theme_location' => 'footer-menu' ) );
+						do_action('close_footer_menu');
+					?>
 				</div>	
 				<div id="powered-by">
 					Built on <a href="http://infinity.presscrew.com">Infinity</a> and powered by <a href="http://wordpress.org">WordPress</a>.

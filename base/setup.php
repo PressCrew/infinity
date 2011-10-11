@@ -152,7 +152,7 @@ add_action( 'init', 'infinity_base_register_sidebars' );
  * @package Infinity
  * @subpackage base
  * @see wp_nav_menu()
- * @param string $theme_location Theme location, 'theme_location' arg passed to wp_nav_menu()
+ * @param string $theme_location Theme location, 'theme_location' arg passed to wp_nav_menu()\
  */
 function infinity_base_nav_menu( $theme_location )
 {
@@ -160,9 +160,90 @@ function infinity_base_nav_menu( $theme_location )
 		'theme_location' => $theme_location,
 		'menu_class' => 'sf-menu',
 		'container' => '',
-		'fallback_cb'     => 'false',
+		'fallback_cb' => 'infinity_base_page_menu',
 		'walker' => new Infinity_Base_Walker_Nav_Menu()
 	));
+}
+
+/**
+ * Display a page menu using a custom page walker
+ *
+ * @author Marshall Sorenson <marshall@presscrew.com>
+ * @package Infinity
+ * @subpackage base
+ * @see wp_list_pages()
+ */
+function infinity_base_page_menu()
+{
+	// open the list ?>
+	<ul class="sf-menu"><?php
+		wp_list_pages(array(
+			'title_li' => null,
+			'walker' => new Infinity_Base_Walker_Page_Menu()
+		));
+	// close list?>
+	</ul><?php
+}
+
+/**
+ * Render a single superfish list item
+ *
+ * @param array $args
+ * @param boolean $output
+ * @return void|string
+ */
+function infinity_base_superfish_list_item( $args, $output = true )
+{
+	// default values
+	$defaults = array(
+		'id' => null,
+		'title' => null,
+		'description' => null,
+		'close_item' => false,
+		'li_id' => null,
+		'li_classes' => array(),
+		'a_id' => null,
+		'a_classes' => array(),
+		'a_target' => null,
+		'a_rel' => null,
+		'a_href' => null,
+		'a_before' => null,
+		'a_after' => null,
+		'a_open' => null,
+		'a_close' => null
+	);
+
+	// parse and extract
+	$r = wp_parse_args( $args, $defaults );
+	extract( $r );
+
+	// handle empty list id
+	if ( empty( $li_id ) ) {
+		$li_id = 'menu-item-' . $id;
+	}
+
+	if ( !$output ) {
+		ob_start();
+	}
+
+	// render the list item ?>
+	<li id="<?php print esc_attr( $li_id ) ?>" class="<?php print esc_attr( implode( ' ', $li_classes ) ) ?>">
+		<span><?php print esc_html( $description ) ?></span>
+		<?php print $a_before ?>
+		<a href="<?php print esc_attr( $a_href ) ?>" id="<?php print esc_attr( $a_id ) ?>" class="<?php print esc_attr( implode( ' ', $a_classes ) ) ?>" title="<?php print esc_attr( $a_title ) ?>" target="<?php print esc_attr( $a_target ) ?>" rel="<?php print esc_attr( $a_rel ) ?>">
+			<?php print $a_open ?>
+			<span><?php print esc_html( $title ) ?></span>
+			<?php print $a_close ?>
+		</a>
+		<?php print $a_after ?>
+	<?php if ( $close_item ): ?>
+	</li>
+	<?php endif; ?>
+	<?php
+
+	if ( !$output ) {
+		return ob_get_clean();
+	}
 }
 
 /**
