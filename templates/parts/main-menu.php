@@ -14,7 +14,9 @@
 <div id="main-menu-wrap" role="navigation">
 	<div class="base-menu main-menu">
 		<?php
+			do_action('open_main_menu');
 			infinity_base_nav_menu( 'main-menu' );
+			do_action('close_main_menu');
 		?>
 	</div>
 </div>
