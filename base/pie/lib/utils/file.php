@@ -65,7 +65,11 @@ final class Pie_Easy_File extends Pie_Easy_Base
 	 */
 	public function refresh()
 	{
-		clearstatcache( true, $this->f );
+		if ( defined( 'PHP_VERSION_ID' ) && PHP_VERSION_ID >= 50300 ) {
+			clearstatcache( true, $this->f );
+		} else {
+			clearstatcache();
+		}
 
 		$this->e = file_exists( $this->f );
 
