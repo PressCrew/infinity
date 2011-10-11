@@ -16,10 +16,8 @@
 ?>
 <div class="top-wrap">
 	<?php
-		// show over menu?
-		if ( has_nav_menu( 'over-menu'  ) ):
-			infinity_get_template_part( 'templates/parts/top-menu', 'header' );
-		endif;
+		// show over menu
+		infinity_get_template_part( 'templates/parts/top-menu', 'header' );
 	?>
 	<!-- header -->
 	<div id="header" role="banner">
@@ -37,19 +35,16 @@
 		</<?php echo $heading_tag; ?>>
 		<?php
 			endif;
-			// show primary menu?
-			if ( has_nav_menu( 'main-menu'  ) ):
-				infinity_get_template_part( 'templates/parts/main-menu', 'header' );
-			endif;
+
+			// main menu
+			infinity_get_template_part( 'templates/parts/main-menu', 'header' );
 
 			do_action( 'close_header' );
 		?>
 	</div><!-- end header -->
 	<?php
-		// show the sub-menu?
-		if ( has_nav_menu( 'sub-menu'  ) ):
-			infinity_get_template_part( 'templates/parts/sub-menu', 'header' );
-		endif;
+		// show sub-menu
+		infinity_get_template_part( 'templates/parts/sub-menu', 'header' );
 	?>
 </div><!-- end top wrap -->
 			<div style="clear: both;"></div>

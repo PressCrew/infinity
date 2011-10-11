@@ -10,6 +10,10 @@
  * @subpackage templates
  * @since 1.0
  */
+
+if ( !has_nav_menu( 'over-menu' ) ) {
+	return;
+}
 ?>
 <div id="top-menu-wrap" role="navigation">
 	<div class="base-menu top-menu">

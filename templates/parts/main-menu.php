@@ -10,6 +10,11 @@
  * @subpackage templates
  * @since 1.0
  */
+
+// skip this menu if no main menu is set and at least one menu has been set up
+if ( !has_nav_menu( 'main-menu' ) && ( has_nav_menu( 'over-menu' ) || has_nav_menu( 'sub-menu' ) ) ) {
+	return;
+}
 ?>
 <div id="main-menu-wrap" role="navigation">
 	<div class="base-menu main-menu">

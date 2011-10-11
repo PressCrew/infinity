@@ -10,6 +10,10 @@
  * @subpackage templates
  * @since 1.0
  */
+
+if ( !has_nav_menu( 'sub-menu' ) ) {
+	return;
+}
 ?>
 <div id="sub-menu-wrap" role="navigation">
 	<div class="base-menu sub-menu">

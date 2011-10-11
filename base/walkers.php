@@ -14,8 +14,6 @@
 /**
  * Custom navigation menus walker
  *
- * Kudos to Kriesi (Kriesi.at) and Orman Clark (PremiumPixels.com)
- *
  * @package Infinity
  * @subpackage base
  */
@@ -33,39 +31,76 @@ class Infinity_Base_Walker_Nav_Menu extends Walker_Nav_Menu
 	 */
 	function start_el(&$output, $item, $depth, $args)
 	{
-		global $wp_query;
+		// get item classes
+		$item_classes = empty( $item->classes ) ? array() : (array) $item->classes;
 
-		$indent = ( $depth ) ? str_repeat( "", $depth ) : '';
+		// pass through nav menu css classes filter
+		$nav_classes = apply_filters( 'nav_menu_css_class', array_filter( $item_classes ), $item );
 
-		$class_names = $value = '';
+		// our custom output
+		$item_output =
+			infinity_base_superfish_list_item(
+				array(
+					'id' => $item->ID,
+					'title' => apply_filters( 'the_title', $item->title, $item->ID ),
+					'description' => $item->description,
+					'close_item' => false,
+					'li_classes' => $nav_classes,
+					'a_title' => $item->attr_title,
+					'a_target' => $item->target,
+					'a_rel' => $item->xfn,
+					'a_href' => $item->url,
+					'a_before' => $args->before,
+					'a_after' => $args->after,
+					'a_open' => $args->link_before,
+					'a_close' => $args->link_after
+				),
+				false
+			);
 
-		$classes = empty( $item->classes ) ? array() : (array) $item->classes;
-
-		$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item ) );
-		$class_names = ' class="'. esc_attr( $class_names ) . '"';
-
-		$output .= $indent . '<li id="menu-item-'. $item->ID . '"' . $value . $class_names .'>';
-
-		$attributes  = ! empty( $item->attr_title ) ? ' title="'  . esc_attr( $item->attr_title ) .'"' : '';
-		$attributes .= ! empty( $item->target )     ? ' target="' . esc_attr( $item->target     ) .'"' : '';
-		$attributes .= ! empty( $item->xfn )        ? ' rel="'    . esc_attr( $item->xfn        ) .'"' : '';
-		$attributes .= ! empty( $item->url )        ? ' href="'   . esc_attr( $item->url        ) .'"' : '';
-
-		$prepend = '';
-		$append = '';
-		$description  = ! empty( $item->description ) ? '<span>'.esc_attr( $item->description ).'</span>' : '';
-
-		if( $depth != 0) {
-			$description = $append = $prepend = "";
-		}
-
-		$item_output = $args->before;
-		$item_output .= '<a'. $attributes .'><span>';
-		$item_output .= $args->link_before .$prepend.apply_filters( 'the_title', $item->title, $item->ID ).$append;
-		$item_output .= '</span></a>';
-		$item_output .= $args->after;
-
+		// append it to the output
 		$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
+	}
+}
+
+/**
+ * Custom page menu walker
+ *
+ * @package Infinity
+ * @subpackage base
+ */
+class Infinity_Base_Walker_Page_Menu extends Walker_Page
+{
+	/**
+	 * Start rendering an item element
+	 *
+	 * This overrides the parent method.
+	 *
+	 * @param string $output Passed by reference. Used to append additional content.
+	 * @param object $page Page data object.
+	 * @param int $depth Depth of page. Used for padding.
+	 * @param array $args
+	 * @param int $current_page Page ID.
+	 */
+	function start_el(&$output, $page, $depth, $args, $current_page)
+	{
+		// our custom output
+		$output .=
+			infinity_base_superfish_list_item(
+				array(
+					'id' => $page->ID,
+					'title' => apply_filters( 'the_title', $page->post_title, $page->ID ),
+					'close_item' => false,
+					'li_classes' => apply_filters( 'page_css_class', array(), $page ),
+					'a_title' => $page->post_title,
+					'a_target' => $args->target,
+					'a_rel' => $args->rel,
+					'a_href' => get_post_permalink( $page->ID ),
+					'a_open' => $args->link_before,
+					'a_close' => $args->link_after
+				),
+				false
+			);
 	}
 }
 
