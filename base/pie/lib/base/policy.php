@@ -50,7 +50,7 @@ abstract class Pie_Easy_Policy extends Pie_Easy_Base
 	/**
 	 * @internal
 	 */
-	private function __construct()
+	final protected function __construct()
 	{
 		// singleton
 	}
