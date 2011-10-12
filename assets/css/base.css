@@ -620,10 +620,6 @@ span.edit-link a { color: #999 }
     padding: 0 !important;
 }
 .post .post-content,
-.comment-content {
-    margin-bottom: 40px;
-    position: relative;
-}
 .post img.alignleft {
     margin: 0 7px 2px 0;
     display: inline;
@@ -635,10 +631,10 @@ span.edit-link a { color: #999 }
     margin-right: auto;
     display: block;
 }
-.post h2.pagetitle a,
-.post h2.posttitle a,
-.post h1.pagetitle a,
-.post h1.posttitle a {
+h2.pagetitle a,
+h2.posttitle a,
+h1.pagetitle a,
+h1.posttitle a {
     color: #444444;
     margin-bottom: 0;
     margin-top: 0;
@@ -647,10 +643,10 @@ span.edit-link a { color: #999 }
 .pagetitle {
 	margin-top:  0px;
 }
-.post h2.pagetitle a:hover,
-.post h2.posttitle a:hover,
-.post h1.pagetitle a:hover,
-.post h1.posttitle a:hover { color: #999 }
+h2.pagetitle a:hover,
+h2.posttitle a:hover,
+h1.pagetitle a:hover,
+h1.posttitle a:hover { color: #999 }
 .post img.centered,
 img.aligncenter {
     margin-left: auto;
@@ -755,7 +751,7 @@ ul.page-numbers {
     margin-bottom: 20px;
 }
 ul.page-numbers li { display: inline }
-.pagination {
+.post .pagination {
     border-bottom: 1px solid #EAEAEA;
     color: #888888;
     font-size: 12px;
@@ -844,6 +840,10 @@ h1#tag-title span { color: #555 }
 /* ============ */
 /* ! Comments   */
 /* ============ */
+.comment-content {
+    margin-bottom: 40px;
+    position: relative;
+}
 #comments {
     border-top: 1px solid rgba(0,0,0,0.07);
     position: relative;
