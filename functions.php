@@ -22,6 +22,16 @@
 define( 'INFINITY_VERSION', '1.0b2' );
 
 /**
+ * Infinity version id number
+ *
+ * Examples:
+ *  1.0   = 100
+ *	1.5.3 = 153
+ *  2.6   = 260
+ */
+define( 'INFINITY_VERSION_ID', 100 );
+
+/**
  * Infinity theme name (slug)
  */
 define( 'INFINITY_NAME', 'infinity' );
