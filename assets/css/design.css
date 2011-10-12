@@ -89,8 +89,7 @@ margin: 0px;
     border-radius: 0 4px 4px 0;
     box-shadow: 0 0 0 8px rgba(0, 0, 0, 0.024), 0 0 3px 0 rgba(0, 0, 0, 0.15), 0 0 0 6px rgba(0, 0, 0, 0.02) inset;
     font-size: 26px;
-    left: 20px;
-    margin-left: -32px !important;
+    margin-left: -12px !important;
     padding: 10px 30px;
     position: absolute;
     top: 65px !important;
@@ -417,7 +416,7 @@ div#sidebar div.item-options {
     left: 47%;
     margin-bottom: -25px;
     position: relative;
-    top: -22px;
+    top: -33px;
 }
 /* Stream Icons. no shorthand CSS to maintain hover effects */
 li#activity-all a {
