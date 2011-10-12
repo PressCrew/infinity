@@ -5,80 +5,149 @@ Whether you are starting from scratch, or extending an existing theme, setup is 
 
 <ul class="infinity-docs-menu"></ul>
 
-> For our examples we are using Twenty Ten, the default theme that ships with Wordpress
+### Installing Infinity
 
-### Upload the Themes
+Unpack the Infinity package. Infinity ships with a few themes, but just worry about
+the `infinity` directory for now!
 
-1. Upload the unpacked Infinity directory into the `wp-content/themes/` directory.
+#### Uploading the Base Theme
 
-		wp-content/themes/infinity
+1. Upload the unpacked `infinity` directory into the `wp-content/themes/` directory.
 
-1. Upload the WordPress theme you want to use to the `wp-content/themes/` directory as well.
+	wp-content/themes/infinity
 
-		wp-content/themes/twentyten
+1. If you are running a multi-site setup, be sure to enable the Infinity theme from the
+   network admin dashboard.
 
-### Enabling Infinity in your Theme
+#### Using Base As Your Theme
 
-1. Create a new directory in *your* theme's root directory called: `config`.
+If you just want to play around with Infinity, or use it as your theme, all that you
+need to do is activate it for a site, and you are done!
 
-		wp-content/themes/twentyten/config/
+### Creating a Child Theme
 
-1. Create a new file called `infinity.ini` in the config directory that you just created:
+1. The Infinity package ships with a bare bones theme called `infinity-skeleton`.
+   This theme contains all of the important files which you need to begin developing
+   a child theme of Infinity, or to use as a guide for modifying an existing theme
+   to extend Infinity.
 
-		wp-content/themes/twentyten/config/infinity.ini
+1. Normally you will want to **copy** and **rename** the `infinity-skeleton` directory to
+   something else. For the purposes of our examples, we are going to rename the `infinity-skeleton`
+   to `my-child-theme`. If you choose to name your child theme something other than
+   `my-child-theme`, make sure you use the new name in place of `my-child-theme`
+   in the examples below.
 
-1. Open the file for editing, and add this one simple directive:
+#### Configuring the Child Theme
+
+If you are not familiar with how child themes work in WordPress, please take some
+time to learn about this from the WordPress codex before continuing:
+<a href="http://codex.wordpress.org/Child_Themes" target="_blank">Child Theme</a>
+
+1. Look in the `my-child-theme` theme's root directory called: `config`.
+
+		my-child-theme/config/
+
+1. Open the file called `infinity.ini` in the config directory:
+
+		my-child-theme/config/infinity.ini
+
+1. You will see there is only one directive:
 
 		parent_theme = "infinity"
 
-1. Save and close the ini file.
+   This is how you tell Infinity which theme is the parent of the `my-child-theme` theme,
+   in this case `infinity`.
 
-> Done! That's all there is to it to enable Infinity in your Theme.
+1. Now open the `style.css` file in the `my-child-theme` theme and modify the theme name
+   and description to whatever you like. We are going to call ours "My Child Theme"
 
-### Does your theme look like this?
+1. Also in `style.css` you will notice that the `Template` is set as follows
 
-![Example](infinity://admin:image/docs/setup_theme.jpg "Infinity Enabled")
+		Template: infinity
 
-### Setting up Child Themes
+   Take a moment to absorb this very important detail:
 
-Once you have successfully empowered your theme with Infinity, you are ready to
-create new theme options and use the scheme to create an infinite number of child
-themes based on your Infinity powered theme.
+   **Every child, grandchild, great-grandchild and so on MUST have the
+   `Template` set to `infinity`.**
 
-The easiest and quickest way to extend your Infinity powered theme is to create a
-<a href="http://codex.wordpress.org/Child_Themes" target="_blank">Child Theme</a> that
-loads the templates from your theme. This is very easy to do, and it pretty much
-a repeat of the initial setup:
+#### Installing the Child Theme
 
-1. Create a new directory in the `wp-content/themes/` directory.
+1. Upload the `my-child-theme` directory to the `wp-content/themes/` directory.
 
 		wp-content/themes/my-child-theme
 
-1. *Create* or *Copy* over the `config` directory to the new theme as well.
+1. If you are running a multi-site setup, be sure to enable the new theme from the
+   network admin dashboard.
 
-		wp-content/themes/my-child-theme/config
+1. Activate the "My Child Theme" and you are done!
 
-1. Open up or create the `infinity.ini` file:
+### Grandchild Themes
 
-		wp-content/themes/my-child-theme/config/infinity.ini
+Once you have Infinity configured with a single child theme, you are ready to create an
+infinite number of child themes, if you so desire.
 
-   Change the `parent_theme` line to the name of your parent theme:
+#### Special Requirements of Grandchild Themes
 
-		parent_theme = "twentyten"
+1. Any theme hierarchy which is **three or more** deep (including `infinity`)
+   must use some custom template tags in order for the template inheritance to work properly.
 
-	> This tells Infinity to load the templates from your Infinity powered parent theme
-	(in our case Twenty Ten).
+	> Full documentation for this can be found here:
+	  [Templating](infinity://admin:doc/install_tpls)
 
-1. Create a new `style.css`, or copy over `style.css` from your parent theme and modify it
-   as needed.
+1. Setting up a grandchild theme is identical to setting up a child theme except for one thing,
+   the `parent_theme` directive should be set to the theme you want to inherit from.
 
-> You now have a "grandchild theme" that inherits from **two** themes, its parent (Twenty Ten),
-and its grandparent (Infinity).
+   **DO NOT set the Template setting in `style.css` to the theme you want to inherit from.**
 
-### Special Template Requirements
+   The `Template` setting in style.css should **ALWAYS** be `infinity`.
 
-Any theme hierarchy which is **three or more** deep, including Infinity,
-must use some custom template tags in order for the template inheritance to work properly.
+#### Grandchild Theme Example
 
-> Full documentation for this can be found here:
-[Templating](infinity://admin:doc/install_tpls)
+1. Create a **new copy** of the `infinity-skeleton` directory. For the purposes of our example
+   we are going to name this new theme `my-grandchild-theme`.
+
+1. Open up the `infinity.ini` file:
+
+		my-grandchild-theme/config/infinity.ini
+
+   Change the `parent_theme` line to the name of the theme you want to inherit from:
+
+		parent_theme = "my-child-theme"
+
+	> This tells Infinity to load the templates from your Infinity child theme
+	  which we created and configured early in this document.
+
+1. Now open the `style.css` file in the `my-grandchild-theme` theme and modify the theme name
+   and description to whatever you like. We are going to call ours "My Grandchild Theme"
+
+1. DO NOT edit the `Template` setting in `style.css`. It should **ALWAYS** be `infinity`.
+
+> You now have a grandchild theme that inherits from **two** themes, its parent `my-child-theme`,
+and its grandparent `infinity`.
+
+#### Installing the Grandchild Theme
+
+1. Upload the `my-grandchild-theme` directory to the `wp-content/themes/` directory.
+
+		wp-content/themes/my-grandchild-theme
+
+1. If you are running a multi-site setup, be sure to enable the new theme from the
+   network admin dashboard.
+
+1. Activate the "My Grandchild Theme" and you are done!
+
+### Going Way Deep
+
+The only limits of Infinity's powerful scheme architecture is the limits of your imagination
+(and your server's CPU power).
+
+#### Deep Theme Ancestories
+
+Infinity supports Infinite theme ancestories (hence the name). Simply follow the instructions
+for creating a grandchild theme, taking care to set the `parent_theme` directive to the
+theme which you wish to inherit from
+
+#### Family Tree Ancestories
+
+Yes, you can use Infinity to create "trees" of themes. In fact, this is its most powerful
+feature for use in multi-site setups.
