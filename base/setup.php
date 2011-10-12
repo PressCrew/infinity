@@ -198,8 +198,7 @@ function infinity_base_superfish_list_item( $args, $output = true )
 	$defaults = array(
 		'id' => null,
 		'title' => null,
-		'description' => null,
-		'close_item' => false,
+		'close_item' => true,
 		'li_id' => null,
 		'li_classes' => array(),
 		'a_id' => null,
@@ -221,16 +220,45 @@ function infinity_base_superfish_list_item( $args, $output = true )
 	if ( empty( $li_id ) ) {
 		$li_id = 'menu-item-' . $id;
 	}
+	
+	// list attributes
+	$attr_li[] = sprintf( 'id="%s"', esc_attr( $li_id ) );
 
+	if ( count( $li_classes ) ) {
+		$attr_li[] = sprintf( 'class="%s"', esc_attr( implode( ' ', $li_classes ) ) );
+	}
+
+	// anchor attributes
+	$attr_anchor = array();
+
+	if ( $a_id ) {
+		$attr_anchor[] = sprintf( 'id="%s"', esc_attr( $a_id ) );
+	}
+	if ( count( $a_classes ) ) {
+		$attr_anchor[] = sprintf( 'class="%s"', esc_attr( implode( ' ', $a_classes ) ) );
+	}
+	if ( $a_href ) {
+		$attr_anchor[] = sprintf( 'href="%s"', esc_attr( $a_href ) );
+	}
+	if ( $a_title ) {
+		$attr_anchor[] = sprintf( 'title="%s"', esc_attr( $a_title ) );
+	}
+	if ( $a_target ) {
+		$attr_anchor[] = sprintf( 'target="%s"', esc_attr( $a_target ) );
+	}
+	if ( $a_rel ) {
+		$attr_anchor[] = sprintf( 'rel="%s"', esc_attr( $a_rel ) );
+	}
+
+	// turn on output buffering if we are returning a string
 	if ( !$output ) {
 		ob_start();
 	}
 
 	// render the list item ?>
-	<li id="<?php print esc_attr( $li_id ) ?>" class="<?php print esc_attr( implode( ' ', $li_classes ) ) ?>">
-		<span><?php print esc_html( $description ) ?></span>
+	<li <?php print implode( ' ', $attr_li ) ?>>
 		<?php print $a_before ?>
-		<a href="<?php print esc_attr( $a_href ) ?>" id="<?php print esc_attr( $a_id ) ?>" class="<?php print esc_attr( implode( ' ', $a_classes ) ) ?>" title="<?php print esc_attr( $a_title ) ?>" target="<?php print esc_attr( $a_target ) ?>" rel="<?php print esc_attr( $a_rel ) ?>">
+		<a <?php print implode( ' ', $attr_anchor ) ?>>
 			<?php print $a_open ?>
 			<span><?php print esc_html( $title ) ?></span>
 			<?php print $a_close ?>
@@ -239,8 +267,8 @@ function infinity_base_superfish_list_item( $args, $output = true )
 	<?php if ( $close_item ): ?>
 	</li>
 	<?php endif; ?>
-	<?php
 
+	<?php
 	if ( !$output ) {
 		return ob_get_clean();
 	}

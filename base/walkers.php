@@ -43,7 +43,6 @@ class Infinity_Base_Walker_Nav_Menu extends Walker_Nav_Menu
 				array(
 					'id' => $item->ID,
 					'title' => apply_filters( 'the_title', $item->title, $item->ID ),
-					'description' => $item->description,
 					'close_item' => false,
 					'li_classes' => $nav_classes,
 					'a_title' => $item->attr_title,
@@ -84,6 +83,11 @@ class Infinity_Base_Walker_Page_Menu extends Walker_Page
 	 */
 	function start_el(&$output, $page, $depth, $args, $current_page)
 	{
+		// need the menu item classes
+		$classes[] = 'menu-item';
+		$classes[] = 'menu-item-type-post_type';
+		$classes[] = 'menu-item-object-page';
+
 		// our custom output
 		$output .=
 			infinity_base_superfish_list_item(
@@ -91,7 +95,7 @@ class Infinity_Base_Walker_Page_Menu extends Walker_Page
 					'id' => $page->ID,
 					'title' => apply_filters( 'the_title', $page->post_title, $page->ID ),
 					'close_item' => false,
-					'li_classes' => apply_filters( 'page_css_class', array(), $page ),
+					'li_classes' => $classes,
 					'a_title' => $page->post_title,
 					'a_target' => $args->target,
 					'a_rel' => $args->rel,
