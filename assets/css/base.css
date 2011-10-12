@@ -260,7 +260,7 @@ body {
     z-index: 1;
 }
 #main-menu-wrap {
-    top: 34%;
+    top: 43%;
     float: right;
     right: 20px;
     padding: 5px;
@@ -280,7 +280,7 @@ body {
 /* ========== */
 
 #header {
-    height: 120px;
+    height: 200px;
     position: relative;
 }
 #site-description {
@@ -295,9 +295,9 @@ body {
 h1#site-title {
     font-size: 26px;
     line-height: 180%;
-    position: absolute;
-    top: 11%;
     padding-left: 20px;
+    position: absolute;
+    top: 35%;
 }
 div#site-title {
     font-size: 26px;
