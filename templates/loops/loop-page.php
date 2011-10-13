@@ -24,15 +24,15 @@
 				edit_post_link(' ✍','',' ');
 			?>
 		</h1>
+		<?php
+				do_action( 'open_loop_page' );
+		?>
 		<!-- show page thumb -->
 		<?php
 		infinity_get_template_part( 'templates/parts/post-thumbnail');	
 		?>	
 		<!-- the post -->
 		<div class="post" id="post-<?php the_ID(); ?>">
-			<?php
-				do_action( 'open_loop_page' );
-			?>
 			<div class="entry">
 				<?php
 					the_content( __( '<p class="serif">Read the rest of this page &rarr;</p>', infinity_text_domain ) );

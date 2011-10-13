@@ -845,6 +845,7 @@ h1#tag-title span { color: #555 }
     position: relative;
 }
 #comments {
+    margin-top: 20px;
     border-top: 1px solid rgba(0,0,0,0.07);
     position: relative;
 }

@@ -20,13 +20,13 @@
 ?>
 			<!-- the post -->
 			<div class="post" id="post-<?php the_ID(); ?>">
-				<?php
-					do_action( 'open_loop_single' );
-				?>
 				<div class="post-content">
 					<h1 class="posttitle">
 						<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', infinity_text_domain ) ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a>
 					</h1>
+					<?php
+					do_action( 'open_loop_single' );
+					?>
 					<?php
 						infinity_get_template_part( 'templates/parts/post-meta-top');	
 					?>
@@ -72,6 +72,9 @@
 							do_action( 'close_loop_post_meta_data_bottom' );
 							?>
 						</p>
+						<?php
+						do_action( 'close_loop_single' );
+						?>
 						<?php
 							wp_link_pages( array(
 								'before' => __( '<p><strong>Pages:</strong> ', infinity_text_domain ),
