@@ -751,7 +751,7 @@ ul.page-numbers {
     margin-bottom: 20px;
 }
 ul.page-numbers li { display: inline }
-.post .pagination {
+.pagination {
     border-bottom: 1px solid #EAEAEA;
     color: #888888;
     font-size: 12px;
