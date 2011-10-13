@@ -25,14 +25,14 @@
 			?>
 			<!-- post-content -->
 			<div class="post-content">
-				<?php
-					do_action( 'open_loop_post_content' );
-				?>
 				<!-- post title -->
 				<h2 class="posttitle">
 					<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', infinity_text_domain ) ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a>
 					<?php edit_post_link(' ✍','',' ');?>
 				</h2>
+				<?php
+					do_action( 'open_loop_post_content' );
+				?>
 				<?php
 				infinity_get_template_part( 'templates/parts/post-meta-top');	
 				?>				
@@ -60,7 +60,6 @@
 				<?php
 					infinity_get_template_part( 'templates/parts/post-meta-bottom');	
 				?>
-				
 				<?php
 					do_action( 'close_loop_post_content' );
 				?>
