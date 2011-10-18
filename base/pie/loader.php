@@ -121,6 +121,7 @@ final class Pie_Easy_Loader extends Pie_Easy_Base
 		'base' =>
 			array(
 				'component', 'componentable',
+				'exportable',
 				'factory',
 				'policy', 'policeable',
 				'registry', 'renderer' ),
