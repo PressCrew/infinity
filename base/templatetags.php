@@ -74,11 +74,18 @@ function infinity_base_sidebars()
 {
 		if ( is_page() ) {
 			global $post;
-			if ( function_exists('bp_is_member') && bp_is_member() ) {
+			if ( function_exists('bp_is_page') && bp_is_user() ) {
 				if ( is_active_sidebar( 'member-sidebar' ) ) {
 					dynamic_sidebar( 'member-sidebar' );
 				} else { ?>
 				<div class="widget"><h4>BP Member Sidebar.</h4>
+				<a href="<?php echo home_url( '/'  ); ?>wp-admin/widgets.php" title="Add Widgets">Add Widgets</a></div><?php
+				}
+			} elseif ( function_exists('bp_is_page') && bp_is_page(BP_MEMBERS_SLUG) ) {
+                if ( is_active_sidebar( 'member-sidebar' ) ) {
+                    dynamic_sidebar( 'member-sidebar');
+				} else { ?>
+				<div class="widget"><h4>BP Members Sidebar.</h4>
 				<a href="<?php echo home_url( '/'  ); ?>wp-admin/widgets.php" title="Add Widgets">Add Widgets</a></div><?php
 				}
            } elseif ( function_exists('bp_is_page') && bp_is_page(BP_GROUPS_SLUG) ) {
@@ -102,21 +109,21 @@ function infinity_base_sidebars()
 				<div class="widget"><h4>BP Blogs Sidebar.</h4>
 				<a href="<?php echo home_url( '/'  ); ?>wp-admin/widgets.php" title="Add Widgets">Add Widgets</a></div><?php
 				}
-			} elseif( is_single() ) {
-				if ( is_active_sidebar( 'single-sidebar' ) ) {
-					dynamic_sidebar( 'single-sidebar');
+			} elseif( function_exists('bp_is_page') && bp_is_page(BP_ACTIVITY_SLUG) ) {
+				if ( is_active_sidebar( 'activity-sidebar' ) ) {
+					dynamic_sidebar( 'activity-sidebar');
 				} else { ?>
-				<div class="widget"><h4>Single Posts Sidebar.</h4>
+				<div class="widget"><h4>Activity Sidebar</h4>
 				<a href="<?php echo home_url( '/'  ); ?>wp-admin/widgets.php" title="Add Widgets">Add Widgets</a></div><?php
 				}
 			} elseif( is_front_page() ) {
-				if ( is_active_sidebar( 'activity-sidebar' ) ) {
-					dynamic_sidebar( 'activity-sidebar' );
+				if ( is_active_sidebar( 'home-sidebar' ) ) {
+					dynamic_sidebar( 'home-sidebar' );
 				} else { ?>
 				<div class="widget"><h4>Home Sidebar.</h4>
 				<a href="<?php echo home_url( '/'  ); ?>wp-admin/widgets.php" title="Add Widgets">Add Widgets</a></div><?php
 				}
-			} else {
+			} elseif ( is_page() ) {
 				if ( is_active_sidebar( 'page-sidebar' ) ) {
 					dynamic_sidebar( 'page-sidebar');
 				} else { ?>
