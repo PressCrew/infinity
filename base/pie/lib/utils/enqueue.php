@@ -183,56 +183,6 @@ final class Pie_Easy_Enqueue extends Pie_Easy_Base
 	}
 
 	/**
-	 * Enqueue all stylesheets in a directory
-	 *
-	 * @param string $dir Absolute path the to the directory
-	 * @param string $uri URI of the directory
-	 * @param string $prefix A prefix for the enqueued handle
-	 * @param string $version
-	 *
-	public function auto_styles( $dir, $uri, $prefix = null, $version = null )
-	{
-		// get all css files from dir
-		$files = Pie_Easy_Files::list_filtered( $dir, '/\.css$/' );
-
-		// enqueue each one
-		foreach ( $files as $file ) {
-			wp_enqueue_style(
-				$prefix . str_replace( '.css', '', $file),
-				sprintf( '%s/%s', $uri, $file ),
-				null,
-				$version
-			);
-		}
-	}
-	*/
-
-	/**
-	 * Enqueue all javascript source files in a directory
-	 *
-	 * @param string $dir Absolute path the to the directory
-	 * @param string $uri URI of the directory
-	 * @param string $prefix A prefix for the enqueued handle
-	 * @param string $version
-	 *
-	public function auto_scripts( $dir, $uri, $prefix = null, $version = null )
-	{
-		// get all css files from dir
-		$files = Pie_Easy_Files::list_filtered( $dir, '/\.js$/' );
-
-		// enqueue each one
-		foreach ( $files as $file ) {
-			wp_enqueue_script(
-				$prefix . str_replace( '.js', '', $file),
-				sprintf( '%s/%s', $uri, $file ),
-				array( 'jquery' ),
-				$version
-			);
-		}
-	}
-	*/
-
-	/**
 	 * Call enqueue styles action
 	 *
 	 * Never call this manually unless you really know what you are doing!
@@ -376,52 +326,6 @@ final class Pie_Easy_Enqueue extends Pie_Easy_Base
 				// put in footer group
 				$wp_scripts->add_data( $handle, 'group', 1 );
 			}
-		}
-	}
-
-	/**
-	 * Override registered scripts with another script
-	 *
-	 * @param WP_Scripts $wp_scripts
-	 * @param string $handle
-	 * @param string $src
-	 * @param array $deps
-	 * @param string $ver
-	 * @param boolean $in_footer
-	 * @param integer $group
-	 */
-	private function override_script( WP_Scripts $wp_scripts, $handle, $src, $deps = array(), $ver = false, $in_footer = false, $group = null )
-	{
-		// enqueue when done?
-		$do_enqueue = false;
-
-		// check if handle queued already
-		if ( $wp_scripts->query( $handle, 'queue' ) ) {
-			$wp_scripts->dequeue( $handle );
-			$do_enqueue = true;
-		}
-
-		// get dependancy for handle
-		$dependancy = $wp_scripts->query( $handle );
-
-		// existing dependancy?
-		if ( $dependancy instanceof _WP_Dependency ) {
-			// tweak it
-			$dependancy->src = $src;
-			$dependancy->deps = $deps;
-			$dependancy->ver = $ver;
-		} else {
-			// register it
-			$wp_scripts->add( $handle, $src, $deps, $ver, $in_footer );
-			// handle group
-			if ( $group ) {
-				$wp_scripts->add_data( $handle, 'group', $group );
-			}
-		}
-
-		// enqueue it?
-		if ( $do_enqueue ) {
-			$wp_scripts->enqueue( $handle );
 		}
 	}
 }
