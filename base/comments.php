@@ -47,7 +47,7 @@ if (!function_exists("custom_comment"))
 					<?php if ($comment->comment_approved == '0'): ?>
 						<p class='unapproved'><?php _e('Your comment is awaiting moderation.', infinity_text_domain); ?></p>
 					<?php endif; ?>
-					<div class="reply button orange">
+					<div class="reply button">
 						<?php comment_reply_link(array_merge( $args, array('depth' => $depth, 'max_depth' => $args['max_depth']))) ?>
 					</div><!-- /.reply -->
 				</div><!-- /comment-entry -->
