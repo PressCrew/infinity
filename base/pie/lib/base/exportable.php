@@ -1,6 +1,6 @@
 <?php
 /**
- * PIE API: base policeable class file
+ * PIE API: base exportable class file
  *
  * @author Marshall Sorenson <marshall@presscrew.com>
  * @link http://infinity.presscrew.com/
@@ -12,24 +12,19 @@
  */
 
 /**
- * Make policy implementation easy
- *
- * Custom implementations are handled via policy objects. Any object which needs access to
- * the implementing policy must implement this interface.
+ * Make exporting arbitrary data for objects easy
  *
  * @package PIE
  * @subpackage base
  */
-interface Pie_Easy_Policeable
+interface Pie_Easy_Exportable
 {
 	/**
-	 * Return the policy
+	 * Return a string of data to export
 	 *
-	 * @param Pie_Easy_Policy $policy
-	 * @return Pie_Easy_Policy
+	 * @return string
 	 */
-	public function policy( Pie_Easy_Policy $policy = null );
-
+	public function export();
 }
 
 ?>
