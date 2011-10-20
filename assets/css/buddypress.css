@@ -1,6 +1,7 @@
 /* ============================== */
 /* ! BuddyPress Specific Buttons  */
 /* ============================== */
+
 .activity-list .activity-header a:first-child,
 span.highlight,
 span.activity,
@@ -12,23 +13,7 @@ div#message p,
     text-decoration: none;
     font: bold 11px/12px HelveticaNeue,Arial;
     padding: 3px 6px;
-    color: #555;
-    border: 1px solid #dedede;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    margin-bottom: 2px;
-    background: #f5f5f5;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f9f9', endColorstr='#f0f0f0'); /*  IE */
-    background: -webkit-gradient(linear, left top, left bottom, from(#f9f9f9), to(#f0f0f0)); /*  WebKit */
-    background: -moz-linear-gradient(top,  #f9f9f9, #f0f0f0);
-    border-color: #dedede #d8d8d8 #d3d3d3;
-    color: #555;
-    text-shadow: none;
-    -webkit-box-shadow: 0 1px 1px #eaeaea, inset 0 1px 0 #fbfbfb;
-    -moz-box-shadow: 0 1px 1px #eaeaea, inset 0 1px 0 #fbfbfb;
-    box-shadow: 0 1px 1px #eaeaea, inset 0 1px 0 #fbfbfb;
-}
+ }
 
 
 div#message p {
@@ -45,9 +30,6 @@ span.activity {
     font-size: 12px;
     padding: 7px 12px;
 }
-.activity-list:hover .activity-header a:first-child,
-span.highlight:hover,
-.generic-button:hover { background: #EFEFEF }
 div#sidebar-me h4 {
     font-size: 14px;
     font-style: italic;
@@ -56,44 +38,6 @@ div#sidebar-me h4 {
 }
 div#sidebar ol,div#sidebar ul {
     display: inherit;
-}
-#group-creation-next,
-.not_friends,
-input#send {
-    background: #b7d770;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#cae285', endColorstr='#9fcb57'); /*  IE */
-    background: -webkit-gradient(linear, left top, left bottom, from(#cae285), to(#9fcb57)); /*  WebKit */
-    background: -moz-linear-gradient(top,  #cae285, #9fcb57);
-    border-color: #adc671 #98b65b #87aa4a;
-    color: #5d7731;
-    text-shadow: 0 1px 0 #cfe5a4;
-    -webkit-box-shadow: 0 1px 1px #d3d3d3, inset 0 1px 0 #d7e9a4;
-    -moz-box-shadow: 0 1px 1px #d3d3d3, inset 0 1px 0 #d7e9a4;
-    box-shadow: 0 1px 1px #d3d3d3, inset 0 1px 0 #d7e9a4;
-}
-.not_friends a { color: #5d7731 }
-.is_friend a {
-color: #FF4618;
-}
-div.action .requested { color: #999 }
-div.action .pending {
-    background: none repeat scroll 0 0 #EFEFEF;
-    border: 1px solid #DDDDDD;
-    box-shadow: none;
-    text-shadow: none;
-}
-#group-creation-next:hover,
-.not_friends:hover,
-input#send:hover {
-    background: #b9d972;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#b8d872', endColorstr='#b9d972'); /*  IE */
-    background: -webkit-gradient(linear, left top, left bottom, from(#b8d872), to(#b9d972)); /*  WebKit */
-    background: -moz-linear-gradient(top,  #b8d872, #b9d972);
-    border-color: #8bb14d #83a648 #7d9e45;
-    text-shadow: 0 1px 0 #d5e8aa;
-    -webkit-box-shadow: 0 1px 1px #d5d5d5, inset 0 1px 0 #cae295;
-    -moz-box-shadow: 0 1px 1px #d5d5d5, inset 0 1px 0 #cae295;
-    box-shadow: 0 1px 1px #d5d5d5, inset 0 1px 0 #cae295;
 }
 .activity-read-more {
 margin-left: 5px;
@@ -205,7 +149,6 @@ ul.item-list li img.avatar {
 ul.item-list li div.item-title,
 ul.item-list li h4 {
     font-weight: normal;
-    font-size: 14px;
     width: 75%;
     margin: 0;
 }
@@ -241,7 +184,6 @@ div.item-list-tabs {
     border-bottom: 1px solid #000000;
     border-top: 1px solid #000000;
     clear: left;
-    color: #FFFFFF;
     font-weight: bold;
     height: 40px;
     overflow: hidden;
@@ -571,6 +513,11 @@ div#invite-list {
 }
 /* > Data Tables
 -------------------------------------------------------------- */
+.profile-fields {
+    border: 0 none;
+    font-size: inherit;
+    margin-left: -10px;
+}
 table tr td.thread-info p { margin: 0 }
 table tr td.thread-info p.thread-excerpt {
     color: #888;
@@ -801,6 +748,14 @@ body.activity-permalink .activity-list li .activity-header > p {
     color: #aaa;
     text-decoration: underline;
 }
+a.bp-primary-action span, #reply-title small a span {
+    background: none repeat scroll 0 0 #656565;
+    border-radius: 3px 3px 3px 3px;
+    color: #EFEFEF;
+    font-size: 90%;
+    margin-left: 2px;
+    padding: 0 5px;
+   }
 .activity-list .activity-content span.activity-header-meta a:hover {
     color: inherit;
     text-decoration: none;
@@ -851,41 +806,7 @@ div.activity-meta {
 .activity-list div.activity-meta a {
     font-size: 11px;
 	padding: 5px 8px;
-}
-.activity-list div.activity-meta a:hover {
-    border-top: 1px solid #aaa;
-    background: #eee;
-    background: -moz-linear-gradient(top, rgba(255,255,255,.3) 0%, rgba(0,0,0,.3) 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,.3)), color-stop(100%,rgba(0,0,0,.3)));
-    background: -webkit-linear-gradient(top, rgba(255,255,255,.3) 0%,rgba(0,0,0,.3) 100%);
-    background: -o-linear-gradient(top, rgba(255,255,255,.3) 0%,rgba(0,0,0,.3) 100%);
-    background: -ms-linear-gradient(top, rgba(255,255,255,.3) 0%,rgba(0,0,0,.3) 100%);
-    background: linear-gradient(top, rgba(255,255,255,.3) 0%,rgba(0,0,0,.3) 100%);
-    border-left: 1px solid #aaa;
-    color: #222;
-    border: 1px solid #888;
-}
-
-.activity-list div.activity-meta a.acomment-reply {
-	background: #fecc5f;
-	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#feda71', endColorstr='#febb4a'); /*  IE */
-	background: -webkit-gradient(linear, left top, left bottom, from(#feda71), to(#febb4a)); /*  WebKit */
-	background: -moz-linear-gradient(top,  #feda71, #febb4a);
-	border-color: #f5b74e #e5a73e #d6982f;
-	color: #996633;
-	text-shadow: 0 1px 0 #fedd9b;
-}
-div.activity-meta a:focus { outline: none }
-div.activity-meta a.acomment-reply:hover {
-	background: #fecb5e;
-	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#fec354', endColorstr='#fecd61'); /*  IE */
-	background: -webkit-gradient(linear, left top, left bottom, from(#fec354), to(#fecd61)); /*  WebKit */
-	background: -moz-linear-gradient(top,  #fec354, #fecd61);
-	border-color: #d29a3a #cc9436 #c89133;
-	text-shadow: 0 1px 0 #fee1a0;
-	-webkit-box-shadow: 0 1px 1px #d4d4d4, inset 0 1px 0 #fed17e;
-	-moz-box-shadow: 0 1px 1px #d4d4d4, inset 0 1px 0 #fed17e;
-	box-shadow: 0 1px 1px #d4d4d4, inset 0 1px 0 #fed17e;
+	color: #555;
 }
 div.activity-comments {
     position: relative;
@@ -1097,151 +1018,157 @@ ul.item-list li img.avatar {
     margin-left: 0;
     padding: 3px;
 }
+body, body.wp-admin {
+    padding-top: 25px;
+}
 #wp-admin-bar {
+    font-size: 11px;
+    height: 25px;
+    left: 0;
     position: fixed;
     top: 0;
-    left: 0;
-    z-index: 99;
-    height: 25px;
-    font-size: 11px;
     width: 100%;
     z-index: 1000;
 }
 #wp-admin-bar .padder {
-    position: relative;
-    padding: 0;
-    width: 100%;
-    margin: 0 auto;
-    background: rgb(78,83,86);
-    background: rgb(51,51,51);
-    background: -moz-linear-gradient(top, rgba(51,51,51,1) 0%, rgba(17,17,17,1) 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(51,51,51,1)), color-stop(100%,rgba(17,17,17,1)));
-    background: -webkit-linear-gradient(top, rgba(51,51,51,1) 0%,rgba(17,17,17,1) 100%);
-    background: -o-linear-gradient(top, rgba(51,51,51,1) 0%,rgba(17,17,17,1) 100%);
-    background: -ms-linear-gradient(top, rgba(51,51,51,1) 0%,rgba(17,17,17,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#333333', endColorstr='#111111',GradientType=0 );
-    background: linear-gradient(top, rgba(51,51,51,1) 0%,rgba(17,17,17,1) 100%);
+    background: #444;
     height: 25px;
+    margin: 0 auto;
+    padding: 0;
+    position: relative;
+    width: 100%;
 }
 body#bp-default #wp-admin-bar .padder {
-    min-width: 960px;
     max-width: 1250px;
-}
-body#bp-default.activity-permalink #wp-admin-bar .padder {
     min-width: 960px;
-    max-width: 960px;
 }
-#wp-admin-bar * { z-index: 999 }
+#wp-admin-bar * {
+    z-index: 999;
+}
 #wp-admin-bar div#admin-bar-logo {
+    left: 10px;
     position: absolute;
     top: 5px;
-    left: 10px;
 }
-#wp-admin-bar a img { border: none }
+#wp-admin-bar a img {
+    border: medium none;
+}
 #wp-admin-bar li {
-    list-style: none;
+    line-height: 100%;
+    list-style: none outside none;
     margin: 0;
     padding: 0;
-    line-height: 100%;
     text-align: left;
 }
 #wp-admin-bar li a {
-    padding: 7px 15px 7px 15px;
-    color: #eee;
-    text-decoration: none;
+    color: #EEEEEE;
     font-size: 11px;
+    padding: 7px 15px;
+    text-decoration: none;
 }
-#wp-admin-bar li.alt { border: none }
-#wp-admin-bar li.no-arrow a { padding-right: 15px }
-#wp-admin-bar ul li ul li a span { display: none }
-#wp-admin-bar li:hover,
-#wp-admin-bar li.hover { position: static }
+#wp-admin-bar li.alt {
+    border: medium none;
+}
+#wp-admin-bar li.no-arrow a {
+    padding-right: 15px;
+}
+#wp-admin-bar ul li ul li a span {
+    display: none;
+}
+#wp-admin-bar li:hover, #wp-admin-bar li.hover {
+    position: static;
+}
 #admin-bar-logo {
+    color: #FFFFFF;
     float: left;
-    font-weight: bold;
     font-size: 11px;
+    font-weight: bold;
+    margin: 0;
     padding: 5px 8px;
-    margin: 0;
     text-decoration: none;
-    color: #fff;
 }
-body#bp-default #admin-bar-logo { padding: 2px 8px }
-/*******************/
+body#bp-default #admin-bar-logo {
+    padding: 2px 8px;
+}
 #wp-admin-bar ul {
-    /* all lists */
-    margin: 0;
-    list-style: none;
-    line-height: 1;
     cursor: pointer;
     height: auto;
+    line-height: 1;
+    list-style: none outside none;
+    margin: 0;
     padding: 0;
 }
 #wp-admin-bar ul li {
-    /* all list items */
-    padding: 0;
     float: left;
+    padding: 0 11px 0 0;
     position: relative;
-    background: url( ../images/admin-menu-arrow.gif ) 88% 53% no-repeat;
-    padding-right: 11px;
 }
 #wp-admin-bar ul li.no-arrow {
-    background: none;
+    background: none repeat scroll 0 0 transparent;
     padding-right: 0;
 }
-#wp-admin-bar ul li ul li { background-image: none }
+#wp-admin-bar ul li ul li {
+    background-image: none;
+}
 #wp-admin-bar ul li.align-right {
     position: absolute;
     right: 0;
 }
-#wp-admin-bar ul li a { display: block }
-#wp-admin-bar ul.main-nav li:hover,
-#wp-admin-bar ul.main-nav li.sfhover,
-#wp-admin-bar ul.main-nav li ul li.sfhover { background-color: #333 }
-/* second-level lists */
+#wp-admin-bar ul li a {
+    display: block;
+}
+#wp-admin-bar ul.main-nav li:hover, #wp-admin-bar ul.main-nav li.sfhover, #wp-admin-bar ul.main-nav li ul li.sfhover {
+    background-color: #333333;
+}
 #wp-admin-bar ul li ul {
-    position: absolute;
-    width: 185px;
+    background: none repeat scroll 0 0 #333333;
+    border: 1px solid #222222;
+    border-radius: 0 0 3px 3px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     left: -999em;
     margin-left: 0;
-    background: #333;
-    border: 1px solid #222;
-    -moz-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius-topleft: 0;
-    -webkit-border-top-left-radius: 0;
-    -moz-border-radius-topright: 0;
-    -webkit-border-top-right-radius: 0;
+    position: absolute;
+    width: 185px;
 }
-#wp-admin-bar ul li > ul { border-top: none }
-#wp-admin-bar ul li ul a { color: #eee }
+#wp-admin-bar ul li > ul {
+    border-top: medium none;
+}
+#wp-admin-bar ul li ul a {
+    color: #EEEEEE;
+}
 #wp-admin-bar ul li ul li {
     float: left;
-    width: 174px;
     margin: 0;
+    width: 174px;
 }
-#wp-admin-bar ul li ul li:hover a { color: #fff }
-#wp-admin-bar ul li div.admin-bar-clear { clear: both }
-#wp-admin-bar ul.main-nav li ul li:hover,
-#wp-admin-bar ul.main-nav li ul li.sfhover,
-#wp-admin-bar ul.main-nav li ul li.sfhover { background-color: #222 }
-/* third-and-above-level lists */
+#wp-admin-bar ul li ul li:hover a {
+    color: #FFFFFF;
+}
+#wp-admin-bar ul li div.admin-bar-clear {
+    clear: both;
+}
+#wp-admin-bar ul.main-nav li ul li:hover, #wp-admin-bar ul.main-nav li ul li.sfhover, #wp-admin-bar ul.main-nav li ul li.sfhover {
+    background-color: #222222;
+}
 #wp-admin-bar ul li ul ul {
+    border-radius: 3px 3px 3px 3px;
     margin: -25px 0 0 184px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
 }
-#wp-admin-bar ul li ul li:hover ul li a { color: #eee }
-#wp-admin-bar ul li ul li ul li:hover a { color: #fff }
-#wp-admin-bar ul li:hover ul,
-#wp-admin-bar ul li ul li:hover ul,
-#wp-admin-bar ul li.sfhover ul,
-#wp-admin-bar ul li ul li.sfhover ul { left: auto }
-#wp-admin-bar ul li.align-right:hover ul { right: 0 }
-#wp-admin-bar ul li:hover ul ul,
-#wp-admin-bar li.sfhover ul li ul { left: -999em }
-/* Menu item css */
+#wp-admin-bar ul li ul li:hover ul li a {
+    color: #EEEEEE;
+}
+#wp-admin-bar ul li ul li ul li:hover a {
+    color: #FFFFFF;
+}
+#wp-admin-bar ul li:hover ul, #wp-admin-bar ul li ul li:hover ul, #wp-admin-bar ul li.sfhover ul, #wp-admin-bar ul li ul li.sfhover ul {
+    left: auto;
+}
+#wp-admin-bar ul li.align-right:hover ul {
+    right: 0;
+}
+#wp-admin-bar ul li:hover ul ul, #wp-admin-bar li.sfhover ul li ul {
+    left: -999em;
+}
 #wp-admin-bar img.avatar {
     float: left;
     margin-right: 8px;
@@ -1251,16 +1178,17 @@ body#bp-default #admin-bar-logo { padding: 2px 8px }
     margin-left: 34px;
     padding: 0;
 }
-#wp-admin-bar ul.author-list li a { height: 17px }
-#wp-admin-bar ul li#bp-adminbar-notifications-menu a span {
-    padding: 0 6px;
-    margin-left: 2px;
-    background: #fff;
-    color: #000;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
+#wp-admin-bar ul.author-list li a {
+    height: 17px;
 }
+#wp-admin-bar ul li#bp-adminbar-notifications-menu a span {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-radius: 3px 3px 3px 3px;
+    color: #000000;
+    margin-left: 2px;
+    padding: 0 6px;
+}
+
 /*--------------------------------------------------------------
 Hello, this is the BuddyPress Responsive theme stylesheet
 

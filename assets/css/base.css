@@ -592,7 +592,7 @@ span.edit-link a { color: #999 }
 .wp-caption-text {
     font-style: italic;
     line-height: 17px;
-    margin: 0;
+    margin: 0 !important;
     padding: 0 4px 5px 0;
     font-size: 12px;
 }
@@ -730,6 +730,7 @@ margin-bottom: 25px;
 .post .alignright {
     margin-left: 15px;
     float: right;
+    margin-bottom: 15px;
 }
 .post .alignleft {
     margin-right: 15px;
