@@ -120,11 +120,16 @@ final class Pie_Easy_Loader extends Pie_Easy_Base
 	private static $pkgs = array(
 		'base' =>
 			array(
-				'component', 'componentable',
+				'component',
+				'componentable',
 				'exportable',
 				'factory',
-				'policy', 'policeable',
-				'registry', 'renderer' ),
+				'policy',
+				'policeable',
+				'recursable',
+				'registry',
+				'renderer'
+			),
 		'collections' =>
 			array( 'map', 'map_iterator', 'stack', 'stack_iterator' ),
 		'components' =>
