@@ -17,7 +17,9 @@
 <!--[if IE 8 ]>        <html lang="en" class="no-js ie8"> <![endif]-->
 <!--[if IE 9 ]>        <html lang="en" class="no-js ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html <?php language_attributes(); ?> class="no-js"> <!--<![endif]-->
-<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<?php
+	do_action( 'open_meta' );
+?>
 <?php
 	infinity_get_template_part( 'templates/parts/header-head');	
 ?>
