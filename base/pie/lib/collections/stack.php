@@ -148,6 +148,7 @@ class Pie_Easy_Stack
 	 *
 	 * @param mixed $item The item to be pushed into the stack
 	 * @param boolean $prepend Set to true to prepend item (base of stack)
+	 * @return Pie_Easy_Stack
 	 */
 	public function push( $item, $prepend = false )
 	{
@@ -158,6 +159,8 @@ class Pie_Easy_Stack
 		} else {
 			array_push( $this->data, $item );
 		}
+
+		return $this;
 	}
 
 	/**
