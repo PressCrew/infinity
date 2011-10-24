@@ -20,9 +20,23 @@ Pie_Easy_Loader::load( 'utils/files' );
  * @package PIE
  * @subpackage utils
  * @uses Pie_Easy_Export_Exception
+ * @property-read string $name
+ * @property-read string $ext
+ * @property-read string $path
+ * @property-read string $url
  */
 class Pie_Easy_Export extends Pie_Easy_Base
 {
+	/**
+	 * File name delimiter
+	 */
+	const FILE_NAME_DELIM = '-';
+
+	/**
+	 * File extension delimiter
+	 */
+	const FILE_EXT_DELIM = '.';
+
 	/**
 	 * Set to true once dir props have been populated
 	 *
@@ -59,6 +73,20 @@ class Pie_Easy_Export extends Pie_Easy_Base
 	static private $export_url;
 
 	/**
+	 * Name of the file (without extension)
+	 * 
+	 * @var string 
+	 */
+	private $name;
+
+	/**
+	 * The file extension
+	 *
+	 * @var string
+	 */
+	private $ext;
+
+	/**
 	 * Export file path
 	 *
 	 * @var string
@@ -73,11 +101,18 @@ class Pie_Easy_Export extends Pie_Easy_Base
 	private $url;
 
 	/**
-	 * Callback which will update the file's contents
+	 * Stack of objects to retrieve export data from
 	 *
-	 * @var string|array
+	 * @var Pie_Easy_Stack
 	 */
-	private $callback;
+	private $stack;
+
+	/**
+	 * Map of child instances of self
+	 *
+	 * @var Pie_Easy_Map
+	 */
+	private $children;
 
 	/**
 	 * Set to true the file has been updated
@@ -89,18 +124,27 @@ class Pie_Easy_Export extends Pie_Easy_Base
 	/**
 	 * Constructor
 	 *
-	 * @param string $filename Name of file to manage RELATIVE to export dir
-	 * @param string|array $callback Callback used to update file contents
+	 * @param string $name Name of file to manage RELATIVE to export dir
 	 */
-	public function __construct( $filename, $callback )
+	public function __construct( $name, $ext )
 	{
 		// make sure dir info is populated
 		$this->populate_dir_props();
 
+		// set primitives
+		$this->name = $name;
+
+		// set extension
+		$this->ext = $ext;
+
+		// format the complete file name
+		$filename = $this->name . self::FILE_EXT_DELIM . $this->ext;
+
 		// determine file path and url
 		$this->path = self::$export_dir . Pie_Easy_Files::path_build( $filename );
 		$this->url = self::$export_url . '/' . $filename;
-		$this->callback = $callback;
+		$this->stack = new Pie_Easy_Stack();
+		$this->children = new Pie_Easy_Map();
 	}
 
 	/**
@@ -108,6 +152,8 @@ class Pie_Easy_Export extends Pie_Easy_Base
 	public function __get( $name )
 	{
 		switch( $name ) {
+			case 'name':
+			case 'ext':
 			case 'path':
 			case 'url':
 				return $this->$name;
@@ -121,6 +167,8 @@ class Pie_Easy_Export extends Pie_Easy_Base
 	public function __isset( $name )
 	{
 		switch( $name ) {
+			case 'name':
+			case 'ext':
 			case 'path':
 			case 'url':
 				return isset( $this->$name );
@@ -164,6 +212,37 @@ class Pie_Easy_Export extends Pie_Easy_Base
 	}
 
 	/**
+	 * Get child export instance for name, create if necessary
+	 *
+	 * @param string $name
+	 * @return Pie_Easy_Export
+	 */
+	public function child( $name )
+	{
+		// already have this child?
+		if ( !$this->children->contains( $name ) ) {
+			// nope, create instance of self
+			$child = new self( $this->name . self::FILE_NAME_DELIM . $name, $this->ext );
+			// push onto children stack
+			$this->children->add( $name, $child );
+		}
+		
+		// return the child object
+		return $this->children->item_at( $name );
+	}
+
+	/**
+	 * Push an exportable object onto the stack
+	 *
+	 * @param Pie_Easy_Exportable $obj
+	 * @return Pie_Easy_Stack
+	 */
+	public function push( Pie_Easy_Exportable $obj )
+	{
+		return $this->stack->push( $obj );
+	}
+
+	/**
 	 * Write data to the file
 	 *
 	 * @param string $data
@@ -203,27 +282,38 @@ class Pie_Easy_Export extends Pie_Easy_Base
 	}
 
 	/**
-	 * Update the export file with result of callback execution
+	 * Update the export file
 	 *
 	 * @return boolean
 	 */
 	public function update()
 	{
-		// get result of callback
-		$result = call_user_func( $this->callback );
+		// result is null by default
+		$data = null;
+
+		// loop stack and append result of export method of each
+		foreach ( $this->stack as $exportable ) {
+			/* @var $exportable Pie_Easy_Exportable */
+			$data .= $exportable->export();
+		}
 
 		// any result?
-		if ( $result ) {
-			if ( $this->write( $result ) ) {
+		if ( !empty( $data ) ) {
+			if ( $this->write( $data ) ) {
 				$this->updated = true;
-				return true;
 			}
 		} else {
 			// no content to write, remove it
-			return $this->remove();
+			$this->remove();
 		}
 
-		return false;
+		// now try to update my children
+		if ( $this->children->count() ) {
+			// loop all and call update
+			foreach( $this->children as $child ) {
+				$child->update();
+			}
+		}
 	}
 
 	/**

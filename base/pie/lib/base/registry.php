@@ -47,16 +47,6 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 	private $components;
 
 	/**
-	 * @var Pie_Easy_Export
-	 */
-	private $export_css_file;
-
-	/**
-	 * @var Pie_Easy_Export
-	 */
-	private $export_js_file;
-
-	/**
 	 * Singleton constructor
 	 * 
 	 * @internal
@@ -365,117 +355,6 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 
 		return false;
 	}
-
-	/**
-	 * Export CSS markup from all registered component
-	 * that implement the styleable interface
-	 *
-	 * @return string
-	 */
-	public function export_css()
-	{
-		// css to return
-		$css = '';
-
-		// loop through for import rules
-		foreach ( $this->get_all() as $component ) {
-			// component must be supported
-			if ( $component->supported() ) {
-				// get import rules
-				$css .= $component->import_css();
-			}
-		}
-
-		// prettyfication
-		if ( $css ) {
-			$css .= "\n";
-		}
-
-		// loop through for inline rules
-		foreach ( $this->get_all() as $component ) {
-			// component must be supported
-			if ( $component->supported() ) {
-				// get inline rules
-				$css .= $component->export_css();
-			}
-		}
-
-		return $css;
-	}
-
-	/**
-	 * Return dynamic css object
-	 *
-	 * @return Pie_Easy_Export
-	 */
-	public function export_css_file()
-	{
-		if ( !$this->export_css_file instanceof Pie_Easy_Export ) {
-			$this->export_css_file =
-				new Pie_Easy_Export(
-					$this->policy()->get_handle() . '.css',
-					array( $this, 'export_css' )
-				);
-		}
-
-		return $this->export_css_file;
-	}
-
-	/**
-	 * Export javascript code from all registered component
-	 * that implement the scriptable interface
-	 *
-	 * @return string
-	 */
-	public function export_script()
-	{
-		// code to return
-		$code = '';
-
-		// loop through for code to import
-		foreach ( $this->get_all() as $component ) {
-			// component must be supported
-			if ( $component->supported() ) {
-				// get import rules
-				$code .= $component->import_script();
-			}
-		}
-
-		// prettyfication
-		if ( $code ) {
-			$code .= "\n";
-		}
-
-		// loop through all components
-		foreach ( $this->get_all() as $component ) {
-			// component must be supported
-			if ( $component->supported() ) {
-				// get code
-				$code .= $component->export_script();
-			}
-		}
-
-		return $code;
-	}
-	
-	/**
-	 * Return dynamic script object
-	 *
-	 * @return Pie_Easy_Export
-	 */
-	public function export_js_file()
-	{
-		if ( !$this->export_js_file instanceof Pie_Easy_Export ) {
-			$this->export_js_file =
-				new Pie_Easy_Export(
-					$this->policy()->get_handle() . '.js',
-					array( $this, 'export_script' )
-				);
-		}
-
-		return $this->export_js_file;
-	}
-
 }
 
 ?>

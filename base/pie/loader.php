@@ -178,9 +178,6 @@ final class Pie_Easy_Loader extends Pie_Easy_Base
 						'activity-intro',
 						'support'
 					),
-				'css-background',
-				'css-block',
-				'custom-css',
 				'default',
 				'gravatar',
 				'header-logo'
@@ -190,7 +187,7 @@ final class Pie_Easy_Loader extends Pie_Easy_Base
 				'category', 'categories', 'checkbox', 'colorpicker',
 				'css' =>
 					array(
-						'custom', 'repeat'
+						'custom'
 					),
 				'input', 'input-group',
 				'page', 'pages', 'post', 'posts',

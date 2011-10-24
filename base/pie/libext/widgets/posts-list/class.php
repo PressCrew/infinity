@@ -32,8 +32,8 @@ class Pie_Easy_Exts_Widgets_Posts_List
 		$this->add_capabilities( 'edit_posts' );
 
 		// requires cookie and nested sortable
-		$this->script()->add_dep( 'jquery-cookie' );
-		$this->script()->add_dep( 'jquery-ui-nestedsortable' );
+		$this->script()->admin()->add_dep( 'jquery-cookie' );
+		$this->script()->admin()->add_dep( 'jquery-ui-nestedsortable' );
 	}
 
 	/**

@@ -43,27 +43,46 @@ Unlike the standard solutions WordPress provides for custom headers and custom b
 we've integrated this functionality directly into the theme options panel, so your users do
 not have to switch between different pages in the dashboard.
 
+#### infinity-bp-support
+
+This feature enables BuddyPress support. If BuddyPress is not active it is silently ignored.
+
+#### infinity-bp-activity-intro
+
+This feature adds a a theme option for injecting content before the BuddyPress activity listing.
+
 #### infinity-custom-css
 
 This feature enables a custom CSS option in the theme options panel.
 
-> All of the values of registered options with the `type` of "css" are merged
+> All of the values of registered options with the `type` of "css/custom" are merged
 and sent to the browser by enqueueing a special export script. This is done automatically,
 there are no additional steps to take.
 
+#### infinity-base-styles
+
+This feature enables the base Infinity wireframe stylesheet required for the base templates.
+
+#### infinity-design-styles
+
+This feature enables the Infinity design stylesheet which makes Infinity look nice out of the box.
+
+#### infinity-header-layout
+
+This feature adds several options for customizing the look and feel of the site header.
+
 #### infinity-header-logo
 
-This feature enables a file upload option in the theme options panel for a custom logo.
+This feature adds a file upload option in the theme options panel for a custom logo.
+Some additional options for logo position and padding are also added.
 
-#### infinity-header-background
+#### infinity-main-menu-layout
 
-This feature enables a file upload option in the theme options
-panel for a custom header background image.
+This feature adds several options for customizing the look and feel of the site header.
 
-#### infinity-site-background
+#### infinity-body-layout
 
-This feature enables a file upload option in the theme options
-panel for a custom site background image.
+This feature adds several options for customizing the look and feel of the site body.
 
 #### infinity-post-gravatar
 

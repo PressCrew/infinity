@@ -22,7 +22,22 @@ Pie_Easy_Loader::load_ext( 'options/textarea' );
 class Pie_Easy_Exts_Options_Css_Custom
 	extends Pie_Easy_Exts_Options_Textarea
 {
-	// nothing custom yet, this is a pseudo interface
+	/**
+	 */
+	public function init_styles_dynamic()
+	{
+		// run parent FIRST!
+		parent::init_styles_dynamic();
+
+		// get value
+		$value = trim( $this->get() );
+
+		// did we get anything?
+		if ( !empty( $value ) ) {
+			// have to assume its valid CSS, add as string
+			$this->style()->add_string( $value );
+		}
+	}
 }
 
 ?>

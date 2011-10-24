@@ -111,6 +111,13 @@ abstract class Pie_Easy_Component
 	private $__script__;
 
 	/**
+	 * A map of exports that must be kept up to date
+	 *
+	 * @var Pie_Easy_Map
+	 */
+	static private $__exports__;
+
+	/**
 	 * @param string $theme The theme that created this option
 	 * @param string $name Option name may only contain alphanumeric characters as well as the underscore for use as a word separator.
 	 * @param string $type The type (component extension) of this component
@@ -124,6 +131,13 @@ abstract class Pie_Easy_Component
 
 		// init directives registry
 		$this->__directives__ = new Pie_Easy_Init_Directive_Registry();
+
+		// init exports
+		if ( !self::$__exports__ instanceof Pie_Easy_Map ) {
+			self::$__exports__ = new Pie_Easy_Map();
+			self::$__exports__->add( 'style', new Pie_Easy_Export( 'dynamic', 'css' ) );
+			self::$__exports__->add( 'script', new Pie_Easy_Export( 'dynamic', 'js' ) );
+		}
 
 		// run init template method
 		$this->init();
@@ -198,9 +212,22 @@ abstract class Pie_Easy_Component
 	public function style()
 	{
 		if ( !$this->__style__ instanceof Pie_Easy_Style ) {
+
+			// init style object
 			$this->__style__ = new Pie_Easy_Style();
+
+			// init style export
+			$this->__style__
+				->on_export( array( $this, 'init_styles_dynamic' ) )
+				->exporter( self::$__exports__->item_at( 'style' ) );
+			
+			// init style sections
+			$this->__style__
+				->add_section( 'global' )
+				->add_section( 'admin' );
 		}
 
+		// return it!
 		return $this->__style__;
 	}
 
@@ -212,50 +239,23 @@ abstract class Pie_Easy_Component
 	public function script()
 	{
 		if ( !$this->__script__ instanceof Pie_Easy_Script ) {
+
+			// init script object
 			$this->__script__ = new Pie_Easy_Script();
+
+			// init script export
+			$this->__script__
+				->on_export( array( $this, 'init_scripts_dynamic' ) )
+				->exporter( self::$__exports__->item_at( 'script' ) );
+			
+			// init script sections
+			$this->__script__
+				->add_section( 'global' )
+				->add_section( 'admin' );
 		}
 
+		// return it!
 		return $this->__script__;
-	}
-
-	/**
-	 * Execute style import
-	 *
-	 * @return string
-	 */
-	public function import_css()
-	{
-		return $this->style()->import();
-	}
-
-	/**
-	 * Execute script import
-	 *
-	 * @return string
-	 */
-	public function import_script()
-	{
-		return $this->script()->import();
-	}
-
-	/**
-	 * Execute style exporter
-	 *
-	 * @return string
-	 */
-	public function export_css()
-	{
-		return $this->style()->export();
-	}
-
-	/**
-	 * Execute script exporter
-	 *
-	 * @return string
-	 */
-	public function export_script()
-	{
-		return $this->script()->export();
 	}
 
 	/**
@@ -435,11 +435,27 @@ abstract class Pie_Easy_Component
 	}
 
 	/**
+	 * This template method is called "just in time" to update exportable styles prior to export
+	 */
+	public function init_styles_dynamic()
+	{
+		// override this method to initialize special style exports handling for an option
+	}
+
+	/**
 	 * This template method is called "just in time" to enqueue scripts
 	 */
 	public function init_scripts()
 	{
 		// override this method to initialize special script handling for a component
+	}
+
+	/**
+	 * This template method is called "just in time" to update exportable scripts prior to export
+	 */
+	public function init_scripts_dynamic()
+	{
+		// override this method to initialize special script exports handling for an option
 	}
 
 	/**
@@ -506,6 +522,20 @@ abstract class Pie_Easy_Component
 	public function get_children()
 	{
 		return $this->policy()->registry()->get_children( $this );
+	}
+
+	/**
+	 * Return all private exports
+	 * 
+	 * @return Pie_Easy_Export|array
+	 */
+	static public function get_exports( $name = null )
+	{
+		if ( $name ) {
+			return self::$__exports__->item_at( $name );
+		} else {
+			return self::$__exports__->to_array();
+		}
 	}
 
 	/**

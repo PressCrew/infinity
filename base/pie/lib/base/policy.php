@@ -161,20 +161,6 @@ abstract class Pie_Easy_Policy extends Pie_Easy_Base
 	abstract public function get_handle();
 
 	/**
-	 * Return true to enable policy styling
-	 *
-	 * @return boolean
-	 */
-	abstract public function enable_styling();
-
-	/**
-	 * Return true to enable policy scripting
-	 *
-	 * @return boolean
-	 */
-	abstract public function enable_scripting();
-	
-	/**
 	 * Return a new instance of a component registry
 	 *
 	 * @return Pie_Easy_Registry

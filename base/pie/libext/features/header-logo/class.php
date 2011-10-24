@@ -42,8 +42,11 @@ class Pie_Easy_Exts_Features_Header_Logo
 
 	/**
 	 */
-	public function export_css()
+	public function init_styles_dynamic()
 	{
+		// call parent FIRST
+		parent::init_styles_dynamic();
+		
 		// options
 		$opt_upload = $this->get_suboption('image');
 		$opt_pos = $this->get_suboption('pos')->get();
@@ -66,7 +69,7 @@ class Pie_Easy_Exts_Features_Header_Logo
 				'h1#' . $this->get_element_id() . ' a';
 
 			// add rule
-			$pos = $this->style()->new_rule( $selectors );
+			$pos = $this->style()->rule( $selectors );
 
 			if ( $opt_top ) {
 				$pos->ad( 'top', $opt_top . 'px' );
@@ -116,8 +119,6 @@ class Pie_Easy_Exts_Features_Header_Logo
 			}
 			
 		}
-
-		return parent::export_css();
 	}
 }
 

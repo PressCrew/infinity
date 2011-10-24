@@ -35,8 +35,11 @@ class Pie_Easy_Exts_Features_Gravatar
 
 	/**
 	 */
-	final public function export_css()
+	public function init_styles_dynamic()
 	{
+		// call parent FIRST
+		parent::init_styles_dynamic();
+
 		// options
 		$opt_border_width = $this->get_suboption('border_width')->get();
 		$opt_border_color = $this->get_suboption('border_color')->get();
@@ -44,7 +47,7 @@ class Pie_Easy_Exts_Features_Gravatar
 		$opt_bg_color = $this->get_suboption('bg_color')->get();
 
 		// add rules
-		$img = $this->style()->new_rule( 'img.' . $this->image_class );
+		$img = $this->style()->rule( 'img.' . $this->image_class );
 
 		if ( $opt_border_width ) {
 			$img->ad( 'border-width', $opt_border_width . 'px' );
@@ -58,8 +61,6 @@ class Pie_Easy_Exts_Features_Gravatar
 		if ( $opt_bg_color ) {
 			$img->ad( 'background-color', $opt_bg_color );
 		}
-
-		return parent::export_css();
 	}
 
 	/**

@@ -176,11 +176,8 @@ abstract class Pie_Easy_Options_Registry extends Pie_Easy_Registry
 				}
 			}
 
-			// update custom css
-			$this->export_css_file()->update();
-
-			// update dynamic feature css
-			Pie_Easy_Policy::features()->registry()->export_css_file()->update();
+			// refresh exports
+			Pie_Easy_Scheme::instance()->exports_refresh();
 			
 			// done saving
 			return $save_count;
@@ -209,27 +206,6 @@ abstract class Pie_Easy_Options_Registry extends Pie_Easy_Registry
 			Pie_Easy_Ajax::responseStd( false, __('An error has occurred. No options were updated.', pie_easy_text_domain) );
 		}
 	}
-
-	/**
-	 * Update custom css from value of all registered components that are a css option
-	 *
-	 * @return string
-	 */
-	public function export_css()
-	{
-		// css from parent
-		$css = parent::export_css();
-
-		// loop through and check field type
-		foreach ( $this->get_all() as $component ) {
-			if ( $component instanceof Pie_Easy_Exts_Options_Css ) {
-				$css .= $component->get() . PHP_EOL;
-			}
-		}
-
-		return $css;
-	}
-
 }
 
 ?>

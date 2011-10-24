@@ -504,10 +504,9 @@ final class Pie_Easy_Scheme extends Pie_Easy_Base
 				// use current time
 				$mtime = time();
 			}
-			// try to refresh against every policy
-			foreach( Pie_Easy_Policy::all() as $policy ) {
-				$policy->registry()->export_css_file()->refresh( $mtime );
-				$policy->registry()->export_js_file()->refresh( $mtime );
+			// try to refresh against every exporter
+			foreach ( Pie_Easy_Component::get_exports() as $export ) {
+				$export->refresh( $mtime );
 			}
 		}
 	}

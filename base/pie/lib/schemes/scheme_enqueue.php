@@ -179,19 +179,24 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 		// map of styles and depends
 		$styles = new Pie_Easy_Map();
 
-		// add internal style for every policy
-		foreach( Pie_Easy_Policy::all() as $policy ) {
-			// styling enabled?
-			if ( $policy->enable_styling() ) {
-				// path to stylesheet for this policy
-				$style_path = $policy->registry()->export_css_file()->path;
-				// register if it exists and has content
-				if (  Pie_Easy_Files::cache($style_path)->is_readable() && filesize( $style_path ) > 0 ) {
-					$styles->add(
-						$policy->get_handle(),
-						$policy->registry()->export_css_file()->url
-					);
-				}
+		// get component style export
+		$export_styles = Pie_Easy_Component::get_exports( 'style' );
+
+		// build up array of exports
+		if ( is_admin() ) {
+			$exports['dynamic-admin'] = $export_styles->child( 'admin' );
+		} else {
+			$exports['dynamic'] = $export_styles;
+		}
+		
+		// always register global
+		$exports['dynamic-global'] = $export_styles->child( 'global' );
+		
+		// add internal style for every export
+		foreach( $exports as $handle => $export ) {
+			// register if it exists and has content
+			if (  Pie_Easy_Files::cache( $export->path )->is_readable() && filesize( $export->path ) > 0 ) {
+				$styles->add( $handle, $export->url );
 			}
 		}
 
@@ -220,20 +225,24 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 		// map of scripts and script depends
 		$script = new Pie_Easy_Map();
 
-		// add internal script for every policy
-		foreach( Pie_Easy_Policy::all() as $policy ) {
-			// styling enabled?
-			if ( $policy->enable_scripting() ) {
-				// path to script source for this policy
-				$script_path = $policy->registry()->export_js_file()->path;
-				// register if it exists and has content
-				if ( Pie_Easy_Files::cache($script_path)->is_readable() && filesize( $script_path ) > 0 ) {
-					// add it
-					$script->add(
-						$policy->get_handle(),
-						$policy->registry()->export_js_file()->url
-					);
-				}
+		// get component script export
+		$export_script = Pie_Easy_Component::get_exports( 'script' );
+
+		// build up array of exports
+		if ( is_admin() ) {
+			$exports['dynamic-admin'] = $export_script->child( 'admin' );
+		} else {
+			$exports['dynamic'] = $export_script;
+		}
+		
+		// always register global
+		$exports['dynamic-global'] = $export_script->child( 'global' );
+
+		// add internal script for every export
+		foreach( $exports as $handle => $export ) {
+			// register if it exists and has content
+			if ( Pie_Easy_Files::cache($export->path)->is_readable() && filesize( $export->path ) > 0 ) {
+				$script->add( $handle, $export->url );
 			}
 		}
 
@@ -532,28 +541,29 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 					Pie_Easy_Scheme::DIRECTIVE_STYLE_DEPS
 				);
 
+			// start with empty stacks
+			$dep_stack = new Pie_Easy_Stack();
+			$dep_global_stack = new Pie_Easy_Stack();
+			$dep_admin_stack = new Pie_Easy_Stack();
+
 			// add dynamic style depends for every policy
 			foreach( Pie_Easy_Policy::all() as $policy ) {
-				// make sure styling is enabled
-				if ( $policy->enable_styling() ) {
-					// start with empty stack
-					$dep_stack = new Pie_Easy_Stack();
-					// loop through all registered components
-					foreach ( $policy->registry()->get_all() as $component ) {
-						// any style deps?
-						foreach ( $component->style()->get_deps() as $dep ) {
-							$dep_stack->push( $dep );
-						}
-					}
-					// did we find any addtl dependancies?
-					if ( $dep_stack->count() ) {
-						$dep_map = new Pie_Easy_Map();
-						$dep_map->add( '@:' . $policy->get_handle(), $dep_stack->to_array() );
-						$directive_deps = new Pie_Easy_Init_Directive( 'style_depends', $dep_map, '@' );
-						$style_depends->add( '@', $directive_deps, true );
-					}
+				// loop through all registered components
+				foreach ( $policy->registry()->get_all() as $component ) {
+					// push deps onto stacks
+					$component->style()->push_deps( $dep_stack );
+					$component->style()->get_section('global')->push_deps( $dep_global_stack );
+					$component->style()->get_section('admin')->push_deps( $dep_admin_stack );
 				}
 			}
+
+			// add addtl dependancies
+			$dep_map = new Pie_Easy_Map();
+			$dep_map->add( '@:dynamic', $dep_stack->to_array() );
+			$dep_map->add( '@:dynamic-global', $dep_global_stack->to_array() );
+			$dep_map->add( '@:dynamic-admin', $dep_admin_stack->to_array() );
+			$directive_deps = new Pie_Easy_Init_Directive( 'style_depends', $dep_map, '@' );
+			$style_depends->add( '@', $directive_deps, true );
 
 			// init style depends
 			$this->depends( $this->styles, $style_depends );
@@ -617,28 +627,29 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 					Pie_Easy_Scheme::DIRECTIVE_SCRIPT_DEPS
 				);
 
+			// start with empty stacks
+			$dep_stack = new Pie_Easy_Stack();
+			$dep_global_stack = new Pie_Easy_Stack();
+			$dep_admin_stack = new Pie_Easy_Stack();
+
 			// add dynamic script depends for every policy
 			foreach( Pie_Easy_Policy::all() as $policy ) {
-				// make sure scripting is enabled
-				if ( $policy->enable_scripting() ) {
-					// start with empty stack
-					$dep_stack = new Pie_Easy_Stack();
-					// loop through all registered components
-					foreach ( $policy->registry()->get_all() as $component ) {
-						// any script deps?
-						foreach ( $component->script()->get_deps() as $dep ) {
-							$dep_stack->push( $dep );
-						}
-					}
-					// did we find any addtl dependancies?
-					if ( $dep_stack->count() ) {
-						$dep_map = new Pie_Easy_Map();
-						$dep_map->add( '@:' . $policy->get_handle(), $dep_stack->to_array() );
-						$directive_deps = new Pie_Easy_Init_Directive( 'script_depends', $dep_map, '@' );
-						$script_depends->add( '@', $directive_deps, true );
-					}
+				// loop through all registered components
+				foreach ( $policy->registry()->get_all() as $component ) {
+					// push deps onto stacks
+					$component->script()->push_deps( $dep_stack );
+					$component->script()->get_section('global')->push_deps( $dep_global_stack );
+					$component->script()->get_section('admin')->push_deps( $dep_admin_stack );
 				}
 			}
+
+			// add addtl dependancies
+			$dep_map = new Pie_Easy_Map();
+			$dep_map->add( '@:dynamic', $dep_stack->to_array() );
+			$dep_map->add( '@:dynamic-global', $dep_global_stack->to_array() );
+			$dep_map->add( '@:dynamic-admin', $dep_admin_stack->to_array() );
+			$directive_deps = new Pie_Easy_Init_Directive( 'script_depends', $dep_map, '@' );
+			$script_depends->add( '@', $directive_deps, true );
 
 			// init script depends
 			$this->depends( $this->scripts, $script_depends );
@@ -671,17 +682,23 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 	 */
 	public function handle_style_internal()
 	{
-		// enq active theme stylesheet
-		if ( !is_admin() ) {
-			wp_enqueue_style( '@:style' );
+		// always enqueue global styles
+		if ( wp_style_is( '@:dynamic-global', 'registered' ) ) {
+			wp_enqueue_style( '@:dynamic-global' );
 		}
-		
-		foreach ( Pie_Easy_Policy::all() as $policy ) {
-			// policy style handle
-			$handle = '@:' . $policy->get_handle();
-			// registered?
-			if ( wp_style_is( $handle, 'registered' ) ) {
-				wp_enqueue_style( $handle );
+
+		// are we at the admin dashboard?
+		if ( is_admin() ) {
+			// yes, enqueue admin styles
+			if ( wp_style_is( '@:dynamic-admin', 'registered' ) ) {
+				wp_enqueue_style( '@:dynamic-admin' );
+			}
+		} else {
+			// enq active theme stylesheet
+			wp_enqueue_style( '@:style' );
+			// enqueue public styles
+			if ( wp_style_is( '@:dynamic', 'registered' ) ) {
+				wp_enqueue_style( '@:dynamic' );
 			}
 		}
 	}
@@ -738,12 +755,21 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 	 */
 	public function handle_script_internal()
 	{
-		foreach ( Pie_Easy_Policy::all() as $policy ) {
-			// policy script handle
-			$handle = '@:' . $policy->get_handle();
-			// registered?
-			if ( wp_script_is( $handle, 'registered' ) ) {
-				wp_enqueue_script( $handle );
+		// always enqueue global scripts
+		if ( wp_script_is( '@:dynamic-global', 'registered' ) ) {
+			wp_enqueue_script( '@:dynamic-global' );
+		}
+
+		// are we at the admin dashboard?
+		if ( is_admin() ) {
+			// yes, enqueue admin scripts
+			if ( wp_script_is( '@:dynamic-admin', 'registered' ) ) {
+				wp_enqueue_script( '@:dynamic-admin' );
+			}
+		} else {
+			// enqueue public scripts
+			if ( wp_script_is( '@:dynamic', 'registered' ) ) {
+				wp_enqueue_script( '@:dynamic' );
 			}
 		}
 	}

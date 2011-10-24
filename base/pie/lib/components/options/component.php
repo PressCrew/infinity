@@ -14,62 +14,6 @@
 Pie_Easy_Loader::load( 'base', 'collections', 'utils/docs', 'schemes' );
 
 /**
- * Interface to implement if the option defines its own field_options internally
- *
- * @package PIE-components
- * @subpackage options
- */
-interface Pie_Easy_Options_Option_Auto_Field
-{
-	/**
-	 * Generate custom field options
-	 *
-	 * @return array of field options in [value] => [description] format
-	 */
-	public function load_field_options();
-}
-
-/**
- * Interface to implement if the option is storing an image attachment id
- *
- * @package PIE-components
- * @subpackage options
- */
-interface Pie_Easy_Options_Option_Attachment_Image
-{
-	/**
-	 * Get the attachment image source details
-	 *
-	 * Returns an array with attachment details
-	 *
-	 * <code>
-	 * Array (
-	 *   [0] => url
-	 *   [1] => width
-	 *   [2] => height
-	 * )
-	 * </code>
-	 *
-	 * @see wp_get_attachment_image_src()
-	 * @link http://codex.wordpress.org/Function_Reference/wp_get_attachment_image_src
-	 * @param string $size Either a string (`thumbnail`, `medium`, `large` or `full`), or a two item array representing width and height in pixels, e.g. array(32,32). The size of media icons are never affected.
-	 * @param integer $attach_id The id of the attachment, defaults to option value.
-	 * @return array|false Attachment meta data
-	 */
-	public function get_image_src( $size = 'thumbnail', $attach_id = null );
-
-	/**
-	 * Return the URL of an image attachment for this option
-	 *
-	 * This method is only useful if the option is storing the id of an attachment
-	 *
-	 * @param string $size Either a string (`thumbnail`, `medium`, `large` or `full`), or a two item array representing width and height in pixels, e.g. array(32,32). The size of media icons are never affected.
-	 * @return string|false absolute URL to image file
-	 */
-	public function get_image_url( $size = 'thumbnail' );
-}
-
-/**
  * Make an option easy
  *
  * @package PIE-components
@@ -79,6 +23,10 @@ interface Pie_Easy_Options_Option_Attachment_Image
  * @property-read string $field_class The CSS class to apply to the option's input field
  * @property-read array $field_options An array of field options
  * @property-read mixed $default_value Default value of the option
+ * @property-read string $style_selector Used by options which target css selectors
+ * @property-read string $style_property Used by options whose value is the value of an element style property
+ * @property-read string $style_unit Used by options whose value is a unit of measure for an element style property
+ * @property-read string $style_section Which section to export any dynamic styles to
  */
 abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 {
@@ -108,6 +56,13 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 	 * @var boolean
 	 */
 	private $__post_override__ = false;
+
+	/**
+	 * Local style property object
+	 *
+	 * @var Pie_Easy_Style_Property
+	 */
+	private $__style_property__ = false;
 
 	/**
 	 */
@@ -146,14 +101,63 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 			$this->directives()->set( $theme, 'field_class', $config['field_class'] );
 		}
 
+		// style selector
+		if ( isset( $config['style_selector'] ) ) {
+			$this->directives()->set( $theme, 'style_selector', $config['style_selector'] );
+		}
+
+		// style property
+		if ( isset( $config['style_property'] ) ) {
+			$this->directives()->set( $theme, 'style_property', $config['style_property'] );
+		}
+		
+		// style unit
+		if ( isset( $config['style_unit'] ) ) {
+			$this->directives()->set( $theme, 'style_unit', $config['style_unit'] );
+		}
+
+		// style section
+		if ( isset( $config['style_section'] ) ) {
+			$this->directives()->set( $theme, 'style_section', $config['style_section'] );
+		}
+
+		if ( $this->style_selector && $this->style_property ) {
+
+			// setup property object
+			$this->__style_property__ =
+				Pie_Easy_Style_Property_Factory::instance()->create( $this->style_property );
+
+			// determine value to set
+			if ( $this instanceof Pie_Easy_Options_Option_Image ) {
+				$value = $this->get_image_url();
+			} else {
+				$value = $this->get();
+			}
+
+			// try to set the value
+			if ( !is_null( $value ) && $this->__style_property__->set_value( $value, $this->style_unit ) ) {
+
+				// get the style value
+				$style_value = $this->__style_property__->get_value();
+
+				// add value to component styles if set
+				if ( isset( $style_value->value ) ) {
+					if ( $this->style_section ) {
+						$rule = $this->style()->get_section($this->style_section)->rule( $this->style_selector );
+					} else {
+						$rule = $this->style()->rule( $this->style_selector );
+					}
+					$rule->add_declaration(
+						$this->__style_property__->name,
+						$this->__style_property__->get_value()->format()
+					);
+				}
+			}
+		}
+
 		// field options
 		// @todo this grew too big, move to private method
-		if ( $this instanceof Pie_Easy_Options_Option_Auto_Field ) {
-
-			// call template method to load options
-			$field_options = $this->load_field_options();
-
-		} elseif ( isset( $config['field_options'] ) ) {
+		if ( isset( $config['field_options'] ) ) {
 
 			if ( is_array( $config['field_options'] ) ) {
 
@@ -185,6 +189,21 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 			} else {
 				throw new Exception( sprintf( 'The field options for the "%s" option is not configured correctly', $name ) );
 			}
+		
+		} elseif ( $this instanceof Pie_Easy_Options_Option_Auto_Field ) {
+
+			// call template method to load options
+			$field_options = $this->load_field_options();
+
+		} elseif ( $this->__style_property__ ) {
+			
+			// check type
+			switch ( true ) {
+				case ( $this instanceof Pie_Easy_Exts_Options_Select ):
+				case ( $this instanceof Pie_Easy_Exts_Options_Radio ):
+					$field_options = $this->__style_property__->get_list_values();
+			}
+			
 		}
 
 		// make sure we ended up with some options
@@ -438,6 +457,62 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 	{
 		return $this->get_api_prefix() . $this->name;
 	}
+}
+
+/**
+ * Interface to implement if the option defines its own field_options internally
+ *
+ * @package PIE-components
+ * @subpackage options
+ */
+interface Pie_Easy_Options_Option_Auto_Field
+{
+	/**
+	 * Generate custom field options
+	 *
+	 * @return array of field options in [value] => [description] format
+	 */
+	public function load_field_options();
+}
+
+/**
+ * Interface to implement if the option is storing an image attachment id
+ *
+ * @package PIE-components
+ * @subpackage options
+ */
+interface Pie_Easy_Options_Option_Attachment_Image
+{
+	/**
+	 * Get the attachment image source details
+	 *
+	 * Returns an array with attachment details
+	 *
+	 * <code>
+	 * Array (
+	 *   [0] => url
+	 *   [1] => width
+	 *   [2] => height
+	 * )
+	 * </code>
+	 *
+	 * @see wp_get_attachment_image_src()
+	 * @link http://codex.wordpress.org/Function_Reference/wp_get_attachment_image_src
+	 * @param string $size Either a string (`thumbnail`, `medium`, `large` or `full`), or a two item array representing width and height in pixels, e.g. array(32,32). The size of media icons are never affected.
+	 * @param integer $attach_id The id of the attachment, defaults to option value.
+	 * @return array|false Attachment meta data
+	 */
+	public function get_image_src( $size = 'thumbnail', $attach_id = null );
+
+	/**
+	 * Return the URL of an image attachment for this option
+	 *
+	 * This method is only useful if the option is storing the id of an attachment
+	 *
+	 * @param string $size Either a string (`thumbnail`, `medium`, `large` or `full`), or a two item array representing width and height in pixels, e.g. array(32,32). The size of media icons are never affected.
+	 * @return string|false absolute URL to image file
+	 */
+	public function get_image_url( $size = 'thumbnail' );
 }
 
 /**

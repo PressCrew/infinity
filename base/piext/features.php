@@ -38,20 +38,6 @@ class Infinity_Features_Policy extends Pie_Easy_Features_Policy
 	}
 
 	/**
-	 */
-	final public function enable_styling()
-	{
-		return ( !is_admin() );
-	}
-
-	/**
-	 */
-	final public function enable_scripting()
-	{
-		return ( !is_admin() );
-	}
-
-	/**
 	 * @return Infinity_Features_Registry
 	 */
 	final public function new_registry()

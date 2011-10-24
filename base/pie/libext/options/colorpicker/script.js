@@ -1,4 +1,9 @@
-/* colorpicker wrapper */
+/**
+ * Color picker wrapper
+ *
+ * @todo refactor this into a jQuery plugin
+ * @section admin
+ */
 var pieEasyColorPicker = function ()
 {
 	var

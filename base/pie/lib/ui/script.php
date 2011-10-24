@@ -100,7 +100,7 @@ class Pie_Easy_Script extends Pie_Easy_Asset
 	public function export()
 	{
 		// the markup that will be returned
-		$code = null;
+		$code = parent::export();
 
 		// render rules
 		if ( $this->logic->count() ) {
