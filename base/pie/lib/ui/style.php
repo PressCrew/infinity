@@ -1440,6 +1440,22 @@ class Pie_Easy_Style_Property_Factory extends Pie_Easy_Base
 	}
 
 	/**
+	 * Return a new font-family property object
+	 *
+	 * @return Pie_Easy_Style_Property
+	 */
+	protected function prop_font_family()
+	{
+		return
+			Pie_Easy_Style_Property_Primitive::create( 'font-family' )
+				->add_enum( 'serif', __( 'Times (serif)', pie_easy_text_domain ) )
+				->add_enum( 'sans-serif', __( 'Helvetica (sans-serif)', pie_easy_text_domain ) )
+				->add_enum( 'monospace', __( 'Courier (monospace)', pie_easy_text_domain ) )
+				->add_enum( 'cursive', __( 'Zapf-Chancery (cursive)', pie_easy_text_domain ) )
+				->add_enum( 'fantasy', __( 'Western (fantasy)', pie_easy_text_domain ) );
+	}
+
+	/**
 	 * Return a new height property object
 	 *
 	 * @return Pie_Easy_Style_Property
