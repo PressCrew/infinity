@@ -1569,6 +1569,20 @@ class Pie_Easy_Style_Property_Factory extends Pie_Easy_Base
 	{
 		return $this->prop_padding( 'padding-left' );
 	}
+
+	/**
+	 * Return a new width property object
+	 *
+	 * @return Pie_Easy_Style_Property
+	 */
+	protected function prop_width( $property = 'width' )
+	{
+		return
+			Pie_Easy_Style_Property_Primitive::create( $property )
+				->add_length()
+				->add_percentage()
+				->add_enum( 'auto' );
+	}
 }
 
 ?>
