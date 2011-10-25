@@ -648,7 +648,8 @@ class Pie_Easy_Style_Value_String extends Pie_Easy_Style_Value
 	 */
 	public function validate( $value )
 	{
-		throw new Exception( 'I need some work' );
+		// pretty much have to allow anything here
+		return true;
 	}
 }
 
@@ -1147,6 +1148,18 @@ class Pie_Easy_Style_Property_Primitive extends Pie_Easy_Style_Property
 	}
 
 	/**
+	 * Add string as a possible value type
+	 */
+	public function add_string()
+	{
+		if ( !$this->valmap->contains( self::KEY_STRING ) ) {
+			$this->valmap->add( self::KEY_STRING, new Pie_Easy_Style_Value_String() );
+		}
+
+		return $this;
+	}
+
+	/**
 	 * Add URI as a possible value type
 	 */
 	public function add_uri()
@@ -1437,6 +1450,18 @@ class Pie_Easy_Style_Property_Factory extends Pie_Easy_Base
 				->add_enum( 'blue', __( 'Blue', pie_easy_text_domain ) )
 				->add_enum( 'teal', __( 'Teal', pie_easy_text_domain ) )
 				->add_enum( 'aqua', __( 'Aqua', pie_easy_text_domain ) );
+	}
+
+	/**
+	 * Return a new content property object
+	 *
+	 * @return Pie_Easy_Style_Property
+	 */
+	protected function prop_content()
+	{
+		return
+			Pie_Easy_Style_Property_Primitive::create( 'content' )
+				->add_string();
 	}
 
 	/**
