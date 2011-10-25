@@ -1456,6 +1456,30 @@ class Pie_Easy_Style_Property_Factory extends Pie_Easy_Base
 	}
 
 	/**
+	 * Return a new font-weight property object
+	 *
+	 * @return Pie_Easy_Style_Property
+	 */
+	protected function prop_font_weight()
+	{
+		return
+			Pie_Easy_Style_Property_Primitive::create( 'font-weight' )
+				->add_enum( 'lighter', __( 'Lighter', pie_easy_text_domain ) )
+				->add_enum( 'normal', __( 'Normal', pie_easy_text_domain ) )
+				->add_enum( 'bold', __( 'Bold', pie_easy_text_domain ) )
+				->add_enum( 'bolder', __( 'Bolder', pie_easy_text_domain ) )
+				->add_enum( '100', __( 'One Hundred', pie_easy_text_domain ) )
+				->add_enum( '200', __( 'Two Hundred', pie_easy_text_domain ) )
+				->add_enum( '300', __( 'Three Hundred', pie_easy_text_domain ) )
+				->add_enum( '400', __( 'Four Hundred', pie_easy_text_domain ) )
+				->add_enum( '500', __( 'Five Hundred', pie_easy_text_domain ) )
+				->add_enum( '600', __( 'Six Hundred', pie_easy_text_domain ) )
+				->add_enum( '700', __( 'Seven Hundred', pie_easy_text_domain ) )
+				->add_enum( '800', __( 'Eight Hundred', pie_easy_text_domain ) )
+				->add_enum( '900', __( 'Nine Hundred', pie_easy_text_domain ) );
+	}
+
+	/**
 	 * Return a new height property object
 	 *
 	 * @return Pie_Easy_Style_Property
