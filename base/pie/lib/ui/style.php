@@ -651,6 +651,13 @@ class Pie_Easy_Style_Value_String extends Pie_Easy_Style_Value
 		// pretty much have to allow anything here
 		return true;
 	}
+
+	/**
+	 */
+	public function format()
+	{
+		return sprintf( '"%s"', esc_attr( $this->value ) );
+	}
 }
 
 /**
