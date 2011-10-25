@@ -10,6 +10,19 @@ div#infinity-cpanel {
 	-webkit-box-shadow: 1px 1px 1px #bbbbbb, 3px 3px 8px #cccccc;
 }
 
+div#infinity-cpanel .ui-widget a,
+div#infinity-cpanel .ui-widget a:link,
+div#infinity-cpanel .ui-widget a:active,
+div#infinity-cpanel .ui-widget a:visited,
+div#infinity-cpanel .ui-widget a:hover {
+	text-decoration: none;
+}
+
+div#infinity-cpanel .ui-widget a:hover {
+	text-decoration: underline;
+	font-weight: bold;
+}
+
 div.infinity-cpanel .ui-button .ui-button-text {
 	font-weight: bold;
 }
