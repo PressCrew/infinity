@@ -19,7 +19,7 @@
 /**
  * Infinity version number
  */
-define( 'INFINITY_VERSION', '1.0b2' );
+define( 'INFINITY_VERSION', '1.0b3' );
 
 /**
  * Infinity version id number
