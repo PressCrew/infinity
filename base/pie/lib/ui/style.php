@@ -1343,7 +1343,7 @@ class Pie_Easy_Style_Property_Factory extends Pie_Easy_Base
 			return call_user_func( array( $this, $method_name ) );
 		} else {
 			// no, not good
-			throw new Exception( 'The method "%s" has not been implemented yet', $method_name );
+			throw new Exception( sprintf( 'The method "%s" has not been implemented yet', $method_name ) );
 		}
 	}
 
