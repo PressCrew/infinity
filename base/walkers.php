@@ -60,6 +60,22 @@ class Infinity_Base_Walker_Nav_Menu extends Walker_Nav_Menu
 		// append it to the output
 		$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
 	}
+
+	/**
+	 * @param string $output Passed by reference. Used to append additional content.
+	 * @param object $item Page data object. Not used.
+	 * @param int $depth Depth of page. Not Used.
+	 */
+	function end_el( &$output, $item, $depth )
+	{
+		// close link item
+		$output .= '</li>' . PHP_EOL;
+		
+		// add menu divider to first level
+		if ( $depth < 1 ) {
+			$output .= '<li class="menu-divider"></li>' . PHP_EOL;
+		}
+	}
 }
 
 /**
@@ -105,6 +121,22 @@ class Infinity_Base_Walker_Page_Menu extends Walker_Page
 				),
 				false
 			);
+	}
+
+	/**
+	 * @param string $output Passed by reference. Used to append additional content.
+	 * @param object $page Page data object. Not used.
+	 * @param int $depth Depth of page. Not Used.
+	 */
+	function end_el( &$output, $page, $depth )
+	{
+		// close link item
+		$output .= '</li>' . PHP_EOL;
+		
+		// add menu divider to first level
+		if ( $depth < 1 ) {
+			$output .= '<li class="menu-divider"></li>' . PHP_EOL;
+		}
 	}
 }
 

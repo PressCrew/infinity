@@ -275,6 +275,15 @@ body {
     font-size: 10.5px;
 }
 
+/* menu divider */
+.base-menu ul li.menu-divider {
+	text-align: center;
+}
+/* always hide last menu divider */
+.base-menu ul li.menu-divider:last-child {
+	display: none;
+}
+
 /* ========== */
 /* ! Header   */
 /* ========== */
