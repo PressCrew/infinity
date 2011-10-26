@@ -1526,6 +1526,73 @@ class Pie_Easy_Style_Property_Factory extends Pie_Easy_Base
 	}
 
 	/**
+	 * Return a new max length property object
+	 *
+	 * @return Pie_Easy_Style_Property
+	 */
+	private function prop_max_length( $property )
+	{
+		return
+			Pie_Easy_Style_Property_Primitive::create( $property )
+				->add_enum( 'none' )
+				->add_length()
+				->add_percentage();
+	}
+
+	/**
+	 * Return a new max-height property object
+	 *
+	 * @return Pie_Easy_Style_Property
+	 */
+	protected function prop_max_height()
+	{
+		return $this->prop_max_length( 'max-height' );
+	}
+
+	/**
+	 * Return a new max-width property object
+	 *
+	 * @return Pie_Easy_Style_Property
+	 */
+	protected function prop_max_width()
+	{
+		return $this->prop_max_length( 'max-width' );
+	}
+
+	/**
+	 * Return a new min length property object
+	 *
+	 * @return Pie_Easy_Style_Property
+	 */
+	private function prop_min_length( $property )
+	{
+		return
+			Pie_Easy_Style_Property_Primitive::create( $property )
+				->add_length()
+				->add_percentage();
+	}
+
+	/**
+	 * Return a new min-height property object
+	 *
+	 * @return Pie_Easy_Style_Property
+	 */
+	protected function prop_min_height()
+	{
+		return $this->prop_min_length( 'min-height' );
+	}
+
+	/**
+	 * Return a new min-width property object
+	 *
+	 * @return Pie_Easy_Style_Property
+	 */
+	protected function prop_min_width()
+	{
+		return $this->prop_min_length( 'min-width' );
+	}
+
+	/**
 	 * Return a new padding property object
 	 *
 	 * @return Pie_Easy_Style_Property
