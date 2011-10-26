@@ -232,10 +232,8 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 
 		// don't return components who have a parent in the result
 		foreach( $components as $key => $component_i ) {
-			foreach( $components as $component_ii ) {
-				if ( $component_ii->is_parent_of( $component_i ) ) {
-					unset( $components[$key] );
-				}
+			if ( isset( $component_i->parent ) ) {
+				unset( $components[$key] );
 			}
 		}
 
