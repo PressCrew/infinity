@@ -116,6 +116,11 @@ p.lead {
 em { font-style: italic }
 strong { font-weight: bold }
 small { font-size: 80% }
+hr {
+    background-color: #DDDDDD;
+    border: 0 none;
+    margin-top: 10px !important;
+}
 /* #Links */
 a:hover,
 a:visited:hover { color: #777 }
@@ -139,7 +144,6 @@ a:visited:hover { color: #777 }
 .post dl dt,
 dl dd { line-height: 18px }
 .post dl dt { font-weight: bold }
-.post dl dd { margin-left: 9px }
 .post hr {
     margin: 20px 0 19px;
     border: 0;
@@ -412,6 +416,9 @@ float: right;
 .base-menu li.sfHover li a span.sf-sub-indicator {
     float: right;
     margin: 5px 0 0 0;
+}
+.sf-sub-indicator {
+    padding: 4px 4px 4px 0 !important;
 }
 .base-menu li a span {
     letter-spacing: 1px;
@@ -804,14 +811,17 @@ p#breadcrumbs { margin-top: 0px }
 }
 .author-box,
 .category-box,
-.tag-box {
+.tag-box,
+.info-box {
     margin-bottom: 20px;
     border: 1px solid #DDDDDD;
     background: #F9F9F9;
     border-radius: 3px;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
+    padding: 10px;
 }
+
 h1#category-title,
 h1#tag-title {
     font-style: normal;
@@ -829,9 +839,7 @@ h1#tag-title span { color: #555 }
     font-size: 16px;
 }
 #author-description {
-    overflow: auto;
-    padding: 10px 20px 20px;
-    font-size: 12.8px;
+    padding: 0 10px 10px;
 }
 #author-description img {
     margin-top: 2px;
@@ -840,13 +848,24 @@ h1#tag-title span { color: #555 }
 }
 #category-description,
 #tag-description {
-    padding: 20px 20px 0;
-    font-size: 12.8px;
+    padding: 10px;
 }
 #author-social {
     float: right;
     width: 25%;
 }
+
+/*Search Page*/
+
+.search-title {
+    font-size: 18px;
+    color: #999;
+}
+
+.search-title span {
+color: #444;
+}
+
 /* ============ */
 /* ! Comments   */
 /* ============ */
@@ -942,11 +961,12 @@ ol.commentlist {
     font-size: 13px;
 }
 #respond span.required {
-    font-weight: bold;
-    float: left;
-    margin: 10px 0 0 -17px;
+    color: #CFCFCF;
     display: block;
+    float: left;
     font-size: 16px;
+    font-weight: bold;
+    margin: 4px 0 0 -12px;
 }
 #respond .right {
     float: left;
@@ -962,7 +982,7 @@ ol.commentlist {
     float: left;
     width: 200px;
 }
-#commentform { margin: 15px 0 0 0 }
+#commentform { margin: 10px 0 0 10px; }
 #commentform input.txt,
 #commentform textarea {
     border-color: #ccc #efefef #efefef #ccc;
@@ -1005,6 +1025,7 @@ p.form-allowed-tags { width: 70% }
 /* Standard Buttons. For more button variations check extras.css
 ================================================== */
 a.button,
+.generic-button,
 a.more-link,
 button,
 input[type="submit"],
@@ -1091,10 +1112,6 @@ input[type="button"].full-width {
 }
 /* Default Tables and Tabs. Check Base Docs for more info
 ================================================== */
-/*
- * Tables.less
- * Tables for, you guessed it, tabular data
- * ---------------------------------------- */
 table {
     width: 100%;
     margin-bottom: 18px;
@@ -1187,41 +1204,6 @@ legend {
 }
 select { width: 220px }
 input[type="checkbox"] { display: inline }
-/* #Media Item Grid
-================================================== */
-.media-grid {
-    margin-left: -20px;
-    margin-bottom: 0;
-    zoom: 1;
-}
-.media-grid:before,
-.media-grid:after {
-    display: table;
-    content: "";
-    zoom: 1;
-    *display: inline;
-}
-.media-grid:after { clear: both }
-.media-grid li { display: inline }
-.media-grid a {
-    float: left;
-    padding: 4px;
-    margin: 0 0 20px 20px;
-    border: 1px solid #ddd;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
-    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
-    -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
-}
-.media-grid a img { display: block }
-.media-grid a:hover {
-    border-color: #0069d6;
-    -webkit-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
-    -moz-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
-    box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
-}
 /* ! The Grid
 The Infinity Base Grid. Do you want to generate your own Fluid or Fixed Grid? 
 Visit http://www.tinyfluidgrid.com/ and create your own. When you're done simply
