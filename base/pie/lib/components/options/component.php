@@ -128,7 +128,9 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 				Pie_Easy_Style_Property_Factory::instance()->create( $this->style_property );
 
 			// determine value to set
-			if ( $this instanceof Pie_Easy_Options_Option_Image ) {
+			if ( $this instanceof Pie_Easy_Options_Option_Attachment_Image ) {
+				$value = $this->get_image_url();
+			} elseif ( $this instanceof Pie_Easy_Options_Option_Static_Image ) {
 				$value = $this->get_image_url();
 			} else {
 				$value = $this->get();
@@ -473,6 +475,22 @@ interface Pie_Easy_Options_Option_Auto_Field
 	 * @return array of field options in [value] => [description] format
 	 */
 	public function load_field_options();
+}
+
+/**
+ * Interface to implement if the option is referencing a static image
+ *
+ * @package PIE-components
+ * @subpackage options
+ */
+interface Pie_Easy_Options_Option_Static_Image
+{
+	/**
+	 * Return the URL of a static image for this option
+	 *
+	 * @return string|false absolute URL to image file
+	 */
+	public function get_image_url();
 }
 
 /**
