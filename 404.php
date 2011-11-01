@@ -19,15 +19,41 @@
 		?>
 		<div id="post-0" class="post error404 not-found">
 			<h1 class="entry-title">
-				<?php _e( 'Not Found', infinity_text_domain ); ?>
+				<?php _e( 'Darn it.. Nothing found', infinity_text_domain ); ?>
 			</h1>
 			<div class="entry-content">
 				<p>
-					<?php _e( 'Apologies, but the page you requested could not be found. Perhaps searching will help.', infinity_text_domain ); ?>
-				</p>
-				<?php
-					infinity_get_search_form();
-				?>
+						<?php
+							_e( 'Sorry, but nothing matched your search criteria. Please try again with some different keywords.', infinity_text_domain );
+						?>
+					</p>
+					<?php
+						infinity_get_search_form();
+					?>
+					
+					<div id="search-recent-posts" class="grid_12 alpha">
+
+					<?php the_widget( 'WP_Widget_Recent_Posts', array( 'number' => 10 ), array( 'widget_id' => '404' ) ); ?>	
+					
+					</div>		
+					
+					<div id="search-categories-widget" class="grid_12 alpha">
+
+						<h2 class="widgettitle">
+						<?php _e( 'Most Used Categories', 'twentyeleven' ); ?>
+						</h2>
+						<ul>
+						<?php wp_list_categories( array( 'orderby' => 'count', 'order' => 'DESC', 'show_count' => 1, 'title_li' => '', 'number' => 10 ) ); ?>
+						</ul>
+					</div>	
+					<div style="clear: both;"></div>
+					<?php
+					/* translators: %1$s: smilie */
+					$archive_content = '<p>' . sprintf( __( 'Try looking in the monthly archives. %1$s', infinity_text_domain ), convert_smilies( ':)' ) ) . '</p>';
+					the_widget( 'WP_Widget_Archives', array('count' => 0 , 'dropdown' => 1 ), array( 'after_title' => '</h2>'.$archive_content ) );
+					?>
+
+					<?php the_widget( 'WP_Widget_Tag_Cloud' ); ?>
 			</div>
 		</div>
 		<?php
