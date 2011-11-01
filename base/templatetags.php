@@ -81,6 +81,7 @@ function infinity_base_sidebars()
 				<div class="widget"><h4>BP Member Sidebar.</h4>
 				<a href="<?php echo home_url( '/'  ); ?>wp-admin/widgets.php" title="Add Widgets">Add Widgets</a></div><?php
 				}
+		
 			} elseif ( function_exists('bp_is_page') && bp_is_page(BP_MEMBERS_SLUG) ) {
                 if ( is_active_sidebar( 'member-sidebar' ) ) {
                     dynamic_sidebar( 'member-sidebar');

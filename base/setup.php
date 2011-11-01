@@ -112,6 +112,12 @@ function infinity_base_register_sidebar( $id, $name, $desc )
  */
 function infinity_base_register_sidebars()
 {
+	// page
+	infinity_base_register_sidebar(
+		'home-sidebar',
+		'Home Sidebar',
+		'The home widget area'
+	);
 	// blog
 	infinity_base_register_sidebar(
 		'blog-sidebar',
