@@ -318,9 +318,9 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 	public function update( $value )
 	{
 		if ( $this->check_caps() ) {
-			// force numeric values to integers
+			// force numeric values to floats since it could be an int or a float
 			if ( is_numeric( $value ) ) {
-				$value = (integer) $value;
+				$value = floatval( $value );
 			}
 			// is the value null, an empty string, or equal to the default value?
 			if ( $value === null || $value === '' || $value === $this->default_value ) {
