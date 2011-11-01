@@ -72,9 +72,6 @@ if ( ! empty($comments_by_type['pings']) ) { ?>
 	} // End have_comments() IF Statement
  
  } else {
- 
-	// If there are no comments and comments are closed, let's leave a little note, shall we?
-	if ( ! comments_open() && is_single() ) { ?><p class="nocomments"><?php _e( 'Comments are closed.', infinity_text_domain ); ?></p><?php }
 
  
  } // End IF Statement

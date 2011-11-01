@@ -19,7 +19,7 @@
 		do_action( 'open_search' );
 
 		if ( have_posts() ): ?>
-			<h1 class="page-title">
+			<h1 class="page-title search-title">
 				<?php
 					printf( __( 'Search Results for: <span>%s</span>', infinity_text_domain ), get_search_query() );
 				?>

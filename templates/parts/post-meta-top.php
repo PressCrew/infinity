@@ -14,7 +14,7 @@
  * to add your own stuff as well!
  */
 ?>
-<p class="post-meta-data">
+<p class="post-meta-data post-top">
 <?php
 	do_action( 'open_loop_post_meta_data_top' );
 ?>					

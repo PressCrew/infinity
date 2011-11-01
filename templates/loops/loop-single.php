@@ -22,7 +22,7 @@
 			<div class="post" id="post-<?php the_ID(); ?>">
 				<div class="post-content">
 					<h1 class="posttitle">
-						<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', infinity_text_domain ) ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a>
+						<?php the_title(); ?>
 						<?php edit_post_link(' ✍','',' ');?>
 					</h1>	
 					<?php
