@@ -211,6 +211,9 @@ final class Pie_Easy_Loader extends Pie_Easy_Base
 					),
 				'ui' =>
 					array(
+						'image-picker',
+						'overlay-picker',
+						'scroll-picker',
 						'slider'
 					),
 				'upload',
