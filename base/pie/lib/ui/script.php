@@ -106,7 +106,7 @@ class Pie_Easy_Script extends Pie_Easy_Asset
 		if ( $this->logic->count() ) {
 			
 			// begin script generation
-			$code = sprintf( '/*+++ begin script: %s */', $this->token ) . PHP_EOL;
+			$code .= sprintf( '/*+++ begin script: %s */', $this->token ) . PHP_EOL;
 			
 			// loop all logic objects
 			foreach ( $this->logic->to_array() as $logic ) {

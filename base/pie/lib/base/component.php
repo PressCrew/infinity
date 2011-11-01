@@ -139,6 +139,10 @@ abstract class Pie_Easy_Component
 			self::$__exports__->add( 'script', new Pie_Easy_Export( 'dynamic', 'js' ) );
 		}
 
+		// init style and script objects
+		$this->style();
+		$this->script();
+
 		// run init template method
 		$this->init();
 	}
