@@ -632,7 +632,7 @@ class Pie_Easy_Style_Value_Number extends Pie_Easy_Style_Value
 	 */
 	public function validate( $value )
 	{
-		throw new Exception( 'I need some work' );
+		return ( is_numeric( $value ) );
 	}
 }
 
@@ -1143,6 +1143,18 @@ class Pie_Easy_Style_Property_Primitive extends Pie_Easy_Style_Property
 	}
 
 	/**
+	 * Add number as a possible value type
+	 */
+	public function add_number()
+	{
+		if ( !$this->valmap->contains( self::KEY_NUMBER ) ) {
+			$this->valmap->add( self::KEY_NUMBER, new Pie_Easy_Style_Value_Number() );
+		}
+
+		return $this;
+	}
+
+	/**
 	 * Add percentage as a possible value type
 	 */
 	public function add_percentage()
@@ -1590,6 +1602,18 @@ class Pie_Easy_Style_Property_Factory extends Pie_Easy_Base
 	protected function prop_min_width()
 	{
 		return $this->prop_min_length( 'min-width' );
+	}
+
+	/**
+	 * Return a new opacity property object
+	 *
+	 * @return Pie_Easy_Style_Property
+	 */
+	protected function prop_opacity()
+	{
+		return
+			Pie_Easy_Style_Property_Primitive::create( 'opacity' )
+				->add_number();
 	}
 
 	/**
