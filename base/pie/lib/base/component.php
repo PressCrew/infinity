@@ -652,9 +652,10 @@ abstract class Pie_Easy_Component
 	/**
 	 * Return absolute path to default template
 	 *
+	 * @param integer $ancestor Number of ancestories to skip, including self
 	 * @return string
 	 */
-	final public function get_template_path()
+	final public function get_template_path( $ancestor = 0 )
 	{
 		// template path to return
 		$template = null;
@@ -667,7 +668,7 @@ abstract class Pie_Easy_Component
 		if ( $template ) {
 			return $template;
 		} else {
-			return $this->locate_ext_file( 'template.php' );
+			return $this->locate_ext_file( 'template.php', $ancestor );
 		}
 	}
 	
@@ -675,9 +676,10 @@ abstract class Pie_Easy_Component
 	 * Return path to an ext file
 	 *
 	 * @param string $filename
+	 * @param integer $ancestor
 	 * @return string
 	 */
-	final protected function locate_ext_file( $filename )
+	final protected function locate_ext_file( $filename, $ancestor = 0 )
 	{
 		// what class am i?
 		$r = new ReflectionClass($this);
@@ -701,6 +703,11 @@ abstract class Pie_Easy_Component
 
 		// loop all ext paths
 		foreach( $ext_paths as $ext_path ) {
+
+			// skip this ancestor?
+			if ( $ancestor-- >= 1 ) {
+				continue;
+			}
 
 			// get parent directory of class file path
 			$ext_dir = dirname( $ext_path );

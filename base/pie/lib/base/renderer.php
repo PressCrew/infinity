@@ -263,8 +263,10 @@ abstract class Pie_Easy_Renderer extends Pie_Easy_Componentable
 
 	/**
 	 * Load the component template
+	 *
+	 * @param integer $ancestor Number of ancestories to skip, including self
 	 */
-	final public function load_template()
+	final public function load_template( $ancestor = 0 )
 	{
 		// get template vars
 		$__tpl_vars__ = $this->component()->get_template_vars();
@@ -275,7 +277,7 @@ abstract class Pie_Easy_Renderer extends Pie_Easy_Componentable
 		}
 
 		// load template
-		include( $this->component()->get_template_path() );
+		include( $this->component()->get_template_path( $ancestor ) );
 	}
 
 }
