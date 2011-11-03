@@ -108,6 +108,13 @@ class Pie_Easy_Export extends Pie_Easy_Base
 	private $stack;
 
 	/**
+	 * Callback from which to retrieve data
+	 *
+	 * @var string|array
+	 */
+	private $callback;
+
+	/**
 	 * Map of child instances of self
 	 *
 	 * @var Pie_Easy_Map
@@ -126,16 +133,15 @@ class Pie_Easy_Export extends Pie_Easy_Base
 	 *
 	 * @param string $name Name of file to manage RELATIVE to export dir
 	 */
-	public function __construct( $name, $ext )
+	public function __construct( $name, $ext, $callback = null )
 	{
 		// make sure dir info is populated
 		$this->populate_dir_props();
 
 		// set primitives
 		$this->name = $name;
-
-		// set extension
 		$this->ext = $ext;
+		$this->callback = $callback;
 
 		// format the complete file name
 		$filename = $this->name . self::FILE_EXT_DELIM . $this->ext;
@@ -239,6 +245,11 @@ class Pie_Easy_Export extends Pie_Easy_Base
 	 */
 	public function push( Pie_Easy_Exportable $obj )
 	{
+		// not allowed if callback is set
+		if ( $this->callback ) {
+			throw new Exception( 'Adding exportable objects not allowed when a callback is set' );
+		}
+
 		return $this->stack->push( $obj );
 	}
 
@@ -291,10 +302,19 @@ class Pie_Easy_Export extends Pie_Easy_Base
 		// result is null by default
 		$data = null;
 
-		// loop stack and append result of export method of each
-		foreach ( $this->stack as $exportable ) {
-			/* @var $exportable Pie_Easy_Exportable */
-			$data .= $exportable->export();
+		// have a callback
+		if ( $this->callback ) {
+			// have a callback, make sure its callable
+			if ( is_callable( $this->callback ) ) {
+				// execute it
+				$data .= call_user_func( $this->callback );
+			}
+		} else {
+			// loop stack and append result of export method of each
+			foreach ( $this->stack as $exportable ) {
+				/* @var $exportable Pie_Easy_Exportable */
+				$data .= $exportable->export();
+			}
 		}
 
 		// any result?
