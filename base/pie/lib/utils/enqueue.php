@@ -241,6 +241,8 @@ final class Pie_Easy_Enqueue extends Pie_Easy_Base
 
 		// register default scripts
 		$this->register_script(
+			'webfont', 'webfont.js' );
+		$this->register_script(
 			'pie-easy-colorpicker', 'colorpicker.js', array('jquery') );
 		$this->register_script(
 			'jquery-ui-nestedsortable', 'jquery.ui.nestedSortable.js', array('jquery', 'jquery-ui-sortable') );
