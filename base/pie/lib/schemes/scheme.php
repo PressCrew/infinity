@@ -512,6 +512,17 @@ final class Pie_Easy_Scheme extends Pie_Easy_Base
 	}
 
 	/**
+	 * Do a hard refresh of all component exports
+	 */
+	public function exports_refresh_hard()
+	{
+		// try to refresh against every exporter
+		foreach ( Pie_Easy_Component::get_exports() as $export ) {
+			$export->refresh_hard();
+		}
+	}
+
+	/**
 	 * Enable components for the scheme by passing a valid policy object
 	 *
 	 * @param Pie_Easy_Policy $policy

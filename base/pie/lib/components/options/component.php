@@ -76,6 +76,14 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 
 	/**
 	 */
+	public function init_styles_dynamic()
+	{
+		parent::init_styles_dynamic();
+		$this->refresh_style_property();
+	}
+
+	/**
+	 */
 	public function configure( $config, $theme )
 	{
 		// RUN PARENT FIRST!
@@ -121,41 +129,8 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 			$this->directives()->set( $theme, 'style_section', $config['style_section'] );
 		}
 
-		if ( $this->style_selector && $this->style_property ) {
-
-			// setup property object
-			$this->__style_property__ =
-				Pie_Easy_Style_Property_Factory::instance()->create( $this->style_property );
-
-			// determine value to set
-			if ( $this instanceof Pie_Easy_Options_Option_Attachment_Image ) {
-				$value = $this->get_image_url( 'full' );
-			} elseif ( $this instanceof Pie_Easy_Options_Option_Static_Image ) {
-				$value = $this->get_image_url();
-			} else {
-				$value = $this->get();
-			}
-
-			// try to set the value
-			if ( !is_null( $value ) && $this->__style_property__->set_value( $value, $this->style_unit ) ) {
-
-				// get the style value
-				$style_value = $this->__style_property__->get_value();
-
-				// add value to component styles if set
-				if ( isset( $style_value->value ) ) {
-					if ( $this->style_section ) {
-						$rule = $this->style()->get_section($this->style_section)->rule( $this->style_selector );
-					} else {
-						$rule = $this->style()->rule( $this->style_selector );
-					}
-					$rule->add_declaration(
-						$this->__style_property__->name,
-						$this->__style_property__->get_value()->format()
-					);
-				}
-			}
-		}
+		// setup style property object
+		$this->refresh_style_property();
 
 		// field options
 		// @todo this grew too big, move to private method
@@ -458,6 +433,52 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 	private function get_api_name()
 	{
 		return $this->get_api_prefix() . $this->name;
+	}
+
+	/**
+	 * @todo need to get rid of this mess once fields component is working
+	 */
+	private function refresh_style_property()
+	{
+		// set to null in case it should not exist anymore
+		$this->__style_property__ = null;
+
+		// must have selector and property
+		if ( $this->style_selector && $this->style_property ) {
+
+			// setup property object
+			$this->__style_property__ =
+				Pie_Easy_Style_Property_Factory::instance()->create( $this->style_property );
+
+			// determine value to set
+			if ( $this instanceof Pie_Easy_Options_Option_Attachment_Image ) {
+				$value = $this->get_image_url( 'full' );
+			} elseif ( $this instanceof Pie_Easy_Options_Option_Static_Image ) {
+				$value = $this->get_image_url();
+			} else {
+				$value = $this->get();
+			}
+
+			// try to set the value
+			if ( !is_null( $value ) && $this->__style_property__->set_value( $value, $this->style_unit ) ) {
+
+				// get the style value
+				$style_value = $this->__style_property__->get_value();
+
+				// add value to component styles if set
+				if ( isset( $style_value->value ) ) {
+					if ( $this->style_section ) {
+						$rule = $this->style()->get_section($this->style_section)->rule( $this->style_selector );
+					} else {
+						$rule = $this->style()->rule( $this->style_selector );
+					}
+					$rule->add_declaration(
+						$this->__style_property__->name,
+						$this->__style_property__->get_value()->format()
+					);
+				}
+			}
+		}
 	}
 }
 

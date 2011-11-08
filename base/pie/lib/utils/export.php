@@ -340,12 +340,11 @@ class Pie_Easy_Export extends Pie_Easy_Base
 	 * If given timestamp is more recent than file last modified time, update the file
 	 *
 	 * @param integer $timestamp Unix timestamp
-	 * @param boolean $force Set to true to force a refresh even if file has been updated already
 	 * @return boolean
 	 */
-	public function refresh( $timestamp, $force = false )
+	public function refresh( $timestamp )
 	{
-		if ( $this->updated && !$force ) {
+		if ( $this->updated ) {
 			return true;
 		} else {
 			// must be a number
@@ -361,13 +360,24 @@ class Pie_Easy_Export extends Pie_Easy_Base
 					}
 				} else {
 					// doesn't exist, update it
-					$this->update();
+					return $this->update();
 				}
 			}
 
 			// did NOT refresh
 			return false;
 		}
+	}
+
+	/**
+	 * Force update the file, ignoring any conditions
+	 *
+	 * @return boolean
+	 */
+	public function refresh_hard()
+	{
+		// update without any stat checks
+		return $this->update();
 	}
 
 	/**
