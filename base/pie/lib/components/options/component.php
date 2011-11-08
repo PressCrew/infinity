@@ -129,7 +129,7 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 
 			// determine value to set
 			if ( $this instanceof Pie_Easy_Options_Option_Attachment_Image ) {
-				$value = $this->get_image_url();
+				$value = $this->get_image_url( 'full' );
 			} elseif ( $this instanceof Pie_Easy_Options_Option_Static_Image ) {
 				$value = $this->get_image_url();
 			} else {
