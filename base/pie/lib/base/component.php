@@ -221,9 +221,11 @@ abstract class Pie_Easy_Component
 			$this->__style__ = new Pie_Easy_Style();
 
 			// init style export
-			$this->__style__
-				->on_export( array( $this, 'init_styles_dynamic' ) )
-				->exporter( self::$__exports__->item_at( 'style' ) );
+			if ( $this->supported() ) {
+				$this->__style__
+					->on_export( array( $this, 'init_styles_dynamic' ) )
+					->exporter( self::$__exports__->item_at( 'style' ) );
+			}
 			
 			// init style sections
 			$this->__style__
@@ -248,9 +250,11 @@ abstract class Pie_Easy_Component
 			$this->__script__ = new Pie_Easy_Script();
 
 			// init script export
-			$this->__script__
-				->on_export( array( $this, 'init_scripts_dynamic' ) )
-				->exporter( self::$__exports__->item_at( 'script' ) );
+			if ( $this->supported() ) {
+				$this->__script__
+					->on_export( array( $this, 'init_scripts_dynamic' ) )
+					->exporter( self::$__exports__->item_at( 'script' ) );
+			}
 			
 			// init script sections
 			$this->__script__
