@@ -174,11 +174,15 @@ require_once( INFINITY_PIE_DIR . DIRECTORY_SEPARATOR . 'loader.php' );
 Pie_Easy_Loader::init( INFINITY_PIE_URL, 'Infinity_Exts' );
 
 // initialize enqueuer and configure actions
-Pie_Easy_Enqueue::instance()
-	->styles_on_action( 'wp_print_styles' )
-	->scripts_on_action( 'wp_print_scripts' )
-	->styles_on_action( 'load-toplevel_page_' . INFINITY_ADMIN_PAGE )
-	->scripts_on_action( 'load-toplevel_page_' . INFINITY_ADMIN_PAGE );
+if ( is_admin() ) {
+	Pie_Easy_Enqueue::instance()
+		->styles_on_action( 'load-toplevel_page_' . INFINITY_ADMIN_PAGE )
+		->scripts_on_action( 'load-toplevel_page_' . INFINITY_ADMIN_PAGE );
+} else {
+	Pie_Easy_Enqueue::instance()
+		->styles_on_action( 'wp_print_styles' )
+		->scripts_on_action( 'wp_print_scripts' );
+}
 
 // load Infinity API
 require_once( INFINITY_PIEXT_DIR . DIRECTORY_SEPARATOR . 'scheme.php' );
