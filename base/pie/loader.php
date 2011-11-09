@@ -315,7 +315,7 @@ final class Pie_Easy_Loader extends Pie_Easy_Base
 
 		// loop through all exts
 		foreach ( $exts as $ext ) {
-			return self::$instance->load_libext( $ext );
+			self::$instance->load_libext( $ext );
 		}
 	}
 
