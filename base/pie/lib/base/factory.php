@@ -61,7 +61,16 @@ abstract class Pie_Easy_Factory extends Pie_Easy_Componentable
 			}
 
 		} else {
-			return Pie_Easy_Loader::load_libext( $ext_full );
+
+			// try for a distro extension
+			$class_name = Pie_Easy_Loader::load_libext( $ext_full );
+
+			// class must exist
+			if ( class_exists( $class_name ) ) {
+				return $class_name;
+			} else {
+				throw new Exception( sprintf( 'The "%s" extension does not exist!', $ext_full ) );
+			}
 		}
 	}
 
