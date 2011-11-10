@@ -18,7 +18,7 @@
 			do_action( 'open_content' );
 			do_action( 'open_single' );
 		?>
-		<div class="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+		<div class="post">
 			<?php
 				infinity_get_template_part( 'templates/loops/loop', 'single' );
 			?>
@@ -32,3 +32,5 @@
 	infinity_get_sidebar();
 	infinity_get_footer();
 ?>
+
+

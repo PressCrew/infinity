@@ -24,7 +24,7 @@
 				<?php printf( __( 'You are browsing the archive for %1$s.', infinity_text_domain ), wp_title( false, false ) ); ?>
 			</h1>
 			<?php
-				infinity_get_template_part( 'templates/loops/loop', 'archive' );
+				infinity_get_template_part( 'templates/loops/loop', 'excerpt' );
 			?>
 		</div>
 		<?php

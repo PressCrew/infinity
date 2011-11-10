@@ -25,7 +25,7 @@
 				?>
 			</h1>
 			<?php
-				infinity_get_template_part( 'templates/loops/loop', 'search' );
+				infinity_get_template_part( 'templates/loops/loop', 'excerpt' );
 		else: ?>
 			<div id="post-0" class="post no-results not-found">
 				<h2 class="entry-title">

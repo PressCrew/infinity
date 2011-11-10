@@ -55,7 +55,9 @@ function infinity_base_post_thumb_sizes()
 		set_post_thumbnail_size( 35, 35, true );
 		add_image_size( 'post-image', 674, 140, true );
 		add_image_size( 'featured-single', 960, 160, true ); 
-		add_image_size( 'slider-full', 960, 300, true );
+		add_image_size( 'slider-full', 980, 360, true );
+		add_image_size( 'slider-posts', 709, 265, true );
+		add_image_size( 'widget', 300, '', true );
 		add_image_size( 'large', 680, '', true );
 		add_image_size( 'medium', 250, '', true );
 		add_image_size( 'small', 125, '', true );

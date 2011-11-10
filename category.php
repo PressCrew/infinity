@@ -21,7 +21,7 @@
 		<div class="page" id="blog-category">
 			<?php
 				infinity_get_template_part( 'templates/parts/introduction-boxes' );
-				infinity_get_template_part( 'templates/loops/loop', 'category' );
+				infinity_get_template_part( 'templates/loops/loop', 'excerpt' );
 			?>
 		</div>
 		<?php

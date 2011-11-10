@@ -19,7 +19,7 @@
 			do_action( 'open_loop' );
 ?>
 			<!-- the post -->
-			<div class="post" id="post-<?php the_ID(); ?>">
+			<div <?php post_class(); ?> id="post-<?php the_ID(); ?>">
 				<div class="post-content">
 					<h1 class="posttitle">
 						<?php the_title(); ?>
