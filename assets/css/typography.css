@@ -1,0 +1,169 @@
+/* ============================================= */
+/* ! Typography and Tags (ul, li,a, input etc)   */
+/* ============================================= */
+body {
+    /* Fix for webkit rendering */
+    font: 13px/21px "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #444;
+    -webkit-text-size-adjust: 100%;
+  	-ms-text-size-adjust: 100%;
+  	text-rendering: optimizeLegibility;
+  	-webkit-font-smoothing: antialiased;
+}
+ol, ul { padding: 0 }
+p {
+    font-weight: normal;
+    line-height: 18px;
+    margin-bottom: 9px;
+}
+p small {
+    font-size: 11px;
+    color: #bfbfbf;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+    color: #404040;
+}
+h2 small { font-size: 14px }
+h1 small { font-size: 18px }
+h1 small, h2 small, h3 small, h4 small, h5 small, h6 small { color: #bfbfbf }
+h3 small { font-size: 14px }
+h4 small { font-size: 12px }
+h1 {
+    margin-bottom: 18px;
+    font-size: 30px;
+    line-height: 32px;
+}
+h2 {
+    font-size: 24px;
+    line-height: 36px;
+    margin-bottom: 10px;
+}
+h2.pagetitle a, h2.posttitle a, h1.pagetitle a, h1.posttitle a {
+    color: #444444;
+    margin-bottom: 0;
+    margin-top: 0;
+    font-size: 24px;
+}
+h2.pagetitle a:hover, h2.posttitle a:hover, h1.pagetitle a:hover, h1.posttitle a:hover { color: #999 }
+.pagetitle { margin-top: 0px }
+h3, h4, h5, h6 {
+    line-height: 36px;
+    margin-bottom: 10px;
+}
+h3 { font-size: 18px }
+h4 { font-size: 16px }
+h5 { font-size: 14px }
+h6 {
+    font-size: 13px;
+    color: #bfbfbf;
+    text-transform: uppercase;
+}
+p { margin: 0 0 20px }
+p.lead {
+    line-height: 27px;
+    color: #777;
+    font-size: 21px;
+}
+em { font-style: italic }
+strong { font-weight: bold }
+small { font-size: 80% }
+hr {
+    background-color: #DDDDDD;
+    border: 0 none;
+    margin-top: 10px !important;
+}
+/* #Links */
+a:hover, a:visited:hover { color: #777 }
+.post ul, .post ol { margin: 10px 10px 18px 25px }
+.post ul ul, .post ul ol, .post ol ol, .post ol ul { margin-bottom: 0 }
+.post ul { list-style: disc }
+.post ol { list-style: decimal }
+.post li {
+    line-height: 18px;
+    list-style: disc inside none;
+}
+.moretag { margin-left: 10px }
+.post ul.unstyled {
+    list-style: none;
+    margin-left: 0;
+}
+.post dl { margin-bottom: 18px }
+.post dl dt, dl dd { line-height: 18px }
+.post dl dt { font-weight: bold }
+.post hr {
+    margin: 20px 0 19px;
+    border: 0;
+    border-bottom: 1px solid #eee;
+}
+strong {
+    font-style: inherit;
+    font-weight: bold;
+}
+em {
+    font-style: italic;
+    font-weight: inherit;
+    line-height: inherit;
+}
+.muted { color: #bfbfbf }
+blockquote {
+    margin-bottom: 18px;
+    border-left: 5px solid #eee;
+    padding-left: 15px;
+}
+blockquote small {
+    display: block;
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 18px;
+    color: #bfbfbf;
+}
+blockquote small:before { content: '\2014 \00A0' }
+blockquote p {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 18px;
+    margin-bottom: 0;
+}
+address {
+    display: block;
+    line-height: 18px;
+    margin-bottom: 18px;
+}
+code, pre {
+    padding: 0 3px 2px;
+    font-family: Monaco, Andale Mono, Courier New, monospace;
+    font-size: 12px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+code {
+    background-color: #fee9cc;
+    color: rgba(0, 0, 0, 0.75);
+    padding: 1px 3px;
+}
+pre {
+    background-color: #f5f5f5;
+    display: block;
+    padding: 8.5px;
+    margin: 0 0 18px;
+    line-height: 18px;
+    font-size: 12px;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    white-space: pre;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+.clear {
+    clear: both;
+    display: block;
+    font-size: 0;
+    height: 0;
+    line-height: 0;
+    width: 100%;
+}

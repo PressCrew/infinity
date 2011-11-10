@@ -1,5 +1,13 @@
+/*
+----------------------------------------------------------------
+BuddyPress Default Styling.
+
+You can disable the css in this file by adding the following code to your child theme config/infinity.ini file
+
+infinity-bp-support = off
+--------------------------------------------------------------*/
 /* ============================== */
-/* ! BuddyPress Specific Buttons  */
+/* BuddyPress Infinity Tweaks  */
 /* ============================== */
 
 .activity-list .activity-header a:first-child,
@@ -50,9 +58,11 @@ div#sidebar ol,div#sidebar ul {
 .activity-read-more {
 margin-left: 5px;
 }
+
 /* ================================================================================================
 /* ! BuddyPress Default Styling. This has been taken directly from latest version of BP-Default.css   */
 /* ================================================================================================== */
+
 /* > Item Headers (Profiles, Groups)
 -------------------------------------------------------------- */
 div#item-header {
@@ -73,6 +83,10 @@ div#item-header img.avatar {
     float: left;
     margin: 0 15px 25px 0;
 }
+.achievements div#item-header img.avatar {
+max-width: 93%;
+}
+
 div#item-header h2 { margin-bottom: 5px }
 div#item-header span.activity,
 div#item-header h2 span.highlight {
@@ -262,9 +276,9 @@ div.item-list-tabs ul li a span {
     color: inherit;
 }
 div.item-list-tabs ul li a span {
-    background: #EF7D3C;
+    background: none repeat scroll 0 0 #272625;
     border-radius: 3px 3px 3px 3px;
-    color: #FFFFFF;
+    color: #DDD;
     display: inline;
     font-size: 90%;
     margin-left: 2px;
@@ -376,20 +390,20 @@ div.pagination .pagination-links a {
 }
 div.pagination .pagination-links a:hover { font-weight: bold }
 div#pag-bottom { margin-top: 0 }
-div#sidebar div.item-options {
+ div.item-options {
     color: #73C1E6;
     font-size: 9.8px;
     font-weight: bold;
     text-transform: uppercase;
 }
-div#sidebar div.item-avatar img {
+div.item-avatar img {
     display: block;
     float: left;
     height: 40px;
     margin: 5px 5px 5px 0;
     width: 40px;
 }
-div#sidebar .avatar-block { overflow: hidden }
+.avatar-block { overflow: hidden }
 /* > Error / Success Messages
 -------------------------------------------------------------- */
 div#message { margin: 15px 0 }

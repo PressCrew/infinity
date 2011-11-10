@@ -1,0 +1,431 @@
+/* ! WordPress Styling
+
+This CSS file contains all the default WordPress Styling.
+//Posts & Pages	
+	+ Display
+	+ Meta & Breadcrumbs
+	+ Author/Category/Tag Boxes
+	+ Comments
+
+You can disable the css in this file by adding the following code to your child theme config/infinity.ini file
+
+infinity-wordpress-style = off
+
+/*
+================================================== */
+/* Post Meta */
+span.edit-link {
+    margin-left: 1px;
+    margin-right: 9px;
+    float: right;
+}
+span.edit-link a { color: #999 }
+/* The actual Posts*/
+.posttitle {
+
+}
+.entry {
+    min-height: 110px;
+    margin-top: 10px;
+}
+.post dd.wp-caption p.wp-caption-text,
+.wp-caption-text {
+    font-style: italic;
+    line-height: 17px;
+    margin: 0 !important;
+    padding: 0 4px 5px 0;
+    font-size: 12px;
+}
+.post-meta-data span {
+    border-right: 1px solid #DDD;
+    margin-right: 5px;
+    padding-right: 5px;
+}
+.post .author-box img,
+.comment-avatar-box img {
+    float: none;
+    margin: 0;
+    border: 4px solid #fff;
+}
+.post img.alignright {
+    margin: 0 0 2px 7px;
+    display: inline;
+    padding: 4px;
+}
+.post img.wp-smiley {
+    float: none !important;
+    clear: none !important;
+    margin: 0 !important;
+    border: none !important;
+    padding: 0 !important;
+}
+.post .post-content,
+.post img.alignleft {
+    margin: 0 7px 2px 0;
+    display: inline;
+    padding: 4px;
+}
+.post .aligncenter,
+.post .aligncenter {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+.post img.centered,
+img.aligncenter {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+.post img {
+    max-width: 100%;
+    height: auto;
+}
+.post .wp-caption {
+    text-align: center;
+    padding-top: 4px;
+    border-radius: 3px;
+    background-color: #f3f3f3;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border: 1px solid #ddd;
+}
+.post .wp-caption img {
+    margin: 0;
+    border: 0 none;
+    padding: 0;
+}
+.post blockquote {
+    font-style: italic;
+    font-family: georgia, times, serif;
+    line-height: 150%;
+    quotes: none;
+    padding: 0 3em;
+    font-size: 16px;
+}
+.post blockquote {
+    font-style: italic;
+    line-height: 150%;
+    margin-left: 20px;
+    color: #6C6C6C;
+    quotes: none;
+    padding: 10px 20px 0;
+    font-size: 17px;
+}
+.post code { font-family: "Monaco", courier, sans-serif }
+.post pre,
+.post code p {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #E0E0E0;
+    padding: 3px 5px;
+    font-size: 11.5px;
+}
+.postthumb img {
+    border: 1px solid #DDDDDD;
+    padding: 5px;
+    max-width: 98%;
+    height: auto;
+}
+.post img a:hover { background: #EFEFEF }
+.post p { margin: 0 0 20px 0 }
+.post .gallery-caption { }
+#single-attachment img {
+margin-top: 25px;
+margin-bottom: 25px;
+}
+/* Post Titles */
+/* Captions */
+/* Block Quotes */
+/* page links */
+.page-link {
+    font-weight: bold;
+    word-spacing: 0.5em;
+    margin: 0 0 22px;
+}
+.page-link a:active,
+.page-link a:hover { color: #FF4B33 }
+.page-link a:link,
+.page-link a:visited {
+    font-weight: normal;
+    border: 1px solid #DDD;
+    padding: 5px 8px;
+}
+.home .sticky .page-link a {}
+/* code in posts */
+.post .alignright {
+    margin-left: 15px;
+    float: right;
+    margin-bottom: 15px;
+}
+.post .alignleft {
+    margin-right: 15px;
+    float: left;
+}
+/* per post navigation and pagination */
+ul.page-numbers li a,
+.paged-navigation,
+.comment-navigation {
+    font-size: 14px;
+    font-weight: bold;
+    height: 38px;
+    margin: 0 2px 10px 0;
+    text-align: center;
+    word-spacing: 10px;
+}
+ul.page-numbers {
+    text-align: center;
+    margin-bottom: 20px;
+}
+ul.page-numbers li { display: inline }
+.pagination {
+    border-bottom: 1px solid #EAEAEA;
+    color: #888888;
+    font-size: 12px;
+    height: 16px;
+    padding: 10px;
+}
+.pagination#user-pag,
+.friends .pagination,
+.mygroups .pagination,
+.myblogs .pagination {
+    background: #f8f8f8;
+    border: none;
+    padding: 8px 15px;
+}
+/*Post Meta */
+.post .post-meta-data,
+.comment-meta,
+.comment-options,
+p#breadcrumbs {
+    border-bottom: 1px solid #EFEFEF;
+    border-top: 1px solid #EFEFEF;
+    color: #AAAAAA;
+    font-size: 11.5px;
+    font-weight: bold;
+    margin-top: 10px;
+    min-height: 20px;
+    padding: 3px 0;
+    margin-bottom: 10px;
+}
+p#breadcrumbs { margin-top: 0px }
+/* Intro Boxes for authors, categories and tags */
+.post-author-box {
+    float: right;
+    padding: 3px;
+    display: none;
+}
+.post-author-box img {
+    width: 50px;
+    height: 50px;
+}
+.author-box,
+.category-box,
+.tag-box,
+.info-box {
+    margin-bottom: 20px;
+    border: 1px solid #DDDDDD;
+    background: #F9F9F9;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    padding: 10px;
+}
+
+h1#category-title,
+h1#tag-title {
+    font-style: normal;
+    color: #999;
+    font-size: 16px;
+    line-height: 18px;
+}
+h1#category-title span,
+h1#tag-title span { color: #555 }
+.authorbox h3 {
+    font-style: normal;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #555555;
+    font-size: 16px;
+}
+#author-description {
+    padding: 0 10px 10px;
+}
+#author-description img {
+    margin-top: 2px;
+    margin-right: 10px;
+    float: left;
+}
+#category-description,
+#tag-description {
+    padding: 10px;
+}
+#author-social {
+    float: right;
+    width: 25%;
+}
+
+/*Search Page*/
+
+.search-title {
+    font-size: 18px;
+    color: #999;
+}
+
+.search-title span {
+color: #444;
+}
+
+/* ============ */
+/* ! Comments   */
+/* ============ */
+.comment-content {
+    margin-bottom: 40px;
+    position: relative;
+}
+#comments {
+    margin-top: 20px;
+    border-top: 1px solid rgba(0,0,0,0.07);
+    position: relative;
+}
+#comments .pingbacks li.pingback { margin: 10px 0 }
+#comments .pingbacks li.pingback .reply { display: none }
+#comments .cancel-comment-reply { margin: 10px 0 }
+#comments .comment.thread-even {
+    background: #fafafa;
+    background: rgba(0,0,0,0.02);
+    border-bottom: 1px solid #e6e6e6;
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+}
+#comments .comment-entry p {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 0 0 10px 62px;
+}
+#comments .bypostauthor { background: #EFEFEF }
+#comments .comment-head { margin: 0 0 15px 0 }
+#comments .comment-head .name {
+    font-weight: bold;
+    margin: 0;
+    font-size: 15px;
+}
+#comments .comment-head .date,
+#comments .comment-head .edit,
+#comments .comment-head .perma { font-size: 11px }
+#comments .avatar img {
+    background: #FFFFFF;
+    vertical-align: middle;
+    width: 40px;
+    height: 40px;
+    margin: 0;
+    border: 1px solid #DDDDDD;
+    padding: 3px;
+}
+#comments ul.children {
+    margin: 10px 10px 0 25px;
+    padding: 0;
+}
+#comments ul.children li { border-top: 1px solid #E6E6E6 }
+#comments .navigation { }
+#comments .navigation a {
+    text-decoration: none;
+    margin: 15px 0 0 0;
+    display: block;
+}
+#comments .navigation a:hover { }
+#comments blockquote {
+    font-style: italic;
+    padding-top: 5px;
+    font-weight: bold;
+    line-height: 150%;
+    padding-left: 0;
+    padding-bottom: 5px;
+    color: #545454;
+}
+#comments .comment {
+    margin-top: 10px;
+    list-style-type: none;
+    width: 100%;
+}
+#comments .comment .comment-container {
+    padding: 20px;
+    position: relative;
+}
+#comments h3#pings { margin-top: 25px }
+#comments  .avatar {
+    float: left;
+    margin: 0 15px 10px 0;
+}
+#comments .reply { padding: 5px 8px }
+#comments .reply a { font-size: 11px }
+#comments h3 { }
+ol.commentlist {
+    margin-left: 0px;
+    list-style: none;
+}
+/* The Comments Forms */
+#respond { margin: 40px 0 0 }
+#respond #reply-title small {
+    margin-top: 5px;
+    display: block;
+    font-size: 13px;
+}
+#respond span.required {
+    color: #CFCFCF;
+    display: block;
+    float: left;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 4px 0 0 -12px;
+}
+#respond .right {
+    float: left;
+    width: 380px;
+}
+#respond label {
+    color: #777777;
+    padding: 4px 0;
+    font-size: 11px;
+}
+#respond .left {
+    margin-right: 15px;
+    float: left;
+    width: 200px;
+}
+#commentform { margin: 10px 0 0 10px; }
+#commentform input.txt,
+#commentform textarea {
+    border-color: #ccc #efefef #efefef #ccc;
+    border-width: 1px;
+    border-style: solid;
+}
+li.bypostauthor { background: none repeat scroll 0 0 #F8FDFF !important }
+#commentform input.txt {
+    background: #fcfcfc;
+    width: 170px;
+    color: #666;
+    margin: 0 5px 10px 0;
+    padding: 5px 7px;
+}
+#commentform textarea {
+    width: 95%;
+    height: auto;
+}
+#commentform #submit { margin: 15px 0 0 0 }
+/* Pingsbacks */
+h3#pings { margin: 25px 0 10px 0 }
+.pinglist li {
+    list-style-type: decimal;
+    margin: 0 0 0 20px;
+}
+.pinglist li .pingcontent {
+    margin: 10px 0;
+    display: block;
+}
+.pinglist li .author {
+    font-weight: bold;
+    font-size: 15px;
+}
+.pinglist li .date { font-size: 11px }
+p.form-allowed-tags { width: 70% }
+

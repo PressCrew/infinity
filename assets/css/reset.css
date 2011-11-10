@@ -1,0 +1,10 @@
+/* ! The Reset
+
+The Infinity Reset. If you want to use another one add this to your
+Child Theme config/infinity.ini
+
+infinity-reset-style = off
+
+/*
+================================================== */
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{background:transparent;vertical-align:baseline;margin:0;border:0;padding:0;outline:0}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}label span,legend span{font-weight:normal;color:#444;font-size:13px}a,a:visited{font-weight:bold;text-decoration:none;color:#60a2c1;outline:0}a:hover,a:visited:hover{color:#777}p img{margin:0}a img{border:none}ul ul,ul ol,ol ol,ol ul{margin:4px 0 5px 30px}ul ul li,ul ol li,ol ol li,ol ul li{margin-bottom:6px}li p{line-height:21px}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}:focus{outline:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-spacing:0;border-collapse:collapse}.clearfix{display:inline-block}.clearfix:before,.clearfix:after,.row:before,.row:after{visibility:hidden;width:0;height:0;content:'\0020';display:block;overflow:hidden}.row:after,.clearfix:after{clear:both}.clearfix:after{visibility:hidden;clear:both;height:0;content:".";display:block}some_nowhitespace{nowhitespace:afterproperty}/*\*/.clearfix{display:block}some_nowhitespace{nowhitespace:afterproperty}/**/.none{display:none}

@@ -1,0 +1,375 @@
+/*
+----------------------------------------------------------------
+//LAYOUT
+	+ Global & Wraps
+	+ Header
+	+ Navigation Menus
+	+ Content
+	+ Sidebar
+	+ Footer
+	
+You can disable the css in this file by adding the following code to your child theme config/infinity.ini file
+
+infinity-layout-style = off
+--------------------------------------------------------------*/
+/* ================== */
+/* ! Global & Wraps   */
+/* ================== */
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: none;
+}
+#wrapper {
+    margin: 30px auto;
+    max-width: 1150px;
+}
+.top-wrap { position: relative }
+.main-wrap {
+    padding-top: 40px;
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 40px;
+}
+.footer-wrap {
+    padding-: 20px;
+    position: relative;
+    background: #F8F8F8;
+}
+
+/* Top Menu */
+#top-menu-wrap, #sub-menu-wrap {
+    border-bottom: 2px solid #DDD;
+    background: none repeat scroll 0 0 #F8F8F8;
+    border-top: 1px solid #DDDDDD;
+    position: relative;        
+    height: 30px;
+    padding: 5px 10px;
+}
+
+#top-menu-wrap {
+    z-index: 1;
+}
+#main-menu-wrap {
+    top: 43%;
+    float: right;
+    right: 20px;
+    padding: 5px;
+    position: relative;
+}
+#main-menu-wrap ul.sub-menu { z-index: 99 }
+.main-menu { padding-left: 0px !important }
+/* Change font styling for the top and sub menus */
+#sub-menu-wrap ul a span,
+#top-menu-wrap ul a span {
+    text-transform: uppercase;
+    font-size: 10.5px;
+}
+
+/* menu divider */
+.base-menu ul li.menu-divider {
+	text-align: center;
+}
+/* always hide last menu divider */
+.base-menu ul li.menu-divider:last-child {
+	display: none;
+}
+
+/* ========== */
+/* ! Header   */
+/* ========== */
+
+#header {
+    height: 200px;
+    position: relative;
+}
+#site-description {
+    font-style: italic;
+    padding-left: 10px;
+    color: #999999;
+    position: relative;
+    font-size: 14px;
+    line-height: 180%;
+    font-weight: bold;
+}
+h1#site-title {
+    font-size: 26px;
+    line-height: 180%;
+    padding-left: 20px;
+    position: absolute;
+    top: 35%;
+}
+div#site-title {
+    font-size: 26px;
+    line-height: 180%;
+    position: absolute;
+    top: 25%;
+    padding-left: 20px;
+}
+#site-title a {
+    margin-bottom: -29px;
+    display: block;
+}
+
+/* ========================== */
+/* ! /* Navigation Menus */   */
+/* ========================== */
+
+.base-menu { padding-left: 10px;
+padding-right: 10px; }
+.base-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.base-menu ul li {
+    float: left;
+    position: relative;
+}
+.base-menu ul li.right {
+float: right;	
+}
+.base-menu ul li li:hover ul,
+.base-menu ul li li.sfHover ul,
+.base-menu ul li li li:hover ul,
+.base-menu ul li li li.sfHover ul,
+.base-menu ul li li li li:hover ul,
+.base-menu ul li li li li.sfHover ul {
+    /* match .nav ul width */
+    top: -1px;
+    left: 180px;
+}
+.base-menu ul li:hover {
+    visibility: inherit; /* fixes IE7 'sticky bug' */
+}
+.base-menu ul li:hover li ul,
+.base-menu ul li.sfHover li ul,
+.base-menu ul li li:hover li ul,
+.base-menu ul li li.sfHover li ul,
+.base-menu ul li li li:hover li ul,
+.base-menu ul li li li.sfHover li ul { top: -9999em }
+.base-menu ul li:hover ul,
+.base-menu ul li.sfHover ul {
+    top: 27px;
+    /* match top ul list item height */
+    left: 0px;
+    z-index: 95;
+}
+.base-menu ul ul {
+    background: #222;
+    top: -9999em;
+    width: 210px;
+    /* left offset of submenus need to match (see below) */
+    margin: 3px 0 0 0;
+    padding: 15px 5px 15px 5px;
+    z-index: 50;
+    position: absolute;
+}
+.base-menu ul ul li {
+    float: left;
+    width: 150px;
+    padding: 0 5px 0 5px;
+}
+.base-menu ul ul li { width: 85% }
+.base-menu ul ul li:first-child { border-top: none }
+.base-menu ul ul li:last-child { border-bottom: none }
+.base-menu ul ul li a {
+    font-weight: normal;
+    text-transform: none;
+    width: 180px;
+    color: #B5B5B5;
+    padding: 5px 0 5px 0;
+    font-size: 13px;
+}
+.base-menu ul a {
+    font-weight: bold;
+    float: left;
+    padding: 0 3px 0 10px;
+    font-size: 13px;
+    margin-right: 5px;
+}
+.base-menu ul a:hover,
+.base-menu ul li.sfHover a,
+.base-menu ul li.current-cat a,
+.base-menu ul li.current_page_item a,
+.base-menu ul li.current-menu-item a {
+    text-decoration: none;
+    background-color: #EFEFEF;
+    /* Left image */
+}
+.base-menu li li a:hover,
+.base-menu li.sfHover li a { background: none }
+.base-menu li li a span.sf-sub-indicator,
+.base-menu li.sfHover li a span.sf-sub-indicator {
+    float: right;
+    margin: 5px 0 0 0;
+}
+.sf-sub-indicator {
+    padding: 4px 4px 4px 0 !important;
+}
+.base-menu li a span {
+    letter-spacing: 1px;
+    float: left;
+    cursor: pointer;
+    display: block;
+    padding: 4px 4px 4px 0;
+}
+.base-menu li li a span { padding: 0 }
+.base-menu ul li.sfHover li a,
+.base-menu ul li.sfHover li a span {
+    font-weight: normal !important;
+    text-transform: none !important;
+    letter-spacing: 0px !important;
+    font-size: 12.8px !important;
+}
+.base-menu ul li.sfHover li a:hover,
+.base-menu ul li.sfHover li a span:hover {
+}
+/*  Make sub menus appear */
+.base-menu ul li:hover ul,
+.base-menu ul li.sfHover ul {
+    left: -1px;
+    top: 36px; /* match top ul list item height */
+    z-index: 99;
+}
+/* Hide all subs subs (4 levels deep) */
+.base-menu ul li:hover li ul,
+.base-menu ul li.sfHover li ul,
+.base-menu ul li li:hover li ul,
+.base-menu ul li li.sfHover li ul,
+.base-menu ul li li li:hover li ul,
+.base-menu ul li li li.sfHover li ul { top: -9999em }
+/* Displays all subs subs (4 levels deep) */
+.base-menu ul li li:hover ul,
+.base-menu ul li li.sfHover ul,
+.base-menu ul li li li:hover ul,
+.base-menu ul li li li.sfHover ul,
+.base-menu ul li li li li:hover ul,
+.base-menu ul li li li li.sfHover ul {
+    left: 180px; /* match .nav ul width */
+    top: -1px;
+}
+/* 2nd level skin */
+.base-menu ul ul {
+    position: absolute;
+    top: -9999em;
+    width: 180px; /* left offset of submenus need to match (see below) */
+    padding: 15px 5px 15px 5px;
+    margin: 3px 0 0 0;
+    -webkit-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background: #FFF;
+}
+.base-menu ul ul li {
+    float: left;
+    width: 150px;
+    background: none;
+    padding: 0 5px 0 5px;
+}
+.base-menu ul li a span {
+    color: #777777;
+}
+.base-menu ul ul li:first-child { border-top: none }
+.base-menu ul ul li:last-child { border-bottom: none }
+.base-menu ul ul li a {
+    font-size: 13px !important;
+    text-transform: none !important;
+    font-weight: normal;
+    padding: 5px 0 5px 0;
+    width: 150px;
+}
+.base-menu ul li a{ background: none;
+    border-radius: 5px 5px 5px 5px; }
+    
+/* =========== 
+ ! Content  
+ =========== */
+ 
+/* Fallback for browsers who don't have JS enabled */
+
+#content, #sidebar {
+	margin-left: 0.41666666666667%;
+	margin-right: 0.41666666666667%;
+	float: left;
+	display: block;
+}
+
+#content {
+width: 65.833333333333%;
+}   
+     
+/* =========== 
+ ! Sidebar   
+ =========== */
+
+/* Fallback for browsers who don't have JS enabled */ 
+#sidebar {
+width: 32.5%;
+} 
+ 
+#sidebar h4 a.widgettitle { color: #F4F4F4!important }
+#sidebar .widget_search { margin-top: 20px }
+#sidebar .widget_search input[type=text] {
+    width: 110px;
+    padding: 2px;
+}
+#sidebar ul ul,
+#sidebar ul ol,
+#sidebar ol ol,
+#sidebar ol ul { margin: 0px }
+#pattern { display: none }
+#inner-sidebar { padding-left: 20px }
+/* Widgets */
+.widget { margin-bottom: 30px }
+.widget h4 {
+    border-bottom: 1px solid #EFEFEF;
+    color: #999999;
+    font-size: 11.8px;
+    letter-spacing: 1px;
+    line-height: 24px;
+    text-transform: uppercase;
+}
+
+/* ========== 
+ ! Footer   
+ ========== */
+ 
+#footer h4 { color: #60A2C1 }
+#footer p:last-child { margin-bottom: 0 }
+.footer-widgets { margin-bottom: 20px }
+#footer .widget {
+    margin-bottom: 0;
+    padding: 20px;
+}
+.footer-widget h3 {
+    margin-bottom: 10px;
+    color: #FEDA71;
+    font-size: 16px;
+}
+#footer-widget-right { border-right: none }
+#footer-widget-left { border-left: none }
+#footer-menu  ul li a:hover { color: #777 }
+#footer-menu ul li { display: inline }
+#footer-menu ul li a {
+    font-weight: bold;
+    padding-right: 8px;
+}
+.footer-menu ul li:last-child a { border-right: 0px }
+#footer-info {
+    background: none repeat scroll 0 0 #444444;
+    color: #EFEFEF;
+    overflow: auto;
+    padding: 10px;
+}
+#footer-menu {
+width: 70%;
+}
+#powered-by {
+float: right;
+margin-top: -20px;
+}
+
