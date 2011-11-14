@@ -373,3 +373,22 @@ float: right;
 margin-top: -20px;
 }
 
+/* ================== */
+/* ! Page Templates   */
+/* ================== */
+
+/*page templare sidebar left*/
+.page-template-sidebar-left-template-php #content { float: right !important }
+.page-template-sidebar-left-template-php #inner-sidebar {
+    margin-left: -25px !important;
+    margin-right: 10px !important;
+    padding-right: 25px !important;
+}
+/*page templare sidebar right*/
+.page-template-sidebar-right-template-php #inner-sidebar {
+    margin-left: 15px !important;
+    margin-right: -25px !important;
+    margin-top: -40px !important;
+    padding-right: 25px !important;
+}
+.page-template-sidebar-right-template-php #content { float: left !important }
