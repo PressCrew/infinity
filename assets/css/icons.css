@@ -1,0 +1,125 @@
+/* Post Meta Icons */
+span.post-author,
+span.post-category,
+span.time-posted,
+span.post-comments { margin-right: 10px }
+span.post-author {
+    background: url("../images/icons/black.png") no-repeat scroll -728px -1228px transparent;
+    padding-left: 18px;
+}
+span.post-category {
+    background: url("../images/icons/black.png") no-repeat scroll -3px -37px transparent;
+    padding-left: 22px;
+}
+span.time-posted {
+    background: url("../images/icons/black.png") no-repeat scroll -4px -1703px transparent;
+    padding-left: 19px;
+}
+span.post-comments,
+span.comments a {
+    background: url("../images/icons/black.png") no-repeat scroll -724px -1089px transparent;
+    float: right;
+    padding-left: 22px;
+    margin-right: 5px;
+    border-right: 0 none;
+}
+span.post-tags {
+    background: url("../images/icons/black.png") no-repeat scroll -1px -513px transparent;
+    margin-right: 0;
+    padding-left: 23px;
+}
+
+/* Stream Icons. no shorthand CSS to maintain hover effects */
+li#activity-all a {
+    background-image: url("../images/icons/white.png");
+    background-position: -724px -1117px;
+    background-repeat: no-repeat;
+    padding-left: 23px;
+}
+li#activity-favorites a {
+    background-image: url("../images/icons/white.png");
+    background-repeat: no-repeat;
+    background-position: 0px -29px;
+    padding-left: 24px;
+}
+li#activity-friends a {
+    background-image: url("../images/icons/white.png");
+    background-repeat: no-repeat;
+    background-position: -722px -371px;
+    padding-left: 24px;
+}
+li#activity-groups a {
+    background-image: url("../images/icons/white.png");
+    background-repeat: no-repeat;
+    background-position: 0 -1526px;
+    padding-left: 24px;
+}
+li#activity-links a {
+    background-image: url("../images/icons/white.png");
+    background-repeat: no-repeat;
+    background-position: -723px -1084px;
+    padding-left: 24px;
+}
+li#activity-mentions a {
+    background-image: url("../images/icons/white.png");
+    background-position: -724px -1084px;
+    background-repeat: no-repeat;
+    padding-left: 23px;
+}
+/* Group Icons */
+li#members-groups-li a {
+    background: url("../images/icons/white.png") no-repeat scroll -724px -1221px transparent;
+    padding-left: 25px;
+}
+li#forums-groups-li a {
+    background: url("../images/icons/white.png") no-repeat scroll -725px -1119px transparent;
+    padding-left: 25px;
+}
+li#admin-groups-li a {
+    background: url("../images/icons/white.png") no-repeat scroll 2px -744px transparent;
+    padding-left: 25px;
+}
+li#invite-groups-li a {
+    background: url("../images/icons/white.png") no-repeat scroll 0px -675px transparent;
+    padding-left: 25px;
+}
+li#home-groups-li a {
+    background: url("../images/icons/white.png") no-repeat scroll 2px -1833px transparent;
+    padding-left: 25px;
+}
+/* Profile Icons  */
+#user-activity {
+    background: url("../images/icons/white.png") no-repeat scroll -724px -914px transparent;
+    padding-left: 24px;
+}
+#user-xprofile {
+    background: url("../images/icons/white.png") no-repeat scroll -724px -1222px transparent;
+    padding-left: 25px;
+}
+#user-friends {
+    background: url("../images/icons/white.png") no-repeat scroll -725px -1119px transparent;
+    padding-left: 25px;
+}
+#user-groups {
+    background: url("../images/icons/white.png") no-repeat scroll 2px -1527px transparent;
+    padding-left: 25px;
+}
+#user-profile { background: url("../images/icons/white.png") no-repeat scroll 2px -1492px transparent }
+#user-links {
+    background: url("../images/icons/white.png") no-repeat scroll -724px -1224px transparent;
+    padding-left: 25px;
+}
+#user-settings {
+    background: url("../images/icons/white.png") no-repeat scroll -725px -949px transparent;
+    padding-left: 25px;
+}
+#user-messages {
+    background: url("../images/icons/white.png") no-repeat scroll 0 -914px transparent;
+    padding-left: 24px;
+}
+
+div#message p {
+    background: url("../images/icons/black.png") no-repeat scroll -724px -336px #FFFFE4;
+    font-weight: bold;
+    padding-left: 22px !important;
+}

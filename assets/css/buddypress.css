@@ -23,7 +23,6 @@ div#message p,
     padding: 3px 6px;
 }
 div#message p {
-    background: url("../images/icons/black.png") no-repeat scroll -724px -336px #FFFFE4;
     font-weight: bold;
     padding-left: 22px !important;
 }
