@@ -36,6 +36,10 @@ Pie_Easy_Loader::load(
  * @property-read string $required_feature Feature required for this component to run/display
  * @property-read boolean $ignore Whether or not this component should be ignored
  * @property-read string $template Relative path to component template file
+ * @property-read string $style Relative path to custom stylesheet
+ * @property-read string $style_depends Comma separated list of style handles to enqueue
+ * @property-read string $script Relative path to custom javascript source file
+ * @property-read string $script_depends Comma separated list of script handles to enqueue
  */
 abstract class Pie_Easy_Component
 	extends Pie_Easy_Componentable
@@ -302,26 +306,28 @@ abstract class Pie_Easy_Component
 
 		// set stylesheet
 		if ( isset( $conf_map->style ) ) {
-			// no deps by default
-			$deps = array();
-			// any deps?
-			if ( isset( $conf_map->style_depends ) ) {
-				$deps = explode( ',', $conf_map->style_depends );
-			}
-			// set the stylesheet
-			$this->style()->add_file( $conf_map->style, $deps );
+			$this->style()->add_file( $conf_map->style );
+		}
+
+		// set style dependancies
+		if ( isset( $conf_map->style_depends ) ) {
+			// split deps at comma
+			$deps = explode( ',', $conf_map->style_depends );
+			// set directive
+			$this->directives()->set( $theme, 'style_depends', $deps );
 		}
 
 		// set script
 		if ( isset( $conf_map->script ) ) {
-			// no deps by default
-			$deps = array();
-			// any deps?
-			if ( isset( $conf_map['script_depends'] ) ) {
-				$deps = explode( ',', $conf_map['script_depends'] );
-			}
-			// set the script
-			$this->script()->add_file( $conf_map->script, $deps );
+			$this->script()->add_file( $conf_map->script );
+		}
+
+		// set script dependancies
+		if ( isset( $conf_map->script_depends ) ) {
+			// split deps at comma
+			$deps = explode( ',', $conf_map->script_depends );
+			// set directive
+			$this->directives()->set( $theme, 'script_depends', $deps );
 		}
 
 		// set template
@@ -436,10 +442,18 @@ abstract class Pie_Easy_Component
 
 	/**
 	 * This template method is called "just in time" to enqueue styles
+	 *
+	 * Override this method to initialize special style handling for a component
 	 */
 	public function init_styles()
 	{
-		// override this method to initialize special style handling for a component
+		// depend on any styles?
+		if ( $this->style_depends instanceof Pie_Easy_Map ) {
+			// enqueue all of them
+			foreach( $this->style_depends as $dep ) {
+				wp_enqueue_style( $dep );
+			}
+		}
 	}
 
 	/**
@@ -452,10 +466,18 @@ abstract class Pie_Easy_Component
 
 	/**
 	 * This template method is called "just in time" to enqueue scripts
+	 *
+	 * Override this method to initialize special script handling for a component
 	 */
 	public function init_scripts()
 	{
-		// override this method to initialize special script handling for a component
+		// depend on any scripts?
+		if ( $this->script_depends instanceof Pie_Easy_Map ) {
+			// enqueue all of them
+			foreach( $this->script_depends as $dep ) {
+				wp_enqueue_script( $dep );
+			}
+		}
 	}
 
 	/**
