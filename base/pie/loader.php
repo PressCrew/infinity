@@ -162,7 +162,17 @@ final class Pie_Easy_Loader extends Pie_Easy_Base
 				'script', 'scriptable',
 				'style', 'styleable' ),
 		'utils' =>
-			array( 'ajax', 'docs', 'enqueue', 'export', 'file', 'files', 'file_cache', 'i18n' )
+			array(
+				'ajax',
+				'docs',
+				'enqueue',
+				'export',
+				'file',
+				'files',
+				'file_cache',
+				'i18n',
+				'webfont'
+			)
 	);
 
 	/**
