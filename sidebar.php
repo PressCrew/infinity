@@ -16,7 +16,6 @@
 
 <div id="sidebar">
 	<div id="inner-sidebar">
-	Branch!
 	<!-- sidebar -->
 		<?php
 			do_action( 'open_sidebar' );?>
