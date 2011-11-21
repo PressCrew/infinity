@@ -29,6 +29,14 @@ function infinity_scheme_init()
 	Pie_Easy_Scheme::instance()->set_docs_dir( 'documents' );
 	Pie_Easy_Scheme::instance()->set_exts_dir( 'extensions' );
 
+	// initialize policies (the order is important here)
+	Infinity_Sections_Policy::instance();
+	Infinity_Options_Policy::instance();
+	Infinity_Features_Policy::instance();
+	Infinity_Screens_Policy::instance();
+	Infinity_Widgets_Policy::instance();
+	Infinity_Shortcodes_Policy::instance();
+
 	return true;
 }
 
