@@ -21,7 +21,7 @@
 	<!-- basic title -->
 	<title>
 		<?php
-			infinity_base_title();
+			wp_title('');
 		?>
 	</title>
 	<!-- core meta tags -->
