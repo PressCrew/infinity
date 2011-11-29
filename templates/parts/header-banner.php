@@ -21,26 +21,27 @@
 	?>
 	<!-- header -->
 	<div id="header" role="banner">
-		<?php
-			do_action( 'open_header' );
-			$feature = infinity_feature_fetch( 'infinity-header-logo' );
-			if ( !$feature || !$feature->image_url() || !infinity_feature( 'infinity-header-logo' ) ):
-		?>
-		<?php
-			$heading_tag = ( is_home() || is_front_page() ) ? 'h1' : 'div';
-		?>
-		<<?php echo $heading_tag; ?> id="site-title">
-			<a href="<?php echo home_url( '/' ); ?>" title="<?php bloginfo('name'); ?> - <?php bloginfo('description'); ?>"><?php bloginfo('name'); ?></a>
-			<span id="site-description"><?php bloginfo('description'); ?></span>
-		</<?php echo $heading_tag; ?>>
-		<?php
-			endif;
-
-			// main menu
-			infinity_get_template_part( 'templates/parts/main-menu', 'header' );
-
-			do_action( 'close_header' );
-		?>
+		<div id="logo-menu-wrap">
+			<?php
+				do_action( 'open_header' );
+				$feature = infinity_feature_fetch( 'infinity-header-logo' );
+				if ( !$feature || !$feature->image_url() || !infinity_feature( 'infinity-header-logo' ) ):
+			?>
+			<?php
+				$heading_tag = ( is_home() || is_front_page() ) ? 'h1' : 'div';
+			?>
+			<<?php echo $heading_tag; ?> id="site-title">
+				<a href="<?php echo home_url( '/' ); ?>" title="<?php bloginfo('name'); ?> - <?php bloginfo('description'); ?>"><?php bloginfo('name'); ?></a>
+				<span id="site-description"><?php bloginfo('description'); ?></span>
+			</<?php echo $heading_tag; ?>>
+			<?php
+				endif;
+				// main menu
+				infinity_get_template_part( 'templates/parts/main-menu', 'header' );
+	
+				do_action( 'close_header' );
+			?>
+		</div>
 	</div><!-- end header -->
 	<?php
 		// show sub-menu

@@ -51,11 +51,11 @@ body {
     z-index: 1;
 }
 #main-menu-wrap {
-    top: 43%;
     float: right;
-    right: 20px;
-    padding: 5px;
     position: relative;
+    right: 10px;
+    margin-top: 0.5%;
+    padding: 8px 5px;
 }
 #main-menu-wrap ul.sub-menu { z-index: 99 }
 .main-menu { padding-left: 0px !important }
@@ -109,6 +109,18 @@ div#site-title {
 #site-title a {
     margin-bottom: -29px;
     display: block;
+}
+
+#header h1 {
+position: relative;
+left: 10px;
+}
+
+#logo-menu-wrap {
+    margin-top: -25px;
+    position: absolute;
+    top: 50%;
+    width: 100%;
 }
 
 /* ========================== */
