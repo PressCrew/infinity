@@ -80,6 +80,7 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 	{
 		parent::init_styles_dynamic();
 		$this->refresh_style_property();
+		$this->generate_style_property();
 	}
 
 	/**
@@ -445,10 +446,17 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 
 		// must have selector and property
 		if ( $this->style_selector && $this->style_property ) {
-
 			// setup property object
 			$this->__style_property__ =
 				Pie_Easy_Style_Property_Factory::instance()->create( $this->style_property );
+		}
+	}
+
+	/**
+	 */
+	private function generate_style_property()
+	{
+		if ( $this->__style_property__ ) {
 
 			// determine value to set
 			if ( $this instanceof Pie_Easy_Options_Option_Attachment_Image ) {
@@ -478,6 +486,7 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 					);
 				}
 			}
+
 		}
 	}
 }

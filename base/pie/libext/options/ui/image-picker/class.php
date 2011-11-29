@@ -98,7 +98,13 @@ class Pie_Easy_Exts_Options_Ui_Image_Picker
 	 */
 	public function get_image_url()
 	{
-		return $this->field_options->item_at( $this->get() );
+		$value = $this->get();
+
+		if ( $this->field_options->contains( $value ) ) {
+			return $this->field_options->item_at( $value );
+		} else {
+			return null;
+		}
 	}
 }
 
