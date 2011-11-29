@@ -41,19 +41,32 @@ class Pie_Easy_Exts_Options_Ui_Overlay_Picker
 
 		// have a url?
 		if ( $url ) {
-			// new style rule
-			$rule = $this->style()->rule( '#' . $this->get_element_id() );
-			// set background on my class
-			$rule->ad( 'background-image', sprintf( 'url("%s")', $url ) );
+			// element rule
+			$rule1 = $this->style()->rule( $this->style_selector );
+			$rule1->ad( 'position', 'relative' );
+			$rule1->ad( 'z-index', 1 );
+			// pseudo element rule
+			$rule2 = $this->style()->rule( $this->style_selector . ':before' );
+			$rule2->ad( 'content', '""' );
+			$rule2->ad( 'position', 'absolute' );
+			$rule2->ad( 'z-index', -1 );
+			$rule2->ad( 'top', 0 );
+			$rule2->ad( 'right', 0 );
+			$rule2->ad( 'left', 0 );
+			$rule2->ad( 'bottom', 0 );
+			$rule2->ad( 'background-image', sprintf( 'url("%s")', $url ) );
 			// toggle on
 			$this->__have_style__ = true;
 		}
 	}
 
+	/**
+	 * @todo deprecated?
+	 */
 	public function init_scripts_dynamic()
 	{
 		// run parent
-		parent::init_scripts_dynamic();
+		return parent::init_scripts_dynamic();
 
 		// have a style and selector?
 		if ( $this->__have_style__ && $this->style_selector ) {
