@@ -22,11 +22,6 @@
 (function($){
 	$(document).ready(function() {
 
-		// set pattern element height to height of document
-		jQuery('#pattern').css({
-			'height': jQuery(document).height() + 'px'
-		});
-
 		// add grid class to content for buddypress and bbpress combatibilty
 		jQuery('#content').addClass('grid_16');
 		jQuery('#sidebar').addClass('grid_8 omega');

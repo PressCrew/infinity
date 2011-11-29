@@ -285,7 +285,6 @@ color: #444;
 }
 #comments {
     margin-top: 20px;
-    border-top: 1px solid rgba(0,0,0,0.07);
     position: relative;
 }
 #comments .pingbacks li.pingback { margin: 10px 0 }
@@ -325,7 +324,6 @@ color: #444;
     margin: 10px 10px 0 25px;
     padding: 0;
 }
-#comments ul.children li { border-top: 1px solid #E6E6E6 }
 #comments .navigation { }
 #comments .navigation a {
     text-decoration: none;
@@ -348,6 +346,7 @@ color: #444;
     width: 100%;
 }
 #comments .comment .comment-container {
+    border-bottom: 1px solid #F4F4F4;
     padding: 20px;
     position: relative;
 }
@@ -356,8 +355,14 @@ color: #444;
     float: left;
     margin: 0 15px 10px 0;
 }
-#comments .reply { padding: 5px 8px }
-#comments .reply a { font-size: 11px }
+#comments .reply { 
+    position: relative;
+    top: -22px;
+}
+#comments .reply a { 
+    font-size: 10px;
+    padding: 0 8px;
+}
 #comments h3 { }
 ol.commentlist {
     margin-left: 0px;
@@ -398,6 +403,7 @@ ol.commentlist {
     border-color: #ccc #efefef #efefef #ccc;
     border-width: 1px;
     border-style: solid;
+    font-size: inherit;
 }
 li.bypostauthor { background: none repeat scroll 0 0 #F8FDFF !important }
 #commentform input.txt {
@@ -428,4 +434,3 @@ h3#pings { margin: 25px 0 10px 0 }
 }
 .pinglist li .date { font-size: 11px }
 p.form-allowed-tags { width: 70% }
-

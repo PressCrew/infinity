@@ -109,6 +109,12 @@ li#activity-mentions a {
     background-repeat: no-repeat;
     padding-left: 23px;
 }
+li#activity-following a, li#following-personal-li a {
+    background-image: url("../images/icons/white.png");
+    background-repeat: no-repeat;
+    background-position: 1px -1186px;
+    padding-left: 24px;
+}
 /* Group Icons */
 li#members-groups-li a {
     background: url("../images/icons/white.png") no-repeat scroll -724px -1221px transparent;
@@ -161,8 +167,61 @@ li#home-groups-li a {
     padding-left: 24px;
 }
 
+#user-forums {
+background: url("../images/icons/white.png") no-repeat scroll -723px -1117px transparent;
+padding-left: 24px;
+}
+
+a.send-message {
+    background: url("../images/icons/black.png") no-repeat scroll -728px -1124px transparent;
+    padding-left: 19px;
+    padding-top: 2px;
+}
+
+.follow-button a.follow {
+    background: url("../images/icons/black.png") no-repeat scroll -4px -1193px transparent;
+    padding-left: 19px;
+    padding-top: 2px;
+}
+div#post-mention a.mention {
+    background: url("../images/icons/black.png") no-repeat scroll -728px -1092px transparent;
+    padding-left: 19px;
+    padding-top: 2px;
+}
+
 div#message p {
     background: url("../images/icons/black.png") no-repeat scroll -724px -336px #FFFFE4;
     font-weight: bold;
     padding-left: 22px !important;
+}
+
+/* Activity Stream Icons  */
+.bbp_reply_create .activity-header, .new_blog_comment .activity-header, .new_forum_post .activity-header, .activity_comment .activity-header {
+    background: url("../images/icons/black.png") no-repeat scroll 0 -1836px transparent;
+    padding-left: 16px;
+}
+
+.bbp_topic_create .activity-header,.new_forum_topic .activity-header {
+    background: url("../images/icons/black.png") no-repeat scroll -722px -1122px transparent;
+    padding-left: 20px;
+}
+
+.new_blog_post .activity-header p {
+    background: url("../images/icons/black.png") no-repeat scroll -723px -715px transparent;
+    padding-left: 17px;
+}
+
+.activity_update .activity-header {
+    background: url("../images/icons/black.png") no-repeat scroll -720px -1089px transparent;
+    padding-left: 20px;
+}
+
+.activity_update .activity-header {
+    background: url("../images/icons/black.png") no-repeat scroll -720px -1089px transparent;
+    padding-left: 20px;
+}
+
+.created_group .activity-header p {
+    background: url("../images/icons/black.png") no-repeat scroll 0 -1531px transparent;
+    padding-left: 16px;
 }

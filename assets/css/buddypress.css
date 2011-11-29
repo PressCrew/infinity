@@ -462,14 +462,12 @@ ul.button-nav li.current a { font-weight: bold }
     background-position: 95% 50% !important;
     background-repeat: no-repeat !important;
     padding-right: 25px !important;
-    display: none;
 }
 a.loading {
     background-image: url( ../images/buddypress/ajax-loader.gif ) !important;
     background-position: 95% 50% !important;
     background-repeat: no-repeat !important;
     padding-right: 25px !important;
-    display: none;
 }
 /* > Input Forms
 -------------------------------------------------------------- */
