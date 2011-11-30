@@ -109,7 +109,7 @@ left: 10px;
 }
 
 #logo-menu-wrap {
-    margin-top: -25px;
+    margin-top: -30px;
     position: absolute;
     top: 50%;
     width: 100%;
@@ -314,8 +314,6 @@ width: 65.833333333333%;
 #sidebar {
 width: 32.5%;
 } 
- 
-#sidebar h4 a.widgettitle { color: #F4F4F4!important }
 #sidebar .widget_search { margin-top: 20px }
 #sidebar .widget_search input[type=text] {
     width: 110px;

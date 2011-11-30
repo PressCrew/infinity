@@ -21,9 +21,6 @@ span.edit-link {
 }
 span.edit-link a { color: #999 }
 /* The actual Posts*/
-.posttitle {
-
-}
 .entry {
     min-height: 110px;
     margin-top: 10px;
@@ -232,12 +229,20 @@ p#breadcrumbs { margin-top: 0px }
     padding: 10px;
 }
 
+#category-description p,
+#tag-description p {
+font-style: italic;
+margin-top: 10px;
+margin-bottom: 0px;
+}
+
 h1#category-title,
 h1#tag-title {
     font-style: normal;
     color: #999;
     font-size: 16px;
     line-height: 18px;
+    margin-bottom: 0;
 }
 h1#category-title span,
 h1#tag-title span { color: #555 }

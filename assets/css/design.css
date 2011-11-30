@@ -80,19 +80,15 @@ a:visited:hover { color: #777 }
     height: 200px;
 }
 
-#header h1 {
-margin: 0px;
-}
 #site-title {
     background: none repeat scroll 0 0 #FFFFFF;
     border: 1px solid #DDDDDD;
     border-radius: 0 4px 4px 0;
     box-shadow: 0 0 0 8px rgba(0, 0, 0, 0.024), 0 0 3px 0 rgba(0, 0, 0, 0.15), 0 0 0 6px rgba(0, 0, 0, 0.02) inset;
-    font-size: 26px;
     margin-left: -12px !important;
     padding: 10px 30px;
     position: absolute;
-    top: 65px !important;
+    top: -8px;
 }
 
 /* ==================== */
@@ -347,7 +343,7 @@ p#breadcrumbs {
 }
 h1#category-title,
 h1#tag-title {
-    background: url("../images/icons/black.png") no-repeat scroll -3px -30px transparent;
+    background: url("../images/icons/black.png") no-repeat scroll -3px -36px transparent;
     color: #999;
     font-size: 16px;
     padding-left: 22px;
@@ -355,7 +351,7 @@ h1#tag-title {
 h1#category-title span,
 h1#tag-title span { color: #555 }
 .authorbox h3 {
-    background: url("../images/icons/black.png") no-repeat scroll -724px -1222px transparent;
+    background: url("../images/icons/black.png") no-repeat scroll -724px -1228px transparent;
     padding-left: 25px;
 }
 /* per post navigation and pagination */
