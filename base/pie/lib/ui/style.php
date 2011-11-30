@@ -1538,6 +1538,59 @@ class Pie_Easy_Style_Property_Factory extends Pie_Easy_Base
 	}
 
 	/**
+	 * Return a new margin property object
+	 *
+	 * @return Pie_Easy_Style_Property
+	 */
+	protected function prop_margin( $property = 'margin' )
+	{
+		return
+			Pie_Easy_Style_Property_Primitive::create( $property )
+				->add_length()
+				->add_percentage();
+	}
+
+	/**
+	 * Return a new margin-top property object
+	 * 
+	 * @return Pie_Easy_Style_Property
+	 */
+	protected function prop_margin_top()
+	{
+		return $this->prop_margin( 'margin-top' );
+	}
+
+	/**
+	 * Return a new margin-right property object
+	 *
+	 * @return Pie_Easy_Style_Property
+	 */
+	protected function prop_margin_right()
+	{
+		return $this->prop_margin( 'margin-right' );
+	}
+
+	/**
+	 * Return a new margin-bottom property object
+	 *
+	 * @return Pie_Easy_Style_Property
+	 */
+	protected function prop_margin_bottom()
+	{
+		return $this->prop_margin( 'margin-bottom' );
+	}
+
+	/**
+	 * Return a new margin-left property object
+	 *
+	 * @return Pie_Easy_Style_Property
+	 */
+	protected function prop_margin_left()
+	{
+		return $this->prop_margin( 'margin-left' );
+	}
+	
+	/**
 	 * Return a new max length property object
 	 *
 	 * @return Pie_Easy_Style_Property
