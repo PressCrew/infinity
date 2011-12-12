@@ -1,19 +1,87 @@
-<div class="wrap nosubsub">
-	<?php infinity_dashboard_cpanel_ui() ?>
+<?php
+	// begin rendering by passing our element id prefix
+	infinity_dashboard_cpanel_render_begin( 'infinity-cpanel-' );
+?>
+
+<div id="infinity-cpanel" class="wrap nosubsub">
+
+	<!-- header -->
+	<div id="infinity-cpanel-header" class="ui-widget-header ui-corner-top">
+		<?php
+			// use load template to make header template overridable
+			infinity_dashboard_load_template( 'cpanel_header.php' );
+		?>
+	</div>
+
+	<!-- toolbar -->
+	<div id="infinity-cpanel-toolbar">
+
+		<!-- menu -->
+		<a id="infinity-cpanel-menubutton" title="<?php _e( 'infinity', infinity_text_domain ) ?>"><?php _e( 'infinity', infinity_text_domain ) ?></a>
+		<ul id="infinity-cpanel-menu">
+			<?php infinity_dashboard_cpanel_render_menu_items(); ?>
+		</ul>
+
+		<!-- toolbar buttons -->
+		<?php infinity_dashboard_cpanel_render_toolbar_buttons(); ?>
+
+		<!-- refresh button -->
+		<a id="infinity-cpanel-refreshbutton" title="<?php _e( 'Refresh current tab', pie_easy_text_domain ) ?>">
+			<?php _e('Refresh', pie_easy_text_domain ) ?>
+		</a>
+
+		<!-- scroll button -->
+		<input id="infinity-cpanel-scrollbutton" type="checkbox" />
+		<label for="infinity-cpanel-scrollbutton" title="<?php _e( 'Toggle scroll bars on/off', pie_easy_text_domain ) ?>"><?php _e( 'Scrolling', pie_easy_text_domain ) ?></label>
+
+	</div>
+
+	<!-- tabs -->
+	<div id="infinity-cpanel-tabs">
+		<ul><!-- tabs are injected here --></ul>
+		<!-- panels are injected here -->
+	</div>
+
 </div>
 
 <script type="text/javascript">
-	pieEasyCpanel(
-		{
-			id: 'infinity-cpanel',
-			startButtonId: 'infinity-cpanel-toolbar-start',
-			postAction: 'infinity_tabs_content',
-			tabLoaded:
-				function(event)
-				{
-					initOptionsPanel(event.target);
-					initDocuments(event.target);
-				}
-		}
-	);
+(function($){
+
+	// its pretty safe to hack this code as its all config/preference.
+	// all of the logic code is safely tucked away in cpanel.js
+
+	var menuButton =
+			$( 'a#infinity-cpanel-menubutton' ).button({
+				icons: { secondary: 'ui-icon-triangle-1-s' }
+			});
+	var refreshButton =
+			$( 'a#infinity-cpanel-refreshbutton' ).button({
+				icons: { primary: 'ui-icon-refresh' }
+			});
+	var scrollButton =
+			$( 'input#infinity-cpanel-scrollbutton' ).button({
+				icons: { primary: 'ui-icon-arrow-2-n-s' }
+			});	
+	var menu =
+			$( 'ul#infinity-cpanel-menu' ).buttonmenu({
+				button: menuButton
+			});
+	var toolbar =
+			$( 'div#infinity-cpanel-toolbar' ).toolbar();
+
+	$('div#infinity-cpanel-tabs').cpaneltabs({
+		availableTabs: <?php infinity_dashboard_cpanel_render_available_tabs() ?>,
+		defaultAnchor: 'a#infinity-cpanel-toolbarbutton-start',
+		idPrefix: 'infinity-cpanel-tab-',
+		refreshButton: refreshButton,
+		scrollButton: scrollButton,
+		toolbar: toolbar
+	});
+
+})(jQuery);
 </script>
+
+<?php
+	// renders dynamic scripts and performs cleanup
+	infinity_dashboard_cpanel_render_end();
+?>

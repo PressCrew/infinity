@@ -106,7 +106,7 @@ class Infinity_Exts_Screen_Factory extends Pie_Easy_Screens_Factory
 		if ( !$component->url ) {
 			// set url
 			$def_map = new Pie_Easy_Map();
-			$def_map->add( 'url', infinity_screens_route( 'cpanel', $component->name ) );
+			$def_map->add( 'url', INFINITY_AJAX_URL . infinity_screens_route( 'cpanel', $component->name ) );
 			// configure it
 			$component->configure( $def_map, $theme );
 		}

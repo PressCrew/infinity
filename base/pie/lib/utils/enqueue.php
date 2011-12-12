@@ -209,11 +209,17 @@ final class Pie_Easy_Enqueue extends Pie_Easy_Base
 		// register default styles
 
 		$this->register_style(
-			'pie-easy-ui',
-			'ui.css',
+			'jquery-juicy',
+			'juicy/jquery.juicy.css',
 			array( '@:ui' )
 		);
 
+		$this->register_style(
+			'pie-easy-ui',
+			'ui.css',
+			array( 'jquery-juicy' )
+		);
+		
 		$this->register_style(
 			'pie-easy-colorpicker',
 			'colorpicker.css'
@@ -251,13 +257,25 @@ final class Pie_Easy_Enqueue extends Pie_Easy_Base
 		$this->register_script(
 			'pie-easy-global', 'global.js', array('pie-easy-colorpicker') );
 		$this->register_script(
-			'pie-easy-cpanel', 'cpanel.js', array('pie-easy-global', 'jquery-cookie', 'jquery-ui-button', 'jquery-ui-accordion', 'jquery-ui-menu', 'jquery-ui-position', 'jquery-ui-tabs', 'jquery-ui-sortable', 'jquery-ui-resizable' ) );
-		$this->register_script(
 			'pie-easy-slider', 'slider.js', array('pie-easy-global', 'jquery-ui-slider') );
 		$this->register_script(
 			'pie-easy-scrollpane', 'scrollpane.js', array('pie-easy-global', 'jquery-ui-slider') );
 		$this->register_script(
 			'pie-easy-uploader', 'uploader.js', array('pie-easy-global', 'jquery-swfupload', 'jquery-ui-button') );
+		$this->register_script(
+			'jquery-juicy-browsertabs', 'juicy/jquery.juicy.browsertabs.js', array('jquery-ui-tabs') );
+		$this->register_script(
+			'jquery-juicy-buttonmenu', 'juicy/jquery.juicy.buttonmenu.js', array('jquery-ui-button','jquery-ui-menu') );
+		$this->register_script(
+			'jquery-juicy-buttonselect', 'juicy/jquery.juicy.buttonselect.js', array('jquery-ui-button') );
+		$this->register_script(
+			'jquery-juicy-flashmesg', 'juicy/jquery.juicy.flashmesg.js', array('jquery-ui-widget') );
+		$this->register_script(
+			'jquery-juicy-titlebox', 'juicy/jquery.juicy.titlebox.js', array('jquery-ui-widget') );
+		$this->register_script(
+			'jquery-juicy-toolbar', 'juicy/jquery.juicy.toolbar.js', array('jquery-ui-widget','jquery-ui-button') );
+		$this->register_script(
+			'jquery-juicy-fontfilter', 'juicy/jquery.juicy.fontfilter.js', array('jquery-juicy-titlebox','jquery-juicy-buttonselect','pie-easy-slider','webfont') );
 
 		// localize
 		$this->localize_scripts();

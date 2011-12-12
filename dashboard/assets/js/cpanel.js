@@ -1,4 +1,51 @@
 
+(function($){
+
+var response = null;
+
+$.widget( 'infinity.cpaneltabs', $.juicy.browsertabs, {
+
+	options: {
+		ajaxOptions: {
+			beforeSend: function ( xhr, settings ) {
+				response = null;
+				settings.url += '&action=infinity_tabs_content';
+			},
+			dataFilter: function ( data, type ) {
+				response = pieEasyAjax.splitResponseStd( data );
+				return response.content;
+			}
+		},
+		cache: true,
+		cookie: {name: 'cpanel_current_tab', expires: 7},
+		cookieScroll: {name: 'cpanel_scroll', expires: 7},
+		cookieTabs: {name: 'cpanel_open_tabs', expires: 7},
+		sortable: true,
+		// events
+		load: function( event, ui ) {
+			if ( response ) {
+				if ( response.code >= 1 ) {
+					initOptionsPanel( ui.panel );
+					initDocuments( ui.panel );
+				} else {
+					// set up flash message
+					$('<div></div>')
+						.prependTo( ui.panel )
+						.flashmesg({
+							dismiss: true,
+							set: 'error',
+							messageText: response.message
+						})
+						.fadeIn();
+					return;
+				}
+			}
+		}
+	}
+});
+
+})(jQuery)
+
 // init all options
 function initOptions(panel)
 {

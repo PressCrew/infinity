@@ -330,6 +330,11 @@ class Pie_Easy_Script_Logic extends Pie_Easy_Base
 
 		// loop all vars and format them
 		foreach( $vars as $var_name => $var_val ) {
+			// object properties must be quoted
+			if ( $object ) {
+				$var_name = sprintf( "'%s'", $var_name );
+			}
+			// push onto array
 			array_push( $vars_f, $var_name . $operator . $var_val );
 		}
 

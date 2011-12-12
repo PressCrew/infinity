@@ -92,6 +92,11 @@ define( 'INFINITY_ADMIN_DIR', INFINITY_THEME_DIR . DIRECTORY_SEPARATOR . INFINIT
 define( 'INFINITY_ADMIN_URL', INFINITY_THEME_URL . '/' . INFINITY_ADMIN_REL );
 
 /**
+ * Infinity AJAX url
+ */
+define( 'INFINITY_AJAX_URL', admin_url( 'admin-ajax.php' ) );
+
+/**
  * Infinity languages directory path
  */
 define( 'INFINITY_LANGUAGES_DIR', INFINITY_THEME_DIR . DIRECTORY_SEPARATOR . 'languages' );

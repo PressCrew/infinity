@@ -19,7 +19,7 @@
 		Its the best place to start.
 		<ul>
 			<li>
-				<a target="infinity-cpanel-tab-ddocs" href="<?php print infinity_screens_route( 'cpanel', 'ddocs', 'index' ) ?>">Built-In Docs &raquo;</a>
+				<a target="infinity-cpanel-tab-ddocs" href="<?php print infinity_dashboard_screen_url( 'cpanel', 'ddocs', 'index' ) ?>">Built-In Docs &raquo;</a>
 			</li>
 			<li>
 				<a target="_blank" href="http://infinity.presscrew.com/docs">Online Docs &raquo;</a>

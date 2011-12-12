@@ -59,37 +59,89 @@ function infinity_dashboard_cpanel_actions()
 }
 
 /**
- * Initialize and render the control panel markup
+ * Initialize a control panel instance
  *
  * @package Infinity
  * @subpackage dashboard
- * @param string $header_template Path to header template relative to theme directory
+ * @return Pie_Easy_Ui_Cpanel
  */
-function infinity_dashboard_cpanel_ui( $header_template = null )
+function infinity_dashboard_cpanel_factory()
 {
 	Pie_Easy_Loader::load( 'ui/cpanel' );
 
-	// handle empty header template
-	if ( empty( $header_template ) ) {
-		$header_template = 'dashboard/templates/cpanel_header.php';
-	}
-
 	// new control panel instance using screens policy
 	$cpanel = new Pie_Easy_Ui_Cpanel( Infinity_Screens_Policy::instance() );
+	
+	return $cpanel;
+}
 
-	// start rendering
-	$cpanel->render_begin(
-		__( 'infinity', infinity_text_domain ),
-		'infinity-cpanel'
-	);
+/**
+ * Begin control panel rendering
+ *
+ * @package Infinity
+ * @subpackage dashboard
+ * @param string $id_prefix The CSS id prefix for dynamic elements
+ */
+function infinity_dashboard_cpanel_render_begin( $id_prefix )
+{
+	global $infinity_c8c12e68cf;
 
-	// render the required elements
-	$cpanel->render_header( $header_template );
-	$cpanel->render_toolbar();
-	$cpanel->render_tabs();
+	$infinity_c8c12e68cf = infinity_dashboard_cpanel_factory();
+	$infinity_c8c12e68cf->render_begin( 'infinity-cpanel-' );
+}
 
-	// all done
-	$cpanel->render_end();
+/**
+ * Render control panel menu items
+ *
+ * @package Infinity
+ * @subpackage dashboard
+ */
+function infinity_dashboard_cpanel_render_menu_items()
+{
+	global $infinity_c8c12e68cf;
+
+	$infinity_c8c12e68cf->render_menu_items();
+}
+
+/**
+ * Render control panel toolbar buttons
+ *
+ * @package Infinity
+ * @subpackage dashboard
+ */
+function infinity_dashboard_cpanel_render_toolbar_buttons()
+{
+	global $infinity_c8c12e68cf;
+
+	$infinity_c8c12e68cf->render_toolbar_buttons();
+}
+
+/**
+ * Render control panel available tabs
+ *
+ * @package Infinity
+ * @subpackage dashboard
+ */
+function infinity_dashboard_cpanel_render_available_tabs()
+{
+	global $infinity_c8c12e68cf;
+
+	$infinity_c8c12e68cf->render_available_tabs();
+}
+
+/**
+ * End rendering
+ *
+ * @package Infinity
+ * @subpackage dashboard
+ */
+function infinity_dashboard_cpanel_render_end()
+{
+	global $infinity_c8c12e68cf;
+
+	$infinity_c8c12e68cf->render_end();
+
+	unset( $infinity_c8c12e68cf );
 }
 
 //

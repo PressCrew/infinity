@@ -79,6 +79,19 @@ function infinity_dashboard_image( $name )
 }
 
 /**
+ * Return URL to a screen component route
+ *
+ * @package Infinity
+ * @subpackage dashboard
+ * @param string|array $params,...
+ * @return string
+ */
+function infinity_dashboard_screen_url()
+{
+	return INFINITY_AJAX_URL . call_user_func_array( 'infinity_screens_route', func_get_args() );
+}
+
+/**
  * Publish a document page
  *
  * @package Infinity
@@ -146,11 +159,11 @@ function infinity_dashboard_doc_filter_cb( $match )
 			switch( $call_type ) {
 				case '':
 				case 'action':
-					return infinity_screens_route( $route );
+					return infinity_dashboard_screen_url( $route );
 				case 'image':
 					return infinity_dashboard_image( $route );
 				case 'doc':
-					return infinity_screens_route( 'cpanel', 'ddocs', $route );
+					return infinity_dashboard_screen_url( 'cpanel', 'ddocs', $route );
 			}
 		case 'theme':
 			switch( $call_type ) {
@@ -158,7 +171,7 @@ function infinity_dashboard_doc_filter_cb( $match )
 				case 'image':
 					return infinity_image_url( $route );
 				case 'doc':
-					return infinity_screens_route( 'cpanel', 'docs', $route );
+					return infinity_dashboard_screen_url( 'cpanel', 'docs', $route );
 			}
 	}
 }
