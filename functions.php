@@ -185,7 +185,7 @@ if ( is_admin() ) {
 		->scripts_on_action( 'load-toplevel_page_' . INFINITY_ADMIN_PAGE );
 } else {
 	Pie_Easy_Enqueue::instance()
-		->styles_on_action( 'wp_print_styles' )
+		->styles_on_action( 'wp_enqueue_scripts' )
 		->scripts_on_action( 'wp_print_scripts' );
 }
 
