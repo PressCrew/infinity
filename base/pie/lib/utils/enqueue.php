@@ -76,8 +76,12 @@ final class Pie_Easy_Enqueue extends Pie_Easy_Base
 	 */
 	private function init()
 	{
-		// negative priorities work... shhhh...
-		add_action( 'after_setup_theme', array( self::instance(), 'register_ui_scripts' ), -99999 );
+		global $wp_version;
+		
+		if ( (float) $wp_version < 3.3 ) {
+			// negative priorities work... shhhh...
+			add_action( 'after_setup_theme', array( self::instance(), 'register_ui_scripts' ), -99999 );
+		}
 	}
 
 	/**
@@ -251,6 +255,8 @@ final class Pie_Easy_Enqueue extends Pie_Easy_Base
 		$this->register_script(
 			'pie-easy-colorpicker', 'colorpicker.js', array('jquery') );
 		$this->register_script(
+			'jquery-ui-menu', 'jquery.ui.menu.min.js', array( 'jquery-ui-core', 'jquery-ui-widget' ) );
+		$this->register_script(
 			'jquery-ui-nestedsortable', 'jquery.ui.nestedSortable.js', array('jquery', 'jquery-ui-sortable') );
 		$this->register_script(
 			'jquery-swfupload', 'jquery.swfupload.js', array('jquery', 'swfupload-all') );
@@ -331,8 +337,6 @@ final class Pie_Easy_Enqueue extends Pie_Easy_Base
 				array( 'src' => 'jquery.ui.autocomplete.min.js', 'deps' => $deps_cwp ),
 			'jquery-ui-datepicker' =>
 				array( 'src' => 'jquery.ui.datepicker.min.js', 'deps' => $deps_c ),
-			'jquery-ui-menu' =>
-				array( 'src' => 'jquery.ui.menu.min.js', 'deps' => $deps_cw ),
 			'jquery-ui-progressbar' =>
 				array( 'src' => 'jquery.ui.progressbar.min.js', 'deps' => $deps_cw ),
 			'jquery-ui-slider' =>
