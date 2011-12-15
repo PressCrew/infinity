@@ -83,12 +83,14 @@ function infinity_dashboard_image( $name )
  *
  * @package Infinity
  * @subpackage dashboard
- * @param string|array $params,...
+ * @param string $params,...
  * @return string
  */
 function infinity_dashboard_screen_url()
 {
-	return INFINITY_AJAX_URL . call_user_func_array( 'infinity_screens_route', func_get_args() );
+	$args = func_get_args();
+	
+	return INFINITY_AJAX_URL . call_user_func_array( 'infinity_screens_route', $args );
 }
 
 /**
