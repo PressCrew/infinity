@@ -204,7 +204,7 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 		$styles->add( 'style', get_bloginfo( 'stylesheet_url' ) );
 
 		// add directive
-		$directive = new Pie_Easy_Init_Directive( 'style', $styles, '@' );
+		$directive = new Pie_Easy_Init_Directive( '@', 'style', $styles );
 		$style_defs->add( '@', $directive, true );
 
 		// hook up styles internal handler
@@ -249,7 +249,7 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 		// any scripts to add?
 		if ( $script->count() ) {
 			// add directive
-			$directive = new Pie_Easy_Init_Directive( 'script', $script, '@' );
+			$directive = new Pie_Easy_Init_Directive( '@', 'script', $script );
 			$script_defs->add( '@', $directive, true );
 		}
 
@@ -562,7 +562,7 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 			$dep_map->add( '@:dynamic', $dep_stack->to_array() );
 			$dep_map->add( '@:dynamic-global', $dep_global_stack->to_array() );
 			$dep_map->add( '@:dynamic-admin', $dep_admin_stack->to_array() );
-			$directive_deps = new Pie_Easy_Init_Directive( 'style_depends', $dep_map, '@' );
+			$directive_deps = new Pie_Easy_Init_Directive( '@', 'style_depends', $dep_map );
 			$style_depends->add( '@', $directive_deps, true );
 
 			// init style depends
@@ -648,7 +648,7 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 			$dep_map->add( '@:dynamic', $dep_stack->to_array() );
 			$dep_map->add( '@:dynamic-global', $dep_global_stack->to_array() );
 			$dep_map->add( '@:dynamic-admin', $dep_admin_stack->to_array() );
-			$directive_deps = new Pie_Easy_Init_Directive( 'script_depends', $dep_map, '@' );
+			$directive_deps = new Pie_Easy_Init_Directive( '@', 'script_depends', $dep_map );
 			$script_depends->add( '@', $directive_deps, true );
 
 			// init script depends

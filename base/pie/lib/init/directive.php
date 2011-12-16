@@ -45,12 +45,12 @@ class Pie_Easy_Init_Directive extends Pie_Easy_Base
 	/**
 	 * Initialize the directive
 	 *
+	 * @param string $theme Slug of the theme which is setting this directive
 	 * @param string $name Name for this directive (slug format)
 	 * @param mixed $value Value for this directive
-	 * @param string $theme Slug of the theme which is setting this directive
 	 * @param boolean $read_only Set to true to disallow modification of the value once set
 	 */
-	public function __construct( $name, $value, $theme, $read_only = false )
+	public function __construct( $theme, $name, $value = null, $read_only = false )
 	{
 		$this->name = strtolower( trim( $name ) );
 		$this->theme = strtolower( trim( $theme ) );
@@ -191,7 +191,7 @@ class Pie_Easy_Init_Directive_Registry extends Pie_Easy_Base
 			return $theme_map->item_at($theme)->set_value( $value );
 		} else {
 			// create new directive
-			$directive = new Pie_Easy_Init_Directive( $name, $value, $theme, $read_only );
+			$directive = new Pie_Easy_Init_Directive( $theme, $name, $value, $read_only );
 			// add it to directive map
 			return $theme_map->add( $theme, $directive );
 		}
