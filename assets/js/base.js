@@ -32,43 +32,13 @@
 
 		// main navigation setup (superfish)
 		if(jQuery().superfish) {
-
 			jQuery('.base-menu ul.sf-menu').superfish({
-				delay: 200,
-				animation: {
-					opacity: 'show',
-					height: 'show'
-				},
+				delay: 400,
+				animation: {opacity:'show', height:'show'},
 				speed: 'fast',
+				autoArrows: false,
 				dropShadows: false
 			});
-
-			jQuery('.base-menu li li a').hover(
-				function() {
-					jQuery(this)
-						.find('span')
-						.not('span.sf-sub-indicator')
-						.stop()
-						.animate({
-							paddingLeft: 5
-						},
-						200,
-						'jswing'
-					);
-				},
-				function() {
-					jQuery(this)
-						.find('span')
-						.not('span.sf-sub-indicator')
-						.stop()
-						.animate({
-							paddingLeft: 0
-						},
-						200,
-						'jswing'
-					);
-				}
-			);
 
 		}
 
