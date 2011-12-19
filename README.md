@@ -1,4 +1,4 @@
-## Infinity Theme Anti-Framework
+## Infinity WordPress Theming Engine
 
 Infinity is a free WordPress theme which can be used on its own or as an
 extremely powerful parent theme.
