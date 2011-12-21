@@ -21,7 +21,8 @@ $.widget( "juicy.buttonmenu", $.ui.menu, {
 		$.ui.menu.prototype._create.call( this );
 
 		var self = this,
-			o = this.options;
+			o = this.options,
+			subMenus;
 
 		this.element
 			.addClass( 'juicy-buttonmenu' )
@@ -36,11 +37,14 @@ $.widget( "juicy.buttonmenu", $.ui.menu, {
 			this._button( o.button );
 			o.button = null;
 		}
-		
-		// init sub menus
-		this.element
+
+		// locate submenus
+		subMenus = this.element
 			.children( 'li' )
-			.children( 'ul' )
+			.children( 'ul' );
+
+		// init sub menus
+		subMenus
 			.buttonmenu( o )
 			.hide();
 
@@ -51,6 +55,8 @@ $.widget( "juicy.buttonmenu", $.ui.menu, {
 			.click(function( e ) {
 				// look for sub menu
 				var menu = $(this).siblings( '.ui-menu' ).first();
+				// hide other menus
+				subMenus.not( menu ).hide();
 				// any sub menus?
 				if ( menu.length ) {
 					// is it a re-click?
