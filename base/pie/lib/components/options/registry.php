@@ -142,6 +142,11 @@ abstract class Pie_Easy_Options_Registry extends Pie_Easy_Registry
 				!empty( $_POST['option_names'] ) ?
 				explode( ',', $_POST['option_names'] ) : null;
 
+			// do a reset if option reset param is set
+			$reset_options =
+				!empty( $_POST['option_reset'] ) ?
+				( (boolean) $_POST['option_reset'] ) : false;
+
 			// keep track of how many were updated
 			$save_count = 0;
 
@@ -156,17 +161,22 @@ abstract class Pie_Easy_Options_Registry extends Pie_Easy_Registry
 				// is this option registered?
 				if ( $this->has( $option_name ) ) {
 					// get the option
-					$option = $this->get($option_name);
+					$option = $this->get( $option_name );
 					// look for option name as POST key
 					if ( array_key_exists( $option->name, $_POST ) ) {
-						// get new value
-						$new_value = $_POST[$option->name];
-						// strip slashes from new value?
-						if ( is_scalar( $new_value ) ) {
-							$new_value = stripslashes( $_POST[$option->name] );
+						// reset?
+						if ( $reset_options ) {
+							$option->delete();
+						} else {
+							// get new value
+							$new_value = $_POST[$option->name];
+							// strip slashes from new value?
+							if ( is_scalar( $new_value ) ) {
+								$new_value = stripslashes( $_POST[$option->name] );
+							}
+							// update it
+							$option->update( $new_value );
 						}
-						// update it
-						$option->update( $new_value );
 					} else {
 						// not in POST, delete it
 						$option->delete();

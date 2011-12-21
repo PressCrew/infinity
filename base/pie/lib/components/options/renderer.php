@@ -179,6 +179,19 @@ abstract class Pie_Easy_Options_Renderer extends Pie_Easy_Renderer
 	}
 
 	/**
+	 * Render reset one option button
+	 *
+	 * @param string $class
+	 */
+	public function render_reset_one( $class = null )
+	{
+		// begin rendering ?>
+		<a class="<?php $this->merge_classes('pie-easy-options-save', 'pie-easy-options-reset-one', $class) ?>" href="#<?php $this->render_name() ?>">
+			<?php _e( 'Reset', pie_easy_text_domain ); ?>
+		</a><?php
+	}
+
+	/**
 	 * Render a hidden input which appends the current option name to the manifest
 	 */
 	final public function render_manifest()

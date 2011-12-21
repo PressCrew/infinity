@@ -130,22 +130,37 @@
 
 				// save all button
 				$('a.pie-easy-options-save-all', $option)
-					.button({icons: {secondary: "ui-icon-arrowthick-2-n-s"}});
+					.button({icons: {primary: "ui-icon-arrowthick-2-n-s"}});
 					
 				// save one button
 				$('a.pie-easy-options-save-one', $option)
-					.button({icons: {secondary: "ui-icon-arrowthick-1-e"}});
+					.button({icons: {primary: "ui-icon-arrowthick-1-e"}});
+
+				// reset one button
+				$('a.pie-easy-options-reset-one', $option)
+					.button({icons: {primary: "ui-icon-arrowreturnthick-1-w"}});
 				
 				// save buttons click
-				$('a.pie-easy-options-save', $option).click( function(){
+				$('a.pie-easy-options-save', $option).click( function( e ){
 
 					// get option from href
-					var opt_names = $(this).prop('hash').substr(1);
+					var opt_name = $(this).prop('hash').substr(1),
+						opt_reset = $(this).hasClass( 'pie-easy-options-reset-one' );
+
+					if ( opt_reset ) {
+						var r = confirm( 'You will lose any unsaved changes to *other* options on this screen, continue?' );
+						if ( r == false ) {
+							e.preventDefault();
+							e.stopImmediatePropagation();
+							return;
+						}
+					}
 
 					// form data
 					var data =
 						'action=' + action +
-						'&option_names=' + opt_names +
+						'&option_names=' + opt_name +
+						'&option_reset=' + new Number( opt_reset ) +
 						'&' + $form.serialize()
 
 					// message element
@@ -162,15 +177,16 @@
 							data,
 							function(r) {
 								var sr = pieEasyAjax.splitResponseStd(r);
-								// flash them ;)
-								message.fadeOut(300, function() {
-									var state = (sr.code >= 1) ? 'alert' : 'error';
-									$(this).pieEasyFlash(state, sr.message).fadeIn();
+									// flash them ;)
+									message.fadeOut(300, function() {
+										var state = (sr.code >= 1) ? 'alert' : 'error';
+										$option.trigger( 'pieEasyOptionsPost', [ state, opt_name, opt_reset ] );
+										$(this).pieEasyFlash(state, sr.message).fadeIn();
+									});
 							});
-						});
 					});
 
-					return false;
+					e.preventDefault();
 				});
 			});
 		}

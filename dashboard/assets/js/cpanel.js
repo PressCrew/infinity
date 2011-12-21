@@ -73,7 +73,7 @@ function initOptionsPanel(panel)
 	}
 
 	// the option form
-	var form = $('div#infinity-cpanel-options form', panel);
+	var form = $('div#infinity-cpanel-options form', panel).empty();
 	// the menu(s)
 	var menu = $('div.infinity-cpanel-options-menu', panel);
 	// get last option loaded
@@ -113,6 +113,13 @@ function initOptionsPanel(panel)
 			return false;
 		}
 	);
+
+	// bind reset handler
+	$('div.infinity-cpanel-options-single', panel).live( 'pieEasyOptionsPost', function( e, state, name, reset ){
+		if ( reset ) {
+			initOptionsPanel( panel );
+		}
+	});
 
 	// populate form if empty
 	if (form.children().length < 1 && last) {
