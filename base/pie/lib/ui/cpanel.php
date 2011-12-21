@@ -107,7 +107,7 @@ final class Pie_Easy_Ui_Cpanel extends Pie_Easy_Base
 			$children = $this->policy->registry()->get_children( $item );
 			$children_cnt = count( $children ); ?>
 			<li>
-				<a target="<?php if ( !$children_cnt ) $this->render_button_target( $item ); ?>" id="<?php $this->render_id( 'menu', 'item', $item->name ) ?>" href="<?php print esc_attr( $item->url ) ?>" title="<?php print esc_attr( $item->title ) ?>"><?php print esc_attr( $item->title ) ?></a>
+				<a target="<?php if ( !$children_cnt ) $this->render_button_target( $item ); ?>" id="<?php $this->render_id( 'menu', 'item', $item->name ) ?>" href="<?php if ( !$children_cnt ) print esc_attr( $item->url ) ?>" title="<?php print esc_attr( $item->title ) ?>"><?php print esc_attr( $item->title ) ?></a>
 				<?php if ( $children_cnt ): ?>
 					<?php $this->render_menu_items( $children ) ?>
 				<?php endif; ?>
