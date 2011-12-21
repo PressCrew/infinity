@@ -143,6 +143,8 @@ class Infinity_Options_Renderer extends Pie_Easy_Options_Renderer
 		if ( $this->do_save_single_button() ) {
 			$this->render_save_one();
 		}
+		
+		$this->render_reset_one();
 	}
 
 	/**
