@@ -194,7 +194,8 @@ $.widget( 'juicy.browsertabs', $.ui.tabs, {
 		toolbar
 			.find( 'a' )
 			.click( function( e ) {
-				if ( self._identTab( $(this) ) ) {
+				var $a = $( this );
+				if ( $a.attr( 'href' ) && self._identTab( $(this) ) ) {
 					self.loadTab( this, true );
 					e.preventDefault();
 				}
