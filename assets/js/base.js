@@ -22,10 +22,6 @@
 (function($){
 	$(document).ready(function() {
 
-		// add grid class to content for buddypress and bbpress combatibilty
-		jQuery('#content').addClass('grid_16');
-		jQuery('#sidebar').addClass('grid_8 omega');
-
 	/*-----------------------------------------------------------------------------------*/
 	/*	Superfish Settings - http://users.tpg.com.au/j_birch/plugins/superfish/
 	/*-----------------------------------------------------------------------------------*/
@@ -41,6 +37,12 @@
 			});
 
 		}
+		
+		// Adds button class to reply links
+		jQuery(document).ready(function() {
+				//buttons
+				jQuery('.comment-reply-link').addClass('button');
+		});
 
 		// buddypress avatars, post thumbnails support and menus hover effect
 		function infinity_overlay()
