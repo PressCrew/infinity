@@ -17,6 +17,7 @@
 require_once( INFINITY_BASE_DIR . DIRECTORY_SEPARATOR . 'comments.php' );
 require_once( INFINITY_BASE_DIR . DIRECTORY_SEPARATOR . 'templatetags.php' );
 require_once( INFINITY_BASE_DIR . DIRECTORY_SEPARATOR . 'walkers.php' );
+require_once( INFINITY_BASE_DIR . DIRECTORY_SEPARATOR . 'options.php' );
  
 // add post formats
 add_theme_support(
@@ -66,6 +67,19 @@ function infinity_base_post_thumb_sizes()
 	}
 }
 add_action( 'init', 'infinity_base_post_thumb_sizes' );
+
+/**
+ * Enqueue Comment Script
+ *
+ * @package Infinity
+ * @subpackage base
+ */
+function infinity_enqueue_comments_reply() {
+	if( get_option( 'thread_comments' ) ) {
+		wp_enqueue_script( 'comment-reply' );
+	}
+}
+add_action( 'comment_form_before', 'infinity_enqueue_comments_reply' );
 
 /**
  * Register menus
@@ -290,36 +304,37 @@ function infinity_base_superfish_list_item( $args, $output = true )
  * @todo write a paginator from scratch, this is mental
  */
 function infinity_base_paginate() {
-	global $wp_query, $wp_rewrite;
+   global $wp_query, $wp_rewrite;
 
-	$wp_query->query_vars['paged'] > 1 ? $current = $wp_query->query_vars['paged'] : $current = 1;
+   $wp_query->query_vars['paged'] > 1 ? $current = $wp_query->query_vars['paged'] : $current = 1;
 
-	$pagination = array(
-		'base' => @add_query_arg('page','%#%'),
-		'format' => '',
-		'total' => $wp_query->max_num_pages,
-		'current' => $current,
-		'show_all' => true,
-		'type' => 'list'
-	);
+   $pagination = array(
+       'base' => @add_query_arg('page','%#%'),
+       'format' => '',
+       'total' => $wp_query->max_num_pages,
+       'current' => $current,
+       'show_all' => true,
+       'type' => 'list'
+   );
 
-	if ( $wp_rewrite->using_permalinks() ) {
-		$pagination['base'] =
-			user_trailingslashit(
-				trailingslashit(
-					remove_query_arg( 's', get_pagenum_link( 1 ) )
-				) . 'page/%#%/', 'paged'
-			);
-	}
+   if ( $wp_rewrite->using_permalinks() ) {
+       $pagination['base'] =
+           user_trailingslashit(
+               trailingslashit(
+                   remove_query_arg( 's', get_pagenum_link( 1 ) )
+               ) . 'page/%#%/', 'paged'
+           );
+   }
 
-	if ( !empty( $wp_query->query_vars['s'] ) ) {
-		$pagination['add_args'] = array(
-			's' => get_query_var( 's' )
-		);
-	}
-	
-	print paginate_links( $pagination );
+   if ( !empty( $wp_query->query_vars['s'] ) ) {
+       $pagination['add_args'] = array(
+           's' => urlencode( get_query_var( 's' ) )
+       );
+   }
+   
+   print paginate_links( $pagination );
 }
+
 
 /**
  * Add Breadcrumb functionality for WordPress SEO
@@ -335,4 +350,95 @@ function infinity_base_yoast_breadcrumbs() {
 }
 add_action( 'open_content', 'infinity_base_yoast_breadcrumbs' );
 
+/**
+ * Clean up image output and turn it into nice HTML5 Fig captions
+ *
+ * @package Infinity
+ * @subpackage base
+ */
+add_filter( 'img_caption_shortcode', 'infinity_cleaner_caption', 10, 3 );
+
+function infinity_cleaner_caption( $output, $attr, $content ) {
+
+	/* We're not worried abut captions in feeds, so just return the output here. */
+	if ( is_feed() )
+		return $output;
+
+	/* Set up the default arguments. */
+	$defaults = array(
+		'id' => '',
+		'align' => 'alignnone',
+		'width' => '',
+		'caption' => ''
+	);
+
+	/* Merge the defaults with user input. */
+	$attr = shortcode_atts( $defaults, $attr );
+
+	/* If the width is less than 1 or there is no caption, return the content wrapped between the [caption]< tags. */
+	if ( 1 > $attr['width'] || empty( $attr['caption'] ) )
+		return $content;
+
+	/* Set up the attributes for the caption <div>. */
+	$attributes .= ' class="figure ' . esc_attr( $attr['align'] ) . '" style="width:'. esc_attr( $attr['width'] ) . 'px"';
+
+	/* Open the caption <div>. */
+	$output = '<figure' . $attributes .'>';
+
+	/* Allow shortcodes for the content the caption was created for. */
+	$output .= do_shortcode( $content );
+
+	/* Append the caption text. */
+	$output .= '<figcaption class="wp-caption">' . $attr['caption'] . '</figcaption>';
+
+	/* Close the caption </div>. */
+	$output .= '</figure>';
+
+	/* Return the formatted, clean caption. */
+	return $output;
+}
+
+// Clean the output of attributes of images in editor. Courtesy of SitePoint. http://www.sitepoint.com/wordpress-change-img-tag-html/
+function image_tag_class($class, $id, $align, $size) {
+	$align = 'align' . esc_attr($align);
+	return $align;
+}
+
+add_filter('get_image_tag_class', 'image_tag_class', 0, 4);
+
+function image_tag($html, $id, $alt, $title) {
+	return preg_replace(array(
+			'/\s+width="\d+"/i',
+			'/\s+height="\d+"/i',
+			'/alt=""/i'
+		),
+		array(
+			'',
+			'',
+			'',
+			'alt="' . $title . '"'
+		),
+		$html);
+}
+add_filter('get_image_tag', 'image_tag', 0, 4);
+
+if ( ! function_exists( 'infinity_posted_on' ) ) :
+/**
+ * Prints HTML with meta information for the current post-date/time and author.
+ * Create your own twentyeleven_posted_on to override in a child theme
+ *
+ * @since Twenty Eleven 1.0
+ */
+function infinity_posted_on() {
+	printf( __( '<a href="%1$s" title="%2$s" rel="bookmark"><time class="entry-date" datetime="%3$s" pubdate>%4$s</time></a>', infinity_text_domain ),
+		esc_url( get_permalink() ),
+		esc_attr( get_the_time() ),
+		esc_attr( get_the_date( 'c' ) ),
+		esc_html( get_the_date() ),
+		esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
+		esc_attr( sprintf( __( 'View all posts by %s', 'twentyeleven' ), get_the_author() ) ),
+		get_the_author()
+	);
+}
+endif;
 ?>
