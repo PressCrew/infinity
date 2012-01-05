@@ -12,30 +12,30 @@
  */
 infinity_get_header(); ?>
 
-	<div id="content" role="main">
+	<div id="content" role="main" <?php do_action( 'content_class' ); ?>>
 
 		<?php do_action( 'before_content' ) ?>	
 		<?php do_action( 'before_page' ) ?>
 
-		<div class="page-<?php the_ID(); ?>" <?php post_class(); ?>>
-		
+		<div class="page-<?php the_ID(); ?>" <?php post_class(); ?>>	
 		<?php
 			if ( have_posts() ):
 				while ( have_posts() ):
 					the_post();
 					do_action( 'open_loop' );
 		?>
+		<header>
 		<h1 class="pagetitle">
 			<?php
 				the_title();
 			?>
 		</h1>
+		</header>
 		<!-- show page thumb -->
-		<div id="page-thumb">
-			<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', infinity_text_domain ) ?> <?php the_title_attribute(); ?>"><?php the_post_thumbnail('post-image'); ?></a>
-		</div>
+		<?php
+		infinity_get_template_part( 'templates/parts/post-meta-top');	
+		?>				
 		<!-- the post -->
-		
 		<div class="post" id="post-<?php the_ID(); ?>">
 			<?php
 				do_action( 'open_loop_page' );
@@ -45,43 +45,43 @@ infinity_get_header(); ?>
 					the_content( __( '<p class="serif">Read the rest of this page &rarr;</p>', infinity_text_domain ) );
 				?>	
 				<?php
-						infinity_get_search_form();
-					?>	
-				<div class="grid_24">						
-		<div id="archives-recent" class="grid_16 alpha">
-						<h4><?php _e('Last 30 Posts', 'infinity_text_domain') ?></h4>
-											
-						<ul>
-							<?php $archive_30 = get_posts('numberposts=10');
-							foreach($archive_30 as $post) : ?>
-								<li><a href="<?php the_permalink(); ?>"><?php the_title();?></a></li>
-							<?php endforeach; ?>
-						</ul>	
+					infinity_get_search_form();
+				?>	
+			<div id="archives" class="grid_24">						
+				<div id="archives-recent" class="grid_16 alpha">
+								<h4><?php _e('Last 30 Posts', 'infinity_text_domain') ?></h4>
+													
+								<ul>
+									<?php $archive_30 = get_posts('numberposts=10');
+									foreach($archive_30 as $post) : ?>
+										<li><a href="<?php the_permalink(); ?>"><?php the_title();?></a></li>
+									<?php endforeach; ?>
+								</ul>	
 				</div>
-		<div id="archives-month" class="grid_8 omega">				
-						
-						<h4><?php _e('Archives by Month:', 'infinity_text_domain') ?></h4>
-						
-						<ul>
-							<?php wp_get_archives('type=monthly'); ?>
-						</ul>
-
-		</div>			
-		</div>	
-					<div id="archives-subject" class="grid_24">
-			
-						<h4><?php _e('Archives by Subject:', 'infinity_text_domain') ?></h4>
-						
-						<ul>
-					 		<?php wp_list_categories( 'title_li=' ); ?>
-						</ul>
-						
-					</div>
+				<div id="archives-month" class="grid_8 omega">				
+								
+								<h4><?php _e('Archives by Month:', 'infinity_text_domain') ?></h4>
+								
+								<ul>
+									<?php wp_get_archives('type=monthly'); ?>
+								</ul>
+		
+				</div>			
+			</div>	
+			<div id="archives-subject" class="grid_24">
+				
+							<h4><?php _e('Archives by Subject:', 'infinity_text_domain') ?></h4>
+							
+							<ul>
+						 		<?php wp_list_categories( 'title_li=' ); ?>
+							</ul>
+							
 			</div>
+		</div>
 			<?php
 				do_action( 'close_loop_page' );
 			?>
-		</div>
+	</div>
 <?php
 		do_action( 'close_loop' );
 		endwhile;

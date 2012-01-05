@@ -13,15 +13,9 @@
  * @since 1.0
  */
 ?>
-
-
 <!-- show the post thumb? -->
-
-
-
 <?php if (has_post_thumbnail()):?>
-
-<div class="postthumb">
+<figure class="postthumb">
 	<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', infinity_text_domain ) ?> <?php the_title_attribute(); ?>"><?php the_post_thumbnail('post-image'); ?></a>
-</div>
-  <?php endif;?>
+</figure>
+<?php endif;?>

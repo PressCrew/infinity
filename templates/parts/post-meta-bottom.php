@@ -15,7 +15,7 @@
  */
 ?>
 
-<div class="post-meta-data post-bottom">
+<footer class="post-meta-data post-bottom">
 	<?php
 		do_action( 'open_loop_post_meta_data_bottom' );
 	?>
@@ -29,4 +29,4 @@
 <?php
 	do_action( 'close_loop_post_meta_data_bottom' );
 ?>
-</div>
+</footer>

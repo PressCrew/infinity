@@ -14,7 +14,7 @@
  * to add your own stuff as well!
  */
 ?>
-<p class="post-meta-data post-top">
+<div class="post-meta-data post-top">
 <?php
 	do_action( 'open_loop_post_meta_data_top' );
 ?>					
@@ -29,9 +29,7 @@
 		?>						
 	</span>
 	<span class="time-posted">
-		<?php
-			print human_time_diff(get_the_time('U'), current_time('timestamp')) . ' ago';
-		?>
+		<?php infinity_posted_on() ?>
 	</span>
 	<span class="post-comments">
 		<?php
@@ -45,4 +43,4 @@
 <?php
 	do_action( 'close_loop_post_meta_data_top' );
 ?>
-</p>
+</div>

@@ -16,11 +16,11 @@ if ( !has_nav_menu( 'sub-menu' ) ) {
 }
 ?>
 <div id="sub-menu-wrap" role="navigation">
-	<div class="base-menu sub-menu">
+	<nav class="base-menu sub-menu">
 		<?php
 			do_action('open_sub_menu');
 			infinity_base_nav_menu( 'sub-menu' );
 			do_action('close_sub_menu');
 		?>
-	</div>
+	</nav>
 </div>

@@ -48,16 +48,16 @@
 				<div style="clear: both;"></div>
 			<?php endif; // end primary widget area ?>
 			<div id="footer-info">
-				<div id="footer-menu" role="navigation">
+				<nav id="footer-menu" role="navigation">
 					<?php
 						do_action('open_footer_menu');
 						wp_nav_menu( array( 'theme_location' => 'footer-menu' ) );
 						do_action('close_footer_menu');
 					?>
-				</div>	
-				<div id="powered-by">
-					Built on <a href="http://infinity.presscrew.com">Infinity</a> and powered by <a href="http://wordpress.org">WordPress</a>.
-				</div>
+				</nav>	
+			</div>
+			<div id="powered-by">
+				<?php echo infinity_option_get( 'infinity-core-options-footer_text' ); ?>
 			</div>
 			<?php
 				do_action( 'close_footer' );

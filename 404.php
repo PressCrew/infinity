@@ -13,14 +13,16 @@
 
 	infinity_get_header();
 ?>
-	<div id="content" role="main">
+	<div id="content" role="main" <?php do_action( 'content_class' ); ?>>
 		<?php
 			do_action( 'open_404' );
 		?>
-		<div id="post-0" class="post error404 not-found">
+		<article id="post-0" class="post error404 not-found">
+			<header>
 			<h1 class="entry-title">
 				<?php _e( 'Darn it.. Nothing found', infinity_text_domain ); ?>
 			</h1>
+			</header>
 			<div class="entry-content">
 				<p>
 						<?php
@@ -55,7 +57,7 @@
 
 					<?php the_widget( 'WP_Widget_Tag_Cloud' ); ?>
 			</div>
-		</div>
+		</article>
 		<?php
 			do_action( 'close_404' );
 		?>

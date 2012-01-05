@@ -17,11 +17,11 @@ if ( !has_nav_menu( 'main-menu' ) && ( has_nav_menu( 'over-menu' ) || has_nav_me
 }
 ?>
 <div id="main-menu-wrap" role="navigation">
-	<div class="base-menu main-menu">
+	<nav class="base-menu main-menu">
 		<?php
 			do_action('open_main_menu');
 			infinity_base_nav_menu( 'main-menu' );
 			do_action('close_main_menu');
 		?>
-	</div>
+	</nav>
 </div>

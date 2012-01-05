@@ -16,11 +16,13 @@
 ?>
 		<div class="category-box">
 			<div id="category-description">
+			<header>
 			<h1 id= "category-title" class="page-title">
 				<?php
 					printf( __( 'Category Archives: <span>%s</span>', infinity_text_domain ), single_cat_title( '', false ) );
 				?>
 			</h1>
+			</header>
 			<?php
 				// get cat desc
 				$category_description = category_description();
@@ -41,11 +43,13 @@
 ?>
 		<div class="tag-box">
 			<div id="tag-description">
+			<header>
 			<h1 id="tag-title" class="page-title">
 				<?php
 					printf( __( 'Tag Archives: <span>%s</span>', infinity_text_domain ), single_tag_title( '', false ) );
 				?>
 			</h1>
+			</header>
 			<?php
 					$tag_description = tag_description();
 					if ( ! empty( $tag_description ) )
@@ -66,6 +70,7 @@
 ?>
 		<div class="category-box">
 			<div id="category-description">
+			<header>
 			<h1 id= "category-title" class="page-title">
 				<?php if ( is_day() ) : ?>
 							<?php printf( __( 'Daily Archives: %s', 'twentyeleven' ), '<span>' . get_the_date() . '</span>' ); ?>
@@ -74,7 +79,7 @@
 						<?php elseif ( is_year() ) : ?>
 							<?php printf( __( 'Yearly Archives: %s', 'twentyeleven' ), '<span>' . get_the_date( 'Y' ) . '</span>' ); ?>
 						<?php endif; ?>
-
+			</header>
 			</div>
 		</div>
 <?php

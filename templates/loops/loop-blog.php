@@ -19,7 +19,7 @@ $wp_query->query('posts_per_page=5'.'&paged='.$paged);
 while ($wp_query->have_posts()) : $wp_query->the_post();
 ?>
 		<!-- post -->
-		<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+		<article class="post" id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 			<?php
 				do_action( 'open_loop_post' );
 			?>
@@ -65,7 +65,7 @@ while ($wp_query->have_posts()) : $wp_query->the_post();
 			<?php
 				do_action( 'close_loop_post' );
 			?>
-		</div><!-- post -->
+		</article><!-- post -->
 	<?php
 		do_action( 'close_loop' );
 		endwhile;
