@@ -7,6 +7,7 @@
 	+ Content
 	+ Sidebar
 	+ Footer
+	+ Tooltips
 	
 You can disable the css in this file by adding the following code to your child theme config/infinity.ini file
 
@@ -15,7 +16,6 @@ infinity-layout-style = off
 /* ================== */
 /* ! Global & Wraps   */
 /* ================== */
-
 body {
     -webkit-font-smoothing: antialiased;
     -webkit-text-size-adjust: none;
@@ -43,22 +43,33 @@ body {
     background: none repeat scroll 0 0 #F8F8F8;
     border-top: 1px solid #DDDDDD;
     position: relative;        
-    height: 30px;
-    padding: 5px 10px;
+    min-height: 30px;
 }
 
 #top-menu-wrap {
-    z-index: 1;
+    /* setting z-index for dropdowns. do not mess with this */
+    z-index: 12 !important; 
 }
 #main-menu-wrap {
-    float: right;
-    position: relative;
-    right: 10px;
     margin-top: 0.5%;
-    padding: 8px 5px;
+    padding: 0;
+    position: absolute;
+    right: 10px;
+    /* setting z-index for dropdowns. do not mess with this */
+    z-index: 11 !important; 
 }
-#main-menu-wrap ul.sub-menu { z-index: 99 }
-.main-menu { padding-left: 0px !important }
+#main-menu-wrap ul.sub-menu { z-index: 99 !important }
+
+/* Set a min-height so we can apply texture overlays */
+.main-menu, .top-menu, .sub-menu {
+min-height: 30px;
+padding: 5px 10px;
+}
+
+#sub-menu-wrap {
+/* setting z-index for dropdowns. do not mess with this */
+z-index: 10 !important;
+}
 /* Change font styling for the top and sub menus */
 #sub-menu-wrap ul a span,
 #top-menu-wrap ul a span {
@@ -80,8 +91,10 @@ body {
 /* ========== */
 
 #header {
-    height: 200px;
+    min-height: 150px;
     position: relative;
+    /* setting z-index for dropdowns. do not mess with this */
+    z-index: 11 !important; 
 }
 #site-description {
     font-style: italic;
@@ -90,22 +103,19 @@ body {
     position: relative;
     font-size: 14px;
     line-height: 180%;
-    font-weight: bold;
 }
 h1#site-title,div#site-title {
-    float: left;
+	position: absolute;
+    left: 15px;
     font-size: 26px;
     line-height: 180%;
     padding-left: 10px;
+    font-weight: bold;
+    margin: 0;
 }
 #site-title a {
     margin-bottom: -29px;
     display: block;
-}
-
-#header h1 {
-position: relative;
-left: 10px;
 }
 
 #logo-menu-wrap {
@@ -178,7 +188,6 @@ float: right;
 .base-menu ul ul li:first-child { border-top: none }
 .base-menu ul ul li:last-child { border-bottom: none }
 .base-menu ul ul li a {
-    font-weight: normal;
     text-transform: none;
     width: 180px;
     color: #B5B5B5;
@@ -186,7 +195,6 @@ float: right;
     font-size: 13px;
 }
 .base-menu ul a {
-    font-weight: bold;
     float: left;
     padding: 0 3px 0 10px;
     font-size: 13px;
@@ -212,16 +220,14 @@ float: right;
     padding: 4px 4px 4px 0 !important;
 }
 .base-menu li a span {
-    letter-spacing: 1px;
     float: left;
     cursor: pointer;
     display: block;
-    padding: 4px 4px 4px 0;
+    padding: 5px 5px 5px 0;
 }
 .base-menu li li a span { padding: 0 }
 .base-menu ul li.sfHover li a,
 .base-menu ul li.sfHover li a span {
-    font-weight: normal !important;
     text-transform: none !important;
     letter-spacing: 0px !important;
     font-size: 12.8px !important;
@@ -302,18 +308,12 @@ float: right;
 	display: block;
 }
 
-#content {
-width: 65.833333333333%;
-}   
-     
+      
 /* =========== 
  ! Sidebar   
  =========== */
-
-/* Fallback for browsers who don't have JS enabled */ 
-#sidebar {
-width: 32.5%;
-} 
+ 
+#sidebar h4 a.widgettitle { color: #F4F4F4!important }
 #sidebar .widget_search { margin-top: 20px }
 #sidebar .widget_search input[type=text] {
     width: 110px;
@@ -323,24 +323,14 @@ width: 32.5%;
 #sidebar ul ol,
 #sidebar ol ol,
 #sidebar ol ul { margin: 0px }
-#pattern { display: none }
 #inner-sidebar { padding-left: 20px }
 /* Widgets */
 .widget { margin-bottom: 30px }
-.widget h4 {
-    border-bottom: 1px solid #EFEFEF;
-    color: #999999;
-    font-size: 11.8px;
-    letter-spacing: 1px;
-    line-height: 24px;
-    text-transform: uppercase;
-}
 
 /* ========== 
  ! Footer   
  ========== */
  
-#footer h4 { color: #60A2C1 }
 #footer p:last-child { margin-bottom: 0 }
 .footer-widgets { margin-bottom: 20px }
 #footer .widget {
@@ -357,7 +347,6 @@ width: 32.5%;
 #footer-menu  ul li a:hover { color: #777 }
 #footer-menu ul li { display: inline }
 #footer-menu ul li a {
-    font-weight: bold;
     padding-right: 8px;
 }
 .footer-menu ul li:last-child a { border-right: 0px }
@@ -371,14 +360,14 @@ width: 32.5%;
 width: 70%;
 }
 #powered-by {
-float: right;
-margin-top: -20px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    text-align: center;
 }
 
 /* ================== */
 /* ! Page Templates   */
 /* ================== */
-
 /*page templare sidebar left*/
 .page-template-sidebar-left-template-php #content { float: right !important }
 .page-template-sidebar-left-template-php #inner-sidebar {
@@ -394,3 +383,107 @@ margin-top: -20px;
     padding-right: 25px !important;
 }
 .page-template-sidebar-right-template-php #content { float: left !important }
+
+/* ============ */
+/* ! Tooltips   */
+/* ============ */
+.twipsy {
+    display: block;
+    position: absolute;
+    visibility: visible;
+    padding: 5px;
+    font-size: 11px;
+    z-index: 1000;
+    filter: alpha(opacity=80);
+    -khtml-opacity: 0.8;
+    -moz-opacity: 0.8;
+    opacity: 0.8;
+    margin-top: -20px;
+}
+
+.twipsy.fade.in {
+    filter: alpha(opacity=80);
+    -khtml-opacity: 0.8;
+    -moz-opacity: 0.8;
+    opacity: 0.8;
+}
+.twipsy.above .twipsy-arrow {
+    bottom: 0;
+    left: 50%;
+    margin-left: -5px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #000000;
+}
+.twipsy.left .twipsy-arrow {
+    top: 50%;
+    right: 0;
+    margin-top: -5px;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 5px solid #000000;
+}
+.twipsy.below .twipsy-arrow {
+    top: 0;
+    left: 50%;
+    margin-left: -5px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid #000000;
+}
+.twipsy.right .twipsy-arrow {
+    top: 50%;
+    left: 0;
+    margin-top: -5px;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-right: 5px solid #000000;
+}
+.twipsy-inner {
+    padding: 3px 8px;
+    background-color: #000000;
+    color: white;
+    text-align: center;
+    max-width: 200px;
+    text-decoration: none;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+.twipsy-arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+}
+.fade {
+    -moz-transition: opacity 0.15s linear 0s;
+    opacity: 0;
+}
+.fade.in { opacity: 1 }
+
+/*CSS Fix for activity directory*/
+body.directory.activity.logged-in .twipsy {
+margin-top: -20px;
+}
+
+.addthis_toolbox {
+    height: 16px;
+    margin-bottom: 15px;
+    margin-top: 14px;
+}
+
+.single .addthis_toolbox {
+    position: relative;
+    left: 18px;
+    margin-left: 10px;
+}
+
+
+.addthis_button_twitter_follow_native {
+margin-left: 10px;
+}
+
+#screen-name, #followers, .button {
+    color: #DDDDDD;
+}
+

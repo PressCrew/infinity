@@ -21,9 +21,15 @@ span.edit-link {
 }
 span.edit-link a { color: #999 }
 /* The actual Posts*/
+.author-avatar {
+    float: left;
+    margin-bottom: 0;
+    margin-right: 10px;
+    margin-top: 0;
+}
 .entry {
-    min-height: 110px;
-    margin-top: 10px;
+    margin-bottom: 30px;
+    margin-top: 30px;
 }
 .post dd.wp-caption p.wp-caption-text,
 .wp-caption-text {
@@ -56,7 +62,9 @@ span.edit-link a { color: #999 }
     border: none !important;
     padding: 0 !important;
 }
-.post .post-content,
+.post-content {
+margin-bottom: 70px;
+}
 .post img.alignleft {
     margin: 0 7px 2px 0;
     display: inline;
@@ -79,13 +87,14 @@ img.aligncenter {
     height: auto;
 }
 .post .wp-caption {
-    text-align: center;
+    background-color: #F9F9F9;
+    border: 1px solid #DDDDDD;
+    border-radius: 3px 3px 3px 3px;
+    font-size: 90%;
+    font-style: italic;
+    padding-bottom: 7px;
     padding-top: 4px;
-    border-radius: 3px;
-    background-color: #f3f3f3;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border: 1px solid #ddd;
+    text-align: center;
 }
 .post .wp-caption img {
     margin: 0;
@@ -119,12 +128,10 @@ img.aligncenter {
     font-size: 11.5px;
 }
 .postthumb img {
-    border: 1px solid #DDDDDD;
-    padding: 5px;
-    max-width: 98%;
+    max-width: 100%;
     height: auto;
+    margin-bottom: 20px;
 }
-.post img a:hover { background: #EFEFEF }
 .post p { margin: 0 0 20px 0 }
 .post .gallery-caption { }
 #single-attachment img {
@@ -161,18 +168,34 @@ margin-bottom: 25px;
 }
 /* per post navigation and pagination */
 ul.page-numbers li a,
+ul.page-numbers li span,
 .paged-navigation,
 .comment-navigation {
+    background: none repeat scroll 0 0 #FFFFFF;
+    color: inherit;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px 4px 4px 4px;
     font-size: 14px;
     font-weight: bold;
     height: 38px;
     margin: 0 2px 10px 0;
+    padding: 5px 8px;
     text-align: center;
     word-spacing: 10px;
+}
+ul.page-numbers li a:hover,
+.paged-navigation:hover,
+.comment-navigation:hover {
+background: #444;
+color: #FFF;
 }
 ul.page-numbers {
     text-align: center;
     margin-bottom: 20px;
+}
+ul.page-numbers li span {
+background: #444;
+color: #FFF;
 }
 ul.page-numbers li { display: inline }
 .pagination {
@@ -186,12 +209,12 @@ ul.page-numbers li { display: inline }
 .friends .pagination,
 .mygroups .pagination,
 .myblogs .pagination {
-    background: #f8f8f8;
+    background: #F9F9F9;
     border: none;
     padding: 8px 15px;
 }
 /*Post Meta */
-.post .post-meta-data,
+.post-meta-data,
 .comment-meta,
 .comment-options,
 p#breadcrumbs {
@@ -199,7 +222,6 @@ p#breadcrumbs {
     border-top: 1px solid #EFEFEF;
     color: #AAAAAA;
     font-size: 11.5px;
-    font-weight: bold;
     margin-top: 10px;
     min-height: 20px;
     padding: 3px 0;
@@ -236,19 +258,8 @@ margin-top: 10px;
 margin-bottom: 0px;
 }
 
-h1#category-title,
-h1#tag-title {
-    font-style: normal;
-    color: #999;
-    font-size: 16px;
-    line-height: 18px;
-    margin-bottom: 0;
-}
-h1#category-title span,
-h1#tag-title span { color: #555 }
 .authorbox h3 {
     font-style: normal;
-    font-weight: 700;
     margin-bottom: 10px;
     color: #555555;
     font-size: 16px;
@@ -295,35 +306,25 @@ color: #444;
 #comments .pingbacks li.pingback { margin: 10px 0 }
 #comments .pingbacks li.pingback .reply { display: none }
 #comments .cancel-comment-reply { margin: 10px 0 }
-#comments .comment.thread-even {
-    background: #fafafa;
-    background: rgba(0,0,0,0.02);
-    border-bottom: 1px solid #e6e6e6;
-    border-bottom: 1px solid rgba(0,0,0,0.07);
-}
 #comments .comment-entry p {
     padding-left: 10px;
     padding-right: 10px;
-    margin: 0 0 10px 62px;
+    margin: 0 0 20px 62px;
 }
-#comments .bypostauthor { background: #EFEFEF }
-#comments .comment-head { margin: 0 0 15px 0 }
+#comments .bypostauthor { background: #F9F9F9 }
+#comments .comment-head { margin: 0 0 15px 70px }
 #comments .comment-head .name {
     font-weight: bold;
     margin: 0;
-    font-size: 15px;
 }
 #comments .comment-head .date,
 #comments .comment-head .edit,
 #comments .comment-head .perma { font-size: 11px }
 #comments .avatar img {
-    background: #FFFFFF;
     vertical-align: middle;
     width: 40px;
     height: 40px;
     margin: 0;
-    border: 1px solid #DDDDDD;
-    padding: 3px;
 }
 #comments ul.children {
     margin: 10px 10px 0 25px;
@@ -352,7 +353,7 @@ color: #444;
 }
 #comments .comment .comment-container {
     border-bottom: 1px solid #F4F4F4;
-    padding: 20px;
+    padding-bottom: 15px;
     position: relative;
 }
 #comments h3#pings { margin-top: 25px }
@@ -361,17 +362,23 @@ color: #444;
     margin: 0 15px 10px 0;
 }
 #comments .reply { 
-    position: relative;
-    top: -22px;
+    left: 0;
+    position: absolute;
+    top: 45px;
 }
 #comments .reply a { 
-    font-size: 10px;
-    padding: 0 8px;
+    font-size: 70%;
+    padding: 0 6px;
 }
 #comments h3 { }
 ol.commentlist {
     margin-left: 0px;
     list-style: none;
+    padding-left: 0px;
+}
+#comments .unapproved {
+font-style: italic;
+color: #999;
 }
 /* The Comments Forms */
 #respond { margin: 40px 0 0 }
@@ -412,7 +419,7 @@ ol.commentlist {
 }
 li.bypostauthor { background: none repeat scroll 0 0 #F8FDFF !important }
 #commentform input.txt {
-    background: #fcfcfc;
+    background: #F9F9F9;
     width: 170px;
     color: #666;
     margin: 0 5px 10px 0;
@@ -423,6 +430,10 @@ li.bypostauthor { background: none repeat scroll 0 0 #F8FDFF !important }
     height: auto;
 }
 #commentform #submit { margin: 15px 0 0 0 }
+.form-allowed-tags {
+font-size: 90%;
+color: #777;
+}
 /* Pingsbacks */
 h3#pings { margin: 25px 0 10px 0 }
 .pinglist li {
