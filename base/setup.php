@@ -18,22 +18,29 @@ require_once( INFINITY_BASE_DIR . DIRECTORY_SEPARATOR . 'comments.php' );
 require_once( INFINITY_BASE_DIR . DIRECTORY_SEPARATOR . 'templatetags.php' );
 require_once( INFINITY_BASE_DIR . DIRECTORY_SEPARATOR . 'walkers.php' );
 require_once( INFINITY_BASE_DIR . DIRECTORY_SEPARATOR . 'options.php' );
- 
+//Only Load BuddyPress Setup when BP is actually running
+if ( function_exists('bp_is_member') ) {
+	require_once( INFINITY_BASE_DIR . DIRECTORY_SEPARATOR . 'buddypress-setup.php' );
+} 
+
 // add post formats
-add_theme_support(
-	'post-formats',
-	array(
-		'aside',
-		'audio',
-		'chat',
-		'gallery',
-		'image',
-		'link',
-		'quote',
-		'status',
-		'video'
-	)
-);
+function infinity_base_post_formats() {
+	add_theme_support(
+		'post-formats',
+		array(
+			'aside',
+			'audio',
+			'chat',
+			'gallery',
+			'image',
+			'link',
+			'quote',
+			'status',
+			'video'
+		)
+	);
+   add_action( 'init', 'infinity_base_post_formats' );
+}
 
 
 // Set the content width based on the theme's design and stylesheet.
@@ -50,23 +57,19 @@ if ( ! isset( $content_width ) ) {
  * @package Infinity
  * @subpackage base
  */
-function infinity_base_post_thumb_sizes()
-{
-	if ( current_theme_supports( 'post-thumbnails' ) ) {
-		set_post_thumbnail_size( 35, 35, true );
-		add_image_size( 'post-image', 674, 140, true );
-		add_image_size( 'featured-single', 960, 160, true ); 
-		add_image_size( 'slider-full', 980, 360, true );
-		add_image_size( 'slider-posts', 709, 265, true );
-		add_image_size( 'widget', 300, '', true );
-		add_image_size( 'large', 680, '', true );
-		add_image_size( 'medium', 250, '', true );
-		add_image_size( 'small', 125, '', true );
-		add_image_size( 'thumbnail-large', 600, 200, true );
-		add_image_size( 'thumbnail-post', 210, 160, true );
+if ( current_theme_supports( 'infinity-post-thumbnails' ) ) {
+	function infinity_base_post_thumb_sizes()
+	{
+		if ( current_theme_supports( 'post-thumbnails' ) ) {
+			set_post_thumbnail_size( 35, 35, true );
+			add_image_size( 'post-image', 674, 140, true );
+			add_image_size( 'slider-full', 980, 360, true );
+			add_image_size( 'thumbnail-large', 600, 200, true );
+			add_image_size( 'thumbnail-post', 210, 160, true );
+		}
 	}
+	add_action( 'init', 'infinity_base_post_thumb_sizes' );
 }
-add_action( 'init', 'infinity_base_post_thumb_sizes' );
 
 /**
  * Enqueue Comment Script
@@ -88,85 +91,96 @@ add_action( 'comment_form_before', 'infinity_enqueue_comments_reply' );
  * @subpackage base
  */
 function infinity_base_register_menus()
-{
-	register_nav_menu( 'over-menu', __( 'Top Menu', infinity_text_domain ) );
-	register_nav_menu( 'main-menu', __( 'Main Menu', infinity_text_domain ) );
-	register_nav_menu( 'sub-menu', __( 'Sub Menu' ), infinity_text_domain );
-	register_nav_menu( 'footer-menu', __( 'Footer Menu', infinity_text_domain ) );
+{	
+	if ( current_theme_supports( 'infinity-top-menu-setup' ) ) {
+		register_nav_menu( 'over-menu', __( 'Top Menu', infinity_text_domain ) );
+	}	
+	if ( current_theme_supports( 'infinity-main-menu-setup' ) ) {
+		register_nav_menu( 'main-menu', __( 'Main Menu', infinity_text_domain ) );
+	}
+	if ( current_theme_supports( 'infinity-sub-menu-setup' ) ) {
+		register_nav_menu( 'sub-menu', __( 'Sub Menu' ), infinity_text_domain );
+	}
+	if ( current_theme_supports( 'infinity-footer-menu-setup' ) ) {
+		register_nav_menu( 'footer-menu', __( 'Footer Menu', infinity_text_domain ) );
+	}
 }
 add_action( 'init', 'infinity_base_register_menus' );
 
-/**
- * Register one sidebar
- *
- * @author Marshall Sorenson <marshall@presscrew.com>
- * @package Infinity
- * @subpackage base
- * @see register_sidebar()
- * @param string $id Sidebar ID, 'id' arg passed to register_sidebar()
- * @param string $name Sidebar name, 'name' arg passed to register_sidebar()
- * @param string $desc Sedebar description, 'description' arg passed to register_sidebar()
- */
-function infinity_base_register_sidebar( $id, $name, $desc )
-{
-	register_sidebar( array(
-		'id' => $id,
-		'name' => $name,
-		'description' => $desc,
-		'before_widget' => '<div id="%1$s" class="widget %2$s">',
-		'after_widget' => '</div>',
-		'before_title' => '<h4>',
-		'after_title' => '</h4>'
-	));
+if ( current_theme_supports( 'infinity-sidebar-setup' ) ) {
+	/**
+	 * Register one sidebar
+	 *
+	 * @author Marshall Sorenson <marshall@presscrew.com>
+	 * @package Infinity
+	 * @subpackage base
+	 * @see register_sidebar()
+	 * @param string $id Sidebar ID, 'id' arg passed to register_sidebar()
+	 * @param string $name Sidebar name, 'name' arg passed to register_sidebar()
+	 * @param string $desc Sedebar description, 'description' arg passed to register_sidebar()
+	 */
+	function infinity_base_register_sidebar( $id, $name, $desc )
+	{
+		register_sidebar( array(
+			'id' => $id,
+			'name' => $name,
+			'description' => $desc,
+			'before_widget' => '<article id="%1$s" class="widget %2$s">',
+			'after_widget' => '</article>',
+			'before_title' => '<h4>',
+			'after_title' => '</h4>'
+		));
+	}
+	
+	/**
+	 * Register all sidebars
+	 *
+	 * @package Infinity
+	 * @subpackage base
+	 */
+	function infinity_base_register_sidebars()
+	{
+		// page
+		infinity_base_register_sidebar(
+			'home-sidebar',
+			'Home Sidebar',
+			'The home widget area'
+		);
+		// blog
+		infinity_base_register_sidebar(
+			'blog-sidebar',
+			'Blog Sidebar',
+			'The blog widget area'
+		);
+		// page
+		infinity_base_register_sidebar(
+			'page-sidebar',
+			'Page Sidebar',
+			'The page widget area'
+		);
+		// footer left
+		infinity_base_register_sidebar(
+			'footer-left',
+			'Footer Left',
+			'The left footer widget'
+		);
+		// footer middle
+		infinity_base_register_sidebar(
+			'footer-middle',
+			'Footer Middle',
+			'The middle footer widget'
+		);
+		// footer right
+		infinity_base_register_sidebar(
+			'footer-right',
+			'Footer Right',
+			'The right footer widget'
+		);
+	}
+	add_action( 'init', 'infinity_base_register_sidebars' );
 }
 
-/**
- * Register all sidebars
- *
- * @package Infinity
- * @subpackage base
- */
-function infinity_base_register_sidebars()
-{
-	// page
-	infinity_base_register_sidebar(
-		'home-sidebar',
-		'Home Sidebar',
-		'The home widget area'
-	);
-	// blog
-	infinity_base_register_sidebar(
-		'blog-sidebar',
-		'Blog Sidebar',
-		'The blog widget area'
-	);
-	// page
-	infinity_base_register_sidebar(
-		'page-sidebar',
-		'Page Sidebar',
-		'The page widget area'
-	);
-	// footer left
-	infinity_base_register_sidebar(
-		'footer-left',
-		'Footer Left',
-		'The left footer widget'
-	);
-	// footer middle
-	infinity_base_register_sidebar(
-		'footer-middle',
-		'Footer Middle',
-		'The middle footer widget'
-	);
-	// footer right
-	infinity_base_register_sidebar(
-		'footer-right',
-		'Footer Right',
-		'The right footer widget'
-	);
-}
-add_action( 'init', 'infinity_base_register_sidebars' );
-
+if ( current_theme_supports( 'infinity-top-menu-setup' ) || current_theme_supports( 'infinity-main-menu-setup' ) || current_theme_supports( 'infinity-sub-menu-setup' ) || current_theme_supports( 'infinity-footer-menu-setup' ) ) {
 /**
  * Display a nav menu using a custom walker
  *
@@ -295,44 +309,47 @@ function infinity_base_superfish_list_item( $args, $output = true )
 		return ob_get_clean();
 	}
 }
+}
 
-/**
- * Add Pagination
- *
- * @package Infinity
- * @subpackage base
- * @todo write a paginator from scratch, this is mental
- */
-function infinity_base_paginate() {
-   global $wp_query, $wp_rewrite;
-
-   $wp_query->query_vars['paged'] > 1 ? $current = $wp_query->query_vars['paged'] : $current = 1;
-
-   $pagination = array(
-       'base' => @add_query_arg('page','%#%'),
-       'format' => '',
-       'total' => $wp_query->max_num_pages,
-       'current' => $current,
-       'show_all' => true,
-       'type' => 'list'
-   );
-
-   if ( $wp_rewrite->using_permalinks() ) {
-       $pagination['base'] =
-           user_trailingslashit(
-               trailingslashit(
-                   remove_query_arg( 's', get_pagenum_link( 1 ) )
-               ) . 'page/%#%/', 'paged'
-           );
-   }
-
-   if ( !empty( $wp_query->query_vars['s'] ) ) {
-       $pagination['add_args'] = array(
-           's' => urlencode( get_query_var( 's' ) )
-       );
-   }
-   
-   print paginate_links( $pagination );
+if ( current_theme_supports( 'infinity-pagination' ) ) {
+	/**
+	 * Add Pagination
+	 *
+	 * @package Infinity
+	 * @subpackage base
+	 * @todo write a paginator from scratch, this is mental
+	 */
+	function infinity_base_paginate() {
+	   global $wp_query, $wp_rewrite;
+	
+	   $wp_query->query_vars['paged'] > 1 ? $current = $wp_query->query_vars['paged'] : $current = 1;
+	
+	   $pagination = array(
+	       'base' => @add_query_arg('page','%#%'),
+	       'format' => '',
+	       'total' => $wp_query->max_num_pages,
+	       'current' => $current,
+	       'show_all' => true,
+	       'type' => 'list'
+	   );
+	
+	   if ( $wp_rewrite->using_permalinks() ) {
+	       $pagination['base'] =
+	           user_trailingslashit(
+	               trailingslashit(
+	                   remove_query_arg( 's', get_pagenum_link( 1 ) )
+	               ) . 'page/%#%/', 'paged'
+	           );
+	   }
+	
+	   if ( !empty( $wp_query->query_vars['s'] ) ) {
+	       $pagination['add_args'] = array(
+	           's' => urlencode( get_query_var( 's' ) )
+	       );
+	   }
+	   
+	   print paginate_links( $pagination );
+	}
 }
 
 
@@ -421,24 +438,4 @@ function image_tag($html, $id, $alt, $title) {
 		$html);
 }
 add_filter('get_image_tag', 'image_tag', 0, 4);
-
-if ( ! function_exists( 'infinity_posted_on' ) ) :
-/**
- * Prints HTML with meta information for the current post-date/time and author.
- * Create your own twentyeleven_posted_on to override in a child theme
- *
- * @since Twenty Eleven 1.0
- */
-function infinity_posted_on() {
-	printf( __( '<a href="%1$s" title="%2$s" rel="bookmark"><time class="entry-date" datetime="%3$s" pubdate>%4$s</time></a>', infinity_text_domain ),
-		esc_url( get_permalink() ),
-		esc_attr( get_the_time() ),
-		esc_attr( get_the_date( 'c' ) ),
-		esc_html( get_the_date() ),
-		esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
-		esc_attr( sprintf( __( 'View all posts by %s', 'twentyeleven' ), get_the_author() ) ),
-		get_the_author()
-	);
-}
-endif;
 ?>

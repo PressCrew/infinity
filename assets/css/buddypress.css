@@ -10,6 +10,11 @@ infinity-bp-support = off
 /* BuddyPress Infinity Tweaks  */
 /* ============================== */
 
+.padder ul, ol {
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+}
 span.highlight,
 span.activity,
 div#message p,
@@ -412,6 +417,9 @@ div.item-list-tabs ul li.current a span {
 div#item-nav ul li.loading a { background-position: 88% 50% }
 div.item-list-tabs#object-nav { margin-top: 0 }
 div#subnav.item-list-tabs {
+    background: none repeat scroll 0 0 transparent;
+    border-bottom: 1px solid #E8E8E8;
+    border-top: 0 solid;
     font-family: inherit;
     font-size: 13px;
     font-weight: bold;

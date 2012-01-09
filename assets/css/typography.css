@@ -62,7 +62,10 @@ h2.pagetitle a, h2.posttitle a, h1.pagetitle a, h1.posttitle a {
 }
 h2.pagetitle a:hover, h2.posttitle a:hover, h1.pagetitle a:hover, h1.posttitle a:hover { color: #999 }
 
-.posttitle,.pagetitle { margin-top: 0px }
+.posttitle,.pagetitle { 
+    margin-bottom: 20px;
+    margin-top: 0;
+}
 
 h1 .post-edit-link, h2 .post-edit-link {
     font-size: 27px !important;

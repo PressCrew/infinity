@@ -85,11 +85,21 @@ a:visited:hover { color: #777 }
     border: 1px solid #DDDDDD;
     border-radius: 0 4px 4px 0;
     box-shadow: 0 0 0 8px rgba(0, 0, 0, 0.024), 0 0 3px 0 rgba(0, 0, 0, 0.15), 0 0 0 6px rgba(0, 0, 0, 0.02) inset;
-    margin-left: -12px !important;
+    margin-left: -28px !important;
+    padding-left: 28px !important;
     padding: 10px 30px;
     position: absolute;
     top: -8px;
 }
+
+.main-menu, .top-menu, .sub-menu {
+padding: 0px;
+}
+
+.base-menu ul li a span {
+    font-weight: bold;
+}
+
 
 /* ==================== */
 /* ! The Top Menu   */
@@ -219,8 +229,7 @@ div#main-menu-wrap ul li ul li a { background: transparent }
 /* =========== */
 /* ! Sidebar   */
 /* =========== */
-
-.widget,
+#sidebar .widget,
 .notification {
     border: 1px solid #dddddd;
     padding: 10px 20px;
@@ -250,6 +259,10 @@ div#main-menu-wrap ul li ul li a { background: transparent }
     background: -webkit-linear-gradient(#fafafa, #ffffff);
     background: -moz-linear-gradient(center top, #fafafa 0%, #ffffff 100%);
     background: -moz-gradient(center top, #fafafa 0%, #ffffff 100%);
+}
+
+#sidebar ul, ol {
+    padding: 0 0 0 15px;
 }
 
 /* ========== */
@@ -306,6 +319,9 @@ color: #DDD;
 /* ========= */
 /* ! Posts   */
 /* ========= */
+.author-avatar img {
+padding: 0px !important;
+}
 
 .post p.post-meta-data,
 .comment-meta,

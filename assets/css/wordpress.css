@@ -127,10 +127,12 @@ img.aligncenter {
     padding: 3px 5px;
     font-size: 11.5px;
 }
+.postthumb {
+	margin-bottom: 20px;
+}
 .postthumb img {
     max-width: 100%;
     height: auto;
-    margin-bottom: 20px;
 }
 .post p { margin: 0 0 20px 0 }
 .post .gallery-caption { }
