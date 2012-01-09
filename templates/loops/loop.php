@@ -26,7 +26,7 @@
 			?>
 				<header>
 				<h2 class="posttitle">
-					<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', 'infinity' ) ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a>
+					<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', infinity_text_domain ) ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a>
 					<?php edit_post_link(' ✍','',' ');?>
 				</h2>
 				</header>
@@ -49,7 +49,7 @@
 						if ( is_search() || is_category() || is_tag() || is_archive()  ) : // Display excerpts for archives and search results
 						the_excerpt();
 						else : 
-						the_content( __( 'Read More', 'infinity' ) );
+						the_content( __( 'Read More', infinity_text_domain ) );
 						endif;
 						do_action( 'after_loop_content' );
 					?>
@@ -67,12 +67,14 @@
 	</div><!-- post-content -->
 	<?php
 		do_action( 'close_loop' );
-		endwhile;
-		infinity_base_paginate();
+	endwhile;
+		if ( current_theme_supports( 'infinity-pagination' ) ) :
+   		infinity_base_paginate();
+    	endif;
 	else:
 ?>
 		<h2 class="center">
-			<?php _e( 'Not Found', 'infinity' ) ?>
+			<?php _e( 'Not Found', infinity_text_domain ) ?>
 		</h2>
 <?php
 		infinity_get_search_form();
