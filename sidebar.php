@@ -14,7 +14,7 @@
 	do_action( 'before_sidebar' );
 ?>
 
-<div id="sidebar">
+<aside id="sidebar" role="complementary" <?php do_action( 'sidebar_class' ); ?>>
 	<div id="inner-sidebar">
 	<!-- sidebar -->
 		<?php
@@ -30,4 +30,4 @@
 		do_action( 'after_sidebar' );
 	?>
 	</div>
-</div>
+</aside>

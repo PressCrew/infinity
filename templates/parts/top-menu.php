@@ -16,11 +16,11 @@ if ( !has_nav_menu( 'over-menu' ) ) {
 }
 ?>
 <div id="top-menu-wrap" role="navigation">
-	<div class="base-menu top-menu">
+	<nav class="base-menu top-menu">
 		<?php
 			do_action('open_top_menu');
 			infinity_base_nav_menu( 'over-menu' );
 			do_action('close_top_menu');
 		?>
-	</div>
+	</nav>
 </div>

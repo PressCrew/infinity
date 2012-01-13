@@ -18,18 +18,18 @@
 			the_post();
 			do_action( 'open_loop' );
 ?>
+	<div class="post-content">
 		<!-- post -->
-		<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+		<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 			<?php
 				do_action( 'open_loop_post' );
 			?>
-			<!-- post-content -->
-			<div class="post-content">
-				<!-- post title -->
+				<header>
 				<h2 class="posttitle">
 					<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', infinity_text_domain ) ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a>
 					<?php edit_post_link(' ✍','',' ');?>
 				</h2>
+				</header>
 				<?php
 					do_action( 'open_loop_post_content' );
 				?>
@@ -42,35 +42,35 @@
 				<!-- show the avatar? -->
 				<div class="entry">
 				<?php
-				infinity_get_template_part( 'templates/parts/post-thumbnail');	
+					infinity_get_template_part( 'templates/parts/post-thumbnail');	
 				?>	
-					<div class="post-author-box">
-						<?php
-							echo get_avatar( get_the_author_meta( 'user_email' ), '50' );
-						?>
-					</div>
 					<?php
 						do_action( 'before_loop_content' );
-						the_content( __( 'Read More', 'infinity' ) );
-						wp_link_pages( array( 'before' => '<div class="page-link">' . __( '<span>Pages:</span>', infinity_text_domain ), 'after' => '</div>' ) ); 
+						if ( is_search() || is_category() || is_tag() || is_archive()  ) : // Display excerpts for archives and search results
+						the_excerpt();
+						else : 
+						the_content( __( 'Read More', infinity_text_domain ) );
+						endif;
 						do_action( 'after_loop_content' );
 					?>
 				</div>
 				<?php
-					infinity_get_template_part( 'templates/parts/post-meta-bottom');	
-				?>
-				<?php
 					do_action( 'close_loop_post_content' );
 				?>
-			</div><!-- post-content -->
+				<?php
+					infinity_get_template_part( 'templates/parts/post-meta-bottom');	
+				?>
 			<?php
 				do_action( 'close_loop_post' );
 			?>
-		</div><!-- post -->
+		</article><!-- post -->
+	</div><!-- post-content -->
 	<?php
 		do_action( 'close_loop' );
-		endwhile;
-		infinity_base_paginate();
+	endwhile;
+		if ( current_theme_supports( 'infinity-pagination' ) ) :
+   		infinity_base_paginate();
+    	endif;
 	else:
 ?>
 		<h2 class="center">

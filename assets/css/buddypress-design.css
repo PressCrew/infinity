@@ -1,0 +1,28 @@
+div.item-list-tabs ul li.feed a {
+    background: url("../images/icons/black.png") no-repeat scroll 0 -1222px transparent;
+    padding-left: 24px !important;
+}
+
+
+/* ! Error Messages   */
+div#message.error p {
+    background: #e41717;
+    color: #fff;
+    border-color: #a71a1a;
+    clear: left;
+}
+div#message.updated p {
+    background: url("../images/icons/black.png") no-repeat scroll 1px -1661px #DFFCD9;
+    border-color: #C4E9BD;
+    color: #1A9B00;
+}
+form.standard-form#signup_form div div.error {
+    color: #fff;
+    background: #e41717;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    padding: 6px;
+    width: 90%;
+    margin: 0 0 10px 0;
+}

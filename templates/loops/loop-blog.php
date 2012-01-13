@@ -19,7 +19,7 @@ $wp_query->query('posts_per_page=5'.'&paged='.$paged);
 while ($wp_query->have_posts()) : $wp_query->the_post();
 ?>
 		<!-- post -->
-		<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+		<article class="post" id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 			<?php
 				do_action( 'open_loop_post' );
 			?>
@@ -51,7 +51,7 @@ while ($wp_query->have_posts()) : $wp_query->the_post();
 					</div>
 					<?php
 						do_action( 'before_loop_content' );
-						the_excerpt( __( 'Read More', 'infinity' ) );
+						the_excerpt( __( 'Read More', infinity_text_domain ) );
 						do_action( 'after_loop_content' );
 					?>
 				</div>
@@ -65,10 +65,12 @@ while ($wp_query->have_posts()) : $wp_query->the_post();
 			<?php
 				do_action( 'close_loop_post' );
 			?>
-		</div><!-- post -->
+		</article><!-- post -->
 	<?php
 		do_action( 'close_loop' );
 		endwhile;
-		infinity_base_paginate();
+		if ( current_theme_supports( 'infinity-pagination' ) ) :
+   		infinity_base_paginate();
+    	endif;
 		$wp_query = null; $wp_query = $temp;
 ?>

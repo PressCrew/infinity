@@ -19,19 +19,23 @@
 		do_action( 'open_head' );
 	?>
 	<!-- basic title -->
-	<title>
-		<?php
-			wp_title('');
-		?>
-	</title>
-	<!-- core meta tags -->
+		<title>
+		<?php /*SEO optimized Titles if Yoast SEO Plugin is not installed. If it is, use default wp_title */ if ( function_exists('yoast_breadcrumb') ) : 
+			wp_title();
+			else:
+			infinity_base_title();
+			endif;
+		?>	
+	</title>		<!-- core meta tags -->
 	<meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
 	<meta name="generator" content="WordPress <?php bloginfo('version'); ?>" />
 	<!-- core link tags -->
-	<link rel="alternate" type="application/rss+xml" title="<?php bloginfo('name'); ?> <?php _e( 'Blog Posts RSS Feed', 'buddypress' ) ?>" href="<?php bloginfo('rss2_url'); ?>" />
-	<link rel="alternate" type="application/atom+xml" title="<?php bloginfo('name'); ?> <?php _e( 'Blog Posts Atom Feed', 'buddypress' ) ?>" href="<?php bloginfo('atom_url'); ?>" />
+	<link rel="alternate" type="application/rss+xml" title="<?php bloginfo('name'); ?> <?php _e( 'Blog Posts RSS Feed', infinity_text_domain ) ?>" href="<?php bloginfo('rss2_url'); ?>" />
+	<link rel="alternate" type="application/atom+xml" title="<?php bloginfo('name'); ?> <?php _e( 'Blog Posts Atom Feed', infinity_text_domain ) ?>" href="<?php bloginfo('atom_url'); ?>" />
 	<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
-	<?php if ( is_singular() ) wp_enqueue_script( "comment-reply" ); ?>
+	<!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
 	<?php
 		wp_head();
 		do_action( 'close_head' );

@@ -53,9 +53,9 @@ abstract class Pie_Easy_I18n extends Pie_Easy_Base
 
 		// try to load it
 		if ( Pie_Easy_Files::cache($mofile_global)->is_readable() ) {
-			return load_textdomain( $domain, $mofile_global );
+			return load_theme_textdomain( $domain, $mofile_global );
 		} elseif ( ( $mofile_custom ) && Pie_Easy_Files::cache($mofile_custom)->is_readable() ) {
-			return load_textdomain( $domain, $mofile_custom );
+			return load_theme_textdomain( $domain, $mofile_custom );
 		} else {
 			return false;
 		}

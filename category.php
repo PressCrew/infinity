@@ -13,15 +13,17 @@
 
 	infinity_get_header();
 ?>
-	<div id="content" role="main">
+	<div id="content" role="main" <?php do_action( 'content_class' ); ?>>
 		<?php
 			do_action( 'open_content' );
 			do_action( 'open_category' );
 		?>
 		<div class="page" id="blog-category">
 			<?php
+				if ( current_theme_supports( 'infinity-introduction-boxes' ) ) :
 				infinity_get_template_part( 'templates/parts/introduction-boxes' );
-				infinity_get_template_part( 'templates/loops/loop', 'excerpt' );
+				endif;
+				infinity_get_template_part( 'templates/loops/loop', 'category' );
 			?>
 		</div>
 		<?php

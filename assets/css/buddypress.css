@@ -10,7 +10,11 @@ infinity-bp-support = off
 /* BuddyPress Infinity Tweaks  */
 /* ============================== */
 
-.activity-list .activity-header a:first-child,
+.padder ul, ol {
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+}
 span.highlight,
 span.activity,
 div#message p,
@@ -22,6 +26,15 @@ div#message p,
     font: bold 11px/12px HelveticaNeue,Arial;
     padding: 3px 6px;
 }
+
+.activity-list .activity-header a:first-child {
+padding: 0px;
+}
+
+.activity-header p {
+margin-bottom: 0px;
+}
+
 div#message p {
     font-weight: bold;
     padding-left: 22px !important;
@@ -33,7 +46,7 @@ div#message p {
     line-height: 18px;
 }
 span.activity {
-    background: #EFEFEF;
+    background: #F9F9F9;
     font-weight: normal;
     margin-top: 6px;
 }
@@ -45,18 +58,120 @@ span.activity {
 color: inherit;
 font-weight: bold;
 }
-div#sidebar-me h4 {
-    font-size: 14px;
-    font-style: italic;
-    margin: 6px 0 20px;
-    padding-top: 4px;
-}
 div#sidebar ol,div#sidebar ul {
     display: inherit;
 }
 .activity-read-more {
 margin-left: 5px;
 }
+
+/* BuddyBar Widget Styling */
+#sidebar-me,#bp-login-widget {
+    font-size: 11.5px;
+    overflow: hidden;
+    padding-bottom: 6px;
+}
+
+#bp-login-widget {
+margin-bottom: 20px;
+}
+
+img.avatar {
+    float: left;
+}
+
+#bp-profile-widget {
+}
+
+#bp-profile li a {
+    color: #666666;
+    font-style: italic;
+}
+
+#bp-profile li a:hover {
+color: #F55D2D;
+}
+
+.bp-user-link, .bp-module-title {
+	font-weight: bold;
+}
+
+#bp-activity, #bp-friends, #bp-groups, #bp-messages, .bp-user-link {
+	margin-bottom: .5em;
+}
+
+.bp-user-link, #bp-activity, #bp-friends, #bp-groups, #bp-messages, #bp-avatar, #bp-profile {
+	float: left;
+	margin-left: 0px;
+	list-style: none;
+	margin-bottom: 10px;
+}
+
+#bp-activity, #bp-friends, #bp-groups, #bp-messages {
+    margin-bottom: 0;
+    margin-right: 10px;
+    padding: 0;
+    width: 72px;
+}
+
+.bp-module-link a {
+color: #999;
+}
+
+#bp-avatar img {
+	height: 75px; 
+	width: 75px;
+	margin-right: 10px;
+}
+
+.bp-user-link {
+	font-size: large;
+	width: 280px;
+}
+
+.bp-module-title {
+	font-size: 13px;
+}
+
+#sidebar-me ul li a:hover {
+margin-bottom: 2px;
+color: #222;
+}
+
+#side-user-login, #sidebar-user-pass {
+   font-size: 12px;
+    padding: 4px;
+    width: 86% !important;
+}
+
+.sidebar-login-button {
+    float: left;
+}
+
+#sidebar-login-form .button {
+    float: right;
+    margin-right: 23px;
+    margin-top: 2px;
+}
+
+/* 3rd Party Connect Buttons like Facebook */
+#bp-connect-buttons p {
+display: none;
+}
+
+#bp-connect-buttons {
+    background: #F9F9F9;
+    border-bottom: 1px dotted #DDDDDD;
+    border-top: 1px dotted #DDDDDD;
+    margin: 51px -20px -7px;
+    padding-left: 20px;
+}
+
+.fb_button_small, .fb_button_small_rtl{
+margin-top: 10px;
+margin-bottom: 10px;
+}
+
 
 /* ================================================================================================
 /* ! BuddyPress Default Styling. This has been taken directly from latest version of BP-Default.css   */
@@ -70,9 +185,7 @@ div#item-header {
 }
 div#item-header div#item-header-content { margin-left: 170px }
 div#item-header h2 {
-    font-size: 28px;
     margin: 0 0 15px 0;
-    line-height: 120%;
 }
 div#item-header h2 a {
     text-decoration: none;
@@ -155,7 +268,7 @@ div#item-header a.button {
 div#item-header div#message.info {
     line-height: 80%;
 }
-div#item-header div#message.info p { background: #FFFFE4 }
+div#item-header div#message.info p { background: #F9F9F9 }
 /* > Item Lists (Activity, Friend, Group lists)
 -------------------------------------------------------------- */
 ul.item-list { width: 100% }
@@ -212,28 +325,24 @@ ul.item-list li h5 span.small {
 /* > Item Tabs
 -------------------------------------------------------------- */
 div.item-list-tabs {
-    background: #333333;
-    border-bottom: 1px solid #000000;
-    border-top: 1px solid #000000;
-    clear: left;
-    font-weight: bold;
-    height: 40px;
-    overflow: hidden;
+    background: #F9F9F9;
+    border-bottom: 2px solid #DDDDDD;
+    border-top: 1px solid #DDDDDD;
+    min-height: 41px;
+    position: relative;
+    clear: both;
 }
+
 div.item-list-tabs ul li a {
-    color: #D6D1D1;
+    color: #777;
     font-size: 10.5px;
-    letter-spacing: 0.5px;
     text-decoration: none;
 }
 div.item-list-tabs ul { width: 100% }
 div.item-list-tabs ul li {
-    text-transform: uppercase;
     font-size: 11.8px;
-    color: #D6D6D6;
     float: left;
     margin: 5px 0 0 5px;
-    text-shadow: none;
 }
 div.item-list-tabs#subnav ul li { margin-top: 0 }
 div#subnav.item-list-tabs ul li a {
@@ -247,7 +356,10 @@ div#subnav.item-list-tabs ul li a:hover {
     color: #444;
     background: none;
 }
-div#subnav.item-list-tabs ul li.current a { color: #444 }
+div#subnav.item-list-tabs ul li.current a {
+    background: none repeat scroll 0 0 transparent !important;
+    color: #444444;
+}
 div.item-list-tabs ul li:first-child { margin-left: 20px }
 div.item-list-tabs ul li.last {
     float: right;
@@ -275,9 +387,9 @@ div.item-list-tabs ul li a span {
     color: inherit;
 }
 div.item-list-tabs ul li a span {
-    background: none repeat scroll 0 0 #272625;
+    background: #FFF;
     border-radius: 3px 3px 3px 3px;
-    color: #DDD;
+    color: #999;
     display: inline;
     font-size: 90%;
     margin-left: 2px;
@@ -286,37 +398,28 @@ div.item-list-tabs ul li a span {
 div.item-list-tabs ul li.selected a,
 div.item-list-tabs ul li.selected a,
 div.item-list-tabs ul li.current a {
-    background-color: #FFFFFF !important;
+    background: none repeat scroll 0 0 #444444 !important;
     border-radius: 4px 4px 4px 4px;
-    color: #333333;
+    color: #DDDDDD;
     font-weight: bold;
-    text-shadow: none;
     padding-left: 10px !important;
-    background: -webkit-linear-gradient(#DDD, #ffffff)!important;
-    background: -moz-linear-gradient(center top, #DDD 0%, #ffffff 100%)!important;
-    background: -moz-gradient(center top, #DDD 0%, #ffffff 100%)!important;
 }
 div.item-list-tabs ul li.selected a span,
 div.item-list-tabs ul li.current a span,
 div.item-list-tabs ul li a:hover span {
-	background-color: #999;
+	background-color: #444;
 }
 div.item-list-tabs ul li.selected a span,
 div.item-list-tabs ul li.current a span {
 	background-color: #555;
 }
 
-ul li.loading a {
-    background: #000 !important;
-    background-repeat: no-repeat;
-}
 div#item-nav ul li.loading a { background-position: 88% 50% }
 div.item-list-tabs#object-nav { margin-top: 0 }
 div#subnav.item-list-tabs {
-    background: #FFFFFF;
-    border-bottom: 1px solid #EBEBEB;
-    border-top: 1px solid #F4F4F4;
-    box-shadow: 1px 3px 3px rgba(230, 228, 228, 0.5);
+    background: none repeat scroll 0 0 transparent;
+    border-bottom: 1px solid #E8E8E8;
+    border-top: 0 solid;
     font-family: inherit;
     font-size: 13px;
     font-weight: bold;
@@ -325,10 +428,6 @@ div#subnav.item-list-tabs {
     min-height: 32px;
     overflow: hidden;
     padding-top: 5px;
-}
-div.item-list-tabs ul li.feed a {
-    background: url("../images/icons/black.png") no-repeat scroll 0 -1222px transparent;
-    padding-left: 24px !important;
 }
 /* > Item Body
 -------------------------------------------------------------- */
@@ -389,11 +488,15 @@ div.pagination .pagination-links a {
 }
 div.pagination .pagination-links a:hover { font-weight: bold }
 div#pag-bottom { margin-top: 0 }
- div.item-options {
+div.item-options {
     color: #73C1E6;
     font-size: 9.8px;
     font-weight: bold;
     text-transform: uppercase;
+}
+div.item-options a {
+    padding-bottom: 2px;
+    padding-top: 2px;
 }
 div.item-avatar img {
     display: block;
@@ -411,27 +514,6 @@ div#message p {
     padding: 10px 15px;
     font-size: 12px;
     display: block;
-}
-div#message.error p {
-    background: #e41717;
-    color: #fff;
-    border-color: #a71a1a;
-    clear: left;
-}
-div#message.updated p {
-    background: url("../images/icons/black.png") no-repeat scroll 1px -1661px #DFFCD9;
-    border-color: #C4E9BD;
-    color: #1A9B00;
-}
-form.standard-form#signup_form div div.error {
-    color: #fff;
-    background: #e41717;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-    padding: 6px;
-    width: 90%;
-    margin: 0 0 10px 0;
 }
 /* Buttons that are disabled */
 div.pending a,
@@ -462,6 +544,7 @@ ul.button-nav li.current a { font-weight: bold }
     background-position: 95% 50% !important;
     background-repeat: no-repeat !important;
     padding-right: 25px !important;
+    display: none;
 }
 a.loading {
     background-image: url( ../images/buddypress/ajax-loader.gif ) !important;
@@ -471,42 +554,6 @@ a.loading {
 }
 /* > Input Forms
 -------------------------------------------------------------- */
-form.standard-form { }
-form.standard-form textarea,
-form.standard-form input[type=text],
-form.standard-form select,
-form.standard-form input[type=password],
-.dir-search input[type=text] {
-    border: 1px inset #ccc;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-    padding: 6px !important;
-    font: inherit;
-    color: #888;
-}
-form.standard-form select { padding: 3px }
-form.standard-form input[type=password] { margin-bottom: 5px }
-form.standard-form label,
-form.standard-form span.label {
-    display: block;
-    font-weight: bold;
-    margin: 15px 0 5px 0;
-}
-form.standard-form div.checkbox label,
-form.standard-form div.radio label {
-    font-weight: normal;
-    margin: 5px 0 0 0;
-    font-size: 14px;
-    color: #888;
-}
-form.standard-form#sidebar-login-form label { margin-top: 5px }
-form.standard-form input[type=text] { width: 75% }
-form.standard-form#sidebar-login-form input[type=text],
-form.standard-form#sidebar-login-form input[type=password] {
-    padding: 4px;
-    width: 95%;
-}
 form.standard-form #basic-details-section input[type=password],
 form.standard-form #blog-details-section input#signup_blog_url { width: 35% }
 form.standard-form#signup_form input[type=text],
@@ -594,10 +641,6 @@ table.notification-settings .no {
     width: 40px;
     text-align: center;
 }
-.forums {
-margin-left: -25px;
-margin-right: -25px;
-}
 
 table tr.alt {
     background: #FBFBFB;
@@ -666,7 +709,7 @@ text-align: center;
 }
 form#whats-new-form h5 {
     color: #555555;
-    font-size: 14px;
+    font-size: 1.2em;
     font-weight: bold;
     line-height: 25px;
     margin: 0px 0 13px 76px;
@@ -700,7 +743,7 @@ form#whats-new-form textarea {
 form#whats-new-form #whats-new-options select { max-width: 200px }
 form#whats-new-form #whats-new-submit {
     float: right;
-    margin: 0;
+    margin-top: -5px;
 }
 #whats-new-options {
     height: 0;
@@ -1116,15 +1159,4 @@ div#topic-meta h3 { font-size: 20px }
 div#new-topic-post {
     margin: 0;
     padding: 1px 0 0 0;
-}
-/*
-BuddyPress */
-img.avatar,
-ul.item-list li img.avatar {
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    background: #EFEFEF;
-    border: 1px solid #CCC;
-    margin-left: 0;
-    padding: 3px;
 }

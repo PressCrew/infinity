@@ -13,14 +13,16 @@
 
 	infinity_get_header();
 ?>
-	<div id="content" role="main">
+	<div id="content" role="main" <?php do_action( 'content_class' ); ?>>
 		<?php
 			do_action( 'open_404' );
 		?>
-		<div id="post-0" class="post error404 not-found">
+		<article id="post-0" class="post error404 not-found">
+			<header>
 			<h1 class="entry-title">
 				<?php _e( 'Darn it.. Nothing found', infinity_text_domain ); ?>
 			</h1>
+			</header>
 			<div class="entry-content">
 				<p>
 						<?php
@@ -40,7 +42,7 @@
 					<div id="search-categories-widget" class="grid_12 alpha">
 
 						<h2 class="widgettitle">
-						<?php _e( 'Most Used Categories', 'twentyeleven' ); ?>
+						<?php _e( 'Most Used Categories', infinity_text_domain ); ?>
 						</h2>
 						<ul>
 						<?php wp_list_categories( array( 'orderby' => 'count', 'order' => 'DESC', 'show_count' => 1, 'title_li' => '', 'number' => 10 ) ); ?>
@@ -55,7 +57,7 @@
 
 					<?php the_widget( 'WP_Widget_Tag_Cloud' ); ?>
 			</div>
-		</div>
+		</article>
 		<?php
 			do_action( 'close_404' );
 		?>

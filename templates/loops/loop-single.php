@@ -21,6 +21,9 @@
 			<!-- the post -->
 			<div <?php post_class(); ?> id="post-<?php the_ID(); ?>">
 				<div class="post-content">
+					<?php
+						infinity_get_template_part( 'templates/parts/post-avatar');	
+					?>			
 					<h1 class="posttitle">
 						<?php the_title(); ?>
 						<?php edit_post_link(' ✍','',' ');?>
@@ -28,34 +31,37 @@
 					<?php
 					do_action( 'open_loop_single' );
 					?>			
-					<?php
-					infinity_get_template_part( 'templates/parts/post-meta-top');	
-					?>
 					<!-- show the post thumb? -->
 					<?php
 					infinity_get_template_part( 'templates/parts/post-thumbnail');	
-					?>								
+					?>	
+					<?php
+					infinity_get_template_part( 'templates/parts/post-meta-top');	
+					?>							
 					<?php
 						do_action( 'before_single_entry' )
 					?>
 					<div class="entry">
 						<?php
 							do_action( 'open_single_entry' );
-							the_content( __( 'Read the rest of this entry &rarr;', infinity_text_domain ) );
-							wp_link_pages( array( 'before' => '<div class="page-link">' . __( '<span>Pages:</span>', infinity_text_domain ), 'after' => '</div>' ) ); 
-						?>
-						<?php 
-							get_template_part('templates/parts/post-meta-bottom'); 
-							do_action('after_single_entry');
-						?>
+							the_content( __( 'Read the rest of this entry &rarr;', infinity_text_domain ) ); 
+					   	?>
+						<div style="clear: both;"></div>
 						<?php
 							wp_link_pages( array(
 								'before' => __( '<p><strong>Pages:</strong> ', infinity_text_domain ),
 								'after' => '</p>', 'next_or_number' => 'number')
 							);
-							infinity_get_template_part( 'templates/parts/author-box');	
+							do_action( 'close_single_entry' );
 						?>
 					</div>
+					<?php 
+						do_action('after_single_entry');
+					?>
+					<?php
+						infinity_get_template_part('templates/parts/post-meta-bottom'); 
+						infinity_get_template_part( 'templates/parts/author-box');	
+					?>
 				</div>
 				<?php
 					do_action( 'close_loop_single' );

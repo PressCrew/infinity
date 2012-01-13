@@ -22,10 +22,6 @@
 (function($){
 	$(document).ready(function() {
 
-		// add grid class to content for buddypress and bbpress combatibilty
-		jQuery('#content').addClass('grid_16');
-		jQuery('#sidebar').addClass('grid_8 omega');
-
 	/*-----------------------------------------------------------------------------------*/
 	/*	Superfish Settings - http://users.tpg.com.au/j_birch/plugins/superfish/
 	/*-----------------------------------------------------------------------------------*/
@@ -41,23 +37,12 @@
 			});
 
 		}
-
-		// buddypress avatars, post thumbnails support and menus hover effect
-		function infinity_overlay()
-		{
-			jQuery('.wp-post-image,img.avatar, ul.item-list li img.avatar, .pie-easy-exts-features-header-logo, #primary-nav li a span, a.button-callout, #sidebar a img').hover( function() {
-				jQuery(this).stop().animate({opacity : 0.7}, 200);
-			}, function() {
-				jQuery(this).stop().animate({opacity : 1}, 200);
-			});
-
-			jQuery('.plus').hover( function() {
-				jQuery(this).parent('.post-thumb').find('img').stop().animate({opacity : 0.8}, 200);
-			}, function() {
-				jQuery(this).parent('.post-thumb').find('img').stop().animate({opacity : 1}, 200);
-			});
-		}
-		infinity_overlay();
+		
+		// Adds button class to reply links
+		jQuery(document).ready(function() {
+				//buttons
+				jQuery('.comment-reply-link').addClass('button');
+		});
 		
 	});
 })(jQuery);

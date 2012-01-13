@@ -20,7 +20,7 @@
 		infinity_get_template_part( 'templates/parts/top-menu', 'header' );
 	?>
 	<!-- header -->
-	<div id="header" role="banner">
+	<header id="header" role="banner">
 		<div id="logo-menu-wrap">
 			<?php
 				do_action( 'open_header' );
@@ -42,7 +42,7 @@
 				do_action( 'close_header' );
 			?>
 		</div>
-	</div><!-- end header -->
+	</header><!-- end header -->
 	<?php
 		// show sub-menu
 		infinity_get_template_part( 'templates/parts/sub-menu', 'header' );

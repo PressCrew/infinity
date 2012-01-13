@@ -199,9 +199,6 @@ require_once( INFINITY_PIEXT_DIR . DIRECTORY_SEPARATOR . 'screens.php' );
 require_once( INFINITY_PIEXT_DIR . DIRECTORY_SEPARATOR . 'shortcodes.php' );
 require_once( INFINITY_PIEXT_DIR . DIRECTORY_SEPARATOR . 'i18n.php' );
 
-// load theme setup
-require_once( INFINITY_BASE_DIR . DIRECTORY_SEPARATOR . 'setup.php' );
-
 // initialize scheme
 infinity_scheme_init();
 
@@ -226,5 +223,6 @@ if ( is_admin() ) {
 	infinity_features_init_screen();
 	infinity_shortcodes_init_screen();
 }
-
+// load theme setup
+require_once( INFINITY_BASE_DIR . DIRECTORY_SEPARATOR . 'setup.php' );
 ?>

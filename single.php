@@ -13,16 +13,14 @@
 
 	infinity_get_header();
 ?>
-	<div id="content" role="main">
+	<div id="content" role="main" <?php do_action( 'content_class' ); ?>>
 		<?php
 			do_action( 'open_content' );
 			do_action( 'open_single' );
 		?>
-		<div class="post">
-			<?php
+			<?php /* Load Single Post Loop */
 				infinity_get_template_part( 'templates/loops/loop', 'single' );
 			?>
-		</div>
 		<?php
 			do_action( 'close_single' );
 			do_action( 'close_content' );

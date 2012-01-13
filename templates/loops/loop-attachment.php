@@ -19,11 +19,13 @@
 			do_action( 'open_loop' );
 ?>
 			<!-- the post -->
-			<div class="post" id="post-<?php the_ID(); ?>">
+			<article class="post" id="post-<?php the_ID(); ?>">
 				<div class="post-content">
+					<header>
 					<h1 class="posttitle">
 						<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', infinity_text_domain ) ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a>
 					</h1>
+					</header>
 					<?php
 					do_action( 'open_loop_single' );
 					?>
@@ -35,8 +37,10 @@
 					?>
 					<div class="entry">
 						<a href="#">
-							<?php echo wp_get_attachment_image( $post->ID, 'large', false, array( 'class' => 'size-large aligncenter' ) ); ?>
-						</a>
+							<figure class="attachment-image">
+								<?php echo wp_get_attachment_image( $post->ID, 'large', false, array( 'class' => 'size-large aligncenter' ) ); ?>
+							</figure>
+							</a>
 
 						<div class="entry-caption">
 							<?php if ( !empty( $post->post_excerpt ) ) the_excerpt(); ?>
@@ -44,7 +48,7 @@
 								
 						<?php the_content(); ?>		
 
-						<p class="post-meta-data post-bottom">
+						<footer class="post-meta-data post-bottom">
 							<?php
 								do_action( 'open_loop_post_meta_data_bottom' );
 							?>
@@ -71,7 +75,7 @@
 							<?php
 							do_action( 'close_loop_post_meta_data_bottom' );
 							?>
-						</p>
+						</footer>
 						<?php
 						do_action( 'close_loop_single' );
 						?>
@@ -87,7 +91,7 @@
 				<?php
 					do_action( 'close_loop_single' );
 				?>
-			</div>
+			</article>
 <?php
 			comments_template('', true);
 			do_action( 'close_loop' );

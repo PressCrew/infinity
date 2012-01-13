@@ -13,20 +13,21 @@
 
 	infinity_get_header();
 ?>	
-	<div id="content" role="main">
+	<div id="content" role="main" <?php do_action( 'content_class' ); ?>>
 	<?php
 		do_action( 'open_content' );
 		do_action( 'open_search' );
-
 		if ( have_posts() ): ?>
-			<h1 class="page-title search-title">
-				<?php
-					printf( __( 'Search Results for: <span>%s</span>', infinity_text_domain ), get_search_query() );
-				?>
-			</h1>
+			<header>
+				<h1 class="page-title search-title">
+					<?php
+						printf( __( 'Search Results for: <span>%s</span>', infinity_text_domain ), get_search_query() );
+					?>
+				</h1>
+			</header>
 			<?php
-				infinity_get_template_part( 'templates/loops/loop', 'excerpt' );
-		else: ?>
+				infinity_get_template_part( 'templates/loops/loop', 'search' );
+			else: ?>
 			<div id="post-0" class="post no-results not-found">
 				<h2 class="entry-title">
 					<?php

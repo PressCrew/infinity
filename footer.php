@@ -21,45 +21,48 @@
 			do_action( 'open_footer_wrap' );
 		?>
 		<!-- begin footer -->
-		<div id="footer">
+		<footer id="footer" role="contentinfo">
 			<?php
 				do_action( 'open_footer' );
 			?>
-			<!-- footer widgets -->
-			<div class="footer-widgets grid_24">
-				<div class="grid_8 footer-widget alpha" id="footer-widget-left">
-					<?php
-						dynamic_sidebar( 'Footer Left' );
-					?>
+			
+			<?php if ( is_active_sidebar( 'Footer Left' ) || is_active_sidebar( 'Footer Middle' ) || is_active_sidebar( 'Footer Right' ) ) : ?>
+				<!-- footer widgets -->
+				<div class="footer-widgets">
+					<div class="<?php do_action( 'footer_widget_class' ); ?> footer-widget" id="footer-widget-left">
+						<?php
+							dynamic_sidebar( 'Footer Left' );
+						?>
+					</div>
+					<div class="<?php do_action( 'footer_widget_class' ); ?> footer-widget" id="footer-widget-middle">
+						<?php
+							dynamic_sidebar( 'Footer Middle' );
+						?>
+					</div>
+					<div class="<?php do_action( 'footer_widget_class' ); ?> footer-widget" id="footer-widget-right">
+						<?php
+							dynamic_sidebar( 'Footer Right' );
+						?>
+					</div>
 				</div>
-				<div class="grid_8 footer-widget" id="footer-widget-middle">
-					<?php
-						dynamic_sidebar( 'Footer Middle' );
-					?>
-				</div>
-				<div class="grid_8 footer-widget omega" id="footer-widget-right">
-					<?php
-						dynamic_sidebar( 'Footer Right' );
-					?>
-				</div>
-			</div>
-			<div style="clear: both;"></div>
+				<div style="clear: both;"></div>
+			<?php endif; // end primary widget area ?>
 			<div id="footer-info">
-				<div id="footer-menu" role="navigation">
+				<nav id="footer-menu" role="navigation">
 					<?php
 						do_action('open_footer_menu');
 						wp_nav_menu( array( 'theme_location' => 'footer-menu' ) );
 						do_action('close_footer_menu');
 					?>
-				</div>	
-				<div id="powered-by">
-					Built on <a href="http://infinity.presscrew.com">Infinity</a> and powered by <a href="http://wordpress.org">WordPress</a>.
-				</div>
+				</nav>	
+			</div>
+			<div id="powered-by">
+				<?php echo infinity_option_get( 'infinity-core-options-footer_text' ); ?>
 			</div>
 			<?php
 				do_action( 'close_footer' );
 			?>
-		</div>
+		</footer>
 		<?php
 			do_action( 'close_footer_wrap' );
 		?>
