@@ -105,6 +105,13 @@ if ( current_theme_supports( 'infinity-grid-style' ) ) {
 		<?php }} 
 	// Hook into action
 	add_action('open_body','infinity_custom_sidebar');
+	
+	// Add the Footer Widget Class
+	function infinity_footer_widget_class() { { ?>
+	grid_8
+	<?php }} 
+	// Hook into action
+	add_action('footer_widget_class','infinity_footer_widget_class');
 }
 
 // Custom CSS

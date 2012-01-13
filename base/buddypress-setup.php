@@ -16,60 +16,60 @@ register_sidebar(array(
 'name' => 'Home Sidebar',
 'id' => 'activity-sidebar',
 'description' => "The Home Sidebar",
-'before_widget' => '<div id="%1$s" class="widget %2$s">',
-'after_widget' => '</div>',
-'before_title' => '<h3>',
-'after_title' => '</h3>'
+'before_widget' => '<article id="%1$s" class="widget %2$s">',
+'after_widget' => '</article>',
+'before_title' => '<h4>',
+'after_title' => '</h4>'
 ));
 
 register_sidebar(array(
 'name' => 'Activity Sidebar',
 'id' => 'activity-sidebar',
 'description' => "The Activity Sidebar area",
-'before_widget' => '<div id="%1$s" class="widget %2$s">',
-'after_widget' => '</div>',
-'before_title' => '<h3>',
-'after_title' => '</h3>'
+'before_widget' => '<article id="%1$s" class="widget %2$s">',
+'after_widget' => '</article>',
+'before_title' => '<h4>',
+'after_title' => '</h4>'
 ));
  
 register_sidebar(array(
 'name' => 'Member Sidebar',
 'id' => 'member-sidebar',
 'description' => "The Members widget area",
-'before_widget' => '<div id="%1$s" class="widget %2$s">',
-'after_widget' => '</div>',
-'before_title' => '<h3>',
-'after_title' => '</h3>'
+'before_widget' => '<article id="%1$s" class="widget %2$s">',
+'after_widget' => '</article>',
+'before_title' => '<h4>',
+'after_title' => '</h4>'
 ));
 
 register_sidebar(array(
 'name' => 'Blogs Sidebar',
 'id' => 'blogs-sidebar',
 'description' => "The Blogs Sidebar area",
-'before_widget' => '<div id="%1$s" class="widget %2$s">',
-'after_widget' => '</div>',
-'before_title' => '<h3>',
-'after_title' => '</h3>'
+'before_widget' => '<article id="%1$s" class="widget %2$s">',
+'after_widget' => '</article>',
+'before_title' => '<h4>',
+'after_title' => '</h4>'
 ));
  
 register_sidebar(array(
 'name' => 'Groups Sidebar',
 'id' => 'groups-sidebar',
 'description' => "The Groups widget area",
-'before_widget' => '<div id="%1$s" class="widget %2$s">',
-'after_widget' => '</div>',
-'before_title' => '<h3>',
-'after_title' => '</h3>'
+'before_widget' => '<article id="%1$s" class="widget %2$s">',
+'after_widget' => '</article>',
+'before_title' => '<h4>',
+'after_title' => '</h4>'
 ));
  
 register_sidebar(array(
 'name' => 'Forums Sidebar',
 'id' => 'forums-sidebar',
 'description' => "The Forums widget area",
-'before_widget' => '<div id="%1$s" class="widget %2$s">',
-'after_widget' => '</div>',
-'before_title' => '<h3>',
-'after_title' => '</h3>'
+'before_widget' => '<article id="%1$s" class="widget %2$s">',
+'after_widget' => '</article>',
+'before_title' => '<h4>',
+'after_title' => '</h4>'
 ));
 
 function bp_message_notices() { { ?>

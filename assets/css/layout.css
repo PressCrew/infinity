@@ -51,8 +51,8 @@ body {
     z-index: 12 !important; 
 }
 #main-menu-wrap {
-    margin-top: 0.5%;
     padding: 0;
+    padding-top: 0.5%;
     position: absolute;
     right: 10px;
     /* setting z-index for dropdowns. do not mess with this */
