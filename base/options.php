@@ -8,7 +8,12 @@
  */
 
 
-// ! // Google Analytics
+/**
+ * Insert Google Analyitcs code
+ *
+ * @package Infinity
+ * @subpackage base
+ */
 function infinity_google_analytics() { { ?>
 	<!-- html -->
 		<?php echo infinity_option_get( 'infinity-core-options-google_analytics' ); ?>
@@ -17,9 +22,12 @@ function infinity_google_analytics() { { ?>
 // Hook into action
 add_action('close_body','infinity_google_analytics');
 
-// ========================== 
-// ! // Custom Favicon
-// ========================== 
+/**
+ * Custom Favicon
+ *
+ * @package Infinity
+ * @subpackage base
+ */
 function infinity_custom_favicon() { { ?>
 	<?php if ( infinity_option_get( 'infinity-core-options-custom_favicon' ) ): ?>
 		<link rel="shortcut icon" type="image/png" href="<?php echo infinity_option_image_url( 'infinity-core-options-custom_favicon', full ); ?>" />
@@ -31,9 +39,12 @@ function infinity_custom_favicon() { { ?>
 add_action('wp_head','infinity_custom_favicon'); 
 
 if ( current_theme_supports( 'infinity-grid-style' ) ) {
-	// ========================== 
-	// ! // Apply Content Class based on Theme Options
-	// ========================== 
+	/**
+	 * Content Class: Let user pick a sidebar and content width through a theme options
+	 *
+	 * @package Infinity
+	 * @subpackage base
+	 */
 	function infinity_content_class() { { ?>
 			<?php if ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_17" ): ?>
 				class="grid_17"
@@ -56,7 +67,12 @@ if ( current_theme_supports( 'infinity-grid-style' ) ) {
 	// Hook into action
 	add_action('content_class','infinity_content_class');
 	
-	//do the same for the sidebar
+	/**
+ 	* Sidebar Class: Apply Sidebar Grid Class based on Core Theme Options
+ 	*
+ 	* @package Infinity
+ 	* @subpackage base
+ 	*/
 	function infinity_sidebar_class() { { ?>
 			<?php if ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_17" ): ?>
 				class="grid_7"
@@ -79,8 +95,13 @@ if ( current_theme_supports( 'infinity-grid-style' ) ) {
 	// Hook into action
 	add_action('sidebar_class','infinity_sidebar_class');
 	 
-	// ! // Use a jQuery powered fallback for 3rd Party BuddyPress Plugins.
-	function infinity_custom_sidebar() { { ?>
+	/**
+ 	* Sidebar Class: Still Apply Grid Classes with jQuery even if content_class and sidebar_class do actions 
+ 	* Are not added to custom templates (Most notably BuddyPress) 
+ 	* @package Infinity
+ 	* @subpackage base
+ 	*/
+	function infinity_grid_fallback() { { ?>
 		<script>
 		jQuery(document).ready(function() {
 				<?php if ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_17" ): ?>
@@ -104,9 +125,14 @@ if ( current_theme_supports( 'infinity-grid-style' ) ) {
 		</script>		
 		<?php }} 
 	// Hook into action
-	add_action('open_body','infinity_custom_sidebar');
+	add_action('open_body','infinity_grid_fallback');
 	
-	// Add the Footer Widget Class
+	/**
+	 * Add Footer Widget Class
+	 *
+	 * @package Infinity
+	 * @subpackage base
+	 */
 	function infinity_footer_widget_class() { { ?>
 	grid_8
 	<?php }} 
@@ -114,16 +140,22 @@ if ( current_theme_supports( 'infinity-grid-style' ) ) {
 	add_action('footer_widget_class','infinity_footer_widget_class');
 }
 
-// Custom CSS
-add_action( 'wp_head', 'infinity_custom_css' );
-function infinity_custom_css( ) {
-    # get theme options
-?>
-<style type='text/css'>
+/**
+* Inject CSS to move sidebar to Left based on theme option
+*
+* TO DO: load this CSS in dynamic.css instead of injecting it inline
+*
+* @package Infinity
+* @subpackage base
+*/
+function infinity_sidebar_position_css( ) 
+{ ?>
 <?php if ( infinity_option_get( 'infinity-core-options-sidebar_position' ) == "left" ): ?>
-	#content{float:right;}#inner-sidebar{margin-left:-23px;margin-right:10px;padding-right:25px;}
+	<style type='text/css'>
+		#content{float:right;}#inner-sidebar{margin-left:-23px;margin-right:10px;padding-right:25px;}
+	</style> 
 <?php endif; ?>
-</style> 
 <?php
 }
+add_action( 'wp_head', 'infinity_sidebar_position_css' );
 ?>
