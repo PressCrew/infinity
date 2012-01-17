@@ -47,21 +47,21 @@ if ( current_theme_supports( 'infinity-grid-style' ) ) {
 	 */
 	function infinity_content_class() { { ?>
 			<?php if ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_17" ): ?>
-				class="grid_17"
+				class="grid_17 alpha"
 			<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_20" ): ?>
-				class="grid_20"
+				class="grid_20 alpha"
 			<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_19" ): ?>
-				class="grid_19"
+				class="grid_19 alpha"
 			<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_18" ): ?>
-				class="grid_18"
+				class="grid_18 alpha"
 			<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_16" ): ?>
-				class="grid_16"
+				class="grid_16 alpha"
 			<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_15" ): ?>
-				class="grid_15"
+				class="grid_15 alpha"
 			<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_14" ): ?>
-				class="grid_14"
+				class="grid_14 alpha"
 			<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_12" ): ?>
-				class="grid_12"
+				class="grid_12 alpha"
 			<?php endif; ?>
 		<?php }} 
 	// Hook into action
@@ -75,21 +75,21 @@ if ( current_theme_supports( 'infinity-grid-style' ) ) {
  	*/
 	function infinity_sidebar_class() { { ?>
 			<?php if ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_17" ): ?>
-				class="grid_7"
+				class="grid_7 omega"
 			<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_20" ): ?>
-				class="grid_4"
+				class="grid_4 omega"
 			<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_19" ): ?>
-				class="grid_5"
+				class="grid_5 omega"
 			<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_18" ): ?>
-				class="grid_6"
+				class="grid_6 omega"
 			<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_16" ): ?>
-				class="grid_8"
+				class="grid_8 omega"
 			<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_15" ): ?>
-				class="grid_9"
+				class="grid_9 omega"
 			<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_14" ): ?>
-				class="grid_10"
+				class="grid_10 omega"
 			<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_12" ): ?>
-				class="grid_12"
+				class="grid_12 omega"
 			<?php endif; ?>
 		<?php }} 
 	// Hook into action
@@ -105,21 +105,21 @@ if ( current_theme_supports( 'infinity-grid-style' ) ) {
 		<script>
 		jQuery(document).ready(function() {
 				<?php if ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_17" ): ?>
-					jQuery('div#content').addClass('grid_17');
+					jQuery('div#content').addClass('grid_17 alpha');
 				<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_20" ): ?>
-					jQuery('div#content').addClass('grid_20');
+					jQuery('div#content').addClass('grid_20 alpha');
 				<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_19" ): ?>
-					jQuery('div#content').addClass('grid_19');
+					jQuery('div#content').addClass('grid_19 alpha');
 				<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_18" ): ?>
-					jQuery('div#content').addClass('grid_18');
+					jQuery('div#content').addClass('grid_18 alpha');
 				<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_16" ): ?>
-					jQuery('div#content').addClass('grid_16');
+					jQuery('div#content').addClass('grid_16 alpha');
 				<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_15" ): ?>
-					jQuery('div#content').addClass('grid_15');
+					jQuery('div#content').addClass('grid_15 alpha');
 				<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_14" ): ?>
-					jQuery('div#content').addClass('grid_14');
+					jQuery('div#content').addClass('grid_14 alpha');
 				<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_12" ): ?>
-					jQuery('div#content').addClass('grid_12');
+					jQuery('div#content').addClass('grid_12 alpha');
 				<?php endif; ?>
 		});
 		</script>		

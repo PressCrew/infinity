@@ -1,4 +1,4 @@
-a.button, .generic-button, a.more-link, button, input[type="submit"], input[type="reset"], input[type="button"] {
+a.button, .generic-button, a.more-link, button, input[type="submit"], input[type="reset"], input[type="button"],#review_form #submit {
     margin-top: 10px;
     border-top: 1px solid #ccc;
     background: #eee;
@@ -25,7 +25,7 @@ a.button, .generic-button, a.more-link, button, input[type="submit"], input[type
     padding: 4px 12px;
     font-size: 11px;
 }
-a.button:active, button:active, input[type="submit"]:active, input[type="reset"]:active, input[type="button"]:active {
+a.button:active, button:active, input[type="submit"]:active, input[type="reset"]:active, input[type="button"]:active,#review_form #submit:active {
     background: #eee;
     background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0,0,0,.3)), color-stop(100%, rgba(255,255,255,.3)));
     background: -webkit-linear-gradient(top, rgba(0,0,0,.3) 0%, rgba(255,255,255,.3) 100%);
@@ -37,7 +37,7 @@ a.button:active, button:active, input[type="submit"]:active, input[type="reset"]
     border-bottom: 1px solid #aaa;
     border: 1px solid #888;
 }
-a.button:hover, button:hover, input[type="submit"]:hover, input[type="reset"]:hover, input[type="button"]:hover {
+a.button:hover, button:hover, input[type="submit"]:hover, input[type="reset"]:hover, input[type="button"]:hover,#review_form #submit:hover {
     border-top: 1px solid #aaa;
     background: #eee;
     background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255,255,255,.3)), color-stop(100%, rgba(0,0,0,.3)));
