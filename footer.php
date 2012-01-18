@@ -16,7 +16,7 @@
 			do_action( 'close_main_wrap' );
 		?>
 		</div>
-		<div class="footer-wrap">
+		<div class="footer-wrap <?php do_action( 'footer_wrap_class' ); ?>">
 		<?php
 			do_action( 'open_footer_wrap' );
 		?>

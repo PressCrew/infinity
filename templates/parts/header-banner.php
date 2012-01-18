@@ -14,7 +14,7 @@
  * @since 1.0
  */
 ?>
-<div class="top-wrap">
+<div class="top-wrap <?php do_action( 'top_wrap_class' ); ?>">
 	<?php
 		// show over menu
 		infinity_get_template_part( 'templates/parts/top-menu', 'header' );
