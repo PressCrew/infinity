@@ -332,7 +332,9 @@ if ( current_theme_supports( 'infinity-pagination' ) )
 	       'format' => '',
 	       'total' => $wp_query->max_num_pages,
 	       'current' => $current,
-	       'show_all' => true,
+      	   'show_all' => false,
+		   'end_size' => 3,
+		   'mid_size' => 5,
 	       'type' => 'list'
 	   );
 	
