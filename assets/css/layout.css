@@ -60,18 +60,12 @@ body {
 
 /* Set a min-height so we can apply texture overlays */
 .main-menu, .top-menu, .sub-menu {
-min-height: 30px;
+min-height: 37px;
 }
 
 #sub-menu-wrap {
 /* setting z-index for dropdowns. do not mess with this */
 z-index: 10 !important;
-}
-/* Change font styling for the top and sub menus */
-#sub-menu-wrap ul a span,
-#top-menu-wrap ul a span {
-    text-transform: uppercase;
-    font-size: 10.5px;
 }
 
 /* menu divider */
@@ -126,11 +120,6 @@ position: absolute;
 
 .base-menu { padding-left: 10px;
 padding-right: 10px; }
-.base-menu ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
 .base-menu ul li {
     float: left;
     position: relative;
@@ -191,7 +180,7 @@ float: right;
 }
 .base-menu ul a {
     float: left;
-    padding: 0 3px 0 10px;
+    padding: 8px 10px;
 }
  /* Page Currently being viewed */
 .base-menu ul a:hover,
@@ -201,6 +190,7 @@ float: right;
 .base-menu ul li.current-menu-item a {
     text-decoration: none;
     background-color: #000;
+    color: #DDD;
 }
 .base-menu li li a:hover,
 .base-menu li.sfHover li a { background: none }
@@ -209,19 +199,8 @@ float: right;
     float: right;
     margin: 5px 0 0 0;
 }
-.base-menu li a span {
-    float: left;
-    cursor: pointer;
-    display: block;
-    padding: 5px 5px 5px 0;
-}
 .base-menu li li a span { padding: 0 }
 .base-menu ul li.sfHover li a,
-.base-menu ul li.sfHover li a span {
-    text-transform: none !important;
-    letter-spacing: 0px !important;
-    font-size: 12.8px !important;
-}
 .base-menu ul li.sfHover li a:hover,
 .base-menu ul li.sfHover li a span:hover {
 }
@@ -264,8 +243,8 @@ float: right;
     background: none;
     padding: 0 5px 0 5px;
 }
-.base-menu ul li a span {
-    color: #777777;
+.base-menu li a:hover {
+    color: #DDD;
 }
 .base-menu ul ul li:first-child { border-top: none }
 .base-menu ul ul li:last-child { border-bottom: none }

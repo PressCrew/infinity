@@ -22,7 +22,7 @@ a.button, .generic-button, a.more-link, button, input[type="submit"], input[type
     border: 1px solid #aaa;
     cursor: pointer;
     display: inline-block;
-    padding: 4px 12px;
+    padding: 8px 12px;
     font-size: 11px;
 }
 a.button:active, button:active, input[type="submit"]:active, input[type="reset"]:active, input[type="button"]:active,#review_form #submit:active {
