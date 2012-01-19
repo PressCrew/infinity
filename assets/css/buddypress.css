@@ -9,7 +9,6 @@ infinity-bp-support = off
 /* ============================== */
 /* BuddyPress Infinity Tweaks  */
 /* ============================== */
-
 .padder ul, ol {
     list-style: none outside none;
     margin: 0;
@@ -40,8 +39,6 @@ div#message p {
     padding-left: 22px !important;
 }
 #sidebar div#message p {
-    background: #FFFFE4;
-    font-weight: bold;
     padding-left: 10px !important;
     line-height: 18px;
 }
@@ -49,14 +46,6 @@ span.activity {
     background: #F9F9F9;
     font-weight: normal;
     margin-top: 6px;
-}
-.generic-button {
-    font-size: 12px;
-    padding: 7px 12px;
-}
-.generic-button a {
-color: inherit;
-font-weight: bold;
 }
 div#sidebar ol,div#sidebar ul {
     display: inherit;
@@ -214,7 +203,6 @@ div#item-header h2 span.highlight {
 }
 div#item-header h2 span.highlight span {
     background: #444444;
-    border-radius: 3px 3px 3px 3px;
     color: #FFFFFF;
     cursor: pointer;
     display: none;
@@ -325,49 +313,31 @@ ul.item-list li h5 span.small {
 /* > Item Tabs
 -------------------------------------------------------------- */
 div.item-list-tabs {
-    background: #F9F9F9;
-    border-bottom: 2px solid #DDDDDD;
+    border-bottom: 1px solid #DDDDDD;
     border-top: 1px solid #DDDDDD;
-    min-height: 41px;
+    min-height: 37px;
     position: relative;
     clear: both;
 }
 
-div.item-list-tabs ul li a {
-    color: #777;
-    font-size: 10.5px;
-    text-decoration: none;
+.item-list-tabs ul {
+    background: none repeat scroll 0 0 #222222;
+    overflow: hidden;
 }
+
 div.item-list-tabs ul { width: 100% }
 div.item-list-tabs ul li {
-    font-size: 11.8px;
     float: left;
-    margin: 5px 0 0 5px;
 }
-div.item-list-tabs#subnav ul li { margin-top: 0 }
-div#subnav.item-list-tabs ul li a {
-    color: #999;
-    text-shadow: none;
-    padding: 5px;
-    text-transform: none;
-    font-size: inherit;
+div.item-list-tabs ul li a:hover {
+	color: #DDD;
+	background: #000;
 }
-div#subnav.item-list-tabs ul li a:hover {
-    color: #444;
-    background: none;
-}
-div#subnav.item-list-tabs ul li.current a {
-    background: none repeat scroll 0 0 transparent !important;
-    color: #444444;
-}
-div.item-list-tabs ul li:first-child { margin-left: 20px }
 div.item-list-tabs ul li.last {
     float: right;
-    font-size: 12px;
     margin: 10px 20px 0 0;
     text-transform: inherit;
 }
-div.item-list-tabs#subnav ul li.last { margin-top: -4px; }
 div.item-list-tabs ul li.last select {
     display: inline-block;
     margin-left: 8px;
@@ -377,7 +347,7 @@ div.item-list-tabs ul li.last select {
 div.item-list-tabs ul li a,
 div.item-list-tabs ul li span {
     display: block;
-    padding: 5px 10px;
+    padding: 8px 10px;
     text-decoration: none;
 }
 div.item-list-tabs ul li span { color: #aaa }
@@ -387,22 +357,18 @@ div.item-list-tabs ul li a span {
     color: inherit;
 }
 div.item-list-tabs ul li a span {
-    background: #FFF;
-    border-radius: 3px 3px 3px 3px;
-    color: #999;
+    background: none repeat scroll 0 0 #333333;
+    color: #999999;
     display: inline;
-    font-size: 90%;
+    font-size: 75%;
     margin-left: 2px;
-    padding: 1px 6px;
+    padding: 2px 5px;
 }
 div.item-list-tabs ul li.selected a,
 div.item-list-tabs ul li.selected a,
 div.item-list-tabs ul li.current a {
-    background: none repeat scroll 0 0 #444444 !important;
-    border-radius: 4px 4px 4px 4px;
+    background: none repeat scroll 0 0 #000;
     color: #DDDDDD;
-    font-weight: bold;
-    padding-left: 10px !important;
 }
 div.item-list-tabs ul li.selected a span,
 div.item-list-tabs ul li.current a span,
@@ -415,19 +381,33 @@ div.item-list-tabs ul li.current a span {
 }
 
 div#item-nav ul li.loading a { background-position: 88% 50% }
+
+/* Subnav */
+#subnav ul {
+background: transparent;
+}
+div.item-list-tabs#subnav ul li { margin-top: 0 }
+div#subnav.item-list-tabs ul li a {
+    color: #999;
+}
+
+div#subnav.item-list-tabs ul li.current a {
+background: transparent;
+    color: #444444;
+}
+
+div#subnav.item-list-tabs ul li a:hover {
+color: #222;
+background: transparent;
+}
+
 div.item-list-tabs#object-nav { margin-top: 0 }
 div#subnav.item-list-tabs {
-    background: none repeat scroll 0 0 transparent;
     border-bottom: 1px solid #E8E8E8;
     border-top: 0 solid;
     font-family: inherit;
-    font-size: 13px;
-    font-weight: bold;
-    height: 32px;
     margin-bottom: 20px;
-    min-height: 32px;
     overflow: hidden;
-    padding-top: 5px;
 }
 /* > Item Body
 -------------------------------------------------------------- */
@@ -546,11 +526,11 @@ ul.button-nav li.current a { font-weight: bold }
     padding-right: 25px !important;
     display: none;
 }
-a.loading {
+a.loading, li.loading a {
     background-image: url( ../images/buddypress/ajax-loader.gif ) !important;
-    background-position: 95% 50% !important;
+    background-position: 5% 50% !important;
     background-repeat: no-repeat !important;
-    padding-right: 25px !important;
+    padding-left: 25px !important;
 }
 /* > Input Forms
 -------------------------------------------------------------- */
@@ -604,9 +584,6 @@ form#send-invite-form { margin-top: 20px }
 div#invite-list {
     height: 400px;
     overflow: scroll;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
     padding: 5px;
     background: #f5f5f5;
     width: 160px;
@@ -618,7 +595,6 @@ div#invite-list {
 .profile-fields {
     border: 0 none;
     font-size: inherit;
-    margin-left: -10px;
 }
 table tr td.thread-info p { margin: 0 }
 table tr td.thread-info p.thread-excerpt {
@@ -703,6 +679,9 @@ text-align: center;
     margin-top: 20px;
     border: none;
 }
+#whats-new-form {
+margin-bottom: 30px;
+}
 .home-page form#whats-new-form {
     border-bottom: none;
     padding-bottom: 0;
@@ -725,13 +704,9 @@ form#whats-new-form #whats-new-textarea {
     border: 1px inset #ccc;
     background: #fff;
     margin-bottom: 10px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
 }
 form#whats-new-form textarea {
     border: medium none;
-    box-shadow: none;
     color: #555555;
     font-family: inherit;
     font-size: 14px;
@@ -825,9 +800,6 @@ body.activity-permalink .activity-list .activity-avatar img {
 }
 .activity-list .activity-content { margin-left: 70px }
 body.activity-permalink .activity-list li .activity-content {
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
     font-size: 16px;
     line-height: 150%;
     margin-left: 106px;
@@ -866,7 +838,6 @@ body.activity-permalink .activity-list li .activity-header > p {
 }
 a.bp-primary-action span, #reply-title small a span {
     background: #656565;
-    border-radius: 3px 3px 3px 3px;
     color: #EFEFEF;
     font-size: 90%;
     margin-left: 2px;
@@ -880,7 +851,6 @@ a.bp-primary-action span, #reply-title small a span {
 .activity-list .activity-content blockquote {
     background: #FBFBFB;
     border: 1px solid #F4F4F4;
-    border-radius: 4px 4px 4px 4px;
     margin: 15px 0 15px 5px;
     overflow: hidden;
     padding: 10px;
@@ -910,9 +880,6 @@ body.activity-permalink .activity-content blockquote { margin-top: 5px }
     font-size: 1.2em;
     border-right: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
 }
 .activity-list li.load-more a { color: #555 }
 /* > Activity Stream Comments
@@ -992,7 +959,6 @@ div.acomment-options a {
 div.activity-comments form.ac-form {
     background: #FAFAFA;
     border: 1px solid #F1F1F1;
-    border-radius: 4px 4px 4px 4px;
     display: none;
     margin: 10px 0 10px 33px;
     padding: 8px;
@@ -1013,9 +979,6 @@ div.activity-comments form .ac-textarea {
     border: 1px inset #ccc;
     background: #fff;
     margin-bottom: 10px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
 }
 div.activity-comments form textarea {
     width: 100%;
@@ -1050,9 +1013,9 @@ div.activity-comments form div.ac-reply-content {
 -------------------------------------------------------------- */
 table#message-threads {
     border: 0 none;
-    font-size: 12px;
+    font-size: 95%;
     margin-bottom: 20px;
-    margin-left: -30px;
+    margin-top: 20px;
     padding: 0;
 }
 table#message-threads th + th, table#message-threads td + td {
@@ -1068,7 +1031,6 @@ table#message-threads tr.unread td span.activity { background: #fff }
 li span.unread-count,
 tr.unread span.unread-count {
     background: #DD0000;
-    border-radius: 3px 3px 3px 3px;
     color: #FFFFFF;
     font-weight: bold;
     left: 37px;
@@ -1092,9 +1054,8 @@ div.messages-options-nav select {
 float: right;
 }
 .thread-options .button {
-    bottom: 29px;
-    font-size: 11px;
-    left: 27px;
+    font-size: 90%;
+    left: 10px;
     line-height: 21px;
     padding: 0 7px;
     position: relative;

@@ -35,46 +35,6 @@ body {
 .footer-wrap {
     padding-: 20px;
     position: relative;
-    background: #F8F8F8;
-}
-
-/* Top Menu */
-#top-menu-wrap, #sub-menu-wrap {
-    position: relative;        
-    min-height: 30px;
-}
-
-#top-menu-wrap {
-    /* setting z-index for dropdowns. do not mess with this */
-    z-index: 12 !important; 
-}
-#main-menu-wrap {
-    padding: 0;
-    padding-top: 0.5%;
-    position: absolute;
-    right: 10px;
-    /* setting z-index for dropdowns. do not mess with this */
-    z-index: 11 !important; 
-}
-#main-menu-wrap ul.sub-menu { z-index: 99 !important }
-
-/* Set a min-height so we can apply texture overlays */
-.main-menu, .top-menu, .sub-menu {
-min-height: 37px;
-}
-
-#sub-menu-wrap {
-/* setting z-index for dropdowns. do not mess with this */
-z-index: 10 !important;
-}
-
-/* menu divider */
-.base-menu ul li.menu-divider {
-	text-align: center;
-}
-/* always hide last menu divider */
-.base-menu ul li.menu-divider:last-child {
-	display: none;
 }
 
 /* ========== */
@@ -117,9 +77,42 @@ position: absolute;
 /* ========================== */
 /* ! /* Navigation Menus */   */
 /* ========================== */
+/* Menu Wraps */
 
-.base-menu { padding-left: 10px;
-padding-right: 10px; }
+/* Top Menu */
+#top-menu-wrap, #sub-menu-wrap {
+    position: relative;        
+    min-height: 30px;
+}
+
+#top-menu-wrap {
+    /* setting z-index for dropdowns. do not mess with this */
+    z-index: 12 !important; 
+}
+
+#main-menu-wrap {
+    padding: 0;
+    padding-top: 0.5%;
+    position: absolute;
+    right: 10px;
+    /* setting z-index for dropdowns. do not mess with this */
+    z-index: 11 !important; 
+}
+#main-menu-wrap ul.sub-menu { z-index: 99 !important }
+
+#sub-menu-wrap {
+/* setting z-index for dropdowns. do not mess with this */
+z-index: 10 !important;
+}
+
+/* Set a min-height so we can apply texture overlays */
+.main-menu,.top-menu, .top-wrap .sub-menu {
+min-height: 37px;
+}
+
+/* ===================== */
+/* ! Base Menu Styling   */
+/* ===================== */
 .base-menu ul li {
     float: left;
     position: relative;
@@ -154,7 +147,6 @@ float: right;
     z-index: 95;
 }
 .base-menu ul ul {
-    background: #222;
     top: -9999em;
     width: 210px;
     /* left offset of submenus need to match (see below) */
@@ -172,11 +164,7 @@ float: right;
 .base-menu ul ul li:first-child { border-top: none }
 .base-menu ul ul li:last-child { border-bottom: none }
 .base-menu ul ul li a {
-    text-transform: none;
     width: 180px;
-    color: #B5B5B5;
-    padding: 5px 0 5px 0;
-    font-size: 13px;
 }
 .base-menu ul a {
     float: left;
@@ -188,7 +176,6 @@ float: right;
 .base-menu ul li.current-cat a,
 .base-menu ul li.current_page_item a,
 .base-menu ul li.current-menu-item a {
-    text-decoration: none;
     background-color: #000;
     color: #DDD;
 }
@@ -199,16 +186,16 @@ float: right;
     float: right;
     margin: 5px 0 0 0;
 }
-.base-menu li li a span { padding: 0 }
+.base-menu li li a span { padding: 0; color: #BBB; }
 .base-menu ul li.sfHover li a,
 .base-menu ul li.sfHover li a:hover,
 .base-menu ul li.sfHover li a span:hover {
+color: #DDD;
 }
 /*  Make sub menus appear */
 .base-menu ul li:hover ul,
 .base-menu ul li.sfHover ul {
-    left: -1px;
-    top: 36px; /* match top ul list item height */
+    top: 34px; /* match top ul list item height */
     z-index: 99;
 }
 /* Hide all subs subs (4 levels deep) */
@@ -249,11 +236,24 @@ float: right;
 .base-menu ul ul li:first-child { border-top: none }
 .base-menu ul ul li:last-child { border-bottom: none }
 .base-menu ul ul li a {
-    font-size: 13px !important;
-    text-transform: none !important;
-    font-weight: normal;
-    padding: 5px 0 5px 0;
     width: 150px;
+}
+.base-menu ul ul li a:hover {
+    padding-left: 12px;
+}
+
+.base-menu:first-child ul li:after{
+content: "";
+}
+
+.base-menu ul ul li:after {
+ content: none !important;
+}
+
+/* Don't remove this */
+#footer .sub-menu, #footer .sub-menu:before {
+background: none;
+border: 0px;
 }
   
 /* =========== 
@@ -261,12 +261,15 @@ float: right;
  =========== */
  
 /* Fallback for browsers who don't have JS enabled */
-
 #content, #sidebar {
 	margin-left: 0.41666666666667%;
 	margin-right: 0.41666666666667%;
 	float: left;
 	display: block;
+}
+
+#inner-sidebar {
+    margin-right: -2.94%;
 }
 
       
@@ -284,7 +287,6 @@ float: right;
 #sidebar ul ol,
 #sidebar ol ol,
 #sidebar ol ul { margin: 0px }
-#inner-sidebar { padding-left: 20px }
 /* Widgets */
 .widget { margin-bottom: 30px }
 
@@ -293,18 +295,16 @@ float: right;
  ========== */
  
 #footer p:last-child { margin-bottom: 0 }
-.footer-widgets { margin-bottom: 20px }
 #footer .widget {
     margin-bottom: 0;
-    padding: 20px;
 }
 .footer-widget h3 {
     margin-bottom: 10px;
     color: #FEDA71;
     font-size: 16px;
 }
-#footer-widget-right { border-right: none }
-#footer-widget-left { border-left: none }
+#footer-widget-right { border-right: none; margin-right: 0px; }
+#footer-widget-left { border-left: none;  margin-left: 0px; }
 #footer-menu  ul li a:hover { color: #777 }
 #footer-menu ul li { display: inline }
 #footer-menu ul li a {
@@ -312,13 +312,8 @@ float: right;
 }
 .footer-menu ul li:last-child a { border-right: 0px }
 #footer-info {
-    background: none repeat scroll 0 0 #444444;
-    color: #EFEFEF;
     overflow: auto;
-    padding: 10px;
-}
-#footer-menu {
-width: 70%;
+    padding-top: 20px;
 }
 #powered-by {
     padding-bottom: 10px;
@@ -336,6 +331,7 @@ width: 70%;
     margin-right: 10px !important;
     padding-right: 25px !important;
 }
+
 /*page templare sidebar right*/
 .page-template-sidebar-right-template-php #inner-sidebar {
     margin-left: 15px !important;
@@ -343,91 +339,3 @@ width: 70%;
     margin-top: -40px !important;
     padding-right: 25px !important;
 }
-.page-template-sidebar-right-template-php #content { float: left !important }
-
-/* ========== */
-/* ! Tables   */
-/* ========== */
-table {
-    width: 100%;
-    margin-bottom: 18px;
-    padding: 0;
-    border-collapse: separate;
-    *border-collapse: collapse;
-    font-size: 13px;
-    border: 1px solid #ddd;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
-}
-table th, table td {
-    padding: 10px 10px 9px;
-    line-height: 18px;
-    text-align: left;
-}
-table th {
-    padding-top: 9px;
-    font-weight: bold;
-    vertical-align: middle;
-    border-bottom: 1px solid #ddd;
-}
-table td { vertical-align: top }
-table th + th, table td + td { border-left: 1px solid #ddd }
-table tr + tr td { border-top: 1px solid #ddd }
-table tbody tr:first-child td:first-child {
-    -webkit-border-radius: 4px 0 0 0;
-    -moz-border-radius: 4px 0 0 0;
-    border-radius: 4px 0 0 0;
-}
-table tbody tr:first-child td:last-child {
-    -webkit-border-radius: 0 4px 0 0;
-    -moz-border-radius: 0 4px 0 0;
-    border-radius: 0 4px 0 0;
-}
-table tbody tr:last-child td:first-child {
-    -webkit-border-radius: 0 0 0 4px;
-    -moz-border-radius: 0 0 0 4px;
-    border-radius: 0 0 0 4px;
-}
-table tbody tr:last-child td:last-child {
-    -webkit-border-radius: 0 0 4px 0;
-    -moz-border-radius: 0 0 4px 0;
-    border-radius: 0 0 4px 0;
-}
-
-/* ========== */
-/* ! Forms   */
-/* ========== */
-form { margin-bottom: 20px }
-fieldset { margin-bottom: 20px }
-input[type="text"], input[type="password"], input[type="email"], textarea, select {
-    background: #FFF;
-    margin-bottom: 20px;
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
-    border-radius: 2px;
-    font: 13px;
-    width: 70%;
-    color: #777;
-    margin: 0;
-    border: 1px solid #ccc;
-    display: block;
-    padding: 6px 4px;
-    outline: none;
-    max-width: 100%;
-}
-input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus, textarea:focus {
-    -webkit-box-shadow: 0 0 3px rgba(0,0,0,.2);
-    -moz-box-shadow: 0 0 3px rgba(0,0,0,.2);
-    box-shadow: 0 0 3px rgba(0,0,0,.2);
-    color: #444;
-    border: 1px solid #aaa;
-}
-select { padding: 0 }
-textarea { min-height: 60px }
-label, legend {
-    font-weight: bold;
-    font-size: 13px;
-}
-select { width: 220px }
-input[type="checkbox"] { display: inline }
