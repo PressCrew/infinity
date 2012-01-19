@@ -90,7 +90,9 @@ function infinity_dashboard_screen_url()
 {
 	$args = func_get_args();
 	
-	return INFINITY_AJAX_URL . call_user_func_array( 'infinity_screens_route', $args );
+	$url = INFINITY_AJAX_URL . call_user_func_array( 'infinity_screens_route', $args );
+	
+	return apply_filters( 'infinity_dashboard_screen_url', $url, $args );
 }
 
 /**
