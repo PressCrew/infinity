@@ -222,7 +222,13 @@ final class Pie_Easy_Files extends Pie_Easy_Base
 	 */
 	static public function theme_root_url( $theme )
 	{
-		return get_theme_root_uri( $theme );
+		$url = get_theme_root_uri( $theme );
+
+		if ( is_ssl() ) {
+			return preg_replace( '/http:\/\//', 'https://', $url, 1 );
+		} else {
+			return $url;
+		}
 	}
 	
 	/**
