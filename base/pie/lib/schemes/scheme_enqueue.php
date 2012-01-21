@@ -492,7 +492,7 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 	 */
 	private function enqueue_path( $theme, $path )
 	{
-		if ( preg_match( '/^https:\/\//i', $path ) ) {
+		if ( preg_match( '/^https?:\/\//i', $path ) ) {
 			return $path;
 		} else {
 			return Pie_Easy_Files::theme_file_url( $theme, $path );
