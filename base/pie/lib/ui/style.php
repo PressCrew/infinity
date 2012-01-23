@@ -133,7 +133,7 @@ class Pie_Easy_Style extends Pie_Easy_Asset
 			// anything else needs to be resolved
 			default:
 				$path = Pie_Easy_Files::path_build( $this->last_dirname, $path );
-				$path = Pie_Easy_Files::theme_file_to_url( $path );
+				$path = Pie_Easy_Files::file_to_uri_path( $path );
 		}
 
 		// return fixed url value

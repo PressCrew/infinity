@@ -30,6 +30,44 @@ final class Pie_Easy_Files extends Pie_Easy_Base
 	private static $fcache;
 
 	/**
+	 * Cached doc root
+	 *
+	 * @var string
+	 */
+	static private $document_root;
+
+	/**
+	 * Cached doc root length
+	 *
+	 * @var string
+	 */
+	static private $document_root_length;
+
+	/**
+	 * Set the doc root variables if not already set
+	 *
+	 * @return type
+	 */
+	public static function document_root()
+	{
+		if ( empty( self::$document_root ) ) {
+			if ( 1 == 0 && isset( $_SERVER['DOCUMENT_ROOT'] ) ) {
+				self::$document_root = realpath( $_SERVER['DOCUMENT_ROOT'] );
+			} else {
+				$theme_root = get_theme_root();
+				$theme_root_uri = get_theme_root_uri();
+				$uri_parts = parse_url( $theme_root_uri );
+				$path_length = strlen( $uri_parts['path'] );
+				$document_root = substr_replace( $theme_root, '', -$path_length );
+				self::$document_root = realpath( $document_root );
+			}
+			self::$document_root_length = strlen( self::$document_root );
+		}
+		
+		return self::$document_root;
+	}
+
+	/**
 	 * Split a path at forward '/' OR backward '\' slashes
 	 *
 	 * @param string $path
@@ -299,6 +337,21 @@ final class Pie_Easy_Files extends Pie_Easy_Base
 		$theme = array_shift( $file_names );
 		// return as url
 		return self::theme_file_url( $theme, $file_names );
+	}
+
+	/**
+	 * Convert fully qualified file path to absolute uri path
+	 *
+	 * @param string $file_name File name
+	 * @return string
+	 */
+	static public function file_to_uri_path( $file_name )
+	{
+		// make sure doc root is cached
+		self::document_root();
+
+		// return only uri path portion
+		return substr( $file_name, self::$document_root_length );
 	}
 
 	/**
