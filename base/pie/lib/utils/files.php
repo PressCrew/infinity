@@ -51,7 +51,7 @@ final class Pie_Easy_Files extends Pie_Easy_Base
 	public static function document_root()
 	{
 		if ( empty( self::$document_root ) ) {
-			if ( 1 == 0 && isset( $_SERVER['DOCUMENT_ROOT'] ) ) {
+			if ( isset( $_SERVER['DOCUMENT_ROOT'] ) ) {
 				self::$document_root = realpath( $_SERVER['DOCUMENT_ROOT'] );
 			} else {
 				$theme_root = get_theme_root();
