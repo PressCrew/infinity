@@ -42,7 +42,6 @@
 				<?php
 				wp_link_pages( array( 'before' => __( '<p><strong>Pages:</strong> ', infinity_text_domain ), 'after' => '</p>', 'next_or_number' => 'number'));
 				edit_post_link( __( 'Edit this entry.', infinity_text_domain ), '<p>', '</p>');
-				comments_template('', true);
 				?>
 			</div>
 			<?php
