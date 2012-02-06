@@ -19,7 +19,6 @@
 			do_action( 'open_home' );
 		?>
 			<?php
-				infinity_get_template_part( 'templates/parts/introduction-boxes', 'index' );
 				infinity_get_template_part( 'templates/loops/loop', 'index' );
 			?>
 		<?php
