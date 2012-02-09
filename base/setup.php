@@ -18,10 +18,6 @@ require_once( INFINITY_BASE_DIR . DIRECTORY_SEPARATOR . 'comments.php' );
 require_once( INFINITY_BASE_DIR . DIRECTORY_SEPARATOR . 'templatetags.php' );
 require_once( INFINITY_BASE_DIR . DIRECTORY_SEPARATOR . 'walkers.php' );
 require_once( INFINITY_BASE_DIR . DIRECTORY_SEPARATOR . 'options.php' );
-//Only Load BuddyPress Setup when BP is actually running
-if ( function_exists('bp_is_member') ) {
-	require_once( INFINITY_BASE_DIR . DIRECTORY_SEPARATOR . 'buddypress-setup.php' );
-} 
 
 // add post formats
 function infinity_base_post_formats() 
