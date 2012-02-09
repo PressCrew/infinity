@@ -23,37 +23,72 @@ class Pie_Easy_Exts_Features_Bp_Support
 	extends Pie_Easy_Features_Feature_Bp
 {
 	/**
+	 * Option name for BuddyPress version number cache
+	 */
+	const OPTION_BP_VERSION = 'pie_b4f63ae9_bp_version';
+	
+	/**
 	 */
 	public function init()
 	{
-		// run parent init method
-		parent::init();
-
-		// register sidebars
-		$this->register_sidebars();
+		if ( is_admin() && !is_writable( TEMPLATEPATH ) ) {
+			bp_core_add_admin_notice(
+				sprintf(
+					__( "Your theme's BuddyPress support extension requires that the theme folder be writable. Try setting mode 0777 on the directory: %s", pie_easy_text_domain ),
+					TEMPLATEPATH
+				)
+			);
+			return false;
+		}
 		
-		// extra activity entry links
-		add_action( 'bp_activity_entry_meta', array($this,'activity_entry_meta') );
+		// make sure bp is active
+		if ( $this->is_active() ) {
+
+			parent::init();
+
+			$this->setup_theme();
+			$this->maybe_copy_theme();
+
+			// addtl filters
+			add_filter( 'bp_no_access_mode', array( $this, 'use_wplogin' ) );
+			add_filter( 'bp_get_activity_action_pre_meta', array( $this, 'secondary_avatars' ), 10, 2 );
+
+			// addtl actions
+			add_action( 'switch_theme', array( $this, 'flush_caches' ) );
+			add_action( 'open_sidebar', array( $this, 'message_notices' ) );
+			add_action( 'widgets_init', array( $this, 'register_sidebars' ) );
+			add_action( 'bp_activity_entry_meta', array( $this, 'activity_entry_meta' ) );
+		}
 	}
 
 	/**
-	 * Register one sidebar
-	 *
-	 * @param string $id Sidebar ID, 'id' arg passed to register_sidebar()
-	 * @param string $name Sidebar name, 'name' arg passed to register_sidebar()
-	 * @param string $desc Sedebar description, 'description' arg passed to register_sidebar()
+	 * @internal copied from bp-default/functions.php
 	 */
-	public function register_sidebar( $id, $name, $desc )
+	public function init_scripts()
 	{
-		register_sidebar( array(
-			'id' => $id,
-			'name' => $name,
-			'description' => $desc,
-			'before_widget' => '<div id="%1$s" class="widget %2$s">',
-			'after_widget' => '</div>',
-			'before_title' => '<h4>',
-			'after_title' => '</h4>'
-		));
+		parent::init_scripts();
+
+		// Bump this when changes are made to bust cache
+		$version = '20120110';
+
+		// Enqueue the global JS - Ajax will not work without it
+		wp_enqueue_script( 'dtheme-ajax-js', get_template_directory_uri() . '/_inc/global.js', array( 'jquery' ), $version );
+
+		// Add words that we need to use in JS to the end of the page so they can be translated and still used.
+		$params = array(
+			'my_favs'           => __( 'My Favorites', 'buddypress' ),
+			'accepted'          => __( 'Accepted', 'buddypress' ),
+			'rejected'          => __( 'Rejected', 'buddypress' ),
+			'show_all_comments' => __( 'Show all comments for this thread', 'buddypress' ),
+			'show_all'          => __( 'Show all', 'buddypress' ),
+			'comments'          => __( 'comments', 'buddypress' ),
+			'close'             => __( 'Close', 'buddypress' ),
+			'view'              => __( 'View', 'buddypress' ),
+			'mark_as_fav'	    => __( 'Favorite', 'buddypress' ),
+			'remove_fav'	    => __( 'Remove Favorite', 'buddypress' )
+		);
+
+		wp_localize_script( 'dtheme-ajax-js', 'BP_DTheme', $params );
 	}
 
 	/**
@@ -92,6 +127,86 @@ class Pie_Easy_Exts_Features_Bp_Support
 			'The Forums widget area'
 		);
 	}
+	
+	/**
+	 * @internal copied from bp-default/functions.php
+	 */
+	protected function setup_theme()
+	{
+		require_once( BP_PLUGIN_DIR . '/bp-themes/bp-default/_inc/ajax.php' );
+
+		// setup buttons for active components
+		if ( !is_admin() ) {
+
+			// friends button
+			if ( bp_is_active( 'friends' ) ) {
+				add_action( 'bp_member_header_actions', 'bp_add_friend_button' );
+			}
+
+			// activity button
+			if ( bp_is_active( 'activity' ) ) {
+				add_action( 'bp_member_header_actions', 'bp_send_public_message_button' );
+			}
+
+			// messages button
+			if ( bp_is_active( 'messages' ) ) {
+				add_action( 'bp_member_header_actions', 'bp_send_private_message_button' );
+			}
+
+			// group buttons
+			if ( bp_is_active( 'groups' ) ) {
+				add_action( 'bp_group_header_actions', 'bp_group_join_button' );
+				add_action( 'bp_group_header_actions', 'bp_group_new_topic_button' );
+				add_action( 'bp_directory_groups_actions', 'bp_group_join_button' );
+			}
+
+			// blog button
+			if ( bp_is_active( 'blogs' ) ) {
+				add_action( 'bp_directory_blogs_actions',  'bp_blogs_visit_blog_button' );
+			}
+		}
+	}
+
+	/**
+	 * Add secondary avatar support
+	 *
+	 * @internal copied from bp-default/functions.php
+	 * @param string $action
+	 * @param string $activity
+	 * @return string
+	 */
+	public function secondary_avatars( $action, $activity )
+	{
+		switch ( $activity->component ) {
+			case 'groups' :
+			case 'friends' :
+				// Only insert avatar if one exists
+				$secondary_avatar = bp_get_activity_secondary_avatar();
+				if ( $secondary_avatar ) {
+					$reverse_content = strrev( $action );
+					$position        = strpos( $reverse_content, 'a<' );
+					$action          = substr_replace( $action, $secondary_avatar, -$position - 2, 0 );
+				}
+				break;
+		}
+
+		return $action;
+	}
+
+	/**
+	 * Add wrapper around message notices
+	 */
+	public function message_notices()
+	{
+		// render notification box ?>
+		<div class="top-notification-box">
+			<?php
+				if ( is_user_logged_in() && bp_is_active( 'messages' ) ) {
+					bp_message_get_notices();
+				}
+			?>
+		</div><?php
+	}
 
 	/**
 	 * Add cool buttons to activity stream items
@@ -117,6 +232,38 @@ class Pie_Easy_Exts_Features_Bp_Support
 	}
 
 	/**
+	 * We want to use wp_login
+	 * 
+	 * @return integer
+	 */
+	public function use_wplogin()
+	{
+		return 2;
+	}
+
+	//
+	// Helpers
+	//
+	
+	/**
+	 * Determine if BuddyPress is active and should load up
+	 * 
+	 * @return boolean
+	 */
+	private function is_active()
+	{
+		global $blog_id;
+		
+		switch ( false ) {
+			case ( function_exists( 'bp_is_active' ) ):
+			case ( bp_is_root_blog() ):
+				return false;
+			default:
+				return true;
+		}
+	}
+
+	/**
 	 * Render a special activity entry anchor
 	 *
 	 * @param string $class
@@ -126,6 +273,87 @@ class Pie_Easy_Exts_Features_Bp_Support
 	{
 		// render the link ?>
 		<a class="<?php print esc_attr( $class ) ?> button" href="<?php bp_activity_thread_permalink() ?>"><?php print $title ?></a><?php
+	}
+
+	/**
+	 * Register one sidebar
+	 *
+	 * @param string $id Sidebar ID, 'id' arg passed to register_sidebar()
+	 * @param string $name Sidebar name, 'name' arg passed to register_sidebar()
+	 * @param string $desc Sedebar description, 'description' arg passed to register_sidebar()
+	 */
+	protected function register_sidebar( $id, $name, $desc )
+	{
+		register_sidebar( array(
+			'id' => $id,
+			'name' => $name,
+			'description' => $desc,
+			'before_widget' => '<article id="%1$s" class="widget %2$s">',
+			'after_widget' => '</article>',
+			'before_title' => '<h4>',
+			'after_title' => '</h4>'
+		));
+	}
+
+	/**
+	 * Copy a BuddyPress theme from the plugin dir to another location
+	 * 
+	 * @param string $dst_dir
+	 * @param string $theme
+	 * @return boolean
+	 */
+	protected function copy_theme( $dst_dir, $theme = 'bp-default' )
+	{
+		$src_dir = BP_PLUGIN_DIR . '/bp-themes/' . $theme;
+
+		// theme subdir names
+		$dirs = array(
+			'activity',
+			'blogs',
+			'forums',
+			'groups',
+			'members',
+			'registration'
+		);
+
+		// loop all dirs and copy
+		foreach ( $dirs as $dir ) {
+			// format paths
+			$src_path = sprintf( '%s/%s', $src_dir, $dir );
+			$dst_path = sprintf( '%s/%s', $dst_dir, $dir );
+			// try to copy
+			if ( !Pie_Easy_files::path_copy( $src_path, $dst_path ) ) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * Copy theme to templatepath if bp version out of date
+	 */
+	protected function maybe_copy_theme()
+	{		
+		// try to get the version of bp from cache
+		$version = get_option( self::OPTION_BP_VERSION );
+
+		// newer version?
+		if ( version_compare( BP_VERSION, $version ) == 1 ) {
+			// yep, copy theme
+			if ( $this->copy_theme( TEMPLATEPATH ) ) {
+				// update version cache
+				update_option( self::OPTION_BP_VERSION, BP_VERSION );
+			}
+		}
+	}
+
+	/**
+	 * Flush any applicable cached data
+	 */
+	public function flush_caches()
+	{
+		delete_option( self::OPTION_BP_VERSION );
 	}
 }
 
