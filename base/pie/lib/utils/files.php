@@ -175,6 +175,56 @@ final class Pie_Easy_Files extends Pie_Easy_Base
 	}
 
 	/**
+	 * Copy a path from one location to another
+	 *
+	 * @param string $src Source path
+	 * @param string $dst Destination path
+	 * @param boolean $recurse Recursively copy directories?
+	 * @return boolean
+	 */
+	public function path_copy( $src, $dst, $recurse = true )
+	{
+		$dir = @opendir( $src );
+
+		if ( !$dir || !is_writable( $dst ) ) {
+			return false;
+		}
+
+		if ( !is_dir( $dst ) && !@mkdir( $dst ) ) {
+			return false;
+		}
+
+		while ( false !== ( $file = @readdir( $dir ) ) ) {
+
+			// handle dots
+			switch ( $file ) {
+				case '.':
+				case '..':
+					continue;
+			}
+
+			// format paths
+			$src_path = sprintf( '%s/%s', $src, $file );
+			$dst_path = sprintf( '%s/%s', $dst, $file );
+
+			// is src a dir?
+			if ( is_dir( $src_path ) ) {
+				// yep, recurse if applic
+				if ( true === $recurse ) {
+					self::path_copy( $src_path, $dst_path, true );
+				}
+			} elseif ( !@copy( $src_path, $dst_path ) ) {
+				// copy failed
+				return false;
+			}
+		}
+
+		@closedir( $dir );
+
+		return true;
+	}
+	
+	/**
 	 * Returns fstat instance for a file from the cache
 	 *
 	 * @param string $filename
