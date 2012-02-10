@@ -186,7 +186,11 @@ final class Pie_Easy_Files extends Pie_Easy_Base
 	{
 		$dir = @opendir( $src );
 
-		if ( !$dir || !is_writable( $dst ) ) {
+		if ( !$dir ) {
+			return false;
+		}
+
+		if ( file_exists( $dst ) && !is_writable( $dst ) ) {
 			return false;
 		}
 
