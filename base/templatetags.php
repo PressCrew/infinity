@@ -76,7 +76,7 @@ if ( current_theme_supports( 'infinity-sidebar-setup' ) ) {
 	{
 			if ( is_page() ) {
 				global $post;
-				if ( function_exists('bp_is_page') && bp_is_user() ) {
+				if ( function_exists('bp_is_page') && bp_is_user() || bp_is_members_component()  ) {
 					if ( is_active_sidebar( 'member-sidebar' ) ) {
 						dynamic_sidebar( 'member-sidebar' );
 					} else { ?>
