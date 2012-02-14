@@ -73,7 +73,7 @@ abstract class Pie_Easy_Base
 	public function __call( $name, $arguments )
 	{
 		throw new Exception(
-			sprintf( 'The "%s" metnod does not exist (obj context).', $name ) );
+			sprintf( 'The "%s" method does not exist (obj context).', $name ) );
 	}
 
 	/**
