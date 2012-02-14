@@ -29,26 +29,38 @@ class Pie_Easy_Exts_Options_Ui_Image_Picker
 {
 	/**
 	 */
-	public function configure( $config, $theme )
+	protected function init()
+	{
+		// run parent
+		parent::init();
+
+		// init directives
+		$this->file_directory = null;
+		$this->file_extension = null;
+	}
+	
+	/**
+	 */
+	public function configure( Pie_Easy_Init_Config $config )
 	{
 		// file directory
-		if ( isset( $config['file_directory'] ) ) {
-			$this->directives()->set( $theme, 'file_directory', $config['file_directory'] );
+		if ( isset( $config->file_directory ) ) {
+			$this->file_directory = $config->file_directory;
 		}
 
 		// file directory
-		if ( isset( $config['file_extension'] ) ) {
-			$this->directives()->set( $theme, 'file_extension', $config['file_extension'] );
+		if ( isset( $config->file_extension ) ) {
+			$this->file_extension = $config->file_extension;
 		}
 
 		// run parent
-		parent::configure( $config, $theme );
+		parent::configure( $config );
 	}
 
 	/**
 	 */
 	public function load_field_options()
-	{
+	{		
 		// file extension is required
 		if ( strlen( $this->file_extension ) ) {
 			// check file directory

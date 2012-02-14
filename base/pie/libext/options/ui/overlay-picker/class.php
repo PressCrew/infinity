@@ -35,7 +35,7 @@ class Pie_Easy_Exts_Options_Ui_Overlay_Picker
 	{
 		// run parent
 		parent::init_styles_dynamic();
-
+		
 		// try to get my image url
 		$url = $this->get_image_url();
 

@@ -24,13 +24,13 @@ class Pie_Easy_Exts_Options_Wp_Blogname
 {
 	/**
 	 */
-	public function configure( $conf_map, $theme )
+	protected function init()
 	{
-		if ( !$conf_map->title ) {
-			$conf_map->title = __('Site Title');
-		}
+		// run parent
+		parent::init();
 
-		parent::configure( $conf_map, $theme );
+		// init directives
+		$this->title = __( 'Site Title' );
 	}
 
 	/**

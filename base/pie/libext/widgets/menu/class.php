@@ -24,6 +24,17 @@ class Pie_Easy_Exts_Widgets_Menu
 {
 	/**
 	 */
+	protected function init()
+	{
+		// run parent
+		parent::init();
+
+		// init directives
+		$this->menu_items = null;
+	}
+	
+	/**
+	 */
 	public function init_scripts()
 	{
 		parent::init_scripts();
@@ -33,14 +44,14 @@ class Pie_Easy_Exts_Widgets_Menu
 
 	/**
 	 */
-	public function configure( Pie_Easy_Map $config, $theme )
+	public function configure( Pie_Easy_Init_Config $config )
 	{
 		// RUN PARENT FIRST!
-		parent::configure( $config, $theme );
+		parent::configure( $config );
 
-		// css title class
-		if ( isset( $config['menu_items'] ) ) {
-			$this->directives()->set( $theme, 'menu_items', $config['menu_items'] );
+		// menu items
+		if ( isset( $config->menu_items ) ) {
+			$this->menu_items = $config->menu_items;
 		}
 	}
 
@@ -60,7 +71,7 @@ class Pie_Easy_Exts_Widgets_Menu
 	 */
 	protected function get_items()
 	{
-		$callback = $this->directive('menu_items')->value;
+		$callback = $this->menu_items;
 
 		if ( function_exists( $callback ) ) {
 			return call_user_func( $callback );

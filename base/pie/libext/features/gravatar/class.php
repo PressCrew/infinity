@@ -22,14 +22,25 @@ class Pie_Easy_Exts_Features_Gravatar
 {
 	/**
 	 */
-	public function configure( $conf_map, $theme )
+	protected function init()
+	{
+		// run parent
+		parent::init();
+
+		// init directives
+		$this->image_class = null;
+	}
+	
+	/**
+	 */
+	public function configure( Pie_Easy_Init_Config $config )
 	{
 		// RUN PARENT FIRST!
-		parent::configure( $conf_map, $theme );
+		parent::configure( $config );
 
 		// css title class
-		if ( isset( $conf_map['image_class'] ) ) {
-			$this->directives()->set( $theme, 'image_class', $conf_map['image_class'] );
+		if ( isset( $config->image_class ) ) {
+			$this->image_class = (string) $config->image_class;
 		}
 	}
 

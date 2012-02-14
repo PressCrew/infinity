@@ -66,9 +66,20 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 
 	/**
 	 */
-	public function init()
+	protected function init()
 	{
 		parent::init();
+
+		// init directives
+		$this->section = 'default';
+		$this->default_value = null;
+		$this->field_id = null;
+		$this->field_class = null;
+		$this->field_options = null;
+		$this->style_selector = null;
+		$this->style_property = null;
+		$this->style_unit = null;
+		$this->style_section = null;
 
 		// user must be allowed to manage options
 		$this->add_capabilities( 'manage_options' );
@@ -85,72 +96,72 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 
 	/**
 	 */
-	public function configure( $config, $theme )
+	public function configure( Pie_Easy_Init_Config $config )
 	{
 		// RUN PARENT FIRST!
-		parent::configure( $config, $theme );
+		parent::configure( $config );
 
 		// section
-		if ( isset( $config['section'] ) ) {
-			$this->set_section( $config['section'], $theme );
+		if ( isset( $config->section ) ) {
+			$this->set_section( $config->section );
 		}
 
 		// default value
-		if ( isset( $config['default_value'] ) ) {
-			$this->directives()->set( $theme, 'default_value', $config['default_value'] );
+		if ( isset( $config->default_value ) ) {
+			$this->default_value = $config->default_value;
 		}
 
 		// css id
-		if ( isset( $config['field_id'] ) ) {
-			$this->directives()->set( $theme, 'field_id', $config['field_id'] );
+		if ( isset( $config->field_id ) ) {
+			$this->field_id = $config->field_id;
 		}
 
 		// css class
-		if ( isset( $config['field_class'] ) ) {
-			$this->directives()->set( $theme, 'field_class', $config['field_class'] );
+		if ( isset( $config->field_class ) ) {
+			$this->field_class = $config->field_class;
 		}
 
 		// style selector
-		if ( isset( $config['style_selector'] ) ) {
-			$this->directives()->set( $theme, 'style_selector', $config['style_selector'] );
+		if ( isset( $config->style_selector ) ) {
+			$this->style_selector = $config->style_selector;
 		}
 
 		// style property
-		if ( isset( $config['style_property'] ) ) {
-			$this->directives()->set( $theme, 'style_property', $config['style_property'] );
+		if ( isset( $config->style_property ) ) {
+			$this->style_property = $config->style_property;
 		}
 		
 		// style unit
-		if ( isset( $config['style_unit'] ) ) {
-			$this->directives()->set( $theme, 'style_unit', $config['style_unit'] );
+		if ( isset( $config->style_unit ) ) {
+			$this->style_unit = $config->style_unit;
 		}
 
 		// style section
-		if ( isset( $config['style_section'] ) ) {
-			$this->directives()->set( $theme, 'style_section', $config['style_section'] );
+		if ( isset( $config->style_section ) ) {
+			$this->style_section = $config->style_section;
 		}
 
 		// setup style property object
 		$this->refresh_style_property();
-
+		
 		// field options
 		// @todo this grew too big, move to private method
-		if ( isset( $config['field_options'] ) ) {
+		if ( isset( $config->field_options ) ) {
 
-			if ( is_array( $config['field_options'] ) ) {
+			if ( is_array( $config->field_options ) ) {
 
 				// loop through all field options
-				foreach ( $config['field_options'] as $field_option ) {
+				foreach ( $config->field_options as $field_option ) {
 					// split each one at the delimeter
 					$field_option = explode( self::FIELD_OPTION_DELIM, $field_option, 2 );
 					// add to array
 					$field_options[trim($field_option[0])] = trim($field_option[1]);
 				}
 
-			} elseif ( strlen( $config['field_options'] ) ) {
+			} elseif ( strlen( $config->field_options ) ) {
 
 				// possibly a function
-				$callback = $config['field_options'];
+				$callback = $config->field_options;
 
 				// check if the function exists
 				if ( function_exists( $callback ) ) {
@@ -174,20 +185,20 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 			$field_options = $this->load_field_options();
 
 		} elseif ( $this->__style_property__ ) {
-			
+
 			// check type
 			switch ( true ) {
 				case ( $this instanceof Pie_Easy_Exts_Options_Select ):
 				case ( $this instanceof Pie_Easy_Exts_Options_Radio ):
 					$field_options = $this->__style_property__->get_list_values();
 			}
-			
+
 		}
 
 		// make sure we ended up with some options
 		if ( isset( $field_options ) && count( $field_options ) >= 1 ) {
 			// finally set them for the option
-			$this->directives()->set( $theme, 'field_options', $field_options, true );
+			$this->directive( 'field_options', $field_options, true );
 		}
 	}
 
@@ -379,9 +390,8 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 	 * Set the section
 	 *
 	 * @param string $section
-	 * @param string $theme
 	 */
-	protected function set_section( $section, $theme )
+	protected function set_section( $section )
 	{
 		// lookup the section registry
 		$section_registry = Pie_Easy_Policy::instance('Pie_Easy_Sections_Policy')->registry();
@@ -397,7 +407,7 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 			}
 		}
 
-		$this->directives()->set( $theme, 'section', $section->name );
+		$this->section = $section->name;
 	}
 
 	/**
@@ -591,9 +601,9 @@ abstract class Pie_Easy_Options_Option_Image
 			$src = wp_get_attachment_image_src( $attach_id, $size );
 		} else {
 			// was a default set?
-			if ( $this->directives()->has( 'default_value' ) ) {
+			if ( isset( $this->default_value ) ) {
 				// use default
-				$directive = $this->directives()->get( 'default_value' );
+				$directive = $this->directive( 'default_value' );
 				// mimic the src array
 				$src = array_fill( 0, 3, null );
 				// is a default set?
@@ -630,7 +640,7 @@ abstract class Pie_Easy_Options_Option_Image
 		} elseif ( is_string( $value ) && strlen( $value ) >= 1 ) {
 
 			// use default
-			$directive = $this->directives()->get( 'default_value' );
+			$directive = $this->directive( 'default_value' );
 
 			// they must have provided an image path
 			return Pie_Easy_Files::theme_file_url( $directive->theme, $directive->value );

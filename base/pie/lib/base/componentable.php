@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'base/policeable' );
+Pie_Easy_Loader::load( 'base/policeable', 'base/configurable', 'init/configuration' );
 
 /**
  * Make managing components with policies easy

@@ -39,35 +39,47 @@ class Pie_Easy_Exts_Screens_Cpanel
 
 	/**
 	 */
-	public function configure( $config, $theme )
+	protected function init()
+	{
+		// run parent
+		parent::init();
+
+		// initialize directives
+		$this->icon_primary = null;
+		$this->icon_secondary = null;
+		$this->priority = null;
+		$this->toolbar = false;
+	}
+
+	/**
+	 */
+	public function configure( Pie_Easy_Init_Config $config )
 	{
 		// RUN PARENT FIRST!
-		parent::configure( $config, $theme );
+		parent::configure( $config );
 
-		// icons
-		$icon_primary = ( isset( $config['icon_primary'] ) ) ? $config['icon_primary'] : null;
-		$icon_secondary = ( isset( $config['icon_secondary'] ) ) ? $config['icon_secondary'] : null;
+		// set directives
+		$this->icon_primary = (string) $config->icon_primary;
+		$this->icon_secondary = (string) $config->icon_secondary;
+		$this->priority = (integer) $config->priority;
+		$this->toolbar = (boolean) $config->toolbar;
 
+		// set up icons
 		if ( $this->icon() ) {
-			if ( $icon_primary ) {
-				$this->icon()->primary = $icon_primary;
+			// override existing
+			if ( $this->icon_primary ) {
+				$this->icon()->primary = $this->icon_primary;
 			}
-			if ( $icon_secondary ) {
-				$this->icon()->secondary = $icon_secondary;
+			if ( $this->icon_secondary ) {
+				$this->icon()->secondary = $this->icon_secondary;
 			}
 		} else {
-			$this->icon( new Pie_Easy_Icon( $icon_primary, $icon_secondary ) );
+			// new icon
+			$this->icon( new Pie_Easy_Icon( $this->icon_primary, $this->icon_secondary ) );
 		}
 
-		// priority
-		if ( isset( $config['priority'] ) ) {
-			$this->position( new Pie_Easy_Position( $config['priority'] ) );
-		}
-
-		// show on toolbar?
-		if ( isset( $config['toolbar'] ) ) {
-			$this->directives()->set( $theme, 'toolbar', (boolean) $config['toolbar'] );
-		}
+		// set up position
+		$this->position( new Pie_Easy_Position( $this->priority ) );
 	}
 
 	/**
@@ -78,7 +90,7 @@ class Pie_Easy_Exts_Screens_Cpanel
 	 */
 	final public function icon( Pie_Easy_Icon $icon = null )
 	{
-		if ( $icon ) {
+		if ( func_num_args() >= 1 ) {
 			$this->__icon__ = $icon;
 		}
 

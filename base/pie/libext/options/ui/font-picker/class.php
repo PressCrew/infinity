@@ -27,20 +27,20 @@ class Pie_Easy_Exts_Options_Ui_Font_Picker
 {
 	/**
 	 *
-	public function configure( $config, $theme )
+	public function configure( Pie_Easy_Init_Config $config )
 	{
 		// file directory
-		if ( isset( $config['file_directory'] ) ) {
-			$this->directives()->set( $theme, 'file_directory', $config['file_directory'] );
+		if ( isset( $config->file_directory ) ) {
+			$this->file_directory = $config->file_directory;
 		}
 
 		// file directory
-		if ( isset( $config['file_extension'] ) ) {
-			$this->directives()->set( $theme, 'file_extension', $config['file_extension'] );
+		if ( isset( $config->file_extension ) ) {
+			$this->file_extension = $config->file_extension;
 		}
 
 		// run parent
-		parent::configure( $config, $theme );
+		parent::configure( $config );
 	}
 	 */
 

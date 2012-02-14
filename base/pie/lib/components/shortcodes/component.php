@@ -42,24 +42,28 @@ abstract class Pie_Easy_Shortcodes_Shortcode extends Pie_Easy_Component
 
 	/**
 	 */
-	public function init()
+	protected function init()
 	{
+		// run parent
 		parent::init();
-		
+
+		// init directives
+		$this->attributes = null;
+
 		// set up handler
 		add_shortcode( $this->name, array( $this, 'render_handler' ) );
 	}
 
 	/**
 	 */
-	public function configure( $config, $theme )
+	public function configure( Pie_Easy_Init_Config $config )
 	{
 		// RUN PARENT FIRST!
-		parent::configure( $config, $theme );
+		parent::configure( $config );
 
 		// attribute defaults
-		if ( isset( $config['attributes'] ) ) {
-			$this->directives()->set( $theme, 'attributes', $config['attributes'] );
+		if ( isset( $config->attributes ) ) {
+			$this->attributes = $config->attributes;
 		}
 	}
 

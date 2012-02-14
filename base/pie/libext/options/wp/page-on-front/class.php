@@ -24,19 +24,16 @@ class Pie_Easy_Exts_Options_Wp_Page_On_Front
 {
 	/**
 	 */
-	public function configure( $conf_map, $theme )
+	protected function init()
 	{
-		if ( !$conf_map->title ) {
-			$conf_map->title = __('Front page displays');
-		}
+		// run parent
+		parent::init();
 
-		if ( !$conf_map->description ) {
-			$conf_map->description = __('Select the page to show on the front page');
-		}
-
-		parent::configure( $conf_map, $theme );
+		// init directives
+		$this->title = __( 'Front page displays' );
+		$this->description = __( 'Select the page to show on the front page' );
 	}
-
+	
 	/**
 	 */
 	protected function get_option()

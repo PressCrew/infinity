@@ -23,21 +23,33 @@ abstract class Pie_Easy_Screens_Screen extends Pie_Easy_Component
 {
 	/**
 	 */
-	public function configure( $config, $theme )
+	protected function init()
+	{
+		// run parent
+		parent::init();
+
+		// init directives
+		$this->url = null;
+		$this->target = null;
+	}
+	
+	/**
+	 */
+	public function configure( Pie_Easy_Init_Config $config )
 	{
 		// RUN PARENT FIRST!
-		parent::configure( $config, $theme );
+		parent::configure( $config );
 
 		// url where to find the screen
 		// @todo add this to documentation when stable
-		if ( isset( $config['url'] ) ) {
-			$this->directives()->set( $theme, 'url', $config['url'] );
+		if ( isset( $config->url ) ) {
+			$this->url = $config->url;
 		}
 
 		// target of the screen menu link
 		// @todo add this to documentation when stable
-		if ( isset( $config['target'] ) ) {
-			$this->directives()->set( $theme, 'target', $config['target'] );
+		if ( isset( $config->target ) ) {
+			$this->target = $config->target;
 		}
 	}
 }

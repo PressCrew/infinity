@@ -24,31 +24,22 @@ class Pie_Easy_Exts_Options_Plugins_Domain_Mapping
 {
 	/**
 	 */
-	public function init()
+	protected function init()
 	{
 		// is the plugin active?
 		if ( $this->plugin_active() ) {
+
 			// yes, ok to init
 			parent::init();
+
+			// init directives
+			$this->title = __( 'Custom Domain', pie_easy_text_domain );
+			$this->description = __( 'Enter the custom domain name you wish to map to your site.', pie_easy_text_domain );
+			
 		} else {
 			// not active
 			throw new Exception( 'The domain mapping plugin has not been enabled' );
 		}
-	}
-
-	/**
-	 */
-	public function configure( $conf_map, $theme )
-	{
-		if ( !$conf_map->title ) {
-			$conf_map->title = __( 'Custom Domain', pie_easy_text_domain );
-		}
-
-		if ( !$conf_map->description ) {
-			$conf_map->description = __( 'Enter the custom domain name you wish to map to your site.', pie_easy_text_domain );
-		}
-
-		parent::configure( $conf_map, $theme );
 	}
 
 	/**

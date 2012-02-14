@@ -11,8 +11,11 @@
  * @since 1.0
  */
 
-
-Pie_Easy_Loader::load( 'base/componentable', 'collections', 'utils/export' );
+Pie_Easy_Loader::load(
+	'base/componentable',
+	'init/configuration',
+	'utils/export'
+);
 
 /**
  * Make keeping track of concrete components
@@ -37,7 +40,7 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 	 *
 	 * @var string
 	 */
-	protected $loading_theme;
+	static private $theme_scope;
 
 	/**
 	 * Registered components map
@@ -251,50 +254,31 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 	final public function load_config_file( $filename, $theme )
 	{
 		// set the current theme being loaded
-		$this->loading_theme = $theme;
+		self::$theme_scope = $theme;
 
 		// try to parse the file
-		return $this->load_config_array( parse_ini_file( $filename, true ) );
+		$result = $this->load_config_sections( parse_ini_file( $filename, true ) );
+
+		// remove theme scope
+		self::$theme_scope = null;
+
+		return $result;
 	}
 
 	/**
 	 * Load components into registry from an array (of parsed ini sections)
 	 *
-	 * @param array $ini_array
+	 * @param array $sections_array
 	 * @return boolean
 	 */
-	private function load_config_array( $ini_array )
+	private function load_config_sections( $sections_array )
 	{
 		// an array means successful parse
-		if ( is_array( $ini_array ) ) {
-			
-			// loop through each directive
-			foreach ( $ini_array as $name => $config ) {
-				
-				// convert config array to map
-				$conf_map = new Pie_Easy_Map( $config );
-
-				// set default type if necessary
-				if ( empty( $conf_map->type ) ) {
-					$conf_map->type = self::DEFAULT_COMPONENT_TYPE;
-				}
-
-				// sub option?
-				if ( $this->load_sub_option( $name, $conf_map ) ) {
-					// yes, skip standard loading
-					continue;
-				}
-
-				// use factory to create/get component
-				$component =
-					$this->policy()->factory()->create(
-						$this->loading_theme,
-						$name,
-						$conf_map
-					);
-
-				// register component
-				$this->register( $component );
+		if ( is_array( $sections_array ) ) {
+			// loop through each section
+			foreach ( $sections_array as $section_name => $section_array ) {
+				// load one section
+				$this->load_config_section( $section_name, $section_array );
 			}
 			// all done
 			return true;
@@ -304,54 +288,74 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 	}
 
 	/**
-	 * Load config as a sub option if syntax of name calls for it
+	 * Load one component into registry from a single parsed ini section (array)
 	 *
-	 * @param string $name
-	 * @param Pie_Easy_Map $conf_map
+	 * @param string $section_name
+	 * @param array $section_array
 	 * @return boolean
 	 */
-	private function load_sub_option( $name, Pie_Easy_Map $conf_map )
+	private function load_config_section( $section_name, $section_array )
 	{
-		// split for possible sub option syntax
-		$parts = explode( self::SUB_OPTION_DELIM, $name );
+		// set default type if necessary
+		if ( empty( $section_array['type'] ) ) {
+			$section_array['type'] = self::DEFAULT_COMPONENT_TYPE;
+		}
 
-		// if has exactly two parts it is a sub option
-		if ( count($parts) == 2 ) {
+		// convert config array to map
+		$config = new Pie_Easy_Init_Config( $section_array );
 
-			// make sure options component has been enabled
-			if ( $this->policy()->options() instanceof Pie_Easy_Policy ) {
-
-				// feature name is the first string
-				$feature_name = $parts[0];
-
-				// automagically set required feature if applicable
-				if ( $this instanceof Pie_Easy_Features_Registry ) {
-					$conf_map->required_feature = $feature_name;
-				}
-				
-				// option name is both strings glued with a hyphen
-				$option_name = implode( '-', $parts );
-
-				// create/get option using the option component factory
-				$component =
-					$this->policy()->options()->factory()->create(
-						$this->loading_theme,
-						$option_name,
-						$conf_map
-					);
-
-				// register option
-				$this->policy()->options()->registry()->register( $component );
-
-				// all done
+		// options component enabled?
+		if ( $this->policy()->options() instanceof Pie_Easy_Policy ) {
+			// is it a sub option?
+			if ( $this->policy()->options()->registry()->load_feature_option( $section_name, $config ) ) {
+				// yes, skip standard loading
 				return true;
-			} else {
-				throw new Exception(
-					'Unable to load sub option because options component has not been enabled' );
 			}
 		}
 
-		return false;
+		return $this->load_config_map( $section_name, $config );
+	}
+
+	/**
+	 * Load one component given its name and config map
+	 *
+	 * @param string $name
+	 * @param Pie_Easy_Init_Config $config
+	 * @return boolean
+	 */
+	protected function load_config_map( $name, Pie_Easy_Init_Config $config )
+	{
+		// use factory to create/get component
+		$component =
+			$this->policy()->factory()->create(
+				$name,
+				$config
+			);
+
+		// configure it
+		$component->configure( $config );
+
+		// register component
+		return $this->register( $component );
+	}
+
+	/**
+	 * Return the current theme scope
+	 *
+	 * @return string
+	 */
+	static public function theme_scope()
+	{
+		// if the theme scope is needed, then its assumed that some kind of
+		// loading or component creation is happening. since theme scope
+		// is required for these procedures, throw an error
+		// if theme scope is null
+		if ( empty( self::$theme_scope ) ) {
+			throw new Exception( 'The theme scope is empty, something went horribly wrong!' );
+		}
+
+		// return the current theme scope
+		return self::$theme_scope;
 	}
 }
 

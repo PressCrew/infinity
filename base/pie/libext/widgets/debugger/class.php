@@ -43,7 +43,7 @@ class Pie_Easy_Exts_Widgets_Debugger
 	{
 		// render scheme stuff
 		$this->render_scheme(
-			Pie_Easy_Scheme::instance()->directives()->get_all()
+			Pie_Easy_Scheme::instance()->directives()
 		);
 
 		// render component stuff
@@ -183,7 +183,7 @@ class Pie_Easy_Exts_Widgets_Debugger
 			// render item ?>
 			<li id="<?php $this->render_item_id( $component->name ) ?>">
 				<a><?php print $component->name ?></a>
-				<?php $this->render_directives( $component->directives()->get_all() ); ?>
+				<?php $this->render_directives( $component->directives() ); ?>
 			</li><?php
 
 			$this->render_item_id();

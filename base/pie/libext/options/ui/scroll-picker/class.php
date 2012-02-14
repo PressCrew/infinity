@@ -30,6 +30,19 @@ class Pie_Easy_Exts_Options_Ui_Scroll_Picker
 {
 	/**
 	 */
+	protected function init()
+	{
+		// run parent
+		parent::init();
+
+		// initilaize directives
+		$this->item_width = null;
+		$this->item_height = null;
+		$this->item_margin = null;
+	}
+	
+	/**
+	 */
 	public function init_scripts()
 	{
 		parent::init_scripts();
@@ -38,24 +51,24 @@ class Pie_Easy_Exts_Options_Ui_Scroll_Picker
 
 	/**
 	 */
-	public function configure( $config, $theme )
+	public function configure( Pie_Easy_Init_Config $config )
 	{
 		// RUN PARENT FIRST!
-		parent::configure( $config, $theme );
+		parent::configure( $config );
 
 		// item width
-		if ( isset( $config['item_width'] ) ) {
-			$this->directives()->set( $theme, 'item_width', $config['item_width'] );
+		if ( isset( $config->item_width ) ) {
+			$this->item_width = (string) $config->item_width;
 		}
 
 		// item height
-		if ( isset( $config['item_height'] ) ) {
-			$this->directives()->set( $theme, 'item_height', $config['item_height'] );
+		if ( isset( $config->item_height ) ) {
+			$this->item_height = (string) $config->item_height;
 		}
 
 		// item margin
-		if ( isset( $config['item_margin'] ) ) {
-			$this->directives()->set( $theme, 'item_margin', $config['item_margin'] );
+		if ( isset( $config->item_margin ) ) {
+			$this->item_margin = (string) $config->item_margin;
 		}
 	}
 

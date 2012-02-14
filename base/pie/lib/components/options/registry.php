@@ -49,6 +49,45 @@ abstract class Pie_Easy_Options_Registry extends Pie_Easy_Registry
 	}
 
 	/**
+	 * Load option config as a feature sub option if syntax of name matches pattern
+	 *
+	 * @param string $name
+	 * @param Pie_Easy_Init_Config $config
+	 * @return boolean
+	 */
+	public function load_feature_option( $name, Pie_Easy_Init_Config $config )
+	{
+		// split for possible sub option syntax
+		$parts = explode( self::SUB_OPTION_DELIM, $name );
+
+		// if has exactly two parts it is a feature sub option
+		if ( count($parts) == 2 ) {
+
+			// feature name is the first string
+			$feature_name = $parts[0];
+
+			// set required feature
+			$config->required_feature = $feature_name;
+
+			// option name is both strings glued with a hyphen
+			$option_name = implode( '-', $parts );
+
+			// call parent config loader
+			if ( $this->load_config_map( $option_name, $config ) ) {
+				// successfully loaded feature sub option
+				return true;
+			} else {
+				// this is really bad
+				throw new Exception( sprintf(
+					'Failed to load "%s" as a sub option of feature "%s"', $option_name, $feature_name ) );
+			}
+		}
+
+		// not a feature option
+		return false;
+	}
+
+	/**
 	 * Return sibling options as an array
 	 *
 	 * @param Pie_Easy_Options_Option $option

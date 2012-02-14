@@ -43,7 +43,7 @@ Pie_Easy_Loader::load(
  */
 abstract class Pie_Easy_Component
 	extends Pie_Easy_Componentable
-		implements Pie_Easy_Styleable, Pie_Easy_Scriptable
+		implements Pie_Easy_Configurable, Pie_Easy_Styleable, Pie_Easy_Scriptable
 {
 	/**
 	 * Name of the default section
@@ -122,19 +122,36 @@ abstract class Pie_Easy_Component
 	static private $__exports__;
 
 	/**
-	 * @param string $theme The theme that created this option
 	 * @param string $name Option name may only contain alphanumeric characters as well as the underscore for use as a word separator.
 	 * @param string $type The type (component extension) of this component
+	 * @param Pie_Easy_Policy $policy The policy to apply to this component
 	 */
-	final public function __construct( $theme, $name, $type )
-	{	
+	final public function __construct( $name, $type, $policy )
+	{
+		// apply policy
+		$this->policy( $policy );
+
 		// set basic properties
-		$this->__theme__ = $theme;
 		$this->set_name($name);
 		$this->__type__ = $type;
+		$this->__theme__ = $this->policy()->registry()->theme_scope();
 
 		// init directives registry
 		$this->__directives__ = new Pie_Easy_Init_Directive_Registry();
+
+		// init base directives
+		$this->title = __( 'No title was configured', pie_easy_text_domain );
+		$this->description = null;
+		$this->documentation = null;
+		$this->style = null;
+		$this->style_depends = null;
+		$this->script = null;
+		$this->script_depends = null;
+		$this->template = null;
+		$this->class = null;
+		$this->capabilities = null;
+		$this->required_feature = null;
+		$this->ignore = false;
 
 		// init exports
 		if ( !self::$__exports__ instanceof Pie_Easy_Map ) {
@@ -153,7 +170,7 @@ abstract class Pie_Easy_Component
 
 	/**
 	 */
-	public function __get( $name )
+	final public function __get( $name )
 	{
 		switch ( $name ) {
 			case 'theme':
@@ -165,8 +182,8 @@ abstract class Pie_Easy_Component
 			case 'parent':
 				return $this->__parent__;
 			default:
-				if ( $this->directives()->has($name) ) {
-					return $this->directives()->get($name)->value;
+				if ( $this->__directives__->has($name) ) {
+					return $this->__directives__->get($name)->value;
 				} else {
 					return null;
 				}
@@ -175,7 +192,25 @@ abstract class Pie_Easy_Component
 
 	/**
 	 */
-	public function __isset( $name )
+	final public function __set( $name, $value )
+	{
+		switch ( $name ) {
+			case 'theme':
+			case 'name':
+			case 'type':
+			case 'parent':
+				// not allowed
+				throw new Exception(
+					sprintf( 'The "%s" property is not accessible for writing.', $name ) );
+			default:
+				// set directive
+				return $this->directive( $name, $value );
+		}
+	}
+
+	/**
+	 */
+	final public function __isset( $name )
 	{
 		switch ( $name ) {
 			case 'theme':
@@ -187,8 +222,17 @@ abstract class Pie_Easy_Component
 			case 'parent':
 				return isset( $this->__parent__ );
 			default:
-				return $this->directives()->has( $name );
+				return $this->__directives__->has( $name );
 		}
+	}
+
+	/**
+	 */
+	final public function __unset( $name )
+	{
+		// not allowed
+		throw new Exception(
+			sprintf( 'The "%s" property cannot be unset', $name ) );
 	}
 
 	/**
@@ -198,18 +242,31 @@ abstract class Pie_Easy_Component
 	 */
 	final protected function directives()
 	{
-		return $this->__directives__;
+		return $this->__directives__->get_all();
 	}
 
 	/**
 	 * Return one directive
 	 *
 	 * @param string $name
+	 * @param mixed $value
+	 * @param boolean $read_only
 	 * @return mixed
 	 */
-	final protected function directive( $name )
+	final protected function directive( $name, $value = null, $read_only = false )
 	{
-		return $this->directives()->get($name);
+		// two args means set the value
+		if ( func_num_args() >= 2 ) {
+			$this->__directives__->set(
+				$this->policy()->registry()->theme_scope(),
+				$name,
+				$value,
+				$read_only
+			);
+		}
+
+		// return the value
+		return $this->__directives__->get( $name );
 	}
 	
 	/**
@@ -271,88 +328,84 @@ abstract class Pie_Easy_Component
 	}
 
 	/**
-	 * Configure this component from an array of values
-	 *
-	 * @param Pie_Easy_Map $conf_map A configuration map
-	 * @param string $theme Theme for which to configure
 	 */
-	public function configure( Pie_Easy_Map $conf_map, $theme )
+	public function configure( Pie_Easy_Init_Config $config )
 	{
 		// parent
-		if ( $conf_map->parent ) {
-			if ( $this->__name__ != $conf_map->parent ) {
-				$this->__parent__ = trim( $conf_map->parent );
+		if ( $config->parent ) {
+			if ( $this->__name__ != $config->parent ) {
+				$this->__parent__ = trim( $config->parent );
 			} else {
 				throw new Exception( sprintf( 'The component "%s" cannot be a parent of itself', $this->__name__ ) );
 			}
 		}
 		
 		// title
-		if ( isset( $conf_map->title ) ) {
-			$this->directives()->set( $theme, 'title', $conf_map->title );
-		} elseif ( !$this->directives()->has( 'title' ) ) {
-			throw new Exception( 'The "title" directive is required' );
+		if ( isset( $config->title ) ) {
+			$this->title = $config->title;
 		}
 		
 		// desc
-		if ( isset( $conf_map->description ) ) {
-			$this->directives()->set( $theme, 'description', $conf_map->description );
+		if ( isset( $config->description ) ) {
+			$this->description = $config->description;
 		}
 
 		// documentation
-		if ( isset( $conf_map->documentation ) ) {
-			$this->directives()->set( $theme, 'documentation', $conf_map->documentation );
+		if ( isset( $config->documentation ) ) {
+			$this->documentation = $config->documentation;
 		}
 
 		// set stylesheet
-		if ( isset( $conf_map->style ) ) {
-			$this->style()->add_file( $conf_map->style );
+		if ( isset( $config->style ) ) {
+			$this->style = $config->style;
+			$this->style()->add_file( $this->style );
 		}
 
 		// set style dependancies
-		if ( isset( $conf_map->style_depends ) ) {
+		if ( isset( $config->style_depends ) ) {
 			// split deps at comma
-			$deps = explode( ',', $conf_map->style_depends );
+			$deps = explode( ',', $config->style_depends );
 			// set directive
-			$this->directives()->set( $theme, 'style_depends', $deps );
+			$this->style_depends = $deps;
 		}
 
 		// set script
-		if ( isset( $conf_map->script ) ) {
-			$this->script()->add_file( $conf_map->script );
+		if ( isset( $config->script ) ) {
+			$this->script = $config->script;
+			$this->script()->add_file( $this->script );
 		}
 
 		// set script dependancies
-		if ( isset( $conf_map->script_depends ) ) {
+		if ( isset( $config->script_depends ) ) {
 			// split deps at comma
-			$deps = explode( ',', $conf_map->script_depends );
+			$deps = explode( ',', $config->script_depends );
 			// set directive
-			$this->directives()->set( $theme, 'script_depends', $deps );
+			$this->script_depends = $deps;
 		}
 
 		// set template
-		if ( isset( $conf_map->template ) ) {
-			$this->directives()->set( $theme, 'template', $conf_map->template );
+		if ( isset( $config->template ) ) {
+			$this->template = $config->template;
 		}
 
 		// css class
-		if ( isset( $conf_map->class ) ) {
-			$this->directives()->set( $theme, 'class', $conf_map->class );
+		if ( isset( $config->class ) ) {
+			$this->class = $config->class;
 		}
 
 		// capabilities
-		if ( isset( $conf_map->capabilities ) ) {
-			$this->add_capabilities( $conf_map->capabilities );
+		if ( isset( $config->capabilities ) ) {
+			$this->add_capabilities( $config->capabilities );
 		}
 
 		// required feature
-		if ( isset( $conf_map->required_feature ) ) {
-			$this->directives()->set( $theme, 'required_feature', $conf_map->required_feature );
+		if ( isset( $config->required_feature ) ) {
+			$this->required_feature = $config->required_feature;
 		}
 
 		// set ignore
-		if ( isset( $conf_map->ignore ) ) {
-			$this->directives()->set( $theme, 'ignore', (boolean) $conf_map->ignore );
+		if ( isset( $config->ignore ) ) {
+			$this->ignore = (boolean) $config->ignore;
 		}
 
 		// default style
@@ -383,18 +436,25 @@ abstract class Pie_Easy_Component
 		// split at comma
 		$caps = explode( ',', $string );
 
+		// capabilities are empty by default
+		$capabilities = array();
+
 		// trim and set each
 		foreach ( $caps as $cap ) {
 			$cap_trimmed = trim( $cap );
 			$capabilities[$cap_trimmed] = $cap_trimmed;
 		}
 
-		if ( $this->directives()->has('capabilities') ) {
-			$theme_map = $this->directives()->get_map( 'capabilities' );
-			$theme_caps = $theme_map->item_at($this->__theme__)->value;
-			$theme_caps->merge_with( $capabilities );
+		if ( isset( $this->capabilities ) ) {
+			// lookup map
+			$theme_map = $this->__directives__->get_map( 'capabilities' );
+			// get one?
+			if ( $theme_map && $theme_map->item_at( $this->__theme__ )->value ) {
+				$theme_caps = $theme_map->item_at($this->__theme__)->value;
+				$theme_caps->merge_with( $capabilities );
+			}
 		} else {
-			$this->directives()->set( $this->__theme__, 'capabilities', $capabilities );
+			$this->capabilities = $capabilities;
 		}
 	}
 

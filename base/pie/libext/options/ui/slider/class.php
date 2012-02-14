@@ -39,6 +39,26 @@ class Pie_Easy_Exts_Options_Ui_Slider
 {
 	/**
 	 */
+	protected function init()
+	{
+		// run parent
+		parent::init();
+
+		// initialize directives
+		$this->animate = false;
+		$this->max = null;
+		$this->min = null;
+		$this->orientation = null;
+		$this->step = null;
+		$this->range = null;
+		$this->label = null;
+		$this->prefix = null;
+		$this->suffix = null;
+		$this->delimiter = null;
+	}
+
+	/**
+	 */
 	public function init_scripts()
 	{
 		parent::init_scripts();
@@ -47,59 +67,59 @@ class Pie_Easy_Exts_Options_Ui_Slider
 
 	/**
 	 */
-	public function configure( $config, $theme )
+	public function configure( Pie_Easy_Init_Config $config )
 	{
 		// RUN PARENT FIRST!
-		parent::configure( $config, $theme );
+		parent::configure( $config );
 
 		// animate
-		if ( isset( $config['animate'] ) ) {
-			$this->directives()->set( $theme, 'animate', $config['animate'] );
+		if ( isset( $config->animate ) ) {
+			$this->animate = $config->animate;
 		}
 
 		// max
-		if ( isset( $config['max'] ) ) {
-			$this->directives()->set( $theme, 'max', (integer) $config['max'] );
+		if ( isset( $config->max ) && is_numeric( $config->max ) ) {
+			$this->max = (integer) $config->max;
 		}
 
 		// min
-		if ( isset( $config['min'] ) ) {
-			$this->directives()->set( $theme, 'min', (integer) $config['min'] );
+		if ( isset( $config->min ) && is_numeric( $config->min ) ) {
+			$this->min = (integer) $config->min;
 		}
 
 		// orientation
-		if ( isset( $config['orientation'] ) ) {
-			$this->directives()->set( $theme, 'orientation', $config['orientation'] );
+		if ( isset( $config->orientation ) && strlen( $config->orientation ) ) {
+			$this->orientation = (string) $config->orientation;
 		}
 
 		// step
-		if ( isset( $config['step'] ) ) {
-			$this->directives()->set( $theme, 'step', $config['step'] );
+		if ( isset( $config->step ) && is_numeric( $config->step ) ) {
+			$this->step = (integer) $config->step;
 		}
 
 		// range
-		if ( isset( $config['range'] ) ) {
-			$this->directives()->set( $theme, 'range', (integer) $config['range'] );
+		if ( isset( $config->range ) && is_numeric( $config->range )  ) {
+			$this->range = $config->range;
 		}
 		
 		// value label
-		if ( isset( $config['label'] ) ) {
-			$this->directives()->set( $theme, 'label', $config['label'] );
+		if ( isset( $config->label ) && strlen( $config->label ) ) {
+			$this->label = (string) $config->label;
 		}
 
 		// prefix
-		if ( isset( $config['prefix'] ) ) {
-			$this->directives()->set( $theme, 'prefix', $config['prefix'] );
+		if ( isset( $config->prefix ) && strlen( $config->prefix ) ) {
+			$this->prefix = (string) $config->prefix;
 		}
 
 		// suffix
-		if ( isset( $config['suffix'] ) ) {
-			$this->directives()->set( $theme, 'suffix', $config['suffix'] );
+		if ( isset( $config->suffix ) && strlen( $config->suffix ) ) {
+			$this->suffix = (string) $config->suffix;
 		}
 
 		// delimiter (more than one handle)
-		if ( isset( $config['delimiter'] ) ) {
-			$this->directives()->set( $theme, 'delimiter', $config['delimiter'] );
+		if ( isset( $config->delimiter ) && strlen( $config->delimiter ) ) {
+			$this->delimiter = (string) $config->delimiter;
 		}
 	}
 

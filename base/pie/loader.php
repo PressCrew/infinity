@@ -122,6 +122,7 @@ final class Pie_Easy_Loader extends Pie_Easy_Base
 			array(
 				'component',
 				'componentable',
+				'configurable',
 				'exportable',
 				'factory',
 				'policy',
@@ -148,7 +149,7 @@ final class Pie_Easy_Loader extends Pie_Easy_Base
 					array( 'component', 'factory', 'renderer', 'policy', 'registry' )
 			),
 		'init' =>
-			array( 'directive' ),
+			array( 'directive', 'configuration' ),
 		'parsers' =>
 			array( 'markdown', 'textile' ),
 		'schemes' =>

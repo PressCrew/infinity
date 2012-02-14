@@ -32,19 +32,31 @@ abstract class Pie_Easy_Sections_Section extends Pie_Easy_Component
 
 	/**
 	 */
-	public function configure( $config, $theme )
+	protected function init()
+	{
+		// run parent
+		parent::init();
+
+		// init directives
+		$this->class_title = null;
+		$this->class_content = null;
+	}
+	
+	/**
+	 */
+	public function configure( Pie_Easy_Init_Config $config )
 	{
 		// RUN PARENT FIRST!
-		parent::configure( $config, $theme );
+		parent::configure( $config );
 
 		// css title class
-		if ( isset( $config['class_title'] ) ) {
-			$this->directives()->set( $theme, 'class_title', $config['class_title'] );
+		if ( isset( $config->class_title ) ) {
+			$this->class_title = $config->class_title;
 		}
 
 		// css content class
-		if ( isset( $config['class_content'] ) ) {
-			$this->directives()->set( $theme, 'class_content', $config['class_content'] );
+		if ( isset( $config->class_content ) ) {
+			$this->class_content = $config->class_content;
 		}
 	}
 

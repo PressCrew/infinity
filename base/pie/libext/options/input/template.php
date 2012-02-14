@@ -11,6 +11,6 @@
  * @since 1.0
  */
 
-$this->render_input( $this->component()->input_type );
+$this->render_input( $this->component()->input_type() );
 
 ?>

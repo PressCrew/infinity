@@ -26,7 +26,11 @@ class Pie_Easy_Exts_Widgets_Posts_List
 	 */
 	protected function init()
 	{
+		// run parent
 		parent::init();
+
+		// init directives
+		$this->post_type = 'post';
 
 		// requires edit posts
 		$this->add_capabilities( 'edit_posts' );
@@ -38,14 +42,14 @@ class Pie_Easy_Exts_Widgets_Posts_List
 
 	/**
 	 */
-	public function configure( $conf_map, $theme )
+	public function configure( Pie_Easy_Init_Config $config )
 	{
 		// RUN PARENT FIRST!
-		parent::configure( $conf_map, $theme );
+		parent::configure( $config );
 
 		// css title class
-		if ( isset( $conf_map['post_type'] ) ) {
-			$this->directives()->set( $theme, 'post_type', $conf_map['post_type'] );
+		if ( isset( $config->post_type ) ) {
+			$this->post_type = (string) $config->post_type;
 		}
 	}
 

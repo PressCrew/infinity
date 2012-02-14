@@ -18,7 +18,6 @@ Pie_Easy_Loader::load( 'components/options/component' );
  *
  * @package PIE-extensions
  * @subpackage options
- * @property-read string $input_type The type attribute for the input element
  */
 abstract class Pie_Easy_Exts_Options_Input
 	extends Pie_Easy_Options_Option
@@ -28,31 +27,7 @@ abstract class Pie_Easy_Exts_Options_Input
 	 *
 	 * @var string
 	 */
-	private $input_type = 'text';
-
-	/**
-	 */
-	public function __get( $name )
-	{
-		switch ( $name ) {
-			case 'input_type':
-				return $this->input_type;
-			default:
-				return parent::__get( $name );
-		}
-	}
-
-	/**
-	 */
-	public function __isset( $name )
-	{
-		switch ( $name ) {
-			case 'input_type':
-				return isset( $this->input_type );
-			default:
-				return parent::__isset( $name );
-		}
-	}
+	private $__input_type__;
 
 	/**
 	 * Get/Set the input type
@@ -60,13 +35,19 @@ abstract class Pie_Easy_Exts_Options_Input
 	 * @param string $type
 	 * @return string
 	 */
-	final protected function input_type( $type = null )
+	final public function input_type( $type = null )
 	{
-		if ( $type ) {
-			$this->input_type = $type;
+		// if we have one or more args, we are setting
+		if ( func_num_args() >= 1 ) {
+			// can't have been set already
+			if ( is_null( $this->__input_type__ ) ) {
+				$this->__input_type__ = $type;
+			} else {
+				throw new Exception( 'The "input_type" property cannot be changed once set' );
+			}
 		}
 
-		return $this->input_type;
+		return $this->__input_type__;
 	}
 }
 

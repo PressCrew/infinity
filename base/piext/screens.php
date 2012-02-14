@@ -94,21 +94,21 @@ class Infinity_Exts_Screen_Factory extends Pie_Easy_Screens_Factory
 {
 	/**
 	 */
-	public function create( $theme, $name, $conf )
+	public function create( $name, Pie_Easy_Init_Config $config )
 	{
 		// DO NOT TRY THIS YOURSELF
 		// @todo this is a temporary solution until the configuration strategy is improved
 
 		// call parent to create component
-		$component = parent::create( $theme, $name, $conf );
+		$component = parent::create( $name, $config );
 
 		// check if URL is set
 		if ( !$component->url ) {
 			// set url
-			$def_map = new Pie_Easy_Map();
-			$def_map->add( 'url', INFINITY_AJAX_URL . infinity_screens_route( 'cpanel', $component->name ) );
+			$pre_config = new Pie_Easy_Init_Config();
+			$pre_config->add( 'url', INFINITY_AJAX_URL . infinity_screens_route( 'cpanel', $component->name ) );
 			// configure it
-			$component->configure( $def_map, $theme );
+			$component->configure( $pre_config );
 		}
 
 		return $component;

@@ -169,7 +169,7 @@ class Pie_Easy_Init_Directive_Registry extends Pie_Easy_Base
 	 * @param mixed $value
 	 * @param boolean $read_only
 	 */
-	public function set( $theme, $name, $value, $read_only = null )
+	public function set( $theme, $name, $value, $read_only = false )
 	{
 		// convert arrays to maps
 		if ( is_array( $value ) ) {
@@ -195,6 +195,17 @@ class Pie_Easy_Init_Directive_Registry extends Pie_Easy_Base
 			// add it to directive map
 			return $theme_map->add( $theme, $directive );
 		}
+	}
+
+	/**
+	 * Remove a directive from the registry (for all themes)
+	 * 
+	 * @param string $name
+	 * @return mixed
+	 */
+	public function remove( $name )
+	{
+		return $this->directives->remove( $name );
 	}
 
 	/**

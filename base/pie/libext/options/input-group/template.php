@@ -20,7 +20,11 @@
 			$loop = ($loop) ? $loop + 1 : 1;
 
 			// finally render the input element
-			$this->render_input( $this->component()->input_type, $value, $this->component()->get_element_id( $loop ) );
+			$this->render_input(
+				$this->component()->input_type(),
+				$value,
+				$this->component()->get_element_id( $loop )
+			);
 
 			// render the label ?>
 			<label for="<?php print esc_attr( $this->component()->get_element_id( $loop ) ) ?>"><?php print esc_html( $display ) ?></label><?php

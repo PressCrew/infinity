@@ -24,19 +24,16 @@ class Pie_Easy_Exts_Options_Wp_Blogdescription
 {
 	/**
 	 */
-	public function configure( $conf_map, $theme )
+	protected function init()
 	{
-		if ( !$conf_map->title ) {
-			$conf_map->title = __('Tagline');
-		}
+		// run parent
+		parent::init();
 
-		if ( !$conf_map->description ) {
-			$conf_map->description = __('In a few words, explain what this site is about.');
-		}
-
-		parent::configure( $conf_map, $theme );
+		// init directives
+		$this->title = __( 'Tagline' );
+		$this->description = __( 'In a few words, explain what this site is about.' );
 	}
-
+	
 	/**
 	 */
 	protected function get_option()
