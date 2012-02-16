@@ -318,7 +318,7 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 	 * @param Pie_Easy_Init_Config $config
 	 * @return boolean
 	 */
-	protected function load_config_map( $name, Pie_Easy_Init_Config $config )
+	final protected function load_config_map( $name, Pie_Easy_Init_Config $config )
 	{
 		// use factory to create/get component
 		$component =
@@ -339,7 +339,7 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 	 *
 	 * @return string
 	 */
-	static public function theme_scope()
+	final static public function theme_scope()
 	{
 		// if the theme scope is needed, then its assumed that some kind of
 		// loading or component creation is happening. since theme scope
