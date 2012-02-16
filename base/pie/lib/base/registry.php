@@ -26,7 +26,7 @@ Pie_Easy_Loader::load(
 abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 {
 	/**
-	 * Name of the default component to use when none configured
+	 * Type of the default component to use when none configured
 	 */
 	const DEFAULT_COMPONENT_TYPE = 'default';
 
@@ -248,16 +248,22 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 	 */
 	final public function load_config_file( $filename, $theme )
 	{
-		// set the current theme being loaded
-		self::$theme_scope = $theme;
+		// try to parse the file into INI sections
+		$sections = parse_ini_file( $filename, true );
 
-		// try to parse the file
-		$result = $this->load_config_sections( parse_ini_file( $filename, true ) );
+		// get a config?
+		if ( $sections ) {
+			// set the current theme being loaded
+			self::$theme_scope = $theme;
+			// load all parsed sections
+			$result = $this->load_config_sections( $sections );
+			// remove theme scope
+			self::$theme_scope = null;
+			// all done
+			return $result;
+		}
 
-		// remove theme scope
-		self::$theme_scope = null;
-
-		return $result;
+		return false;
 	}
 
 	/**
@@ -266,10 +272,10 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 	 * @param array $sections_array
 	 * @return boolean
 	 */
-	private function load_config_sections( $sections_array )
+	final protected function load_config_sections( $sections_array )
 	{
-		// an array means successful parse
-		if ( is_array( $sections_array ) ) {
+		// must have a non-empty array
+		if ( is_array( $sections_array ) && count( $sections_array ) ) {
 			// loop through each section
 			foreach ( $sections_array as $section_name => $section_array ) {
 				// load one section
