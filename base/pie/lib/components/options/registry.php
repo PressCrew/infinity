@@ -53,8 +53,26 @@ abstract class Pie_Easy_Options_Registry extends Pie_Easy_Registry
 		// override this to apply special localizations that apply to your implementation
 	}
 
+	public function load_feature_options_file( Pie_Easy_Features_Feature $feature, $filename )
+	{
+		// try to parse the options file into INI sections
+		$sections = parse_ini_file( $filename, true );
+
+		// get any sections?
+		if ( is_array( $sections ) && count( $sections ) ) {
+			// inject required feature directive into every option
+			foreach ( $sections as $name => &$directives) {
+				$directives['for_feature'] = $feature->name;
+			}
+		}
+
+		// load the sections as normal
+		return $this->load_config_sections( $sections );
+	}
+	
 	/**
-	 * Load option config as a feature sub option if syntax of name matches pattern
+	 * Load option config as a feature option if syntax of name matches pattern
+	 * or if the "for_feature" directive is set.
 	 *
 	 * @param string $name
 	 * @param Pie_Easy_Init_Config $config
@@ -62,21 +80,30 @@ abstract class Pie_Easy_Options_Registry extends Pie_Easy_Registry
 	 */
 	public function load_feature_option( $name, Pie_Easy_Init_Config $config )
 	{
-		// split for possible sub option syntax
-		$parts = explode( self::FEATURE_OPTION_DELIM, $name );
+		// defaults
+		$feature_name = null;
+		$option_name = null;
 
-		// if has exactly two parts it is a feature sub option
-		if ( count($parts) == 2 ) {
+		// feature explicitly set?
+		if ( isset( $config->for_feature ) ) {
+			$feature_name = $config->for_feature;
+			$option_name = $feature_name . '-' . $name;
+		} else {
+			// split for possible sub option syntax
+			$parts = explode( self::FEATURE_OPTION_DELIM, $name );
+			// if has exactly two parts its a feature option
+			if ( count($parts) == 2 ) {
+				// feature name is the first string
+				$feature_name = $parts[0];
+				// option name is both strings glued with a hyphen
+				$option_name = implode( '-', $parts );
+			}
+		}
 
-			// feature name is the first string
-			$feature_name = $parts[0];
-
+		// have req feature option details?
+		if ( $feature_name && $option_name ) {
 			// set required feature
 			$config->required_feature = $feature_name;
-
-			// option name is both strings glued with a hyphen
-			$option_name = implode( '-', $parts );
-
 			// call parent config loader
 			if ( $this->load_config_map( $option_name, $config ) ) {
 				// successfully loaded feature sub option
@@ -84,7 +111,7 @@ abstract class Pie_Easy_Options_Registry extends Pie_Easy_Registry
 			} else {
 				// this is really bad
 				throw new Exception( sprintf(
-					'Failed to load "%s" as a sub option of feature "%s"', $option_name, $feature_name ) );
+					'Failed to load "%s" as an option for feature "%s"', $option_name, $feature_name ) );
 			}
 		}
 

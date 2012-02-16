@@ -22,6 +22,23 @@ Pie_Easy_Loader::load( 'base/component', 'ui/styleable', 'utils/files' );
 abstract class Pie_Easy_Features_Feature
 	extends Pie_Easy_Component
 {
+	protected function init()
+	{
+		// call parent
+		parent::init();
+
+		// look for an options configuration file
+		$options_file = $this->locate_ext_file( 'options.ini' );
+
+		// find one?
+		if ( $options_file ) {
+			// load using options registry
+			$registry = $this->policy()->options()->registry();
+			$registry->load_feature_options_file( $this, $options_file );
+			unset( $registry );
+		}
+	}
+
 	/**
 	 * Check if theme supports this feature
 	 *
