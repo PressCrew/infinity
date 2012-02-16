@@ -177,6 +177,8 @@ final class Pie_Easy_Files extends Pie_Easy_Base
 	/**
 	 * Copy a path from one location to another
 	 *
+	 * Warning: For security reasons, this method does NOT copy ANY kind of dot files
+	 *
 	 * @param string $src Source path
 	 * @param string $dst Destination path
 	 * @param boolean $recurse Recursively copy directories?
@@ -190,21 +192,19 @@ final class Pie_Easy_Files extends Pie_Easy_Base
 			return false;
 		}
 
-		if ( file_exists( $dst ) && !is_writable( $dst ) ) {
-			return false;
-		}
-
-		if ( !is_dir( $dst ) && !@mkdir( $dst ) ) {
+		if ( is_dir( $dst ) ) {
+			if ( !is_writable( $dst ) ) {
+				return false;
+			}
+		} elseif ( !@mkdir( $dst ) ) {
 			return false;
 		}
 
 		while ( false !== ( $file = @readdir( $dir ) ) ) {
 
-			// handle dots
-			switch ( $file ) {
-				case '.':
-				case '..':
-					continue;
+			// skip dot files
+			if ( $file{0} == '.' ) {
+				continue;
 			}
 
 			// format paths
