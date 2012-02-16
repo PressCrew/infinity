@@ -22,6 +22,11 @@ Pie_Easy_Loader::load( 'base/registry', 'components/options/factory', 'utils/aja
 abstract class Pie_Easy_Options_Registry extends Pie_Easy_Registry
 {
 	/**
+	 * Sub option delimeter
+	 */
+	const FEATURE_OPTION_DELIM = '.';
+	
+	/**
 	 * Enqueue required scripts
 	 */
 	public function init_scripts()
@@ -58,7 +63,7 @@ abstract class Pie_Easy_Options_Registry extends Pie_Easy_Registry
 	public function load_feature_option( $name, Pie_Easy_Init_Config $config )
 	{
 		// split for possible sub option syntax
-		$parts = explode( self::SUB_OPTION_DELIM, $name );
+		$parts = explode( self::FEATURE_OPTION_DELIM, $name );
 
 		// if has exactly two parts it is a feature sub option
 		if ( count($parts) == 2 ) {

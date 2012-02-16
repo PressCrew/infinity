@@ -29,11 +29,6 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 	 * Name of the default component to use when none configured
 	 */
 	const DEFAULT_COMPONENT_TYPE = 'default';
-	
-	/**
-	 * Sub option delimeter
-	 */
-	const SUB_OPTION_DELIM = '.';
 
 	/**
 	 * Name of the theme currently being loaded
