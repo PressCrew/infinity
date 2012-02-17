@@ -200,6 +200,7 @@ final class Pie_Easy_Loader extends Pie_Easy_Base
 					array(
 						'bg-color',
 						'bg-image',
+						'bg-repeat',
 						'custom'
 					),
 				'input', 'input-group',
