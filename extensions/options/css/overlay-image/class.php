@@ -28,8 +28,8 @@ class Infinity_Exts_Options_Css_Overlay_Image
 		parent::init();
 
 		// init directives
-		$this->title = __( 'Overlay Image', pie_easy_text_domain );
-		$this->description = __( 'Select a texture to use as the background overlay', pie_easy_text_domain );
+		$this->title = __( 'Overlay Image', infinity_text_domain );
+		$this->description = __( 'Select a texture to use as the background overlay', infinity_text_domain );
 		$this->item_width = '100px';
 		$this->item_height = '100px';
 		$this->file_directory = 'assets/images/textures';
