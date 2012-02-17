@@ -20,6 +20,18 @@
 class Pie_Easy_Exts_Features_Header_Logo
 	extends Pie_Easy_Features_Feature
 {
+	/**
+	 */
+	protected function init()
+	{
+		// run parent
+		parent::init();
+
+		// init directives
+		$this->title = __( 'Header Logo', pie_easy_text_domain );
+		$this->description = __( 'Custom header logo support', pie_easy_text_domain );
+	}
+
 	public function init_styles()
 	{
 		// run parent
