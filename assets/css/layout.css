@@ -7,7 +7,8 @@
 	+ Content
 	+ Sidebar
 	+ Footer
-	+ Tooltips
+	+ Tables
+	+ Forms
 	
 You can disable the css in this file by adding the following code to your child theme config/infinity.ini file
 
@@ -34,56 +35,6 @@ body {
 .footer-wrap {
     padding-: 20px;
     position: relative;
-    background: #F8F8F8;
-}
-
-/* Top Menu */
-#top-menu-wrap, #sub-menu-wrap {
-    border-bottom: 2px solid #DDD;
-    background: none repeat scroll 0 0 #F8F8F8;
-    border-top: 1px solid #DDDDDD;
-    position: relative;        
-    min-height: 30px;
-}
-
-#top-menu-wrap {
-    /* setting z-index for dropdowns. do not mess with this */
-    z-index: 12 !important; 
-}
-#main-menu-wrap {
-    padding: 0;
-    padding-top: 0.5%;
-    position: absolute;
-    right: 10px;
-    /* setting z-index for dropdowns. do not mess with this */
-    z-index: 11 !important; 
-}
-#main-menu-wrap ul.sub-menu { z-index: 99 !important }
-
-/* Set a min-height so we can apply texture overlays */
-.main-menu, .top-menu, .sub-menu {
-min-height: 30px;
-padding: 5px 10px;
-}
-
-#sub-menu-wrap {
-/* setting z-index for dropdowns. do not mess with this */
-z-index: 10 !important;
-}
-/* Change font styling for the top and sub menus */
-#sub-menu-wrap ul a span,
-#top-menu-wrap ul a span {
-    text-transform: uppercase;
-    font-size: 10.5px;
-}
-
-/* menu divider */
-.base-menu ul li.menu-divider {
-	text-align: center;
-}
-/* always hide last menu divider */
-.base-menu ul li.menu-divider:last-child {
-	display: none;
 }
 
 /* ========== */
@@ -96,20 +47,18 @@ z-index: 10 !important;
     /* setting z-index for dropdowns. do not mess with this */
     z-index: 11 !important; 
 }
+
 #site-description {
     font-style: italic;
-    padding-left: 10px;
     color: #999999;
     position: relative;
     font-size: 14px;
     line-height: 180%;
 }
 h1#site-title,div#site-title {
-	position: absolute;
-    left: 15px;
+position: absolute;
     font-size: 26px;
     line-height: 180%;
-    padding-left: 10px;
     font-weight: bold;
     margin: 0;
 }
@@ -128,14 +77,42 @@ h1#site-title,div#site-title {
 /* ========================== */
 /* ! /* Navigation Menus */   */
 /* ========================== */
+/* Menu Wraps */
 
-.base-menu { padding-left: 10px;
-padding-right: 10px; }
-.base-menu ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+/* Top Menu */
+#top-menu-wrap, #sub-menu-wrap {
+    position: relative;        
+    min-height: 30px;
 }
+
+#top-menu-wrap {
+    /* setting z-index for dropdowns. do not mess with this */
+    z-index: 12 !important; 
+}
+
+#main-menu-wrap {
+    padding: 0;
+    padding-top: 0.5%;
+    position: absolute;
+    right: 10px;
+    /* setting z-index for dropdowns. do not mess with this */
+    z-index: 11 !important; 
+}
+#main-menu-wrap ul.sub-menu { z-index: 99 !important }
+
+#sub-menu-wrap {
+/* setting z-index for dropdowns. do not mess with this */
+z-index: 10 !important;
+}
+
+/* Set a min-height so we can apply texture overlays */
+.main-menu,.top-menu, .top-wrap .sub-menu {
+min-height: 37px;
+}
+
+/* ===================== */
+/* ! Base Menu Styling   */
+/* ===================== */
 .base-menu ul li {
     float: left;
     position: relative;
@@ -170,7 +147,6 @@ float: right;
     z-index: 95;
 }
 .base-menu ul ul {
-    background: #222;
     top: -9999em;
     width: 210px;
     /* left offset of submenus need to match (see below) */
@@ -188,26 +164,20 @@ float: right;
 .base-menu ul ul li:first-child { border-top: none }
 .base-menu ul ul li:last-child { border-bottom: none }
 .base-menu ul ul li a {
-    text-transform: none;
     width: 180px;
-    color: #B5B5B5;
-    padding: 5px 0 5px 0;
-    font-size: 13px;
 }
 .base-menu ul a {
     float: left;
-    padding: 0 3px 0 10px;
-    font-size: 13px;
-    margin-right: 5px;
+    padding: 8px 10px;
 }
+ /* Page Currently being viewed */
 .base-menu ul a:hover,
 .base-menu ul li.sfHover a,
 .base-menu ul li.current-cat a,
 .base-menu ul li.current_page_item a,
 .base-menu ul li.current-menu-item a {
-    text-decoration: none;
-    background-color: #EFEFEF;
-    /* Left image */
+    background-color: #000;
+    color: #DDD;
 }
 .base-menu li li a:hover,
 .base-menu li.sfHover li a { background: none }
@@ -216,30 +186,16 @@ float: right;
     float: right;
     margin: 5px 0 0 0;
 }
-.sf-sub-indicator {
-    padding: 4px 4px 4px 0 !important;
-}
-.base-menu li a span {
-    float: left;
-    cursor: pointer;
-    display: block;
-    padding: 5px 5px 5px 0;
-}
-.base-menu li li a span { padding: 0 }
+.base-menu li li a span { padding: 0; color: #BBB; }
 .base-menu ul li.sfHover li a,
-.base-menu ul li.sfHover li a span {
-    text-transform: none !important;
-    letter-spacing: 0px !important;
-    font-size: 12.8px !important;
-}
 .base-menu ul li.sfHover li a:hover,
 .base-menu ul li.sfHover li a span:hover {
+color: #DDD;
 }
 /*  Make sub menus appear */
 .base-menu ul li:hover ul,
 .base-menu ul li.sfHover ul {
-    left: -1px;
-    top: 36px; /* match top ul list item height */
+    top: 34px; /* match top ul list item height */
     z-index: 99;
 }
 /* Hide all subs subs (4 levels deep) */
@@ -266,12 +222,6 @@ float: right;
     width: 180px; /* left offset of submenus need to match (see below) */
     padding: 15px 5px 15px 5px;
     margin: 3px 0 0 0;
-    -webkit-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
-    -moz-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
-    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
     background: #FFF;
 }
 .base-menu ul ul li {
@@ -280,32 +230,46 @@ float: right;
     background: none;
     padding: 0 5px 0 5px;
 }
-.base-menu ul li a span {
-    color: #777777;
+.base-menu li a:hover {
+    color: #DDD;
 }
 .base-menu ul ul li:first-child { border-top: none }
 .base-menu ul ul li:last-child { border-bottom: none }
 .base-menu ul ul li a {
-    font-size: 13px !important;
-    text-transform: none !important;
-    font-weight: normal;
-    padding: 5px 0 5px 0;
     width: 150px;
 }
-.base-menu ul li a{ background: none;
-    border-radius: 5px 5px 5px 5px; }
-    
+.base-menu ul ul li a:hover {
+    padding-left: 12px;
+}
+
+.base-menu:first-child ul li:after{
+content: "";
+}
+
+.base-menu ul ul li:after {
+ content: none !important;
+}
+
+/* Don't remove this */
+#footer .sub-menu, #footer .sub-menu:before {
+background: none;
+border: 0px;
+}
+  
 /* =========== 
  ! Content  
  =========== */
  
 /* Fallback for browsers who don't have JS enabled */
-
 #content, #sidebar {
 	margin-left: 0.41666666666667%;
 	margin-right: 0.41666666666667%;
 	float: left;
 	display: block;
+}
+
+#inner-sidebar {
+    margin-right: -2.94%;
 }
 
       
@@ -319,31 +283,20 @@ float: right;
     width: 110px;
     padding: 2px;
 }
-#sidebar ul ul,
-#sidebar ul ol,
-#sidebar ol ol,
-#sidebar ol ul { margin: 0px }
-#inner-sidebar { padding-left: 20px }
 /* Widgets */
 .widget { margin-bottom: 30px }
 
 /* ========== 
  ! Footer   
  ========== */
- 
 #footer p:last-child { margin-bottom: 0 }
-.footer-widgets { margin-bottom: 20px }
-#footer .widget {
-    margin-bottom: 0;
-    padding: 20px;
-}
 .footer-widget h3 {
     margin-bottom: 10px;
     color: #FEDA71;
     font-size: 16px;
 }
-#footer-widget-right { border-right: none }
-#footer-widget-left { border-left: none }
+#footer-widget-right { border-right: none; margin-right: 0px; }
+#footer-widget-left { border-left: none;  margin-left: 0px; }
 #footer-menu  ul li a:hover { color: #777 }
 #footer-menu ul li { display: inline }
 #footer-menu ul li a {
@@ -351,18 +304,21 @@ float: right;
 }
 .footer-menu ul li:last-child a { border-right: 0px }
 #footer-info {
-    background: none repeat scroll 0 0 #444444;
-    color: #EFEFEF;
     overflow: auto;
-    padding: 10px;
-}
-#footer-menu {
-width: 70%;
 }
 #powered-by {
     padding-bottom: 10px;
     padding-top: 10px;
-    text-align: center;
+}
+
+/* use a pseudo element to put some empty hidden content into the div.
+this is needed for when a footer menu is not being used.
+ */
+#footer-info:before {
+    content: "";
+    display: block;
+    height: 1px;
+    overflow: auto;
 }
 
 /* ================== */
@@ -375,6 +331,7 @@ width: 70%;
     margin-right: 10px !important;
     padding-right: 25px !important;
 }
+
 /*page templare sidebar right*/
 .page-template-sidebar-right-template-php #inner-sidebar {
     margin-left: 15px !important;
@@ -382,108 +339,3 @@ width: 70%;
     margin-top: -40px !important;
     padding-right: 25px !important;
 }
-.page-template-sidebar-right-template-php #content { float: left !important }
-
-/* ============ */
-/* ! Tooltips   */
-/* ============ */
-.twipsy {
-    display: block;
-    position: absolute;
-    visibility: visible;
-    padding: 5px;
-    font-size: 11px;
-    z-index: 1000;
-    filter: alpha(opacity=80);
-    -khtml-opacity: 0.8;
-    -moz-opacity: 0.8;
-    opacity: 0.8;
-    margin-top: -20px;
-}
-
-.twipsy.fade.in {
-    filter: alpha(opacity=80);
-    -khtml-opacity: 0.8;
-    -moz-opacity: 0.8;
-    opacity: 0.8;
-}
-.twipsy.above .twipsy-arrow {
-    bottom: 0;
-    left: 50%;
-    margin-left: -5px;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 5px solid #000000;
-}
-.twipsy.left .twipsy-arrow {
-    top: 50%;
-    right: 0;
-    margin-top: -5px;
-    border-top: 5px solid transparent;
-    border-bottom: 5px solid transparent;
-    border-left: 5px solid #000000;
-}
-.twipsy.below .twipsy-arrow {
-    top: 0;
-    left: 50%;
-    margin-left: -5px;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-bottom: 5px solid #000000;
-}
-.twipsy.right .twipsy-arrow {
-    top: 50%;
-    left: 0;
-    margin-top: -5px;
-    border-top: 5px solid transparent;
-    border-bottom: 5px solid transparent;
-    border-right: 5px solid #000000;
-}
-.twipsy-inner {
-    padding: 3px 8px;
-    background-color: #000000;
-    color: white;
-    text-align: center;
-    max-width: 200px;
-    text-decoration: none;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
-}
-.twipsy-arrow {
-    position: absolute;
-    width: 0;
-    height: 0;
-}
-.fade {
-    -moz-transition: opacity 0.15s linear 0s;
-    opacity: 0;
-}
-.fade.in { opacity: 1 }
-
-/*CSS Fix for activity directory*/
-body.directory.activity.logged-in .twipsy {
-margin-top: -20px;
-}
-
-.addthis_toolbox {
-    height: 16px;
-    margin-bottom: 15px;
-    margin-top: 14px;
-}
-
-.single .addthis_toolbox {
-    position: relative;
-    left: 18px;
-    margin-left: 10px;
-}
-
-
-.addthis_button_twitter_follow_native {
-margin-left: 10px;
-}
-
-#screen-name, #followers, .button {
-    color: #DDDDDD;
-}
-

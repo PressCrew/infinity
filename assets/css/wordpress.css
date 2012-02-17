@@ -101,32 +101,6 @@ img.aligncenter {
     border: 0 none;
     padding: 0;
 }
-.post blockquote {
-    font-style: italic;
-    font-family: georgia, times, serif;
-    line-height: 150%;
-    quotes: none;
-    padding: 0 3em;
-    font-size: 16px;
-}
-.post blockquote {
-    font-style: italic;
-    line-height: 150%;
-    margin-left: 20px;
-    color: #6C6C6C;
-    quotes: none;
-    padding: 10px 20px 0;
-    font-size: 17px;
-}
-.post code { font-family: "Monaco", courier, sans-serif }
-.post pre,
-.post code p {
-    margin-top: 15px;
-    margin-bottom: 15px;
-    border: 1px solid #E0E0E0;
-    padding: 3px 5px;
-    font-size: 11.5px;
-}
 .postthumb {
 	margin-bottom: 20px;
 }
@@ -134,7 +108,6 @@ img.aligncenter {
     max-width: 100%;
     height: auto;
 }
-.post p { margin: 0 0 20px 0 }
 .post .gallery-caption { }
 #single-attachment img {
 margin-top: 25px;
@@ -202,10 +175,11 @@ color: #FFF;
 ul.page-numbers li { display: inline }
 .pagination {
     border-bottom: 1px solid #EAEAEA;
-    color: #888888;
-    font-size: 12px;
     height: 16px;
-    padding: 10px;
+    padding-left: 0px;
+    padding-bottom: 10px;
+    color: #888888;
+    font-size: 90%;
 }
 .pagination#user-pag,
 .friends .pagination,
@@ -366,7 +340,7 @@ color: #444;
 #comments .reply { 
     left: 0;
     position: absolute;
-    top: 45px;
+    top: 60px;
 }
 #comments .reply a { 
     font-size: 70%;
