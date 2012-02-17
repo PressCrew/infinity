@@ -24,7 +24,7 @@ class Pie_Easy_Exts_Options_Upload
 {
 	/**
 	 */
-	public function init()
+	protected function init()
 	{
 		// always run parent first
 		parent::init();
