@@ -17,21 +17,61 @@ infinity-layout-style = off
 /* ================== */
 /* ! Global & Wraps   */
 /* ================== */
+.footer-wrap {
+    padding-: 20px;
+    background: #F8F8F8;
+}
+
+/* Set a min-height so we can apply texture overlays */
+.main-menu, .top-menu, .sub-menu {
+background: #222;
+}
+
+/* Change font styling for the top and sub menus */
+#sub-menu-wrap ul a span,
+#top-menu-wrap ul a span {
+    text-transform: uppercase;
+    font-size: 10.5px;
+}
 
 
+/* menu divider */
+.base-menu ul li.menu-divider {
+	text-align: center;
+}
+/* always hide last menu divider */
+.base-menu ul li.menu-divider:last-child {
+	display: none;
+}
 
 /* ========== */
 /* ! Header   */
 /* ========== */
 
+#header {
+    min-height: 150px;
+}
 
+#site-description {
+    color: #999999;
+}
+h1#site-title,div#site-title {
+}
+
+
+#logo-menu-wrap {
+    margin-top: -30px;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+}
 
 /* ========================== */
 /* ! /* Navigation Menus */   */
 /* ========================== */
 
-/* Set a min-height so we can apply texture overlays */
-.main-menu,.top-menu, .top-wrap .sub-menu {
-min-height: 37px;
-background: none repeat scroll 0 0 #333333;
+.main-menu, .top-menu, .sub-menu {
+min-height: 30px;
+padding: 5px 10px;
+background: #222;
 }
