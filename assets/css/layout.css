@@ -7,8 +7,7 @@
 	+ Content
 	+ Sidebar
 	+ Footer
-	+ Tables
-	+ Forms
+	+ Tooltips
 	
 You can disable the css in this file by adding the following code to your child theme config/infinity.ini file
 
@@ -385,89 +384,106 @@ width: 70%;
 }
 .page-template-sidebar-right-template-php #content { float: left !important }
 
-/* ========== */
-/* ! Tables   */
-/* ========== */
-table {
-    width: 100%;
-    margin-bottom: 18px;
-    padding: 0;
-    border-collapse: separate;
-    *border-collapse: collapse;
-    font-size: 13px;
-    border: 1px solid #ddd;
+/* ============ */
+/* ! Tooltips   */
+/* ============ */
+.twipsy {
+    display: block;
+    position: absolute;
+    visibility: visible;
+    padding: 5px;
+    font-size: 11px;
+    z-index: 1000;
+    filter: alpha(opacity=80);
+    -khtml-opacity: 0.8;
+    -moz-opacity: 0.8;
+    opacity: 0.8;
+    margin-top: -20px;
+}
+
+.twipsy.fade.in {
+    filter: alpha(opacity=80);
+    -khtml-opacity: 0.8;
+    -moz-opacity: 0.8;
+    opacity: 0.8;
+}
+.twipsy.above .twipsy-arrow {
+    bottom: 0;
+    left: 50%;
+    margin-left: -5px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #000000;
+}
+.twipsy.left .twipsy-arrow {
+    top: 50%;
+    right: 0;
+    margin-top: -5px;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 5px solid #000000;
+}
+.twipsy.below .twipsy-arrow {
+    top: 0;
+    left: 50%;
+    margin-left: -5px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid #000000;
+}
+.twipsy.right .twipsy-arrow {
+    top: 50%;
+    left: 0;
+    margin-top: -5px;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-right: 5px solid #000000;
+}
+.twipsy-inner {
+    padding: 3px 8px;
+    background-color: #000000;
+    color: white;
+    text-align: center;
+    max-width: 200px;
+    text-decoration: none;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
 }
-table th, table td {
-    padding: 10px 10px 9px;
-    line-height: 18px;
-    text-align: left;
+.twipsy-arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
 }
-table th {
-    padding-top: 9px;
-    font-weight: bold;
-    vertical-align: middle;
-    border-bottom: 1px solid #ddd;
+.fade {
+    -moz-transition: opacity 0.15s linear 0s;
+    opacity: 0;
 }
-table td { vertical-align: top }
-table th + th, table td + td { border-left: 1px solid #ddd }
-table tr + tr td { border-top: 1px solid #ddd }
-table tbody tr:first-child td:first-child {
-    -webkit-border-radius: 4px 0 0 0;
-    -moz-border-radius: 4px 0 0 0;
-    border-radius: 4px 0 0 0;
-}
-table tbody tr:first-child td:last-child {
-    -webkit-border-radius: 0 4px 0 0;
-    -moz-border-radius: 0 4px 0 0;
-    border-radius: 0 4px 0 0;
-}
-table tbody tr:last-child td:first-child {
-    -webkit-border-radius: 0 0 0 4px;
-    -moz-border-radius: 0 0 0 4px;
-    border-radius: 0 0 0 4px;
-}
-table tbody tr:last-child td:last-child {
-    -webkit-border-radius: 0 0 4px 0;
-    -moz-border-radius: 0 0 4px 0;
-    border-radius: 0 0 4px 0;
+.fade.in { opacity: 1 }
+
+/*CSS Fix for activity directory*/
+body.directory.activity.logged-in .twipsy {
+margin-top: -20px;
 }
 
-/* ========== */
-/* ! Forms   */
-/* ========== */
-form { margin-bottom: 20px }
-fieldset { margin-bottom: 20px }
-input[type="text"], input[type="password"], input[type="email"], textarea, select {
-    background: #FFF;
-    margin-bottom: 20px;
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
-    border-radius: 2px;
-    font: 13px;
-    width: 70%;
-    color: #777;
-    margin: 0;
-    border: 1px solid #ccc;
-    display: block;
-    padding: 6px 4px;
-    outline: none;
-    max-width: 100%;
+.addthis_toolbox {
+    height: 16px;
+    margin-bottom: 15px;
+    margin-top: 14px;
 }
-input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus, textarea:focus {
-    -webkit-box-shadow: 0 0 3px rgba(0,0,0,.2);
-    -moz-box-shadow: 0 0 3px rgba(0,0,0,.2);
-    box-shadow: 0 0 3px rgba(0,0,0,.2);
-    color: #444;
-    border: 1px solid #aaa;
+
+.single .addthis_toolbox {
+    position: relative;
+    left: 18px;
+    margin-left: 10px;
 }
-select { padding: 0 }
-textarea { min-height: 60px }
-label, legend {
-    font-weight: bold;
-    font-size: 13px;
+
+
+.addthis_button_twitter_follow_native {
+margin-left: 10px;
 }
-select { width: 220px }
-input[type="checkbox"] { display: inline }
+
+#screen-name, #followers, .button {
+    color: #DDDDDD;
+}
+
