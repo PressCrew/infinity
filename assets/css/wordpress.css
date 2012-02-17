@@ -134,6 +134,7 @@ img.aligncenter {
     max-width: 100%;
     height: auto;
 }
+.post p { margin: 0 0 20px 0 }
 .post .gallery-caption { }
 #single-attachment img {
 margin-top: 25px;
