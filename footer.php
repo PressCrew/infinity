@@ -47,17 +47,19 @@
 				</div>
 				<div style="clear: both;"></div>
 			<?php endif; // end primary widget area ?>
-			<div id="footer-info">
-				<nav id="footer-menu" role="navigation">
-					<?php
-						do_action('open_footer_menu');
-						wp_nav_menu( array( 'theme_location' => 'footer-menu' ) );
-						do_action('close_footer_menu');
-					?>
-				</nav>	
-			</div>
 			<div id="powered-by">
-				<?php echo infinity_option_get( 'infinity-core-options-footer_text' ); ?>
+				<div id="footer-info" class="grid_16 alpha">
+				<?php
+					// Load Footer Menu only if it's enabled
+					if ( current_theme_supports( 'infinity-footer-menu-setup' ) ) :
+						infinity_get_template_part( 'templates/parts/footer-menu', 'footer' );
+					endif;
+				?>
+				</div>
+				<div id="copyright-info" class="grid_8 omega">	
+					<?php echo infinity_option_get( 'infinity-core-options-footer_text' ); ?>
+				</div>
+				<div style="clear: both;"></div>
 			</div>
 			<?php
 				do_action( 'close_footer' );

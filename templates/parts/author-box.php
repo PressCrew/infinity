@@ -11,7 +11,7 @@
  * @since 1.0
  */
 ?>
-<?php if ( get_the_author_meta('description') ): ?>
+<?php if ( get_the_author_meta('description') && current_theme_supports( 'infinity-author-box' ) ): ?>
 	<div class="author-box">
 		<?php
 			do_action( 'open_author_box' );
