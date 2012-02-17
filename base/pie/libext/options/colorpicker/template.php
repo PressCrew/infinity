@@ -14,7 +14,7 @@
 
 <?php $this->render_input( 'text' ) ?>
 
-<div id="<?php $this->render_id('launcher') ?>" class="<?php $this->render_class( 'launcher' ) ?>">
+<div id="<?php $this->render_id('launcher') ?>" class="pie-easy-exts-options-colorpicker-launcher">
 	<div style="background-color: <?php $this->render_field_value() ?>;"></div>
 </div>
 

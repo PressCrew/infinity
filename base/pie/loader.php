@@ -198,6 +198,7 @@ final class Pie_Easy_Loader extends Pie_Easy_Base
 				'category', 'categories', 'checkbox', 'colorpicker',
 				'css' =>
 					array(
+						'bg-color',
 						'custom'
 					),
 				'input', 'input-group',
