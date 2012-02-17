@@ -71,92 +71,91 @@ function infinity_base_author_box()
  * @package Infinity
  * @subpackage base
  */
-if ( current_theme_supports( 'infinity-sidebar-setup' ) ) {
-	function infinity_base_sidebars()
-	{
-			if ( is_page() ) {
-				global $post;
-				if ( function_exists('bp_is_page') && bp_is_user() || bp_is_members_component()  ) {
-					if ( is_active_sidebar( 'member-sidebar' ) ) {
-						dynamic_sidebar( 'member-sidebar' );
-					} else { ?>
-					<?php if( current_user_can('edit_theme_options') ) : ?>
-					<div class="widget"><h4>BP Member Sidebar.</h4>
-					<a href="<?php echo home_url( '/'  ); ?>wp-admin/widgets.php" title="Add Widgets">Add Widgets</a></div><?php endif; ?><?php
-					}
-			
-				} elseif ( function_exists('bp_is_page') && bp_is_page(BP_MEMBERS_SLUG) ) {
-	                if ( is_active_sidebar( 'member-sidebar' ) ) {
-	                    dynamic_sidebar( 'member-sidebar');
-					} else { ?>
-					<?php if( current_user_can('edit_theme_options') ) : ?>
-					<div class="widget"><h4>BP Members Sidebar.</h4>
-					<a href="<?php echo home_url( '/'  ); ?>wp-admin/widgets.php" title="Add Widgets">Add Widgets</a></div><?php endif; ?><?php
-					}
-	           } elseif ( function_exists('bp_is_page') && bp_is_page(BP_GROUPS_SLUG) ) {
-	                if ( is_active_sidebar( 'groups-sidebar' ) ) {
-	                    dynamic_sidebar( 'groups-sidebar');
-					} else { ?>
-					<?php if( current_user_can('edit_theme_options') ) : ?>
-					<div class="widget"><h4>BP Group Sidebar.</h4>
-					<a href="<?php echo home_url( '/'  ); ?>wp-admin/widgets.php" title="Add Widgets">Add Widgets</a></div><?php endif; ?><?php
-					}
-	            } elseif ( function_exists('bp_is_page') && bp_is_page(BP_FORUMS_SLUG) ) {
-	                if ( is_active_sidebar( 'forums-sidebar' ) ) {
-	                    dynamic_sidebar( 'forums-sidebar');
-					} else { ?>
-					<?php if( current_user_can('edit_theme_options') ) : ?>
-					<div class="widget"><h4>BP Forums Sidebar.</h4>
-					<a href="<?php echo home_url( '/'  ); ?>wp-admin/widgets.php" title="Add Widgets">Add Widgets</a></div><?php endif; ?><?php
-					}
-	            } elseif ( function_exists('bp_is_page') && bp_is_page(BP_BLOGS_SLUG) ) {
-	                if ( is_active_sidebar( 'blogs-sidebar' ) ) {
-	                    dynamic_sidebar( 'blogs-sidebar');
-					} else { ?>
-					<?php if( current_user_can('edit_theme_options') ) : ?>
-					<div class="widget"><h4>BP Blogs Sidebar.</h4>
-					<a href="<?php echo home_url( '/'  ); ?>wp-admin/widgets.php" title="Add Widgets">Add Widgets</a></div><?php endif; ?><?php
-					}
-				} elseif( function_exists('bp_is_page') && bp_is_page(BP_ACTIVITY_SLUG) ) {
-					if ( is_active_sidebar( 'activity-sidebar' ) ) {
-						dynamic_sidebar( 'activity-sidebar');
-					} else { ?>
-					<?php if( current_user_can('edit_theme_options') ) : ?>
-					<div class="widget"><h4>Activity Sidebar</h4>
-					<a href="<?php echo home_url( '/'  ); ?>wp-admin/widgets.php" title="Add Widgets">Add Widgets</a></div><?php endif; ?><?php
-					}
-				} elseif( is_front_page() ) {
-					if ( is_active_sidebar( 'home-sidebar' ) ) {
-						dynamic_sidebar( 'home-sidebar' );
-					} else { ?>
-					<?php if( current_user_can('edit_theme_options') ) : ?>
-					<div class="widget"><h4>Home Sidebar.</h4>
-					<a href="<?php echo home_url( '/'  ); ?>wp-admin/widgets.php" title="Add Widgets">Add Widgets</a></div><?php endif; ?><?php
-					}
-				} elseif ( is_page() ) {
-					if ( is_active_sidebar( 'page-sidebar' ) ) {
-						dynamic_sidebar( 'page-sidebar');
-					} else { ?>
-					<?php if( current_user_can('edit_theme_options') ) : ?>
-					<div class="widget"><h4>Page Sidebar.</h4>
-					<a href="<?php echo home_url( '/'  ); ?>wp-admin/widgets.php" title="Add Widgets">Add Widgets</a></div><?php endif; ?><?php
-					}
-				}
-			} else {
-				if ( is_active_sidebar( 'blog-sidebar' ) ) {
-					dynamic_sidebar( 'blog-sidebar');
-				} else { ?>
-				<?php if( current_user_can('edit_theme_options') ) : ?>
-					<div class="widget"><h4>Blog Sidebar.</h4>
-					<a href="<?php echo home_url( '/'  ); ?>wp-admin/widgets.php" title="Add Widgets">Add Widgets</a></div>
-					<?php endif; ?><?php
-				}
+function infinity_base_sidebars()
+{
+	if ( !current_theme_supports( 'infinity-sidebar-setup' ) ) {
+		return;
+	}
+
+	if ( is_page() ) {
+		if ( function_exists('bp_is_page') && bp_is_user() || bp_is_members_component()  ) {
+			if ( is_active_sidebar( 'member-sidebar' ) ) {
+				dynamic_sidebar( 'member-sidebar' );
+			} elseif ( current_user_can('edit_theme_options') ) { ?>
+				<div class="widget">
+					<h4>BP Member Sidebar.</h4>
+					<a href="<?php echo home_url( '/'  ); ?>wp-admin/widgets.php" title="Add Widgets">Add Widgets</a>
+				</div><?php
 			}
+		} elseif ( function_exists('bp_is_page') && bp_is_groups_component() && !bp_is_user() ) {
+			if ( is_active_sidebar( 'groups-sidebar' ) ) {
+				dynamic_sidebar( 'groups-sidebar');
+			} elseif ( current_user_can('edit_theme_options') ) { ?>
+				<div class="widget">
+					<h4>BP Group Sidebar.</h4>
+					<a href="<?php echo home_url( '/'  ); ?>wp-admin/widgets.php" title="Add Widgets">Add Widgets</a>
+				</div><?php
+			}
+		} elseif ( function_exists('bp_is_page') && bp_is_forums_component() && !bp_is_user() ) {
+			if ( is_active_sidebar( 'forums-sidebar' ) ) {
+				dynamic_sidebar( 'forums-sidebar');
+			} elseif ( current_user_can('edit_theme_options') ) { ?>
+				<div class="widget">
+					<h4>BP Forums Sidebar.</h4>
+					<a href="<?php echo home_url( '/'  ); ?>wp-admin/widgets.php" title="Add Widgets">Add Widgets</a>
+				</div><?php
+			}
+		} elseif ( function_exists('bp_is_page') && bp_is_blogs_component() && !bp_is_user() ) {
+			if ( is_active_sidebar( 'blogs-sidebar' ) ) {
+				dynamic_sidebar( 'blogs-sidebar');
+			} elseif ( current_user_can('edit_theme_options') ) { ?>
+				<div class="widget">
+					<h4>BP Blogs Sidebar.</h4>
+					<a href="<?php echo home_url( '/'  ); ?>wp-admin/widgets.php" title="Add Widgets">Add Widgets</a>
+				</div><?php
+			}
+		} elseif( function_exists('bp_is_page') && bp_is_activity_component() && !bp_is_user() ) {
+			if ( is_active_sidebar( 'activity-sidebar' ) ) {
+				dynamic_sidebar( 'activity-sidebar');
+			} elseif( current_user_can('edit_theme_options') ){ ?>
+				<div class="widget">
+					<h4>Activity Sidebar</h4>
+					<a href="<?php echo home_url( '/'  ); ?>wp-admin/widgets.php" title="Add Widgets">Add Widgets</a>
+				</div><?php
+			}
+		} elseif( is_front_page() ) {
+			if ( is_active_sidebar( 'home-sidebar' ) ) {
+				dynamic_sidebar( 'home-sidebar' );
+			} elseif ( current_user_can('edit_theme_options') ) { ?>
+				<div class="widget">
+					<h4>Home Sidebar.</h4>
+					<a href="<?php echo home_url( '/'  ); ?>wp-admin/widgets.php" title="Add Widgets">Add Widgets</a>
+				</div><?php
+			}
+		} elseif ( is_page() ) {
+			if ( is_active_sidebar( 'page-sidebar' ) ) {
+				dynamic_sidebar( 'page-sidebar');
+			} elseif ( current_user_can('edit_theme_options') ) { ?>
+				<div class="widget">
+					<h4>Page Sidebar.</h4>
+					<a href="<?php echo home_url( '/'  ); ?>wp-admin/widgets.php" title="Add Widgets">Add Widgets</a>
+				</div><?php
+			}
+		}
+	} else {
+		if ( is_active_sidebar( 'blog-sidebar' ) ) {
+			dynamic_sidebar( 'blog-sidebar');
+		} elseif( current_user_can('edit_theme_options') ) { ?>
+			<div class="widget">
+				<h4>Blog Sidebar.</h4>
+				<a href="<?php echo home_url( '/'  ); ?>wp-admin/widgets.php" title="Add Widgets">Add Widgets</a>
+			</div><?php
+		}
 	}
 }
+
 /**
  * Prints HTML with meta information for the current post-date/time and author.
- *
  */
 function infinity_posted_on() {
 	printf( __( '<a href="%1$s" title="%2$s" rel="bookmark"><time class="entry-date" datetime="%3$s" pubdate>%4$s</time></a>', infinity_text_domain ),
