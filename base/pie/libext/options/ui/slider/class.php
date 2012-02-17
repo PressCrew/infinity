@@ -79,22 +79,22 @@ class Pie_Easy_Exts_Options_Ui_Slider
 
 		// max
 		if ( isset( $config->max ) && is_numeric( $config->max ) ) {
-			$this->max = (integer) $config->max;
+			$this->max = $config->max;
 		}
 
 		// min
 		if ( isset( $config->min ) && is_numeric( $config->min ) ) {
-			$this->min = (integer) $config->min;
+			$this->min = $config->min;
 		}
 
 		// orientation
-		if ( isset( $config->orientation ) && strlen( $config->orientation ) ) {
+		if ( isset( $config->orientation ) ) {
 			$this->orientation = (string) $config->orientation;
 		}
 
 		// step
 		if ( isset( $config->step ) && is_numeric( $config->step ) ) {
-			$this->step = (integer) $config->step;
+			$this->step = $config->step;
 		}
 
 		// range
@@ -103,22 +103,22 @@ class Pie_Easy_Exts_Options_Ui_Slider
 		}
 		
 		// value label
-		if ( isset( $config->label ) && strlen( $config->label ) ) {
+		if ( isset( $config->label ) ) {
 			$this->label = (string) $config->label;
 		}
 
 		// prefix
-		if ( isset( $config->prefix ) && strlen( $config->prefix ) ) {
+		if ( isset( $config->prefix ) ) {
 			$this->prefix = (string) $config->prefix;
 		}
 
 		// suffix
-		if ( isset( $config->suffix ) && strlen( $config->suffix ) ) {
+		if ( isset( $config->suffix ) ) {
 			$this->suffix = (string) $config->suffix;
 		}
 
 		// delimiter (more than one handle)
-		if ( isset( $config->delimiter ) && strlen( $config->delimiter ) ) {
+		if ( isset( $config->delimiter ) ) {
 			$this->delimiter = (string) $config->delimiter;
 		}
 	}
