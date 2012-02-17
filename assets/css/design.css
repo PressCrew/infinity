@@ -1,47 +1,73 @@
-/*
+/*----------------------------------------------------------------
+>>> Design CSS Style
 ----------------------------------------------------------------
-//LAYOUT
-	+ Global & Wraps
+//CORE LAYOUT
+	+ Body and Main Wrapper
 	+ Header
-	+ Navigation Menus
+		 - Top Menu
+		 - Main Menu
+		 - Sub Menu
 	+ Content
 	+ Sidebar
 	+ Footer
-	+ Tables
-	+ Forms
-	
-You can disable the css in this file by adding the following code to your child theme config/infinity.ini file
-
-infinity-layout-style = off
+//POSTS
+	+ Posts
+	+ Meta Icons
+	+ Comments
+//BuddyPress	
+	+ General
+	+ Icons
+	+ Footer
+//BBPress
+	+ Misc.
+// Extras
+   + Shortcodes
+   + Buttons
+   + Notifications
 --------------------------------------------------------------*/
-/* ================== */
-/* ! Global & Wraps   */
-/* ================== */
-.footer-wrap {
-    padding-: 20px;
-    background: #F8F8F8;
-}
 
-/* Set a min-height so we can apply texture overlays */
-.main-menu, .top-menu, .sub-menu {
-background: #222;
-}
+/* =============== */
+/* ! Core Layout   */
+/* =============== */
 
-/* Change font styling for the top and sub menus */
-#sub-menu-wrap ul a span,
-#top-menu-wrap ul a span {
-    text-transform: uppercase;
-    font-size: 10.5px;
+body {
+    background: url("../images/bg.png") repeat scroll 0 0 #FFFDF9;
+    font-family: "PT Sans", "Helvetica Neue", Arial, sans serif;
+    font-size: 14px;
+    color: #5B5B5B;
 }
-
-
-/* menu divider */
-.base-menu ul li.menu-divider {
-	text-align: center;
+#wrapper {
+    box-shadow: 0 0 0 12px rgba(0, 0, 0, 0.024), 0 0 3px 0 rgba(0, 0, 0, 0.15), 0 0 0 6px rgba(0, 0, 0, 0.02) inset;
+    border: 1px solid #EEE;
+    background: #FFF;
+    border-radius: 12px 12px 12px 12px;
+    max-width: 1020px;
 }
-/* always hide last menu divider */
-.base-menu ul li.menu-divider:last-child {
-	display: none;
+.main-wrap {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.main-wrap p { line-height: 160% }
+#inner-sidebar {
+    border-left: 0px solid #E6E6E6;
+    padding-left: 17px;
+}
+/* Link Styling */
+a,
+a:visited { color: #EF7D3C }
+a:hover,
+a:visited:hover { color: #777 }
+::-moz-selection {
+    background: #F26535;
+    color: #fff;
+}
+::-webkit-selection {
+    background: #F26535;
+    color: #fff;
+}
+::selection {
+    background: #F26535;
+    color: #fff;
 }
 
 /* ========== */
@@ -49,29 +75,348 @@ background: #222;
 /* ========== */
 
 #header {
-    min-height: 150px;
+    background: url("../images/header-background.jpg") repeat scroll 0 0 transparent;
+    border-bottom: 2px solid #4F4F4F;
+    height: 200px;
 }
 
-#site-description {
-    color: #999999;
-}
-h1#site-title,div#site-title {
-}
-
-
-#logo-menu-wrap {
-    margin-top: -30px;
+#site-title {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #DDDDDD;
+    border-radius: 0 4px 4px 0;
+    box-shadow: 0 0 0 8px rgba(0, 0, 0, 0.024), 0 0 3px 0 rgba(0, 0, 0, 0.15), 0 0 0 6px rgba(0, 0, 0, 0.02) inset;
+    margin-left: -28px !important;
+    padding-left: 28px !important;
+    padding: 10px 30px;
     position: absolute;
-    top: 50%;
-    width: 100%;
+    top: -8px;
 }
-
-/* ========================== */
-/* ! /* Navigation Menus */   */
-/* ========================== */
 
 .main-menu, .top-menu, .sub-menu {
-min-height: 30px;
-padding: 5px 10px;
-background: #222;
+padding: 0px;
+}
+
+.base-menu ul li a span {
+    font-weight: bold;
+}
+
+
+/* ==================== */
+/* ! The Top Menu   */
+/* ==================== */
+#top-menu-wrap {
+    background: #2F2F2F;
+    border-top: 2px solid #4F4F4F;
+    border: 1px solid #111;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    border-bottom: 2px solid #EF7D3C !important;
+    padding: 5px 0 5px 15px;
+}
+/* Menu Hover */
+#top-menu-wrap ul a:hover,
+#top-menu-wrap ul li.sfHover a,
+#top-menu-wrap ul li.current-cat a,
+#top-menu-wrap ul li.current_page_item a,
+#top-menu-wrap ul li.current-menu-item a { background: #444 !important }
+/* Transparant BG for items in the dropdown menu */
+div#top-menu-wrap ul li ul li a,
+div#top-menu-wrap ul li ul li a,
+div#top-menu-wrap ul li ul li a { background: transparent }
+/* Menu Color */
+#top-menu-wrap ul li a span {
+    color: #DDD;
+    text-shadow: 0px -1px 0px #111;
+    font-size: 11.5px;
+}
+/* Dropdown Background */
+#top-menu-wrap ul ul { background: #444 !important }
+.base-menu ul a { text-shadow: 0 1px 0 rgba(0, 0, 0, 0.7) }
+.base-menu ul ul {
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
+    border-radius: 3px;
+    -moz-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+.base-menu ul li.sfHover a,
+.base-menu ul li.current-cat a,
+.base-menu ul li.current_page_item a,
+.base-menu ul li.current-menu-item a {
+    border-radius: 4px;
+    text-decoration: none;
+    background-color: transparent;
+    /* Left image */
+}
+.base-menu ul a:hover {
+    border-radius: 4px;
+    text-decoration: none;
+    background-color: #222;
+    /* Left image */
+}
+
+/* ==================== */
+/* ! The Main Menu   */
+/* ==================== */
+
+.main-menu-wrap { top: 40% }
+#main-menu-wrap {
+    background: -moz-linear-gradient(top, rgba(50,51,54,0.9) 0%, rgba(41,42,44,0.9) 50%, rgba(33,34,36,0.9) 51%, rgba(25,26,27,0.9) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(50,51,54,0.9)), color-stop(50%,rgba(41,42,44,0.9)), color-stop(51%,rgba(33,34,36,0.9)), color-stop(100%,rgba(25,26,27,0.9)));
+    background: -webkit-linear-gradient(top, rgba(50,51,54,0.9) 0%,rgba(41,42,44,0.9) 50%,rgba(33,34,36,0.9) 51%,rgba(25,26,27,0.9) 100%);
+    background: -o-linear-gradient(top, rgba(50,51,54,0.9) 0%,rgba(41,42,44,0.9) 50%,rgba(33,34,36,0.9) 51%,rgba(25,26,27,0.9) 100%);
+    background: -ms-linear-gradient(top, rgba(50,51,54,0.9) 0%,rgba(41,42,44,0.9) 50%,rgba(33,34,36,0.9) 51%,rgba(25,26,27,0.9) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e6323336', endColorstr='#e6191a1b',GradientType=0 );
+    background: linear-gradient(top, rgba(50,51,54,0.9) 0%,rgba(41,42,44,0.9) 50%,rgba(33,34,36,0.9) 51%,rgba(25,26,27,0.9) 100%);
+    border: 1px solid #222222;
+    border-radius: 6px 6px 6px 6px;
+    top: 46%;
+    border: 1px solid #303030;
+}
+/* Menu Hover */
+#main-menu-wrap ul a:hover,
+#main-menu-wrap ul li.sfHover a,
+#main-menu-wrap ul li.current-cat a,
+#main-menu-wrap ul li.current_page_item a,
+#main-menu-wrap ul li.current-menu-item a { }
+/* Transparant BG for items in the dropdown menu */
+div#main-menu-wrap ul li ul li a,
+div#top-menu-wrap ul li ul li a,
+div#main-menu-wrap ul li ul li a { background: transparent !important }
+/* Menu Color */
+#main-menu-wrap ul li a span {
+    color: #EFEFEF;
+    text-shadow: 0px 1px 0px #222;
+    font-size: 14px;
+}
+/* Dropdown Background */
+#main-menu-wrap ul ul { background: #222 !important }
+
+/* ==================== */
+/* ! The Sub Menu   */
+/* ==================== */
+
+#sub-menu-wrap {
+    background: #2F2F2F;
+    border: 1px solid #111;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    border-bottom: 2px solid #EF7D3C !important;
+    padding: 5px 0 5px 15px;
+}
+/* Menu Hover */
+#sub-menu-wrap ul a:hover {
+background: #000;
+}
+#sub-menu-wrap ul li.sfHover a {
+background: transparent;
+}
+#sub-menu-wrap ul li.current-cat a,
+#sub-menu-wrap ul li.current_page_item a,
+#sub-menu-wrap ul li.current-menu-item a { background: transparent }
+/* Transparant BG for items in the dropdown menu */
+div#sub-menu-wrap ul li ul li a,
+div#top-menu-wrap ul li ul li a,
+div#main-menu-wrap ul li ul li a { background: transparent }
+/* Menu Color and Size */
+#sub-menu-wrap ul li a span {
+    color: #FFF;
+    text-shadow: 0px -1px 0px #111;
+    font-size: 11.5px;
+}
+/* Dropdown Background */
+#sub-menu-wrap ul ul { background: #222 !important }
+
+/* =========== */
+/* ! Sidebar   */
+/* =========== */
+#sidebar .widget,
+.notification {
+    border: 1px solid #dddddd;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+.widget h4 {
+    border-bottom: 1px solid #EFEFEF;
+    letter-spacing: 1.5px;
+    line-height: 180%;
+    margin-top: 10px;
+}
+.notification,
+.widget,
+.author-box,
+.category-box,
+.tag-box,
+.post-author-box,
+.post code p {
+    box-shadow: inset 0 0 0 3px rgba(0, 0, 0, 0.025);
+    -webkit-box-shadow: inset 0 0 0 3px rgba(0, 0, 0, 0.025);
+    -moz-box-shadow: inset 0 0 0 3px rgba(0, 0, 0, 0.025);
+    background: #fafafa;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fafafa), to(#ffffff));
+    background: -webkit-linear-gradient(#fafafa, #ffffff);
+    background: -moz-linear-gradient(center top, #fafafa 0%, #ffffff 100%);
+    background: -moz-gradient(center top, #fafafa 0%, #ffffff 100%);
+}
+
+#sidebar ul, ol {
+    padding: 0 0 0 15px;
+}
+
+/* ========== */
+/* ! Footer   */
+/* ========== */
+
+#footer {
+    color: #DEDEDE;
+    text-shadow: 0 1px 0 #000000;
+}
+.footer-wrap {
+    border-bottom: 5px solid #737373;
+    border-top: 5px solid #EF7D3C;
+    background: rgb(68,68,68);
+    background: -moz-linear-gradient(top, rgba(68,68,68,1) 0%, rgba(48,48,48,1) 47%, rgba(52,52,52,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(68,68,68,1)), color-stop(47%,rgba(48,48,48,1)), color-stop(100%,rgba(52,52,52,1)));
+    background: -webkit-linear-gradient(top, rgba(68,68,68,1) 0%,rgba(48,48,48,1) 47%,rgba(52,52,52,1) 100%);
+    background: -o-linear-gradient(top, rgba(68,68,68,1) 0%,rgba(48,48,48,1) 47%,rgba(52,52,52,1) 100%);
+    background: -ms-linear-gradient(top, rgba(68,68,68,1) 0%,rgba(48,48,48,1) 47%,rgba(52,52,52,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#444444', endColorstr='#343434',GradientType=0 );
+    background: linear-gradient(top, rgba(68,68,68,1) 0%,rgba(48,48,48,1) 47%,rgba(52,52,52,1) 100%);
+    margin-top: 40px;
+    border-radius: 0px 0px 12px 12px;
+}
+#footer h4 {
+    color: #EFEFEF;
+    font-size: 14px;
+}
+#footer .widget {
+    background: none repeat scroll 0 0 transparent;
+    border: medium none;
+    box-shadow: none;
+    color: #EFEFEF;
+    margin-bottom: 0;
+    padding: 20px;
+}
+#footer .widget a { color: #EFEFEF }
+#footer-info {
+    background: none repeat scroll 0 0 #2B2B2B;
+    border-radius: 0 0 10px 10px;
+    border-top: 1px solid #606060;
+    color: #EFEFEF;
+    font-size: 10.5px;
+    font-weight: bold;
+    letter-spacing: 0.8px;
+    overflow: auto;
+    padding: 10px 10px 10px 30px;
+    text-transform: uppercase;
+}
+#footer-menu ul li a {
+color: #DDD;
+}
+
+/* ========= */
+/* ! Posts   */
+/* ========= */
+.author-avatar img {
+padding: 0px !important;
+}
+
+.post p.post-meta-data,
+.comment-meta,
+.comment-options,
+p#breadcrumbs {
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+.post .wp-caption {
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+.post code p { background: -moz-linear-gradient(center top , #F1F1F1, #FFFFFF) repeat scroll 0 0 transparent }
+.post blockquote {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-left: 1px dashed #DDDDDD;
+}
+.post img {
+	    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #DDDDDD;
+    max-width: 98%;
+    padding: 5px;
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.024) inset;
+    border-radius: 4px 4px 4px 4px;
+}
+/* Intro Boxes for authors, categories and tags */
+.author-box,
+.category-box,
+.tag-box {
+    border-radius: 4px;
+    background-color: #FFF;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border: 1px solid #dddddd;
+}
+h1#category-title,
+h1#tag-title {
+    background: url("../images/icons/black.png") no-repeat scroll -3px -36px transparent;
+    color: #999;
+    font-size: 16px;
+    padding-left: 22px;
+}
+h1#category-title span,
+h1#tag-title span { color: #555 }
+.authorbox h3 {
+    background: url("../images/icons/black.png") no-repeat scroll -724px -1228px transparent;
+    padding-left: 25px;
+}
+/* per post navigation and pagination */
+.navigation,
+.paged-navigation,
+.comment-navigation {
+    background: #F2F2F2;
+    border-radius: 2px;
+    word-spacing: 1px;
+    border: 1px solid #DDDDDD;
+}
+
+/* ============ */
+/* ! Comments   */
+/* ============ */
+
+#comments .bypostauthor { background: #EFEFEF }
+
+/* ==================== */
+/* ! BuddyPress   */
+/* ==================== */
+
+div.item-list-tabs ul li a:hover {
+    background-color: #555;
+    border-radius: 3px;
+}
+div#sidebar div.item-options {
+    left: 47%;
+    margin-bottom: -25px;
+    position: relative;
+    top: -33px;
+}
+/* =========== */
+/* ! BBPress   */
+/* =========== */
+
+.bbPress #content { width: 99% !important }
+.bbPress #sidebar { display: none !important }
+tr.sticky td.bbp-topic-title a {
+    background: url("../images/icons/black.png") no-repeat scroll -1px -2px transparent;
+    padding-left: 24px;
+}
+p.bbp-topic-meta a {
+    background: none !important;
+    padding-left: 0px !important;
+}
+.BBPress table th,
+table td {
+    line-height: 18px;
+    padding: 15px 10px 9px;
+    text-align: left;
 }

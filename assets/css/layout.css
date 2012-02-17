@@ -40,6 +40,9 @@ body {
 
 /* Top Menu */
 #top-menu-wrap, #sub-menu-wrap {
+    border-bottom: 2px solid #DDD;
+    background: none repeat scroll 0 0 #F8F8F8;
+    border-top: 1px solid #DDDDDD;
     position: relative;        
     min-height: 30px;
 }
@@ -61,6 +64,7 @@ body {
 /* Set a min-height so we can apply texture overlays */
 .main-menu, .top-menu, .sub-menu {
 min-height: 30px;
+padding: 5px 10px;
 }
 
 #sub-menu-wrap {
@@ -93,18 +97,20 @@ z-index: 10 !important;
     /* setting z-index for dropdowns. do not mess with this */
     z-index: 11 !important; 
 }
-
 #site-description {
     font-style: italic;
+    padding-left: 10px;
     color: #999999;
     position: relative;
     font-size: 14px;
     line-height: 180%;
 }
 h1#site-title,div#site-title {
-position: absolute;
+	position: absolute;
+    left: 15px;
     font-size: 26px;
     line-height: 180%;
+    padding-left: 10px;
     font-weight: bold;
     margin: 0;
 }
@@ -192,15 +198,17 @@ float: right;
 .base-menu ul a {
     float: left;
     padding: 0 3px 0 10px;
+    font-size: 13px;
+    margin-right: 5px;
 }
- /* Page Currently being viewed */
 .base-menu ul a:hover,
 .base-menu ul li.sfHover a,
 .base-menu ul li.current-cat a,
 .base-menu ul li.current_page_item a,
 .base-menu ul li.current-menu-item a {
     text-decoration: none;
-    background-color: #000;
+    background-color: #EFEFEF;
+    /* Left image */
 }
 .base-menu li li a:hover,
 .base-menu li.sfHover li a { background: none }
@@ -208,6 +216,9 @@ float: right;
 .base-menu li.sfHover li a span.sf-sub-indicator {
     float: right;
     margin: 5px 0 0 0;
+}
+.sf-sub-indicator {
+    padding: 4px 4px 4px 0 !important;
 }
 .base-menu li a span {
     float: left;
@@ -256,6 +267,12 @@ float: right;
     width: 180px; /* left offset of submenus need to match (see below) */
     padding: 15px 5px 15px 5px;
     margin: 3px 0 0 0;
+    -webkit-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
     background: #FFF;
 }
 .base-menu ul ul li {
@@ -276,7 +293,9 @@ float: right;
     padding: 5px 0 5px 0;
     width: 150px;
 }
-  
+.base-menu ul li a{ background: none;
+    border-radius: 5px 5px 5px 5px; }
+    
 /* =========== 
  ! Content  
  =========== */
