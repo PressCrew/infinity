@@ -72,7 +72,7 @@ class Pie_Easy_Exts_Features_Bp_Support
 		$version = '20120110';
 
 		// Enqueue the global JS - Ajax will not work without it
-		wp_enqueue_script( 'dtheme-ajax-js', get_template_directory_uri() . '/_inc/global.js', array( 'jquery' ), $version );
+		wp_enqueue_script( 'dtheme-ajax-js', BP_PLUGIN_URL . '/bp-themes/bp-default/_inc/global.js', array( 'jquery' ), $version );
 
 		// Add words that we need to use in JS to the end of the page so they can be translated and still used.
 		$params = array(
