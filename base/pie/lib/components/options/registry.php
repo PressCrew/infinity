@@ -62,7 +62,7 @@ abstract class Pie_Easy_Options_Registry extends Pie_Easy_Registry
 		if ( is_array( $sections ) && count( $sections ) ) {
 			// inject required feature directive into every option
 			foreach ( $sections as $name => &$directives) {
-				$directives['for_feature'] = $feature->name;
+				$directives['feature'] = $feature->name;
 			}
 		}
 
@@ -72,7 +72,7 @@ abstract class Pie_Easy_Options_Registry extends Pie_Easy_Registry
 	
 	/**
 	 * Load option config as a feature option if syntax of name matches pattern
-	 * or if the "for_feature" directive is set.
+	 * or if the "feature" directive is set.
 	 *
 	 * @param string $name
 	 * @param Pie_Easy_Init_Config $config
@@ -85,8 +85,8 @@ abstract class Pie_Easy_Options_Registry extends Pie_Easy_Registry
 		$option_name = null;
 
 		// feature explicitly set?
-		if ( isset( $config->for_feature ) ) {
-			$feature_name = $config->for_feature;
+		if ( isset( $config->feature ) ) {
+			$feature_name = $config->feature;
 			$option_name = $feature_name . '-' . $name;
 		} else {
 			// split for possible sub option syntax

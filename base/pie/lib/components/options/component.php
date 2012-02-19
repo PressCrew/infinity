@@ -19,6 +19,7 @@ Pie_Easy_Loader::load( 'base', 'collections', 'utils/docs', 'schemes' );
  * @package PIE-components
  * @subpackage options
  * @property-read string $section The section to which this options is assigned (slug)
+ * @property-read string $feature The feature for which this option was created (slug)
  * @property-read string $field_id The CSS id to apply to the option's input field
  * @property-read string $field_class The CSS class to apply to the option's input field
  * @property-read array $field_options An array of field options
@@ -72,6 +73,7 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 
 		// init directives
 		$this->section = 'default';
+		$this->feature = null;
 		$this->default_value = null;
 		$this->field_id = null;
 		$this->field_class = null;
@@ -104,6 +106,11 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 		// section
 		if ( isset( $config->section ) ) {
 			$this->set_section( $config->section );
+		}
+
+		// feature
+		if ( isset( $config->feature ) ) {
+			$this->feature = $config->feature;
 		}
 
 		// default value
