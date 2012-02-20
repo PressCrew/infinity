@@ -136,6 +136,14 @@ class Pie_Easy_Init_Directive extends Pie_Easy_Base
 		$this->value = $value;
 		return true;
 	}
+
+	/**
+	 * Lock directive to prevent further modifactions
+	 */
+	public function lock()
+	{
+		$this->read_only = true;
+	}
 }
 
 /**
@@ -144,25 +152,13 @@ class Pie_Easy_Init_Directive extends Pie_Easy_Base
  * @package PIE
  * @subpackage init
  */
-class Pie_Easy_Init_Directive_Registry extends Pie_Easy_Base
+class Pie_Easy_Init_Directive_Registry extends Pie_Easy_Map
 {
 	/**
-	 * Registered directives
-	 *
-	 * @var Pie_Easy_Map
-	 */
-	private $directives;
-
-	/**
-	 * Constructor
-	 */
-	public function __construct()
-	{
-		$this->directives = new Pie_Easy_Map();
-	}
-
-	/**
 	 * Set a directive
+	 *
+	 * This method supports delayed locking of a directive. Set the read_only flag to
+	 * true at any time to lock the directive from further modification.
 	 *
 	 * @param string $theme
 	 * @param string $name
@@ -181,20 +177,35 @@ class Pie_Easy_Init_Directive_Registry extends Pie_Easy_Base
 			// use existing directive map
 			$theme_map = $this->get_map( $name );
 		} else {
-			// create and add new map
-			$theme_map = new Pie_Easy_Map();
-			$this->directives->add( $name, $theme_map );
+			// create new map
+			$theme_map = new Pie_Easy_Map_Lockable();
+			// add theme map to registry (myself)
+			$this->add( $name, $theme_map );
 		}
 
 		// check for existing directive for given theme
 		if ( $theme_map->contains( $theme ) ) {
-			return $theme_map->item_at($theme)->set_value( $value );
+			// get directive
+			$directive = $theme_map->item_at( $theme );
+			// update value, save result
+			$result = $directive->set_value( $value );
 		} else {
 			// create new directive
-			$directive = new Pie_Easy_Init_Directive( $theme, $name, $value, $read_only );
-			// add it to directive map
-			return $theme_map->add( $theme, $directive );
+			$directive = new Pie_Easy_Init_Directive( $theme, $name, $value );
+			// add to theme map
+			$theme_map->add( $theme, $directive );
+			// new directive, good result
+			$result = true;
 		}
+
+		// lock if necessary
+		if ( $read_only ) {
+			$directive->lock();
+			$theme_map->lock();
+		}
+
+		// return result
+		return $result;
 	}
 
 	/**
@@ -205,7 +216,7 @@ class Pie_Easy_Init_Directive_Registry extends Pie_Easy_Base
 	 */
 	public function remove( $name )
 	{
-		return $this->directives->remove( $name );
+		return parent::remove( $name );
 	}
 
 	/**
@@ -217,7 +228,7 @@ class Pie_Easy_Init_Directive_Registry extends Pie_Easy_Base
 	public function has( $name )
 	{
 		// check for theme directive
-		return $this->directives->contains( $name );
+		return $this->contains( $name );
 	}
 
 	/**
@@ -261,7 +272,7 @@ class Pie_Easy_Init_Directive_Registry extends Pie_Easy_Base
 	public function get_map( $name )
 	{
 		if ( $this->has( $name ) ) {
-			return $this->directives->item_at( $name );
+			return $this->item_at( $name );
 		}
 
 		// directive not set
@@ -275,7 +286,7 @@ class Pie_Easy_Init_Directive_Registry extends Pie_Easy_Base
 	 */
 	public function get_all()
 	{
-		return $this->directives->to_array();
+		return $this->to_array();
 	}
 }
 ?>

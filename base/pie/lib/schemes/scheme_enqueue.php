@@ -111,11 +111,14 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 				Pie_Easy_Scheme::DIRECTIVE_STYLE_DEFS
 			);
 
+		// create new map so we can write to it
+		$style_defs_w = new Pie_Easy_Map( $style_defs );
+
 		// init internal styles
-		$this->setup_internal_styles( $style_defs );
+		$this->setup_internal_styles( $style_defs_w );
 
 		// define styles
-		$this->define_styles( $style_defs );
+		$this->define_styles( $style_defs_w );
 
 		// register styles
 		add_action( 'pie_easy_register_styles', array( $this, 'register_styles' ) );
@@ -124,13 +127,19 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 		$this->scripts = new Pie_Easy_Map();
 
 		// get script defs
-		$script_defs = $this->scheme->directives()->get_map( Pie_Easy_Scheme::DIRECTIVE_SCRIPT_DEFS );
+		$script_defs =
+			$this->scheme->directives()->get_map(
+				Pie_Easy_Scheme::DIRECTIVE_SCRIPT_DEFS
+			);
+
+		// create new map so we can write to it
+		$script_defs_w = new Pie_Easy_Map( $script_defs );
 
 		// init internal scripts
-		$this->setup_internal_scripts( $script_defs );
+		$this->setup_internal_scripts( $script_defs_w );
 		
 		// define scripts
-		$this->define_scripts( $script_defs );
+		$this->define_scripts( $script_defs_w );
 
 		// register scripts
 		add_action( 'pie_easy_register_scripts', array( $this, 'register_scripts' ) );
@@ -541,6 +550,9 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 					Pie_Easy_Scheme::DIRECTIVE_STYLE_DEPS
 				);
 
+			// create new map so we can write to it
+			$style_depends_w = new Pie_Easy_Map( $style_depends );
+
 			// start with empty stacks
 			$dep_stack = new Pie_Easy_Stack();
 			$dep_global_stack = new Pie_Easy_Stack();
@@ -563,10 +575,10 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 			$dep_map->add( '@:dynamic-global', $dep_global_stack->to_array() );
 			$dep_map->add( '@:dynamic-admin', $dep_admin_stack->to_array() );
 			$directive_deps = new Pie_Easy_Init_Directive( '@', 'style_depends', $dep_map );
-			$style_depends->add( '@', $directive_deps, true );
+			$style_depends_w->add( '@', $directive_deps, true );
 
 			// init style depends
-			$this->depends( $this->styles, $style_depends );
+			$this->depends( $this->styles, $style_depends_w );
 		}
 
 		// init style action triggers
@@ -627,6 +639,9 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 					Pie_Easy_Scheme::DIRECTIVE_SCRIPT_DEPS
 				);
 
+			// create new map so we can write to it
+			$script_depends_w = new Pie_Easy_Map( $script_depends );
+
 			// start with empty stacks
 			$dep_stack = new Pie_Easy_Stack();
 			$dep_global_stack = new Pie_Easy_Stack();
@@ -649,10 +664,10 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 			$dep_map->add( '@:dynamic-global', $dep_global_stack->to_array() );
 			$dep_map->add( '@:dynamic-admin', $dep_admin_stack->to_array() );
 			$directive_deps = new Pie_Easy_Init_Directive( '@', 'script_depends', $dep_map );
-			$script_depends->add( '@', $directive_deps, true );
+			$script_depends_w->add( '@', $directive_deps, true );
 
 			// init script depends
-			$this->depends( $this->scripts, $script_depends );
+			$this->depends( $this->scripts, $script_depends_w );
 		}
 
 		// init script action triggers
