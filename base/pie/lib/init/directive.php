@@ -157,19 +157,20 @@ class Pie_Easy_Init_Directive_Registry extends Pie_Easy_Map
 	/**
 	 * Set a directive
 	 *
-	 * This method supports delayed locking of a directive. Set the read_only flag to
+	 * This method supports delayed locking of a directive. Set the read only flags to
 	 * true at any time to lock the directive from further modification.
 	 *
 	 * @param string $theme
 	 * @param string $name
 	 * @param mixed $value
-	 * @param boolean $read_only
+	 * @param boolean $ro_value
+	 * @param boolean $ro_theme
 	 */
-	public function set( $theme, $name, $value, $read_only = false )
+	public function set( $theme, $name, $value, $ro_value = false, $ro_theme = false )
 	{
 		// convert arrays to maps
 		if ( is_array( $value ) ) {
-			$value = new Pie_Easy_Map( $value, $read_only );
+			$value = new Pie_Easy_Map( $value, $ro_value );
 		}
 
 		// check for existing map of theme directives
@@ -198,9 +199,13 @@ class Pie_Easy_Init_Directive_Registry extends Pie_Easy_Map
 			$result = true;
 		}
 
-		// lock if necessary
-		if ( $read_only ) {
+		// lock directive if applicable
+		if ( $ro_value ) {
 			$directive->lock();
+		}
+
+		// lock from any overriding directives
+		if ( $ro_theme ) {
 			$theme_map->lock();
 		}
 

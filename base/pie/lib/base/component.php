@@ -107,9 +107,9 @@ abstract class Pie_Easy_Component
 		$this->__directives__ = new Pie_Easy_Init_Directive_Registry();
 
 		// init read-only directives
-		$this->directive( 'theme', $this->policy()->registry()->theme_scope(), true );
-		$this->directive( 'name', $this->validate_name( $name ), true );
-		$this->directive( 'type', $type, true );
+		$this->directive( 'theme', $this->policy()->registry()->theme_scope(), true, true );
+		$this->directive( 'name', $this->validate_name( $name ), true, true );
+		$this->directive( 'type', $type, true, true );
 
 		// init base directives
 		$this->title = __( 'No title was configured', pie_easy_text_domain );
@@ -190,10 +190,11 @@ abstract class Pie_Easy_Component
 	 *
 	 * @param string $name
 	 * @param mixed $value
-	 * @param boolean $read_only
+	 * @param boolean $ro_value
+	 * @param boolean $ro_theme
 	 * @return mixed
 	 */
-	final protected function directive( $name, $value = null, $read_only = false )
+	final protected function directive( $name, $value = null, $ro_value = false, $ro_theme = false )
 	{
 		// two args means set the value
 		if ( func_num_args() >= 2 ) {
@@ -201,7 +202,8 @@ abstract class Pie_Easy_Component
 				$this->policy()->registry()->theme_scope(),
 				$name,
 				$value,
-				$read_only
+				$ro_value,
+				$ro_theme
 			);
 		}
 

@@ -208,7 +208,7 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 		// make sure we ended up with some options
 		if ( isset( $field_options ) && count( $field_options ) >= 1 ) {
 			// finally set them for the option
-			$this->directive( 'field_options', $field_options, true );
+			$this->directive( 'field_options', $field_options, true, true );
 		}
 	}
 
