@@ -373,4 +373,18 @@ class Pie_Easy_Map
 	}
 }
 
+/**
+ * A special kind of map which can be marked read only via public access
+ *
+ * @package PIE
+ * @subpackage collections
+ */
+class Pie_Easy_Map_Lockable extends Pie_Easy_Map
+{
+	public function lock()
+	{
+		$this->set_read_only( true );
+	}
+}
+
 ?>
