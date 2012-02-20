@@ -24,7 +24,7 @@ class Pie_Easy_Exts_Options_Checkbox
 {
 	/**
 	 */
-	public function init()
+	protected function init()
 	{
 		parent::init();
 		$this->input_type( 'checkbox' );

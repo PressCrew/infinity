@@ -29,7 +29,7 @@ class Pie_Easy_Exts_Features_Bp_Support
 	
 	/**
 	 */
-	public function init()
+	protected function init()
 	{
 		if ( is_admin() && !is_writable( TEMPLATEPATH ) ) {
 			bp_core_add_admin_notice(
