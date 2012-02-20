@@ -246,7 +246,7 @@ div#subnav.item-list-tabs {
 --------------------------------------------------------------*/
 div.dir-search {
     left: 70%;
-    margin-top: -62px;
+    margin-top: -60px;
     position: relative;
     width: 51%;
 }
@@ -254,8 +254,7 @@ div.dir-search {
 div.dir-search input[type=text] {
     display: inline-block;
     font-size: 12px;
-    margin-right: 14px;
-    padding: 4px;
+    margin-right: 10px;
 }
 div.dir-search label { display: inline-block }
 #content .item-title a { font-size: 14px }
@@ -617,11 +616,14 @@ body.activity-permalink .activity-list li .activity-header > p {
     text-decoration: underline;
 }
 a.bp-primary-action span, #reply-title small a span {
-    background: #656565;
+    background: none repeat scroll 0 0 #696868;
+    border: 1px solid #FFFFFF;
+    border-radius: 3px 3px 3px 3px;
     color: #EFEFEF;
-    font-size: 90%;
+    font-size: 85%;
     margin-left: 2px;
-    padding: 0 5px;
+    padding: 2px 4px 0;
+    text-shadow: 0 1px 0 #222222;
 }
 .activity-list .activity-content span.activity-header-meta a:hover {
     color: inherit;
