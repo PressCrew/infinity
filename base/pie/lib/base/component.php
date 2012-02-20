@@ -66,34 +66,6 @@ abstract class Pie_Easy_Component
 	const ELEMENT_CLASS_DELIM = '-';
 
 	/**
-	 * The theme that created this concrete component
-	 *
-	 * @var string
-	 */
-	private $__theme__;
-
-	/**
-	 * Type of the concrete component
-	 *
-	 * @var string
-	 */
-	private $__type__;
-	
-	/**
-	 * Name of the concrete component
-	 *
-	 * @var string
-	 */
-	private $__name__;
-
-	/**
-	 * The parent component
-	 * 
-	 * @var string
-	 */
-	private $__parent__;
-	
-	/**
 	 * Component directives registry
 	 *
 	 * @var Pie_Easy_Init_Directive_Registry
@@ -131,13 +103,13 @@ abstract class Pie_Easy_Component
 		// apply policy
 		$this->policy( $policy );
 
-		// set basic properties
-		$this->set_name($name);
-		$this->__type__ = $type;
-		$this->__theme__ = $this->policy()->registry()->theme_scope();
-
 		// init directives registry
 		$this->__directives__ = new Pie_Easy_Init_Directive_Registry();
+
+		// init read-only directives
+		$this->directive( 'theme', $this->policy()->registry()->theme_scope(), true );
+		$this->directive( 'name', $this->validate_name( $name ), true );
+		$this->directive( 'type', $type, true );
 
 		// init base directives
 		$this->title = __( 'No title was configured', pie_easy_text_domain );
@@ -172,21 +144,10 @@ abstract class Pie_Easy_Component
 	 */
 	final public function __get( $name )
 	{
-		switch ( $name ) {
-			case 'theme':
-				return $this->__theme__;
-			case 'name':
-				return $this->__name__;
-			case 'type':
-				return $this->__type__;
-			case 'parent':
-				return $this->__parent__;
-			default:
-				if ( $this->__directives__->has($name) ) {
-					return $this->__directives__->get($name)->value;
-				} else {
-					return null;
-				}
+		if ( $this->__directives__->has($name) ) {
+			return $this->__directives__->get($name)->value;
+		} else {
+			return null;
 		}
 	}
 
@@ -194,36 +155,15 @@ abstract class Pie_Easy_Component
 	 */
 	final public function __set( $name, $value )
 	{
-		switch ( $name ) {
-			case 'theme':
-			case 'name':
-			case 'type':
-			case 'parent':
-				// not allowed
-				throw new Exception(
-					sprintf( 'The "%s" property is not accessible for writing.', $name ) );
-			default:
-				// set directive
-				return $this->directive( $name, $value );
-		}
+		// set directive
+		return $this->directive( $name, $value );
 	}
 
 	/**
 	 */
 	final public function __isset( $name )
 	{
-		switch ( $name ) {
-			case 'theme':
-				return isset( $this->__theme__ );
-			case 'name':
-				return isset( $this->__name__ );
-			case 'type':
-				return isset( $this->__type__ );
-			case 'parent':
-				return isset( $this->__parent__ );
-			default:
-				return $this->__directives__->has( $name );
-		}
+		return $this->__directives__->has( $name );
 	}
 
 	/**
@@ -333,10 +273,11 @@ abstract class Pie_Easy_Component
 	{
 		// parent
 		if ( $config->parent ) {
-			if ( $this->__name__ != $config->parent ) {
-				$this->__parent__ = trim( $config->parent );
+			if ( $this->name != $config->parent ) {
+				$this->directive( 'parent', $config->parent, true );
 			} else {
-				throw new Exception( sprintf( 'The component "%s" cannot be a parent of itself', $this->__name__ ) );
+				throw new Exception(
+					sprintf( 'The component "%s" cannot be a parent of itself', $this->name ) );
 			}
 		}
 		
@@ -449,8 +390,8 @@ abstract class Pie_Easy_Component
 			// lookup map
 			$theme_map = $this->__directives__->get_map( 'capabilities' );
 			// get one?
-			if ( $theme_map && $theme_map->item_at( $this->__theme__ )->value ) {
-				$theme_caps = $theme_map->item_at($this->__theme__)->value;
+			if ( $theme_map && $theme_map->item_at($this->theme)->value ) {
+				$theme_caps = $theme_map->item_at($this->theme)->value;
 				$theme_caps->merge_with( $capabilities );
 			}
 		} else {
@@ -563,14 +504,16 @@ abstract class Pie_Easy_Component
 	 *
 	 * @param string $name
 	 */
-	private function set_name( $name )
+	private function validate_name( $name )
 	{
 		// name must adhere to a strict format
 		if ( preg_match( '/^[a-z0-9]+((_|-)[a-z0-9]+)*$/', $name ) ) {
-			$this->__name__ = $name;
-			return true;
+			return $name;
 		} else {
-			throw new Exception( sprintf( 'Option name "%s" does not match the allowed pattern', $name ) );
+			throw new Exception( sprintf(
+				'The %s name "%s" does not match the allowed pattern',
+				$this->policy()->get_handle(), $name
+			));
 		}
 	}
 
@@ -582,7 +525,7 @@ abstract class Pie_Easy_Component
 	 */
 	public function is_parent_of( Pie_Easy_Component $component )
 	{
-		return $this->__name__ == $component->parent;
+		return $this->name == $component->parent;
 	}
 
 	/**
