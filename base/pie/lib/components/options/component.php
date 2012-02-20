@@ -188,8 +188,11 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 		
 		} elseif ( $this instanceof Pie_Easy_Options_Option_Auto_Field ) {
 
-			// call template method to load options
-			$field_options = $this->load_field_options();
+			// skip if already populated
+			if ( $this->field_options !== null ) {
+				// call template method to load options
+				$field_options = $this->load_field_options();
+			}
 
 		} elseif ( $this->__style_property__ ) {
 
