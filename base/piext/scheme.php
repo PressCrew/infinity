@@ -41,6 +41,26 @@ function infinity_scheme_init()
 }
 
 /**
+ * Finalize scheme for the active theme
+ *
+ * @package Infinity
+ * @subpackage scheme
+ * @return boolean
+ */
+function infinity_scheme_finalize()
+{
+	// finalize registries
+	Infinity_Sections_Policy::instance()->registry()->finalize();
+	Infinity_Options_Policy::instance()->registry()->finalize();
+	Infinity_Features_Policy::instance()->registry()->finalize();
+	Infinity_Screens_Policy::instance()->registry()->finalize();
+	Infinity_Widgets_Policy::instance()->registry()->finalize();
+	Infinity_Shortcodes_Policy::instance()->registry()->finalize();
+
+	return true;
+}
+
+/**
  * Get a scheme directive value
  *
  * @package Infinity

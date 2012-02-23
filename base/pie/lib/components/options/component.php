@@ -98,10 +98,13 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 
 	/**
 	 */
-	public function configure( Pie_Easy_Init_Config $config )
+	public function configure()
 	{
 		// RUN PARENT FIRST!
-		parent::configure( $config );
+		parent::configure();
+
+		// get config
+		$config = $this->config();
 
 		// section
 		if ( isset( $config->section ) ) {
@@ -150,12 +153,12 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 
 		// setup style property object
 		$this->refresh_style_property();
-		
+
 		// field options
 		// @todo this grew too big, move to private method
 		if ( isset( $config->field_options ) ) {
 
-			if ( is_array( $config->field_options ) ) {
+			if ( $config->field_options instanceof Pie_Easy_Map ) {
 
 				// loop through all field options
 				foreach ( $config->field_options as $field_option ) {
@@ -613,7 +616,7 @@ abstract class Pie_Easy_Options_Option_Image
 			// was a default set?
 			if ( isset( $this->default_value ) ) {
 				// use default
-				$directive = $this->directive( 'default_value' );
+				$directive = $this->directive()->get( 'default_value' );
 				// mimic the src array
 				$src = array_fill( 0, 3, null );
 				// is a default set?
@@ -650,7 +653,7 @@ abstract class Pie_Easy_Options_Option_Image
 		} elseif ( is_string( $value ) && strlen( $value ) >= 1 ) {
 
 			// use default
-			$directive = $this->directive( 'default_value' );
+			$directive = $this->directive()->get( 'default_value' );
 
 			// they must have provided an image path
 			return Pie_Easy_Files::theme_file_url( $directive->theme, $directive->value );

@@ -26,11 +26,6 @@ Pie_Easy_Loader::load(
 abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 {
 	/**
-	 * Type of the default component to use when none configured
-	 */
-	const DEFAULT_COMPONENT_TYPE = 'default';
-
-	/**
 	 * Name of the theme currently being loaded
 	 *
 	 * @var string
@@ -297,47 +292,59 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 	 */
 	private function load_config_section( $section_name, $section_array )
 	{
-		// set default type if necessary
-		if ( empty( $section_array['type'] ) ) {
-			$section_array['type'] = self::DEFAULT_COMPONENT_TYPE;
-		}
-
-		// convert config array to map
-		$config = new Pie_Easy_Init_Config( $section_array );
-
 		// options component enabled?
 		if ( $this->policy()->options() instanceof Pie_Easy_Policy ) {
 			// is it a sub option?
-			if ( $this->policy()->options()->registry()->load_feature_option( $section_name, $config ) ) {
+			if ( $this->policy()->options()->registry()->load_feature_option( $section_name, $section_array ) ) {
 				// yes, skip standard loading
 				return true;
 			}
 		}
 
-		return $this->load_config_map( $section_name, $config );
+		return $this->load_config_map( $section_name, $section_array );
 	}
 
 	/**
-	 * Load one component given its name and config map
+	 * Load one component given its name and config array
 	 *
 	 * @param string $name
-	 * @param Pie_Easy_Init_Config $config
+	 * @param array $config_array
 	 * @return boolean
 	 */
-	final protected function load_config_map( $name, Pie_Easy_Init_Config $config )
+	final protected function load_config_map( $name, $config_array )
 	{
-		// use factory to create/get component
-		$component =
-			$this->policy()->factory()->create(
-				$name,
-				$config
-			);
+		// push theme onto config
+		$config_array['theme'] = self::theme_scope();
 
-		// configure it
-		$component->configure( $config );
+		// check if already registered
+		if ( $this->has( $name ) ) {
+			// use that one
+			$component = $this->get( $name );
+		} else {
+			// use factory to create new component
+			$component =
+				$this->policy()->factory()->create(
+					$name,
+					$config_array
+				);
+			// register component
+			$this->register( $component );
+		}
 
-		// register component
-		return $this->register( $component );
+		// push configuration
+		$component->config_array( $config_array );
+
+		return true;
+	}
+
+	/**
+	 * Perform final setup steps
+	 */
+	final public function finalize()
+	{
+		foreach ( $this->components as $component ) {
+			$component->finalize();
+		}
 	}
 
 	/**

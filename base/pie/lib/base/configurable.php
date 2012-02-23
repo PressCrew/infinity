@@ -20,12 +20,16 @@
 interface Pie_Easy_Configurable
 {
 	/**
-	 * Accept a configuration
+	 * Accept a complete or partial configuration as an array
 	 *
-	 * @param Pie_Easy_Init_Config $config
-	 * @return boolean
+	 * @param array $config_array
 	 */
-	public function configure( Pie_Easy_Init_Config $config );
+	public function config_array( $config_array );
+
+	/**
+	 * Perform configuration steps
+	 */
+	public function configure();
 }
 
 ?>

@@ -42,10 +42,13 @@ class Pie_Easy_Exts_Widgets_Posts_List
 
 	/**
 	 */
-	public function configure( Pie_Easy_Init_Config $config )
+	public function configure()
 	{
 		// RUN PARENT FIRST!
-		parent::configure( $config );
+		parent::configure();
+
+		// get config
+		$config = $this->config();
 
 		// css title class
 		if ( isset( $config->post_type ) ) {

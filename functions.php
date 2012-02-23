@@ -210,6 +210,9 @@ infinity_widgets_init();
 infinity_shortcodes_init();
 infinity_options_init();
 
+// finalize scheme
+infinity_scheme_finalize();
+
 if ( is_admin() ) {
 	// init admin only components screens
 	infinity_sections_init_screen();

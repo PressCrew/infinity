@@ -35,10 +35,13 @@ abstract class Pie_Easy_Screens_Screen extends Pie_Easy_Component
 	
 	/**
 	 */
-	public function configure( Pie_Easy_Init_Config $config )
+	public function configure()
 	{
 		// RUN PARENT FIRST!
-		parent::configure( $config );
+		parent::configure();
+
+		// get config
+		$config = $this->config();
 
 		// url where to find the screen
 		// @todo add this to documentation when stable

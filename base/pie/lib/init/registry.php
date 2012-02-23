@@ -22,6 +22,20 @@ Pie_Easy_Loader::load( 'collections' );
 abstract class Pie_Easy_Init_Registry extends Pie_Easy_Map
 {
 	/**
+	 */
+	public function __get( $name )
+	{
+		return $this->get( $name )->value;
+	}
+
+	/**
+	 */
+	public function __set( $name, $value )
+	{
+		throw new Exception( 'No magic setting allowed, call the set() method' );
+	}
+
+	/**
 	 * Create a new instance of Pie_Easy_Init_Data for storing in the registry
 	 *
 	 * @param string $theme Slug of the theme which is setting this data
@@ -183,6 +197,16 @@ abstract class Pie_Easy_Init_Registry extends Pie_Easy_Map
 	public function lock()
 	{
 		$this->set_read_only( true );
+	}
+
+	/**
+	 * Return lock state
+	 *
+	 * @return boolean
+	 */
+	public function locked()
+	{
+		return ( $this->get_read_only() === true );
 	}
 }
 
