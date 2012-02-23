@@ -31,7 +31,7 @@ class Pie_Easy_Exts_Features_Bp_Activity_Intro
 
 	/**
 	 */
-	public function init()
+	protected function init()
 	{
 		// run parent init method
 		parent::init();

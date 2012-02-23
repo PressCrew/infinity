@@ -53,10 +53,13 @@ class Pie_Easy_Exts_Screens_Cpanel
 
 	/**
 	 */
-	public function configure( Pie_Easy_Init_Config $config )
+	public function configure()
 	{
 		// RUN PARENT FIRST!
-		parent::configure( $config );
+		parent::configure();
+
+		// get config
+		$config = $this->config();
 
 		// set directives
 		$this->icon_primary = (string) $config->icon_primary;

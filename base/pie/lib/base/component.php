@@ -66,6 +66,13 @@ abstract class Pie_Easy_Component
 	const ELEMENT_CLASS_DELIM = '-';
 
 	/**
+	 * Component configurations registry
+	 *
+	 * @var Pie_Easy_Init_Config
+	 */
+	private $__config__;
+	
+	/**
 	 * Component directives registry
 	 *
 	 * @var Pie_Easy_Init_Directive_Registry
@@ -96,20 +103,32 @@ abstract class Pie_Easy_Component
 	/**
 	 * @param string $name Option name may only contain alphanumeric characters as well as the underscore for use as a word separator.
 	 * @param string $type The type (component extension) of this component
+	 * @param string $theme The theme which originally created this component
 	 * @param Pie_Easy_Policy $policy The policy to apply to this component
 	 */
-	final public function __construct( $name, $type, $policy )
+	final public function __construct( $name, $type, $theme, $policy )
 	{
 		// apply policy
 		$this->policy( $policy );
 
-		// init directives registry
+		// init config and directives registries
+		$this->__config__ = new Pie_Easy_Init_Config();
 		$this->__directives__ = new Pie_Easy_Init_Directive_Registry();
 
+		// init base config
+		$this->config_array(
+			array(
+				'name' => $this->validate_name( $name ),
+				'type' => $type,
+				'theme' => $theme
+			),
+			$theme
+		);
+
 		// init read-only directives
-		$this->directive( 'theme', $this->policy()->registry()->theme_scope(), true, true );
-		$this->directive( 'name', $this->validate_name( $name ), true, true );
-		$this->directive( 'type', $type, true, true );
+		$this->directive( 'name', $this->config()->name, true, true );
+		$this->directive( 'type', $this->config()->type, true, true );
+		$this->directive( 'theme', $this->config()->theme, true, true );
 
 		// init base directives
 		$this->title = __( 'No title was configured', pie_easy_text_domain );
@@ -194,21 +213,30 @@ abstract class Pie_Easy_Component
 	 * @param boolean $ro_theme
 	 * @return mixed
 	 */
-	final protected function directive( $name, $value = null, $ro_value = false, $ro_theme = false )
+	final protected function directive( $name = null, $value = null, $ro_value = false, $ro_theme = false )
 	{
-		// two args means set the value
-		if ( func_num_args() >= 2 ) {
-			$this->__directives__->set(
-				$this->policy()->registry()->theme_scope(),
-				$name,
-				$value,
-				$ro_value,
-				$ro_theme
-			);
-		}
+		// this method is silly flexible
+		switch ( func_num_args() ) {
 
-		// return the value
-		return $this->__directives__->get( $name );
+			// no args, return entire directive registry
+			case 0:
+				return $this->__directives__;
+
+			// one arg, return value of one directive
+			case 1:
+				return $this->__directives__->get( $name )->value;
+
+			// more than one arg, we are setting
+			default:
+				// get theme which set the config directive
+				$theme = $this->__config__->get($name)->theme;
+				// if theme is empty, assume origin theme set directive
+				if ( empty( $theme ) ) {
+					$theme = $this->theme;
+				}
+				// set it
+				return $this->__directives__->set( $theme, $name, $value, $ro_value, $ro_theme );
+		}
 	}
 	
 	/**
@@ -270,13 +298,71 @@ abstract class Pie_Easy_Component
 	}
 
 	/**
+	 * Return entire config, or return/set the value of one item
+	 *
+	 * @param string $name
+	 * @param mixed $value
+	 * @param boolean $ro_value
+	 * @param boolean $ro_theme
+	 * @return Pie_Easy_Init_Config|mixed
 	 */
-	public function configure( Pie_Easy_Init_Config $config )
+	final public function config( $name = null, $value = null, $ro_value = false, $ro_theme = false )
 	{
+		// this method is just silly flexible
+		switch ( func_num_args() ) {
+
+			// no args, return entire config
+			case 0:
+				return $this->__config__;
+
+			// one arg, return value of one item
+			case 1:
+				return $this->__config__->get( $name )->value;
+
+			// more than one arg, we are setting
+			default:
+				// get current theme scope
+				$theme = $this->policy()->registry()->theme_scope();
+				// set it
+				return $this->__config__->set( $theme, $name, $value, $ro_value, $ro_theme );
+		}
+	}
+
+	/**
+	 * Push component config values on to the configuration
+	 *
+	 * @param array $config_array
+	 */
+	final public function config_array( $config_array )
+	{
+		$theme = $config_array['theme'];
+
+		foreach ( $config_array as $name => $value ) {
+
+			// skip these base items
+			switch ( $name ) {
+				case 'theme':
+				case 'name':
+				case 'type':
+					continue;
+			}
+
+			// set it
+			$this->__config__->set( $theme, $name, $value );
+		}
+	}
+
+	/**
+	 */
+	public function configure()
+	{
+		// get config
+		$config = $this->config();
+
 		// parent
 		if ( $config->parent ) {
 			if ( $this->name != $config->parent ) {
-				$this->directive( 'parent', $config->parent, true );
+				$this->directive( 'parent', $config->parent );
 			} else {
 				throw new Exception(
 					sprintf( 'The component "%s" cannot be a parent of itself', $this->name ) );
@@ -287,7 +373,7 @@ abstract class Pie_Easy_Component
 		if ( isset( $config->title ) ) {
 			$this->title = $config->title;
 		}
-		
+
 		// desc
 		if ( isset( $config->description ) ) {
 			$this->description = $config->description;
@@ -366,6 +452,20 @@ abstract class Pie_Easy_Component
 		if ( $default_script ) {
 			$this->script()->add_file( $default_script );
 		}
+	}
+
+	/**
+	 * Run final component set up steps
+	 */
+	final public function finalize()
+	{
+		// lock configuration
+		$this->config()->lock();
+
+		// call configure template method
+		$this->configure();
+
+		// @todo should probably lock the directives here
 	}
 
 	/**

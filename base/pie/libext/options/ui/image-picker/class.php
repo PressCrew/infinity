@@ -41,8 +41,14 @@ class Pie_Easy_Exts_Options_Ui_Image_Picker
 	
 	/**
 	 */
-	public function configure( Pie_Easy_Init_Config $config )
+	public function configure()
 	{
+		// run parent
+		parent::configure();
+		
+		// get config
+		$config = $this->config();
+		
 		// file directory
 		if ( isset( $config->file_directory ) ) {
 			$this->file_directory = $config->file_directory;
@@ -52,9 +58,6 @@ class Pie_Easy_Exts_Options_Ui_Image_Picker
 		if ( isset( $config->file_extension ) ) {
 			$this->file_extension = $config->file_extension;
 		}
-
-		// run parent
-		parent::configure( $config );
 	}
 
 	/**

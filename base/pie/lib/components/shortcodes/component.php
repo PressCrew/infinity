@@ -56,10 +56,13 @@ abstract class Pie_Easy_Shortcodes_Shortcode extends Pie_Easy_Component
 
 	/**
 	 */
-	public function configure( Pie_Easy_Init_Config $config )
+	public function configure()
 	{
 		// RUN PARENT FIRST!
-		parent::configure( $config );
+		parent::configure();
+
+		// get config
+		$config = $this->config();
 
 		// attribute defaults
 		if ( isset( $config->attributes ) ) {

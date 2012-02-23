@@ -27,8 +27,11 @@ class Pie_Easy_Exts_Options_Ui_Font_Picker
 {
 	/**
 	 *
-	public function configure( Pie_Easy_Init_Config $config )
+	public function configure()
 	{
+		// get config
+		$config = $this->config();
+		
 		// file directory
 		if ( isset( $config->file_directory ) ) {
 			$this->file_directory = $config->file_directory;
@@ -40,7 +43,7 @@ class Pie_Easy_Exts_Options_Ui_Font_Picker
 		}
 
 		// run parent
-		parent::configure( $config );
+		parent::configure();
 	}
 	 */
 

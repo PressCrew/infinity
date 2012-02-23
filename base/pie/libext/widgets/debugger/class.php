@@ -27,7 +27,7 @@ class Pie_Easy_Exts_Widgets_Debugger
 
 	/**
 	 */
-	public function init()
+	protected function init()
 	{
 		parent::init();
 

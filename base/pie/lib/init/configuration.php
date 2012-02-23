@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'collections' );
+Pie_Easy_Loader::load( 'init/registry' );
 
 /**
  * Make an init configuration easy
@@ -22,7 +22,7 @@ Pie_Easy_Loader::load( 'collections' );
  * @package PIE
  * @subpackage init
  */
-class Pie_Easy_Init_Config extends Pie_Easy_Map
+class Pie_Easy_Init_Config extends Pie_Easy_Init_Registry
 {
 	// nothing special yet
 }

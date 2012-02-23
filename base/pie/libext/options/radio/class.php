@@ -24,7 +24,7 @@ class Pie_Easy_Exts_Options_Radio
 {
 	/**
 	 */
-	public function init()
+	protected function init()
 	{
 		parent::init();
 		$this->input_type( 'radio' );

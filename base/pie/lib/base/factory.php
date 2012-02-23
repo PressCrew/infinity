@@ -22,6 +22,11 @@ Pie_Easy_Loader::load( 'base/componentable', 'utils/files' );
 abstract class Pie_Easy_Factory extends Pie_Easy_Componentable
 {
 	/**
+	 * Component type to use when none configured
+	 */
+	const DEFAULT_COMPONENT_TYPE = 'default';
+
+	/**
 	 * Load a component extension
 	 *
 	 * Override this class to load component class files which exist outside of PIE's path
@@ -78,21 +83,26 @@ abstract class Pie_Easy_Factory extends Pie_Easy_Componentable
 	 * Return an instance of a component
 	 *
 	 * @param string $name
-	 * @param Pie_Easy_Init_Config $config
+	 * @param array $config
 	 * @return Pie_Easy_Component
 	 */
-	public function create( $name, Pie_Easy_Init_Config $config )
+	public function create( $name, $config )
 	{
-		// check if already registered
-		if ( $this->policy()->registry()->has( $name ) ) {
-			// use that one
-			$component = $this->policy()->registry()->get( $name );
-		} else {
-			// make sure the extension is loaded
-			$class_name = $this->load_ext( $config->type );
-			// create new component
-			$component = new $class_name( $name, $config->type, $this->policy() );
+		// puke on empty theme
+		if ( empty( $config['theme'] ) ) {
+			throw new Exception( 'Theme cannot be empty' );
 		}
+
+		// set default type if necessary
+		if ( empty( $config['type'] ) ) {
+			$config['type'] = self::DEFAULT_COMPONENT_TYPE;
+		}
+
+		// make sure the extension is loaded
+		$class_name = $this->load_ext( $config['type'] );
+		
+		// create new component
+		$component = new $class_name( $name, $config['type'], $config['theme'], $this->policy() );
 
 		// all done
 		return $component;
