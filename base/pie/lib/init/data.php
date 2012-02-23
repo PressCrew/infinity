@@ -206,7 +206,7 @@ class Pie_Easy_Init_Data extends Pie_Easy_Base
 					// is data already set?
 					if ( $this->registry->has( $str_name ) ) {
 						// return new string
-						return str_replace(
+						$value = str_replace(
 							$str_search,
 							$this->registry->get( $str_name )->value,
 							$value
@@ -220,7 +220,6 @@ class Pie_Easy_Init_Data extends Pie_Easy_Base
 			}
 		}
 
-		// no substition applies
 		return $value;
 	}
 
