@@ -194,6 +194,23 @@ abstract class Pie_Easy_Component
 	}
 
 	/**
+	 * Return current version of this component
+	 *
+	 * You must define the VERSION class constant or it will return the version of
+	 * the parent component class, or 0 if no version is found at all.
+	 *
+	 * @return int
+	 */
+	final public function version()
+	{
+		if ( defined('self::VERSION') ) {
+			return self::VERSION;
+		} else {
+			return 0;
+		}
+	}
+
+	/**
 	 * Return directives registry
 	 *
 	 * @return Pie_Easy_Init_Directive_Registry
