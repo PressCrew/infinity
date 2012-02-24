@@ -437,7 +437,7 @@ abstract class Pie_Easy_Component
 		}
 
 		// default style
-		$default_style = $this->locate_ext_file( 'style.css' );
+		$default_style = $this->locate_file( 'style.css' );
 
 		// have default style file?
 		if ( $default_style ) {
@@ -445,7 +445,7 @@ abstract class Pie_Easy_Component
 		}
 
 		// default script
-		$default_script = $this->locate_ext_file( 'script.js' );
+		$default_script = $this->locate_file( 'script.js' );
 
 		// have default script file?
 		if ( $default_script ) {
@@ -798,7 +798,7 @@ abstract class Pie_Easy_Component
 		if ( $template ) {
 			return $template;
 		} else {
-			return $this->locate_ext_file( 'template.php', $ancestor );
+			return $this->locate_file( 'template.php', $ancestor );
 		}
 	}
 	
@@ -809,7 +809,7 @@ abstract class Pie_Easy_Component
 	 * @param integer $ancestor
 	 * @return string
 	 */
-	final protected function locate_ext_file( $filename, $ancestor = 0 )
+	final protected function locate_file( $filename, $ancestor = 0 )
 	{
 		// what class am i?
 		$r = new ReflectionClass($this);
