@@ -103,6 +103,10 @@ abstract class Pie_Easy_Options_Registry extends Pie_Easy_Registry
 		if ( $config['feature'] && $option_name ) {
 			// set required feature
 			$config['required_feature'] = $config['feature'];
+			// clean up parent
+			if ( isset( $config['parent'] ) ) {
+				$config['parent'] = str_replace( self::FEATURE_OPTION_DELIM, '-', $config['parent'] );
+			}
 			// call parent config loader
 			if ( $this->load_config_map( $option_name, $config ) ) {
 				// successfully loaded feature sub option
