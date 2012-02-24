@@ -11,8 +11,6 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'utils/files' );
-
 /**
  * Make exporting dynamic files easy
  *

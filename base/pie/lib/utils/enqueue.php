@@ -11,8 +11,6 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'collections', 'utils/files' );
-
 /**
  * Make enqueing assets Easy
  *

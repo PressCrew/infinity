@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'base/exportable', 'base/recursable', 'collections', 'utils/files' );
+Pie_Easy_Loader::load( 'base/exportable', 'base/recursable' );
 
 /**
  * Make assets for components easy

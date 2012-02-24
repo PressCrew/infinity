@@ -12,11 +12,6 @@
  */
 
 /**
- * Load reqs
- */
-Pie_Easy_Loader::load( 'utils/files', 'collections' );
-
-/**
  * Make Scheming Easy
  *
  * @package PIE

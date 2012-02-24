@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'base/component', 'utils/files' );
+Pie_Easy_Loader::load( 'base/component' );
 
 /**
  * Make a shortcode easy

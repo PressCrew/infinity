@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'base', 'collections', 'utils/docs', 'schemes' );
+Pie_Easy_Loader::load( 'base', 'utils/docs', 'schemes' );
 
 /**
  * Make an option easy

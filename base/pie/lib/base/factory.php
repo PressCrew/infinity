@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'base/componentable', 'utils/files' );
+Pie_Easy_Loader::load( 'base/componentable' );
 
 /**
  * Make creating concrete components easy

@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'utils/ajax', 'utils/files', 'components/options' );
+Pie_Easy_Loader::load( 'utils/ajax', 'components/options' );
 
 /**
  * Infinity Theme: options policy

@@ -295,8 +295,12 @@ final class Pie_Easy_Loader extends Pie_Easy_Base
 			// create singleton instance
 			self::$instance = new self();
 
-			// load the enqueue helper
-			self::$instance->load( 'utils/enqueue' );
+			// load really important classes
+			self::$instance->load(
+				'collections',
+				'utils/files',
+				'utils/enqueue'
+			);
 		}
 	}
 
