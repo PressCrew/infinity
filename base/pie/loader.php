@@ -118,62 +118,107 @@ final class Pie_Easy_Loader extends Pie_Easy_Base
 	 * @var array
 	 */
 	private static $pkgs = array(
-		'base' =>
-			array(
-				'component',
-				'componentable',
-				'configurable',
-				'exportable',
-				'factory',
-				'policy',
-				'policeable',
-				'recursable',
-				'registry',
-				'renderer'
+		'base' => array(
+			'component' => true,
+			'componentable' => true,
+			'configurable' => true,
+			'exportable' => true,
+			'factory' => true,
+			'policy' => true,
+			'policeable' => true,
+			'recursable' => true,
+			'registry' => true,
+			'renderer' => true
+		),
+		'collections' => array(
+			'map' => true,
+			'map_iterator' => true,
+			'stack' => true,
+			'stack_iterator' => true
+		),
+		'components' => array(
+			'features' => array(
+				'component' => true,
+				'component_bp' => true,
+				'factory' => true,
+				'renderer' => true,
+				'policy' => true,
+				'registry' => true
 			),
-		'collections' =>
-			array( 'map', 'map_iterator', 'stack', 'stack_iterator' ),
-		'components' =>
-			array(
-				'features' =>
-					array( 'component', 'component_bp', 'factory', 'renderer', 'policy', 'registry' ),
-				'options' =>
-					array( 'component', 'factory', 'renderer', 'policy', 'registry', 'walkers' ),
-				'screens' =>
-					array( 'component', 'factory', 'renderer', 'policy', 'registry' ),
-				'sections' =>
-					array( 'component', 'factory', 'renderer', 'policy', 'registry' ),
-				'shortcodes' =>
-					array( 'component', 'factory', 'renderer', 'policy', 'registry' ),
-				'widgets' =>
-					array( 'component', 'factory', 'renderer', 'policy', 'registry' )
+			'options' => array(
+				'component' => true,
+				'factory' => true,
+				'renderer' => true,
+				'policy' => true,
+				'registry' => true,
+				'walkers' => true
 			),
-		'init' =>
-			array( 'data', 'directive', 'configuration', 'registry' ),
-		'parsers' =>
-			array( 'markdown', 'textile' ),
-		'schemes' =>
-			array( 'scheme', 'scheme_enqueue' ),
-		'ui' =>
-			array(
-				'asset',
-				'cpanel',
-				'icon', 'iconable',
-				'position', 'positionable',
-				'script', 'scriptable',
-				'style', 'styleable' ),
-		'utils' =>
-			array(
-				'ajax',
-				'docs',
-				'enqueue',
-				'export',
-				'file',
-				'files',
-				'file_cache',
-				'i18n',
-				'webfont'
+			'screens' => array(
+				'component' => true,
+				'factory' => true,
+				'renderer' => true,
+				'policy' => true,
+				'registry' => true
+			),
+			'sections' => array(
+				'component' => true,
+				'factory' => true,
+				'renderer' => true,
+				'policy' => true,
+				'registry' => true
+			),
+			'shortcodes' => array(
+				'component' => true,
+				'factory' => true,
+				'renderer' => true,
+				'policy' => true,
+				'registry' => true
+			),
+			'widgets' => array(
+				'component' => true,
+				'factory' => true,
+				'renderer' => true,
+				'policy' => true,
+				'registry' => true
 			)
+		),
+		'init' => array(
+			'data' => true,
+			'directive' => true,
+			'configuration' => true,
+			'registry' => true
+		),
+		'parsers' => array(
+			'markdown' => true,
+			'textile' => true
+		),
+		'schemes' => array(
+			'scheme' => true,
+			'scheme_enqueue' => true
+		),
+		'ui' => array(
+			'asset' => true,
+			'cpanel' => true,
+			'icon' => true,
+			'iconable' => true,
+			'position' => true,
+			'positionable' => true,
+			'script' => true,
+			'scriptable' => true,
+			'style' => true,
+			'styleable' => true
+		),
+		'utils' => array(
+			'ajax' => true,
+			'docs' => true,
+			'enqueue' => true,
+			'export' => true,
+			'file' => true,
+			'file_cache' => true,
+			'files' => true,
+			'i18n' => true,
+			'webfont' => true
+		)
 	);
 
 	/**
@@ -182,78 +227,89 @@ final class Pie_Easy_Loader extends Pie_Easy_Base
 	 * @var array
 	 */
 	private static $exts = array(
-		'features' =>
-			array(
-				'bp' =>
-					array(
-						'activity-intro',
-						'support'
-					),
-				'default',
-				'gravatar',
-				'header-logo'
+		'features' => array(
+			'bp' => array(
+				'activity-intro' => true,
+				'support' => true
 			),
-		'options' =>
-			array(
-				'category', 'categories', 'checkbox', 'colorpicker',
-				'css' =>
-					array(
-						'bg-color',
-						'bg-image',
-						'bg-repeat',
-						'custom'
-					),
-				'input', 'input-group',
-				'page', 'pages', 'post', 'posts',
-				'plugins' =>
-					array(
-						'domain-mapping'
-					),
-				'position' =>
-					array(
-						'left-right', 'left-center-right', 'top-bottom'
-					),
-				'radio',
-				'select',
-				'tag', 'tags',
-				'text', 'textarea',
-				'toggle' =>
-					array(
-						'enable', 'disable', 'enable-disable',
-						'on', 'off', 'on-off',
-						'yes', 'no', 'yes-no'
-					),
-				'ui' =>
-					array(
-						'font-picker',
-						'image-picker',
-						'overlay-picker',
-						'scroll-picker',
-						'slider'
-					),
-				'upload',
-				'wp' =>
-					array(
-						'blogname', 'blogdescription', 'page-on-front'
-					)
+			'default' => true,
+			'gravatar' => true,
+			'header-logo' => true
+		),
+		'options' => array(
+			'category' => true,
+			'categories' => true,
+			'checkbox' => true,
+			'colorpicker' => true,
+			'css' => array(
+				'bg-color' => true,
+				'bg-image' => true,
+				'bg-repeat' => true,
+				'custom' => true
 			),
-		'screens' =>
-			array(
-				'cpanel'
+			'input' => true,
+			'input-group' => true,
+			'page' => true,
+			'pages' => true,
+			'post' => true,
+			'posts' => true,
+			'plugins' => array(
+				'domain-mapping' => true
 			),
-		'sections' =>
-			array(
-				'default'
+			'position' => array(
+				'left-right' => true,
+				'left-center-right' => true,
+				'top-bottom' => true
 			),
-		'shortcodes' =>
-			array(
-				'access', 'visitor'
+			'radio' => true,
+			'select' => true,
+			'tag' => true,
+			'tags' => true,
+			'text' => true,
+			'textarea' => true,
+			'toggle' => array(
+				'enable' => true,
+				'disable' => true,
+				'enable-disable' => true,
+				'on' => true,
+				'off' => true,
+				'on-off' => true,
+				'yes' => true,
+				'no' => true,
+				'yes-no' => true
 			),
-		'widgets' =>
-			array(
-				'debugger', 'default', 'menu',
-				'posts-list', 'theme-picker', 'title-block'
+			'ui' => array(
+				'font-picker' => true,
+				'image-picker' => true,
+				'overlay-picker' => true,
+				'scroll-picker' => true,
+				'slider' => true
+			),
+			'upload' => true,
+			'wp' => array(
+				'blogname' => true,
+				'blogdescription' => true,
+				'page-on-front' => true
 			)
+		),
+		'screens' => array(
+			'cpanel' => true
+		),
+		'sections' => array(
+			'default' => true
+		),
+		'shortcodes' => array(
+			'access' => true,
+			'visitor' => true
+		),
+		'widgets' => array(
+			'debugger' => true,
+			'default' => true,
+			'menu' => true,
+			'posts-list' => true,
+			'theme-picker' => true,
+			'title-block' => true
+		)
 	);
 
 	/**
@@ -356,14 +412,17 @@ final class Pie_Easy_Loader extends Pie_Easy_Base
 			foreach ( $files as $file ) {
 				// is file a pkg key?
 				if ( isset( $pkgs[$file] ) ) {
-					// its a pkg, go to next level
-					$pkgs = $pkgs[$file];
-				} elseif ( in_array( $file, $pkgs ) ) {
-					// its a lib
-					return $this->load_lib_file( array_pop( $files ), $files );
-				} else {
-					throw new Exception(
-						sprintf( 'The library path "%s" is not valid.', $lib ) );
+					// is it an array?
+					if ( is_array( $pkgs[$file] ) ) {
+						// its a pkg, go to next level
+						$pkgs = $pkgs[$file];
+					} elseif ( true === $pkgs[$file] ) {
+						// its a file, load it
+						return $this->load_lib_file( array_pop( $files ), $files );
+					} else {
+						throw new Exception(
+							sprintf( 'The library path "%s" is not valid.', $lib ) );
+					}
 				}
 			}
 		} else {
@@ -371,11 +430,8 @@ final class Pie_Easy_Loader extends Pie_Easy_Base
 		}
 
 		// loading entire pkg
-		if ( is_array( $pkgs ) ) {
-			// yep
-			foreach( $pkgs as $file ) {
-				$this->load_lib_file( $file, $files );
-			}
+		foreach( array_keys( $pkgs ) as $pkg_file ) {
+			$this->load_lib_file( $pkg_file, $files );
 		}
 	}
 
@@ -418,11 +474,14 @@ final class Pie_Easy_Loader extends Pie_Easy_Base
 			foreach ( $files as $file ) {
 				// is file a pkg key?
 				if ( isset( $exts[$file] ) ) {
-					// its a pkg, go to next level
-					$exts = $exts[$file];
-				} elseif ( in_array( $file, $exts ) ) {
-					// its a lib
-					return self::load_libext_file( $files );
+					// is it an array?
+					if ( is_array( $exts[$file] ) ) {
+						// its a pkg, go to next level
+						$exts = $exts[$file];
+					} elseif ( true === $exts[$file] ) {
+						// its a file
+						return self::load_libext_file( $files );
+					}
 				}
 			}
 		} else {
