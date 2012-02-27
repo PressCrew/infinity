@@ -271,7 +271,7 @@ class Pie_Easy_Export extends Pie_Easy_Base
 						'Unable to write to the file: ' . $this->path );
 				}
 				// try to write it
-				$bytes = file_put_contents( $file->filename(), $data );
+				$bytes = file_put_contents( $file->getPathname(), $data );
 				// any bytes written
 				if ( $bytes ) {
 					// yep, refresh file
