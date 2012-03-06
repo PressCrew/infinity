@@ -875,12 +875,7 @@ abstract class Pie_Easy_Component
 				return $file_theme;
 			} else {
 				// no, try for default location
-				$file_default =
-					PIE_EASY_LIBEXT_DIR .
-					Pie_Easy_Files::path_build(
-						$ext_type,
-						$filename
-					);
+				$file_default = PIE_EASY_LIBEXT_DIR . '/' . $ext_type . '/' . $filename;
 				// exists?
 				if ( Pie_Easy_Files::cache($file_default)->is_readable() ) {
 					return $file_default;
