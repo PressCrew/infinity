@@ -548,7 +548,7 @@ final class Pie_Easy_Loader extends Pie_Easy_Base
 	public function load_wpadmin_lib()
 	{
 		foreach( func_get_args() as $file ) {
-			require_once( Pie_Easy_Files::path_build( ABSPATH, 'wp-admin', 'includes', $file . '.php' ) );
+			require_once( ABSPATH . 'wp-admin/includes/' . $file . '.php' );
 		}
 	}
 
