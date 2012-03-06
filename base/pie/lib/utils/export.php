@@ -201,7 +201,7 @@ class Pie_Easy_Export extends Pie_Easy_Base
 				self::$upload_dir = realpath( $upload_dir['basedir'] );
 				self::$upload_url = $upload_dir['baseurl'];
 				// determine export path and url
-				self::$export_dir = self::$upload_dir . Pie_Easy_Files::path_build( PIE_EASY_EXPORTS_SUBDIR, get_stylesheet() );
+				self::$export_dir = sprintf( '%s/%s/%s', self::$upload_dir, PIE_EASY_EXPORTS_SUBDIR, get_stylesheet() );
 				self::$export_url = sprintf( '%s/%s/%s', self::$upload_url, PIE_EASY_EXPORTS_SUBDIR, get_stylesheet() );
 				// don't try to set these twice
 				self::$populated = true;
