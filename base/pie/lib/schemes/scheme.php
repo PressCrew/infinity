@@ -764,7 +764,7 @@ final class Pie_Easy_Scheme extends Pie_Easy_Base
 
 			// inject prefix?
 			if ( $prefix_map && $prefix_map->contains($theme) ) {
-				$stack_file .= DIRECTORY_SEPARATOR . $prefix_map->item_at($theme)->value;
+				$stack_file .= '/' . $prefix_map->item_at($theme)->value;
 			}
 
 			// append requested path

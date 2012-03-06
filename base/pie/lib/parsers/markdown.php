@@ -26,10 +26,7 @@
 /**
  * Load the markdown lib
  */
-require_once
-	PIE_EASY_VENDORS_DIR .
-	DIRECTORY_SEPARATOR . 'markdown' .
-	DIRECTORY_SEPARATOR . 'markdown.php';
+require_once PIE_EASY_VENDORS_DIR . '/markdown/markdown.php';
 
 /**
  * Make Markdown parsing easy

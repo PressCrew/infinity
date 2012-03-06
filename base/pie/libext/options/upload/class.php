@@ -118,7 +118,7 @@ class Pie_Easy_Exts_Options_Upload
 	{
 		if ( isset( $_POST['attachment_id'] ) && is_numeric( $_POST['attachment_id'] ) ) {
 			// load api file
-			require_once ABSPATH . 'wp-admin' . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR . 'image-edit.php'; ?>
+			require_once ABSPATH . 'wp-admin/includes/image-edit.php'; ?>
 			<div class="image-editor" id="image-editor-<?php echo $_POST['attachment_id'] ?>"><?php
 			wp_image_editor( $_POST['attachment_id'] ); ?>
 			</div> <?php

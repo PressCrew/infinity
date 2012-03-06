@@ -29,11 +29,11 @@ define( 'PIE_EASY_DIR', dirname( __FILE__ ) );
 /**
  * PIE API: library directory
  */
-define( 'PIE_EASY_LIB_DIR', PIE_EASY_DIR . DIRECTORY_SEPARATOR . 'lib' );
+define( 'PIE_EASY_LIB_DIR', PIE_EASY_DIR . '/lib' );
 /**
  * PIE API: extensions library directory
  */
-define( 'PIE_EASY_LIBEXT_DIR', PIE_EASY_DIR . DIRECTORY_SEPARATOR . 'libext' );
+define( 'PIE_EASY_LIBEXT_DIR', PIE_EASY_DIR . '/libext' );
 /**
  * PIE API: text domain
  */
@@ -45,11 +45,11 @@ define( 'pie_easy_text_domain', PIE_EASY_TEXT_DOMAIN );
 /**
  * PIE API: languages directory
  */
-define( 'PIE_EASY_LANGUAGES_DIR', PIE_EASY_DIR . DIRECTORY_SEPARATOR . 'languages' );
+define( 'PIE_EASY_LANGUAGES_DIR', PIE_EASY_DIR . '/languages' );
 /**
  * PIE API: vendors library directory
  */
-define( 'PIE_EASY_VENDORS_DIR', PIE_EASY_LIB_DIR . DIRECTORY_SEPARATOR . 'vendors' );
+define( 'PIE_EASY_VENDORS_DIR', PIE_EASY_LIB_DIR . '/vendors' );
 /**
  * PIE API: exports caching toggle
  */
@@ -79,19 +79,13 @@ if ( !defined( 'PIE_EASY_EXPORTS_SUBDIR' ) ) {
  *  load error handler if applicable
  */
 if ( PIE_EASY_ERROR_HANDLING ) {
-	require_once
-		PIE_EASY_LIB_DIR .
-		DIRECTORY_SEPARATOR . 'errors' .
-		DIRECTORY_SEPARATOR . 'handler.php';
+	require_once PIE_EASY_LIB_DIR . '/errors/handler.php';
 }
 
 /**
  * include the base class
  */
-require_once
-	PIE_EASY_LIB_DIR .
-	DIRECTORY_SEPARATOR . 'base' .
-	DIRECTORY_SEPARATOR . 'base.php';
+require_once PIE_EASY_LIB_DIR . '/base/base.php';
 
 /**
  * Make loading PIE libraries easy
@@ -447,8 +441,8 @@ final class Pie_Easy_Loader extends Pie_Easy_Base
 		// build up file path
 		$path =
 			PIE_EASY_LIB_DIR .
-			DIRECTORY_SEPARATOR . implode( DIRECTORY_SEPARATOR, $pkg ) .
-			DIRECTORY_SEPARATOR . $file . '.php';
+			'/' . implode( '/', $pkg ) .
+			'/' . $file . '.php';
 
 		// load it
 		require_once $path;
@@ -511,13 +505,10 @@ final class Pie_Easy_Loader extends Pie_Easy_Base
 		}
 
 		// relative file
-		$file = implode( DIRECTORY_SEPARATOR, $files );
+		$file = implode( '/', $files );
 		
 		// build up file path
-		$path =
-			PIE_EASY_LIBEXT_DIR .
-			DIRECTORY_SEPARATOR . $file .
-			DIRECTORY_SEPARATOR . 'class.php';
+		$path = PIE_EASY_LIBEXT_DIR . '/' . $file . '/class.php';
 
 		// make sure it exists
 		if ( Pie_Easy_Files::cache($path)->is_readable() ) {

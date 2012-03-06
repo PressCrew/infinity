@@ -16,7 +16,7 @@ ob_start();
 
 // devs can override this to generate a custom friendly error page
 if ( !defined( 'PIE_EASY_ERROR_PAGE_PATH' ) && PIE_EASY_ERROR_REPORTING == false ) {
-	define( 'PIE_EASY_ERROR_PAGE_PATH', dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'error.php' );
+	define( 'PIE_EASY_ERROR_PAGE_PATH', dirname( __FILE__ ) . '/error.php' );
 }
 
 // devs can override this to generate a custom friendly AJAX error message
@@ -190,7 +190,7 @@ class Pie_Easy_Error_Handler
 			} else {
 
 				// load dump template
-				require( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'dump.php');
+				require( dirname( __FILE__ ) . '/dump.php');
 				
 			}
 		}

@@ -83,23 +83,11 @@ final class Pie_Easy_Files extends Pie_Easy_Base
 			// strip out leading drive letters (Windows)
 			$path_clean = preg_replace( '/^[a-z]{1}:/i', '', $path );
 			// replace double back slashes with single backslash
-			$path_clean = str_replace( '\\', DIRECTORY_SEPARATOR, $path_clean );
+			$path_clean = str_replace( '\\', '/', $path_clean );
 		}
 			
 		// split at forward and back slashes
 		return preg_split( '/\/|\\\/', $path_clean, null, PREG_SPLIT_NO_EMPTY );
-	}
-
-	/**
-	 * Pop and return the last file off the end of a path
-	 *
-	 * @see path_split
-	 * @param string $path
-	 * @return string
-	 */
-	public static function path_pop ( $path )
-	{
-		return array_pop( self::path_split( $path ) );
 	}
 
 	/**
@@ -164,13 +152,13 @@ final class Pie_Easy_Files extends Pie_Easy_Base
 		}
 
 		// format the final path
-		$final_path = implode( DIRECTORY_SEPARATOR, $file_names_clean );
+		$final_path = implode( '/', $file_names_clean );
 
 		// relative
 		if ( $relative ) {
 			return $final_path;
 		} else {
-			return DIRECTORY_SEPARATOR . $final_path;
+			return '/' . $final_path;
 		}
 	}
 
@@ -276,7 +264,7 @@ final class Pie_Easy_Files extends Pie_Easy_Base
 					// check regex
 					if ( preg_match($regex, $file) ) {
 						// build file path
-						$file_path = ( $absolute ) ? $dir . DIRECTORY_SEPARATOR . $file : $file;
+						$file_path = ( $absolute ) ? $dir . '/' . $file : $file;
 						// push onto return array
 						$return_files[$file] = $file_path;
 					}
@@ -331,7 +319,7 @@ final class Pie_Easy_Files extends Pie_Easy_Base
 	 */
 	static public function theme_dir( $theme )
 	{
-		return self::theme_root( $theme ) . DIRECTORY_SEPARATOR . $theme;
+		return self::theme_root( $theme ) . '/' . $theme;
 	}
 
 	/**
@@ -373,7 +361,7 @@ final class Pie_Easy_Files extends Pie_Easy_Base
 	static public function theme_file_to_rel( $file_path )
 	{
 		// convert path to be realtive to themes root
-		return str_replace( realpath( get_theme_root() ) . DIRECTORY_SEPARATOR, '', $file_path );
+		return str_replace( realpath( get_theme_root() ) . '/', '', $file_path );
 	}
 
 	/**

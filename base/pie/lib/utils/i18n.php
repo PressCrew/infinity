@@ -46,10 +46,10 @@ abstract class Pie_Easy_I18n extends Pie_Easy_Base
 		$mofile = sprintf( '%s-%s.mo', $domain, get_locale() );
 
 		// global .mo file path
-		$mofile_global = WP_LANG_DIR . DIRECTORY_SEPARATOR . $mofile;
+		$mofile_global = WP_LANG_DIR . '/' . $mofile;
 
 		// custom .mo file path
-		$mofile_custom = ( $custom_dir_path ) ? $custom_dir_path . DIRECTORY_SEPARATOR . $mofile : null;
+		$mofile_custom = ( $custom_dir_path ) ? $custom_dir_path . '/' . $mofile : null;
 
 		// try to load it
 		if ( Pie_Easy_Files::cache($mofile_global)->is_readable() ) {
