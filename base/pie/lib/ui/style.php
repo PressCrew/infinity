@@ -132,7 +132,7 @@ class Pie_Easy_Style extends Pie_Easy_Asset
 				break;
 			// anything else needs to be resolved
 			default:
-				$path = Pie_Easy_Files::path_build( $this->last_dirname, $path );
+				$path = Pie_Easy_Files::path_resolve( $this->last_dirname, $path );
 				$path = Pie_Easy_Files::file_to_uri_path( $path );
 		}
 
