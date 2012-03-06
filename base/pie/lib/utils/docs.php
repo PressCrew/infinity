@@ -221,7 +221,7 @@ class Pie_Easy_Docs extends Pie_Easy_Base
 				$doc_append = implode( '/', $splits );
 				// append remaining parts to each doc dir
 				foreach ( $this->doc_dirs as &$doc_dir ) {
-					$doc_dir .= $doc_append;
+					$doc_dir .= '/' . $doc_append;
 				}
 			}
 		}
