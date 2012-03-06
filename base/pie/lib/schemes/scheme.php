@@ -728,9 +728,6 @@ final class Pie_Easy_Scheme extends Pie_Easy_Base
 		// get all args
 		$file_names = func_get_args();
 
-		// file paths to be located
-		$locate_names = array();
-
 		// no prefix map by default
 		$prefix_map = null;
 
@@ -746,16 +743,6 @@ final class Pie_Easy_Scheme extends Pie_Easy_Base
 			return false;
 		}
 
-		// split all strings in case they contain a static directory separator
-		foreach ( $file_names as $file_name ) {
-			// split it
-			$splits = Pie_Easy_Files::path_split( $file_name );
-			// append to array
-			foreach ( $splits as $split ) {
-				$locate_names[] = $split;
-			}
-		}
-
 		// loop through stack TOP DOWN
 		foreach ( $this->themes->to_array(true) as $theme ) {
 
@@ -768,7 +755,7 @@ final class Pie_Easy_Scheme extends Pie_Easy_Base
 			}
 
 			// append requested path
-			$stack_file .= '/' . implode( '/', $locate_names );
+			$stack_file .= '/' . implode( '/', $file_names );
 
 			// does stack file exist?
 			if ( Pie_Easy_Files::cache($stack_file)->is_readable() ) {
