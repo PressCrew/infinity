@@ -145,7 +145,7 @@ class Pie_Easy_Export extends Pie_Easy_Base
 		$filename = $this->name . self::FILE_EXT_DELIM . $this->ext;
 
 		// determine file path and url
-		$this->path = self::$export_dir . Pie_Easy_Files::path_build( $filename );
+		$this->path = self::$export_dir . '/' . $filename;
 		$this->url = self::$export_url . '/' . $filename;
 		$this->stack = new Pie_Easy_Stack();
 		$this->children = new Pie_Easy_Map();
