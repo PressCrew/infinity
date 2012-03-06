@@ -710,7 +710,7 @@ final class Pie_Easy_Scheme extends Pie_Easy_Base
 			throw new Exception( 'No file names passed' );
 		}
 
-		return $this->theme_dir( $theme ) . Pie_Easy_Files::path_build( $file_names );
+		return $this->theme_dir( $theme ) . '/' . implode( '/', $file_names );
 	}
 
 	/**
@@ -768,7 +768,7 @@ final class Pie_Easy_Scheme extends Pie_Easy_Base
 			}
 
 			// append requested path
-			$stack_file .= Pie_Easy_Files::path_build( $locate_names );
+			$stack_file .= '/' . implode( '/', $locate_names );
 
 			// does stack file exist?
 			if ( Pie_Easy_Files::cache($stack_file)->is_readable() ) {
