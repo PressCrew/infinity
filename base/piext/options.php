@@ -173,10 +173,7 @@ class Infinity_Options_Renderer extends Pie_Easy_Options_Renderer
 	protected function load_dash_template( $name )
 	{
 		// find template
-		$template =
-			infinity_dashboard_locate_template(
-				Pie_Easy_Files::path_build( 'options', $name . '.php', true )
-			);
+		$template = infinity_dashboard_locate_template( 'options/' . $name . '.php' );
 
 		// include it
 		include( $template );
