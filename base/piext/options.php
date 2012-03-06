@@ -477,7 +477,7 @@ function infinity_options_render_menu( $args = null )
 
 	// load the menu template
 	infinity_dashboard_load_template(
-		Pie_Easy_Files::path_build( 'options', 'menu.php', true ),
+		'options/menu.php',
 		array( 'sections' => $sections )
 	);
 }
@@ -509,7 +509,7 @@ function infinity_options_render_menu_section( Pie_Easy_Sections_Section $sectio
 
 	// load the menu section template
 	infinity_dashboard_load_template(
-		Pie_Easy_Files::path_build( 'options', 'menu_section.php', true ),
+		'options/menu_section.php',
 		array(
 			'section' => $section,
 			'children' => $children,
@@ -529,7 +529,7 @@ function infinity_options_render_menu_options( $options )
 {
 	// load the menu options template
 	infinity_dashboard_load_template(
-		Pie_Easy_Files::path_build( 'options', 'menu_options.php', true ),
+		'options/menu_options.php',
 		array( 'options' => $options )
 	);
 }
