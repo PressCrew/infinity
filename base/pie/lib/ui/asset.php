@@ -148,13 +148,17 @@ abstract class Pie_Easy_Asset extends Pie_Easy_Base
 	}
 
 	/**
-	 * Returns one of this asset's sections
+	 * Returns one of this asset's sections if applicable
 	 *
 	 * @return Pie_Easy_Asset
 	 */
 	public function get_section( $name )
 	{
-		return $this->sections->item_at( $name );
+		if ( is_string( $name ) ) {
+			return $this->sections->item_at( $name );
+		} else {
+			return $this;
+		}
 	}
 
 	/**
@@ -178,6 +182,7 @@ abstract class Pie_Easy_Asset extends Pie_Easy_Base
 	 * Add a dependancy
 	 *
 	 * @param string $dep_handle Handle of the dependancy to add
+	 * @return Pie_Easy_Asset
 	 */
 	public function add_dep( $dep_handle )
 	{
@@ -187,6 +192,8 @@ abstract class Pie_Easy_Asset extends Pie_Easy_Base
 		if ( strlen( $dep_handle ) && !$this->deps->contains( $dep_handle ) ) {
 			$this->deps->push( $dep_handle );
 		}
+
+		return $this;
 	}
 
 	/**
@@ -212,7 +219,7 @@ abstract class Pie_Easy_Asset extends Pie_Easy_Base
 	/**
 	 * Push all of this asset's deps onto the given stack
 	 *
-	 * @return true
+	 * @return Pie_Easy_Asset
 	 */
 	public function push_deps( Pie_Easy_Stack $stack )
 	{
@@ -220,14 +227,16 @@ abstract class Pie_Easy_Asset extends Pie_Easy_Base
 			$stack->push( $dep );
 		}
 
-		return true;
+		return $this;
 	}
 
 	/**
 	 * Add a file
 	 *
+	 * @todo kill deps param, use chaining
 	 * @param string $file
 	 * @param array $deps
+	 * @return Pie_Easy_Asset
 	 */
 	public function add_file( $file, $deps = null )
 	{
@@ -240,6 +249,8 @@ abstract class Pie_Easy_Asset extends Pie_Easy_Base
 				$this->add_dep($dep);
 			}
 		}
+
+		return $this;
 	}
 
 	/**
@@ -266,10 +277,13 @@ abstract class Pie_Easy_Asset extends Pie_Easy_Base
 	 * Push an arbitrary string on the stack
 	 *
 	 * @param string $string
+	 * @return Pie_Easy_Asset
 	 */
 	public function add_string( $string )
 	{
 		$this->strings->push( $string );
+
+		return $this;
 	}
 
 	/**
