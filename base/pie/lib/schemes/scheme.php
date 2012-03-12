@@ -157,6 +157,11 @@ final class Pie_Easy_Scheme extends Pie_Easy_Base
 	private $enqueue;
 
 	/**
+	 * @var Pie_Easy_Export_Manager
+	 */
+	private $exports;
+
+	/**
 	 * This is a singleton
 	 */
 	private function __construct()
@@ -165,6 +170,11 @@ final class Pie_Easy_Scheme extends Pie_Easy_Base
 		$this->themes = new Pie_Easy_Stack();
 		$this->directives = new Pie_Easy_Init_Directive_Registry();
 		$this->config_files_loaded = new Pie_Easy_Stack();
+
+		// set up exports
+		$this->exports = new Pie_Easy_Export_Manager();
+		$this->exports->add( 'styles', new Pie_Easy_Component_Style_Export( 'dynamic', 'css' ) );
+		$this->exports->add( 'scripts', new Pie_Easy_Component_Script_Export( 'dynamic', 'js' ) );
 	}
 
 	/**
@@ -251,6 +261,20 @@ final class Pie_Easy_Scheme extends Pie_Easy_Base
 		}
 
 		throw new Exception( 'The enqueuer has not been initialized yet' );
+	}
+
+	/**
+	 * Get exports manager
+	 *
+	 * @return Pie_Easy_Export_Manager
+	 */
+	public function exports()
+	{
+		if ( $this->exports instanceof Pie_Easy_Export_Manager ) {
+			return $this->exports;
+		}
+
+		throw new Exception( 'The export manager has not been initialized yet' );
 	}
 
 	/**
@@ -486,7 +510,7 @@ final class Pie_Easy_Scheme extends Pie_Easy_Base
 	}
 
 	/**
-	 * Refresh dynamic css/js file if necessary
+	 * Refresh export files if necessary
 	 */
 	public function exports_refresh()
 	{
@@ -499,22 +523,22 @@ final class Pie_Easy_Scheme extends Pie_Easy_Base
 				// use current time
 				$mtime = time();
 			}
-			// try to refresh against every exporter
-			foreach ( Pie_Easy_Component::get_exports() as $export ) {
-				$export->refresh( $mtime );
+			// check if stale
+			if ( $this->exports()->stale( $mtime ) ) {
+				// loop all component registries and pass them the exporters
+				foreach ( Pie_Easy_Policy::all() as $policy ) {
+					// call accept on the registry for each export
+					$policy->registry()->accept( $this->exports()->get( 'styles' ) );
+					$policy->registry()->accept( $this->exports()->get( 'scripts' ) );
+				}
+				// update 'em
+				$this->exports()->update();
+				// all done
+				return true;
 			}
 		}
-	}
 
-	/**
-	 * Do a hard refresh of all component exports
-	 */
-	public function exports_refresh_hard()
-	{
-		// try to refresh against every exporter
-		foreach ( Pie_Easy_Component::get_exports() as $export ) {
-			$export->refresh_hard();
-		}
+		return false;
 	}
 
 	/**

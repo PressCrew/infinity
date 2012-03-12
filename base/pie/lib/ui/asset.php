@@ -60,20 +60,6 @@ abstract class Pie_Easy_Asset extends Pie_Easy_Base
 	private $strings;
 
 	/**
-	 * An option exporter instance
-	 *
-	 * @var Pie_Easy_Export
-	 */
-	private $exporter;
-
-	/**
-	 * Callback to exec immediately before exporting
-	 *
-	 * @var string|array
-	 */
-	protected $pre_export_callback;
-	
-	/**
 	 * Files that have already been imported
 	 *
 	 * @var Pie_Easy_Stack
@@ -124,14 +110,7 @@ abstract class Pie_Easy_Asset extends Pie_Easy_Base
 		// new "sub asset"
 		$asset = new $class();
 
-		// add exporter if applicable
-		if ( $this->exporter instanceof Pie_Easy_Export ) {
-			// yep, use section name
-			$exporter = $this->exporter->child( $name );
-			$asset->exporter( $exporter );
-		}
-
-		// and new "sub asset" of same class
+		// add new "sub asset" of same class
 		$this->sections->add( $name, $asset );
 
 		return $this;
@@ -313,11 +292,6 @@ abstract class Pie_Easy_Asset extends Pie_Easy_Base
 	 */
 	public function export()
 	{
-		// exec the pre export callback if applicable
-		if ( ( $this->pre_export_callback ) && is_callable( $this->pre_export_callback ) ) {
-			call_user_func( $this->pre_export_callback );
-		}
-		
 		// the code that will be returned
 		$code = null;
 
@@ -413,52 +387,6 @@ abstract class Pie_Easy_Asset extends Pie_Easy_Base
 	protected function get_file_contents( $filename )
 	{
 		return file_get_contents( $filename );
-	}
-
-	/**
-	 * Get/Set current exporter
-	 * 
-	 * @param Pie_Easy_Export $exporter
-	 * @return Pie_Easy_Export
-	 */
-	public function exporter( Pie_Easy_Export $exporter = null )
-	{
-		// setting?
-		if ( $exporter ) {
-			// already set?
-			if ( $this->exporter instanceof Pie_Easy_Export ) {
-				throw new Exception( 'Cannot set exporter, already set' );
-			} else {
-				// ok, set it
-				$this->exporter = $exporter;
-				// push myself onto export stack
-				$this->exporter->push( $this );
-			}
-		}
-
-		// return exporter instance
-		if ( $this->exporter instanceof Pie_Easy_Export ) {
-			return $this->exporter;
-		} else {
-			throw new Exception( 'No exporter has been set' );
-		}
-	}
-
-	/**
-	 * Callback to exec immediately before exporting
-	 *
-	 * @param string|array $callback
-	 * @return Pie_Easy_Asset
-	 */
-	public function on_export( $callback )
-	{
-		if ( is_callable( $callback ) ) {
-			$this->pre_export_callback = $callback;
-		} else {
-			throw new Exception( 'The callback provided is not callable' );
-		}
-
-		return $this;
 	}
 }
 

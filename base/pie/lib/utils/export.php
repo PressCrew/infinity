@@ -120,13 +120,6 @@ class Pie_Easy_Export extends Pie_Easy_Base
 	private $children;
 
 	/**
-	 * Set to true the file has been updated
-	 *
-	 * @var boolean
-	 */
-	private $updated = false;
-
-	/**
 	 * Constructor
 	 *
 	 * @param string $name Name of file to manage RELATIVE to export dir
@@ -248,7 +241,19 @@ class Pie_Easy_Export extends Pie_Easy_Base
 			throw new Exception( 'Adding exportable objects not allowed when a callback is set' );
 		}
 
-		return $this->stack->push( $obj );
+		// push object on to stack
+		$this->stack->push( $obj );
+
+		// handle recursive objects
+		if ( $obj instanceof Pie_Easy_Recursable ) {
+			// loop children
+			foreach ( $obj->get_children() as $name => $child ) {
+				// push to child
+				$this->child( $name )->push( $child );
+			}
+		}
+
+		return $this;
 	}
 
 	/**
@@ -317,9 +322,7 @@ class Pie_Easy_Export extends Pie_Easy_Base
 
 		// any result?
 		if ( !empty( $data ) ) {
-			if ( $this->write( $data ) ) {
-				$this->updated = true;
-			}
+			$this->write( $data );
 		} else {
 			// no content to write, remove it
 			$this->remove();
@@ -335,6 +338,35 @@ class Pie_Easy_Export extends Pie_Easy_Base
 	}
 
 	/**
+	 * Returns true if given timestamp is more recent than file last modified time
+	 *
+	 * @param integer $timestamp Unix timestamp
+	 * @return boolean
+	 */
+	public function stale( $timestamp )
+	{
+		// must be a number
+		if ( is_numeric( $timestamp ) ) {
+			// does file exist?
+			if ( Pie_Easy_Files::cache($this->path)->is_readable() ) {
+				// when was file last modified?
+				$mtime = filemtime( $this->path );
+				// is timestamp more recent?
+				if ( (integer) $timestamp > $mtime ) {
+					// yes, its stale
+					return true;
+				}
+			} else {
+				// doesn't exist
+				return true;
+			}
+		}
+
+		// not stale
+		return false;
+	}
+
+	/**
 	 * If given timestamp is more recent than file last modified time, update the file
 	 *
 	 * @param integer $timestamp Unix timestamp
@@ -342,40 +374,14 @@ class Pie_Easy_Export extends Pie_Easy_Base
 	 */
 	public function refresh( $timestamp )
 	{
-		if ( $this->updated ) {
-			return true;
-		} else {
-			// must be a number
-			if ( is_numeric( $timestamp ) ) {
-				// does file exist?
-				if ( Pie_Easy_Files::cache($this->path)->is_readable() ) {
-					// when was file last modified?
-					$mtime = filemtime( $this->path );
-					// is timestamp more recent?
-					if ( (integer) $timestamp > $mtime ) {
-						// yes, update it
-						return $this->update();
-					}
-				} else {
-					// doesn't exist, update it
-					return $this->update();
-				}
-			}
-
-			// did NOT refresh
-			return false;
+		// is file stale?
+		if ( $this->stale( $timestamp ) ) {
+			// yes, update it
+			return $this->update();
 		}
-	}
-
-	/**
-	 * Force update the file, ignoring any conditions
-	 *
-	 * @return boolean
-	 */
-	public function refresh_hard()
-	{
-		// update without any stat checks
-		return $this->update();
+		
+		// did NOT refresh
+		return false;
 	}
 
 	/**
@@ -385,11 +391,93 @@ class Pie_Easy_Export extends Pie_Easy_Base
 	 */
 	private function remove()
 	{
-		// mark as updated to avoid n+ delete attempts
-		$this->updated = true;
-
 		if ( Pie_Easy_Files::cache($this->path)->is_writable() ) {
 			return unlink( $this->path );
+		}
+	}
+}
+
+/**
+ * Make managing a set of related exports easy
+ *
+ * @package PIE
+ * @subpackage utils
+ */
+class Pie_Easy_Export_Manager
+{
+	/**
+	 * @var Pie_Easy_Map
+	 */
+	private $exports;
+
+	/**
+	 */
+	public function __construct()
+	{
+		$this->exports = new Pie_Easy_Map();
+	}
+
+	/**
+	 * Add an export instance to be managed
+	 *
+	 * @param string $handle
+	 * @param Pie_Easy_Export $export
+	 * @return Pie_Easy_Export
+	 */
+	public function add( $handle, Pie_Easy_Export $export )
+	{
+		if ( $this->exports->contains( $handle ) ) {
+			throw new Exception( sprintf(
+				'The "%s" handle has already been registered' ), $handle );
+		} else {
+			$this->exports->add( $handle, $export );
+		}
+
+		return $this->exports->item_at( $handle );
+	}
+
+	/**
+	 * Get an export instance for handle
+	 *
+	 * @param string $handle
+	 * @return Pie_Easy_Export
+	 */
+	public function get( $handle )
+	{
+		if ( $this->exports->contains( $handle ) ) {
+			return $this->exports->item_at( $handle );
+		} else {
+			throw new Exception( sprintf(
+				'The "%s" handle is not registered' ), $handle );
+		}
+	}
+
+	/**
+	 * Check all managed exports for staleness
+	 *
+	 * @param string $timestamp
+	 * @return boolean
+	 */
+	public function stale( $timestamp )
+	{
+		foreach( $this->exports as $export ) {
+			/* @var $export Pie_Easy_Export */
+			if ( $export->stale( $timestamp ) === true ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Update all managed exports
+	 */
+	public function update()
+	{
+		foreach( $this->exports as $export ) {
+			/* @var $export Pie_Easy_Export */
+			$export->update();
 		}
 	}
 }

@@ -13,6 +13,7 @@
 
 Pie_Easy_Loader::load(
 	'base/componentable',
+	'base/visitable',
 	'init/configuration',
 	'utils/export'
 );
@@ -23,7 +24,7 @@ Pie_Easy_Loader::load(
  * @package PIE
  * @subpackage base
  */
-abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
+abstract class Pie_Easy_Registry extends Pie_Easy_Componentable implements Pie_Easy_Visitable
 {
 	/**
 	 * Name of the theme currently being loaded
@@ -48,6 +49,15 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable
 	{
 		// init local collections
 		$this->components = new Pie_Easy_Map();
+	}
+
+	/**
+	 */
+	public function accept( Pie_Easy_Visitor $visitor )
+	{
+		foreach ( $this->components as $component ) {
+			$component->accept( $visitor );
+		}
 	}
 
 	/**

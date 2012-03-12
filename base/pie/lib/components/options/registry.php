@@ -260,8 +260,8 @@ abstract class Pie_Easy_Options_Registry extends Pie_Easy_Registry
 				}
 			}
 
-			// refresh exports
-			Pie_Easy_Scheme::instance()->exports_refresh_hard();
+			// update all scheme exports
+			Pie_Easy_Scheme::instance()->exports()->update();
 			
 			// done saving
 			return $save_count;
