@@ -186,7 +186,7 @@ if ( is_admin() ) {
 } else {
 	Pie_Easy_Enqueue::instance()
 		->styles_on_action( 'wp_enqueue_scripts' )
-		->scripts_on_action( 'wp_print_scripts' );
+		->scripts_on_action( 'wp_enqueue_scripts' );
 }
 
 // load Infinity API
