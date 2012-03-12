@@ -122,7 +122,8 @@ final class Pie_Easy_Loader extends Pie_Easy_Base
 			'policeable' => true,
 			'recursable' => true,
 			'registry' => true,
-			'renderer' => true
+			'renderer' => true,
+			'visitable' => true
 		),
 		'collections' => array(
 			'map' => true,
