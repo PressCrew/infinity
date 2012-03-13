@@ -212,23 +212,15 @@ abstract class Pie_Easy_Asset extends Pie_Easy_Base
 	/**
 	 * Add a file
 	 *
-	 * @todo kill deps param, use chaining
 	 * @param string $file
-	 * @param array $deps
 	 * @return Pie_Easy_Asset
 	 */
-	public function add_file( $file, $deps = null )
+	public function add_file( $file )
 	{
 		// push file onto stack
 		$this->files->push( $file );
 
-		// add deps to stack
-		if ( is_array($deps) && count($deps) ) {
-			foreach( $deps as $dep ) {
-				$this->add_dep($dep);
-			}
-		}
-
+		// maintain chain
 		return $this;
 	}
 
