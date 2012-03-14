@@ -28,12 +28,15 @@ add_action('close_body','infinity_google_analytics');
  */
 function infinity_custom_favicon()
 {
+	// determine the image path
+	if ( infinity_option_get( 'infinity-core-options-custom_favicon' ) ) {
+		$image = infinity_option_image_url( 'infinity-core-options-custom_favicon', full );
+	} else {
+		$image = get_template_directory_uri() . '/assets/images/favicon.png';
+	}
+
 	// render favicon link ?>
-	<?php if ( infinity_option_get( 'infinity-core-options-custom_favicon' ) ): ?>
-		<link rel="shortcut icon" type="image/png" href="<?php echo infinity_option_image_url( 'infinity-core-options-custom_favicon', full ); ?>" />
-	<?php else: ?>
-		<link rel="shortcut icon" type="image/png" href="<?php echo get_template_directory_uri(); ?>/assets/images/favicon.png" />
-	<?php endif;
+	<link rel="shortcut icon" type="image/png" href="<?php print $image ?>" /><?php
 }
 add_action('wp_head','infinity_custom_favicon'); 
 
@@ -45,23 +48,23 @@ add_action('wp_head','infinity_custom_favicon');
  */
 function infinity_content_class()
 {
-	if ( !current_theme_supports( 'infinity-grid-style' ) ) {
-		return;
-	}
-	
-	// render class attribute ?>
-<?php if ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_17" ): ?>grid_17 alpha
-<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_20" ): ?>grid_20 alpha
-<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_19" ): ?>grid_19 alpha
-<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_18" ): ?>grid_18 alpha
-<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_16" ): ?>grid_16 alpha
-<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_15" ): ?>grid_15 alpha
-<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_14" ): ?>grid_14 alpha
-<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_12" ): ?>grid_12 alpha
-<?php endif;
+	print infinity_get_content_class();
 }
 add_action( 'content_class', 'infinity_content_class' );
-	
+
+/**
+ * Get content class
+ * 
+ * @return string
+ */
+function infinity_get_content_class()
+{
+	// must support grid style feature
+	if ( current_theme_supports( 'infinity-grid-style' ) ) {
+		return infinity_get_sidebar_size() . ' alpha';
+	}
+}
+
 /**
  * Sidebar Class: Apply Sidebar Grid Class based on Core Theme Options
  *
@@ -70,23 +73,69 @@ add_action( 'content_class', 'infinity_content_class' );
  */
 function infinity_sidebar_class()
 {
-	if ( !current_theme_supports( 'infinity-grid-style' ) ) {
-		return;
-	}
-	
-	// render grid class ?>
-<?php if ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_17" ): ?>grid_7 omega
-<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_20" ): ?>grid_4 omega
-<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_19" ): ?>grid_5 omega
-<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_18" ): ?>grid_6 omega
-<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_16" ): ?>grid_8 omega
-<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_15" ): ?>grid_9 omega
-<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_14" ): ?>grid_10 omega
-<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_12" ): ?>grid_12 omega
-<?php endif;
+	print infinity_get_sidebar_class();
 }
 add_action( 'sidebar_class', 'infinity_sidebar_class' );
-	 
+
+/**
+ * Get content class
+ *
+ * @return string
+ */
+function infinity_get_sidebar_class()
+{
+	// must support grid style feature
+	if ( current_theme_supports( 'infinity-grid-style' ) ) {
+
+		$size = infinity_get_sidebar_size();
+		$suffix = ' omega';
+
+		switch ( $size ) {
+			case 'grid_20';
+				return 'grid_4' . $suffix;
+			case 'grid_19';
+				return 'grid_5' . $suffix;
+			case 'grid_18';
+				return 'grid_6' . $suffix;
+			case 'grid_17';
+				return 'grid_7' . $suffix;
+			case 'grid_16';
+				return 'grid_8' . $suffix;
+			case 'grid_15';
+				return 'grid_9' . $suffix;
+			case 'grid_14';
+				return 'grid_10' . $suffix;
+			case 'grid_13';
+				return 'grid_11' . $suffix;
+			case 'grid_12';
+				return 'grid_12' . $suffix;
+		}
+	}
+
+	return null;
+}
+
+/**
+ * Get sidebar size
+ *
+ * @package Infinity
+ * @subpackage base
+ */
+function infinity_get_sidebar_size()
+{
+	// must support grid style feature
+	if ( current_theme_supports( 'infinity-grid-style' ) ) {
+		// get sidebar size
+		$size = infinity_option_get( 'infinity-core-options-sidebar_size' );
+		// did we get one?
+		if ( $size ) {
+			return trim( $size );
+		}
+	}
+
+	return null;
+}
+
 /**
  * Sidebar Class: Still Apply Grid Classes with jQuery even if content_class and sidebar_class do actions
  * Are not added to custom templates (Most notably BuddyPress)
@@ -96,39 +145,19 @@ add_action( 'sidebar_class', 'infinity_sidebar_class' );
  */
 function infinity_grid_fallback()
 {
-	if ( !current_theme_supports( 'infinity-grid-style' ) ) {
-		return;
+	if ( current_theme_supports( 'infinity-grid-style' ) ) {
+		// grab sidebar size
+		$size = infinity_get_sidebar_size();
+		// get one?
+		if ( $size ):
+			// render script element ?>
+			<script>
+				jQuery(document).ready(function() {
+					jQuery('#content').addClass('<?php print $size ?>');
+				});
+			</script><?php
+		endif;
 	}
-	// render grid fallback script ?>
-	<script>
-	jQuery(document).ready(function() {
-	<?php if ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_17" ): ?>
-		jQuery('#content').removeClass('grid_17');
-		jQuery('#content').addClass('grid_17');
-	<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_20" ): ?>
-		jQuery('#content').removeClass('grid_20');
-		jQuery('#content').addClass('grid_20');
-	<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_19" ): ?>
-		jQuery('#content').removeClass('grid_19');
-		jQuery('#content').addClass('grid_19');
-	<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_18" ): ?>
-		jQuery('#content').removeClass('grid_18');
-		jQuery('#content').addClass('grid_18');
-	<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_16" ): ?>
-		jQuery('#content').removeClass('grid_16');
-		jQuery('#content').addClass('grid_16');
-	<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_15" ): ?>
-		jQuery('#content').removeClass('grid_15');
-		jQuery('#content').addClass('grid_15');
-	<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_14" ): ?>
-		jQuery('#content').removeClass('grid_14');
-		jQuery('#content').addClass('grid_14');
-	<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_12" ): ?>
-		jQuery('#content').removeClass('grid_12');
-		jQuery('#content').addClass('grid_12');
-	<?php endif; ?>
-	});
-	</script><?php
 }
 add_action( 'open_body', 'infinity_grid_fallback' );
 	
@@ -140,11 +169,9 @@ add_action( 'open_body', 'infinity_grid_fallback' );
  */
 function infinity_footer_widget_class()
 {
-	if ( !current_theme_supports( 'infinity-grid-style' ) ) {
-		return;
+	if ( current_theme_supports( 'infinity-grid-style' ) ) {
+		print 'grid_8';
 	}
-// render grid class
-?>grid_8<?php
 }
 add_action( 'footer_widget_class', 'infinity_footer_widget_class' );
 
@@ -157,11 +184,12 @@ add_action( 'footer_widget_class', 'infinity_footer_widget_class' );
 */
 function infinity_sidebar_position_css()
 {
-	if ( !current_theme_supports( 'infinity-grid-style' ) || infinity_option_get( 'infinity-core-options-sidebar_position' ) == "right" ) {
-		return;
+	if (
+		current_theme_supports( 'infinity-grid-style' ) &&
+		infinity_option_get( 'infinity-core-options-sidebar_position' ) != 'right'
+	) {
+		print 'sidebar-left';
 	}
-// render grid class
-?>sidebar-left<?php
 }
 add_action( 'sidebar_class', 'infinity_sidebar_position_css' );
 add_action( 'content_class', 'infinity_sidebar_position_css' );
@@ -175,16 +203,17 @@ add_action( 'content_class', 'infinity_sidebar_position_css' );
  */
 function infinity_sidebar_left_fallback()
 {
-	if ( !current_theme_supports( 'infinity-grid-style' ) || infinity_option_get( 'infinity-core-options-sidebar_position' ) == "right" ) {
-		return;
+	if (
+		current_theme_supports( 'infinity-grid-style' ) &&
+		infinity_option_get( 'infinity-core-options-sidebar_position' ) != 'right'
+	) {
+		// render grid fallback script ?>
+		<script>
+		jQuery(document).ready(function() {
+			jQuery('#content').addClass('sidebar-left');
+		});
+		</script><?php
 	}
-	// render grid fallback script ?>
-	<script>
-	jQuery(document).ready(function() {
-		jQuery('#content').removeClass('sidebar-left');
-		jQuery('#content').addClass('sidebar-left');
-	});
-	</script><?php
 }
 add_action( 'open_body', 'infinity_sidebar_left_fallback' );
 ?>
