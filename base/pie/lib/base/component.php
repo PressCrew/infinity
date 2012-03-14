@@ -258,7 +258,7 @@ abstract class Pie_Easy_Component
 		if ( !$this->__style__ instanceof Pie_Easy_Style ) {
 
 			// init style object
-			$this->__style__ = new Pie_Easy_Style();
+			$this->__style__ = new Pie_Easy_Style( $this );
 			
 			// init style sections
 			$this->__style__
@@ -280,7 +280,7 @@ abstract class Pie_Easy_Component
 		if ( !$this->__script__ instanceof Pie_Easy_Script ) {
 
 			// init script object
-			$this->__script__ = new Pie_Easy_Script();
+			$this->__script__ = new Pie_Easy_Script( $this );
 
 			// init script sections
 			$this->__script__
@@ -382,7 +382,10 @@ abstract class Pie_Easy_Component
 		// set stylesheet
 		if ( isset( $config->style ) ) {
 			$this->style = $config->style;
-			$this->style()->add_file( $this->style );
+			$this->style()->cache(
+				$this->get_element_id(),
+				Pie_Easy_Scheme::instance()->locate_file( $this->style )
+			);
 		}
 
 		// set style dependancies
@@ -396,7 +399,10 @@ abstract class Pie_Easy_Component
 		// set script
 		if ( isset( $config->script ) ) {
 			$this->script = $config->script;
-			$this->script()->add_file( $this->script );
+			$this->script()->cache(
+				$this->get_element_id(),
+				Pie_Easy_Scheme::instance()->locate_file( $this->script )
+			);
 		}
 
 		// set script dependancies
@@ -437,7 +443,7 @@ abstract class Pie_Easy_Component
 
 		// have default style file?
 		if ( $default_style ) {
-			$this->style()->add_file( $default_style );
+			$this->style()->cache( $this->get_element_id(), $default_style );
 		}
 
 		// default script
@@ -445,7 +451,7 @@ abstract class Pie_Easy_Component
 
 		// have default script file?
 		if ( $default_script ) {
-			$this->script()->add_file( $default_script );
+			$this->script()->cache( $this->get_element_id(), $default_script );
 		}
 	}
 
@@ -791,7 +797,7 @@ abstract class Pie_Easy_Component
 	 * @param integer $ancestor
 	 * @return string
 	 */
-	final protected function locate_file( $filename, $ancestor = 0 )
+	final public function locate_file( $filename, $ancestor = 0 )
 	{
 		// what class am i?
 		$r = new ReflectionClass($this);
@@ -850,7 +856,7 @@ abstract class Pie_Easy_Component
 
 		return false;
 	}
-	
+
 	/**
 	 * Render this component
 	 *

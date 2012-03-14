@@ -45,9 +45,9 @@ class Pie_Easy_Script extends Pie_Easy_Asset
 	/**
 	 * Constructor
 	 */
-	public function __construct()
+	public function __construct( Pie_Easy_Component $component = null )
 	{
-		parent::__construct();
+		parent::__construct( $component );
 
 		// set token and bump it
 		$this->token = self::$next_token++;

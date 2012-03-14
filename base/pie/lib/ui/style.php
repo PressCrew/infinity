@@ -38,9 +38,9 @@ class Pie_Easy_Style extends Pie_Easy_Asset
 	/**
 	 * Constructor
 	 */
-	public function __construct()
+	public function __construct( Pie_Easy_Component $component = null )
 	{
-		parent::__construct();
+		parent::__construct( $component );
 
 		// init rules map
 		$this->rules = new Pie_Easy_Map();

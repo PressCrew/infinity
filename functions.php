@@ -204,11 +204,11 @@ infinity_scheme_init();
 
 // initialize components
 infinity_sections_init();
+infinity_options_init();
 infinity_screens_init();
 infinity_features_init();
 infinity_widgets_init();
 infinity_shortcodes_init();
-infinity_options_init();
 
 // finalize scheme
 infinity_scheme_finalize();
