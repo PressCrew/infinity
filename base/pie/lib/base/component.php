@@ -13,10 +13,11 @@
 
 Pie_Easy_Loader::load(
 	'base/componentable',
+	'base/visitable',
 	'ui/styleable',
 	'ui/scriptable',
-	'init/directive',
-	'utils/files'
+	'utils/export',
+	'init/directive'
 );
 
 /**
@@ -43,7 +44,7 @@ Pie_Easy_Loader::load(
  */
 abstract class Pie_Easy_Component
 	extends Pie_Easy_Componentable
-		implements Pie_Easy_Configurable, Pie_Easy_Styleable, Pie_Easy_Scriptable
+		implements Pie_Easy_Visitable, Pie_Easy_Configurable, Pie_Easy_Styleable, Pie_Easy_Scriptable
 {
 	/**
 	 * Name of the default section
@@ -94,13 +95,6 @@ abstract class Pie_Easy_Component
 	private $__script__;
 
 	/**
-	 * A map of exports that must be kept up to date
-	 *
-	 * @var Pie_Easy_Map
-	 */
-	static private $__exports__;
-
-	/**
 	 * @param string $name Option name may only contain alphanumeric characters as well as the underscore for use as a word separator.
 	 * @param string $type The type (component extension) of this component
 	 * @param string $theme The theme which originally created this component
@@ -144,13 +138,6 @@ abstract class Pie_Easy_Component
 		$this->required_feature = null;
 		$this->ignore = false;
 
-		// init exports
-		if ( !self::$__exports__ instanceof Pie_Easy_Map ) {
-			self::$__exports__ = new Pie_Easy_Map();
-			self::$__exports__->add( 'style', new Pie_Easy_Export( 'dynamic', 'css' ) );
-			self::$__exports__->add( 'script', new Pie_Easy_Export( 'dynamic', 'js' ) );
-		}
-
 		// init style and script objects
 		$this->style();
 		$this->script();
@@ -192,6 +179,28 @@ abstract class Pie_Easy_Component
 		// not allowed
 		throw new Exception(
 			sprintf( 'The "%s" property cannot be unset', $name ) );
+	}
+
+	public function accept( Pie_Easy_Visitor $visitor )
+	{
+		return $visitor->visit( $this );
+	}
+
+	/**
+	 * Return current version of this component
+	 *
+	 * You must define the VERSION class constant or it will return the version of
+	 * the parent component class, or 0 if no version is found at all.
+	 *
+	 * @return int
+	 */
+	final public function version()
+	{
+		if ( defined('self::VERSION') ) {
+			return self::VERSION;
+		} else {
+			return 0;
+		}
 	}
 
 	/**
@@ -249,14 +258,7 @@ abstract class Pie_Easy_Component
 		if ( !$this->__style__ instanceof Pie_Easy_Style ) {
 
 			// init style object
-			$this->__style__ = new Pie_Easy_Style();
-
-			// init style export
-			if ( $this->supported() ) {
-				$this->__style__
-					->on_export( array( $this, 'init_styles_dynamic' ) )
-					->exporter( self::$__exports__->item_at( 'style' ) );
-			}
+			$this->__style__ = new Pie_Easy_Style( $this );
 			
 			// init style sections
 			$this->__style__
@@ -278,15 +280,8 @@ abstract class Pie_Easy_Component
 		if ( !$this->__script__ instanceof Pie_Easy_Script ) {
 
 			// init script object
-			$this->__script__ = new Pie_Easy_Script();
+			$this->__script__ = new Pie_Easy_Script( $this );
 
-			// init script export
-			if ( $this->supported() ) {
-				$this->__script__
-					->on_export( array( $this, 'init_scripts_dynamic' ) )
-					->exporter( self::$__exports__->item_at( 'script' ) );
-			}
-			
 			// init script sections
 			$this->__script__
 				->add_section( 'global' )
@@ -387,7 +382,10 @@ abstract class Pie_Easy_Component
 		// set stylesheet
 		if ( isset( $config->style ) ) {
 			$this->style = $config->style;
-			$this->style()->add_file( $this->style );
+			$this->style()->cache(
+				$this->get_element_id(),
+				Pie_Easy_Scheme::instance()->locate_file( $this->style )
+			);
 		}
 
 		// set style dependancies
@@ -401,7 +399,10 @@ abstract class Pie_Easy_Component
 		// set script
 		if ( isset( $config->script ) ) {
 			$this->script = $config->script;
-			$this->script()->add_file( $this->script );
+			$this->script()->cache(
+				$this->get_element_id(),
+				Pie_Easy_Scheme::instance()->locate_file( $this->script )
+			);
 		}
 
 		// set script dependancies
@@ -438,19 +439,19 @@ abstract class Pie_Easy_Component
 		}
 
 		// default style
-		$default_style = $this->locate_ext_file( 'style.css' );
+		$default_style = $this->locate_file( 'style.css' );
 
 		// have default style file?
 		if ( $default_style ) {
-			$this->style()->add_file( $default_style );
+			$this->style()->cache( $this->get_element_id(), $default_style );
 		}
 
 		// default script
-		$default_script = $this->locate_ext_file( 'script.js' );
+		$default_script = $this->locate_file( 'script.js' );
 
 		// have default script file?
 		if ( $default_script ) {
-			$this->script()->add_file( $default_script );
+			$this->script()->cache( $this->get_element_id(), $default_script );
 		}
 	}
 
@@ -660,20 +661,6 @@ abstract class Pie_Easy_Component
 	}
 
 	/**
-	 * Return all private exports
-	 * 
-	 * @return Pie_Easy_Export|array
-	 */
-	static public function get_exports( $name = null )
-	{
-		if ( $name ) {
-			return self::$__exports__->item_at( $name );
-		} else {
-			return self::$__exports__->to_array();
-		}
-	}
-
-	/**
 	 * Return sub-option of this component by passing ONLY the sub-option
 	 * portion of the component name.
 	 *
@@ -799,7 +786,7 @@ abstract class Pie_Easy_Component
 		if ( $template ) {
 			return $template;
 		} else {
-			return $this->locate_ext_file( 'template.php', $ancestor );
+			return $this->locate_file( 'template.php', $ancestor );
 		}
 	}
 	
@@ -810,7 +797,7 @@ abstract class Pie_Easy_Component
 	 * @param integer $ancestor
 	 * @return string
 	 */
-	final protected function locate_ext_file( $filename, $ancestor = 0 )
+	final public function locate_file( $filename, $ancestor = 0 )
 	{
 		// what class am i?
 		$r = new ReflectionClass($this);
@@ -859,12 +846,7 @@ abstract class Pie_Easy_Component
 				return $file_theme;
 			} else {
 				// no, try for default location
-				$file_default =
-					PIE_EASY_LIBEXT_DIR .
-					Pie_Easy_Files::path_build(
-						$ext_type,
-						$filename
-					);
+				$file_default = PIE_EASY_LIBEXT_DIR . '/' . $ext_type . '/' . $filename;
 				// exists?
 				if ( Pie_Easy_Files::cache($file_default)->is_readable() ) {
 					return $file_default;
@@ -874,7 +856,7 @@ abstract class Pie_Easy_Component
 
 		return false;
 	}
-	
+
 	/**
 	 * Render this component
 	 *
@@ -922,6 +904,55 @@ abstract class Pie_Easy_Component
 		return true;
 	}
 
+}
+
+/**
+ * Abstract asset exporter
+ *
+ * @package PIE
+ * @subpackage schemes
+ */
+abstract class Pie_Easy_Component_Asset_Export
+	extends Pie_Easy_Export
+		implements Pie_Easy_Visitor
+{
+	// nothing special yet
+}
+
+/**
+ * Style exporter
+ *
+ * @package PIE
+ * @subpackage schemes
+ */
+class Pie_Easy_Component_Style_Export
+	extends Pie_Easy_Component_Asset_Export
+{
+	public function visit( Pie_Easy_Visitable $visited )
+	{
+		if ( $visited->supported() ) {
+			$visited->init_styles_dynamic();
+			$this->push( $visited->style() );
+		}
+	}
+}
+
+/**
+ * Script exporter
+ *
+ * @package PIE
+ * @subpackage schemes
+ */
+class Pie_Easy_Component_Script_Export
+	extends Pie_Easy_Component_Asset_Export
+{
+	public function visit( Pie_Easy_Visitable $visited )
+	{
+		if ( $visited->supported() ) {
+			$visited->init_scripts_dynamic();
+			$this->push( $visited->script() );
+		}
+	}
 }
 
 ?>

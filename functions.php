@@ -39,7 +39,7 @@ define( 'INFINITY_NAME', 'infinity' );
 /**
  * Infinity theme directory path
  */
-define( 'INFINITY_THEME_DIR', realpath( get_theme_root( INFINITY_NAME ) ) . DIRECTORY_SEPARATOR . INFINITY_NAME );
+define( 'INFINITY_THEME_DIR', realpath( get_theme_root( INFINITY_NAME ) ) . '/' . INFINITY_NAME );
 
 /**
  * Infinity theme directory url
@@ -49,7 +49,7 @@ define( 'INFINITY_THEME_URL', get_theme_root_uri( INFINITY_NAME ) . '/' . INFINI
 /**
  * Infinity "base" (includes) directory path
  */
-define( 'INFINITY_BASE_DIR', INFINITY_THEME_DIR . DIRECTORY_SEPARATOR . 'base' );
+define( 'INFINITY_BASE_DIR', INFINITY_THEME_DIR . '/base' );
 
 /**
  * Infinity "base" (includes) url
@@ -59,7 +59,7 @@ define( 'INFINITY_BASE_URL', INFINITY_THEME_URL . '/base' );
 /**
  * PIE directory path
  */
-define( 'INFINITY_PIE_DIR', INFINITY_BASE_DIR . DIRECTORY_SEPARATOR . 'pie' );
+define( 'INFINITY_PIE_DIR', INFINITY_BASE_DIR . '/pie' );
 
 /**
  * PIE directory URL
@@ -69,7 +69,7 @@ define( 'INFINITY_PIE_URL', INFINITY_BASE_URL . '/pie' );
 /**
  * Infinity's PIE implementation directory path
  */
-define( 'INFINITY_PIEXT_DIR', INFINITY_BASE_DIR . DIRECTORY_SEPARATOR . 'piext' );
+define( 'INFINITY_PIEXT_DIR', INFINITY_BASE_DIR . '/piext' );
 
 /**
  * Infinity's PIE implementation url
@@ -84,7 +84,7 @@ define( 'INFINITY_ADMIN_REL', 'dashboard' );
 /**
  * Infinity admin directory absolute path
  */
-define( 'INFINITY_ADMIN_DIR', INFINITY_THEME_DIR . DIRECTORY_SEPARATOR . INFINITY_ADMIN_REL );
+define( 'INFINITY_ADMIN_DIR', INFINITY_THEME_DIR . '/' . INFINITY_ADMIN_REL );
 
 /**
  * Infinity admin directory url
@@ -99,7 +99,7 @@ define( 'INFINITY_AJAX_URL', admin_url( 'admin-ajax.php' ) );
 /**
  * Infinity languages directory path
  */
-define( 'INFINITY_LANGUAGES_DIR', INFINITY_THEME_DIR . DIRECTORY_SEPARATOR . 'languages' );
+define( 'INFINITY_LANGUAGES_DIR', INFINITY_THEME_DIR . '/languages' );
 
 /**
  * Infinity text domain
@@ -119,17 +119,17 @@ define( 'INFINITY_ADMIN_PAGE', INFINITY_NAME . '-theme' );
 /**
  * Infinity admin templates relative directory path
  */
-define( 'INFINITY_ADMIN_TPLS_REL', INFINITY_ADMIN_REL . DIRECTORY_SEPARATOR . 'templates' );
+define( 'INFINITY_ADMIN_TPLS_REL', INFINITY_ADMIN_REL . '/templates' );
 
 /**
  * Infinity admin templates absolute directory path
  */
-define( 'INFINITY_ADMIN_TPLS_DIR', INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'templates' );
+define( 'INFINITY_ADMIN_TPLS_DIR', INFINITY_ADMIN_DIR . '/templates' );
 
 /**
  * Infinity admin documentation directory path
  */
-define( 'INFINITY_ADMIN_DOCS_DIR', INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'docs' );
+define( 'INFINITY_ADMIN_DOCS_DIR', INFINITY_ADMIN_DIR . '/docs' );
 
 /**
  * Infinity development mode
@@ -173,7 +173,7 @@ if ( !defined( 'INFINITY_ERROR_REPORTING' ) ) {
 /**
  * Load the PIE lib loader
  */
-require_once( INFINITY_PIE_DIR . DIRECTORY_SEPARATOR . 'loader.php' );
+require_once( INFINITY_PIE_DIR . '/loader.php' );
 
 // initialize PIE
 Pie_Easy_Loader::init( INFINITY_PIE_URL, 'Infinity_Exts' );
@@ -186,29 +186,29 @@ if ( is_admin() ) {
 } else {
 	Pie_Easy_Enqueue::instance()
 		->styles_on_action( 'wp_enqueue_scripts' )
-		->scripts_on_action( 'wp_print_scripts' );
+		->scripts_on_action( 'wp_enqueue_scripts' );
 }
 
 // load Infinity API
-require_once( INFINITY_PIEXT_DIR . DIRECTORY_SEPARATOR . 'scheme.php' );
-require_once( INFINITY_PIEXT_DIR . DIRECTORY_SEPARATOR . 'sections.php' );
-require_once( INFINITY_PIEXT_DIR . DIRECTORY_SEPARATOR . 'options.php' );
-require_once( INFINITY_PIEXT_DIR . DIRECTORY_SEPARATOR . 'features.php' );
-require_once( INFINITY_PIEXT_DIR . DIRECTORY_SEPARATOR . 'widgets.php' );
-require_once( INFINITY_PIEXT_DIR . DIRECTORY_SEPARATOR . 'screens.php' );
-require_once( INFINITY_PIEXT_DIR . DIRECTORY_SEPARATOR . 'shortcodes.php' );
-require_once( INFINITY_PIEXT_DIR . DIRECTORY_SEPARATOR . 'i18n.php' );
+require_once( INFINITY_PIEXT_DIR . '/scheme.php' );
+require_once( INFINITY_PIEXT_DIR . '/sections.php' );
+require_once( INFINITY_PIEXT_DIR . '/options.php' );
+require_once( INFINITY_PIEXT_DIR . '/features.php' );
+require_once( INFINITY_PIEXT_DIR . '/widgets.php' );
+require_once( INFINITY_PIEXT_DIR . '/screens.php' );
+require_once( INFINITY_PIEXT_DIR . '/shortcodes.php' );
+require_once( INFINITY_PIEXT_DIR . '/i18n.php' );
 
 // initialize scheme
 infinity_scheme_init();
 
 // initialize components
 infinity_sections_init();
+infinity_options_init();
 infinity_screens_init();
 infinity_features_init();
 infinity_widgets_init();
 infinity_shortcodes_init();
-infinity_options_init();
 
 // finalize scheme
 infinity_scheme_finalize();
@@ -220,12 +220,12 @@ if ( is_admin() ) {
 	infinity_screens_init_screen();
 	infinity_widgets_init_screen();
 	// load admin functionality
-	require_once( INFINITY_ADMIN_DIR . DIRECTORY_SEPARATOR . 'loader.php' );
+	require_once( INFINITY_ADMIN_DIR . '/loader.php' );
 } else {
 	// init blog components screens
 	infinity_features_init_screen();
 	infinity_shortcodes_init_screen();
 }
 // load theme setup
-require_once( INFINITY_BASE_DIR . DIRECTORY_SEPARATOR . 'setup.php' );
+require_once( INFINITY_BASE_DIR . '/setup.php' );
 ?>

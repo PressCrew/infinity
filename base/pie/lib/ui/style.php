@@ -38,9 +38,9 @@ class Pie_Easy_Style extends Pie_Easy_Asset
 	/**
 	 * Constructor
 	 */
-	public function __construct()
+	public function __construct( Pie_Easy_Component $component = null )
 	{
-		parent::__construct();
+		parent::__construct( $component );
 
 		// init rules map
 		$this->rules = new Pie_Easy_Map();
@@ -132,7 +132,7 @@ class Pie_Easy_Style extends Pie_Easy_Asset
 				break;
 			// anything else needs to be resolved
 			default:
-				$path = Pie_Easy_Files::path_build( $this->last_dirname, $path );
+				$path = Pie_Easy_Files::path_resolve( $this->last_dirname, $path );
 				$path = Pie_Easy_Files::file_to_uri_path( $path );
 		}
 

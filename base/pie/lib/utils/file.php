@@ -17,45 +17,133 @@
  * @package PIE
  * @subpackage utils
  */
-final class Pie_Easy_File extends Pie_Easy_Base
+final class Pie_Easy_File extends SplFileInfo
 {
 	/**
-	 * File path
+	 * File is a directory
 	 *
-	 * @var string
+	 * @var boolean
 	 */
-	protected $f;
+	private $d;
+
+	/**
+	 * File is a file
+	 *
+	 * @var boolean
+	 */
+	private $f;
+
+	/**
+	 * File is a link
+	 *
+	 * @var boolean
+	 */
+	private $l;
 
 	/**
 	 * File path exists
 	 *
 	 * @var boolean
 	 */
-	protected $e = false;
+	private $e;
 
 	/**
 	 * File path is readable
 	 *
 	 * @var boolean
 	 */
-	protected $r = false;
+	private $r;
 
 	/**
 	 * File path is writable
 	 *
 	 * @var boolean
 	 */
-	protected $w = false;
+	private $w;
+
+	/**
+	 * File path is executable
+	 *
+	 * @var boolean
+	 */
+	private $x;
 
 	/**
 	 * Constructor
 	 *
-	 * @param string $filename Absolute path to file
+	 * @param string $file_name Absolute path to file
 	 */
-	public function __construct( $filename )
+	public function __construct( $file_name )
 	{
-		$this->f = $filename;
+		parent::__construct( $file_name );
+
 		$this->refresh();
+	}
+
+	/**
+	 */
+	public function isDir()
+	{
+		if ( null === $this->d ) {
+			$this->d = parent::isDir();
+		}
+
+		return $this->d;
+	}
+
+	/**
+	 */
+	public function isFile()
+	{
+		if ( null === $this->f ) {
+			$this->f = parent::isFile();
+		}
+
+		return $this->f;
+	}
+
+	/**
+	 */
+	public function isLink()
+	{
+		if ( null === $this->l ) {
+			$this->l = parent::isLink();
+		}
+
+		return $this->l;
+	}
+
+	/**
+	 */
+	public function isReadable()
+	{
+		if ( null === $this->r ) {
+			$this->r = parent::isReadable();
+		}
+
+		return $this->r;
+	}
+
+	/**
+	 */
+	public function isWritable()
+	{
+		if ( null === $this->w ) {
+			$this->w = parent::isWritable();
+		}
+
+		return $this->w;
+	}
+
+	/**
+	 */
+	public function isExecutable()
+	{
+		if ( null === $this->x ) {
+			$this->x = parent::isExecutable();
+		}
+
+		return $this->x;
 	}
 
 	/**
@@ -65,30 +153,26 @@ final class Pie_Easy_File extends Pie_Easy_Base
 	 */
 	public function refresh()
 	{
+		// clear stat cache
 		if ( defined( 'PHP_VERSION_ID' ) && PHP_VERSION_ID >= 50300 ) {
-			clearstatcache( true, $this->f );
+			clearstatcache( true, $this->getFilename() );
 		} else {
 			clearstatcache();
 		}
 
-		$this->e = file_exists( $this->f );
-
-		if ( $this->e ) {
-			$this->r = is_readable( $this->f  );
-			$this->w = is_writable( $this->f  );
-		}
+		// reset vars
+		$this->d =
+		$this->e =
+		$this->f =
+		$this->l =
+		$this->r =
+		$this->w =
+		$this->x = null;
+		
+		// update base stat info
+		$this->exists();
 
 		return $this;
-	}
-
-	/**
-	 * Return file name path
-	 *
-	 * @return string
-	 */
-	public function filename()
-	{
-		return $this->f;
 	}
 
 	/**
@@ -98,27 +182,54 @@ final class Pie_Easy_File extends Pie_Easy_Base
 	 */
 	public function exists()
 	{
+		if ( null === $this->e ) {
+			try {
+				// set boolean toggles
+				$this->e = true;
+				$this->f = false;
+				$this->d = false;
+				$this->l = false;
+				// determine type
+				switch ( $this->getType() ) {
+					case 'file':
+						$this->f = true;
+						break;
+					case 'dir':
+						$this->d = true;
+						break;
+					case 'link':
+						$this->l = true;
+						break;
+				}
+			} catch ( RuntimeException $e ) {
+				// get type failed
+				$this->e = false;
+			}
+		}
+
 		return $this->e;
 	}
 
 	/**
 	 * Returns true if file is readable
 	 *
+	 * @internal backwards compat
 	 * @return boolean
 	 */
 	public function is_readable()
 	{
-		return $this->r;
+		return $this->isReadable();
 	}
 
 	/**
 	 * Returns true if file is writable
 	 *
+	 * @internal backwards compat
 	 * @return boolean
 	 */
 	public function is_writable()
 	{
-		return $this->w;
+		return $this->isWritable();
 	}
 }
 

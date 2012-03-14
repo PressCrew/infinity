@@ -92,7 +92,24 @@ abstract class Pie_Easy_Policy extends Pie_Easy_Base
 	 */
 	final static public function all()
 	{
-		return self::$instances->to_array();
+		$all = array();
+		$options_class = null;
+		$options_policy = null;
+
+		foreach( self::$instances as $class => $policy ) {
+			if ( $policy instanceof Pie_Easy_Options_Policy ) {
+				$options_class = $class;
+				$options_policy = $policy;
+			} else {
+				$all[$class] = $policy;
+			}
+		}
+		
+		if ( $options_class ) {
+			$all[ $options_class ] = $options_policy;
+		}
+
+		return $all;
 	}
 
 	/**

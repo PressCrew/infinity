@@ -261,7 +261,7 @@ function infinity_get_template_part( $slug, $name = null )
 function infinity_comments_template( $file = null, $separate_comments = false )
 {
 	if ( $file === null ) {
-		$file = DIRECTORY_SEPARATOR . 'comments.php';
+		$file = '/comments.php';
 	}
 
 	// this is just a wrapper to avoid confusion

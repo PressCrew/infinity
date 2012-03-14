@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'utils/ajax', 'utils/files', 'components/options' );
+Pie_Easy_Loader::load( 'utils/ajax', 'components/options' );
 
 /**
  * Infinity Theme: options policy
@@ -173,10 +173,7 @@ class Infinity_Options_Renderer extends Pie_Easy_Options_Renderer
 	protected function load_dash_template( $name )
 	{
 		// find template
-		$template =
-			infinity_dashboard_locate_template(
-				Pie_Easy_Files::path_build( 'options', $name . '.php', true )
-			);
+		$template = infinity_dashboard_locate_template( 'options/' . $name . '.php' );
 
 		// include it
 		include( $template );
@@ -480,7 +477,7 @@ function infinity_options_render_menu( $args = null )
 
 	// load the menu template
 	infinity_dashboard_load_template(
-		Pie_Easy_Files::path_build( 'options', 'menu.php', true ),
+		'options/menu.php',
 		array( 'sections' => $sections )
 	);
 }
@@ -512,7 +509,7 @@ function infinity_options_render_menu_section( Pie_Easy_Sections_Section $sectio
 
 	// load the menu section template
 	infinity_dashboard_load_template(
-		Pie_Easy_Files::path_build( 'options', 'menu_section.php', true ),
+		'options/menu_section.php',
 		array(
 			'section' => $section,
 			'children' => $children,
@@ -532,7 +529,7 @@ function infinity_options_render_menu_options( $options )
 {
 	// load the menu options template
 	infinity_dashboard_load_template(
-		Pie_Easy_Files::path_build( 'options', 'menu_options.php', true ),
+		'options/menu_options.php',
 		array( 'options' => $options )
 	);
 }

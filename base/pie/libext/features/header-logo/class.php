@@ -32,14 +32,6 @@ class Pie_Easy_Exts_Features_Header_Logo
 		$this->description = __( 'Custom header logo support', pie_easy_text_domain );
 	}
 
-	public function init_styles()
-	{
-		// run parent
-		parent::init_styles();
-
-		// add positioning styles
-	}
-
 	/**
 	 * Return URL to uploaded logo image
 	 *

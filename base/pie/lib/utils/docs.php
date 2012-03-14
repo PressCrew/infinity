@@ -11,8 +11,6 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'utils/files' );
-
 /**
  * Make documentation easy
  *
@@ -219,9 +217,11 @@ class Pie_Easy_Docs extends Pie_Easy_Base
 			$page = array_pop( $splits );
 			// anything left?
 			if ( count($splits) ) {
+				// put them pack together
+				$doc_append = implode( '/', $splits );
 				// append remaining parts to each doc dir
 				foreach ( $this->doc_dirs as &$doc_dir ) {
-					$doc_dir .= Pie_Easy_Files::path_build( $splits );
+					$doc_dir .= '/' . $doc_append;
 				}
 			}
 		}

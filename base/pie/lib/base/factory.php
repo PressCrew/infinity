@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'base/componentable', 'utils/files' );
+Pie_Easy_Loader::load( 'base/componentable' );
 
 /**
  * Make creating concrete components easy
@@ -40,10 +40,7 @@ abstract class Pie_Easy_Factory extends Pie_Easy_Componentable
 		$ext_full = sprintf('%s/%s', $this->policy()->get_handle(), $ext );
 
 		// format extension file name
-		$ext_file =
-			Pie_Easy_Files::path_build(
-				$this->policy()->get_handle(), $ext, 'class.php', true
-			);
+		$ext_file = sprintf( '%s/%s/class.php', $this->policy()->get_handle(), $ext );
 
 		// look for scheme files first
 		$file_theme =

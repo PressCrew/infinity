@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'base/component', 'ui/styleable', 'utils/files' );
+Pie_Easy_Loader::load( 'base/component', 'ui/styleable' );
 
 /**
  * Make a feature easy
@@ -28,7 +28,7 @@ abstract class Pie_Easy_Features_Feature
 		parent::init();
 
 		// look for an options configuration file
-		$options_file = $this->locate_ext_file( 'options.ini' );
+		$options_file = $this->locate_file( 'options.ini' );
 
 		// find one?
 		if ( $options_file ) {

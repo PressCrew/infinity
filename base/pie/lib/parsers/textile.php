@@ -14,10 +14,7 @@
 /**
  * Load the markdown lib
  */
-require_once
-	PIE_EASY_VENDORS_DIR .
-	DIRECTORY_SEPARATOR . 'textile' .
-	DIRECTORY_SEPARATOR . 'classTextile.php';
+require_once PIE_EASY_VENDORS_DIR . '/textile/classTextile.php';
 
 /**
  * Make Textile parsing easy

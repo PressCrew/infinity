@@ -83,7 +83,7 @@ final class Pie_Easy_Files extends Pie_Easy_Base
 			// strip out leading drive letters (Windows)
 			$path_clean = preg_replace( '/^[a-z]{1}:/i', '', $path );
 			// replace double back slashes with single backslash
-			$path_clean = str_replace( '\\', DIRECTORY_SEPARATOR, $path_clean );
+			$path_clean = str_replace( '\\', '/', $path_clean );
 		}
 			
 		// split at forward and back slashes
@@ -91,39 +91,16 @@ final class Pie_Easy_Files extends Pie_Easy_Base
 	}
 
 	/**
-	 * Pop and return the last file off the end of a path
+	 * Resolve a file path like realpath() does, but without following symlinks,
+	 * and without requiring that the file exists
 	 *
-	 * @see path_split
-	 * @param string $path
-	 * @return string
-	 */
-	public static function path_pop ( $path )
-	{
-		return array_pop( self::path_split( $path ) );
-	}
-
-	/**
-	 * Build a filesytem path from a list of file names
-	 *
-	 * @internal Using this for building URL paths is a bad idea.
 	 * @param array $file_names,... One array or an unlimited number of file names
-	 * @param boolean $relative [Optional] Set to true if the path is relative (no leading slash)
 	 * @return string
 	 */
-	public static function path_build ()
+	public static function path_resolve()
 	{
 		// get all args
 		$args = func_get_args();
-
-		// relative is false by default
-		$relative = false;
-
-		// check for relative flag
-		if ( end( $args ) === true ) {
-			$relative = true;
-			array_pop($args);
-		}
-		reset( $args );
 
 		// if two or more args, we got some file names
 		if ( is_array($args[0]) ) {
@@ -132,46 +109,40 @@ final class Pie_Easy_Files extends Pie_Easy_Base
 			$file_names = $args;
 		}
 
+		// maybe files array
+		$file_names_maybe = array();
+
+		// merge all paths
+		foreach( $file_names as $file_name ) {
+			// split and add to maybe list
+			foreach( self::path_split( $file_name ) as $sub_path ) {
+				$file_names_maybe[] = $sub_path;
+			}
+		}
+
 		// final files array
 		$file_names_clean = array();
 
-		// clean them up
-		foreach( $file_names as $file_name ) {
-			// handle string
-			if ( is_string( $file_name ) ) {
-				// split into parts
-				$sub_paths = self::path_split( $file_name );
-			} else {
-				// should already be an array
-				$sub_paths = $file_name;
+		// resolve
+		foreach( $file_names_maybe as $maybe_file ) {
+			// handle relative traversal in absolute paths
+			if ( $maybe_file == '' ) {
+				// empty file, skip
+				continue;
+			} elseif ( $maybe_file == '.' ) {
+				// single dot, skip
+				continue;
+			} elseif ( $maybe_file == '..' ) {
+				// two dots, remove last dir "up"
+				array_pop( $file_names_clean );
+				continue;
 			}
-			// add to final list
-			foreach( $sub_paths as $sub_path ) {
-				// handle relative traversal in absolute paths
-				if ( !$relative ) {
-					if ( $sub_path == '.' ) {
-						// single dot, skip
-						continue;
-					} elseif ( $sub_path == '..' ) {
-						// two dots, remove last dir "up"
-						array_pop( $file_names_clean );
-						continue;
-					}
-				}
-				// push file name onto final array
-				array_push( $file_names_clean, $sub_path );
-			}
+			// push file name onto final array
+			$file_names_clean[] = $maybe_file;
 		}
 
 		// format the final path
-		$final_path = implode( DIRECTORY_SEPARATOR, $file_names_clean );
-
-		// relative
-		if ( $relative ) {
-			return $final_path;
-		} else {
-			return DIRECTORY_SEPARATOR . $final_path;
-		}
+		return '/' . implode( '/', $file_names_clean );
 	}
 
 	/**
@@ -276,7 +247,7 @@ final class Pie_Easy_Files extends Pie_Easy_Base
 					// check regex
 					if ( preg_match($regex, $file) ) {
 						// build file path
-						$file_path = ( $absolute ) ? $dir . DIRECTORY_SEPARATOR . $file : $file;
+						$file_path = ( $absolute ) ? $dir . '/' . $file : $file;
 						// push onto return array
 						$return_files[$file] = $file_path;
 					}
@@ -331,7 +302,7 @@ final class Pie_Easy_Files extends Pie_Easy_Base
 	 */
 	static public function theme_dir( $theme )
 	{
-		return self::theme_root( $theme ) . DIRECTORY_SEPARATOR . $theme;
+		return self::theme_root( $theme ) . '/' . $theme;
 	}
 
 	/**
@@ -373,7 +344,7 @@ final class Pie_Easy_Files extends Pie_Easy_Base
 	static public function theme_file_to_rel( $file_path )
 	{
 		// convert path to be realtive to themes root
-		return str_replace( realpath( get_theme_root() ) . DIRECTORY_SEPARATOR, '', $file_path );
+		return str_replace( realpath( get_theme_root() ) . '/', '', $file_path );
 	}
 
 	/**

@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'base/exportable', 'base/recursable', 'collections', 'utils/files' );
+Pie_Easy_Loader::load( 'base/exportable', 'base/recursable' );
 
 /**
  * Make assets for components easy
@@ -23,6 +23,11 @@ Pie_Easy_Loader::load( 'base/exportable', 'base/recursable', 'collections', 'uti
 abstract class Pie_Easy_Asset extends Pie_Easy_Base
 	implements Pie_Easy_Exportable, Pie_Easy_Recursable
 {
+	/**
+	 * @var Pie_Easy_Component 
+	 */
+	private $component;
+
 	/**
 	 * Stack of sections
 	 * 
@@ -46,11 +51,26 @@ abstract class Pie_Easy_Asset extends Pie_Easy_Base
 	private $deps;
 
 	/**
-	 * The files
+	 * The files to enqueue
 	 *
+	 * @todo this functionality does not exist yet
 	 * @var Pie_Easy_Stack
 	 */
 	private $files;
+
+	/**
+	 * The files to export
+	 *
+	 * @var Pie_Easy_Stack
+	 */
+	private $files_export;
+
+	/**
+	 * Export callbacks
+	 *
+	 * @var Pie_Easy_Stack
+	 */
+	private $callbacks;
 
 	/**
 	 * The strings
@@ -59,20 +79,6 @@ abstract class Pie_Easy_Asset extends Pie_Easy_Base
 	 */
 	private $strings;
 
-	/**
-	 * An option exporter instance
-	 *
-	 * @var Pie_Easy_Export
-	 */
-	private $exporter;
-
-	/**
-	 * Callback to exec immediately before exporting
-	 *
-	 * @var string|array
-	 */
-	protected $pre_export_callback;
-	
 	/**
 	 * Files that have already been imported
 	 *
@@ -83,12 +89,19 @@ abstract class Pie_Easy_Asset extends Pie_Easy_Base
 	/**
 	 * Constructor
 	 */
-	public function __construct()
+	public function __construct( Pie_Easy_Component $component = null )
 	{
+		// get a component?
+		if ( $component ) {
+			$this->component = $component;
+		}
+
 		// init maps and stacks
 		$this->sections = new Pie_Easy_Map();
 		$this->deps = new Pie_Easy_Stack();
-		$this->files = new Pie_Easy_Stack();
+		$this->files = new Pie_Easy_Map();
+		$this->files_export = new Pie_Easy_Map();
+		$this->callbacks = new Pie_Easy_Map();
 		$this->strings = new Pie_Easy_Stack();
 
 		if ( !self::$files_imported instanceof Pie_Easy_Stack ) {
@@ -97,6 +110,7 @@ abstract class Pie_Easy_Asset extends Pie_Easy_Base
 	}
 
 	/**
+	 * @todo drop this for a get_section() wrapper
 	 * @return Pie_Easy_Asset
 	 */
 	public function __call( $name, $arguments )
@@ -111,27 +125,65 @@ abstract class Pie_Easy_Asset extends Pie_Easy_Base
 	}
 
 	/**
+	 * Return the component which "owns" this asset instance
+	 *
+	 * @return Pie_Easy_Component
+	 */
+	final protected function component()
+	{
+		if ( $this->component instanceof Pie_Easy_Component ) {
+			return $this->component;
+		} else {
+			throw new Exception( 'No component is set' );
+		}
+	}
+
+	/**
+	 * Add a file or callback from which to populate the dynamic asset cache
+	 *
+	 * @param string $handle
+	 * @param string|array $file_or_callback
+	 * @return Pie_Easy_Asset
+	 */
+	final public function cache( $handle, $file_or_callback )
+	{
+		// does string have an extension?
+		if ( is_string( $file_or_callback) && strpos( $file_or_callback, '.' ) ) {
+			// string contains a dot, assume its a file
+			$this->add_file( $handle, $file_or_callback, true );
+		} else {
+			// nope... determine if it could be a callback
+			if ( method_exists( $this->component(), $file_or_callback ) ) {
+				// its a method of the component
+				$this->add_callback(
+					$handle,
+					array( $this->component(), $file_or_callback )
+				);
+			} elseif ( is_callable( $file_or_callback, true ) ) {
+				// it *might* be a valid callback
+				$this->add_callback( $handle, $file_or_callback );
+			}
+		}
+
+		// maintain chain
+		return $this;
+	}
+
+	/**
 	 * Add a section to the asset
 	 * 
 	 * @param string $name
 	 * @return Pie_Easy_Asset 
 	 */
-	public function add_section( $name )
+	final public function add_section( $name )
 	{
 		// get class of this object
 		$class = get_class( $this );
 		
 		// new "sub asset"
-		$asset = new $class();
+		$asset = new $class( $this->component );
 
-		// add exporter if applicable
-		if ( $this->exporter instanceof Pie_Easy_Export ) {
-			// yep, use section name
-			$exporter = $this->exporter->child( $name );
-			$asset->exporter( $exporter );
-		}
-
-		// and new "sub asset" of same class
+		// add new "sub asset" of same class
 		$this->sections->add( $name, $asset );
 
 		return $this;
@@ -142,19 +194,23 @@ abstract class Pie_Easy_Asset extends Pie_Easy_Base
 	 *
 	 * @return boolean
 	 */
-	public function has_sections()
+	final public function has_sections()
 	{
 		return ( $this->sections->count() );
 	}
 
 	/**
-	 * Returns one of this asset's sections
+	 * Returns one of this asset's sections if applicable
 	 *
 	 * @return Pie_Easy_Asset
 	 */
-	public function get_section( $name )
+	final public function get_section( $name )
 	{
-		return $this->sections->item_at( $name );
+		if ( is_string( $name ) ) {
+			return $this->sections->item_at( $name );
+		} else {
+			return $this;
+		}
 	}
 
 	/**
@@ -162,14 +218,14 @@ abstract class Pie_Easy_Asset extends Pie_Easy_Base
 	 *
 	 * @return array
 	 */
-	public function get_sections()
+	final public function get_sections()
 	{
 		return $this->sections->to_array();
 	}
 
 	/**
 	 */
-	public function get_children()
+	final public function get_children()
 	{
 		return $this->get_sections();
 	}
@@ -178,8 +234,9 @@ abstract class Pie_Easy_Asset extends Pie_Easy_Base
 	 * Add a dependancy
 	 *
 	 * @param string $dep_handle Handle of the dependancy to add
+	 * @return Pie_Easy_Asset
 	 */
-	public function add_dep( $dep_handle )
+	final public function add_dep( $dep_handle )
 	{
 		// just in case
 		$dep_handle = trim( $dep_handle );
@@ -187,6 +244,8 @@ abstract class Pie_Easy_Asset extends Pie_Easy_Base
 		if ( strlen( $dep_handle ) && !$this->deps->contains( $dep_handle ) ) {
 			$this->deps->push( $dep_handle );
 		}
+
+		return $this;
 	}
 
 	/**
@@ -194,7 +253,7 @@ abstract class Pie_Easy_Asset extends Pie_Easy_Base
 	 *
 	 * @return boolen
 	 */
-	public function has_deps()
+	final public function has_deps()
 	{
 		return ( $this->deps->count() );
 	}
@@ -204,7 +263,7 @@ abstract class Pie_Easy_Asset extends Pie_Easy_Base
 	 *
 	 * @return array
 	 */
-	public function get_deps()
+	final public function get_deps()
 	{
 		return $this->deps->to_array();
 	}
@@ -212,34 +271,36 @@ abstract class Pie_Easy_Asset extends Pie_Easy_Base
 	/**
 	 * Push all of this asset's deps onto the given stack
 	 *
-	 * @return true
+	 * @return Pie_Easy_Asset
 	 */
-	public function push_deps( Pie_Easy_Stack $stack )
+	final public function push_deps( Pie_Easy_Stack $stack )
 	{
 		foreach ( $this->deps as $dep ) {
 			$stack->push( $dep );
 		}
 
-		return true;
+		return $this;
 	}
 
 	/**
 	 * Add a file
 	 *
+	 * @param string $handle
 	 * @param string $file
-	 * @param array $deps
+	 * @param boolean $cache
+	 * @return Pie_Easy_Asset
 	 */
-	public function add_file( $file, $deps = null )
+	final public function add_file( $handle, $file, $cache = false )
 	{
-		// push file onto stack
-		$this->files->push( $file );
-
-		// add deps to stack
-		if ( is_array($deps) && count($deps) ) {
-			foreach( $deps as $dep ) {
-				$this->add_dep($dep);
-			}
+		// push file onto applicable stack
+		if ( true === $cache ) {
+			$this->files_export->add( $handle, $file );
+		} else {
+			$this->files->add( $handle, $file );
 		}
+
+		// maintain chain
+		return $this;
 	}
 
 	/**
@@ -247,7 +308,7 @@ abstract class Pie_Easy_Asset extends Pie_Easy_Base
 	 *
 	 * @return boolen
 	 */
-	public function has_files()
+	final public function has_files()
 	{
 		return ( $this->files->count() );
 	}
@@ -257,19 +318,50 @@ abstract class Pie_Easy_Asset extends Pie_Easy_Base
 	 *
 	 * @return array
 	 */
-	public function get_files()
+	final public function get_files()
 	{
 		return $this->files->to_array();
+	}
+
+	/**
+	 * Add a callback to execute just before exporting
+	 *
+	 * @param string $handle
+	 * @param string|array $callback
+	 * @return Pie_Easy_Asset
+	 */
+	final public function add_callback( $handle, $callback )
+	{
+		if ( is_callable( $callback ) ) {
+			$this->callbacks->add( $handle, $callback );
+		} else {
+			throw new Exception( sprintf( 'The callback for handle "%s" is not callable', $handle ) );
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Returns true if at least one callback has been added
+	 * 
+	 * @return boolean
+	 */
+	final public function has_callbacks()
+	{
+		return ( $this->callbacks->count() );
 	}
 
 	/**
 	 * Push an arbitrary string on the stack
 	 *
 	 * @param string $string
+	 * @return Pie_Easy_Asset
 	 */
-	public function add_string( $string )
+	final public function add_string( $string )
 	{
 		$this->strings->push( $string );
+
+		return $this;
 	}
 
 	/**
@@ -277,7 +369,7 @@ abstract class Pie_Easy_Asset extends Pie_Easy_Base
 	 *
 	 * @return boolean
 	 */
-	public function has_strings()
+	final public function has_strings()
 	{
 		return ( $this->strings->count() );
 	}
@@ -287,7 +379,7 @@ abstract class Pie_Easy_Asset extends Pie_Easy_Base
 	 *
 	 * @return array
 	 */
-	public function get_strings()
+	final public function get_strings()
 	{
 		return $this->strings->to_array();
 	}
@@ -295,29 +387,36 @@ abstract class Pie_Easy_Asset extends Pie_Easy_Base
 	/**
 	 * Inject static code/markup
 	 *
+	 * @todo get rid of file splitting!
 	 * @return string
 	 */
 	public function export()
 	{
-		// exec the pre export callback if applicable
-		if ( ( $this->pre_export_callback ) && is_callable( $this->pre_export_callback ) ) {
-			call_user_func( $this->pre_export_callback );
-		}
-		
 		// the code that will be returned
 		$code = null;
 
+		// handle callbacks
+		if ( $this->has_callbacks() ) {
+			// loop em
+			foreach ( $this->callbacks as $callback ) {
+				// execute callback with myself as only argument
+				call_user_func( $callback, $this );
+			}
+		}
+
 		// have any files?
-		if ( $this->has_files() ) {
+		if ( $this->files_export->count() ) {
 
 			// loop through all files
-			foreach ( $this->get_files() as $file ) {
+			foreach ( $this->files_export as $file ) {
 
 				// resolve file path
-				if ( path_is_absolute( $file ) ) {
+				if ( $file{0} == '/' ) {
+					// its absolute already, which is good
 					$filename = $file;
 				} else {
-					$filename = Pie_Easy_Scheme::instance()->locate_file( $file );
+					// relative path, need to locate it
+					$filename = $this->component()->locate_file( $file );
 				}
 
 				// only import each file once!
@@ -399,52 +498,6 @@ abstract class Pie_Easy_Asset extends Pie_Easy_Base
 	protected function get_file_contents( $filename )
 	{
 		return file_get_contents( $filename );
-	}
-
-	/**
-	 * Get/Set current exporter
-	 * 
-	 * @param Pie_Easy_Export $exporter
-	 * @return Pie_Easy_Export
-	 */
-	public function exporter( Pie_Easy_Export $exporter = null )
-	{
-		// setting?
-		if ( $exporter ) {
-			// already set?
-			if ( $this->exporter instanceof Pie_Easy_Export ) {
-				throw new Exception( 'Cannot set exporter, already set' );
-			} else {
-				// ok, set it
-				$this->exporter = $exporter;
-				// push myself onto export stack
-				$this->exporter->push( $this );
-			}
-		}
-
-		// return exporter instance
-		if ( $this->exporter instanceof Pie_Easy_Export ) {
-			return $this->exporter;
-		} else {
-			throw new Exception( 'No exporter has been set' );
-		}
-	}
-
-	/**
-	 * Callback to exec immediately before exporting
-	 *
-	 * @param string|array $callback
-	 * @return Pie_Easy_Asset
-	 */
-	public function on_export( $callback )
-	{
-		if ( is_callable( $callback ) ) {
-			$this->pre_export_callback = $callback;
-		} else {
-			throw new Exception( 'The callback provided is not callable' );
-		}
-
-		return $this;
 	}
 }
 

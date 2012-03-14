@@ -188,8 +188,8 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 		// map of styles and depends
 		$styles = new Pie_Easy_Map();
 
-		// get component style export
-		$export_styles = Pie_Easy_Component::get_exports( 'style' );
+		// get export
+		$export_styles = $this->scheme->exports()->get( 'styles' );
 
 		// build up array of exports
 		if ( is_admin() ) {
@@ -234,8 +234,8 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 		// map of scripts and script depends
 		$script = new Pie_Easy_Map();
 
-		// get component script export
-		$export_script = Pie_Easy_Component::get_exports( 'script' );
+		// get export
+		$export_script = $this->scheme->exports()->get( 'scripts' );
 
 		// build up array of exports
 		if ( is_admin() ) {
@@ -243,7 +243,7 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 		} else {
 			$exports['dynamic'] = $export_script;
 		}
-		
+
 		// always register global
 		$exports['dynamic-global'] = $export_script->child( 'global' );
 

@@ -12,11 +12,6 @@
  */
 
 /**
- * Load reqs
- */
-Pie_Easy_Loader::load( 'utils/files', 'collections' );
-
-/**
  * Make Scheming Easy
  *
  * @package PIE
@@ -162,6 +157,11 @@ final class Pie_Easy_Scheme extends Pie_Easy_Base
 	private $enqueue;
 
 	/**
+	 * @var Pie_Easy_Export_Manager
+	 */
+	private $exports;
+
+	/**
 	 * This is a singleton
 	 */
 	private function __construct()
@@ -170,6 +170,11 @@ final class Pie_Easy_Scheme extends Pie_Easy_Base
 		$this->themes = new Pie_Easy_Stack();
 		$this->directives = new Pie_Easy_Init_Directive_Registry();
 		$this->config_files_loaded = new Pie_Easy_Stack();
+
+		// set up exports
+		$this->exports = new Pie_Easy_Export_Manager();
+		$this->exports->add( 'styles', new Pie_Easy_Component_Style_Export( 'dynamic', 'css' ) );
+		$this->exports->add( 'scripts', new Pie_Easy_Component_Script_Export( 'dynamic', 'js' ) );
 	}
 
 	/**
@@ -256,6 +261,20 @@ final class Pie_Easy_Scheme extends Pie_Easy_Base
 		}
 
 		throw new Exception( 'The enqueuer has not been initialized yet' );
+	}
+
+	/**
+	 * Get exports manager
+	 *
+	 * @return Pie_Easy_Export_Manager
+	 */
+	public function exports()
+	{
+		if ( $this->exports instanceof Pie_Easy_Export_Manager ) {
+			return $this->exports;
+		}
+
+		throw new Exception( 'The export manager has not been initialized yet' );
 	}
 
 	/**
@@ -491,7 +510,7 @@ final class Pie_Easy_Scheme extends Pie_Easy_Base
 	}
 
 	/**
-	 * Refresh dynamic css/js file if necessary
+	 * Refresh export files if necessary
 	 */
 	public function exports_refresh()
 	{
@@ -504,22 +523,22 @@ final class Pie_Easy_Scheme extends Pie_Easy_Base
 				// use current time
 				$mtime = time();
 			}
-			// try to refresh against every exporter
-			foreach ( Pie_Easy_Component::get_exports() as $export ) {
-				$export->refresh( $mtime );
+			// check if stale
+			if ( $this->exports()->stale( $mtime ) ) {
+				// loop all component registries and pass them the exporters
+				foreach ( Pie_Easy_Policy::all() as $policy ) {
+					// call accept on the registry for each export
+					$policy->registry()->accept( $this->exports()->get( 'styles' ) );
+					$policy->registry()->accept( $this->exports()->get( 'scripts' ) );
+				}
+				// update 'em
+				$this->exports()->update();
+				// all done
+				return true;
 			}
 		}
-	}
 
-	/**
-	 * Do a hard refresh of all component exports
-	 */
-	public function exports_refresh_hard()
-	{
-		// try to refresh against every exporter
-		foreach ( Pie_Easy_Component::get_exports() as $export ) {
-			$export->refresh_hard();
-		}
+		return false;
 	}
 
 	/**
@@ -715,7 +734,7 @@ final class Pie_Easy_Scheme extends Pie_Easy_Base
 			throw new Exception( 'No file names passed' );
 		}
 
-		return $this->theme_dir( $theme ) . Pie_Easy_Files::path_build( $file_names );
+		return $this->theme_dir( $theme ) . '/' . implode( '/', $file_names );
 	}
 
 	/**
@@ -733,9 +752,6 @@ final class Pie_Easy_Scheme extends Pie_Easy_Base
 		// get all args
 		$file_names = func_get_args();
 
-		// file paths to be located
-		$locate_names = array();
-
 		// no prefix map by default
 		$prefix_map = null;
 
@@ -751,16 +767,6 @@ final class Pie_Easy_Scheme extends Pie_Easy_Base
 			return false;
 		}
 
-		// split all strings in case they contain a static directory separator
-		foreach ( $file_names as $file_name ) {
-			// split it
-			$splits = Pie_Easy_Files::path_split( $file_name );
-			// append to array
-			foreach ( $splits as $split ) {
-				$locate_names[] = $split;
-			}
-		}
-
 		// loop through stack TOP DOWN
 		foreach ( $this->themes->to_array(true) as $theme ) {
 
@@ -769,11 +775,11 @@ final class Pie_Easy_Scheme extends Pie_Easy_Base
 
 			// inject prefix?
 			if ( $prefix_map && $prefix_map->contains($theme) ) {
-				$stack_file .= DIRECTORY_SEPARATOR . $prefix_map->item_at($theme)->value;
+				$stack_file .= '/' . $prefix_map->item_at($theme)->value;
 			}
 
 			// append requested path
-			$stack_file .= Pie_Easy_Files::path_build( $locate_names );
+			$stack_file .= '/' . implode( '/', $file_names );
 
 			// does stack file exist?
 			if ( Pie_Easy_Files::cache($stack_file)->is_readable() ) {

@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load( 'components/widgets/component', 'utils/ajax', 'utils/files' );
+Pie_Easy_Loader::load( 'components/widgets/component', 'utils/ajax' );
 
 /**
  * Posts list widget

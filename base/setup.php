@@ -14,10 +14,10 @@
 /**
  * Include custom comments, template tags, and walker classes
  */
-require_once( INFINITY_BASE_DIR . DIRECTORY_SEPARATOR . 'comments.php' );
-require_once( INFINITY_BASE_DIR . DIRECTORY_SEPARATOR . 'templatetags.php' );
-require_once( INFINITY_BASE_DIR . DIRECTORY_SEPARATOR . 'walkers.php' );
-require_once( INFINITY_BASE_DIR . DIRECTORY_SEPARATOR . 'options.php' );
+require_once( INFINITY_BASE_DIR . '/comments.php' );
+require_once( INFINITY_BASE_DIR . '/templatetags.php' );
+require_once( INFINITY_BASE_DIR . '/walkers.php' );
+require_once( INFINITY_BASE_DIR . '/options.php' );
 
 // add post formats
 function infinity_base_post_formats() 
