@@ -50,23 +50,15 @@ function infinity_content_class()
 	}
 	
 	// render class attribute ?>
-	<?php if ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_17" ): ?>
-		class="grid_17 alpha"
-	<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_20" ): ?>
-		class="grid_20 alpha"
-	<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_19" ): ?>
-		class="grid_19 alpha"
-	<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_18" ): ?>
-		class="grid_18 alpha"
-	<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_16" ): ?>
-		class="grid_16 alpha"
-	<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_15" ): ?>
-		class="grid_15 alpha"
-	<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_14" ): ?>
-		class="grid_14 alpha"
-	<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_12" ): ?>
-		class="grid_12 alpha"
-	<?php endif;
+<?php if ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_17" ): ?>grid_17 alpha
+<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_20" ): ?>grid_20 alpha
+<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_19" ): ?>grid_19 alpha
+<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_18" ): ?>grid_18 alpha
+<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_16" ): ?>grid_16 alpha
+<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_15" ): ?>grid_15 alpha
+<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_14" ): ?>grid_14 alpha
+<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_12" ): ?>grid_12 alpha
+<?php endif;
 }
 add_action( 'content_class', 'infinity_content_class' );
 	
@@ -83,23 +75,15 @@ function infinity_sidebar_class()
 	}
 	
 	// render grid class ?>
-	<?php if ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_17" ): ?>
-		class="grid_7 omega"
-	<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_20" ): ?>
-		class="grid_4 omega"
-	<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_19" ): ?>
-		class="grid_5 omega"
-	<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_18" ): ?>
-		class="grid_6 omega"
-	<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_16" ): ?>
-		class="grid_8 omega"
-	<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_15" ): ?>
-		class="grid_9 omega"
-	<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_14" ): ?>
-		class="grid_10 omega"
-	<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_12" ): ?>
-		class="grid_12 omega"
-	<?php endif;
+<?php if ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_17" ): ?>grid_7 omega
+<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_20" ): ?>grid_4 omega
+<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_19" ): ?>grid_5 omega
+<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_18" ): ?>grid_6 omega
+<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_16" ): ?>grid_8 omega
+<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_15" ): ?>grid_9 omega
+<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_14" ): ?>grid_10 omega
+<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_12" ): ?>grid_12 omega
+<?php endif;
 }
 add_action( 'sidebar_class', 'infinity_sidebar_class' );
 	 
@@ -115,26 +99,33 @@ function infinity_grid_fallback()
 	if ( !current_theme_supports( 'infinity-grid-style' ) ) {
 		return;
 	}
-	
 	// render grid fallback script ?>
 	<script>
 	jQuery(document).ready(function() {
 	<?php if ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_17" ): ?>
-		jQuery('div#content').addClass('grid_17 alpha');
+		jQuery('#content').removeClass('grid_17');
+		jQuery('#content').addClass('grid_17');
 	<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_20" ): ?>
-		jQuery('div#content').addClass('grid_20 alpha');
+		jQuery('#content').removeClass('grid_20');
+		jQuery('#content').addClass('grid_20');
 	<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_19" ): ?>
-		jQuery('div#content').addClass('grid_19 alpha');
+		jQuery('#content').removeClass('grid_19');
+		jQuery('#content').addClass('grid_19');
 	<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_18" ): ?>
-		jQuery('div#content').addClass('grid_18 alpha');
+		jQuery('#content').removeClass('grid_18');
+		jQuery('#content').addClass('grid_18');
 	<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_16" ): ?>
-		jQuery('div#content').addClass('grid_16 alpha');
+		jQuery('#content').removeClass('grid_16');
+		jQuery('#content').addClass('grid_16');
 	<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_15" ): ?>
-		jQuery('div#content').addClass('grid_15 alpha');
+		jQuery('#content').removeClass('grid_15');
+		jQuery('#content').addClass('grid_15');
 	<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_14" ): ?>
-		jQuery('div#content').addClass('grid_14 alpha');
+		jQuery('#content').removeClass('grid_14');
+		jQuery('#content').addClass('grid_14');
 	<?php elseif ( infinity_option_get( 'infinity-core-options-sidebar_size' ) == "grid_12" ): ?>
-		jQuery('div#content').addClass('grid_12 alpha');
+		jQuery('#content').removeClass('grid_12');
+		jQuery('#content').addClass('grid_12');
 	<?php endif; ?>
 	});
 	</script><?php
@@ -152,28 +143,48 @@ function infinity_footer_widget_class()
 	if ( !current_theme_supports( 'infinity-grid-style' ) ) {
 		return;
 	}
-	// render grid class
-	?> grid_8 <?php
+// render grid class
+?>grid_8<?php
 }
 add_action( 'footer_widget_class', 'infinity_footer_widget_class' );
 
 /**
-* Inject CSS to move sidebar to Left based on theme option
+* Add Left Sidebar class to content/sidebar id based on theme option.
 *
-* TO DO: load this CSS in dynamic.css instead of injecting it inline
 *
 * @package Infinity
 * @subpackage base
 */
-function infinity_sidebar_position_css( ) 
+function infinity_sidebar_position_css()
 {
-	// render position css ?>
-	<?php if ( infinity_option_get( 'infinity-core-options-sidebar_position' ) == "left" ): ?>
-		<style type='text/css'>
-			#content{float:right;}#inner-sidebar{margin-left:-23px;margin-right:10px;padding-right:25px;}
-		</style>
-	<?php endif;
+	if ( !current_theme_supports( 'infinity-grid-style' ) || infinity_option_get( 'infinity-core-options-sidebar_position' ) == "right" ) {
+		return;
+	}
+// render grid class
+?>sidebar-left<?php
 }
-add_action( 'wp_head', 'infinity_sidebar_position_css' );
+add_action( 'sidebar_class', 'infinity_sidebar_position_css' );
+add_action( 'content_class', 'infinity_sidebar_position_css' );
 
+/**
+ * Left Sidebar Class. Add Left Sidebar class to content when content_class and sidebar_class do actions
+ * Are not added to custom templates (Most notably BuddyPress)
+ * 
+ * @package Infinity
+ * @subpackage base
+ */
+function infinity_sidebar_left_fallback()
+{
+	if ( !current_theme_supports( 'infinity-grid-style' ) || infinity_option_get( 'infinity-core-options-sidebar_position' ) == "right" ) {
+		return;
+	}
+	// render grid fallback script ?>
+	<script>
+	jQuery(document).ready(function() {
+		jQuery('#content').removeClass('sidebar-left');
+		jQuery('#content').addClass('sidebar-left');
+	});
+	</script><?php
+}
+add_action( 'open_body', 'infinity_sidebar_left_fallback' );
 ?>
