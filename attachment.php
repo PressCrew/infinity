@@ -13,7 +13,7 @@
 
 	infinity_get_header();
 ?>
-	<div id="content" role="main" <?php do_action( 'content_class' ); ?>>
+	<div id="content" role="main" class="<?php do_action( 'content_class' ); ?>">
 		<?php
 			do_action( 'before_content' );
 			do_action( 'before_attachment' );
