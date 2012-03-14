@@ -44,8 +44,6 @@ body {
 #header {
     min-height: 150px;
     position: relative;
-    /* setting z-index for dropdowns. do not mess with this */
-    z-index: 11 !important; 
 }
 
 #site-description {
@@ -260,18 +258,18 @@ border: 0px;
  ! Content  
  =========== */
  
-/* Fallback for browsers who don't have JS enabled */
-#content, #sidebar {
-	margin-left: 0.41666666666667%;
-	margin-right: 0.41666666666667%;
-	float: left;
-	display: block;
-}
-
 #inner-sidebar {
-    margin-right: -2.94%;
+	margin-right: -2.94%;
 }
 
+#content.sidebar-left {
+	float: right !important;
+}
+
+.sidebar-left #inner-sidebar {
+    margin-left: -40px;
+    margin-right: 20px;
+}
       
 /* =========== 
  ! Sidebar   

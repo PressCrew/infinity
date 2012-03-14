@@ -71,7 +71,7 @@ h1#site-title, div#site-title {
     padding-right: 30px;
 }
 /* Global CSS3 Stuff */
-.main-menu, .top-menu, .top-wrap .sub-menu, .item-list-tabs, .footer-wrap,thead:first-child tr th, thead:first-child tr td  {
+.main-menu, .top-menu, .top-wrap .sub-menu, .item-list-tabs, .footer-wrap,thead:first-child tr th, thead:first-child tr td, .base-menu ul.sub-menu  {
     background-color: #222222;
     background-image: -webkit-linear-gradient(center top , #333333, #222222);
     background-image: -moz-linear-gradient(center top , #333333, #222222);
@@ -134,6 +134,13 @@ div.item-list-tabs {
     -moz-border-radius: 6px 6px 6px 6px;
     border-radius: 6px 6px 6px 6px;
     margin-right: 10px;
+}
+#main-menu-wrap .sub-menu {
+margin: 8px 0 0;
+}
+
+.base-menu .sub-menu {
+padding-left: 0px !important;
 }
 /* Setup the inner sidebar. This contains some negative margins and padding which can't be applied it the #sidebar class
 because of the Flexible Grid class it needs.*/

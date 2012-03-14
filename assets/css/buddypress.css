@@ -130,6 +130,9 @@ ul.item-list li img.avatar {
     float: left;
     margin: 0 10px 10px 0;
 }
+.widget img.avatar {
+     float: left;
+}
 ul.item-list li div.item-title, ul.item-list li h4 {
     font-weight: normal;
     width: 100%;
