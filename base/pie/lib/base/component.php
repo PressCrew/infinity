@@ -438,21 +438,6 @@ abstract class Pie_Easy_Component
 			$this->ignore = (boolean) $config->ignore;
 		}
 
-		// default style
-		$default_style = $this->locate_file( 'style.css' );
-
-		// have default style file?
-		if ( $default_style ) {
-			$this->style()->cache( $this->get_element_id(), $default_style );
-		}
-
-		// default script
-		$default_script = $this->locate_file( 'script.js' );
-
-		// have default script file?
-		if ( $default_script ) {
-			$this->script()->cache( $this->get_element_id(), $default_script );
-		}
 	}
 
 	/**

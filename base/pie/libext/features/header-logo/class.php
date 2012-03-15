@@ -38,11 +38,10 @@ class Pie_Easy_Exts_Features_Header_Logo
 	{
 		parent::init_styles();
 		
-		// add static logo styles
-		$this->style()->cache( 'logo', 'logo.css' );
-
-		// add dynamic logo styles callback
-		$this->style()->cache( 'logo-gen', 'logo_styles' );
+		// add static logo styles and callback
+		$this->style()
+			->cache( 'logo', 'logo.css' )
+			->cache( 'logo-gen', 'logo_styles' );
 	}
 
 	/**

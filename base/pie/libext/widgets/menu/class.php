@@ -32,13 +32,29 @@ class Pie_Easy_Exts_Widgets_Menu
 		// init directives
 		$this->menu_items = null;
 	}
+
+	/**
+	 */
+	public function init_styles()
+	{
+		parent::init_styles();
+
+		// slurp admin styles
+		$this->style()
+			->section( 'admin' )
+			->cache( 'admin', 'admin.css' );
+	}
 	
 	/**
 	 */
 	public function init_scripts()
 	{
 		parent::init_scripts();
-		wp_enqueue_script( 'jquery-ui-menu' );
+
+		// new jquery ui menu
+		$this->script()
+			->section( 'admin' )
+			->enqueue( 'jquery-ui-menu' );
 	}
 
 

@@ -46,7 +46,7 @@ class Pie_Easy_Exts_Options_Ui_Overlay_Picker
 		parent::init_scripts();
 
 		// add overlay script callback
-		$this->style()->cache( 'overlay-gen', 'overlay_script' );
+		$this->script()->cache( 'overlay-gen', 'overlay_script' );
 	}
 
 	/**
@@ -79,13 +79,13 @@ class Pie_Easy_Exts_Options_Ui_Overlay_Picker
 
 	/**
 	 */
-	public function overlay_script()
+	public function overlay_script( $script )
 	{
 		// have a style and selector?
 		if ( $this->__have_style__ && $this->style_selector ) {
 
 			// new logic capture
-			$this->script()->begin_logic();
+			$script->begin_logic();
 
 			// generate script
 			if (0): ?><script><?php endif; ?>
@@ -95,7 +95,7 @@ class Pie_Easy_Exts_Options_Ui_Overlay_Picker
 			
 			<?php if (0): ?></script><?php endif;
 
-			$logic = $this->script()->end_logic();
+			$logic = $script->end_logic();
 			$logic->ready = true;
 			$logic->alias = true;
 		}

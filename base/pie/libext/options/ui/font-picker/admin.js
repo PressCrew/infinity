@@ -1,6 +1,3 @@
-/**
- * @section admin
- */
 /*
 WebFont.load({
 	google: {
