@@ -24,18 +24,25 @@ class Pie_Easy_Exts_Options_Css_Custom
 {
 	/**
 	 */
-	public function init_styles_dynamic()
+	public function init_styles()
 	{
-		// run parent FIRST!
-		parent::init_styles_dynamic();
+		parent::init_styles();
 
+		// add css injection callback
+		$this->style()->cache( 'custom', 'inject_css' );
+	}
+
+	/**
+	 */
+	public function inject_css( $style )
+	{
 		// get value
 		$value = trim( $this->get() );
 
 		// did we get anything?
 		if ( !empty( $value ) ) {
 			// have to assume its valid CSS, add as string
-			$this->style()->add_string( $value );
+			$style->add_string( $value );
 		}
 	}
 }

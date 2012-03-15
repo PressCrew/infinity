@@ -89,9 +89,9 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 
 	/**
 	 */
-	public function init_styles_dynamic()
+	public function init_styles()
 	{
-		parent::init_styles_dynamic();
+		parent::init_styles();
 		$this->refresh_style_property();
 		$this->generate_style_property();
 	}
