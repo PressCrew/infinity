@@ -321,11 +321,12 @@ class Pie_Easy_Export extends Pie_Easy_Base
 		}
 
 		// any result?
-		if ( !empty( $data ) ) {
-			$this->write( $data );
+		if ( empty( $data ) ) {
+			// no content to write, empty it
+			$this->write();
 		} else {
-			// no content to write, remove it
-			$this->remove();
+			// write it!
+			$this->write( $data );
 		}
 
 		// now try to update my children
