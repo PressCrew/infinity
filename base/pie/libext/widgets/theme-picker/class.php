@@ -37,6 +37,30 @@ class Pie_Easy_Exts_Widgets_Theme_Picker
 	private $themes;
 
 	/**
+	 */
+	public function init_styles()
+	{
+		parent::init_styles();
+
+		// slurp admin styles
+		$this->style()
+			->section( 'admin' )
+			->cache( 'admin', 'admin.css' );
+	}
+
+	/**
+	 */
+	public function init_scripts()
+	{
+		parent::init_scripts();
+
+		// slurp admin styles
+		$this->script()
+			->section( 'admin' )
+			->cache( 'admin', 'admin.js' );
+	}
+
+	/**
 	 * Load all themes information into local properties
 	 * 
 	 * @todo only list themes which implement the scheme

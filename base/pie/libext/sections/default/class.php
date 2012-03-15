@@ -20,7 +20,17 @@
 class Pie_Easy_Exts_Sections_Default
 	extends Pie_Easy_Sections_Section
 {
-	// empty for now
+	/**
+	 */
+	public function init_styles()
+	{
+		parent::init_styles();
+
+		// slurp admin styles
+		$this->style()
+			->section( 'admin' )
+			->cache( 'admin', 'admin.css' );
+	}
 }
 
 ?>

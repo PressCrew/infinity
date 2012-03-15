@@ -227,8 +227,8 @@ final class Pie_Easy_Enqueue extends Pie_Easy_Base
 			'colorpicker.css'
 		);
 
-		do_action('pie_easy_register_styles');
 		do_action('pie_easy_init_styles');
+		do_action('pie_easy_register_styles');
 		do_action('pie_easy_enqueue_styles');
 	}
 
@@ -285,8 +285,8 @@ final class Pie_Easy_Enqueue extends Pie_Easy_Base
 		$this->localize_scripts();
 
 		// actions!
-		do_action('pie_easy_register_scripts');
 		do_action('pie_easy_init_scripts');
+		do_action('pie_easy_register_scripts');
 		do_action('pie_easy_enqueue_scripts');
 		do_action('pie_easy_localize_scripts');
 	}

@@ -24,6 +24,18 @@ class Pie_Easy_Exts_Widgets_Title_Block
 {
 	/**
 	 */
+	public function init_styles()
+	{
+		parent::init_styles();
+
+		// slurp admin styles
+		$this->style()
+			->section( 'admin' )
+			->cache( 'admin', 'admin.css' );
+	}
+	
+	/**
+	 */
 	public function render( $output = true )
 	{
 		if ( !$output ) {

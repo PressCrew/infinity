@@ -39,8 +39,10 @@ class Pie_Easy_Exts_Options_Upload
 	{
 		parent::init_styles();
 
-		// enqueue image editor style
-		wp_enqueue_style( 'imgareaselect' );
+		// need image editor styles
+		$this->style()
+			->section( 'admin' )
+			->enqueue( 'imgareaselect' );
 	}
 
 	/**
@@ -49,12 +51,12 @@ class Pie_Easy_Exts_Options_Upload
 	{
 		parent::init_scripts();
 
-		// enqueue uploader plugin
-		wp_enqueue_script( 'pie-easy-uploader' );
-
-		// enqueue image editor scripts and style
-		wp_enqueue_script( 'wp-ajax-response' );
-		wp_enqueue_script( 'image-edit' );
+		// need uploader plugin, ajax response, image editor scripts
+		$this->script()
+			->section( 'admin' )
+			->enqueue( 'pie-easy-uploader' )
+			->enqueue( 'wp-ajax-response' )
+			->enqueue( 'image-edit' );
 
 		// localize the upload wrapper
 		$this->localize_script();

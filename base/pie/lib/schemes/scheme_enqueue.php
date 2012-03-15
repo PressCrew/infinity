@@ -564,8 +564,8 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 				foreach ( $policy->registry()->get_all() as $component ) {
 					// push deps onto stacks
 					$component->style()->push_deps( $dep_stack );
-					$component->style()->get_section('global')->push_deps( $dep_global_stack );
-					$component->style()->get_section('admin')->push_deps( $dep_admin_stack );
+					$component->style()->section('global')->push_deps( $dep_global_stack );
+					$component->style()->section('admin')->push_deps( $dep_admin_stack );
 				}
 			}
 
@@ -653,8 +653,8 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 				foreach ( $policy->registry()->get_all() as $component ) {
 					// push deps onto stacks
 					$component->script()->push_deps( $dep_stack );
-					$component->script()->get_section('global')->push_deps( $dep_global_stack );
-					$component->script()->get_section('admin')->push_deps( $dep_admin_stack );
+					$component->script()->section('global')->push_deps( $dep_global_stack );
+					$component->script()->section('admin')->push_deps( $dep_admin_stack );
 				}
 			}
 

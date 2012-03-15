@@ -51,19 +51,23 @@ class Pie_Easy_Exts_Options_Ui_Font_Picker
 	{
 		parent::init_styles();
 
-		if ( is_admin() ) {
-			wp_enqueue_style( 'jquery-multiselect' );
-		}
+		// slurp admin styles
+		$this->style()
+			->section( 'admin' )
+			->cache( 'admin', 'admin.css' )
+			->enqueue( 'jquery-multiselect' );
 	}
 
 	public function init_scripts()
 	{
 		parent::init_scripts();
 
-		if ( is_admin() ) {
-			wp_enqueue_script( 'jquery-multiselect' );
-			wp_enqueue_script( 'jquery-pie-ui-fontpicker' );
-		}
+		// slurp admin scripts
+		$this->script()
+			->section( 'admin' )
+			->cache( 'admin', 'admin.js' )
+			->enqueue( 'jquery-multiselect' )
+			->enqueue( 'jquery-pie-ui-fontpicker' );
 	}
 
 	/**

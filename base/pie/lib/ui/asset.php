@@ -36,14 +36,6 @@ abstract class Pie_Easy_Asset extends Pie_Easy_Base
 	private $sections;
 
 	/**
-	 * The PCRE pattern at which to split the sections
-	 * 
-	 * @var string
-	 */
-	private $sections_pattern =
-		'/(\/[*]{2}\h*\v(?:\h+[*]\V*\v)*\h+[*]\h+@section\h+([a-z0-9]+)\h*\v(?:\h+[*]\V*\v)*\h+[*]+\/)/';
-
-	/**
 	 * Script dependancies
 	 *
 	 * @var Pie_Easy_Stack
@@ -110,21 +102,6 @@ abstract class Pie_Easy_Asset extends Pie_Easy_Base
 	}
 
 	/**
-	 * @todo drop this for a get_section() wrapper
-	 * @return Pie_Easy_Asset
-	 */
-	public function __call( $name, $arguments )
-	{
-		// check if there is a section with the name of the method
-		if ( $this->sections->contains( $name ) ) {
-			// found one, return that asset instance
-			return $this->sections->item_at( $name );
-		} else {
-			throw new Exception( sprintf( 'No asset section with the name "%s" exists.', $name ) );
-		}
-	}
-
-	/**
 	 * Return the component which "owns" this asset instance
 	 *
 	 * @return Pie_Easy_Component
@@ -136,6 +113,27 @@ abstract class Pie_Easy_Asset extends Pie_Easy_Base
 		} else {
 			throw new Exception( 'No component is set' );
 		}
+	}
+
+	/**
+	 * Return the section for the given name
+	 *
+	 * @param string $name
+	 * @return Pie_Easy_Asset
+	 */
+	final public function section( $name )
+	{
+		return $this->get_section( $name );
+	}
+
+	/**
+	 * Enqueue an asset which has already been registered (as a dependancy)
+	 * 
+	 * @return Pie_Easy_Asset
+	 */
+	public function enqueue( $handle )
+	{
+		return $this->add_dep( $handle );
 	}
 
 	/**
@@ -276,7 +274,9 @@ abstract class Pie_Easy_Asset extends Pie_Easy_Base
 	final public function push_deps( Pie_Easy_Stack $stack )
 	{
 		foreach ( $this->deps as $dep ) {
-			$stack->push( $dep );
+			if ( !$stack->contains( $dep ) ) {
+				$stack->push( $dep );
+			}
 		}
 
 		return $this;
@@ -435,37 +435,7 @@ abstract class Pie_Easy_Asset extends Pie_Easy_Base
 				if ( Pie_Easy_Files::cache($filename)->is_readable() ) {
 
 					// get entire contents of file
-					$data = $this->get_file_contents( $filename ) . PHP_EOL;
-
-					// any sections to handle?
-					if ( $this->sections->count() ) {
-
-						// we have sections! need to split it up
-						$data_parts = preg_split( $this->sections_pattern, $data, null, PREG_SPLIT_DELIM_CAPTURE );
-
-						// loop data parts
-						while( count( $data_parts ) > 1 ) {
-							// pop section content off end
-							$section_content = trim( array_pop( $data_parts ) );
-							// section name is next item "up"
-							$section_name = trim( array_pop( $data_parts ) );
-							// section comment is next item "up"
-							$section_comment = trim( array_pop( $data_parts ) );
-							// add string to section if it exists
-							if ( $this->sections->contains( $section_name ) ) {
-								// add section comment and content as string
-								$this->sections->item_at( $section_name )->add_string( $section_comment );
-								$this->sections->item_at( $section_name )->add_string( $section_content );
-							}
-						}
-
-						// data in the zero key is THIS asset's code
-						$code .= array_key_exists( 0, $data_parts ) ? $data_parts[0] : null;
-
-					} else {
-						// no sections, just append data as is
-						$code .= $data;
-					}
+					$code .= $this->get_file_contents( $filename ) . PHP_EOL;
 
 					// success
 					//$code .= '/*--- import complete! */' . PHP_EOL . PHP_EOL;

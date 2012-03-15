@@ -30,6 +30,16 @@ class Pie_Easy_Exts_Features_Gravatar
 		// init directives
 		$this->image_class = null;
 	}
+
+	/**
+	 */
+	public function init_styles()
+	{
+		parent::init_styles();
+
+		// add gravatar image styles callback
+		$this->style()->cache( 'image', 'image_css' );
+	}
 	
 	/**
 	 */
@@ -49,11 +59,8 @@ class Pie_Easy_Exts_Features_Gravatar
 
 	/**
 	 */
-	public function init_styles_dynamic()
+	public function image_css( $style )
 	{
-		// call parent FIRST
-		parent::init_styles_dynamic();
-
 		// options
 		$opt_border_width = $this->get_suboption('border_width')->get();
 		$opt_border_color = $this->get_suboption('border_color')->get();
@@ -61,7 +68,7 @@ class Pie_Easy_Exts_Features_Gravatar
 		$opt_bg_color = $this->get_suboption('bg_color')->get();
 
 		// add rules
-		$img = $this->style()->rule( 'img.' . $this->image_class );
+		$img = $style->rule( 'img.' . $this->image_class );
 
 		if ( $opt_border_width ) {
 			$img->ad( 'border-width', $opt_border_width . 'px' );

@@ -34,10 +34,6 @@ class Pie_Easy_Exts_Widgets_Posts_List
 
 		// requires edit posts
 		$this->add_capabilities( 'edit_posts' );
-
-		// requires cookie and nested sortable
-		$this->script()->admin()->add_dep( 'jquery-cookie' );
-		$this->script()->admin()->add_dep( 'jquery-ui-nestedsortable' );
 	}
 
 	/**
@@ -63,6 +59,32 @@ class Pie_Easy_Exts_Widgets_Posts_List
 		add_action( 'wp_ajax_pie_easy_widgets_posts_list_save', array( $this, 'ajax_update_hierarchy' ) );
 		add_action( 'wp_ajax_pie_easy_widgets_posts_list_item_status', array( $this, 'ajax_post_status' ) );
 		add_action( 'wp_ajax_pie_easy_widgets_posts_list_item_trash', array( $this, 'ajax_post_trash' ) );
+	}
+
+	/**
+	 */
+	public function init_styles()
+	{
+		parent::init_styles();
+
+		// slurp admin styles
+		$this->style()
+			->section( 'admin' )
+			->cache( 'admin', 'admin.css' );
+	}
+
+	/**
+	 */
+	public function init_scripts()
+	{
+		parent::init_scripts();
+
+		// slurp admin scripts
+		$this->script()
+			->section( 'admin' )
+			->cache( 'admin', 'admin.js' )
+			->enqueue( 'jquery-cookie' )
+			->enqueue( 'jquery-ui-nestedsortable' );
 	}
 
 	/**

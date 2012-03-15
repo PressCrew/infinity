@@ -32,8 +32,29 @@ class Pie_Easy_Exts_Widgets_Debugger
 		parent::init();
 
 		$this->__id_stack__ = new Pie_Easy_Stack();
+	}
+
+	/**
+	 */
+	public function init_styles()
+	{
+		parent::init_styles();
+
+		// slurp admin styles
+		$this->style()
+			->section( 'admin' )
+			->cache( 'admin', 'admin.css' );
+	}
+
+	/**
+	 */
+	public function init_scripts()
+	{
+		parent::init_scripts();
 		
-		$this->script()->admin()->add_dep( 'jquery-jstree' );
+		$this->script()
+			->section( 'admin' )
+			->enqueue( 'jquery-jstree' );
 	}
 
 	/**

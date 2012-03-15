@@ -46,7 +46,11 @@ class Pie_Easy_Exts_Options_Ui_Scroll_Picker
 	public function init_scripts()
 	{
 		parent::init_scripts();
-		wp_enqueue_script( 'pie-easy-scrollpane' );
+		
+		// need scrollpane helper
+		$this->script()
+			->section( 'admin' )
+			->enqueue( 'pie-easy-scrollpane' );
 	}
 
 	/**

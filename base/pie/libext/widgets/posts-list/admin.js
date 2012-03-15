@@ -1,8 +1,4 @@
-/**
- * Enable nested sortable for posts list widget
- *
- * @section admin
- */
+
 function widgetPostsListSortable(selector)
 {
 	// init objects

@@ -31,22 +31,39 @@ class Pie_Easy_Exts_Options_Ui_Overlay_Picker
 
 	/**
 	 */
-	public function init_styles_dynamic()
+	public function init_styles()
 	{
-		// run parent
-		parent::init_styles_dynamic();
-		
+		parent::init_styles();
+
+		// add bg image style callback
+		$this->style()->cache( 'bgimage-gen', 'bg_image_style' );
+	}
+
+	/**
+	 */
+	public function init_scripts()
+	{
+		parent::init_scripts();
+
+		// add overlay script callback
+		$this->script()->cache( 'overlay-gen', 'overlay_script' );
+	}
+
+	/**
+	 */
+	public function bg_image_style( $style )
+	{
 		// try to get my image url
 		$url = $this->get_image_url();
 
 		// have a url?
 		if ( $url ) {
 			// element rule
-			$rule1 = $this->style()->rule( $this->style_selector );
+			$rule1 = $style->rule( $this->style_selector );
 			$rule1->ad( 'position', 'relative' );
 			$rule1->ad( 'z-index', 1 );
 			// pseudo element rule
-			$rule2 = $this->style()->rule( $this->style_selector . ':before' );
+			$rule2 = $style->rule( $this->style_selector . ':before' );
 			$rule2->ad( 'content', '""' );
 			$rule2->ad( 'position', 'absolute' );
 			$rule2->ad( 'z-index', -1 );
@@ -61,18 +78,14 @@ class Pie_Easy_Exts_Options_Ui_Overlay_Picker
 	}
 
 	/**
-	 * @todo deprecated?
 	 */
-	public function init_scripts_dynamic()
+	public function overlay_script( $script )
 	{
-		// run parent
-		return parent::init_scripts_dynamic();
-
 		// have a style and selector?
 		if ( $this->__have_style__ && $this->style_selector ) {
 
 			// new logic capture
-			$this->script()->begin_logic();
+			$script->begin_logic();
 
 			// generate script
 			if (0): ?><script><?php endif; ?>
@@ -82,7 +95,7 @@ class Pie_Easy_Exts_Options_Ui_Overlay_Picker
 			
 			<?php if (0): ?></script><?php endif;
 
-			$logic = $this->script()->end_logic();
+			$logic = $script->end_logic();
 			$logic->ready = true;
 			$logic->alias = true;
 		}

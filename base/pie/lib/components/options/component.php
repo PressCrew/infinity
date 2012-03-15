@@ -89,9 +89,9 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 
 	/**
 	 */
-	public function init_styles_dynamic()
+	public function init_styles()
 	{
-		parent::init_styles_dynamic();
+		parent::init_styles();
 		$this->refresh_style_property();
 		$this->generate_style_property();
 	}
@@ -499,7 +499,7 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 				// add value to component styles if set
 				if ( isset( $style_value->value ) ) {
 					if ( $this->style_section ) {
-						$rule = $this->style()->get_section($this->style_section)->rule( $this->style_selector );
+						$rule = $this->style()->section($this->style_section)->rule( $this->style_selector );
 					} else {
 						$rule = $this->style()->rule( $this->style_selector );
 					}

@@ -438,21 +438,6 @@ abstract class Pie_Easy_Component
 			$this->ignore = (boolean) $config->ignore;
 		}
 
-		// default style
-		$default_style = $this->locate_file( 'style.css' );
-
-		// have default style file?
-		if ( $default_style ) {
-			$this->style()->cache( $this->get_element_id(), $default_style );
-		}
-
-		// default script
-		$default_script = $this->locate_file( 'script.js' );
-
-		// have default script file?
-		if ( $default_script ) {
-			$this->script()->cache( $this->get_element_id(), $default_script );
-		}
 	}
 
 	/**
@@ -561,14 +546,6 @@ abstract class Pie_Easy_Component
 	}
 
 	/**
-	 * This template method is called "just in time" to update exportable styles prior to export
-	 */
-	public function init_styles_dynamic()
-	{
-		// override this method to initialize special style exports handling for an option
-	}
-
-	/**
 	 * This template method is called "just in time" to enqueue scripts
 	 *
 	 * Override this method to initialize special script handling for a component
@@ -582,14 +559,6 @@ abstract class Pie_Easy_Component
 				wp_enqueue_script( $dep );
 			}
 		}
-	}
-
-	/**
-	 * This template method is called "just in time" to update exportable scripts prior to export
-	 */
-	public function init_scripts_dynamic()
-	{
-		// override this method to initialize special script exports handling for an option
 	}
 
 	/**
@@ -931,7 +900,7 @@ class Pie_Easy_Component_Style_Export
 	public function visit( Pie_Easy_Visitable $visited )
 	{
 		if ( $visited->supported() ) {
-			$visited->init_styles_dynamic();
+			$visited->init_styles();
 			$this->push( $visited->style() );
 		}
 	}
@@ -949,7 +918,7 @@ class Pie_Easy_Component_Script_Export
 	public function visit( Pie_Easy_Visitable $visited )
 	{
 		if ( $visited->supported() ) {
-			$visited->init_scripts_dynamic();
+			$visited->init_scripts();
 			$this->push( $visited->script() );
 		}
 	}

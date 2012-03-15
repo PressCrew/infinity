@@ -1,6 +1,4 @@
-/**
- * @section admin
- */
+
 function widgetThemePickerDialogInit(dialog, ss)
 {
 	// activate link

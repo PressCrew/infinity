@@ -59,12 +59,28 @@ class Pie_Easy_Exts_Options_Ui_Slider
 
 	/**
 	 */
+	public function init_styles()
+	{
+		parent::init_styles();
+
+		// slurp admin styles
+		$this->style()
+			->section( 'admin' )
+			->cache( 'admin', 'admin.css' );
+	}
+
+	/**
+	 */
 	public function init_scripts()
 	{
 		parent::init_scripts();
-		wp_enqueue_script( 'pie-easy-slider' );
+		
+		// need slider helper
+		$this->script()
+			->section( 'admin' )
+			->enqueue( 'pie-easy-slider' );
 	}
-
+	
 	/**
 	 */
 	public function configure()
