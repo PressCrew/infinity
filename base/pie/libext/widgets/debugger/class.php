@@ -33,7 +33,7 @@ class Pie_Easy_Exts_Widgets_Debugger
 
 		$this->__id_stack__ = new Pie_Easy_Stack();
 		
-		$this->script()->admin()->add_dep( 'jquery-jstree' );
+		$this->script()->section('admin')->add_dep( 'jquery-jstree' );
 	}
 
 	/**

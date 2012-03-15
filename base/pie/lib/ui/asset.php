@@ -110,21 +110,6 @@ abstract class Pie_Easy_Asset extends Pie_Easy_Base
 	}
 
 	/**
-	 * @todo drop this for a get_section() wrapper
-	 * @return Pie_Easy_Asset
-	 */
-	public function __call( $name, $arguments )
-	{
-		// check if there is a section with the name of the method
-		if ( $this->sections->contains( $name ) ) {
-			// found one, return that asset instance
-			return $this->sections->item_at( $name );
-		} else {
-			throw new Exception( sprintf( 'No asset section with the name "%s" exists.', $name ) );
-		}
-	}
-
-	/**
 	 * Return the component which "owns" this asset instance
 	 *
 	 * @return Pie_Easy_Component
@@ -136,6 +121,17 @@ abstract class Pie_Easy_Asset extends Pie_Easy_Base
 		} else {
 			throw new Exception( 'No component is set' );
 		}
+	}
+
+	/**
+	 * Return the section for the given name
+	 *
+	 * @param string $name
+	 * @return Pie_Easy_Asset
+	 */
+	final public function section( $name )
+	{
+		return $this->get_section( $name );
 	}
 
 	/**

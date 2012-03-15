@@ -499,7 +499,7 @@ abstract class Pie_Easy_Options_Option extends Pie_Easy_Component
 				// add value to component styles if set
 				if ( isset( $style_value->value ) ) {
 					if ( $this->style_section ) {
-						$rule = $this->style()->get_section($this->style_section)->rule( $this->style_selector );
+						$rule = $this->style()->section($this->style_section)->rule( $this->style_selector );
 					} else {
 						$rule = $this->style()->rule( $this->style_selector );
 					}
