@@ -47,6 +47,13 @@ class Pie_Easy_Style extends Pie_Easy_Asset
 	}
 
 	/**
+	 */
+	final public function enqueue( $handle )
+	{
+		wp_enqueue_style( $handle );
+	}
+
+	/**
 	 * Add/get a rule for a selector
 	 * 
 	 * @param string $selector CSS selector to affect

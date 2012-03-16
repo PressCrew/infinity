@@ -22,20 +22,32 @@ Pie_Easy_Loader::load( 'base/component', 'ui/styleable' );
 abstract class Pie_Easy_Features_Feature
 	extends Pie_Easy_Component
 {
+	/**
+	 * Sub options toggle
+	 *
+	 * @var boolean
+	 */
+	protected $suboptions = false;
+
+	/**
+	 */
 	protected function init()
 	{
 		// call parent
 		parent::init();
 
-		// look for an options configuration file
-		$options_file = $this->locate_file( 'options.ini' );
-
-		// find one?
-		if ( $options_file ) {
-			// load using options registry
-			$registry = $this->policy()->options()->registry();
-			$registry->load_feature_options_file( $this, $options_file );
-			unset( $registry );
+		// suboptions toggled on?
+		if ( true === $this->suboptions ) {
+			// look for an options configuration file
+			$options_file = $this->locate_file( 'options.ini' );
+			// find one?
+			if ( $options_file ) {
+				// load using options registry
+				$this->policy()
+					->options()
+					->registry()
+					->load_feature_options_file( $this, $options_file );
+			}
 		}
 	}
 

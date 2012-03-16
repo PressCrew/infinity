@@ -83,8 +83,8 @@ class Pie_Easy_Exts_Widgets_Posts_List
 		$this->script()
 			->section( 'admin' )
 			->cache( 'admin', 'admin.js' )
-			->enqueue( 'jquery-cookie' )
-			->enqueue( 'jquery-ui-nestedsortable' );
+			->add_dep( 'jquery-cookie' )
+			->add_dep( 'jquery-ui-nestedsortable' );
 	}
 
 	/**

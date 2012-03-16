@@ -57,6 +57,13 @@ class Pie_Easy_Script extends Pie_Easy_Asset
 	}
 
 	/**
+	 */
+	final public function enqueue( $handle )
+	{
+		wp_enqueue_script( $handle );
+	}
+
+	/**
 	 * Create and return a new logic object
 	 *
 	 * @param string $code valid javascript code

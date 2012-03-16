@@ -74,11 +74,11 @@ class Pie_Easy_Exts_Options_Ui_Slider
 	public function init_scripts()
 	{
 		parent::init_scripts();
-		
-		// need slider helper
-		$this->script()
-			->section( 'admin' )
-			->enqueue( 'pie-easy-slider' );
+
+		if ( is_admin() ) {
+			// need slider helper
+			wp_enqueue_script( 'pie-easy-slider' );
+		}
 	}
 	
 	/**
