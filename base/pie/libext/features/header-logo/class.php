@@ -22,6 +22,10 @@ class Pie_Easy_Exts_Features_Header_Logo
 {
 	/**
 	 */
+	protected $suboptions = true;
+
+	/**
+	 */
 	protected function init()
 	{
 		// run parent
