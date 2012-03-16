@@ -51,10 +51,10 @@ class Pie_Easy_Exts_Widgets_Menu
 	{
 		parent::init_scripts();
 
-		// new jquery ui menu
-		$this->script()
-			->section( 'admin' )
-			->enqueue( 'jquery-ui-menu' );
+		if ( is_admin() ) {
+			// need jquery ui menu
+			wp_enqueue_script( 'jquery-ui-menu' );
+		}
 	}
 
 

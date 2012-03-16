@@ -39,10 +39,10 @@ class Pie_Easy_Exts_Options_Upload
 	{
 		parent::init_styles();
 
-		// need image editor styles
-		$this->style()
-			->section( 'admin' )
-			->enqueue( 'imgareaselect' );
+		if ( is_admin() ) {
+			// need image editor styles
+			wp_enqueue_style( 'imgareaselect' );
+		}
 	}
 
 	/**
@@ -51,15 +51,15 @@ class Pie_Easy_Exts_Options_Upload
 	{
 		parent::init_scripts();
 
-		// need uploader plugin, ajax response, image editor scripts
-		$this->script()
-			->section( 'admin' )
-			->enqueue( 'pie-easy-uploader' )
-			->enqueue( 'wp-ajax-response' )
-			->enqueue( 'image-edit' );
+		if ( is_admin() ) {
+			// need uploader plugin, ajax response, image editor scripts
+			wp_enqueue_script( 'pie-easy-uploader' );
+			wp_enqueue_script( 'wp-ajax-response' );
+			wp_enqueue_script( 'image-edit' );
 
-		// localize the upload wrapper
-		$this->localize_script();
+			// localize the upload wrapper
+			$this->localize_script();
+		}
 	}
 
 	/**

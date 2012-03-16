@@ -46,11 +46,11 @@ class Pie_Easy_Exts_Options_Ui_Scroll_Picker
 	public function init_scripts()
 	{
 		parent::init_scripts();
-		
-		// need scrollpane helper
-		$this->script()
-			->section( 'admin' )
-			->enqueue( 'pie-easy-scrollpane' );
+
+		if ( is_admin() ) {
+			// need scrollpane helper
+			wp_enqueue_script( 'pie-easy-scrollpane' );
+		}
 	}
 
 	/**

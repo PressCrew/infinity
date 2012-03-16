@@ -51,10 +51,10 @@ class Pie_Easy_Exts_Widgets_Debugger
 	public function init_scripts()
 	{
 		parent::init_scripts();
-		
-		$this->script()
-			->section( 'admin' )
-			->enqueue( 'jquery-jstree' );
+
+		if ( is_admin() ) {
+			wp_enqueue_script( 'jquery-jstree' );
+		}
 	}
 
 	/**

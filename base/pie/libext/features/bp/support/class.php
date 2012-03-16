@@ -72,10 +72,7 @@ class Pie_Easy_Exts_Features_Bp_Support
 		$version = '20120110';
 
 		// the global BuddyPress JS - Ajax will not work without it
-		wp_register_script( 'dtheme-ajax-js', BP_PLUGIN_URL . '/bp-themes/bp-default/_inc/global.js', array( 'jquery' ), $version );
-		
-		// enqueue it
-		$this->script()->enqueue( 'dtheme-ajax-js' );
+		wp_enqueue_script( 'dtheme-ajax-js', BP_PLUGIN_URL . '/bp-themes/bp-default/_inc/global.js', array( 'jquery' ), $version );
 
 		// Add words that we need to use in JS to the end of the page so they can be translated and still used.
 		$params = array(

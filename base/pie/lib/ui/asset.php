@@ -131,10 +131,7 @@ abstract class Pie_Easy_Asset extends Pie_Easy_Base
 	 * 
 	 * @return Pie_Easy_Asset
 	 */
-	public function enqueue( $handle )
-	{
-		return $this->add_dep( $handle );
-	}
+	abstract public function enqueue( $handle );
 
 	/**
 	 * Add a file or callback from which to populate the dynamic asset cache

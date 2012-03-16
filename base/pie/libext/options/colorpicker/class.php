@@ -32,7 +32,7 @@ class Pie_Easy_Exts_Options_Colorpicker
 		$this->style()
 			->section( 'admin' )
 			->cache( 'admin', 'admin.css' )
-			->enqueue( 'pie-easy-colorpicker' );
+			->add_dep( 'pie-easy-colorpicker' );
 	}
 
 	/**
@@ -45,7 +45,7 @@ class Pie_Easy_Exts_Options_Colorpicker
 		$this->script()
 			->section( 'admin' )
 			->cache( 'wrapper', 'wrapper.js' )
-			->enqueue( 'pie-easy-colorpicker' );
+			->add_dep( 'pie-easy-colorpicker' );
 	}
 
 }

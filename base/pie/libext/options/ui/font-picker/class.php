@@ -55,7 +55,7 @@ class Pie_Easy_Exts_Options_Ui_Font_Picker
 		$this->style()
 			->section( 'admin' )
 			->cache( 'admin', 'admin.css' )
-			->enqueue( 'jquery-multiselect' );
+			->add_dep( 'jquery-multiselect' );
 	}
 
 	public function init_scripts()
@@ -66,8 +66,8 @@ class Pie_Easy_Exts_Options_Ui_Font_Picker
 		$this->script()
 			->section( 'admin' )
 			->cache( 'admin', 'admin.js' )
-			->enqueue( 'jquery-multiselect' )
-			->enqueue( 'jquery-pie-ui-fontpicker' );
+			->add_dep( 'jquery-multiselect' )
+			->add_dep( 'jquery-pie-ui-fontpicker' );
 	}
 
 	/**
