@@ -188,7 +188,7 @@ function infinity_sidebar_position_css()
 		current_theme_supports( 'infinity-grid-style' ) &&
 		infinity_option_get( 'infinity-core-options-sidebar_position' ) != 'right'
 	) {
-		print 'sidebar-left';
+		print ' sidebar-left';
 	}
 }
 add_action( 'sidebar_class', 'infinity_sidebar_position_css' );
