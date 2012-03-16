@@ -25,11 +25,6 @@ class Pie_Easy_Exts_Options_Ui_Overlay_Picker
 	extends Pie_Easy_Exts_Options_Ui_Image_Picker
 {
 	/**
-	 * @var boolean
-	 */
-	private $__have_style__;
-
-	/**
 	 */
 	public function init_styles()
 	{
@@ -37,16 +32,6 @@ class Pie_Easy_Exts_Options_Ui_Overlay_Picker
 
 		// add bg image style callback
 		$this->style()->cache( 'bgimage-gen', 'bg_image_style' );
-	}
-
-	/**
-	 */
-	public function init_scripts()
-	{
-		parent::init_scripts();
-
-		// add overlay script callback
-		$this->script()->cache( 'overlay-gen', 'overlay_script' );
 	}
 
 	/**
@@ -72,32 +57,6 @@ class Pie_Easy_Exts_Options_Ui_Overlay_Picker
 			$rule2->ad( 'left', 0 );
 			$rule2->ad( 'bottom', 0 );
 			$rule2->ad( 'background-image', sprintf( 'url("%s")', $url ) );
-			// toggle on
-			$this->__have_style__ = true;
-		}
-	}
-
-	/**
-	 */
-	public function overlay_script( $script )
-	{
-		// have a style and selector?
-		if ( $this->__have_style__ && $this->style_selector ) {
-
-			// new logic capture
-			$script->begin_logic();
-
-			// generate script
-			if (0): ?><script><?php endif; ?>
-
-			// call the add overlay helper
-			$('<?php print $this->style_selector ?>').pieEasyExtsAddOverlay('<?php print $this->get_element_id(); ?>', '<?php print $this->get_element_class(); ?>');
-			
-			<?php if (0): ?></script><?php endif;
-
-			$logic = $script->end_logic();
-			$logic->ready = true;
-			$logic->alias = true;
 		}
 	}
 }
