@@ -148,7 +148,7 @@ if ( !defined( 'INFINITY_DEV_MODE' ) ) {
  * Infinity error handling
  */
 if ( !defined( 'INFINITY_ERROR_HANDLING' ) ) {
-	define( 'INFINITY_ERROR_HANDLING', true );
+	define( 'INFINITY_ERROR_HANDLING', INFINITY_DEV_MODE );
 }
 	/**
 	 * PIE error handling

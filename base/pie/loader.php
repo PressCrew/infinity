@@ -60,7 +60,7 @@ if ( !defined( 'PIE_EASY_CACHE_EXPORTS' ) ) {
  * PIE API: error handling support toggle
  */
 if ( !defined( 'PIE_EASY_ERROR_HANDLING' ) ) {
-	define( 'PIE_EASY_ERROR_HANDLING', true );
+	define( 'PIE_EASY_ERROR_HANDLING', false );
 }
 /**
  * PIE API: error reproting support toggle
