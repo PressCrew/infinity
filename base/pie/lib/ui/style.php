@@ -112,8 +112,25 @@ class Pie_Easy_Style extends Pie_Easy_Asset
 
 		// get content?
 		if ( $content ) {
+
+			// new file info instance
+			$fi = new SplFileInfo( $filename );
+
 			// save last filename
-			$this->last_dirname = dirname( $filename );
+			$this->last_dirname = $fi->getPath();
+
+			// handle any pre-processing
+			switch ( $fi->getExtension() ) {
+				// its a LESS CSS file
+				case 'less':
+					// load less parser
+					Pie_Easy_Loader::load( 'parsers/less' );
+					// parse it
+					$content = Pie_Easy_Less::parse( $content, $fi->getPath() );
+					// done with less
+					break;
+			}
+			
 			// replace all CSS url() values
 			return preg_replace_callback( '/url\s*\([\'\"\s]*([^\'\"\s]*)[\'\"\s]*\)/', array($this, 'fix_url_path'), $content );
 		}
