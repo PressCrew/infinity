@@ -184,6 +184,7 @@ final class Pie_Easy_Loader extends Pie_Easy_Base
 			'registry' => true
 		),
 		'parsers' => array(
+			'less' => true,
 			'markdown' => true,
 			'textile' => true
 		),
