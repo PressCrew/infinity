@@ -241,6 +241,7 @@ final class Pie_Easy_Loader extends Pie_Easy_Base
 				'bg-color' => true,
 				'bg-image' => true,
 				'bg-repeat' => true,
+				'border-width' => true,
 				'custom' => true,
 				'length-px' => true
 			),
