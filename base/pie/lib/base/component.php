@@ -330,7 +330,21 @@ abstract class Pie_Easy_Component
 	 */
 	final public function config_array( $config_array )
 	{
+		// grab theme from configuration array
 		$theme = $config_array['theme'];
+
+		// is a feature set?
+		if ( isset( $config_array['feature'] ) ) {
+			// yes, check it for namespace defaults
+			$feature = $this->policy()->features()->registry()->get( $config_array['feature'] );
+			// try to grab defaults
+			$defaults_array = $feature->config()->get_ns_defaults( $this->policy()->get_handle() );
+			// get any defaults?
+			if ( !empty( $defaults_array ) ) {
+				// merge config *ON TOP OF* defaults
+				$config_array = array_merge( $defaults_array, $config_array );
+			}
+		}
 
 		foreach ( $config_array as $name => $value ) {
 
