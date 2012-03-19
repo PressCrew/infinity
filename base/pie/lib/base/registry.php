@@ -123,6 +123,8 @@ abstract class Pie_Easy_Registry extends Pie_Easy_Componentable implements Pie_E
 		if ( !$this->has( $component->name ) ) {
 			// register it
 			$this->components->add( $component->name, $component );
+			// post reg
+			$component->init_registered();
 		}
 
 		return true;

@@ -30,11 +30,12 @@ abstract class Pie_Easy_Features_Feature
 	protected $suboptions = false;
 
 	/**
+	 * @internal
 	 */
-	protected function init()
+	public function init_registered()
 	{
 		// call parent
-		parent::init();
+		parent::init_registered();
 
 		// suboptions toggled on?
 		if ( true === $this->suboptions ) {

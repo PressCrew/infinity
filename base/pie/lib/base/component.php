@@ -514,6 +514,15 @@ abstract class Pie_Easy_Component
 	}
 
 	/**
+	 * This template method is called immediately after component registration
+	 * @internal
+	 */
+	public function init_registered()
+	{
+		// override this to perform post registration tasks
+	}
+
+	/**
 	 * This template method is called if the current request is AJAX
 	 */
 	public function init_ajax()
