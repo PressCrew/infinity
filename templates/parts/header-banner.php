@@ -16,8 +16,10 @@
 ?>
 <div class="top-wrap <?php do_action( 'top_wrap_class' ); ?>">
 	<?php
-		// show over menu
+		// Load Top Menu only if it's enabled
+		if ( current_theme_supports( 'infinity-top-menu-setup' ) ) :
 		infinity_get_template_part( 'templates/parts/top-menu', 'header' );
+		endif;
 	?>
 	<!-- header -->
 	<header id="header" role="banner">
@@ -36,16 +38,19 @@
 			</<?php echo $heading_tag; ?>>
 			<?php
 				endif;
-				// main menu
+				// Load Main Menu only if it's enabled
+				if ( current_theme_supports( 'infinity-main-menu-setup' ) ) :
 				infinity_get_template_part( 'templates/parts/main-menu', 'header' );
-	
+				endif;
 				do_action( 'close_header' );
 			?>
 		</div>
 	</header><!-- end header -->
 	<?php
-		// show sub-menu
+		// Load Sub Menu only if it's enabled
+		if ( current_theme_supports( 'infinity-main-menu-setup' ) ) :
 		infinity_get_template_part( 'templates/parts/sub-menu', 'header' );
+		endif;
 	?>
 </div><!-- end top wrap -->
 			<div style="clear: both;"></div>

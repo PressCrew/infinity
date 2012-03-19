@@ -16,9 +16,7 @@ html { font-size: 100%; overflow-y: scroll; -webkit-text-size-adjust: 100%; -ms-
 body { margin: 0; /* add your base font-size and line-height here */ }
 button, input, select, textarea { font-family: sans-serif; }
 
-a { color: #5093DA; text-decoration: none; }
-a:visited { color: #5093DA; }
-a:hover { color: #777; }
+a { text-decoration: none; }
 a:focus { outline: thin dotted; }
 a:hover, a:active { outline: 0; }
 a:active, input.button:active { outline: 0; position: relative; top: 1px; }
@@ -48,6 +46,16 @@ fieldset { border: 0; margin: 0; padding: 0; }
 label { cursor: pointer; }
 legend { border: 0; *margin-left: -7px; padding: 0; }
 button, input, select, textarea { font-size: 100%; margin: 0; vertical-align: baseline; *vertical-align: middle; }
+select {
+    background-color: #FFFFFF;
+    border: 1px solid #C4C1C1;
+    border-radius: 2px 2px 2px 2px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.17);
+    color: #777777;
+    font-size: 90%;
+    font-weight: bold;
+    padding: 4px 2px 2px;
+}
 button, input { line-height: normal; }
 button, input[type="button"], input[type="reset"], input[type="submit"] { cursor: pointer; -webkit-appearance: button; *overflow: visible; }
 input[type="checkbox"], input[type="radio"] { box-sizing: border-box; padding: 0; }
@@ -76,11 +84,10 @@ blockquote small {
     line-height: 18px;
     color: #bfbfbf;
 }
-blockquote small:before { content: '\2014 \00A0' }
+blockquote:before { content: '\2014 \00A0' }
 blockquote p {
     font-size: 100%;
     font-weight: 300;
-    line-height: 18px;
     margin-bottom: 0;
 }
 address {
@@ -121,4 +128,27 @@ pre {
     height: 0;
     line-height: 0;
     width: 100%;
+}
+
+.image-grid {
+    display: block;
+    list-style: none outside none !important;
+    margin: 0 !important;
+    width: 100%;
+}
+.image-grid:after {
+    clear: both;
+    content: "";
+    display: block;
+    height: 0;
+    overflow: hidden;
+}
+.image-grid li {
+    height: 320px;
+    list-style: none outside none;
+    margin-left: 0 !important;
+    overflow: hidden;
+}
+.image-grid li img {
+    max-width: 93%;
 }

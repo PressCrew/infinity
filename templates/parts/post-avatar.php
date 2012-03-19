@@ -13,8 +13,10 @@
  * @since 1.0
  */
 ?>
+<?php if ( current_theme_supports( 'infinity-post-avatars' )):?>
 <div class="author-avatar">
 	<a href="<?php echo get_author_posts_url(get_the_author_meta( 'ID' )); ?>" title="all posts by this author">
 		<?php echo get_avatar( get_the_author_meta('ID'), 35 ); ?>
 	</a>	
 </div>
+<?php endif;?>
