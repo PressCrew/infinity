@@ -317,7 +317,10 @@ abstract class Pie_Easy_Component
 
 			// one arg, return value of one item
 			case 1:
-				return $this->__config__->get( $name )->value;
+				// get directive data
+				$data = $this->__config__->get( $name );
+				// return data value or null
+				return ( $data ) ? $data->value : null;
 
 			// more than one arg, we are setting
 			default:
