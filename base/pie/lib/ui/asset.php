@@ -408,7 +408,7 @@ abstract class Pie_Easy_Asset extends Pie_Easy_Base
 			foreach ( $this->files_export as $file ) {
 
 				// resolve file path
-				if ( $file{0} == '/' ) {
+				if ( path_is_absolute( $file ) ) {
 					// its absolute already, which is good
 					$filename = $file;
 				} else {
