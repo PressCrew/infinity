@@ -100,7 +100,7 @@ abstract class Pie_Easy_Options_Registry extends Pie_Easy_Registry
 		}
 
 		// have all feature option details?
-		if ( $config['feature'] && $option_name ) {
+		if ( isset( $config['feature'] ) && $option_name ) {
 			// set required feature
 			$config['required_feature'] = $config['feature'];
 			// clean up parent
