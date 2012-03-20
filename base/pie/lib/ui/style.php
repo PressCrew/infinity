@@ -969,7 +969,7 @@ abstract class Pie_Easy_Style_Property extends Pie_Easy_Base
  * @package PIE
  * @subpackage ui
  */
-class Pie_Easy_Style_Property_Primitive extends Pie_Easy_Style_Property
+final class Pie_Easy_Style_Property_Primitive extends Pie_Easy_Style_Property
 {
 	/**
 	 * Integer values map key
@@ -1221,7 +1221,7 @@ class Pie_Easy_Style_Property_Primitive extends Pie_Easy_Style_Property
  * @package PIE
  * @subpackage ui
  */
-class Pie_Easy_Style_Property_Composite extends Pie_Easy_Style_Property
+final class Pie_Easy_Style_Property_Composite extends Pie_Easy_Style_Property
 {
 	/**
 	 * List of primitive properties which compose this composite's value
@@ -1354,7 +1354,7 @@ class Pie_Easy_Style_Property_Composite extends Pie_Easy_Style_Property
  * @package PIE
  * @subpackage ui
  */
-class Pie_Easy_Style_Property_Factory extends Pie_Easy_Base
+final class Pie_Easy_Style_Property_Factory extends Pie_Easy_Base
 {
 	/**
 	 * Singleton instance
