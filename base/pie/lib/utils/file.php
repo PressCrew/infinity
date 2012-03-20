@@ -231,6 +231,33 @@ final class Pie_Easy_File extends SplFileInfo
 	{
 		return $this->isWritable();
 	}
+
+	/**
+	 * Retrieves the file extension.
+	 *
+	 * This method is for backwards compat with SplFileInfo shipped with PHP < 5.3.6
+	 *
+	 * @return string
+	 */
+	public function getExtension()
+	{
+		// does SPL version support this method already?
+		if ( is_callable( 'parent::getExtension' ) ) {
+			// yep, call parent method
+			return parent::getExtension();
+		} else {
+			// split filename at dot
+			$file_parts = explode( '.', $this->getFilename() );
+			// two or more parts means there is an extension
+			if ( count( $file_parts ) >= 2 ) {
+				// extension is the last item
+				return trim( array_pop( $file_parts ) );
+			}
+		}
+		
+		// no extension
+		return '';
+	}
 }
 
 ?>

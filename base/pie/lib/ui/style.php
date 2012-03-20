@@ -114,7 +114,7 @@ class Pie_Easy_Style extends Pie_Easy_Asset
 		if ( $content ) {
 
 			// new file info instance
-			$fi = new SplFileInfo( $filename );
+			$fi = new Pie_Easy_File( $filename );
 
 			// save last filename
 			$this->last_dirname = $fi->getPath();
