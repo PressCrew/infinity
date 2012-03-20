@@ -233,14 +233,19 @@ abstract class Pie_Easy_Component
 
 			// one arg, return value of one directive
 			case 1:
-				return $this->__directives__->get( $name )->value;
+				// get directive data
+				$data = $this->__directives__->get( $name );
+				// return data value or null
+				return ( $data ) ? $data->value : null;
 
 			// more than one arg, we are setting
 			default:
 				// get theme which set the config directive
-				$theme = $this->__config__->get($name)->theme;
+				$config_data = $this->__config__->get( $name );
 				// if theme is empty, assume origin theme set directive
-				if ( empty( $theme ) ) {
+				if ( $config_data ) {
+					$theme = $config_data->theme;
+				} else {
 					$theme = $this->theme;
 				}
 				// set it
