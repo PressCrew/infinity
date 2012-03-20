@@ -113,11 +113,11 @@ class Infinity_Base_Walker_Page_Menu extends Walker_Page
 					'close_item' => false,
 					'li_classes' => $classes,
 					'a_title' => $page->post_title,
-					'a_target' => $args->target,
-					'a_rel' => $args->rel,
 					'a_href' => get_post_permalink( $page->ID ),
-					'a_open' => $args->link_before,
-					'a_close' => $args->link_after
+					'a_target' => ( isset( $args['target'] ) ) ? $args['target'] : null,
+					'a_rel' => ( isset( $args['rel'] ) ) ? $args['rel'] : null,
+					'a_open' => ( isset( $args['link_before'] ) ) ? $args['link_before'] : null,
+					'a_close' => ( isset( $args['link_after'] ) ) ? $args['link_after'] : null
 				),
 				false
 			);
