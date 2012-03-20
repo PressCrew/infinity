@@ -232,9 +232,10 @@ final class Pie_Easy_Scheme extends Pie_Easy_Base
 		$this->feature_support();
 
 		// some scheme initializations must occur after WP theme setup
-		add_action( 'after_setup_theme', array($this, 'exports_refresh') );
 		add_action( 'after_setup_theme', array($this, 'init_enqueueing') );
 		add_action( 'after_setup_theme', array($this, 'load_functions') );
+		add_action( 'pie_easy_enqueue_styles', array($this, 'exports_refresh'), 0 );
+		add_action( 'pie_easy_enqueue_scripts', array($this, 'exports_refresh'), 0 );
 
 		return true;
 	}
@@ -514,6 +515,18 @@ final class Pie_Easy_Scheme extends Pie_Easy_Base
 	 */
 	public function exports_refresh()
 	{
+		switch( current_filter() ) {
+			case 'pie_easy_enqueue_styles':
+				$export = $this->exports()->get( 'styles' );
+				break;
+			case 'pie_easy_enqueue_scripts':
+				$export = $this->exports()->get( 'scripts' );
+				break;
+			default:
+				return;
+		}
+
+		// loop all config files
 		foreach ( $this->config_files_loaded as $file ) {
 			// config was last modified...
 			if ( PIE_EASY_CACHE_EXPORTS ) {
@@ -524,15 +537,14 @@ final class Pie_Easy_Scheme extends Pie_Easy_Base
 				$mtime = time();
 			}
 			// check if stale
-			if ( $this->exports()->stale( $mtime ) ) {
+			if ( $export->stale( $mtime ) ) {
 				// loop all component registries and pass them the exporters
 				foreach ( Pie_Easy_Policy::all() as $policy ) {
-					// call accept on the registry for each export
-					$policy->registry()->accept( $this->exports()->get( 'styles' ) );
-					$policy->registry()->accept( $this->exports()->get( 'scripts' ) );
+					// call accept on the registry for the export
+					$policy->registry()->accept( $export );
 				}
-				// update 'em
-				$this->exports()->update();
+				// update it
+				$export->update();
 				// all done
 				return true;
 			}
