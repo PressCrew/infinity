@@ -35,7 +35,11 @@ abstract class Pie_Easy_Init_Registry extends Pie_Easy_Map
 	 */
 	public function __get( $name )
 	{
-		return $this->get( $name )->value;
+		if ( $this->has( $name ) ) {
+			return $this->get( $name )->value;
+		} else {
+			return null;
+		}
 	}
 
 	/**
