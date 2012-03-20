@@ -218,8 +218,10 @@ class Pie_Easy_Export extends Pie_Easy_Base
 	{
 		// already have this child?
 		if ( !$this->children->contains( $name ) ) {
-			// nope, create instance of self
-			$child = new self( $this->name . self::FILE_NAME_DELIM . $name, $this->ext );
+			// nope, get class of instance
+			$classname = get_class( $this );
+			// create instance of same class
+			$child = new $classname( $this->name . self::FILE_NAME_DELIM . $name, $this->ext );
 			// push onto children stack
 			$this->children->add( $name, $child );
 		}
