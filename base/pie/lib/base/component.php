@@ -95,6 +95,13 @@ abstract class Pie_Easy_Component
 	private $__script__;
 
 	/**
+	 * The template part to append to the *default* template path
+	 *
+	 * @var string
+	 */
+	private $__template_part__ = '';
+
+	/**
 	 * @param string $name Option name may only contain alphanumeric characters as well as the underscore for use as a word separator.
 	 * @param string $type The type (component extension) of this component
 	 * @param string $theme The theme which originally created this component
@@ -783,10 +790,35 @@ abstract class Pie_Easy_Component
 			$template = Pie_Easy_Scheme::instance()->locate_template( $this->template );
 		}
 
+		// was a template found?
 		if ( $template ) {
+			// yes! use that one
 			return $template;
 		} else {
-			return $this->locate_file( 'template.php', $ancestor );
+			// is a template part set?
+			if ( strlen( $this->__template_part__ ) ) {
+				// yes, append it
+				$filename = sprintf( 'template-%s.php', $this->__template_part__ );
+			} else {
+				// no, use default
+				$filename = 'template.php';
+			}
+			// try to locate the template
+			return $this->locate_file( $filename, $ancestor );
+		}
+	}
+
+	/**
+	 * Set the template part "suffix" for the default template path
+	 *
+	 * @param string $name
+	 */
+	final protected function set_template_part( $name = '' )
+	{
+		if ( $name === '' ) {
+			$this->__template_part__ = '';
+		} else {
+			$this->__template_part__ = $this->validate_name( $name );
 		}
 	}
 	
