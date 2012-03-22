@@ -188,6 +188,8 @@ abstract class Pie_Easy_Component
 			sprintf( 'The "%s" property cannot be unset', $name ) );
 	}
 
+	/**
+	 */
 	public function accept( Pie_Easy_Visitor $visitor )
 	{
 		return $visitor->visit( $this );
