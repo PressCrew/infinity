@@ -189,6 +189,39 @@ abstract class Pie_Easy_Component
 	}
 
 	/**
+	 * Return array of ReflectionClass objects for the current component's ancestory
+	 *
+	 * @return array
+	 */
+	private function reflect_stack()
+	{
+		// the stack of reflection objects to return
+		$stack = array();
+
+		// what class am i?
+		$reflection = new ReflectionClass( $this );
+
+		// i am the first one for the stack
+		$stack[] = $reflection;
+
+		// loop class ancestry
+		while( $parent_class = $reflection->getParentClass() ) {
+			// load next ancestory
+			$reflection = new ReflectionClass( $parent_class->name );
+			// is next parent class the base component?
+			if ( $reflection->getParentClass()->name == 'Pie_Easy_Component') {
+				// yep, we are done
+				break;
+			} else {
+				// push on to stack
+				$stack[] = $reflection;
+			}
+		}
+
+		return $stack;
+	}
+
+	/**
 	 */
 	public function accept( Pie_Easy_Visitor $visitor )
 	{
@@ -833,24 +866,13 @@ abstract class Pie_Easy_Component
 	 */
 	final public function locate_file( $filename, $ancestor = 0 )
 	{
-		// what class am i?
-		$r = new ReflectionClass($this);
-
-		// i am the first class to check
-		$ext_paths = array( $r->getFileName() );
+		// array of extension paths
+		$ext_paths = array();
 
 		// loop class ancestry
-		while( $parent_class = $r->getParentClass() ) {
-			// load next ancestory
-			$r = new ReflectionClass( $parent_class->name );
-			// grandparent class
-			$grandparent_class = $r->getParentClass();
-			// break if grandparent class is base component
-			if ( $grandparent_class->name == 'Pie_Easy_Component') {
-				break;
-			}
+		foreach ( $this->reflect_stack() as $reflection ) {
 			// push parent class onto classes
-			array_push( $ext_paths, $parent_class->getFileName() );
+			$ext_paths[] = $reflection->getFileName();
 		}
 
 		// loop all ext paths
