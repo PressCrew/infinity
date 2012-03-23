@@ -203,10 +203,7 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 		
 		// add internal style for every export
 		foreach( $exports as $handle => $export ) {
-			// register if it exists and has content
-			if (  Pie_Easy_Files::cache( $export->path )->is_readable() && filesize( $export->path ) > 0 ) {
-				$styles->add( $handle, $export->url );
-			}
+			$styles->add( $handle, $export->url );
 		}
 
 		// add the theme style.css LAST
@@ -249,10 +246,7 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 
 		// add internal script for every export
 		foreach( $exports as $handle => $export ) {
-			// register if it exists and has content
-			if ( Pie_Easy_Files::cache($export->path)->is_readable() && filesize( $export->path ) > 0 ) {
-				$script->add( $handle, $export->url );
-			}
+			$script->add( $handle, $export->url );
 		}
 
 		// any scripts to add?
