@@ -308,9 +308,7 @@ abstract class Pie_Easy_Component
 			$this->__style__ = new Pie_Easy_Style( $this );
 			
 			// init style sections
-			$this->__style__
-				->add_section( 'global' )
-				->add_section( 'admin' );
+			$this->__style__->add_section( 'admin' );
 		}
 
 		// return it!
@@ -330,9 +328,7 @@ abstract class Pie_Easy_Component
 			$this->__script__ = new Pie_Easy_Script( $this );
 
 			// init script sections
-			$this->__script__
-				->add_section( 'global' )
-				->add_section( 'admin' );
+			$this->__script__->add_section( 'admin' );
 		}
 
 		// return it!

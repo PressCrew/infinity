@@ -198,9 +198,6 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 			$exports['dynamic'] = $export_styles;
 		}
 		
-		// always register global
-		$exports['dynamic-global'] = $export_styles->child( 'global' );
-		
 		// add internal style for every export
 		foreach( $exports as $handle => $export ) {
 			$styles->add( $handle, $export->url );
@@ -240,9 +237,6 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 		} else {
 			$exports['dynamic'] = $export_script;
 		}
-
-		// always register global
-		$exports['dynamic-global'] = $export_script->child( 'global' );
 
 		// add internal script for every export
 		foreach( $exports as $handle => $export ) {
@@ -549,7 +543,6 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 
 			// start with empty stacks
 			$dep_stack = new Pie_Easy_Stack();
-			$dep_global_stack = new Pie_Easy_Stack();
 			$dep_admin_stack = new Pie_Easy_Stack();
 
 			// add dynamic style depends for every policy
@@ -558,7 +551,6 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 				foreach ( $policy->registry()->get_all() as $component ) {
 					// push deps onto stacks
 					$component->style()->push_deps( $dep_stack );
-					$component->style()->section('global')->push_deps( $dep_global_stack );
 					$component->style()->section('admin')->push_deps( $dep_admin_stack );
 				}
 			}
@@ -566,7 +558,6 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 			// add addtl dependancies
 			$dep_map = new Pie_Easy_Map();
 			$dep_map->add( '@:dynamic', $dep_stack->to_array() );
-			$dep_map->add( '@:dynamic-global', $dep_global_stack->to_array() );
 			$dep_map->add( '@:dynamic-admin', $dep_admin_stack->to_array() );
 			$directive_deps = new Pie_Easy_Init_Directive( '@', 'style_depends', $dep_map );
 			$style_depends_w->add( '@', $directive_deps, true );
@@ -638,7 +629,6 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 
 			// start with empty stacks
 			$dep_stack = new Pie_Easy_Stack();
-			$dep_global_stack = new Pie_Easy_Stack();
 			$dep_admin_stack = new Pie_Easy_Stack();
 
 			// add dynamic script depends for every policy
@@ -647,7 +637,6 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 				foreach ( $policy->registry()->get_all() as $component ) {
 					// push deps onto stacks
 					$component->script()->push_deps( $dep_stack );
-					$component->script()->section('global')->push_deps( $dep_global_stack );
 					$component->script()->section('admin')->push_deps( $dep_admin_stack );
 				}
 			}
@@ -655,7 +644,6 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 			// add addtl dependancies
 			$dep_map = new Pie_Easy_Map();
 			$dep_map->add( '@:dynamic', $dep_stack->to_array() );
-			$dep_map->add( '@:dynamic-global', $dep_global_stack->to_array() );
 			$dep_map->add( '@:dynamic-admin', $dep_admin_stack->to_array() );
 			$directive_deps = new Pie_Easy_Init_Directive( '@', 'script_depends', $dep_map );
 			$script_depends_w->add( '@', $directive_deps, true );
@@ -691,11 +679,6 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 	 */
 	public function handle_style_internal()
 	{
-		// always enqueue global styles
-		if ( wp_style_is( '@:dynamic-global', 'registered' ) ) {
-			wp_enqueue_style( '@:dynamic-global' );
-		}
-
 		// are we at the admin dashboard?
 		if ( is_admin() ) {
 			// yes, enqueue admin styles
@@ -764,11 +747,6 @@ class Pie_Easy_Scheme_Enqueue extends Pie_Easy_Base
 	 */
 	public function handle_script_internal()
 	{
-		// always enqueue global scripts
-		if ( wp_script_is( '@:dynamic-global', 'registered' ) ) {
-			wp_enqueue_script( '@:dynamic-global' );
-		}
-
 		// are we at the admin dashboard?
 		if ( is_admin() ) {
 			// yes, enqueue admin scripts
