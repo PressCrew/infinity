@@ -144,6 +144,8 @@ abstract class Pie_Easy_Renderer extends Pie_Easy_Componentable
 
 	/**
 	 * Render element id
+	 *
+	 * @param string $suffix,... zero or more suffixes to append
 	 */
 	public function render_id()
 	{
@@ -158,7 +160,7 @@ abstract class Pie_Easy_Renderer extends Pie_Easy_Componentable
 	/**
 	 * Render a special one-off class
 	 *
-	 * @param string $suffix,...
+	 * @param string $suffix,... zero or more suffixes to append
 	 */
 	public function render_class()
 	{
