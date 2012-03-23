@@ -27,7 +27,7 @@
 			);
 
 			// render the label ?>
-			<label for="<?php print esc_attr( $this->component()->get_element_id( $loop ) ) ?>"><?php print esc_html( $display ) ?></label><?php
+			<label for="<?php $this->render_id( $loop ) ?>"><?php print esc_html( $display ) ?></label><?php
 		}
 	?>
 </div>
