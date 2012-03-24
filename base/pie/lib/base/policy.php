@@ -173,9 +173,10 @@ abstract class Pie_Easy_Policy extends Pie_Easy_Base
 	/**
 	 * Return the name of the policy handle
 	 *
+	 * @param boolean $plural set to false to return singular form of handle
 	 * @return string
 	 */
-	abstract public function get_handle();
+	abstract public function get_handle( $plural = true );
 
 	/**
 	 * Return a new instance of a component registry

@@ -27,9 +27,9 @@ abstract class Pie_Easy_Widgets_Policy extends Pie_Easy_Policy
 	/**
 	 * @return string
 	 */
-	public function get_handle()
+	public function get_handle( $plural = true )
 	{
-		return 'widgets';
+		return ( $plural ) ? 'widgets' : 'widget';
 	}
 }
 

@@ -27,9 +27,9 @@ abstract class Pie_Easy_Screens_Policy extends Pie_Easy_Policy
 	/**
 	 * @return string
 	 */
-	public function get_handle()
+	public function get_handle( $plural = true )
 	{
-		return 'screens';
+		return ( $plural ) ? 'screens' : 'screen';
 	}
 }
 
