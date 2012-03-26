@@ -17,7 +17,7 @@
  * @package ICE-extensions
  * @subpackage features
  */
-class ICE_Exts_Features_Header_Logo
+class ICE_Ext_Feature_Header_Logo
 	extends ICE_Feature
 {
 	/**

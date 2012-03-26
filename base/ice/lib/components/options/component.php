@@ -201,8 +201,8 @@ abstract class ICE_Option extends ICE_Component
 
 			// check type
 			switch ( true ) {
-				case ( $this instanceof ICE_Exts_Options_Select ):
-				case ( $this instanceof ICE_Exts_Options_Radio ):
+				case ( $this instanceof ICE_Ext_Option_Select ):
+				case ( $this instanceof ICE_Ext_Option_Radio ):
 					$field_options = $this->__style_property__->get_list_values();
 			}
 

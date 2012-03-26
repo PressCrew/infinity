@@ -19,8 +19,8 @@ ICE_Loader::load_ext( 'options/checkbox' );
  * @package ICE-extensions
  * @subpackage options
  */
-class ICE_Exts_Options_Toggle_Yes
-	extends ICE_Exts_Options_Checkbox
+class ICE_Ext_Option_Toggle_Yes
+	extends ICE_Ext_Option_Checkbox
 		implements ICE_Option_Auto_Field
 {
 	/**

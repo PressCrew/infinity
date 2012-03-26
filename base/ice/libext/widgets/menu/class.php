@@ -19,7 +19,7 @@ ICE_Loader::load( 'components/widgets/component', 'utils/ajax' );
  * @package ICE-extensions
  * @subpackage widgets
  */
-class ICE_Exts_Widgets_Menu
+class ICE_Ext_Widget_Menu
 	 extends ICE_Widget
 {
 	/**

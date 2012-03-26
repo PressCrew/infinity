@@ -22,8 +22,8 @@ ICE_Loader::load_ext( 'options/ui/scroll-picker' );
  * @package ICE-extensions
  * @subpackage options
  */
-class ICE_Exts_Options_Ui_Font_Picker
-	extends ICE_Exts_Options_Ui_Scroll_Picker
+class ICE_Ext_Option_Ui_Font_Picker
+	extends ICE_Ext_Option_Ui_Scroll_Picker
 {
 	/**
 	 *

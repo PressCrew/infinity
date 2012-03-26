@@ -19,7 +19,7 @@
  * @package ICE-extensions
  * @subpackage widgets
  */
-class ICE_Exts_Widgets_Default
+class ICE_Ext_Widget_Default
 	extends ICE_Widget
 {
 	// nothing special here

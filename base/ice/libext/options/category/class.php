@@ -17,7 +17,7 @@
  * @package ICE-extensions
  * @subpackage options
  */
-class ICE_Exts_Options_Category
+class ICE_Ext_Option_Category
 	extends ICE_Option
 {
 	/**

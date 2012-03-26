@@ -21,8 +21,8 @@ ICE_Loader::load_ext( 'options/ui/slider' );
  * @package ICE-extensions
  * @subpackage options
  */
-class ICE_Exts_Options_Css_Length_Px
-	extends ICE_Exts_Options_Ui_Slider
+class ICE_Ext_Option_Css_Length_Px
+	extends ICE_Ext_Option_Ui_Slider
 {
 	protected function init()
 	{

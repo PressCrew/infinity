@@ -19,7 +19,7 @@ ICE_Loader::load( 'components/widgets/component' );
  * @package ICE-extensions
  * @subpackage widgets
  */
-class ICE_Exts_Widgets_Title_Block
+class ICE_Ext_Widget_Title_Block
 	 extends ICE_Widget
 {
 	/**

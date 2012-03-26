@@ -19,8 +19,8 @@ ICE_Loader::load_ext( 'options/textarea' );
  * @package ICE-extensions
  * @subpackage options
  */
-class ICE_Exts_Options_Css_Custom
-	extends ICE_Exts_Options_Textarea
+class ICE_Ext_Option_Css_Custom
+	extends ICE_Ext_Option_Textarea
 {
 	/**
 	 */

@@ -19,7 +19,7 @@
  * @package ICE-extensions
  * @subpackage shortcodes
  */
-class ICE_Exts_Shortcodes_Visitor extends ICE_Shortcode
+class ICE_Ext_Shortcode_Visitor extends ICE_Shortcode
 {
 	/**
 	 */

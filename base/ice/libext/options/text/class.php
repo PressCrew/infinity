@@ -19,8 +19,8 @@ ICE_Loader::load_ext( 'options/input' );
  * @package ICE-extensions
  * @subpackage options
  */
-class ICE_Exts_Options_Text
-	extends ICE_Exts_Options_Input
+class ICE_Ext_Option_Text
+	extends ICE_Ext_Option_Input
 {
 	/**
 	 */

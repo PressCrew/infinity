@@ -21,8 +21,8 @@ ICE_Loader::load_ext( 'options/ui/image-picker' );
  * @package ICE-extensions
  * @subpackage options
  */
-class ICE_Exts_Options_Ui_Overlay_Picker
-	extends ICE_Exts_Options_Ui_Image_Picker
+class ICE_Ext_Option_Ui_Overlay_Picker
+	extends ICE_Ext_Option_Ui_Image_Picker
 {
 	/**
 	 */

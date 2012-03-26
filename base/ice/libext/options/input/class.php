@@ -19,7 +19,7 @@ ICE_Loader::load( 'components/options/component' );
  * @package ICE-extensions
  * @subpackage options
  */
-abstract class ICE_Exts_Options_Input
+abstract class ICE_Ext_Option_Input
 	extends ICE_Option
 {
 	/**

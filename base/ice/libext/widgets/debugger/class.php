@@ -17,7 +17,7 @@
  * @package ICE-extensions
  * @subpackage widgets
  */
-class ICE_Exts_Widgets_Debugger
+class ICE_Ext_Widget_Debugger
 	extends ICE_Widget
 {
 	/**

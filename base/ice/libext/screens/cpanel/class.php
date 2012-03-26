@@ -19,7 +19,7 @@ ICE_Loader::load( 'ui/iconable', 'ui/positionable' );
  * @package ICE-extensions
  * @subpackage screens
  */
-class ICE_Exts_Screens_Cpanel
+class ICE_Ext_Screen_Cpanel
 	extends ICE_Screen
 		implements ICE_Iconable, ICE_Positionable
 {

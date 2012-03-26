@@ -19,8 +19,8 @@ ICE_Loader::load_ext( 'options/colorpicker' );
  * @package ICE-extensions
  * @subpackage options
  */
-class ICE_Exts_Options_Css_Bg_Color
-	extends ICE_Exts_Options_Colorpicker
+class ICE_Ext_Option_Css_Bg_Color
+	extends ICE_Ext_Option_Colorpicker
 {
 	/**
 	 */

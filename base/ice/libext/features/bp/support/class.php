@@ -19,7 +19,7 @@ ICE_Loader::load( 'components/features/component_bp' );
  * @package ICE-extensions
  * @subpackage features
  */
-class ICE_Exts_Features_Bp_Support
+class ICE_Ext_Feature_Bp_Support
 	extends ICE_Feature_Bp
 {
 	/**

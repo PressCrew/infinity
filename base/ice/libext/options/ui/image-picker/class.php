@@ -23,8 +23,8 @@ ICE_Loader::load_ext( 'options/ui/scroll-picker' );
  * @property-read string $file_directory
  * @property-read string $file_extension
  */
-class ICE_Exts_Options_Ui_Image_Picker
-	extends ICE_Exts_Options_Ui_Scroll_Picker
+class ICE_Ext_Option_Ui_Image_Picker
+	extends ICE_Ext_Option_Ui_Scroll_Picker
 		implements ICE_Option_Static_Image, ICE_Option_Auto_Field
 {
 	/**

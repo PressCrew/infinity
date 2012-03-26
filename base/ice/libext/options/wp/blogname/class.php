@@ -19,8 +19,8 @@ ICE_Loader::load_ext( 'options/text' );
  * @package ICE-extensions
  * @subpackage options
  */
-class ICE_Exts_Options_Wp_Blogname
-	extends ICE_Exts_Options_Text
+class ICE_Ext_Option_Wp_Blogname
+	extends ICE_Ext_Option_Text
 {
 	/**
 	 */

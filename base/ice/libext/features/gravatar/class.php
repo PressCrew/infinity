@@ -17,7 +17,7 @@
  * @package ICE-extensions
  * @subpackage features
  */
-class ICE_Exts_Features_Gravatar
+class ICE_Ext_Feature_Gravatar
 	extends ICE_Feature
 {
 	/**

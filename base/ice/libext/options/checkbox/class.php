@@ -19,8 +19,8 @@ ICE_Loader::load_ext( 'options/input-group' );
  * @package ICE-extensions
  * @subpackage options
  */
-class ICE_Exts_Options_Checkbox
-	extends ICE_Exts_Options_Input_Group
+class ICE_Ext_Option_Checkbox
+	extends ICE_Ext_Option_Input_Group
 {
 	/**
 	 */

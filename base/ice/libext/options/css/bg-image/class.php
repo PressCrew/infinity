@@ -19,8 +19,8 @@ ICE_Loader::load_ext( 'options/upload' );
  * @package ICE-extensions
  * @subpackage options
  */
-class ICE_Exts_Options_Css_Bg_Image
-	extends ICE_Exts_Options_Upload
+class ICE_Ext_Option_Css_Bg_Image
+	extends ICE_Ext_Option_Upload
 {
 	/**
 	 */

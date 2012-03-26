@@ -19,8 +19,8 @@ ICE_Loader::load_ext( 'options/page' );
  * @package ICE-extensions
  * @subpackage options
  */
-class ICE_Exts_Options_Wp_Page_On_Front
-	extends ICE_Exts_Options_Page
+class ICE_Ext_Option_Wp_Page_On_Front
+	extends ICE_Ext_Option_Page
 {
 	/**
 	 */

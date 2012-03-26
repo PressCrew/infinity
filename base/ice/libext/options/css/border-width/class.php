@@ -19,8 +19,8 @@ ICE_Loader::load_ext( 'options/css/length-px' );
  * @package ICE-extensions
  * @subpackage options
  */
-class ICE_Exts_Options_Css_Border_Width
-	extends ICE_Exts_Options_Css_Length_Px
+class ICE_Ext_Option_Css_Border_Width
+	extends ICE_Ext_Option_Css_Length_Px
 {
 	protected function init()
 	{

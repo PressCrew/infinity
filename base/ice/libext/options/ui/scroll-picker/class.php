@@ -25,7 +25,7 @@ ICE_Loader::load( 'components/options/component' );
  * @property-read string $item_height
  * @property-read string $item_margin
  */
-class ICE_Exts_Options_Ui_Scroll_Picker
+class ICE_Ext_Option_Ui_Scroll_Picker
 	extends ICE_Option
 {
 	/**

@@ -17,7 +17,7 @@
  * @package ICE-extensions
  * @subpackage sections
  */
-class ICE_Exts_Sections_Default
+class ICE_Ext_Section_Default
 	extends ICE_Section
 {
 	/**
