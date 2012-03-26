@@ -7,7 +7,7 @@ function widgetThemePickerDialogInit(dialog, ss)
 		{
 			// params
 			var data =
-				'action=ice_exts_widgets_theme_picker_activate&' +
+				'action=ice_ext_widget_theme_picker_activate&' +
 				jQuery(this).attr('href').split('?')[1]
 
 			// message and image elements

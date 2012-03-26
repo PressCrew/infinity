@@ -151,7 +151,7 @@ class ICE_Ext_Widget_Theme_Picker
 	{
 		parent::init_ajax();
 		
-		add_action( 'wp_ajax_ice_exts_widgets_theme_picker_activate', array( $this, 'ajax_switch_theme' ) );
+		add_action( 'wp_ajax_ice_ext_widget_theme_picker_activate', array( $this, 'ajax_switch_theme' ) );
 	}
 
 	/**
