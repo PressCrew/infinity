@@ -176,7 +176,7 @@ if ( !defined( 'INFINITY_ERROR_REPORTING' ) ) {
 require_once( INFINITY_ICE_DIR . '/loader.php' );
 
 // initialize ICE
-ICE_Loader::init( INFINITY_ICE_URL, 'Infinity_Exts' );
+ICE_Loader::init( INFINITY_ICE_URL );
 
 // initialize enqueuer and configure actions
 if ( is_admin() ) {

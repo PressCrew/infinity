@@ -310,16 +310,14 @@ final class ICE_Loader extends ICE_Base
 	 * You must tell ICE at what URL its root directory is located
 	 *
 	 * @param string $ice_url The absolute URL to ICE root
-	 * @param string $ext_prefix The prefix for ext class names defined in the implementing API
 	 */
-	final static public function init( $ice_url, $ext_prefix )
+	final static public function init( $ice_url )
 	{
 		// new instance if necessary
 		if ( !self::$instance instanceof self ) {
 
 			// define api ext prefixes
 			define( 'ICE_EXT_PREFIX', 'ICE_Ext' );
-			define( 'ICE_EXT_PREFIX_API', $ext_prefix );
 
 			// define ICE urls
 			define( 'ICE_URL', $ice_url );
@@ -484,9 +482,13 @@ final class ICE_Loader extends ICE_Base
 	 */
 	private static function load_libext_file( $files )
 	{
+		// chomp plurals
+		$class = $files;
+		$class[0] = rtrim( $class[0], 's' );
+
 		// determine class name
 		$class_name =
-			ICE_Files::file_to_class( implode( '_', $files ), ICE_EXT_PREFIX );
+			ICE_Files::file_to_class( implode( '_', $class ), ICE_EXT_PREFIX );
 
 		// if class already exists, just return it
 		if ( class_exists( $class_name ) ) {
