@@ -20,7 +20,7 @@ ICE_Loader::load( 'components/options/component' );
  * @subpackage options
  */
 abstract class ICE_Exts_Options_Input
-	extends ICE_Options_Option
+	extends ICE_Option
 {
 	/**
 	 * The type attribute for the input element

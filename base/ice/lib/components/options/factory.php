@@ -19,7 +19,7 @@ ICE_Loader::load( 'base/factory' );
  * @package ICE-components
  * @subpackage options
  */
-class ICE_Options_Factory extends ICE_Factory
+class ICE_Option_Factory extends ICE_Factory
 {	
 	// nothing custom yet
 }

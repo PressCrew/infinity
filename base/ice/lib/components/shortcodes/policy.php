@@ -22,7 +22,7 @@ ICE_Loader::load( 'base/policy' );
  * @package ICE-components
  * @subpackage shortcodes
  */
-abstract class ICE_Shortcodes_Policy extends ICE_Policy
+abstract class ICE_Shortcode_Policy extends ICE_Policy
 {
 	/**
 	 * @return string

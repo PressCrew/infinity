@@ -20,7 +20,7 @@ ICE_Loader::load( 'components/features/component_bp' );
  * @subpackage features
  */
 class ICE_Exts_Features_Bp_Activity_Intro
-	extends ICE_Features_Feature_Bp
+	extends ICE_Feature_Bp
 {
 	/**
 	 * The intro content to render

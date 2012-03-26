@@ -19,7 +19,7 @@ ICE_Loader::load( 'base/component' );
  * @package ICE-components
  * @subpackage shortcodes
  */
-abstract class ICE_Shortcodes_Shortcode extends ICE_Component
+abstract class ICE_Shortcode extends ICE_Component
 {
 	/**
 	 * Config attribute default override delimeter

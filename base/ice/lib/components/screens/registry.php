@@ -19,7 +19,7 @@ ICE_Loader::load( 'base/registry', 'components/screens/factory' );
  * @package ICE-components
  * @subpackage screens
  */
-abstract class ICE_Screens_Registry extends ICE_Registry
+abstract class ICE_Screen_Registry extends ICE_Registry
 {
 	// nothing custom yet
 }

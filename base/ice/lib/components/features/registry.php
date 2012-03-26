@@ -19,7 +19,7 @@ ICE_Loader::load( 'base/registry', 'components/features/factory' );
  * @package ICE-components
  * @subpackage features
  */
-abstract class ICE_Features_Registry extends ICE_Registry
+abstract class ICE_Feature_Registry extends ICE_Registry
 {
 	// nothing custom yet
 }

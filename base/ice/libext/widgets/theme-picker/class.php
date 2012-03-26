@@ -20,7 +20,7 @@ ICE_Loader::load( 'components/widgets/component' );
  * @subpackage widgets
  */
 class ICE_Exts_Widgets_Theme_Picker
-	 extends ICE_Widgets_Widget
+	 extends ICE_Widget
 {
 	/**
 	 * Current theme data

@@ -19,7 +19,7 @@ ICE_Loader::load( 'base/factory' );
  * @package ICE-components
  * @subpackage shortcodes
  */
-class ICE_Shortcodes_Factory extends ICE_Factory
+class ICE_Shortcode_Factory extends ICE_Factory
 {
 	// nothing custom yet
 }

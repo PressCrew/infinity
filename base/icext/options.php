@@ -19,10 +19,10 @@ ICE_Loader::load( 'utils/ajax', 'components/options' );
  * @package Infinity-components
  * @subpackage options
  */
-class Infinity_Options_Policy extends ICE_Options_Policy
+class Infinity_Options_Policy extends ICE_Option_Policy
 {
 	/**
-	 * @return ICE_Options_Policy
+	 * @return ICE_Option_Policy
 	 */
 	static public function instance()
 	{
@@ -69,7 +69,7 @@ class Infinity_Options_Policy extends ICE_Options_Policy
  * @package Infinity-components
  * @subpackage options
  */
-class Infinity_Options_Registry extends ICE_Options_Registry
+class Infinity_Options_Registry extends ICE_Option_Registry
 {
 	/**
 	 * Set up form handler
@@ -99,7 +99,7 @@ add_action( 'wp_loaded', array( 'Infinity_Options_Registry', 'init_form_processi
  * @package Infinity-extensions
  * @subpackage options
  */
-class Infinity_Exts_Option_Factory extends ICE_Options_Factory
+class Infinity_Exts_Option_Factory extends ICE_Option_Factory
 {
 	// nothing custom yet
 }
@@ -110,7 +110,7 @@ class Infinity_Exts_Option_Factory extends ICE_Options_Factory
  * @package Infinity-components
  * @subpackage options
  */
-class Infinity_Options_Renderer extends ICE_Options_Renderer
+class Infinity_Options_Renderer extends ICE_Option_Renderer
 {
 	/**
 	 * Returns true if single save button should be displayed
@@ -281,7 +281,7 @@ function infinity_option_image_url( $option_name, $size = 'thumbnail' )
  * @package Infinity-components
  * @subpackage options
  * @param type $option_name
- * @return ICE_Options_Option
+ * @return ICE_Option
  */
 function infinity_option_fetch( $option_name )
 {
@@ -294,7 +294,7 @@ function infinity_option_fetch( $option_name )
  * @package Infinity-components
  * @subpackage options
  * @param type $option_name
- * @return ICE_Options_Option
+ * @return ICE_Option
  */
 function infinity_option_get( $option_name )
 {
@@ -312,7 +312,7 @@ function infinity_option_render_begin( $option_name )
 {
 	global $infinity_246f86b591;
 
-	if ( $infinity_246f86b591 instanceof ICE_Options_Option ) {
+	if ( $infinity_246f86b591 instanceof ICE_Option ) {
 		throw new Exception(
 			'Cannot begin rendering option "%s" because rendering of option "%s" has not ended!',
 			$option_name, $infinity_246f86b591->name
@@ -487,9 +487,9 @@ function infinity_options_render_menu( $args = null )
  *
  * @package Infinity-components
  * @subpackage options
- * @param ICE_Sections_Section $section
+ * @param ICE_Section $section
  */
-function infinity_options_render_menu_section( ICE_Sections_Section $section )
+function infinity_options_render_menu_section( ICE_Section $section )
 {
 	// get registries for this theme
 	$sections_registry = Infinity_Sections_Policy::instance()->registry();
@@ -565,13 +565,13 @@ function infinity_options_render_options_screen()
 	$section = Infinity_Sections_Policy::instance()->registry()->get( $load_section );
 
 	// did we get a valid section?
-	if ( $section instanceof ICE_Sections_Section ) {
+	if ( $section instanceof ICE_Section ) {
 		// load specific option?
 		if ( $load_option ) {
 			// look up the single option
 			$option = Infinity_Options_Policy::instance()->registry()->get( $load_option );
 			// did we get a valid option?
-			if ( $option instanceof ICE_Options_Option ) {
+			if ( $option instanceof ICE_Option ) {
 				// add it to options to array
 				$options[] = $option;
 			}

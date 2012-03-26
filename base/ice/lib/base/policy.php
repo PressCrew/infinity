@@ -97,7 +97,7 @@ abstract class ICE_Policy extends ICE_Base
 		$options_policy = null;
 
 		foreach( self::$instances as $class => $policy ) {
-			if ( $policy instanceof ICE_Options_Policy ) {
+			if ( $policy instanceof ICE_Option_Policy ) {
 				$options_class = $class;
 				$options_policy = $policy;
 			} else {
@@ -113,51 +113,51 @@ abstract class ICE_Policy extends ICE_Base
 	}
 
 	/**
-	 * @return ICE_Features_Policy
+	 * @return ICE_Feature_Policy
 	 */
 	final static public function features()
 	{
-		return self::instance( 'ICE_Features_Policy' );
+		return self::instance( 'ICE_Feature_Policy' );
 	}
 
 	/**
-	 * @return ICE_Widgets_Policy
+	 * @return ICE_Widget_Policy
 	 */
 	final static public function widgets()
 	{
-		return self::instance( 'ICE_Widgets_Policy' );
+		return self::instance( 'ICE_Widget_Policy' );
 	}
 
 	/**
-	 * @return ICE_Options_Policy
+	 * @return ICE_Option_Policy
 	 */
 	final static public function options()
 	{
-		return self::instance( 'ICE_Options_Policy' );
+		return self::instance( 'ICE_Option_Policy' );
 	}
 
 	/**
-	 * @return ICE_Screens_Policy
+	 * @return ICE_Screen_Policy
 	 */
 	final static public function screens()
 	{
-		return self::instance( 'ICE_Screens_Policy' );
+		return self::instance( 'ICE_Screen_Policy' );
 	}
 
 	/**
-	 * @return ICE_Sections_Policy
+	 * @return ICE_Section_Policy
 	 */
 	final static public function sections()
 	{
-		return self::instance( 'ICE_Sections_Policy' );
+		return self::instance( 'ICE_Section_Policy' );
 	}
 
 	/**
-	 * @return ICE_Shortcodes_Policy
+	 * @return ICE_Shortcode_Policy
 	 */
 	final static public function shortcodes()
 	{
-		return self::instance( 'ICE_Shortcodes_Policy' );
+		return self::instance( 'ICE_Shortcode_Policy' );
 	}
 
 	/**
@@ -217,7 +217,7 @@ abstract class ICE_Policy extends ICE_Base
 	/**
 	 * Return the factory instance
 	 *
-	 * @return ICE_Sections_Factory
+	 * @return ICE_Section_Factory
 	 */
 	final public function factory()
 	{

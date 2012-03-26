@@ -18,7 +18,7 @@
  * @subpackage widgets
  */
 class ICE_Exts_Widgets_Debugger
-	extends ICE_Widgets_Widget
+	extends ICE_Widget
 {
 	/**
 	 * @var ICE_Map

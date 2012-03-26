@@ -18,7 +18,7 @@
  * @subpackage options
  */
 class ICE_Exts_Options_Pages
-	extends ICE_Options_Option
+	extends ICE_Option
 {
 	/**
 	 * Render page checkboxes
@@ -38,7 +38,7 @@ class ICE_Exts_Options_Pages
 			'sort_column'  => 'menu_order, post_title',
 			'link_before'  => '',
 			'link_after'   => '',
-			'walker'			=> new ICE_Options_Walker_Page(),
+			'walker'			=> new ICE_Option_Walker_Page(),
 			'ice_option'	=> $this );
 
 		// call the WordPress function

@@ -18,7 +18,7 @@
  * @subpackage options
  */
 class ICE_Exts_Options_Page
-	extends ICE_Options_Option
+	extends ICE_Option
 {
 	/**
 	 * Render a page select box

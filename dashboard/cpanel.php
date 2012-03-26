@@ -180,7 +180,7 @@ function infinity_dashboard_cpanel_tabs_content()
 	$action = infinity_dashboard_cpanel_action();
 	$screen = Infinity_Screens_Policy::instance()->registry()->get( $action );
 
-	if ( $screen instanceof ICE_Screens_Screen ) {
+	if ( $screen instanceof ICE_Screen ) {
 		ICE_Ajax::responseBegin();
 		$screen->render();
 		ICE_Ajax::responseEnd( true );

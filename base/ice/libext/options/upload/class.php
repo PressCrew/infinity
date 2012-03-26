@@ -20,7 +20,7 @@ ICE_Loader::load( 'utils/ajax' );
  * @subpackage options
  */
 class ICE_Exts_Options_Upload
-	extends ICE_Options_Option_Image
+	extends ICE_Option_Image
 {
 	/**
 	 */

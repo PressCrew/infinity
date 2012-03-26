@@ -19,8 +19,8 @@ ICE_Loader::load( 'components/features/component' );
  * @package ICE-components
  * @subpackage features
  */
-abstract class ICE_Features_Feature_Bp
-	extends ICE_Features_Feature
+abstract class ICE_Feature_Bp
+	extends ICE_Feature
 {
 	/**
 	 * Check if BuddyPress is active

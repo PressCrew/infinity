@@ -19,10 +19,10 @@ ICE_Loader::load( 'components/features' );
  * @package Infinity-components
  * @subpackage features
  */
-class Infinity_Features_Policy extends ICE_Features_Policy
+class Infinity_Features_Policy extends ICE_Feature_Policy
 {
 	/**
-	 * @return ICE_Features_Policy
+	 * @return ICE_Feature_Policy
 	 */
 	static public function instance()
 	{
@@ -68,7 +68,7 @@ class Infinity_Features_Policy extends ICE_Features_Policy
  * @package Infinity-components
  * @subpackage features
  */
-class Infinity_Features_Registry extends ICE_Features_Registry
+class Infinity_Features_Registry extends ICE_Feature_Registry
 {
 	// nothing custom yet
 }
@@ -79,7 +79,7 @@ class Infinity_Features_Registry extends ICE_Features_Registry
  * @package Infinity-extensions
  * @subpackage features
  */
-class Infinity_Exts_Feature_Factory extends ICE_Features_Factory
+class Infinity_Exts_Feature_Factory extends ICE_Feature_Factory
 {
 	// nothing custom yet
 }
@@ -90,7 +90,7 @@ class Infinity_Exts_Feature_Factory extends ICE_Features_Factory
  * @package Infinity-components
  * @subpackage features
  */
-class Infinity_Features_Renderer extends ICE_Features_Renderer
+class Infinity_Features_Renderer extends ICE_Feature_Renderer
 {
 	// nothing custom yet
 }
@@ -126,7 +126,7 @@ function infinity_feature( $feature_name, $output = true )
  * @package Infinity-components
  * @subpackage features
  * @param string $feature_name
- * @return ICE_Features_Feature|false
+ * @return ICE_Feature|false
  */
 function infinity_feature_fetch( $feature_name )
 {

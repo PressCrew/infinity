@@ -3,7 +3,7 @@
  * Infinity Theme: Dashboard options screen, menu template
  *
  * Variables:
- *		$sections	Array of ICE_Sections_Section objects registered for options
+ *		$sections	Array of ICE_Section objects registered for options
  *
  * @package Infinity
  * @subpackage dashboard-templates

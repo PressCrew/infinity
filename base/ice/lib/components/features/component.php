@@ -19,7 +19,7 @@ ICE_Loader::load( 'base/component', 'ui/styleable' );
  * @package ICE-components
  * @subpackage features
  */
-abstract class ICE_Features_Feature
+abstract class ICE_Feature
 	extends ICE_Component
 {
 	/**

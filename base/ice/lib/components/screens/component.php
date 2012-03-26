@@ -19,7 +19,7 @@ ICE_Loader::load( 'base/component' );
  * @package ICE-components
  * @subpackage screens
  */
-abstract class ICE_Screens_Screen extends ICE_Component
+abstract class ICE_Screen extends ICE_Component
 {
 	/**
 	 */

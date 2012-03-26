@@ -17,7 +17,7 @@
  * @package ICE-components
  * @subpackage screens
  */
-abstract class ICE_Screens_Renderer extends ICE_Renderer
+abstract class ICE_Screen_Renderer extends ICE_Renderer
 {
 	// nothing custom yet
 }

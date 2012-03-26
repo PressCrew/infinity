@@ -29,7 +29,7 @@ ICE_Loader::load( 'base', 'utils/docs', 'schemes' );
  * @property-read string $style_unit Used by options whose value is a unit of measure for an element style property
  * @property-read string $style_section Which section to export any dynamic styles to
  */
-abstract class ICE_Options_Option extends ICE_Component
+abstract class ICE_Option extends ICE_Component
 {
 	/**
 	 * All global options are prepended with this prefix template
@@ -189,7 +189,7 @@ abstract class ICE_Options_Option extends ICE_Component
 				throw new Exception( sprintf( 'The field options for the "%s" option is not configured correctly', $name ) );
 			}
 		
-		} elseif ( $this instanceof ICE_Options_Option_Auto_Field ) {
+		} elseif ( $this instanceof ICE_Option_Auto_Field ) {
 
 			// skip if already populated
 			if ( $this->field_options == null ) {
@@ -407,7 +407,7 @@ abstract class ICE_Options_Option extends ICE_Component
 	protected function set_section( $section )
 	{
 		// lookup the section registry
-		$section_registry = ICE_Policy::instance('ICE_Sections_Policy')->registry();
+		$section_registry = ICE_Policy::instance('ICE_Section_Policy')->registry();
 
 		// get section from section registry
 		$section = $section_registry->get( $section );
@@ -482,9 +482,9 @@ abstract class ICE_Options_Option extends ICE_Component
 		if ( $this->__style_property__ ) {
 
 			// determine value to set
-			if ( $this instanceof ICE_Options_Option_Attachment_Image ) {
+			if ( $this instanceof ICE_Option_Attachment_Image ) {
 				$value = $this->get_image_url( 'full' );
-			} elseif ( $this instanceof ICE_Options_Option_Static_Image ) {
+			} elseif ( $this instanceof ICE_Option_Static_Image ) {
 				$value = $this->get_image_url();
 			} else {
 				$value = $this->get();
@@ -520,7 +520,7 @@ abstract class ICE_Options_Option extends ICE_Component
  * @package ICE-components
  * @subpackage options
  */
-interface ICE_Options_Option_Auto_Field
+interface ICE_Option_Auto_Field
 {
 	/**
 	 * Generate custom field options
@@ -536,7 +536,7 @@ interface ICE_Options_Option_Auto_Field
  * @package ICE-components
  * @subpackage options
  */
-interface ICE_Options_Option_Static_Image
+interface ICE_Option_Static_Image
 {
 	/**
 	 * Return the URL of a static image for this option
@@ -552,7 +552,7 @@ interface ICE_Options_Option_Static_Image
  * @package ICE-components
  * @subpackage options
  */
-interface ICE_Options_Option_Attachment_Image
+interface ICE_Option_Attachment_Image
 {
 	/**
 	 * Get the attachment image source details
@@ -592,9 +592,9 @@ interface ICE_Options_Option_Attachment_Image
  * @package ICE-components
  * @subpackage options
  */
-abstract class ICE_Options_Option_Image
-	extends ICE_Options_Option
-		implements ICE_Options_Option_Attachment_Image
+abstract class ICE_Option_Image
+	extends ICE_Option
+		implements ICE_Option_Attachment_Image
 {
 	/**
 	 */

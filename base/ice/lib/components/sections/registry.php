@@ -19,7 +19,7 @@ ICE_Loader::load( 'base/registry', 'components/sections/factory' );
  * @package ICE-components
  * @subpackage sections
  */
-abstract class ICE_Sections_Registry extends ICE_Registry
+abstract class ICE_Section_Registry extends ICE_Registry
 {
 	// nothing custom yet
 }

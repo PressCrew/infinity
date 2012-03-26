@@ -35,7 +35,7 @@ ICE_Loader::load( 'components/options/component' );
  * @property-read string $suffix
  */
 class ICE_Exts_Options_Ui_Slider
-	extends ICE_Options_Option
+	extends ICE_Option
 {
 	/**
 	 */

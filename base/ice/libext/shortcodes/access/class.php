@@ -17,7 +17,7 @@
  * @package ICE-extensions
  * @subpackage shortcodes
  */
-class ICE_Exts_Shortcodes_Access extends ICE_Shortcodes_Shortcode
+class ICE_Exts_Shortcodes_Access extends ICE_Shortcode
 {
 	/**
 	 */

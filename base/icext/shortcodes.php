@@ -19,10 +19,10 @@ ICE_Loader::load( 'components/shortcodes' );
  * @package Infinity-components
  * @subpackage shortcodes
  */
-class Infinity_Shortcodes_Policy extends ICE_Shortcodes_Policy
+class Infinity_Shortcodes_Policy extends ICE_Shortcode_Policy
 {
 	/**
-	 * @return ICE_Shortcodes_Policy
+	 * @return ICE_Shortcode_Policy
 	 */
 	static public function instance()
 	{
@@ -68,7 +68,7 @@ class Infinity_Shortcodes_Policy extends ICE_Shortcodes_Policy
  * @package Infinity-components
  * @subpackage shortcodes
  */
-class Infinity_Shortcodes_Registry extends ICE_Shortcodes_Registry
+class Infinity_Shortcodes_Registry extends ICE_Shortcode_Registry
 {
 	// nothing custom yet
 }
@@ -79,7 +79,7 @@ class Infinity_Shortcodes_Registry extends ICE_Shortcodes_Registry
  * @package Infinity-extensions
  * @subpackage shortcodes
  */
-class Infinity_Exts_Shortcode_Factory extends ICE_Shortcodes_Factory
+class Infinity_Exts_Shortcode_Factory extends ICE_Shortcode_Factory
 {
 	// nothing custom yet
 }
@@ -90,7 +90,7 @@ class Infinity_Exts_Shortcode_Factory extends ICE_Shortcodes_Factory
  * @package Infinity-components
  * @subpackage shortcodes
  */
-class Infinity_Shortcodes_Renderer extends ICE_Shortcodes_Renderer
+class Infinity_Shortcodes_Renderer extends ICE_Shortcode_Renderer
 {
 	// nothing custom yet
 }

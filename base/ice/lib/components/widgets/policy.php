@@ -22,7 +22,7 @@ ICE_Loader::load( 'base/policy' );
  * @package ICE-components
  * @subpackage widgets
  */
-abstract class ICE_Widgets_Policy extends ICE_Policy
+abstract class ICE_Widget_Policy extends ICE_Policy
 {
 	/**
 	 * @return string

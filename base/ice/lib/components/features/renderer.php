@@ -17,7 +17,7 @@
  * @package ICE-components
  * @subpackage features
  */
-abstract class ICE_Features_Renderer extends ICE_Renderer
+abstract class ICE_Feature_Renderer extends ICE_Renderer
 {
 	// nothing custom yet
 }

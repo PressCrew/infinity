@@ -21,7 +21,7 @@ ICE_Loader::load( 'base' );
  * @property-read string $class_title The CSS class for the title of this section
  * @property-read string $class_content The CSS class for the content of this section
  */
-abstract class ICE_Sections_Section extends ICE_Component
+abstract class ICE_Section extends ICE_Component
 {
 	/**
 	 * Components to render

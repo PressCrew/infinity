@@ -21,7 +21,7 @@ ICE_Loader::load_ext( 'options/radio' );
  */
 class ICE_Exts_Options_Position_Top_Bottom
 	extends ICE_Exts_Options_Radio
-		implements ICE_Options_Option_Auto_Field
+		implements ICE_Option_Auto_Field
 {
 	/**
 	 */

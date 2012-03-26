@@ -24,7 +24,7 @@ final class ICE_Ui_Cpanel extends ICE_Base
 	/**
 	 * The screens policy instance
 	 *
-	 * @var ICE_Screens_Policy
+	 * @var ICE_Screen_Policy
 	 */
 	private $policy;
 
@@ -38,9 +38,9 @@ final class ICE_Ui_Cpanel extends ICE_Base
 	/**
 	 * Constructor
 	 *
-	 * @param ICE_Screens_Policy $policy
+	 * @param ICE_Screen_Policy $policy
 	 */
-	public function __construct( ICE_Screens_Policy $policy )
+	public function __construct( ICE_Screen_Policy $policy )
 	{
 		$this->policy = $policy;
 	}

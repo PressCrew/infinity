@@ -19,7 +19,7 @@ ICE_Loader::load( 'base/factory' );
  * @package ICE-components
  * @subpackage screens
  */
-class ICE_Screens_Factory extends ICE_Factory
+class ICE_Screen_Factory extends ICE_Factory
 {
 	// nothing custom yet
 }

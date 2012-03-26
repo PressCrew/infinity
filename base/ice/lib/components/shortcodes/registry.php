@@ -19,7 +19,7 @@ ICE_Loader::load( 'base/registry', 'components/shortcodes/factory' );
  * @package ICE-components
  * @subpackage shortcodes
  */
-abstract class ICE_Shortcodes_Registry extends ICE_Registry
+abstract class ICE_Shortcode_Registry extends ICE_Registry
 {
 	// nothing custom yet
 }

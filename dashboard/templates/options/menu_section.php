@@ -3,9 +3,9 @@
  * Infinity Theme: Dashboard options screen, menu section template
  *
  * Variables:
- *		$section	The current ICE_Sections_Section object being rendered
- *		$children	Array of ICE_Sections_Section objects that are children of the section object
- *		$options	Array of ICE_Options_Option objects that are assigned to the section object
+ *		$section	The current ICE_Section object being rendered
+ *		$children	Array of ICE_Section objects that are children of the section object
+ *		$options	Array of ICE_Option objects that are assigned to the section object
  *
  * @package Infinity
  * @subpackage dashboard-templates

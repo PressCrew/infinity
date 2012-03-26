@@ -22,7 +22,7 @@ ICE_Loader::load( 'base/policy' );
  * @package ICE-components
  * @subpackage screens
  */
-abstract class ICE_Screens_Policy extends ICE_Policy
+abstract class ICE_Screen_Policy extends ICE_Policy
 {
 	/**
 	 * @return string

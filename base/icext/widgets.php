@@ -19,10 +19,10 @@ ICE_Loader::load( 'components/widgets' );
  * @package Infinity-components
  * @subpackage widgets
  */
-class Infinity_Widgets_Policy extends ICE_Widgets_Policy
+class Infinity_Widgets_Policy extends ICE_Widget_Policy
 {
 	/**
-	 * @return ICE_Widgets_Policy
+	 * @return ICE_Widget_Policy
 	 */
 	static public function instance()
 	{
@@ -69,7 +69,7 @@ class Infinity_Widgets_Policy extends ICE_Widgets_Policy
  * @package Infinity-components
  * @subpackage widgets
  */
-class Infinity_Widgets_Registry extends ICE_Widgets_Registry
+class Infinity_Widgets_Registry extends ICE_Widget_Registry
 {
 	// nothing custom yet
 }
@@ -80,7 +80,7 @@ class Infinity_Widgets_Registry extends ICE_Widgets_Registry
  * @package Infinity-extensions
  * @subpackage widgets
  */
-class Infinity_Exts_Widget_Factory extends ICE_Widgets_Factory
+class Infinity_Exts_Widget_Factory extends ICE_Widget_Factory
 {
 	// nothing custom yet
 }
@@ -91,7 +91,7 @@ class Infinity_Exts_Widget_Factory extends ICE_Widgets_Factory
  * @package Infinity-components
  * @subpackage widgets
  */
-class Infinity_Widgets_Renderer extends ICE_Widgets_Renderer
+class Infinity_Widgets_Renderer extends ICE_Widget_Renderer
 {
 	// nothing custom yet
 }

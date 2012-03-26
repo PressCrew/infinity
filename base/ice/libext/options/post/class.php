@@ -21,7 +21,7 @@ ICE_Loader::load_ext( 'options/select' );
  */
 class ICE_Exts_Options_Post
 	extends ICE_Exts_Options_Select
-		implements ICE_Options_Option_Auto_Field
+		implements ICE_Option_Auto_Field
 {
 	/**
 	 */

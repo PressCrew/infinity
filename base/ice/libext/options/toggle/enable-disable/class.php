@@ -21,7 +21,7 @@ ICE_Loader::load_ext( 'options/radio' );
  */
 class ICE_Exts_Options_Toggle_Enable_Disable
 	extends ICE_Exts_Options_Radio
-		implements ICE_Options_Option_Auto_Field
+		implements ICE_Option_Auto_Field
 {
 	/**
 	 */

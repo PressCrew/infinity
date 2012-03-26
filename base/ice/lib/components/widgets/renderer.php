@@ -17,7 +17,7 @@
  * @package ICE-components
  * @subpackage widgets
  */
-abstract class ICE_Widgets_Renderer extends ICE_Renderer
+abstract class ICE_Widget_Renderer extends ICE_Renderer
 {
 	// nothing custom yet
 }

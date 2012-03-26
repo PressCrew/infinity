@@ -19,10 +19,10 @@ ICE_Loader::load( 'components/sections' );
  * @package Infinity-components
  * @subpackage sections
  */
-class Infinity_Sections_Policy extends ICE_Sections_Policy
+class Infinity_Sections_Policy extends ICE_Section_Policy
 {
 	/**
-	 * @return ICE_Sections_Policy
+	 * @return ICE_Section_Policy
 	 */
 	static public function instance()
 	{
@@ -69,7 +69,7 @@ class Infinity_Sections_Policy extends ICE_Sections_Policy
  * @package Infinity-components
  * @subpackage sections
  */
-class Infinity_Sections_Registry extends ICE_Sections_Registry
+class Infinity_Sections_Registry extends ICE_Section_Registry
 {
 	// nothing custom yet
 }
@@ -80,7 +80,7 @@ class Infinity_Sections_Registry extends ICE_Sections_Registry
  * @package Infinity-extensions
  * @subpackage sections
  */
-class Infinity_Exts_Section_Factory extends ICE_Sections_Factory
+class Infinity_Exts_Section_Factory extends ICE_Section_Factory
 {
 	// nothing custom yet
 }
@@ -91,7 +91,7 @@ class Infinity_Exts_Section_Factory extends ICE_Sections_Factory
  * @package Infinity-components
  * @subpackage sections
  */
-class Infinity_Sections_Renderer extends ICE_Sections_Renderer
+class Infinity_Sections_Renderer extends ICE_Section_Renderer
 {
 	/**
 	 * Render the section layout around the section's content

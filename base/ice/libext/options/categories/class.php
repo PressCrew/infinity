@@ -18,7 +18,7 @@
  * @subpackage options
  */
 class ICE_Exts_Options_Categories
-	extends ICE_Options_Option
+	extends ICE_Option
 {
 	/**
 	 * Render category checkboxes
@@ -49,7 +49,7 @@ class ICE_Exts_Options_Categories
 			'current_category'		=> false,
 			'pad_counts'			=> false,
 			'taxonomy'				=> 'category',
-			'walker'				=> new ICE_Options_Walker_Category(),
+			'walker'				=> new ICE_Option_Walker_Category(),
 			'ice_option'		=> $this );
 
 		// call the WordPress function

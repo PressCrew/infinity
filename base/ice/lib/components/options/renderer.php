@@ -19,7 +19,7 @@ ICE_Loader::load( 'utils/docs' );
  * @package ICE-components
  * @subpackage options
  */
-abstract class ICE_Options_Renderer extends ICE_Renderer
+abstract class ICE_Option_Renderer extends ICE_Renderer
 {
 	/**
 	 * The field which contains all of the options which were rendered
@@ -143,7 +143,7 @@ abstract class ICE_Options_Renderer extends ICE_Renderer
 	 */
 	public function render_date_updated( $format = 'F j, Y, g:i a' )
 	{
-		$time_updated = $this->component()->get_meta( ICE_Options_Option::META_TIME_UPDATED );
+		$time_updated = $this->component()->get_meta( ICE_Option::META_TIME_UPDATED );
 
 		if ( $time_updated ) {
 			print date( $format, $time_updated );

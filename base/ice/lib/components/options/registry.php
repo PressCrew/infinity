@@ -19,7 +19,7 @@ ICE_Loader::load( 'base/registry', 'components/options/factory', 'utils/ajax' );
  * @package ICE-components
  * @subpackage options
  */
-abstract class ICE_Options_Registry extends ICE_Registry
+abstract class ICE_Option_Registry extends ICE_Registry
 {
 	/**
 	 * Sub option delimeter
@@ -53,7 +53,7 @@ abstract class ICE_Options_Registry extends ICE_Registry
 		// override this to apply special localizations that apply to your implementation
 	}
 
-	public function load_feature_options_file( ICE_Features_Feature $feature, $filename )
+	public function load_feature_options_file( ICE_Feature $feature, $filename )
 	{
 		// try to parse the options file into INI sections
 		$sections = parse_ini_file( $filename, true );
@@ -125,10 +125,10 @@ abstract class ICE_Options_Registry extends ICE_Registry
 	/**
 	 * Return sibling options as an array
 	 *
-	 * @param ICE_Options_Option $option
+	 * @param ICE_Option $option
 	 * @return array
 	 */
-	public function get_siblings( ICE_Options_Option $option )
+	public function get_siblings( ICE_Option $option )
 	{
 		// options to return
 		$options = array();
@@ -146,10 +146,10 @@ abstract class ICE_Options_Registry extends ICE_Registry
 	/**
 	 * Return registered options as an array
 	 *
-	 * @param ICE_Sections_Section $section Limit options to one section by passing a section object
+	 * @param ICE_Section $section Limit options to one section by passing a section object
 	 * @return array
 	 */
-	public function get_for_section( ICE_Sections_Section $section )
+	public function get_for_section( ICE_Section $section )
 	{
 		// options to return
 		$options = array();
@@ -176,10 +176,10 @@ abstract class ICE_Options_Registry extends ICE_Registry
 	 * It does not make sense to list an option in a menu which requires another option,
 	 * so this helper method will return an array without them.
 	 *
-	 * @param ICE_Sections_Section $section Limit options to one section
+	 * @param ICE_Section $section Limit options to one section
 	 * @return array
 	 */
-	public function get_menu_options( ICE_Sections_Section $section = null )
+	public function get_menu_options( ICE_Section $section = null )
 	{
 		// get all options for section
 		$options = $this->get_for_section( $section );
@@ -207,9 +207,9 @@ abstract class ICE_Options_Registry extends ICE_Registry
 	{
 		if ( empty( $_POST ) ) {
 			return false;
-		} elseif ( isset( $_POST[ICE_Options_Renderer::FIELD_MANIFEST] ) ) {
+		} elseif ( isset( $_POST[ICE_Option_Renderer::FIELD_MANIFEST] ) ) {
 
-			$manifest = $_POST[ICE_Options_Renderer::FIELD_MANIFEST];
+			$manifest = $_POST[ICE_Option_Renderer::FIELD_MANIFEST];
 
 			// "save only these" option names if param is set
 			$save_options =

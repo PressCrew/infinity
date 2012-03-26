@@ -19,7 +19,7 @@ ICE_Loader::load( 'base/factory' );
  * @package ICE-components
  * @subpackage widgets
  */
-class ICE_Widgets_Factory extends ICE_Factory
+class ICE_Widget_Factory extends ICE_Factory
 {
 	// nothing custom yet
 }

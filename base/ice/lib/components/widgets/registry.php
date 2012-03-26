@@ -19,7 +19,7 @@ ICE_Loader::load( 'base/registry', 'components/widgets/factory' );
  * @package ICE-components
  * @subpackage widgets
  */
-abstract class ICE_Widgets_Registry extends ICE_Registry
+abstract class ICE_Widget_Registry extends ICE_Registry
 {
 	// nothing custom yet
 }

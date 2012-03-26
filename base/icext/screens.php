@@ -29,10 +29,10 @@ define( 'INFINITY_ROUTE_DELIM', '/' );
  * @package Infinity-components
  * @subpackage screens
  */
-class Infinity_Screens_Policy extends ICE_Screens_Policy
+class Infinity_Screens_Policy extends ICE_Screen_Policy
 {
 	/**
-	 * @return ICE_Screens_Policy
+	 * @return ICE_Screen_Policy
 	 */
 	static public function instance()
 	{
@@ -79,7 +79,7 @@ class Infinity_Screens_Policy extends ICE_Screens_Policy
  * @package Infinity-components
  * @subpackage screens
  */
-class Infinity_Screens_Registry extends ICE_Screens_Registry
+class Infinity_Screens_Registry extends ICE_Screen_Registry
 {
 	// nothing custom yet
 }
@@ -90,7 +90,7 @@ class Infinity_Screens_Registry extends ICE_Screens_Registry
  * @package Infinity-extensions
  * @subpackage screens
  */
-class Infinity_Exts_Screen_Factory extends ICE_Screens_Factory
+class Infinity_Exts_Screen_Factory extends ICE_Screen_Factory
 {
 	/**
 	 */
@@ -118,7 +118,7 @@ class Infinity_Exts_Screen_Factory extends ICE_Screens_Factory
  * @package Infinity-components
  * @subpackage screens
  */
-class Infinity_Screens_Renderer extends ICE_Screens_Renderer
+class Infinity_Screens_Renderer extends ICE_Screen_Renderer
 {
 	// nothing custom yet
 }

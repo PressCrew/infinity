@@ -22,7 +22,7 @@ ICE_Loader::load( 'ui/style' );
  * @subpackage features
  */
 class ICE_Exts_Features_Default
-	extends ICE_Features_Feature
+	extends ICE_Feature
 {
 	// nothing special here
 }

@@ -17,7 +17,7 @@
  * @package ICE-components
  * @subpackage options
  */
-class ICE_Options_Walker_Category extends Walker_Category
+class ICE_Option_Walker_Category extends Walker_Category
 {
 	/**
 	 * @see Walker_Category::start_el()
@@ -70,7 +70,7 @@ class ICE_Options_Walker_Category extends Walker_Category
  * @package ICE-components
  * @subpackage options
  */
-class ICE_Options_Walker_Page extends Walker_Page
+class ICE_Option_Walker_Page extends Walker_Page
 {
 	/**
 	 * @see Walker::start_el()
