@@ -46,11 +46,11 @@ class Infinity_Options_Policy extends ICE_Option_Policy
 	}
 
 	/**
-	 * @return Infinity_Exts_Option_Factory
+	 * @return Infinity_Option_Factory
 	 */
 	final public function new_factory()
 	{
-		return new Infinity_Exts_Option_Factory();
+		return new Infinity_Option_Factory();
 	}
 
 	/**
@@ -99,7 +99,7 @@ add_action( 'wp_loaded', array( 'Infinity_Options_Registry', 'init_form_processi
  * @package Infinity-extensions
  * @subpackage options
  */
-class Infinity_Exts_Option_Factory extends ICE_Option_Factory
+class Infinity_Option_Factory extends ICE_Option_Factory
 {
 	// nothing custom yet
 }

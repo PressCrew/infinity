@@ -46,11 +46,11 @@ class Infinity_Sections_Policy extends ICE_Section_Policy
 	}
 
 	/**
-	 * @return Infinity_Exts_Section_Factory
+	 * @return Infinity_Section_Factory
 	 */
 	final public function new_factory()
 	{
-		return new Infinity_Exts_Section_Factory();
+		return new Infinity_Section_Factory();
 	}
 
 	/**
@@ -80,7 +80,7 @@ class Infinity_Sections_Registry extends ICE_Section_Registry
  * @package Infinity-extensions
  * @subpackage sections
  */
-class Infinity_Exts_Section_Factory extends ICE_Section_Factory
+class Infinity_Section_Factory extends ICE_Section_Factory
 {
 	// nothing custom yet
 }

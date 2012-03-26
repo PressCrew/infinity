@@ -46,11 +46,11 @@ class Infinity_Shortcodes_Policy extends ICE_Shortcode_Policy
 	}
 
 	/**
-	 * @return Infinity_Exts_Shortcode_Factory
+	 * @return Infinity_Shortcode_Factory
 	 */
 	final public function new_factory()
 	{
-		return new Infinity_Exts_Shortcode_Factory();
+		return new Infinity_Shortcode_Factory();
 	}
 
 	/**
@@ -79,7 +79,7 @@ class Infinity_Shortcodes_Registry extends ICE_Shortcode_Registry
  * @package Infinity-extensions
  * @subpackage shortcodes
  */
-class Infinity_Exts_Shortcode_Factory extends ICE_Shortcode_Factory
+class Infinity_Shortcode_Factory extends ICE_Shortcode_Factory
 {
 	// nothing custom yet
 }

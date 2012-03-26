@@ -19,7 +19,7 @@ ICE_Loader::load_ext( 'options/ui/overlay-picker' );
  * @package Infinity
  * @subpackage extensions
  */
-class Infinity_Exts_Options_Css_Overlay_Image
+class ICE_Ext_Option_Css_Overlay_Image
 	extends ICE_Ext_Option_Ui_Overlay_Picker
 {
 	protected function init()

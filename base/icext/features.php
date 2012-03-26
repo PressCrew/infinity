@@ -46,11 +46,11 @@ class Infinity_Features_Policy extends ICE_Feature_Policy
 	}
 
 	/**
-	 * @return Infinity_Exts_Feature_Factory
+	 * @return Infinity_Feature_Factory
 	 */
 	final public function new_factory()
 	{
-		return new Infinity_Exts_Feature_Factory();
+		return new Infinity_Feature_Factory();
 	}
 
 	/**
@@ -79,7 +79,7 @@ class Infinity_Features_Registry extends ICE_Feature_Registry
  * @package Infinity-extensions
  * @subpackage features
  */
-class Infinity_Exts_Feature_Factory extends ICE_Feature_Factory
+class Infinity_Feature_Factory extends ICE_Feature_Factory
 {
 	// nothing custom yet
 }

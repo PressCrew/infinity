@@ -56,11 +56,11 @@ class Infinity_Screens_Policy extends ICE_Screen_Policy
 	}
 
 	/**
-	 * @return Infinity_Exts_Screen_Factory
+	 * @return Infinity_Screen_Factory
 	 */
 	final public function new_factory()
 	{
-		return new Infinity_Exts_Screen_Factory();
+		return new Infinity_Screen_Factory();
 	}
 
 	/**
@@ -90,7 +90,7 @@ class Infinity_Screens_Registry extends ICE_Screen_Registry
  * @package Infinity-extensions
  * @subpackage screens
  */
-class Infinity_Exts_Screen_Factory extends ICE_Screen_Factory
+class Infinity_Screen_Factory extends ICE_Screen_Factory
 {
 	/**
 	 */

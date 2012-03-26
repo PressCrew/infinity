@@ -46,11 +46,11 @@ class Infinity_Widgets_Policy extends ICE_Widget_Policy
 	}
 
 	/**
-	 * @return Infinity_Exts_Widget_Factory
+	 * @return Infinity_Widget_Factory
 	 */
 	final public function new_factory()
 	{
-		return new Infinity_Exts_Widget_Factory();
+		return new Infinity_Widget_Factory();
 	}
 
 	/**
@@ -80,7 +80,7 @@ class Infinity_Widgets_Registry extends ICE_Widget_Registry
  * @package Infinity-extensions
  * @subpackage widgets
  */
-class Infinity_Exts_Widget_Factory extends ICE_Widget_Factory
+class Infinity_Widget_Factory extends ICE_Widget_Factory
 {
 	// nothing custom yet
 }

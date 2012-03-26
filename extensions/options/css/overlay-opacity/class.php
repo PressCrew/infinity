@@ -19,7 +19,7 @@ ICE_Loader::load_ext( 'options/ui/slider' );
  * @package Infinity
  * @subpackage extensions
  */
-class Infinity_Exts_Options_Css_Overlay_Opacity
+class ICE_Ext_Option_Css_Overlay_Opacity
 	extends ICE_Ext_Option_Ui_Slider
 {
 	protected function init()
