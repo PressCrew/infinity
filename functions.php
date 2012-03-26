@@ -57,24 +57,24 @@ define( 'INFINITY_BASE_DIR', INFINITY_THEME_DIR . '/base' );
 define( 'INFINITY_BASE_URL', INFINITY_THEME_URL . '/base' );
 
 /**
- * PIE directory path
+ * ICE directory path
  */
-define( 'INFINITY_PIE_DIR', INFINITY_BASE_DIR . '/pie' );
+define( 'INFINITY_ICE_DIR', INFINITY_BASE_DIR . '/ice' );
 
 /**
- * PIE directory URL
+ * ICE directory URL
  */
-define( 'INFINITY_PIE_URL', INFINITY_BASE_URL . '/pie' );
+define( 'INFINITY_ICE_URL', INFINITY_BASE_URL . '/ice' );
 
 /**
- * Infinity's PIE implementation directory path
+ * Infinity's ICE implementation directory path
  */
-define( 'INFINITY_PIEXT_DIR', INFINITY_BASE_DIR . '/piext' );
+define( 'INFINITY_ICEXT_DIR', INFINITY_BASE_DIR . '/icext' );
 
 /**
- * Infinity's PIE implementation url
+ * Infinity's ICE implementation url
  */
-define( 'INFINITY_PIEXT_URL', INFINITY_BASE_URL . '/piext' );
+define( 'INFINITY_ICEXT_URL', INFINITY_BASE_URL . '/icext' );
 
 /**
  * Infinity admin directory relative path
@@ -138,10 +138,10 @@ if ( !defined( 'INFINITY_DEV_MODE' ) ) {
 	define( 'INFINITY_DEV_MODE', false );
 }
 	/**
-	 * PIE exports caching toggle
+	 * ICE exports caching toggle
 	 */
-	if ( !defined( 'PIE_EASY_CACHE_EXPORTS' ) ) {
-		define( 'PIE_EASY_CACHE_EXPORTS', !INFINITY_DEV_MODE );
+	if ( !defined( 'ICE_CACHE_EXPORTS' ) ) {
+		define( 'ICE_CACHE_EXPORTS', !INFINITY_DEV_MODE );
 	}
 
 /**
@@ -151,10 +151,10 @@ if ( !defined( 'INFINITY_ERROR_HANDLING' ) ) {
 	define( 'INFINITY_ERROR_HANDLING', INFINITY_DEV_MODE );
 }
 	/**
-	 * PIE error handling
+	 * ICE error handling
 	 */
-	if ( !defined( 'PIE_EASY_ERROR_HANDLING' ) ) {
-		define( 'PIE_EASY_ERROR_HANDLING', INFINITY_ERROR_HANDLING );
+	if ( !defined( 'ICE_ERROR_HANDLING' ) ) {
+		define( 'ICE_ERROR_HANDLING', INFINITY_ERROR_HANDLING );
 	}
 
 /**
@@ -164,40 +164,40 @@ if ( !defined( 'INFINITY_ERROR_REPORTING' ) ) {
 	define( 'INFINITY_ERROR_REPORTING', INFINITY_DEV_MODE );
 }
 	/**
-	 * PIE error reporting
+	 * ICE error reporting
 	 */
-	if ( !defined( 'PIE_EASY_ERROR_REPORTING' ) ) {
-		define( 'PIE_EASY_ERROR_REPORTING', INFINITY_ERROR_REPORTING );
+	if ( !defined( 'ICE_ERROR_REPORTING' ) ) {
+		define( 'ICE_ERROR_REPORTING', INFINITY_ERROR_REPORTING );
 	}
 
 /**
- * Load the PIE lib loader
+ * Load the ICE lib loader
  */
-require_once( INFINITY_PIE_DIR . '/loader.php' );
+require_once( INFINITY_ICE_DIR . '/loader.php' );
 
-// initialize PIE
-Pie_Easy_Loader::init( INFINITY_PIE_URL, 'Infinity_Exts' );
+// initialize ICE
+ICE_Loader::init( INFINITY_ICE_URL, 'Infinity_Exts' );
 
 // initialize enqueuer and configure actions
 if ( is_admin() ) {
-	Pie_Easy_Enqueue::instance()
+	ICE_Enqueue::instance()
 		->styles_on_action( 'load-toplevel_page_' . INFINITY_ADMIN_PAGE )
 		->scripts_on_action( 'load-toplevel_page_' . INFINITY_ADMIN_PAGE );
 } else {
-	Pie_Easy_Enqueue::instance()
+	ICE_Enqueue::instance()
 		->styles_on_action( 'wp_enqueue_scripts' )
 		->scripts_on_action( 'wp_enqueue_scripts' );
 }
 
 // load Infinity API
-require_once( INFINITY_PIEXT_DIR . '/scheme.php' );
-require_once( INFINITY_PIEXT_DIR . '/sections.php' );
-require_once( INFINITY_PIEXT_DIR . '/options.php' );
-require_once( INFINITY_PIEXT_DIR . '/features.php' );
-require_once( INFINITY_PIEXT_DIR . '/widgets.php' );
-require_once( INFINITY_PIEXT_DIR . '/screens.php' );
-require_once( INFINITY_PIEXT_DIR . '/shortcodes.php' );
-require_once( INFINITY_PIEXT_DIR . '/i18n.php' );
+require_once( INFINITY_ICEXT_DIR . '/scheme.php' );
+require_once( INFINITY_ICEXT_DIR . '/sections.php' );
+require_once( INFINITY_ICEXT_DIR . '/options.php' );
+require_once( INFINITY_ICEXT_DIR . '/features.php' );
+require_once( INFINITY_ICEXT_DIR . '/widgets.php' );
+require_once( INFINITY_ICEXT_DIR . '/screens.php' );
+require_once( INFINITY_ICEXT_DIR . '/shortcodes.php' );
+require_once( INFINITY_ICEXT_DIR . '/i18n.php' );
 
 // initialize scheme
 infinity_scheme_init();

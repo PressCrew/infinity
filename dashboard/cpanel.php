@@ -63,14 +63,14 @@ function infinity_dashboard_cpanel_actions()
  *
  * @package Infinity
  * @subpackage dashboard
- * @return Pie_Easy_Ui_Cpanel
+ * @return ICE_Ui_Cpanel
  */
 function infinity_dashboard_cpanel_factory()
 {
-	Pie_Easy_Loader::load( 'ui/cpanel' );
+	ICE_Loader::load( 'ui/cpanel' );
 
 	// new control panel instance using screens policy
-	$cpanel = new Pie_Easy_Ui_Cpanel( Infinity_Screens_Policy::instance() );
+	$cpanel = new ICE_Ui_Cpanel( Infinity_Screens_Policy::instance() );
 	
 	return $cpanel;
 }
@@ -180,12 +180,12 @@ function infinity_dashboard_cpanel_tabs_content()
 	$action = infinity_dashboard_cpanel_action();
 	$screen = Infinity_Screens_Policy::instance()->registry()->get( $action );
 
-	if ( $screen instanceof Pie_Easy_Screens_Screen ) {
-		Pie_Easy_Ajax::responseBegin();
+	if ( $screen instanceof ICE_Screens_Screen ) {
+		ICE_Ajax::responseBegin();
 		$screen->render();
-		Pie_Easy_Ajax::responseEnd( true );
+		ICE_Ajax::responseEnd( true );
 	} else {
-		Pie_Easy_Ajax::responseStd( false, sprintf( __('There was an error while trying to load the %s tab content.', infinity_text_domain), $action ) );
+		ICE_Ajax::responseStd( false, sprintf( __('There was an error while trying to load the %s tab content.', infinity_text_domain), $action ) );
 	}
 }
 

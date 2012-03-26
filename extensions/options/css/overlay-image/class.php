@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load_ext( 'options/ui/overlay-picker' );
+ICE_Loader::load_ext( 'options/ui/overlay-picker' );
 
 /**
  * CSS overlay image
@@ -20,7 +20,7 @@ Pie_Easy_Loader::load_ext( 'options/ui/overlay-picker' );
  * @subpackage extensions
  */
 class Infinity_Exts_Options_Css_Overlay_Image
-	extends Pie_Easy_Exts_Options_Ui_Overlay_Picker
+	extends ICE_Exts_Options_Ui_Overlay_Picker
 {
 	protected function init()
 	{

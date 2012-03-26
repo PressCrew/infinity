@@ -12,7 +12,7 @@ $.widget( 'infinity.cpaneltabs', $.juicy.browsertabs, {
 				settings.url += '&action=infinity_tabs_content';
 			},
 			dataFilter: function ( data, type ) {
-				response = pieEasyAjax.splitResponseStd( data );
+				response = iceEasyAjax.splitResponseStd( data );
 				return response.content;
 			}
 		},
@@ -51,8 +51,8 @@ function initOptions(panel)
 {
 	var $ = jQuery;
 
-	// call pie helper
-	$(panel).pieEasyOptions( 'init', 'infinity_options_update' );
+	// call ice helper
+	$(panel).iceEasyOptions( 'init', 'infinity_options_update' );
 
 	// create tabs
 	$('div.infinity-cpanel-options-single', panel).each(function(){
@@ -115,7 +115,7 @@ function initOptionsPanel(panel)
 	);
 
 	// bind reset handler
-	$('div.infinity-cpanel-options-single', panel).live( 'pieEasyOptionsPost', function( e, state, name, reset ){
+	$('div.infinity-cpanel-options-single', panel).live( 'iceEasyOptionsPost', function( e, state, name, reset ){
 		if ( reset ) {
 			initOptionsPanel( panel );
 		}
@@ -156,20 +156,20 @@ function initOptionsPanel(panel)
 		// message element
 		var message =
 			$('div#infinity-cpanel-options-flash', panel)
-				.pieEasyFlash('loading', 'Loading option editor.')
+				.iceEasyFlash('loading', 'Loading option editor.')
 				.fadeIn();
 		// empty the form
 		form.empty();
 		// send request for option screen
 		$.post(
-			pieEasyGlobalL10n.ajax_url,
+			iceEasyGlobalL10n.ajax_url,
 			{
 				'action': 'infinity_options_screen',
 				'load_section': load[1],
 				'load_option': (load[3]) ? load[3] : ''
 			},
 			function(r) {
-				var sr = pieEasyAjax.splitResponseStd(r);
+				var sr = iceEasyAjax.splitResponseStd(r);
 				if (sr.code >= 1) {
 					// save as last option screen
 					$.cookie('infinity_cpanel_option_loaded', id, {expires: 7});
@@ -183,7 +183,7 @@ function initOptionsPanel(panel)
 				} else {
 					// error
 					message.fadeOut(300, function(){
-						message.pieEasyFlash('error', sr.message).fadeIn();
+						message.iceEasyFlash('error', sr.message).fadeIn();
 					})
 				}
 			}

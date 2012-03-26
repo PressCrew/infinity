@@ -39,7 +39,7 @@ $this->render_begin( 'infinity-cpanel-options-single' );
 </div>
 <?php if ( $this->has_documentation() ): ?>
 <div id="<?php $this->render_name() ?>-tabs-2">
-	<div class="infinity-docs"><?php $this->render_documentation( Pie_Easy_Scheme::instance()->theme_documentation_dirs() ) ?></div>
+	<div class="infinity-docs"><?php $this->render_documentation( ICE_Scheme::instance()->theme_documentation_dirs() ) ?></div>
 </div>
 <?php endif; ?>
 <?php if ( is_admin() ): ?>

@@ -3,7 +3,7 @@
  * Infinity Theme: Dashboard options screen, menu options template
  *
  * Variables:
- *		$options	Array of Pie_Easy_Options_Option objects that need to be rendered
+ *		$options	Array of ICE_Options_Option objects that need to be rendered
  *
  * @package Infinity
  * @subpackage dashboard-templates

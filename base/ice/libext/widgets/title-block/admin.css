@@ -1,0 +1,13 @@
+
+div.icext-widget-title-block {
+	padding: 0;
+}
+	div.icext-widget-title-block > div {
+		padding: 5px;
+	}
+	div.icext-widget-title-block > div.ui-widget-header {
+		font-weight: bold;
+	}
+	div.icext-widget-title-block > div.ui-widget-content {
+		border-top: none;
+	}

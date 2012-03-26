@@ -26,13 +26,13 @@
 		<?php infinity_dashboard_cpanel_render_toolbar_buttons(); ?>
 
 		<!-- refresh button -->
-		<a id="infinity-cpanel-refreshbutton" title="<?php _e( 'Refresh current tab', pie_easy_text_domain ) ?>">
-			<?php _e('Refresh', pie_easy_text_domain ) ?>
+		<a id="infinity-cpanel-refreshbutton" title="<?php _e( 'Refresh current tab', infinity_text_domain ) ?>">
+			<?php _e('Refresh', infinity_text_domain ) ?>
 		</a>
 
 		<!-- scroll button -->
 		<input id="infinity-cpanel-scrollbutton" type="checkbox" />
-		<label for="infinity-cpanel-scrollbutton" title="<?php _e( 'Toggle scroll bars on/off', pie_easy_text_domain ) ?>"><?php _e( 'Scrolling', pie_easy_text_domain ) ?></label>
+		<label for="infinity-cpanel-scrollbutton" title="<?php _e( 'Toggle scroll bars on/off', infinity_text_domain ) ?>"><?php _e( 'Scrolling', infinity_text_domain ) ?></label>
 
 	</div>
 

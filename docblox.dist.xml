@@ -31,8 +31,8 @@
   <files>
     <directory>.</directory>
     <ignore>assets/*</ignore>
-    <ignore>base/pie/assets/*</ignore>
-    <ignore>base/pie/lib/vendors/*</ignore>
+    <ignore>base/ice/assets/*</ignore>
+    <ignore>base/ice/lib/vendors/*</ignore>
     <ignore>dashboard/assets/*</ignore>
     <ignore>dashboard/docs/*</ignore>
     <ignore>dashboard/templates/*</ignore>

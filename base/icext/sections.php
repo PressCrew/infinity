@@ -1,0 +1,148 @@
+<?php
+/**
+ * Infinity Theme: sections classes file
+ *
+ * @author Marshall Sorenson <marshall@presscrew.com>
+ * @link http://infinity.presscrew.com/
+ * @copyright Copyright (C) 2010-2011 Marshall Sorenson
+ * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
+ * @package Infinity-components
+ * @subpackage sections
+ * @since 1.0
+ */
+
+ICE_Loader::load( 'components/sections' );
+
+/**
+ * Infinity Theme: sections policy
+ *
+ * @package Infinity-components
+ * @subpackage sections
+ */
+class Infinity_Sections_Policy extends ICE_Sections_Policy
+{
+	/**
+	 * @return ICE_Sections_Policy
+	 */
+	static public function instance()
+	{
+		self::$calling_class = __CLASS__;
+		return parent::instance();
+	}
+	
+	/**
+	 */
+	final public function get_api_slug()
+	{
+		return 'infinity_theme';
+	}
+
+	/**
+	 * @return Infinity_Sections_Registry
+	 */
+	final public function new_registry()
+	{
+		return new Infinity_Sections_Registry();
+	}
+
+	/**
+	 * @return Infinity_Exts_Section_Factory
+	 */
+	final public function new_factory()
+	{
+		return new Infinity_Exts_Section_Factory();
+	}
+
+	/**
+	 * @return Infinity_Sections_Renderer
+	 */
+	final public function new_renderer()
+	{
+		return new Infinity_Sections_Renderer();
+	}
+
+}
+
+/**
+ * Infinity Theme: sections registry
+ *
+ * @package Infinity-components
+ * @subpackage sections
+ */
+class Infinity_Sections_Registry extends ICE_Sections_Registry
+{
+	// nothing custom yet
+}
+
+/**
+ * Infinity Theme: section factory
+ *
+ * @package Infinity-extensions
+ * @subpackage sections
+ */
+class Infinity_Exts_Section_Factory extends ICE_Sections_Factory
+{
+	// nothing custom yet
+}
+
+/**
+ * Infinity Theme: sections renderer
+ *
+ * @package Infinity-components
+ * @subpackage sections
+ */
+class Infinity_Sections_Renderer extends ICE_Sections_Renderer
+{
+	/**
+	 * Render the section layout around the section's content
+	 *
+	 * @param string $content The content that should be wrapped in the section layout
+	 */
+	protected function render_section( $content )
+	{ ?>
+		<div class="<?php $this->render_classes() ?>">
+			<?php print $content ?>
+		</div><?php
+	}
+}
+
+//
+// Helpers
+//
+
+/**
+ * Initialize sections environment
+ *
+ * @package Infinity-components
+ * @subpackage sections
+ */
+function infinity_sections_init()
+{
+	// component policies
+	$sections_policy = Infinity_Sections_Policy::instance();
+
+	// enable component
+	ICE_Scheme::instance()->enable_component( $sections_policy );
+
+	do_action( 'infinity_sections_init' );
+}
+
+/**
+ * Initialize sections screen requirements
+ *
+ * @package Infinity-components
+ * @subpackage sections
+ */
+function infinity_sections_init_screen()
+{
+	// init ajax OR screen reqs (not both)
+	if ( defined( 'DOING_AJAX') ) {
+		Infinity_Sections_Policy::instance()->registry()->init_ajax();
+		do_action( 'infinity_sections_init_ajax' );
+	} else {
+		Infinity_Sections_Policy::instance()->registry()->init_screen();
+		do_action( 'infinity_sections_init_screen' );
+	}
+}
+
+?>

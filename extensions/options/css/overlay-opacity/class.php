@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-Pie_Easy_Loader::load_ext( 'options/ui/slider' );
+ICE_Loader::load_ext( 'options/ui/slider' );
 
 /**
  * CSS overlay opacity
@@ -20,7 +20,7 @@ Pie_Easy_Loader::load_ext( 'options/ui/slider' );
  * @subpackage extensions
  */
 class Infinity_Exts_Options_Css_Overlay_Opacity
-	extends Pie_Easy_Exts_Options_Ui_Slider
+	extends ICE_Exts_Options_Ui_Slider
 {
 	protected function init()
 	{

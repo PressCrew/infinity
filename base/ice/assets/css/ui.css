@@ -1,0 +1,179 @@
+/**
+ * Copyright (C) 2010-2011  Marshall Sorenson
+ *
+ * Contact Information:
+ *     marshall@presscrew.com
+ *     http://infinity.presscrew.com/
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+
+/* Activity Icon */
+.ui-icon.ui-icon-ajax-loader {
+	background-image: url('../images/ajax_loader.gif');
+}
+
+/* Flash Messages */
+div.ice-flash div.ui-state-default,
+div.ice-flash div.ui-state-error,
+div.ice-flash div.ui-state-highlight {
+	padding: 0 0.8em;
+}
+div.ice-flash span.ui-icon {
+	float: left;
+	margin-right: 0.3em;
+}
+div.ice-flash span.ui-icon-ajax-loader {
+	margin-top: -0.1em;
+	margin-right: 0.7em;
+}
+div.ice-flash button.ui-button {
+	margin-left: 0.5em;
+}
+div.ice-flash span.ui-button-text {
+	padding: 0.1em 0.5em;
+	font-size: 10px;
+}
+
+/* Options message container */
+div.ice-options-mesg {
+	display: none;
+}
+
+/* Uploader */
+div.ice-uploader fieldset {
+	margin-top: 18px\9; /* IE hack part 1 of 2 */
+	min-height: 150px;
+	padding: 10px;
+}
+	div.ice-uploader fieldset legend {
+		margin-top: -24px\9; /* IE hack part 2 of 2 */
+		margin-left: 3px;
+		padding: 3px 5px 3px 3px;
+		font-size: 11px;
+		font-style: italic;
+	}
+div.ice-uploader fieldset.ice-uploader-img {
+	float: left;
+	width: 170px;
+	margin-right: 20px;
+	text-align: center;
+}
+	div.ice-uploader fieldset.ice-uploader-img p {
+		min-height: 70px;
+	}
+	div.ice-uploader fieldset.ice-uploader-img p img {
+		max-height: 150px;
+		max-width: 150px;
+	}
+	div.ice-uploader fieldset.ice-uploader-img div {
+		text-align: center;
+		display: none;
+	}
+		div.ice-uploader fieldset.ice-uploader-img div a span.ui-icon {
+			left: 0.1em;
+		}
+		div.ice-uploader fieldset.ice-uploader-img div a span.ui-button-text {
+			font-size: 10px;
+			padding-left: 1.8em;
+			padding-right: 0.5em;
+		}
+div.ice-uploader fieldset.ice-uploader-stat {
+	float: left;
+	height: 180px;
+	width: 300px;
+	padding-bottom: 30px;
+	display: none;
+}
+	div.ice-uploader fieldset.ice-uploader-stat textarea {
+		height: 80%;
+		width: 100%;
+		margin-bottom: 5px;
+		font-size: 10px;
+	}
+	div.ice-uploader fieldset.ice-uploader-stat div p {
+		float: left;
+		margin: 0 0 0 0;
+		padding: 6px 0 0 10px;
+	}
+div.ice-uploader div.ice-uploader-btn {
+	clear: left;
+	width: 190px;
+	text-align: center;
+}
+
+/* make image editor elements align to top of JUI dialog */
+.ui-dialog-content div.image-editor table td {
+	vertical-align: top;
+}
+
+/* ======================= */
+/* ! Scroll Pane Styling   */
+/* ======================= */
+
+.ice-scroll-pane {
+	overflow: auto;
+	width: 99%;
+	margin-top: 10px;
+	border-left: none;
+}
+	.ice-scroll-pane-value {
+		float: left;
+		position: absolute;
+		z-index: 2;
+		margin-top: -1px;
+	}
+		.ice-scroll-pane-value > .ui-widget-header:first-child {
+			padding-top: 2px;
+			padding-bottom: 2px;
+			border: none;
+			font-size: 10px;
+			font-weight: bold;
+			text-align: center;
+		}
+	.ice-scroll-pane-view {
+		float: left;
+	}
+	.ice-scroll-pane-item {
+		display: block;
+		float: left;
+	}
+	.ice-scroll-pane-bar-wrap {
+		clear: left;
+		padding: 0 4px 0 2px;
+		margin: 0 -1px -1px -1px;
+		border-left: none;
+	}
+	.ice-scroll-pane-bar-wrap .ui-slider {
+		background: none;
+		border:0;
+		height: 2em;
+		margin: 0 auto;
+	}
+	.ice-scroll-pane-bar-wrap .ui-handle-helper-parent {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		margin: 0 auto;
+	}
+	.ice-scroll-pane-bar-wrap .ui-slider-handle {
+		top:.2em;
+		height: 1.5em;
+	}
+	.ice-scroll-pane-bar-wrap .ui-slider-handle .ui-icon {
+		margin: -8px auto 0;
+		position: relative;
+		top: 50%;
+	}
