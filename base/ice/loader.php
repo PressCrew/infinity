@@ -318,7 +318,7 @@ final class ICE_Loader extends ICE_Base
 		if ( !self::$instance instanceof self ) {
 
 			// define api ext prefixes
-			define( 'ICE_EXT_PREFIX', 'ICE_Exts' );
+			define( 'ICE_EXT_PREFIX', 'ICE_Ext' );
 			define( 'ICE_EXT_PREFIX_API', $ext_prefix );
 
 			// define ICE urls
