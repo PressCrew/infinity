@@ -388,8 +388,14 @@ final class ICE_Files extends ICE_Base
 	 */
 	static public function file_to_class( $file_name, $prefix = null )
 	{
-		// split at common delimeters
-		$parts = preg_split( '/[_.\/\\-]/', $file_name );
+		// is file name already an array?
+		if ( is_array( $file_name ) ) {
+			// yep, use as is
+			$parts = $file_name;
+		} else {
+			// split at common delimeters
+			$parts = preg_split( '/[_.\/\\-]/', $file_name );
+		}
 
 		// if last part is php, kill it
 		if ( end( $parts ) == 'php' ) {
