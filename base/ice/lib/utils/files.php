@@ -388,10 +388,15 @@ final class ICE_Files extends ICE_Base
 	 */
 	static public function file_to_class( $file_name, $prefix = null )
 	{
+		// the parts to merge
+		$parts = array();
+
 		// is file name already an array?
 		if ( is_array( $file_name ) ) {
-			// yep, use as is
-			$parts = $file_name;
+			// yep, clean it up
+			foreach ( $file_name as $file_part ) {
+				$parts[] = self::file_to_class( $file_part );
+			}
 		} else {
 			// split at common delimeters
 			$parts = preg_split( '/[_.\/\\-]/', $file_name );
