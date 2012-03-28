@@ -7,7 +7,7 @@
  * @copyright Copyright (C) 2010-2011 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
  * @package ICE
- * @subpackage ui
+ * @subpackage dom
  * @since 1.0
  */
 
@@ -17,7 +17,7 @@ ICE_Loader::load( 'dom/asset' );
  * Make scripts for components easy
  *
  * @package ICE
- * @subpackage ui
+ * @subpackage dom
  */
 class ICE_Script extends ICE_Asset
 {
@@ -137,7 +137,7 @@ class ICE_Script extends ICE_Asset
  * @property boolean $ready
  * @property boolean|string $function
  * @package ICE
- * @subpackage ui
+ * @subpackage dom
  */
 class ICE_Script_Logic extends ICE_Base
 {

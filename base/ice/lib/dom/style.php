@@ -7,7 +7,7 @@
  * @copyright Copyright (C) 2010-2011 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
  * @package ICE
- * @subpackage ui
+ * @subpackage dom
  * @since 1.0
  */
 
@@ -17,7 +17,7 @@ ICE_Loader::load( 'dom/asset' );
  * Make styles for components easy
  *
  * @package ICE
- * @subpackage ui
+ * @subpackage dom
  */
 class ICE_Style extends ICE_Asset
 {
@@ -169,7 +169,7 @@ class ICE_Style extends ICE_Asset
  * Make rules for styles easy
  *
  * @package ICE
- * @subpackage ui
+ * @subpackage dom
  * @property string $selector CSS selector to which apply declarations
  */
 class ICE_Style_Rule extends ICE_Base
@@ -289,7 +289,7 @@ class ICE_Style_Rule extends ICE_Base
  * Any style value which has a unit should implement this interface
  *
  * @package ICE
- * @subpackage ui
+ * @subpackage dom
  */
 interface ICE_Style_Unitable
 {
@@ -305,7 +305,7 @@ interface ICE_Style_Unitable
  * A unit of measure for a style value
  *
  * @package ICE
- * @subpackage ui
+ * @subpackage dom
  */
 abstract class ICE_Style_Unit extends ICE_Base
 {
@@ -412,7 +412,7 @@ abstract class ICE_Style_Unit extends ICE_Base
  * A style unit representing "no unit"
  *
  * @package ICE
- * @subpackage ui
+ * @subpackage dom
  */
 class ICE_Style_Unit_None extends ICE_Style_Unit
 {
@@ -435,7 +435,7 @@ class ICE_Style_Unit_None extends ICE_Style_Unit
  * A style value length unit of measure
  *
  * @package ICE
- * @subpackage ui
+ * @subpackage dom
  */
 class ICE_Style_Unit_Length extends ICE_Style_Unit
 {
@@ -461,7 +461,7 @@ class ICE_Style_Unit_Length extends ICE_Style_Unit
  * A style value percentage unit of measure
  * 
  * @package ICE
- * @subpackage ui
+ * @subpackage dom
  */
 class ICE_Style_Unit_Percentage extends ICE_Style_Unit
 {
@@ -484,7 +484,7 @@ class ICE_Style_Unit_Percentage extends ICE_Style_Unit
  * A style value container and formatter
  *
  * @package ICE
- * @subpackage ui
+ * @subpackage dom
  */
 abstract class ICE_Style_Value
 	extends ICE_Base implements ICE_Style_Unitable
@@ -632,7 +632,7 @@ abstract class ICE_Style_Value
  * A style integer value
  *
  * @package ICE
- * @subpackage ui
+ * @subpackage dom
  */
 class ICE_Style_Value_Integer extends ICE_Style_Value
 {
@@ -648,7 +648,7 @@ class ICE_Style_Value_Integer extends ICE_Style_Value
  * A style number value
  *
  * @package ICE
- * @subpackage ui
+ * @subpackage dom
  */
 class ICE_Style_Value_Number extends ICE_Style_Value
 {
@@ -664,7 +664,7 @@ class ICE_Style_Value_Number extends ICE_Style_Value
  * A style string value
  *
  * @package ICE
- * @subpackage ui
+ * @subpackage dom
  */
 class ICE_Style_Value_String extends ICE_Style_Value
 {
@@ -688,7 +688,7 @@ class ICE_Style_Value_String extends ICE_Style_Value
  * A style color value
  * 
  * @package ICE
- * @subpackage ui
+ * @subpackage dom
  */
 class ICE_Style_Value_Color extends ICE_Style_Value
 {
@@ -705,7 +705,7 @@ class ICE_Style_Value_Color extends ICE_Style_Value
  * A style URI value
  *
  * @package ICE
- * @subpackage ui
+ * @subpackage dom
  */
 class ICE_Style_Value_Uri extends ICE_Style_Value
 {
@@ -730,7 +730,7 @@ class ICE_Style_Value_Uri extends ICE_Style_Value
  * A style counter value
  *
  * @package ICE
- * @subpackage ui
+ * @subpackage dom
  */
 class ICE_Style_Value_Counter extends ICE_Style_Value
 {
@@ -746,7 +746,7 @@ class ICE_Style_Value_Counter extends ICE_Style_Value
  * A style identifier value
  *
  * @package ICE
- * @subpackage ui
+ * @subpackage dom
  */
 class ICE_Style_Value_Identifier extends ICE_Style_Value
 {
@@ -762,7 +762,7 @@ class ICE_Style_Value_Identifier extends ICE_Style_Value
  * A style enumeration value
  *
  * @package ICE
- * @subpackage ui
+ * @subpackage dom
  */
 class ICE_Style_Value_Enum extends ICE_Style_Value
 {
@@ -834,7 +834,7 @@ class ICE_Style_Value_Enum extends ICE_Style_Value
  * A style length value
  *
  * @package ICE
- * @subpackage ui
+ * @subpackage dom
  */
 class ICE_Style_Value_Length extends ICE_Style_Value
 {
@@ -858,7 +858,7 @@ class ICE_Style_Value_Length extends ICE_Style_Value
  * A style percentage value
  *
  * @package ICE
- * @subpackage ui
+ * @subpackage dom
  */
 class ICE_Style_Value_Percentage extends ICE_Style_Value
 {
@@ -882,7 +882,7 @@ class ICE_Style_Value_Percentage extends ICE_Style_Value
  * Make style properties easy
  *
  * @package ICE
- * @subpackage ui
+ * @subpackage dom
  */
 abstract class ICE_Style_Property extends ICE_Base
 {
@@ -967,7 +967,7 @@ abstract class ICE_Style_Property extends ICE_Base
  * A simple style property which has a single value
  * 
  * @package ICE
- * @subpackage ui
+ * @subpackage dom
  */
 final class ICE_Style_Property_Primitive extends ICE_Style_Property
 {
@@ -1219,7 +1219,7 @@ final class ICE_Style_Property_Primitive extends ICE_Style_Property
  * A complex style property which has a two or more values
  *
  * @package ICE
- * @subpackage ui
+ * @subpackage dom
  */
 final class ICE_Style_Property_Composite extends ICE_Style_Property
 {
@@ -1352,7 +1352,7 @@ final class ICE_Style_Property_Composite extends ICE_Style_Property
  * A style property factory
  *
  * @package ICE
- * @subpackage ui
+ * @subpackage dom
  */
 final class ICE_Style_Property_Factory extends ICE_Base
 {
