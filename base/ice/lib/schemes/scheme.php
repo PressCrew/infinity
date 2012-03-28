@@ -362,8 +362,14 @@ final class ICE_Scheme extends ICE_Base
 	 */
 	final public function set_exts_dir( $dir_name )
 	{
+		// only set if not already
 		if ( empty( $this->exts_dir ) ) {
+			// set property
 			$this->exts_dir = $dir_name;
+			// add extension dir for each theme to extension loader
+			foreach ( $this->themes as $theme ) {
+				ICE_Ext_Loader::path( $this->theme_file( $theme, $this->exts_dir ) );
+			}
 			return true;
 		}
 

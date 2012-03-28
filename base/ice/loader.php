@@ -206,100 +206,6 @@ final class ICE_Loader extends ICE_Base
 	);
 
 	/**
-	 * Available lib extensions
-	 *
-	 * @var array
-	 */
-	private static $exts = array(
-		'features' => array(
-			'bp' => array(
-				'activity-intro' => true,
-				'support' => true
-			),
-			'default' => true,
-			'gravatar' => true,
-			'header-logo' => true
-		),
-		'options' => array(
-			'category' => true,
-			'categories' => true,
-			'checkbox' => true,
-			'colorpicker' => true,
-			'css' => array(
-				'bg-color' => true,
-				'bg-image' => true,
-				'bg-repeat' => true,
-				'border-color' => true,
-				'border-width' => true,
-				'custom' => true,
-				'length-px' => true
-			),
-			'input' => true,
-			'input-group' => true,
-			'page' => true,
-			'pages' => true,
-			'post' => true,
-			'posts' => true,
-			'plugins' => array(
-				'domain-mapping' => true
-			),
-			'position' => array(
-				'left-right' => true,
-				'left-center-right' => true,
-				'top-bottom' => true
-			),
-			'radio' => true,
-			'select' => true,
-			'tag' => true,
-			'tags' => true,
-			'text' => true,
-			'textarea' => true,
-			'toggle' => array(
-				'enable' => true,
-				'disable' => true,
-				'enable-disable' => true,
-				'on' => true,
-				'off' => true,
-				'on-off' => true,
-				'yes' => true,
-				'no' => true,
-				'yes-no' => true
-			),
-			'ui' => array(
-				'font-picker' => true,
-				'image-picker' => true,
-				'overlay-picker' => true,
-				'scroll-picker' => true,
-				'slider' => true
-			),
-			'upload' => true,
-			'wp' => array(
-				'blogname' => true,
-				'blogdescription' => true,
-				'page-on-front' => true
-			)
-		),
-		'screens' => array(
-			'cpanel' => true
-		),
-		'sections' => array(
-			'default' => true
-		),
-		'shortcodes' => array(
-			'access' => true,
-			'visitor' => true
-		),
-		'widgets' => array(
-			'debugger' => true,
-			'default' => true,
-			'menu' => true,
-			'posts-list' => true,
-			'theme-picker' => true,
-			'title-block' => true
-		)
-	);
-
-	/**
 	 * This is a singleton
 	 */
 	private function __construct() {}
@@ -354,7 +260,7 @@ final class ICE_Loader extends ICE_Base
 
 		// loop through all libs
 		foreach ( $libs as $lib ) {
-			self::$instance->load_lib( $lib );
+			self::$instance->load_one( $lib );
 		}
 	}
 
@@ -371,7 +277,7 @@ final class ICE_Loader extends ICE_Base
 
 		// loop through all exts
 		foreach ( $exts as $ext ) {
-			self::$instance->load_libext( $ext );
+			ICE_Ext_Loader::load_one( $ext );
 		}
 	}
 
@@ -381,7 +287,7 @@ final class ICE_Loader extends ICE_Base
 	 * @param string $lib
 	 * @return true|void
 	 */
-	private function load_lib( $lib )
+	private function load_one( $lib )
 	{
 		// set files
 		$files = is_array( $lib ) ? $lib : explode( self::PATH_DELIM, $lib );
@@ -400,7 +306,7 @@ final class ICE_Loader extends ICE_Base
 						$pkgs = $pkgs[$file];
 					} elseif ( true === $pkgs[$file] ) {
 						// its a file, load it
-						return $this->load_lib_file( array_pop( $files ), $files );
+						return $this->load_file( array_pop( $files ), $files );
 					} else {
 						throw new Exception(
 							sprintf( 'The library path "%s" is not valid.', $lib ) );
@@ -413,7 +319,7 @@ final class ICE_Loader extends ICE_Base
 
 		// loading entire pkg
 		foreach( array_keys( $pkgs ) as $pkg_file ) {
-			$this->load_lib_file( $pkg_file, $files );
+			$this->load_file( $pkg_file, $files );
 		}
 	}
 
@@ -424,7 +330,7 @@ final class ICE_Loader extends ICE_Base
 	 * @param array|string $pkg
 	 * @return true
 	 */
-	private function load_lib_file( $file, $pkg )
+	private function load_file( $file, $pkg )
 	{
 		// build up file path
 		$path =
@@ -435,89 +341,6 @@ final class ICE_Loader extends ICE_Base
 		// load it
 		require_once $path;
 		return true;
-	}
-
-	/**
-	 * Load ONE lib extension
-	 *
-	 * @param string $ext
-	 * @return string Name of class that was loaded
-	 */
-	final static public function load_libext( $ext )
-	{
-		// set files
-		$files = is_array( $ext ) ? $ext : explode( self::PATH_DELIM, $ext );
-
-		// files can't be empty
-		if ( count( $files ) ) {
-			// base extension
-			$exts = self::$exts;
-			// check all libs
-			foreach ( $files as $file ) {
-				// is file a pkg key?
-				if ( isset( $exts[$file] ) ) {
-					// is it an array?
-					if ( is_array( $exts[$file] ) ) {
-						// its a pkg, go to next level
-						$exts = $exts[$file];
-					} elseif ( true === $exts[$file] ) {
-						// its a file
-						return self::load_libext_file( $files );
-					}
-				}
-			}
-		} else {
-			throw new Exception( 'The extension path is empty.' );
-		}
-
-		// ext not found
-		return null;
-	}
-
-	/**
-	 * Load a library extension file
-	 *
-	 * @param array $files
-	 * @return true
-	 */
-	private static function load_libext_file( $files )
-	{
-		// chomp plurals
-		$class = $files;
-		$class[0] = rtrim( $class[0], 's' );
-
-		// determine class name
-		$class_name =
-			ICE_Files::file_to_class( implode( '_', $class ), ICE_EXT_PREFIX );
-
-		// if class already exists, just return it
-		if ( class_exists( $class_name ) ) {
-			// already loaded, woot
-			return $class_name;
-		}
-
-		// relative file
-		$file = implode( '/', $files );
-		
-		// build up file path
-		$path = ICE_LIBEXT_DIR . '/' . $file . '/class.php';
-
-		// make sure it exists
-		if ( ICE_Files::cache($path)->is_readable() ) {
-			// load it
-			require_once $path;
-		} else {
-			// not good
-			throw new Exception( sprintf( 'The extension "%s" does not exist. Please check your config file!', $file ) );
-		}
-
-		// did the file we just loaded define the class we were expecting?
-		if ( class_exists( $class_name ) ) {
-			// return class name
-			return $class_name;
-		} else {
-			throw new Exception( sprintf( 'The class "%s" does not exist', $class_name ) );
-		}
 	}
 
 	/**
@@ -542,6 +365,233 @@ final class ICE_Loader extends ICE_Base
 		foreach( func_get_args() as $file ) {
 			require_once( ABSPATH . 'wp-admin/includes/' . $file . '.php' );
 		}
+	}
+
+}
+
+/**
+ * Make loading ICE extensions easy
+ *
+ * @package ICE
+ */
+final class ICE_Ext_Loader extends ICE_Base
+{
+	/**
+	 * Delimeter at which to split library paths
+	 */
+	const PATH_DELIM = '/';
+
+	/**
+	 * Singleton instance
+	 *
+	 * @var ICE_Loader
+	 */
+	private static $instance;
+
+	/**
+	 * Map of already loaded extensions
+	 *
+	 * @var ICE_Map
+	 */
+	private $loaded;
+
+	/**
+	 * Array of extension paths to check
+	 *
+	 * @var ICE_Stack
+	 */
+	private $paths;
+
+	/**
+	 * This is a singleton
+	 */
+	private function __construct()
+	{
+		$this->loaded = new ICE_Map();
+		$this->paths = new ICE_Stack();
+		$this->add_path( ICE_LIBEXT_DIR );
+	}
+
+	/**
+	 * Return singleton instance
+	 *
+	 * @return ICE_Ext_Loader
+	 */
+	final static public function instance()
+	{
+		// new instance if necessary
+		if ( !self::$instance instanceof self ) {
+			// create singleton instance
+			self::$instance = new self();
+		}
+
+		return self::$instance;
+	}
+
+	/**
+	 * Load extension(s) via static call
+	 *
+	 * @param string $ext,... An unlimited number of lib exts to load
+	 * @return string Name of class that was loaded
+	 */
+	final static public function load()
+	{
+		// handle variable number of args
+		$exts = func_get_args();
+
+		// loop through all exts
+		foreach ( $exts as $ext ) {
+			self::instance()->load_ext( $ext );
+		}
+	}
+
+	/**
+	 * Load ONE extension
+	 *
+	 * @param string $ext
+	 * @return string Name of class that was loaded
+	 */
+	final static public function load_one( $ext )
+	{
+		return self::instance()->load_ext( $ext );
+	}
+
+	/**
+	 * Load an extension file
+	 *
+	 * @param string $ext
+	 * @return string Name of class that was loaded
+	 */
+	final public function load_ext( $ext )
+	{
+		// get class parts
+		$class_parts = array_filter( explode( self::PATH_DELIM, $ext ) );
+
+		// files must have at least two parts
+		if ( count( $class_parts ) < 2 ) {
+			throw new Exception( 'The extension path is empty or incomplete.' );
+		}
+		
+		// determine class name
+		$class_name = $class_parts;
+		$class_name[0] = rtrim( $class_name[0], 's' );
+		$class_name = ICE_Files::file_to_class( $class_name, ICE_EXT_PREFIX );
+
+		// if class already exists, just return it
+		if ( class_exists( $class_name ) ) {
+			// already loaded, woot
+			return $class_name;
+		}
+
+		// try to locate file
+		$path = $this->locate_file( $ext, 'class.php' );
+
+		// did we find a file?
+		if ( $path ) {
+			// load it
+			require_once $path;
+		} else {
+			// not good
+			throw new Exception( sprintf( 'The extension "%s" was not found.', $ext ) );
+		}
+
+		// did the file we just loaded define the class we were expecting?
+		if ( class_exists( $class_name ) ) {
+			// update loaded map
+			$this->loaded->add( $class_name, $class_parts );
+			// return class name
+			return $class_name;
+		} else {
+			throw new Exception( sprintf( 'The class "%s" does not exist', $class_name ) );
+		}
+	}
+
+	/**
+	 * Find first matching extension file in the path stack
+	 *
+	 * @param string|array $ext
+	 * @param string $file
+	 * @return string|boolean
+	 */
+	final public function locate_file( $ext, $file )
+	{
+		// handle strings
+		if ( is_string( $ext ) ) {
+			// if ext has path delim, use as is
+			if ( strpos( $ext, self::PATH_DELIM ) ) {
+				$ext_path = $ext;
+			} elseif ( class_exists( $ext ) ) {
+				// get class parts array
+				$ext = $this->loaded->item_at( $ext );
+			}
+		}
+
+		// handle arrays
+		if ( is_array( $ext ) ) {
+			$ext_path = implode( self::PATH_DELIM, $ext );
+		}
+
+		// loop path stack top down
+		foreach ( $this->paths->to_array( true ) as $basepath ) {
+
+			// build up path
+			$path = $basepath . '/' . $ext_path . '/' . $file;
+			
+			// does file exist at path?
+			if ( ICE_Files::cache($path)->is_readable() ) {
+				// found one!
+				return $path;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Return information of about loaded extensions
+	 *
+	 * @param string $class_name the extension's class name
+	 * @param boolean $return_array set to true to return an array of the extension name parts
+	 * @return boolean|array
+	 */
+	final public function loaded( $class_name, $return_array = false )
+	{
+		// is class in loaded map?
+		if ( $this->loaded->contains( $class_name ) ) {
+			// yep return array or true
+			return ( $return_array ) ? $this->loaded->item_at( $class_name ) : true;
+		}
+
+		// class not loaded
+		return false;
+	}
+
+	/**
+	 * Add a path to check. Later items are check first.
+	 *
+	 * @param string $path
+	 * @return boolean
+	 */
+	final public static function path( $path )
+	{
+		return self::instance()->add_path( $path );
+	}
+
+	/**
+	 * Add a path to check. Later items are check first.
+	 *
+	 * @param string $path
+	 * @return boolean
+	 */
+	final public function add_path( $path )
+	{
+		if ( !$this->paths->contains( $path ) ) {
+			$this->paths->push( $path );
+			return true;
+		}
+
+		// already exists
+		return false;
 	}
 
 }

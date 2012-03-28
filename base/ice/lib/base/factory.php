@@ -37,36 +37,10 @@ abstract class ICE_Factory extends ICE_Componentable
 	public function load_ext( $ext )
 	{
 		// expand extension name
-		$ext_full = sprintf( '%s/%s', $this->policy()->get_handle( false ), $ext );
+		$ext_full = $this->policy()->get_handle() . '/' . $ext;
 
-		// format extension file name
-		$ext_file = sprintf( '%s/%s/class.php', $this->policy()->get_handle(), $ext );
-
-		// look for scheme files first
-		$file_theme = ICE_Scheme::instance()->locate_extension_file( $ext_file );
-
-		// find a theme file?
-		if ( $file_theme ) {
-
-			// format class name
-			$class_name = ICE_Files::file_to_class( $ext_full, ICE_EXT_PREFIX );
-
-			// load the file
-			require_once $file_theme;
-
-			// class must exist
-			if ( class_exists( $class_name ) ) {
-				return $class_name;
-			} else {
-				throw new Exception( sprintf( 'The class "%s" does not exist in the file %s', $class_name, $file_theme ) );
-			}
-
-		} else {
-			// format dist ext type
-			$ext_dist = sprintf( '%s/%s', $this->policy()->get_handle(), $ext );
-			// try for a distro extension
-			return ICE_Loader::load_libext( $ext_dist );
-		}
+		// try to load it with extension loader
+		return ICE_Ext_Loader::load_one( $ext_full );
 	}
 
 	/**

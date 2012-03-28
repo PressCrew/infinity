@@ -62,6 +62,11 @@ abstract class ICE_Component
 	const ELEMENT_ID_DELIM = '-';
 
 	/**
+	 * The prefix used for element classes.
+	 */
+	const ELEMENT_CLASS_PREFIX = 'icext';
+
+	/**
 	 * The delimeter used for element classes.
 	 */
 	const ELEMENT_CLASS_DELIM = '-';
@@ -745,8 +750,8 @@ abstract class ICE_Component
 	{
 		// every id has at least these pieces
 		$id = array(
-			'icext',
-			$this->policy()->get_handle(),
+			self::ELEMENT_CLASS_PREFIX,
+			$this->policy()->get_handle( true ),
 			str_replace( '/', self::ELEMENT_ID_DELIM, $this->type ),
 			$this->name
 		);
@@ -765,29 +770,38 @@ abstract class ICE_Component
 	}
 
 	/**
-	 * Return css class for this component
+	 * Return css classes for this component
 	 *
 	 * @param string $suffix,...
 	 * @return string
 	 */
 	final public function get_element_class()
 	{
-		// every id has at least these pieces
-		$class = array(
-			'icext',
-			$this->policy()->get_handle(),
-			str_replace( '/', self::ELEMENT_CLASS_DELIM, $this->type ),
-		);
+		// get reflection stack
+		$reflection_stack = array_reverse( $this->reflect_stack() );
 
-		// any additional args?
-		if ( func_num_args() ) {
-			// add each suffix
-			foreach( func_get_args() as $arg ) {
-				array_push( $class, $arg );
-			}
+		// component type
+		$comp_type = $this->policy()->get_handle( false );
+
+		// classes start with abstract component type
+		$classes[] = self::ELEMENT_CLASS_PREFIX . self::ELEMENT_CLASS_DELIM . $comp_type;
+		
+		// loop reflection stack
+		/* @var $reflection ReflectionClass */
+		foreach ( $reflection_stack as $reflection ) {
+			// get class parts from extension loader
+			$class_parts = ICE_Ext_Loader::instance()->loaded( $reflection->getName(), true );
+			// css class
+			$class = array_merge(
+				array( self::ELEMENT_CLASS_PREFIX ),
+				array_slice( $class_parts, 1 ),
+				func_get_args()
+			);
+			// append it
+			$classes[] = implode( self::ELEMENT_CLASS_DELIM, $class );
 		}
 
-		return esc_attr( implode( self::ELEMENT_CLASS_DELIM, $class ) );
+		return esc_attr( implode( ' ', $classes ) );
 	}
 	
 	/**
@@ -858,50 +872,20 @@ abstract class ICE_Component
 	 */
 	final public function locate_file( $filename, $ancestor = 0 )
 	{
-		// array of extension paths
-		$ext_paths = array();
-
 		// loop class ancestry
 		foreach ( $this->reflect_stack() as $reflection ) {
-			// push parent class onto classes
-			$ext_paths[] = $reflection->getFileName();
-		}
-
-		// loop all ext paths
-		foreach( $ext_paths as $ext_path ) {
-
-			// skip this ancestor?
-			if ( $ancestor-- >= 1 ) {
-				continue;
-			}
-
-			// get parent directory of class file path
-			$ext_dir = dirname( $ext_path );
-
-			// get extension type from path
-			$ext_type = substr( $ext_dir, strrpos( $ext_dir, $this->policy()->get_handle() ) );
-
-			// look for scheme files first
-			$file_theme =
-				ICE_Scheme::instance()->locate_extension_file(
-					$ext_type,
-					$filename
-				);
-
-			// find a theme file?
-			if ( $file_theme ) {
-				// yes, use that one
-				return $file_theme;
-			} else {
-				// no, try for default location
-				$file_default = ICE_LIBEXT_DIR . '/' . $ext_type . '/' . $filename;
-				// exists?
-				if ( ICE_Files::cache($file_default)->is_readable() ) {
-					return $file_default;
+			// skip ancestors
+			if ( $ancestor-- <= 0 ) {
+				// call ext loader file locator helper
+				$located = ICE_Ext_Loader::instance()->locate_file( $reflection->getName(), $filename );
+				// anything?
+				if ( $located ) {
+					return $located;
 				}
 			}
 		}
 
+		// no file found :(
 		return false;
 	}
 
