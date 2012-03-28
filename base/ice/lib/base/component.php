@@ -14,8 +14,8 @@
 ICE_Loader::load(
 	'base/componentable',
 	'base/visitable',
-	'ui/styleable',
-	'ui/scriptable',
+	'dom/styleable',
+	'dom/scriptable',
 	'utils/export',
 	'init/directive'
 );

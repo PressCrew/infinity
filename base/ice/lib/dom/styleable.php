@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-ICE_Loader::load( 'ui/style' );
+ICE_Loader::load( 'dom/style' );
 
 /**
  * Make style implementation easy

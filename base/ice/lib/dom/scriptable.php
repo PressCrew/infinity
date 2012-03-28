@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-ICE_Loader::load( 'ui/script' );
+ICE_Loader::load( 'dom/script' );
 
 /**
  * Make script implementation easy

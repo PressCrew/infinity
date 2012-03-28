@@ -165,6 +165,12 @@ final class ICE_Loader extends ICE_Base
 				'registry' => true
 			)
 		),
+		'dom' => array(
+			'script' => true,
+			'scriptable' => true,
+			'style' => true,
+			'styleable' => true
+		),
 		'init' => array(
 			'data' => true,
 			'directive' => true,
@@ -186,11 +192,7 @@ final class ICE_Loader extends ICE_Base
 			'icon' => true,
 			'iconable' => true,
 			'position' => true,
-			'positionable' => true,
-			'script' => true,
-			'scriptable' => true,
-			'style' => true,
-			'styleable' => true
+			'positionable' => true
 		),
 		'utils' => array(
 			'ajax' => true,
