@@ -385,6 +385,10 @@ class ICE_Map_Lockable extends ICE_Map
 	{
 		$this->set_read_only( true );
 	}
+	public function locked()
+	{
+		return $this->get_read_only();
+	}
 }
 
 ?>
