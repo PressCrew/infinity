@@ -166,6 +166,7 @@ final class ICE_Loader extends ICE_Base
 			)
 		),
 		'dom' => array(
+			'asset' => true,
 			'script' => true,
 			'scriptable' => true,
 			'style' => true,
@@ -187,7 +188,6 @@ final class ICE_Loader extends ICE_Base
 			'scheme_enqueue' => true
 		),
 		'ui' => array(
-			'asset' => true,
 			'cpanel' => true,
 			'icon' => true,
 			'iconable' => true,

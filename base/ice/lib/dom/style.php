@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-ICE_Loader::load( 'ui/asset' );
+ICE_Loader::load( 'dom/asset' );
 
 /**
  * Make styles for components easy
