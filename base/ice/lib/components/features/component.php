@@ -40,6 +40,7 @@ abstract class ICE_Feature
 		// suboptions toggled on?
 		if ( true === $this->suboptions ) {
 			// look for an options configuration file
+			// TODO this should be loading ALL options files in stack
 			$options_file = $this->locate_file( 'options.ini' );
 			// find one?
 			if ( $options_file ) {
