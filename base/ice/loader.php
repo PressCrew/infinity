@@ -167,6 +167,7 @@ final class ICE_Loader extends ICE_Base
 		),
 		'dom' => array(
 			'asset' => true,
+			'element' => true,
 			'script' => true,
 			'scriptable' => true,
 			'style' => true,
