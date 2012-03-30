@@ -143,54 +143,137 @@ abstract class ICE_Renderer extends ICE_Componentable
 	}
 
 	/**
+	 * Render id, sid, and class attributes
+	 *
+	 * @param string $addtl,... zero or more additional classes to append to class attribute
+	 */
+	public function render_attrs()
+	{
+		$element = $this->component->element();
+
+		$attrs[] = $element->id_attribute();
+		$attrs[] = $element->sid_attribute();
+		$attrs[] = $element->class_attribute( $addtl = func_get_args() );
+		
+		print implode( ' ', array_filter( $attrs ) );
+	}
+
+	/**
 	 * Render element id
 	 *
 	 * @param string $suffix,... zero or more suffixes to append
 	 */
 	public function render_id()
 	{
-		$args = func_get_args();
-
-		print call_user_func_array(
-			array( $this->component, 'get_element_id' ),
-			$args
+		print esc_attr(
+			$this->component->element()->id( $suffixes = func_get_args() )
 		);
 	}
 
 	/**
-	 * Render a special one-off class
+	 * Render element id attribute
+	 *
+	 * @param string $suffix,... zero or more suffixes to append
+	 */
+	public function render_id_attr()
+	{
+		print $this->component->element()->id_attribute( $suffixes = func_get_args() );
+	}
+	
+	/**
+	 * Render element id selector
+	 *
+	 * @param string $suffix,... zero or more suffixes to append
+	 */
+	public function render_id_selector()
+	{
+		print $this->component->element()->id_selector( $suffixes = func_get_args() );
+	}
+
+	/**
+	 * Render element special id
+	 *
+	 * @param string $suffix,... zero or more suffixes to append
+	 */
+	public function render_sid()
+	{
+		print esc_attr(
+			$this->component->element()->sid( $suffixes = func_get_args() )
+		);
+	}
+
+	/**
+	 * Render element special id attribute
+	 *
+	 * @param string $suffix,... zero or more suffixes to append
+	 */
+	public function render_sid_attr()
+	{
+		print $this->component->element()->sid_attribute( $suffixes = func_get_args() );
+	}
+
+	/**
+	 * Render element special id selector
+	 *
+	 * @param string $suffix,... zero or more suffixes to append
+	 */
+	public function render_sid_selector()
+	{
+		print $this->component->element()->sid_selector( $suffixes = func_get_args() );
+	}
+
+	/**
+	 * Render element class list
 	 *
 	 * @param string $suffix,... zero or more suffixes to append
 	 */
 	public function render_class()
 	{
-		$args = func_get_args();
-
-		print call_user_func_array(
-			array( $this->component, 'get_element_class' ), $args
+		print esc_attr(
+			$this->component->element()->class_names( $suffixes = func_get_args() )
 		);
 	}
 
 	/**
-	 * Render wrapper classes
+	 * Render element class attribute
+	 *
+	 * @param string $suffix,... zero or more suffixes to append
+	 */
+	public function render_class_attr()
+	{
+		print $this->component->element()->class_attribute( $suffixes = func_get_args() );
+	}
+
+	/**
+	 * Render element class selector
+	 *
+	 * @param string $suffix,... zero or more suffixes to append
+	 */
+	public function render_class_selector()
+	{
+		print $this->component->element()->class_selector( $suffixes = func_get_args() );
+	}
+
+	/**
+	 * Render main element container classes
 	 *
 	 * @param string $addtl,...
 	 */
 	public function render_classes()
 	{
-		// get unlimited number of class args
-		$classes = func_get_args();
+		// get component classes
+		$classes = $this->component->element()->class_names();
 
-		// custom class if set
-		if ( $this->component->class ) {
-			array_unshift( $classes, $this->component->class );
+		// escape and print
+		print esc_attr( $classes );
+
+		// did we get any addtl class args?
+		if ( func_num_args() ) {
+			// get unlimited number of addtl classes
+			$addtl = func_get_args();
+			// render addtl classes delimited with a space
+			print ' ' . esc_attr( join( ' ', $addtl ) );
 		}
-		
-		// component generic class
-		array_unshift( $classes, $this->component->get_element_class() );
-
-		// render them all delimited with a space
-		print esc_attr( join( ' ', $classes ) );
 	}
 
 	/**

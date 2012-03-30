@@ -14,6 +14,7 @@
 ICE_Loader::load(
 	'base/componentable',
 	'base/visitable',
+	'dom/element',
 	'dom/styleable',
 	'dom/scriptable',
 	'utils/export',
@@ -31,6 +32,7 @@ ICE_Loader::load(
  * @property-read string $parent The parent component (slug)
  * @property-read string $title The concrete component title
  * @property-read string $description The concrete component description
+ * @property-read string $id The CSS id to set for the component's container
  * @property-read string $class The CSS class to apply to the component's container
  * @property-read boolean|string $documentation true/false to enable/disable, string for manual page name
  * @property-read array $capabilities Required capabilities, can only be appended
@@ -86,6 +88,13 @@ abstract class ICE_Component
 	private $__directives__;
 
 	/**
+	 * Component's DOM element helper
+	 *
+	 * @var ICE_Component_Element
+	 */
+	private $__element__;
+
+	/**
 	 * Component's styling if applicable
 	 *
 	 * @var ICE_Style
@@ -98,6 +107,14 @@ abstract class ICE_Component
 	 * @var ICE_Script
 	 */
 	private $__script__;
+
+	/**
+	 * A unique string which can be used to identify this component instance
+	 * persistently across requests.
+	 * 
+	 * @var string 
+	 */
+	private $__unique_id__;
 
 	/**
 	 * The template part to append to the *default* template path
@@ -145,6 +162,7 @@ abstract class ICE_Component
 		$this->script = null;
 		$this->script_depends = null;
 		$this->template = null;
+		$this->id = null;
 		$this->class = null;
 		$this->capabilities = null;
 		$this->required_feature = null;
@@ -194,6 +212,24 @@ abstract class ICE_Component
 	}
 
 	/**
+	 * Get the unique id for this component instance
+	 *
+	 * @return string
+	 */
+	public function get_unique_id()
+	{
+		if ( !$this->__unique_id__ ) {
+			$this->__unique_id__ = md5(
+				$this->policy()->get_handle() . '/' .
+				$this->type . '/' .
+				$this->name
+			);
+		}
+
+		return $this->__unique_id__;
+	}
+
+	/**
 	 * Return array of ReflectionClass objects for the current component's ancestory
 	 *
 	 * @return array
@@ -217,6 +253,9 @@ abstract class ICE_Component
 			if ( $reflection->getParentClass()->name == 'ICE_Component') {
 				// yep, we are done
 				break;
+			} elseif ( $reflection->isAbstract() ) {
+				// skip abstract classes
+				continue;
 			} else {
 				// push on to stack
 				$stack[] = $reflection;
@@ -300,6 +339,22 @@ abstract class ICE_Component
 		}
 	}
 	
+	/**
+	 * Return element helper instance
+	 *
+	 * @return ICE_Component_Element
+	 */
+	public function element()
+	{
+		if ( !$this->__element__ instanceof ICE_Component_Element ) {
+			// init element object
+			$this->__element__ = new ICE_Component_Element();
+		}
+
+		// return it!
+		return $this->__element__;
+	}
+
 	/**
 	 * Return style object
 	 *
@@ -483,6 +538,11 @@ abstract class ICE_Component
 			$this->template = $config->template;
 		}
 
+		// css id
+		if ( isset( $config->id ) ) {
+			$this->id = $config->id;
+		}
+
 		// css class
 		if ( isset( $config->class ) ) {
 			$this->class = $config->class;
@@ -507,6 +567,8 @@ abstract class ICE_Component
 
 	/**
 	 * Run final component set up steps
+	 *
+	 * @todo should probably lock the directives here
 	 */
 	final public function finalize()
 	{
@@ -516,7 +578,8 @@ abstract class ICE_Component
 		// call configure template method
 		$this->configure();
 
-		// @todo should probably lock the directives here
+		// initialize the element helper
+		$this->init_element();
 	}
 
 	/**
@@ -601,6 +664,55 @@ abstract class ICE_Component
 	public function init_screen()
 	{
 		// override this method to initialize special screen handling for an option
+	}
+
+	/**
+	 * Set up the element helper instance
+	 */
+	final protected function init_element()
+	{
+		// set preferences
+		$this->element()
+			->set_slug( self::ELEMENT_CLASS_PREFIX )
+			->set_class_suffix_offset( 1 )
+			->set_sid( $this->get_unique_id() );
+
+		// set custom id if applicable
+		if ( $this->id ) {
+			$this->element()->set_id( $this->id );
+		}
+
+		// get reflection stack
+		$reflection_stack = array_reverse( $this->reflect_stack() );
+
+		// component type
+		$comp_type = $this->policy()->get_handle( false );
+
+		// classes start with abstract component type
+		$this->element()->add_class( array( self::ELEMENT_CLASS_PREFIX, $comp_type ) );
+
+		// loop reflection stack
+		/* @var $reflection ReflectionClass */
+		foreach ( $reflection_stack as $reflection ) {
+			// get class parts from extension loader
+			$class_parts = ICE_Ext_Loader::instance()->loaded( $reflection->getName(), true );
+			// css class
+			$class = array_merge(
+				array( self::ELEMENT_CLASS_PREFIX ),
+				array_slice( $class_parts, 1 ),
+				func_get_args()
+			);
+			// add element class
+			$this->element()->add_class( $class );
+		}
+		
+		// add custom class if set
+		if ( $this->class ) {
+			$this->element()->add_class( $this->class );
+		}
+
+		// no more messing with element allowed
+		$this->element()->lock();
 	}
 
 	/**
@@ -936,6 +1048,17 @@ abstract class ICE_Component
 		return true;
 	}
 
+}
+
+/**
+ * Component element
+ *
+ * @package ICE
+ * @subpackage base
+ */
+class ICE_Component_Element extends ICE_Element
+{
+	// nothing special yet, but there will be!
 }
 
 /**
