@@ -34,7 +34,7 @@ abstract class ICE_Renderer extends ICE_Componentable
 	 * @var array
 	 */
 	private $rendered = array();
-	
+
 	/**
 	 * Return component which is currently being rendered
 	 *
@@ -149,13 +149,17 @@ abstract class ICE_Renderer extends ICE_Componentable
 	 */
 	public function render_attrs()
 	{
-		$element = $this->component->element();
+		if ( $this->render_id_attr() ) {
+			print ' ';
+		}
 
-		$attrs[] = $element->id_attribute();
-		$attrs[] = $element->sid_attribute();
-		$attrs[] = $element->class_attribute( $addtl = func_get_args() );
+		if ( $this->render_sid_attr() ) {
+			print ' ';
+		}
 		
-		print implode( ' ', array_filter( $attrs ) );
+		if ( $this->render_classes_attr( $addtl = func_get_args() ) ) {
+			print ' ';
+		}
 	}
 
 	/**
@@ -177,9 +181,14 @@ abstract class ICE_Renderer extends ICE_Componentable
 	 */
 	public function render_id_attr()
 	{
-		print $this->component->element()->id_attribute( $suffixes = func_get_args() );
+		$attr = $this->component->element()->id_attribute( $suffixes = func_get_args() );
+
+		if ( $attr ) {
+			print $attr;
+			return true;
+		}
 	}
-	
+
 	/**
 	 * Render element id selector
 	 *
@@ -209,7 +218,12 @@ abstract class ICE_Renderer extends ICE_Componentable
 	 */
 	public function render_sid_attr()
 	{
-		print $this->component->element()->sid_attribute( $suffixes = func_get_args() );
+		$attr = $this->component->element()->sid_attribute( $suffixes = func_get_args() );
+
+		if ( $attr ) {
+			print $attr;
+			return true;
+		}
 	}
 
 	/**
@@ -261,18 +275,27 @@ abstract class ICE_Renderer extends ICE_Componentable
 	 */
 	public function render_classes()
 	{
-		// get component classes
-		$classes = $this->component->element()->class_names();
-
 		// escape and print
-		print esc_attr( $classes );
+		print esc_attr( $this->component->element()->class_list( $addtl = func_get_args() ) );
+	}
 
-		// did we get any addtl class args?
-		if ( func_num_args() ) {
-			// get unlimited number of addtl classes
-			$addtl = func_get_args();
-			// render addtl classes delimited with a space
-			print ' ' . esc_attr( join( ' ', $addtl ) );
+	/**
+	 * Render main element container class attribute
+	 *
+	 * @param string $addtl,...
+	 */
+	public function render_classes_attr()
+	{
+		$classes = $this->component->element()->class_list( $addtl = func_get_args() );
+
+		if ( $classes ) {
+			
+			print sprintf(
+				'class="%s"',
+				esc_attr( $classes )
+			);
+			
+			return true;
 		}
 	}
 
@@ -324,7 +347,7 @@ abstract class ICE_Renderer extends ICE_Componentable
 				unset( $classes[$key] );
 			}
 		}
-		
+
 		// render them all delimited with a space
 		print esc_attr( join( ' ', $classes ) );
 	}
@@ -338,7 +361,7 @@ abstract class ICE_Renderer extends ICE_Componentable
 	{
 		$this->load_template();
 	}
-	
+
 	/**
 	 * Render sample code for this component
 	 * 
