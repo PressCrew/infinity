@@ -298,7 +298,22 @@ abstract class ICE_Element extends ICE_Base
 	}
 
 	/**
-	 * Return DOM HTML class names separated by spaces
+	 * Return DOM HTML class list separated by spaces
+	 *
+	 * @param string $addtl,... zero or more additional classes to append
+	 * @return string
+	 */
+	public function class_list()
+	{
+		$classes = $this->get_classes();
+
+		if ( $classes ) {
+			return implode( ' ', $classes ) . $this->suffix( $addtl = func_get_args(), ' ' );
+		}
+	}
+
+	/**
+	 * Return DOM HTML class names separated by spaces and optional suffixed
 	 *
 	 * @param string $suffix,...
 	 * @return string
