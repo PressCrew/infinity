@@ -328,7 +328,7 @@ abstract class ICE_Element extends ICE_Base
 	}
 
 	/**
-	 * Return DOM HTML special id attribute
+	 * Return DOM HTML class attribute
 	 *
 	 * @param string $suffix,...
 	 * @return string
