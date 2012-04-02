@@ -114,7 +114,7 @@ abstract class ICE_Component
 	 * 
 	 * @var string 
 	 */
-	private $__unique_id__;
+	private $__unique_hash__;
 
 	/**
 	 * The template part to append to the *default* template path
@@ -212,21 +212,27 @@ abstract class ICE_Component
 	}
 
 	/**
-	 * Get the unique id for this component instance
+	 * Get the unique id string for this component instance
 	 *
 	 * @return string
 	 */
 	public function get_unique_id()
 	{
-		if ( !$this->__unique_id__ ) {
-			$this->__unique_id__ = md5(
-				$this->policy()->get_handle() . '/' .
-				$this->type . '/' .
-				$this->name
-			);
+		return $this->policy()->get_handle() . '/' . $this->type . '/' . $this->name;
+	}
+	
+	/**
+	 * Get the unique hash for this component instance
+	 *
+	 * @return string
+	 */
+	public function get_unique_hash()
+	{
+		if ( !$this->__unique_hash__ ) {
+			$this->__unique_hash__ = hash( 'crc32', $this->get_unique_id() );
 		}
 
-		return $this->__unique_id__;
+		return $this->__unique_hash__;
 	}
 
 	/**
@@ -675,7 +681,7 @@ abstract class ICE_Component
 		$this->element()
 			->set_slug( self::ELEMENT_CLASS_PREFIX )
 			->set_class_suffix_offset( 1 )
-			->set_sid( $this->get_unique_id() );
+			->set_sid( $this->get_unique_hash() );
 
 		// set custom id if applicable
 		if ( $this->id ) {
