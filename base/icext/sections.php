@@ -93,17 +93,7 @@ class Infinity_Section_Factory extends ICE_Section_Factory
  */
 class Infinity_Sections_Renderer extends ICE_Section_Renderer
 {
-	/**
-	 * Render the section layout around the section's content
-	 *
-	 * @param string $content The content that should be wrapped in the section layout
-	 */
-	protected function render_section( $content )
-	{ ?>
-		<div class="<?php $this->render_classes() ?>">
-			<?php print $content ?>
-		</div><?php
-	}
+	// nothing custom yet
 }
 
 //
