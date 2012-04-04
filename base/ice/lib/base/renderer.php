@@ -143,23 +143,33 @@ abstract class ICE_Renderer extends ICE_Componentable
 	}
 
 	/**
-	 * Render id, sid, and class attributes
+	 * Render id, and class attributes
 	 *
 	 * @param string $addtl,... zero or more additional classes to append to class attribute
 	 */
 	public function render_attrs()
 	{
-		if ( $this->render_id_attr() ) {
-			print ' ';
+		// attributes to print
+		$attrs = array();
+
+		// get id from component
+		$id = $this->component->element()->id();
+
+		// if we got an id, add it to attr list
+		if ( $id ) {
+			$attrs[] = sprintf( 'id="%s"', esc_attr( $id ) );
 		}
 
-		if ( $this->render_sid_attr() ) {
-			print ' ';
+		// get classes from component
+		$classes = $this->component->element()->class_list( $addtl = func_get_args() );
+
+		// if we got classes, add them to attr list
+		if ( $classes ) {
+			$attrs[] = sprintf( 'class="%s"', esc_attr( $classes ) );
 		}
-		
-		if ( $this->render_classes_attr( $addtl = func_get_args() ) ) {
-			print ' ';
-		}
+
+		// print attributes separated with a space
+		print implode( ' ', $attrs );
 	}
 
 	/**
@@ -175,65 +185,23 @@ abstract class ICE_Renderer extends ICE_Componentable
 	}
 
 	/**
-	 * Render element id attribute
-	 *
-	 * @param string $suffix,... zero or more suffixes to append
-	 */
-	public function render_id_attr()
-	{
-		$attr = $this->component->element()->id_attribute( $suffixes = func_get_args() );
-
-		if ( $attr ) {
-			print $attr;
-			return true;
-		}
-	}
-
-	/**
-	 * Render element id selector
-	 *
-	 * @param string $suffix,... zero or more suffixes to append
-	 */
-	public function render_id_selector()
-	{
-		print $this->component->element()->id_selector( $suffixes = func_get_args() );
-	}
-
-	/**
-	 * Render element special id
-	 *
-	 * @param string $suffix,... zero or more suffixes to append
-	 */
-	public function render_sid()
-	{
-		print esc_attr(
-			$this->component->element()->sid( $suffixes = func_get_args() )
-		);
-	}
-
-	/**
 	 * Render element special id attribute
 	 *
-	 * @param string $suffix,... zero or more suffixes to append
+	 * @param string $sid
 	 */
-	public function render_sid_attr()
+	public function render_sid_attr( $sid )
 	{
-		$attr = $this->component->element()->sid_attribute( $suffixes = func_get_args() );
-
-		if ( $attr ) {
-			print $attr;
-			return true;
-		}
+		print $this->component->element()->sid_attribute( $sid );
 	}
 
 	/**
 	 * Render element special id selector
 	 *
-	 * @param string $suffix,... zero or more suffixes to append
+	 * @param string $sid
 	 */
-	public function render_sid_selector()
+	public function render_sid_selector( $sid )
 	{
-		print $this->component->element()->sid_selector( $suffixes = func_get_args() );
+		print $this->component->element()->sid_selector( $sid );
 	}
 
 	/**
@@ -246,16 +214,6 @@ abstract class ICE_Renderer extends ICE_Componentable
 		print esc_attr(
 			$this->component->element()->class_names( $suffixes = func_get_args() )
 		);
-	}
-
-	/**
-	 * Render element class attribute
-	 *
-	 * @param string $suffix,... zero or more suffixes to append
-	 */
-	public function render_class_attr()
-	{
-		print $this->component->element()->class_attribute( $suffixes = func_get_args() );
 	}
 
 	/**
@@ -277,26 +235,6 @@ abstract class ICE_Renderer extends ICE_Componentable
 	{
 		// escape and print
 		print esc_attr( $this->component->element()->class_list( $addtl = func_get_args() ) );
-	}
-
-	/**
-	 * Render main element container class attribute
-	 *
-	 * @param string $addtl,...
-	 */
-	public function render_classes_attr()
-	{
-		$classes = $this->component->element()->class_list( $addtl = func_get_args() );
-
-		if ( $classes ) {
-			
-			print sprintf(
-				'class="%s"',
-				esc_attr( $classes )
-			);
-			
-			return true;
-		}
 	}
 
 	/**

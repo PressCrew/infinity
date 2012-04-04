@@ -39,12 +39,6 @@ abstract class ICE_Element extends ICE_Base
 	private $id;
 
 	/**
-	 * The HTML system id attribute
-	 * @var string
-	 */
-	private $sid;
-
-	/**
 	 * The class names map
 	 * @var ICE_Map
 	 */
@@ -124,18 +118,6 @@ abstract class ICE_Element extends ICE_Base
 	}
 
 	/**
-	 * Set the HTML system id attribute value
-	 *
-	 * @param string $sid
-	 * @return ICE_Element
-	 */
-	final public function set_sid( $sid )
-	{
-		$this->sid = $sid;
-		return $this;
-	}
-
-	/**
 	 * Add a class to the class list
 	 *
 	 * @param string $class
@@ -194,7 +176,7 @@ abstract class ICE_Element extends ICE_Base
 	 * @param string $glue
 	 * @return string
 	 */
-	protected function suffix( $parts, $glue = '-' )
+	protected function suffix( $parts, $glue = '_' )
 	{
 		$suffix = '';
 		
@@ -219,81 +201,30 @@ abstract class ICE_Element extends ICE_Base
 	 */
 	final public function id()
 	{
-		$id = ( $this->id ) ? $this->id : $this->sid;
-
-		if ( $id ) {
-			return $id . $this->suffix( $suffixes = func_get_args() );
-		}
-	}
-
-	/**
-	 * Return DOM HTML id selector string
-	 *
-	 * @param string $suffix,...
-	 * @return string
-	 */
-	final public function id_selector()
-	{
-		$id = $this->id( $suffixes = func_get_args() );
-		
-		if ( $id ) {
-			return '#' . $id;
-		}
-	}
-
-	/**
-	 * Return DOM HTML identifier attribute
-	 *
-	 * @param string $suffix,...
-	 * @return string
-	 */
-	final public function id_attribute()
-	{
-		$id = $this->id( $suffixes = func_get_args() );
-
-		if ( $id ) {
-			return sprintf( 'id="%s"', esc_attr( $id ) );
-		}
-	}
-
-	/**
-	 * Return DOM HTML element special id
-	 *
-	 * @param string $suffix,...
-	 * @return string
-	 */
-	final public function sid()
-	{
-		if ( $this->sid ) {
-			return $this->sid . $this->suffix( $args = func_get_args() );
+		if ( $this->id ) {
+			return $this->id . $this->suffix( $suffixes = func_get_args() );
 		}
 	}
 
 	/**
 	 * Return DOM HTML special id selector string
 	 *
-	 * @param string $suffix,...
+	 * @param string $sid
 	 * @return string
 	 */
-	public function sid_selector()
+	public function sid_selector( $sid )
 	{
-		$sid = $this->sid( $suffixes = func_get_args() );
-
-		if ( $sid ) {
-			return sprintf( '[data-%s-sid="%s"]', $this->slug, esc_attr( $sid ) );
-		}
+		return sprintf( '[data-%s-sid="%s"]', $this->slug, esc_attr( $sid ) );
 	}
 
 	/**
-	 * Return DOM HTML identifier attribute
+	 * Return DOM HTML special identifier attribute
 	 *
-	 * @param string $suffix,...
+	 * @param string $sid
 	 * @return string
 	 */
-	final public function sid_attribute()
+	final public function sid_attribute( $sid )
 	{
-		$sid = $this->sid( $suffixes = func_get_args() );
-
 		if ( $sid ) {
 			return sprintf( 'data-%s-sid="%s"', $this->slug, esc_attr( $sid ) );
 		}
@@ -340,22 +271,7 @@ abstract class ICE_Element extends ICE_Base
 		$classes = $this->get_classes( $suffixes = func_get_args() );
 
 		if ( count( $classes ) ) {
-			return '.' . implode( '.', $classes );
-		}
-	}
-
-	/**
-	 * Return DOM HTML class attribute
-	 *
-	 * @param string $suffix,...
-	 * @return string
-	 */
-	final public function class_attribute()
-	{
-		$classes = $this->class_names( $suffixes = func_get_args() );
-
-		if ( $classes ) {
-			return sprintf( 'class="%s"', esc_attr( $classes ) );
+			return implode( '.', $classes );
 		}
 	}
 

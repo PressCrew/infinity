@@ -59,19 +59,14 @@ abstract class ICE_Component
 	const DEFAULT_TEMPLATE_DIR = 'templates';
 
 	/**
-	 * The delimeter used for element ids.
+	 * The prefix used for dynamic element ids.
 	 */
-	const ELEMENT_ID_DELIM = '-';
+	const ELEMENT_ID_PREFIX = 'icext';
 
 	/**
 	 * The prefix used for element classes.
 	 */
 	const ELEMENT_CLASS_PREFIX = 'icext';
-
-	/**
-	 * The delimeter used for element classes.
-	 */
-	const ELEMENT_CLASS_DELIM = '-';
 
 	/**
 	 * Component configurations registry
@@ -509,7 +504,7 @@ abstract class ICE_Component
 		if ( isset( $config->style ) ) {
 			$this->style = $config->style;
 			$this->style()->cache(
-				$this->get_element_id(),
+				$this->element()->id(),
 				ICE_Scheme::instance()->locate_file( $this->style )
 			);
 		}
@@ -526,7 +521,7 @@ abstract class ICE_Component
 		if ( isset( $config->script ) ) {
 			$this->script = $config->script;
 			$this->script()->cache(
-				$this->get_element_id(),
+				$this->element()->id(),
 				ICE_Scheme::instance()->locate_file( $this->script )
 			);
 		}
@@ -677,16 +672,18 @@ abstract class ICE_Component
 	 */
 	final protected function init_element()
 	{
+		// determine id
+		if ( $this->id ) {
+			$element_id = $this->id;
+		} else {
+			$element_id = self::ELEMENT_ID_PREFIX . '-' . $this->get_unique_hash();
+		}
+		
 		// set preferences
 		$this->element()
+			->set_id( $element_id )
 			->set_slug( self::ELEMENT_CLASS_PREFIX )
-			->set_class_suffix_offset( 1 )
-			->set_sid( $this->get_unique_hash() );
-
-		// set custom id if applicable
-		if ( $this->id ) {
-			$this->element()->set_id( $this->id );
-		}
+			->set_class_suffix_offset( 1 );
 
 		// get reflection stack
 		$reflection_stack = array_reverse( $this->reflect_stack() );
@@ -858,70 +855,6 @@ abstract class ICE_Component
 		return $this->policy()->options()->registry()->has( $option_name );
 	}
 
-	/**
-	 * Return unique css element id for this component
-	 *
-	 * @param string $suffix,...
-	 * @return string
-	 */
-	final public function get_element_id()
-	{
-		// every id has at least these pieces
-		$id = array(
-			self::ELEMENT_CLASS_PREFIX,
-			$this->policy()->get_handle( true ),
-			str_replace( '/', self::ELEMENT_ID_DELIM, $this->type ),
-			$this->name
-		);
-		
-		// any additional args?
-		if ( func_num_args() ) {
-			// push extra delimeter so we get a triple char
-			array_push( $id, self::ELEMENT_ID_DELIM );
-			// add each suffix
-			foreach( func_get_args() as $arg ) {
-				array_push( $id, $arg );
-			}
-		}
-
-		return esc_attr( implode( self::ELEMENT_ID_DELIM, $id ) );
-	}
-
-	/**
-	 * Return css classes for this component
-	 *
-	 * @param string $suffix,...
-	 * @return string
-	 */
-	final public function get_element_class()
-	{
-		// get reflection stack
-		$reflection_stack = array_reverse( $this->reflect_stack() );
-
-		// component type
-		$comp_type = $this->policy()->get_handle( false );
-
-		// classes start with abstract component type
-		$classes[] = self::ELEMENT_CLASS_PREFIX . self::ELEMENT_CLASS_DELIM . $comp_type;
-		
-		// loop reflection stack
-		/* @var $reflection ReflectionClass */
-		foreach ( $reflection_stack as $reflection ) {
-			// get class parts from extension loader
-			$class_parts = ICE_Ext_Loader::instance()->loaded( $reflection->getName(), true );
-			// css class
-			$class = array_merge(
-				array( self::ELEMENT_CLASS_PREFIX ),
-				array_slice( $class_parts, 1 ),
-				func_get_args()
-			);
-			// append it
-			$classes[] = implode( self::ELEMENT_CLASS_DELIM, $class );
-		}
-
-		return esc_attr( implode( ' ', $classes ) );
-	}
-	
 	/**
 	 * Return array of variables to extract() for use by the template
 	 *
