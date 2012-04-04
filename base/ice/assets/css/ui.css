@@ -25,6 +25,24 @@
 	background-image: url('../images/ajax_loader.gif');
 }
 
+/* Generic Targets */
+.ice-first, .ice-last,
+.ice-odd, .ice-even,
+.ice-top, .ice-middle, .ice-bottom,
+.ice-left, .ice-center, .ice-right,
+.ice-prev, .ice-curr, .ice-next,
+.ice-do-activate, .ice-do-deactivate,
+.ice-do-toggle, .ice-do-enable, .ice-do-disable,
+.ice-do-create, .ice-do-preview, .ice-do-save, .ice-do-delete, .ice-do-reset,
+.ice-do-trash, .ice-do-untrash,
+.ice-do-open, .ice-do-close,
+.ice-title, .ice-content, .ice-message,
+.ice-controls, .ice-viewport, .ice-wrapper,
+.ice-item, .ice-value, .ice-status {
+	/* no styling */
+}
+
+
 /* Flash Messages */
 div.ice-flash div.ui-state-default,
 div.ice-flash div.ui-state-error,
