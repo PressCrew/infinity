@@ -219,8 +219,10 @@ abstract class ICE_Element extends ICE_Base
 	 */
 	final public function id()
 	{
-		if ( $this->id ) {
-			return $this->id . $this->suffix( $suffixes = func_get_args() );
+		$id = ( $this->id ) ? $this->id : $this->sid;
+
+		if ( $id ) {
+			return $id . $this->suffix( $suffixes = func_get_args() );
 		}
 	}
 
