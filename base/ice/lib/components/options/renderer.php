@@ -34,7 +34,7 @@ abstract class ICE_Option_Renderer extends ICE_Renderer
 	public function render_begin( $block_class = null )
 	{
 		// begin rendering ?>
-		<div id="<?php $this->render_id() ?>" class="ice-options-block <?php $this->render_classes() ?> <?php print $block_class ?>">
+		<div <?php $this->render_attrs( 'ice-options-block', $block_class ) ?>>
 			<?php $this->render_manifest() ?>
 			<div class="ice-options-mesg">
 				<!-- flash messages for this option will render here -->
