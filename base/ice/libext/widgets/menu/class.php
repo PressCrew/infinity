@@ -108,7 +108,7 @@ class ICE_Ext_Widget_Menu
 		// render list
 		foreach( $this->get_items() as $item_slug => $item ) { ?>
 			<li>
-				<a id="<?php print $this->get_element_id( $item_slug ) ?>" href="<?php print esc_attr( $item['href'] ) ?>"><?php print esc_attr( $item['text'] ) ?></a>
+				<a id="<?php print $this->element()->id( $item_slug ) ?>" href="<?php print esc_attr( $item['href'] ) ?>"><?php print esc_attr( $item['text'] ) ?></a>
 			</li><?php
 		}
 	}
@@ -148,15 +148,19 @@ class ICE_Ext_Widget_Menu
 				// format conf
 				$conf = sprintf( '{%s}', $icon->config() );
 			}
+			
+			/*\*/ if(0)?><script><?php /*\*/
 
 			// start capturing
 			$script->begin_logic();
 			
-			// the button statement (one liner) ?>
-			jQuery('a#<?php print $this->get_element_id( $item_slug ) ?>').button(<?php print $conf ?>); <?php
+			// the button statement ?>
+			jQuery('a#<?php print $this->element()->id( $item_slug ) ?>').button(<?php print $conf ?>); <?php
 
 			// end capturing
 			$script->end_logic();
+			
+			/*\*/ if(0)?></script><?php /*\*/
 		}
 
 		return $script;

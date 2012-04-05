@@ -57,7 +57,7 @@ class ICE_Ext_Widget_Title_Block
 	protected function open_block()
 	{
 		// render the opening block html ?>
-		<div class="<?php print $this->get_element_class( 'block' ) ?> ui-widget">
+		<div class="<?php print $this->element()->class_names( 'block' ) ?> ui-widget">
 			<div class="ui-widget-header"><?php print esc_html( $this->title ) ?></div>
 			<div class="ui-widget-content"><?php
 	}

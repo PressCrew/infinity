@@ -10,12 +10,14 @@
  * @subpackage sections
  * @since 1.0
  */
+
+/* @var $this ICE_Section_Renderer */
 ?>
-<div class="<?php $this->render_classes() ?> <?php $this->render_class( 'block' ) ?>">
-	<div class="ui-widget-header ui-state-active <?php $this->render_class( 'title' ) ?> <?php $this->render_class_title() ?>">
+<div <?php $this->render_attrs() ?>>
+	<div class="ui-widget-header ui-state-active ice-title <?php $this->render_class_title() ?>">
 		<?php $this->render_title(); ?> <?php _e( 'Options', infinity_text_domain ); ?>
 	</div>
-	<div class="<?php $this->render_class( 'content' ) ?> <?php $this->render_class_content() ?>">
+	<div class="ui-widget-content ice-content <?php $this->render_class_content() ?>">
 		<?php $this->component()->render_components() ?>
 	</div>
 </div>

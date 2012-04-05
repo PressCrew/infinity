@@ -10,14 +10,16 @@
  * @subpackage options
  * @since 1.0
  */
+
+/* @var $this ICE_Option_Renderer */
 ?>
-<span id="<?php $this->render_id('label') ?>" class="<?php $this->render_class('label') ?>">
+<span class="ice-title">
 	<?php print esc_html( $label ) ?>
 </span>
-<span id="<?php $this->render_id('values') ?>" class="<?php $this->render_class('values') ?>">
+<span class="ice-content">
 	<!-- formatted values injected here -->
 </span>
-<div id="<?php $this->render_id('widget') ?>" class="<?php $this->render_class('widget') ?>">
+<div id="<?php $this->render_id('widget') ?>" class="ice-controls">
 <?php
 	// render hidden input(s)
 	if ( $this->component()->range ) {
@@ -27,7 +29,7 @@
 			// keep track of current loop for element id
 			$loop = ($loop) ? $loop + 1 : 1;
 			// finally render the input element
-			$this->render_input( 'hidden-multi', $value, $this->component()->get_element_id( $loop ) );
+			$this->render_input( 'hidden-multi', $value, $this->component()->element()->id( $loop ) );
 		}
 	} else {
 		// just a single, easy peasy
@@ -43,9 +45,9 @@
 				<?php print $options ?>)
 			.iceEasySlider(
 				'updateInput',
-				'#<?php print $this->render_id('widget') ?> input')
+				'#<?php $this->render_id('widget') ?> input')
 			.iceEasySlider(
 				'updateDisplay',
-				'#<?php $this->render_id('values') ?>');
+				'#<?php $this->render_id() ?> span.ice-content');
 	});
 </script>

@@ -11,6 +11,8 @@
  * @since 1.0
  */
 
+/* @var $this ICE_Option_Renderer */
+
 // grab value one time only
 $selected_value = $this->component()->get();
 

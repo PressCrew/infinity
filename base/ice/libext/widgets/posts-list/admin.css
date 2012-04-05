@@ -1,36 +1,36 @@
 
-div.icext-widgets-posts-list {
+div.icext-widget.icext-posts-list {
 	width: 700px;
 }
-div.icext-widgets-posts-list div.ui-widget-header a {
+div.icext-widget.icext-posts-list div.ui-widget-header a {
 	float: right;
 	font-size: 11px;
 }
-div.icext-widgets-posts-list div.ui-widget-header,
-div.icext-widgets-posts-list div.ui-widget-content {
+div.icext-widget.icext-posts-list div.ui-widget-header,
+div.icext-widget.icext-posts-list div.ui-widget-content {
 	padding: .5em;
 }
-	div.icext-widgets-posts-list ul li {
+	div.icext-widget.icext-posts-list ul li {
 		margin: 5px 0px 5px 0px;
 	}
-	div.icext-widgets-posts-list ul li div.ice-posts-list-item-content {
+	div.icext-widget.icext-posts-list ul li div.ice-content {
 		height: 32px;
 		padding-top: 5px;
 		padding: 5px 15px 0 15px;
 	}
-	div.icext-widgets-posts-list ul li a.ice-posts-list-item-title {
+	div.icext-widget.icext-posts-list ul li a.ice-title {
 		display: inline-block;
 		font-size: 14px;
 		font-weight: bold;
 		margin-top: 5px;
 	}
-	div.icext-widgets-posts-list ul li div.ice-posts-list-item-actions {
+	div.icext-widget.icext-posts-list ul li div.ice-controls {
 		display: inline-block;
 		float: right;
 	}
-	div.icext-widgets-posts-list ul li a.ice-posts-list-item-trash {
+	div.icext-widget.icext-posts-list ul li a.ice-do-trash {
 		margin-left: 10px;
 	}
-	div.icext-widgets-posts-list ul ul {
+	div.icext-widget.icext-posts-list ul ul {
 		margin-left: 20px;
 	}

@@ -83,8 +83,8 @@ class ICE_Ext_Feature_Header_Logo
 
 			// selectors to target
 			$selectors =
-				'div#' . $this->get_element_id() . ' a,' .
-				'h1#' . $this->get_element_id() . ' a';
+				'div#' . $this->element()->id() . ' a,' .
+				'h1#' . $this->element()->id() . ' a';
 
 			// add rule
 			$pos = $style->rule( $selectors );

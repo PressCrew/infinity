@@ -10,9 +10,12 @@
  * @subpackage widgets
  * @since 1.0
  */
+
+/* @var $this ICE_Widget_Renderer */
+/* @var $button_script ICE_Script */
 ?>
 
-<ul id="<?php $this->render_id() ?>" class="<?php $this->render_classes() ?>">
+<ul <?php $this->render_attrs() ?>>
 	<?php $this->component()->render_items() ?>
 </ul>
 
@@ -20,5 +23,5 @@
 	// init menu
 	jQuery('ul#<?php $this->render_id() ?>').menu();
 	// render all of the button script logic
-	<?php print $button_script->export(); ?>
+	<?php print $button_script->export() ?>
 </script>

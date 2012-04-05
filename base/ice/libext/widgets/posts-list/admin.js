@@ -8,13 +8,13 @@ function widgetPostsListSortable(selector)
 			jQuery('<div></div>')
 				.insertBefore(posts),
 		item =
-			jQuery('div.ice-posts-list-item-content', posts)
+			jQuery('div.ice-content', posts)
 				.addClass('ui-state-default ui-corner-all'),
 		status =
-			jQuery('span.ice-posts-list-item-status', posts)
+			jQuery('span.ice-status', posts)
 				.buttonset(),
 		trash =
-			jQuery('a.ice-posts-list-item-trash', posts)
+			jQuery('a.ice-do-trash', posts)
 				.button({icons: {primary: 'ui-icon-trash'}});
 
 	// add icons to status buttons

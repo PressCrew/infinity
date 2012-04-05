@@ -10,6 +10,8 @@
  * @subpackage options
  * @since 1.0
  */
+
+/* @var $this ICE_Option_Renderer */
 ?>
 
 <div id="<?php $this->render_id('toolbar') ?>" class="<?php $this->render_class('toolbar') ?>"></div>

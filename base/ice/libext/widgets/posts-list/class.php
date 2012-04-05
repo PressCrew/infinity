@@ -425,9 +425,9 @@ class ICE_Posts_List extends WP_Posts_List_Table
 		$can_edit_post = current_user_can( $post_type_object->cap->edit_post, $post->ID );
 
 		if ( $can_edit_post ) {
-			?><div class="ice-posts-list-item-content"><?php
+			?><div class="ice-content"><?php
 				$this->post_title();?>
-				<div class="ice-posts-list-item-actions"><?php
+				<div class="ice-controls"><?php
 					$this->post_status();
 					$this->post_trash();?>
 				</div><?php
@@ -445,7 +445,7 @@ class ICE_Posts_List extends WP_Posts_List_Table
 	private function post_title()
 	{
 		// start rendering ?>
-		<a class="ice-posts-list-item-title" href="<?php print $this->post_edit_url() ?>"><?php print _draft_or_post_title() ?></a><?php
+		<a class="ice-title" href="<?php print $this->post_edit_url() ?>"><?php print _draft_or_post_title() ?></a><?php
 	}
 
 	/**
@@ -457,7 +457,7 @@ class ICE_Posts_List extends WP_Posts_List_Table
 		$post_status = $this->post->post_status;
 
 		// open container ?>
-		<span class="ice-posts-list-item-status"><?php
+		<span class="ice-status"><?php
 			// handle each status type
 			switch ( $post_status ) {
 				case 'draft':
@@ -493,7 +493,7 @@ class ICE_Posts_List extends WP_Posts_List_Table
 	private function post_trash()
 	{
 		// render button ?>
-		<a class="ice-posts-list-item-trash" href="#<?php print $this->post->ID ?>"><?php _e( 'Trash' ) ?></a><?php
+		<a class="ice-do-trash" href="#<?php print $this->post->ID ?>"><?php _e( 'Trash' ) ?></a><?php
 	}
 
 	/**

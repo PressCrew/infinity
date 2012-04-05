@@ -1,9 +1,9 @@
 
-span.icext-options-ui-slider-label,
-span.icext-options-ui-slider-values {
+.icext-option.icext-ui-slider span.ice-title,
+.icext-option.icext-ui-slider span.ice-content {
 	font-size: 12px;
 	font-weight: bold;
 }
-div.icext-options-ui-slider-widget {
+.icext-option.icext-ui-slider div.ice-controls {
 	margin: 10px 0 15px 0;
 }

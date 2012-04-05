@@ -10,5 +10,7 @@
  * @subpackage options
  * @since 1.0
  */
+
+/* @var $this ICE_Option_Renderer */
 ?>
 <?php $this->component()->render_field() ?>

@@ -10,8 +10,10 @@
  * @subpackage options
  * @since 1.0
  */
+
+/* @var $this ICE_Option_Renderer */
 ?>
-<div id="<?php $this->render_field_id() ?>" class="<?php $this->render_class( 'field' ) ?>">
+<div id="<?php $this->render_field_id() ?>" class="<?php $this->render_field_class() ?>">
 	<?php
 		// loop all field options
 		foreach ( $this->component()->field_options as $value => $display ) {
@@ -23,7 +25,7 @@
 			$this->render_input(
 				$this->component()->input_type(),
 				$value,
-				$this->component()->get_element_id( $loop )
+				$this->component()->element()->id( $loop )
 			);
 
 			// render the label ?>

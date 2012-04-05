@@ -1,13 +1,13 @@
 
-div.icext-widget-title-block {
+div.icext-widget.icext-title-block {
 	padding: 0;
 }
-	div.icext-widget-title-block > div {
+	div.icext-widget.icext-title-block > div {
 		padding: 5px;
 	}
-	div.icext-widget-title-block > div.ui-widget-header {
+	div.icext-widget.icext-title-block > div.ui-widget-header {
 		font-weight: bold;
 	}
-	div.icext-widget-title-block > div.ui-widget-content {
+	div.icext-widget.icext-title-block > div.ui-widget-content {
 		border-top: none;
 	}

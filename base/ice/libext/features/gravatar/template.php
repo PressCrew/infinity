@@ -10,7 +10,9 @@
  * @subpackage features
  * @since 1.0
  */
+
+/* @var $this ICE_Feature_Renderer */
 ?>
 <?php if ( in_the_loop() ): ?>
-	<img src="<?php print $this->url() ?>" id="<?php $this->render_id() ?>" class="<?php $this->render_classes( $this->component()->image_class ) ?>">
+	<img src="<?php print $this->url() ?>" <?php $this->render_attrs( $this->component()->image_class ) ?>>
 <?php endif; ?>

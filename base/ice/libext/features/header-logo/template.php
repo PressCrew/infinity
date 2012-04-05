@@ -10,12 +10,13 @@
  * @subpackage features
  * @since 1.0
  */
-?>
 
-<?php
-	$heading_tag = ( is_home() || is_front_page() ) ? 'h1' : 'div';
+/* @var $this ICE_Feature_Renderer */
+
+$heading_tag = ( is_home() || is_front_page() ) ? 'h1' : 'div';
+
 ?>
-<<?php print $heading_tag; ?> id="<?php $this->render_id() ?>" class="<?php $this->render_classes() ?>">
+<<?php print $heading_tag; ?> <?php $this->render_attrs() ?>>
 	<a href="<?php echo home_url( '/'  ); ?>" title="<?php bloginfo('name'); ?> - <?php bloginfo('description'); ?>">
 		<img src="<?php print $this->component()->image_url(); ?>">
 	</a>

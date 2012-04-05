@@ -10,7 +10,9 @@
  * @subpackage options
  * @since 1.0
  */
+
+/* @var $this ICE_Option_Renderer */
 ?>
-<div class="<?php $this->render_class( 'field' ) ?>" id="<?php $this->render_field_id() ?>">
+<div id="<?php $this->render_field_id() ?>" class="<?php $this->render_field_class() ?>">
 	<?php $this->component()->render_field() ?>
 </div>

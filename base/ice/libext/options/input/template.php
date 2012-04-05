@@ -11,6 +11,8 @@
  * @since 1.0
  */
 
+/* @var $this ICE_Option_Renderer */
+
 $this->render_input( $this->component()->input_type() );
 
 ?>

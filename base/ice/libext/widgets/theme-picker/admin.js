@@ -2,8 +2,8 @@
 function widgetThemePickerDialogInit(dialog, ss)
 {
 	// activate link
-	jQuery('a.icext-widgets-theme-picker-dialog-list-item-activate', dialog)
-		.click( function()
+	jQuery('a.ice-do-activate', dialog)
+		.click( function(e)
 		{
 			// params
 			var data =
@@ -11,7 +11,7 @@ function widgetThemePickerDialogInit(dialog, ss)
 				jQuery(this).attr('href').split('?')[1]
 
 			// message and image elements
-			var message = jQuery(this).siblings('div.icext-widgets-theme-picker-dialog-list-item-message');
+			var message = jQuery(this).siblings('div.ice-message');
 			var ss_new = jQuery(this).siblings('img');
 
 			// set loading message
@@ -40,6 +40,7 @@ function widgetThemePickerDialogInit(dialog, ss)
 					});
 				});
 			});
-			return false;
+
+			e.preventDefault();
 		});
 }

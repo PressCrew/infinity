@@ -10,7 +10,9 @@
  * @subpackage features
  * @since 1.0
  */
+
+/* @var $this ICE_Feature_Renderer */
 ?>
-<div id="<?php $this->render_id() ?>" class="<?php $this->render_classes() ?>">
+<div <?php $this->render_attrs() ?>>
 	<?php print $content ?>
 </div>

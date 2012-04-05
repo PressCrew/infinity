@@ -303,10 +303,7 @@ class ICE_Ext_Widget_Debugger
 
 			$this->__id_stack__->push( $string );
 			
-			print call_user_func_array(
-				array( $this, 'get_element_id' ),
-				$this->__id_stack__->to_array()
-			);
+			print $this->element()->id( $this->__id_stack__->to_array() );
 			
 		} else {
 			$this->__id_stack__->pop();

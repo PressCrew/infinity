@@ -11,8 +11,6 @@
  * @since 1.0
  */
 
-ICE_Loader::load( 'dom/style' );
-
 /**
  * Default feature
  *

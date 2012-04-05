@@ -11,17 +11,12 @@
  * @since 1.0
  */
 
-//
-// Available Variables
-//
-// $edit_url - URL of image editor
-// $attach_url - URL of image attachment
-// $attach_width - Width of image attachment (pixels)
-// $attach_height - Height of image attachment (pixels)
-//
-
+/* @var $this ICE_Option_Renderer */
+/* @var $edit_url string URL of image editor */
+/* @var $attach_url string URL of image attachment */
+/* @var $attach_width integer Width of image attachment (pixels) */
+/* @var $attach_height integer Height of image attachment (pixels) */
 ?>
-
 <div class="ice-uploader ui-widget">
 	<fieldset class="ice-uploader-img ui-widget-content ui-corner-all">
 		<legend class="ui-widget-header ui-corner-all"><?php _e('Current Image', infinity_text_domain) ?></legend>

@@ -81,6 +81,17 @@ class ICE_Ext_Widget_Theme_Picker
 	}
 
 	/**
+	 * Return true if theme has a screenshot
+	 *
+	 * @param array $theme
+	 * @return boolean
+	 */
+	public function has_sshot( $theme )
+	{
+		return ( isset( $theme['Screenshot'] ) && true == $theme['Screenshot'] );
+	}
+
+	/**
 	 * Format URL to a theme's screenshot
 	 *
 	 * @param array $theme

@@ -10,10 +10,12 @@
  * @subpackage shortcodes
  * @since 1.0
  */
+
+/* @var $this ICE_Shortcode_Renderer */
 ?>
 
 <?php if ( $content ): ?>
-	<div id="<?php $this->render_id() ?>" class="<?php $this->render_classes() ?>">
+	<div <?php $this->render_attrs() ?>>
 		<?php echo $content ?>
 	</div>
 <?php elseif ( $message ): ?>
