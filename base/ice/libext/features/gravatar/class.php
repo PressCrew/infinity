@@ -62,10 +62,10 @@ class ICE_Ext_Feature_Gravatar
 	public function image_css( $style )
 	{
 		// options
-		$opt_border_width = $this->get_suboption('border_width')->get();
-		$opt_border_color = $this->get_suboption('border_color')->get();
+		$opt_border_width = $this->get_suboption('border-width')->get();
+		$opt_border_color = $this->get_suboption('border-color')->get();
 		$opt_padding = $this->get_suboption('padding')->get();
-		$opt_bg_color = $this->get_suboption('bg_color')->get();
+		$opt_bg_color = $this->get_suboption('bg-color')->get();
 
 		// add rules
 		$img = $style->rule( 'img.' . $this->image_class );
@@ -93,9 +93,9 @@ class ICE_Ext_Feature_Gravatar
 	{
 		// options
 		$opt_size = $this->get_suboption('size')->get();
-		$opt_default_set = $this->get_suboption('default_set')->get();
-		$opt_default_img = $this->get_suboption('default_img')->get_image_url();
-		$opt_default_force = $this->get_suboption('default_force')->get();
+		$opt_default_set = $this->get_suboption('default-set')->get();
+		$opt_default_img = $this->get_suboption('default-img')->get_image_url();
+		$opt_default_force = $this->get_suboption('default-force')->get();
 		$opt_rating = $this->get_suboption('option_rating')->get();
 
 		// the hash

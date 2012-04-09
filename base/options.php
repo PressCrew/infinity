@@ -16,7 +16,7 @@
 function infinity_google_analytics()
 {
 	// render analytics code
-	echo infinity_option_get( 'infinity-core-options-google_analytics' );
+	echo infinity_option_get( 'infinity-core-options-google-analytics' );
 } 
 add_action('close_body','infinity_google_analytics');
 
@@ -29,7 +29,7 @@ add_action('close_body','infinity_google_analytics');
 function infinity_custom_favicon()
 {
 	// determine the image path
-	if ( infinity_option_get( 'infinity-core-options-custom_favicon' ) ) {
+	if ( infinity_option_get( 'infinity-core-options-custom-favicon' ) ) {
 		$image = infinity_option_image_url( 'infinity-core-options-custom_favicon', full );
 	} else {
 		$image = get_template_directory_uri() . '/assets/images/favicon.png';
@@ -126,7 +126,7 @@ function infinity_get_sidebar_size()
 	// must support grid style feature
 	if ( current_theme_supports( 'infinity-grid-style' ) ) {
 		// get sidebar size
-		$size = infinity_option_get( 'infinity-core-options-sidebar_size' );
+		$size = infinity_option_get( 'infinity-core-options-sidebar-size' );
 		// did we get one?
 		if ( $size ) {
 			return trim( $size );
@@ -186,7 +186,7 @@ function infinity_sidebar_position_css()
 {
 	if (
 		current_theme_supports( 'infinity-grid-style' ) &&
-		infinity_option_get( 'infinity-core-options-sidebar_position' ) != 'right'
+		infinity_option_get( 'infinity-core-options-sidebar-position' ) != 'right'
 	) {
 		print ' sidebar-left';
 	}
@@ -205,7 +205,7 @@ function infinity_sidebar_left_fallback()
 {
 	if (
 		current_theme_supports( 'infinity-grid-style' ) &&
-		infinity_option_get( 'infinity-core-options-sidebar_position' ) != 'right'
+		infinity_option_get( 'infinity-core-options-sidebar-position' ) != 'right'
 	) {
 		// render grid fallback script ?>
 		<script>

@@ -768,7 +768,7 @@ abstract class ICE_Component
 	private function validate_name( $name )
 	{
 		// name must adhere to a strict format
-		if ( preg_match( '/^[a-z0-9]+((_|-)[a-z0-9]+)*$/', $name ) ) {
+		if ( preg_match( '/^[a-z][a-z0-9]*((_|-)[a-z0-9]+)*$/', $name ) ) {
 			return $name;
 		} else {
 			throw new Exception( sprintf(

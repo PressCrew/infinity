@@ -57,7 +57,7 @@
 				?>
 				</div>
 				<div id="copyright-info" class="grid_8 omega">	
-					<?php echo infinity_option_get( 'infinity-core-options-footer_text' ); ?>
+					<?php echo infinity_option_get( 'infinity-core-options-footer-text' ); ?>
 				</div>
 				<div style="clear: both;"></div>
 			</div>
