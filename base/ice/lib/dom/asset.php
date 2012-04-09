@@ -45,7 +45,6 @@ abstract class ICE_Asset extends ICE_Base
 	/**
 	 * The files to enqueue
 	 *
-	 * @todo this functionality does not exist yet
 	 * @var ICE_Stack
 	 */
 	private $files;
