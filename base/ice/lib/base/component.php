@@ -796,7 +796,7 @@ abstract class ICE_Component
 	 *
 	 * @return ICE_Component
 	 */
-	public function get_parent()
+	public function parent()
 	{
 		// is a parent set
 		if ( $this->parent ) {

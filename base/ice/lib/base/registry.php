@@ -178,7 +178,7 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 				if ( $component->ignore ) {
 					// component is explicitly ignored
 					continue;
-				} elseif ( $component->parent && $component->get_parent()->ignore ) {
+				} elseif ( $component->parent && $component->parent()->ignore ) {
 					// component parent is ignored, applies to this child
 					continue;
 				}
