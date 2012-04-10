@@ -31,13 +31,6 @@ class Infinity_Shortcodes_Policy extends ICE_Shortcode_Policy
 	}
 	
 	/**
-	 */
-	final public function get_api_slug()
-	{
-		return 'infinity_theme';
-	}
-
-	/**
 	 * @return Infinity_Shortcodes_Registry
 	 */
 	final public function new_registry()

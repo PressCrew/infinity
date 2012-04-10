@@ -161,16 +161,6 @@ abstract class ICE_Policy extends ICE_Base
 	}
 
 	/**
-	 * Return the name of the implementing API
-	 *
-	 * If you are rolling your own parent theme, this should probably return the
-	 * name of the theme you are creating.
-	 *
-	 * @return string
-	 */
-	abstract public function get_api_slug();
-
-	/**
 	 * Return the name of the policy handle
 	 *
 	 * @param boolean $plural set to false to return singular form of handle

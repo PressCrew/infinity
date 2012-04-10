@@ -44,7 +44,7 @@ abstract class ICE_Option extends ICE_Component
 	/**
 	 * Special meta options use this as a delimeter
 	 */
-	const META_DELIM = '.';
+	const API_DELIM = '.';
 
 	/**
 	 * For tracking the time updated
@@ -433,20 +433,10 @@ abstract class ICE_Option extends ICE_Component
 	{
 		switch ( $type ) {
 			case self::META_TIME_UPDATED:
-				return $this->get_api_name() . self::META_DELIM . $type;
+				return $this->get_api_name() . self::API_DELIM . $type;
 			default:
 				throw new Exception( sprintf( 'The "%s" type is not valid', $type ) );
 		}
-	}
-
-	/**
-	 * Get the prefix for API option
-	 *
-	 * @return string
-	 */
-	private function get_api_prefix()
-	{
-		return sprintf( self::PREFIX_TPL, $this->policy()->get_api_slug() );
 	}
 
 	/**
@@ -456,7 +446,14 @@ abstract class ICE_Option extends ICE_Component
 	 */
 	private function get_api_name()
 	{
-		return $this->get_api_prefix() . $this->name;
+		return implode(
+			self::API_DELIM,
+			array(
+				self::ELEMENT_ID_PREFIX,
+				$this->get_unique_hash(),
+				get_stylesheet()
+			)
+		);
 	}
 
 	/**

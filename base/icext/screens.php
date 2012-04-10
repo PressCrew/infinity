@@ -41,13 +41,6 @@ class Infinity_Screens_Policy extends ICE_Screen_Policy
 	}
 	
 	/**
-	 */
-	final public function get_api_slug()
-	{
-		return 'infinity_theme';
-	}
-
-	/**
 	 * @return Infinity_Screens_Registry
 	 */
 	final public function new_registry()

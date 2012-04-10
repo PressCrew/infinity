@@ -31,13 +31,6 @@ class Infinity_Widgets_Policy extends ICE_Widget_Policy
 	}
 	
 	/**
-	 */
-	final public function get_api_slug()
-	{
-		return 'infinity_theme';
-	}
-
-	/**
 	 * @return Infinity_Widgets_Registry
 	 */
 	final public function new_registry()

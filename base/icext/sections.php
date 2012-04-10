@@ -31,13 +31,6 @@ class Infinity_Sections_Policy extends ICE_Section_Policy
 	}
 	
 	/**
-	 */
-	final public function get_api_slug()
-	{
-		return 'infinity_theme';
-	}
-
-	/**
 	 * @return Infinity_Sections_Registry
 	 */
 	final public function new_registry()
