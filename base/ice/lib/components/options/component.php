@@ -42,14 +42,14 @@ abstract class ICE_Option extends ICE_Component
 	const FIELD_OPTION_DELIM = '=';
 
 	/**
-	 * Special meta options use this as a delimeter
-	 */
-	const API_DELIM = '.';
-
-	/**
 	 * For tracking the time updated
 	 */
 	const META_TIME_UPDATED = 'time_updated';
+
+	/**
+	 * For tracking time updated long string
+	 */
+	const META_TIME_UPDATED_KEY = 'tu';
 
 	/**
 	 * If true, a POST value will override the real option value
@@ -433,7 +433,7 @@ abstract class ICE_Option extends ICE_Component
 	{
 		switch ( $type ) {
 			case self::META_TIME_UPDATED:
-				return $this->get_api_name() . self::API_DELIM . $type;
+				return $this->get_api_name() . self::API_DELIM . self::META_TIME_UPDATED_KEY;
 			default:
 				throw new Exception( sprintf( 'The "%s" type is not valid', $type ) );
 		}
@@ -449,7 +449,7 @@ abstract class ICE_Option extends ICE_Component
 		return implode(
 			self::API_DELIM,
 			array(
-				self::ELEMENT_ID_PREFIX,
+				self::API_PREFIX,
 				$this->get_unique_hash(),
 				get_stylesheet()
 			)

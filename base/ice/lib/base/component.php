@@ -49,6 +49,16 @@ abstract class ICE_Component
 		implements ICE_Visitable, ICE_Configurable, ICE_Styleable, ICE_Scriptable
 {
 	/**
+	 * Persistence algorithms should use this as a prefix
+	 */
+	const API_PREFIX = 'icext';
+
+	/**
+	 * Persistence algorithms should use this as a delimeter where valid
+	 */
+	const API_DELIM = '.';
+
+	/**
 	 * Name of the default section
 	 */
 	const DEFAULT_SECTION = 'default';
@@ -57,16 +67,6 @@ abstract class ICE_Component
 	 * Name of the default templates subdir
 	 */
 	const DEFAULT_TEMPLATE_DIR = 'templates';
-
-	/**
-	 * The prefix used for dynamic element ids.
-	 */
-	const ELEMENT_ID_PREFIX = 'icext';
-
-	/**
-	 * The prefix used for element classes.
-	 */
-	const ELEMENT_CLASS_PREFIX = 'icext';
 
 	/**
 	 * Component configurations registry
@@ -676,13 +676,13 @@ abstract class ICE_Component
 		if ( $this->id ) {
 			$element_id = $this->id;
 		} else {
-			$element_id = self::ELEMENT_ID_PREFIX . '-' . $this->get_unique_hash();
+			$element_id = self::API_PREFIX . '-' . $this->get_unique_hash();
 		}
 		
 		// set preferences
 		$this->element()
 			->set_id( $element_id )
-			->set_slug( self::ELEMENT_CLASS_PREFIX )
+			->set_slug( self::API_PREFIX )
 			->set_class_suffix_offset( 1 );
 
 		// get reflection stack
@@ -692,7 +692,7 @@ abstract class ICE_Component
 		$comp_type = $this->policy()->get_handle( false );
 
 		// classes start with abstract component type
-		$this->element()->add_class( array( self::ELEMENT_CLASS_PREFIX, $comp_type ) );
+		$this->element()->add_class( array( self::API_PREFIX, $comp_type ) );
 
 		// loop reflection stack
 		/* @var $reflection ReflectionClass */
@@ -701,7 +701,7 @@ abstract class ICE_Component
 			$class_parts = ICE_Ext_Loader::instance()->loaded( $reflection->getName(), true );
 			// css class
 			$class = array_merge(
-				array( self::ELEMENT_CLASS_PREFIX ),
+				array( self::API_PREFIX ),
 				array_slice( $class_parts, 1 ),
 				func_get_args()
 			);
