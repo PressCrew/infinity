@@ -46,7 +46,7 @@ ICE_Loader::load(
  */
 abstract class ICE_Component
 	extends ICE_Componentable
-		implements ICE_Visitable, ICE_Configurable, ICE_Styleable, ICE_Scriptable
+		implements ICE_Recursable, ICE_Visitable, ICE_Configurable, ICE_Styleable, ICE_Scriptable
 {
 	/**
 	 * Persistence algorithms should use this as a prefix
