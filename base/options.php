@@ -30,7 +30,7 @@ function infinity_custom_favicon()
 {
 	// determine the image path
 	if ( infinity_option_get( 'infinity-core-options-custom-favicon' ) ) {
-		$image = infinity_option_image_url( 'infinity-core-options-custom_favicon', full );
+		$image = infinity_option_image_url( 'infinity-core-options-custom-favicon', full );
 	} else {
 		$image = get_template_directory_uri() . '/assets/images/favicon.png';
 	}
