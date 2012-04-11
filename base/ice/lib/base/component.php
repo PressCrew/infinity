@@ -28,6 +28,8 @@ ICE_Loader::load(
  * @subpackage base
  * @property-read string $theme The theme that created this concrete component
  * @property-read string $name The concrete component name
+ * @property-read string $aname The component atypical name which can be used to identify this component instance across components and persistently across requests
+ * @property-read string $hname The component hash name which is the eight character crc32 hex hash of the aname
  * @property-read string $type The concrete component type
  * @property-read string $parent The parent component (slug)
  * @property-read string $title The concrete component title
@@ -104,14 +106,6 @@ abstract class ICE_Component
 	private $__script__;
 
 	/**
-	 * A unique string which can be used to identify this component instance
-	 * persistently across requests.
-	 * 
-	 * @var string 
-	 */
-	private $__unique_hash__;
-
-	/**
 	 * The template part to append to the *default* template path
 	 *
 	 * @var string
@@ -144,9 +138,14 @@ abstract class ICE_Component
 		);
 
 		// init read-only directives
+		//// the following three must be set FIRST before any other directives
 		$this->directive( 'name', $this->config()->name, true, true );
 		$this->directive( 'type', $this->config()->type, true, true );
 		$this->directive( 'theme', $this->config()->theme, true, true );
+		//// the "atypical name" is unique across all components
+		$this->directive( 'aname', $policy->get_handle( false ) . '/' . $this->name, true, true );
+		//// the "hash name" is the crc32 hex hash of the aname
+		$this->directive( 'hname', hash( 'crc32', $this->aname ), true, true );
 
 		// init base directives
 		$this->title = __( 'No title was configured', infinity_text_domain );
@@ -204,30 +203,6 @@ abstract class ICE_Component
 		// not allowed
 		throw new Exception(
 			sprintf( 'The "%s" property cannot be unset', $name ) );
-	}
-
-	/**
-	 * Get the unique id string for this component instance
-	 *
-	 * @return string
-	 */
-	public function get_unique_id()
-	{
-		return $this->policy()->get_handle() . '/' . $this->type . '/' . $this->name;
-	}
-	
-	/**
-	 * Get the unique hash for this component instance
-	 *
-	 * @return string
-	 */
-	public function get_unique_hash()
-	{
-		if ( !$this->__unique_hash__ ) {
-			$this->__unique_hash__ = hash( 'crc32', $this->get_unique_id() );
-		}
-
-		return $this->__unique_hash__;
 	}
 
 	/**
@@ -676,7 +651,7 @@ abstract class ICE_Component
 		if ( $this->id ) {
 			$element_id = $this->id;
 		} else {
-			$element_id = self::API_PREFIX . '-' . $this->get_unique_hash();
+			$element_id = self::API_PREFIX . '-' . $this->hname;
 		}
 		
 		// set preferences

@@ -450,7 +450,7 @@ abstract class ICE_Option extends ICE_Component
 			self::API_DELIM,
 			array(
 				self::API_PREFIX,
-				$this->get_unique_hash(),
+				$this->hname,
 				get_stylesheet()
 			)
 		);
