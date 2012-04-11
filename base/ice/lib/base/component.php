@@ -555,7 +555,9 @@ abstract class ICE_Component
 		$this->configure();
 
 		// initialize the element helper
-		$this->init_element();
+		if ( $this->supported() ) {
+			$this->init_element();
+		}
 	}
 
 	/**

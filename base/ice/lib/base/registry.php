@@ -67,7 +67,9 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	{
 		// init ajax for each registered component
 		foreach ( $this->get_all() as $component ) {
-			$component->init_ajax();
+			if ( $component->supported() ) {
+				$component->init_ajax();
+			}
 		}
 	}
 
@@ -81,7 +83,9 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 		
 		// init screen for each registered component
 		foreach ( $this->get_all() as $component ) {
-			$component->init_screen();
+			if ( $component->supported() ) {
+				$component->init_screen();
+			}
 		}
 	}
 
@@ -91,7 +95,9 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	public function init_styles()
 	{
 		foreach ( $this->get_all() as $component ) {
-			$component->init_styles();
+			if ( $component->supported() ) {
+				$component->init_styles();
+			}
 		}
 	}
 
@@ -102,7 +108,9 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	{
 		// init scripts for each registered component
 		foreach ( $this->get_all() as $component ) {
-			$component->init_scripts();
+			if ( $component->supported() ) {
+				$component->init_scripts();
+			}
 		}
 	}
 
@@ -124,7 +132,9 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 			// register it
 			$this->components->add( $component->name, $component );
 			// post reg
-			$component->init_registered();
+			if ( $component->supported() ) {
+				$component->init_registered();
+			}
 		}
 
 		return true;
