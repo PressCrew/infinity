@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-ICE_Loader::load( 'base' );
+ICE_Loader::load( 'base/component' );
 
 /**
  * Make an option section easy
