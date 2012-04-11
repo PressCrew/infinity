@@ -19,7 +19,7 @@ ICE_Loader::load( 'components/options/component' );
  * @package ICE-extensions
  * @subpackage options
  */
-abstract class ICE_Ext_Option_Input
+class ICE_Ext_Option_Input
 	extends ICE_Option
 {
 	/**
@@ -27,7 +27,7 @@ abstract class ICE_Ext_Option_Input
 	 *
 	 * @var string
 	 */
-	private $__input_type__;
+	private $__input_type__ = 'text';
 
 	/**
 	 * Get/Set the input type
@@ -39,12 +39,7 @@ abstract class ICE_Ext_Option_Input
 	{
 		// if we have one or more args, we are setting
 		if ( func_num_args() >= 1 ) {
-			// can't have been set already
-			if ( is_null( $this->__input_type__ ) ) {
-				$this->__input_type__ = $type;
-			} else {
-				throw new Exception( 'The "input_type" property cannot be changed once set' );
-			}
+			$this->__input_type__ = $type;
 		}
 
 		return $this->__input_type__;
