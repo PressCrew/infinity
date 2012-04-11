@@ -148,7 +148,7 @@ if ( !defined( 'INFINITY_DEV_MODE' ) ) {
  * Infinity error handling
  */
 if ( !defined( 'INFINITY_ERROR_HANDLING' ) ) {
-	define( 'INFINITY_ERROR_HANDLING', INFINITY_DEV_MODE );
+	define( 'INFINITY_ERROR_HANDLING', false );
 }
 	/**
 	 * ICE error handling
@@ -161,7 +161,7 @@ if ( !defined( 'INFINITY_ERROR_HANDLING' ) ) {
  * Infinity error reporting
  */
 if ( !defined( 'INFINITY_ERROR_REPORTING' ) ) {
-	define( 'INFINITY_ERROR_REPORTING', INFINITY_DEV_MODE );
+	define( 'INFINITY_ERROR_REPORTING', INFINITY_ERROR_HANDLING );
 }
 	/**
 	 * ICE error reporting
