@@ -29,22 +29,31 @@ class ICE_Ext_Feature_Bp_Support
 	
 	/**
 	 */
-	protected function init()
+	public function supported()
 	{
-		if ( is_admin() && !is_writable( TEMPLATEPATH ) ) {
-			bp_core_add_admin_notice(
-				sprintf(
-					__( "Your theme's BuddyPress support extension requires that the theme folder be writable. Try setting mode 0777 on the directory: %s", infinity_text_domain ),
-					TEMPLATEPATH
-				)
-			);
-			return false;
+		if ( parent::supported() ) {
+			return $this->is_active();
 		}
-		
-		// make sure bp is active
-		if ( $this->is_active() ) {
+	}
+
+	/**
+	 */
+	protected function init()
+	{		
+		// make sure component is supported
+		if ( $this->supported() ) {
 
 			parent::init();
+
+			if ( is_admin() && !is_writable( TEMPLATEPATH ) ) {
+				bp_core_add_admin_notice(
+					sprintf(
+						__( "Your theme's BuddyPress support extension requires that the theme folder be writable. Try setting mode 0777 on the directory: %s", infinity_text_domain ),
+						TEMPLATEPATH
+					)
+				);
+				return false;
+			}
 
 			$this->setup_theme();
 			$this->maybe_copy_theme();
