@@ -680,7 +680,7 @@ abstract class ICE_Component
 			$class = array_merge(
 				array( self::API_PREFIX ),
 				array_slice( $class_parts, 1 ),
-				func_get_args()
+				$args = func_get_args()
 			);
 			// add element class
 			$this->element()->add_class( $class );
