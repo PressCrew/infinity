@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-ICE_Loader::load( 'utils/docs' );
+ICE_Loader::load( 'base/renderer', 'utils/docs' );
 
 /**
  * Make rendering options easy
