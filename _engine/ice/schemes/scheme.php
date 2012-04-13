@@ -208,9 +208,9 @@ final class ICE_Scheme extends ICE_Base
 	 * @param string $root_theme
 	 * @param string $config_dir
 	 * @param string $config_file
-	 * @return boolean
+	 * @return ICE_Scheme
 	 */
-	public function init( $root_theme, $config_dir = 'config', $config_file = null )
+	public function init( $root_theme )
 	{
 		// do not init same scheme twice
 		if ( $this->root_theme ) {
@@ -219,8 +219,7 @@ final class ICE_Scheme extends ICE_Base
 
 		// setup config
 		$this->set_root_theme( $root_theme );
-		$this->set_config_dir( $config_dir );
-		$this->set_config_file( $config_file );
+		$this->set_config_file( null );
 
 		// load it
 		$this->load();
@@ -237,7 +236,7 @@ final class ICE_Scheme extends ICE_Base
 		add_action( 'ice_enqueue_styles', array($this, 'exports_refresh'), 0 );
 		add_action( 'ice_enqueue_scripts', array($this, 'exports_refresh'), 0 );
 
-		return true;
+		return $this;
 	}
 
 	/**
@@ -312,19 +311,21 @@ final class ICE_Scheme extends ICE_Base
 	 * @param string $dir_name
 	 * @return boolean
 	 */
-	private function set_config_dir( $dir_name )
+	final public function set_config_dir( $dir_name )
 	{
 		if ( empty( $this->config_dir ) ) {
 			$this->config_dir = $dir_name;
-			return true;
+		} else {
+			throw new Exception( 'Cannot set config dir, already set' );
 		}
 
-		return false;
+		return $this;
 	}
 
 	/**
 	 * Set the name of the config file that your API uses
 	 *
+	 * @todo this should probably be depracated
 	 * @param string $file_name
 	 * @return boolean
 	 */
@@ -348,10 +349,11 @@ final class ICE_Scheme extends ICE_Base
 	{
 		if ( empty( $this->docs_dir ) ) {
 			$this->docs_dir = $dir_name;
-			return true;
+		} else {
+			throw new Exception( 'Cannot set docs dir, already set' );
 		}
 
-		return false;
+		return $this;
 	}
 
 	/**
@@ -366,14 +368,11 @@ final class ICE_Scheme extends ICE_Base
 		if ( empty( $this->exts_dir ) ) {
 			// set property
 			$this->exts_dir = $dir_name;
-			// add extension dir for each theme to extension loader
-			foreach ( $this->themes as $theme ) {
-				ICE_Ext_Loader::path( $this->theme_file( $theme, $this->exts_dir ) );
-			}
-			return true;
+		} else {
+			throw new Exception( 'Cannot set extensions dir, already set' );
 		}
 
-		return false;
+		return $this;
 	}
 
 	/**
@@ -469,6 +468,9 @@ final class ICE_Scheme extends ICE_Base
 					$this->directives()->set( $theme, $name, $value, true );
 				}
 			}
+
+			// add extension dir to extension loader
+			ICE_Ext_Loader::path( $this->theme_file( $theme, $this->exts_dir ) );
 
 		} else {
 			throw new Exception( 'Failed to parse theme ini file: ' . $ini_file );

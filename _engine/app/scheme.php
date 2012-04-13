@@ -23,11 +23,11 @@ ICE_Loader::load( 'schemes' );
 function infinity_scheme_init()
 {
 	// initialize the scheme
-	ICE_Scheme::instance()->init( INFINITY_NAME );
-	
-	// set docs and exts dirs
-	ICE_Scheme::instance()->set_docs_dir( 'documents' );
-	ICE_Scheme::instance()->set_exts_dir( 'extensions' );
+	ICE_Scheme::instance()
+		->set_config_dir( INFINITY_ENGINE_DIR . '/ini' )
+		->set_docs_dir( INFINITY_ENGINE_DIR . '/doc' )
+		->set_exts_dir( INFINITY_ENGINE_DIR . '/ext' )
+		->init( INFINITY_NAME );
 
 	// initialize policies (the order is important here)
 	Infinity_Sections_Policy::instance();

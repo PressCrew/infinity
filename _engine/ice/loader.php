@@ -27,17 +27,13 @@ define( 'ICE_VERSION', '1.0' );
  */
 define( 'ICE_DIR', dirname( __FILE__ ) );
 /**
- * ICE API: library directory
+ * ICE API: library directory (3rd party)
  */
 define( 'ICE_LIB_DIR', ICE_DIR . '/lib' );
 /**
  * ICE API: extensions library directory
  */
-define( 'ICE_LIBEXT_DIR', ICE_DIR . '/libext' );
-/**
- * ICE API: vendors library directory
- */
-define( 'ICE_VENDORS_DIR', ICE_LIB_DIR . '/vendors' );
+define( 'ICE_EXT_DIR', ICE_DIR . '/ext' );
 /**
  * ICE API: exports caching toggle
  */
@@ -67,13 +63,13 @@ if ( !defined( 'ICE_EXPORTS_SUBDIR' ) ) {
  *  load error handler if applicable
  */
 if ( ICE_ERROR_HANDLING ) {
-	require_once ICE_LIB_DIR . '/errors/handler.php';
+	require_once ICE_DIR . '/errors/handler.php';
 }
 
 /**
  * include the base class
  */
-require_once ICE_LIB_DIR . '/base/base.php';
+require_once ICE_DIR . '/base/base.php';
 
 /**
  * Make loading ICE libraries easy
@@ -337,7 +333,7 @@ final class ICE_Loader extends ICE_Base
 	{
 		// build up file path
 		$path =
-			ICE_LIB_DIR .
+			ICE_DIR .
 			'/' . implode( '/', $pkg ) .
 			'/' . $file . '.php';
 
@@ -412,7 +408,7 @@ final class ICE_Ext_Loader extends ICE_Base
 	{
 		$this->loaded = new ICE_Map();
 		$this->paths = new ICE_Stack();
-		$this->add_path( ICE_LIBEXT_DIR );
+		$this->add_path( ICE_EXT_DIR );
 	}
 
 	/**

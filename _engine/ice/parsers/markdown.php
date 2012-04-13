@@ -1,6 +1,6 @@
 <?php
 /**
- * ICE API: textile class file
+ * ICE API: markdown class file
  *
  * @author Marshall Sorenson <marshall@presscrew.com>
  * @link http://infinity.presscrew.com/
@@ -12,28 +12,39 @@
  */
 
 /**
- * Load the markdown lib
+ * Disable automatic WP post parsing
+ * @internal
  */
-require_once ICE_VENDORS_DIR . '/textile/classTextile.php';
+@define( 'MARKDOWN_WP_POSTS', false );
 
 /**
- * Make Textile parsing easy
+ * Disable automatic WP comment parsing
+ * @internal
+ */
+@define( 'MARKDOWN_WP_COMMENTS', false );
+
+/**
+ * Load the markdown lib
+ */
+require_once ICE_LIB_DIR . '/markdown/markdown.php';
+
+/**
+ * Make Markdown parsing easy
  *
  * @package ICE
  * @subpackage parsers
  */
-final class ICE_Textile extends ICE_Base
+final class ICE_Markdown extends ICE_Base
 {
 	/**
-	 * Parse textile markup and return HTML
+	 * Parse markdown markup and return HTML
 	 *
 	 * @param string $text
 	 * @return string
 	 */
 	public static function parse( $text )
 	{
-		$parser = new Textile();
-		return $parser->TextileThis( $text );
+		return Markdown( $text );
 	}
 }
 
