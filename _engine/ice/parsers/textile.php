@@ -14,7 +14,7 @@
 /**
  * Load the markdown lib
  */
-require_once ICE_LIB_DIR . '/textile/classTextile.php';
+require_once ICE_LIB_PATH . '/textile/classTextile.php';
 
 /**
  * Make Textile parsing easy

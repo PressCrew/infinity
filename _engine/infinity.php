@@ -42,7 +42,7 @@ if ( !defined( 'INFINITY_NAME' ) ) {
 /**
  * Infinity theme directory path
  */
-define( 'INFINITY_THEME_DIR', realpath( get_theme_root( INFINITY_NAME ) ) . '/' . INFINITY_NAME );
+define( 'INFINITY_THEME_PATH', realpath( get_theme_root( INFINITY_NAME ) ) . '/' . INFINITY_NAME );
 
 /**
  * Infinity theme directory url
@@ -59,7 +59,7 @@ if ( !defined( 'INFINITY_ENGINE_DIR' ) ) {
 /**
  * Infinity "engine" directory path
  */
-define( 'INFINITY_ENGINE_PATH', INFINITY_THEME_DIR . '/' . INFINITY_ENGINE_DIR );
+define( 'INFINITY_ENGINE_PATH', INFINITY_THEME_PATH . '/' . INFINITY_ENGINE_DIR );
 
 /**
  * Infinity "base" (includes) url
@@ -69,7 +69,7 @@ define( 'INFINITY_ENGINE_URL', INFINITY_THEME_URL . '/' . INFINITY_ENGINE_DIR );
 /**
  * ICE directory path
  */
-define( 'INFINITY_ICE_DIR', INFINITY_ENGINE_PATH . '/ice' );
+define( 'INFINITY_ICE_PATH', INFINITY_ENGINE_PATH . '/ice' );
 
 /**
  * ICE directory URL
@@ -79,12 +79,12 @@ define( 'INFINITY_ICE_URL', INFINITY_ENGINE_URL . '/ice' );
 /**
  * Infinity application directory path
  */
-define( 'INFINITY_APP_DIR', INFINITY_ENGINE_PATH . '/app' );
+define( 'INFINITY_APP_PATH', INFINITY_ENGINE_PATH . '/app' );
 
 /**
  * Infinity includes directory path
  */
-define( 'INFINITY_INC_DIR', INFINITY_ENGINE_PATH . '/inc' );
+define( 'INFINITY_INC_PATH', INFINITY_ENGINE_PATH . '/inc' );
 
 /**
  * Infinity templates directory name
@@ -94,17 +94,17 @@ define( 'INFINITY_SUBTPLS_DIR', 'templates' );
 /**
  * Infinity admin directory relative path
  */
-define( 'INFINITY_ADMIN_REL', 'dashboard' );
+define( 'INFINITY_ADMIN_DIR', 'dashboard' );
 
 /**
  * Infinity admin directory absolute path
  */
-define( 'INFINITY_ADMIN_DIR', INFINITY_THEME_DIR . '/' . INFINITY_ADMIN_REL );
+define( 'INFINITY_ADMIN_PATH', INFINITY_THEME_PATH . '/' . INFINITY_ADMIN_DIR );
 
 /**
  * Infinity admin directory url
  */
-define( 'INFINITY_ADMIN_URL', INFINITY_THEME_URL . '/' . INFINITY_ADMIN_REL );
+define( 'INFINITY_ADMIN_URL', INFINITY_THEME_URL . '/' . INFINITY_ADMIN_DIR );
 
 /**
  * Infinity AJAX url
@@ -114,7 +114,7 @@ define( 'INFINITY_AJAX_URL', admin_url( 'admin-ajax.php' ) );
 /**
  * Infinity languages directory path
  */
-define( 'INFINITY_LANGUAGES_DIR', INFINITY_THEME_DIR . '/languages' );
+define( 'INFINITY_LANGUAGES_PATH', INFINITY_THEME_PATH . '/languages' );
 
 /**
  * Infinity text domain
@@ -134,7 +134,7 @@ define( 'INFINITY_ADMIN_PAGE', INFINITY_NAME . '-theme' );
 /**
  * Infinity admin documentation directory path
  */
-define( 'INFINITY_ADMIN_DOCS_DIR', INFINITY_ADMIN_DIR . '/docs' );
+define( 'INFINITY_ADMIN_DOCS_PATH', INFINITY_ADMIN_PATH . '/docs' );
 
 /**
  * Infinity development mode
@@ -178,7 +178,7 @@ if ( !defined( 'INFINITY_ERROR_REPORTING' ) ) {
 /**
  * Load the ICE lib loader
  */
-require_once( INFINITY_ICE_DIR . '/loader.php' );
+require_once( INFINITY_ICE_PATH . '/loader.php' );
 
 // initialize ICE
 ICE_Loader::init( INFINITY_ICE_URL );
@@ -195,14 +195,14 @@ if ( is_admin() ) {
 }
 
 // load Infinity API
-require_once( INFINITY_APP_DIR . '/scheme.php' );
-require_once( INFINITY_APP_DIR . '/sections.php' );
-require_once( INFINITY_APP_DIR . '/options.php' );
-require_once( INFINITY_APP_DIR . '/features.php' );
-require_once( INFINITY_APP_DIR . '/widgets.php' );
-require_once( INFINITY_APP_DIR . '/screens.php' );
-require_once( INFINITY_APP_DIR . '/shortcodes.php' );
-require_once( INFINITY_APP_DIR . '/i18n.php' );
+require_once( INFINITY_APP_PATH . '/scheme.php' );
+require_once( INFINITY_APP_PATH . '/sections.php' );
+require_once( INFINITY_APP_PATH . '/options.php' );
+require_once( INFINITY_APP_PATH . '/features.php' );
+require_once( INFINITY_APP_PATH . '/widgets.php' );
+require_once( INFINITY_APP_PATH . '/screens.php' );
+require_once( INFINITY_APP_PATH . '/shortcodes.php' );
+require_once( INFINITY_APP_PATH . '/i18n.php' );
 
 // initialize scheme
 infinity_scheme_init();
@@ -225,7 +225,7 @@ if ( is_admin() ) {
 	infinity_screens_init_screen();
 	infinity_widgets_init_screen();
 	// load admin functionality
-	require_once( INFINITY_ADMIN_DIR . '/loader.php' );
+	require_once( INFINITY_ADMIN_PATH . '/loader.php' );
 } else {
 	// init blog components screens
 	infinity_features_init_screen();
@@ -233,8 +233,8 @@ if ( is_admin() ) {
 }
 
 // load local theme setup if applicable
-if ( is_readable( INFINITY_INC_DIR . '/setup.php' ) ) {
-	require_once( INFINITY_INC_DIR . '/setup.php' );
+if ( is_readable( INFINITY_INC_PATH . '/setup.php' ) ) {
+	require_once( INFINITY_INC_PATH . '/setup.php' );
 }
 
 ?>

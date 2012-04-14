@@ -18,12 +18,12 @@
 /**
  * Include admin menu functions
  */
-require_once( INFINITY_ADMIN_DIR . '/menu.php' );
+require_once( INFINITY_ADMIN_PATH . '/menu.php' );
 
 /**
  * Include control panel functions
  */
-require_once( INFINITY_ADMIN_DIR . '/cpanel.php' );
+require_once( INFINITY_ADMIN_PATH . '/cpanel.php' );
 
 
 //
@@ -41,7 +41,7 @@ require_once( INFINITY_ADMIN_DIR . '/cpanel.php' );
 function infinity_dashboard_locate_template( $rel_path )
 {
 	// format template path
-	$template = INFINITY_SUBTPLS_DIR . '/' . INFINITY_ADMIN_REL . '/' . $rel_path;
+	$template = INFINITY_SUBTPLS_DIR . '/' . INFINITY_ADMIN_DIR . '/' . $rel_path;
 
 	// locate the template
 	return infinity_locate_template( $template );
@@ -120,7 +120,7 @@ function infinity_dashboard_doc_publish( $page = null )
 function infinity_dashboard_devdoc_publish( $page = null )
 {
 	ICE_Loader::load( 'utils/docs' );
-	$doc = new ICE_Docs( INFINITY_ADMIN_DOCS_DIR, $page );
+	$doc = new ICE_Docs( INFINITY_ADMIN_DOCS_PATH, $page );
 	$doc->set_pre_filter( 'infinity_dashboard_doc_filter' );
 	$doc->publish();
 }

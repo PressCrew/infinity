@@ -26,7 +26,7 @@
 /**
  * Load the markdown lib
  */
-require_once ICE_LIB_DIR . '/markdown/markdown.php';
+require_once ICE_LIB_PATH . '/markdown/markdown.php';
 
 /**
  * Make Markdown parsing easy
