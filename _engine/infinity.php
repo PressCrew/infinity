@@ -87,6 +87,11 @@ define( 'INFINITY_APP_DIR', INFINITY_ENGINE_PATH . '/app' );
 define( 'INFINITY_INC_DIR', INFINITY_ENGINE_PATH . '/inc' );
 
 /**
+ * Infinity templates directory name
+ */
+define( 'INFINITY_SUBTPLS_DIR', 'templates' );
+
+/**
  * Infinity admin directory relative path
  */
 define( 'INFINITY_ADMIN_REL', 'dashboard' );
@@ -125,16 +130,6 @@ define( 'infinity_text_domain', INFINITY_TEXT_DOMAIN );
  * Infinity admin page name
  */
 define( 'INFINITY_ADMIN_PAGE', INFINITY_NAME . '-theme' );
-
-/**
- * Infinity admin templates relative directory path
- */
-define( 'INFINITY_ADMIN_TPLS_REL', INFINITY_ADMIN_REL . '/templates' );
-
-/**
- * Infinity admin templates absolute directory path
- */
-define( 'INFINITY_ADMIN_TPLS_DIR', INFINITY_ADMIN_DIR . '/templates' );
 
 /**
  * Infinity admin documentation directory path

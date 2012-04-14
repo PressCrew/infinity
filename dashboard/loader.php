@@ -41,7 +41,7 @@ require_once( INFINITY_ADMIN_DIR . '/cpanel.php' );
 function infinity_dashboard_locate_template( $rel_path )
 {
 	// format template path
-	$template = INFINITY_ADMIN_TPLS_REL . '/' . $rel_path;
+	$template = INFINITY_SUBTPLS_DIR . '/' . INFINITY_ADMIN_REL . '/' . $rel_path;
 
 	// locate the template
 	return infinity_locate_template( $template );
