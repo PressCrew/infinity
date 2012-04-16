@@ -23,7 +23,7 @@ define( 'INFINITY_NAME', basename( INFINITY_PATH ) );
 /**
  * Set the Infinity engine directory name
  */
-define( 'INFINITY_ENGINE_DIR', '_engine' );
+define( 'INFINITY_ENGINE_DIR', 'engine' );
 
 /**
  * To Infinity, and beyond! (sorry, had to do it)
@@ -32,7 +32,7 @@ require_once( INFINITY_PATH . '/' . INFINITY_ENGINE_DIR . '/infinity.php' );
 
 //
 // At this point, Infinity is fully loaded and initialized,
-// and your inc/setup.php has been loaded if applicable.
+// and your includes/setup.php has been loaded if applicable.
 //
 // So... get to work! (Unless you don't roll on Shabbos)
 //

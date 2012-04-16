@@ -69,22 +69,22 @@ define( 'INFINITY_ENGINE_URL', INFINITY_THEME_URL . '/' . INFINITY_ENGINE_DIR );
 /**
  * ICE directory path
  */
-define( 'INFINITY_ICE_PATH', INFINITY_ENGINE_PATH . '/ice' );
+define( 'INFINITY_ICE_PATH', INFINITY_ENGINE_PATH . '/ICE' );
 
 /**
  * ICE directory URL
  */
-define( 'INFINITY_ICE_URL', INFINITY_ENGINE_URL . '/ice' );
+define( 'INFINITY_ICE_URL', INFINITY_ENGINE_URL . '/ICE' );
 
 /**
- * Infinity application directory path
+ * Infinity application interface directory path
  */
-define( 'INFINITY_APP_PATH', INFINITY_ENGINE_PATH . '/app' );
+define( 'INFINITY_API_PATH', INFINITY_ENGINE_PATH . '/api' );
 
 /**
  * Infinity includes directory path
  */
-define( 'INFINITY_INC_PATH', INFINITY_ENGINE_PATH . '/inc' );
+define( 'INFINITY_INC_PATH', INFINITY_ENGINE_PATH . '/includes' );
 
 /**
  * Infinity admin directory relative path
@@ -190,14 +190,14 @@ if ( is_admin() ) {
 }
 
 // load Infinity API
-require_once( INFINITY_APP_PATH . '/scheme.php' );
-require_once( INFINITY_APP_PATH . '/sections.php' );
-require_once( INFINITY_APP_PATH . '/options.php' );
-require_once( INFINITY_APP_PATH . '/features.php' );
-require_once( INFINITY_APP_PATH . '/widgets.php' );
-require_once( INFINITY_APP_PATH . '/screens.php' );
-require_once( INFINITY_APP_PATH . '/shortcodes.php' );
-require_once( INFINITY_APP_PATH . '/i18n.php' );
+require_once( INFINITY_API_PATH . '/scheme.php' );
+require_once( INFINITY_API_PATH . '/sections.php' );
+require_once( INFINITY_API_PATH . '/options.php' );
+require_once( INFINITY_API_PATH . '/features.php' );
+require_once( INFINITY_API_PATH . '/widgets.php' );
+require_once( INFINITY_API_PATH . '/screens.php' );
+require_once( INFINITY_API_PATH . '/shortcodes.php' );
+require_once( INFINITY_API_PATH . '/i18n.php' );
 
 // initialize scheme
 infinity_scheme_init();

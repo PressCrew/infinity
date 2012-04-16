@@ -24,9 +24,9 @@ function infinity_scheme_init()
 {
 	// initialize the scheme
 	ICE_Scheme::instance()
-		->set_config_dir( INFINITY_ENGINE_DIR . '/ini' )
-		->set_docs_dir( INFINITY_ENGINE_DIR . '/doc' )
-		->set_exts_dir( INFINITY_ENGINE_DIR . '/ext' )
+		->set_config_dir( INFINITY_ENGINE_DIR . '/config' )
+		->set_docs_dir( INFINITY_ENGINE_DIR . '/documents' )
+		->set_exts_dir( INFINITY_ENGINE_DIR . '/extensions' )
 		->init( INFINITY_NAME );
 
 	// initialize policies (the order is important here)
