@@ -219,8 +219,6 @@ if ( is_admin() ) {
 	infinity_options_init_screen();
 	infinity_screens_init_screen();
 	infinity_widgets_init_screen();
-	// load admin functionality
-	require_once( INFINITY_ADMIN_PATH . '/loader.php' );
 } else {
 	// init blog components screens
 	infinity_features_init_screen();

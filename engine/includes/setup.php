@@ -19,6 +19,14 @@ require_once( INFINITY_INC_PATH . '/templatetags.php' );
 require_once( INFINITY_INC_PATH . '/walkers.php' );
 require_once( INFINITY_INC_PATH . '/options.php' );
 
+/**
+ * Include dashboard if applicable
+ */
+if ( is_admin() ) {
+	// load admin functionality
+	require_once( INFINITY_ADMIN_PATH . '/loader.php' );
+}
+
 // add post formats
 function infinity_base_post_formats() 
 {
