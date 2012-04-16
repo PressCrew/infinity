@@ -87,11 +87,6 @@ define( 'INFINITY_APP_PATH', INFINITY_ENGINE_PATH . '/app' );
 define( 'INFINITY_INC_PATH', INFINITY_ENGINE_PATH . '/inc' );
 
 /**
- * Infinity templates directory name
- */
-define( 'INFINITY_SUBTPLS_DIR', 'templates' );
-
-/**
  * Infinity admin directory relative path
  */
 define( 'INFINITY_ADMIN_DIR', 'dashboard' );

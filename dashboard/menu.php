@@ -32,7 +32,7 @@ function infinity_dashboard_menu_setup()
 		'manage_options',
 		INFINITY_ADMIN_PAGE,
 		'infinity_dashboard_cpanel_screen',
-		INFINITY_THEME_URL . '/assets/images/dashboard/icon_16.png',
+		INFINITY_ADMIN_URL . '/assets/images/icon_16.png',
 		1 );
 
 	add_action( 'admin_print_styles', 'infinity_dashboard_menu_styler', 99999 );

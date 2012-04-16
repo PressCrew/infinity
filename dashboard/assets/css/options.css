@@ -87,7 +87,7 @@ div.infinity-cpanel-options-single {
 	width: 99%;
 	padding: 3px;
 	margin-bottom: 15px;
-	background: url('../../images/dashboard/ui_pattern_bg.png') repeat;
+	background: url(../images/ui_pattern_bg.png) repeat;
 }
 	div.infinity-cpanel-options-single ul.ui-tabs-nav {
 		padding-top: 0.2em;

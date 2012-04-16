@@ -35,7 +35,7 @@ div#infinity-cpanel-header {
     height: 85px;
 	margin: 3px;
 	padding-bottom: 6px;
-	background: url('../../images/dashboard/cpanel_header_bg.png') repeat-x;
+	background: url('../images/cpanel_header_bg.png') repeat-x;
 }
 
 div#infinity-cpanel-header-logo {
@@ -44,7 +44,7 @@ div#infinity-cpanel-header-logo {
 	left: 30px;
 	height: 57px;
 	width: 225px;
-	background: url('../../images/dashboard/cpanel_header_logo.png') no-repeat;
+	background: url('../images/cpanel_header_logo.png') no-repeat;
 }
 
 div#infinity-cpanel-header-version {
