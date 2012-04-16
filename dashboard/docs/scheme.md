@@ -41,7 +41,7 @@ required to take advantage of the many other powerful features of Infinity.
 
 ### Customize Child Themes without having to worry about upgrades
 
-If you have modified a child theme of a Infinity, you can easily create a
+If you have modified a child theme of Infinity, you can easily create a
 grandchild theme to further customize it exactly as you wish. This means that if your
 child themes gets an update you can safely upgrade and enjoy the new features,
 without losing your customizations! This solves a very big problem with most WordPress

@@ -37,9 +37,9 @@ where the custom css markup is entered in the options panel.
 	title = "Custom CSS"
 	description = "Enter custom CSS markup to fine tune the look of your site"
 
-This configuration block creates a new option called "infinity-custom-css-markup"
+This configuration block creates a new option called "infinity-custom-css_markup"
 
-> The "." is replaced with a "-" because jQuery does not support periods in HTML element ids.
+> The "." is replaced with am underscore ("_") because jQuery does not support periods in HTML element ids.
 
 Sub-options can be overriden by theme ancestors in their features.ini just like you would
 normally do, as long as you maintain the feature name prefix *exactly*.

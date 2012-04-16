@@ -77,7 +77,7 @@ for `wp_enqueue_styles()` to work properly.
 
 #### [style\_conditions]
 
-The style conditions section lets fine tune when styles are enqueued by assigning one
+The style conditions section lets you fine tune when styles are enqueued by assigning one
 or more style handles to a condition (callback function) which evaluates to true.
 
 The basic format is:
@@ -99,9 +99,6 @@ Here is an example:
 In the above example, the `sliders` stylesheet would only be enqueued if the `is_front_page()`
 function returns true, and the page-sidebar stylesheet would only be enqueued if the `is_page()`
 function returns true.
-
-All style conditions are evaluated on the `template_redirect` and `admin_init` actions at
-priority 10. This is hard coded in Infinity and cannot be changed via any configuration settings.
 
 ### Cross-Referencing Handles
 
@@ -148,22 +145,15 @@ The following internal handles refer to static stylesheets that ship with Infini
 The following internal handles refer to stylesheets that are generated and saved to a cache
 file every time a configuration ini file is modified, or a theme option is saved.
 
-Each infinity component type has its own cache file which is located under the applicable
+The theme and admin dashboard each have their own cache file which is located under the applicable
 uploads folder depending on whether you are running a standard or network install of WordPress.
 
 Standard Location:
 
-	wp-content/uploads/files/exports/[component].css
+	wp-content/uploads/files/exports/dynamic.css
+	wp-content/uploads/files/exports/dynamic-admin.css
 
 Network Location:
 
-	wp-content/blogs.dir/[site_id]/files/exports/[component].css
-
-Component Handles:
-
-* __@:features__ Features component css
-* __@:options__ Options component css
-* __@:screens__ Screens component css
-* __@:sections__ Sections component css
-* __@:shortcodes__ Shortcodes component css
-* __@:widgets__ Widgets component css
+	wp-content/blogs.dir/[site_id]/files/exports/dynamic.css
+	wp-content/blogs.dir/[site_id]/files/exports/dynamic-admin.css

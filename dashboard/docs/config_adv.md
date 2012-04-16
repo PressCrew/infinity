@@ -4,14 +4,6 @@ Infinity has some additional configuration directives which are available for sp
 
 ### Directives
 
-#### development\_mode
-
-Toggle this setting "On" to:
-
-* Force writing of dynamic script and style files on every request
-
-> Stay tuned for more functionality tied to development mode.
-
 #### image\_root
 
 The root image directory, relative to your theme root.

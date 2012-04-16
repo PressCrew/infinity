@@ -1,7 +1,7 @@
 ## Legend
 
 Throughout this documentation there are a few formatting styles used.
-This legend serves to eliminate any confusion, just in case.
+This legend serves to eliminate any confusion, just in case!
 
 ### Highlighting
 

@@ -81,7 +81,7 @@ The available option types are:
 	* __colorpicker__ - Color picker
 
 > To learn more about what can be done with the different option types,
-  check out the configuration examples in `infinity/config/options.examples.ini`
+  check out the configuration examples in `infinity/engine/config/options.examples.ini`
 
 Child theme can override type: **No**
 
@@ -183,11 +183,11 @@ Child theme can override required\_feature: **No**
 Documentation can be provided for any option by creating a doc page in the configuration
 docs folder:
 
-	wp-content/themes/child_theme/config/docs/mytheme_option.md
+	wp-content/themes/child_theme/engine/documents/options/mytheme_option.md
 
 Sub-directories are also allowed:
 
-	wp-content/themes/child_theme/config/docs/foo/bar/mytheme_option.md
+	wp-content/themes/child_theme/engine/documents/foo/bar/mytheme_option.md
 
 There are three valid formats for doc pages.
 
@@ -234,9 +234,9 @@ There are three documentation modes:
 	`documentation = on`
 
 	In this case the doc page should have the exact same name as the option, and be placed
-	in a subdirectory of your `config/docs` folder called `options`. For example:
+	in a subdirectory of your `engine/documents` folder called `options`. For example:
 
-	`my-theme/config/options/option_name.md`
+	`my-theme/engine/documents/options/option_name.md`
 
 * **Manual**
 
@@ -249,7 +249,7 @@ There are three documentation modes:
 
 	`documentation = "foo/bar/mytheme_option"`
 
-	Create the directories `config/docs/foo/bar` and place your doc page in the `foo` directory.
+	Create the directories `engine/documents/foo/bar` and place your doc page in the `foo` directory.
 
 	> Infinity makes heavy use of the manual mode due to the fact that you can re-use the same
 	page doc for as many options as you wish. This allows you to build up and pull from a library

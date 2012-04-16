@@ -7,7 +7,8 @@ to explore what this project has to offer.
 
 *Dont' call it a framework!*
 
-Infinity is not a framework. It is a radical new approach to theme development.
+Infinity is not a theme framework. It is a radical new approach to theme development which
+we have come to call a theming *engine*.
 The authors' never ending battle with the nuances of WordPress drove us to invent a
 new work flow pattern for the development of themes. We have implemented these ideas into a
 prototype theme which insulates designers from PHP code.
@@ -32,7 +33,7 @@ Another important distinction is that Infinity is *only extended*, never modifie
 upgrade your entire hierarchy of themes to the latest and greatest version of Infinity
 without having to touch a single one of your child themes until you are ready.
 
-Infinity is the culmination of many hundreds of hours of research and development.
+Infinity is the culmination of many thousands of hours of research and development.
 We hope you enjoy it.
 
 If you wish to support us, the best way is to get involved in the community!

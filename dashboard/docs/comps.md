@@ -30,12 +30,12 @@ Infinity what components you want to provide with your theme.
 
 Each component has its own configuration file in the `my-theme/config` directory.
 
-	config/features.ini
-	config/options.ini
-	config/screens.ini
-	config/sections.ini
-	config/shortcodes.ini
-	config/widgets.ini
+	engine/config/features.ini
+	engine/config/options.ini
+	engine/config/screens.ini
+	engine/config/sections.ini
+	engine/config/shortcodes.ini
+	engine/config/widgets.ini
 
 > Never edit the configuration files that ship with Infinity. Edit the files in your
 child theme!
@@ -69,7 +69,7 @@ extensions as a model for development.
 ### Helper Functions
 
 Some components have helper functions which are used to edit, manipulate and/or display
-its underlaying functionality and data.
+its underlying functionality and data.
 
 It is important that you use these functions to display components or get their data as they
 do many special things behind the scenes, like handling default values and checking user

@@ -12,8 +12,7 @@ Defining a component is very simple. Each component configuration block begins w
 name that you use to display/manipulate the component in your WordPress theme.
 
 The component name goes inside square brackets, and the directives for that component come
-immediately after it. Component names can only contain the characters a-z, 0-9, underscore
-and hyphen.
+immediately after it. Component names can only contain the characters a-z, 0-9, and hyphen.
 
 	[component-name]
 	type = "valid-type"				; Required
@@ -74,9 +73,19 @@ A more detailed description of what the component does inside your theme.
 
 Child theme can override: **Yes**
 
+#### id
+
+Infinity automagically assigns an id to component HTML elements. If you wish to
+assign a custom id to a configured component, setting this directive will tell
+infinity to use your id instead.
+
+	id = "my-special-id"
+
+Child theme can override: **Yes**
+
 #### class
 
-You can assign a extra CSS class to any component to customize the looks using CSS.
+You can assign an additional CSS class to any component to customize the looks using CSS.
 This is a powerful feature which allows you to completely customize the look and feel of
 your components to make them fit your theme's or client's needs.
 

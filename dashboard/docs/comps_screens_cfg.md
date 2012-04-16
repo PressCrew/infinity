@@ -1,7 +1,7 @@
 ## Screens Component: Configuration
 
 The screens component is used to create "pages" of content which can then be added to
-the Infinity control panel. Screens are automatically added to the dropdown menu and
+the Infinity control panel. Screens are automatically added to the drop down menu and
 can be nested to build up a cascading menu. You can even add icons and control the
 order in which they are shown/listed using only configuration directives.
 

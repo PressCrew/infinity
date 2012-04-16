@@ -98,9 +98,6 @@ Here is an example:
 In the above example, the `sliders` script would only be enqueued if the `is_front_page()`
 function returns true.
 
-> All script conditions are evaluated on the `template_redirect` and `admin_init` actions
-at priority 10. This is hard coded in Infinity and cannot be changed via any configuration settings.
-
 ### Cross-Referencing Handles
 
 There may be a situation where you want to add a dependency or condition to one of your
@@ -131,22 +128,15 @@ understand the significance of the prefix.
 The following internal handles refer to scripts that are generated and saved to a cache
 file every time a configuration ini file is modified, or a theme option is saved.
 
-Each infinity component type has its own cache file which is located under the applicable
+The theme and admin dashboard each have their own cache file which is located under the applicable
 uploads folder depending on whether you are running a standard or network install of WordPress.
 
 Standard Location:
 
-	wp-content/uploads/files/exports/[component].js
+	wp-content/uploads/files/exports/dynamic.js
+	wp-content/uploads/files/exports/dynamic-admin.js
 
 Network Location:
 
-	wp-content/blogs.dir/[site_id]/files/exports/[component].js
-
-Component Handles:
-
-* __@:features__ Features component js
-* __@:options__ Options component js
-* __@:screens__ Screens component js
-* __@:sections__ Sections component js
-* __@:shortcodes__ Shortcodes component js
-* __@:widgets__ Widgets component js
+	wp-content/blogs.dir/[site_id]/files/exports/dynamic.js
+	wp-content/blogs.dir/[site_id]/files/exports/dynamic-admin.js

@@ -7,8 +7,17 @@ Whether you are starting from scratch, or extending an existing theme, setup is 
 
 ### Installing Infinity
 
-Unpack the Infinity package. Infinity ships with a few themes, but just worry about
-the `infinity` directory for now!
+Take a moment to make sure that you have downloaded the correct package for your
+needs. There are three packages available
+[on our downloads page](https://github.com/PressCrew/infinity/tags):
+
+1. Engine Only - For developers who want to roll their own parent theme.
+1. Base Theme - For developers who want a parent theme that works out of the box.
+1. BP Base Theme - For developers who want a BuddyPress parent theme that works out of the box.
+
+> The Engine Only package does nothing out of the box, so is not covered in this setup guide.
+
+Got the right base theme for your situation? Cool, unzip the Infinity package!
 
 #### Uploading the Base Theme
 
@@ -24,34 +33,94 @@ the `infinity` directory for now!
 If you just want to play around with Infinity, or use it as your theme, all that you
 need to do is activate it for a site, and you are done!
 
+### Getting to Know the Engine
+
+Open up the `infinity` theme's root directory named: `engine`. You should see several folders,
+of which the purpose for each is described below.
+
+> For purposes of this guide, when we say *parent theme developer* we are talking about the
+> Press Crew team. If you are using a parent theme developed by someone else which uses the
+> Infinity Engine, then *they* are the parent theme developer and the name of the theme directory
+> will be something other than `infinity`.
+
+#### ICE/
+
+The Infinity Component Engine library. You should never touch this, ever!
+
+#### api/
+
+The Infinity API classes and helper function files. Again, do not touch!
+
+#### config/
+
+All of the configuration INI files which define the settings which have been provided
+by the parent theme developer. You can amend and extend these files in your child
+theme if you like.
+
+#### documents/
+
+All of the documentation files for the parent theme. You can amend and extend these
+files in your child theme if you like.
+
+#### extensions/
+
+Any extensions required by the parent theme. You can add more extensions to your
+child theme and they will integrate seamlessly into the parent theme.
+
+#### includes/
+
+The parent theme developer may have additional PHP scripts which are required for the
+theme's functionality, and it is common for them to be placed in this directory.
+
+#### infinity.php
+
+this is the script which loads the Infinity API, and initializes the configuration as well as
+loads any additional PHP scripts which the parent theme developer has provided.
+
+> Unless you are developing your own parent theme, you should never touch **ANY** of the
+> files or folders in the parent theme's `engine` folder. Instead you should create *new* files
+> **at the same relative path** in your child theme.
+
+> A child theme will, at the most, have the `config`, `documents`, and `extensions` directories
+> inside the `engine` directory.
+
 ### Creating a Child Theme
 
-1. The Infinity package ships with a bare bones theme called `infinity-skeleton`.
-   This theme contains all of the important files which you need to begin developing
-   a child theme of Infinity, or to use as a guide for modifying an existing theme
-   to extend Infinity.
+Creating a child theme is extremely easy. It takes less than a minute.
 
-1. Normally you will want to **copy** and **rename** the `infinity-skeleton` directory to
-   something else. For the purposes of our examples, we are going to rename the `infinity-skeleton`
-   to `my-child-theme`. If you choose to name your child theme something other than
-   `my-child-theme`, make sure you use the new name in place of `my-child-theme`
-   in the examples below.
+#### Starting with the Skeleton Theme
 
-#### Configuring the Child Theme
+If you are new to Infinity, you probably want to start with the Infinity Skeleton
+theme which you can [download here](https://github.com/PressCrew/infinity-skeleton/tags).
+This theme contains all of the important files which you need to begin developing
+a child theme of Infinity, or to use as a guide for modifying an existing theme
+to extend Infinity.
+
+#### Making It Your Own
+
+Normally you will want to **copy** and **rename** the `infinity-skeleton` directory to
+something else. For the purposes of our examples, we are going to rename the `infinity-skeleton`
+to `my-child-theme`. If you choose to name your child theme something other than
+`my-child-theme`, make sure you use the new name in place of `my-child-theme`
+in the examples below.
+
+### Configuring a Child Theme
 
 If you are not familiar with how child themes work in WordPress, please take some
 time to learn about this from the WordPress codex before continuing:
 <a href="http://codex.wordpress.org/Child_Themes" target="_blank">Child Theme</a>
 
-1. Look in the `my-child-theme` theme's root directory called: `config`.
+#### Setting the Parent Theme
 
-		my-child-theme/config/
+1. Look in the `my-child-theme` theme's `engine` directory called: `config`.
+
+		my-child-theme/engine/config/
 
 1. Open the file called `infinity.ini` in the config directory:
 
-		my-child-theme/config/infinity.ini
+		my-child-theme/engine/config/infinity.ini
 
-1. You will see there is only one directive:
+1. At the top you will see the most important directive:
 
 		parent_theme = "infinity"
 
@@ -108,7 +177,7 @@ infinite number of child themes, if you so desire.
 
 1. Open up the `infinity.ini` file:
 
-		my-grandchild-theme/config/infinity.ini
+		my-grandchild-theme/engine/config/infinity.ini
 
    Change the `parent_theme` line to the name of the theme you want to inherit from:
 

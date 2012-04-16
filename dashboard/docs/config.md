@@ -9,9 +9,9 @@ you might want to do that first to make this easier to follow.
 ### INI File Basics
 
 All of the configuration of Infinity is done with ini files. The ini files all reside
-in a subdirectory named `config` in your theme's root:
+in a directory named `config` under your theme's `engine` directory:
 
-	wp-content/themes/my-theme/config
+	wp-content/themes/my-theme/engine/config
 
 If you are not familiar with how ini files work, it is very simple. They contain sections,
 directives, and values:
@@ -21,13 +21,16 @@ directives, and values:
 	directive_one = 1
 	directive_two = on
 	directive_three = "a string value"
+	directive_four[] = "array item 0"
+	directive_four[] = "array item 1"
+	directive_four[] = "array item 2"
 
 ### The Infinity Config File
 
 All of the configuration directives discussed in this document are set in Infinity's
 main ini file:
 
-	wp-content/themes/my-theme/config/infinity.ini
+	wp-content/themes/my-theme/engine/config/infinity.ini
 
-> Take a look at the infinity.sample.ini file located in the same directory
-to see complete working examples of all the configuration directives available to you.
+> Take a look at the infinity.example.ini file located in the same directory
+to see complete working examples of most of the configuration directives available to you.

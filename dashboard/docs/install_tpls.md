@@ -2,7 +2,7 @@
 
 Infinity requires the use of some custom template tags in order
 for the infinite child theme template inheritance to work properly. If you wish to have a
-theme hierarchy which is **three or more** themes deep, including Infinity, you must use these
+theme hierarchy which is **three or more** themes deep, **including** Infinity, you must use these
 special functions **instead of** the standard core functions in WordPress.
 
 *If you are only inheriting options, and not templates, this does not apply to you.*
