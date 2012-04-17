@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<docblox>
+<phpdoc>
   <title>Infinity API Manual</title>
   <parser>
     <default-package-name>Infinity</default-package-name>
-    <target>etc/docblox/output</target>
+    <target>etc/phpdoc/output</target>
     <markers>
       <item>TODO</item>
       <item>FIXME</item>
@@ -16,7 +16,7 @@
     <visibility></visibility>
   </parser>
   <transformer>
-    <target>etc/docblox/output</target>
+    <target>etc/phpdoc/output</target>
   </transformer>
   <logging>
     <level>warn</level>
@@ -25,18 +25,21 @@
       <errors>{APP_ROOT}/data/log/{DATE}.errors.log</errors>
     </paths>
   </logging>
-  <transformations>
-    <template name="default" />
-  </transformations>
   <files>
     <directory>.</directory>
+    <ignore>activity/*</ignore>
     <ignore>assets/*</ignore>
-    <ignore>base/ice/assets/*</ignore>
-    <ignore>base/ice/lib/vendors/*</ignore>
+    <ignore>blogs/*</ignore>
     <ignore>dashboard/assets/*</ignore>
     <ignore>dashboard/docs/*</ignore>
     <ignore>dashboard/templates/*</ignore>
-    <ignore>documents/*</ignore>
+    <ignore>engine/ICE/assets/*</ignore>
+    <ignore>engine/ICE/lib/*</ignore>
+    <ignore>engine/documents/*</ignore>
     <ignore>etc/*</ignore>
+    <ignore>forums/*</ignore>
+    <ignore>groups/*</ignore>
+    <ignore>members/*</ignore>
+    <ignore>registration/*</ignore>
   </files>
-</docblox>
+</phpdoc>
