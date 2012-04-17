@@ -36,6 +36,7 @@
     <ignore>engine/ICE/assets/*</ignore>
     <ignore>engine/ICE/lib/*</ignore>
     <ignore>engine/documents/*</ignore>
+    <ignore>engine/includes/*</ignore>
     <ignore>etc/*</ignore>
     <ignore>forums/*</ignore>
     <ignore>groups/*</ignore>
