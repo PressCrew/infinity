@@ -35,6 +35,8 @@ final class ICE_Enqueue extends ICE_Base
 	const UI_STYLE_HANDLE = '@:ui';
 
 	/**
+	 * Singleton instance
+	 * 
 	 * @var ICE_Enqueue
 	 */
 	static private $instance;
@@ -47,6 +49,8 @@ final class ICE_Enqueue extends ICE_Base
 	private $ui_stylesheet;
 
 	/**
+	 * Constructor
+	 * 
 	 * @internal
 	 */
 	private function __construct()

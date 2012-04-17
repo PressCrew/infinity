@@ -147,16 +147,22 @@ final class ICE_Scheme extends ICE_Base
 	private $themes;
 
 	/**
+	 * The directives registry instance
+	 * 
 	 * @var ICE_Init_Directive_Registry
 	 */
 	private $directives;
 
 	/**
+	 * The enqueue helper instance
+	 * 
 	 * @var ICE_Scheme_Enqueue
 	 */
 	private $enqueue;
 
 	/**
+	 * The exports manager instance
+	 * 
 	 * @var ICE_Export_Manager
 	 */
 	private $exports;

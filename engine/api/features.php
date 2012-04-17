@@ -6,7 +6,7 @@
  * @link http://infinity.presscrew.com/
  * @copyright Copyright (C) 2010-2011 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage features
  * @since 1.0
  */
@@ -16,7 +16,7 @@ ICE_Loader::load( 'components/features' );
 /**
  * Infinity Theme: features policy
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage features
  */
 class Infinity_Features_Policy extends ICE_Feature_Policy
@@ -58,7 +58,7 @@ class Infinity_Features_Policy extends ICE_Feature_Policy
 /**
  * Infinity Theme: features registry
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage features
  */
 class Infinity_Features_Registry extends ICE_Feature_Registry
@@ -80,7 +80,7 @@ class Infinity_Feature_Factory extends ICE_Feature_Factory
 /**
  * Infinity Theme: features renderer
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage features
  */
 class Infinity_Features_Renderer extends ICE_Feature_Renderer
@@ -95,7 +95,7 @@ class Infinity_Features_Renderer extends ICE_Feature_Renderer
 /**
  * Display a feature
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage features
  * @param string $feature_name
  * @param boolean $output
@@ -116,7 +116,7 @@ function infinity_feature( $feature_name, $output = true )
 /**
  * Fetch a feature
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage features
  * @param string $feature_name
  * @return ICE_Feature|false
@@ -136,7 +136,7 @@ function infinity_feature_fetch( $feature_name )
 /**
  * Initialize features environment
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage features
  */
 function infinity_features_init()
@@ -153,7 +153,7 @@ function infinity_features_init()
 /**
  * Initialize features screen requirements
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage features
  */
 function infinity_features_init_screen()

@@ -28,21 +28,29 @@ class ICE_Stack_Iterator
 		implements Iterator
 {
 	/**
-	 * @var array The data to be iterated through
+	 * The data to be iterated through.
+	 * 
+	 * @var array
 	 */
 	private $data;
 	
 	/**
-	 * @var integer Index of the current item
+	 * Index of the current item.
+	 * 
+	 * @var integer
 	 */
 	private $index;
 	
 	/**
-	 * @var integer Count of the data items
+	 * Count of the data items.
+	 * 
+	 * @var integer
 	 */
 	private $count;
 
 	/**
+	 * Constructor
+	 * 
 	 * @param array $data The data to be iterated through
 	 */
 	public function __construct( &$data )

@@ -6,8 +6,7 @@
  * @link http://infinity.presscrew.com/
  * @copyright Copyright (C) 2010-2011 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
- * @package Infinity
- * @subpackage scheme
+ * @package Infinity-api
  * @since 1.0
  */
 
@@ -16,8 +15,7 @@ ICE_Loader::load( 'schemes' );
 /**
  * Initialize and load the scheme for the active theme
  *
- * @package Infinity
- * @subpackage scheme
+ * @package Infinity-api
  * @return boolean
  */
 function infinity_scheme_init()
@@ -43,8 +41,7 @@ function infinity_scheme_init()
 /**
  * Finalize scheme for the active theme
  *
- * @package Infinity
- * @subpackage scheme
+ * @package Infinity-api
  * @return boolean
  */
 function infinity_scheme_finalize()
@@ -63,8 +60,7 @@ function infinity_scheme_finalize()
 /**
  * Get a scheme directive value
  *
- * @package Infinity
- * @subpackage scheme
+ * @package Infinity-api
  * @param string $name
  * @return mixed
  */
@@ -76,8 +72,7 @@ function infinity_scheme_directive( $name )
 /**
  * Check if template exists anywhere in the scheme
  *
- * @package Infinity
- * @subpackage scheme
+ * @package Infinity-api
  * @param string|array $template_name
  * @param boolean $load Auto load template if set to true
  * @return string
@@ -90,8 +85,7 @@ function infinity_locate_template( $template_name, $load = false )
 /**
  * Load a template
  *
- * @package Infinity
- * @subpackage scheme
+ * @package Infinity-api
  * @param string|array $template_name
  * @return string
  */
@@ -103,8 +97,7 @@ function infinity_load_template( $template_name )
 /**
  * Return absolute path to first image matching path in the scheme stack
  *
- * @package Infinity
- * @subpackage scheme
+ * @package Infinity-api
  * @param string $path Image file path RELATIVE to your image_root setting
  */
 function infinity_image_path( $path )
@@ -116,8 +109,7 @@ function infinity_image_path( $path )
 /**
  * Return URL to first image matching path in the scheme stack
  *
- * @package Infinity
- * @subpackage scheme
+ * @package Infinity-api
  * @param string $path Image file path RELATIVE to your image_root setting
  */
 function infinity_image_url( $path )
@@ -131,8 +123,7 @@ function infinity_image_url( $path )
 /**
  * Return absolute path to first style matching path in the scheme stack
  *
- * @package Infinity
- * @subpackage scheme
+ * @package Infinity-api
  * @param string $path Stylesheet file path RELATIVE to your style_root setting
  */
 function infinity_style_path( $path )
@@ -144,8 +135,7 @@ function infinity_style_path( $path )
 /**
  * Return URL to first style matching path in the scheme stack
  *
- * @package Infinity
- * @subpackage scheme
+ * @package Infinity-api
  * @param string $path Stylesheet file path RELATIVE to your style_root setting
  */
 function infinity_style_url( $path )
@@ -159,8 +149,7 @@ function infinity_style_url( $path )
 /**
  * Return absolute path to first script matching path in the scheme stack
  *
- * @package Infinity
- * @subpackage scheme
+ * @package Infinity-api
  * @param string $path Script file path RELATIVE to your script_root setting
  */
 function infinity_script_path( $path )
@@ -172,8 +161,7 @@ function infinity_script_path( $path )
 /**
  * Return URL to first script matching path in the scheme stack
  *
- * @package Infinity
- * @subpackage scheme
+ * @package Infinity-api
  * @param string $path Script file path RELATIVE to your script_root setting
  */
 function infinity_script_url( $path )
@@ -187,8 +175,7 @@ function infinity_script_url( $path )
 /**
  * Load a header from the scheme stack
  *
- * @package Infinity
- * @subpackage scheme
+ * @package Infinity-api
  * @param string $name
  * @return boolean
  */
@@ -200,8 +187,7 @@ function infinity_get_header( $name = null )
 /**
  * Load a footer from the scheme stack
  *
- * @package Infinity
- * @subpackage scheme
+ * @package Infinity-api
  * @param string $name
  * @return boolean
  */
@@ -213,8 +199,7 @@ function infinity_get_footer( $name = null )
 /**
  * Load a sidebar from the scheme stack
  *
- * @package Infinity
- * @subpackage scheme
+ * @package Infinity-api
  * @param string $name
  * @return boolean
  */
@@ -226,8 +211,7 @@ function infinity_get_sidebar( $name = null )
 /**
  * Load the search form from the scheme stack
  *
- * @package Infinity
- * @subpackage scheme
+ * @package Infinity-api
  * @param string $echo
  * @return boolean
  */
@@ -239,8 +223,7 @@ function infinity_get_search_form( $echo = true )
 /**
  * Load a template part from the scheme stack
  *
- * @package Infinity
- * @subpackage scheme
+ * @package Infinity-api
  * @param string $slug The slug name for the generic template.
  * @param string $name The name of the specialised template.
  * @return boolean
@@ -253,8 +236,7 @@ function infinity_get_template_part( $slug, $name = null )
 /**
  * Load comments template from the scheme stack (wrapper)
  *
- * @package Infinity
- * @subpackage scheme
+ * @package Infinity-api
  * @param string $file Optional, default '/comments.php'. The file to load
  * @param bool $separate_comments Optional, whether to separate the comments by comment type. Default is false.
  */

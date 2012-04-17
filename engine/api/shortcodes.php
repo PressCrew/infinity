@@ -6,7 +6,7 @@
  * @link http://infinity.presscrew.com/
  * @copyright Copyright (C) 2010-2011 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage shortcodes
  * @since 1.0
  */
@@ -16,7 +16,7 @@ ICE_Loader::load( 'components/shortcodes' );
 /**
  * Infinity Theme: shortcodes policy
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage shortcodes
  */
 class Infinity_Shortcodes_Policy extends ICE_Shortcode_Policy
@@ -58,7 +58,7 @@ class Infinity_Shortcodes_Policy extends ICE_Shortcode_Policy
 /**
  * Infinity Theme: shortcodes registry
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage shortcodes
  */
 class Infinity_Shortcodes_Registry extends ICE_Shortcode_Registry
@@ -69,7 +69,7 @@ class Infinity_Shortcodes_Registry extends ICE_Shortcode_Registry
 /**
  * Infinity Theme: shortcode factory
  *
- * @package Infinity-extensions
+ * @package Infinity-api
  * @subpackage shortcodes
  */
 class Infinity_Shortcode_Factory extends ICE_Shortcode_Factory
@@ -80,7 +80,7 @@ class Infinity_Shortcode_Factory extends ICE_Shortcode_Factory
 /**
  * Infinity Theme: shortcodes renderer
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage shortcodes
  */
 class Infinity_Shortcodes_Renderer extends ICE_Shortcode_Renderer
@@ -95,7 +95,7 @@ class Infinity_Shortcodes_Renderer extends ICE_Shortcode_Renderer
 /**
  * Initialize shortcodes environment
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage shortcodes
  */
 function infinity_shortcodes_init()
@@ -112,7 +112,7 @@ function infinity_shortcodes_init()
 /**
  * Initialize shortcodes screen requirements
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage shortcodes
  */
 function infinity_shortcodes_init_screen()

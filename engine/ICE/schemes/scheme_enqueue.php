@@ -56,21 +56,29 @@ class ICE_Scheme_Enqueue extends ICE_Base
 	const TRIGGER_PARAMS = 'params';
 
 	/**
+	 * The scheme instance which owns this instance
+	 * 
 	 * @var ICE_Scheme
 	 */
 	private $scheme;
 
 	/**
+	 * Map of style configurations
+	 *
 	 * @var ICE_Map
 	 */
 	private $styles;
 
 	/**
+	 * Stack of styles to ignore
+	 *
 	 * @var ICE_Stack
 	 */
 	private $styles_ignore;
 
 	/**
+	 * Map of script configurations
+	 *
 	 * @var ICE_Map
 	 */
 	private $scripts;
@@ -317,6 +325,8 @@ class ICE_Scheme_Enqueue extends ICE_Base
 	}
 
 	/**
+	 * Define all styles for given style defs map
+	 *
 	 * @internal
 	 * @param ICE_Map $style_defs
 	 */
@@ -326,6 +336,8 @@ class ICE_Scheme_Enqueue extends ICE_Base
 	}
 
 	/**
+	 * Define all scripts for given script defs map
+	 *
 	 * @param ICE_Map $script_defs
 	 */
 	private function define_scripts( ICE_Map $script_defs )

@@ -7,8 +7,8 @@
  * The "Template Name:" bit above allows this to be selectable
  * from a dropdown menu on the edit page screen.
  *
- * @package infinity
- * @subpackage base
+ * @package Infinity
+ * @subpackage templates
  */
 infinity_get_header(); ?>
 

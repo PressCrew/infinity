@@ -46,7 +46,7 @@ final class ICE_Files extends ICE_Base
 	/**
 	 * Set the doc root variables if not already set
 	 *
-	 * @return type
+	 * @return string
 	 */
 	public static function document_root()
 	{
@@ -94,7 +94,7 @@ final class ICE_Files extends ICE_Base
 	 * Resolve a file path like realpath() does, but without following symlinks,
 	 * and without requiring that the file exists
 	 *
-	 * @param array $file_names,... One array or an unlimited number of file names
+	 * @param array|string $file_names,... One array or an unlimited number of file names
 	 * @return string
 	 */
 	public static function path_resolve()
@@ -320,7 +320,7 @@ final class ICE_Files extends ICE_Base
 	 * Return URL to a theme file
 	 *
 	 * @param string $theme
-	 * @param string|array $file_names,...
+	 * @param string|array $file_names,... Zero or more file name parameters
 	 */
 	static public function theme_file_url( $theme )
 	{
@@ -384,7 +384,7 @@ final class ICE_Files extends ICE_Base
 	 *
 	 * @param string $file_name File name
 	 * @param string $prefix Optional class prefix
-	 * @return type
+	 * @return string
 	 */
 	static public function file_to_class( $file_name, $prefix = null )
 	{

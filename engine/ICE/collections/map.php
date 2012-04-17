@@ -28,12 +28,16 @@ class ICE_Map
 		implements IteratorAggregate,ArrayAccess,Countable
 {
 	/**
-	 * @var array Internal data storage
+	 * Internal data storage.
+	 * 
+	 * @var array
 	 */
 	private $__data__ = array();
 
 	/**
-	 * @var boolean Whether this list is read-only
+	 * Whether this list is read-only.
+	 * 
+	 * @var boolean
 	 */
 	private $__read_only__ = false;
 
@@ -381,10 +385,19 @@ class ICE_Map
  */
 class ICE_Map_Lockable extends ICE_Map
 {
+	/**
+	 * Lock the map from further modification
+	 */
 	public function lock()
 	{
 		$this->set_read_only( true );
 	}
+
+	/**
+	 * Return true if map is locked
+	 *
+	 * @return boolean
+	 */
 	public function locked()
 	{
 		return $this->get_read_only();

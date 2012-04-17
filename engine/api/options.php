@@ -6,7 +6,7 @@
  * @link http://infinity.presscrew.com/
  * @copyright Copyright (C) 2010-2011 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage options
  * @since 1.0
  */
@@ -16,7 +16,7 @@ ICE_Loader::load( 'utils/ajax', 'components/options' );
 /**
  * Infinity Theme: options policy
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage options
  */
 class Infinity_Options_Policy extends ICE_Option_Policy
@@ -59,7 +59,7 @@ class Infinity_Options_Policy extends ICE_Option_Policy
 /**
  * Infinity Theme: options registry
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage options
  */
 class Infinity_Options_Registry extends ICE_Option_Registry
@@ -89,7 +89,7 @@ add_action( 'wp_loaded', array( 'Infinity_Options_Registry', 'init_form_processi
 /**
  * Infinity Theme: option factory
  *
- * @package Infinity-extensions
+ * @package Infinity-api
  * @subpackage options
  */
 class Infinity_Option_Factory extends ICE_Option_Factory
@@ -100,7 +100,7 @@ class Infinity_Option_Factory extends ICE_Option_Factory
 /**
  * Infinity Theme: options renderer
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage options
  */
 class Infinity_Options_Renderer extends ICE_Option_Renderer
@@ -180,7 +180,7 @@ class Infinity_Options_Renderer extends ICE_Option_Renderer
 /**
  * Initialize options environment
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage options
  */
 function infinity_options_init()
@@ -197,7 +197,7 @@ function infinity_options_init()
 /**
  * Initialize options screen requirements
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage options
  */
 function infinity_options_init_screen()
@@ -215,7 +215,7 @@ function infinity_options_init_screen()
 /**
  * Render an option (field only)
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage options
  * @param string $option_name
  * @param boolean $output
@@ -229,7 +229,7 @@ function infinity_option( $option_name, $output = true )
 /**
  * Get special meta data about option value
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage options
  * @param string $option_name
  * @param string $meta_type The only valid type so far is "time_updated"
@@ -243,7 +243,7 @@ function infinity_option_meta( $option_name, $meta_type )
 /**
  * Get an option image src array
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage options
  * @param string $option_name
  * @param string $size Either a string (`thumbnail`, `medium`, `large` or `full`), or a two item array representing width and height in pixels, e.g. array(32,32). The size of media icons are never affected.
@@ -257,7 +257,7 @@ function infinity_option_image_src( $option_name, $size = 'thumbnail' )
 /**
  * Get an option image url
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage options
  * @param string $option_name
  * @param string $size Either a string (`thumbnail`, `medium`, `large` or `full`), or a two item array representing width and height in pixels, e.g. array(32,32). The size of media icons are never affected.
@@ -271,9 +271,9 @@ function infinity_option_image_url( $option_name, $size = 'thumbnail' )
 /**
  * Fetch and option object from the registry
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage options
- * @param type $option_name
+ * @param string $option_name
  * @return ICE_Option
  */
 function infinity_option_fetch( $option_name )
@@ -284,9 +284,9 @@ function infinity_option_fetch( $option_name )
 /**
  * Get the value of an option
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage options
- * @param type $option_name
+ * @param string $option_name
  * @return ICE_Option
  */
 function infinity_option_get( $option_name )
@@ -297,9 +297,9 @@ function infinity_option_get( $option_name )
 /**
  * Begin rendering an option
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage options
- * @param type $option_name
+ * @param string $option_name
  */
 function infinity_option_render_begin( $option_name )
 {
@@ -322,7 +322,7 @@ function infinity_option_render_begin( $option_name )
 /**
  * Render the escaped title text for the option
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage options
  */
 function infinity_option_render_title()
@@ -334,7 +334,7 @@ function infinity_option_render_title()
 /**
  * Render the escaped description text for the option
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage options
  */
 function infinity_option_render_description()
@@ -346,7 +346,7 @@ function infinity_option_render_description()
 /**
  * Render the label element for the option
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage options
  */
 function infinity_option_render_label()
@@ -358,7 +358,7 @@ function infinity_option_render_label()
 /**
  * Render the field element for the option
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage options
  */
 function infinity_option_render_field()
@@ -370,7 +370,7 @@ function infinity_option_render_field()
 /**
  * Render the meta elements for the option
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage options
  */
 function infinity_option_render_meta()
@@ -382,7 +382,7 @@ function infinity_option_render_meta()
 /**
  * Render one or both button elements for the option
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage options
  */
 function infinity_option_render_buttons()
@@ -394,7 +394,7 @@ function infinity_option_render_buttons()
 /**
  * Render the save all button element for the option
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage options
  */
 function infinity_option_render_save_all()
@@ -406,7 +406,7 @@ function infinity_option_render_save_all()
 /**
  * Render the save one button element for the option
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage options
  */
 function infinity_option_render_save_one()
@@ -418,7 +418,7 @@ function infinity_option_render_save_one()
 /**
  * End rendering the option
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage options
  */
 function infinity_option_render_end()
@@ -437,7 +437,7 @@ function infinity_option_render_end()
 /**
  * Render a menu composed of all the sections with their options.
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage options
  * @param array $args
  */
@@ -478,7 +478,7 @@ function infinity_options_render_menu( $args = null )
 /**
  * Render a menu section
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage options
  * @param ICE_Section $section
  */
@@ -514,7 +514,7 @@ function infinity_options_render_menu_section( ICE_Section $section )
 /**
  * Render options for a menu section
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage options
  * @param array $options
  */
@@ -530,7 +530,7 @@ function infinity_options_render_menu_options( $options )
 /**
  * Render options according to the option name POST var
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage options
  */
 function infinity_options_render_options_screen()

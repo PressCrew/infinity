@@ -6,7 +6,7 @@
  * @link http://infinity.presscrew.com/
  * @copyright Copyright (C) 2010-2011 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage screens
  * @since 1.0
  */
@@ -26,7 +26,7 @@ define( 'INFINITY_ROUTE_DELIM', '/' );
 /**
  * Infinity Theme: screens policy
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage screens
  */
 class Infinity_Screens_Policy extends ICE_Screen_Policy
@@ -69,7 +69,7 @@ class Infinity_Screens_Policy extends ICE_Screen_Policy
 /**
  * Infinity Theme: screens registry
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage screens
  */
 class Infinity_Screens_Registry extends ICE_Screen_Registry
@@ -80,7 +80,7 @@ class Infinity_Screens_Registry extends ICE_Screen_Registry
 /**
  * Infinity Theme: section factory
  *
- * @package Infinity-extensions
+ * @package Infinity-api
  * @subpackage screens
  */
 class Infinity_Screen_Factory extends ICE_Screen_Factory
@@ -108,7 +108,7 @@ class Infinity_Screen_Factory extends ICE_Screen_Factory
 /**
  * Infinity Theme: screens renderer
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage screens
  */
 class Infinity_Screens_Renderer extends ICE_Screen_Renderer
@@ -123,7 +123,7 @@ class Infinity_Screens_Renderer extends ICE_Screen_Renderer
 /**
  * Initialize screens environment
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage screens
  */
 function infinity_screens_init()
@@ -140,7 +140,7 @@ function infinity_screens_init()
 /**
  * Initialize screens screen requirements
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage screens
  */
 function infinity_screens_init_screen()
@@ -158,7 +158,7 @@ function infinity_screens_init_screen()
 /**
  * Build a page/route URL
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage screens
  * @param string|array $params,...
  * @return array
@@ -187,7 +187,7 @@ function infinity_screens_route()
 /**
  * Parse the page/route into screen, action, and params
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage screens
  * @return array
  */
@@ -238,7 +238,7 @@ function infinity_screens_route_parse()
 /**
  * Retrieve a specific route param by offset
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage screens
  * @param integer $offset
  * @return mixed

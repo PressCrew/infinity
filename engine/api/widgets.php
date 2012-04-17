@@ -6,7 +6,7 @@
  * @link http://infinity.presscrew.com/
  * @copyright Copyright (C) 2010-2011 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage widgets
  * @since 1.0
  */
@@ -16,7 +16,7 @@ ICE_Loader::load( 'components/widgets' );
 /**
  * Infinity Theme: widgets policy
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage widgets
  */
 class Infinity_Widgets_Policy extends ICE_Widget_Policy
@@ -59,7 +59,7 @@ class Infinity_Widgets_Policy extends ICE_Widget_Policy
 /**
  * Infinity Theme: widgets registry
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage widgets
  */
 class Infinity_Widgets_Registry extends ICE_Widget_Registry
@@ -70,7 +70,7 @@ class Infinity_Widgets_Registry extends ICE_Widget_Registry
 /**
  * Infinity Theme: section factory
  *
- * @package Infinity-extensions
+ * @package Infinity-api
  * @subpackage widgets
  */
 class Infinity_Widget_Factory extends ICE_Widget_Factory
@@ -81,7 +81,7 @@ class Infinity_Widget_Factory extends ICE_Widget_Factory
 /**
  * Infinity Theme: widgets renderer
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage widgets
  */
 class Infinity_Widgets_Renderer extends ICE_Widget_Renderer
@@ -96,7 +96,7 @@ class Infinity_Widgets_Renderer extends ICE_Widget_Renderer
 /**
  * Display a widget
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage widgets
  * @param string $widget_name
  * @param boolean $output
@@ -110,7 +110,7 @@ function infinity_widget( $widget_name, $output = true )
 /**
  * Initialize widgets environment
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage widgets
  */
 function infinity_widgets_init()
@@ -127,7 +127,7 @@ function infinity_widgets_init()
 /**
  * Initialize widgets screen requirements
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage widgets
  */
 function infinity_widgets_init_screen()

@@ -6,7 +6,7 @@
  * @link http://infinity.presscrew.com/
  * @copyright Copyright (C) 2010-2011 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage sections
  * @since 1.0
  */
@@ -16,7 +16,7 @@ ICE_Loader::load( 'components/sections' );
 /**
  * Infinity Theme: sections policy
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage sections
  */
 class Infinity_Sections_Policy extends ICE_Section_Policy
@@ -59,7 +59,7 @@ class Infinity_Sections_Policy extends ICE_Section_Policy
 /**
  * Infinity Theme: sections registry
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage sections
  */
 class Infinity_Sections_Registry extends ICE_Section_Registry
@@ -70,7 +70,7 @@ class Infinity_Sections_Registry extends ICE_Section_Registry
 /**
  * Infinity Theme: section factory
  *
- * @package Infinity-extensions
+ * @package Infinity-api
  * @subpackage sections
  */
 class Infinity_Section_Factory extends ICE_Section_Factory
@@ -81,7 +81,7 @@ class Infinity_Section_Factory extends ICE_Section_Factory
 /**
  * Infinity Theme: sections renderer
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage sections
  */
 class Infinity_Sections_Renderer extends ICE_Section_Renderer
@@ -96,7 +96,7 @@ class Infinity_Sections_Renderer extends ICE_Section_Renderer
 /**
  * Initialize sections environment
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage sections
  */
 function infinity_sections_init()
@@ -113,7 +113,7 @@ function infinity_sections_init()
 /**
  * Initialize sections screen requirements
  *
- * @package Infinity-components
+ * @package Infinity-api
  * @subpackage sections
  */
 function infinity_sections_init_screen()

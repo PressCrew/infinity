@@ -238,8 +238,6 @@ class ICE_Docs extends ICE_Base
 
 	/**
 	 * Set the file of the page
-	 *
-	 * @param string $page
 	 */
 	private function update_page_file()
 	{
@@ -249,8 +247,6 @@ class ICE_Docs extends ICE_Base
 
 	/**
 	 * Set the markup format of the page
-	 *
-	 * @param string $page
 	 */
 	private function update_page_markup()
 	{

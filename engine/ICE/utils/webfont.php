@@ -45,7 +45,6 @@ class ICE_Webfont extends ICE_Base
 	/**
 	 * Constructor
 	 *
-	 * @param string $filename
 	 * @param integer $max_age
 	 */
 	private function __construct( $max_age = 86400 )

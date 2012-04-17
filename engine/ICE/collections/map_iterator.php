@@ -28,21 +28,29 @@ class ICE_Map_Iterator
 		implements Iterator
 {
 	/**
-	 * @var array The data to be iterated through
+	 * The data to be iterated through.
+	 * 
+	 * @var array 
 	 */
 	private $data;
 
 	/**
-	 * @var array List of keys in the map
+	 * List of keys in the map.
+	 * 
+	 * @var array
 	 */
 	private $keys;
 
 	/**
-	 * @var mixed Current key
+	 * Current key.
+	 * 
+	 * @var mixed
 	 */
 	private $key;
 
 	/**
+	 * Constructor
+	 * 
 	 * @param array $data The data to be iterated through
 	 */
 	public function __construct( &$data )

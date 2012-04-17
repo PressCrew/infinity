@@ -123,6 +123,8 @@ class ICE_Export extends ICE_Base
 	 * Constructor
 	 *
 	 * @param string $name Name of file to manage RELATIVE to export dir
+	 * @param string $ext File extension of the export file
+	 * @param string|array Provide a valid callback which generates the export instead of using the exportable objects stack
 	 */
 	public function __construct( $name, $ext, $callback = null )
 	{
@@ -409,6 +411,8 @@ class ICE_Export extends ICE_Base
 class ICE_Export_Manager
 {
 	/**
+	 * Map of export objects being managed
+	 * 
 	 * @var ICE_Map
 	 */
 	private $exports;
