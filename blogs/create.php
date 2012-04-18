@@ -13,7 +13,7 @@
 
 	<?php do_action( 'bp_before_directory_blogs_content' ); ?>
 
-	<div id="content">
+	<div id="content" role="main" class="<?php do_action( 'content_class' ); ?>">
 		<div class="padder" role="main">
 
 		<?php do_action( 'template_notices' ); ?>

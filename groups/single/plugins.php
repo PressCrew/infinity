@@ -1,6 +1,6 @@
 <?php get_header( 'buddypress' ) ?>
 
-	<div id="content">
+	<div id="content" role="main" class="<?php do_action( 'content_class' ); ?>">
 		<div class="padder">
 			<?php if ( bp_has_groups() ) : while ( bp_groups() ) : bp_the_group(); ?>
 
