@@ -22,6 +22,11 @@
 define( 'INFINITY_VERSION', '1.0b3' );
 
 /**
+ * Infinity branch name
+ */
+define( 'INFINITY_BRANCH', 'base' );
+
+/**
  * Infinity theme name (slug)
  */
 if ( !defined( 'INFINITY_NAME' ) ) {
