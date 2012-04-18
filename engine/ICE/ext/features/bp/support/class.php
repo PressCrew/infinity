@@ -23,11 +23,6 @@ class ICE_Ext_Feature_Bp_Support
 	extends ICE_Feature_Bp
 {
 	/**
-	 * Option name for BuddyPress version number cache
-	 */
-	const OPTION_BP_VERSION = 'ice_b4f63ae9_bp_version';
-	
-	/**
 	 */
 	public function supported()
 	{
@@ -56,14 +51,12 @@ class ICE_Ext_Feature_Bp_Support
 			}
 
 			$this->setup_theme();
-			$this->maybe_copy_theme();
 
 			// addtl filters
 			add_filter( 'bp_no_access_mode', array( $this, 'use_wplogin' ) );
 			add_filter( 'bp_get_activity_action_pre_meta', array( $this, 'secondary_avatars' ), 10, 2 );
 
 			// addtl actions
-			add_action( 'switch_theme', array( $this, 'flush_caches' ) );
 			add_action( 'open_sidebar', array( $this, 'message_notices' ) );
 			add_action( 'widgets_init', array( $this, 'register_sidebars' ) );
 			add_action( 'bp_activity_entry_meta', array( $this, 'activity_entry_meta' ) );
@@ -306,12 +299,13 @@ class ICE_Ext_Feature_Bp_Support
 
 	/**
 	 * Copy a BuddyPress theme from the plugin dir to another location
-	 * 
+	 *
+	 * @internal this method is unused but may come in useful some day
 	 * @param string $dst_dir
 	 * @param string $theme
 	 * @return boolean
 	 */
-	protected function copy_theme( $dst_dir, $theme = 'bp-default' )
+	private function copy_theme( $dst_dir, $theme = 'bp-default' )
 	{
 		$src_dir = BP_PLUGIN_DIR . '/bp-themes/' . $theme;
 
@@ -339,31 +333,6 @@ class ICE_Ext_Feature_Bp_Support
 		return true;
 	}
 
-	/**
-	 * Copy theme to templatepath if bp version out of date
-	 */
-	protected function maybe_copy_theme()
-	{		
-		// try to get the version of bp from cache
-		$version = get_option( self::OPTION_BP_VERSION );
-
-		// newer version?
-		if ( version_compare( BP_VERSION, $version ) == 1 ) {
-			// yep, copy theme
-			if ( $this->copy_theme( TEMPLATEPATH ) ) {
-				// update version cache
-				update_option( self::OPTION_BP_VERSION, BP_VERSION );
-			}
-		}
-	}
-
-	/**
-	 * Flush any applicable cached data
-	 */
-	public function flush_caches()
-	{
-		delete_option( self::OPTION_BP_VERSION );
-	}
 }
 
 ?>
