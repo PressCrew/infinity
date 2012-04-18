@@ -1,0 +1,1 @@
+This directory is for widget extension packages.
