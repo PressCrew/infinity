@@ -4,7 +4,7 @@ This is where your end-user documentation could/should go.
 
 This file is located in
 
-	your-theme/documents
+	themes/infinity/engine/documents
 
 and is written using Markdown.
 
@@ -16,6 +16,6 @@ and can be overridden the same way as you would do with a theme template.
 ### How we did it!
 
 To see how we organized the developer docs, which might give you some ideas
-of how to handle your own documentation, look in
+of how to handle your own documentation, look in one of our base theme packages.
 
-	your-theme/dashboard/docs
+	themes/infinity/dashboard/docs
