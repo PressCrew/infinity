@@ -59,7 +59,6 @@ class ICE_Ext_Feature_Bp_Support
 			// addtl actions
 			add_action( 'open_sidebar', array( $this, 'message_notices' ) );
 			add_action( 'widgets_init', array( $this, 'register_sidebars' ) );
-			add_action( 'bp_activity_entry_meta', array( $this, 'activity_entry_meta' ) );
 		}
 	}
 
@@ -208,29 +207,6 @@ class ICE_Ext_Feature_Bp_Support
 				}
 			?>
 		</div><?php
-	}
-
-	/**
-	 * Add cool buttons to activity stream items
-	 */
-	public function activity_entry_meta()
-	{
-		// activity object name and type
-		$name = bp_get_activity_object_name();
-		$type = bp_get_activity_type();
-
-		// check name/type and render link if applicable
-		if ( $name == 'blogs' && $type == 'new_blog_post' ) {
-			$this->render_activity_entry_link( 'view-post', __( 'View Blog Post', infinity_text_domain ) );
-		} elseif ( $name == 'blogs' && $type == 'new_blog_comment' ) {
-			$this->render_activity_entry_link( 'view-post', __( 'View Blog Comment', infinity_text_domain ) );
-		} elseif ( $name == 'activity' && $type == 'activity_update' ) {
-			$this->render_activity_entry_link( 'view-post', __( 'View Activity Status', infinity_text_domain ) );
-		} elseif ( $name == 'groups' && $type == 'new_forum_topic' ) {
-			$this->render_activity_entry_link( 'view-thread', __( 'View Forum Thread', infinity_text_domain ) );
-		} elseif ( $name == 'groups' && $type == 'new_forum_post' ) {
-			$this->render_activity_entry_link( 'view-post', __( 'View Forum Reply', infinity_text_domain ) );
-		}
 	}
 
 	/**
