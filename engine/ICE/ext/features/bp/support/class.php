@@ -40,12 +40,13 @@ class ICE_Ext_Feature_Bp_Support
 
 			parent::init();
 
-			if ( is_admin() && !is_writable( TEMPLATEPATH ) ) {
+			if (
+				is_admin() &&
+				!is_dir( TEMPLATEPATH . '/members' ) &&
+				!is_dir( STYLESHEETPATH . '/members' )
+			) {
 				bp_core_add_admin_notice(
-					sprintf(
-						__( "Your theme's BuddyPress support extension requires that the theme folder be writable. Try setting mode 0777 on the directory: %s", infinity_text_domain ),
-						TEMPLATEPATH
-					)
+					__( "You have BuddyPress activated, but the templates are missing from your theme!", infinity_text_domain )
 				);
 				return false;
 			}
