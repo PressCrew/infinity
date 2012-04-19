@@ -170,8 +170,8 @@ abstract class ICE_Init_Registry extends ICE_Map
 
 		// get a map?
 		if ( $theme_map ) {
-			// get theme stack TOP DOWN
-			$themes = ICE_Scheme::instance()->theme_stack( true );
+			// get theme stack
+			$themes = ICE_Scheme::instance()->theme_stack();
 			// did we get a stack?
 			if ( is_array( $themes ) && count( $themes ) ) {
 				// check for data according to theme stack

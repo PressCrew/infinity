@@ -502,7 +502,7 @@ final class ICE_Scheme extends ICE_Base
 	public function load_functions()
 	{
 		// loop through theme stack
-		foreach ( $this->themes->to_array() as $theme  ) {
+		foreach ( $this->theme_stack() as $theme  ) {
 			// load functions file if it exists
 			$filename = $this->theme_file( $theme, 'functions.php' );
 			// try to load it
@@ -580,7 +580,7 @@ final class ICE_Scheme extends ICE_Base
 	public function enable_component( ICE_Policy $policy )
 	{
 		// loop through entire theme stack BOTTOM UP and try to load options
-		foreach( $this->themes->to_array() as $theme ) {
+		foreach( $this->theme_stack( false ) as $theme ) {
 
 			// path to ini file
 			$ini_file = $this->theme_file( $theme, $this->config_dir, $policy->get_handle() . '.ini' );
@@ -678,7 +678,7 @@ final class ICE_Scheme extends ICE_Base
 	 * @param boolean $top_down
 	 * @return array
 	 */
-	public function theme_stack( $top_down = false )
+	public function theme_stack( $top_down = true )
 	{
 		return $this->themes->to_array( $top_down );
 	}
@@ -708,7 +708,8 @@ final class ICE_Scheme extends ICE_Base
 		// paths to return
 		$paths = array();
 
-		foreach ( $this->themes->to_array(true) as $theme ) {
+		// loop through theme stack
+		foreach ( $this->theme_stack() as $theme ) {
 			$paths[] = $this->theme_file( $theme, $file_names );
 		}
 
@@ -797,8 +798,8 @@ final class ICE_Scheme extends ICE_Base
 			return false;
 		}
 
-		// loop through stack TOP DOWN
-		foreach ( $this->themes->to_array(true) as $theme ) {
+		// loop through theme stack
+		foreach ( $this->theme_stack() as $theme ) {
 
 			// build path to stackfile
 			$stack_file = $this->theme_dir( $theme );
