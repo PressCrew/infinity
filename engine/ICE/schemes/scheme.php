@@ -145,6 +145,13 @@ final class ICE_Scheme extends ICE_Base
 	private $themes;
 
 	/**
+	 * Cache of reversed theme stack array
+	 *
+	 * @var array
+	 */
+	private $theme_stack_topdown;
+
+	/**
 	 * The directives registry instance
 	 * 
 	 * @var ICE_Init_Directive_Registry
@@ -680,7 +687,20 @@ final class ICE_Scheme extends ICE_Base
 	 */
 	public function theme_stack( $top_down = true )
 	{
-		return $this->themes->to_array( $top_down );
+		// top down?
+		if ( true === $top_down ) {
+			// empty cache?
+			if ( null === $this->theme_stack_topdown ) {
+				// populate cache
+				$this->theme_stack_topdown = $this->themes->to_array( true );
+			}
+			// return reversed array
+			return $this->theme_stack_topdown;
+		} else {
+			// return array as is
+			return $this->themes->to_array();
+		}
+		
 	}
 
 	/**
