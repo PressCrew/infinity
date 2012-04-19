@@ -451,7 +451,7 @@ abstract class ICE_Option extends ICE_Component
 			array(
 				self::API_PREFIX,
 				$this->hname,
-				get_stylesheet()
+				ICE_ACTIVE_THEME
 			)
 		);
 	}

@@ -413,7 +413,7 @@ final class ICE_Scheme extends ICE_Base
 	public function load( $theme = null )
 	{
 		if ( empty( $theme ) ) {
-			$theme = $this->active_theme();
+			$theme = ICE_ACTIVE_THEME;
 		}
 
 		// get path to config file
@@ -670,16 +670,6 @@ final class ICE_Scheme extends ICE_Base
 
 		// didn't find a template
 		return '';
-	}
-
-	/**
-	 * Return the name of the active theme
-	 *
-	 * @return string
-	 */
-	private function active_theme()
-	{
-		return get_stylesheet();
 	}
 
 	/**
