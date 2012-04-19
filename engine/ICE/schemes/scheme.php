@@ -528,16 +528,30 @@ final class ICE_Scheme extends ICE_Base
 	/**
 	 * Refresh export files if necessary
 	 */
-	public function exports_refresh()
+	public function exports_refresh( $force = false )
 	{
+		// export instance depends on which filter is being run
 		switch( current_filter() ) {
+			// enqueue styles action
 			case 'ice_enqueue_styles':
+				// grab the styles exporter
 				$export = $this->exports()->get( 'styles' );
 				break;
+			// enqueue scripts action
 			case 'ice_enqueue_scripts':
+				// grab the scripts exporter
 				$export = $this->exports()->get( 'scripts' );
 				break;
+			// no matching filter... might be a hard refresh
 			default:
+				// force toggled on?
+				if ( true === $force ) {
+					// manually call style enqueuer
+					ICE_Enqueue::instance()->do_enqueue_styles();
+					// manually call script enqueuer
+					ICE_Enqueue::instance()->do_enqueue_scripts();
+				}
+				// return either way
 				return;
 		}
 
@@ -565,6 +579,7 @@ final class ICE_Scheme extends ICE_Base
 			}
 		}
 
+		// did NOT refresh
 		return false;
 	}
 
