@@ -22,6 +22,7 @@ function infinity_scheme_init()
 {
 	// initialize the scheme
 	ICE_Scheme::instance()
+		->set_config_file( 'infinity' )
 		->set_config_dir( INFINITY_ENGINE_DIR . '/config' )
 		->set_docs_dir( INFINITY_ENGINE_DIR . '/documents' )
 		->set_exts_dir( INFINITY_ENGINE_DIR . '/extensions' )
