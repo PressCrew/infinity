@@ -42,6 +42,20 @@ final class ICE_Enqueue extends ICE_Base
 	static private $instance;
 
 	/**
+	 * Will be set to true once style enqueuer has been executed
+	 * 
+	 * @var boolean 
+	 */
+	private $did_styles = false;
+
+	/**
+	 * Will be set to true once script enqueuer has been executed
+	 * 
+	 * @var boolean
+	 */
+	private $did_scripts = false;
+
+	/**
 	 * The style handle for the UI theme
 	 *
 	 * @var string
@@ -197,6 +211,15 @@ final class ICE_Enqueue extends ICE_Base
 	 */
 	public function do_enqueue_styles()
 	{
+		// already run?
+		if ( true === $this->did_styles ) {
+			// yep, don't run again
+			return;
+		} else {
+			// update toggle
+			$this->did_styles = true;
+		}
+
 		// have a custom ui stylesheet?
 		if ( $this->ui_stylesheet ) {
 			// register custom ui stylesheet
@@ -245,6 +268,15 @@ final class ICE_Enqueue extends ICE_Base
 	 */
 	public function do_enqueue_scripts()
 	{
+		// already run?
+		if ( true === $this->did_scripts ) {
+			// yep, don't run again
+			return;
+		} else {
+			// update toggle
+			$this->did_scripts = true;
+		}
+		
 		// register popular jQuery plugins
 		$this->register_script(
 			'jquery-cookie', 'jquery.cookie.js', array('jquery') );

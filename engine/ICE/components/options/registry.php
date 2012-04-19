@@ -260,8 +260,8 @@ abstract class ICE_Option_Registry extends ICE_Registry
 				}
 			}
 
-			// update all scheme exports
-			ICE_Scheme::instance()->exports()->update();
+			// hard refresh all scheme exports
+			ICE_Scheme::instance()->exports_refresh( true );
 			
 			// done saving
 			return $save_count;
