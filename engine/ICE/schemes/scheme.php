@@ -687,6 +687,13 @@ final class ICE_Scheme extends ICE_Base
 	 */
 	public function theme_stack( $top_down = true )
 	{
+		// is there anything in the stack yet?
+		if ( $this->themes->count() === 0 ) {
+			// not good. throw an exception here so we don't have to
+			// act paranoid and check the result of every call to this.
+			throw new Exception( 'You are trying to get the theme stack before it has been loaded' );
+		}
+
 		// top down?
 		if ( true === $top_down ) {
 			// empty cache?
