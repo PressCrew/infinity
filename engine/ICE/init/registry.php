@@ -35,11 +35,7 @@ abstract class ICE_Init_Registry extends ICE_Map
 	 */
 	public function __get( $name )
 	{
-		if ( $this->has( $name ) ) {
-			return $this->get( $name )->value;
-		} else {
-			return null;
-		}
+		return $this->get( $name )->value;
 	}
 
 	/**
@@ -92,11 +88,11 @@ abstract class ICE_Init_Registry extends ICE_Map
 			$value = new ICE_Map( $value, $ro_value );
 		}
 
-		// check for existing map of theme data
-		if ( $this->has( $name ) ) {
-			// use existing map
-			$theme_map = $this->item_at( $name );
-		} else {
+		// try to get existing map
+		$theme_map = $this->item_at( $name );
+
+		// handle empty map
+		if ( null === $theme_map ) {
 			// create new map
 			$theme_map = new ICE_Map_Lockable();
 			// add theme map to registry (myself)

@@ -174,11 +174,7 @@ abstract class ICE_Component
 	 */
 	final public function __get( $name )
 	{
-		if ( $this->__directives__->has($name) ) {
-			return $this->__directives__->get($name)->value;
-		} else {
-			return null;
-		}
+		return $this->__directives__->get($name)->value;
 	}
 
 	/**
