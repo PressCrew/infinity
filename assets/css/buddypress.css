@@ -340,7 +340,7 @@ ul.button-nav li.current a { font-weight: bold }
     padding-right: 25px !important;
     display: none;
 }
-a.loading, li.loading a {
+a.loading, li.loading a,#object-nav a.loading, #object-nav li.loading {
     background-image: url( ../images/buddypress/ajax-loader.gif ) !important;
     background-position: 5% 50% !important;
     background-repeat: no-repeat !important;
@@ -847,7 +847,7 @@ div#message-thread img.avatar {
 }
 div#message-thread strong {
     margin: 0;
-    font-size: 16px;
+    font-size: 110%;
 }
 div#message-thread strong a { text-decoration: none }
 div#message-thread strong span.activity { margin: 4px 0 0 10px }
