@@ -302,12 +302,14 @@ final class ICE_Scheme extends ICE_Base
 	 */
 	private function set_root_theme( $name )
 	{
+		// is root theme empty?
 		if ( empty( $this->root_theme ) ) {
+			// yes, ok to set it
 			$this->root_theme = $name;
-			return true;
 		}
 
-		return false;
+		// maintain the chain
+		return $this;
 	}
 
 	/**
@@ -427,8 +429,8 @@ final class ICE_Scheme extends ICE_Base
 			$theme = $this->active_theme();
 		}
 
-		// paths to files
-		$ini_file = $this->theme_file( $theme, $this->config_dir, $this->config_file . '.ini' );
+		// get path to config file
+		$ini_file = $this->theme_config_file( $theme );
 
 		// does ini file exist?
 		if ( ICE_Files::cache($ini_file)->is_readable() ) {
@@ -760,6 +762,17 @@ final class ICE_Scheme extends ICE_Base
 		}
 
 		return $this->theme_dir( $theme ) . '/' . implode( '/', $file_names );
+	}
+
+	/**
+	 * Return path to a specific theme's main configuration file
+	 *
+	 * @param string $theme
+	 * @return string
+	 */
+	private function theme_config_file( $theme )
+	{
+		return $this->theme_file( $theme, $this->config_dir, $this->config_file . '.ini' );
 	}
 
 	/**
