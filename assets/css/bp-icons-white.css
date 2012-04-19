@@ -136,7 +136,7 @@ a.send-message {
     background-repeat: no-repeat;
     background-position: -728px -1125px;
     padding-left: 19px;
-    padding-top: 2px;
+    padding-top: 4px;
 }
 
 .follow-button a.follow {
@@ -144,12 +144,12 @@ a.send-message {
     padding-left: 19px;
     background-repeat: no-repeat;
     background-position: -4px -1191px; 
-    padding-top: 2px;
+    padding-top: 4px;
 }
 div#post-mention a.mention {
     background-image: url("../images/icons/black.png");
     padding-left: 19px;
-    padding-top: 2px;
+    padding-top: 4px;
     background-position: -728px -1091px; 
     background-repeat: no-repeat;
 }
