@@ -54,7 +54,11 @@ class ICE_Map
 			$this->copy_from( $data );
 		}
 
-		$this->set_read_only( $read_only );
+		// read only toggled on?
+		if ( $read_only === true ) {
+			// yes, lock it down
+			$this->__read_only__ = true;
+		}
 	}
 
 	/**
