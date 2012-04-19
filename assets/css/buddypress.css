@@ -97,7 +97,10 @@ div#item-header ul {
     margin-bottom: 15px;
 }
 div#item-header ul h5, div#item-header ul span, div#item-header ul hr { display: none }
-div#item-header ul li { float: right }
+div#item-header ul li { 
+	float: right;
+	list-style: none outside none; 
+}
 div#item-header ul img.avatar, div#item-header ul.avatars img.avatar {
     width: 30px;
     height: 30px;
