@@ -95,7 +95,7 @@ abstract class ICE_Init_Registry extends ICE_Map
 		// check for existing map of theme data
 		if ( $this->has( $name ) ) {
 			// use existing map
-			$theme_map = $this->get_map( $name );
+			$theme_map = $this->item_at( $name );
 		} else {
 			// create new map
 			$theme_map = new ICE_Map_Lockable();
@@ -165,8 +165,8 @@ abstract class ICE_Init_Registry extends ICE_Map
 	 */
 	public function get( $name )
 	{
-		// use existing data map
-		$theme_map = $this->get_map( $name );
+		// use existing data map if exists
+		$theme_map = $this->item_at( $name );
 
 		// get a map?
 		if ( $theme_map ) {
@@ -197,12 +197,8 @@ abstract class ICE_Init_Registry extends ICE_Map
 	 */
 	public function get_map( $name )
 	{
-		if ( $this->has( $name ) ) {
-			return $this->item_at( $name );
-		}
-
-		// key not set
-		return null;
+		// return item for name (key)
+		return $this->item_at( $name );
 	}
 
 	/**
