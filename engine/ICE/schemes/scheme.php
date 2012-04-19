@@ -225,7 +225,6 @@ final class ICE_Scheme extends ICE_Base
 
 		// setup config
 		$this->set_root_theme( $root_theme );
-		$this->set_config_file( null );
 
 		// load it
 		$this->load();
@@ -331,18 +330,18 @@ final class ICE_Scheme extends ICE_Base
 	/**
 	 * Set the name of the config file that your API uses
 	 *
-	 * @todo this should probably be depracated
 	 * @param string $file_name
 	 * @return boolean
 	 */
-	private function set_config_file( $file_name )
+	final public function set_config_file( $file_name )
 	{
 		if ( empty( $this->config_file ) ) {
-			$this->config_file = ( strlen($file_name) ) ? $file_name : $this->root_theme;
-			return true;
+			$this->config_file = $file_name;
+		} else {
+			throw new Exception( 'Cannot set config file, already set' );
 		}
 
-		return false;
+		return $this;
 	}
 
 	/**
