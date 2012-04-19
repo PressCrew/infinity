@@ -166,17 +166,12 @@ abstract class ICE_Init_Registry extends ICE_Map
 
 		// get a map?
 		if ( $theme_map ) {
-			// get theme stack
-			$themes = ICE_Scheme::instance()->theme_stack();
-			// did we get a stack?
-			if ( is_array( $themes ) && count( $themes ) ) {
-				// check for data according to theme stack
-				foreach ( $themes as $theme ) {
-					// does theme have this data key set?
-					if ( $theme_map->contains( $theme ) ) {
-						// yes, return it
-						return $theme_map->item_at($theme);
-					}
+			// check for data according to theme stack
+			foreach ( ICE_Scheme::instance()->theme_stack() as $theme ) {
+				// does theme have this data key set?
+				if ( $theme_map->contains( $theme ) ) {
+					// yes, return it
+					return $theme_map->item_at($theme);
 				}
 			}
 		}
