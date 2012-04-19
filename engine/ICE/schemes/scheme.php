@@ -89,13 +89,11 @@ final class ICE_Scheme extends ICE_Base
 	const DIRECTIVE_OPT_SAVE_SINGLE = 'options_save_single';
 
 	/**
-	 * Singleton instances
+	 * Singleton instance
 	 *
-	 * Map of ICE_Scheme objects, theme names are keys
-	 *
-	 * @var ICE_Map
+	 * @var ICE_Scheme
 	 */
-	static private $instances;
+	static private $instance;
 
 	/**
 	 * Name of the root theme
@@ -184,28 +182,17 @@ final class ICE_Scheme extends ICE_Base
 	}
 
 	/**
-	 * Return the singleton instance of the scheme for a specific theme
+	 * Return the singleton instance of the scheme
 	 *
-	 * If no start theme is supplied, the active theme will be used
-	 *
-	 * @param string $start_theme Theme at which to start building the scheme from (bottom up)
 	 * @return ICE_Scheme
 	 */
-	static public function instance( $start_theme = null )
+	static public function instance()
 	{
-		if ( empty( $start_theme ) ) {
-			$start_theme = get_stylesheet();
+		if ( !self::$instance instanceof self ) {
+			self::$instance = new self();
 		}
 
-		if ( !self::$instances instanceof ICE_Map ) {
-			self::$instances = new ICE_Map();
-		}
-
-		if ( !self::$instances->contains( $start_theme ) ) {
-			self::$instances->add( $start_theme, new self() );
-		}
-
-		return self::$instances->item_at( $start_theme );
+		return self::$instance;
 	}
 
 	/**
