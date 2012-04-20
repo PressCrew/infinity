@@ -16,7 +16,7 @@
  *
  * @package ICE
  * @subpackage init
- * @property-read string $name The theme for which the data is set
+ * @property-read string $theme The theme for which the data is set
  * @property-read string $name The name for the data (slug)
  * @property mixed $value The value of the data
  * @property-read boolean $read_only Whether the data is read only
