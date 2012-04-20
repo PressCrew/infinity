@@ -33,17 +33,6 @@ abstract class ICE_Init_Registry extends ICE_Map
 
 	/**
 	 */
-	public function __get( $name )
-	{
-		if ( $this->has( $name ) ) {
-			return $this->get( $name )->value;
-		} else {
-			return null;
-		}
-	}
-
-	/**
-	 */
 	public function __set( $name, $value )
 	{
 		throw new Exception( 'No magic setting allowed, call the set() method' );
@@ -92,11 +81,11 @@ abstract class ICE_Init_Registry extends ICE_Map
 			$value = new ICE_Map( $value, $ro_value );
 		}
 
-		// check for existing map of theme data
-		if ( $this->has( $name ) ) {
-			// use existing map
-			$theme_map = $this->get_map( $name );
-		} else {
+		// try to get existing map
+		$theme_map = $this->item_at( $name );
+
+		// handle empty map
+		if ( null === $theme_map ) {
 			// create new map
 			$theme_map = new ICE_Map_Lockable();
 			// add theme map to registry (myself)
@@ -165,27 +154,33 @@ abstract class ICE_Init_Registry extends ICE_Map
 	 */
 	public function get( $name )
 	{
-		// use existing data map
-		$theme_map = $this->get_map( $name );
+		// use existing data map if exists
+		$theme_map = $this->item_at( $name );
 
 		// get a map?
 		if ( $theme_map ) {
-			// get theme stack TOP DOWN
-			$themes = ICE_Scheme::instance()->theme_stack( true );
-			// did we get a stack?
-			if ( is_array( $themes ) && count( $themes ) ) {
-				// check for data according to theme stack
-				foreach ( $themes as $theme ) {
-					// does theme have this data key set?
-					if ( $theme_map->contains( $theme ) ) {
-						// yes, return it
-						return $theme_map->item_at($theme);
-					}
+			// check for data according to theme stack
+			foreach ( ICE_Scheme::instance()->theme_stack() as $theme ) {
+				// does theme have this data key set?
+				if ( $theme_map->contains( $theme ) ) {
+					// yes, return it
+					return $theme_map->item_at($theme);
 				}
 			}
 		}
 
 		// key not set
+		return null;
+	}
+
+	public function get_value( $name )
+	{
+		$data = $this->get( $name );
+
+		if ( $data ) {
+			return $data->get_value();
+		}
+
 		return null;
 	}
 
@@ -197,12 +192,8 @@ abstract class ICE_Init_Registry extends ICE_Map
 	 */
 	public function get_map( $name )
 	{
-		if ( $this->has( $name ) ) {
-			return $this->item_at( $name );
-		}
-
-		// key not set
-		return null;
+		// return item for name (key)
+		return $this->item_at( $name );
 	}
 
 	/**

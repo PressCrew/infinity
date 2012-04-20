@@ -65,12 +65,9 @@ class ICE_Ext_Widget_Menu
 		// RUN PARENT FIRST!
 		parent::configure();
 
-		// get config
-		$config = $this->config();
-
 		// menu items
-		if ( isset( $config->menu_items ) ) {
-			$this->menu_items = $config->menu_items;
+		if ( $this->config()->contains( 'menu_items' ) ) {
+			$this->menu_items = $this->config( 'menu_items' );
 		}
 	}
 

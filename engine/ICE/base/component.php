@@ -139,9 +139,9 @@ abstract class ICE_Component
 
 		// init read-only directives
 		//// the following three must be set FIRST before any other directives
-		$this->directive( 'name', $this->config()->name, true, true );
-		$this->directive( 'type', $this->config()->type, true, true );
-		$this->directive( 'theme', $this->config()->theme, true, true );
+		$this->directive( 'name', $this->config( 'name' ), true, true );
+		$this->directive( 'type', $this->config( 'type' ), true, true );
+		$this->directive( 'theme', $this->config( 'theme' ), true, true );
 		//// the "atypical name" is unique across all components
 		$this->directive( 'aname', $policy->get_handle( false ) . '/' . $this->name, true, true );
 		//// the "hash name" is the crc32 hex hash of the aname
@@ -174,11 +174,7 @@ abstract class ICE_Component
 	 */
 	final public function __get( $name )
 	{
-		if ( $this->__directives__->has($name) ) {
-			return $this->__directives__->get($name)->value;
-		} else {
-			return null;
-		}
+		return $this->__directives__->get($name)->value;
 	}
 
 	/**
@@ -447,13 +443,13 @@ abstract class ICE_Component
 	 */
 	public function configure()
 	{
-		// get config
-		$config = $this->config();
-
 		// parent
-		if ( $config->parent ) {
-			if ( $this->name != $config->parent ) {
-				$this->directive( 'parent', $config->parent );
+		if ( $this->config()->contains( 'parent' ) ) {
+			//  get parent from config
+			$parent = $this->config( 'parent' );
+			// name can't equal parent
+			if ( $this->config( 'name' ) != $parent ) {
+				$this->directive( 'parent', $parent );
 			} else {
 				throw new Exception(
 					sprintf( 'The component "%s" cannot be a parent of itself', $this->name ) );
@@ -461,23 +457,23 @@ abstract class ICE_Component
 		}
 		
 		// title
-		if ( isset( $config->title ) ) {
-			$this->title = $config->title;
+		if ( $this->config()->contains( 'title' ) ) {
+			$this->title = $this->config( 'title' );
 		}
 
 		// desc
-		if ( isset( $config->description ) ) {
-			$this->description = $config->description;
+		if ( $this->config()->contains( 'description' ) ) {
+			$this->description = $this->config( 'description' );
 		}
 
 		// documentation
-		if ( isset( $config->documentation ) ) {
-			$this->documentation = $config->documentation;
+		if ( $this->config()->contains( 'documentation' ) ) {
+			$this->documentation = $this->config( 'documentation' );
 		}
 
 		// set stylesheet
-		if ( isset( $config->style ) ) {
-			$this->style = $config->style;
+		if ( $this->config()->contains( 'style' ) ) {
+			$this->style = $this->config( 'style' );
 			$this->style()->cache(
 				$this->element()->id(),
 				ICE_Scheme::instance()->locate_file( $this->style )
@@ -485,16 +481,16 @@ abstract class ICE_Component
 		}
 
 		// set style dependancies
-		if ( isset( $config->style_depends ) ) {
+		if ( $this->config()->contains( 'style_depends' ) ) {
 			// split deps at comma
-			$deps = explode( ',', $config->style_depends );
+			$deps = explode( ',', $this->config( 'style_depends' ) );
 			// set directive
 			$this->style_depends = $deps;
 		}
 
 		// set script
-		if ( isset( $config->script ) ) {
-			$this->script = $config->script;
+		if ( $this->config()->contains( 'script' ) ) {
+			$this->script = $this->config( 'script' );
 			$this->script()->cache(
 				$this->element()->id(),
 				ICE_Scheme::instance()->locate_file( $this->script )
@@ -502,41 +498,41 @@ abstract class ICE_Component
 		}
 
 		// set script dependancies
-		if ( isset( $config->script_depends ) ) {
+		if ( $this->config()->contains( 'script_depends' ) ) {
 			// split deps at comma
-			$deps = explode( ',', $config->script_depends );
+			$deps = explode( ',', $this->config( 'script_depends' ) );
 			// set directive
 			$this->script_depends = $deps;
 		}
 
 		// set template
-		if ( isset( $config->template ) ) {
-			$this->template = $config->template;
+		if ( $this->config()->contains( 'template' ) ) {
+			$this->template = $this->config( 'template' );
 		}
 
 		// css id
-		if ( isset( $config->id ) ) {
-			$this->id = $config->id;
+		if ( $this->config()->contains( 'id' ) ) {
+			$this->id = $this->config( 'id' );
 		}
 
 		// css class
-		if ( isset( $config->class ) ) {
-			$this->class = $config->class;
+		if ( $this->config()->contains( 'class' ) ) {
+			$this->class = $this->config( 'class' );
 		}
 
 		// capabilities
-		if ( isset( $config->capabilities ) ) {
-			$this->add_capabilities( $config->capabilities );
+		if ( $this->config()->contains( 'capabilities' ) ) {
+			$this->add_capabilities( $this->config( 'capabilities' ) );
 		}
 
 		// required feature
-		if ( isset( $config->required_feature ) ) {
-			$this->required_feature = $config->required_feature;
+		if ( $this->config()->contains( 'required_feature' ) ) {
+			$this->required_feature = $this->config( 'required_feature' );
 		}
 
 		// set ignore
-		if ( isset( $config->ignore ) ) {
-			$this->ignore = (boolean) $config->ignore;
+		if ( $this->config()->contains( 'ignore' ) ) {
+			$this->ignore = (boolean) $this->config( 'ignore' );
 		}
 
 	}

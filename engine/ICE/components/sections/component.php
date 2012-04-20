@@ -49,17 +49,14 @@ abstract class ICE_Section extends ICE_Component
 		// RUN PARENT FIRST!
 		parent::configure();
 
-		// get config
-		$config = $this->config();
-
 		// css title class
-		if ( isset( $config->class_title ) ) {
-			$this->class_title = $config->class_title;
+		if ( $this->config()->contains( 'class_title' ) ) {
+			$this->class_title = $this->config( 'class_title' );
 		}
 
 		// css content class
-		if ( isset( $config->class_content ) ) {
-			$this->class_content = $config->class_content;
+		if ( $this->config()->contains( 'class_content' ) ) {
+			$this->class_content = $this->config( 'class_content' );
 		}
 	}
 

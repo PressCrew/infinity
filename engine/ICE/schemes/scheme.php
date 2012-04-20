@@ -89,13 +89,11 @@ final class ICE_Scheme extends ICE_Base
 	const DIRECTIVE_OPT_SAVE_SINGLE = 'options_save_single';
 
 	/**
-	 * Singleton instances
+	 * Singleton instance
 	 *
-	 * Map of ICE_Scheme objects, theme names are keys
-	 *
-	 * @var ICE_Map
+	 * @var ICE_Scheme
 	 */
-	static private $instances;
+	static private $instance;
 
 	/**
 	 * Name of the root theme
@@ -147,6 +145,13 @@ final class ICE_Scheme extends ICE_Base
 	private $themes;
 
 	/**
+	 * Cache of reversed theme stack array
+	 *
+	 * @var array
+	 */
+	private $theme_stack_topdown;
+
+	/**
 	 * The directives registry instance
 	 * 
 	 * @var ICE_Init_Directive_Registry
@@ -184,28 +189,17 @@ final class ICE_Scheme extends ICE_Base
 	}
 
 	/**
-	 * Return the singleton instance of the scheme for a specific theme
+	 * Return the singleton instance of the scheme
 	 *
-	 * If no start theme is supplied, the active theme will be used
-	 *
-	 * @param string $start_theme Theme at which to start building the scheme from (bottom up)
 	 * @return ICE_Scheme
 	 */
-	static public function instance( $start_theme = null )
+	static public function instance()
 	{
-		if ( empty( $start_theme ) ) {
-			$start_theme = get_stylesheet();
+		if ( !self::$instance instanceof self ) {
+			self::$instance = new self();
 		}
 
-		if ( !self::$instances instanceof ICE_Map ) {
-			self::$instances = new ICE_Map();
-		}
-
-		if ( !self::$instances->contains( $start_theme ) ) {
-			self::$instances->add( $start_theme, new self() );
-		}
-
-		return self::$instances->item_at( $start_theme );
+		return self::$instance;
 	}
 
 	/**
@@ -426,7 +420,7 @@ final class ICE_Scheme extends ICE_Base
 	public function load( $theme = null )
 	{
 		if ( empty( $theme ) ) {
-			$theme = $this->active_theme();
+			$theme = ICE_ACTIVE_THEME;
 		}
 
 		// get path to config file
@@ -515,7 +509,7 @@ final class ICE_Scheme extends ICE_Base
 	public function load_functions()
 	{
 		// loop through theme stack
-		foreach ( $this->themes->to_array() as $theme  ) {
+		foreach ( $this->theme_stack() as $theme  ) {
 			// load functions file if it exists
 			$filename = $this->theme_file( $theme, 'functions.php' );
 			// try to load it
@@ -593,7 +587,7 @@ final class ICE_Scheme extends ICE_Base
 	public function enable_component( ICE_Policy $policy )
 	{
 		// loop through entire theme stack BOTTOM UP and try to load options
-		foreach( $this->themes->to_array() as $theme ) {
+		foreach( $this->theme_stack( false ) as $theme ) {
 
 			// path to ini file
 			$ini_file = $this->theme_file( $theme, $this->config_dir, $policy->get_handle() . '.ini' );
@@ -686,24 +680,34 @@ final class ICE_Scheme extends ICE_Base
 	}
 
 	/**
-	 * Return the name of the active theme
-	 *
-	 * @return string
-	 */
-	private function active_theme()
-	{
-		return get_stylesheet();
-	}
-
-	/**
 	 * Return theme stack as an array
 	 *
 	 * @param boolean $top_down
 	 * @return array
 	 */
-	public function theme_stack( $top_down = false )
+	public function theme_stack( $top_down = true )
 	{
-		return $this->themes->to_array( $top_down );
+		// is there anything in the stack yet?
+		if ( $this->themes->count() === 0 ) {
+			// not good. throw an exception here so we don't have to
+			// act paranoid and check the result of every call to this.
+			throw new Exception( 'You are trying to get the theme stack before it has been loaded' );
+		}
+
+		// top down?
+		if ( true === $top_down ) {
+			// empty cache?
+			if ( null === $this->theme_stack_topdown ) {
+				// populate cache
+				$this->theme_stack_topdown = $this->themes->to_array( true );
+			}
+			// return reversed array
+			return $this->theme_stack_topdown;
+		} else {
+			// return array as is
+			return $this->themes->to_array();
+		}
+		
 	}
 
 	/**
@@ -731,7 +735,8 @@ final class ICE_Scheme extends ICE_Base
 		// paths to return
 		$paths = array();
 
-		foreach ( $this->themes->to_array(true) as $theme ) {
+		// loop through theme stack
+		foreach ( $this->theme_stack() as $theme ) {
 			$paths[] = $this->theme_file( $theme, $file_names );
 		}
 
@@ -820,8 +825,8 @@ final class ICE_Scheme extends ICE_Base
 			return false;
 		}
 
-		// loop through stack TOP DOWN
-		foreach ( $this->themes->to_array(true) as $theme ) {
+		// loop through theme stack
+		foreach ( $this->theme_stack() as $theme ) {
 
 			// build path to stackfile
 			$stack_file = $this->theme_dir( $theme );

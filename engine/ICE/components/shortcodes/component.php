@@ -61,12 +61,9 @@ abstract class ICE_Shortcode extends ICE_Component
 		// RUN PARENT FIRST!
 		parent::configure();
 
-		// get config
-		$config = $this->config();
-
 		// attribute defaults
-		if ( isset( $config->attributes ) ) {
-			$this->attributes = $config->attributes;
+		if ( $this->config()->contains( 'attributes' ) ) {
+			$this->attributes = $this->config( 'attributes' );
 		}
 	}
 
