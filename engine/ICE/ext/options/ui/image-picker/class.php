@@ -46,17 +46,14 @@ class ICE_Ext_Option_Ui_Image_Picker
 		// run parent
 		parent::configure();
 		
-		// get config
-		$config = $this->config();
-		
 		// file directory
-		if ( isset( $config->file_directory ) ) {
-			$this->file_directory = $config->file_directory;
+		if ( $this->config()->contains( 'file_directory' ) ) {
+			$this->file_directory = $this->config( 'file_directory' );
 		}
 
 		// file directory
-		if ( isset( $config->file_extension ) ) {
-			$this->file_extension = $config->file_extension;
+		if ( $this->config()->contains( 'file_extension' ) ) {
+			$this->file_extension = $this->config( 'file_extension' );
 		}
 	}
 

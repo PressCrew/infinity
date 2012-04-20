@@ -58,14 +58,11 @@ class ICE_Ext_Screen_Cpanel
 		// RUN PARENT FIRST!
 		parent::configure();
 
-		// get config
-		$config = $this->config();
-
 		// set directives
-		$this->icon_primary = (string) $config->icon_primary;
-		$this->icon_secondary = (string) $config->icon_secondary;
-		$this->priority = (integer) $config->priority;
-		$this->toolbar = (boolean) $config->toolbar;
+		$this->icon_primary = (string) $this->config( 'icon_primary' );
+		$this->icon_secondary = (string) $this->config( 'icon_secondary' );
+		$this->priority = (integer) $this->config( 'priority' );
+		$this->toolbar = (boolean) $this->config( 'toolbar' );
 
 		// set up icons
 		if ( $this->icon() ) {

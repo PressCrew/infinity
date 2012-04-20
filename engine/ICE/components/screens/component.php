@@ -40,19 +40,16 @@ abstract class ICE_Screen extends ICE_Component
 		// RUN PARENT FIRST!
 		parent::configure();
 
-		// get config
-		$config = $this->config();
-
 		// url where to find the screen
 		// @todo add this to documentation when stable
-		if ( isset( $config->url ) ) {
-			$this->url = $config->url;
+		if ( $this->config()->contains( 'url' ) ) {
+			$this->url = $this->config( 'url' );
 		}
 
 		// target of the screen menu link
 		// @todo add this to documentation when stable
-		if ( isset( $config->target ) ) {
-			$this->target = $config->target;
+		if ( $this->config()->contains( 'target' ) ) {
+			$this->target = $this->config( 'target' );
 		}
 	}
 }

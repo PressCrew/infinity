@@ -60,22 +60,19 @@ class ICE_Ext_Option_Ui_Scroll_Picker
 		// RUN PARENT FIRST!
 		parent::configure();
 
-		// get config
-		$config = $this->config();
-
 		// item width
-		if ( isset( $config->item_width ) ) {
-			$this->item_width = (string) $config->item_width;
+		if ( $this->config()->contains( 'item_width' ) ) {
+			$this->item_width = (string) $this->config( 'item_width' );
 		}
 
 		// item height
-		if ( isset( $config->item_height ) ) {
-			$this->item_height = (string) $config->item_height;
+		if ( $this->config()->contains( 'item_height' ) ) {
+			$this->item_height = (string) $this->config( 'item_height' );
 		}
 
 		// item margin
-		if ( isset( $config->item_margin ) ) {
-			$this->item_margin = (string) $config->item_margin;
+		if ( $this->config()->contains( 'item_margin' ) ) {
+			$this->item_margin = (string) $this->config( 'item_margin' );
 		}
 	}
 

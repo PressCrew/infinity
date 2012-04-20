@@ -88,57 +88,54 @@ class ICE_Ext_Option_Ui_Slider
 		// RUN PARENT FIRST!
 		parent::configure();
 
-		// get config
-		$config = $this->config();
-
 		// animate
-		if ( isset( $config->animate ) ) {
-			$this->animate = $config->animate;
+		if ( $this->config()->contains( 'animate' ) ) {
+			$this->animate = $this->config( 'animate' );
 		}
 
 		// max
-		if ( isset( $config->max ) && is_numeric( $config->max ) ) {
-			$this->max = $config->max;
+		if ( $this->config()->contains( 'max' ) && is_numeric( $this->config( 'max' ) ) ) {
+			$this->max = $this->config( 'max' );
 		}
 
 		// min
-		if ( isset( $config->min ) && is_numeric( $config->min ) ) {
-			$this->min = $config->min;
+		if ( $this->config()->contains( 'min' ) && is_numeric( $this->config( 'min' ) ) ) {
+			$this->min = $this->config( 'min' );
 		}
 
 		// orientation
-		if ( isset( $config->orientation ) ) {
-			$this->orientation = (string) $config->orientation;
+		if ( $this->config()->contains( 'orientation' ) ) {
+			$this->orientation = (string) $this->config( 'orientation' );
 		}
 
 		// step
-		if ( isset( $config->step ) && is_numeric( $config->step ) ) {
-			$this->step = $config->step;
+		if ( $this->config()->contains( 'step' ) && is_numeric( $this->config( 'step' ) ) ) {
+			$this->step = $this->config( 'step' );
 		}
 
 		// range
-		if ( isset( $config->range ) && is_numeric( $config->range )  ) {
-			$this->range = $config->range;
+		if ( $this->config()->contains( 'range' ) && is_numeric( $this->config( 'range' ) )  ) {
+			$this->range = $this->config( 'range' );
 		}
 		
 		// value label
-		if ( isset( $config->label ) ) {
-			$this->label = (string) $config->label;
+		if ( $this->config()->contains( 'label' ) ) {
+			$this->label = (string) $this->config( 'label' );
 		}
 
 		// prefix
-		if ( isset( $config->prefix ) ) {
-			$this->prefix = (string) $config->prefix;
+		if ( $this->config()->contains( 'prefix' ) ) {
+			$this->prefix = (string) $this->config( 'prefix' );
 		}
 
 		// suffix
-		if ( isset( $config->suffix ) ) {
-			$this->suffix = (string) $config->suffix;
+		if ( $this->config()->contains( 'suffix' ) ) {
+			$this->suffix = (string) $this->config( 'suffix' );
 		}
 
 		// delimiter (more than one handle)
-		if ( isset( $config->delimiter ) ) {
-			$this->delimiter = (string) $config->delimiter;
+		if ( $this->config()->contains( 'delimiter' ) ) {
+			$this->delimiter = (string) $this->config( 'delimiter' );
 		}
 	}
 

@@ -33,13 +33,6 @@ abstract class ICE_Init_Registry extends ICE_Map
 
 	/**
 	 */
-	public function __get( $name )
-	{
-		return $this->get( $name )->value;
-	}
-
-	/**
-	 */
 	public function __set( $name, $value )
 	{
 		throw new Exception( 'No magic setting allowed, call the set() method' );
@@ -177,6 +170,17 @@ abstract class ICE_Init_Registry extends ICE_Map
 		}
 
 		// key not set
+		return null;
+	}
+
+	public function get_value( $name )
+	{
+		$data = $this->get( $name );
+
+		if ( $data ) {
+			return $data->get_value();
+		}
+
 		return null;
 	}
 
