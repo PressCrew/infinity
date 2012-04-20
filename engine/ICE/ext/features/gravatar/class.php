@@ -48,12 +48,9 @@ class ICE_Ext_Feature_Gravatar
 		// RUN PARENT FIRST!
 		parent::configure();
 
-		// get config
-		$config = $this->config();
-
 		// css title class
-		if ( isset( $config->image_class ) ) {
-			$this->image_class = (string) $config->image_class;
+		if ( $this->config()->contains( 'image_class' ) ) {
+			$this->image_class = (string) $this->config( 'image_class' );
 		}
 	}
 

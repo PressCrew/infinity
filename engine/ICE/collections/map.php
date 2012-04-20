@@ -54,7 +54,11 @@ class ICE_Map
 			$this->copy_from( $data );
 		}
 
-		$this->set_read_only( $read_only );
+		// read only toggled on?
+		if ( $read_only === true ) {
+			// yes, lock it down
+			$this->__read_only__ = true;
+		}
 	}
 
 	/**
@@ -133,11 +137,11 @@ class ICE_Map
 	 */
 	public function item_at( $key )
 	{
-		if( isset( $this->__data__[$key] ) ) {
+		if ( isset( $this->__data__[$key] ) ) {
 			return $this->__data__[$key];
-		} else {
-			return null;
 		}
+
+		return null;
 	}
 
 	/**
@@ -213,7 +217,7 @@ class ICE_Map
 	 */
 	public function contains( $key )
 	{
-		return isset( $this->__data__[$key] ) || array_key_exists( $key, $this->__data__ );
+		return ( isset( $this->__data__[$key] ) || array_key_exists( $key, $this->__data__ ) );
 	}
 
 	/**
@@ -241,17 +245,13 @@ class ICE_Map
 	 */
 	public function copy_from($data)
 	{
-		if( is_array($data) || $data instanceof Traversable ) {
+		if ( is_array( $data ) || $data instanceof Traversable ) {
 
-			if( $this->count() > 0 ) {
+			if  ( $this->count() > 0 ) {
 				$this->clear();
 			}
 
-			if ( $data instanceof ICE_Map ) {
-				$data = $data->to_array();
-			}
-
-			foreach( $data as $key => $value ) {
+			foreach ( $data as $key => $value ) {
 				$this->add( $key, $value );
 			}
 
@@ -308,10 +308,10 @@ class ICE_Map
 	 * @param array $b Array to be merged from
 	 * @return array The merged array (the original arrays are not changed.)
 	 */
-	public static function merge_array($a,$b)
+	public static function merge_array( $a, $b )
 	{
 		foreach( $b as $k => $v ) {
-			if( is_integer( $k ) ) {
+			if ( is_integer( $k ) ) {
 				$a[] = $v;
 			} elseif ( is_array( $v ) && isset( $a[$k] ) && is_array( $a[$k] ) ) {
 				$a[$k] = self::merge_array( $a[$k], $v );

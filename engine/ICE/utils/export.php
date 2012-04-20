@@ -196,8 +196,8 @@ class ICE_Export extends ICE_Base
 				self::$upload_dir = realpath( $upload_dir['basedir'] );
 				self::$upload_url = $upload_dir['baseurl'];
 				// determine export path and url
-				self::$export_dir = sprintf( '%s/%s/%s', self::$upload_dir, ICE_EXPORTS_SUBDIR, get_stylesheet() );
-				self::$export_url = sprintf( '%s/%s/%s', self::$upload_url, ICE_EXPORTS_SUBDIR, get_stylesheet() );
+				self::$export_dir = sprintf( '%s/%s/%s', self::$upload_dir, ICE_EXPORTS_SUBDIR, ICE_ACTIVE_THEME );
+				self::$export_url = sprintf( '%s/%s/%s', self::$upload_url, ICE_EXPORTS_SUBDIR, ICE_ACTIVE_THEME );
 				// don't try to set these twice
 				self::$populated = true;
 				// yay

@@ -121,7 +121,7 @@ class ICE_Ext_Widget_Debugger
 	protected function render_directive( ICE_Map $directive_map )
 	{
 		// get the theme stack from the scheme
-		$stack = ICE_Scheme::instance()->theme_stack(true);
+		$stack = ICE_Scheme::instance()->theme_stack();
 
 		$map_last = null;
 

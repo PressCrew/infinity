@@ -43,12 +43,9 @@ class ICE_Ext_Widget_Posts_List
 		// RUN PARENT FIRST!
 		parent::configure();
 
-		// get config
-		$config = $this->config();
-
 		// css title class
-		if ( isset( $config->post_type ) ) {
-			$this->post_type = (string) $config->post_type;
+		if ( $this->config()->contains( 'post_type' ) ) {
+			$this->post_type = (string) $this->config( 'post_type' );
 		}
 	}
 

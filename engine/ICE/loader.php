@@ -58,6 +58,10 @@ if ( !defined( 'ICE_ERROR_REPORTING' ) ) {
 if ( !defined( 'ICE_EXPORTS_SUBDIR' ) ) {
 	define( 'ICE_EXPORTS_SUBDIR', 'exports' );
 }
+/**
+ * ICE API: cache get_stylesheet() call for performance 
+ */
+define( 'ICE_ACTIVE_THEME', get_stylesheet() );
 
 /**
  *  load error handler if applicable

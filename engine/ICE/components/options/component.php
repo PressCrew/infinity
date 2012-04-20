@@ -103,52 +103,49 @@ abstract class ICE_Option extends ICE_Component
 		// RUN PARENT FIRST!
 		parent::configure();
 
-		// get config
-		$config = $this->config();
-
 		// section
-		if ( isset( $config->section ) ) {
-			$this->set_section( $config->section );
+		if ( $this->config()->contains( 'section' ) ) {
+			$this->set_section( $this->config( 'section' ) );
 		}
 
 		// feature
-		if ( isset( $config->feature ) ) {
-			$this->feature = $config->feature;
+		if ( $this->config()->contains( 'feature' ) ) {
+			$this->feature = $this->config( 'feature' );
 		}
 
 		// default value
-		if ( isset( $config->default_value ) ) {
-			$this->default_value = $config->default_value;
+		if ( $this->config()->contains( 'default_value' ) ) {
+			$this->default_value = $this->config( 'default_value' );
 		}
 
 		// css id
-		if ( isset( $config->field_id ) ) {
-			$this->field_id = $config->field_id;
+		if ( $this->config()->contains( 'field_id' ) ) {
+			$this->field_id = $this->config( 'field_id' );
 		}
 
 		// css class
-		if ( isset( $config->field_class ) ) {
-			$this->field_class = $config->field_class;
+		if ( $this->config()->contains( 'field_class' ) ) {
+			$this->field_class = $this->config( 'field_class' );
 		}
 
 		// style selector
-		if ( isset( $config->style_selector ) ) {
-			$this->style_selector = $config->style_selector;
+		if ( $this->config()->contains( 'style_selector' ) ) {
+			$this->style_selector = $this->config( 'style_selector' );
 		}
 
 		// style property
-		if ( isset( $config->style_property ) ) {
-			$this->style_property = $config->style_property;
+		if ( $this->config()->contains( 'style_property' ) ) {
+			$this->style_property = $this->config( 'style_property' );
 		}
 		
 		// style unit
-		if ( isset( $config->style_unit ) ) {
-			$this->style_unit = $config->style_unit;
+		if ( $this->config()->contains( 'style_unit' ) ) {
+			$this->style_unit = $this->config( 'style_unit' );
 		}
 
 		// style section
-		if ( isset( $config->style_section ) ) {
-			$this->style_section = $config->style_section;
+		if ( $this->config()->contains( 'style_section' ) ) {
+			$this->style_section = $this->config( 'style_section' );
 		}
 
 		// setup style property object
@@ -156,22 +153,26 @@ abstract class ICE_Option extends ICE_Component
 
 		// field options
 		// @todo this grew too big, move to private method
-		if ( isset( $config->field_options ) ) {
+		if ( $this->config()->contains( 'field_options' ) ) {
 
-			if ( $config->field_options instanceof ICE_Map ) {
+			// grab field options
+			$fo_config = $this->config( 'field_options' );
+
+			// is configured field options a map?
+			if ( $fo_config instanceof ICE_Map ) {
 
 				// loop through all field options
-				foreach ( $config->field_options as $field_option ) {
+				foreach ( $fo_config as $field_option ) {
 					// split each one at the delimeter
 					$field_option = explode( self::FIELD_OPTION_DELIM, $field_option, 2 );
 					// add to array
 					$field_options[trim($field_option[0])] = trim($field_option[1]);
 				}
 
-			} elseif ( strlen( $config->field_options ) ) {
+			} elseif ( strlen( $fo_config ) ) {
 
 				// possibly a function
-				$callback = $config->field_options;
+				$callback = $fo_config;
 
 				// check if the function exists
 				if ( function_exists( $callback ) ) {
@@ -451,7 +452,7 @@ abstract class ICE_Option extends ICE_Component
 			array(
 				self::API_PREFIX,
 				$this->hname,
-				get_stylesheet()
+				ICE_ACTIVE_THEME
 			)
 		);
 	}
