@@ -128,7 +128,7 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	final protected function register( ICE_Component $component )
 	{
 		// has the component already been registered?
-		if ( !$this->has( $component->name ) ) {
+		if ( !$this->components->contains( $component->name ) ) {
 			// register it
 			$this->components->add( $component->name, $component );
 			// post reg
@@ -160,7 +160,7 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	final public function get( $name )
 	{
 		// check registry
-		if ( $this->has( $name ) ) {
+		if ( $this->components->contains( $name ) ) {
 			// from top of stack
 			return $this->components->item_at( $name );
 		}
@@ -339,9 +339,9 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 		$config_array['theme'] = self::theme_scope();
 
 		// check if already registered
-		if ( $this->has( $name ) ) {
+		if ( $this->components->contains( $name ) ) {
 			// use that one
-			$component = $this->get( $name );
+			$component = $this->components->item_at( $name );
 		} else {
 			// use factory to create new component
 			$component =
