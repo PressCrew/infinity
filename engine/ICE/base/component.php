@@ -113,6 +113,41 @@ abstract class ICE_Component
 	private $__template_part__ = '';
 
 	/**
+	 * The component name
+	 *
+	 * @var string
+	 */
+	private $name;
+
+	/**
+	 * The theme (slug) which created this component
+	 *
+	 * @var string
+	 */
+	private $theme;
+
+	/**
+	 * The component type
+	 *
+	 * @var string
+	 */
+	private $type;
+
+	/**
+	 * The atypical component name, unique across entire component stack
+	 *
+	 * @var string
+	 */
+	private $aname;
+
+	/**
+	 * The hash name. A crc32 hash of the aname in hex format
+	 *
+	 * @var string
+	 */
+	private $hname;
+
+	/**
 	 * @param string $name Option name may only contain alphanumeric characters as well as the underscore for use as a word separator.
 	 * @param string $type The type (component extension) of this component
 	 * @param string $theme The theme which originally created this component
@@ -127,25 +162,16 @@ abstract class ICE_Component
 		$this->__config__ = new ICE_Init_Config();
 		$this->__directives__ = new ICE_Init_Directive_Registry();
 
-		// init base config
-		$this->config_array(
-			array(
-				'name' => $this->validate_name( $name ),
-				'type' => $type,
-				'theme' => $theme
-			),
-			$theme
-		);
+		// init required directives
+		$this->name = $this->validate_name( $name );
+		$this->type = $type;
+		$this->theme = $theme;
 
-		// init read-only directives
-		//// the following three must be set FIRST before any other directives
-		$this->directive( 'name', $this->config( 'name' ), true, true );
-		$this->directive( 'type', $this->config( 'type' ), true, true );
-		$this->directive( 'theme', $this->config( 'theme' ), true, true );
-		//// the "atypical name" is unique across all components
-		$this->directive( 'aname', $policy->get_handle( false ) . '/' . $this->name, true, true );
-		//// the "hash name" is the crc32 hex hash of the aname
-		$this->directive( 'hname', hash( 'crc32', $this->aname ), true, true );
+		// the "atypical name" is unique across all components
+		$this->aname = $policy->get_handle( false ) . '/' . $this->name;
+
+		// the "hash name" is the crc32 hex hash of the aname
+		$this->hname = hash( 'crc32', $this->aname );
 
 		// init base directives
 		$this->title = __( 'No title was configured', infinity_text_domain );
@@ -174,22 +200,48 @@ abstract class ICE_Component
 	 */
 	final public function __get( $name )
 	{
-		return $this->__directives__->get($name)->value;
+		switch ( $name ) {
+			case 'name':
+			case 'type':
+			case 'theme':
+			case 'aname':
+			case 'hname':
+				return $this->$name;
+			default:
+				return $this->directive( $name );
+		}
 	}
 
 	/**
 	 */
 	final public function __set( $name, $value )
 	{
-		// set directive
-		return $this->directive( $name, $value );
+		switch ( $name ) {
+			case 'name':
+			case 'type':
+			case 'theme':
+			case 'aname':
+			case 'hname':
+				return parent::__set( $name, $value );
+			default:
+				return $this->directive( $name, $value );
+		}
 	}
 
 	/**
 	 */
 	final public function __isset( $name )
 	{
-		return $this->__directives__->has( $name );
+		switch ( $name ) {
+			case 'name':
+			case 'type':
+			case 'theme':
+			case 'aname':
+			case 'hname':
+				return isset( $this->$name );
+			default:
+				return $this->__directives__->has( $name );
+		}
 	}
 
 	/**
@@ -294,7 +346,7 @@ abstract class ICE_Component
 				// get directive data
 				$data = $this->__directives__->get( $name );
 				// return data value or null
-				return ( $data ) ? $data->value : null;
+				return ( $data ) ? $data->get_value() : null;
 
 			// more than one arg, we are setting
 			default:
@@ -302,7 +354,7 @@ abstract class ICE_Component
 				$config_data = $this->__config__->get( $name );
 				// if theme is empty, assume origin theme set directive
 				if ( $config_data ) {
-					$theme = $config_data->theme;
+					$theme = $config_data->get_theme();
 				} else {
 					$theme = $this->theme;
 				}
@@ -390,7 +442,7 @@ abstract class ICE_Component
 				// get directive data
 				$data = $this->__config__->get( $name );
 				// return data value or null
-				return ( $data ) ? $data->value : null;
+				return ( $data ) ? $data->get_value() : null;
 
 			// more than one arg, we are setting
 			default:
@@ -426,11 +478,13 @@ abstract class ICE_Component
 
 		foreach ( $config_array as $name => $value ) {
 
-			// skip these base items
+			// skip these base directives
 			switch ( $name ) {
 				case 'theme':
 				case 'name':
 				case 'type':
+				case 'aname':
+				case 'hname':
 					continue;
 			}
 
@@ -448,7 +502,7 @@ abstract class ICE_Component
 			//  get parent from config
 			$parent = $this->config( 'parent' );
 			// name can't equal parent
-			if ( $this->config( 'name' ) != $parent ) {
+			if ( $this->name != $parent ) {
 				$this->directive( 'parent', $parent );
 			} else {
 				throw new Exception(
@@ -580,9 +634,11 @@ abstract class ICE_Component
 			// lookup map
 			$theme_map = $this->__directives__->get_map( 'capabilities' );
 			// get one?
-			if ( $theme_map && $theme_map->item_at($this->theme)->value ) {
-				$theme_caps = $theme_map->item_at($this->theme)->value;
-				$theme_caps->merge_with( $capabilities );
+			if ( $theme_map && $theme_map->contains( $this->theme ) ) {
+				if ( $theme_map->item_at($this->theme)->has_value() ) {
+					$theme_caps = $theme_map->item_at($this->theme)->get_value();
+					$theme_caps->merge_with( $capabilities );
+				}
 			}
 		} else {
 			$this->capabilities = $capabilities;

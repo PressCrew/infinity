@@ -618,8 +618,8 @@ abstract class ICE_Option_Image
 				// mimic the src array
 				$src = array_fill( 0, 3, null );
 				// is a default set?
-				if ( $directive->value ) {
-					$src[0] = ICE_Files::theme_file_url( $directive->theme, $directive->value );
+				if ( $directive->has_value() ) {
+					$src[0] = ICE_Files::theme_file_url( $directive->get_theme(), $directive->get_value() );
 				}
 			}
 		}

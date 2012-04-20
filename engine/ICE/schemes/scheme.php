@@ -489,7 +489,8 @@ final class ICE_Scheme extends ICE_Base
 			$map = $this->directives()->get_map( self::DIRECTIVE_FEATURE );
 			// loop through and add theme support for each feature
 			foreach ( $map as $directive ) {
-				foreach( $directive->value as $feature => $toggle ) {
+				// loop all features
+				foreach( $directive->get_value() as $feature => $toggle ) {
 					// toggled on?
 					if ( (boolean) $toggle === true ) {
 						add_theme_support( $feature );
