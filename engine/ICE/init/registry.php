@@ -32,6 +32,13 @@ abstract class ICE_Init_Registry extends ICE_Map
 	private $__ns_defaults__ = array();
 
 	/**
+	 * Simple cache for storing value for effective theme from stack
+	 * 
+	 * @var array
+	 */
+	private $__lookup_cache__ = array();
+
+	/**
 	 * Create a new instance of ICE_Init_Data for storing in the registry
 	 *
 	 * @param string $theme Slug of the theme which is setting this data
@@ -102,6 +109,12 @@ abstract class ICE_Init_Registry extends ICE_Map
 			$result = true;
 		}
 
+		// update cache
+		if ( true === $result ) {
+			// good result, clear cache
+			unset( $this->__lookup_cache__[ $name ] );
+		}
+
 		// lock data map if applicable
 		if ( $ro_value ) {
 			$data->lock();
@@ -124,6 +137,10 @@ abstract class ICE_Init_Registry extends ICE_Map
 	 */
 	public function remove( $name )
 	{
+		// wipe cache for this item
+		unset( $this->__lookup_cache__[ $name ] );
+		
+		// call parent to remove
 		return parent::remove( $name );
 	}
 
@@ -145,8 +162,23 @@ abstract class ICE_Init_Registry extends ICE_Map
 	 * @param string $name Name of key to retrieve (slug)
 	 * @return ICE_Init_Data
 	 */
-	public function get( $name )
+	public function get( $name, $use_cache = true )
 	{
+		// use the cache?
+		if ( true === $use_cache ) {
+			// does it exist in the cache (even if null)?
+			if (
+				isset( $this->__lookup_cache__[ $name ] ) ||
+				array_key_exists( $name, $this->__lookup_cache__ )
+			) {
+				// yep, use cached value
+				return $this->__lookup_cache__[ $name ];
+			}
+		}
+
+		// value is null by default
+		$value = null;
+
 		// use existing data map if exists
 		$theme_map = $this->item_at( $name );
 
@@ -156,14 +188,22 @@ abstract class ICE_Init_Registry extends ICE_Map
 			foreach ( ICE_Scheme::instance()->theme_stack() as $theme ) {
 				// does theme have this data key set?
 				if ( $theme_map->contains( $theme ) ) {
-					// yes, return it
-					return $theme_map->item_at($theme);
+					// yes, grab value
+					$value = $theme_map->item_at($theme);
+					// and skip remaining themes
+					break;
 				}
 			}
 		}
 
-		// key not set
-		return null;
+		// update cache if applicable
+		if ( true === $use_cache ) {
+			// cache toggled on, set it
+			$this->__lookup_cache__[ $name ] = $value;
+		}
+
+		// always return looked up value
+		return $value;
 	}
 
 	public function get_value( $name )
