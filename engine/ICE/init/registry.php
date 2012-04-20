@@ -32,13 +32,6 @@ abstract class ICE_Init_Registry extends ICE_Map
 	private $__ns_defaults__ = array();
 
 	/**
-	 */
-	public function __set( $name, $value )
-	{
-		throw new Exception( 'No magic setting allowed, call the set() method' );
-	}
-
-	/**
 	 * Create a new instance of ICE_Init_Data for storing in the registry
 	 *
 	 * @param string $theme Slug of the theme which is setting this data
