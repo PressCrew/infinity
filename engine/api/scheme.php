@@ -67,7 +67,7 @@ function infinity_scheme_finalize()
  */
 function infinity_scheme_directive( $name )
 {
-	return ICE_Scheme::instance()->directives()->get($name)->value;
+	return ICE_Scheme::instance()->directives()->get($name)->get_value();
 }
 
 /**

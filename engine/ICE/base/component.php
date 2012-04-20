@@ -208,7 +208,7 @@ abstract class ICE_Component
 			case 'hname':
 				return $this->$name;
 			default:
-				return $this->__directives__->get($name)->value;
+				return $this->directive( $name );
 		}
 	}
 
@@ -346,7 +346,7 @@ abstract class ICE_Component
 				// get directive data
 				$data = $this->__directives__->get( $name );
 				// return data value or null
-				return ( $data ) ? $data->value : null;
+				return ( $data ) ? $data->get_value() : null;
 
 			// more than one arg, we are setting
 			default:
@@ -354,7 +354,7 @@ abstract class ICE_Component
 				$config_data = $this->__config__->get( $name );
 				// if theme is empty, assume origin theme set directive
 				if ( $config_data ) {
-					$theme = $config_data->theme;
+					$theme = $config_data->get_theme();
 				} else {
 					$theme = $this->theme;
 				}
@@ -442,7 +442,7 @@ abstract class ICE_Component
 				// get directive data
 				$data = $this->__config__->get( $name );
 				// return data value or null
-				return ( $data ) ? $data->value : null;
+				return ( $data ) ? $data->get_value() : null;
 
 			// more than one arg, we are setting
 			default:
@@ -634,9 +634,11 @@ abstract class ICE_Component
 			// lookup map
 			$theme_map = $this->__directives__->get_map( 'capabilities' );
 			// get one?
-			if ( $theme_map && $theme_map->item_at($this->theme)->value ) {
-				$theme_caps = $theme_map->item_at($this->theme)->value;
-				$theme_caps->merge_with( $capabilities );
+			if ( $theme_map && $theme_map->contains( $this->theme ) ) {
+				if ( $theme_map->item_at($this->theme)->has_value() ) {
+					$theme_caps = $theme_map->item_at($this->theme)->get_value();
+					$theme_caps->merge_with( $capabilities );
+				}
 			}
 		} else {
 			$this->capabilities = $capabilities;
