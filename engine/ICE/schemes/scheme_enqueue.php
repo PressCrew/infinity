@@ -274,11 +274,14 @@ class ICE_Scheme_Enqueue extends ICE_Base
 		// loop through and populate trigger map
 		foreach ( $directive_map as $theme => $directive ) {
 
+			// get value of directive
+			$value = $directive->get_value();
+
 			// is directive value a map?
-			if ( $directive->value instanceof ICE_Map ) {
+			if ( $value instanceof ICE_Map ) {
 
 				// yes, add each handle and URL path to map
-				foreach( $directive->value as $handle => $path ) {
+				foreach( $value as $handle => $path ) {
 
 					// define it
 					$this->define_one( $map, $theme, $handle, $path );
@@ -359,12 +362,15 @@ class ICE_Scheme_Enqueue extends ICE_Base
 	{
 		// loop through and update triggers map with deps
 		foreach ( $directive_map as $theme => $directive ) {
+			
+			// get directive value
+			$value = $directive->get_value();
 
 			// is directive value a map?
-			if ( $directive->value instanceof ICE_Map ) {
+			if ( $value instanceof ICE_Map ) {
 
 				// yes, add action to each trigger's dependancy stack
-				foreach( $directive->value as $handle => $dep_handles ) {
+				foreach( $value as $handle => $dep_handles ) {
 
 					// get theme handle
 					$theme_handle = $this->make_handle( $theme, $handle );
@@ -423,11 +429,14 @@ class ICE_Scheme_Enqueue extends ICE_Base
 			// loop through and update triggers map
 			foreach ( $directive_map as $theme => $directive ) {
 
+				// get value of directive
+				$value = $directive->get_value();
+
 				// is directive value a map?
-				if ( $directive->value instanceof ICE_Map ) {
+				if ( $value instanceof ICE_Map ) {
 
 					// yes, add action to each trigger's trigger stack
-					foreach( $directive->value as $action => $handles ) {
+					foreach( $value as $action => $handles ) {
 
 						// no action params by default
 						$action_params = null;

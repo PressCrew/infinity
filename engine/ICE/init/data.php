@@ -16,10 +16,6 @@
  *
  * @package ICE
  * @subpackage init
- * @property-read string $theme The theme for which the data is set
- * @property-read string $name The name for the data (slug)
- * @property mixed $value The value of the data
- * @property-read boolean $read_only Whether the data is read only
  */
 class ICE_Init_Data extends ICE_Base
 {
@@ -70,61 +66,6 @@ class ICE_Init_Data extends ICE_Base
 	}
 
 	/**
-	 */
-	public function __get( $name )
-	{
-		switch ( $name ) {
-			case 'theme':
-			case 'name':
-			case 'read_only':
-				return $this->$name;
-			case 'value':
-				return $this->get_value();
-			default:
-				return parent::__get( $name );
-		}
-	}
-
-	/**
-	 */
-	public function __isset( $name )
-	{
-		switch ( $name ) {
-			case 'theme':
-			case 'name':
-			case 'value':
-			case 'read_only':
-				return isset( $this->$name );
-			default:
-				return parent::__isset( $name );
-		}
-	}
-
-	/**
-	 */
-	public function __set( $name, $value )
-	{
-		switch ( $name ) {
-			case 'value':
-				return $this->set_value( $value );
-			default:
-				return parent::__set( $name, $value );
-		}
-	}
-
-	/**
-	 */
-	public function __unset( $name )
-	{
-		switch ( $name ) {
-			case 'value':
-				return $this->set_value( null );
-			default:
-				return parent::__unset( $name );
-		}
-	}
-
-	/**
 	 * Set the registry to use for substitution
 	 *
 	 * @param ICE_Init_Registry $registry
@@ -139,6 +80,26 @@ class ICE_Init_Data extends ICE_Base
 		} else {
 			throw new Exception( 'Cannot set registry, already set.' );
 		}
+	}
+
+	/**
+	 * Return the name (key) of this data
+	 *
+	 * @return string
+	 */
+	public function get_name()
+	{
+		return $this->name;
+	}
+
+	/**
+	 * Return the theme which created this data
+	 * 
+	 * @return string
+	 */
+	public function get_theme()
+	{
+		return $this->theme;
 	}
 
 	/**
@@ -177,6 +138,16 @@ class ICE_Init_Data extends ICE_Base
 		} else {
 			return $this->value;
 		}
+	}
+
+	/**
+	 * Returns true if value is not null
+	 *
+	 * @return boolean
+	 */
+	public function has_value()
+	{
+		return ( null !== $this->value );
 	}
 
 	/**
