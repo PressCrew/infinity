@@ -654,7 +654,7 @@ abstract class ICE_Option_Image
 			$directive = $this->directive()->get( 'default_value' );
 
 			// they must have provided an image path
-			return ICE_Files::theme_file_url( $directive->theme, $directive->value );
+			return ICE_Files::theme_file_url( $directive->get_theme(), $directive->get_value() );
 
 		}
 

@@ -180,7 +180,7 @@ class ICE_Scheme_Enqueue extends ICE_Base
 		// custom ui stylesheet set?
 		if ( $ui_stylesheet instanceof ICE_Init_Directive ) {
 			ICE_Enqueue::instance()->ui_stylesheet(
-				ICE_Files::theme_file_url( $ui_stylesheet->theme, $ui_stylesheet->value )
+				ICE_Files::theme_file_url( $ui_stylesheet->get_theme(), $ui_stylesheet->get_value() )
 			);
 		}
 	}
@@ -835,7 +835,7 @@ class ICE_Scheme_Enqueue extends ICE_Base
 	public function handle_script_domain()
 	{
 		// render it
-		?><script type="text/javascript">document.domain = '<?php print $this->script_domain->value ?>';</script><?php
+		?><script type="text/javascript">document.domain = '<?php print $this->script_domain->get_value() ?>';</script><?php
 		echo PHP_EOL;
 	}
 
