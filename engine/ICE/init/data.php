@@ -179,7 +179,7 @@ class ICE_Init_Data extends ICE_Base
 						// return new string
 						$value = str_replace(
 							$str_search,
-							$this->registry->get( $str_name )->value,
+							$this->registry->get( $str_name )->get_value(),
 							$value
 						);
 					} else {
