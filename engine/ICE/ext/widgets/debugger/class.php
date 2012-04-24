@@ -90,7 +90,7 @@ class ICE_Ext_Widget_Debugger
 			// loop current map
 			foreach ( $directive_map as $directive ) {
 				// is map's value a map?
-				if ( $directive->value instanceof ICE_Map ) {
+				if ( $directive->get_value() instanceof ICE_Map ) {
 					// yes, so its a group
 					$is_group = true;
 				}
@@ -131,7 +131,7 @@ class ICE_Ext_Widget_Debugger
 			if ( $directive_map->contains($theme) ):
 				$directive = $directive_map->item_at($theme);
 				$map_child = new ICE_Map();
-				$map_child->add( $directive->name, $directive->value );
+				$map_child->add( $directive->get_name(), $directive->get_value() );
 				// render item ?>
 				<li id="<?php $this->render_item_id( $theme ) ?>" class="jstree-open">
 					<a><?php print $theme ?></a>
