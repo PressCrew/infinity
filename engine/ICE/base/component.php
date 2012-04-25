@@ -173,10 +173,6 @@ abstract class ICE_Component
 		// the "hash name" is the crc32 hex hash of the aname
 		$this->hname = hash( 'crc32', $this->aname );
 
-		// init style and script objects
-		$this->style();
-		$this->script();
-
 		// run init template method
 		$this->init();
 	}
