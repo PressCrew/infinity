@@ -18,6 +18,10 @@ ICE_Loader::load( 'ui/iconable', 'ui/positionable' );
  *
  * @package ICE-extensions
  * @subpackage screens
+ * @property-read string $icon_primary
+ * @property-read string $icon_secondary
+ * @property-read integer $priority
+ * @property-read boolean $toolbar
  */
 class ICE_Ext_Screen_Cpanel
 	extends ICE_Screen
@@ -36,20 +40,6 @@ class ICE_Ext_Screen_Cpanel
 	 * @var ICE_Position
 	 */
 	private $__position__;
-
-	/**
-	 */
-	protected function init()
-	{
-		// run parent
-		parent::init();
-
-		// initialize directives
-		$this->icon_primary = null;
-		$this->icon_secondary = null;
-		$this->priority = null;
-		$this->toolbar = false;
-	}
 
 	/**
 	 */

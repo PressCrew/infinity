@@ -18,6 +18,7 @@ ICE_Loader::load( 'base/component' );
  *
  * @package ICE-components
  * @subpackage shortcodes
+ * @property-read array $attributes
  */
 abstract class ICE_Shortcode extends ICE_Component
 {
@@ -46,9 +47,6 @@ abstract class ICE_Shortcode extends ICE_Component
 	{
 		// run parent
 		parent::init();
-
-		// init directives
-		$this->attributes = null;
 
 		// set up handler
 		add_shortcode( $this->name, array( $this, 'render_handler' ) );
