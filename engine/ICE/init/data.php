@@ -56,8 +56,8 @@ class ICE_Init_Data extends ICE_Base
 	 */
 	public function __construct( $theme, $name, $value = null, $read_only = false )
 	{
-		$this->theme = strtolower( trim( $theme ) );
-		$this->name = strtolower( trim( $name ) );
+		$this->theme = $theme;
+		$this->name = $name;
 		$this->value = $value;
 
 		if ( $read_only ) {

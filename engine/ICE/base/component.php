@@ -173,21 +173,6 @@ abstract class ICE_Component
 		// the "hash name" is the crc32 hex hash of the aname
 		$this->hname = hash( 'crc32', $this->aname );
 
-		// init base directives
-		$this->title = __( 'No title was configured', infinity_text_domain );
-		$this->description = null;
-		$this->documentation = null;
-		$this->style = null;
-		$this->style_depends = null;
-		$this->script = null;
-		$this->script_depends = null;
-		$this->template = null;
-		$this->id = null;
-		$this->class = null;
-		$this->capabilities = null;
-		$this->required_feature = null;
-		$this->ignore = false;
-
 		// init style and script objects
 		$this->style();
 		$this->script();

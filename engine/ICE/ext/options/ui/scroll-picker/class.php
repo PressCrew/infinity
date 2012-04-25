@@ -30,19 +30,6 @@ class ICE_Ext_Option_Ui_Scroll_Picker
 {
 	/**
 	 */
-	protected function init()
-	{
-		// run parent
-		parent::init();
-
-		// initilaize directives
-		$this->item_width = null;
-		$this->item_height = null;
-		$this->item_margin = null;
-	}
-	
-	/**
-	 */
 	public function init_scripts()
 	{
 		parent::init_scripts();

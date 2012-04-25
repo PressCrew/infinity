@@ -71,18 +71,6 @@ abstract class ICE_Option extends ICE_Component
 	{
 		parent::init();
 
-		// init directives
-		$this->section = 'default';
-		$this->feature = null;
-		$this->default_value = null;
-		$this->field_id = null;
-		$this->field_class = null;
-		$this->field_options = null;
-		$this->style_selector = null;
-		$this->style_property = null;
-		$this->style_unit = null;
-		$this->style_section = null;
-
 		// user must be allowed to manage options
 		$this->add_capabilities( 'manage_options' );
 	}
@@ -106,6 +94,8 @@ abstract class ICE_Option extends ICE_Component
 		// section
 		if ( $this->config()->contains( 'section' ) ) {
 			$this->set_section( $this->config( 'section' ) );
+		} else {
+			$this->set_section( 'default' );
 		}
 
 		// feature

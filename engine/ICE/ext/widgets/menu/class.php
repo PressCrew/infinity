@@ -18,21 +18,11 @@ ICE_Loader::load( 'components/widgets/component', 'utils/ajax' );
  *
  * @package ICE-extensions
  * @subpackage widgets
+ * @property-read callback $menu_items
  */
 class ICE_Ext_Widget_Menu
 	 extends ICE_Widget
 {
-	/**
-	 */
-	protected function init()
-	{
-		// run parent
-		parent::init();
-
-		// init directives
-		$this->menu_items = null;
-	}
-
 	/**
 	 */
 	public function init_styles()

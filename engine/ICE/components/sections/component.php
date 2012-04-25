@@ -32,18 +32,6 @@ abstract class ICE_Section extends ICE_Component
 
 	/**
 	 */
-	protected function init()
-	{
-		// run parent
-		parent::init();
-
-		// init directives
-		$this->class_title = null;
-		$this->class_content = null;
-	}
-	
-	/**
-	 */
 	public function configure()
 	{
 		// RUN PARENT FIRST!
