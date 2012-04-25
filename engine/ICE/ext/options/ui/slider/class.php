@@ -39,26 +39,6 @@ class ICE_Ext_Option_Ui_Slider
 {
 	/**
 	 */
-	protected function init()
-	{
-		// run parent
-		parent::init();
-
-		// initialize directives
-		$this->animate = false;
-		$this->max = null;
-		$this->min = null;
-		$this->orientation = null;
-		$this->step = null;
-		$this->range = null;
-		$this->label = null;
-		$this->prefix = null;
-		$this->suffix = null;
-		$this->delimiter = null;
-	}
-
-	/**
-	 */
 	public function init_styles()
 	{
 		parent::init_styles();
@@ -166,7 +146,7 @@ class ICE_Ext_Option_Ui_Slider
 		}
 		
 		// add variables
-		$logic->av( 'animate', $this->animate );
+		$logic->av( 'animate', (boolean) $this->animate );
 		$logic->av( 'max', $this->max );
 		$logic->av( 'min', $this->min );
 		$logic->av( 'orientation', $this->orientation );

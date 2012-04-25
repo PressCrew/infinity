@@ -23,18 +23,6 @@ abstract class ICE_Screen extends ICE_Component
 {
 	/**
 	 */
-	protected function init()
-	{
-		// run parent
-		parent::init();
-
-		// init directives
-		$this->url = null;
-		$this->target = null;
-	}
-	
-	/**
-	 */
 	public function configure()
 	{
 		// RUN PARENT FIRST!

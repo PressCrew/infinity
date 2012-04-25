@@ -29,18 +29,6 @@ class ICE_Ext_Option_Ui_Image_Picker
 {
 	/**
 	 */
-	protected function init()
-	{
-		// run parent
-		parent::init();
-
-		// init directives
-		$this->file_directory = null;
-		$this->file_extension = null;
-	}
-	
-	/**
-	 */
 	public function configure()
 	{
 		// run parent
