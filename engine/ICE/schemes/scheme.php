@@ -525,6 +525,9 @@ final class ICE_Scheme extends ICE_Base
 	 */
 	public function exports_refresh( $force = false )
 	{
+		// hard refresh toggle
+		static $hard_refresh = false;
+
 		// export instance depends on which filter is being run
 		switch( current_filter() ) {
 			// enqueue styles action
@@ -541,41 +544,58 @@ final class ICE_Scheme extends ICE_Base
 			default:
 				// force toggled on?
 				if ( true === $force ) {
+					// toggle hard refresh ON
+					$hard_refresh = true;
 					// manually call style enqueuer
 					ICE_Enqueue::instance()->do_enqueue_styles();
 					// manually call script enqueuer
 					ICE_Enqueue::instance()->do_enqueue_scripts();
+					// toggle hard refresh OFF
+					$hard_refresh = false;
 				}
 				// return either way
 				return;
 		}
 
-		// loop all config files
-		foreach ( $this->config_files_loaded as $file ) {
-			// config was last modified...
-			if ( ICE_CACHE_EXPORTS ) {
-				// in cache mode, use file last mod time
+		// are we using the cache?
+		if ( true == ICE_CACHE_EXPORTS && false == $hard_refresh ) {
+			// yes, loop all config files
+			foreach ( $this->config_files_loaded as $file ) {
+				// get file last mod time
 				$mtime = @filemtime( $file );
-			} else {
-				// use current time
-				$mtime = time();
-			}
-			// check if stale
-			if ( $export->stale( $mtime ) ) {
-				// loop all component registries and pass them the exporters
-				foreach ( ICE_Policy::all() as $policy ) {
-					// call accept on the registry for the export
-					$policy->registry()->accept( $export );
+				// check if stale
+				if ( $export->stale( $mtime ) ) {
+					// call export refresher
+					return $this->export_refresh( $export );
 				}
-				// update it
-				$export->update();
-				// all done
-				return true;
 			}
+			// cache is up to date, did NOT refresh
+			return false;
 		}
 
-		// did NOT refresh
-		return false;
+		// update the export
+		return $this->export_refresh( $export );
+	}
+
+	/**
+	 * Refresh one export
+	 *
+	 * @param ICE_Export $export
+	 * @return boolean
+	 */
+	final protected function export_refresh( ICE_Export $export )
+	{
+		// loop all component registries and pass them the exporters
+		foreach ( ICE_Policy::all() as $policy ) {
+			// call accept on the registry for the export
+			$policy->registry()->accept( $export );
+		}
+
+		// update it
+		$export->update();
+		
+		// all done
+		return true;
 	}
 
 	/**
