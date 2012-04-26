@@ -27,6 +27,16 @@ ICE_Loader::load(
 abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 {
 	/**
+	 * Sub option delimeter
+	 */
+	const SUB_OPTION_DELIM = '.';
+
+	/**
+	 * Sub option glue
+	 */
+	const SUB_OPTION_GLUE = '_';
+
+	/**
 	 * Name of the theme currently being loaded
 	 *
 	 * @var string
@@ -131,13 +141,24 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 		if ( !$this->components->contains( $component->name ) ) {
 			// register it
 			$this->components->add( $component->name, $component );
-			// post reg
-			if ( $component->supported() ) {
-				$component->init_registered();
-			}
 		}
 
 		return true;
+	}
+
+	/**
+	 * Normalize a component name which may have "dots" in it
+	 *
+	 * @param string $name
+	 * @return string
+	 */
+	final protected function normalize_name( $name )
+	{
+		if ( strpos( $name, self::SUB_OPTION_DELIM ) !== false ) {
+			return str_replace( self::SUB_OPTION_DELIM, self::SUB_OPTION_GLUE, $name );
+		}
+
+		return $name;
 	}
 
 	/**
@@ -148,6 +169,10 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	 */
 	final public function has( $name )
 	{
+		// normalize name
+		$name = $this->normalize_name( $name );
+
+		// call contains method of map class
 		return $this->components->contains( $name );
 	}
 
@@ -159,6 +184,9 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	 */
 	final public function get( $name )
 	{
+		// normalize name
+		$name = $this->normalize_name( $name );
+
 		// check registry
 		if ( $this->components->contains( $name ) ) {
 			// from top of stack
@@ -335,6 +363,9 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	 */
 	final protected function load_config_map( $name, $config_array )
 	{
+		// normalize name
+		$name = $this->normalize_name( $name );
+		
 		// push theme onto config
 		$config_array['theme'] = self::theme_scope();
 
@@ -355,6 +386,11 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 
 		// push configuration
 		$component->config_array( $config_array );
+
+		// post registration
+		if ( $component->supported() ) {
+			$component->init_registered();
+		}
 
 		return true;
 	}

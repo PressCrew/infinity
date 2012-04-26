@@ -173,10 +173,6 @@ abstract class ICE_Component
 		// the "hash name" is the crc32 hex hash of the aname
 		$this->hname = hash( 'crc32', $this->aname );
 
-		// init style and script objects
-		$this->style();
-		$this->script();
-
 		// run init template method
 		$this->init();
 	}
@@ -847,7 +843,7 @@ abstract class ICE_Component
 	public function get_suboption( $name )
 	{
 		// build up option name
-		$option_name = sprintf( '%s-%s', $this->name, $name );
+		$option_name = $this->name . ICE_Registry::SUB_OPTION_GLUE . $name;
 
 		// get and return it
 		return $this->policy()->options()->registry()->get( $option_name );
