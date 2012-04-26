@@ -22,11 +22,6 @@ ICE_Loader::load( 'base/registry', 'components/options/factory', 'utils/ajax' );
 abstract class ICE_Option_Registry extends ICE_Registry
 {
 	/**
-	 * Sub option delimeter
-	 */
-	const FEATURE_OPTION_DELIM = '.';
-	
-	/**
 	 * Enqueue required scripts
 	 */
 	public function init_scripts()
@@ -86,16 +81,16 @@ abstract class ICE_Option_Registry extends ICE_Registry
 
 		// feature explicitly set?
 		if ( isset( $config['feature'] ) ) {
-			$option_name = $config['feature'] . '-' . $name;
+			$option_name = $config['feature'] . self::SUB_OPTION_GLUE . $name;
 		} else {
 			// split for possible sub option syntax
-			$parts = explode( self::FEATURE_OPTION_DELIM, $name );
+			$parts = explode( self::SUB_OPTION_DELIM, $name );
 			// if has exactly two parts its a feature option
 			if ( count($parts) == 2 ) {
 				// feature name is the first string
 				$config['feature'] = $parts[0];
 				// option name is both strings glued with a hyphen
-				$option_name = implode( '-', $parts );
+				$option_name = implode( self::SUB_OPTION_GLUE, $parts );
 			}
 		}
 
@@ -105,7 +100,7 @@ abstract class ICE_Option_Registry extends ICE_Registry
 			$config['required_feature'] = $config['feature'];
 			// clean up parent
 			if ( isset( $config['parent'] ) ) {
-				$config['parent'] = str_replace( self::FEATURE_OPTION_DELIM, '-', $config['parent'] );
+				$config['parent'] = $this->normalize_name( $config['parent'] );
 			}
 			// call parent config loader
 			if ( $this->load_config_map( $option_name, $config ) ) {
