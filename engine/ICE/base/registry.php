@@ -131,10 +131,6 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 		if ( !$this->components->contains( $component->name ) ) {
 			// register it
 			$this->components->add( $component->name, $component );
-			// post reg
-			if ( $component->supported() ) {
-				$component->init_registered();
-			}
 		}
 
 		return true;
@@ -355,6 +351,11 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 
 		// push configuration
 		$component->config_array( $config_array );
+
+		// post registration
+		if ( $component->supported() ) {
+			$component->init_registered();
+		}
 
 		return true;
 	}
