@@ -175,8 +175,8 @@ ICE_Loader::init( INFINITY_ICE_URL );
 // initialize enqueuer and configure actions
 if ( is_admin() ) {
 	ICE_Enqueue::instance()
-		->styles_on_action( 'load-toplevel_page_' . INFINITY_ADMIN_PAGE )
-		->scripts_on_action( 'load-toplevel_page_' . INFINITY_ADMIN_PAGE );
+		->styles_on_action( 'load-appearance_page_' . INFINITY_ADMIN_PAGE )
+		->scripts_on_action( 'load-appearance_page_' . INFINITY_ADMIN_PAGE );
 } else {
 	ICE_Enqueue::instance()
 		->styles_on_action( 'wp_enqueue_scripts' )
