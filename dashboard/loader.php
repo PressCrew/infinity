@@ -12,13 +12,26 @@
  */
 
 //
-// Files
+// Redirect on activation
 //
 
-/**
- * Include admin menu functions
- */
-require_once( INFINITY_ADMIN_PATH . '/menu.php' );
+// make this global just to be safe
+global $pagenow;
+
+// was i just activated?
+if (
+	$pagenow == "themes.php" &&
+	isset( $_GET['activated'] )
+) {
+	// yes, redirect
+	wp_redirect( admin_url( 'themes.php?page=' . INFINITY_ADMIN_PAGE ) );
+	// no more exec
+	exit;
+}
+
+//
+// Files
+//
 
 /**
  * Include control panel functions
@@ -29,6 +42,31 @@ require_once( INFINITY_ADMIN_PATH . '/cpanel.php' );
 //
 // Functions
 //
+
+/**
+ * Adds the Infinity submenu item to the WordPress menu
+ *
+ * @package Infinity
+ * @subpackage dashboard
+ */
+function infinity_dashboard_menu_setup()
+{
+	// get name of current theme
+	$theme_name = get_current_theme();
+
+	// format title/page name
+	$menu_title = __( sprintf( '%s Options', $theme_name ), infinity_text_domain );
+
+	// add appearance submenu item
+	add_theme_page(
+		$menu_title,
+		$menu_title,
+		'manage_options',
+		INFINITY_ADMIN_PAGE,
+		'infinity_dashboard_cpanel_screen'
+	);
+}
+add_action( 'admin_menu', 'infinity_dashboard_menu_setup' );
 
 /**
  * Locate a dashboard template relative to the template dir root

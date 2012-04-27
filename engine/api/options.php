@@ -80,7 +80,7 @@ class Infinity_Options_Registry extends ICE_Option_Registry
 		if ( defined('DOING_AJAX') ) {
 			add_action( 'wp_ajax_infinity_options_update', array( Infinity_Options_Policy::instance()->registry(), 'process_form_ajax' ) );
 		} else {
-			add_action( 'load-toplevel_page_' . INFINITY_ADMIN_PAGE, array( Infinity_Options_Policy::instance()->registry(), 'process_form' ) );
+			add_action( 'load-appearance_page_' . INFINITY_ADMIN_PAGE, array( Infinity_Options_Policy::instance()->registry(), 'process_form' ) );
 		}
 	}
 }
