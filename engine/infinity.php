@@ -199,7 +199,6 @@ require_once( INFINITY_API_PATH . '/features.php' );
 require_once( INFINITY_API_PATH . '/widgets.php' );
 require_once( INFINITY_API_PATH . '/screens.php' );
 require_once( INFINITY_API_PATH . '/shortcodes.php' );
-require_once( INFINITY_API_PATH . '/i18n.php' );
 
 // initialize scheme
 infinity_scheme_init();
