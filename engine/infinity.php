@@ -113,7 +113,7 @@ define( 'INFINITY_LANGUAGES_PATH', INFINITY_THEME_PATH . '/languages' );
 /**
  * Infinity text domain
  */
-define( 'INFINITY_TEXT_DOMAIN', INFINITY_NAME . '-theme' );
+define( 'INFINITY_TEXT_DOMAIN', INFINITY_SLUG );
 
 /**
  * Infinity text domain alias (for code completion)
@@ -123,7 +123,7 @@ define( 'infinity_text_domain', INFINITY_TEXT_DOMAIN );
 /**
  * Infinity admin page name
  */
-define( 'INFINITY_ADMIN_PAGE', INFINITY_NAME . '-theme' );
+define( 'INFINITY_ADMIN_PAGE', INFINITY_SLUG . '-theme' );
 
 /**
  * Infinity admin documentation directory path
