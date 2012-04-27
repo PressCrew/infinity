@@ -12,6 +12,24 @@
  */
 
 //
+// Redirect on activation
+//
+
+// make this global just to be safe
+global $pagenow;
+
+// was i just activated?
+if (
+	$pagenow == "themes.php" &&
+	isset( $_GET['activated'] )
+) {
+	// yes, redirect
+	wp_redirect( admin_url( 'themes.php?page=' . INFINITY_ADMIN_PAGE ) );
+	// no more exec
+	exit;
+}
+
+//
 // Files
 //
 
