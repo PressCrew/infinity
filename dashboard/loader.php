@@ -20,7 +20,7 @@ global $pagenow;
 
 // was i just activated?
 if (
-	$pagenow == "themes.php" &&
+	$pagenow == 'themes.php' &&
 	isset( $_GET['activated'] )
 ) {
 	// yes, redirect
