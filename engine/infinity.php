@@ -27,10 +27,15 @@ define( 'INFINITY_VERSION', '1.0b3' );
 define( 'INFINITY_BRANCH', 'buddypress' );
 
 /**
+ * Infinity slug
+ */
+define( 'INFINITY_SLUG', 'infinity' );
+
+/**
  * Infinity theme name (slug)
  */
 if ( !defined( 'INFINITY_NAME' ) ) {
-	define( 'INFINITY_NAME', 'infinity' );
+	define( 'INFINITY_NAME', INFINITY_SLUG );
 }
 
 /**
@@ -108,7 +113,7 @@ define( 'INFINITY_LANGUAGES_PATH', INFINITY_THEME_PATH . '/languages' );
 /**
  * Infinity text domain
  */
-define( 'INFINITY_TEXT_DOMAIN', INFINITY_NAME . '-theme' );
+define( 'INFINITY_TEXT_DOMAIN', INFINITY_SLUG );
 
 /**
  * Infinity text domain alias (for code completion)
@@ -118,7 +123,7 @@ define( 'infinity_text_domain', INFINITY_TEXT_DOMAIN );
 /**
  * Infinity admin page name
  */
-define( 'INFINITY_ADMIN_PAGE', INFINITY_NAME . '-theme' );
+define( 'INFINITY_ADMIN_PAGE', INFINITY_SLUG . '-theme' );
 
 /**
  * Infinity admin documentation directory path
@@ -172,6 +177,9 @@ require_once( INFINITY_ICE_PATH . '/loader.php' );
 // initialize ICE
 ICE_Loader::init( INFINITY_ICE_URL );
 
+// setup translation
+load_theme_textdomain( INFINITY_TEXT_DOMAIN, WP_LANG_DIR . '/' . INFINITY_SLUG );
+
 // initialize enqueuer and configure actions
 if ( is_admin() ) {
 	ICE_Enqueue::instance()
@@ -191,7 +199,6 @@ require_once( INFINITY_API_PATH . '/features.php' );
 require_once( INFINITY_API_PATH . '/widgets.php' );
 require_once( INFINITY_API_PATH . '/screens.php' );
 require_once( INFINITY_API_PATH . '/shortcodes.php' );
-require_once( INFINITY_API_PATH . '/i18n.php' );
 
 // initialize scheme
 infinity_scheme_init();
