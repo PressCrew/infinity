@@ -203,7 +203,6 @@ final class ICE_Loader extends ICE_Base
 			'file' => true,
 			'file_cache' => true,
 			'files' => true,
-			'i18n' => true,
 			'webfont' => true
 		)
 	);
