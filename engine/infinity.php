@@ -27,10 +27,15 @@ define( 'INFINITY_VERSION', '1.0b3' );
 define( 'INFINITY_BRANCH', 'base' );
 
 /**
+ * Infinity slug
+ */
+define( 'INFINITY_SLUG', 'infinity' );
+
+/**
  * Infinity theme name (slug)
  */
 if ( !defined( 'INFINITY_NAME' ) ) {
-	define( 'INFINITY_NAME', 'infinity' );
+	define( 'INFINITY_NAME', INFINITY_SLUG );
 }
 
 /**
