@@ -318,12 +318,14 @@ this is needed for when a footer menu is not being used.
     height: 1px;
     overflow: auto;
 }
-
 /* ================== */
 /* ! Page Templates   */
 /* ================== */
 /*page templare sidebar left*/
-.page-template-sidebar-left-template-php #content { float: right !important }
+.page-template-sidebar-left-template-php #content,
+.page-template-sidebar-left-template-php #sidebar.sidebar-right #inner-sidebar { 
+	float: right !important 
+}
 .page-template-sidebar-left-template-php #inner-sidebar {
     margin-left: -25px !important;
     margin-right: 10px !important;
@@ -331,9 +333,14 @@ this is needed for when a footer menu is not being used.
 }
 
 /*page templare sidebar right*/
-.page-template-sidebar-right-template-php #inner-sidebar {
+.page-template-sidebar-right-template-php #sidebar.sidebar-left #inner-sidebar {
     margin-left: 15px !important;
     margin-right: -25px !important;
     margin-top: -40px !important;
     padding-right: 25px !important;
+}
+
+.page-template-sidebar-left-template-php #sidebar.sidebar-left #inner-sidebar,
+.page-template-sidebar-left-template-php #sidebar.sidebar-right #inner-sidebar { 
+	float: left !important;
 }

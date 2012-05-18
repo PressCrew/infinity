@@ -24,15 +24,16 @@
 
 		<!-- toolbar buttons -->
 		<?php infinity_dashboard_cpanel_render_toolbar_buttons(); ?>
-
-		<!-- refresh button -->
-		<a id="infinity-cpanel-refreshbutton" title="<?php _e( 'Refresh current tab', infinity_text_domain ) ?>">
-			<?php _e('Refresh', infinity_text_domain ) ?>
-		</a>
-
-		<!-- scroll button -->
-		<input id="infinity-cpanel-scrollbutton" type="checkbox" />
-		<label for="infinity-cpanel-scrollbutton" title="<?php _e( 'Toggle scroll bars on/off', infinity_text_domain ) ?>"><?php _e( 'Scrolling', infinity_text_domain ) ?></label>
+		
+		<?php if ( true === INFINITY_DEV_MODE ): ?>
+			<!-- refresh button -->
+			<a id="infinity-cpanel-refreshbutton" title="<?php _e( 'Refresh current tab', infinity_text_domain ) ?>">
+				<?php _e('Refresh', infinity_text_domain ) ?>
+			</a>
+			<!-- scroll button -->
+			<input id="infinity-cpanel-scrollbutton" type="checkbox" />
+			<label for="infinity-cpanel-scrollbutton" title="<?php _e( 'Toggle scroll bars on/off', infinity_text_domain ) ?>"><?php _e( 'Scrolling', infinity_text_domain ) ?></label>
+		<?php endif; ?>
 
 	</div>
 
