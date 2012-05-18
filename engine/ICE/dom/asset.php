@@ -383,7 +383,6 @@ abstract class ICE_Asset extends ICE_Base
 	/**
 	 * Inject static code/markup
 	 *
-	 * @todo get rid of file splitting!
 	 * @return string
 	 */
 	public function export()
