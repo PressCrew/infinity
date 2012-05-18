@@ -26,8 +26,8 @@ $this->render_begin( 'infinity-cpanel-options-single' );
 	<?php if ( $this->has_documentation() ): ?>
 	<li><a href="#<?php $this->render_name() ?>-tabs-2"><?php _e('Documentation', infinity_text_domain) ?></a></li>
 	<?php endif; ?>
-	<?php if ( is_admin() ): ?>
-	<li><a href="#<?php $this->render_name() ?>-tabs-3"><?php _e('Sample Code', infinity_text_domain) ?></a></li>
+	<?php if ( true == INFINITY_DEV_MODE ): ?>
+		<li><a href="#<?php $this->render_name() ?>-tabs-3"><?php _e('Sample Code', infinity_text_domain) ?></a></li>
 	<?php endif; ?>
 </ul>
 <div id="<?php $this->render_name() ?>-tabs-1">
@@ -42,7 +42,7 @@ $this->render_begin( 'infinity-cpanel-options-single' );
 	<div class="infinity-docs"><?php $this->render_documentation( ICE_Scheme::instance()->theme_documentation_dirs() ) ?></div>
 </div>
 <?php endif; ?>
-<?php if ( is_admin() ): ?>
+<?php if ( is_admin() && 1 == constant( 'INFINITY_DEV_MODE' ) ): ?>
 <div id="<?php $this->render_name() ?>-tabs-3">
 	<p><?php $this->render_sample_code() ?></p>
 </div>
