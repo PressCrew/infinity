@@ -609,7 +609,7 @@ abstract class ICE_Option_Image
 				$src = array_fill( 0, 3, null );
 				// is a default set?
 				if ( $directive->has_value() ) {
-					$src[0] = ICE_Files::theme_file_url( $directive->get_theme(), $directive->get_value() );
+					$src[0] = ICE_Scheme::instance()->theme_file_url( $directive->get_theme(), $directive->get_value() );
 				}
 			}
 		}
@@ -644,7 +644,7 @@ abstract class ICE_Option_Image
 			$directive = $this->directive()->get( 'default_value' );
 
 			// they must have provided an image path
-			return ICE_Files::theme_file_url( $directive->get_theme(), $directive->get_value() );
+			return ICE_Scheme::instance()->theme_file_url( $directive->get_theme(), $directive->get_value() );
 
 		}
 
