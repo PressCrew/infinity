@@ -145,6 +145,13 @@ final class ICE_Scheme extends ICE_Base
 	private $themes;
 
 	/**
+	 * Themes which have been compiled into one theme
+	 *
+	 * @var ICE_Map
+	 */
+	private $themes_compiled;
+
+	/**
 	 * Cache of reversed theme stack array
 	 *
 	 * @var array
@@ -179,8 +186,18 @@ final class ICE_Scheme extends ICE_Base
 	{
 		// initialize themes map
 		$this->themes = new ICE_Stack();
+		$this->themes_compiled = new ICE_Map();
 		$this->directives = new ICE_Init_Directive_Registry();
 		$this->config_files_loaded = new ICE_Stack();
+
+		// handle compiled themes
+		if ( defined( 'ICE_THEMES_COMPILED' ) && ICE_THEMES_COMPILED !== null ) {
+			// split at comma
+			foreach( explode( ',', ICE_THEMES_COMPILED ) as $theme ) {
+				// push on to compiled themes map
+				$this->themes_compiled->add( $theme, $theme );
+			}
+		}
 
 		// set up exports
 		$this->exports = new ICE_Export_Manager();
@@ -419,12 +436,21 @@ final class ICE_Scheme extends ICE_Base
 	 */
 	public function load( $theme = null )
 	{
+		// was a theme passed?
 		if ( empty( $theme ) ) {
-			$theme = ICE_ACTIVE_THEME;
+			// nope, is there at least one compiled themes?
+			if ( $this->themes_compiled->count() >= 1 ) {
+				// use theme from top of compiled themes stack
+				$compiled = $this->themes_compiled->to_array();
+				$theme = end( $compiled );
+			} else {
+				// fall back to using active theme
+				$theme = ICE_ACTIVE_THEME;
+			}
 		}
 
 		// get path to config file
-		$ini_file = $this->theme_config_file( $theme );
+		$ini_file = $this->theme_config_file( $theme, $this->config_file );
 
 		// does ini file exist?
 		if ( ICE_Files::cache($ini_file)->is_readable() ) {
@@ -470,8 +496,11 @@ final class ICE_Scheme extends ICE_Base
 				}
 			}
 
-			// add extension dir to extension loader
-			ICE_Ext_Loader::path( $this->theme_file( $theme, $this->exts_dir ) );
+			// make sure theme is NOT compiled in
+			if ( false === $this->themes_compiled->contains( $theme ) ) {
+				// add extension dir to extension loader
+				ICE_Ext_Loader::path( $this->theme_file( $theme, $this->exts_dir ) );
+			}
 
 		} else {
 			throw new Exception( 'Failed to parse theme ini file: ' . $ini_file );
@@ -611,7 +640,7 @@ final class ICE_Scheme extends ICE_Base
 		foreach( $this->theme_stack( false ) as $theme ) {
 
 			// path to ini file
-			$ini_file = $this->theme_file( $theme, $this->config_dir, $policy->get_handle() . '.ini' );
+			$ini_file = $this->theme_config_file( $theme, $policy->get_handle() );
 
 			// load the option config if it exists
 			if ( ICE_Files::cache($ini_file)->is_readable() ) {
@@ -737,9 +766,13 @@ final class ICE_Scheme extends ICE_Base
 	 * @param string $theme
 	 * @return string
 	 */
-	public function theme_dir( $theme )
+	final public function theme_dir( $theme )
 	{
-		return ICE_Files::theme_dir( $theme );
+		if ( true === $this->themes_compiled->contains( $theme ) ) {
+			return ICE_Files::theme_dir( $this->root_theme );
+		} else {
+			return ICE_Files::theme_dir( $theme );
+		}
 	}
 
 	/**
@@ -748,7 +781,7 @@ final class ICE_Scheme extends ICE_Base
 	 * @param string $file_names,...
 	 * @return array
 	 */
-	public function theme_dirs()
+	final public function theme_dirs()
 	{
 		// get all args
 		$file_names = func_get_args();
@@ -758,7 +791,11 @@ final class ICE_Scheme extends ICE_Base
 
 		// loop through theme stack
 		foreach ( $this->theme_stack() as $theme ) {
-			$paths[] = $this->theme_file( $theme, $file_names );
+			// make sure theme is NOT compiled in
+			if ( false === $this->themes_compiled->contains( $theme ) ) {
+				// add to list of paths
+				$paths[] = $this->theme_file( $theme, $file_names );
+			}
 		}
 
 		return $paths;
@@ -780,7 +817,7 @@ final class ICE_Scheme extends ICE_Base
 	 * @param string $theme
 	 * @param string $file_names,...
 	 */
-	public function theme_file( $theme = null )
+	final public function theme_file( $theme = null )
 	{
 		// get all args
 		$args = func_get_args();
@@ -806,14 +843,47 @@ final class ICE_Scheme extends ICE_Base
 	}
 
 	/**
+	 * Return URL to a theme file
+	 *
+	 * @param string $theme
+	 * @param string|array $file_names,... Zero or more file name parameters
+	 */
+	final public function theme_file_url( $theme )
+	{
+		// get all args
+		$args = func_get_args();
+
+		// is this theme compiled?
+		if ( $this->themes_compiled->contains( $theme ) ) {
+			// theme is root theme
+			$args[0] = $this->root_theme;
+		}
+		
+		return call_user_func_array( array( 'ICE_Files', 'theme_file_url' ), $args );
+	}
+
+	/**
 	 * Return path to a specific theme's main configuration file
 	 *
 	 * @param string $theme
 	 * @return string
 	 */
-	private function theme_config_file( $theme )
+	private function theme_config_file( $theme, $filename )
 	{
-		return $this->theme_file( $theme, $this->config_dir, $this->config_file . '.ini' );
+		// the relative config dir path
+		$config_dir = null;
+
+		// is this theme compiled?
+		if ( $this->themes_compiled->contains( $theme ) ) {
+			// yes, append theme name to config dir path
+			$config_dir = $this->config_dir . '/' . $theme;
+		} else {
+			// no, use config dir path as is
+			$config_dir = $this->config_dir;
+		}
+
+		// return absolute path to theme file
+		return $this->theme_file( $theme, $config_dir, $filename . '.ini' );
 	}
 
 	/**
@@ -849,6 +919,12 @@ final class ICE_Scheme extends ICE_Base
 		// loop through theme stack
 		foreach ( $this->theme_stack() as $theme ) {
 
+			// is theme in current loop compiled?
+			if ( true === $this->themes_compiled->contains( $theme ) ) {
+				// yep, skip it
+				continue;
+			}
+
 			// build path to stackfile
 			$stack_file = $this->theme_dir( $theme );
 
@@ -867,38 +943,6 @@ final class ICE_Scheme extends ICE_Base
 		}
 
 		return false;
-	}
-
-	/**
-	 * Locate a theme config file, giving priority to top themes in the stack
-	 *
-	 * @param string $file_names,... The file names that make up the RELATIVE path to the theme config root
-	 * @return string|false
-	 */
-	public function locate_config_file()
-	{
-		// get all args
-		$args = func_get_args();
-		// config root is first arg
-		array_unshift( $args, $this->config_dir );
-		// locate it
-		return call_user_func_array( array($this,'locate_file'), $args );
-	}
-
-	/**
-	 * Locate a theme component extension file, giving priority to top themes in the stack
-	 *
-	 * @param string $file_names,... The file names that make up the RELATIVE path to the theme extensions root
-	 * @return string|false
-	 */
-	public function locate_extension_file()
-	{
-		// get all args
-		$args = func_get_args();
-		// extension root is first arg
-		array_unshift( $args, $this->exts_dir );
-		// locate it
-		return call_user_func_array( array($this,'locate_file'), $args );
 	}
 
 	/**
