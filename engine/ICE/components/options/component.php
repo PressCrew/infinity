@@ -301,6 +301,34 @@ abstract class ICE_Option extends ICE_Component
 	}
 
 	/**
+	 * Returns true if a row for the option exists in the database
+	 *
+	 * @param boolean $ignore_default Set to true to ignore any default value that might be set
+	 * @return boolean
+	 */
+	public function is_set( $ignore_default = false )
+	{
+		global $wpdb;
+
+		// any default value?
+		if ( false === $ignore_default && null !== $this->default_value ) {
+			// a default value is set, no need to look in the database
+			return true;
+		}
+
+		// check if the option exists in the database
+		$count = $wpdb->get_var(
+			$wpdb->prepare(
+				"SELECT COUNT(*) FROM {$wpdb->options} WHERE option_name = %s LIMIT 1",
+				$this->get_api_name()
+			)
+		);
+
+		// return result of count as boolean
+		return (boolean) $count;
+	}
+
+	/**
 	 * Update the value of this option
 	 *
 	 * @param mixed $value
