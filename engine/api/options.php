@@ -295,6 +295,20 @@ function infinity_option_get( $option_name )
 }
 
 /**
+ * Returns true if option is set
+ *
+ * @package Infinity-api
+ * @subpackage options
+ * @param string $option_name
+ * @param boolean $ignore_default
+ * @return ICE_Option
+ */
+function infinity_option_isset( $option_name, $ignore_default = false )
+{
+	return infinity_option_fetch($option_name)->is_set( $ignore_default );
+}
+
+/**
  * Begin rendering an option
  *
  * @package Infinity-api
