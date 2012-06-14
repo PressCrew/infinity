@@ -47,6 +47,15 @@ class ICE_Ext_Feature_Echo
 		// run parent init method
 		parent::init();
 
+		// register actions as late as possible (this may need to be tweaked later)
+		add_action( 'init', array($this,'register_actions') );
+	}
+
+	/**
+	 * Register all configured actions
+	 */
+	public function register_actions()
+	{
 		// call template class method to get action list
 		$this->__actions__ = $this->get_action_list();
 
