@@ -47,10 +47,6 @@ not have to switch between different pages in the dashboard.
 
 This feature enables BuddyPress support. If BuddyPress is not active it is silently ignored.
 
-#### infinity-bp-activity-intro
-
-This feature adds a a theme option for injecting content before the BuddyPress activity listing.
-
 #### infinity-custom-css
 
 This feature enables a custom CSS option in the theme options panel.

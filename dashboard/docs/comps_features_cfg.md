@@ -59,7 +59,6 @@ The available feature types are:
 
 * __default__				- An generic feature which acts as a simple container
 * __bp/support__			- Enables BuddyPress support
-* __bp/activity-intro__		- Enables custom content before activity stream
 * __gravatar__				- Add a gravatar just about anywhere and give users the power to
 							control the output.
 * __header-logo__			- Attach an uploader option to any css selector to allow users to manage
