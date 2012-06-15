@@ -65,11 +65,17 @@ abstract class ICE_Factory extends ICE_Componentable
 		// make sure the extension is loaded
 		$class_name = $this->load_ext( $config['type'] );
 
-		// create new component
-		$component = new $class_name( $name, $config['type'], $config['theme'], $this->policy() );
-
-		// all done
-		return $component;
+		// try to create new component
+		try {
+			// construct it
+			$component = new $class_name( $name, $config['type'], $config['theme'], $this->policy() );
+			// return it
+			return $component;
+		// catch missing reqs exception
+		} catch ( ICE_Missing_Reqs_Exception $e ) {
+			// failed to create component due to missing reqs
+			return false;
+		}
 	}
 
 }
