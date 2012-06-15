@@ -380,8 +380,15 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 					$name,
 					$config_array
 				);
-			// register component
-			$this->register( $component );
+			// make sure we got a valid component
+			if ( $component instanceof ICE_Component ) {
+				// register component
+				$this->register( $component );
+			} else {
+				// did not get a component, nothing to do
+				// TODO might want to throw an exception here, this is pretty bad juju
+				return false;
+			}
 		}
 
 		// push configuration

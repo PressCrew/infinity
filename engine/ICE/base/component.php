@@ -155,6 +155,13 @@ abstract class ICE_Component
 	 */
 	final public function __construct( $name, $type, $theme, $policy )
 	{
+		// check requirements
+		if ( false === $this->check_reqs() ) {
+			// can't construct object, external requirements are missing or broken
+			throw new ICE_Missing_Reqs_Exception(
+				sprintf( 'Cannot construct the "%s" %s component: requirements check failed' ) );
+		}
+
 		// apply policy
 		$this->policy( $policy );
 
@@ -641,6 +648,18 @@ abstract class ICE_Component
 			}
 		}
 
+		return true;
+	}
+
+	/**
+	 * Check that all external requirements of this component are met.
+	 *
+	 * This method is executed in the constructor before any other logic!
+	 *
+	 * @return boolean
+	 */
+	public function check_reqs()
+	{
 		return true;
 	}
 

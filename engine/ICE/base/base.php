@@ -88,4 +88,13 @@ abstract class ICE_Base
 	}
 }
 
+/**
+ * This exception should be thrown when a fatal error occurs due
+ * to missing or otherwise broken external requirements.
+ */
+class ICE_Missing_Reqs_Exception extends RuntimeException
+{
+	// nothing special yet
+}
+
 ?>
