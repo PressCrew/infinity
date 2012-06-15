@@ -159,7 +159,7 @@ abstract class ICE_Component
 		if ( false === $this->check_reqs() ) {
 			// can't construct object, external requirements are missing or broken
 			throw new ICE_Missing_Reqs_Exception(
-				sprintf( 'Cannot construct the "%s" %s component: requirements check failed' ) );
+				sprintf( 'Cannot construct the "%s" %s component: requirements check failed', $name, $type ) );
 		}
 
 		// apply policy
