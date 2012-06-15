@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-ICE_Loader::load( 'components/features/component_bp' );
+ICE_Loader::load( 'components/features/component' );
 
 /**
  * BuddyPress custom mysteryman feature
@@ -20,7 +20,7 @@ ICE_Loader::load( 'components/features/component_bp' );
  * @subpackage features
  */
 class ICE_Ext_Feature_Bp_Custom_Mysteryman
-	extends ICE_Feature_Bp
+	extends ICE_Feature
 {
 	/**
 	 */
@@ -32,6 +32,18 @@ class ICE_Ext_Feature_Bp_Custom_Mysteryman
 	 * @var null|false|string Set to null if no lookup yet, false if URL lookup failed, string if lookup was a success
 	 */
 	private $custom_url;
+
+	/**
+	 */
+	public function check_reqs()
+	{
+		// is buddypress active?
+		if ( true === parent::check_reqs() ) {
+			return class_exists( 'BP_Component' );
+		}
+
+		return false;
+	}
 	
 	/**
 	 */
