@@ -340,7 +340,7 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	 * @param array $section_array
 	 * @return boolean
 	 */
-	private function load_config_section( $section_name, $section_array )
+	protected function load_config_section( $section_name, $section_array )
 	{
 		// options component enabled?
 		if ( $this->policy()->options() instanceof ICE_Policy ) {
