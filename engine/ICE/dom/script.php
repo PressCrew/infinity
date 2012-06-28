@@ -289,7 +289,7 @@ class ICE_Script_Logic extends ICE_Base
 	 */
 	public function av( $name, $value, $nulls = false )
 	{
-		return $this->add_variable( $name, $value );
+		return $this->add_variable( $name, $value, $nulls );
 	}
 
 	/**
