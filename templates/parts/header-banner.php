@@ -48,8 +48,8 @@
 	</header><!-- end header -->
 	<?php
 		// Load Sub Menu only if it's enabled
-		if ( current_theme_supports( 'infinity-main-menu-setup' ) ) :
-		infinity_get_template_part( 'templates/parts/sub-menu', 'header' );
+		if ( current_theme_supports( 'infinity-sub-menu-setup' ) ) :
+			infinity_get_template_part( 'templates/parts/sub-menu', 'header' );
 		endif;
 	?>
 </div><!-- end top wrap -->
