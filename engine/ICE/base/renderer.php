@@ -309,10 +309,8 @@ abstract class ICE_Renderer extends ICE_Componentable
 
 	/**
 	 * Load the component template
-	 *
-	 * @param integer $ancestor Number of ancestories to skip, including self
 	 */
-	final public function load_template( $ancestor = 0 )
+	final public function load_template()
 	{
 		// get template vars
 		$__tpl_vars__ = $this->component()->get_template_vars();
@@ -323,7 +321,7 @@ abstract class ICE_Renderer extends ICE_Componentable
 		}
 
 		// load template
-		include( $this->component()->get_template_path( $ancestor ) );
+		include( $this->component()->get_template_path() );
 	}
 
 }
