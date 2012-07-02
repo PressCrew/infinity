@@ -122,7 +122,6 @@ final class ICE_Loader extends ICE_Base
 		'components' => array(
 			'features' => array(
 				'component' => true,
-				'component_bp' => true,
 				'factory' => true,
 				'renderer' => true,
 				'policy' => true,

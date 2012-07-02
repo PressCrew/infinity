@@ -191,8 +191,8 @@
 					_diaZoom.dialog({
 						autoOpen: false,
 						modal: true,
-						height: _diaZoom.children('img').attr('height') + 60,
-						width: _diaZoom.children('img').attr('width') + 30
+						height: parseInt(_diaZoom.children('img').attr('height')) + 60,
+						width: parseInt(_diaZoom.children('img').attr('width')) + 30
 					});
 					// init zoom button
 					_btnZoom.button({

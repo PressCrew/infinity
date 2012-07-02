@@ -96,20 +96,23 @@ abstract class ICE_Option_Registry extends ICE_Registry
 
 		// have all feature option details?
 		if ( isset( $config['feature'] ) && $option_name ) {
-			// set required feature
-			$config['required_feature'] = $config['feature'];
-			// clean up parent
-			if ( isset( $config['parent'] ) ) {
-				$config['parent'] = $this->normalize_name( $config['parent'] );
-			}
-			// call parent config loader
-			if ( $this->load_config_map( $option_name, $config ) ) {
-				// successfully loaded feature sub option
-				return true;
-			} else {
-				// this is really bad
-				throw new Exception( sprintf(
-					'Failed to load "%s" as an option for feature "%s"', $option_name, $config['feature'] ) );
+			// make sure feature is registered
+			if ( $this->policy()->features()->registry()->has( $config['feature'] ) ) {
+				// set required feature
+				$config['required_feature'] = $config['feature'];
+				// clean up parent
+				if ( isset( $config['parent'] ) ) {
+					$config['parent'] = $this->normalize_name( $config['parent'] );
+				}
+				// call parent config loader
+				if ( $this->load_config_map( $option_name, $config ) ) {
+					// successfully loaded feature sub option
+					return true;
+				} else {
+					// this is really bad
+					throw new Exception( sprintf(
+						'Failed to load "%s" as an option for feature "%s"', $option_name, $config['feature'] ) );
+				}
 			}
 		}
 
