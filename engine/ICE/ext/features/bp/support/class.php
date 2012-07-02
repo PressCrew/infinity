@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-ICE_Loader::load( 'components/features/component_bp' );
+ICE_Loader::load( 'components/features/component' );
 
 /**
  * BuddyPress support feature
@@ -20,15 +20,29 @@ ICE_Loader::load( 'components/features/component_bp' );
  * @subpackage features
  */
 class ICE_Ext_Feature_Bp_Support
-	extends ICE_Feature_Bp
+	extends ICE_Feature
 {
+	/**
+	 */
+	public function check_reqs()
+	{
+		// is buddypress active?
+		if ( true === parent::check_reqs() ) {
+			return class_exists( 'BP_Component' );
+		}
+
+		return false;
+	}
+	
 	/**
 	 */
 	public function supported()
 	{
-		if ( parent::supported() ) {
+		if ( true === parent::supported() ) {
 			return $this->is_active();
 		}
+
+		return false;
 	}
 
 	/**
@@ -231,8 +245,6 @@ class ICE_Ext_Feature_Bp_Support
 	 */
 	private function is_active()
 	{
-		global $blog_id;
-		
 		switch ( false ) {
 			case ( function_exists( 'bp_is_active' ) ):
 			case ( bp_is_root_blog() ):
