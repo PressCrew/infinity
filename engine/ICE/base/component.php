@@ -897,10 +897,9 @@ abstract class ICE_Component
 	/**
 	 * Return absolute path to default template
 	 *
-	 * @param integer $ancestor Number of ancestories to skip, including self
 	 * @return string
 	 */
-	final public function get_template_path( $ancestor = 0 )
+	final public function get_template_path()
 	{
 		// template path to return
 		$template = null;
@@ -915,16 +914,8 @@ abstract class ICE_Component
 			// yes! use that one
 			return $template;
 		} else {
-			// is a template part set?
-			if ( strlen( $this->__template_part__ ) ) {
-				// yes, append it
-				$filename = sprintf( 'template-%s.php', $this->__template_part__ );
-			} else {
-				// no, use default
-				$filename = 'template.php';
-			}
-			// try to locate the template
-			return $this->locate_file( $filename, $ancestor );
+			// try to locate the default template
+			return $this->locate_file( 'template.php' );
 		}
 	}
 
@@ -946,26 +937,12 @@ abstract class ICE_Component
 	 * Return path to an ext file
 	 *
 	 * @param string $filename
-	 * @param integer $ancestor
 	 * @return string
 	 */
-	final public function locate_file( $filename, $ancestor = 0 )
+	final public function locate_file( $filename )
 	{
-		// loop class ancestry
-		foreach ( $this->reflect_stack() as $reflection ) {
-			// skip ancestors
-			if ( $ancestor-- <= 0 ) {
-				// call ext loader file locator helper
-				$located = ICE_Ext_Loader::instance()->locate_file( $reflection->getName(), $filename );
-				// anything?
-				if ( $located ) {
-					return $located;
-				}
-			}
-		}
-
-		// no file found :(
-		return false;
+		// call ext loader file locator helper
+		return ICE_Ext_Loader::instance()->locate_file( get_class( $this ), $filename );
 	}
 
 	/**
