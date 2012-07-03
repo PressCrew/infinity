@@ -918,10 +918,10 @@ abstract class ICE_Component
 	 * @param string $name
 	 * @return string|false
 	 */
-	final protected function get_template_part( $name )
+	final public function get_template_part( $name )
 	{
 		// only allow sane characters
-		if ( preg_match( '/[a-z0-9]+[\w-]*', $name ) ) {
+		if ( preg_match( '/[a-z0-9]+[\w-]*/', $name ) ) {
 			// try to locate it!
 			return $this->locate_file( sprintf( 'template-%s.php', $name ) );
 		}
