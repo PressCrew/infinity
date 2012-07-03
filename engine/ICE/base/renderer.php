@@ -324,6 +324,15 @@ abstract class ICE_Renderer extends ICE_Componentable
 		include( $this->component()->get_template_path() );
 	}
 
+	/**
+	 * Load a component template part
+	 */
+	final public function load_template_part( $name )
+	{
+		// load template
+		include( $this->component()->get_template_part( $name ) );
+	}
+
 }
 
 ?>
