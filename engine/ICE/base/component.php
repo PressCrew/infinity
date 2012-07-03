@@ -956,6 +956,27 @@ abstract class ICE_Component
 	}
 
 	/**
+	 * Return URL to an ext file
+	 *
+	 * @param string $filename
+	 * @return string|false
+	 */
+	final public function locate_file_url( $filename )
+	{
+		// locate the file path
+		$path = $this->locate_file( $filename );
+
+		// was a path found?
+		if ( $path ) {
+			// yes, use files util to get URL
+			return ICE_Files::theme_file_to_url( $path );
+		}
+
+		// no file found
+		return false;
+	}
+
+	/**
 	 * Render this component
 	 *
 	 * @param boolean $output Whether to output or return result
