@@ -941,8 +941,18 @@ abstract class ICE_Component
 	 */
 	final public function locate_file( $filename )
 	{
-		// call ext loader file locator helper
-		return ICE_Ext_Loader::instance()->locate_file( get_class( $this ), $filename );
+		// loop class ancestry
+		foreach ( $this->reflect_stack() as $reflection ) {
+			// call ext loader file locator helper
+			$located = ICE_Ext_Loader::instance()->locate_file( $reflection->getName(), $filename );
+			// anything?
+			if ( $located ) {
+				return $located;
+			}
+		}
+
+		// no file found :(
+		return false;
 	}
 
 	/**
