@@ -106,13 +106,6 @@ abstract class ICE_Component
 	private $__script__;
 
 	/**
-	 * The template part to append to the *default* template path
-	 *
-	 * @var string
-	 */
-	private $__template_part__ = '';
-
-	/**
 	 * The component name
 	 *
 	 * @var string
@@ -920,17 +913,22 @@ abstract class ICE_Component
 	}
 
 	/**
-	 * Set the template part "suffix" for the default template path
+	 * Return absolute path to a template part
 	 *
 	 * @param string $name
+	 * @return string|false
 	 */
-	final protected function set_template_part( $name = '' )
+	final protected function get_template_part( $name )
 	{
-		if ( $name === '' ) {
-			$this->__template_part__ = '';
-		} else {
-			$this->__template_part__ = $this->validate_name( $name );
+		// only allow sane characters
+		if ( preg_match( '/[a-z0-9]+[\w-]*', $name ) ) {
+			// try to locate it!
+			return $this->locate_file( sprintf( 'template-%s.php', $name ) );
 		}
+
+		// bad name
+		throw new Exception( sprintf(
+			'The template part named "%s" contains invalid characters', $name ) );
 	}
 	
 	/**
