@@ -343,6 +343,50 @@ abstract class ICE_Component
 				return $this->__directives__->set( $theme, $name, $value, $ro_value, $ro_theme );
 		}
 	}
+
+	/**
+	 * Copy a configuration value to a directive
+	 *
+	 * @param string $name Name of the directive to copy from the configuration
+	 * @param null|string $type null: no type casting, string|integer|float|boolean|array: cast to type
+	 * @param mixed $default If set, this value will be used if directive is missing from configuration
+	 * @return boolean
+	 */
+	final protected function directive_init( $name, $type = null, $default = null )
+	{
+		// was a default passed?
+		$has_default = ( func_num_args() >= 3 );
+
+		// value is null by default
+		$value = null;
+
+		// is conf data set?
+		if ( $this->config()->contains( $name ) ) {
+			// get value of conf
+			$raw_value = $this->config( $name );
+			// type cast?
+			if ( $type ) {
+				try {
+					// try to cast it
+					$value = $this->cast( $raw_value, $type );
+				} catch ( Exception $e ) {
+					// type cast failed, value NOT set
+				}
+			} else {
+				// no type passed, use value as is
+				$value = $raw_value;
+			}
+		}
+		
+		// handle default value
+		if ( null == $value && true == $has_default ) {
+			// use default value
+			$value = $default;
+		}
+
+		// set the directive
+		return $this->directive( $name, $value );
+	}
 	
 	/**
 	 * Return element helper instance
