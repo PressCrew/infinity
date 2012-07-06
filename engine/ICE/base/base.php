@@ -86,6 +86,133 @@ abstract class ICE_Base
 		throw new Exception(
 			sprintf( 'The "%s" class cannot be converted to a string.', get_class($this) ) );
 	}
+
+	/**
+	 * Cast a value from one type to another.
+	 *
+	 * This method simplifies type casting. It supports numeric tests and some sanity checks
+	 * to prevent silly mistakes like casting an array to a string, etc.
+	 *
+	 * @param mixed $value The value to cast
+	 * @param string $type One of string|integer|float|number|boolean|array|object|unset
+	 * @return mixed
+	 * @throws Exception
+	 */
+	final public function cast( $value, $type )
+	{
+		// get the type for the received value
+		$valtype = gettype( $value );
+
+		// if actual type matches requested type, nothing to do
+		if ( $type == $valtype ) {
+			// return value untouched
+			return $value;
+		}
+
+		// value has different type, need to cast
+		switch ( $type ) {
+
+			// cast to string
+			case 'string' :
+				// must be scalar
+				if ( is_scalar( $value ) ) {
+					// ok to cast
+					return (string) $value;
+				} else {
+					throw new Exception( 'Casting an non-scalar value to a string is silly!' );
+				}
+
+			// cast to integer
+			case 'integer' :
+				// must be scalar
+				if ( is_scalar( $value ) ) {
+					// make sure its numeric
+					if ( is_numeric( $value ) ) {
+						// its numeric!
+						return (integer) $value;
+					} else {
+						// not numeric
+						throw new Exception( 'Casting a non-numeric value to an integer is silly' );
+					}
+				} else {
+					// not scalar
+					throw new Exception( 'Casting a non-scalar value to an integer is silly' );
+				}
+			
+			// cast to float
+			case 'float' :
+				// must be scalar
+				if ( is_scalar( $value ) ) {
+					// make sure its numeric
+					if ( is_numeric( $value ) ) {
+						// its numeric!
+						return (float) $value;
+					} else {
+						// not numeric
+						throw new Exception( 'Casting a non-numeric value to a float is silly' );
+					}
+				} else {
+					// not scalar
+					throw new Exception( 'Casting a non-scalar value to a float is silly' );
+				}
+
+			// cast to a number (float OR integer)
+			case 'number' :
+				// make sure its numeric
+				if ( is_numeric( $value ) ) {
+					// its numeric! if it has a dot, cast to float, otherwise cast to int
+					if ( strpos( $value, '.' ) ) {
+						// call again using float as type
+						return $this->cast( $value, 'float' );
+					} else {
+						// call again using integer as type
+						return $this->cast( $value, 'integer' );
+					}
+				} else {
+					// not numeric
+					throw new Exception( 'Casting a non-numeric value to a number is silly' );
+				}
+
+			// cast to boolean
+			case 'boolean' :
+				// sanity check
+				if ( 'object' != $valtype && 'resource' != $valtype ) {
+					// ok to cast
+					return (boolean) $value;
+				} else {
+					throw new Exception( 'Casting an object or resource to a boolean is silly!' );
+				}
+				
+			
+			// cast to array
+			case 'array' :
+				return (array) $value;
+			
+			// cast to object
+			case 'object' :
+				// sanity check
+				if ( !is_scalar( $value ) && 'resource' != $valtype ) {
+					// ok to cast
+					return (object) $value;
+				} else {
+					throw new Exception( 'Casting a scalar value or a resource to an object is silly!' );
+				}
+				
+			// cast to unset
+			case 'unset' :
+				// this does NOT unset the value, but always returns NULL
+				return (unset) $value;
+
+			// cast to resource
+			case 'resource' :
+				throw new Exception( 'Casting any value to a resource is silly!' );
+			
+			// default
+			default :
+				// must have a valid type
+				throw new Exception( sprintf( 'The type: "%s" is not a valid type', $type ) );
+		}
+	}
 }
 
 /**
