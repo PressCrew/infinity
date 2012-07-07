@@ -44,6 +44,13 @@ final class ICE_Files extends ICE_Base
 	static private $document_root_length;
 
 	/**
+	 * Cached theme root path
+	 *
+	 * @var array
+	 */
+	static private $theme_root = array();
+
+	/**
 	 * Set the doc root variables if not already set
 	 *
 	 * @return string
@@ -54,7 +61,7 @@ final class ICE_Files extends ICE_Base
 			if ( isset( $_SERVER['DOCUMENT_ROOT'] ) ) {
 				self::$document_root = realpath( $_SERVER['DOCUMENT_ROOT'] );
 			} else {
-				$theme_root = get_theme_root();
+				$theme_root = self::theme_root();
 				$theme_root_uri = get_theme_root_uri();
 				$uri_parts = parse_url( $theme_root_uri );
 				$path_length = strlen( $uri_parts['path'] );
@@ -272,9 +279,16 @@ final class ICE_Files extends ICE_Base
 	 * @param string $theme
 	 * @return string
 	 */
-	static public function theme_root( $theme )
+	static public function theme_root( $theme = null )
 	{
-		return realpath( get_theme_root( $theme ) );
+		// handle cache miss
+		if ( !isset( self::$theme_root[ $theme ] ) ) {
+			// populate it
+			self::$theme_root[ $theme ] = realpath( get_theme_root( $theme ) );
+		}
+
+		// return cached value
+		return self::$theme_root[ $theme ];
 	}
 
 	/**
@@ -344,7 +358,7 @@ final class ICE_Files extends ICE_Base
 	static public function theme_file_to_rel( $file_path )
 	{
 		// convert path to be realtive to themes root
-		return str_replace( realpath( get_theme_root() ) . '/', '', $file_path );
+		return str_replace( self::theme_root() . '/', '', $file_path );
 	}
 
 	/**
