@@ -309,7 +309,7 @@ final class ICE_Files extends ICE_Base
 		// handle cache miss
 		if ( !isset( self::$theme_root_uri[ $theme ] ) ) {
 			// populate it
-			self::$theme_root_uri[ $theme ] = realpath( get_theme_root_uri( $theme ) );
+			self::$theme_root_uri[ $theme ] = get_theme_root_uri( $theme );
 		}
 
 		// return cached value
