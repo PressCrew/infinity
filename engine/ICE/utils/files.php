@@ -51,6 +51,13 @@ final class ICE_Files extends ICE_Base
 	static private $theme_root = array();
 
 	/**
+	 * Cached theme root uri
+	 *
+	 * @var array
+	 */
+	static private $theme_root_uri = array();
+
+	/**
 	 * Set the doc root variables if not already set
 	 *
 	 * @return string
@@ -62,7 +69,7 @@ final class ICE_Files extends ICE_Base
 				self::$document_root = realpath( $_SERVER['DOCUMENT_ROOT'] );
 			} else {
 				$theme_root = self::theme_root();
-				$theme_root_uri = get_theme_root_uri();
+				$theme_root_uri = self::theme_root_uri();
 				$uri_parts = parse_url( $theme_root_uri );
 				$path_length = strlen( $uri_parts['path'] );
 				$document_root = substr_replace( $theme_root, '', -$path_length );
@@ -297,15 +304,16 @@ final class ICE_Files extends ICE_Base
 	 * @param string $theme
 	 * @return string
 	 */
-	static public function theme_root_url( $theme )
+	static public function theme_root_uri( $theme = null )
 	{
-		$url = get_theme_root_uri( $theme );
-
-		if ( is_ssl() ) {
-			return preg_replace( '/http:\/\//', 'https://', $url, 1 );
-		} else {
-			return $url;
+		// handle cache miss
+		if ( !isset( self::$theme_root_uri[ $theme ] ) ) {
+			// populate it
+			self::$theme_root_uri[ $theme ] = realpath( get_theme_root_uri( $theme ) );
 		}
+
+		// return cached value
+		return self::$theme_root_uri[ $theme ];
 	}
 	
 	/**
@@ -327,7 +335,7 @@ final class ICE_Files extends ICE_Base
 	 */
 	static public function theme_dir_url( $theme )
 	{
-		return self::theme_root_url( $theme ) . '/' . $theme;
+		return self::theme_root_uri( $theme ) . '/' . $theme;
 	}
 
 	/**
