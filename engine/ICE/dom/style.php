@@ -1196,11 +1196,11 @@ final class ICE_Style_Property_Primitive extends ICE_Style_Property
 final class ICE_Style_Property_Composite extends ICE_Style_Property
 {
 	/**
-	 * List of primitive properties which compose this composite's value
+	 * Array of primitive properties which compose this composite's value
 	 *
-	 * @var ICE_Map
+	 * @var array
 	 */
-	private $properties;
+	private $properties = array();
 
 	/**
 	 * Constructor
@@ -1214,11 +1214,9 @@ final class ICE_Style_Property_Composite extends ICE_Style_Property
 
 		parent::__construct( $name );
 
-		$this->properties = new ICE_Map();
-
 		foreach ( $primitives as $primitive ) {
 			if ( $primitive instanceof ICE_Style_Property_Primitive ) {
-				$this->properties->add( $primitive->name, $primitive );
+				$this->properties[ $primitive->name ] = $primitive;
 			} else {
 				throw new Exception( 'Only primitive properties can be added to a composite property' );
 			}
