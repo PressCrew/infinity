@@ -38,9 +38,9 @@ class ICE_Script extends ICE_Asset
 	/**
 	 * The blocks of logic
 	 *
-	 * @var ICE_Stack
+	 * @var array
 	 */
-	private $logic;
+	private $logic_stack = array();
 
 	/**
 	 * Constructor
@@ -51,9 +51,6 @@ class ICE_Script extends ICE_Asset
 
 		// set token and bump it
 		$this->token = self::$next_token++;
-
-		// init logic stack
-		$this->logic = new ICE_Stack();
 	}
 
 	/**
@@ -75,7 +72,7 @@ class ICE_Script extends ICE_Asset
 		$logic = new ICE_Script_Logic( $code );
 		
 		// add it to logic stack
-		$this->logic->push( $logic );
+		$this->logic_stack[] = $logic;
 
 		return $logic;
 	}
@@ -110,13 +107,13 @@ class ICE_Script extends ICE_Asset
 		$code = parent::export();
 
 		// render rules
-		if ( $this->logic->count() ) {
+		if ( count( $this->logic_stack ) ) {
 			
 			// begin script generation
 			$code .= sprintf( '/*+++ begin script: %s */', $this->token ) . PHP_EOL;
 			
 			// loop all logic objects
-			foreach ( $this->logic->to_array() as $logic ) {
+			foreach ( $this->logic_stack as $logic ) {
 				// append output of logic export
 				$code .= $logic->export();
 			}
