@@ -101,9 +101,9 @@ class ICE_Export extends ICE_Base
 	/**
 	 * Stack of objects to retrieve export data from
 	 *
-	 * @var ICE_Stack
+	 * @var array
 	 */
-	private $stack;
+	private $stack = array();
 
 	/**
 	 * Callback from which to retrieve data
@@ -115,9 +115,9 @@ class ICE_Export extends ICE_Base
 	/**
 	 * Map of child instances of self
 	 *
-	 * @var ICE_Map
+	 * @var array
 	 */
-	private $children;
+	private $children = array();
 
 	/**
 	 * Constructor
@@ -142,8 +142,6 @@ class ICE_Export extends ICE_Base
 		// determine file path and url
 		$this->path = self::$export_dir . '/' . $filename;
 		$this->url = self::$export_url . '/' . $filename;
-		$this->stack = new ICE_Stack();
-		$this->children = new ICE_Map();
 	}
 
 	/**
@@ -219,17 +217,17 @@ class ICE_Export extends ICE_Base
 	public function child( $name )
 	{
 		// already have this child?
-		if ( !$this->children->contains( $name ) ) {
+		if ( !isset( $this->children[ $name ] ) ) {
 			// nope, get class of instance
 			$classname = get_class( $this );
 			// create instance of same class
 			$child = new $classname( $this->name . self::FILE_NAME_DELIM . $name, $this->ext );
 			// push onto children stack
-			$this->children->add( $name, $child );
+			$this->children[ $name ] = $child;
 		}
 		
 		// return the child object
-		return $this->children->item_at( $name );
+		return $this->children[ $name ];
 	}
 
 	/**
@@ -246,7 +244,7 @@ class ICE_Export extends ICE_Base
 		}
 
 		// push object on to stack
-		$this->stack->push( $obj );
+		$this->stack[] = $obj;
 
 		// handle recursive objects
 		if ( $obj instanceof ICE_Recursable ) {
@@ -334,7 +332,7 @@ class ICE_Export extends ICE_Base
 		}
 
 		// now try to update my children
-		if ( $this->children->count() ) {
+		if ( count( $this->children ) ) {
 			// loop all and call update
 			foreach( $this->children as $child ) {
 				$child->update();
