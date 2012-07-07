@@ -409,18 +409,11 @@ class ICE_Export extends ICE_Base
 class ICE_Export_Manager
 {
 	/**
-	 * Map of export objects being managed
+	 * Array of export objects being managed
 	 * 
-	 * @var ICE_Map
+	 * @var array
 	 */
-	private $exports;
-
-	/**
-	 */
-	public function __construct()
-	{
-		$this->exports = new ICE_Map();
-	}
+	private $exports = array();
 
 	/**
 	 * Add an export instance to be managed
@@ -431,14 +424,14 @@ class ICE_Export_Manager
 	 */
 	public function add( $handle, ICE_Export $export )
 	{
-		if ( $this->exports->contains( $handle ) ) {
+		if ( isset( $this->exports[ $handle ] ) ) {
 			throw new Exception( sprintf(
 				'The "%s" handle has already been registered' ), $handle );
 		} else {
-			$this->exports->add( $handle, $export );
+			$this->exports[ $handle ] = $export;
 		}
 
-		return $this->exports->item_at( $handle );
+		return $this->exports[ $handle ];
 	}
 
 	/**
@@ -449,8 +442,8 @@ class ICE_Export_Manager
 	 */
 	public function get( $handle )
 	{
-		if ( $this->exports->contains( $handle ) ) {
-			return $this->exports->item_at( $handle );
+		if ( isset( $this->exports[ $handle ] ) ) {
+			return $this->exports[ $handle ];
 		} else {
 			throw new Exception( sprintf(
 				'The "%s" handle is not registered' ), $handle );
