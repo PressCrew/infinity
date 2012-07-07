@@ -752,31 +752,28 @@ class ICE_Style_Value_Identifier extends ICE_Style_Value
 class ICE_Style_Value_Enum extends ICE_Style_Value
 {
 	/**
-	 * @var ICE_Map
+	 * @var array
 	 */
-	private $values;
+	private $values = array();
 
 	/**
 	 * Constructor
 	 *
-	 * @param ICE_Map $values A map of possible values
+	 * @param array $values An array of possible values
 	 */
-	public function __construct( ICE_Map $values = null )
+	public function __construct( $values = null )
 	{
 		// run parent contructor
 		parent::__construct();
 
 		// were values passed?
-		if ( $values ) {
+		if ( is_array( $values ) && count( $values ) ) {
 			// yes, use them
 			$this->values = $values;
-		} else {
-			// no, use new empty map
-			$this->values = new ICE_Map();
 		}
 
 		// every property allows inherit
-		$this->values->add( 'inherit', __( 'Inherit', infinity_text_domain ) );
+		$this->values[ 'inherit' ] = __( 'Inherit', infinity_text_domain );
 	}
 
 	/**
@@ -800,7 +797,7 @@ class ICE_Style_Value_Enum extends ICE_Style_Value
 	 */
 	public function add( $string, $desc )
 	{
-		return $this->values->add( $string, $desc );
+		return $this->values[ $string ] = $desc;
 	}
 
 	/**
@@ -811,7 +808,7 @@ class ICE_Style_Value_Enum extends ICE_Style_Value
 	 */
 	protected function validate( $value )
 	{
-		return $this->values->contains( $value );
+		return isset( $this->values[ $value ] );
 	}
 }
 
@@ -1054,7 +1051,7 @@ final class ICE_Style_Property_Primitive extends ICE_Style_Property
 	{
 		foreach ( $this->valmap as $style_value ) {
 			if ( $style_value instanceof ICE_Style_Value_Enum ) {
-				return $style_value->values->to_array();
+				return $style_value->values;
 			}
 		}
 
