@@ -24,9 +24,9 @@ class ICE_Style extends ICE_Asset
 	/**
 	 * The rules
 	 *
-	 * @var ICE_Map
+	 * @var array
 	 */
-	private $rules;
+	private $rules = array();
 
 	/**
 	 * Parent dir of last filename being fixed for css url() values
@@ -34,17 +34,6 @@ class ICE_Style extends ICE_Asset
 	 * @var string
 	 */
 	private $last_dirname;
-
-	/**
-	 * Constructor
-	 */
-	public function __construct( ICE_Component $component = null )
-	{
-		parent::__construct( $component );
-
-		// init rules map
-		$this->rules = new ICE_Map();
-	}
 
 	/**
 	 */
@@ -65,13 +54,13 @@ class ICE_Style extends ICE_Asset
 		$key = md5( trim( $selector ) );
 
 		// get or create a rule
-		if ( $this->rules->contains( $key ) ) {
-			$rule = $this->rules->item_at( $key );
+		if ( isset( $this->rules[ $key ] ) ) {
+			$rule = $this->rules[ $key ];
 		} else {
 			// new rule object
 			$rule = new ICE_Style_Rule( $selector );
 			// add it to rule map
-			$this->rules->add( $key, $rule );
+			$this->rules[ $key ] = $rule;
 		}
 
 		// return it for editing
@@ -89,9 +78,9 @@ class ICE_Style extends ICE_Asset
 		$markup = parent::export();
 
 		// render rules
-		if ( $this->rules->count() ) {
+		if ( count( $this->rules ) ) {
 			// get markup for each rule
-			foreach ( $this->rules->to_array() as $rule ) {
+			foreach ( $this->rules as $rule ) {
 				// append output of rule export
 				$markup .= '/*+++ generating style ***/' . PHP_EOL;
 				$markup .= $rule->export();
