@@ -1004,21 +1004,11 @@ final class ICE_Style_Property_Primitive extends ICE_Style_Property
 	const KEY_ENUM = 512;
 
 	/**
-	 * A map of possible style value objects for this property
+	 * An array of possible style value objects for this property
 	 *
-	 * @var ICE_Map
+	 * @var array
 	 */
-	private $valmap;
-
-	/**
-	 */
-	public function __construct( $name )
-	{
-		parent::__construct( $name );
-
-		// set possible value types
-		$this->valmap = new ICE_Map();
-	}
+	private $valmap = array();
 
 	/**
 	 */
@@ -1115,8 +1105,8 @@ final class ICE_Style_Property_Primitive extends ICE_Style_Property
 	 */
 	public function add_color()
 	{
-		if ( !$this->valmap->contains( self::KEY_COLOR ) ) {
-			$this->valmap->add( self::KEY_COLOR, new ICE_Style_Value_Color() );
+		if ( !isset( $this->valmap[ self::KEY_COLOR ] ) ) {
+			$this->valmap[ self::KEY_COLOR ] = new ICE_Style_Value_Color();
 		}
 
 		return $this;
@@ -1127,11 +1117,11 @@ final class ICE_Style_Property_Primitive extends ICE_Style_Property
 	 */
 	public function add_enum( $string, $desc = null )
 	{
-		if ( !$this->valmap->contains( self::KEY_ENUM ) ) {
-			$this->valmap->add( self::KEY_ENUM, new ICE_Style_Value_Enum() );
+		if ( !isset( $this->valmap[ self::KEY_ENUM ] ) ) {
+			$this->valmap[ self::KEY_ENUM ] = new ICE_Style_Value_Enum();
 		}
 
-		$this->valmap->item_at( self::KEY_ENUM )->add( $string, $desc );
+		$this->valmap[ self::KEY_ENUM ]->add( $string, $desc );
 
 		return $this;
 	}
@@ -1141,8 +1131,8 @@ final class ICE_Style_Property_Primitive extends ICE_Style_Property
 	 */
 	public function add_length()
 	{
-		if ( !$this->valmap->contains( self::KEY_LENGTH ) ) {
-			$this->valmap->add( self::KEY_LENGTH, new ICE_Style_Value_Length() );
+		if ( !isset( $this->valmap[ self::KEY_LENGTH ] ) ) {
+			$this->valmap[ self::KEY_LENGTH ] = new ICE_Style_Value_Length();
 		}
 
 		return $this;
@@ -1153,8 +1143,8 @@ final class ICE_Style_Property_Primitive extends ICE_Style_Property
 	 */
 	public function add_number()
 	{
-		if ( !$this->valmap->contains( self::KEY_NUMBER ) ) {
-			$this->valmap->add( self::KEY_NUMBER, new ICE_Style_Value_Number() );
+		if ( !isset( $this->valmap[ self::KEY_NUMBER ] ) ) {
+			$this->valmap[ self::KEY_NUMBER ] = new ICE_Style_Value_Number();
 		}
 
 		return $this;
@@ -1165,8 +1155,8 @@ final class ICE_Style_Property_Primitive extends ICE_Style_Property
 	 */
 	public function add_percentage()
 	{
-		if ( !$this->valmap->contains( self::KEY_PERCENTAGE ) ) {
-			$this->valmap->add( self::KEY_PERCENTAGE, new ICE_Style_Value_Percentage() );
+		if ( !isset( $this->valmap[ self::KEY_PERCENTAGE ] ) ) {
+			$this->valmap[ self::KEY_PERCENTAGE ] = new ICE_Style_Value_Percentage();
 		}
 
 		return $this;
@@ -1177,8 +1167,8 @@ final class ICE_Style_Property_Primitive extends ICE_Style_Property
 	 */
 	public function add_string()
 	{
-		if ( !$this->valmap->contains( self::KEY_STRING ) ) {
-			$this->valmap->add( self::KEY_STRING, new ICE_Style_Value_String() );
+		if ( !isset( $this->valmap[ self::KEY_STRING ] ) ) {
+			$this->valmap[ self::KEY_STRING ] = new ICE_Style_Value_String();
 		}
 
 		return $this;
@@ -1189,8 +1179,8 @@ final class ICE_Style_Property_Primitive extends ICE_Style_Property
 	 */
 	public function add_uri()
 	{
-		if ( !$this->valmap->contains( self::KEY_URI ) ) {
-			$this->valmap->add( self::KEY_URI, new ICE_Style_Value_Uri() );
+		if ( !isset( $this->valmap[ self::KEY_URI ] ) ) {
+			$this->valmap[ self::KEY_URI ] = new ICE_Style_Value_Uri();
 		}
 
 		return $this;
