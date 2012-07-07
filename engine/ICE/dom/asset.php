@@ -33,42 +33,42 @@ abstract class ICE_Asset extends ICE_Base
 	 * 
 	 * @var ICE_Map
 	 */
-	private $sections;
+	private $sections = array();
 
 	/**
 	 * Script dependancies
 	 *
-	 * @var ICE_Stack
+	 * @var array
 	 */
-	private $deps;
+	private $deps = array();
 
 	/**
 	 * The files to enqueue
 	 *
-	 * @var ICE_Stack
+	 * @var array
 	 */
-	private $files;
+	private $files = array();
 
 	/**
 	 * The files to export
 	 *
-	 * @var ICE_Stack
+	 * @var array
 	 */
-	private $files_export;
+	private $files_export = array();
 
 	/**
 	 * Export callbacks
 	 *
-	 * @var ICE_Stack
+	 * @var array
 	 */
-	private $callbacks;
+	private $callbacks = array();
 
 	/**
 	 * The strings
 	 *
-	 * @var ICE_Stack
+	 * @var array
 	 */
-	private $strings;
+	private $strings = array();
 
 	/**
 	 * Files that have already been imported
@@ -87,14 +87,7 @@ abstract class ICE_Asset extends ICE_Base
 			$this->component = $component;
 		}
 
-		// init maps and stacks
-		$this->sections = new ICE_Map();
-		$this->deps = new ICE_Stack();
-		$this->files = new ICE_Map();
-		$this->files_export = new ICE_Map();
-		$this->callbacks = new ICE_Map();
-		$this->strings = new ICE_Stack();
-
+		// init files imported stack
 		if ( !self::$files_imported instanceof ICE_Stack ) {
 			self::$files_imported = new ICE_Stack();
 		}
@@ -178,7 +171,7 @@ abstract class ICE_Asset extends ICE_Base
 		$asset = new $class( $this->component );
 
 		// add new "sub asset" of same class
-		$this->sections->add( $name, $asset );
+		$this->sections[ $name ] = $asset;
 
 		return $this;
 	}
@@ -190,7 +183,7 @@ abstract class ICE_Asset extends ICE_Base
 	 */
 	final public function has_sections()
 	{
-		return ( $this->sections->count() );
+		return ( count( $this->sections ) );
 	}
 
 	/**
@@ -201,7 +194,7 @@ abstract class ICE_Asset extends ICE_Base
 	final public function get_section( $name )
 	{
 		if ( is_string( $name ) ) {
-			return $this->sections->item_at( $name );
+			return $this->sections[ $name ];
 		} else {
 			return $this;
 		}
@@ -214,7 +207,7 @@ abstract class ICE_Asset extends ICE_Base
 	 */
 	final public function get_sections()
 	{
-		return $this->sections->to_array();
+		return $this->sections;
 	}
 
 	/**
@@ -235,8 +228,8 @@ abstract class ICE_Asset extends ICE_Base
 		// just in case
 		$dep_handle = trim( $dep_handle );
 
-		if ( strlen( $dep_handle ) && !$this->deps->contains( $dep_handle ) ) {
-			$this->deps->push( $dep_handle );
+		if ( strlen( $dep_handle ) && !isset( $this->deps[ $dep_handle ] ) ) {
+			$this->deps[] = $dep_handle;
 		}
 
 		return $this;
@@ -249,7 +242,7 @@ abstract class ICE_Asset extends ICE_Base
 	 */
 	final public function has_deps()
 	{
-		return ( $this->deps->count() );
+		return ( count( $this->deps ) );
 	}
 
 	/**
@@ -259,7 +252,7 @@ abstract class ICE_Asset extends ICE_Base
 	 */
 	final public function get_deps()
 	{
-		return $this->deps->to_array();
+		return $this->deps;
 	}
 
 	/**
@@ -290,9 +283,9 @@ abstract class ICE_Asset extends ICE_Base
 	{
 		// push file onto applicable stack
 		if ( true === $cache ) {
-			$this->files_export->add( $handle, $file );
+			$this->files_export[ $handle ] = $file;
 		} else {
-			$this->files->add( $handle, $file );
+			$this->files[ $handle ] = $file;
 		}
 
 		// maintain chain
@@ -306,7 +299,7 @@ abstract class ICE_Asset extends ICE_Base
 	 */
 	final public function has_files()
 	{
-		return ( $this->files->count() );
+		return ( count( $this->files ) );
 	}
 
 	/**
@@ -316,7 +309,7 @@ abstract class ICE_Asset extends ICE_Base
 	 */
 	final public function get_files()
 	{
-		return $this->files->to_array();
+		return $this->files;
 	}
 
 	/**
@@ -329,7 +322,7 @@ abstract class ICE_Asset extends ICE_Base
 	final public function add_callback( $handle, $callback )
 	{
 		if ( is_callable( $callback ) ) {
-			$this->callbacks->add( $handle, $callback );
+			$this->callbacks[ $handle ] = $callback;
 		} else {
 			throw new Exception( sprintf( 'The callback for handle "%s" is not callable', $handle ) );
 		}
@@ -344,7 +337,7 @@ abstract class ICE_Asset extends ICE_Base
 	 */
 	final public function has_callbacks()
 	{
-		return ( $this->callbacks->count() );
+		return ( count( $this->callbacks ) );
 	}
 
 	/**
@@ -355,7 +348,7 @@ abstract class ICE_Asset extends ICE_Base
 	 */
 	final public function add_string( $string )
 	{
-		$this->strings->push( $string );
+		$this->strings[] = $string;
 
 		return $this;
 	}
@@ -367,7 +360,7 @@ abstract class ICE_Asset extends ICE_Base
 	 */
 	final public function has_strings()
 	{
-		return ( $this->strings->count() );
+		return ( count( $this->strings ) );
 	}
 
 	/**
@@ -377,7 +370,7 @@ abstract class ICE_Asset extends ICE_Base
 	 */
 	final public function get_strings()
 	{
-		return $this->strings->to_array();
+		return $this->strings;
 	}
 
 	/**
@@ -400,7 +393,7 @@ abstract class ICE_Asset extends ICE_Base
 		}
 
 		// have any files?
-		if ( $this->files_export->count() ) {
+		if ( count( $this->files_export ) ) {
 
 			// loop through all files
 			foreach ( $this->files_export as $file ) {
@@ -445,7 +438,7 @@ abstract class ICE_Asset extends ICE_Base
 		if ( $this->has_strings() ) {
 			//$code .= '/*--- importing strings */' . PHP_EOL;
 			$code .=
-				implode( PHP_EOL, $this->strings->to_array() ) .
+				implode( PHP_EOL, $this->strings ) .
 				str_repeat( PHP_EOL, 2 );
 			//$code .= '/*!!! importing strings complete */' . PHP_EOL;
 		}
