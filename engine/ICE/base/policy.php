@@ -23,9 +23,9 @@
 abstract class ICE_Policy extends ICE_Base
 {
 	/**
-	 * @var ICE_Map 
+	 * @var array
 	 */
-	static private $instances;
+	static private $instances = array();
 
 	/**
 	 * @var string
@@ -63,11 +63,6 @@ abstract class ICE_Policy extends ICE_Base
 	 */
 	static public function instance( $class = null )
 	{
-		// init instances map
-		if ( !self::$instances instanceof ICE_Map ) {
-			self::$instances = new ICE_Map();
-		}
-
 		// is this a lookup?
 		if ( $class ) {
 			foreach ( self::$instances as $instance ) {
@@ -77,11 +72,11 @@ abstract class ICE_Policy extends ICE_Base
 			}
 		} else {
 			// create new instance?
-			if ( !self::$instances->contains( self::$calling_class ) ) {
-				self::$instances->add( self::$calling_class, new self::$calling_class() );
+			if ( !isset( self::$instances[ self::$calling_class ] ) ) {
+				self::$instances[ self::$calling_class ] = new self::$calling_class();
 			}
 			// return it
-			return self::$instances->item_at( self::$calling_class );
+			return self::$instances[ self::$calling_class ];
 		}
 	}
 
