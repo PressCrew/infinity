@@ -256,7 +256,7 @@ class ICE_Ext_Widget_Debugger
 				<?php else: ?>
 					<span>
 						<em><?php print $key ?> </em> =
-						<?php if ( is_scalar( $value ) && !is_null( $value ) ): ?>
+						<?php if ( is_scalar( $value ) && null !== $value ): ?>
 							<?php $this->render_value( $value ) ?>
 						<?php else: ?>
 							<?php _e( 'null', infinity_text_domain ) ?>
@@ -299,7 +299,7 @@ class ICE_Ext_Widget_Debugger
 	 */
 	protected function render_item_id( $string = null )
 	{
-		if ( !is_null( $string ) ) {
+		if ( null !== $string ) {
 
 			$this->__id_stack__->push( $string );
 			

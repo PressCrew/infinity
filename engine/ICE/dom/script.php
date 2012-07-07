@@ -275,7 +275,7 @@ class ICE_Script_Logic extends ICE_Base
 	 */
 	public function add_variable( $name, $value, $nulls = false )
 	{
-		if ( !is_null( $value ) || $nulls ) {
+		if ( null !== $value || $nulls ) {
 			$this->variables->add( $name, $value );
 		}
 	}
@@ -317,7 +317,7 @@ class ICE_Script_Logic extends ICE_Base
 				case is_bool( $value ):
 					$vars[$name] = ( $value ) ? 'true' : 'false';
 					break;
-				case is_null( $value ):
+				case ( null === $value ):
 					$vars[$name] = 'null';
 					break;
 				case is_string( $value ):

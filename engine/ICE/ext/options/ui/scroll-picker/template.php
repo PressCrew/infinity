@@ -43,7 +43,7 @@
 		options.barWrapSelector = 'div.ice-wrapper';
 		options.barSelector = 'div.ice-controls';
 		// add selection options
-		<?php if ( !is_null( $value ) ): ?>
+		<?php if ( null !== $value ): ?>
 		options.itemActiveSelector = 'a#<?php $this->render_id('widget','item',$value) ?>';
 		<?php endif; ?>
 		options.itemEvents = {

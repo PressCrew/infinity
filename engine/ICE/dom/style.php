@@ -352,7 +352,7 @@ abstract class ICE_Style_Unit extends ICE_Base
 		switch( $name ) {
 			case 'unit':
 			case 'value':
-				return !is_null( $this->value );
+				return ( null !== $this->value );
 			default:
 				return parent::__isset( $name );
 		}
@@ -541,7 +541,7 @@ abstract class ICE_Style_Value
 	{
 		switch( $name ) {
 			case 'value':
-				return !is_null( $this->value );
+				return ( null !== $this->value );
 			default:
 				return parent::__isset( $name );
 		}
@@ -576,7 +576,7 @@ abstract class ICE_Style_Value
 	public function set( $value, $unit = null )
 	{
 		// is value null?
-		if ( is_null( $value ) ) {
+		if ( null === $value ) {
 
 			// yep, treat like an unset
 			$this->value = null;
@@ -1121,7 +1121,7 @@ final class ICE_Style_Property_Primitive extends ICE_Style_Property
 	 */
 	public function format( $format = null )
 	{
-		if ( is_null( $format ) ) {
+		if ( null === $format ) {
 			$format = '%s: %s';
 		}
 
@@ -1276,7 +1276,7 @@ final class ICE_Style_Property_Composite extends ICE_Style_Property
 			throw new Exception( 'Value must be an array or accessible as an array' );
 		}
 
-		if ( !is_null( $unit ) && ( !is_array( $unit ) || !$unit instanceof ArrayAccess ) ) {
+		if ( null !== $unit && ( !is_array( $unit ) || !$unit instanceof ArrayAccess ) ) {
 			throw new Exception( 'Unit must be an array or accessible as an array' );
 		}
 
