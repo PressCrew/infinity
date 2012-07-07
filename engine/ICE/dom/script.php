@@ -177,9 +177,9 @@ class ICE_Script_Logic extends ICE_Base
 	/**
 	 * The dynamic variables
 	 *
-	 * @var ICE_Map
+	 * @var array
 	 */
-	private $variables;
+	private $variables = array();
 
 	/**
 	 * The logic to print
@@ -200,9 +200,6 @@ class ICE_Script_Logic extends ICE_Base
 
 		// assign any initial logic
 		$this->logic = $logic;
-
-		// init variables
-		$this->variables = new ICE_Map();
 	}
 
 	/**
@@ -273,7 +270,7 @@ class ICE_Script_Logic extends ICE_Base
 	public function add_variable( $name, $value, $nulls = false )
 	{
 		if ( null !== $value || $nulls ) {
-			$this->variables->add( $name, $value );
+			$this->variables[ $name ] = $value;
 		}
 	}
 
@@ -297,7 +294,7 @@ class ICE_Script_Logic extends ICE_Base
 	public function export_variables( $object = false )
 	{
 		// skip if no variables
-		if ( !$this->variables->count() ) {
+		if ( count( $this->variables ) < 1 ) {
 			return null;
 		}
 		
@@ -305,7 +302,7 @@ class ICE_Script_Logic extends ICE_Base
 		$vars = array();
 		
 		// add each variable
-		foreach ( $this->variables->to_array() as $name => $value ) {
+		foreach ( $this->variables as $name => $value ) {
 			// format the var
 			switch ( true ) {
 				case is_numeric( $value ):
