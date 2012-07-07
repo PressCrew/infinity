@@ -507,7 +507,7 @@ abstract class ICE_Option extends ICE_Component
 			}
 
 			// try to set the value
-			if ( !is_null( $value ) && $this->__style_property__->set_value( $value, $this->style_unit ) ) {
+			if ( null !== $value && $this->__style_property__->set_value( $value, $this->style_unit ) ) {
 
 				// get the style value
 				$style_value = $this->__style_property__->get_value();

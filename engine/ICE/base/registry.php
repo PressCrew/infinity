@@ -44,22 +44,11 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	static private $theme_scope;
 
 	/**
-	 * Registered components map
+	 * Registered components array
 	 *
-	 * @var ICE_Map
+	 * @var array
 	 */
-	private $components;
-
-	/**
-	 * Singleton constructor
-	 * 
-	 * @internal
-	 */
-	public function __construct()
-	{
-		// init local collections
-		$this->components = new ICE_Map();
-	}
+	private $components = array();
 
 	/**
 	 */
@@ -138,9 +127,9 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	final protected function register( ICE_Component $component )
 	{
 		// has the component already been registered?
-		if ( !$this->components->contains( $component->name ) ) {
+		if ( !isset( $this->components[ $component->name ] ) ) {
 			// register it
-			$this->components->add( $component->name, $component );
+			$this->components[ $component->name ] = $component;
 		}
 
 		return true;
@@ -173,7 +162,7 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 		$name = $this->normalize_name( $name );
 
 		// call contains method of map class
-		return $this->components->contains( $name );
+		return isset( $this->components[ $name ] );
 	}
 
 	/**
@@ -188,9 +177,9 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 		$name = $this->normalize_name( $name );
 
 		// check registry
-		if ( $this->components->contains( $name ) ) {
+		if ( isset( $this->components[ $name ] ) ) {
 			// from top of stack
-			return $this->components->item_at( $name );
+			return $this->components[ $name ];
 		}
 
 		// didn't find it
@@ -370,9 +359,9 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 		$config_array['theme'] = self::theme_scope();
 
 		// check if already registered
-		if ( $this->components->contains( $name ) ) {
+		if ( isset( $this->components[ $name ] ) ) {
 			// use that one
-			$component = $this->components->item_at( $name );
+			$component = $this->components[ $name ];
 		} else {
 			// use factory to create new component
 			$component =

@@ -40,9 +40,9 @@ abstract class ICE_Element extends ICE_Base
 
 	/**
 	 * The class names map
-	 * @var ICE_Map
+	 * @var array
 	 */
-	private $classes;
+	private $classes = array();
 
 	/**
 	 * Lock toggle
@@ -51,21 +51,12 @@ abstract class ICE_Element extends ICE_Base
 	private $locked = false;
 
 	/**
-	 * Constructor
-	 */
-	public function __construct()
-	{
-		$this->classes = new ICE_Map_Lockable();
-	}
-
-	/**
 	 * Lock this element from further modification
 	 *
 	 * @return ICE_Element
 	 */
 	public function lock()
 	{
-		$this->classes->lock();
 		$this->locked = true;
 
 		return $this;
@@ -129,7 +120,7 @@ abstract class ICE_Element extends ICE_Base
 			$class = implode( '-', $class );
 		}
 
-		$this->classes->add( null, $class );
+		$this->classes[] = $class;
 
 		return $this;
 	}
@@ -142,7 +133,7 @@ abstract class ICE_Element extends ICE_Base
 	 */
 	protected function get_classes( $suffixes = array() )
 	{
-		if ( $this->classes->locked() == false ) {
+		if ( $this->locked() == false ) {
 			throw new Exception( 'Getting classes before locking is not allowed' );
 		}
 
@@ -163,7 +154,7 @@ abstract class ICE_Element extends ICE_Base
 			return $classes;
 		} else {
 			// return classes as is
-			return $this->classes->to_array();
+			return $this->classes;
 		}
 	}
 

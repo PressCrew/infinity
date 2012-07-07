@@ -78,7 +78,7 @@ abstract class ICE_Option_Renderer extends ICE_Renderer
 		$real_value = $this->component()->get();
 		
 		// overriding value?
-		if ( is_null( $value ) ) {
+		if ( null === $value ) {
 			// use real value
 			$input_value = $real_value;
 		} else {
@@ -107,7 +107,7 @@ abstract class ICE_Option_Renderer extends ICE_Renderer
 	 */
 	final public function render_field_value( $value = null )
 	{
-		if ( is_null( $value ) ) {
+		if ( null === $value ) {
 			$value = $this->component()->get();
 		}
 		

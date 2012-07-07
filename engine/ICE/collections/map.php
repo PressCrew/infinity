@@ -158,7 +158,7 @@ class ICE_Map
 	{
 		if( !$this->__read_only__ ) {
 			if ( $prepend ) {
-				if ( !is_null($key) ) {
+				if ( null !== $key ) {
 					$this->__data__ = array_merge( array( $key => $value ), $this->__data__ );
 				} else {
 					throw new Exception( 'Prepend requires a non-null key' );

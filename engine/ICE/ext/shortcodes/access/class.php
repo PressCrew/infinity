@@ -33,7 +33,7 @@ class ICE_Ext_Shortcode_Access extends ICE_Shortcode
 	 */
 	public function get_content()
 	{
-		if ( !is_null( parent::get_content() ) && !is_feed() && current_user_can( $this->get_att('capability') ) ) {
+		if ( null !== parent::get_content() && !is_feed() && current_user_can( $this->get_att('capability') ) ) {
 			return parent::get_content();
 		}
 

@@ -74,12 +74,12 @@ class ICE_Init_Data extends ICE_Base
 	 */
 	public function registry( ICE_Init_Registry $registry = null )
 	{
-		if ( is_null( $this->registry ) ) {
+		if ( null === $this->registry ) {
 			$this->registry = $registry;
 			return true;
-		} else {
-			throw new Exception( 'Cannot set registry, already set.' );
 		}
+
+		throw new Exception( 'Cannot set registry, already set.' );
 	}
 
 	/**
