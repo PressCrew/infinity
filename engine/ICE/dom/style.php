@@ -173,9 +173,9 @@ class ICE_Style_Rule extends ICE_Base
 	/**
 	 * The declarations
 	 *
-	 * @var ICE_Map
+	 * @var array
 	 */
-	private $declarations;
+	private $declarations = array();
 
 	/**
 	 * Constructor
@@ -186,9 +186,6 @@ class ICE_Style_Rule extends ICE_Base
 	{
 		// set selector
 		$this->selector = $selector;
-
-		// init declarations
-		$this->declarations = new ICE_Map();
 	}
 
 	/**
@@ -223,7 +220,7 @@ class ICE_Style_Rule extends ICE_Base
 	 */
 	public function add_declaration( $property, $value )
 	{
-		$this->declarations->add( $property, $value );
+		$this->declarations[ $property ] = $value;
 	}
 
 	/**
@@ -250,12 +247,11 @@ class ICE_Style_Rule extends ICE_Base
 
 		// declarations passed in?
 		if ( is_array( $declarations ) ) {
-			// merge over existing decs?
-			if ( is_array( $this->declarations ) ) {
-				$declarations = array_merge( $this->declarations->to_array(), $declarations );
-			}
+			// merge over existing decs
+			$declarations = array_merge( $this->declarations, $declarations );
 		} else {
-			$declarations = $this->declarations->to_array();
+			// use existing decs as is
+			$declarations = $this->declarations;
 		}
 
 		// open declarations with the selector
