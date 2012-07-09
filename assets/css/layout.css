@@ -80,10 +80,10 @@ position: absolute;
 /* Top Menu */
 #top-menu-wrap, #sub-menu-wrap {
     position: relative;        
-    min-height: 30px;
 }
 
 #top-menu-wrap {
+    margin-bottom: -6px;
     /* setting z-index for dropdowns. do not mess with this */
     z-index: 12 !important; 
 }
@@ -100,17 +100,20 @@ position: absolute;
 
 #sub-menu-wrap {
 /* setting z-index for dropdowns. do not mess with this */
-z-index: 10 !important;
-}
-
-/* Set a min-height so we can apply texture overlays */
-.main-menu,.top-menu, .top-wrap .sub-menu {
-min-height: 37px;
+	z-index: 10 !important;
+    margin-bottom: -3px;
 }
 
 /* ===================== */
 /* ! Base Menu Styling   */
 /* ===================== */
+.base-menu {
+	display: inline-block;
+    width: 100%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    webkit-box-sizing: border-box;
+}
 .base-menu ul li {
     float: left;
     position: relative;
