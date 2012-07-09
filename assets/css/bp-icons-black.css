@@ -161,3 +161,11 @@ div#message p {
         background-repeat: no-repeat;
         background-position:-724px -332px; 
 }
+	
+/* Third Party Plugin Icons */	  	
+li#nav-docs-groups-li a { 	
+	background-image: url("../images/icons/black.png");  	
+	background-position: 0 -502px;  	
+	background-repeat: no-repeat; 	
+	padding-left: 25px; 	
+}
