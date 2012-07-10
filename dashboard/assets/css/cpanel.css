@@ -2,6 +2,10 @@
 /* ! Control Panel Styling   */
 /* ========================= */
 
+body.appearance_page_infinity-theme {
+	background: url('../../../assets/images/design/bg.png') repeat -4px -2px;
+}
+
 /* main container */
 div#infinity-cpanel {
 	max-width: 1000px;
@@ -36,12 +40,12 @@ div#infinity-cpanel-header {
 	height: 65px;
 	border: 0 none;
 	margin-bottom: 10px;
-	padding: 0 10px 20px 20px;
-	background: url('../../../assets/images/design/bg.png') repeat -4px -2px;
+	padding: 10px 20px;
+	background: transparent;
 }
 div#infinity-cpanel-header-logo {
 	position: relative;
-	top: 20px;
+	top: 10px;
 	height: 48px;
 	width: 187px;
 	background: url('../images/admin_logo.png') no-repeat scroll 0 0 transparent;
@@ -50,7 +54,7 @@ div#infinity-cpanel-header-logo {
 div#infinity-cpanel-header-version {
 	float: left;
 	position: relative;
-	top: 58px;
+	top: 48px;
 	z-index: 1;
 	font-size: 10px;
 	letter-spacing: .05em;
@@ -114,10 +118,10 @@ div#infinity-cpanel-toolbar {
 /* tabs */
 div#infinity-cpanel-tabs {
 	margin: 3px;
-	background: transparent;
+	background: #fff none;
 }
 div#infinity-cpanel-tab-options {
-	background: transparent;
+	background: #fff none;
 }
 
 div#infinity-cpanel-tabs > ul.ui-tabs-nav {
