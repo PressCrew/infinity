@@ -179,7 +179,7 @@ abstract class ICE_Component
 
 	/**
 	 */
-	final public function __get( $name )
+	protected function get_property( $name )
 	{
 		switch ( $name ) {
 			case 'name':
@@ -189,23 +189,22 @@ abstract class ICE_Component
 			case 'hname':
 				return $this->$name;
 			default:
-				return $this->directive( $name );
+				return parent::get_property( $name );
 		}
 	}
 
 	/**
 	 */
-	final public function __set( $name, $value )
+	protected function set_property( $name, $value )
 	{
 		switch ( $name ) {
-			case 'name':
-			case 'type':
-			case 'theme':
-			case 'aname':
-			case 'hname':
-				return parent::__set( $name, $value );
+			case 'foobar':
+				// set it
+				$this->$name = $value;
+				// chain it
+				return $this;
 			default:
-				return $this->directive( $name, $value );
+				return parent::set_property( $name, $value );
 		}
 	}
 

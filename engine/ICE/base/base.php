@@ -20,26 +20,54 @@
 abstract class ICE_Base
 {
 	/**
+	 * Getter/Setter
+	 * 
+	 * @param string $name
+	 * @param mixed $value
+	 * @return mixed
+	 */
+	public function property( $name, $value = null )
+	{
+		if ( func_num_args() === 1 ) {
+			return $this->get_property( $name );
+		} else {
+			return $this->set_property( $name, $value );
+		}
+	}
+	
+	/**
 	 * Getter
 	 *
 	 * @param string $name Property name
+	 * @return mixed
 	 */
-	public function __get( $name )
+	protected function get_property( $name )
 	{
 		throw new Exception(
 			sprintf( 'The "%s" property is not accessible for reading.', $name ) );
 	}
 
+	public function __get( $name )
+	{
+		return $this->get_property( $name );
+	}
+	
 	/**
 	 * Setter
 	 * 
 	 * @param string $name Property name
 	 * @param mixed $value Property value
+	 * @return ICE_Base
 	 */
-	public function __set( $name, $value )
+	protected function set_property( $name, $value )
 	{
 		throw new Exception(
 			sprintf( 'The "%s" property is not accessible for writing.', $name ) );
+	}
+
+	public function __set( $name, $value )
+	{
+		return $this->set_property( $name, $value );
 	}
 
 	/**
