@@ -193,9 +193,8 @@ abstract class ICE_Element extends ICE_Base
 	final public function id()
 	{
 		if ( $this->id ) {
-			return str_replace(
-				'.', '-', $this->id . $this->suffix( $suffixes = func_get_args() )
-			);
+			$suffixes = func_get_args();
+			return str_replace( '.', '-', $this->id . $this->suffix( $suffixes ) );
 		}
 	}
 
