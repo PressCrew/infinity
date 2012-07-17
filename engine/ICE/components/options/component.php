@@ -223,6 +223,12 @@ abstract class ICE_Option extends ICE_Component
 		$this->refresh_style_property();
 
 		// field options
+		
+		// skip loading field options outside of dashboard
+		if ( !is_admin() ) {
+			return;
+		}
+
 		// @todo this grew too big, move to private method
 		if ( is_admin() && $this->config()->contains( 'field_options' ) ) {
 
