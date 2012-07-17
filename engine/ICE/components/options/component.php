@@ -224,7 +224,7 @@ abstract class ICE_Option extends ICE_Component
 
 		// field options
 		// @todo this grew too big, move to private method
-		if ( $this->config()->contains( 'field_options' ) ) {
+		if ( is_admin() && $this->config()->contains( 'field_options' ) ) {
 
 			// grab field options
 			$fo_config = $this->config( 'field_options' );
