@@ -69,7 +69,7 @@ class ICE_Ext_Option_Ui_Image_Picker
 	/**
 	 */
 	public function load_field_options()
-	{		
+	{
 		// file extension is required
 		if ( strlen( $this->file_extension ) ) {
 			// check file directory
@@ -86,8 +86,6 @@ class ICE_Ext_Option_Ui_Image_Picker
 						$field_options = array();
 						// format the array
 						foreach ( $images as $key => $value ) {
-							// clean up key
-							$key = str_replace( '.', '-', $key );
 							// value is absolute URL
 							$field_options[$key] = ICE_Files::theme_file_to_url($value);
 						}
@@ -122,10 +120,11 @@ class ICE_Ext_Option_Ui_Image_Picker
 	public function get_image_url()
 	{
 		$value = $this->get();
-		$fo = $this->property( 'field_options' );
 
-		if ( isset( $fo[$value] ) ) {
-			return $fo[$value];
+		$path = ICE_Scheme::instance()->locate_file( $this->file_directory );
+
+		if ( $path ) {
+			return ICE_Files::theme_file_to_url( $path . '/' . $value );
 		} else {
 			return null;
 		}
