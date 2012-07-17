@@ -16,11 +16,27 @@
  *
  * @package ICE-extensions
  * @subpackage features
- * @property-read string $image_class
  */
 class ICE_Ext_Feature_Gravatar
 	extends ICE_Feature
 {
+	/**
+	 * @var string
+	 */
+	protected $image_class;
+
+	/**
+	 */
+	protected function get_property( $name )
+	{
+		switch ( $name ) {
+			case 'image_class':
+				return $this->$name;
+			default:
+				return parent::get_property( $name );
+		}
+	}
+	
 	/**
 	 */
 	public function init_styles()

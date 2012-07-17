@@ -98,7 +98,7 @@ class Infinity_Screen_Factory extends ICE_Screen_Factory
 		// check if URL is set
 		if ( !$component->config( 'url' ) ) {
 			// set url
-			$component->config( 'url', INFINITY_AJAX_URL . infinity_screens_route( 'cpanel', $component->name ) );
+			$component->config( 'url', INFINITY_AJAX_URL . infinity_screens_route( 'cpanel', $component->property( 'name' ) ) );
 		}
 
 		return $component;

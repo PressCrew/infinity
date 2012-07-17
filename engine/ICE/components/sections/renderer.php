@@ -26,8 +26,10 @@ abstract class ICE_Section_Renderer extends ICE_Renderer
 	 */
 	public function render_class_title()
 	{
-		if ( $this->component()->class_title ) {
-			print esc_attr( $this->component()->class_title );
+		$class_title = $this->component()->property( 'class_title' );
+		
+		if ( $class_title ) {
+			print esc_attr( $class_title );
 		}
 	}
 
@@ -36,8 +38,10 @@ abstract class ICE_Section_Renderer extends ICE_Renderer
 	 */
 	public function render_class_content()
 	{
-		if ( $this->component()->class_content ) {
-			print esc_attr( $this->component()->class_content );
+		$class_content = $this->component()->property( 'class_content' );
+
+		if ( $class_content ) {
+			print esc_attr( $class_content );
 		}
 	}
 

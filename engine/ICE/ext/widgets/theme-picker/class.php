@@ -27,14 +27,14 @@ class ICE_Ext_Widget_Theme_Picker
 	 *
 	 * @var array
 	 */
-	private $theme;
+	private $__wp_theme__;
 
 	/**
 	 * Allowed themes data
 	 *
 	 * @var array
 	 */
-	private $themes;
+	private $__wp_themes__;
 
 	/**
 	 */
@@ -74,10 +74,10 @@ class ICE_Ext_Widget_Theme_Picker
 		$ct = current_theme_info();
 
 		// get all themes
-		$this->themes = get_allowed_themes();
+		$this->__wp_themes__ = get_allowed_themes();
 
 		// extract current theme
-		$this->theme = $this->themes[$ct->name];
+		$this->__wp_theme__ = $this->__wp_themes__[$ct->name];
 	}
 
 	/**
@@ -147,8 +147,8 @@ class ICE_Ext_Widget_Theme_Picker
 		$this->load_theme_data();
 
 		return array(
-			'theme' => $this->theme,
-			'themes' => $this->themes,
+			'theme' => $this->__wp_theme__,
+			'themes' => $this->__wp_themes__,
 		);
 	}
 

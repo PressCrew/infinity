@@ -20,13 +20,34 @@ ICE_Loader::load_ext( 'options/ui/scroll-picker' );
  *
  * @package ICE-extensions
  * @subpackage options
- * @property-read string $file_directory
- * @property-read string $file_extension
  */
 class ICE_Ext_Option_Ui_Image_Picker
 	extends ICE_Ext_Option_Ui_Scroll_Picker
 		implements ICE_Option_Static_Image, ICE_Option_Auto_Field
 {
+	/**
+	 * @var string
+	 */
+	protected $file_directory;
+
+	/**
+	 * @var string
+	 */
+	protected $file_extension;
+
+	/**
+	 */
+	protected function get_property( $name )
+	{
+		switch ( $name ) {
+			case 'file_directory':
+			case 'file_extension':
+				return $this->$name;
+			default:
+				return parent::get_property( $name );
+		}
+	}
+	
 	/**
 	 */
 	public function configure()
@@ -48,7 +69,7 @@ class ICE_Ext_Option_Ui_Image_Picker
 	/**
 	 */
 	public function load_field_options()
-	{		
+	{
 		// file extension is required
 		if ( strlen( $this->file_extension ) ) {
 			// check file directory
@@ -65,8 +86,6 @@ class ICE_Ext_Option_Ui_Image_Picker
 						$field_options = array();
 						// format the array
 						foreach ( $images as $key => $value ) {
-							// clean up key
-							$key = str_replace( '.', '-', $key );
 							// value is absolute URL
 							$field_options[$key] = ICE_Files::theme_file_to_url($value);
 						}
@@ -90,8 +109,10 @@ class ICE_Ext_Option_Ui_Image_Picker
 	 */
 	public function render_field_option( $value )
 	{
+		$fo = $this->property( 'field_options' );
+		
 		// render an img tag ?>
-		<div style="background-repeat: repeat; background-image: url('<?php print esc_attr( $this->field_options->item_at( $value ) ) ?>'); width: <?php print esc_attr( $this->item_width ) ?>; height: <?php print esc_attr( $this->item_height ) ?>"></div><?php
+		<div style="background-repeat: repeat; background-image: url('<?php print esc_attr( $fo[$value] ) ?>'); width: <?php print esc_attr( $this->item_width ) ?>; height: <?php print esc_attr( $this->item_height ) ?>"></div><?php
 	}
 
 	/**
@@ -100,8 +121,10 @@ class ICE_Ext_Option_Ui_Image_Picker
 	{
 		$value = $this->get();
 
-		if ( $this->field_options->contains( $value ) ) {
-			return $this->field_options->item_at( $value );
+		$path = ICE_Scheme::instance()->locate_file( $this->file_directory );
+
+		if ( $path ) {
+			return ICE_Files::theme_file_to_url( $path . '/' . $value );
 		} else {
 			return null;
 		}

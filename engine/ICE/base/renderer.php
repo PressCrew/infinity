@@ -62,7 +62,7 @@ abstract class ICE_Renderer extends ICE_Componentable
 	 */
 	final public function has_documentation()
 	{
-		return ( $this->component->documentation );
+		return ( $this->component->property( 'documentation' ) );
 	}
 
 	/**
@@ -123,7 +123,7 @@ abstract class ICE_Renderer extends ICE_Componentable
 	 */
 	public function render_name()
 	{
-		print esc_attr( $this->component->name );
+		print esc_attr( $this->component->property( 'name' ) );
 	}
 
 	/**
@@ -131,7 +131,7 @@ abstract class ICE_Renderer extends ICE_Componentable
 	 */
 	public function render_title()
 	{
-		print esc_html( $this->component->title );
+		print esc_html( $this->component->property( 'title' ) );
 	}
 
 	/**
@@ -139,7 +139,7 @@ abstract class ICE_Renderer extends ICE_Componentable
 	 */
 	public function render_description()
 	{
-		print esc_html( $this->component->description );
+		print esc_html( $this->component->property( 'description' ) );
 	}
 
 	/**
@@ -244,21 +244,24 @@ abstract class ICE_Renderer extends ICE_Componentable
 	 */
 	final public function render_documentation( $doc_dirs )
 	{
+		// get doc setting
+		$documentation = $this->component->property( 'documentation' );
+
 		// is documentation set?
-		if ( $this->component->documentation ) {
+		if ( $documentation ) {
 			// boolean value?
-			if ( is_numeric( $this->component->documentation ) ) {
+			if ( is_numeric( $documentation ) ) {
 				// use auto naming?
-				if ( (boolean) $this->component->documentation == true ) {
+				if ( (boolean) $documentation == true ) {
 					// yes, page is component name
-					$page = $this->policy()->get_handle() . '/' . $this->component->name;
+					$page = $this->policy()->get_handle() . '/' . $this->component->property( 'name' );
 				} else {
 					// no, documentation disabled
 					return;
 				}
 			} else {
 				// page name was set manually
-				$page = $this->component->documentation;
+				$page = $documentation;
 			}
 
 			// new easy doc object

@@ -21,22 +21,81 @@ ICE_Loader::load( 'components/options/component' );
  * @link http://jqueryui.com/demos/slider/
  * @package ICE-extensions
  * @subpackage options
- * 
- * @property-read boolean|string|integer $animate
- * @property-read integer $max
- * @property-read integer $min
- * @property-read string $orientation
- * @property-read boolean $step
- * @property-read boolean $range
- *
- * @property-read string $label
- * @property-read string $delimiter
- * @property-read string $prefix
- * @property-read string $suffix
  */
 class ICE_Ext_Option_Ui_Slider
 	extends ICE_Option
 {
+	/**
+	 * @var boolean|string|integer
+	 */
+	protected $animate;
+
+	/**
+	 * @var string
+	 */
+	protected $delimiter;
+
+	/**
+	 * @var string
+	 */
+	protected $label;
+
+	/**
+	 * @var integer
+	 */
+	protected $max;
+
+	/**
+	 * @var integer
+	 */
+	protected $min;
+
+	/**
+	 * @var string
+	 */
+	protected $orientation;
+
+	/**
+	 * @var string
+	 */
+	protected $prefix;
+
+	/**
+	 * @var boolean
+	 */
+	protected $range;
+
+	/**
+	 * @var integer
+	 */
+	protected $step;
+
+	/**
+	 * @var string
+	 */
+	protected $suffix;
+
+	/**
+	 */
+	protected function get_property( $name )
+	{
+		switch ( $name ) {
+			case 'animate':
+			case 'delimiter':
+			case 'label':
+			case 'max':
+			case 'min':
+			case 'orientation':
+			case 'prefix':
+			case 'range':
+			case 'step':
+			case 'suffix':
+				return $this->$name;
+			default:
+				return parent::get_property( $name );
+		}
+	}
+	
 	/**
 	 */
 	public function init_styles()

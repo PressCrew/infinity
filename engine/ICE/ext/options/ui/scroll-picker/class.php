@@ -21,13 +21,39 @@ ICE_Loader::load( 'components/options/component' );
  * @link http://jqueryui.com/demos/slider/
  * @package ICE-extensions
  * @subpackage options
- * @property-read string $item_width
- * @property-read string $item_height
- * @property-read string $item_margin
  */
 class ICE_Ext_Option_Ui_Scroll_Picker
 	extends ICE_Option
 {
+	/**
+	 * @var string
+	 */
+	protected $item_height;
+
+	/**
+	 * @var string
+	 */
+	protected $item_margin;
+
+	/**
+	 * @var string
+	 */
+	protected $item_width;
+	
+	/**
+	 */
+	protected function get_property( $name )
+	{
+		switch ( $name ) {
+			case 'item_height':
+			case 'item_margin':
+			case 'item_width':
+				return $this->$name;
+			default:
+				return parent::get_property( $name );
+		}
+	}
+	
 	/**
 	 */
 	public function init_scripts()
@@ -81,7 +107,7 @@ class ICE_Ext_Option_Ui_Scroll_Picker
 		return array(
 			'value' => $this->get(),
 			'scroll_options' => $options->export_variables(true),
-			'field_options' => $this->field_options->to_array()
+			'field_options' => $this->property( 'field_options' )
 		);
 	}
 
@@ -92,7 +118,7 @@ class ICE_Ext_Option_Ui_Scroll_Picker
 	 */
 	public function render_field_option( $value )
 	{
-		print esc_html( $this->field_options->item_at( $value ) );
+		print esc_html( $this->property( 'field_options' )->item_at( $value ) );
 	}
 }
 

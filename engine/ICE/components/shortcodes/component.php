@@ -18,7 +18,6 @@ ICE_Loader::load( 'base/component' );
  *
  * @package ICE-components
  * @subpackage shortcodes
- * @property-read array $attributes
  */
 abstract class ICE_Shortcode extends ICE_Component
 {
@@ -42,6 +41,23 @@ abstract class ICE_Shortcode extends ICE_Component
 	private $__the_content__;
 
 	/**
+	 * @var array
+	 */
+	protected $attributes;
+
+	/**
+	 */
+	protected function get_property( $name )
+	{
+		switch ( $name ) {
+			case 'attributes':
+				return $this->$name;
+			default:
+				return parent::get_property( $name );
+		}
+	}
+	
+	/**
 	 */
 	protected function init()
 	{
@@ -49,7 +65,7 @@ abstract class ICE_Shortcode extends ICE_Component
 		parent::init();
 
 		// set up handler
-		add_shortcode( $this->name, array( $this, 'render_handler' ) );
+		add_shortcode( $this->property( 'name' ), array( $this, 'render_handler' ) );
 	}
 
 	/**
