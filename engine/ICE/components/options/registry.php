@@ -133,7 +133,7 @@ abstract class ICE_Option_Registry extends ICE_Registry
 
 		// render options that require this one
 		foreach ( $this->get_all() as $sibling_option ) {
-			if ( $option->property( 'name' ) == $sibling_option->parent ) {
+			if ( $option->property( 'name' ) == $sibling_option->property( 'parent' ) ) {
 				$options[] = $sibling_option;
 			}
 		}
@@ -156,7 +156,7 @@ abstract class ICE_Option_Registry extends ICE_Registry
 		foreach ( parent::get_all() as $option ) {
 
 			// do section names match?
-			if ( $section->property( 'name' ) != $option->section ) {
+			if ( $section->property( 'name' ) != $option->property( 'section' ) ) {
 				continue;
 			}
 
@@ -184,7 +184,7 @@ abstract class ICE_Option_Registry extends ICE_Registry
 
 		foreach ( $options as $key => $option ) {
 			// remove options that require another option
-			if ( $option->parent ) {
+			if ( $option->property( 'parent' ) ) {
 				unset( $options[$key] );
 			}
 			// remove options that aren't supported

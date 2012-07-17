@@ -81,7 +81,7 @@ abstract class ICE_Section extends ICE_Component
 	public function add_component( ICE_Component $component )
 	{
 		// does component section match my name?
-		if ( $component->section == $this->property( 'name' ) ) {
+		if ( $component->property( 'section' ) == $this->property( 'name' ) ) {
 			// yep, add to components array
 			$this->__components__[] = $component;
 		} else {

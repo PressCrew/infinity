@@ -107,7 +107,7 @@ final class ICE_Ui_Cpanel extends ICE_Base
 			$children = $this->policy->registry()->get_children( $item );
 			$children_cnt = count( $children ); ?>
 			<li>
-				<a target="<?php if ( !$children_cnt ) $this->render_button_target( $item ); ?>" id="<?php $this->render_id( 'menu', 'item', $item->property( 'name' ) ) ?>" href="<?php if ( !$children_cnt ) print esc_attr( $item->url ) ?>" title="<?php print esc_attr( $item->title ) ?>"><?php print esc_attr( $item->title ) ?></a>
+				<a target="<?php if ( !$children_cnt ) $this->render_button_target( $item ); ?>" id="<?php $this->render_id( 'menu', 'item', $item->property( 'name' ) ) ?>" href="<?php if ( !$children_cnt ) print esc_attr( $item->property( 'url' ) ) ?>" title="<?php print esc_attr( $item->property( 'title' ) ) ?>"><?php print esc_attr( $item->property( 'title' ) ) ?></a>
 				<?php if ( $children_cnt ): ?>
 					<?php $this->render_menu_items( $children ) ?>
 				<?php endif; ?>
@@ -126,10 +126,13 @@ final class ICE_Ui_Cpanel extends ICE_Base
 	 */
 	protected function render_button_target( ICE_Component $item )
 	{
+		// get target
+		$target = $item->property( 'target' );
+
 		// was a target set explicitly?
-		if ( $item->target ) {
+		if ( $target ) {
 			// use that target
-			print esc_attr( $item->target );
+			print esc_attr( $target );
 		} else {
 			// generate a tab target from the name
 			$this->render_id( 'tab', $item->property( 'name' ) );
@@ -145,8 +148,8 @@ final class ICE_Ui_Cpanel extends ICE_Base
 		$items = ICE_Position::sort_priority( $items );
 
 		foreach( $items as $item ): ?>
-			<?php if ( $item->toolbar ): ?>
-				<a target="<?php $this->render_id( 'tab', $item->property( 'name' ) ) ?>" id="<?php $this->render_id( 'toolbarbutton', $item->property( 'name' ) ) ?>" href="<?php print esc_attr( $item->url ) ?>" title="<?php print esc_attr( $item->title ) ?>"><?php print esc_attr( $item->title ) ?></a>
+			<?php if ( $item->property( 'toolbar' ) ): ?>
+				<a target="<?php $this->render_id( 'tab', $item->property( 'name' ) ) ?>" id="<?php $this->render_id( 'toolbarbutton', $item->property( 'name' ) ) ?>" href="<?php print esc_attr( $item->property( 'url' ) ) ?>" title="<?php print esc_attr( $item->property( 'title' ) ) ?>"><?php print esc_attr( $item->property( 'title' ) ) ?></a>
 			<?php endif;
 		endforeach;
 	}
@@ -174,7 +177,7 @@ final class ICE_Ui_Cpanel extends ICE_Base
 				}
 				// menu button and maybe toolbar button ?>
 				$('a#<?php $this->render_id( 'menu', 'item', $item->property( 'name' ) ) ?>').button(<?php print $conf ?>);
-				<?php if ( $item->toolbar ): ?>
+				<?php if ( $item->property( 'toolbar' ) ): ?>
 					$('a#<?php $this->render_id( 'toolbarbutton', $item->property( 'name' ) ) ?>').button(<?php print $conf ?>);
 				<?php endif;
 			}
@@ -210,7 +213,7 @@ final class ICE_Ui_Cpanel extends ICE_Base
 
 			foreach( $items as $item ) {
 				// add variable
-				$logic->av( $item->property( 'name' ), $item->title );
+				$logic->av( $item->property( 'name' ), $item->property( 'title' ) );
 			}
 
 			print $logic->export_variables( true );

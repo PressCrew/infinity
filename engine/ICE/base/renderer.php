@@ -62,7 +62,7 @@ abstract class ICE_Renderer extends ICE_Componentable
 	 */
 	final public function has_documentation()
 	{
-		return ( $this->component->documentation );
+		return ( $this->component->property( 'documentation' ) );
 	}
 
 	/**

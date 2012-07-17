@@ -855,7 +855,7 @@ abstract class ICE_Component
 	 */
 	public function is_parent_of( ICE_Component $component )
 	{
-		return $this->name == $component->parent;
+		return $this->name == $component->property( 'parent' );
 	}
 
 	/**

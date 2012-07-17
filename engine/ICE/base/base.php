@@ -20,6 +20,76 @@
 abstract class ICE_Base
 {
 	/**
+	 * Default magic getter
+	 *
+	 * @param string $name
+	 * @throws Exception
+	 */
+	public function __get( $name )
+	{
+		throw new Exception(
+			sprintf( 'The "%s" property does not exist (get).', $name ) );
+	}
+
+	/**
+	 * Default magic setter
+	 *
+	 * @param string $name
+	 * @param mixed $value
+	 * @throws Exception
+	 */
+	public function __set( $name, $value )
+	{
+		throw new Exception(
+			sprintf( 'The "%s" property does not exist (set).', $name ) );
+	}
+
+	/**
+	 * Default magic issetter
+	 *
+	 * @param string $name
+	 */
+	public function __isset( $name )
+	{
+		throw new Exception(
+			sprintf( 'The "%s" property does not exist (isset).', $name ) );
+	}
+
+	/**
+	 * Default magic unsetter
+	 *
+	 * @param string $name
+	 */
+	public function __unset( $name )
+	{
+		throw new Exception(
+			sprintf( 'The "%s" property does not exist (unset).', $name ) );
+	}
+
+	/**
+	 * Default magic caller
+	 *
+	 * @param string $name
+	 * @param array $arguments
+	 */
+	public function __call( $name, $arguments )
+	{
+		throw new Exception(
+			sprintf( 'The "%s" method does not exist (obj context).', $name ) );
+	}
+
+	/**
+	 * Default toStringer
+	 *
+	 * @return string
+	 */
+	public function __toString()
+	{
+		throw new Exception(
+			sprintf( 'The "%s" class cannot be converted to a string.', get_class($this) ) );
+	}
+	
+	/**
 	 * Getter/Setter
 	 * 
 	 * @param string $name
@@ -46,11 +116,6 @@ abstract class ICE_Base
 		throw new Exception(
 			sprintf( 'The "%s" property is not accessible for reading.', $name ) );
 	}
-
-	public function __get( $name )
-	{
-		return $this->get_property( $name );
-	}
 	
 	/**
 	 * Setter
@@ -63,56 +128,6 @@ abstract class ICE_Base
 	{
 		throw new Exception(
 			sprintf( 'The "%s" property is not accessible for writing.', $name ) );
-	}
-
-	public function __set( $name, $value )
-	{
-		return $this->set_property( $name, $value );
-	}
-
-	/**
-	 * Issetter
-	 *
-	 * @param string $name Property name
-	 */
-	public function __isset( $name )
-	{
-		throw new Exception(
-			sprintf( 'The "%s" property does not exist (isset).', $name ) );
-	}
-
-	/**
-	 * Issetter
-	 *
-	 * @param string $name Property name
-	 */
-	public function __unset( $name )
-	{
-		throw new Exception(
-			sprintf( 'The "%s" property does not exist (unset).', $name ) );
-	}
-
-	/**
-	 * Caller
-	 *
-	 * @param string $name Method name
-	 * @param array $arguments Method arguments
-	 */
-	public function __call( $name, $arguments )
-	{
-		throw new Exception(
-			sprintf( 'The "%s" method does not exist (obj context).', $name ) );
-	}
-
-	/**
-	 * toStringer
-	 *
-	 * @return string
-	 */
-	public function __toString()
-	{
-		throw new Exception(
-			sprintf( 'The "%s" class cannot be converted to a string.', get_class($this) ) );
 	}
 
 	/**

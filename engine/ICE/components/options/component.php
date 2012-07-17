@@ -552,7 +552,7 @@ abstract class ICE_Option extends ICE_Component
 			self::API_DELIM,
 			array(
 				self::API_PREFIX,
-				$this->hname,
+				$this->get_property( 'hname' ),
 				ICE_ACTIVE_THEME
 			)
 		);

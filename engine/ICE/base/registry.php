@@ -202,10 +202,10 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 			// include ignored?
 			if ( !$include_ignored ) {
 				// check ignore toggle
-				if ( $component->ignore ) {
+				if ( $component->property( 'ignore' ) ) {
 					// component is explicitly ignored
 					continue;
-				} elseif ( $component->parent && $component->parent()->ignore ) {
+				} elseif ( $component->property( 'parent' ) && $component->parent()->property( 'ignore' ) ) {
 					// component parent is ignored, applies to this child
 					continue;
 				}
@@ -264,7 +264,7 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 
 		// don't return components who have a parent in the result
 		foreach( $components as $key => $component_i ) {
-			if ( isset( $component_i->parent ) ) {
+			if ( $component_i->property( 'parent' ) ) {
 				unset( $components[$key] );
 			}
 		}
