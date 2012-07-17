@@ -18,8 +18,6 @@ ICE_Loader::load( 'base/component' );
  *
  * @package ICE-components
  * @subpackage sections
- * @property-read string $class_title The CSS class for the title of this section
- * @property-read string $class_content The CSS class for the content of this section
  */
 abstract class ICE_Section extends ICE_Component
 {
@@ -30,6 +28,33 @@ abstract class ICE_Section extends ICE_Component
 	 */
 	private $__components__;
 
+	/**
+	 * The CSS class for the content of this section
+	 * 
+	 * @var string
+	 */
+	protected $class_content;
+
+	/**
+	 * The CSS class for the title of this section
+	 * 
+	 * @var string
+	 */
+	protected $class_title;
+
+	/**
+	 */
+	protected function get_property( $name )
+	{
+		switch ( $name ) {
+			case 'class_content':
+			case 'class_title':
+				return $this->$name;
+			default:
+				return parent::get_property( $name );
+		}
+	}
+	
 	/**
 	 */
 	public function configure()
@@ -56,13 +81,13 @@ abstract class ICE_Section extends ICE_Component
 	public function add_component( ICE_Component $component )
 	{
 		// does component section match my name?
-		if ( $component->section == $this->name ) {
+		if ( $component->section == $this->property( 'name' ) ) {
 			// yep, add to components array
 			$this->__components__[] = $component;
 		} else {
 			// not good
 			throw new Exception(
-				sprintf( 'The component "%s" is not assigned to the section "%s"', $component->name, $this->name ) );
+				sprintf( 'The component "%s" is not assigned to the section "%s"', $component->property( 'name' ), $this->property( 'name' ) ) );
 		}
 	}
 

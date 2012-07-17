@@ -18,16 +18,6 @@ ICE_Loader::load( 'base/component', 'utils/docs', 'schemes' );
  *
  * @package ICE-components
  * @subpackage options
- * @property-read string $section The section to which this options is assigned (slug)
- * @property-read string $feature The feature for which this option was created (slug)
- * @property-read string $field_id The CSS id to apply to the option's input field
- * @property-read string $field_class The CSS class to apply to the option's input field
- * @property-read array $field_options An array of field options
- * @property-read mixed $default_value Default value of the option
- * @property-read string $style_selector Used by options which target css selectors
- * @property-read string $style_property Used by options whose value is the value of an element style property
- * @property-read string $style_unit Used by options whose value is a unit of measure for an element style property
- * @property-read string $style_section Which section to export any dynamic styles to
  */
 abstract class ICE_Option extends ICE_Component
 {
@@ -65,6 +55,97 @@ abstract class ICE_Option extends ICE_Component
 	 */
 	private $__style_property__ = false;
 
+	/**
+	 * Default value of the option
+	 *
+	 * @var mixed
+	 */
+	protected $default_value;
+
+	/**
+	 * The feature for which this option was created (slug)
+	 *
+	 * @var string
+	 */
+	protected $feature;
+
+	/**
+	 * The CSS class to apply to the option's input field
+	 *
+	 * @var string
+	 */
+	protected $field_class;
+
+	/**
+	 * The CSS id to apply to the option's input field
+	 *
+	 * @var string
+	 */
+	protected $field_id;
+
+	/**
+	 * An array of field options
+	 *
+	 * @var array
+	 */
+	private $field_options;
+
+	/**
+	 * The section to which this options is assigned (slug)
+	 *
+	 * @var string
+	 */
+	protected $section;
+
+	/**
+	 * Used by options whose value is the value of an element style property
+	 *
+	 * @var string
+	 */
+	protected $style_property;
+
+	/**
+	 * Which section to export any dynamic styles to
+	 *
+	 * @var string
+	 */
+	protected $style_section;
+
+	/**
+	 * Used by options which target css selectors
+	 *
+	 * @var string
+	 */
+	protected $style_selector;
+
+	/**
+	 * Used by options whose value is a unit of measure for an element style property
+	 *
+	 * @var string
+	 */
+	protected $style_unit;
+
+	/**
+	 */
+	protected function get_property( $name )
+	{
+		switch ( $name ) {
+			case 'default_value':
+			case 'feature':
+			case 'field_class':
+			case 'field_id':
+			case 'field_options':
+			case 'section':
+			case 'style_property':
+			case 'style_section':
+			case 'style_selector':
+			case 'style_unit':
+				return $this->$name;
+			default:
+				return parent::get_property( $name );
+		}
+	}
+	
 	/**
 	 */
 	protected function init()
@@ -202,7 +283,7 @@ abstract class ICE_Option extends ICE_Component
 		// make sure we ended up with some options
 		if ( isset( $field_options ) && count( $field_options ) >= 1 ) {
 			// finally set them for the option
-			$this->directive( 'field_options', $field_options, true, true );
+			$this->field_options = $field_options;
 		}
 	}
 
@@ -215,8 +296,10 @@ abstract class ICE_Option extends ICE_Component
 	 */
 	public function supported()
 	{
-		if ( $this->required_feature ) {
-			return current_theme_supports( $this->required_feature );
+		$feature = $this->property( 'required_feature' );
+
+		if ( null !== $feature ) {
+			return current_theme_supports( $feature );
 		}
 
 		return parent::supported();
@@ -272,8 +355,8 @@ abstract class ICE_Option extends ICE_Component
 	 */
 	public function get()
 	{
-		if ( $this->__post_override__ === true && isset( $_POST[$this->name] ) ) {
-			return $_POST[$this->name];
+		if ( $this->__post_override__ === true && isset( $_POST[$this->property( 'name' )] ) ) {
+			return $_POST[$this->property( 'name' )];
 		} else {
 			return $this->get_option();
 		}
@@ -435,11 +518,11 @@ abstract class ICE_Option extends ICE_Component
 		foreach ( $section_registry->get_all() as $section_i ) {
 			if ( $section->is_parent_of( $section_i ) ) {
 				throw new Exception(
-					sprintf( 'Cannot add options to section "%s" because it is acting as a parent section', $section->name ) );
+					sprintf( 'Cannot add options to section "%s" because it is acting as a parent section', $section->property( 'name' ) ) );
 			}
 		}
 
-		$this->section = $section->name;
+		$this->section = $section->property( 'name' );
 	}
 
 	/**
@@ -632,12 +715,13 @@ abstract class ICE_Option_Image
 			// was a default set?
 			if ( isset( $this->default_value ) ) {
 				// use default
-				$directive = $this->directive()->get( 'default_value' );
-				// mimic the src array
-				$src = array_fill( 0, 3, null );
+				$directive = $this->default_value;
 				// is a default set?
-				if ( $directive->has_value() ) {
-					$src[0] = ICE_Scheme::instance()->theme_file_url( $directive->get_theme(), $directive->get_value() );
+				if ( $directive ) {
+					// mimic the src array
+					$src = array_fill( 0, 3, null );
+					// zero index is the url
+					$src[0] = ICE_Scheme::instance()->theme_file_url( $this->config()->get('default_value')->get_theme(), $directive );
 				}
 			}
 		}
@@ -668,11 +752,8 @@ abstract class ICE_Option_Image
 
 		} elseif ( is_string( $value ) && strlen( $value ) >= 1 ) {
 
-			// use default
-			$directive = $this->directive()->get( 'default_value' );
-
 			// they must have provided an image path
-			return ICE_Scheme::instance()->theme_file_url( $directive->get_theme(), $directive->get_value() );
+			return ICE_Scheme::instance()->theme_file_url( $this->config()->get('default_value')->get_theme(), $this->default_value );
 
 		}
 

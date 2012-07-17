@@ -22,6 +22,29 @@ ICE_Loader::load( 'base/component' );
 abstract class ICE_Screen extends ICE_Component
 {
 	/**
+	 * @var string
+	 */
+	protected $target;
+
+	/**
+	 * @var string
+	 */
+	protected $url;
+
+	/**
+	 */
+	protected function get_property( $name )
+	{
+		switch ( $name ) {
+			case 'url':
+			case 'target':
+				return $this->$name;
+			default:
+				return parent::get_property( $name );
+		}
+	}
+	
+	/**
 	 */
 	public function configure()
 	{

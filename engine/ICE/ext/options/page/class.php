@@ -30,7 +30,7 @@ class ICE_Ext_Option_Page
 			'child_of'	=> 0,
 			'echo'		=> true,
 			'selected'	=> $this->get(),
-			'name'		=> $this->name );
+			'name'		=> $this->property( 'name' ) );
 
 		// call the WP function
 		wp_dropdown_pages( $args );

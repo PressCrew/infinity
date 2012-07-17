@@ -16,7 +16,7 @@
 <div id="<?php $this->render_field_id() ?>" class="<?php $this->render_field_class() ?>">
 	<?php
 		// loop all field options
-		foreach ( $this->component()->field_options as $value => $display ) {
+		foreach ( $this->component()->property( 'field_options' ) as $value => $display ) {
 
 			// keep track of current loop for element id
 			$loop = ($loop) ? $loop + 1 : 1;

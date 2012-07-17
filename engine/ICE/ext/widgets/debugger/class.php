@@ -202,8 +202,8 @@ class ICE_Ext_Widget_Debugger
 		// loop all components
 		foreach( $registry->get_all(true) as $component ) {
 			// render item ?>
-			<li id="<?php $this->render_item_id( $component->name ) ?>">
-				<a><?php print $component->name ?></a>
+			<li id="<?php $this->render_item_id( $component->property( 'name' ) ) ?>">
+				<a><?php print $component->property( 'name' ) ?></a>
 				<?php $this->render_directives( $component->directives() ); ?>
 			</li><?php
 

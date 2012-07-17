@@ -127,9 +127,9 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	final protected function register( ICE_Component $component )
 	{
 		// has the component already been registered?
-		if ( !isset( $this->components[ $component->name ] ) ) {
+		if ( !isset( $this->components[ $component->property( 'name' ) ] ) ) {
 			// register it
-			$this->components[ $component->name ] = $component;
+			$this->components[ $component->property( 'name' ) ] = $component;
 		}
 
 		return true;
@@ -257,7 +257,7 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 		// loop through all registered components
 		foreach ( $this->get_all() as $component ) {
 			// filter on component names
-			if ( empty( $component_names ) || in_array( $component->name, $component_names, true ) ) {
+			if ( empty( $component_names ) || in_array( $component->property( 'name' ), $component_names, true ) ) {
 				$components[] = $component;
 			}
 		}

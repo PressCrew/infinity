@@ -20,13 +20,34 @@ ICE_Loader::load_ext( 'options/ui/scroll-picker' );
  *
  * @package ICE-extensions
  * @subpackage options
- * @property-read string $file_directory
- * @property-read string $file_extension
  */
 class ICE_Ext_Option_Ui_Image_Picker
 	extends ICE_Ext_Option_Ui_Scroll_Picker
 		implements ICE_Option_Static_Image, ICE_Option_Auto_Field
 {
+	/**
+	 * @var string
+	 */
+	protected $file_directory;
+
+	/**
+	 * @var string
+	 */
+	protected $file_extension;
+
+	/**
+	 */
+	protected function get_property( $name )
+	{
+		switch ( $name ) {
+			case 'file_directory':
+			case 'file_extension':
+				return $this->$name;
+			default:
+				return parent::get_property( $name );
+		}
+	}
+	
 	/**
 	 */
 	public function configure()
@@ -90,8 +111,10 @@ class ICE_Ext_Option_Ui_Image_Picker
 	 */
 	public function render_field_option( $value )
 	{
+		$fo = $this->property( 'field_options' );
+		
 		// render an img tag ?>
-		<div style="background-repeat: repeat; background-image: url('<?php print esc_attr( $this->field_options->item_at( $value ) ) ?>'); width: <?php print esc_attr( $this->item_width ) ?>; height: <?php print esc_attr( $this->item_height ) ?>"></div><?php
+		<div style="background-repeat: repeat; background-image: url('<?php print esc_attr( $fo[$value] ) ?>'); width: <?php print esc_attr( $this->item_width ) ?>; height: <?php print esc_attr( $this->item_height ) ?>"></div><?php
 	}
 
 	/**
@@ -99,9 +122,10 @@ class ICE_Ext_Option_Ui_Image_Picker
 	public function get_image_url()
 	{
 		$value = $this->get();
+		$fo = $this->property( 'field_options' );
 
-		if ( $this->field_options->contains( $value ) ) {
-			return $this->field_options->item_at( $value );
+		if ( isset( $fo[$value] ) ) {
+			return $fo[$value];
 		} else {
 			return null;
 		}

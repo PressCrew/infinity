@@ -42,6 +42,41 @@ class ICE_Ext_Screen_Cpanel
 	private $__position__;
 
 	/**
+	 * @var string
+	 */
+	protected $icon_primary;
+
+	/**
+	 * @var string
+	 */
+	protected $icon_secondary;
+
+	/**
+	 * @var integer
+	 */
+	protected $priority;
+
+	/**
+	 * @var boolean
+	 */
+	protected $toolbar;
+
+	/**
+	 */
+	protected function get_property( $name )
+	{
+		switch ( $name ) {
+			case 'icon_primary':
+			case 'icon_secondary':
+			case 'priority':
+			case 'toolbar':
+				return $this->$name;
+			default:
+				return parent::get_property( $name );
+		}
+	}
+
+	/**
 	 */
 	public function configure()
 	{

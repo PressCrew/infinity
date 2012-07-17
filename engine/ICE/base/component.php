@@ -26,25 +26,6 @@ ICE_Loader::load(
  *
  * @package ICE
  * @subpackage base
- * @property-read string $theme The theme that created this concrete component
- * @property-read string $name The concrete component name
- * @property-read string $aname The component atypical name which can be used to identify this component instance across components and persistently across requests
- * @property-read string $hname The component hash name which is the eight character crc32 hex hash of the aname
- * @property-read string $type The concrete component type
- * @property-read string $parent The parent component (slug)
- * @property-read string $title The concrete component title
- * @property-read string $description The concrete component description
- * @property-read string $id The CSS id to set for the component's container
- * @property-read string $class The CSS class to apply to the component's container
- * @property-read boolean|string $documentation true/false to enable/disable, string for manual page name
- * @property-read array $capabilities Required capabilities, can only be appended
- * @property-read string $required_feature Feature required for this component to run/display
- * @property-read boolean $ignore Whether or not this component should be ignored
- * @property-read string $template Relative path to component template file
- * @property-read string $style Relative path to custom stylesheet
- * @property-read string $style_depends Comma separated list of style handles to enqueue
- * @property-read string $script Relative path to custom javascript source file
- * @property-read string $script_depends Comma separated list of script handles to enqueue
  */
 abstract class ICE_Component
 	extends ICE_Componentable
@@ -78,13 +59,6 @@ abstract class ICE_Component
 	private $__config__;
 	
 	/**
-	 * Component directives registry
-	 *
-	 * @var ICE_Init_Directive_Registry
-	 */
-	private $__directives__;
-
-	/**
 	 * Component's DOM element helper
 	 *
 	 * @var ICE_Component_Element
@@ -106,11 +80,123 @@ abstract class ICE_Component
 	private $__script__;
 
 	/**
+	 * The component atypical name which can be used to identify this component instance across components and persistently across requests
+	 *
+	 * @var string
+	 */
+	private $aname;
+	
+	/**
+	 * Required capabilities, can only be appended
+	 *
+	 * @var array
+	 */
+	private $capabilities;
+
+	/**
+	 * The CSS class(es) to apply to the component's container
+	 *
+	 * @var array
+	 */
+	protected $class;
+	
+	/**
+	 * The component description
+	 *
+	 * @var string
+	 */
+	protected $description;
+
+	/**
+	 * Set to true/false to enable/disable, or to a string for manual page name
+	 *
+	 * @var boolean
+	 */
+	protected $documentation;
+
+	/**
+	 * The component hash name. A crc32 hash of the aname in hex format
+	 *
+	 * @var string
+	 */
+	private $hname;
+
+	/**
+	 * The CSS id to set for the component's container
+	 *
+	 * @var string
+	 */
+	protected $id;
+
+	/**
+	 * Whether or not this component should be ignored
+	 *
+	 * @var boolean
+	 */
+	protected $ignore;
+	
+	/**
+	 * The parent component (slug)
+	 *
+	 * @var string
+	 */
+	protected $parent;
+
+	/**
 	 * The component name
 	 *
 	 * @var string
 	 */
 	private $name;
+
+	/**
+	 * Feature required for this component to run/display
+	 *
+	 * @var string
+	 */
+	protected $required_feature;
+
+	/**
+	 * Relative path to custom javascript source file
+	 *
+	 * @var string
+	 */
+	protected $script;
+
+	/**
+	 * Comma separated list of script handles to enqueue
+	 *
+	 * @var string
+	 */
+	protected $script_depends;
+
+	/**
+	 * Relative path to custom stylesheet
+	 *
+	 * @var string
+	 */
+	protected $style;
+
+	/**
+	 * Comma separated list of style handles to enqueue
+	 *
+	 * @var string
+	 */
+	protected $style_depends;
+	
+	/**
+	 * Relative path to component template file
+	 *
+	 * @var string
+	 */
+	protected $template;
+
+	/**
+	 * The component title
+	 *
+	 * @var string
+	 */
+	protected $title;
 
 	/**
 	 * The theme (slug) which created this component
@@ -125,20 +211,6 @@ abstract class ICE_Component
 	 * @var string
 	 */
 	private $type;
-
-	/**
-	 * The atypical component name, unique across entire component stack
-	 *
-	 * @var string
-	 */
-	private $aname;
-
-	/**
-	 * The hash name. A crc32 hash of the aname in hex format
-	 *
-	 * @var string
-	 */
-	private $hname;
 
 	/**
 	 * @param string $name Option name may only contain alphanumeric characters as well as the underscore for use as a word separator.
@@ -160,7 +232,6 @@ abstract class ICE_Component
 
 		// init config and directives registries
 		$this->__config__ = new ICE_Init_Config();
-		$this->__directives__ = new ICE_Init_Directive_Registry();
 
 		// init required directives
 		$this->name = $this->validate_name( $name );
@@ -182,11 +253,25 @@ abstract class ICE_Component
 	protected function get_property( $name )
 	{
 		switch ( $name ) {
-			case 'name':
-			case 'type':
-			case 'theme':
 			case 'aname':
+			case 'capabilities':
+			case 'class':
+			case 'description':
+			case 'documentation':
 			case 'hname':
+			case 'id':
+			case 'ignore':
+			case 'name':
+			case 'parent':
+			case 'required_feature':
+			case 'script':
+			case 'script_depends':
+			case 'style':
+			case 'style_depends':
+			case 'template':
+			case 'theme':
+			case 'title':
+			case 'type':
 				return $this->$name;
 			default:
 				return parent::get_property( $name );
@@ -194,7 +279,7 @@ abstract class ICE_Component
 	}
 
 	/**
-	 */
+	 *
 	protected function set_property( $name, $value )
 	{
 		switch ( $name ) {
@@ -207,31 +292,8 @@ abstract class ICE_Component
 				return parent::set_property( $name, $value );
 		}
 	}
-
-	/**
+	 *
 	 */
-	final public function __isset( $name )
-	{
-		switch ( $name ) {
-			case 'name':
-			case 'type':
-			case 'theme':
-			case 'aname':
-			case 'hname':
-				return isset( $this->$name );
-			default:
-				return $this->__directives__->has( $name );
-		}
-	}
-
-	/**
-	 */
-	final public function __unset( $name )
-	{
-		// not allowed
-		throw new Exception(
-			sprintf( 'The "%s" property cannot be unset', $name ) );
-	}
 
 	/**
 	 * Return array of ReflectionClass objects for the current component's ancestory
@@ -290,56 +352,6 @@ abstract class ICE_Component
 			return self::VERSION;
 		} else {
 			return 0;
-		}
-	}
-
-	/**
-	 * Return directives registry
-	 *
-	 * @return ICE_Init_Directive_Registry
-	 */
-	final protected function directives()
-	{
-		return $this->__directives__->get_all();
-	}
-
-	/**
-	 * Return one directive
-	 *
-	 * @param string $name
-	 * @param mixed $value
-	 * @param boolean $ro_value
-	 * @param boolean $ro_theme
-	 * @return mixed
-	 */
-	final protected function directive( $name = null, $value = null, $ro_value = false, $ro_theme = false )
-	{
-		// this method is silly flexible
-		switch ( func_num_args() ) {
-
-			// no args, return entire directive registry
-			case 0:
-				return $this->__directives__;
-
-			// one arg, return value of one directive
-			case 1:
-				// get directive data
-				$data = $this->__directives__->get( $name );
-				// return data value or null
-				return ( $data ) ? $data->get_value() : null;
-
-			// more than one arg, we are setting
-			default:
-				// get theme which set the config directive
-				$config_data = $this->__config__->get( $name );
-				// if theme is empty, assume origin theme set directive
-				if ( $config_data ) {
-					$theme = $config_data->get_theme();
-				} else {
-					$theme = $this->theme;
-				}
-				// set it
-				return $this->__directives__->set( $theme, $name, $value, $ro_value, $ro_theme );
 		}
 	}
 
@@ -527,7 +539,7 @@ abstract class ICE_Component
 			$parent = $this->config( 'parent' );
 			// name can't equal parent
 			if ( $this->name != $parent ) {
-				$this->directive( 'parent', $parent );
+				$this->parent = $parent;
 			} else {
 				throw new Exception(
 					sprintf( 'The component "%s" cannot be a parent of itself', $this->name ) );
@@ -655,15 +667,8 @@ abstract class ICE_Component
 		}
 
 		if ( isset( $this->capabilities ) ) {
-			// lookup map
-			$theme_map = $this->__directives__->get_map( 'capabilities' );
-			// get one?
-			if ( $theme_map && $theme_map->contains( $this->theme ) ) {
-				if ( $theme_map->item_at($this->theme)->has_value() ) {
-					$theme_caps = $theme_map->item_at($this->theme)->get_value();
-					$theme_caps->merge_with( $capabilities );
-				}
-			}
+			// merge them
+			$this->capabilities = array_merge( $this->capabilities, $capabilities );
 		} else {
 			$this->capabilities = $capabilities;
 		}

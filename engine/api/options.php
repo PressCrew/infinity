@@ -322,7 +322,7 @@ function infinity_option_render_begin( $option_name )
 	if ( $infinity_246f86b591 instanceof ICE_Option ) {
 		throw new Exception(
 			'Cannot begin rendering option "%s" because rendering of option "%s" has not ended!',
-			$option_name, $infinity_246f86b591->name
+			$option_name, $infinity_246f86b591->property( 'name' )
 		);
 	}
 	

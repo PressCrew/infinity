@@ -23,14 +23,28 @@ class ICE_Ext_Widget_Posts_List
 	 extends ICE_Widget
 {
 	/**
+	 * @var string
+	 */
+	protected $post_type = 'post';
+
+	/**
+	 */
+	protected function get_property( $name )
+	{
+		switch ( $name ) {
+			case 'post_type':
+				return $this->$name;
+			default:
+				return parent::get_property( $name );
+		}
+	}
+	
+	/**
 	 */
 	protected function init()
 	{
 		// run parent
 		parent::init();
-
-		// init directives
-		$this->post_type = 'post';
 
 		// requires edit posts
 		$this->add_capabilities( 'edit_posts' );
