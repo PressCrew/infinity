@@ -407,8 +407,12 @@ abstract class ICE_Component
 	public function element()
 	{
 		if ( !$this->__element__ instanceof ICE_Component_Element ) {
-			// init element object
+			// new element object
 			$this->__element__ = new ICE_Component_Element();
+			// initialize the element
+			if ( $this->supported() ) {
+				$this->init_element();
+			}
 		}
 
 		// return it!
@@ -639,11 +643,6 @@ abstract class ICE_Component
 
 		// call configure template method
 		$this->configure();
-
-		// initialize the element helper
-		if ( $this->supported() ) {
-			$this->init_element();
-		}
 	}
 
 	/**
