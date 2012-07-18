@@ -356,14 +356,14 @@ abstract class ICE_Component
 	}
 
 	/**
-	 * Copy a configuration value to a directive
+	 * Copy a configuration setting to a property
 	 *
-	 * @param string $name Name of the directive to copy from the configuration
+	 * @param string $name Name of the setting to copy from the configuration
 	 * @param null|string $type null: no type casting, string|integer|float|boolean|array: cast to type
-	 * @param mixed $default If set, this value will be used if directive is missing from configuration
+	 * @param mixed $default If set, this value will be used if setting is missing from configuration
 	 * @return boolean
 	 */
-	final protected function directive_init( $name, $type = null, $default = null )
+	final protected function import_property( $name, $type = null, $default = null )
 	{
 		// was a default passed?
 		$has_default = ( func_num_args() >= 3 );
@@ -395,8 +395,8 @@ abstract class ICE_Component
 			$value = $default;
 		}
 
-		// set the directive
-		return $this->directive( $name, $value );
+		// set the property
+		return $this->set_property( $name, $value );
 	}
 	
 	/**
