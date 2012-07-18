@@ -358,6 +358,9 @@ abstract class ICE_Component
 	/**
 	 * Copy a configuration setting to a property
 	 *
+	 * This method only works for properties which are *locally accessible*, which means
+	 * they must have been declared as protected or public (even though public would be silly!).
+	 *
 	 * @param string $name Name of the setting to copy from the configuration
 	 * @param null|string $type null: no type casting, string|integer|float|boolean|array: cast to type
 	 * @param mixed $default If set, this value will be used if setting is missing from configuration
@@ -371,10 +374,11 @@ abstract class ICE_Component
 		// value is null by default
 		$value = null;
 
+		// get raw value of conf
+		$raw_value = $this->config( $name );
+
 		// is conf data set?
-		if ( $this->config()->contains( $name ) ) {
-			// get value of conf
-			$raw_value = $this->config( $name );
+		if ( $raw_value ) {
 			// type cast?
 			if ( $type ) {
 				try {
@@ -387,10 +391,8 @@ abstract class ICE_Component
 				// no type passed, use value as is
 				$value = $raw_value;
 			}
-		}
-		
-		// handle default value
-		if ( null == $value && true == $has_default ) {
+		// handle default
+		} elseif ( true == $has_default ) {
 			// use default value
 			$value = $default;
 		}
