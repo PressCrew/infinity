@@ -113,8 +113,8 @@ abstract class ICE_Base
 	 */
 	protected function get_property( $name )
 	{
-		throw new Exception(
-			sprintf( 'The "%s" property is not accessible for reading.', $name ) );
+		// try to get it
+		return $this->$name;
 	}
 	
 	/**
@@ -126,8 +126,11 @@ abstract class ICE_Base
 	 */
 	protected function set_property( $name, $value )
 	{
-		throw new Exception(
-			sprintf( 'The "%s" property is not accessible for writing.', $name ) );
+		// try to set it
+		$this->$name = $value;
+		
+		// chain it
+		return $this;
 	}
 
 	/**
