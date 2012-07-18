@@ -398,7 +398,7 @@ abstract class ICE_Component
 		}
 
 		// set the property
-		return $this->set_property( $name, $value );
+		return $this->$name = $value;
 	}
 	
 	/**
