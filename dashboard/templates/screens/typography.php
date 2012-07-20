@@ -9,7 +9,7 @@ ICE_Loader::load( 'utils/webfont' );
 	(function($){
 		var options = {};
 		// add application options
-		options.jsonUrl = '<?php print ICE_Webfont::instance(0)->url ?>';
+		options.jsonUrl = '<?php print ICE_Webfont::instance(0)->get_property( 'url' ) ?>';
 		options.slantText = '<?php _e( 'Slant', infinity_text_domain ) ?>';
 		options.serviceText = '<?php _e( 'Service', infinity_text_domain ) ?>';
 		options.variantText = '<?php _e( 'Thickness', infinity_text_domain ) ?>';

@@ -208,7 +208,7 @@ class ICE_Scheme_Enqueue extends ICE_Base
 		
 		// add internal style for every export
 		foreach( $exports as $handle => $export ) {
-			$styles->add( $handle, $export->url );
+			$styles->add( $handle, $export->get_property( 'url' ) );
 		}
 
 		// add the theme style.css LAST
@@ -248,7 +248,7 @@ class ICE_Scheme_Enqueue extends ICE_Base
 
 		// add internal script for every export
 		foreach( $exports as $handle => $export ) {
-			$script->add( $handle, $export->url );
+			$script->add( $handle, $export->get_property( 'url' ) );
 		}
 
 		// any scripts to add?

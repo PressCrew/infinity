@@ -68,9 +68,9 @@ class ICE_Webfont extends ICE_Base
 	{
 		switch ( $name ) {
 			case 'path':
-				return $this->export->path;
+				return $this->export->get_property( 'path' );
 			case 'url':
-				return $this->export->url;
+				return $this->export->get_property( 'url' );
 			default:
 				return parent::__get( $name );
 		}
