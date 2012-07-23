@@ -146,7 +146,7 @@ class ICE_Export extends ICE_Base
 
 	/**
 	 */
-	public function __get( $name )
+	public function get_property( $name )
 	{
 		switch( $name ) {
 			case 'name':
@@ -155,22 +155,7 @@ class ICE_Export extends ICE_Base
 			case 'url':
 				return $this->$name;
 			default:
-				return parent::__get( $name );
-		}
-	}
-
-	/**
-	 */
-	public function __isset( $name )
-	{
-		switch( $name ) {
-			case 'name':
-			case 'ext':
-			case 'path':
-			case 'url':
-				return isset( $this->$name );
-			default:
-				return parent::__isset( $name );
+				return parent::get_property( $name );
 		}
 	}
 
