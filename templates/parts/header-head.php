@@ -14,7 +14,7 @@
  * @since 1.0
  */
 ?>
-<head profile="http://gmpg.org/xfn/11">
+<head>
 	<?php
 		do_action( 'open_head' );
 	?>
@@ -30,6 +30,7 @@
 	<meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
 	<meta name="generator" content="WordPress <?php bloginfo('version'); ?>" />
 	<!-- core link tags -->
+	<link rel="profile" href="http://gmpg.org/xfn/11" />
 	<link rel="alternate" type="application/rss+xml" title="<?php bloginfo('name'); ?> <?php _e( 'Blog Posts RSS Feed', infinity_text_domain ) ?>" href="<?php bloginfo('rss2_url'); ?>" />
 	<link rel="alternate" type="application/atom+xml" title="<?php bloginfo('name'); ?> <?php _e( 'Blog Posts Atom Feed', infinity_text_domain ) ?>" href="<?php bloginfo('atom_url'); ?>" />
 	<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
