@@ -29,6 +29,7 @@ span.activity {
     background: #F9F9F9;
     font-weight: normal;
     margin-top: 6px;
+    font-size: 90%;
 }
 .activity-read-more { margin-left: 5px }
 
@@ -52,7 +53,7 @@ div#item-header img.avatar {
 div#item-header h2 { margin-bottom: 5px }
 div#item-header span.activity, div#item-header h2 span.highlight {
     vertical-align: middle;
-    font-size: 11px;
+    font-size: 90%;
     font-weight: normal;
     line-height: 170%;
     margin-bottom: 7px;
@@ -66,7 +67,7 @@ div#item-header h2 span.highlight span {
     color: #FFFFFF;
     cursor: pointer;
     display: none;
-    font-size: 11px;
+    font-size: 90%;
     font-weight: bold;
     margin-bottom: 0;
     padding: 1px 4px;
@@ -76,7 +77,7 @@ div#item-header h2 span.highlight span {
     vertical-align: middle;
 }
 div#item-header div#item-meta {
-    font-size: 14px;
+    font-size: 110%;
     color: #777;
     padding-bottom: 10px;
     overflow: hidden;
@@ -89,7 +90,7 @@ div#item-header div#item-actions {
     text-align: right;
 }
 div#item-header div#item-actions h3 {
-    font-size: 12px;
+    font-size: 100%;
     margin: 0 0 5px 0;
 }
 div#item-header ul {
@@ -108,7 +109,7 @@ div#item-header ul img.avatar, div#item-header ul.avatars img.avatar {
 }
 div#item-header div.generic-button, div#item-header a.button {
     float: left;
-    font-size: 11px;
+    font-size: 90%;
     margin: 10px 10px 0 0;
 }
 div#item-header div#message.info { line-height: 80% }
@@ -136,11 +137,11 @@ ul.item-list li div.item-title, ul.item-list li h4 {
     margin: 0;
 }
 ul.item-list li div.item-title span {
-    font-size: 12px;
+    font-size: 100%;
     color: #999;
 }
 ul.item-list li div.item-desc {
-    font-size: 11px;
+    font-size: 90%;
     margin: 10px 0 0 64px;
     width: 68%;
 }
@@ -153,13 +154,13 @@ ul.item-list li div.action {
 ul.item-list li div.meta {
     margin-top: 10px;
     color: #888;
-    font-size: 11px;
+    font-size: 90%;
 }
 #sidebar .item-meta { position: relative }
 .item-avatar { float: left }
 ul.item-list li h5 span.small {
     font-weight: normal;
-    font-size: 11px;
+    font-size: 90%;
 }
 /* > Item Tabs
 --------------------------------------------------------------*/
@@ -259,11 +260,10 @@ div.dir-search {
 .dir-form { margin-bottom: 30px }
 div.dir-search input[type=text] {
     display: inline-block;
-    font-size: 12px;
     margin-right: 10px;
 }
 div.dir-search label { display: inline-block }
-#content .item-title a { font-size: 14px }
+#content .item-title a { font-size: 120% }
 .dir-form h3 .button {
     margin-bottom: 0;
     margin-top: 0;
@@ -283,14 +283,13 @@ div.pagination#user-pag, .friends div.pagination, .mygroups div.pagination, .myb
 div.pagination .pag-count { float: left }
 div.pagination .pagination-links { float: right }
 div.pagination .pagination-links span, div.pagination .pagination-links a {
-    font-size: 12px;
     padding: 0 5px;
 }
 div.pagination .pagination-links a:hover { font-weight: bold }
 div#pag-bottom { margin-top: 0 }
 div.item-options {
     color: #73C1E6;
-    font-size: 9.8px;
+    font-size: 80%;
     font-weight: bold;
     text-transform: uppercase;
 }
@@ -310,7 +309,7 @@ div#message { margin: 15px 0 }
 div#message.updated { clear: both }
 div#message p {
     padding: 10px 15px;
-    font-size: 12px;
+    font-size: 90%;
     display: block;
 }
 /* Buttons that are disabled */
@@ -409,7 +408,7 @@ div#invite-list {
 table tr td.thread-info p { margin: 0 }
 table tr td.thread-info p.thread-excerpt {
     color: #888;
-    font-size: 11px;
+    font-size: 90%;
     margin-top: 3px;
 }
 div#sidebar table td, table.forum td { text-align: center }
@@ -445,13 +444,13 @@ table.forum tr.closed td.td-title {
 }
 table.forum td p.topic-text {
     color: #888;
-    font-size: 11px;
+    font-size: 90%;
 }
 table.forum tr > td:first-child, table.forum tr > th:first-child { padding-left: 20px }
 table.forum tr > td:last-child, table.forum tr > th:last-child { padding-right: 20px }
 table.forum tr th#th-title, table.forum tr th#th-poster, table.forum tr th#th-group, table.forum td.td-poster, table.forum td.td-group, table.forum td.td-title { text-align: left }
 table.forum td.td-freshness {
-    font-size: 11px;
+    font-size: 90%;
     color: #888;
 }
 table.forum td img.avatar {
@@ -494,7 +493,7 @@ form#whats-new-form #whats-new-textarea {
 }
 form#whats-new-form textarea {
     font-family: inherit;
-    font-size: 14px;
+    font-size: 120%;
     height: 60px;
     margin: 0;
     width: 98%;
@@ -553,12 +552,12 @@ body.activity-permalink .activity-list li.mini .activity-meta {
 }
 .activity-list li.mini .activity-comments {
     clear: left;
-    font-size: 12px;
+    font-size: 100%;
     margin-top: 30px;
 }
 .activity-list li .activity-inreplyto {
     color: #A6A6A6;
-    font-size: 11.5px;
+    font-size: 90%;
     margin-bottom: 15px;
     margin-top: 20px;
     padding-left: 25px;
@@ -585,7 +584,7 @@ body.activity-permalink .activity-list .activity-avatar img {
     margin-top: -20px;
 }
 body.activity-permalink .activity-list li .activity-content {
-    font-size: 16px;
+    font-size: 130%;
     line-height: 150%;
     margin-left: 106px;
     margin-right: 0;
@@ -614,7 +613,7 @@ body.activity-permalink .activity-list li .activity-header > p {
 .activity-list .activity-content span.activity-header-meta a {
     background: none;
     padding: 0;
-    font-size: 11px;
+    font-size: 90%;
     margin: 0;
     border: none;
     color: #777;
@@ -669,7 +668,7 @@ div.activity-meta {
     margin: 0 0 20px 3px;
     clear: left;
 }
-.activity-list div.activity-meta a { font-size: 11px }
+.activity-list div.activity-meta a { font-size: 90%;}
 div.activity-comments {
     position: relative;
     margin: 0 0 0 75px;
@@ -722,13 +721,13 @@ div.activity-comments li {
 div.acomment-content .time-since { display: none }
 div.acomment-content .activity-delete-link { display: none }
 div.acomment-content .comment-header { display: none }
-body.activity-permalink div.activity-comments div.acomment-content { font-size: 14px }
+body.activity-permalink div.activity-comments div.acomment-content { font-size: 120%; }
 div.activity-comments div.acomment-meta {
-    font-size: 11px;
+    font-size: 90%;
     color: #888;
 }
 div.acomment-options a {
-    font-size: 10px;
+    font-size: 80%;
     padding: 0 10px;
 }
 div.activity-comments form.ac-form {
@@ -758,7 +757,7 @@ div.activity-comments form .ac-textarea {
 div.activity-comments form textarea {
     width: 100%;
     font-family: inherit;
-    font-size: 11px;
+    font-size: 90%;
     color: #555;
     height: 60px;
     border: none;
@@ -782,7 +781,7 @@ div.activity-comments form div.ac-reply-content {
     margin-left: 25px;
     padding-left: 15px;
     color: #888;
-    font-size: 11px;
+    font-size: 90%;
 }
 /* > Private Message Threads
 --------------------------------------------------------------*/
@@ -823,7 +822,7 @@ div.messages-options-nav {
     background: transparent;
     border-bottom: 1px solid #DDDDDD;
     border-top: 1px solid #DDDDDD;
-    font-size: 11px;
+    font-size: 90%;
     padding: 8px 15px;
     text-align: right;
 }
@@ -876,7 +875,7 @@ div.admin-links {
     top: 15px;
     right: 25px;
     color: #888;
-    font-size: 11px;
+    font-size: 90%;
 }
 div#topic-meta div.admin-links {
     bottom: 0;
@@ -888,7 +887,6 @@ div#topic-meta {
     position: relative;
     padding: 5px 0;
 }
-div#topic-meta h3 { font-size: 20px }
 div#new-topic-post {
     margin: 0;
     padding: 1px 0 0 0;
