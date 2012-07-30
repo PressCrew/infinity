@@ -12,17 +12,26 @@ label,
 input,
 select,
 textarea {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: normal;
   font-weight: 13px;
   line-height: 18px;
   margin-bottom: 10px;
 }
 label {
-  display: block;
-  margin-bottom: 5px;
-  color: #666;
-  font-weight: 500;
+    color: #999999;
+    display: block;
+    font-size: 80%;
+    font-weight: bold;
+    margin: 5px 0;
+    text-transform: uppercase;
+}
+label ul {
+	padding: 0;
+}
+label li {
+	text-transform: none;
+	color: inherit;
+	font-weight: normal;
 }
 input[type=image], input[type=checkbox], input[type=radio] {
   width: auto;
@@ -266,167 +275,4 @@ input::-webkit-input-placeholder {
 }
 .form-horizontal .form-actions {
   padding-left: 160px;
-}
-table {
-  width: 100%;
-  margin-bottom: 18px;
-}
-th, td {
-  padding: 8px;
-  line-height: 18px;
-  text-align: left;
-  border-top: 1px solid #ddd;
-}
-th {
-  font-weight: bold;
-  vertical-align: bottom;
-}
-td {
-  vertical-align: middle;
-}
-thead:first-child tr th, thead:first-child tr td {
-  border-top: 0;
-}
-tbody + tbody {
-  border-top: 2px solid #ddd;
-}
-.table-condensed th, .table-condensed td {
-  padding: 4px 5px;
-}
-.table-bordered {
-  border: 1px solid #ddd;
-  border-collapse: separate;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
-}
-.table-bordered th + th,
-.table-bordered td + td,
-.table-bordered th + td,
-.table-bordered td + th {
-  border-left: 1px solid #ddd;
-}
-.table-bordered thead:first-child tr:first-child th, .table-bordered tbody:first-child tr:first-child th, .table-bordered tbody:first-child tr:first-child td {
-  border-top: 0;
-}
-.table-bordered thead:first-child tr:first-child th:first-child, .table-bordered tbody:first-child tr:first-child td:first-child {
-  -webkit-border-radius: 4px 0 0 0;
-  -moz-border-radius: 4px 0 0 0;
-  border-radius: 4px 0 0 0;
-}
-.table-bordered thead:first-child tr:first-child th:last-child, .table-bordered tbody:first-child tr:first-child td:last-child {
-  -webkit-border-radius: 0 4px 0 0;
-  -moz-border-radius: 0 4px 0 0;
-  border-radius: 0 4px 0 0;
-}
-.table-bordered thead:last-child tr:last-child th:first-child, .table-bordered tbody:last-child tr:last-child td:first-child {
-  -webkit-border-radius: 0 0 0 4px;
-  -moz-border-radius: 0 0 0 4px;
-  border-radius: 0 0 0 4px;
-}
-.table-bordered thead:last-child tr:last-child th:last-child, .table-bordered tbody:last-child tr:last-child td:last-child {
-  -webkit-border-radius: 0 0 4px 0;
-  -moz-border-radius: 0 0 4px 0;
-  border-radius: 0 0 4px 0;
-}
-.table-striped tbody tr:nth-child(odd) td, .table-striped tbody tr:nth-child(odd) th {
-  background-color: #f9f9f9;
-}
-table .span1 {
-  float: none;
-  width: 44px;
-  margin-left: 0;
-}
-table .span2 {
-  float: none;
-  width: 124px;
-  margin-left: 0;
-}
-table .span3 {
-  float: none;
-  width: 204px;
-  margin-left: 0;
-}
-table .span4 {
-  float: none;
-  width: 284px;
-  margin-left: 0;
-}
-table .span5 {
-  float: none;
-  width: 364px;
-  margin-left: 0;
-}
-table .span6 {
-  float: none;
-  width: 444px;
-  margin-left: 0;
-}
-table .span7 {
-  float: none;
-  width: 524px;
-  margin-left: 0;
-}
-table .span8 {
-  float: none;
-  width: 604px;
-  margin-left: 0;
-}
-table .span9 {
-  float: none;
-  width: 684px;
-  margin-left: 0;
-}
-table .span10 {
-  float: none;
-  width: 764px;
-  margin-left: 0;
-}
-table .span11 {
-  float: none;
-  width: 844px;
-  margin-left: 0;
-}
-table .span12 {
-  float: none;
-  width: 924px;
-  margin-left: 0;
-}
-table .header {
-  cursor: pointer;
-}
-table .header:after {
-  content: "";
-  float: right;
-  margin-top: 7px;
-  border-width: 0 4px 4px;
-  border-style: solid;
-  border-color: #000 transparent;
-  visibility: hidden;
-}
-table .headerSortUp, table .headerSortDown {
-  background-color: #f7f7f9;
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
-}
-table .header:hover:after {
-  visibility: visible;
-}
-table .headerSortDown:after, table .headerSortDown:hover:after {
-  visibility: visible;
-  filter: alpha(opacity=60);
-  -moz-opacity: 0.6;
-  opacity: 0.6;
-}
-table .headerSortUp:after {
-  border-bottom: none;
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-top: 4px solid #000;
-  visibility: visible;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-  filter: alpha(opacity=60);
-  -moz-opacity: 0.6;
-  opacity: 0.6;
 }
