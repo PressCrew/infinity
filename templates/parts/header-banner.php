@@ -22,7 +22,7 @@
 		endif;
 	?>
 	<!-- header -->
-	<header id="header" role="banner" class="column sixteen">
+	<header id="header" role="banner">
 		<div id="logo-menu-wrap">
 			<?php
 				do_action( 'open_header' );
