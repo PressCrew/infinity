@@ -930,7 +930,7 @@ final class ICE_Scheme extends ICE_Base
 
 			// inject prefix?
 			if ( $prefix_map && $prefix_map->contains($theme) ) {
-				$stack_file .= '/' . $prefix_map->item_at($theme)->value;
+				$stack_file .= '/' . $prefix_map->item_at($theme)->get_value();
 			}
 
 			// append requested path
@@ -960,7 +960,7 @@ final class ICE_Scheme extends ICE_Base
 			// throw out the first one
 			array_shift( $args );
 			// add directive path
-			array_unshift( $args, $this->directives()->get($path_directive)->value );
+			array_unshift( $args, $this->directives()->get_value($path_directive) );
 			// locate it
 			return call_user_func_array( array($this,'locate_file'), $args );
 		}
