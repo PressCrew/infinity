@@ -1,7 +1,6 @@
 /* ================ */
 /* ! Post Formats   */
 /* ================ */
-
 .format-standard .posttitle,
 .format-gallery .posttitle,
 .format-video .posttitle,
@@ -71,6 +70,3 @@ span.post-tags {
     margin-right: 0;
     padding-left: 23px;
 }
-
-
-

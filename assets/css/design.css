@@ -18,7 +18,7 @@ body {
 	background: url("../images/design/bg.png") repeat #FFF;
 }
 h2.pagetitle a,h2.posttitle a,h1.pagetitle a,h1.posttitle a {
-	color: #545454;
+	color: inherit;
 	margin-bottom: 0;
 	margin-top: 0;
 }
@@ -35,17 +35,8 @@ a:hover {
 	color: #666;
 	text-decoration: none;
 }
-#wrapper {
+.main-wrap {
 	background: #FFF;
-	border: 1px solid #F2F2F2;
-	margin: 30px auto;
-	max-width: 1150px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-	-webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
-	-moz-box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
-	box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
 }
 #header {
 	background: url("../images/design/header-background.jpg") no-repeat scroll transparent;
@@ -68,12 +59,8 @@ h1#site-title,div#site-title {
 	border-top: 1px solid #D0CECE;
 	padding: 10px 30px 6px;
 }
-.main-wrap {
-	padding-left: 30px;
-	padding-right: 30px;
-}
 /* Global CSS3 Stuff */
-.main-menu,.top-menu,.top-wrap .sub-menu,.item-list-tabs,.footer-wrap,thead:first-child tr th,thead:first-child tr td,.base-menu ul ul {
+.main-menu,.top-menu,.top-wrap .sub-menu,.item-list-tabs,thead:first-child tr th,thead:first-child tr td,.base-menu ul ul {
 	background-color: #222222;
 	background-image: -webkit-linear-gradient(center top , #333333, #222222);
 	background-image: -moz-linear-gradient(center top , #333333, #222222);
@@ -89,15 +76,11 @@ h1#site-title,div#site-title {
 	border-bottom: 2px solid #628FAA;
 	border-top: 2px solid #525151;
 }
-.footer-wrap {
-	padding-left: 10px;
-	padding-right: 10px;
-}
 #footer .widget h4 {
 	border-bottom: 1px solid #3E3C3C;
 	color: #E0E0E0;
 }
-.author-box,.category-box,.tag-box,.info-box,#inner-sidebar,.activity-inner,div.activity-comments form.ac-form,.postthumb img,span.activity,h1#site-title,div#site-title,#inner-sidebar {
+.author-box,.category-box,.tag-box,.info-box,#sidebar,.activity-inner,div.activity-comments form.ac-form,.postthumb img,span.activity,h1#site-title,div#site-title {
 	background-color: #FFF;
 	background-image: -webkit-linear-gradient(center top , #FFFFFF 0%, #F4F4F4 100%) ;
 	background-image: -moz-linear-gradient(center top , #FFFFFF 0%, #F4F4F4 100%) ;
@@ -143,13 +126,12 @@ div.item-list-tabs {
 .base-menu .sub-menu {
 	padding-left: 0px !important;
 }
-/* Setup the inner sidebar. This contains some negative margins and padding which can't be applied it the #sidebar class
-because of the Flexible Grid class it needs.*/
-#inner-sidebar {
-	margin-left: 20px;
-	margin-right: -40px;
-	margin-top: -40px;
-	padding: 30px;
+
+/* Sidebar */
+#content,
+#sidebar,
+.footer-widget {
+	    padding: 30px;
 }
 .widget {
 	margin: 0 0 20px;
@@ -161,22 +143,24 @@ because of the Flexible Grid class it needs.*/
 /* Footer */
 #footer .widget {
 	color: #BFBFBF;
-	font-weight: 400;
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-	padding: 20px;
-}
-#footer-widget-right .widget {
-	padding-right: 10px;
 }
 /* WordPress */
+#category-description header:before {
+    background: url("../images/icons/black.png") no-repeat scroll 0 -35px transparent;
+    content: "";
+    height: 22px;
+    position: absolute;
+    width: 25px;;
+}
 h1#category-title,h1#tag-title {
-	background: url("../images/icons/black.png") no-repeat scroll -3px -36px transparent;
 	color: #999;
 	font-size: 16px;
 	padding-left: 22px;
 }
 h1#category-title span,h1#tag-title span {
 	color: #555;
+	
 }
 .authorbox h3 {
 	background: url("../images/icons/black.png") no-repeat scroll -724px -1228px transparent;
@@ -253,15 +237,10 @@ span.activity {
 	margin-top: -6px;
 	padding: 0 5px;
 }
-#powered-by {
+.footer-wrap {
 	background: none repeat scroll 0 0 #2F2F2F;
 	border-top: 1px solid #454545;
 	color: #DDDDDD;
-	font-weight: bold;
-	margin-left: -10px;
-	margin-right: -10px;
-	padding-left: 30px;
-	padding-right: 30px;
 }
 #copyright-info {
 	text-align: right;
