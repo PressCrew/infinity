@@ -48,7 +48,7 @@ add_action('wp_head','infinity_custom_favicon');
  */
 function infinity_content_class()
 {
-	print infinity_get_content_class();
+	print 'column ' . infinity_get_content_class();
 }
 add_action( 'content_class', 'infinity_content_class' );
 
@@ -61,7 +61,7 @@ function infinity_get_content_class()
 {
 	// must support grid style feature
 	if ( current_theme_supports( 'infinity-grid-style' ) ) {
-		return infinity_get_sidebar_size() . ' alpha';
+		return infinity_get_sidebar_size();
 	}
 }
 
@@ -73,7 +73,7 @@ function infinity_get_content_class()
  */
 function infinity_sidebar_class()
 {
-	print infinity_get_sidebar_class();
+	print 'column ' . infinity_get_sidebar_class();
 }
 add_action( 'sidebar_class', 'infinity_sidebar_class' );
 
@@ -88,28 +88,23 @@ function infinity_get_sidebar_class()
 	if ( current_theme_supports( 'infinity-grid-style' ) ) {
 
 		$size = infinity_get_sidebar_size();
-		$suffix = ' omega';
 
 		switch ( $size ) {
-			case 'grid_20';
-				return 'grid_4' . $suffix;
-			case 'grid_19';
-				return 'grid_5' . $suffix;
-			case 'grid_18';
-				return 'grid_6' . $suffix;
-			case 'grid_17';
-				return 'grid_7' . $suffix;
-			case 'grid_16';
-				return 'grid_8' . $suffix;
-			case 'grid_15';
-				return 'grid_9' . $suffix;
-			case 'grid_14';
-				return 'grid_10' . $suffix;
-			case 'grid_13';
-				return 'grid_11' . $suffix;
-			case 'grid_12';
-				return 'grid_12' . $suffix;
-		}
+			case 'fourteen';
+				return 'two';
+			case 'thirteen';
+				return 'three';
+			case 'twelve';
+				return 'four';
+			case 'eleven';
+				return 'five';
+			case 'ten';
+				return 'six';
+			case 'nine';
+				return 'seven';
+			case 'eight';
+				return 'eight';
+			}
 	}
 
 	return null;
@@ -161,20 +156,6 @@ function infinity_grid_fallback()
 }
 add_action( 'open_body', 'infinity_grid_fallback' );
 	
-/**
- * Add Footer Widget Class
- *
- * @package Infinity
- * @subpackage base
- */
-function infinity_footer_widget_class()
-{
-	if ( current_theme_supports( 'infinity-grid-style' ) ) {
-		print 'grid_8';
-	}
-}
-add_action( 'footer_widget_class', 'infinity_footer_widget_class' );
-
 /**
 * Add Left Sidebar class to content/sidebar id based on theme option.
 *
