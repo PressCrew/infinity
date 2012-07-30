@@ -224,7 +224,7 @@ p#breadcrumbs { margin-top: 0px }
     border-radius: 3px;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
-    padding: 10px;
+    padding: 10px 20px;
 }
 
 #category-description p,
@@ -241,7 +241,7 @@ margin-bottom: 0px;
     font-size: 16px;
 }
 #author-description {
-    padding: 0 10px 10px;
+    overflow: hidden;
 }
 #author-description img {
     margin-top: 2px;
@@ -315,12 +315,12 @@ color: #444;
 #comments .navigation a:hover { }
 #comments blockquote {
     font-style: italic;
-    padding-top: 5px;
     font-weight: bold;
     line-height: 150%;
-    padding-left: 0;
+    margin-left: 71px;
     padding-bottom: 5px;
-    color: #545454;
+    padding-left: 0;
+    padding-top: 20px;
 }
 #comments .comment {
     margin-top: 10px;

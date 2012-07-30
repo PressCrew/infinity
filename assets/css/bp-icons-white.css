@@ -65,40 +65,40 @@ li#admin-groups-li a {
 li#invite-groups-li a {
     background-image: url("../images/icons/white.png");
     padding-left: 25px;
-    background-repeat: no-repeat;
-    background-position: 0px -671px;
+        background-repeat: no-repeat;
+        background-position: 0px -671px;
 }
 
 li#home-groups-li a {
     background-image: url("../images/icons/white.png");
     padding-left: 25px;
-    background-repeat: no-repeat;
-    background-position: 2px -1829px; 
+        background-repeat: no-repeat;
+        background-position: 2px -1829px; 
 }
 /* Profile Icons  */
 #user-activity {
     background-image: url("../images/icons/white.png");
     padding-left: 24px;
-    background-repeat: no-repeat;
-    background-position: -724px -910px; 
+        background-repeat: no-repeat;
+        background-position: -724px -910px; 
 }
 #user-xprofile {
     background-image: url("../images/icons/white.png");
     padding-left: 25px;
-    background-repeat: no-repeat;
-    background-position: -724px -1218px; 
+        background-repeat: no-repeat;
+        background-position: -724px -1218px; 
 }
 #user-friends {
     background-image: url("../images/icons/white.png");
     padding-left: 25px;
-    background-repeat: no-repeat;
-    background-position:-725px -1115px; 
+        background-repeat: no-repeat;
+        background-position:-725px -1115px; 
 }
 #user-groups {
     background-image: url("../images/icons/white.png");
     padding-left: 25px;
-    background-repeat: no-repeat;
-    background-position: 2px -1523px; 
+        background-repeat: no-repeat;
+        background-position: 2px -1523px; 
 }
 #user-profile { 
 	background-image: url("../images/icons/white.png");
@@ -111,60 +111,82 @@ li#home-groups-li a {
     background-repeat: no-repeat;
     background-position: -724px -1220px; 
 }
-#user-settings {
-    background-image: url("../images/icons/white.png");
-    padding-left: 25px;
-    background-repeat: no-repeat;
-    background-position:-725px -945px; 
-}
 #user-messages {
     background-image: url("../images/icons/white.png");
     padding-left: 24px;
     background-repeat: no-repeat;
     background-position: 0 -910px; 
 }
-
 #user-forums {
-    background-image: url("../images/icons/white.png");
-    padding-left: 24px;
+	background-image: url("../images/icons/white.png");
+	padding-left: 24px;
     background-repeat: no-repeat;
     background-position: -723px -1113px; 
 }
-
 a.send-message {
-    background-image: url("../images/icons/black.png");
+    background-image: url("../images/icons/white.png");
     background-repeat: no-repeat;
-    background-position: -728px -1125px;
+    background-position: -728px -1120px;
     padding-left: 19px;
     padding-top: 4px;
 }
 
 .follow-button a.follow {
-    background-image: url("../images/icons/black.png");
+    background-image: url("../images/icons/white.png");
     padding-left: 19px;
     background-repeat: no-repeat;
-    background-position: -4px -1191px; 
+    background-position: -4px -1189px; 
     padding-top: 4px;
 }
 div#post-mention a.mention {
-    background-image: url("../images/icons/black.png");
+    background-image: url("../images/icons/white.png");
     padding-left: 19px;
     padding-top: 4px;
-    background-position: -728px -1091px; 
+    background-position: -728px -1088px; 
     background-repeat: no-repeat;
 }
-
+#user-settings {
+	background-image: url("../images/icons/white.png");  
+    background-position: -723px 8px;
+    background-repeat: no-repeat;
+    padding-left: 25px;
+} 
 div#message p {
-    background-image: url("../images/icons/black.png") #FFFFE4;
-    font-weight: bold;
-    padding-left: 22px !important;
-    background-repeat: no-repeat;
-    background-position:-724px -332px; 
+    background-color: #FEFAEB;
+    border: 1px solid #F1F1F1;
+    border-radius: 4px 4px 4px 4px;
+    display: block;
+    font-size: 12px;
+    padding: 10px 15px;
 }
-/* Third Party Plugin Icons */	  	
+div#message p:before {
+	background-image: url("../images/icons/white.png");
+    background-position: -729px -343px;
+    background-repeat: no-repeat;
+    content: "";
+    display: inline;
+    font-weight: bold;
+    height: 0;
+    padding-bottom: 3px;
+    padding-left: 19px !important;
+    padding-top: 1px;
+} 	
 li#nav-docs-groups-li a { 	
 	background-image: url("../images/icons/white.png");  	
 	background-position: 0 -502px;  	
 	background-repeat: no-repeat; 	
 	padding-left: 25px; 	
+}
+li#nav-notifications-groups-li a {
+	background-image: url("../images/icons/white.png");  	
+	background-position: 0 -910px;
+    background-repeat: no-repeat;
+    padding-left: 25px;	
+}
+/* BBPress */	
+#nav-forums {
+	background-image: url("../images/icons/white.png");  	
+	background-position: -725px -1114px;
+    background-repeat: no-repeat;
+    padding-left: 25px;	
 }

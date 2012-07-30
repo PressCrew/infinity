@@ -33,13 +33,13 @@
 						infinity_get_search_form();
 					?>
 					
-					<div id="search-recent-posts" class="grid_12 alpha">
+					<div id="search-recent-posts" class="eight columns">
 
 					<?php the_widget( 'WP_Widget_Recent_Posts', array( 'number' => 10 ), array( 'widget_id' => '404' ) ); ?>	
 					
 					</div>		
 					
-					<div id="search-categories-widget" class="grid_12 alpha">
+					<div id="search-categories-widget" class="eight columns">
 
 						<h2 class="widgettitle">
 						<?php _e( 'Most Used Categories', infinity_text_domain ); ?>

@@ -14,7 +14,7 @@
  * @since 1.0
  */
 ?>
-<div class="top-wrap <?php do_action( 'top_wrap_class' ); ?>">
+<div class="top-wrap row <?php do_action( 'top_wrap_class' ); ?>">
 	<?php
 		// Load Top Menu only if it's enabled
 		if ( current_theme_supports( 'infinity-top-menu-setup' ) ) :
@@ -22,7 +22,7 @@
 		endif;
 	?>
 	<!-- header -->
-	<header id="header" role="banner">
+	<header id="header" role="banner" class="column sixteen">
 		<div id="logo-menu-wrap">
 			<?php
 				do_action( 'open_header' );
@@ -53,4 +53,3 @@
 		endif;
 	?>
 </div><!-- end top wrap -->
-			<div style="clear: both;"></div>
