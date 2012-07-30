@@ -104,6 +104,7 @@ position: absolute;
 .base-menu ul li {
     float: left;
     position: relative;
+    list-style-type: none;
 }
 .base-menu ul li.right {
 float: right;	
