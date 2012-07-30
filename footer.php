@@ -16,7 +16,7 @@
 			do_action( 'close_main_wrap' );
 		?>
 		</div>
-		<div class="footer-wrap <?php do_action( 'footer_wrap_class' ); ?>">
+		<div class="footer-wrap row <?php do_action( 'footer_wrap_class' ); ?>">
 		<?php
 			do_action( 'open_footer_wrap' );
 		?>
@@ -24,31 +24,10 @@
 		<footer id="footer" role="contentinfo">
 			<?php
 				do_action( 'open_footer' );
+				infinity_get_template_part( 'templates/parts/footer-widgets' );
 			?>
-			
-			<?php if ( is_active_sidebar( 'Footer Left' ) || is_active_sidebar( 'Footer Middle' ) || is_active_sidebar( 'Footer Right' ) ) : ?>
-				<!-- footer widgets -->
-				<div class="footer-widgets">
-					<div class="<?php do_action( 'footer_widget_class' ); ?> footer-widget" id="footer-widget-left">
-						<?php
-							dynamic_sidebar( 'Footer Left' );
-						?>
-					</div>
-					<div class="<?php do_action( 'footer_widget_class' ); ?> footer-widget" id="footer-widget-middle">
-						<?php
-							dynamic_sidebar( 'Footer Middle' );
-						?>
-					</div>
-					<div class="<?php do_action( 'footer_widget_class' ); ?> footer-widget" id="footer-widget-right">
-						<?php
-							dynamic_sidebar( 'Footer Right' );
-						?>
-					</div>
-				</div>
-				<div style="clear: both;"></div>
-			<?php endif; // end primary widget area ?>
 			<div id="powered-by">
-				<div id="footer-info" class="grid_16 alpha">
+				<div id="footer-info" class="column ten">
 				<?php
 					// Load Footer Menu only if it's enabled
 					if ( current_theme_supports( 'infinity-footer-menu-setup' ) ) :
@@ -56,10 +35,9 @@
 					endif;
 				?>
 				</div>
-				<div id="copyright-info" class="grid_8 omega">	
+				<div id="copyright-info" class="column six">	
 					<?php echo infinity_option_get( 'infinity-core-options.footer-text' ); ?>
 				</div>
-				<div style="clear: both;"></div>
 			</div>
 			<?php
 				do_action( 'close_footer' );
