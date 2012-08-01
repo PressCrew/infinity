@@ -859,19 +859,28 @@ final class ICE_Scheme extends ICE_Base
 	 * @param string $theme
 	 * @return string
 	 */
-	private function theme_config_file( $theme, $filename )
+	final public function theme_config_dir( $theme )
 	{
-		// the relative config dir path
-		$config_dir = null;
-
 		// is this theme compiled?
 		if ( $this->themes_compiled->contains( $theme ) ) {
 			// yes, append theme name to config dir path
-			$config_dir = $this->config_dir . '/' . $theme;
+			return $this->config_dir . '/' . $theme;
 		} else {
 			// no, use config dir path as is
-			$config_dir = $this->config_dir;
+			return $this->config_dir;
 		}
+	}
+
+	/**
+	 * Return path to a specific theme's configuration file
+	 *
+	 * @param string $theme
+	 * @return string
+	 */
+	final public function theme_config_file( $theme, $filename )
+	{
+		// the relative config dir path
+		$config_dir = $this->theme_config_dir( $theme );
 
 		// return absolute path to theme file
 		return $this->theme_file( $theme, $config_dir, $filename . '.ini' );
