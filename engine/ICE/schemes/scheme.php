@@ -96,6 +96,13 @@ final class ICE_Scheme extends ICE_Base
 	static private $instance;
 
 	/**
+	 * Name of the base theme
+	 *
+	 * @var string
+	 */
+	private $base_theme;
+
+	/**
 	 * Name of the root theme
 	 *
 	 * @var string
@@ -222,20 +229,29 @@ final class ICE_Scheme extends ICE_Base
 	/**
 	 * One time initialization helper
 	 *
-	 * @param string $root_theme
-	 * @param string $config_dir
-	 * @param string $config_file
+	 * @param string $base_theme
 	 * @return ICE_Scheme
 	 */
-	public function init( $root_theme )
+	public function init( $base_theme )
 	{
 		// do not init same scheme twice
-		if ( $this->root_theme ) {
+		if ( $this->base_theme ) {
 			return;
 		}
 
-		// setup config
-		$this->set_root_theme( $root_theme );
+		// set base theme
+		$this->base_theme = $base_theme;
+
+		// is there at least one compiled themes?
+		if ( $this->themes_compiled->count() >= 1 ) {
+			// copy all compiled themes
+			$compiled = $this->themes_compiled->to_array();
+			// use highest ancestor
+			$this->root_theme = key( $compiled );
+		} else {
+			// no compiled theme, root is template
+			$this->root_theme = get_template();
+		}
 
 		// load it
 		$this->load();
@@ -303,24 +319,6 @@ final class ICE_Scheme extends ICE_Base
 		if ( !$this->enqueue instanceof ICE_Scheme_Enqueue ) {
 			$this->enqueue = new ICE_Scheme_Enqueue( $this );
 		}
-	}
-
-	/**
-	 * Set the name of the root theme
-	 *
-	 * @param string $name
-	 * @return boolean
-	 */
-	private function set_root_theme( $name )
-	{
-		// is root theme empty?
-		if ( empty( $this->root_theme ) ) {
-			// yes, ok to set it
-			$this->root_theme = $name;
-		}
-
-		// maintain the chain
-		return $this;
 	}
 
 	/**
@@ -438,15 +436,8 @@ final class ICE_Scheme extends ICE_Base
 	{
 		// was a theme passed?
 		if ( empty( $theme ) ) {
-			// nope, is there at least one compiled themes?
-			if ( $this->themes_compiled->count() >= 1 ) {
-				// use theme from top of compiled themes stack
-				$compiled = $this->themes_compiled->to_array();
-				$theme = end( $compiled );
-			} else {
-				// fall back to using active theme
-				$theme = ICE_ACTIVE_THEME;
-			}
+			// fall back to using active theme
+			$theme = ICE_ACTIVE_THEME;
 		}
 
 		// get path to config file
@@ -658,6 +649,9 @@ final class ICE_Scheme extends ICE_Base
 			}
 		}
 
+		// finalize policy
+		$policy->finalize();
+
 		return true;
 	}
 
@@ -769,7 +763,7 @@ final class ICE_Scheme extends ICE_Base
 	final public function theme_dir( $theme )
 	{
 		if ( true === $this->themes_compiled->contains( $theme ) ) {
-			return ICE_Files::theme_dir( $this->root_theme );
+			return ICE_Files::theme_dir( $this->base_theme );
 		} else {
 			return ICE_Files::theme_dir( $theme );
 		}
@@ -825,7 +819,7 @@ final class ICE_Scheme extends ICE_Base
 
 		// handle empty theme
 		if ( empty( $theme ) ) {
-			$theme = $this->root_theme;
+			$theme = $this->base_theme;
 		}
 
 		// one or more args left, then we got some file names
@@ -855,32 +849,41 @@ final class ICE_Scheme extends ICE_Base
 
 		// is this theme compiled?
 		if ( $this->themes_compiled->contains( $theme ) ) {
-			// theme is root theme
-			$args[0] = $this->root_theme;
+			// theme is base theme
+			$args[0] = $this->base_theme;
 		}
 		
 		return call_user_func_array( array( 'ICE_Files', 'theme_file_url' ), $args );
 	}
 
 	/**
-	 * Return path to a specific theme's main configuration file
+	 * Return path to a specific theme's configuration file
 	 *
 	 * @param string $theme
 	 * @return string
 	 */
-	private function theme_config_file( $theme, $filename )
+	final public function theme_config_dir( $theme )
 	{
-		// the relative config dir path
-		$config_dir = null;
-
 		// is this theme compiled?
 		if ( $this->themes_compiled->contains( $theme ) ) {
 			// yes, append theme name to config dir path
-			$config_dir = $this->config_dir . '/' . $theme;
+			return $this->config_dir . '/' . $theme;
 		} else {
 			// no, use config dir path as is
-			$config_dir = $this->config_dir;
+			return $this->config_dir;
 		}
+	}
+
+	/**
+	 * Return path to a specific theme's configuration file
+	 *
+	 * @param string $theme
+	 * @return string
+	 */
+	final public function theme_config_file( $theme, $filename )
+	{
+		// the relative config dir path
+		$config_dir = $this->theme_config_dir( $theme );
 
 		// return absolute path to theme file
 		return $this->theme_file( $theme, $config_dir, $filename . '.ini' );

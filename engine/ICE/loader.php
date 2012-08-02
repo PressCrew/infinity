@@ -185,6 +185,7 @@ final class ICE_Loader extends ICE_Base
 			'registry' => true
 		),
 		'parsers' => array(
+			'ini' => true,
 			'less' => true,
 			'markdown' => true,
 			'packages' => true,
