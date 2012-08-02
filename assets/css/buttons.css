@@ -24,6 +24,9 @@ a.button, .generic-button, a.more-link, button, input[type="submit"], input[type
     font-size: 11px;
     padding: 8px 12px;
 }
+.generic-button a {
+	color: #444;
+}
 a.button:active, button:active, input[type="submit"]:active, input[type="reset"]:active, input[type="button"]:active,#review_form #submit:active {
     background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0,0,0,.3)), color-stop(100%, rgba(255,255,255,.3)));
     background: -webkit-linear-gradient(top, rgba(0,0,0,.3) 0%, rgba(255,255,255,.3) 100%);
