@@ -649,6 +649,9 @@ final class ICE_Scheme extends ICE_Base
 			}
 		}
 
+		// finalize policy
+		$policy->finalize();
+
 		return true;
 	}
 

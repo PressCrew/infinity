@@ -226,6 +226,16 @@ abstract class ICE_Policy extends ICE_Base
 		}
 		return $this->renderer;
 	}
+
+	/**
+	 * This template method is called when this policy is enabled
+	 *
+	 * @return boolean
+	 */
+	public function finalize()
+	{
+		return true;
+	}
 }
 
 ?>
