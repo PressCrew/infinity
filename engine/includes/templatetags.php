@@ -85,10 +85,10 @@ function infinity_base_sidebars()
 			if ( is_active_sidebar( 'member-sidebar' ) ) {
 				dynamic_sidebar( 'member-sidebar' );
 			} elseif ( current_user_can( 'edit_theme_options' ) ) { ?>
-				<div class="widget">
+				<aside class="widget">
 					<h4>BP Member Sidebar.</h4>
 					<a href="<?php echo home_url( '/'  ); ?>wp-admin/widgets.php" title="Add Widgets">Add Widgets</a>
-				</div><?php
+				</aside><?php
 			}
 		} elseif (
 			function_exists( 'bp_is_user' ) && !bp_is_user() &&
@@ -97,10 +97,10 @@ function infinity_base_sidebars()
 			if ( is_active_sidebar( 'groups-sidebar' ) ) {
 				dynamic_sidebar( 'groups-sidebar' );
 			} elseif ( current_user_can( 'edit_theme_options' ) ) { ?>
-				<div class="widget">
+				<aside class="widget">
 					<h4>BP Group Sidebar.</h4>
 					<a href="<?php echo home_url( '/'  ); ?>wp-admin/widgets.php" title="Add Widgets">Add Widgets</a>
-				</div><?php
+				</aside><?php
 			}
 		} elseif (
 			function_exists( 'bp_is_user' ) && !bp_is_user() &&
@@ -109,10 +109,10 @@ function infinity_base_sidebars()
 			if ( is_active_sidebar( 'forums-sidebar' ) ) {
 				dynamic_sidebar( 'forums-sidebar' );
 			} elseif ( current_user_can( 'edit_theme_options' ) ) { ?>
-				<div class="widget">
+				<aside class="widget">
 					<h4>BP Forums Sidebar.</h4>
 					<a href="<?php echo home_url( '/'  ); ?>wp-admin/widgets.php" title="Add Widgets">Add Widgets</a>
-				</div><?php
+				</aside><?php
 			}
 		} elseif (
 			function_exists( 'bp_is_user' ) && !bp_is_user() &&
@@ -121,10 +121,10 @@ function infinity_base_sidebars()
 			if ( is_active_sidebar( 'blogs-sidebar' ) ) {
 				dynamic_sidebar( 'blogs-sidebar');
 			} elseif ( current_user_can('edit_theme_options') ) { ?>
-				<div class="widget">
+				<aside class="widget">
 					<h4>BP Blogs Sidebar.</h4>
 					<a href="<?php echo home_url( '/'  ); ?>wp-admin/widgets.php" title="Add Widgets">Add Widgets</a>
-				</div><?php
+				</aside><?php
 			}
 		} elseif (
 			function_exists( 'bp_is_user' ) && !bp_is_user() &&
@@ -133,38 +133,38 @@ function infinity_base_sidebars()
 			if ( is_active_sidebar( 'activity-sidebar' ) ) {
 				dynamic_sidebar( 'activity-sidebar');
 			} elseif( current_user_can('edit_theme_options') ){ ?>
-				<div class="widget">
+				<aside class="widget">
 					<h4>Activity Sidebar</h4>
 					<a href="<?php echo home_url( '/'  ); ?>wp-admin/widgets.php" title="Add Widgets">Add Widgets</a>
-				</div><?php
+				</aside><?php
 			}
 		} elseif ( is_front_page() ) {
 			if ( is_active_sidebar( 'home-sidebar' ) ) {
 				dynamic_sidebar( 'home-sidebar' );
 			} elseif ( current_user_can('edit_theme_options') ) { ?>
-				<div class="widget">
+				<aside class="widget">
 					<h4>Home Sidebar.</h4>
 					<a href="<?php echo home_url( '/'  ); ?>wp-admin/widgets.php" title="Add Widgets">Add Widgets</a>
-				</div><?php
+				</aside><?php
 			}
 		} else {
 			if ( is_active_sidebar( 'page-sidebar' ) ) {
 				dynamic_sidebar( 'page-sidebar');
 			} elseif ( current_user_can('edit_theme_options') ) { ?>
-				<div class="widget">
+				<aside class="widget">
 					<h4>Page Sidebar.</h4>
 					<a href="<?php echo home_url( '/'  ); ?>wp-admin/widgets.php" title="Add Widgets">Add Widgets</a>
-				</div><?php
+				</aside><?php
 			}
 		}
 	} else {
 		if ( is_active_sidebar( 'blog-sidebar' ) ) {
 			dynamic_sidebar( 'blog-sidebar');
 		} elseif( current_user_can('edit_theme_options') ) { ?>
-			<div class="widget">
+			<aside class="widget">
 				<h4>Blog Sidebar.</h4>
 				<a href="<?php echo home_url( '/'  ); ?>wp-admin/widgets.php" title="Add Widgets">Add Widgets</a>
-			</div><?php
+			</aside><?php
 		}
 	}
 }
