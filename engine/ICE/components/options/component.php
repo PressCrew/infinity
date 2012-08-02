@@ -565,6 +565,24 @@ abstract class ICE_Option extends ICE_Component
 	}
 
 	/**
+	 * Return style selector formatted with the body class
+	 */
+	private function format_style_selector()
+	{
+		// grab body class from policy
+		$class = $this->policy()->get_body_class();
+		
+		// handle body selectors
+		if ( preg_match( '/^(body[^:]*)(:[\w-]+)?/', $this->style_selector, $matches ) ) {
+			// its a body selector, append it
+			return sprintf( '%s.%s%s', $matches[1], $class, $matches[2] );
+		} else {
+			// not a body selector, prepend it
+			return sprintf( 'body.%s %s', $class, $this->style_selector );
+		}
+	}
+
+	/**
 	 * @todo need to get rid of this mess once fields component is working
 	 */
 	private function refresh_style_property()
@@ -604,9 +622,14 @@ abstract class ICE_Option extends ICE_Component
 				// add value to component styles if set
 				if ( isset( $style_value->value ) ) {
 					if ( $this->style_section ) {
-						$rule = $this->style()->section($this->style_section)->rule( $this->style_selector );
+						$rule =
+							$this->style()
+								->section($this->style_section)
+								->rule( $this->format_style_selector() );
 					} else {
-						$rule = $this->style()->rule( $this->style_selector );
+						$rule =
+							$this->style()
+								->rule( $this->format_style_selector() );
 					}
 					$rule->add_declaration(
 						$this->__style_property__->name,
