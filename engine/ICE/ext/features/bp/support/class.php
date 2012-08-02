@@ -56,8 +56,8 @@ class ICE_Ext_Feature_Bp_Support
 
 			if (
 				is_admin() &&
-				!is_dir( TEMPLATEPATH . '/members' ) &&
-				!is_dir( STYLESHEETPATH . '/members' )
+				!is_dir( get_template_directory() . '/members' ) &&
+				!is_dir( get_stylesheet_directory() . '/members' )
 			) {
 				bp_core_add_admin_notice(
 					__( "You have BuddyPress activated, but the templates are missing from your theme!", infinity_text_domain )

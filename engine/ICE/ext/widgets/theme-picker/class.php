@@ -117,7 +117,7 @@ class ICE_Ext_Widget_Theme_Picker
 				'stylesheet' => $theme['Stylesheet'],
 				'TB_iframe' => 1
 			),
-			get_option( 'home' ) . '/'
+			home_url() . '/'
 		);
 	}
 
