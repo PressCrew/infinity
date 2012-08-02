@@ -119,15 +119,22 @@ class ICE_Ext_Option_Ui_Image_Picker
 	 */
 	public function get_image_url()
 	{
+		// get value
 		$value = $this->get();
 
-		$path = ICE_Scheme::instance()->locate_file( $this->file_directory );
-
-		if ( $path ) {
-			return ICE_Files::theme_file_to_url( $path . '/' . $value );
-		} else {
-			return null;
+		// has a value?
+		if ( $value ) {
+			// yep, locate path
+			$path = ICE_Scheme::instance()->locate_file( $this->file_directory );
+			// find that dir path?
+			if ( $path ) {
+				// yep, return as url
+				return ICE_Files::theme_file_to_url( $path . '/' . $value );
+			}
 		}
+
+		// value not set
+		return null;
 	}
 }
 
