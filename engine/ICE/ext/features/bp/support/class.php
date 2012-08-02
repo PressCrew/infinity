@@ -56,7 +56,7 @@ class ICE_Ext_Feature_Bp_Support
 
 			if (
 				is_admin() &&
-				!is_dir( TEMPLATEPATH . '/members' ) &&
+				!is_dir( get_template_directory() . '/members' ) &&
 				!is_dir( STYLESHEETPATH . '/members' )
 			) {
 				bp_core_add_admin_notice(
