@@ -15,7 +15,6 @@
 ?>
 
 <aside id="sidebar" role="complementary" class="<?php do_action( 'sidebar_class' ); ?>">
-	<div id="inner-sidebar">
 	<!-- sidebar -->
 		<?php
 			do_action( 'open_sidebar' );?>
@@ -29,5 +28,4 @@
 	<?php
 		do_action( 'after_sidebar' );
 	?>
-	</div>
 </aside>

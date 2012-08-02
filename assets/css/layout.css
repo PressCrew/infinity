@@ -33,25 +33,17 @@ body {
     position: relative;
 }
 
-#site-description {
-    font-style: italic;
-    color: #999999;
-    position: relative;
-    font-size: 14px;
-    line-height: 180%;
-}
 h1#site-title,div#site-title {
-position: absolute;
-    font-size: 26px;
+	position: absolute;
     line-height: 180%;
     font-weight: bold;
     margin: 0;
+    font-size: 200%;
 }
 #site-title a {
     margin-bottom: -29px;
     display: block;
 }
-
 #logo-menu-wrap {
     margin-top: -30px;
     position: absolute;
@@ -262,8 +254,6 @@ border: 0px;
 /* =========== 
  ! Sidebar   
  =========== */
- 
-#sidebar h4 a.widgettitle { color: #F4F4F4!important }
 #sidebar .widget_search { margin-top: 20px }
 #sidebar .widget_search input[type=text] {
     width: 110px;
@@ -291,44 +281,25 @@ border: 0px;
 .footer-menu ul li:last-child a { border-right: 0px }
 #footer-info {
     overflow: auto;
+    padding: 0px;
 }
 #powered-by {
-    padding-bottom: 10px;
+    min-height: 30px;
     padding-top: 10px;
 }
-
-/* use a pseudo element to put some empty hidden content into the div.
-this is needed for when a footer menu is not being used.
- */
-#footer-info:before {
-    content: "";
-    display: block;
-    height: 1px;
-    overflow: auto;
+#copyright-info {
+	text-align: right;
 }
 /* ================== */
 /* ! Page Templates   */
 /* ================== */
 /*page templare sidebar left*/
 .page-template-sidebar-left-template-php #content,
-.page-template-sidebar-left-template-php #sidebar.sidebar-right #inner-sidebar { 
+.page-template-sidebar-left-template-php #sidebar.sidebar-right { 
 	float: right !important 
 }
-.page-template-sidebar-left-template-php #inner-sidebar {
-    margin-left: -25px !important;
-    margin-right: 10px !important;
-    padding-right: 25px !important;
-}
 
-/*page templare sidebar right*/
-.page-template-sidebar-right-template-php #sidebar.sidebar-left #inner-sidebar {
-    margin-left: 15px !important;
-    margin-right: -25px !important;
-    margin-top: -40px !important;
-    padding-right: 25px !important;
-}
-
-.page-template-sidebar-left-template-php #sidebar.sidebar-left #inner-sidebar,
-.page-template-sidebar-left-template-php #sidebar.sidebar-right #inner-sidebar { 
+.page-template-sidebar-left-template-php #sidebar.sidebar-left,
+.page-template-sidebar-left-template-php #sidebar.sidebar-right { 
 	float: left !important;
 }
