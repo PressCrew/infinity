@@ -69,8 +69,7 @@ table { border-collapse: collapse; border-spacing: 0; }
 td { vertical-align: top; }
 
 /* Lists ---------------------- */
-ul, ol { font-size: 14px; line-height: 1.6; margin-bottom: 17px; list-style-position: outside; }
-
+ul, ol { list-style-position: outside; }
 ul li ul { margin-left: 20px; margin-bottom: 0; list-style: outside; }
 ul.square, ul.circle, ul.disc { margin-left: 17px; }
 ul.square { list-style-type: square; }
@@ -156,6 +155,9 @@ pre {
     white-space: pre;
     white-space: pre-wrap;
     word-wrap: break-word;
+}
+pre code {
+	background: transparent;
 }
 .clear {
     clear: both;
