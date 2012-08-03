@@ -113,7 +113,13 @@ function infinity_dashboard_load_template( $rel_path, $args = null, $defaults = 
  */
 function infinity_dashboard_image( $name )
 {
-	return INFINITY_ADMIN_URL . '/assets/images/' . $name;
+	$path = infinity_locate_file( INFINITY_ADMIN_DIR . '/assets/images/' . $name );
+
+	if ( $path ) {
+		return ICE_Files::theme_file_to_url( $path );
+	} else {
+		return '';
+	}
 }
 
 /**
