@@ -11,27 +11,30 @@
  * @since 1.0
  */
 ?>
-<div class="footer-widgets">			
-	<?php if ( is_active_sidebar( 'Footer Left' ) ) : ?>
-		<!-- footer widgets -->
-			<div class="footer-widget eight columns" id="footer-widget-left">
-				<?php
-					dynamic_sidebar( 'Footer Left' );
-				?>
-			</div>
-	<?php endif;?>
-	<?php if ( is_active_sidebar( 'Footer Middle' ) ) : ?>
-			<div class="footer-widget eight columns" id="footer-widget-middle">
-				<?php
-					dynamic_sidebar( 'Footer Middle' );
-				?>
-			</div>
-	<?php endif; ?>
-	<?php if ( is_active_sidebar( 'Footer Right' ) ) : ?>
-			<div class="footer-widget eight columns" id="footer-widget-right">
-				<?php
-					dynamic_sidebar( 'Footer Right' );
-				?>
-			</div>
-	<?php endif; ?>
-</div>
+<?php if ( is_active_sidebar( 'Footer Left' ) || is_active_sidebar( 'Footer Middle' ) || is_active_sidebar( 'Footer Right' )  ) : ?>
+	<div class="footer-widgets row">			
+		<?php if ( is_active_sidebar( 'Footer Left' ) ) : ?>
+			<!-- footer widgets -->
+				<div class="five columns footer-widget " id="footer-widget-left">
+					<?php
+						dynamic_sidebar( 'Footer Left' );
+					?>
+				</div>
+		<?php endif;?>
+		<?php if ( is_active_sidebar( 'Footer Middle' ) ) : ?>
+				<div class="five columns footer-widget" id="footer-widget-middle">
+					<?php
+						dynamic_sidebar( 'Footer Middle' );
+					?>
+				</div>
+		<?php endif; ?>
+		<?php if ( is_active_sidebar( 'Footer Right' ) ) : ?>
+				<div class="six columns footer-widget " id="footer-widget-right">
+					<?php
+						dynamic_sidebar( 'Footer Right' );
+					?>
+				</div>
+		<?php endif; ?>
+	</div>
+<?php endif; ?>
+<div style="clear:both;"></div>
