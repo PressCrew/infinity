@@ -71,6 +71,18 @@ function infinity_scheme_directive( $name )
 }
 
 /**
+ * Check if a file exists anywhere in the scheme and return the absolute path
+ *
+ * @package Infinity-api
+ * @param string $filename
+ * @return string
+ */
+function infinity_locate_file( $filename )
+{
+	return ICE_Scheme::instance()->locate_file( $filename );
+}
+
+/**
  * Check if template exists anywhere in the scheme
  *
  * @package Infinity-api

@@ -256,16 +256,16 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 
 		// loop through all registered components
 		foreach ( $this->get_all() as $component ) {
-			// filter on component names
-			if ( empty( $component_names ) || in_array( $component->property( 'name' ), $component_names, true ) ) {
-				$components[] = $component;
-			}
-		}
-
-		// don't return components who have a parent in the result
-		foreach( $components as $key => $component_i ) {
-			if ( $component_i->property( 'parent' ) ) {
-				unset( $components[$key] );
+			// components must NOT have a parent set
+			if ( null === $component->property( 'parent' ) ) {
+				// filter on component names
+				if ( empty( $component_names ) || in_array( $component->property( 'name' ), $component_names, true ) ) {
+					// component must be supported
+					if ( $component->supported() ) {
+						// append to return array
+						$components[] = $component;
+					}
+				}
 			}
 		}
 
