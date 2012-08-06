@@ -25,7 +25,7 @@ infinity_get_header(); ?>
 					do_action( 'open_loop' );
 		?>
 		<header>
-		<h1 class="pagetitle">
+		<h1 class="page-title">
 			<?php
 				the_title();
 			?>

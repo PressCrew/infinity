@@ -1,12 +1,12 @@
 /* ================ */
 /* ! Post Formats   */
 /* ================ */
-.format-standard .posttitle,
-.format-gallery .posttitle,
-.format-video .posttitle,
-.format-aside .posttitle, 
-.format-link .posttitle,
-.format-audio .posttitle {
+.format-standard .post-title,
+.format-gallery .post-title,
+.format-video .post-title,
+.format-aside .post-title, 
+.format-link .post-title,
+.format-audio .post-title {
 padding-right: 40px;
 }
 

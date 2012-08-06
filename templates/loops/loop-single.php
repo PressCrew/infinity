@@ -24,7 +24,7 @@
 					<?php
 						infinity_get_template_part( 'templates/parts/post-avatar');	
 					?>			
-					<h1 class="posttitle">
+					<h1 class="post-title">
 						<?php the_title(); ?>
 						<?php edit_post_link(' ✍','',' ');?>
 					</h1>	
