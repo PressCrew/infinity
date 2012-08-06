@@ -26,7 +26,7 @@ while ($wp_query->have_posts()) : $wp_query->the_post();
 			<!-- post-content -->
 			<div class="post-content">
 				<!-- post title -->
-				<h2 class="posttitle">
+				<h2 class="post-title">
 					<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', infinity_text_domain ) ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a>
 					<?php edit_post_link(' ✍','',' ');?>
 				</h2>

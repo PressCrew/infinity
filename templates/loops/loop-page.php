@@ -20,7 +20,7 @@
 ?>
 	<article id="page" class="page-<?php the_ID(); ?> post" <?php post_class(); ?>>
 		<header>
-		<h1 class="pagetitle">
+		<h1 class="page-title">
 			<?php
 				the_title();
 				edit_post_link(' ✍','',' ');

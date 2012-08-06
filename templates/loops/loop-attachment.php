@@ -22,7 +22,7 @@
 			<article class="post" id="post-<?php the_ID(); ?>">
 				<div class="post-content">
 					<header>
-					<h1 class="posttitle">
+					<h1 class="post-title">
 						<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', infinity_text_domain ) ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a>
 					</h1>
 					</header>
