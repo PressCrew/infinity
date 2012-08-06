@@ -19,11 +19,10 @@ span.highlight, span.activity, div#message p, .generic-button, .activity-list di
 .activity-header p { margin-bottom: 0px }
 div#message p {
     font-weight: bold;
-    padding-left: 22px !important;
+    padding-left: 22px;
 }
 #sidebar div#message p {
-    padding-left: 10px !important;
-    line-height: 18px;
+    padding-left: 10px;
 }
 span.activity {
     background: #F9F9F9;
@@ -644,7 +643,10 @@ a.bp-primary-action span, #reply-title small a span {
     padding: 10px;
 }
 .activity-list .activity-content .activity-inner p { margin: 0 }
-.activity-inner img { max-width: 100% !important }
+.activity-inner img { 
+	max-width: 100% !important;
+	height: auto; 
+}
 body.activity-permalink .activity-content .activity-inner, body.activity-permalink .activity-content blockquote { margin-top: 5px }
 /* Backwards compatibility. */
 .activity-inner > .activity-inner { margin: 0 !important }
@@ -719,9 +721,9 @@ div.activity-comments div.acomment-content {
     margin-left: 49px;
     margin-top: 5px;
 }
-div.activity-comments li {
+#content div.activity-comments li {
     background: #FBFBFB;
-    border: 1px solid #F4F4F4 !important;
+    border: 1px solid #F4F4F4;
     padding: 10px 15px;
 }
 div.acomment-content .time-since { display: none }
