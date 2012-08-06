@@ -19,8 +19,8 @@
 		do_action( 'open_head' );
 	?>
 	<!-- basic title -->
-		<title>
-		<?php /*SEO optimized Titles if Yoast SEO Plugin is not installed. If it is, use default wp_title */ if ( function_exists('yoast_breadcrumb') ) : 
+	<title>
+		<?php /*SEO optimized Titles if Yoast SEO Plugin is not installed. If it is, use default wp_title */ if 	( defined('WPSEO_VERSION') ) : 
 			wp_title();
 			else:
 			infinity_base_title();
