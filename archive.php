@@ -21,7 +21,7 @@
 		?>
 		<div class="page" id="blog-archive">
 			<header>
-			<h1 class="pagetitle">
+			<h1 class="page-title">
 				<?php printf( __( 'You are browsing the archive for %1$s.', infinity_text_domain ), wp_title( false, false ) ); ?>
 			</h1>
 			</header>

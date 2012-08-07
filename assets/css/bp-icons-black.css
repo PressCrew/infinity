@@ -161,7 +161,7 @@ div#message p {
     font-size: 12px;
     padding: 10px 15px;
 }
-div#message p:before {
+#infinity-base div#message p:before {
 	background-image: url("../images/icons/black.png");
     background-position: -729px -343px;
     background-repeat: no-repeat;
@@ -170,7 +170,7 @@ div#message p:before {
     font-weight: bold;
     height: 0;
     padding-bottom: 3px;
-    padding-left: 19px !important;
+    padding-left: 19px;
     padding-top: 1px;
 } 	
 li#nav-docs-groups-li a { 	

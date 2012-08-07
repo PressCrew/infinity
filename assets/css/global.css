@@ -159,34 +159,112 @@ pre {
 pre code {
 	background: transparent;
 }
-.clear {
-    clear: both;
-    display: block;
-    font-size: 0;
-    height: 0;
-    line-height: 0;
-    width: 100%;
+legend {
+  display: block;
+  width: 100%;
+  margin-bottom: 27px;
+  font-size: 19.5px;
+  line-height: 36px;
+  color: #666;
+  border-bottom: 1px solid #eee;
+  -webkit-margin-collapse: separate;
 }
+label,
+input,
+select,
+textarea {
+  font-size: normal;
+  font-weight: 13px;
+  line-height: 18px;
+  margin-bottom: 10px;
+}
+label {
+    color: #999999;
+    display: block;
+    font-size: 80%;
+    font-weight: bold;
+    margin: 5px 0;
+    text-transform: uppercase;
+}
+label ul {
+	padding: 0;
+}
+label li {
+	text-transform: none;
+	color: inherit;
+	font-weight: normal;
+}
+input[type=image], input[type=checkbox], input[type=radio] {
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin: 3px;
+  *margin-top: 0;
+  /* IE6-7 */
 
-.image-grid {
-    display: block;
-    list-style: none outside none !important;
-    margin: 0 !important;
-    width: 100%;
+  line-height: normal;
+  border: none;
+  cursor: pointer;
 }
-.image-grid:after {
-    clear: both;
-    content: "";
-    display: block;
-    height: 0;
-    overflow: hidden;
+input[type=file] {
+  padding: initial;
+  line-height: initial;
+  border: initial;
+  background-color: #ffffff;
+  background-color: initial;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
 }
-.image-grid li {
-    height: 320px;
-    list-style: none outside none;
-    margin-left: 0 !important;
-    overflow: hidden;
+input[type=button], input[type=reset], input[type=submit] {
+  width: auto;
+  height: auto;
 }
-.image-grid li img {
-    max-width: 93%;
+select, input[type=file] {
+  height: 27px;
+  *margin-top: 4px;
+  /* For IE7, add top margin to align select with labels */
+  line-height: 27px;
+}
+select[multiple], select[size] {
+  height: inherit;
+}
+input[type=image] {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+textarea {
+  height: auto;
+}
+.radio, .checkbox {
+  padding-left: 18px;
+}
+.radio input[type=radio], .checkbox input[type=checkbox] {
+  float: left;
+  margin-left: -18px;
+ }
+input, textarea {
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
+  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -ms-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+  transition: border linear 0.2s, box-shadow linear 0.2s;
+  padding: 10px;
+}
+input:focus, textarea:focus {
+  border-color: rgba(82, 168, 236, 0.8);
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+  outline: 0;
+}
+input[type=file]:focus, input[type=checkbox]:focus, select:focus {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  outline: 1px dotted #666;
 }
