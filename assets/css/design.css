@@ -50,7 +50,8 @@ div.bbp-breadcrumb,
 #item-body form#whats-new-form,
 div.item-list-tabs,
 #powered-by,
-#header #site-title {
+#header #site-title,
+.negative {
 	margin-left: -30px;
     margin-right: -30px;
     padding-left: 30px;
@@ -65,7 +66,8 @@ div.item-list-tabs,
 	-webkit-border-radius: 5px 5px 0px 0px;
 	-moz-border-radius: 5px 5px 0px 0px;
 	border-radius: 5px 5px 0px 0px;
-	min-height: 110px;
+	padding-bottom: 60px;
+    padding-top: 60px;
 }
 /* Also add a border radius to our pseudo element for header background */
 #header:before {
@@ -194,7 +196,9 @@ h1#category-title span,h1#tag-title span {
 	box-shadow: none;
 }
 /* BuddyPress */
-img.avatar,ul.item-list li img.avatar {
+img.avatar,
+ul.item-list li img.avatar,
+.fluid-width-video-wrapper {
 	-webkit-border-radius: 3px 3px 3px 3px;
 	-moz-border-radius: 3px 3px 3px 3px;
 	border-radius: 3px 3px 3px 3px;
