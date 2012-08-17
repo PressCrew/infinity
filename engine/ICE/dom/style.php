@@ -190,26 +190,9 @@ class ICE_Style_Rule extends ICE_Base
 
 	/**
 	 */
-	public function __get( $name )
+	public function get_selector()
 	{
-		switch ( $name ) {
-			case 'selector':
-				return $this->selector;
-			default:
-				return parent::__get( $name );
-		}
-	}
-
-	/**
-	 */
-	public function __isset( $name )
-	{
-		switch ( $name ) {
-			case 'selector':
-				return isset( $this->selector );
-			default:
-				return parent::__isset( $name );
-		}
+		return $this->selector;
 	}
 
 	/**
