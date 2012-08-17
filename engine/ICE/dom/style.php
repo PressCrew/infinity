@@ -285,61 +285,6 @@ abstract class ICE_Style_Unit extends ICE_Base
 	private $value;
 
 	/**
-	 */
-	public function __get( $name )
-	{
-		switch( $name ) {
-			case 'unit':
-			case 'value':
-				return (string) $this->value;
-			case 'units':
-			case 'values':
-				return $this->units();
-			default:
-				return parent::__get( $name );
-		}
-	}
-
-	/**
-	 */
-	public function __set( $name, $value )
-	{
-		switch( $name ) {
-			case 'unit':
-			case 'value':
-				return $this->set( $value );
-			default:
-				return parent::__set( $name );
-		}
-	}
-
-	/**
-	 */
-	public function __isset( $name )
-	{
-		switch( $name ) {
-			case 'unit':
-			case 'value':
-				return ( null !== $this->value );
-			default:
-				return parent::__isset( $name );
-		}
-	}
-
-	/**
-	 */
-	public function __unset( $name )
-	{
-		switch( $name ) {
-			case 'unit':
-			case 'value':
-				return $this->value = null;
-			default:
-				return parent::__unset( $name );
-		}
-	}
-
-	/**
 	 * Validate the given unit against the list of allowed units
 	 *
 	 * @param string $unit The unit to validate
@@ -348,6 +293,16 @@ abstract class ICE_Style_Unit extends ICE_Base
 	protected function validate( $unit )
 	{
 		return in_array( $unit, $this->units(), true );
+	}
+
+	/**
+	 * Get the unit
+	 *
+	 * @return string
+	 */
+	public function get()
+	{
+		return $this->value;
 	}
 
 	/**
@@ -585,7 +540,7 @@ abstract class ICE_Style_Value
 	 */
 	public function format()
 	{
-		return $this->value . $this->unit()->value;
+		return $this->value . $this->unit()->get();
 	}
 
 	/**
