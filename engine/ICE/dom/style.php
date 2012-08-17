@@ -1002,7 +1002,7 @@ final class ICE_Style_Property_Primitive extends ICE_Style_Property
 	 */
 	public function set_unit( $unit )
 	{
-		return $this->get_value()-unit()->set( $unit );
+		return $this->get_value()->unit()->set( $unit );
 	}
 
 	/**
