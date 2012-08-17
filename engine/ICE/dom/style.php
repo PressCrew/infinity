@@ -709,15 +709,13 @@ class ICE_Style_Value_Enum extends ICE_Style_Value
 	}
 
 	/**
+	 * Return values array
+	 *
+	 * @return array
 	 */
-	public function __get( $name )
+	public function get_values()
 	{
-		switch( $name ) {
-			case 'values':
-				return $this->values;
-			default:
-				return parent::__get( $name );
-		}
+		return $this->values;
 	}
 
 	/**
@@ -973,7 +971,7 @@ final class ICE_Style_Property_Primitive extends ICE_Style_Property
 	{
 		foreach ( $this->values as $style_value ) {
 			if ( $style_value instanceof ICE_Style_Value_Enum ) {
-				return $style_value->values;
+				return $style_value->get_values();
 			}
 		}
 
