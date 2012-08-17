@@ -940,18 +940,6 @@ final class ICE_Style_Property_Primitive extends ICE_Style_Property
 
 	/**
 	 */
-	public function __get( $name )
-	{
-		switch( $name ) {
-			case 'values':
-				return $this->values;
-			default:
-				return parent::__get( $name );
-		}
-	}
-
-	/**
-	 */
 	static public function create( $name )
 	{
 		return new self( $name );
