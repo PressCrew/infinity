@@ -827,6 +827,16 @@ abstract class ICE_Component
 	 */
 	public function supported()
 	{
+		// is a required feature set?
+		if ( null !== $this->required_feature ) {
+			// check for theme support
+			if ( false == current_theme_supports( $this->required_feature ) ) {
+				// no theme support
+				return false;
+			}
+		}
+
+		// always check capabilities!
 		return $this->check_caps();
 	}
 
