@@ -93,10 +93,10 @@ class ICE_Ext_Screen_Cpanel
 		if ( $this->icon() ) {
 			// override existing
 			if ( $this->icon_primary ) {
-				$this->icon()->primary = $this->icon_primary;
+				$this->icon()->set_property( 'primary', $this->icon_primary );
 			}
 			if ( $this->icon_secondary ) {
-				$this->icon()->secondary = $this->icon_secondary;
+				$this->icon()->set_property( 'secondary', $this->icon_secondary );
 			}
 		} else {
 			// new icon
