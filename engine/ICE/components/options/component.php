@@ -294,24 +294,6 @@ abstract class ICE_Option extends ICE_Component
 	}
 
 	/**
-	 * Check that theme has required feature support enabled if applicable
-	 *
-	 * @todo The logic here is suspicious?
-	 * @todo Make required feature available to all components?
-	 * @return boolean
-	 */
-	public function supported()
-	{
-		$feature = $this->property( 'required_feature' );
-
-		if ( null !== $feature ) {
-			return current_theme_supports( $feature );
-		}
-
-		return parent::supported();
-	}
-
-	/**
 	 * Render this option AND its required siblings
 	 *
 	 * @param boolean $output Whether to output or return result
