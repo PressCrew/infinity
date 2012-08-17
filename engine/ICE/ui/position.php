@@ -41,56 +41,9 @@ class ICE_Position extends ICE_Base
 
 	/**
 	 */
-	public function __get( $name )
+	public function get_priority()
 	{
-		switch ( $name ) {
-			case 'priority':
-				return $this->priority;
-			default:
-				return parent::__get( $name );
-		}
-	}
-
-	/**
-	 */
-	public function __set( $name, $value )
-	{
-		switch ( $name ) {
-			case 'priority':
-				if ( empty( $this->priority ) ) {
-					return $this->priority = $value;
-				} else {
-					throw new Exception( 'Cannot overwrite priority once set' );
-				}
-			default:
-				return parent::__set( $name, $value );
-		}
-	}
-
-	/**
-	 */
-	public function __isset( $name )
-	{
-		switch ( $name ) {
-			case 'priority':
-				return isset( $this->priority );
-			default:
-				return parent::__isset( $name );
-		}
-	}
-
-	/**
-	 */
-	public function __unset( $name )
-	{
-		switch ( $name ) {
-			case 'priority':
-				if ( $this->priority !== null ) {
-					throw new Exception( 'Cannot unset priority once set' );
-				}
-			default:
-				return parent::__unset( $name );
-		}
+		return $this->priority;
 	}
 
 	/**
@@ -114,8 +67,8 @@ class ICE_Position extends ICE_Base
 	 */
 	final static protected function _sort_priority( ICE_Positionable $a, ICE_Positionable $b )
 	{
-		$ap = $a->position()->priority;
-		$bp = $b->position()->priority;
+		$ap = $a->position()->get_priority();
+		$bp = $b->position()->get_priority();
 
 		if ( $ap == $bp ) {
 			return 0;
