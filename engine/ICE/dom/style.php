@@ -816,15 +816,13 @@ abstract class ICE_Style_Property extends ICE_Base
 	}
 
 	/**
+	 * Get name
+	 *
+	 * @return string
 	 */
-	public function __get( $name )
+	public function get_name()
 	{
-		switch( $name ) {
-			case 'name':
-				return $this->name;
-			default:
-				return parent::__get( $name );
-		}
+		return $this->name;
 	}
 
 	/**

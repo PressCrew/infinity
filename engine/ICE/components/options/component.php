@@ -632,7 +632,7 @@ abstract class ICE_Option extends ICE_Component
 								->rule( $this->format_style_selector() );
 					}
 					$rule->add_declaration(
-						$this->__style_property__->name,
+						$this->__style_property__->get_name(),
 						$this->__style_property__->get_value()->format()
 					);
 				}
