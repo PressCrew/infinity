@@ -51,53 +51,30 @@ class ICE_Icon extends ICE_Base
 
 	/**
 	 */
-	public function __get( $name )
+	public function get_property( $name )
 	{
 		switch ( $name ) {
 			case 'primary':
 			case 'secondary':
 				return $this->$name;
 			default:
-				return parent::__get( $name );
+				return parent::get_property( $name );
 		}
 	}
 
 	/**
 	 */
-	public function __isset( $name )
+	protected function set_property( $name, $value )
 	{
 		switch ( $name ) {
 			case 'primary':
 			case 'secondary':
-				return isset( $this->$name );
+				// set it
+				$this->$name = $value;
+				// chain it
+				return $this;
 			default:
-				return parent::__isset( $name );
-		}
-	}
-
-	/**
-	 */
-	public function __set( $name, $value )
-	{
-		switch ( $name ) {
-			case 'primary':
-			case 'secondary':
-				return $this->$name = $value;
-			default:
-				return parent::__set( $name, $value );
-		}
-	}
-
-	/**
-	 */
-	public function __unset( $name )
-	{
-		switch ( $name ) {
-			case 'primary':
-			case 'secondary':
-				return $this->$name = null;
-			default:
-				return parent::__unset( $name );
+				return parent::set_property( $name, $value );
 		}
 	}
 
