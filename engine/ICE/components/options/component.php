@@ -620,7 +620,7 @@ abstract class ICE_Option extends ICE_Component
 				$style_value = $this->__style_property__->get_value();
 
 				// add value to component styles if set
-				if ( isset( $style_value->value ) ) {
+				if ( $style_value->has_value() ) {
 					if ( $this->style_section ) {
 						$rule =
 							$this->style()

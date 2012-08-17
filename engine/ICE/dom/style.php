@@ -431,55 +431,7 @@ abstract class ICE_Style_Value
 	 */
 	public function __construct()
 	{
-		$this->unit = $this->get_unit();
-	}
-
-	/**
-	 */
-	public function __get( $name )
-	{
-		switch( $name ) {
-			case 'value':
-				return $this->value;
-			default:
-				return parent::__get( $name );
-		}
-	}
-
-	/**
-	 */
-	public function __set( $name, $value )
-	{
-		switch( $name ) {
-			case 'value':
-				return $this->set( $value );
-			default:
-				return parent::__set( $name );
-		}
-	}
-
-	/**
-	 */
-	public function __isset( $name )
-	{
-		switch( $name ) {
-			case 'value':
-				return ( null !== $this->value );
-			default:
-				return parent::__isset( $name );
-		}
-	}
-
-	/**
-	 */
-	public function __unset( $name )
-	{
-		switch( $name ) {
-			case 'value':
-				return $this->value = null;
-			default:
-				return parent::__unset( $name );
-		}
+		$this->unit = $this->new_unit();
 	}
 
 	/**
@@ -490,6 +442,51 @@ abstract class ICE_Style_Value
 	}
 
 	/**
+	 * Return the value
+	 *
+	 * @return string
+	 */
+	public function get_value()
+	{
+		return $this->value;
+	}
+
+	/**
+	 * Return true if value is set
+	 *
+	 * @return boolean
+	 */
+	public function has_value()
+	{
+		return ( null !== $this->value);
+	}
+
+	/**
+	 * Set the value
+	 *
+	 * @return boolean
+	 */
+	public function set_value( $value )
+	{
+		// nulls are ok
+		if ( null === $value ) {
+			// explicitly set to null
+			$this->value = null;
+			return true;
+		}
+
+		// validate it
+		if ( $this->validate( $value ) ) {
+			// set it
+			$this->value = $value;
+			return true;
+		}
+
+		// invalid value
+		return false;
+	}
+	
+	/**
 	 * Set the value and unit for this value container
 	 *
 	 * @param mixed $value The value to set
@@ -498,17 +495,14 @@ abstract class ICE_Style_Value
 	 */
 	public function set( $value, $unit = null )
 	{
-		// is value null?
-		if ( null === $value ) {
-
-			// yep, treat like an unset
-			$this->value = null;
-			// successful
-			return true;
-
-		} elseif ( $this->unit()->set( $unit ) && $this->validate( $value ) ) {
-			// value and unit are valid, assign value
-			$this->value = $value;
+		// try to set value
+		if ( true === $this->set_value( $value ) ) {
+			// get a unit?
+			if ( $unit ) {
+				// yep, try to set it
+				return $this->unit()->set( $unit );
+			}
+			// we set value only
 			return true;
 		}
 
@@ -528,7 +522,7 @@ abstract class ICE_Style_Value
 	 *
 	 * @return ICE_Style_Unit_None
 	 */
-	protected function get_unit()
+	protected function new_unit()
 	{
 		return new ICE_Style_Unit_None();
 	}
@@ -761,7 +755,7 @@ class ICE_Style_Value_Length extends ICE_Style_Value
 	/**
 	 * @return ICE_Style_Unit_Length
 	 */
-	protected function get_unit()
+	protected function new_unit()
 	{
 		return new ICE_Style_Unit_Length();
 	}
@@ -785,7 +779,7 @@ class ICE_Style_Value_Percentage extends ICE_Style_Value
 	/**
 	 * @return ICE_Style_Unit_Percentage
 	 */
-	protected function get_unit()
+	protected function new_unit()
 	{
 		return new ICE_Style_Unit_Percentage();
 	}
@@ -992,7 +986,7 @@ final class ICE_Style_Property_Primitive extends ICE_Style_Property
 	public function get_value()
 	{
 		foreach ( $this->values as $style_value ) {
-			if ( isset( $style_value->value ) ) {
+			if ( $style_value->has_value() ) {
 				return $style_value;
 			}
 		}
