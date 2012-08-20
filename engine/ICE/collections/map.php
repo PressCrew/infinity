@@ -62,34 +62,6 @@ class ICE_Map
 	}
 
 	/**
-	 */
-	public function __get( $name )
-	{
-		return $this->item_at( $name );
-	}
-
-	/**
-	 */
-	public function __set( $name, $value )
-	{
-		$this->add( $name, $value );
-	}
-
-	/**
-	 */
-	public function __isset( $name )
-	{
-		return $this->contains( $name );
-	}
-
-	/**
-	 */
-	public function __unset( $name )
-	{
-		return $this->remove( $name );
-	}
-
-	/**
 	 * Check whether this map is read-only or not. Defaults to false.
 	 *
 	 * @return boolean

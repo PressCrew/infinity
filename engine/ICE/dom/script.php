@@ -204,7 +204,7 @@ class ICE_Script_Logic extends ICE_Base
 
 	/**
 	 */
-	public function __get( $name )
+	public function get_property( $name )
 	{
 		switch ( $name ) {
 			case 'alias':
@@ -212,52 +212,28 @@ class ICE_Script_Logic extends ICE_Base
 			case 'function':
 				return $this->$name;
 			default:
-				return parent::__get( $name );
+				return parent::get_property( $name );
 		}
 	}
 
 	/**
 	 */
-	public function __set( $name, $value )
+	protected function set_property( $name, $value )
 	{
 		switch ( $name ) {
 			case 'alias':
-				return $this->alias = (boolean) $value;
 			case 'ready':
-				return $this->ready = (boolean) $value;
+				$this->$name = (boolean) $value;
+				break;
 			case 'function':
-				return $this->function = is_bool( $value ) ? $value : trim( $value );
+				$this->function = is_bool( $value ) ? $value : trim( $value );
+				break;
 			default:
-				return parent::__set( $name, $value );
+				return parent::set_property( $name, $value );
 		}
-	}
 
-	/**
-	 */
-	public function __isset( $name )
-	{
-		switch ( $name ) {
-			case 'alias':
-			case 'ready':
-			case 'function':
-				return isset( $this->$name );
-			default:
-				return parent::__isset( $name );
-		}
-	}
-
-	/**
-	 */
-	public function __unset( $name )
-	{
-		switch ( $name ) {
-			case 'alias':
-			case 'ready':
-			case 'function':
-				return $this->$name = null;
-			default:
-				return parent::__unset( $name );
-		}
+		// chain it
+		return $this;
 	}
 
 	/**

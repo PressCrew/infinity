@@ -183,8 +183,8 @@ final class ICE_Ui_Cpanel extends ICE_Base
 			}
 
 			$logic = $script->end_logic();
-			$logic->alias = true;
-			$logic->ready = true;
+			$logic->set_property( 'alias', true );
+			$logic->set_property( 'ready', true );
 
 		} else {
 			return null;
