@@ -32,7 +32,7 @@
 			<?php
 				$heading_tag = ( is_home() || is_front_page() ) ? 'h1' : 'div';
 			?>
-			<<?php echo $heading_tag; ?> id="site-title" class="seven columns">
+			<<?php echo $heading_tag; ?> id="site-title">
 				<a href="<?php echo home_url( '/' ); ?>" title="<?php bloginfo('name'); ?> - <?php bloginfo('description'); ?>"><?php bloginfo('name'); ?></a>
 				<span id="site-description"><?php bloginfo('description'); ?></span>
 			</<?php echo $heading_tag; ?>>
