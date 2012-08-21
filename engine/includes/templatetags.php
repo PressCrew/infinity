@@ -76,7 +76,11 @@ function infinity_base_sidebars()
 	if ( !current_theme_supports( 'infinity-sidebar-setup' ) ) {
 		return;
 	}
-
+	if ( is_active_sidebar( 'sitewide-sidebar' ) ) {
+				dynamic_sidebar( 'sitewide-sidebar' );
+			} elseif ( current_user_can( 'edit_theme_options' ) ) { ?>
+			<?php
+			}
 	if ( is_page() ) {
 		if (
 			function_exists( 'bp_is_user' ) && bp_is_user() ||

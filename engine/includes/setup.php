@@ -149,6 +149,12 @@ if ( current_theme_supports( 'infinity-sidebar-setup' ) )
 	 */
 	function infinity_base_register_sidebars()
 	{
+		// Global
+		infinity_base_register_sidebar(
+			'sitewide-sidebar',
+			'Sitewide Sidebar',
+			'Sitewide widget area'
+		);
 		// page
 		infinity_base_register_sidebar(
 			'home-sidebar',
