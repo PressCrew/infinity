@@ -148,7 +148,7 @@ function infinity_grid_fallback()
 			// render script element ?>
 			<script>
 				jQuery(document).ready(function() {
-					jQuery('#content').addClass('<?php print $size ?>');
+					jQuery('#content').addClass('column <?php print $size ?>');
 				});
 			</script><?php
 		endif;

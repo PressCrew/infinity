@@ -14,7 +14,7 @@
 
 	infinity_get_header();
 ?>
-	<div id="content" role="main">
+	<div id="content" role="main" class="<?php do_action( 'content_class' ); ?>">
 			<?php
 			do_action( 'open_content' );
 			do_action( 'open_home' );
