@@ -16,7 +16,7 @@ if ( !has_nav_menu( 'main-menu' ) && ( has_nav_menu( 'over-menu' ) || has_nav_me
 	return;
 }
 ?>
-<div id="main-menu-wrap" role="navigation" class="nine columns">
+<div id="main-menu-wrap" role="navigation">
 	<nav class="base-menu main-menu">
 		<?php
 			do_action('open_main_menu');
