@@ -73,7 +73,6 @@ class ICE_Ext_Feature_Bp_Support
 
 			// addtl actions
 			add_action( 'open_sidebar', array( $this, 'message_notices' ) );
-			add_action( 'widgets_init', array( $this, 'register_sidebars' ) );
 		}
 	}
 
@@ -107,43 +106,6 @@ class ICE_Ext_Feature_Bp_Support
 		wp_localize_script( 'dtheme-ajax-js', 'BP_DTheme', $params );
 	}
 
-	/**
-	 * Register special BuddyPress sidebars
-	 */
-	public function register_sidebars()
-	{
-		// activity sidebar
-		$this->register_sidebar(
-			'activity-sidebar',
-			'Activity Sidebar',
-			'The Activity widget area'
-		);
-		// member sidebar
-		$this->register_sidebar(
-			'member-sidebar',
-			'Member Sidebar',
-			'The Members widget area'
-		);
-		// blogs sidebar
-		$this->register_sidebar(
-			'blogs-sidebar',
-			'Blogs Sidebar',
-			'The Blogs Sidebar area'
-		);
-		// groups sidebar
-		$this->register_sidebar(
-			'groups-sidebar',
-			'Groups Sidebar',
-			'The Groups widget area'
-		);
-		// forums sidebar
-		$this->register_sidebar(
-			'forums-sidebar',
-			'Forums Sidebar',
-			'The Forums widget area'
-		);
-	}
-	
 	/**
 	 * @internal copied from bp-default/functions.php
 	 */
@@ -264,26 +226,6 @@ class ICE_Ext_Feature_Bp_Support
 	{
 		// render the link ?>
 		<a class="<?php print esc_attr( $class ) ?> button" href="<?php bp_activity_thread_permalink() ?>"><?php print $title ?></a><?php
-	}
-
-	/**
-	 * Register one sidebar
-	 *
-	 * @param string $id Sidebar ID, 'id' arg passed to register_sidebar()
-	 * @param string $name Sidebar name, 'name' arg passed to register_sidebar()
-	 * @param string $desc Sedebar description, 'description' arg passed to register_sidebar()
-	 */
-	protected function register_sidebar( $id, $name, $desc )
-	{
-		register_sidebar( array(
-			'id' => $id,
-			'name' => $name,
-			'description' => $desc,
-			'before_widget' => '<article id="%1$s" class="widget %2$s">',
-			'after_widget' => '</article>',
-			'before_title' => '<h4>',
-			'after_title' => '</h4>'
-		));
 	}
 
 	/**
