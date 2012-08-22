@@ -14,6 +14,7 @@
 /**
  * Include custom comments, template tags, and walker classes
  */
+require_once( INFINITY_INC_PATH . '/sidebars.php' );
 require_once( INFINITY_INC_PATH . '/comments.php' );
 require_once( INFINITY_INC_PATH . '/templatetags.php' );
 require_once( INFINITY_INC_PATH . '/walkers.php' );
@@ -114,86 +115,6 @@ function infinity_base_register_menus()
 	}
 }
 add_action( 'init', 'infinity_base_register_menus' );
-
-if ( current_theme_supports( 'infinity-sidebar-setup' ) ) 
-{
-	/**
-	 * Register one sidebar
-	 *
-	 * @author Marshall Sorenson <marshall@presscrew.com>
-	 * @package Infinity
-	 * @subpackage base
-	 * @see register_sidebar()
-	 * @param string $id Sidebar ID, 'id' arg passed to register_sidebar()
-	 * @param string $name Sidebar name, 'name' arg passed to register_sidebar()
-	 * @param string $desc Sedebar description, 'description' arg passed to register_sidebar()
-	 */
-	function infinity_base_register_sidebar( $id, $name, $desc )
-	{
-		register_sidebar( array(
-			'id' => $id,
-			'name' => $name,
-			'description' => $desc,
-			'before_widget' => '<article id="%1$s" class="widget %2$s">',
-			'after_widget' => '</article>',
-			'before_title' => '<h4>',
-			'after_title' => '</h4>'
-		));
-	}
-	
-	/**
-	 * Register all sidebars
-	 *
-	 * @package Infinity
-	 * @subpackage base
-	 */
-	function infinity_base_register_sidebars()
-	{
-		// Global
-		infinity_base_register_sidebar(
-			'sitewide-sidebar',
-			'Sitewide Sidebar',
-			'Sitewide widget area'
-		);
-		// page
-		infinity_base_register_sidebar(
-			'home-sidebar',
-			'Home Sidebar',
-			'The home widget area'
-		);
-		// blog
-		infinity_base_register_sidebar(
-			'blog-sidebar',
-			'Blog Sidebar',
-			'The blog widget area'
-		);
-		// page
-		infinity_base_register_sidebar(
-			'page-sidebar',
-			'Page Sidebar',
-			'The page widget area'
-		);
-		// footer left
-		infinity_base_register_sidebar(
-			'footer-left',
-			'Footer Left',
-			'The left footer widget'
-		);
-		// footer middle
-		infinity_base_register_sidebar(
-			'footer-middle',
-			'Footer Middle',
-			'The middle footer widget'
-		);
-		// footer right
-		infinity_base_register_sidebar(
-			'footer-right',
-			'Footer Right',
-			'The right footer widget'
-		);
-	}
-	add_action( 'init', 'infinity_base_register_sidebars' );
-}
 
 if ( current_theme_supports( 'infinity-top-menu-setup' ) || current_theme_supports( 'infinity-main-menu-setup' ) || current_theme_supports( 'infinity-sub-menu-setup' ) || current_theme_supports( 'infinity-footer-menu-setup' ) ) 
 {
