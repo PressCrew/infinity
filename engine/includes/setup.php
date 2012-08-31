@@ -314,7 +314,7 @@ add_action( 'open_content', 'infinity_base_yoast_breadcrumbs' );
  * @package Infinity
  * @subpackage base
  */
-function infinity_cleaner_caption( $output, $attr, $content ) 
+function infinity_base_cleaner_caption( $output, $attr, $content )
 {
 	/* We're not worried abut captions in feeds, so just return the output here. */
 	if ( is_feed() )
@@ -332,8 +332,12 @@ function infinity_cleaner_caption( $output, $attr, $content )
 	$attr = shortcode_atts( $defaults, $attr );
 
 	// If the width is less than 1 or there is no caption, return the content wrapped between the [caption]< tags.
-	if ( 1 > $attr['width'] || empty( $attr['caption'] ) )
+	if ( 1 > $attr['width'] || empty( $attr['caption'] ) ) {
 		return $content;
+	}
+
+	// remove hard coded width and height attr from images
+	$content = preg_replace( '/\s+(width|height)="[^"]*"/', '', $content );
 
 	// Set up the attributes for the caption <div>.
 	$attributes .= ' class="figure ' . esc_attr( $attr['align'] ) . '" style="width:'. esc_attr( $attr['width'] ) . 'px"';
@@ -353,7 +357,7 @@ function infinity_cleaner_caption( $output, $attr, $content )
 	// Return the formatted, clean caption.
 	return $output;
 }
-add_filter( 'img_caption_shortcode', 'infinity_cleaner_caption', 10, 3 );
+add_filter( 'img_caption_shortcode', 'infinity_base_cleaner_caption', 10, 3 );
 
 /**
  * Clean the output of attributes of images in editor. Courtesy of SitePoint. http://www.sitepoint.com/wordpress-change-img-tag-html/
@@ -361,33 +365,11 @@ add_filter( 'img_caption_shortcode', 'infinity_cleaner_caption', 10, 3 );
  * @package Infinity
  * @subpackage base
  */
-function image_tag_class($class, $id, $align, $size) 
+function infinity_base_get_image_tag_class( $class, $id, $align, $size )
 {
-	$align = 'align' . esc_attr($align);
+	$align = 'align' . esc_attr( $align );
 	return $align;
 }
-add_filter('get_image_tag_class', 'image_tag_class', 0, 4);
+add_filter( 'get_image_tag_class', 'infinity_base_get_image_tag_class', 0, 4 );
 
-/**
- * Remove the hardcode height and width of the images being inserted
- *
- * @package Infinity
- * @subpackage base
- */
-function image_tag($html, $id, $alt, $title) 
-{
-	return preg_replace(array(
-			'/\s+width="\d+"/i',
-			'/\s+height="\d+"/i',
-			'/alt=""/i'
-		),
-		array(
-			'',
-			'',
-			'',
-			'alt="' . $title . '"'
-		),
-		$html);
-}
-add_filter('get_image_tag', 'image_tag', 0, 4);
 ?>
