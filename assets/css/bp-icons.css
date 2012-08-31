@@ -1,0 +1,152 @@
+/* Using some fancy CSS magic to add our icons */
+.item-list-tabs * a:before,
+#item-buttons * a:before,
+.sidebar-activity-tabs * a:before,
+.button:before,
+#message p:before,
+#subnav * :before,
+#category-title:before,
+#tag-title:before,
+span.post-tags:before{
+	font-weight: normal;
+	font-family: "iconsweetsRegular";
+	color: inherit;
+	padding-right: 2px;
+	font-size: 130%;
+	position: relative;
+    top: 2px;
+}
+#item-buttons * a:before, .activity-meta * a:before, .button:before {
+    display: inline-block;
+    font-size: 135%;
+    padding: 0 2px 6px 1px;
+}
+/* Some Small Padding tweaks to make the icons look sweet */
+div#item-header div.generic-button, div#item-header a.button {
+    padding: 0 8px;
+}
+#sidebar .sidebar-activity-tabs ul li a {
+    padding-bottom: 8px;
+    padding-top: 4px;
+}
+div.item-list-tabs ul li a {
+    padding: 6px 6px 8px !important;
+}
+.loading a:before {
+	display: none !important;
+}
+
+/* Stream Icons. no shorthand CSS to maintain hover effects */
+li#activity-all a:before {
+	content: "s";
+}
+li#activity-favorites a:before,
+.button.fav:before,
+.button.unfav:before {
+	content: "h";
+}
+li#activity-friends a:before {
+	content: "a";
+}
+li#activity-groups a:before,
+.widget_bp_groups_widget  {
+	content: "f";
+}
+li#activity-links a:before {
+	content: "q";
+}
+li#activity-mentions a:before {
+	content: "#";
+}
+li#activity-following a, li#following-personal-li a:before {
+	content: "*";
+}
+.acomment-reply:before {
+	content: "w";
+}
+.delete-activity:before {
+	content: "X"
+}
+/* Group Icons */
+li#members-groups-li a:before {
+	content: "e";
+}
+li#forums-groups-li a:before {
+	content: '"';        
+}
+li#admin-groups-li a:before {
+	content: "i";
+}
+
+li#invite-groups-li a:before {
+	content: "A";
+}
+
+li#home-groups-li a:before {
+	content: "0";
+}
+li#nav-docs-groups-li a:before { 	
+	content: "L";	
+}
+li#nav-notifications-groups-li a:before {
+	content: "6";
+}
+/* Profile Icons  */
+#user-activity:before {
+	content: "s";
+}
+#user-xprofile:before {
+	content: "?";
+}
+#user-friends:before {
+	content: "a";
+}
+#user-groups:before {
+	content: "f";
+}
+#user-profile:before { 
+	content: "?";
+}
+#user-links:before {
+	content: "P";
+}
+#user-messages:before {
+	content: "A";
+}
+#user-forums:before {
+	content: '"';
+}
+li#activity-filter-select label:before {
+	content: ".";	
+}
+a.send-message:before {
+	content: "A";
+}
+a.friendship-button:before {
+	content: "a";
+}
+
+.follow-button a.follow:before {
+	content: "*";
+}
+div#post-mention a.mention:before {
+	content: "#";
+}
+#user-settings:before {
+	content: "i";
+} 
+div#message p {
+    background-color: #FEFAEB;
+    border: 1px solid #F1F1F1;
+    border-radius: 4px 4px 4px 4px;
+    display: block;
+    font-size: 12px;
+    padding: 10px 15px;
+}
+div#message p:before {
+	content: "_";
+} 	
+/* BBPress */	
+#nav-forums:before {
+	content: '"';
+}

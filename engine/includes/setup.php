@@ -45,8 +45,8 @@ function infinity_base_post_formats()
 			'video'
 		)
 	);
-   add_action( 'init', 'infinity_base_post_formats' );
 }
+add_action( 'init', 'infinity_base_post_formats' );
 
 
 // Set the content width based on the theme's design and stylesheet.

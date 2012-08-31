@@ -28,7 +28,7 @@ span.activity {
     background: #F9F9F9;
     font-weight: normal;
     margin-top: 6px;
-    font-size: 90%;
+    font-size: 85%;
 }
 .activity-read-more { margin-left: 5px }
 
@@ -52,7 +52,7 @@ div#item-header img.avatar {
 div#item-header h2 { margin-bottom: 5px }
 div#item-header span.activity, div#item-header h2 span.highlight {
     vertical-align: middle;
-    font-size: 90%;
+    font-size: 85%;
     font-weight: normal;
     line-height: 170%;
     margin-bottom: 7px;
@@ -66,7 +66,7 @@ div#item-header h2 span.highlight span {
     color: #FFFFFF;
     cursor: pointer;
     display: none;
-    font-size: 90%;
+    font-size: 85%;
     font-weight: bold;
     margin-bottom: 0;
     padding: 1px 4px;
@@ -76,7 +76,7 @@ div#item-header h2 span.highlight span {
     vertical-align: middle;
 }
 div#item-header div#item-meta {
-    font-size: 90%;
+    font-size: 85%;
     color: #777;
     padding-bottom: 10px;
     overflow: hidden;
@@ -108,7 +108,7 @@ div#item-header ul img.avatar, div#item-header ul.avatars img.avatar {
 }
 div#item-header div.generic-button, div#item-header a.button {
     float: left;
-    font-size: 90%;
+    font-size: 85%;
     margin: 10px 10px 0 0;
 }
 div#item-header div#message.info { line-height: 80% }
@@ -143,7 +143,7 @@ ul.item-list li div.item-title span {
     color: #999;
 }
 ul.item-list li div.item-desc {
-    font-size: 90%;
+    font-size: 85%;
     margin: 10px 0 0 64px;
     width: 68%;
 }
@@ -156,13 +156,13 @@ ul.item-list li div.action {
 ul.item-list li div.meta {
     margin-top: 10px;
     color: #888;
-    font-size: 90%;
+    font-size: 85%;
 }
 #sidebar .item-meta { position: relative }
 .item-avatar { float: left }
 ul.item-list li h5 span.small {
     font-weight: normal;
-    font-size: 90%;
+    font-size: 85%;
 }
 /* > Item Tabs
 --------------------------------------------------------------*/
@@ -189,7 +189,7 @@ div.item-list-tabs ul li a:hover {
 div.item-list-tabs ul li.last {
     color: #BFBDBD;
     float: right;
-    font-size: 90%;
+    font-size: 85%;
     margin-bottom: -4px;
     text-transform: inherit;
 }
@@ -311,7 +311,7 @@ div#message { margin: 15px 0 }
 div#message.updated { clear: both }
 div#message p {
     padding: 10px 15px;
-    font-size: 90%;
+    font-size: 85%;
     display: block;
 }
 /* Buttons that are disabled */
@@ -351,7 +351,7 @@ a.loading, li.loading a,#object-nav a.loading, #object-nav li.loading {
 /* > Input Forms
 --------------------------------------------------------------*/
 form.standard-form #basic-details-section input[type=password], form.standard-form #blog-details-section input#signup_blog_url { width: 35% }
-form.standard-form#signup_form input[type=text], form.standard-form#signup_form textarea { width: 90% }
+form.standard-form#signup_form input[type=text], form.standard-form#signup_form textarea { width: 85% }
 form.standard-form#signup_form div.submit { float: right }
 div#signup-avatar img { margin: 0 15px 10px 0 }
 form.standard-form textarea {
@@ -362,7 +362,7 @@ form.standard-form textarea#message_content { height: 200px }
 form.standard-form#send-reply textarea { width: 97.5% }
 form.standard-form p.description {
     color: #888888;
-    font-size: 90%;
+    font-size: 85%;
     font-style: italic;
     margin: -5px 0 15px;
 }
@@ -401,6 +401,16 @@ div#invite-list {
     border: 1px solid #e4e4e4;
     margin: 10px 0;
 }
+#invite-list ul {
+	padding: 0;
+}
+#invite-list ul li {
+	list-style: none;
+}
+.action .button {
+	padding: 3px 8px;
+	font-size: 75%;
+}
 /* > Data Tables
 --------------------------------------------------------------*/
 .profile-fields {
@@ -410,7 +420,7 @@ div#invite-list {
 table tr td.thread-info p { margin: 0 }
 table tr td.thread-info p.thread-excerpt {
     color: #888;
-    font-size: 90%;
+    font-size: 85%;
     margin-top: 3px;
 }
 div#sidebar table td, table.forum td { text-align: center }
@@ -446,13 +456,13 @@ table.forum tr.closed td.td-title {
 }
 table.forum td p.topic-text {
     color: #888;
-    font-size: 90%;
+    font-size: 85%;
 }
 table.forum tr > td:first-child, table.forum tr > th:first-child { padding-left: 20px }
 table.forum tr > td:last-child, table.forum tr > th:last-child { padding-right: 20px }
 table.forum tr th#th-title, table.forum tr th#th-poster, table.forum tr th#th-group, table.forum td.td-poster, table.forum td.td-group, table.forum td.td-title { text-align: left }
 table.forum td.td-freshness {
-    font-size: 90%;
+    font-size: 85%;
     color: #888;
 }
 table.forum td img.avatar {
@@ -495,10 +505,10 @@ form#whats-new-form #whats-new-textarea {
 }
 form#whats-new-form textarea {
     font-family: inherit;
-    font-size: 120%;
-    height: 60px;
+    font-size: 110%;
+    height: 60px !important;
     margin: 0;
-    width: 98%;
+    width: 100%;
 }
 form#whats-new-form #whats-new-options select { max-width: 200px }
 form#whats-new-form #whats-new-submit {
@@ -559,7 +569,7 @@ body.activity-permalink .activity-list li.mini .activity-meta {
 }
 .activity-list li .activity-inreplyto {
     color: #A6A6A6;
-    font-size: 90%;
+    font-size: 85%;
     margin-bottom: 15px;
     margin-top: 20px;
     padding-left: 25px;
@@ -595,16 +605,15 @@ body.activity-permalink .activity-list li .activity-content {
     padding: 15px;
 }
 body.activity-permalink .activity-list li .activity-header > p {
-    background: url( ../images/buddypress/activity_arrow.gif )top left no-repeat;
     margin-left: -35px;
     padding: 5px 0 0 38px;
     height: 35px;
     margin-bottom: 0;
 }
 .activity-list .activity-content .activity-header, .activity-list .activity-content .comment-header {
-    font-size: 90%;
-    color: #888;
-    line-height: 220%;
+    color: #888888;
+    font-size: 85%;
+    line-height: 180%;
 }
 .activity-list .activity-content .activity-header img.avatar {
     float: none !important;
@@ -615,7 +624,7 @@ body.activity-permalink .activity-list li .activity-header > p {
 .activity-list .activity-content span.activity-header-meta a {
     background: none;
     padding: 0;
-    font-size: 90%;
+    font-size: 85%;
     margin: 0;
     border: none;
     color: #777;
@@ -668,12 +677,16 @@ body.activity-permalink .activity-content .activity-inner, body.activity-permali
 .activity-list li.load-more a { color: #555 }
 /* > Activity Stream Comments
 --------------------------------------------------------------*/
-div.activity { margin-top: 20px }
+.activity-permalink div.activity {
+    margin-left: 30px;
+    margin-right: 10px;
+    margin-top: 20px;
+}
 div.activity-meta {
     margin: 0 0 20px 3px;
     clear: left;
 }
-.activity-list div.activity-meta a { font-size: 90%;}
+.activity-list div.activity-meta a { font-size: 75%;}
 div.activity-comments {
     position: relative;
     margin: 0 0 0 75px;
@@ -731,7 +744,7 @@ div.acomment-content .activity-delete-link { display: none }
 div.acomment-content .comment-header { display: none }
 body.activity-permalink div.activity-comments div.acomment-content { font-size: 120%; }
 div.activity-comments div.acomment-meta {
-    font-size: 90%;
+    font-size: 85%;
     color: #888;
 }
 div.acomment-options a {
@@ -765,7 +778,7 @@ div.activity-comments form .ac-textarea {
 div.activity-comments form textarea {
     width: 100%;
     font-family: inherit;
-    font-size: 90%;
+    font-size: 85%;
     color: #555;
     height: 60px;
     border: none;
@@ -789,7 +802,7 @@ div.activity-comments form div.ac-reply-content {
     margin-left: 25px;
     padding-left: 15px;
     color: #888;
-    font-size: 90%;
+    font-size: 85%;
 }
 /* > Private Message Threads
 --------------------------------------------------------------*/
@@ -830,13 +843,13 @@ div.messages-options-nav {
     background: transparent;
     border-bottom: 1px solid #DDDDDD;
     border-top: 1px solid #DDDDDD;
-    font-size: 90%;
+    font-size: 85%;
     padding: 8px 15px;
     text-align: right;
 }
 div.messages-options-nav select { float: right }
 .thread-options .button {
-    font-size: 90%;
+    font-size: 85%;
     left: 10px;
     line-height: 21px;
     padding: 0 7px;
@@ -883,7 +896,7 @@ div.admin-links {
     top: 15px;
     right: 25px;
     color: #888;
-    font-size: 90%;
+    font-size: 85%;
 }
 div#topic-meta div.admin-links {
     bottom: 0;

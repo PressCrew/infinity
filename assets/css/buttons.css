@@ -1,3 +1,10 @@
+input.button:active,
+.button:active { outline: 0; position: relative; top: 1px; }
+
+.generic-button a:hover {
+	border: none;
+}
+
 a.button, .generic-button, a.more-link, button, input[type="submit"], input[type="reset"], input[type="button"],#review_form #submit {
     margin-top: 10px;
     border-top: 1px solid #ccc;
@@ -330,7 +337,7 @@ a.button:hover, button:hover,#review_form #submit:hover {
     -moz-box-shadow: 0 1px 1px #b1b1b1, inset 0 1px 0 #838383;
     box-shadow: 0 1px 1px #b1b1b1, inset 0 1px 0 #838383;
 }
-.small, .post-tags a {
+.post-tags a {
     font-size: 10px;
     padding: 3px 5px;
     margin-left: 1px;
