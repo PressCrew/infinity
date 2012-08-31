@@ -3,7 +3,8 @@
 #tag-title:before,
 span.post-tags:before,
 .post-meta-data *:before,
-.post-title:before {
+.post-title:before,
+#author-description h3:before {
 	font-weight: normal;
 	font-family: "iconsweetsRegular";
 	color: inherit;
@@ -21,6 +22,9 @@ span.post-tags:before,
 #tag-title:before,
 span.post-tags:before {
 	content: "."
+}
+#author-description h3:before {
+	content: "a";
 }
 /* ================ */
 /* ! Post Formats   */
@@ -56,8 +60,6 @@ content: "F"
 .format-link .post-title:before {
 content: "Q"
 }
-
-
 .format-gallery .post-title:before {
 content: "3"
 }
