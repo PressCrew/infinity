@@ -336,8 +336,8 @@ function infinity_base_cleaner_caption( $output, $attr, $content )
 		return $content;
 	}
 
-	// remove hard coded width and height attr from images
-	$content = preg_replace( '/\s+(width|height)="[^"]*"/', '', $content );
+	// allow filtering of content since we are overriding caption template
+	$content = apply_filters( 'infinity_base_cleaner_caption_content', $content );
 
 	// Set up the attributes for the caption <div>.
 	$attributes .= ' class="figure ' . esc_attr( $attr['align'] ) . '" style="width:'. esc_attr( $attr['width'] ) . 'px"';
@@ -358,6 +358,19 @@ function infinity_base_cleaner_caption( $output, $attr, $content )
 	return $output;
 }
 add_filter( 'img_caption_shortcode', 'infinity_base_cleaner_caption', 10, 3 );
+
+
+/**
+ * Remove hard coded width/height attr from caption images
+ *
+ * @param string $content
+ * @return string
+ */
+function infinity_base_cleaner_caption_content( $content )
+{
+	return preg_replace( '/\s+(width|height)="[^"]*"/', '', $content );
+}
+add_filter( 'infinity_base_cleaner_caption_content', 'infinity_base_cleaner_caption_content' );
 
 /**
  * Clean the output of attributes of images in editor. Courtesy of SitePoint. http://www.sitepoint.com/wordpress-change-img-tag-html/
