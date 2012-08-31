@@ -203,6 +203,11 @@ p#breadcrumbs {
     padding: 3px 0;
     margin-bottom: 10px;
 }
+span.post-comments {
+	float: right;
+	margin-right: 5px;
+	border-right: 0px;
+}
 p#breadcrumbs { margin-top: 0px }
 /* Intro Boxes for authors, categories and tags */
 .post-author-box {
@@ -242,6 +247,7 @@ margin-bottom: 0px;
 }
 #author-description {
     overflow: hidden;
+    padding-bottom: 15px;
 }
 #author-description img {
     margin-top: 2px;

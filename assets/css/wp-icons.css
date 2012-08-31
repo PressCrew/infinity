@@ -1,72 +1,97 @@
+/* Using some fancy CSS magic to add our icons */
+#category-title:before,
+#tag-title:before,
+span.post-tags:before,
+.post-meta-data *:before,
+.post-title:before {
+	font-weight: normal;
+	font-family: "iconsweetsRegular";
+	color: inherit;
+	font-size: 130%;
+	position: relative;
+    top: 2px;
+}
+.post-top {
+	padding-top: 0px;
+}
+/* Blog Icons */
+#category-title:before {
+	content: "L"
+}
+#tag-title:before,
+span.post-tags:before {
+	content: "."
+}
 /* ================ */
 /* ! Post Formats   */
 /* ================ */
-.format-standard .post-title,
-.format-gallery .post-title,
-.format-video .post-title,
-.format-aside .post-title, 
-.format-link .post-title,
-.format-audio .post-title {
-padding-right: 40px;
+.format-quote .post-meta-data {
+	display: none;
+}
+.format-quote .entry {
+	border-left: 5px solid #EEEEEE;
+    font-family: "Georgia",serif;
+    font-size: 140%;
+    line-height: 140%;
+    margin-bottom: 18px;
+    padding-left: 15px;
 }
 
-.format-video {
-background: url("../images/icons/post-format-video.png") no-repeat scroll 97% 8px transparent;
+.post-title:before {
+    background: none repeat scroll 0 0 #555555;
+    border-radius: 50% 50% 50% 50%;
+    color: #FFFFFF;
+    float: right;
+    font-size: 140%;
+    padding: 0 0.8% 1.5%;
+    position: relative;
+    text-shadow: -1px 1px 0 #000000;
+    top: -8px;
 }
 
-.format-link {
-background: url("../images/icons/post-format-link.png") no-repeat scroll 100% 8px transparent;
+.format-video .post-title:before {
+content: "F"
 }
 
-.format-gallery {
-background: url("../images/icons/post-format-gallery.png") no-repeat scroll 97% 8px transparent;
-padding-right: 30px;
-}
-
-.format-audio {
-background: url("../images/icons/post-format-audio.png") no-repeat scroll 97% 7px transparent;
+.format-link .post-title:before {
+content: "Q"
 }
 
 
-.format-chat {
-background: url("../images/icons/post-format-chat.png") no-repeat scroll 97% 8px transparent;
+.format-gallery .post-title:before {
+content: "3"
+}
+.format-image .post-title:before {
+content: "2"
 }
 
-.format-status {
-background: url("../images/icons/post-format-status.png") no-repeat scroll 97% 8px transparent;
+.format-audio .post-title:before {
+content: "4"
 }
 
-.format-quote {
-background: url("../images/icons/post-format-quote.png") no-repeat scroll 97% 8px transparent;
+.format-chat .post-title:before {
+content: '"'
+}
+
+.format-status .post-title:before {
+content: "#"
+}
+
+.format-quote .post-title:before {
+content: "'"
 }
 
 /* Post Meta Icons */
-span.post-author,
-span.post-category,
-span.time-posted,
-span.post-comments { margin-right: 10px }
-span.post-author {
-    background: url("../images/icons/black.png") no-repeat scroll -728px -1228px transparent;
-    padding-left: 18px;
+span.post-author:before {
+	content: "d";
 }
-span.post-category {
-    background: url("../images/icons/black.png") no-repeat scroll -3px -37px transparent;
-    padding-left: 22px;
+span.post-category:before {
+	content: "L";
 }
-span.time-posted {
-    background: url("../images/icons/black.png") no-repeat scroll -4px -1703px transparent;
-    padding-left: 19px;
+span.time-posted:before {
+	content: "R"
 }
-span.post-comments,
-span.comments a {
-    background: url("../images/icons/black.png") no-repeat scroll -724px -1089px transparent;
-    float: right;
-    padding-left: 22px;
-    margin-right: 5px;
-    border-right: 0 none;
-}
-span.post-tags {
-    background: url("../images/icons/black.png") no-repeat scroll -1px -513px transparent;
-    margin-right: 0;
-    padding-left: 23px;
+span.post-comments:before,
+span.comments a:before {
+content: "#"
 }
