@@ -242,7 +242,7 @@ final class ICE_File extends SplFileInfo
 	public function getExtension()
 	{
 		// does SPL version support this method already?
-		if ( is_callable( array( 'SplFileInfo', 'getExtension' ) ) ) {
+		if ( true === version_compare( PHP_VERSION, '5.3.6', '>=' ) ) {
 			// yep, call parent method
 			return parent::getExtension();
 		} else {
