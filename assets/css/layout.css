@@ -162,7 +162,7 @@ float: right;
 .base-menu ul li.current_page_item a,
 .base-menu ul li.current-menu-item a {
     background-color: #000;
-    color: #DDD;
+    color: #FFF;
 }
 .base-menu li li a:hover,
 .base-menu li.sfHover li a { background: none }

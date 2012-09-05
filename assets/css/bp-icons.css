@@ -30,7 +30,7 @@ div#item-header div.generic-button, div#item-header a.button {
     padding-bottom: 8px;
     padding-top: 4px;
 }
-div.item-list-tabs ul li a {
+div#object-nav ul li a {
     padding: 6px 6px 8px !important;
 }
 .loading a:before {
