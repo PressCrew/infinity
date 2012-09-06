@@ -8,7 +8,8 @@
 #category-title:before,
 #tag-title:before,
 span.post-tags:before,
-.generic-button a:before{
+.generic-button a:before
+ {
 	font-weight: normal;
 	font-family: "iconsweetsRegular";
 	color: inherit;
@@ -16,6 +17,9 @@ span.post-tags:before,
 	font-size: 130%;
 	position: relative;
     top: 2px;
+}
+.activity-comments * :before {
+	display: none;
 }
 #item-buttons * a:before, .activity-meta * a:before, .button:before,.generic-button a:before {
     display: inline-block;
@@ -31,7 +35,10 @@ div#item-header div.generic-button, div#item-header a.button {
     padding-top: 4px;
 }
 div#object-nav ul li a {
-    padding: 6px 6px 8px !important;
+    padding: 4px 6px 8px !important;
+}
+div.activity-type-tabs li a {
+    padding: 4px 6px 8px !important;
 }
 .loading a:before {
 	display: none !important;
@@ -53,8 +60,9 @@ li#activity-groups a:before,
 .widget_bp_groups_widget  {
 	content: "f";
 }
-li#activity-links a:before {
-	content: "q";
+li#activity-links a:before,
+#nav-links:before {
+	content: "Q";
 }
 li#activity-mentions a:before {
 	content: "#";
