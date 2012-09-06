@@ -85,7 +85,8 @@ li#members-groups-li a:before {
 li#forums-groups-li a:before {
 	content: '"';        
 }
-li#admin-groups-li a:before {
+li#admin-groups-li a:before,
+li#link-admin-personal-li a:before {
 	content: "i";
 }
 
@@ -93,7 +94,8 @@ li#invite-groups-li a:before {
 	content: "A";
 }
 
-li#home-groups-li a:before {
+li#home-groups-li a:before,
+li#link-home-personal-li a:before {
 	content: "0";
 }
 li#nav-docs-groups-li a:before { 	
