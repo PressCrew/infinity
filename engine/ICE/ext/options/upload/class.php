@@ -23,14 +23,39 @@ class ICE_Ext_Option_Upload
 	extends ICE_Option_Image
 {
 	/**
+	 * Will be set to true when init_once has already been called
+	 *
+	 * @var boolean
+	 */
+	private static $once = false;
+
+	/**
 	 */
 	protected function init()
 	{
 		// always run parent first
 		parent::init();
 
+		// run init once
+		$this->init_once();
+
 		// upload files is required
 		$this->add_capabilities( 'upload_files' );
+	}
+
+	/**
+	 * Actions to run one time
+	 */
+	protected function init_once()
+	{
+		// check once var
+		if ( false == self::$once ) {
+			// set once to true
+			self::$once = true;
+			// rare case of needing to exec actions outside of our admin page
+			add_action( 'media_upload_tabs', array( $this, 'media_upload_tabs' ), 99 );
+			add_action( 'admin_enqueue_scripts', array( $this, 'media_upload_script' ) );
+		}
 	}
 
 	/**
@@ -40,8 +65,10 @@ class ICE_Ext_Option_Upload
 		parent::init_styles();
 
 		if ( is_admin() ) {
-			// need image editor styles
-			wp_enqueue_style( 'imgareaselect' );
+			// slurp admin styles
+			$this->style()
+				->section( 'admin' )
+				->cache( 'template', 'template.css' );
 		}
 	}
 
@@ -52,13 +79,10 @@ class ICE_Ext_Option_Upload
 		parent::init_scripts();
 
 		if ( is_admin() ) {
-			// need uploader plugin, ajax response, image editor scripts
-			wp_enqueue_script( 'ice-uploader' );
-			wp_enqueue_script( 'wp-ajax-response' );
-			wp_enqueue_script( 'image-edit' );
-
-			// localize the upload wrapper
-			$this->localize_script();
+			// slurp admin script
+			$this->script()
+				->section( 'admin' )
+				->cache( 'template', 'template.js' );
 		}
 	}
 
@@ -69,27 +93,53 @@ class ICE_Ext_Option_Upload
 		parent::init_ajax();
 
 		add_action( 'wp_ajax_ice_options_uploader_media_url', array( $this, 'ajax_media_url' ) );
-		add_action( 'wp_ajax_ice_options_uploader_image_edit', array( $this, 'ajax_image_edit' ) );
 	}
 
 	/**
-	 * Localize the flash uploader class wrapper
+	 * Returns true if special admin actions should be triggered
+	 *
+	 * @return boolean
 	 */
-	protected function localize_script()
+	protected function do_admin_action()
 	{
-		wp_localize_script(
-			'ice-uploader',
-			'iceEasyFlashUploaderL10n',
-			array(
-				'upload_url' => admin_url( ICE_Enqueue::SCRIPT_ASYNC ),
-				'flash_url' => includes_url('js/swfupload/swfupload.swf'),
-				'pp_auth_cookie' => (is_ssl() ? $_COOKIE[SECURE_AUTH_COOKIE] : $_COOKIE[AUTH_COOKIE]),
-				'pp_logged_in_cookie' => $_COOKIE[LOGGED_IN_COOKIE],
-				'pp_wpnonce' => wp_create_nonce( 'media-form' ),
-				'file_size_limit' => 1024 * 1024,
-				'button_image_url' => includes_url('images/upload.png?ver=20100531')
-			)
+		return (
+			isset( $_REQUEST['icext_option_upload'] ) &&
+			1 == $_REQUEST['icext_option_upload']
 		);
+	}
+
+	/**
+	 * Filter media upload tabs
+	 *
+	 * @param array $tabs
+	 * @return array
+	 */
+	public function media_upload_tabs( $tabs )
+	{
+		// do this action?
+		if ( $this->do_admin_action() ) {
+			// remove url and gallery tabs
+			unset( $tabs['type_url'], $tabs['gallery'] );
+		}
+
+		return $tabs;
+	}
+
+	/**
+	 * Enqueue special media uploader script
+	 */
+	public function media_upload_script()
+	{
+		// do this action?
+		if ( $this->do_admin_action() ) {
+			// yep, enqueue it
+			wp_enqueue_script(
+				'icext-option-upload-mu',
+				$this->locate_file_url( 'media-upload.js' ),
+				array( 'jquery' ),
+				ICE_VERSION
+			);
+		}
 	}
 
 	/**
@@ -110,21 +160,6 @@ class ICE_Ext_Option_Upload
 			}
 		} else {
 			ICE_Ajax::response( 0, __('No attachment ID received', infinity_text_domain) );
-		}
-	}
-
-	/**
-	 * Print the WP image edit form via ajax
-	 */
-	public function ajax_image_edit()
-	{
-		if ( isset( $_POST['attachment_id'] ) && is_numeric( $_POST['attachment_id'] ) ) {
-			// load api file
-			require_once ABSPATH . 'wp-admin/includes/image-edit.php'; ?>
-			<div class="image-editor" id="image-editor-<?php echo $_POST['attachment_id'] ?>"><?php
-			wp_image_editor( $_POST['attachment_id'] ); ?>
-			</div> <?php
-			die();
 		}
 	}
 

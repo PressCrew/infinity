@@ -293,15 +293,11 @@ final class ICE_Enqueue extends ICE_Base
 		$this->register_script(
 			'jquery-ui-nestedsortable', 'jquery.ui.nestedSortable.js', array('jquery', 'jquery-ui-sortable') );
 		$this->register_script(
-			'jquery-swfupload', 'jquery.swfupload.js', array('jquery', 'swfupload-all') );
-		$this->register_script(
 			'ice-global', 'global.js', array('ice-colorpicker') );
 		$this->register_script(
 			'ice-slider', 'slider.js', array('ice-global', 'jquery-ui-slider') );
 		$this->register_script(
 			'ice-scrollpane', 'scrollpane.js', array('ice-global', 'jquery-ui-slider') );
-		$this->register_script(
-			'ice-uploader', 'uploader.js', array('ice-global', 'jquery-swfupload', 'jquery-ui-button') );
 		$this->register_script(
 			'jquery-juicy-browsertabs', 'juicy/jquery.juicy.browsertabs.js', array('jquery-ui-tabs') );
 		$this->register_script(
