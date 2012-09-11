@@ -55,7 +55,8 @@
 /**
  * Button Menu
  */
-.juicy-buttonmenu .ui-button {
+.juicy-buttonmenu a.ui-button,
+.juicy-buttonmenu a.ui-button.ui-state-hover {
 	top: 0;
 	margin: 2px;
 	min-width: 120px;
