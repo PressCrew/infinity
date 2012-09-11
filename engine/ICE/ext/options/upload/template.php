@@ -17,25 +17,41 @@
 /* @var $attach_width integer Width of image attachment (pixels) */
 /* @var $attach_height integer Height of image attachment (pixels) */
 ?>
-<div class="ice-uploader ui-widget">
-	<fieldset class="ice-uploader-img ui-widget-content ui-corner-all">
-		<legend class="ui-widget-header ui-corner-all"><?php _e('Current Image', infinity_text_domain) ?></legend>
-		<p><img src="<?php print esc_attr( $attach_url ) ?>" alt="" /></p>
-		<div class="ice-uploader-ibar">
+
+<div id="<?php $this->render_id('main') ?>" class="ui-widget <?php $this->render_class( 'widget' ) ?>">
+	<fieldset class="ui-widget-content ui-corner-all">
+		<legend class="ui-widget-header ui-corner-all">
+			<?php _e('Current Image', infinity_text_domain) ?>
+		</legend>
+		<p class="ice-content">
+			<img src="<?php print esc_attr( $attach_url ) ?>" alt="" />
+		</p>
+		<div class="ice-controls">
+			<a><?php _e('Upload', infinity_text_domain) ?></a>
+			<a><?php _e('Select', infinity_text_domain) ?></a>
 			<a><?php _e('Zoom', infinity_text_domain) ?></a>
-			<a><?php _e('Edit', infinity_text_domain) ?></a>
 			<a><?php _e('Trash', infinity_text_domain) ?></a>
 		</div>
-		<div class="ice-uploader-zoom" title="<?php _e('Full Size Image', infinity_text_domain) ?>">
-			<img src="<?php print esc_attr( $attach_url ) ?>"  height="<?php print esc_attr( $attach_height ) ?>" width="<?php print esc_attr( $attach_width ) ?>" alt="">
-		</div>
+		<?php $this->render_input( 'hidden' ); ?>
 	</fieldset>
-	<fieldset class="ice-uploader-stat ui-widget-content ui-corner-all">
-		<legend class="ui-widget-header ui-corner-all"><?php _e( 'Upload Status', infinity_text_domain ) ?></legend>
-		<textarea></textarea><div><p></p></div>
-	</fieldset>
-	<div class="ice-uploader-btn">
-		<input type="button" /><?php
-		$this->render_input( 'hidden' ); ?>
-	</div>
 </div>
+
+<script type="text/javascript">
+jQuery(document).ready( function($){
+
+	$( 'div#<?php $this->render_id('main') ?>' )
+		.icextOptionUploader({
+			ibarSelector: 'div.ice-controls',
+			imageSelector: 'p.ice-content img',
+			inputSelector: 'input[name="<?php $this->render_name() ?>"]',
+			muOptions: {
+				title: '<?php _e( 'Media Uploader', infinity_text_domain ) ?>',
+				dialogClass: '<?php $this->render_class('dialog') ?>'
+			},
+			zoomOptions: {
+				title: '<?php _e( 'Zoom!', infinity_text_domain ) ?>'
+			}
+		});
+
+});
+</script>
