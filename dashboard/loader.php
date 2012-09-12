@@ -23,6 +23,8 @@ if (
 	$pagenow == 'themes.php' &&
 	isset( $_GET['activated'] )
 ) {
+	// exec activation hook
+	do_action( 'infinity_dashboard_activated' );
 	// yes, redirect
 	wp_redirect( admin_url( 'themes.php?page=' . INFINITY_ADMIN_PAGE ) );
 	// no more exec
