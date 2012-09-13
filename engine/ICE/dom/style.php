@@ -597,7 +597,7 @@ class ICE_Style_Value_String extends ICE_Style_Value
 	 */
 	public function format()
 	{
-		return sprintf( '"%s"', esc_attr( $this->value ) );
+		return sprintf( '"%s"', esc_attr( $this->get_value() ) );
 	}
 }
 
@@ -639,7 +639,7 @@ class ICE_Style_Value_Uri extends ICE_Style_Value
 	public function format()
 	{
 		// simply wrap it with a URL call
-		return sprintf( "url('%s')", $this->value );
+		return sprintf( "url('%s')", $this->get_value() );
 	}
 }
 
