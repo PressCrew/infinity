@@ -112,6 +112,16 @@ h1#site-title,div#site-title {
 	border-bottom: 1px solid #3E3C3C;
 	color: #E0E0E0;
 }
+#footer {
+	padding: 0 30px 5px;
+}
+#powered-by {
+	border-top: 1px solid #434343;
+}
+.footer-widget  {
+    padding-bottom: 10px;
+    padding-top: 20px;
+}
 .author-box,.category-box,.tag-box,.info-box,#sidebar,.activity-inner,div.activity-comments form.ac-form,.postthumb img,span.activity,h1#site-title,div#site-title,.fluid-width-video-wrapper {
 	background-color: #FFF;
 	background-image: -webkit-linear-gradient(center top , #FFFFFF 0%, #F4F4F4 100%) ;
