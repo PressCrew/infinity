@@ -66,7 +66,7 @@ div.item-list-tabs,
 	-webkit-border-radius: 5px 5px 0px 0px;
 	-moz-border-radius: 5px 5px 0px 0px;
 	border-radius: 5px 5px 0px 0px;
-	padding-bottom: 60px;
+    padding-bottom: 35px;
     padding-top: 60px;
 }
 /* Also add a border radius to our pseudo element for header background */
@@ -111,6 +111,16 @@ h1#site-title,div#site-title {
 #footer .widget h4 {
 	border-bottom: 1px solid #3E3C3C;
 	color: #E0E0E0;
+}
+#footer {
+	padding: 0 30px 5px;
+}
+#powered-by {
+	border-top: 1px solid #434343;
+}
+.footer-widget  {
+    padding-bottom: 10px;
+    padding-top: 20px;
 }
 .author-box,.category-box,.tag-box,.info-box,#sidebar,.activity-inner,div.activity-comments form.ac-form,.postthumb img,span.activity,h1#site-title,div#site-title,.fluid-width-video-wrapper {
 	background-color: #FFF;
