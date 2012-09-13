@@ -66,7 +66,7 @@ div.item-list-tabs,
 	-webkit-border-radius: 5px 5px 0px 0px;
 	-moz-border-radius: 5px 5px 0px 0px;
 	border-radius: 5px 5px 0px 0px;
-	padding-bottom: 60px;
+    padding-bottom: 35px;
     padding-top: 60px;
 }
 /* Also add a border radius to our pseudo element for header background */

@@ -45,6 +45,7 @@ h1#site-title,div#site-title {
     font-size: 200%;
     margin: -15px 0 0;
     width: auto;
+    float: left;
 }
 #site-title a {
     margin-bottom: -29px;
