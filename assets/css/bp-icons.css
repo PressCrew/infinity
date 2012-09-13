@@ -43,6 +43,9 @@ div.activity-type-tabs li a {
 .loading a:before {
 	display: none !important;
 }
+div.item-list-tabs ul li.loading a { 
+padding-top: 9px !important;
+}
 
 /* Stream Icons. no shorthand CSS to maintain hover effects */
 li#activity-all a:before {
