@@ -113,7 +113,7 @@ class ICE_Ext_Feature_Header_Logo
 						if ( $opt_left ) {
 							$pos->ad( 'left', $opt_left . 'px' );
 						} else {
-							$pos->ad( 'left', '0px' );
+							$pos->ad( 'left', 'inherit' );
 						}
 						break;
 					// center position
@@ -130,7 +130,7 @@ class ICE_Ext_Feature_Header_Logo
 						if ( $opt_right ) {
 							$pos->ad( 'right', $opt_right . 'px' );
 						} else {
-							$pos->ad( 'right', '0px' );
+							$pos->ad( 'right', 'inherit' );
 						}
 						break;
 				}
