@@ -132,6 +132,10 @@ li#nav-notifications-groups-li a:before {
 #user-forums:before {
 	content: '"';
 }
+#user-blogs:before,
+#user-sites:before {
+	content: "C"
+}
 li#activity-filter-select label:before {
 	content: ".";	
 }
