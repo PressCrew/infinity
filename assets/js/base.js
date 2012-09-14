@@ -19,41 +19,37 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-(function($){
-	$(document).ready(function() {
+jQuery(document).ready(function($)
+{
+	// Superfish Settings:
+	// http://users.tpg.com.au/j_birch/plugins/superfish/
 
-	/*-----------------------------------------------------------------------------------*/
-	/*	Superfish Settings - http://users.tpg.com.au/j_birch/plugins/superfish/
-	/*-----------------------------------------------------------------------------------*/
+	// main navigation setup (superfish)
+	if( $.fn.superfish ) {
+		$('.base-menu ul.sf-menu').superfish({
+			delay: 400,
+			animation: {opacity:'show', height:'show'},
+			speed: 'fast',
+			autoArrows: false,
+			dropShadows: false
+		});
+	}
 
-		// main navigation setup (superfish)
-		if(jQuery().superfish) {
-			jQuery('.base-menu ul.sf-menu').superfish({
-				delay: 400,
-				animation: {opacity:'show', height:'show'},
-				speed: 'fast',
-				autoArrows: false,
-				dropShadows: false
-			});
+	// buttons
+	$('.comment-reply-link').addClass('button');
 
-		}
-				
-		//buttons
-		jQuery('.comment-reply-link').addClass('button');
-		
-		//add a new grid class for register page
-		jQuery('.register #content').addClass('column sixteen');
+	// add a new grid class for register page
+	$('.register #content').addClass('column sixteen');
 
-		// initial sidebar height
-		infinity_sidebar_height();
-		
-		// bump sidebar height after any ajax requests
-		jQuery( '#sidebar' )
-			.bind( 'ajaxStop', function(){
-				infinity_sidebar_height();
-			});
-	});
-})(jQuery);
+	// initial sidebar height
+	infinity_sidebar_height();
+
+	// bump sidebar height after any ajax requests
+	$( '#sidebar' )
+		.bind( 'ajaxStop', function(){
+			infinity_sidebar_height();
+		});
+});
 
 // make the sidebar and content area the same size
 function infinity_sidebar_height()
