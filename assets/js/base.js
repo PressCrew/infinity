@@ -45,26 +45,19 @@
 		jQuery('.register #content').addClass('column sixteen');
 
 		// initial sidebar height
-		balance_sidebar_height();
+		infinity_sidebar_height();
 		
-		// make the sidebar and content area the same size
-		function balance_sidebar_height()
-		{
-			var height = jQuery('.main-wrap').height();
-			jQuery('#sidebar').css( 'min-height', height );
-		}
-
 		// bump sidebar height after any ajax requests
 		jQuery( '#sidebar' )
 			.bind( 'ajaxStop', function(){
-				balance_sidebar_height();
+				infinity_sidebar_height();
 			});
-		// make the sidebar and content area the same size
-		function balance_sidebar_height()
-		{
-			var height = jQuery('.main-wrap').height();
-			jQuery('#sidebar').css( 'min-height', height );
-		}
-	
 	});
 })(jQuery);
+
+// make the sidebar and content area the same size
+function infinity_sidebar_height()
+{
+	var height = jQuery('.main-wrap').height();
+	jQuery('#sidebar').css( 'min-height', height );
+}
