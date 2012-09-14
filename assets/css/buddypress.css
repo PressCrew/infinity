@@ -227,7 +227,9 @@ div.item-list-tabs ul li.selected a, div.item-list-tabs ul li.selected a, div.it
 }
 div.item-list-tabs ul li.selected a span, div.item-list-tabs ul li.current a span, div.item-list-tabs ul li a:hover span { background-color: #444 }
 div.item-list-tabs ul li.selected a span, div.item-list-tabs ul li.current a span { background-color: #555 }
-div#item-nav ul li.loading a { background-position: 88% 50% }
+div.item-list-tabs ul li.loading a { 
+	background-position: 88% 50%;
+	padding-left: 25px !important; }
 /* Subnav */
 div#subnav.item-list-tabs { background: transparent }
 div.item-list-tabs#subnav ul li { margin-top: 0 }
