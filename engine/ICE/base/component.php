@@ -899,6 +899,17 @@ abstract class ICE_Component
 	}
 
 	/**
+	 * Format a suboption name using the glue character defined in the registry
+	 *
+	 * @param string $name
+	 * @return string
+	 */
+	public function format_suboption( $name )
+	{
+		return $this->name . ICE_Registry::SUB_OPTION_GLUE . $name;
+	}
+
+	/**
 	 * Return sub-option of this component by passing ONLY the sub-option
 	 * portion of the component name.
 	 *
@@ -914,7 +925,7 @@ abstract class ICE_Component
 	public function get_suboption( $name )
 	{
 		// build up option name
-		$option_name = $this->name . ICE_Registry::SUB_OPTION_GLUE . $name;
+		$option_name = $this->format_suboption( $name );
 
 		// get and return it
 		return $this->policy()->options()->registry()->get( $option_name );
@@ -922,14 +933,14 @@ abstract class ICE_Component
 
 	/**
 	 * Check if suboption is registered
-	 * 
+	 *
 	 * @param string $name
 	 * @return boolean
 	 */
 	public function has_suboption( $name )
 	{
 		// build up option name
-		$option_name = $this->name . ICE_Registry::SUB_OPTION_GLUE . $name;
+		$option_name = $this->format_suboption( $name );
 
 		// get and return it
 		return $this->policy()->options()->registry()->has( $option_name );
