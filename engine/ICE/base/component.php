@@ -929,7 +929,7 @@ abstract class ICE_Component
 	public function has_suboption( $name )
 	{
 		// build up option name
-		$option_name = sprintf( '%s-%s', $this->name, $name );
+		$option_name = $this->name . ICE_Registry::SUB_OPTION_GLUE . $name;
 
 		// get and return it
 		return $this->policy()->options()->registry()->has( $option_name );
