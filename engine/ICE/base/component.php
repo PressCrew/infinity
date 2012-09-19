@@ -913,11 +913,7 @@ abstract class ICE_Component
 	 * Return sub-option of this component by passing ONLY the sub-option
 	 * portion of the component name.
 	 *
-	 * When a sub-option is registered the delimeter is replaced with a hyphen.
-	 *
-	 * For example [cool-feature.color] results in the option name "cool-feature-color"
-	 *
-	 * To retrieve the option object simply call $feature->get_suboption('color');
+	 * To retrieve the "color" option object, simply call $feature->get_suboption('color');
 	 *
 	 * @param string $name Name of the sub-option
 	 * @return array
