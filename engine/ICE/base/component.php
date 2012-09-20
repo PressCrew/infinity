@@ -239,13 +239,35 @@ abstract class ICE_Component
 		$this->theme = $theme;
 
 		// the "atypical name" is unique across all components
-		$this->aname = $policy->get_handle( false ) . '/' . $this->name;
+		$this->aname = $this->format_aname( $this->name );
 
 		// the "hash name" is the crc32 hex hash of the aname
-		$this->hname = hash( 'crc32', $this->aname );
+		$this->hname = $this->format_hname( $this->aname );
 
 		// run init template method
 		$this->init();
+	}
+
+	/**
+	 * Return an atypical name for the given component name
+	 *
+	 * @param string $name
+	 * @return string
+	 */
+	protected function format_aname( $name = null )
+	{
+		return $this->policy()->get_handle( false ) . '/' . $name;
+	}
+
+	/**
+	 * Return a hash name for the given component atypical name
+	 *
+	 * @param type $aname
+	 * @return type
+	 */
+	protected function format_hname( $aname )
+	{
+		return hash( 'crc32', $aname );
 	}
 
 	/**
@@ -551,7 +573,7 @@ abstract class ICE_Component
 					sprintf( 'The component "%s" cannot be a parent of itself', $this->name ) );
 			}
 		}
-		
+
 		// title
 		if ( $this->config()->contains( 'title' ) ) {
 			$this->title = $this->config( 'title' );
@@ -845,7 +867,7 @@ abstract class ICE_Component
 	 *
 	 * @param string $name
 	 */
-	private function validate_name( $name )
+	final protected function validate_name( $name )
 	{
 		// name must adhere to a strict format
 		if ( preg_match( '/^[a-z][a-z0-9]*((_|-)[a-z0-9]+)*$/', $name ) ) {
@@ -899,14 +921,22 @@ abstract class ICE_Component
 	}
 
 	/**
+	 * Format a suboption name using the glue character defined in the registry
+	 *
+	 * @param string $name
+	 * @return string
+	 */
+	public function format_suboption( $name )
+	{
+		// call registry suboption format helper
+		return ICE_Registry::format_suboption( $this->name, $name );
+	}
+
+	/**
 	 * Return sub-option of this component by passing ONLY the sub-option
 	 * portion of the component name.
 	 *
-	 * When a sub-option is registered the delimeter is replaced with a hyphen.
-	 *
-	 * For example [cool-feature.color] results in the option name "cool-feature-color"
-	 *
-	 * To retrieve the option object simply call $feature->get_suboption('color');
+	 * To retrieve the "color" option object, simply call $feature->get_suboption('color');
 	 *
 	 * @param string $name Name of the sub-option
 	 * @return array
@@ -914,7 +944,7 @@ abstract class ICE_Component
 	public function get_suboption( $name )
 	{
 		// build up option name
-		$option_name = $this->name . ICE_Registry::SUB_OPTION_GLUE . $name;
+		$option_name = $this->format_suboption( $name );
 
 		// get and return it
 		return $this->policy()->options()->registry()->get( $option_name );
@@ -922,14 +952,14 @@ abstract class ICE_Component
 
 	/**
 	 * Check if suboption is registered
-	 * 
+	 *
 	 * @param string $name
 	 * @return boolean
 	 */
 	public function has_suboption( $name )
 	{
 		// build up option name
-		$option_name = sprintf( '%s-%s', $this->name, $name );
+		$option_name = $this->format_suboption( $name );
 
 		// get and return it
 		return $this->policy()->options()->registry()->has( $option_name );

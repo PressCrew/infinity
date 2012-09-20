@@ -22,20 +22,20 @@ ICE_Loader::load( 'base/registry', 'components/features/factory' );
 abstract class ICE_Feature_Registry extends ICE_Registry
 {
 	/**
-	 * Load one component into registry from a single parsed ini section (array)
-	 *
-	 * @param string $section_name
-	 * @param array $section_array
-	 * @return boolean
 	 */
 	protected function load_config_section( $section_name, $section_array )
 	{
+		// not a feature option by default
+		$feature_option = null;
+
 		// sub option syntax?
 		if ( strpos( $section_name, self::SUB_OPTION_DELIM ) ) {
 			// yes, split at special delim
 			$parts = explode( self::SUB_OPTION_DELIM, $section_name );
 			// feature is the first part
 			$feature = $parts[0];
+			// name is the second part
+			$feature_option = $parts[1];
 		} else {
 			// feature name is section name
 			$feature = $section_name;
@@ -43,8 +43,19 @@ abstract class ICE_Feature_Registry extends ICE_Registry
 
 		// does theme support this feature?
 		if ( current_theme_supports( $feature ) ) {
-			// yes!
-			return parent::load_config_section( $section_name, $section_array );
+			// yes, options component enabled?
+			if ( ( $feature_option ) && $this->policy()->options() instanceof ICE_Policy ) {
+				// inject feature atts into config array
+				$section_array[ 'feature' ] = $feature;
+				// is it a sub option?
+				if ( $this->policy()->options()->registry()->load_feature_option( $feature_option, $section_array ) ) {
+					// yes, skip standard loading
+					return true;
+				}
+			} else {
+				// load like a regular feature
+				return parent::load_config_section( $section_name, $section_array );
+			}
 		}
 
 		// feature config *not* loaded

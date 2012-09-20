@@ -331,15 +331,6 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	 */
 	protected function load_config_section( $section_name, $section_array )
 	{
-		// options component enabled?
-		if ( $this->policy()->options() instanceof ICE_Policy ) {
-			// is it a sub option?
-			if ( $this->policy()->options()->registry()->load_feature_option( $section_name, $section_array ) ) {
-				// yes, skip standard loading
-				return true;
-			}
-		}
-
 		return $this->load_config_map( $section_name, $section_array );
 	}
 
@@ -418,6 +409,19 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 
 		// return the current theme scope
 		return self::$theme_scope;
+	}
+
+	/**
+	 * Format a suboption using the glue string
+	 *
+	 * @param string $comp_name
+	 * @param string $option_name
+	 * @return string
+	 */
+	final static public function format_suboption( $comp_name, $option_name )
+	{
+		// join the two strings with the glue character
+		return $comp_name . self::SUB_OPTION_GLUE . $option_name;
 	}
 }
 
