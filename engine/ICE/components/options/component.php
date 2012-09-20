@@ -58,6 +58,14 @@ abstract class ICE_Option extends ICE_Component
 	protected $default_value;
 
 	/**
+	 * An optional deprecated component name to check in situations
+	 * where the name has changed after it has been used to store data.
+	 *
+	 * @var string
+	 */
+	private $name_deprecated;
+	
+	/**
 	 * The feature for which this option was created (slug)
 	 *
 	 * @var string
@@ -138,6 +146,7 @@ abstract class ICE_Option extends ICE_Component
 			case 'field_class':
 			case 'field_id':
 			case 'field_options':
+			case 'name_deprecated':
 			case 'section':
 			case 'style_property':
 			case 'style_section':
@@ -195,6 +204,11 @@ abstract class ICE_Option extends ICE_Component
 		// default value
 		if ( $this->config()->contains( 'default_value' ) ) {
 			$this->default_value = $this->config( 'default_value' );
+		}
+		
+		// deprecated name
+		if ( $this->config()->contains( 'name_deprecated' ) ) {
+			$this->name_deprecated = $this->validate_name( $this->config( 'name_deprecated' ) );
 		}
 
 		// css id
@@ -365,7 +379,30 @@ abstract class ICE_Option extends ICE_Component
 	 */
 	protected function get_option()
 	{
-		return get_option( $this->get_api_name(), $this->default_value );
+		// get option value from database
+		$result = get_option( $this->get_api_name(), $this->default_value );
+
+		// is the result empty?
+		if (
+			null === $result ||
+			is_scalar( $result ) && strlen( $result ) == 0 ||
+			empty( $result )
+		) {
+			// no result, maybe check deprecated name
+			$name_deprecated = $this->property( 'name_deprecated' );
+
+			// if a deprecated name is set, try to get its value
+			if ( $name_deprecated ) {
+				// get the atypical name
+				$aname = $this->format_aname( $name_deprecated );
+				// get the hash name
+				$hname = $this->format_hname( $aname );
+				// try to get value of deprectated option name from the database
+				$result = get_option( $this->get_api_name( $hname ), $this->default_value );
+			}
+		}
+
+		return $result;
 	}
 
 	/**
@@ -542,13 +579,20 @@ abstract class ICE_Option extends ICE_Component
 	 *
 	 * @return string
 	 */
-	private function get_api_name()
+	private function get_api_name( $hname = null )
 	{
+		// handle empty hname
+		if ( null === $hname ) {
+			// use current property
+			$hname = $this->get_property( 'hname' );
+		}
+
+		// return formatted api name
 		return implode(
 			self::API_DELIM,
 			array(
 				self::API_PREFIX,
-				$this->get_property( 'hname' ),
+				$hname,
 				ICE_ACTIVE_THEME
 			)
 		);

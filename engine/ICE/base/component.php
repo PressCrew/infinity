@@ -239,13 +239,35 @@ abstract class ICE_Component
 		$this->theme = $theme;
 
 		// the "atypical name" is unique across all components
-		$this->aname = $policy->get_handle( false ) . '/' . $this->name;
+		$this->aname = $this->format_aname( $this->name );
 
 		// the "hash name" is the crc32 hex hash of the aname
-		$this->hname = hash( 'crc32', $this->aname );
+		$this->hname = $this->format_hname( $this->aname );
 
 		// run init template method
 		$this->init();
+	}
+
+	/**
+	 * Return an atypical name for the given component name
+	 *
+	 * @param string $name
+	 * @return string
+	 */
+	protected function format_aname( $name = null )
+	{
+		return $this->policy()->get_handle( false ) . '/' . $name;
+	}
+
+	/**
+	 * Return a hash name for the given component atypical name
+	 *
+	 * @param type $aname
+	 * @return type
+	 */
+	protected function format_hname( $aname )
+	{
+		return hash( 'crc32', $aname );
 	}
 
 	/**
@@ -551,7 +573,7 @@ abstract class ICE_Component
 					sprintf( 'The component "%s" cannot be a parent of itself', $this->name ) );
 			}
 		}
-		
+
 		// title
 		if ( $this->config()->contains( 'title' ) ) {
 			$this->title = $this->config( 'title' );
