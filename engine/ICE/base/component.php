@@ -845,7 +845,7 @@ abstract class ICE_Component
 	 *
 	 * @param string $name
 	 */
-	private function validate_name( $name )
+	final protected function validate_name( $name )
 	{
 		// name must adhere to a strict format
 		if ( preg_match( '/^[a-z][a-z0-9]*((_|-)[a-z0-9]+)*$/', $name ) ) {

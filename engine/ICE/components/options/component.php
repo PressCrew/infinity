@@ -189,7 +189,7 @@ abstract class ICE_Option extends ICE_Component
 
 		// feature option
 		if ( $this->config()->contains( 'feature_option' ) ) {
-			$this->feature_option = $this->config( 'feature_option' );
+			$this->feature_option = $this->validate_name( $this->config( 'feature_option' ) );
 		}
 
 		// default value
