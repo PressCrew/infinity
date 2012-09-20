@@ -48,6 +48,20 @@ abstract class ICE_Option_Registry extends ICE_Registry
 		// override this to apply special localizations that apply to your implementation
 	}
 
+	/**
+	 */
+	protected function load_config_section( $section_name, $section_array )
+	{
+		// does this load as a feature option?
+		if ( $this->load_feature_option( $section_name, $section_array ) ) {
+			// yes, skip standard loading
+			return true;
+		} else {
+			// no, not a feature option, call parent
+			return parent::load_config_section( $section_name, $section_array );
+		}
+	}
+
 	public function load_feature_options_file( ICE_Feature $feature, $filename )
 	{
 		// try to parse the options file into INI sections
@@ -76,34 +90,26 @@ abstract class ICE_Option_Registry extends ICE_Registry
 	 */
 	public function load_feature_option( $name, $config )
 	{
-		// defaults
-		$option_name = null;
-
 		// feature explicitly set?
 		if ( isset( $config['feature'] ) ) {
-			$option_name = $config['feature'] . self::SUB_OPTION_GLUE . $name;
-		} else {
-			// split for possible sub option syntax
-			$parts = explode( self::SUB_OPTION_DELIM, $name );
-			// if has exactly two parts its a feature option
-			if ( count($parts) == 2 ) {
-				// feature name is the first string
-				$config['feature'] = $parts[0];
-				// option name is both strings glued with a hyphen
-				$option_name = implode( self::SUB_OPTION_GLUE, $parts );
-			}
-		}
 
-		// have all feature option details?
-		if ( isset( $config['feature'] ) && $option_name ) {
+			// format option name
+			$option_name = ICE_Registry::format_suboption( $config['feature'], $name );
+
 			// make sure feature is registered
 			if ( $this->policy()->features()->registry()->has( $config['feature'] ) ) {
+
+				// set feature option
+				$config[ 'feature_option' ] = $name;
+
 				// set required feature
 				$config['required_feature'] = $config['feature'];
+
 				// clean up parent
 				if ( isset( $config['parent'] ) ) {
 					$config['parent'] = $this->normalize_name( $config['parent'] );
 				}
+
 				// call parent config loader
 				if ( $this->load_config_map( $option_name, $config ) ) {
 					// successfully loaded feature sub option

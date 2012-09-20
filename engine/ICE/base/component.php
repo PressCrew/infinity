@@ -906,7 +906,8 @@ abstract class ICE_Component
 	 */
 	public function format_suboption( $name )
 	{
-		return $this->name . ICE_Registry::SUB_OPTION_GLUE . $name;
+		// call registry suboption format helper
+		return ICE_Registry::format_suboption( $this->name, $name );
 	}
 
 	/**

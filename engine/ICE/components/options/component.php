@@ -65,6 +65,13 @@ abstract class ICE_Option extends ICE_Component
 	protected $feature;
 
 	/**
+	 * The feature option name (not prefixed)
+	 *
+	 * @var string
+	 */
+	protected $feature_option;
+
+	/**
 	 * The CSS class to apply to the option's input field
 	 *
 	 * @var string
@@ -127,6 +134,7 @@ abstract class ICE_Option extends ICE_Component
 		switch ( $name ) {
 			case 'default_value':
 			case 'feature':
+			case 'feature_option':
 			case 'field_class':
 			case 'field_id':
 			case 'field_options':
@@ -177,6 +185,11 @@ abstract class ICE_Option extends ICE_Component
 		// feature
 		if ( $this->config()->contains( 'feature' ) ) {
 			$this->feature = $this->config( 'feature' );
+		}
+
+		// feature option
+		if ( $this->config()->contains( 'feature_option' ) ) {
+			$this->feature_option = $this->config( 'feature_option' );
 		}
 
 		// default value
