@@ -22,11 +22,6 @@ ICE_Loader::load( 'base/component', 'utils/docs', 'schemes' );
 abstract class ICE_Option extends ICE_Component
 {
 	/**
-	 * All global options are prepended with this prefix template
-	 */
-	const PREFIX_TPL = '%s_opt_';
-
-	/**
 	 * The string on which to split field option key => values
 	 */
 	const FIELD_OPTION_DELIM = '=';
