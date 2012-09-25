@@ -1,0 +1,238 @@
+/*
+Theme Name: Balance Responsive Theme
+Parent styles */
+/* This stylesheet contains a bunch of extra stuff like buttons and Menu Icons you can use across your theme.*/
+/*
+ /* Columns Shortcodes*/
+/*--------------------------------------------------------------
+1.1 - iPad Landscape
+--------------------------------------------------------------*/
+body { min-width: inherit }
+@media only screen and (max-width: 768px) { 
+	html {
+	    margin-top: 0 !important;
+	}
+	body {
+		margin-top: -28px;
+	}
+	#wpadminbar,
+	.twipsy { display: none !important }
+	#sidebar { 
+		min-height: auto !important;
+	}
+	#wrapper { margin: 0 20px 20px }
+	.callout-box h2,
+	.flex-caption,
+	#feature-box h3 { display: none }
+	.callout-box { padding: 0px }
+	html.js { margin-top: 0 !important }
+	img,
+	fieldset {
+	    max-width: 100%;
+	    height: auto;
+	}
+	ul.sf-menu,
+	div.menu ul { display: none }
+	div.item-list-tabs select {
+	    margin-left: 20px;
+	    margin-top: 10px;
+	}
+	#subnav select { margin-top: 5px }
+	.mobileMenu { margin-top: 5px }
+	.post-category,
+	.time-posted { display: none }
+	/* huh?
+	 {
+	    border-left: 0 solid #E6E6E6;
+	    padding-left: 0;
+	}
+	*/
+	select.mobileMenu {
+	    background: none repeat scroll 0 0 transparent;
+	    border: 1px solid #777777;
+	    box-shadow: none;
+	    margin-top: 8px !important;
+	    width: 98%;
+	}
+	#wpadminbar { display: none }
+	div#content .padder {
+	    margin-right: 0;
+	    width: auto;
+	    float: none;
+	    border: none;
+	}
+}
+/*--------------------------------------------------------------
+1.2 - iPad Portrait
+--------------------------------------------------------------*/
+@media only screen and (max-width: 640px) { 
+	div.dir-search {
+	    float: none;
+	    margin: 1.25em 0 0;
+	}
+	div#item-header div#item-header-content { margin-left: 0px }
+	#div.activity-comments { margin: 0 }
+	#feature-box #callout-button {
+	    position: inherit;
+	    position: inherit;
+	    right: inherit;
+	    top: inherit;
+	}
+	li.featured-item { text-align: center }
+	#main-menu-wrap {
+	    background: none repeat scroll 0 0 transparent !important;
+	    border: 0 none !important;
+	    border-radius: 0 0 0 0 !important;
+	    margin-top: 6px;
+	    right: 0;
+	    z-index: 100;
+	}
+	div#item-header img.avatar {
+	    height: 80px !important;
+	    width: 80px !important;
+	}
+	div#item-header ul img.avatar,
+	div#item-header ul.avatars img.avatar {
+	    height: 30px !important;
+	    margin: 2px;
+	    width: 30px !important;
+	}
+	/* huh?
+	 {
+	    border: 0px;
+	    height: auto !important;
+	    margin: 0px;
+	    padding-right: 0px;
+	    padding-top: 30px;
+	}
+	*/
+	.activity-header p { line-height: 280% !important }
+	.activity-list .activity-content .activity-header img.avatar { display: none }
+	.pie-easy-exts-features-header-logo img {
+	    margin-top: 8px;
+	    width: 224px;
+	}
+	div.dir-search {
+	    float: none;
+	    margin: 1.25em 0 0;
+	}
+	ul.item-list li div.action {
+	    padding-left: 64px;
+	    position: relative;
+	    right: auto;
+	    text-align: left;
+	    top: 1em;
+	    margin-bottom: 1.25em;
+	}
+	.activity-list li.mini { display: none }
+	div.dir-search { position: inherit }
+	ul.item-list li div.action {
+	    padding-left: 64px;
+	    position: relative;
+	    right: auto;
+	    text-align: left;
+	    top: 1em;
+	    margin-bottom: 1.25em;
+	}
+	.activity-list .activity-content { margin-left: 0 }
+}
+/*--------------------------------------------------------------
+2.0 - Smartphone (any)
+--------------------------------------------------------------*/
+@media screen and (max-device-width: 480px), screen and (-webkit-min-device-pixel-ratio: 2) { 	 }
+@media only screen and (max-width: 480px) { 
+	body {
+	    width: 100%;
+	}
+	#logo-menu-wrap img { max-width: 140px }
+	#copyright-info { text-align: center }
+	#header { height: 110px }
+	#site-title { top: 10% !important }
+	.activity-list li.mini .activity-content p { width: 440% !important }
+}
+/*--------------------------------------------------------------
+3.0 - iPhone
+--------------------------------------------------------------*/
+@media only screen and (max-width: 320px) { 
+	#sidebar { width: 100% !important }
+	/* huh?
+	 {
+	    border-left: 0 solid #E6E6E6;
+	    padding-left: 0;
+	}
+	*/
+	form#groups-directory-form h3 a {
+	    display: block;
+	    margin-top: 0.6em;
+	}
+	form#whats-new-form div#whats-new-avatar { display: none }
+	form#whats-new-form h5 { margin: 0 0 0 0px }
+	form#whats-new-form #whats-new-content {
+	    margin-left: 0px;
+	    padding-left: 0px;
+	}
+	body.activity-permalink .activity-list li .activity-content { margin-left: 0 }
+	body.activity-permalink .activity-list li.mini .activity-meta { left: 0 }
+}
+/*--------------------------------------------------------------
+2.0 - Smartphone (any)
+--------------------------------------------------------------*/
+@media only screen and (max-width: 480px) { 
+	div.item-list-tabs ul li.last {
+	    float: none;
+	    margin: 0.3em 0.6em;
+	}
+	div#subnav.item-list-tabs ul li.last { margin-top: 1em }
+	div#subnav ul { padding-top: 0.6em }
+	div.pagination { padding: 0.6em }
+	div.item-list-tabs ul { padding-top: 0 }
+	    div.item-list-tabs ul li { margin-top: 0 }
+	form.standard-form #basic-details-section,
+	form.standard-form #blog-details-section,
+	form.standard-form #profile-details-section {
+	    float: none;
+	    width: 100%;
+	}
+	div.item-list-tabs { height: auto !important }
+}
+/* -------------------------------------------------- 
+	:: Forms
+---------------------------------------------------*/
+@media only screen and (max-width: 767px) { 
+	input.input-text,
+	input.input-text.oversize,
+	textarea,
+	form.nice input.input-text,
+	form.nice input.input-text.oversize,
+	form.nice textarea {
+	    display: block;
+	    width: 96%;
+	    padding: 6px 2% 4px;
+	    font-size: 18px;
+	}
+	form.nice input.input-text,
+	form.nice input.input-text.oversize,
+	form.nice textarea {
+	    -webkit-border-radius: 2px;
+	    -moz-border-radius: 2px;
+	}
+	form.nice small.error {
+	    padding: 6px 2%;
+	    display: block;
+	}
+	form.nice .small + .error { width: auto }
+	form.nice .medium + .error { width: auto }
+	form.nice .large + .error { width: auto }
+}
+/* -------------------------------------------------- 
+	:: UI
+---------------------------------------------------*/
+/* Buttons */
+@media only screen and (max-width: 767px) { 
+	.button { display: block }
+	button.button {
+	    width: 100%;
+	    padding-left: 0px;
+	    padding-right: 0px;
+	}
+}
