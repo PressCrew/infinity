@@ -22,7 +22,7 @@
 		// set viewport scale
 		function setScale( min, max ) {
 			// match all viewport metas and set content attr
-			$( 'meta[name=viewport]' ).attr( 'content', 'width=device-width, minimum-scale=' + min + ', maximum-scale=' + max );
+			$( 'head meta[name=viewport]' ).attr( 'content', 'width=device-width, minimum-scale=' + min + ', maximum-scale=' + max );
 		}
 		
 		// gesture event callback
