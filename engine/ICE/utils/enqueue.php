@@ -283,6 +283,8 @@ final class ICE_Enqueue extends ICE_Base
 		$this->register_script(
 			'jquery-fitvids', 'jquery.fitvids.js', array('jquery') );
 		$this->register_script(
+			'jquery-gridrotator', 'jquery.gridrotator.js', array('jquery') );
+		$this->register_script(
 			'jquery-mobilemenu', 'jquery.mobilemenu.min.js', array('jquery') );
 		$this->register_script(
 			'jquery-jstree', 'jquery.jstree.js', array('jquery','jquery-cookie') );
