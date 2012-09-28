@@ -289,6 +289,8 @@ final class ICE_Enqueue extends ICE_Base
 
 		// register default scripts
 		$this->register_script(
+			'modernizr-custom', 'modernizr-custom.js' );
+		$this->register_script(
 			'webfont', 'webfont.js' );
 		$this->register_script(
 			'ice-colorpicker', 'colorpicker.js', array('jquery') );
