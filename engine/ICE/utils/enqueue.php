@@ -294,6 +294,8 @@ final class ICE_Enqueue extends ICE_Base
 		$this->register_script(
 			'jquery-mobilemenu', 'jquery.mobilemenu.min.js', array('jquery') );
 		$this->register_script(
+			'jquery-transit', 'jquery.transit.min.js', array('jquery') );
+		$this->register_script(
 			'jquery-jstree', 'jquery.jstree.js', array('jquery','jquery-cookie') );
 
 		// register default scripts
