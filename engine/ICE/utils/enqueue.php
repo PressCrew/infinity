@@ -254,13 +254,6 @@ final class ICE_Enqueue extends ICE_Base
 			'colorpicker.css'
 		);
 
-		// grid rotator
-		// http://tympanus.net/codrops/2012/08/02/animated-responsive-image-grid/
-		$this->register_style(
-			'jquery-gridrotator',
-			'gridrotator/style.css'
-		);
-
 		do_action('ice_init_styles');
 		do_action('ice_register_styles');
 		do_action('ice_enqueue_styles');
@@ -289,8 +282,6 @@ final class ICE_Enqueue extends ICE_Base
 			'jquery-cookie', 'jquery.cookie.js', array('jquery') );
 		$this->register_script(
 			'jquery-fitvids', 'jquery.fitvids.js', array('jquery') );
-		$this->register_script(
-			'jquery-gridrotator', 'jquery.gridrotator.js', array('jquery') );
 		$this->register_script(
 			'jquery-mobilemenu', 'jquery.mobilemenu.min.js', array('jquery') );
 		$this->register_script(
