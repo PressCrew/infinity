@@ -291,7 +291,11 @@ class ICE_Script_Logic extends ICE_Base
 					$vars[$name] = 'null';
 					break;
 				case is_string( $value ):
-					$vars[$name] = sprintf( "'%s'", $value );
+					if ( $this->is_object_literal( $value ) ) {
+						$vars[$name] = $value;
+					} else {
+						$vars[$name] = sprintf( "'%s'", $value );
+					}
 					break;
 				case is_array( $value ):
 					$vars[$name] = sprintf( "['%s']", implode( "','", $value ) );
@@ -387,6 +391,29 @@ class ICE_Script_Logic extends ICE_Base
 
 		// all done
 		return $code;
+	}
+
+	/**
+	 * Returns true if string is *probably* an object literal
+	 *
+	 * @param string $string
+	 * @return boolean
+	 */
+	protected function is_object_literal( $string )
+	{
+		// make sure its a string
+		if ( is_string( $string ) ) {
+			// its a string, trim it
+			$trimmed = trim( $string );
+			// check first and last char for matching curly braces
+			if ( substr( $trimmed, 0, 1 ) == '{' && substr( $trimmed, -1, 1 ) == '}' ) {
+				// string starts and ends with matching braces
+				return true;
+			}
+		}
+
+		// nope
+		return false;
 	}
 }
 
