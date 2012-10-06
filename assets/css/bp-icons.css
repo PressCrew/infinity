@@ -46,7 +46,6 @@ div.activity-type-tabs li a {
 div.item-list-tabs ul li.loading a { 
 padding-top: 9px !important;
 }
-
 /* Stream Icons. no shorthand CSS to maintain hover effects */
 li#activity-all a:before {
 	content: "s";
@@ -169,4 +168,49 @@ div#message p:before {
 /* BBPress */	
 #nav-forums:before {
 	content: '"';
+}
+/* Main Menu Icons */
+.base-menu li ul li a:before {
+	content: none !important;
+}
+.main-menu * :before {
+	font-weight: normal;
+	font-family: "iconsweetsRegular";
+	color: inherit;
+	padding-right: 2px;
+	font-size: 130%;
+	position: relative;
+	top: 2px;
+	text-transform: none;
+}
+#main-menu-wrap .icon-groups a:before {
+	content: "f";
+}
+#main-menu-wrap .icon-members a:before {
+	content: "e";
+}
+#main-menu-wrap .icon-activity a:before {
+	content: "s";
+}
+#main-menu-wrap .icon-forums a:before {
+	content: '"';
+}
+#main-menu-wrap .icon-links a:before {
+	content: "Q";
+}
+#main-menu-wrap .icon-sites a:before,
+#main-menu-wrap .icon-blogs a:before {
+	content: "C";
+}
+#bp-adminbar-notifications-menu a:before {
+	content: "6"
+}
+#bp-adminbar-account-menu a:before {
+	content: "a"
+}
+.login-form-link a:before {
+	content: "y";
+}
+#join-us-link a:before {
+	content: "w";
 }
