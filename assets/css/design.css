@@ -145,9 +145,6 @@ h1#site-title,div#site-title {
 	-webkit-border-radius: 6px 6px 6px 6px;
 	-moz-border-radius: 6px 6px 6px 6px;
 	border-radius: 6px 6px 6px 6px;
-	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=94)";
-	filter: alpha(opacity=94);
-	opacity: 0.94;
 	padding: 5px;
 }
 .main-menu ul a {
