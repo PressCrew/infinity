@@ -285,7 +285,10 @@ div.pagination#user-pag, .friends div.pagination, .mygroups div.pagination, .myb
     padding: 8px 15px;
 }
 div.pagination .pag-count { float: none; line-height: 5px; font-style: italic;}
-div.pagination .pagination-links { float: right }
+div.pagination .pagination-links {
+    float: right;
+    margin-top: -10px;
+}
 div.pagination .pagination-links span, div.pagination .pagination-links a {
     padding: 0 5px;
 }
