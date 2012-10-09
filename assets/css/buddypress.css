@@ -678,6 +678,7 @@ body.activity-permalink .activity-content .activity-inner, body.activity-permali
     font-size: 1.2em;
     border-right: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
+    min-height: 40px;
 }
 .activity-list li.load-more a { color: #555 }
 /* > Activity Stream Comments
