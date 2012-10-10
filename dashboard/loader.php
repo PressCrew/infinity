@@ -36,9 +36,10 @@ if (
 //
 
 /**
- * Include control panel functions
+ * Include control panel and support functions
  */
 require_once( INFINITY_ADMIN_PATH . '/cpanel.php' );
+require_once( INFINITY_ADMIN_PATH . '/support.php' );
 
 
 //
