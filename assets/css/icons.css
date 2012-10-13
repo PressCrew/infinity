@@ -18,7 +18,10 @@ span.post-tags:before,
 #author-description h3:before,
 .single_add_to_cart_button:before,
 .load-more a:before,
-#whats-new {
+#whats-new,
+.main-menu * :before,
+.link-home h2 a:before,
+div.link-vote-panel div.clickers a.up:before {
     font-weight: normal;
     font-family: "iconsweetsRegular";
     color: inherit;
@@ -26,6 +29,7 @@ span.post-tags:before,
     font-size: 130%;
     position: relative;
     top: 2px;
+    text-transform: none;
 }
 
 /* WordPress Icons */
@@ -345,15 +349,16 @@ div#message p:before {
     content: none !important
 }
 
-.main-menu * :before {
-    font-weight: normal;
-    font-family: "iconsweetsRegular";
-    color: inherit;
-    padding-right: 2px;
-    font-size: 130%;
-    position: relative;
-    top: 2px;
-    text-transform: none;
+/* Make sure items with an icon line up with non-icon items */
+#main-menu-wrap .icon-groups a,
+#main-menu-wrap .icon-members a,
+#main-menu-wrap .icon-activity a,
+#main-menu-wrap .icon-members a,
+#main-menu-wrap .icon-forums,
+#main-menu-wrap .icon-links a,
+#main-menu-wrap .icon-sites a,
+#main-menu-wrap .icon-blogs a   {
+	margin-top: -5px;
 }
 
 #main-menu-wrap .icon-groups a:before {
@@ -380,7 +385,6 @@ div#message p:before {
 #main-menu-wrap .icon-blogs a:before {
     content: "C"
 }
-
 #bp-adminbar-notifications-menu a:before {
     content: "6"
 }
@@ -415,4 +419,20 @@ a.add_to_cart_button:before {
 	content: "(";
 	float: left;
 	opacity: 0.7;
+}
+/* BuddyPress Links Icons */
+.link-home h2 a:before {
+    content: "Q";
+    font-size: 100%;
+    opacity: 0.6;
+}
+div.link-vote-panel div.clickers a.up {
+	background: transparent;
+}
+div.link-vote-panel div.clickers a.up:before {
+	color: inherit;
+    height: 20px;
+    position: relative;
+    width: 20px;
+	content: "[";
 }

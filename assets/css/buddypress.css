@@ -198,7 +198,6 @@ div.item-list-tabs ul li.last select {
     display: inline-block;
     margin-left: 8px;
     margin-top: 4px;
-    max-width: 110px;
 }
 li#activity-filter-select label { display: inline-block }
 div.item-list-tabs ul li a, div.item-list-tabs ul li span {
