@@ -14,6 +14,7 @@
 /**
  * Include custom comments, template tags, and walker classes
  */
+require_once( INFINITY_INC_PATH . '/menus.php' );
 require_once( INFINITY_INC_PATH . '/sidebars.php' );
 require_once( INFINITY_INC_PATH . '/comments.php' );
 require_once( INFINITY_INC_PATH . '/templatetags.php' );
@@ -56,6 +57,17 @@ if ( ! isset( $content_width ) )
 {
 	$content_width = 760;	
 	add_theme_support( 'automatic-feed-links' );
+}
+
+// Add a special body class whenever the admin bar is displaying
+if ( is_admin_bar_showing() ) {
+		add_filter('body_class','my_class_names');
+		function my_class_names($classes) {
+			// add 'class-name' to the $classes array
+			$classes[] = 'admin-bar-showing';
+			// return the $classes array
+			return $classes;
+		}
 }
 
 /**
