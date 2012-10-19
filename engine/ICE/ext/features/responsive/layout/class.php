@@ -30,7 +30,7 @@ class ICE_Ext_Feature_Responsive_Layout
 		parent::init();
 
 		// add actions
-		add_action( 'open_meta', array( $this, 'viewport_meta' ) );
+		add_action( 'open_head', array( $this, 'viewport_meta' ) );
 		add_action( 'wp_head', array( $this, 'render' ) );
 	}
 
