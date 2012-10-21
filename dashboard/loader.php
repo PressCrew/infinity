@@ -57,13 +57,13 @@ function infinity_dashboard_menu_setup()
 	// get name of current theme
 	$theme_name = get_current_theme();
 
-	// format title/page name
-	$menu_title = sprintf( __( '%s Options', infinity_text_domain ), $theme_name );
+	// format page title
+	$page_title = sprintf( __( '%s Options', infinity_text_domain ), $theme_name );
 
 	// add appearance submenu item
 	add_theme_page(
-		$menu_title,
-		$menu_title,
+		apply_filters( 'infinity_dashboard_menu_setup_page_title', $page_title, $theme_name ),
+		apply_filters( 'infinity_dashboard_menu_setup_menu_title', $page_title, $theme_name ),
 		'manage_options',
 		INFINITY_ADMIN_PAGE,
 		'infinity_dashboard_cpanel_screen'
