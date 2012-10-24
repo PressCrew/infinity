@@ -3,6 +3,11 @@
 	z-index: 1000;
 }
 
+.colorpicker div.colorpicker_field input[type="text"] {
+	padding: 0;
+	height: 15px;
+}
+
 div.icext-option.icext-colorpicker_launcher {
 	display: inline-block;
 	position: relative;
