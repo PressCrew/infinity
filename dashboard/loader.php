@@ -45,6 +45,15 @@ function infinity_dashboard_activated()
 add_action( 'load-themes.php', 'infinity_dashboard_activated' );
 
 /**
+ * Force exports refresh on theme activation
+ */
+function infinity_dashboard_activated_refresh()
+{
+	ICE_Scheme::instance()->exports_refresh( true );
+}
+add_action( 'infinity_dashboard_activated', 'infinity_dashboard_activated_refresh', 0 );
+
+/**
  * Redirect to admin page on activation
  */
 function infinity_dashboard_activated_redirect()
