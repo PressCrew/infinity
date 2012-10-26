@@ -213,6 +213,9 @@ abstract class ICE_Option_Registry extends ICE_Registry
 			return false;
 		} elseif ( isset( $_POST[ICE_Option_Renderer::FIELD_MANIFEST] ) ) {
 
+			// check nonce
+			check_admin_referer( 'ice_options_update' );
+
 			$manifest = $_POST[ICE_Option_Renderer::FIELD_MANIFEST];
 
 			// "save only these" option names if param is set
