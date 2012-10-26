@@ -1338,6 +1338,27 @@ final class ICE_Style_Property_Factory extends ICE_Base
 	}
 
 	/**
+	 * Return a new border-style property object
+	 *
+	 * @return ICE_Style_Property
+	 */
+	protected function prop_border_style()
+	{
+		return
+			ICE_Style_Property_Primitive::create( 'border-style' )
+				->add_enum( 'none', __( 'No Border', infinity_text_domain ) )
+				->add_enum( 'hidden', __( 'Hidden', infinity_text_domain ) )
+				->add_enum( 'dotted', __( 'Dotted', infinity_text_domain ) )
+				->add_enum( 'dashed', __( 'Dashed', infinity_text_domain ) )
+				->add_enum( 'solid', __( 'Solid', infinity_text_domain ) )
+				->add_enum( 'double', __( 'Double', infinity_text_domain ) )
+				->add_enum( 'groove', __( 'Groove', infinity_text_domain ) )
+				->add_enum( 'ridge', __( 'Ridge', infinity_text_domain ) )
+				->add_enum( 'inset', __( 'Inset', infinity_text_domain ) )
+				->add_enum( 'outset', __( 'Outset', infinity_text_domain ) );
+	}
+	
+	/**
 	 * Return a new border-width property object
 	 *
 	 * @return ICE_Style_Property
