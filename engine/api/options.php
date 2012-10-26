@@ -589,21 +589,18 @@ function infinity_options_render_options_screen()
 	}
 
 	// content to return
-	$content = null;
-
-	// option content
-	$option_content = null;
+	$content = wp_nonce_field( 'ice_options_update', '_wpnonce', true, false );
 
 	// loop through all options and render each one
 	foreach ( $options as $option_to_render ) {
 		// enable post override
 		$option_to_render->enable_post_override();
-		// try to render the option
+		// add option to section components to render
 		$section->add_component( $option_to_render );
 	}
 
 	// render the section
-	$content = $section->render( false );
+	$content .= $section->render( false );
 
 	// respond
 	if ( strlen($content) ) {
