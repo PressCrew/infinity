@@ -12,26 +12,6 @@
  */
 
 //
-// Redirect on activation
-//
-
-// make this global just to be safe
-global $pagenow;
-
-// was i just activated?
-if (
-	$pagenow == 'themes.php' &&
-	isset( $_GET['activated'] )
-) {
-	// exec activation hook
-	do_action( 'infinity_dashboard_activated' );
-	// yes, redirect
-	wp_redirect( admin_url( 'themes.php?page=' . INFINITY_ADMIN_PAGE ) );
-	// no more exec
-	exit;
-}
-
-//
 // Files
 //
 
@@ -45,6 +25,36 @@ require_once( INFINITY_ADMIN_PATH . '/support.php' );
 //
 // Functions
 //
+
+/**
+ * Fire activation hook if theme was just activated
+ */
+function infinity_dashboard_activated()
+{
+	global $pagenow;
+
+	// was i just activated?
+	if (
+		$pagenow == 'themes.php' &&
+		isset( $_GET['activated'] )
+	) {
+		// exec activation hook
+		do_action( 'infinity_dashboard_activated' );
+	}
+}
+add_action( 'load-themes.php', 'infinity_dashboard_activated' );
+
+/**
+ * Redirect to admin page on activation
+ */
+function infinity_dashboard_activated_redirect()
+{
+	// redirect to admin page
+	wp_redirect( admin_url( 'themes.php?page=' . INFINITY_ADMIN_PAGE ) );
+	// no more exec
+	exit;
+}
+add_action( 'infinity_dashboard_activated', 'infinity_dashboard_activated_redirect', 99 );
 
 /**
  * Adds the Infinity submenu item to the WordPress menu
