@@ -285,15 +285,12 @@ abstract class ICE_Style_Unit extends ICE_Base
 	private $value;
 
 	/**
-	 * Validate the given unit against the list of allowed units
+	 * Validate the given unit
 	 *
 	 * @param string $unit The unit to validate
 	 * @return boolean
 	 */
-	protected function validate( $unit )
-	{
-		return in_array( $unit, $this->units(), true );
-	}
+	abstract protected function validate( $unit );
 
 	/**
 	 * Get the unit
@@ -322,13 +319,6 @@ abstract class ICE_Style_Unit extends ICE_Base
 
 		return false;
 	}
-
-	/**
-	 * Return an array of allowed units
-	 *
-	 * @return array
-	 */
-	abstract public function units();
 }
 
 /**
@@ -340,17 +330,10 @@ abstract class ICE_Style_Unit extends ICE_Base
 class ICE_Style_Unit_None extends ICE_Style_Unit
 {
 	/**
-	 * Allowed units
-	 *
-	 * @var array
 	 */
-	private $units = array( null, '' );
-
-	/**
-	 */
-	public function units()
+	protected function validate( $unit )
 	{
-		return $this->units;
+		return ( null === $unit || '' === $unit );
 	}
 }
 
@@ -367,16 +350,23 @@ class ICE_Style_Unit_Length extends ICE_Style_Unit
 	 *
 	 * @var array
 	 */
-	private $units =
+	private static $units =
 		array(
-			'em', 'ex', 'in', 'cm', 'mm', 'pt', 'pc', 'px'
+			'em' => true,
+			'ex' => true,
+			'in' => true,
+			'cm' => true,
+			'mm' => true,
+			'pt' => true,
+			'pc' => true,
+			'px' => true
 		);
 
 	/**
 	 */
-	public function units()
+	protected function validate( $unit )
 	{
-		return $this->units;
+		return isset( self::$units[ $unit ] );
 	}
 }
 
@@ -389,17 +379,10 @@ class ICE_Style_Unit_Length extends ICE_Style_Unit
 class ICE_Style_Unit_Percentage extends ICE_Style_Unit
 {
 	/**
-	 * Allowed units
-	 *
-	 * @var array
 	 */
-	private $units = array( '%' );
-
-	/**
-	 */
-	public function units()
+	protected function validate( $unit )
 	{
-		return $this->units;
+		return ( '%' === $unit );
 	}
 }
 
@@ -1337,6 +1320,27 @@ final class ICE_Style_Property_Factory extends ICE_Base
 		return $this->prop_color( 'border-color' );
 	}
 
+	/**
+	 * Return a new border-style property object
+	 *
+	 * @return ICE_Style_Property
+	 */
+	protected function prop_border_style()
+	{
+		return
+			ICE_Style_Property_Primitive::create( 'border-style' )
+				->add_enum( 'none', __( 'No Border', infinity_text_domain ) )
+				->add_enum( 'hidden', __( 'Hidden', infinity_text_domain ) )
+				->add_enum( 'dotted', __( 'Dotted', infinity_text_domain ) )
+				->add_enum( 'dashed', __( 'Dashed', infinity_text_domain ) )
+				->add_enum( 'solid', __( 'Solid', infinity_text_domain ) )
+				->add_enum( 'double', __( 'Double', infinity_text_domain ) )
+				->add_enum( 'groove', __( 'Groove', infinity_text_domain ) )
+				->add_enum( 'ridge', __( 'Ridge', infinity_text_domain ) )
+				->add_enum( 'inset', __( 'Inset', infinity_text_domain ) )
+				->add_enum( 'outset', __( 'Outset', infinity_text_domain ) );
+	}
+	
 	/**
 	 * Return a new border-width property object
 	 *
