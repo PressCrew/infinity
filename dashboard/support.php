@@ -12,6 +12,49 @@
  */
 
 /**
+ * Theme update notification/nag helper
+ */
+function infinity_dashboard_update_nag( $args )
+{
+	// get stylesheet name
+	$stylesheet = get_stylesheet();
+
+	// default settings
+	$defaults = array(
+		'package_file' => null,
+		'package_id' => $stylesheet,
+		'theme_slug' => $stylesheet,
+		'theme_name' => ucfirst( $stylesheet )
+	);
+	
+	// merge args and defaults
+	$settings = wp_parse_args( $args, $defaults );
+
+	// load notifier class
+	ICE_Loader::load( 'parsers/packages' );
+
+	// new packages instance
+	$packages = new ICE_Packages( $settings['package_file'] );
+
+	// check if update needed
+	$update = $packages->theme_needs_update( $settings['theme_slug'], $settings['package_id'] );
+
+	// spit out nag message if update needed
+	if ( $update ) {
+		// render markup ?>
+		<div class="update-nag">
+			There is a new version of the <?php echo $settings['theme_name'] ?> theme available.
+			<?php if ( current_user_can( 'update_themes' ) ): ?>
+				Please <a href="<?php echo $update->download ?>">download</a> it now!
+			<?php else: ?>
+				Please notify the site administrator!
+			<?php endif; ?>
+		</div><?php
+	}
+
+}
+
+/**
  * Show useful support information. Props to Paul Gibbs for 90% of the code!
  *
  * @copyright Original code Copyright (C) Paul Gibbs
