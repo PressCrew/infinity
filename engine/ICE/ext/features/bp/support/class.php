@@ -28,7 +28,7 @@ class ICE_Ext_Feature_Bp_Support
 	{
 		// is buddypress active?
 		if ( true === parent::check_reqs() ) {
-			return class_exists( 'BP_Component' );
+			return $this->is_active();
 		}
 
 		return false;
@@ -207,12 +207,10 @@ class ICE_Ext_Feature_Bp_Support
 	 */
 	private function is_active()
 	{
-		switch ( false ) {
-			case ( function_exists( 'bp_is_active' ) ):
-			case ( bp_is_root_blog() ):
-				return false;
-			default:
-				return true;
+		if ( function_exists( 'bp_is_root_blog' ) ) {
+			return bp_is_root_blog();
+		} else {
+			return false;
 		}
 	}
 
