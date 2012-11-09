@@ -23,10 +23,6 @@ body { min-width: inherit }
 	body #wrapper { 
 		margin: 0 10px 10px; 
 	}
-	body #header {
-    min-height: inherit;
-    height: auto;
-    }
     .main-menu select.mobileMenu {
 	    float: right;
     }
@@ -100,6 +96,9 @@ body { min-width: inherit }
 	}
 	.activity-header p { line-height: 280% !important }
 	.activity-list .activity-content .activity-header img.avatar { display: none }
+	.my-account .activity-avatar {
+		display: none;
+	}
 	.pie-easy-exts-features-header-logo img {
 	    margin-top: 8px;
 	    width: 224px;
