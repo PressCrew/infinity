@@ -148,14 +148,17 @@ div#item-header a.button {
 #sidebar .sidebar-activity-tabs ul li a {
     padding-bottom: 8px;
     padding-top: 4px;
+    text-decoration: none;
 }
 
 div#object-nav ul li a {
-    padding: 4px 6px 8px !important
+    padding: 4px 6px 8px !important;
+    text-decoration: none;
 }
 
 div.activity-type-tabs li a {
-    padding: 4px 6px 8px !important
+    padding: 4px 6px 8px !important;
+    text-decoration: none;
 }
 
 .loading a:before {
