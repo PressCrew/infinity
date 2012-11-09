@@ -277,7 +277,8 @@ li#nav-notifications-groups-li a:before {
     content: "P"
 }
 
-#user-messages:before {
+#user-messages:before,
+#nav-invite-anyone:before {
     content: "A"
 }
 
