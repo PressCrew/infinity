@@ -281,7 +281,8 @@ li#nav-notifications-groups-li a:before {
 }
 
 #user-messages:before,
-#nav-invite-anyone:before {
+#nav-invite-anyone:before,
+#user-invite-anyone:before {
     content: "A"
 }
 
