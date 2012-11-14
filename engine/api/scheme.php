@@ -36,6 +36,8 @@ function infinity_scheme_init()
 	Infinity_Widgets_Policy::instance();
 	Infinity_Shortcodes_Policy::instance();
 
+	do_action( 'infinity_scheme_init' );
+
 	return true;
 }
 
