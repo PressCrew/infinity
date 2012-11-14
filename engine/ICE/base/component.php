@@ -988,7 +988,14 @@ abstract class ICE_Component
 
 		// try to locate the template
 		if ( $this->template ) {
-			$template = ICE_Scheme::instance()->locate_template( $this->template );
+			// was absolute path given?
+			if ( path_is_absolute( $this->template ) ) {
+				// yep, use as is
+				$template = $this->template;
+			} else {
+				// its relative, try to locate it
+				$template = ICE_Scheme::instance()->locate_template( $this->template );
+			}
 		}
 
 		// was a template found?
