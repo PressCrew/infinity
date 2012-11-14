@@ -254,4 +254,21 @@ function infinity_screens_route_param( $offset )
 	return null;
 }
 
+//
+// Helpers
+//
+
+/**
+ * Fetch a screen object from the registry
+ *
+ * @package Infinity-api
+ * @subpackage screens
+ * @param string $screen_name
+ * @return ICE_Screen
+ */
+function infinity_screen_fetch( $screen_name )
+{
+	return Infinity_Screens_Policy::instance()->registry()->get( $screen_name );
+}
+
 ?>
