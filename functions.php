@@ -11,24 +11,9 @@
  */
 
 /**
- * Set the Infinity path
- */
-define( 'INFINITY_PATH', dirname( __FILE__ ) );
-
-/**
- * Set the Infinity theme name (usually current theme/directory name)
- */
-define( 'INFINITY_NAME', basename( INFINITY_PATH ) );
-
-/**
- * Set the Infinity engine directory name
- */
-define( 'INFINITY_ENGINE_DIR', 'engine' );
-
-/**
  * To Infinity, and beyond! (sorry, had to do it)
  */
-require_once( INFINITY_PATH . '/' . INFINITY_ENGINE_DIR . '/infinity.php' );
+require_once( 'engine/infinity.php' );
 
 //
 // At this point, Infinity is fully loaded and initialized,

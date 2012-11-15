@@ -32,10 +32,31 @@ define( 'INFINITY_BRANCH', 'base' );
 define( 'INFINITY_SLUG', 'infinity' );
 
 /**
+ * Infinity "engine" directory path
+ */
+if ( !defined( 'INFINITY_ENGINE_PATH' ) ) {
+	define( 'INFINITY_ENGINE_PATH', dirname( __FILE__ ) );
+}
+
+/**
+ * Infinity "engine" directory name
+ */
+if ( !defined( 'INFINITY_ENGINE_DIR' ) ) {
+	define( 'INFINITY_ENGINE_DIR', basename( INFINITY_ENGINE_PATH ) );
+}
+
+/**
+ * Set the Infinity path
+ */
+if ( !defined( 'INFINITY_PATH' ) ) {
+	define( 'INFINITY_PATH', dirname( INFINITY_ENGINE_PATH ) );
+}
+
+/**
  * Infinity theme name (slug)
  */
 if ( !defined( 'INFINITY_NAME' ) ) {
-	define( 'INFINITY_NAME', INFINITY_SLUG );
+	define( 'INFINITY_NAME', basename( INFINITY_PATH ) );
 }
 
 /**
@@ -47,18 +68,6 @@ define( 'INFINITY_THEME_PATH', realpath( get_theme_root( INFINITY_NAME ) ) . '/'
  * Infinity theme directory url
  */
 define( 'INFINITY_THEME_URL', get_theme_root_uri( INFINITY_NAME ) . '/' . INFINITY_NAME );
-
-/**
- * Infinity "engine" directory name
- */
-if ( !defined( 'INFINITY_ENGINE_DIR' ) ) {
-	define( 'INFINITY_ENGINE_DIR', '_engine' );
-}
-
-/**
- * Infinity "engine" directory path
- */
-define( 'INFINITY_ENGINE_PATH', INFINITY_THEME_PATH . '/' . INFINITY_ENGINE_DIR );
 
 /**
  * Infinity "base" (includes) url
