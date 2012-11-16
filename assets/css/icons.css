@@ -250,7 +250,10 @@ li#link-home-personal-li a:before {
 li#nav-docs-groups-li a:before {
     content: "L"
 }
-
+#bp-create-doc-button:before {
+    content: "C";
+    font-size: 165%;
+}
 li#nav-notifications-groups-li a:before {
     content: "6"
 }
