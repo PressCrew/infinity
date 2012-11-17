@@ -56,6 +56,7 @@ a.button:hover, button:hover,#review_form #submit:hover {
     border-left: 1px solid #aaa;
     color: #222;
     border: 1px solid #888;
+    padding: 8px 12px;
 }
 .button.full-width, button.full-width, input[type="submit"].full-width, input[type="reset"].full-width, input[type="button"].full-width {
     text-align: center;

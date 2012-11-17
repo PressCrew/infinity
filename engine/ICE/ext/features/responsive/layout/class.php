@@ -40,7 +40,7 @@ class ICE_Ext_Feature_Responsive_Layout
 	public function viewport_meta()
 	{
 		// render meta tag ?>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"><?php
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><?php
 	}
 
 }

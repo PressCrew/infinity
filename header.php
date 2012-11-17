@@ -18,9 +18,6 @@
 <!--[if IE 9 ]>        <html <?php language_attributes(); ?> class="no-js ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html <?php language_attributes(); ?> class="no-js"> <!--<![endif]-->
 <?php
-	do_action( 'open_meta' );
-?>
-<?php
 	infinity_get_template_part( 'templates/parts/header-head');	
 ?>
 <body <?php body_class() ?> id="infinity-base">

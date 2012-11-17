@@ -20,8 +20,13 @@ body { min-width: inherit }
 	#sidebar { 
 		min-height: auto !important;
 	}
-	#wrapper { margin: 0 20px 20px }
-	.callout-box h2,
+	body #wrapper { 
+		margin: 0 10px 10px; 
+	}
+    .main-menu select.mobileMenu {
+	    float: right;
+    }
+	.callout-box,
 	.flex-caption,
 	#feature-box h3 { display: none }
 	.callout-box { padding: 0px }
@@ -41,26 +46,26 @@ body { min-width: inherit }
 	.mobileMenu { margin-top: 5px }
 	.post-category,
 	.time-posted { display: none }
-	/* huh?
-	 {
-	    border-left: 0 solid #E6E6E6;
-	    padding-left: 0;
-	}
-	*/
-	select.mobileMenu {
-	    background: none repeat scroll 0 0 transparent;
-	    border: 1px solid #777777;
-	    box-shadow: none;
-	    margin-top: 8px !important;
-	    width: 98%;
-	}
-	#wpadminbar { display: none }
+	body select.mobileMenu {
+    background: none repeat scroll 0 0 transparent;
+    border: 1px solid #555555;
+    border-radius: 2px 2px 2px 2px;
+    box-shadow: none;
+    color: #EFEFEF;
+    float: left;
+    margin-right: 10px;
+    width: 30%;
+    }
+	#wpadminbar{ display: none }
 	div#content .padder {
 	    margin-right: 0;
 	    width: auto;
 	    float: none;
 	    border: none;
 	}
+	#item-header-avatar img.avatar {
+    width: 40%;
+    }
 }
 /*--------------------------------------------------------------
 1.2 - iPad Portrait
@@ -79,14 +84,6 @@ body { min-width: inherit }
 	    top: inherit;
 	}
 	li.featured-item { text-align: center }
-	#main-menu-wrap {
-	    background: none repeat scroll 0 0 transparent !important;
-	    border: 0 none !important;
-	    border-radius: 0 0 0 0 !important;
-	    margin-top: 6px;
-	    right: 0;
-	    z-index: 100;
-	}
 	div#item-header img.avatar {
 	    height: 80px !important;
 	    width: 80px !important;
@@ -97,17 +94,11 @@ body { min-width: inherit }
 	    margin: 2px;
 	    width: 30px !important;
 	}
-	/* huh?
-	 {
-	    border: 0px;
-	    height: auto !important;
-	    margin: 0px;
-	    padding-right: 0px;
-	    padding-top: 30px;
-	}
-	*/
 	.activity-header p { line-height: 280% !important }
 	.activity-list .activity-content .activity-header img.avatar { display: none }
+	.my-account .activity-avatar {
+		display: none;
+	}
 	.pie-easy-exts-features-header-logo img {
 	    margin-top: 8px;
 	    width: 224px;
@@ -135,6 +126,9 @@ body { min-width: inherit }
 	    margin-bottom: 1.25em;
 	}
 	.activity-list .activity-content { margin-left: 0 }
+	div.activity-comments {
+    margin: 0;
+}
 }
 /*--------------------------------------------------------------
 2.0 - Smartphone (any)
@@ -146,7 +140,6 @@ body { min-width: inherit }
 	}
 	#logo-menu-wrap img { max-width: 140px }
 	#copyright-info { text-align: center }
-	#header { height: 110px }
 	#site-title { top: 10% !important }
 	.activity-list li.mini .activity-content p { width: 440% !important }
 }
@@ -155,12 +148,6 @@ body { min-width: inherit }
 --------------------------------------------------------------*/
 @media only screen and (max-width: 320px) { 
 	#sidebar { width: 100% !important }
-	/* huh?
-	 {
-	    border-left: 0 solid #E6E6E6;
-	    padding-left: 0;
-	}
-	*/
 	form#groups-directory-form h3 a {
 	    display: block;
 	    margin-top: 0.6em;
@@ -236,3 +223,42 @@ body { min-width: inherit }
 	    padding-right: 0px;
 	}
 }
+*/
+/* Visibility Classes ---------------------- */
+/* Standard (large) display targeting */
+.show-for-small, .show-for-medium, .show-for-medium-down, .hide-for-large, .hide-for-large-up, .show-for-xlarge { display: none !important; }
+
+.hide-for-xlarge, .show-for-large, .show-for-large-up, .hide-for-small, .hide-for-medium, .hide-for-medium-down { display: block !important; }
+
+/* Very large display targeting */
+@media only screen and (min-width: 3441px) { .hide-for-small, .hide-for-medium, .hide-for-medium-down, .hide-for-large, .show-for-large-up, .show-for-xlarge { display: block !important; }
+  .show-for-small, .show-for-medium, .show-for-medium-down, .show-for-large, .hide-for-large-up, .hide-for-xlarge { display: none !important; } }
+/* Medium display targeting */
+@media only screen and (max-width: 3279px) and (min-width: 768px) { .hide-for-small, .show-for-medium, .show-for-medium-down, .hide-for-large, .hide-for-large-up, .hide-for-xlarge { display: block !important; }
+  .show-for-small, .hide-for-medium, .hide-for-medium-down, .show-for-large, .show-for-large-up, .show-for-xlarge { display: none !important; } }
+/* Small display targeting */
+@media only screen and (max-width: 767px) { .show-for-small, .hide-for-medium, .show-for-medium-down, .hide-for-large, .hide-for-large-up, .hide-for-xlarge { display: block !important; }
+  .hide-for-small, .show-for-medium, .hide-for-medium-down, .show-for-large, .show-for-large-up, .show-for-xlarge { display: none !important; } }
+/* Orientation targeting */
+.show-for-landscape, .hide-for-portrait { display: block !important; }
+
+.hide-for-landscape, .show-for-portrait { display: none !important; }
+
+@media screen and (orientation: landscape) { .show-for-landscape, .hide-for-portrait { display: block !important; }
+  .hide-for-landscape, .show-for-portrait { display: none !important; } }
+@media screen and (orientation: portrait) { .show-for-portrait, .hide-for-landscape { display: block !important; }
+  .hide-for-portrait, .show-for-landscape { display: none !important; } }
+/* Touch-enabled device targeting */
+.show-for-touch { display: none !important; }
+
+.hide-for-touch { display: block !important; }
+
+.touch .show-for-touch { display: block !important; }
+
+.touch .hide-for-touch { display: none !important; }
+
+/* Specific overrides for elements that require something other than display: block */
+table.show-for-xlarge, table.show-for-large, table.hide-for-small, table.hide-for-medium { display: table !important; }
+
+@media only screen and (max-width: 1279px) and (min-width: 768px) { .touch table.hide-for-xlarge, .touch table.hide-for-large, .touch table.hide-for-small, .touch table.show-for-medium { display: table !important; } }
+@media only screen and (max-width: 767px) { table.hide-for-xlarge, table.hide-for-large, table.hide-for-medium, table.show-for-small { display: table !important; } }

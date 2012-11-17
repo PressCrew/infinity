@@ -113,7 +113,7 @@ function infinity_dashboard_support_info()
 		}
 	}
 ?>
-	<h3><?php _e( 'Need Support?', infinity_text_domain ) ?></h3>
+	<h3><?php _e( 'Installation Details', infinity_text_domain ) ?></h3>
 	<p><?php _e( "If you are having issues with the theme and need support, below is some useful info about your installation.", infinity_text_domain ) ?></p>
 	<p><?php _e( "Please submit this information with your support request so it's easier for us to help you!", infinity_text_domain ) ?></p>
 

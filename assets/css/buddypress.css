@@ -198,7 +198,6 @@ div.item-list-tabs ul li.last select {
     display: inline-block;
     margin-left: 8px;
     margin-top: 4px;
-    max-width: 110px;
 }
 li#activity-filter-select label { display: inline-block }
 div.item-list-tabs ul li a, div.item-list-tabs ul li span {
@@ -333,11 +332,26 @@ div.accept, div.reject {
     float: left;
     margin-left: 10px;
 }
+ul.button-nav {
+	padding-left: 0px;
+	clear: both;
+	height: 45px;
+}
 ul.button-nav li {
+	list-style: none;
+}
+ul.button-nav li a {
     float: left;
     margin: 0 10px 10px 0;
+    padding: 8px 10px;
+    font-weight: bold;
 }
-ul.button-nav li.current a { font-weight: bold }
+ul.button-nav li.current a {
+    background: none repeat scroll 0 0 #EFEFEF;
+    border: 1px solid #DDDDDD;
+    border-radius: 3px 3px 3px 3px;
+    margin-bottom: 20px;
+}
 /* > AJAX Loaders
 --------------------------------------------------------------*/
 .ajax-loader {
