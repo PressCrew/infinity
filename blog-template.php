@@ -17,7 +17,7 @@
 	<div id="content" role="main" class="<?php do_action( 'content_class' ); ?>">
 			<?php
 			do_action( 'open_content' );
-			do_action( 'open_home' );
+			do_action( 'open_blog' );
 		?>
 		<div id="home-page" role="main" <?php post_class(); ?>>
 			<?php
@@ -26,7 +26,7 @@
 			?>
 		</div>
 		<?php
-			do_action( 'close_home' );
+			do_action( 'close_blog' );
 			do_action( 'close_content' );
 		?>
 	</div>
