@@ -279,7 +279,7 @@ final class ICE_Enqueue extends ICE_Base
 		
 		// register popular jQuery plugins
 		$this->register_script(
-			'jquery-cookie', 'jquery.cookie.js', array('jquery') );
+			'jquery-cookie', 'jquery.kookie.js', array('jquery') );
 		$this->register_script(
 			'jquery-fitvids', 'jquery.fitvids.js', array('jquery') );
 		$this->register_script(
