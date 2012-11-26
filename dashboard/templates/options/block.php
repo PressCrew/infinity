@@ -34,7 +34,6 @@ $this->render_begin( 'infinity-cpanel-options-single' );
 	<p><?php $this->render_description() ?></p>
 	<?php
 		$this->load_template();
-		$this->render_meta();
 	?>
 </div>
 <?php if ( $this->has_documentation() ): ?>

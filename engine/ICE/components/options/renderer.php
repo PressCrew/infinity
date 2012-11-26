@@ -140,22 +140,6 @@ abstract class ICE_Option_Renderer extends ICE_Renderer
 	}
 
 	/**
-	 * Render a string representation of the date the option was last updated
-	 *
-	 * @param string $format
-	 */
-	public function render_date_updated( $format = 'F j, Y, g:i a' )
-	{
-		$time_updated = $this->component()->get_meta( ICE_Option::META_TIME_UPDATED );
-
-		if ( $time_updated ) {
-			print date( $format, $time_updated );
-		} else {
-			print __('Never', infinity_text_domain);
-		}
-	}
-
-	/**
 	 * Render save all options button
 	 *
 	 * @param string $class

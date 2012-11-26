@@ -42,7 +42,7 @@
 				);
 				// add dismiss button
 				if (state != 'default') {
-					$(this).find('p').append('<button>Ok</button>');
+					$(this).find('p').append('<button>Dismiss</button>');
 					$(this).find('button').button().click(function(){
 						$this.fadeOut(300, function(){
 							$this.empty();
@@ -165,7 +165,7 @@
 										$option.trigger( 'iceEasyOptionsPost', [ state, opt_name, opt_reset ] );
 										var msg = $(this).iceEasyFlash(state, sr.message).fadeIn();
 										if ( 'alert' == state ) {
-											msg.fadeOut();
+											msg.fadeOut(3000);
 										}
 									});
 							});
