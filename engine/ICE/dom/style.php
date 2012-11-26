@@ -68,6 +68,14 @@ class ICE_Style extends ICE_Asset
 	}
 
 	/**
+	 * Clear any rules which may have been set
+	 */
+	public function clear_rules()
+	{
+		$this->rules = array();
+	}
+
+	/**
 	 * Generate CSS markup for this style's dynamic rules
 	 *
 	 * @return string
