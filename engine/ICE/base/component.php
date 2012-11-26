@@ -1087,6 +1087,9 @@ abstract class ICE_Component
 			} else {
 				return $this->policy()->renderer()->render( $this, $output );
 			}
+		} else {
+			// not renderable
+			return false;
 		}
 	}
 
