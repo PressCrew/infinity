@@ -26,8 +26,7 @@
 		<div id="logo-menu-wrap">
 			<?php
 				do_action( 'open_header' );
-				$feature = infinity_feature_fetch( 'infinity-header-logo' );
-				if ( !$feature || !$feature->image_url() || !infinity_feature( 'infinity-header-logo' ) ):
+				if ( !infinity_feature( 'infinity-header-logo' ) ):
 			?>
 			<?php
 				$heading_tag = ( is_home() || is_front_page() ) ? 'h1' : 'div';

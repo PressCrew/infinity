@@ -12,12 +12,14 @@
  */
 
 /* @var $this ICE_Feature_Renderer */
+/* @var $logo_url string URL to logo if applicable */
 
+// use H1 on home page, DIV otherwise
 $heading_tag = ( is_home() || is_front_page() ) ? 'h1' : 'div';
 
 ?>
 <<?php print $heading_tag; ?> <?php $this->render_attrs() ?>>
 	<a href="<?php echo home_url( '/'  ); ?>" title="<?php bloginfo('name'); ?> - <?php bloginfo('description'); ?>">
-		<img src="<?php print $this->component()->image_url(); ?>">
+		<img src="<?php print $logo_url ?>">
 	</a>
 </<?php print $heading_tag; ?>>
