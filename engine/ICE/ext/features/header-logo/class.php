@@ -49,6 +49,27 @@ class ICE_Ext_Feature_Header_Logo
 	}
 
 	/**
+	 */
+	public function renderable()
+	{
+		// check parent
+		if ( true === parent::renderable() ) {
+			// get toggle option
+			$opt_toggle = (boolean) $this->get_suboption('toggle')->get();
+			// enabled?
+			if ( true === $opt_toggle ) {
+				// yep, check image url
+				if ( null != $this->image_url() ) {
+					// there is an image url
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+	
+	/**
 	 * Return URL to uploaded logo image
 	 *
 	 * @return string
@@ -65,6 +86,12 @@ class ICE_Ext_Feature_Header_Logo
 	 */
 	public function logo_styles( $style )
 	{
+		// is this feature renderable?
+		if ( false === $this->renderable() ) {
+			// nope, abort
+			return false;
+		}
+
 		// options
 		$opt_upload = $this->get_suboption('image');
 		$opt_pos = $this->get_suboption('pos')->get();
@@ -137,6 +164,16 @@ class ICE_Ext_Feature_Header_Logo
 			}
 			
 		}
+	}
+
+	/**
+	 */
+	public function get_template_vars()
+	{
+		// return vars
+		return array(
+			'logo_url' => $this->image_url()
+		);
 	}
 }
 
