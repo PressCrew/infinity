@@ -141,15 +141,6 @@ class Infinity_Options_Renderer extends ICE_Option_Renderer
 	}
 
 	/**
-	 * Renders option meta info
-	 */
-	final public function render_meta()
-	{
-		// load meta information template
-		$this->load_dash_template( 'meta' );
-	}
-
-	/**
 	 * Render sample code for this option
 	 */
 	final public function render_sample_code()
@@ -224,20 +215,6 @@ function infinity_options_init_screen()
 function infinity_option( $option_name, $output = true )
 {
 	return infinity_option_fetch( $option_name )->render( $output );
-}
-
-/**
- * Get special meta data about option value
- *
- * @package Infinity-api
- * @subpackage options
- * @param string $option_name
- * @param string $meta_type The only valid type so far is "time_updated"
- * @return mixed
- */
-function infinity_option_meta( $option_name, $meta_type )
-{
-	return Infinity_Options_Policy::instance()->registry()->get( $option_name )->get_meta( $meta_type );
 }
 
 /**
@@ -379,18 +356,6 @@ function infinity_option_render_field()
 {
 	global $infinity_246f86b591;
 	return $infinity_246f86b591->load_template();
-}
-
-/**
- * Render the meta elements for the option
- *
- * @package Infinity-api
- * @subpackage options
- */
-function infinity_option_render_meta()
-{
-	global $infinity_246f86b591;
-	return $infinity_246f86b591->render_meta();
 }
 
 /**

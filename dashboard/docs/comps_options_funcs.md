@@ -20,15 +20,6 @@ Fetch a registered option object from the registry
 
 > _$option\_name_ : Name of option as configured in options.ini
 
-### infinity\_option\_meta
-
-Get special meta data about option.
-
-	(mixed) infinity_option_meta( string $option_name, string $meta_type )
-
-> _$option\_name_ : Name of option as configured in options.ini  
-> _$meta\_type_ : A valid option meta type (the only valid type is "time_updated")
-
 ### infinity\_option\_image\_src
 
 Get an option image src array.

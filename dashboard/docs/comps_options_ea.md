@@ -89,9 +89,3 @@ Prints option save all button
 Prints option save one button
 
 	(void) infinity_option_render_save_one()
-
-#### infinity\_option\_render\_meta
-
-Prints option meta information. (Currently only last updated date/time)
-
-	(void) infinity_option_render_meta()

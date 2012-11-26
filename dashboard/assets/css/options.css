@@ -101,13 +101,8 @@ div.infinity-cpanel-options-single {
 
 	div.infinity-cpanel-options-single div.ui-tabs-panel {
 		background: #f8f8f8;
-		padding: 0.5em 1em 0.25em;
+		padding: 0.5em 1em 1em 1em;
 	}
-		div.infinity-cpanel-options-single div.ui-tabs-panel div.infinity-cpanel-options-last-modified {
-			line-height: 15px;
-			font-size: 9px;
-			text-align: right;
-		}
 
 div.infinity-cpanel-options-single-flash {
 	display: none;

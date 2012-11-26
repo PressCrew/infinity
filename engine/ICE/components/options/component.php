@@ -27,16 +27,6 @@ abstract class ICE_Option extends ICE_Component
 	const FIELD_OPTION_DELIM = '=';
 
 	/**
-	 * For tracking the time updated
-	 */
-	const META_TIME_UPDATED = 'time_updated';
-
-	/**
-	 * For tracking time updated long string
-	 */
-	const META_TIME_UPDATED_KEY = 'tu';
-
-	/**
 	 * If true, a POST value will override the real option value
 	 *
 	 * @var boolean
@@ -406,17 +396,6 @@ abstract class ICE_Option extends ICE_Component
 	}
 
 	/**
-	 * Get special meta data about an option itself
-	 *
-	 * @param string $type The available types are constants of this class prefixed with "META_"
-	 * @return mixed
-	 */
-	public function get_meta( $type )
-	{
-		return get_option( $this->get_meta_option_name( $type ) );
-	}
-
-	/**
 	 * Returns true if a row for the option exists in the database
 	 *
 	 * @param boolean $ignore_default Set to true to ignore any default value that might be set
@@ -465,7 +444,6 @@ abstract class ICE_Option extends ICE_Component
 			} else {
 				// create or update it
 				if ( $this->update_option( $value ) ) {
-					$this->update_meta( self::META_TIME_UPDATED, time() );
 					return true;
 				}
 			}
@@ -486,18 +464,6 @@ abstract class ICE_Option extends ICE_Component
 	}
 
 	/**
-	 * Set special meta data about an option itself
-	 *
-	 * @param string $type
-	 * @param mixed $value
-	 * @return boolean
-	 */
-	private function update_meta( $type, $value )
-	{
-		return update_option( $this->get_meta_option_name( $type ), $value );
-	}
-
-	/**
 	 * Delete this option completely from the database
 	 *
 	 * @return boolean
@@ -506,7 +472,6 @@ abstract class ICE_Option extends ICE_Component
 	{
 		if ( $this->check_caps() ) {
 			if ( $this->delete_option() ) {
-				$this->delete_meta();
 				return true;
 			}
 		}
@@ -522,16 +487,6 @@ abstract class ICE_Option extends ICE_Component
 	protected function delete_option()
 	{
 		return delete_option( $this->get_api_name() );
-	}
-
-	/**
-	 * Delete all special meta data about an option
-	 *
-	 * @return boolean
-	 */
-	private function delete_meta()
-	{
-		return delete_option( $this->get_meta_option_name( self::META_TIME_UPDATED ) );
 	}
 
 	/**
@@ -556,22 +511,6 @@ abstract class ICE_Option extends ICE_Component
 		}
 
 		$this->section = $section->property( 'name' );
-	}
-
-	/**
-	 * Build a special meta option name based on the given type
-	 *
-	 * @param string $type
-	 * @return string
-	 */
-	private function get_meta_option_name( $type )
-	{
-		switch ( $type ) {
-			case self::META_TIME_UPDATED:
-				return $this->get_api_name() . self::API_DELIM . self::META_TIME_UPDATED_KEY;
-			default:
-				throw new Exception( sprintf( 'The "%s" type is not valid', $type ) );
-		}
 	}
 
 	/**
