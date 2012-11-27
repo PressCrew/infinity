@@ -62,7 +62,7 @@ if ( !defined( 'INFINITY_NAME' ) ) {
 /**
  * Infinity theme directory path
  */
-define( 'INFINITY_THEME_PATH', realpath( get_theme_root( INFINITY_NAME ) ) . '/' . INFINITY_NAME );
+define( 'INFINITY_THEME_PATH', realpath( get_theme_root( INFINITY_NAME ) . '/' . INFINITY_NAME ) );
 
 /**
  * Infinity theme directory url
