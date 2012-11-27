@@ -66,19 +66,39 @@ final class ICE_Files extends ICE_Base
 	{
 		if ( empty( self::$document_root ) ) {
 			if ( isset( $_SERVER['DOCUMENT_ROOT'] ) ) {
-				self::$document_root = realpath( $_SERVER['DOCUMENT_ROOT'] );
+				self::$document_root = self::path_normalize( $_SERVER['DOCUMENT_ROOT'] );
 			} else {
 				$theme_root = self::theme_root();
 				$theme_root_uri = self::theme_root_uri();
 				$uri_parts = parse_url( $theme_root_uri );
 				$path_length = strlen( $uri_parts['path'] );
-				$document_root = substr_replace( $theme_root, '', -$path_length );
-				self::$document_root = realpath( $document_root );
+				self::$document_root = substr_replace( $theme_root, '', -$path_length );
 			}
 			self::$document_root_length = strlen( self::$document_root );
 		}
 		
 		return self::$document_root;
+	}
+
+	/**
+	 * Normalize a filesystem path to have only single forward slashes
+	 *
+	 * @param string $path
+	 * @return string
+	 */
+	public static function path_normalize( $path )
+	{
+		// run realpath on absolute paths
+		if ( path_is_absolute( $path ) ) {
+			// its absolute
+			$path = realpath( $path );
+		}
+
+		// strip out leading drive letters (Windows)
+		$path_clean = preg_replace( '/^[a-z]{1}:/i', '', $path );
+
+		// replace double and single back slashes with single forward slash
+		return preg_replace( '/[\\\]{1,2}/', '/', $path_clean );
 	}
 
 	/**
@@ -89,19 +109,11 @@ final class ICE_Files extends ICE_Base
 	 */
 	public static function path_split ( $path )
 	{
-		// the path which will be clean
-		$path_clean = $path;
+		// clean up the path
+		$path_clean = self::path_normalize( $path );
 
-		// windows install?
-		if ( DIRECTORY_SEPARATOR == '\\' ) {
-			// strip out leading drive letters (Windows)
-			$path_clean = preg_replace( '/^[a-z]{1}:/i', '', $path );
-			// replace double back slashes with single backslash
-			$path_clean = str_replace( '\\', '/', $path_clean );
-		}
-			
-		// split at forward and back slashes
-		return preg_split( '/\/|\\\/', $path_clean, null, PREG_SPLIT_NO_EMPTY );
+		// split at forward slashes
+		return preg_split( '/\//', $path_clean, null, PREG_SPLIT_NO_EMPTY );
 	}
 
 	/**
@@ -291,7 +303,7 @@ final class ICE_Files extends ICE_Base
 		// handle cache miss
 		if ( !isset( self::$theme_root[ $theme ] ) ) {
 			// populate it
-			self::$theme_root[ $theme ] = realpath( get_theme_root( $theme ) );
+			self::$theme_root[ $theme ] = self::path_normalize( get_theme_root( $theme ) );
 		}
 
 		// return cached value
