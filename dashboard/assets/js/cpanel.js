@@ -63,7 +63,8 @@ function initOptions(panel)
 // init options panel
 function initOptionsPanel(panel)
 {
-	var $ = jQuery;
+	var $ = jQuery,
+		useCookies = ( typeof $.cookie !== "undefined" );
 
 	// full options panel?
 	if ( !$('div#infinity-cpanel-options', panel).length ) {
@@ -73,12 +74,17 @@ function initOptionsPanel(panel)
 	}
 
 	// the option form
-	var form = $('div#infinity-cpanel-options form', panel).empty();
+	var form = $('div#infinity-cpanel-options form', panel).empty(),
 	// the menu(s)
-	var menu = $('div.infinity-cpanel-options-menu', panel);
-	// get last option loaded
-	var last = $.cookie('infinity_cpanel_option_loaded');
+		menu = $('div.infinity-cpanel-options-menu', panel),
+	// last option loaded
+		last = null;
 
+	// try for last option cookie
+	if ( useCookies ) {
+		last = $.cookie('infinity_cpanel_option_loaded');
+	}
+	
 	// setup accordion menu
 	menu.accordion({
 		autoHeight: false,
@@ -89,15 +95,17 @@ function initOptionsPanel(panel)
 			headerSelected: 'ui-icon-folder-open'
 		},
 		change: function(event, ui) {
-			var states = [];
-			menu.each(function(){
-				var state = [
-					$(this).attr('id'),
-					$(this).accordion('option', 'active')
-				];
-				states.push(state.join(','));
-			});
-			$.cookie('infinity_cpanel_option_menu_states', states.join('|'), {expires: 7});
+			if ( useCookies ) {
+				var states = [];
+				menu.each(function(){
+					var state = [
+						$(this).attr('id'),
+						$(this).accordion('option', 'active')
+					];
+					states.push(state.join(','));
+				});
+				$.cookie('infinity_cpanel_option_menu_states', states.join('|'), {expires: 7});
+			}
 		}
 	});
 
@@ -123,8 +131,12 @@ function initOptionsPanel(panel)
 
 	// populate form if empty
 	if (form.children().length < 1 && last) {
+		// init vars
+		var om_states = null;
 		// get states from cookie
-		var om_states = $.cookie('infinity_cpanel_option_menu_states');
+		if ( useCookies) {
+			om_states = $.cookie('infinity_cpanel_option_menu_states');
+		}
 		// get the cookie?
 		if (om_states != null) {
 			// split at pipe
@@ -171,8 +183,10 @@ function initOptionsPanel(panel)
 			function(r) {
 				var sr = iceEasyAjax.splitResponseStd(r);
 				if (sr.code >= 1) {
-					// save as last option screen
-					$.cookie('infinity_cpanel_option_loaded', id, {expires: 7});
+					// maybe save as last option screen
+					if ( useCookies ) {
+						$.cookie('infinity_cpanel_option_loaded', id, {expires: 7});
+					}
 					// inject options markup
 					form.html(sr.content);
 					// init docs and options
