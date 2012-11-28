@@ -51,6 +51,13 @@ h1#site-title,div#site-title {
     margin-bottom: -29px;
     display: block;
 }
+#site-description {
+    font-style: italic;
+    color: #999999;
+    position: relative;
+    font-size: 14px;
+    line-height: 180%;
+}
 /* ========================== */
 /* ! /* Navigation Menus */   */
 /* ========================== */
