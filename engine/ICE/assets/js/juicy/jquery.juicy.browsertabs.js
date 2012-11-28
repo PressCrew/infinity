@@ -27,12 +27,17 @@ $.widget( 'juicy.browsertabs', $.ui.tabs, {
 		// events
 		scroll: null
 	},
+	useCookies: ( typeof $.cookie !== "undefined" ),
 
 	_create: function()
 	{
 		// cache selected tab for use on init
 		if ( this.options.cookie ) {
-			this.selectedIndex = this._cookie();
+			if ( this.useCookies ) {
+				this.selectedIndex = this._cookie();
+			} else {
+				this.options.cookie = null;
+			}
 		}
 
 		if ( isNaN( this.selectedIndex ) || this.selectedIndex < 0 ) {
@@ -293,7 +298,7 @@ $.widget( 'juicy.browsertabs', $.ui.tabs, {
 	// valid commands: boolean or 'get' or 'clear'
 	_cookieScroll: function ( command )
 	{
-		if ( this.options.cookieScroll == null ) {
+		if ( this.options.cookieScroll == null || this.useCookies == false ) {
 			return false;
 		}
 
@@ -324,7 +329,7 @@ $.widget( 'juicy.browsertabs', $.ui.tabs, {
 	// valid commands: 'get', 'update', 'clear'
 	_cookieTabs: function ( command )
 	{
-		if ( this.options.cookieTabs == null ) {
+		if ( this.options.cookieTabs == null || this.useCookies == false ) {
 			return false;
 		}
 		
