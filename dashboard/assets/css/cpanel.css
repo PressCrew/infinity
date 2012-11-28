@@ -119,6 +119,11 @@ div#infinity-cpanel-tabs {
 	margin: 3px;
 	background: #fff none;
 }
+	div#infinity-cpanel-tabs ul.ui-tabs-nav,
+	div#infinity-cpanel-tabs ul.ui-tabs-panel {
+		min-width: 720px;
+	}
+
 div#infinity-cpanel-tab-options {
 	background: #fff none;
 }
