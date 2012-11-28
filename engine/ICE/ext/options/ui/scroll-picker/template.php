@@ -20,6 +20,7 @@
 		</div>
 	</div>
 	<div class="ice-viewport">
+		<a id="<?php $this->render_id('widget','item','null') ?>" class="ice-item ui-widget-header ice-scroll-pane-item-null" href="#"><?php _e( 'None', infinity_text_domain ); ?></a>
 		<?php foreach( $field_options as $field_option_val => $field_option_desc ): ?>
 			<a id="<?php $this->render_id('widget','item',$field_option_val) ?>" class="ice-item ui-widget-header" href="#<?php print esc_attr( $field_option_val ) ?>"><?php $this->component()->render_field_option( $field_option_val ) ?></a>
 		<?php endforeach; ?>
@@ -43,7 +44,9 @@
 		options.barWrapSelector = 'div.ice-wrapper';
 		options.barSelector = 'div.ice-controls';
 		// add selection options
-		<?php if ( null !== $value ): ?>
+		<?php if ( null === $value ): ?>
+		options.itemActiveSelector = 'a#<?php $this->render_id('widget','item','null') ?>';
+		<?php else: ?>
 		options.itemActiveSelector = 'a#<?php $this->render_id('widget','item',$value) ?>';
 		<?php endif; ?>
 		options.itemEvents = {
