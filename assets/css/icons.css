@@ -21,7 +21,12 @@ span.post-tags:before,
 #whats-new,
 .main-menu * :before,
 .link-home h2 a:before,
-div.link-vote-panel div.clickers a.up:before {
+div.link-vote-panel div.clickers a.up:before,
+#bbpress-forums .bbp-forums-list li a:before,
+#favorite-toggle:before,
+#subscription-toggle:before,
+.single-topic h1:before,
+.group-forum-topic #bbpress-forums h3:before {
     font-weight: normal;
     font-family: "iconsweetsRegular";
     color: inherit;
@@ -306,7 +311,8 @@ li#activity-filter-select label:before {
     content: "."
 }
 
-a.send-message:before {
+a.send-message:before,
+#nav-invite-anyone:before {
     content: "A"
 }
 
@@ -338,12 +344,31 @@ div#message p {
 div#message p:before {
     content: "_"
 }
-
 /* BBPress */
-#nav-forums:before {
+#nav-forums:before,
+#nav-forum:before {
     content: '"'
 }
-
+#favorite-toggle:before {
+    content: "h";
+    top: 0;
+}
+#subscription-toggle:before {
+    content: "A";
+    position: relative;
+    right: -9px;
+    top: 0;
+}
+#bbpress-forums .bbp-forums-list li a:before {
+    color: #999999;
+    content: "g";
+    text-shadow: 0 -1px 0 #E3E7E7;
+}
+.groups #item-buttons .group-button a:before {
+    content: "#";
+    font-size: 150%;
+    padding: 0 2px 0 0;
+}
 /* Main Menu Icons */
 .base-menu li ul li a:before {
     content: none !important

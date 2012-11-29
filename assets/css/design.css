@@ -84,13 +84,6 @@ h1#site-title,div#site-title {
 	border-top: 1px solid #D0CECE;
 	padding: 10px 30px 6px;
 }
-#site-description {
-    font-style: italic;
-    color: #999999;
-    position: relative;
-    font-size: 14px;
-    line-height: 180%;
-}
 /* Global CSS3 Stuff */
 .main-menu,.top-menu,.top-wrap .sub-menu,.item-list-tabs,thead:first-child tr th,thead:first-child tr td,.base-menu ul ul {
 	background-color: #222222;
