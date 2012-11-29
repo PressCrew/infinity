@@ -7,6 +7,13 @@ Parent styles */
 /*--------------------------------------------------------------
 1.1 - iPad Landscape
 --------------------------------------------------------------*/
+@media only screen and (max-width: 1050px) { 
+	#infinity-base div.item-options {
+	    float: none;
+	    margin-top: 0;
+	}
+}
+
 body { min-width: inherit }
 @media only screen and (max-width: 768px) { 
 	html {
@@ -66,6 +73,12 @@ body { min-width: inherit }
 	#item-header-avatar img.avatar {
     width: 40%;
     }
+    .activity-list .activity-content {
+    	margin-left: 0;
+	}
+	.activity-avatar {
+		display: none;
+	}
 }
 /*--------------------------------------------------------------
 1.2 - iPad Portrait
@@ -138,7 +151,7 @@ body { min-width: inherit }
 	body {
 	    width: 100%;
 	}
-	#logo-menu-wrap img { max-width: 140px }
+	#logo-menu-wrap img {max-width: 80%;}
 	#copyright-info { text-align: center }
 	#site-title { top: 10% !important }
 	.activity-list li.mini .activity-content p { width: 440% !important }
