@@ -44,11 +44,11 @@ class ICE_Ext_Option_Ui_Overlay_Picker
 		// have a url?
 		if ( $url ) {
 			// element rule
-			$rule1 = $style->rule( $this->style_selector );
+			$rule1 = $style->rule( $this->format_style_selector() );
 			$rule1->ad( 'position', 'relative' );
-			$rule1->ad( 'z-index', 1 );
+			$rule1->ad( 'z-index', 0 );
 			// pseudo element rule
-			$rule2 = $style->rule( $this->style_selector . ':before' );
+			$rule2 = $style->rule( $this->format_style_selector() . ':before' );
 			$rule2->ad( 'content', '""' );
 			$rule2->ad( 'position', 'absolute' );
 			$rule2->ad( 'z-index', -1 );

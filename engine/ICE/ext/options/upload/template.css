@@ -15,6 +15,7 @@ div.icext-option.icext-upload_widget fieldset {
 	min-width: 200px;
 	max-width: 240px;
 	margin-right: 20px;
+	margin-bottom: 10px;
 	text-align: center;
 }
 	div.icext-option.icext-upload_widget fieldset p {
@@ -35,6 +36,12 @@ div.icext-option.icext-upload_widget fieldset {
 			padding-left: 1.8em;
 			padding-right: 0.5em;
 		}
+div.icext-option.icext-upload_widget div.ice-do-disable {
+	font-size: 11px;
+	font-weight: bold;
+	text-align: center;
+	margin-top: 10px;
+}
 
 div.icext-option.icext-upload_dialog iframe {
 	width: 100%;

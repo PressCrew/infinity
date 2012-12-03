@@ -173,6 +173,8 @@ class ICE_Ext_Option_Upload
 			'attach_url' => $url,
 			'attach_width' => $width,
 			'attach_height' => $height,
+			'default_value' => $this->default_value,
+			'default_url' => $this->get_default_image_url(),
 			'edit_url' =>
 				sprintf(
 					'media.php?attachment_id=%d&action=edit',
