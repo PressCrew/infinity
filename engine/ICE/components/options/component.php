@@ -758,9 +758,14 @@ abstract class ICE_Option_Image
 
 		} elseif ( is_string( $value ) && strlen( $value ) >= 1 ) {
 
-			// they must have provided an image path
-			return ICE_Scheme::instance()->theme_file_url( $this->config()->get('default_value')->get_theme(), $this->default_value );
+			// try to get raw default value config
+			$default_config = $this->config()->get('default_value');
 
+			// has default config?
+			if ( $default_config ) {
+				// yep, determine path
+				return ICE_Scheme::instance()->theme_file_url( $default_config->get_theme(), $this->default_value );
+			}
 		}
 
 		return null;
