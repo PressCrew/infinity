@@ -709,22 +709,26 @@ abstract class ICE_Option_Image
 		// src is null by default
 		$src = null;
 
-		// did we get an attachement id?
+		// did we get an attachment id?
 		if ( is_numeric( $attach_id ) ) {
-			// try to get the attachment info
-			$src = wp_get_attachment_image_src( $attach_id, $size );
+			// is attach id gte one?
+			if ( $attach_id >= 1 ) {
+				// try to get the attachment info
+				$src = wp_get_attachment_image_src( $attach_id, $size );
+			} else {
+				// id of zero or less is impossible to lookup,
+				// return false immediately to avoid costly query.
+				return false;
+			}
 		} else {
-			// was a default set?
-			if ( isset( $this->default_value ) ) {
-				// use default
-				$directive = $this->default_value;
-				// is a default set?
-				if ( $directive ) {
-					// mimic the src array
-					$src = array_fill( 0, 3, null );
-					// zero index is the url
-					$src[0] = ICE_Scheme::instance()->theme_file_url( $this->config()->get('default_value')->get_theme(), $directive );
-				}
+			// try to get default url
+			$default_url = $this->get_default_image_url();
+			// get anything?
+			if ( $default_url ) {
+				// mimic the src array
+				$src = array_fill( 0, 3, null );
+				// zero index is the url
+				$src[0] = $default_url;
 			}
 		}
 
@@ -760,6 +764,27 @@ abstract class ICE_Option_Image
 		}
 
 		return null;
+	}
+
+	/**
+	 * Return absolute URL of the default image (if set)
+	 *
+	 * @return string|false
+	 */
+	public function get_default_image_url()
+	{
+		// was a default set?
+		if ( strlen( $this->default_value ) ) {
+			// use default
+			return
+				ICE_Scheme::instance()->theme_file_url(
+					$this->config()->get('default_value')->get_theme(),
+					$this->default_value
+				);
+		}
+
+		// no default set
+		return false;
 	}
 }
 
