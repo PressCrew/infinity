@@ -540,7 +540,7 @@ abstract class ICE_Option extends ICE_Component
 	/**
 	 * Return style selector formatted with the body class
 	 */
-	private function format_style_selector()
+	final protected function format_style_selector()
 	{
 		// grab body class from policy
 		$class = $this->policy()->get_body_class();
