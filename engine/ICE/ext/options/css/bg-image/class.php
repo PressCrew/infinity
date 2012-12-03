@@ -35,6 +35,33 @@ class ICE_Ext_Option_Css_Bg_Image
 		$this->documentation = 'options/uploader';
 		$this->style_property = 'background-image';
 	}
+
+	/**
+	 */
+	public function init_styles()
+	{
+		parent::init_styles();
+
+		// add dynamic styles callback
+		$this->style()
+			->cache( 'remove-image', 'bg_image_override' );
+	}
+	
+	/**
+	 * Add a rule to kill any background image that might be set,
+	 * if the background image was explicitly disabled (zero value).
+	 */
+	public function bg_image_override()
+	{
+		// get current value
+		$value = $this->get();
+
+		// is value a literal zero?
+		if ( is_numeric( $value ) && 0 === (integer) $value ) {
+			$rule = $this->style()->rule( $this->format_style_selector() );
+			$rule->add_declaration( 'background-image', 'none' );
+		}
+	}
 }
 
 ?>
