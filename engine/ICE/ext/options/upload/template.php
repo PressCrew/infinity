@@ -16,6 +16,7 @@
 /* @var $attach_url string URL of image attachment */
 /* @var $attach_width integer Width of image attachment (pixels) */
 /* @var $attach_height integer Height of image attachment (pixels) */
+/* @var $default_url string URL of default image */
 ?>
 
 <div id="<?php $this->render_id('main') ?>" class="ui-widget <?php $this->render_class( 'widget' ) ?>">
@@ -31,7 +32,12 @@
 			<a><?php _e('Select', infinity_text_domain) ?></a>
 			<a><?php _e('Zoom', infinity_text_domain) ?></a>
 			<a><?php _e('Trash', infinity_text_domain) ?></a>
+			<div class="ice-do-disable">
+				<input type="checkbox">
+				<?php _e( 'Disable image, including default', infinity_text_domain ) ?>
+			</div>
 		</div>
+		
 		<?php $this->render_input( 'hidden' ); ?>
 	</fieldset>
 </div>
@@ -44,6 +50,14 @@ jQuery(document).ready( function($){
 			ibarSelector: 'div.ice-controls',
 			imageSelector: 'p.ice-content img',
 			inputSelector: 'input[name="<?php $this->render_name() ?>"]',
+			defImage: {
+				value: '<?php echo $default_value ?>',
+				url: '<?php echo $default_url ?>'
+			},
+			noImage: {
+				value: '0',
+				url: '<?php echo ICE_IMAGES_URL . '/square_x.png' ?>'
+			},
 			muOptions: {
 				title: '<?php _e( 'Media Uploader', infinity_text_domain ) ?>',
 				dialogClass: '<?php $this->render_class('dialog') ?>'
