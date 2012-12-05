@@ -30,7 +30,7 @@ class ICE_Ext_Option_Css_Overlay_Image
 		parent::init();
 
 		// init directives
-		$this->title = __( 'Overlay Image', infinity_text_domain );
+		$this->title = __( 'Background Overlay', infinity_text_domain );
 		$this->description = __( 'Select a texture to use as the background overlay', infinity_text_domain );
 		$this->item_width = '100px';
 		$this->item_height = '100px';

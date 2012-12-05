@@ -1434,15 +1434,15 @@ final class ICE_Style_Property_Factory extends ICE_Base
 				->add_enum( 'normal', __( 'Normal', infinity_text_domain ) )
 				->add_enum( 'bold', __( 'Bold', infinity_text_domain ) )
 				->add_enum( 'bolder', __( 'Bolder', infinity_text_domain ) )
-				->add_enum( '100', __( 'One Hundred', infinity_text_domain ) )
-				->add_enum( '200', __( 'Two Hundred', infinity_text_domain ) )
-				->add_enum( '300', __( 'Three Hundred', infinity_text_domain ) )
-				->add_enum( '400', __( 'Four Hundred', infinity_text_domain ) )
-				->add_enum( '500', __( 'Five Hundred', infinity_text_domain ) )
-				->add_enum( '600', __( 'Six Hundred', infinity_text_domain ) )
-				->add_enum( '700', __( 'Seven Hundred', infinity_text_domain ) )
-				->add_enum( '800', __( 'Eight Hundred', infinity_text_domain ) )
-				->add_enum( '900', __( 'Nine Hundred', infinity_text_domain ) );
+				->add_enum( '100', '100' )
+				->add_enum( '200', '200' )
+				->add_enum( '300', '300' )
+				->add_enum( '400', '400' )
+				->add_enum( '500', '500' )
+				->add_enum( '600', '600' )
+				->add_enum( '700', '700' )
+				->add_enum( '800', '800' )
+				->add_enum( '900', '900' );
 	}
 
 	/**
