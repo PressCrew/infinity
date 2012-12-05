@@ -256,7 +256,8 @@ li#link-home-personal-li a:before {
     content: "0"
 }
 
-li#nav-docs-groups-li a:before {
+li#nav-docs-groups-li a:before,
+#user-docs:before {
     content: "L"
 }
 #bp-create-doc-button:before {
