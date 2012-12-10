@@ -81,23 +81,9 @@ final class ICE_Enqueue extends ICE_Base
 	{
 		if ( !self::$instance instanceof self ) {
 			self::$instance = new self();
-			self::$instance->init();
 		}
 
 		return self::$instance;
-	}
-
-	/**
-	 * Initialize actions required for enqueueing to work properly.
-	 */
-	private function init()
-	{
-		global $wp_version;
-		
-		if ( (float) $wp_version < 3.3 ) {
-			// negative priorities work... shhhh...
-			add_action( 'after_setup_theme', array( self::instance(), 'register_ui_scripts' ), -99999 );
-		}
 	}
 
 	/**
@@ -352,52 +338,6 @@ final class ICE_Enqueue extends ICE_Base
 			)
 		);
 
-	}
-
-	/**
-	 * Register additional jQuery UI scripts
-	 *
-	 * Never call this manually unless you really know what you are doing!
-	 *
-	 * @internal
-	 */
-	public function register_ui_scripts()
-	{
-		global $wp_scripts;
-
-		if ( !$wp_scripts instanceof WP_Scripts ) {
-			$wp_scripts = new WP_Scripts();
-		}
-
-		$deps_c = array( 'jquery-ui-core' );
-		$deps_cw = array_merge( $deps_c, array( 'jquery-ui-widget' ) );
-		$deps_cwm = array_merge( $deps_cw, array( 'jquery-ui-mouse' ) );
-		$deps_cwp = array_merge( $deps_cw, array( 'jquery-ui-position' ) );
-
-		$jui = array(
-			// widgets
-			'jquery-ui-accordion' =>
-				array( 'src' => 'jquery.ui.accordion.min.js', 'deps' => $deps_cw ),
-			'jquery-ui-autocomplete' =>
-				array( 'src' => 'jquery.ui.autocomplete.min.js', 'deps' => $deps_cwp ),
-			'jquery-ui-datepicker' =>
-				array( 'src' => 'jquery.ui.datepicker.min.js', 'deps' => $deps_c ),
-			'jquery-ui-progressbar' =>
-				array( 'src' => 'jquery.ui.progressbar.min.js', 'deps' => $deps_cw ),
-			'jquery-ui-slider' =>
-				array( 'src' => 'jquery.ui.slider.min.js', 'deps' => $deps_cwm )
-		);
-
-		// register more scripts
-		foreach ( $jui as $handle => $cfg ) {
-			// make sure not registered already
-			if ( !$wp_scripts->query( $handle ) ) {
-				// register it
-				$wp_scripts->add( $handle, ICE_JS_URL . '/' . $cfg['src'], $cfg['deps'], '1.8.12' );
-				// put in footer group
-				$wp_scripts->add_data( $handle, 'group', 1 );
-			}
-		}
 	}
 }
 

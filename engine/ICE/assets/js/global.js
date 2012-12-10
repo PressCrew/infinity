@@ -172,6 +172,7 @@
 					});
 
 					e.preventDefault();
+					e.stopPropagation();
 				});
 			});
 		}
