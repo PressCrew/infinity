@@ -7,9 +7,9 @@ $.widget( 'infinity.cpaneltabs', $.juicy.browsertabs, {
 
 	options: {
 		ajaxOptions: {
+			data: { 'action': 'infinity_tabs_content' },
 			beforeSend: function ( xhr, settings ) {
 				response = null;
-				settings.url += '&action=infinity_tabs_content';
 			},
 			dataFilter: function ( data, type ) {
 				response = iceEasyAjax.splitResponseStd( data );
