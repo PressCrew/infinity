@@ -8,6 +8,9 @@
  */
 (function( $ ) {
 
+// split tabs version at dots
+var vSplit = $.ui.tabs.version.split('.');
+
 $.widget( 'juicy.browsertabs', $.ui.tabs, {
 
 	eRefresh: null,
@@ -28,6 +31,7 @@ $.widget( 'juicy.browsertabs', $.ui.tabs, {
 		scroll: null
 	},
 	useCookies: ( typeof $.cookie !== "undefined" ),
+	lte_1_8: ( vSplit[0] <= 1 && vSplit[1] <= 8 ),
 
 	_create: function()
 	{
@@ -264,21 +268,23 @@ $.widget( 'juicy.browsertabs', $.ui.tabs, {
 		if ( index in this.anchors ) {
 			// panel exists
 			this.select( index );
-			this.url( index, href ).load( index );
+			this.url( index, href );
+			this.load( index );
 		} else {
 			// the title
 			var title = o.availableTabs[ this._getTabKey( target ) ];
 			// find a title?
-			if ( title.length ) {
+			if ( title && title.length ) {
 				// create new panel
 				this.add( '#' + target, title );
 				// get index for new tab
 				index = this._getIndex( target );
 				// update url
-				this.url( index, href );
+				this.url( index, href + '#' + target );
 				// select and load it?
 				if ( selected === true || ( selected >= 0 && selected == index ) ) {
-					this.select( index ).load( index );
+					this.select( index );
+					if ( this.lte_1_8 ) this.load( index );
 				}
 				// save open taps
 				this._cookieTabs( 'update' );
@@ -353,12 +359,19 @@ $.widget( 'juicy.browsertabs', $.ui.tabs, {
 				return tabs;
 
 			case 'update':
-				var tabsSave = [];
+				var loopUrl, tabsSave = [];
 				// loop all tabs and encode
 				$.each( this.anchors, function( key, val ) {
+					// how we get the URL depends on UI version
+					if ( self.lte_1_8 ) {
+						loopUrl = $.data( val, 'load.tabs' );
+					} else {
+						loopUrl = $( val ).attr( 'href' ).replace( /#.*$/, '' );
+					}
+					// push on to tabs to save array
 					tabsSave.push(
 						$( val ).prop( 'hash' ).substring(1) + ':' +
-						encodeURIComponent( $.data( val, 'load.tabs' ) )
+						encodeURIComponent( loopUrl )
 					);
 				});
 				// update cookie
