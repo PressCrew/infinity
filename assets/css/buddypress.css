@@ -932,3 +932,7 @@ div#new-topic-post {
     margin: 0;
     padding: 1px 0 0 0;
 }
+/*Core Fixes*/
+.jcrop-holder img, #avatar-crop-pane img {
+    max-width: none;
+}
