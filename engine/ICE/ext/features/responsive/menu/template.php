@@ -19,17 +19,6 @@
 <script type="text/javascript">
 	jQuery(document).ready(function($)
 	{
-		// scroll helper
-		function scrollNow() {
-			window.scrollTo( 0, 1 );
-		}
-		
-		// hide address bar
-		window.addEventListener( 'load', function(){
-			// scroll, like... now
-			window.setTimeout( scrollNow, 0 );
-		});
-
 		// init mobile menu
 		$( '<?php echo $selector ?>' ).mobileMenu(<?php echo $options ?>);
 	});
