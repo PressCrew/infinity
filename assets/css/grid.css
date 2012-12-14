@@ -14,6 +14,9 @@ infinity-grid-style = off
    -moz-box-sizing: border-box;
    -webkit-box-sizing: border-box; 
 }
+#editor-toolbar * {
+    -moz-box-sizing: content-box;
+}
 /* The Grid ---------------------- */
 .row { width: 1050px; max-width: 100%; min-width: 768px; margin: 0 auto; }
 .row .row { width: auto; max-width: none; min-width: 0; margin: 0 -15px; }
