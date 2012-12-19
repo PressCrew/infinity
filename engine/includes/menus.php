@@ -98,27 +98,27 @@ function infinity_bp_nav_inject_options_setup()
  */
 function infinity_bp_nav_inject_options_filter( $html, $user_nav_item )
 {
-	// component slugs to show subnavs for
-	$show = array(
-		'activity' => true,
-		'blogs' => true,
-		'forums' => true
-	);
-
-	// add these slugs for logged in users viewing their own profile
-	if ( bp_is_my_profile() ) {
-		$show['friends'] = true;
-		$show['groups'] = true;
-		$show['messages'] = true;
-		$show['profile'] = true;
-		$show['settings'] = true;
+	// slug of nav item being filtered
+	$component = $user_nav_item[ 'slug' ];
+	
+	// show options nav?
+	$show = bp_is_current_component( $component );
+	
+	// special hack to handle profile in BP versions < 1.7
+	if (
+		'profile' == $component &&
+		-1 == version_compare( BP_VERSION, '1.7') &&
+		false == bp_is_my_profile()
+	) {
+		// force hide it
+		$show = false;
 	}
 
-	// is slug the current component and should we show it?
-	if (
-		bp_is_current_component( $user_nav_item['slug'] ) &&
-		array_key_exists( $user_nav_item['slug'], $show )
-	) {
+	// filter the show var because i love developers
+	$show = (boolean) apply_filters( 'infinity_bp_nav_inject_options_show', $show, $user_nav_item );
+
+	// ok, finally... should we show it?
+	if ( true === $show ) {
 
 		// yes, need to capture options nav output
 		ob_start();
@@ -127,15 +127,18 @@ function infinity_bp_nav_inject_options_filter( $html, $user_nav_item )
 		bp_get_options_nav();
 
 		// grab buffer and wipe it
-		$nav = ob_get_clean();
+		$nav = trim( (string) ob_get_clean() );
 
-		// inject nav onto end of list item wrapped in special <ul>
-		return preg_replace(
-			'/(<\/li>.*)$/',
-			'<ul class="profile-subnav">' . $nav . '</ul>' . '$1',
-			$html,
-			1
-		);
+		// make sure the result has some meat
+		if ( '' != $nav ) {
+			// yep, inject options nav onto end of list item wrapped in special <ul>
+			return preg_replace(
+				'/(<\/li>.*)$/',
+				'<ul class="profile-subnav">' . $nav . '</ul>$1',
+				$html,
+				1
+			);
+		}
 	}
 
 	// no changes
