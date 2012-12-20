@@ -419,7 +419,6 @@ final class ICE_Scheme extends ICE_Base
 			add_filter( 'comments_popup_template', $filter );
 			add_filter( 'paged_template', $filter );
 			add_filter( 'index_template', $filter );
-			add_filter( 'comments_template', $filter );
 
 		}
 	}
