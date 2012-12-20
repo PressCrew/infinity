@@ -19,7 +19,7 @@
 /**
  * Infinity version number
  */
-define( 'INFINITY_VERSION', '1.1a' );
+define( 'INFINITY_VERSION', '1.1b' );
 
 /**
  * Infinity branch name
