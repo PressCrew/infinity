@@ -855,7 +855,7 @@ div.item-list-tabs ul li a span.unread-count {
     padding: 1px 6px;
     color: #fff;
 }
-.messages .avatar {
+#content .messages .avatar {
     height: 45px;
     width: 45px;
 }
