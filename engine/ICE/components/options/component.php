@@ -375,8 +375,9 @@ abstract class ICE_Option extends ICE_Component
 		// is the result empty?
 		if (
 			null === $result ||
-			is_scalar( $result ) && strlen( $result ) == 0 ||
-			empty( $result )
+			is_string( $result ) && '' === $result ||
+			is_bool( $result ) && false === $result ||
+			is_array( $result ) && 0 === count( $result )
 		) {
 			// no result, maybe check deprecated name
 			$name_deprecated = $this->property( 'name_deprecated' );

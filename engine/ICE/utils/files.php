@@ -65,15 +65,11 @@ final class ICE_Files extends ICE_Base
 	public static function document_root()
 	{
 		if ( empty( self::$document_root ) ) {
-			if ( isset( $_SERVER['DOCUMENT_ROOT'] ) ) {
-				self::$document_root = self::path_normalize( $_SERVER['DOCUMENT_ROOT'] );
-			} else {
-				$theme_root = self::theme_root();
-				$theme_root_uri = self::theme_root_uri();
-				$uri_parts = parse_url( $theme_root_uri );
-				$path_length = strlen( $uri_parts['path'] );
-				self::$document_root = substr_replace( $theme_root, '', -$path_length );
-			}
+			$theme_root = self::theme_root();
+			$theme_root_uri = self::theme_root_uri();
+			$uri_parts = parse_url( $theme_root_uri );
+			$path_length = strlen( $uri_parts['path'] );
+			self::$document_root = substr_replace( $theme_root, '', $path_length * -1 );
 			self::$document_root_length = strlen( self::$document_root );
 		}
 		
