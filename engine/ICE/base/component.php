@@ -989,7 +989,7 @@ abstract class ICE_Component
 		// try to locate the template
 		if ( $this->template ) {
 			// was absolute path given?
-			if ( path_is_absolute( $this->template ) ) {
+			if ( ICE_Files::path_is_absolute( $this->template ) ) {
 				// yep, use as is
 				$template = $this->template;
 			} else {

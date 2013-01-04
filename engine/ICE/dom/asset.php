@@ -399,7 +399,7 @@ abstract class ICE_Asset extends ICE_Base
 			foreach ( $this->files_export as $file ) {
 
 				// resolve file path
-				if ( path_is_absolute( $file ) ) {
+				if ( ICE_Files::path_is_absolute( $file ) ) {
 					// its absolute already, which is good
 					$filename = $file;
 				} else {
