@@ -9,7 +9,7 @@
 
 get_header( 'buddypress' ); ?>
 
-	<div id="content">
+	<div id="content" role="main" class="<?php do_action( 'content_class' ); ?>">
 		<div class="padder">
 
 			<?php do_action( 'bp_before_member_settings_template' ); ?>
