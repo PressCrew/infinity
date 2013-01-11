@@ -99,6 +99,10 @@ class ICE_Ext_Feature_Responsive_Menu
 
 		// add actions
 		add_action( 'open_body', array( $this, 'render' ) );
+		add_action( 'open_wrapper', array( $this, 'menu_container' ) );
+
+		// add filter
+		add_filter( 'loginout', array( $this, 'loginout_filter' ) );
 	}
 
 	/**
@@ -150,6 +154,27 @@ class ICE_Ext_Feature_Responsive_Menu
 			'selector' => $this->target_selector,
 			'options' => $logic->export_variables(true)
 		);
+	}
+
+	/**
+	 * Render Mobile Menu Container
+	 */
+	public function menu_container()
+	{
+		// add the Mobile Menu holder ?>
+		<div class="mobile-menu-container">
+			<a class="button black" href="#sidebar">Show Sidebar</a>
+			<?php wp_loginout(); ?>
+		</div><?php
+	}
+
+	/**
+	 * Filter the Login/Logout link and add a button class
+	 */
+	public function loginout_filter( $text )
+	{
+		// add an id and button class to the login/logout link
+		return str_replace('<a ', '<a id="loginlogout" class="button black" ', $text );
 	}
 }
 
