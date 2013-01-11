@@ -4,6 +4,25 @@ Parent styles */
 /* This stylesheet contains a bunch of extra stuff like buttons and Menu Icons you can use across your theme.*/
 /*
  /* Columns Shortcodes*/
+
+/*RESPONSIVE TWEAKS*/
+.mobile-menu-container {
+	display: none;
+}
+.mobile-menu-container select {
+	width: 60%;
+	box-shadow: none;
+} 
+.mobile-menu-container a.button {
+    font-size: 80%;
+    padding: 5px 8px;
+    position: absolute;
+    right: 10px;
+    top: 0px;
+}
+.mobile-menu-container #loginlogout {
+	right: 110px;
+}
 /*--------------------------------------------------------------
 1.1 - iPad Landscape
 --------------------------------------------------------------*/
@@ -44,7 +63,10 @@ body { min-width: inherit }
 	    height: auto;
 	}
 	ul.sf-menu,
-	div.menu ul { display: none }
+	#sub-menu-wrap,
+	#main-menu-wrap,
+	#top-menu-wrap,
+	.base-menu { display: none }
 	div.item-list-tabs select {
 	    margin-left: 20px;
 	    margin-top: 10px;
@@ -53,16 +75,6 @@ body { min-width: inherit }
 	.mobileMenu { margin-top: 5px }
 	.post-category,
 	.time-posted { display: none }
-	body select.mobileMenu {
-    background: none repeat scroll 0 0 transparent;
-    border: 1px solid #555555;
-    border-radius: 2px 2px 2px 2px;
-    box-shadow: none;
-    color: #EFEFEF;
-    float: left;
-    margin-right: 10px;
-    width: 30%;
-    }
 	#wpadminbar{ display: none }
 	div#content .padder {
 	    margin-right: 0;
@@ -78,6 +90,31 @@ body { min-width: inherit }
 	}
 	.activity-avatar {
 		display: none;
+	}
+		#header {
+	    margin-top: 75px;
+	    min-height: 50px;
+	}
+	.mobile-menu-container {
+	width: 100%;
+    z-index: 100;
+    background: #222;
+    border-bottom: 1px solid #292525;
+    border-top: 2px solid #525151;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), 0 -1px 0 rgba(0, 0, 0, 0.1) inset;
+    display: block;
+    margin-left: -10px;
+    margin-right: -10px;
+    margin-top: -1px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    position: fixed;
+    top: 1px;
+	}
+	.mobile-menu-container select {
+    box-shadow: none;
+    width: 60%;
 	}
 }
 /*--------------------------------------------------------------
@@ -141,7 +178,11 @@ body { min-width: inherit }
 	.activity-list .activity-content { margin-left: 0 }
 	div.activity-comments {
     margin: 0;
-}
+	}
+	.mobile-menu-container select {
+    box-shadow: none;
+    width: 55%;
+	}
 }
 /*--------------------------------------------------------------
 2.0 - Smartphone (any)
@@ -155,6 +196,10 @@ body { min-width: inherit }
 	#copyright-info { text-align: center }
 	#site-title { top: 10% !important }
 	.activity-list li.mini .activity-content p { width: 440% !important }
+	.mobile-menu-container select {
+    box-shadow: none;
+    width: 45%;
+	}
 }
 /*--------------------------------------------------------------
 3.0 - iPhone
@@ -173,6 +218,10 @@ body { min-width: inherit }
 	}
 	body.activity-permalink .activity-list li .activity-content { margin-left: 0 }
 	body.activity-permalink .activity-list li.mini .activity-meta { left: 0 }
+	.mobile-menu-container select {
+    box-shadow: none;
+    width: 40%;
+	}
 }
 /*--------------------------------------------------------------
 2.0 - Smartphone (any)
@@ -194,36 +243,12 @@ body { min-width: inherit }
 	    width: 100%;
 	}
 	div.item-list-tabs { height: auto !important }
+	.mobile-menu-container select {
+    box-shadow: none;
+    width: 40%;
+	}
 }
-/* -------------------------------------------------- 
-	:: Forms
----------------------------------------------------*/
-@media only screen and (max-width: 767px) { 
-	input.input-text,
-	input.input-text.oversize,
-	textarea,
-	form.nice input.input-text,
-	form.nice input.input-text.oversize,
-	form.nice textarea {
-	    display: block;
-	    width: 96%;
-	    padding: 6px 2% 4px;
-	    font-size: 18px;
-	}
-	form.nice input.input-text,
-	form.nice input.input-text.oversize,
-	form.nice textarea {
-	    -webkit-border-radius: 2px;
-	    -moz-border-radius: 2px;
-	}
-	form.nice small.error {
-	    padding: 6px 2%;
-	    display: block;
-	}
-	form.nice .small + .error { width: auto }
-	form.nice .medium + .error { width: auto }
-	form.nice .large + .error { width: auto }
-}
+
 /* -------------------------------------------------- 
 	:: UI
 ---------------------------------------------------*/
@@ -236,42 +261,3 @@ body { min-width: inherit }
 	    padding-right: 0px;
 	}
 }
-*/
-/* Visibility Classes ---------------------- */
-/* Standard (large) display targeting */
-.show-for-small, .show-for-medium, .show-for-medium-down, .hide-for-large, .hide-for-large-up, .show-for-xlarge { display: none !important; }
-
-.hide-for-xlarge, .show-for-large, .show-for-large-up, .hide-for-small, .hide-for-medium, .hide-for-medium-down { display: block !important; }
-
-/* Very large display targeting */
-@media only screen and (min-width: 3441px) { .hide-for-small, .hide-for-medium, .hide-for-medium-down, .hide-for-large, .show-for-large-up, .show-for-xlarge { display: block !important; }
-  .show-for-small, .show-for-medium, .show-for-medium-down, .show-for-large, .hide-for-large-up, .hide-for-xlarge { display: none !important; } }
-/* Medium display targeting */
-@media only screen and (max-width: 3279px) and (min-width: 768px) { .hide-for-small, .show-for-medium, .show-for-medium-down, .hide-for-large, .hide-for-large-up, .hide-for-xlarge { display: block !important; }
-  .show-for-small, .hide-for-medium, .hide-for-medium-down, .show-for-large, .show-for-large-up, .show-for-xlarge { display: none !important; } }
-/* Small display targeting */
-@media only screen and (max-width: 767px) { .show-for-small, .hide-for-medium, .show-for-medium-down, .hide-for-large, .hide-for-large-up, .hide-for-xlarge { display: block !important; }
-  .hide-for-small, .show-for-medium, .hide-for-medium-down, .show-for-large, .show-for-large-up, .show-for-xlarge { display: none !important; } }
-/* Orientation targeting */
-.show-for-landscape, .hide-for-portrait { display: block !important; }
-
-.hide-for-landscape, .show-for-portrait { display: none !important; }
-
-@media screen and (orientation: landscape) { .show-for-landscape, .hide-for-portrait { display: block !important; }
-  .hide-for-landscape, .show-for-portrait { display: none !important; } }
-@media screen and (orientation: portrait) { .show-for-portrait, .hide-for-landscape { display: block !important; }
-  .hide-for-portrait, .show-for-landscape { display: none !important; } }
-/* Touch-enabled device targeting */
-.show-for-touch { display: none !important; }
-
-.hide-for-touch { display: block !important; }
-
-.touch .show-for-touch { display: block !important; }
-
-.touch .hide-for-touch { display: none !important; }
-
-/* Specific overrides for elements that require something other than display: block */
-table.show-for-xlarge, table.show-for-large, table.hide-for-small, table.hide-for-medium { display: table !important; }
-
-@media only screen and (max-width: 1279px) and (min-width: 768px) { .touch table.hide-for-xlarge, .touch table.hide-for-large, .touch table.hide-for-small, .touch table.show-for-medium { display: table !important; } }
-@media only screen and (max-width: 767px) { table.hide-for-xlarge, table.hide-for-large, table.hide-for-medium, table.show-for-small { display: table !important; } }

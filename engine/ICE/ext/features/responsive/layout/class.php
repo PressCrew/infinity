@@ -44,5 +44,4 @@ class ICE_Ext_Feature_Responsive_Layout
 	}
 
 }
-
 ?>
