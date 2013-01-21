@@ -11,22 +11,21 @@
  * @since 1.0
  */
 
-/**
- * Disable automatic WP post parsing
- * @internal
- */
-@define( 'MARKDOWN_WP_POSTS', false );
+if ( false === defined( 'MARKDOWN_WP_POSTS' ) ) {
+	/**
+	 * Disable automatic WP post parsing.
+	 * @internal
+	 */
+	define( 'MARKDOWN_WP_POSTS', false );
+}
 
-/**
- * Disable automatic WP comment parsing
- * @internal
- */
-@define( 'MARKDOWN_WP_COMMENTS', false );
-
-/**
- * Load the markdown lib
- */
-require_once ICE_LIB_PATH . '/markdown/markdown.php';
+if ( false === defined( 'MARKDOWN_WP_COMMENTS' ) ) {
+	/**
+	 * Disable automatic WP comment parsing.
+	 * @internal
+	 */
+	define( 'MARKDOWN_WP_COMMENTS', false );
+}
 
 /**
  * Make Markdown parsing easy
@@ -37,6 +36,20 @@ require_once ICE_LIB_PATH . '/markdown/markdown.php';
 final class ICE_Markdown extends ICE_Base
 {
 	/**
+	 * Initialize, load requirements
+	 */
+	public static function init()
+	{
+		// check if markdown parser lib has not been loaded yet
+		if ( false === class_exists( 'Markdown_Parser' ) ) {
+			/**
+			 * Load the markdown lib
+			 */
+			require_once ICE_LIB_PATH . '/markdown/markdown.php';
+		}
+	}
+
+	/**
 	 * Parse markdown markup and return HTML
 	 *
 	 * @param string $text
@@ -44,6 +57,10 @@ final class ICE_Markdown extends ICE_Base
 	 */
 	public static function parse( $text )
 	{
+		// run init
+		self::init();
+
+		// parse text
 		return Markdown( $text );
 	}
 }
