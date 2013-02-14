@@ -62,14 +62,13 @@ body { min-width: inherit }
 	    max-width: 100%;
 	    height: auto;
 	}
-	ul.sf-menu,
-	#sub-menu-wrap,
-	#main-menu-wrap,
-	#top-menu-wrap,
-	.base-menu { display: none }
+	.sf-menu { display: none }
 	div.item-list-tabs select {
 	    margin-left: 20px;
 	    margin-top: 10px;
+	}
+	#user-header-nav {
+		display: block !important;
 	}
 	#subnav select { margin-top: 5px }
 	.mobileMenu { margin-top: 5px }
@@ -93,7 +92,7 @@ body { min-width: inherit }
 	}
 		#header {
 	    margin-top: 75px;
-	    min-height: 90px;
+	    height: 100px;
 	}
 	.mobile-menu-container {
 	width: 100%;
@@ -209,6 +208,9 @@ body { min-width: inherit }
 	form#groups-directory-form h3 a {
 	    display: block;
 	    margin-top: 0.6em;
+	}
+	#user-header-nav {
+		display: none !important;
 	}
 	form#whats-new-form div#whats-new-avatar { display: none }
 	form#whats-new-form h5 { margin: 0 0 0 0px }
