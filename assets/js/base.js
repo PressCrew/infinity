@@ -26,7 +26,7 @@ jQuery(document).ready(function($)
 
 	// main navigation setup (superfish)
 	if( $.fn.superfish ) {
-		$('.base-menu ul.sf-menu').superfish({
+		$('.base-menu ul.sf-menu,.bp-user-nav').superfish({
 			delay: 400,
 			animation: {opacity:'show', height:'show'},
 			speed: 'fast',

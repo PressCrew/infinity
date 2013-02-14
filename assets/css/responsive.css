@@ -62,7 +62,14 @@ body { min-width: inherit }
 	    max-width: 100%;
 	    height: auto;
 	}
-	.sf-menu { display: none }
+	.sf-menu,
+	#top-menu-wrap,
+	#sub-menu-wrap
+	{ display: none }
+	#main-menu-wrap {
+		margin: 0 !important;
+		padding: 0px !important;
+	}
 	div.item-list-tabs select {
 	    margin-left: 20px;
 	    margin-top: 10px;
