@@ -14,11 +14,18 @@ Parent styles */
 	box-shadow: none;
 } 
 .mobile-menu-container a.button {
-    font-size: 80%;
-    padding: 5px 8px;
     position: absolute;
     right: 10px;
-    top: 0px;
+    top: -1px;
+    box-shadow: 0 1px 1px #AFAFAF, 0 1px 0 #868686 inset;
+    font-size: 75%;
+    padding: 2px 8px;
+    text-transform: uppercase;
+    top: -1px;
+}
+.mobile-menu-container a.button:hover {
+	opacity: 0.8;
+	color: #DDD;
 }
 .mobile-menu-container #loginlogout {
 	right: 110px;
@@ -117,6 +124,7 @@ body { min-width: inherit }
     padding-top: 10px;
     position: fixed;
     top: 1px;
+    height: 50px;
 	}
 	.mobile-menu-container select {
     box-shadow: none;
