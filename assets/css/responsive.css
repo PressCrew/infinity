@@ -14,11 +14,18 @@ Parent styles */
 	box-shadow: none;
 } 
 .mobile-menu-container a.button {
-    font-size: 80%;
-    padding: 5px 8px;
     position: absolute;
     right: 10px;
-    top: 0px;
+    top: -1px;
+    box-shadow: 0 1px 1px #AFAFAF, 0 1px 0 #868686 inset;
+    font-size: 75%;
+    padding: 2px 8px;
+    text-transform: uppercase;
+    top: -1px;
+}
+.mobile-menu-container a.button:hover {
+	opacity: 0.8;
+	color: #DDD;
 }
 .mobile-menu-container #loginlogout {
 	right: 110px;
@@ -62,14 +69,20 @@ body { min-width: inherit }
 	    max-width: 100%;
 	    height: auto;
 	}
-	ul.sf-menu,
-	#sub-menu-wrap,
-	#main-menu-wrap,
+	.sf-menu,
 	#top-menu-wrap,
-	.base-menu { display: none }
+	#sub-menu-wrap
+	{ display: none }
+	#main-menu-wrap {
+		margin: 0 !important;
+		padding: 0px !important;
+	}
 	div.item-list-tabs select {
 	    margin-left: 20px;
 	    margin-top: 10px;
+	}
+	#user-header-nav {
+		display: block !important;
 	}
 	#subnav select { margin-top: 5px }
 	.mobileMenu { margin-top: 5px }
@@ -93,7 +106,7 @@ body { min-width: inherit }
 	}
 		#header {
 	    margin-top: 75px;
-	    min-height: 90px;
+	    height: 100px;
 	}
 	.mobile-menu-container {
 	width: 100%;
@@ -111,6 +124,7 @@ body { min-width: inherit }
     padding-top: 10px;
     position: fixed;
     top: 1px;
+    height: 50px;
 	}
 	.mobile-menu-container select {
     box-shadow: none;
@@ -209,6 +223,9 @@ body { min-width: inherit }
 	form#groups-directory-form h3 a {
 	    display: block;
 	    margin-top: 0.6em;
+	}
+	#user-header-nav {
+		display: none !important;
 	}
 	form#whats-new-form div#whats-new-avatar { display: none }
 	form#whats-new-form h5 { margin: 0 0 0 0px }
