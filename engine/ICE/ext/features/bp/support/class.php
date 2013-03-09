@@ -33,7 +33,7 @@ class ICE_Ext_Feature_Bp_Support
 
 		return false;
 	}
-	
+
 	/**
 	 */
 	public function supported()
@@ -48,7 +48,7 @@ class ICE_Ext_Feature_Bp_Support
 	/**
 	 */
 	protected function init()
-	{		
+	{
 		// make sure component is supported
 		if ( $this->supported() ) {
 
@@ -188,7 +188,7 @@ class ICE_Ext_Feature_Bp_Support
 
 	/**
 	 * We want to use wp_login
-	 * 
+	 *
 	 * @return integer
 	 */
 	public function use_wplogin()
@@ -199,10 +199,10 @@ class ICE_Ext_Feature_Bp_Support
 	//
 	// Helpers
 	//
-	
+
 	/**
 	 * Determine if BuddyPress is active and should load up
-	 * 
+	 *
 	 * @return boolean
 	 */
 	private function is_active()
