@@ -226,13 +226,6 @@ li#following-personal-li a:before {
 	content: "s"
 }
 
-#whats-new:before {
-	position: absolute;
-	content: "2";
-	color: #DDD;
-	font-size: 200%;
-}
-
 /* Group Icons */
 li#members-groups-li a:before {
     content: "e"
