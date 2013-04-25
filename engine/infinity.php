@@ -22,11 +22,6 @@
 define( 'INFINITY_VERSION', '1.1b' );
 
 /**
- * Infinity branch name
- */
-define( 'INFINITY_BRANCH', 'buddypress' );
-
-/**
  * Infinity slug
  */
 define( 'INFINITY_SLUG', 'infinity' );
