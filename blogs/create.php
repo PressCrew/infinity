@@ -7,18 +7,18 @@
  * @subpackage bp-default
  */
 
-?>
-
-<?php get_header( 'buddypress' ); ?>
+get_header( 'buddypress' ); ?>
 
 	<?php do_action( 'bp_before_directory_blogs_content' ); ?>
 
 	<div id="content" role="main" class="<?php do_action( 'content_class' ); ?>">
 		<div class="padder" role="main">
+		
+		<?php do_action( 'bp_before_create_blog_content_template' ); ?>
 
 		<?php do_action( 'template_notices' ); ?>
 
-			<h3><?php _e( 'Create a Site', 'buddypress' ); ?> &nbsp;<a class="button" href="<?php echo trailingslashit( bp_get_root_domain() . '/' . bp_get_blogs_root_slug() ) ?>"><?php _e( 'Site Directory', 'buddypress' ); ?></a></h3>
+			<h3><?php _e( 'Create a Site', 'buddypress' ); ?> &nbsp;<a class="button" href="<?php echo trailingslashit( bp_get_root_domain() . '/' . bp_get_blogs_root_slug() ); ?>"><?php _e( 'Site Directory', 'buddypress' ); ?></a></h3>
 
 		<?php do_action( 'bp_before_create_blog_content' ); ?>
 
@@ -35,6 +35,8 @@
 		<?php endif; ?>
 
 		<?php do_action( 'bp_after_create_blog_content' ); ?>
+		
+		<?php do_action( 'bp_after_create_blog_content_template' ); ?>
 
 		</div><!-- .padder -->
 	</div><!-- #content -->
