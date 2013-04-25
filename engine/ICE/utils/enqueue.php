@@ -240,13 +240,6 @@ final class ICE_Enqueue extends ICE_Base
 			'colorpicker.css'
 		);
 
-		// grid rotator
-		// http://tympanus.net/codrops/2012/08/02/animated-responsive-image-grid/
-		$this->register_style(
-			'jquery-gridrotator',
-			'gridrotator/style.css'
-		);
-
 		do_action('ice_init_styles');
 		do_action('ice_register_styles');
 		do_action('ice_enqueue_styles');
