@@ -45,3 +45,4 @@ get_header( 'buddypress' ); ?>
 
 <?php get_sidebar( 'buddypress' ); ?>
 <?php get_footer( 'buddypress' ); ?>
+
