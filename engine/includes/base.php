@@ -252,50 +252,53 @@ function infinity_base_superfish_list_item( $args, $output = true )
 	}
  }
 
-if ( current_theme_supports( 'infinity-pagination' ) )
+/**
+ * Render custom pagination links
+ *
+ * @package Infinity
+ * @subpackage base
+ * @todo write a paginator from scratch, this is mental
+ */
+function infinity_base_paginate()
 {
-	/**
-	 * Add Pagination
-	 *
-	 * @package Infinity
-	 * @subpackage base
-	 * @todo write a paginator from scratch, this is mental
-	 */
-	function infinity_base_paginate() {
-	   global $wp_query, $wp_rewrite;
+   global $wp_query, $wp_rewrite;
 
-	   $wp_query->query_vars['paged'] > 1 ? $current = $wp_query->query_vars['paged'] : $current = 1;
+   // is pagination feature enabled?
+   if ( false == current_theme_supports( 'infinity-pagination' ) ) {
+	   // not enabled, abort
+	   return;
+   }
 
-	   $pagination = array(
-	       'base' => @add_query_arg('page','%#%'),
-	       'format' => '',
-	       'total' => $wp_query->max_num_pages,
-	       'current' => $current,
-      	   'show_all' => false,
-		   'end_size' => 3,
-		   'mid_size' => 5,
-	       'type' => 'list'
+   $wp_query->query_vars['paged'] > 1 ? $current = $wp_query->query_vars['paged'] : $current = 1;
+
+   $pagination = array(
+	   'base' => @add_query_arg('page','%#%'),
+	   'format' => '',
+	   'total' => $wp_query->max_num_pages,
+	   'current' => $current,
+	   'show_all' => false,
+	   'end_size' => 3,
+	   'mid_size' => 5,
+	   'type' => 'list'
+   );
+
+   if ( $wp_rewrite->using_permalinks() ) {
+	   $pagination['base'] =
+		   user_trailingslashit(
+			   trailingslashit(
+				   remove_query_arg( 's', get_pagenum_link( 1 ) )
+			   ) . 'page/%#%/', 'paged'
+		   );
+   }
+
+   if ( !empty( $wp_query->query_vars['s'] ) ) {
+	   $pagination['add_args'] = array(
+		   's' => urlencode( get_query_var( 's' ) )
 	   );
+   }
 
-	   if ( $wp_rewrite->using_permalinks() ) {
-	       $pagination['base'] =
-	           user_trailingslashit(
-	               trailingslashit(
-	                   remove_query_arg( 's', get_pagenum_link( 1 ) )
-	               ) . 'page/%#%/', 'paged'
-	           );
-	   }
-
-	   if ( !empty( $wp_query->query_vars['s'] ) ) {
-	       $pagination['add_args'] = array(
-	           's' => urlencode( get_query_var( 's' ) )
-	       );
-	   }
-
-	   print paginate_links( $pagination );
-	}
+   print paginate_links( $pagination );
 }
-
 
 /**
  * Add Breadcrumb functionality for WordPress SEO

@@ -68,9 +68,7 @@
 	<?php
 		do_action( 'close_loop' );
 	endwhile;
-		if ( current_theme_supports( 'infinity-pagination' ) ) :
    		infinity_base_paginate();
-    	endif;
 	else:
 ?>
 		<h2 class="center">
