@@ -197,4 +197,3 @@ function infinity_sidebar_left_fallback()
 	}
 }
 add_action( 'open_body', 'infinity_sidebar_left_fallback' );
-?>

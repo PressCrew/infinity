@@ -262,5 +262,3 @@ function infinity_base_sidebars()
 	return true;
 
 }
-
-?>

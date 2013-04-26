@@ -93,5 +93,3 @@ function infinity_posted_on() {
 function is_not_admin() {
     return ( !is_admin() );
 }
-
-?>

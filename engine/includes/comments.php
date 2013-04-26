@@ -95,4 +95,3 @@ if (!function_exists("the_commenter_link"))
 		print $commenter ;
 	}
 }
-?>

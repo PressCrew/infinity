@@ -135,5 +135,3 @@ class Infinity_Base_Walker_Page_Menu extends Walker_Page
 		}
 	}
 }
-
-?>
