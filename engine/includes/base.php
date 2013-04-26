@@ -71,18 +71,18 @@ if ( is_admin_bar_showing() ) {
  * @package Infinity
  * @subpackage base
  */
-if ( current_theme_supports( 'infinity-post-thumbnails' ) )
+function infinity_base_post_thumb_sizes()
 {
-	function infinity_base_post_thumb_sizes()
-	{
-		if ( current_theme_supports( 'post-thumbnails' ) ) {
-			set_post_thumbnail_size( 35, 35, true );
-			add_image_size( 'post-image', 674, 140, true );
-			add_image_size( 'slider-full', 980, 360, true );
-			add_image_size( 'thumbnail-large', 600, 200, true );
-			add_image_size( 'thumbnail-post', 210, 160, true );
-		}
+	if ( current_theme_supports( 'post-thumbnails' ) ) {
+		set_post_thumbnail_size( 35, 35, true );
+		add_image_size( 'post-image', 674, 140, true );
+		add_image_size( 'slider-full', 980, 360, true );
+		add_image_size( 'thumbnail-large', 600, 200, true );
+		add_image_size( 'thumbnail-post', 210, 160, true );
 	}
+}
+// add action if infinity post thumbnails feature is enabled
+if ( current_theme_supports( 'infinity-post-thumbnails' ) ) {
 	add_action( 'init', 'infinity_base_post_thumb_sizes' );
 }
 
