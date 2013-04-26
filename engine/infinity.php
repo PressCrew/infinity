@@ -234,5 +234,3 @@ if ( is_admin() ) {
 if ( is_readable( INFINITY_INC_PATH . '/setup.php' ) ) {
 	require_once( INFINITY_INC_PATH . '/setup.php' );
 }
-
-?>

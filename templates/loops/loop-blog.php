@@ -69,8 +69,6 @@ while ($wp_query->have_posts()) : $wp_query->the_post();
 	<?php
 		do_action( 'close_loop' );
 		endwhile;
-		if ( current_theme_supports( 'infinity-pagination' ) ) :
    		infinity_base_paginate();
-    	endif;
 		$wp_query = null; $wp_query = $temp;
 ?>

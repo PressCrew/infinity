@@ -144,5 +144,3 @@ function infinity_bp_nav_inject_options_filter( $html, $user_nav_item )
 	// no changes
 	return $html;
 }
-
-?>
