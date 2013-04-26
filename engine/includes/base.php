@@ -49,15 +49,20 @@ if ( ! isset( $content_width ) )
 	add_theme_support( 'automatic-feed-links' );
 }
 
-// Add a special body class whenever the admin bar is displaying
+/**
+ * Add special "admin bar is showing" body class
+ */
+function infinity_base_admin_bar_class( $classes )
+{
+	// *append* class to the array
+	$classes[] = 'admin-bar-showing';
+
+	// return it!
+	return $classes;
+}
+// add filter only when the admin bar is displaying
 if ( is_admin_bar_showing() ) {
-		add_filter('body_class','my_class_names');
-		function my_class_names($classes) {
-			// add 'class-name' to the $classes array
-			$classes[] = 'admin-bar-showing';
-			// return the $classes array
-			return $classes;
-		}
+	add_filter( 'body_class', 'infinity_base_admin_bar_class' );
 }
 
 /**
