@@ -230,7 +230,5 @@ if ( is_admin() ) {
 	infinity_shortcodes_init_screen();
 }
 
-// load local theme setup if applicable
-if ( is_readable( INFINITY_INC_PATH . '/setup.php' ) ) {
-	require_once( INFINITY_INC_PATH . '/setup.php' );
-}
+// load theme setup
+require_once( INFINITY_INC_PATH . '/setup.php' );
