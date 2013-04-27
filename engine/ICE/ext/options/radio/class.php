@@ -30,5 +30,3 @@ class ICE_Ext_Option_Radio
 		$this->input_type( 'radio' );
 	}
 }
-
-?>

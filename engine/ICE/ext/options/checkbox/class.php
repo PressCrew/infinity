@@ -30,5 +30,3 @@ class ICE_Ext_Option_Checkbox
 		$this->input_type( 'checkbox' );
 	}
 }
-
-?>

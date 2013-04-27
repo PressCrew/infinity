@@ -102,5 +102,3 @@ class ICE_Ext_Option_Css_Overlay_Opacity
 	}
 
 }
-
-?>

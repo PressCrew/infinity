@@ -105,5 +105,3 @@ class ICE_Map_Iterator
 		return $this->key !== false;
 	}
 }
-
-?>

@@ -72,5 +72,3 @@ class ICE_Ext_Widget_Title_Block
 		</div><?php
 	}
 }
-
-?>

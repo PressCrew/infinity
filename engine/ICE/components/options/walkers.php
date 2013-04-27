@@ -117,5 +117,3 @@ class ICE_Option_Walker_Page extends Walker_Page
 		$output .= PHP_EOL;
 	}
 }
-
-?>

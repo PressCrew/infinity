@@ -77,5 +77,3 @@ class ICE_Ext_Feature_Bp_Fb_Autoconnect
 		return false;
 	}
 }
-
-?>

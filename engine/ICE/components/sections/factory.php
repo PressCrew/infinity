@@ -23,5 +23,3 @@ class ICE_Section_Factory extends ICE_Factory
 {
 	// nothing custom yet
 }
-
-?>

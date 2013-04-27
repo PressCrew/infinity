@@ -191,5 +191,3 @@ class ICE_Ext_Widget_Theme_Picker
 		}
 	}
 }
-
-?>

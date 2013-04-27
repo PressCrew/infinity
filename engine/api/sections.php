@@ -127,5 +127,3 @@ function infinity_sections_init_screen()
 		do_action( 'infinity_sections_init_screen' );
 	}
 }
-
-?>

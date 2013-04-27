@@ -23,5 +23,3 @@ abstract class ICE_Screen_Registry extends ICE_Registry
 {
 	// nothing custom yet
 }
-
-?>

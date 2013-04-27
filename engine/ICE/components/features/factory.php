@@ -23,5 +23,3 @@ class ICE_Feature_Factory extends ICE_Factory
 {
 	// nothing custom yet
 }
-
-?>

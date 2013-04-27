@@ -102,5 +102,3 @@ class ICE_Ext_Feature_Responsive_Videos
 		);
 	}
 }
-
-?>

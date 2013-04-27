@@ -74,5 +74,3 @@ abstract class ICE_Option_Policy extends ICE_Policy
 		return $classes;
 	}
 }
-
-?>

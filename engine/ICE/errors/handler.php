@@ -512,5 +512,3 @@ class ICE_Error_Attribute
 		$this->multiline = $multiline;
 	}
 }
-
-?>

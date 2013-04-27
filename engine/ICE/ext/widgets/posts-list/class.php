@@ -515,5 +515,3 @@ class ICE_Posts_List extends WP_Posts_List_Table
 		return get_edit_post_link( $this->post->ID );
 	}
 }
-
-?>

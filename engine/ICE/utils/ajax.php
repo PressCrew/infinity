@@ -75,5 +75,3 @@ final class ICE_Ajax extends ICE_Base
 		self::response( $code, $message, ob_get_clean() );
 	}
 }
-
-?>

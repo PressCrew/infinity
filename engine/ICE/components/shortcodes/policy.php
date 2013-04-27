@@ -32,5 +32,3 @@ abstract class ICE_Shortcode_Policy extends ICE_Policy
 		return ( $plural ) ? 'shortcodes' : 'shortcode';
 	}
 }
-
-?>

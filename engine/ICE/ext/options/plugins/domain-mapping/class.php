@@ -148,5 +148,3 @@ class ICE_Ext_Option_Plugins_Domain_Mapping
 		return ( preg_match( '/^[a-z0-9](-?[a-z0-9]+)*\.[a-z]{2,4}$/i', $domain ) );
 	}
 }
-
-?>

@@ -268,5 +268,3 @@ abstract class ICE_Element extends ICE_Base
 	}
 
 }
-
-?>

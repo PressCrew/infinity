@@ -45,5 +45,3 @@ class ICE_Ext_Option_Pages
 		wp_list_pages( $args );
 	}
 }
-
-?>

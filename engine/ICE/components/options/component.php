@@ -793,5 +793,3 @@ abstract class ICE_Option_Image
 		return false;
 	}
 }
-
-?>

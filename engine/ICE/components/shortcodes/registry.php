@@ -23,5 +23,3 @@ abstract class ICE_Shortcode_Registry extends ICE_Registry
 {
 	// nothing custom yet
 }
-
-?>

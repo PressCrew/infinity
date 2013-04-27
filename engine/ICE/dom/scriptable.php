@@ -29,5 +29,3 @@ interface ICE_Scriptable
 	public function script();
 
 }
-
-?>

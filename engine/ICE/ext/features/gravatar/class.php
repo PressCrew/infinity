@@ -132,5 +132,3 @@ class ICE_Ext_Feature_Gravatar
 		return sprintf( 'http://www.gravatar.com/avatar/%s.jpg?%s', $hash, http_build_query( $params ) );
 	}
 }
-
-?>

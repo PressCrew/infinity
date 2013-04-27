@@ -101,5 +101,3 @@ abstract class ICE_Section extends ICE_Component
 		}
 	}
 }
-
-?>

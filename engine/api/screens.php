@@ -270,5 +270,3 @@ function infinity_screen_fetch( $screen_name )
 {
 	return Infinity_Screens_Policy::instance()->registry()->get( $screen_name );
 }
-
-?>

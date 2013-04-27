@@ -38,5 +38,3 @@ class ICE_Ext_Option_Css_Length_Px
 		$this->title = 'Pixels';
 	}
 }
-
-?>

@@ -259,5 +259,3 @@ final class ICE_File extends SplFileInfo
 		return '';
 	}
 }
-
-?>

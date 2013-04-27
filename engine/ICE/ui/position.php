@@ -77,5 +77,3 @@ class ICE_Position extends ICE_Base
 		return ($ap < $bp) ? -1 : 1;
 	}
 }
-
-?>

@@ -32,5 +32,3 @@ class ICE_Ext_Option_Toggle_Enable
 		);
 	}
 }
-
-?>

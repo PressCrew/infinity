@@ -131,5 +131,3 @@ final class ICE_File_Cache extends ICE_Map
 		);
 	}
 }
-
-?>

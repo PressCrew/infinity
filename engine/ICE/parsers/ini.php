@@ -236,5 +236,3 @@ final class ICE_Ini extends ICE_Base
 	}
 
 }
-
-?>

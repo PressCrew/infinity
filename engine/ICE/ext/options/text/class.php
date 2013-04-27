@@ -30,5 +30,3 @@ class ICE_Ext_Option_Text
 		$this->input_type( 'text' );
 	}
 }
-
-?>

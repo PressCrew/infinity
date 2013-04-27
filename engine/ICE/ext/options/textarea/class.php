@@ -22,5 +22,3 @@ class ICE_Ext_Option_Textarea
 {
 	// nothing fancy here
 }
-
-?>

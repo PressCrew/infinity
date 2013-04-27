@@ -337,5 +337,3 @@ abstract class ICE_Renderer extends ICE_Componentable
 	}
 
 }
-
-?>

@@ -183,5 +183,3 @@ class ICE_Ext_Option_Upload
 		);
 	}
 }
-
-?>

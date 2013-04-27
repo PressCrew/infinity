@@ -1181,5 +1181,3 @@ class ICE_Component_Script_Export
 		}
 	}
 }
-
-?>

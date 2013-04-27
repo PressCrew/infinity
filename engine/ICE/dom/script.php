@@ -416,5 +416,3 @@ class ICE_Script_Logic extends ICE_Base
 		return false;
 	}
 }
-
-?>

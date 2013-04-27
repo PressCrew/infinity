@@ -30,5 +30,3 @@ interface ICE_Positionable
 	public function position( ICE_Position $position = null );
 
 }
-
-?>

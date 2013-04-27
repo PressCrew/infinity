@@ -32,5 +32,3 @@ abstract class ICE_Feature_Policy extends ICE_Policy
 		return ( $plural ) ? 'features' : 'feature';
 	}
 }
-
-?>

@@ -187,5 +187,3 @@ abstract class ICE_Option_Renderer extends ICE_Renderer
 		<input type="hidden" name="<?php print self::FIELD_MANIFEST ?>[]" value="<?php $this->render_name() ?>" /><?php
 	}
 }
-
-?>

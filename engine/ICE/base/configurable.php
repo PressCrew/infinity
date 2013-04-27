@@ -31,5 +31,3 @@ interface ICE_Configurable
 	 */
 	public function configure();
 }
-
-?>

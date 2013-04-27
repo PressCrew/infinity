@@ -36,5 +36,3 @@ class ICE_Ext_Option_Page
 		wp_dropdown_pages( $args );
 	}
 }
-
-?>

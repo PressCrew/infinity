@@ -491,5 +491,3 @@ final class ICE_Files extends ICE_Base
  * @subpackage utils
  */
 final class ICE_Files_Exception extends Exception {}
-
-?>

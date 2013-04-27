@@ -202,5 +202,3 @@ class ICE_Init_Data extends ICE_Base
 		$this->read_only = true;
 	}
 }
-
-?>

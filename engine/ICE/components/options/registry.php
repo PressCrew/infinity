@@ -298,5 +298,3 @@ abstract class ICE_Option_Registry extends ICE_Registry
 		}
 	}
 }
-
-?>

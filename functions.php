@@ -21,5 +21,3 @@ require_once( 'engine/infinity.php' );
 //
 // So... get to work! (Unless you don't roll on Shabbos)
 //
-
-?>

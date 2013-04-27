@@ -40,5 +40,3 @@ class ICE_Ext_Shortcode_Access extends ICE_Shortcode
 		return null;
 	}
 }
-
-?>

@@ -23,5 +23,3 @@ class ICE_Widget_Factory extends ICE_Factory
 {
 	// nothing custom yet
 }
-
-?>

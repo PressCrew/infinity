@@ -26,5 +26,3 @@ class ICE_Init_Config extends ICE_Init_Registry
 {
 	// nothing special yet
 }
-
-?>

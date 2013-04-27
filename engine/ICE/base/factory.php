@@ -79,5 +79,3 @@ abstract class ICE_Factory extends ICE_Componentable
 	}
 
 }
-
-?>

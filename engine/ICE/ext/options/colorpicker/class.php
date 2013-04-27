@@ -49,5 +49,3 @@ class ICE_Ext_Option_Colorpicker
 	}
 
 }
-
-?>

@@ -49,5 +49,3 @@ class ICE_Init_Directive_Registry extends ICE_Init_Registry
 		return new ICE_Init_Directive( $theme, $name, $value, $read_only );
 	}
 }
-
-?>

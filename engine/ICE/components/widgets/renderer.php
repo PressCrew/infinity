@@ -23,5 +23,3 @@ abstract class ICE_Widget_Renderer extends ICE_Renderer
 {
 	// nothing custom yet
 }
-
-?>

@@ -26,5 +26,3 @@ final class ICE_Packages extends Nice_Pkg
 {
 	// nothing special yet
 }
-
-?>

@@ -68,5 +68,3 @@ final class ICE_Less extends ICE_Base
 		return $less->parse( $text );
 	}
 }
-
-?>

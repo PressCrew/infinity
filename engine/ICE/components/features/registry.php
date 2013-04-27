@@ -62,5 +62,3 @@ abstract class ICE_Feature_Registry extends ICE_Registry
 		return false;
 	}
 }
-
-?>
