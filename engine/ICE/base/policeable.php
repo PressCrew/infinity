@@ -31,5 +31,3 @@ interface ICE_Policeable
 	public function policy( ICE_Policy $policy = null );
 
 }
-
-?>

@@ -32,5 +32,3 @@ class ICE_Ext_Option_Css_Border_Color
 		$this->style_property = 'border-color';
 	}
 }
-
-?>

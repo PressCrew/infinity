@@ -237,5 +237,3 @@ abstract class ICE_Policy extends ICE_Base
 		return true;
 	}
 }
-
-?>

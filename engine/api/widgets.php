@@ -141,5 +141,3 @@ function infinity_widgets_init_screen()
 		do_action( 'infinity_widgets_init_widget' );
 	}
 }
-
-?>

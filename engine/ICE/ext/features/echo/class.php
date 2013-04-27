@@ -120,5 +120,3 @@ class ICE_Ext_Feature_Echo
 	}
 
 }
-
-?>

@@ -65,5 +65,3 @@ class ICE_Ext_Option_Wp_Page_On_Front
 		return true;
 	}
 }
-
-?>

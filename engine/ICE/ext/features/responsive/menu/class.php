@@ -177,5 +177,3 @@ class ICE_Ext_Feature_Responsive_Menu
 		return str_replace('<a ', '<a id="loginlogout" class="button black" ', $text );
 	}
 }
-
-?>

@@ -1126,5 +1126,3 @@ final class ICE_Scheme extends ICE_Base
 		}
 	}
 }
-
-?>

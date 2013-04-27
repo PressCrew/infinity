@@ -23,5 +23,3 @@ abstract class ICE_Widget extends ICE_Component
 {
 	// nothing custom yet
 }
-
-?>

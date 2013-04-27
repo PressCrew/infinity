@@ -576,5 +576,3 @@ function infinity_options_render_options_screen()
 
 }
 add_action( 'wp_ajax_infinity_options_screen', 'infinity_options_render_options_screen' );
-
-?>

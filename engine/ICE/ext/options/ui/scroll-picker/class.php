@@ -121,5 +121,3 @@ class ICE_Ext_Option_Ui_Scroll_Picker
 		print esc_html( $this->property( 'field_options' )->item_at( $value ) );
 	}
 }
-
-?>

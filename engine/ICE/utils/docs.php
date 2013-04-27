@@ -307,5 +307,3 @@ class ICE_Docs extends ICE_Base
 	}
 
 }
-
-?>

@@ -58,5 +58,3 @@ abstract class ICE_Componentable
 		}
 	}
 }
-
-?>

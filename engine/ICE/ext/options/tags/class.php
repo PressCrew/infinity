@@ -45,5 +45,3 @@ class ICE_Ext_Option_Tags
 		return $options;
 	}
 }
-
-?>

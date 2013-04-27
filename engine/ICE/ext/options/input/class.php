@@ -45,5 +45,3 @@ class ICE_Ext_Option_Input
 		return $this->__input_type__;
 	}
 }
-
-?>

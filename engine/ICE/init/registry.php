@@ -273,5 +273,3 @@ abstract class ICE_Init_Registry extends ICE_Map
 		return ( $this->get_read_only() === true );
 	}
 }
-
-?>

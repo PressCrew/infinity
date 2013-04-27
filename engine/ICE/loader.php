@@ -604,5 +604,3 @@ final class ICE_Ext_Loader extends ICE_Base
 	}
 
 }
-
-?>

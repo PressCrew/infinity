@@ -56,5 +56,3 @@ class ICE_Ext_Option_Categories
 		wp_list_categories( $args );
 	}
 }
-
-?>

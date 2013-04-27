@@ -23,5 +23,3 @@ abstract class ICE_Section_Registry extends ICE_Registry
 {
 	// nothing custom yet
 }
-
-?>

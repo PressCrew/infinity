@@ -29,5 +29,3 @@ interface ICE_Styleable
 	public function style();
 
 }
-
-?>

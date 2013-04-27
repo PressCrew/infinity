@@ -23,5 +23,3 @@ abstract class ICE_Shortcode_Renderer extends ICE_Renderer
 {
 	// nothing custom yet
 }
-
-?>

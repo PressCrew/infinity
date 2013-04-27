@@ -32,5 +32,3 @@ abstract class ICE_Widget_Policy extends ICE_Policy
 		return ( $plural ) ? 'widgets' : 'widget';
 	}
 }
-
-?>

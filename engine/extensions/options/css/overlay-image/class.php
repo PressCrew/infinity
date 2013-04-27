@@ -38,5 +38,3 @@ class ICE_Ext_Option_Css_Overlay_Image
 		$this->file_extension = 'png';
 	}
 }
-
-?>

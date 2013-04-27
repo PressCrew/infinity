@@ -64,5 +64,3 @@ final class ICE_Markdown extends ICE_Base
 		return Markdown( $text );
 	}
 }
-
-?>

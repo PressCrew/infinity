@@ -424,5 +424,3 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 		return $comp_name . self::SUB_OPTION_GLUE . $option_name;
 	}
 }
-
-?>

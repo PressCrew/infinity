@@ -64,5 +64,3 @@ abstract class ICE_Screen extends ICE_Component
 		}
 	}
 }
-
-?>

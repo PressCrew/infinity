@@ -137,5 +137,3 @@ class ICE_Ext_Option_Ui_Image_Picker
 		return null;
 	}
 }
-
-?>

@@ -458,5 +458,3 @@ abstract class ICE_Asset extends ICE_Base
 		return file_get_contents( $filename );
 	}
 }
-
-?>

@@ -878,5 +878,3 @@ class ICE_Scheme_Enqueue extends ICE_Base
 	}
 
 }
-
-?>

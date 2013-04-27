@@ -32,5 +32,3 @@ abstract class ICE_Screen_Policy extends ICE_Policy
 		return ( $plural ) ? 'screens' : 'screen';
 	}
 }
-
-?>

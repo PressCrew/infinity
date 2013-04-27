@@ -82,5 +82,3 @@ class ICE_Ext_Option_Ui_Font_Picker
 		return array_merge( $parent_vars, $local_vars );
 	}
 }
-
-?>

@@ -1657,5 +1657,3 @@ final class ICE_Style_Property_Factory extends ICE_Base
 				->add_enum( 'auto' );
 	}
 }
-
-?>

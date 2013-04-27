@@ -24,5 +24,3 @@ class ICE_Ext_Feature_Default
 {
 	// nothing special here
 }
-
-?>

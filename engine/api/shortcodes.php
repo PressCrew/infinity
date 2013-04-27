@@ -126,5 +126,3 @@ function infinity_shortcodes_init_screen()
 		do_action( 'infinity_shortcodes_init_screen' );
 	}
 }
-
-?>

@@ -26,5 +26,3 @@ interface ICE_Exportable
 	 */
 	public function export();
 }
-
-?>

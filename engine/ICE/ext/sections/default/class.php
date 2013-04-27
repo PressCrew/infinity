@@ -32,5 +32,3 @@ class ICE_Ext_Section_Default
 			->cache( 'admin', 'admin.css' );
 	}
 }
-
-?>

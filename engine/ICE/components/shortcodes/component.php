@@ -179,5 +179,3 @@ abstract class ICE_Shortcode extends ICE_Component
 	}
 	
 }
-
-?>

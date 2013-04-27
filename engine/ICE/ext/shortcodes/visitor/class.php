@@ -34,5 +34,3 @@ class ICE_Ext_Shortcode_Visitor extends ICE_Shortcode
 		return null;
 	}
 }
-
-?>

@@ -36,5 +36,3 @@ final class ICE_Textile extends ICE_Base
 		return $parser->TextileThis( $text );
 	}
 }
-
-?>

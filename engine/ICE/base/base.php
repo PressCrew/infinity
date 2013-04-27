@@ -266,5 +266,3 @@ class ICE_Missing_Reqs_Exception extends RuntimeException
 {
 	// nothing special yet
 }
-
-?>

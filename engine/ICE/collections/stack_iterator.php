@@ -106,5 +106,3 @@ class ICE_Stack_Iterator
 		return $this->index < $this->count;
 	}
 }
-
-?>

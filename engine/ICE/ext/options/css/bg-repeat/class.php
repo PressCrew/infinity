@@ -36,5 +36,3 @@ class ICE_Ext_Option_Css_Bg_Repeat
 		$this->default_value = 'repeat';
 	}
 }
-
-?>

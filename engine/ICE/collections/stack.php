@@ -183,5 +183,3 @@ class ICE_Stack
 		return new ICE_Stack_Iterator( $this->data );
 	}
 }
-
-?>

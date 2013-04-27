@@ -46,5 +46,3 @@ abstract class ICE_Section_Renderer extends ICE_Renderer
 	}
 
 }
-
-?>

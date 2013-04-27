@@ -472,5 +472,3 @@ class ICE_Export_Manager
  * @subpackage utils
  */
 final class ICE_Export_Exception extends Exception {}
-
-?>

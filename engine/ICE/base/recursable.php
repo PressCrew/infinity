@@ -27,5 +27,3 @@ interface ICE_Recursable
 	 */
 	public function get_children();
 }
-
-?>

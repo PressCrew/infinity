@@ -169,5 +169,3 @@ class ICE_Ext_Widget_Menu
 		return $script;
 	}
 }
-
-?>

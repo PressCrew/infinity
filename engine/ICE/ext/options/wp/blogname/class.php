@@ -54,5 +54,3 @@ class ICE_Ext_Option_Wp_Blogname
 		return delete_option( 'blogname' );
 	}
 }
-
-?>

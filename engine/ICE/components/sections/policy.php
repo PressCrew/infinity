@@ -32,5 +32,3 @@ abstract class ICE_Section_Policy extends ICE_Policy
 		return ( $plural ) ? 'sections' : 'section';
 	}
 }
-
-?>

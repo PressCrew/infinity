@@ -42,5 +42,3 @@ interface ICE_Visitable
 	 */
 	public function accept( ICE_Visitor $visitor );
 }
-
-?>

@@ -264,5 +264,3 @@ function infinity_comments_template( $file = null, $separate_comments = false )
 	// this is just a wrapper to avoid confusion
 	return comments_template( $file, $separate_comments );
 }
-
-?>

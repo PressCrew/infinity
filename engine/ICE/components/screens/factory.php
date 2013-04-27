@@ -23,5 +23,3 @@ class ICE_Screen_Factory extends ICE_Factory
 {
 	// nothing custom yet
 }
-
-?>

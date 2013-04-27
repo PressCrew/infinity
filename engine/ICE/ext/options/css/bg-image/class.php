@@ -63,5 +63,3 @@ class ICE_Ext_Option_Css_Bg_Image
 		}
 	}
 }
-
-?>

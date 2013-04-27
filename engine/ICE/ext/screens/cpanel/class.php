@@ -137,5 +137,3 @@ class ICE_Ext_Screen_Cpanel
 		return $this->__position__;
 	}
 }
-
-?>

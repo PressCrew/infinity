@@ -68,5 +68,3 @@ abstract class ICE_Feature
 	}
 	
 }
-
-?>

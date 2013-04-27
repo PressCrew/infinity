@@ -35,5 +35,3 @@ class ICE_Ext_Option_Css_Bg_Color
 		$this->style_property = 'background-color';
 	}
 }
-
-?>

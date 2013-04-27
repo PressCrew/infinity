@@ -461,5 +461,3 @@ class ICE_Webfont_Service_Google extends ICE_Webfont_Service
 		}
 	}
 }
-
-?>

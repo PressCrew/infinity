@@ -30,5 +30,3 @@ interface ICE_Iconable
 	public function icon( ICE_Icon $icon = null );
 
 }
-
-?>

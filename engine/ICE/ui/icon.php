@@ -102,5 +102,3 @@ class ICE_Icon extends ICE_Base
 		}
 	}
 }
-
-?>

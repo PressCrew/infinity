@@ -24,5 +24,3 @@ class ICE_Ext_Option_Input_Group
 {
 	// nothing custom yet
 }
-
-?>

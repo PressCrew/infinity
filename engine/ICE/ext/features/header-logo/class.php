@@ -176,5 +176,3 @@ class ICE_Ext_Feature_Header_Logo
 		);
 	}
 }
-
-?>

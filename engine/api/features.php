@@ -167,5 +167,3 @@ function infinity_features_init_screen()
 		do_action( 'infinity_features_init_screen' );
 	}
 }
-
-?>

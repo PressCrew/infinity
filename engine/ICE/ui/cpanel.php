@@ -223,5 +223,3 @@ final class ICE_Ui_Cpanel extends ICE_Base
 		}
 	}
 }
-
-?>
