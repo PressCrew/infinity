@@ -18,8 +18,8 @@
 /**
  * Include control panel and support functions
  */
-require_once( INFINITY_ADMIN_PATH . '/cpanel.php' );
-require_once( INFINITY_ADMIN_PATH . '/support.php' );
+require_once INFINITY_ADMIN_PATH . '/cpanel.php';
+require_once INFINITY_ADMIN_PATH . '/support.php';
 
 
 //
@@ -122,7 +122,7 @@ function infinity_dashboard_load_template( $rel_path, $args = null, $defaults = 
 	extract( wp_parse_args( $args, (array) $defaults ) );
 
 	// locate and include the template
-	include( infinity_dashboard_locate_template( $rel_path ) );
+	include infinity_dashboard_locate_template( $rel_path );
 }
 
 /**

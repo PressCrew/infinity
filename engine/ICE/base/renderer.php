@@ -324,7 +324,7 @@ abstract class ICE_Renderer extends ICE_Componentable
 		}
 
 		// load template
-		include( $this->component()->get_template_path() );
+		include $this->component()->get_template_path();
 	}
 
 	/**
@@ -333,7 +333,7 @@ abstract class ICE_Renderer extends ICE_Componentable
 	final public function load_template_part( $name )
 	{
 		// load template
-		include( $this->component()->get_template_part( $name ) );
+		include $this->component()->get_template_part( $name );
 	}
 
 }

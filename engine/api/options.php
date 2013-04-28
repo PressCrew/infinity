@@ -160,7 +160,7 @@ class Infinity_Options_Renderer extends ICE_Option_Renderer
 		$template = infinity_dashboard_locate_template( 'options/' . $name . '.php' );
 
 		// include it
-		include( $template );
+		include $template;
 	}
 }
 

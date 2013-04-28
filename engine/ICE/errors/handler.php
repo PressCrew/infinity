@@ -185,12 +185,12 @@ class ICE_Error_Handler
 				}
 
 				// load the error page
-				require( ICE_ERROR_PAGE_PATH );
+				require ICE_ERROR_PAGE_PATH;
 
 			} else {
 
 				// load dump template
-				require( dirname( __FILE__ ) . '/dump.php');
+				require dirname( __FILE__ ) . '/dump.php';
 				
 			}
 		}

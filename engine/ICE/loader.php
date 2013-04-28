@@ -360,7 +360,7 @@ final class ICE_Loader extends ICE_Base
 	public function load_wp_lib()
 	{
 		foreach( func_get_args() as $file ) {
-			require_once( ABSPATH . 'wp-includes/' . $file . '.php' );
+			require_once ABSPATH . 'wp-includes/' . $file . '.php';
 		}
 	}
 
@@ -372,7 +372,7 @@ final class ICE_Loader extends ICE_Base
 	public function load_wpadmin_lib()
 	{
 		foreach( func_get_args() as $file ) {
-			require_once( ABSPATH . 'wp-admin/includes/' . $file . '.php' );
+			require_once ABSPATH . 'wp-admin/includes/' . $file . '.php';
 		}
 	}
 

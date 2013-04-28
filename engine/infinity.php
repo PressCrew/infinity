@@ -176,7 +176,7 @@ if ( !defined( 'INFINITY_ERROR_REPORTING' ) ) {
 /**
  * Load the ICE lib loader
  */
-require_once( INFINITY_ICE_PATH . '/loader.php' );
+require_once INFINITY_ICE_PATH . '/loader.php';
 
 // initialize ICE
 ICE_Loader::init( INFINITY_ICE_URL );
@@ -196,13 +196,13 @@ if ( is_admin() ) {
 }
 
 // load Infinity API
-require_once( INFINITY_API_PATH . '/scheme.php' );
-require_once( INFINITY_API_PATH . '/sections.php' );
-require_once( INFINITY_API_PATH . '/options.php' );
-require_once( INFINITY_API_PATH . '/features.php' );
-require_once( INFINITY_API_PATH . '/widgets.php' );
-require_once( INFINITY_API_PATH . '/screens.php' );
-require_once( INFINITY_API_PATH . '/shortcodes.php' );
+require_once INFINITY_API_PATH . '/scheme.php';
+require_once INFINITY_API_PATH . '/sections.php';
+require_once INFINITY_API_PATH . '/options.php';
+require_once INFINITY_API_PATH . '/features.php';
+require_once INFINITY_API_PATH . '/widgets.php';
+require_once INFINITY_API_PATH . '/screens.php';
+require_once INFINITY_API_PATH . '/shortcodes.php';
 
 // initialize scheme
 infinity_scheme_init();
@@ -231,4 +231,4 @@ if ( is_admin() ) {
 }
 
 // load theme setup
-require_once( INFINITY_INC_PATH . '/setup.php' );
+require_once INFINITY_INC_PATH . '/setup.php';
