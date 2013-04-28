@@ -13,7 +13,7 @@
 /**
  * To Infinity, and beyond! (sorry, had to do it)
  */
-require_once( 'engine/infinity.php' );
+require_once 'engine/infinity.php';
 
 //
 // At this point, Infinity is fully loaded and initialized,

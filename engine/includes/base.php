@@ -16,7 +16,7 @@
  */
 if ( is_admin() ) {
 	// load admin functionality
-	require_once( INFINITY_ADMIN_PATH . '/loader.php' );
+	require_once INFINITY_ADMIN_PATH . '/loader.php';
 }
 
 // add post formats

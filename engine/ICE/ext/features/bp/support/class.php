@@ -111,7 +111,7 @@ class ICE_Ext_Feature_Bp_Support
 	 */
 	protected function setup_theme()
 	{
-		require_once( BP_PLUGIN_DIR . '/bp-themes/bp-default/_inc/ajax.php' );
+		require_once BP_PLUGIN_DIR . '/bp-themes/bp-default/_inc/ajax.php';
 
 		// tell BuddyPress that Infinity supports it
 		add_theme_support( 'buddypress' );
