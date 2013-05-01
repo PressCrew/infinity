@@ -204,6 +204,9 @@ require_once INFINITY_API_PATH . '/widgets.php';
 require_once INFINITY_API_PATH . '/screens.php';
 require_once INFINITY_API_PATH . '/shortcodes.php';
 
+// load theme setup
+require_once INFINITY_INC_PATH . '/setup.php';
+
 // initialize scheme
 infinity_scheme_init();
 
@@ -229,6 +232,3 @@ if ( is_admin() ) {
 	infinity_features_init_screen();
 	infinity_shortcodes_init_screen();
 }
-
-// load theme setup
-require_once INFINITY_INC_PATH . '/setup.php';
