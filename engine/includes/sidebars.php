@@ -11,20 +11,31 @@
  * @since 1.0
  */
 
-//
-// Add actions based on feature toggles
-//
+/**
+ * Registers our widget sidebars.
+ *
+ * Hooked to 'widgets_init'.
+ *
+ * @package Infinity
+ * @subpackage base
+ * @uses current_theme_supports()
+ * @uses infinity_base_register_sidebars()
+ * @uses infinity_base_register_bp_sidebars()
+ */
+function infinity_widgets_setup() {
+	// sidebars enabled?
+	if ( current_theme_supports( 'infinity-sidebar-setup' ) ) {
+		// yep, register base sidebars
+		infinity_base_register_sidebars();
 
-// sidebars enabled?
-if ( current_theme_supports( 'infinity-sidebar-setup' ) ) {
-	// yep, register base sidebars
-	add_action( 'init', 'infinity_base_register_sidebars' );
-	// BuddyPress sidebars enabled?
-	if ( current_theme_supports( 'infinity-bp-sidebar-setup' ) ) {
-		// yep, register BP sidebars
-		add_action( 'init', 'infinity_base_register_bp_sidebars' );
+		// BuddyPress sidebars enabled?
+		if ( current_theme_supports( 'infinity-bp-sidebar-setup' ) ) {
+			// yep, register BP sidebars
+			infinity_base_register_bp_sidebars();
+		}
 	}
 }
+add_action( 'widgets_init', 'infinity_widgets_setup' );
 
 /**
  * Register one sidebar
