@@ -264,7 +264,7 @@ function infinity_base_sidebars()
 
 	// assume its the "blog" (posts)
 	} else {
-		
+
 		// show blog sidebar
 		return infinity_base_sidebar( 'blog-sidebar', 'Blog Sidebar' );
 	}
