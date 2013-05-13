@@ -18,7 +18,7 @@ function infinity_google_analytics()
 	// render analytics code
 	echo infinity_option_get( 'infinity-core-options.google-analytics' );
 }
-add_action('close_body','infinity_google_analytics');
+add_action( 'close_body', 'infinity_google_analytics' );
 
 /**
  * Custom Favicon
@@ -38,7 +38,7 @@ function infinity_custom_favicon()
 	// render favicon link ?>
 	<link rel="shortcut icon" type="image/png" href="<?php print $image ?>" /><?php
 }
-add_action('wp_head','infinity_custom_favicon'); 
+add_action( 'wp_head', 'infinity_custom_favicon' );
 
 /**
  * Content Class: Let user pick a sidebar and content width through a theme options
