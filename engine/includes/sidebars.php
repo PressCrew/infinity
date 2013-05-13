@@ -22,7 +22,7 @@
  * @uses infinity_base_register_sidebars()
  * @uses infinity_base_register_bp_sidebars()
  */
-function infinity_widgets_setup()
+function infinity_base_widgets_setup()
 {
 	// sidebars enabled?
 	if ( current_theme_supports( 'infinity-sidebar-setup' ) ) {
@@ -35,7 +35,7 @@ function infinity_widgets_setup()
 		}
 	}
 }
-add_action( 'widgets_init', 'infinity_widgets_setup' );
+add_action( 'widgets_init', 'infinity_base_widgets_setup' );
 
 /**
  * Register one sidebar
