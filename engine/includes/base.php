@@ -37,33 +37,39 @@ function infinity_base_post_formats()
 		)
 	);
 }
-add_action( 'init', 'infinity_base_post_formats' );
+add_action( 'after_setup_theme', 'infinity_base_post_formats' );
 
 
-// Set the content width based on the theme's design and stylesheet.
-// Used to set the width of images and content. Should be equal to the
-// width the theme is designed for, generally via the style.css stylesheet.
-if ( ! isset( $content_width ) )
+/**
+ * Set the content width based on the theme's design and stylesheet.
+ * Used to set the width of images and content. Should be equal to the
+ * width the theme is designed for, generally via the style.css stylesheet.
+ */
+function infinity_base_set_content_width()
 {
-	$content_width = 760;
-	add_theme_support( 'automatic-feed-links' );
+	global $content_width;
+
+	if ( false === isset( $content_width ) ) {
+		$content_width = 760;
+		add_theme_support( 'automatic-feed-links' );
+	}
 }
+add_action( 'after_setup_theme', 'infinity_base_set_content_width' );
 
 /**
  * Add special "admin bar is showing" body class
  */
 function infinity_base_admin_bar_class( $classes )
 {
-	// *append* class to the array
-	$classes[] = 'admin-bar-showing';
+	if ( is_admin_bar_showing() ) {
+		// *append* class to the array
+		$classes[] = 'admin-bar-showing';
+	}
 
 	// return it!
 	return $classes;
 }
-// add filter only when the admin bar is displaying
-if ( is_admin_bar_showing() ) {
-	add_filter( 'body_class', 'infinity_base_admin_bar_class' );
-}
+add_filter( 'body_class', 'infinity_base_admin_bar_class' );
 
 /**
  * Setup post thumbnail sizes
@@ -73,7 +79,10 @@ if ( is_admin_bar_showing() ) {
  */
 function infinity_base_post_thumb_sizes()
 {
-	if ( current_theme_supports( 'post-thumbnails' ) ) {
+	if (
+		current_theme_supports( 'infinity-post-thumbnails' ) &&
+		current_theme_supports( 'post-thumbnails' )
+	) {
 		set_post_thumbnail_size( 35, 35, true );
 		add_image_size( 'post-image', 674, 140, true );
 		add_image_size( 'slider-full', 980, 360, true );
@@ -81,10 +90,7 @@ function infinity_base_post_thumb_sizes()
 		add_image_size( 'thumbnail-post', 210, 160, true );
 	}
 }
-// add action if infinity post thumbnails feature is enabled
-if ( current_theme_supports( 'infinity-post-thumbnails' ) ) {
-	add_action( 'init', 'infinity_base_post_thumb_sizes' );
-}
+add_action( 'after_setup_theme', 'infinity_base_post_thumb_sizes' );
 
 /**
  * Enqueue Comment Script
@@ -121,7 +127,7 @@ function infinity_base_register_menus()
 		register_nav_menu( 'footer-menu', __( 'Inside Footer', infinity_text_domain ) );
 	}
 }
-add_action( 'init', 'infinity_base_register_menus' );
+add_action( 'after_setup_theme', 'infinity_base_register_menus' );
 
 /**
  * Display a nav menu using a custom walker

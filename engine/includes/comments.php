@@ -11,8 +11,7 @@
  */
 
 // Fist full of comments
-if (!function_exists("custom_comment"))
-{
+if ( !function_exists( 'custom_comment' ) ) {
 	/**
 	 * Render a custom comment
 	 *
@@ -54,8 +53,7 @@ if (!function_exists("custom_comment"))
 }
 
 // PINGBACK / TRACKBACK OUTPUT
-if (!function_exists("list_pings"))
-{
+if ( !function_exists( 'list_pings' ) ) {
 	/**
 	 * @package Infinity
 	 * @subpackage misc
@@ -76,8 +74,7 @@ if (!function_exists("list_pings"))
 	}
 }
 		
-if (!function_exists("the_commenter_link"))
-{
+if ( !function_exists( 'the_commenter_link' ) ) {
 	/**
 	 * @package Infinity
 	 * @subpackage misc

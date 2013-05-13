@@ -18,11 +18,11 @@
  * @subpackage base
  */
 
+/**
+ * Print the <title> tag based on what is being viewed.
+ */
 function infinity_base_title()
 {
-	/*
-	 * Print the <title> tag based on what is being viewed.
-	 */
 	global $page, $paged;
  
 	wp_title( '|', true, 'right' );
@@ -68,7 +68,8 @@ function infinity_base_author_box()
 /**
  * Prints HTML with meta information for the current post-date/time and author.
  */
-function infinity_posted_on() {
+function infinity_posted_on()
+{
 	printf( __( '<a href="%1$s" title="%2$s" rel="bookmark"><time class="entry-date" datetime="%3$s" pubdate>%4$s</time></a>', infinity_text_domain ),
 		esc_url( get_permalink() ),
 		esc_attr( get_the_time() ),
@@ -83,6 +84,7 @@ function infinity_posted_on() {
 //
 // Custom Conditionals
 //
+
 /**
  * Returns true if not in admin dir
  *
@@ -90,6 +92,7 @@ function infinity_posted_on() {
  * @subpackage conditionals
  * @return boolean
  */
-function is_not_admin() {
+function is_not_admin()
+{
     return ( !is_admin() );
 }

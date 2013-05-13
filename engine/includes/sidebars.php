@@ -11,20 +11,31 @@
  * @since 1.0
  */
 
-//
-// Add actions based on feature toggles
-//
-
-// sidebars enabled?
-if ( current_theme_supports( 'infinity-sidebar-setup' ) ) {
-	// yep, register base sidebars
-	add_action( 'init', 'infinity_base_register_sidebars' );
-	// BuddyPress sidebars enabled?
-	if ( current_theme_supports( 'infinity-bp-sidebar-setup' ) ) {
-		// yep, register BP sidebars
-		add_action( 'init', 'infinity_base_register_bp_sidebars' );
+/**
+ * Registers our widget sidebars.
+ *
+ * Hooked to 'widgets_init'.
+ *
+ * @package Infinity
+ * @subpackage base
+ * @uses current_theme_supports()
+ * @uses infinity_base_register_sidebars()
+ * @uses infinity_base_register_bp_sidebars()
+ */
+function infinity_base_widgets_setup()
+{
+	// sidebars enabled?
+	if ( current_theme_supports( 'infinity-sidebar-setup' ) ) {
+		// yep, register base sidebars
+		infinity_base_register_sidebars();
+		// BuddyPress sidebars enabled?
+		if ( current_theme_supports( 'infinity-bp-sidebar-setup' ) ) {
+			// yep, register BP sidebars
+			infinity_base_register_bp_sidebars();
+		}
 	}
 }
+add_action( 'widgets_init', 'infinity_base_widgets_setup' );
 
 /**
  * Register one sidebar
@@ -253,7 +264,7 @@ function infinity_base_sidebars()
 
 	// assume its the "blog" (posts)
 	} else {
-		
+
 		// show blog sidebar
 		return infinity_base_sidebar( 'blog-sidebar', 'Blog Sidebar' );
 	}
