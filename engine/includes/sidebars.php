@@ -22,12 +22,12 @@
  * @uses infinity_base_register_sidebars()
  * @uses infinity_base_register_bp_sidebars()
  */
-function infinity_widgets_setup() {
+function infinity_widgets_setup()
+{
 	// sidebars enabled?
 	if ( current_theme_supports( 'infinity-sidebar-setup' ) ) {
 		// yep, register base sidebars
 		infinity_base_register_sidebars();
-
 		// BuddyPress sidebars enabled?
 		if ( current_theme_supports( 'infinity-bp-sidebar-setup' ) ) {
 			// yep, register BP sidebars
