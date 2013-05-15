@@ -677,6 +677,11 @@ abstract class ICE_Component
 	 */
 	final public function add_capabilities( $string )
 	{
+		// caps only apply to administration of components for now
+		if ( !is_admin() ) {
+			return;
+		}
+
 		// split at comma
 		$caps = explode( ',', $string );
 
