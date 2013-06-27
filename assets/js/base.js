@@ -31,7 +31,10 @@ jQuery(document).ready(function($)
 			animation: {opacity:'show', height:'show'},
 			speed: 'fast',
 			autoArrows: false,
-			dropShadows: false
+			dropShadows: false,
+			onShow: function() {
+				$(this).css('overflow','visible');
+			}
 		});
 	}
 
