@@ -261,6 +261,10 @@ li#nav-notifications-groups-li a:before {
     content: "6"
 }
 
+#request-membership-groups-li a:before {
+    content: "y"
+}
+
 /* Profile Icons  */
 #user-activity:before {
     content: "s"
