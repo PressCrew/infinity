@@ -137,6 +137,8 @@ body { min-width: inherit }
 @media only screen and (max-width: 640px) { 
 	div.dir-search {
 	    float: none;
+	    width: auto;
+	    text-align: left;
 	    margin: 1.25em 0 0;
 	}
 	div#item-header div#item-header-content { margin-left: 0px }
