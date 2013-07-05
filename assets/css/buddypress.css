@@ -317,10 +317,10 @@ BuddyPress Default Styling.
 /* > Directories (Members, Groups, Blogs, Forums)
 --------------------------------------------------------------*/
 .infinity-bp div.dir-search {
-    left: 65%;
-    margin-top: -60px;
-    position: relative;
-    width: 51%;
+	float: right;
+	margin-top: -60px;
+	width: 50%;
+	text-align: right;
 }
 .infinity-bp .dir-form {
 	margin-bottom: 30px;
