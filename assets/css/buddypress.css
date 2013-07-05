@@ -255,10 +255,10 @@ div#subnav.item-list-tabs {
 /* > Directories (Members, Groups, Blogs, Forums)
 --------------------------------------------------------------*/
 div.dir-search {
-    left: 65%;
+    float: right;
     margin-top: -60px;
-    position: relative;
-    width: 51%;
+    width: 50%;
+    text-align: right;
 }
 .dir-form { margin-bottom: 30px }
 div.dir-search input[type=text] {
