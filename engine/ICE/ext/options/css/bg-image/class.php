@@ -32,7 +32,6 @@ class ICE_Ext_Option_Css_Bg_Image
 		// init directives
 		$this->title = __( 'Background Image', infinity_text_domain );
 		$this->description = __( 'Upload an image to use as the background', infinity_text_domain );
-		$this->documentation = 'options/uploader';
 		$this->style_property = 'background-image';
 	}
 

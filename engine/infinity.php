@@ -130,11 +130,6 @@ define( 'infinity_text_domain', INFINITY_TEXT_DOMAIN );
 define( 'INFINITY_ADMIN_PAGE', INFINITY_SLUG . '-theme' );
 
 /**
- * Infinity admin documentation directory path
- */
-define( 'INFINITY_ADMIN_DOCS_PATH', INFINITY_ADMIN_PATH . '/docs' );
-
-/**
  * Infinity development mode
  */
 if ( !defined( 'INFINITY_DEV_MODE' ) ) {

@@ -186,10 +186,7 @@ final class ICE_Loader extends ICE_Base
 		),
 		'parsers' => array(
 			'ini' => true,
-			'less' => true,
-			'markdown' => true,
-			'packages' => true,
-			'textile' => true
+			'packages' => true
 		),
 		'schemes' => array(
 			'scheme' => true,
@@ -204,7 +201,6 @@ final class ICE_Loader extends ICE_Base
 		),
 		'utils' => array(
 			'ajax' => true,
-			'docs' => true,
 			'enqueue' => true,
 			'export' => true,
 			'file' => true,
