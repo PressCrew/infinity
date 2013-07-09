@@ -19,7 +19,7 @@
 /**
  * Infinity version number
  */
-define( 'INFINITY_VERSION', '1.1b' );
+define( 'INFINITY_VERSION', '1.1' );
 
 /**
  * Infinity slug
