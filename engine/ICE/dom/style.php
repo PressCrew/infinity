@@ -115,18 +115,6 @@ class ICE_Style extends ICE_Asset
 
 			// save last filename
 			$this->last_dirname = $fi->getPath();
-
-			// handle any pre-processing
-			switch ( $fi->getExtension() ) {
-				// its a LESS CSS file
-				case 'less':
-					// load less parser
-					ICE_Loader::load( 'parsers/less' );
-					// parse it
-					$content = ICE_Less::parse( $content, $fi->getPath() );
-					// done with less
-					break;
-			}
 			
 			// replace all CSS url() values
 			return preg_replace_callback( '/url\s*\([\'\"\s]*([^\'\"\s]*)[\'\"\s]*\)/', array($this, 'fix_url_path'), $content );
