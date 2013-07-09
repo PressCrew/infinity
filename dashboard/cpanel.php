@@ -52,7 +52,7 @@ function infinity_dashboard_cpanel_actions()
 		// main
 		'start', 'options', 'shortcodes', 'widgets', 'about',
 		// devs
-		'docs', 'api',
+		'api',
 		// community
 		'news', 'thanks'
 	);
