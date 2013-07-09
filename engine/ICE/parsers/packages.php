@@ -12,7 +12,7 @@
  */
 
 /**
- * Load the markdown lib
+ * Load the nice pkg lib
  */
 require_once ICE_LIB_PATH . '/nicepkg/nicepkg.php';
 
