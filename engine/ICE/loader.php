@@ -21,7 +21,7 @@ if ( defined( 'ICE_VERSION' ) ) {
 /**
  * ICE API: version
  */
-define( 'ICE_VERSION', '1.1' );
+define( 'ICE_VERSION', '1.2a' );
 /**
  * ICE API: root directory
  */
