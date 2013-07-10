@@ -41,18 +41,6 @@ if ( !defined( 'ICE_CACHE_EXPORTS' ) ) {
 	define( 'ICE_CACHE_EXPORTS', true );
 }
 /**
- * ICE API: error handling support toggle
- */
-if ( !defined( 'ICE_ERROR_HANDLING' ) ) {
-	define( 'ICE_ERROR_HANDLING', false );
-}
-/**
- * ICE API: error reproting support toggle
- */
-if ( !defined( 'ICE_ERROR_REPORTING' ) ) {
-	define( 'ICE_ERROR_REPORTING', false );
-}
-/**
  * ICE API: exported files sub directory name
  */
 if ( !defined( 'ICE_EXPORTS_SUBDIR' ) ) {
@@ -68,13 +56,6 @@ if ( !defined( 'ICE_THEMES_COMPILED' ) ) {
  * ICE API: cache get_stylesheet() call for performance 
  */
 define( 'ICE_ACTIVE_THEME', get_stylesheet() );
-
-/**
- *  load error handler if applicable
- */
-if ( ICE_ERROR_HANDLING ) {
-	require_once ICE_PATH . '/errors/handler.php';
-}
 
 /**
  * include the base class
@@ -234,7 +215,6 @@ final class ICE_Loader extends ICE_Base
 			define( 'ICE_URL', $ice_url );
 			define( 'ICE_ASSETS_URL', ICE_URL . '/assets' );
 			define( 'ICE_CSS_URL', ICE_ASSETS_URL . '/css' );
-			define( 'ICE_ERRORS_URL', ICE_ASSETS_URL . '/errors' );
 			define( 'ICE_IMAGES_URL', ICE_ASSETS_URL . '/images' );
 			define( 'ICE_JS_URL', ICE_ASSETS_URL . '/js' );
 
