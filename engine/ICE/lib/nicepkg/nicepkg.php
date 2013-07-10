@@ -42,7 +42,7 @@ class Nice_Pkg
 	 *
 	 * @var array
 	 */
-	private $theme_data;
+	private $theme_info;
 
 	/**
 	 * @param string $url
@@ -66,19 +66,18 @@ class Nice_Pkg
 	}
 
 	/**
-	 * Return theme data for active theme
+	 * Return theme info for active theme
 	 *
 	 * @param string $theme_slug
 	 * @return array
 	 */
-	private function get_theme_data( $theme_slug )
+	private function get_theme_info( $theme_slug )
 	{
-		if ( null === $this->theme_data ) {
-			$stylesheet = get_theme_root( $theme_slug ) . '/' . $theme_slug . '/style.css';
-			$this->theme_data = get_theme_data( $stylesheet );
+		if ( null === $this->theme_info ) {
+			$this->theme_info = wp_get_theme( $theme_slug );
 		}
 
-		return $this->theme_data;
+		return $this->theme_info;
 	}
 
 	/**
@@ -209,11 +208,11 @@ class Nice_Pkg
 	public function theme_needs_update( $theme_slug, $package_id )
 	{
 		// lookup theme
-		$theme = $this->get_theme_data( $theme_slug );
+		$theme = $this->get_theme_info( $theme_slug );
 
 		// get a theme?
-		if ( $theme_slug && isset( $theme['Version'] ) ) {
-			return $this->needs_update( 'theme', $package_id, $theme['Version'] );
+		if ( $theme_slug && isset( $theme->Version ) ) {
+			return $this->needs_update( 'theme', $package_id, $theme->Version );
 		} else {
 			return false;
 		}
