@@ -72,7 +72,7 @@ function infinity_dashboard_support_info()
 	}
 
 	// get theme info
-	$theme = current_theme_info();
+	$theme = wp_get_theme();
 
 	// get plugin info
 	$active_plugins = array();
@@ -131,7 +131,7 @@ function infinity_dashboard_support_info()
 
 	<h4><?php _e( 'Theme', infinity_text_domain ) ?></h4>
 	<ul>
-		<li><?php printf( __( 'Current theme: %s version %s', infinity_text_domain ), $theme->name, $theme->version ) ?></li>
+		<li><?php printf( __( 'Current theme: %s version %s', infinity_text_domain ), $theme->Name, $theme->Version ) ?></li>
 	</ul>
 
 	<h4><?php _e( 'Active Plugins', infinity_text_domain ) ?></h4>
