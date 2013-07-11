@@ -22,7 +22,7 @@ class ICE_Init_Data extends ICE_Base
 	/**
 	 * @var string The theme that set this data
 	 */
-	private $theme;
+	private $theme_slug;
 
 	/**
 	 * @var string The name of this data
@@ -56,7 +56,7 @@ class ICE_Init_Data extends ICE_Base
 	 */
 	public function __construct( $theme, $name, $value = null, $read_only = false )
 	{
-		$this->theme = $theme;
+		$this->theme_slug = $theme;
 		$this->name = $name;
 		$this->value = $value;
 
@@ -97,9 +97,9 @@ class ICE_Init_Data extends ICE_Base
 	 * 
 	 * @return string
 	 */
-	public function get_theme()
+	public function get_theme_slug()
 	{
-		return $this->theme;
+		return $this->theme_slug;
 	}
 
 	/**

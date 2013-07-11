@@ -26,7 +26,7 @@
 					?>			
 					<h1 class="post-title">
 						<?php the_title(); ?>
-						<?php edit_post_link(' ✍','',' ');?>
+						<?php edit_post_link();?>
 					</h1>	
 					<?php
 					do_action( 'open_loop_single' );

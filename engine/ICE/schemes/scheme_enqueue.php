@@ -180,7 +180,7 @@ class ICE_Scheme_Enqueue extends ICE_Base
 		// custom ui stylesheet set?
 		if ( $ui_stylesheet instanceof ICE_Init_Directive ) {
 			ICE_Enqueue::instance()->ui_stylesheet(
-				ICE_Scheme::instance()->theme_file_url( $ui_stylesheet->get_theme(), $ui_stylesheet->get_value() )
+				ICE_Scheme::instance()->theme_file_url( $ui_stylesheet->get_theme_slug(), $ui_stylesheet->get_value() )
 			);
 		}
 	}

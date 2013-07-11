@@ -42,7 +42,7 @@ class ICE_Ext_Option_Categories
 			'exclude_tree'			=> false,
 			'include'				=> false,
 			'hierarchical'			=> false,
-			'title_li'				=> __( 'Categories' ),
+			'title_li'				=> __( 'Categories', infinity_text_domain ),
 			'number'				=> null,
 			'echo'					=> true,
 			'depth'					=> false,

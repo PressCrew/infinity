@@ -19,7 +19,7 @@
 /**
  * Infinity version number
  */
-define( 'INFINITY_VERSION', '1.1' );
+define( 'INFINITY_VERSION', '1.2a' );
 
 /**
  * Infinity slug
@@ -140,32 +140,6 @@ if ( !defined( 'INFINITY_DEV_MODE' ) ) {
 	 */
 	if ( !defined( 'ICE_CACHE_EXPORTS' ) ) {
 		define( 'ICE_CACHE_EXPORTS', !INFINITY_DEV_MODE );
-	}
-
-/**
- * Infinity error handling
- */
-if ( !defined( 'INFINITY_ERROR_HANDLING' ) ) {
-	define( 'INFINITY_ERROR_HANDLING', false );
-}
-	/**
-	 * ICE error handling
-	 */
-	if ( !defined( 'ICE_ERROR_HANDLING' ) ) {
-		define( 'ICE_ERROR_HANDLING', INFINITY_ERROR_HANDLING );
-	}
-
-/**
- * Infinity error reporting
- */
-if ( !defined( 'INFINITY_ERROR_REPORTING' ) ) {
-	define( 'INFINITY_ERROR_REPORTING', INFINITY_ERROR_HANDLING );
-}
-	/**
-	 * ICE error reporting
-	 */
-	if ( !defined( 'ICE_ERROR_REPORTING' ) ) {
-		define( 'ICE_ERROR_REPORTING', INFINITY_ERROR_REPORTING );
 	}
 
 /**

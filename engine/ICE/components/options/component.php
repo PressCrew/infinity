@@ -765,7 +765,7 @@ abstract class ICE_Option_Image
 			// has default config?
 			if ( $default_config ) {
 				// yep, determine path
-				return ICE_Scheme::instance()->theme_file_url( $default_config->get_theme(), $this->default_value );
+				return ICE_Scheme::instance()->theme_file_url( $default_config->get_theme_slug(), $this->default_value );
 			}
 		}
 
@@ -784,7 +784,7 @@ abstract class ICE_Option_Image
 			// use default
 			return
 				ICE_Scheme::instance()->theme_file_url(
-					$this->config()->get('default_value')->get_theme(),
+					$this->config()->get('default_value')->get_theme_slug(),
 					$this->default_value
 				);
 		}
