@@ -74,7 +74,7 @@ add_action( 'infinity_dashboard_activated', 'infinity_dashboard_activated_redire
 function infinity_dashboard_menu_setup()
 {
 	// get name of current theme
-	$theme_name = get_current_theme();
+	$theme_name = wp_get_theme()->Name;
 
 	// format page title
 	$page_title = sprintf( __( '%s Options', infinity_text_domain ), $theme_name );
