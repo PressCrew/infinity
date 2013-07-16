@@ -164,11 +164,11 @@ abstract class ICE_Component
 	protected $script;
 
 	/**
-	 * Comma separated list of script handles to enqueue
+	 * Array of script handles to pass to enqueuer as dependencies.
 	 *
-	 * @var string
+	 * @var array
 	 */
-	protected $script_depends;
+	protected $script_depends = array();
 
 	/**
 	 * Relative path to custom stylesheet
@@ -605,10 +605,6 @@ abstract class ICE_Component
 		// set script
 		if ( $this->config()->contains( 'script' ) ) {
 			$this->script = $this->config( 'script' );
-			$this->script()->cache(
-				$this->element()->id(),
-				ICE_Scheme::instance()->locate_file( $this->script )
-			);
 		}
 
 		// set script dependancies
@@ -842,11 +838,19 @@ abstract class ICE_Component
 	 */
 	public function init_scripts()
 	{
-		// depend on any scripts?
-		if ( $this->script_depends instanceof ICE_Map ) {
-			// enqueue all of them
-			foreach( $this->script_depends as $dep ) {
-				wp_enqueue_script( $dep );
+		// is a script set?
+		if ( $this->script ) {
+			// locate it
+			$path = ICE_Scheme::instance()->locate_file( $this->script );
+			// find it?
+			if ( $path ) {
+				// yep, enqueue it
+				wp_enqueue_script(
+					$this->name,
+					ICE_Files::theme_file_to_url( $path ),
+					$this->script_depends,
+					INFINITY_VERSION
+				);
 			}
 		}
 	}
