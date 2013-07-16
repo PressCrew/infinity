@@ -178,11 +178,11 @@ abstract class ICE_Component
 	protected $style;
 
 	/**
-	 * Comma separated list of style handles to enqueue
+	 * Array of style handles to pass to enqueuer as dependencies.
 	 *
 	 * @var string
 	 */
-	protected $style_depends;
+	protected $style_depends = array();
 	
 	/**
 	 * Relative path to component template file
@@ -592,10 +592,6 @@ abstract class ICE_Component
 		// set stylesheet
 		if ( $this->config()->contains( 'style' ) ) {
 			$this->style = $this->config( 'style' );
-			$this->style()->cache(
-				$this->element()->id(),
-				ICE_Scheme::instance()->locate_file( $this->style )
-			);
 		}
 
 		// set style dependancies
@@ -822,11 +818,19 @@ abstract class ICE_Component
 	 */
 	public function init_styles()
 	{
-		// depend on any styles?
-		if ( $this->style_depends instanceof ICE_Map ) {
-			// enqueue all of them
-			foreach( $this->style_depends as $dep ) {
-				wp_enqueue_style( $dep );
+		// is a style set?
+		if ( $this->style ) {
+			// locate it
+			$path = ICE_Scheme::instance()->locate_file( $this->style );
+			// find it?
+			if ( $path ) {
+				// yep, enqueue it
+				wp_enqueue_style(
+					$this->name,
+					ICE_Files::theme_file_to_url( $path ),
+					$this->style_depends,
+					INFINITY_VERSION
+				);
 			}
 		}
 	}
