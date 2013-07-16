@@ -180,7 +180,7 @@ abstract class ICE_Component
 	/**
 	 * Array of style handles to pass to enqueuer as dependencies.
 	 *
-	 * @var string
+	 * @var array
 	 */
 	protected $style_depends = array();
 	
