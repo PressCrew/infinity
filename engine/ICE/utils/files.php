@@ -417,7 +417,7 @@ final class ICE_Files extends ICE_Base
 	static public function theme_file_to_url( $file_path )
 	{
 		// convert path to be relative to themes root
-		$relative_path = self::theme_file_to_rel( $file_path );
+		$relative_path = self::theme_file_to_rel( self::path_normalize( $file_path ) );
 		// split it up
 		$file_names = self::path_split( $relative_path );
 		// theme is first arg, beautiful!
