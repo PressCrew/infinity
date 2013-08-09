@@ -31,7 +31,7 @@ class ICE_Ext_Option_Ui_Overlay_Picker
 		parent::init_styles();
 
 		// add bg image style callback
-		$this->style()->cache( 'bgimage-gen', 'bg_image_style' );
+		$this->style()->inject( 'bgimage-gen', 'bg_image_style' );
 	}
 
 	/**

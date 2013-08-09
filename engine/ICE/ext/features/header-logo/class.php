@@ -44,8 +44,8 @@ class ICE_Ext_Feature_Header_Logo
 		
 		// add static logo styles and callback
 		$this->style()
-			->cache( 'logo', 'logo.css' )
-			->cache( 'logo-gen', 'logo_styles' );
+			->inject( 'logo', 'logo.css' )
+			->inject( 'logo-gen', 'logo_styles' );
 	}
 
 	/**

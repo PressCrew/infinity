@@ -35,12 +35,6 @@ define( 'ICE_LIB_PATH', ICE_PATH . '/lib' );
  */
 define( 'ICE_EXT_PATH', ICE_PATH . '/ext' );
 /**
- * ICE API: exports caching toggle
- */
-if ( !defined( 'ICE_CACHE_EXPORTS' ) ) {
-	define( 'ICE_CACHE_EXPORTS', true );
-}
-/**
  * ICE API: exported files sub directory name
  */
 if ( !defined( 'ICE_EXPORTS_SUBDIR' ) ) {

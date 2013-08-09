@@ -29,6 +29,6 @@ class ICE_Ext_Section_Default
 		// slurp admin styles
 		$this->style()
 			->section( 'admin' )
-			->cache( 'admin', 'admin.css' );
+			->inject( 'admin', 'admin.css' );
 	}
 }

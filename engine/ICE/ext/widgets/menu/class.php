@@ -48,7 +48,7 @@ class ICE_Ext_Widget_Menu
 		// slurp admin styles
 		$this->style()
 			->section( 'admin' )
-			->cache( 'admin', 'admin.css' );
+			->inject( 'admin', 'admin.css' );
 	}
 	
 	/**

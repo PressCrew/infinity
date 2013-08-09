@@ -43,7 +43,7 @@ class ICE_Ext_Option_Css_Bg_Image
 
 		// add dynamic styles callback
 		$this->style()
-			->cache( 'remove-image', 'bg_image_override' );
+			->inject( 'remove-image', 'bg_image_override' );
 	}
 	
 	/**

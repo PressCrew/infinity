@@ -31,7 +31,7 @@ class ICE_Ext_Option_Colorpicker
 		// slurp admin styles
 		$this->style()
 			->section( 'admin' )
-			->cache( 'admin', 'admin.css' )
+			->inject( 'admin', 'admin.css' )
 			->add_dep( 'ice-colorpicker' );
 	}
 
@@ -44,7 +44,7 @@ class ICE_Ext_Option_Colorpicker
 		// slurp admin script
 		$this->script()
 			->section( 'admin' )
-			->cache( 'wrapper', 'wrapper.js' )
+			->inject( 'wrapper', 'wrapper.js' )
 			->add_dep( 'ice-colorpicker' );
 	}
 

@@ -81,7 +81,7 @@ class ICE_Ext_Widget_Posts_List
 		// slurp admin styles
 		$this->style()
 			->section( 'admin' )
-			->cache( 'admin', 'admin.css' );
+			->inject( 'admin', 'admin.css' );
 	}
 
 	/**
@@ -93,7 +93,7 @@ class ICE_Ext_Widget_Posts_List
 		// slurp admin scripts
 		$this->script()
 			->section( 'admin' )
-			->cache( 'admin', 'admin.js' )
+			->inject( 'admin', 'admin.js' )
 			->add_dep( 'jquery-cookie' )
 			->add_dep( 'jquery-ui-nestedsortable' );
 	}

@@ -44,7 +44,7 @@ class ICE_Ext_Feature_Gravatar
 		parent::init_styles();
 
 		// add gravatar image styles callback
-		$this->style()->cache( 'image', 'image_css' );
+		$this->style()->inject( 'image', 'image_css' );
 	}
 	
 	/**

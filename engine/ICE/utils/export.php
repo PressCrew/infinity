@@ -283,14 +283,14 @@ class ICE_Export extends ICE_Base
 	}
 
 	/**
-	 * Update the export file
+	 * Fetch the export data
 	 *
-	 * @return boolean
+	 * @return string
 	 */
-	public function update()
+	public function fetch()
 	{
 		// result is null by default
-		$data = null;
+		$data = '';
 
 		// have a callback
 		if ( $this->callback ) {
@@ -307,22 +307,16 @@ class ICE_Export extends ICE_Base
 			}
 		}
 
-		// any result?
-		if ( empty( $data ) ) {
-			// no content to write, empty it
-			$this->write();
-		} else {
-			// write it!
-			$this->write( $data );
-		}
-
-		// now try to update my children
+		// now try to fetch my children
 		if ( count( $this->children ) ) {
 			// loop all and call update
 			foreach( $this->children as $child ) {
-				$child->update();
+				$data .= $child->fetch();
 			}
 		}
+
+		// return export string
+		return $data;
 	}
 
 	/**
@@ -454,14 +448,18 @@ class ICE_Export_Manager
 	}
 
 	/**
-	 * Update all managed exports
+	 * Fetch all managed exports
 	 */
-	public function update()
+	public function fetch()
 	{
+		$data = '';
+
 		foreach( $this->exports as $export ) {
 			/* @var $export ICE_Export */
-			$export->update();
+			$data .= $export->fetch();
 		}
+
+		return $data;
 	}
 }
 

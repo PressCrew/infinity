@@ -68,7 +68,7 @@ class ICE_Ext_Option_Upload
 			// slurp admin styles
 			$this->style()
 				->section( 'admin' )
-				->cache( 'template', 'template.css' );
+				->inject( 'template', 'template.css' );
 		}
 	}
 
@@ -82,7 +82,7 @@ class ICE_Ext_Option_Upload
 			// slurp admin script
 			$this->script()
 				->section( 'admin' )
-				->cache( 'template', 'template.js' );
+				->inject( 'template', 'template.js' );
 		}
 	}
 

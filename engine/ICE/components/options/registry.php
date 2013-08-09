@@ -266,9 +266,6 @@ abstract class ICE_Option_Registry extends ICE_Registry
 					$save_count++;
 				}
 			}
-
-			// hard refresh all scheme exports
-			ICE_Scheme::instance()->exports_refresh( true );
 			
 			// done saving
 			return $save_count;

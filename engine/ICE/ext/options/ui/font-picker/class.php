@@ -51,7 +51,7 @@ class ICE_Ext_Option_Ui_Font_Picker
 		// slurp admin styles
 		$this->style()
 			->section( 'admin' )
-			->cache( 'admin', 'admin.css' )
+			->inject( 'admin', 'admin.css' )
 			->add_dep( 'jquery-multiselect' );
 	}
 
@@ -62,7 +62,7 @@ class ICE_Ext_Option_Ui_Font_Picker
 		// slurp admin scripts
 		$this->script()
 			->section( 'admin' )
-			->cache( 'admin', 'admin.js' )
+			->inject( 'admin', 'admin.js' )
 			->add_dep( 'jquery-multiselect' );
 	}
 

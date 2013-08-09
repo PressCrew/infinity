@@ -31,7 +31,7 @@ class ICE_Ext_Widget_Title_Block
 		// slurp admin styles
 		$this->style()
 			->section( 'admin' )
-			->cache( 'admin', 'admin.css' );
+			->inject( 'admin', 'admin.css' );
 	}
 	
 	/**

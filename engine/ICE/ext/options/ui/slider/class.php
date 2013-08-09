@@ -105,7 +105,7 @@ class ICE_Ext_Option_Ui_Slider
 		// slurp admin styles
 		$this->style()
 			->section( 'admin' )
-			->cache( 'admin', 'admin.css' );
+			->inject( 'admin', 'admin.css' );
 	}
 
 	/**

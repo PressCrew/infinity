@@ -265,8 +265,7 @@ final class ICE_Scheme extends ICE_Base
 		// some scheme initializations must occur after WP theme setup
 		add_action( 'after_setup_theme', array($this, 'init_enqueueing') );
 		add_action( 'after_setup_theme', array($this, 'load_functions') );
-		add_action( 'ice_enqueue_styles', array($this, 'exports_refresh'), 0 );
-		add_action( 'ice_enqueue_scripts', array($this, 'exports_refresh'), 0 );
+		add_action( 'wp_head', array($this, 'exports_inject'), 11 );
 
 		return $this;
 	}
@@ -540,69 +539,35 @@ final class ICE_Scheme extends ICE_Base
 	}
 
 	/**
-	 * Refresh export files if necessary
+	 * Inject export files
 	 */
-	public function exports_refresh( $force = false )
+	public function exports_inject()
 	{
-		// hard refresh toggle
-		static $hard_refresh = false;
+		// inject styles
+		$export_styles = $this->exports()->get( 'styles' );
+		$export_scripts = $this->exports()->get( 'scripts' );
 
-		// export instance depends on which filter is being run
-		switch( current_filter() ) {
-			// enqueue styles action
-			case 'ice_enqueue_styles':
-				// grab the styles exporter
-				$export = $this->exports()->get( 'styles' );
-				break;
-			// enqueue scripts action
-			case 'ice_enqueue_scripts':
-				// grab the scripts exporter
-				$export = $this->exports()->get( 'scripts' );
-				break;
-			// no matching filter... might be a hard refresh
-			default:
-				// force toggled on?
-				if ( true === $force ) {
-					// toggle hard refresh ON
-					$hard_refresh = true;
-					// manually call style enqueuer
-					ICE_Enqueue::instance()->do_enqueue_styles();
-					// manually call script enqueuer
-					ICE_Enqueue::instance()->do_enqueue_scripts();
-					// toggle hard refresh OFF
-					$hard_refresh = false;
-				}
-				// return either way
-				return;
-		}
+		// render em! ?>
+		<!-- dynamic styles -->
+		<style type="text/css">
+			<?php $this->export_render( $export_styles ); ?>
+		</style>
+		<!-- dynamic scripts -->
+		<script type="text/javascript">
+			<?php $this->export_render( $export_scripts ); ?>
+		</script><?php
 
-		// are we using the cache?
-		if ( true == ICE_CACHE_EXPORTS && false == $hard_refresh ) {
-			// yes, loop all config files
-			foreach ( $this->config_files_loaded as $file ) {
-				// get file last mod time
-				$mtime = @filemtime( $file );
-				// check if stale
-				if ( $export->stale( $mtime ) ) {
-					// call export refresher
-					return $this->export_refresh( $export );
-				}
-			}
-			// cache is up to date, did NOT refresh
-			return false;
-		}
-
-		// update the export
-		return $this->export_refresh( $export );
+//		global $wp_actions;
+//		var_dump( $wp_actions );
 	}
 
 	/**
-	 * Refresh one export
+	 * Inject one export
 	 *
 	 * @param ICE_Export $export
 	 * @return boolean
 	 */
-	final protected function export_refresh( ICE_Export $export )
+	final protected function export_render( ICE_Export $export )
 	{
 		// loop all component registries and pass them the exporters
 		foreach ( ICE_Policy::all() as $policy ) {
@@ -610,8 +575,8 @@ final class ICE_Scheme extends ICE_Base
 			$policy->registry()->accept( $export );
 		}
 
-		// update it
-		$export->update();
+		// render it
+		echo $export->fetch();
 		
 		// all done
 		return true;

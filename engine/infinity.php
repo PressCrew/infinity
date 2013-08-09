@@ -135,12 +135,6 @@ define( 'INFINITY_ADMIN_PAGE', INFINITY_SLUG . '-theme' );
 if ( !defined( 'INFINITY_DEV_MODE' ) ) {
 	define( 'INFINITY_DEV_MODE', false );
 }
-	/**
-	 * ICE exports caching toggle
-	 */
-	if ( !defined( 'ICE_CACHE_EXPORTS' ) ) {
-		define( 'ICE_CACHE_EXPORTS', !INFINITY_DEV_MODE );
-	}
 
 /**
  * Load the ICE lib loader

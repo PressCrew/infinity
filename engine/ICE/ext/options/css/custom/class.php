@@ -29,7 +29,7 @@ class ICE_Ext_Option_Css_Custom
 		parent::init_styles();
 
 		// add css injection callback
-		$this->style()->cache( 'custom', 'inject_css' );
+		$this->style()->inject( 'custom', 'inject_css' );
 	}
 
 	/**

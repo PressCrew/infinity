@@ -126,13 +126,13 @@ abstract class ICE_Asset extends ICE_Base
 	abstract public function enqueue( $handle );
 
 	/**
-	 * Add a file or callback from which to populate the dynamic asset cache
+	 * Add a file or callback from which to inject dynamic asset code.
 	 *
 	 * @param string $handle
 	 * @param string|array $file_or_callback
 	 * @return ICE_Asset
 	 */
-	final public function cache( $handle, $file_or_callback )
+	final public function inject( $handle, $file_or_callback )
 	{
 		// does string have an extension?
 		if ( is_string( $file_or_callback) && strpos( $file_or_callback, '.' ) ) {
@@ -276,13 +276,13 @@ abstract class ICE_Asset extends ICE_Base
 	 *
 	 * @param string $handle
 	 * @param string $file
-	 * @param boolean $cache
+	 * @param boolean $inject
 	 * @return ICE_Asset
 	 */
-	final public function add_file( $handle, $file, $cache = false )
+	final public function add_file( $handle, $file, $inject = false )
 	{
 		// push file onto applicable stack
-		if ( true === $cache ) {
+		if ( true === $inject ) {
 			$this->files_export[ $handle ] = $file;
 		} else {
 			$this->files[ $handle ] = $file;
@@ -455,6 +455,8 @@ abstract class ICE_Asset extends ICE_Base
 	 */
 	protected function get_file_contents( $filename )
 	{
-		return file_get_contents( $filename );
+		ob_start();
+		include $filename;
+		return ob_get_clean();
 	}
 }
