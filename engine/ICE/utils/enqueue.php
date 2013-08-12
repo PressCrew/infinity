@@ -32,7 +32,7 @@ final class ICE_Enqueue extends ICE_Base
 	/**
 	 * Default UI style handle
 	 */
-	const UI_STYLE_HANDLE = '@:ui';
+	const UI_STYLE_HANDLE = 'custom-ui';
 
 	/**
 	 * Singleton instance
@@ -226,7 +226,7 @@ final class ICE_Enqueue extends ICE_Base
 		$this->register_style(
 			'jquery-juicy',
 			'juicy/jquery.juicy.css',
-			array( '@:ui' )
+			array( self::UI_STYLE_HANDLE )
 		);
 
 		$this->register_style(
