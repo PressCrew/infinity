@@ -449,13 +449,3 @@ a.add_to_cart_button:before {
     font-size: 100%;
     opacity: 0.6;
 }
-div.link-vote-panel div.clickers a.up {
-	background: transparent;
-}
-div.link-vote-panel div.clickers a.up:before {
-	color: inherit;
-    height: 20px;
-    position: relative;
-    width: 20px;
-	content: "[";
-}
