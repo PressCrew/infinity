@@ -182,7 +182,7 @@ final class ICE_Ui_Cpanel extends ICE_Base
 				<?php endif;
 			}
 
-			$logic = $script->end_logic();
+			$logic = $script->end_logic( 'items' );
 			$logic->set_property( 'alias', true );
 			$logic->set_property( 'ready', true );
 
@@ -209,7 +209,7 @@ final class ICE_Ui_Cpanel extends ICE_Base
 
 			// new script helper
 			$script = new ICE_Script();
-			$logic = $script->logic();
+			$logic = $script->logic( 'vars' );
 
 			foreach( $items as $item ) {
 				// add variable

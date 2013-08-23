@@ -13,6 +13,7 @@
 
 ICE_Loader::load(
 	'base/componentable',
+	'base/recursable',
 	'base/visitable',
 	'dom/element',
 	'dom/styleable',
@@ -451,12 +452,8 @@ abstract class ICE_Component
 	public function style()
 	{
 		if ( !$this->__style__ instanceof ICE_Style ) {
-
 			// init style object
 			$this->__style__ = new ICE_Style( $this );
-			
-			// init style sections
-			$this->__style__->add_section( 'admin' );
 		}
 
 		// return it!
@@ -471,12 +468,8 @@ abstract class ICE_Component
 	public function script()
 	{
 		if ( !$this->__script__ instanceof ICE_Script ) {
-
 			// init script object
 			$this->__script__ = new ICE_Script( $this );
-
-			// init script sections
-			$this->__script__->add_section( 'admin' );
 		}
 
 		// return it!
@@ -832,6 +825,14 @@ abstract class ICE_Component
 	}
 
 	/**
+	 * This template method is called "just in time" to enqueue admin styles.
+	 */
+	public function init_admin_styles()
+	{
+		// override me
+	}
+
+	/**
 	 * This template method is called "just in time" to enqueue scripts
 	 *
 	 * Override this method to initialize special script handling for a component
@@ -853,6 +854,14 @@ abstract class ICE_Component
 				);
 			}
 		}
+	}
+
+	/**
+	 * This template method is called "just in time" to enqueue admin scripts.
+	 */
+	public function init_admin_scripts()
+	{
+		// override me
 	}
 
 	/**
@@ -1144,53 +1153,4 @@ abstract class ICE_Component
 class ICE_Component_Element extends ICE_Element
 {
 	// nothing special yet, but there will be!
-}
-
-/**
- * Abstract asset exporter
- *
- * @package ICE
- * @subpackage schemes
- */
-abstract class ICE_Component_Asset_Export
-	extends ICE_Export
-		implements ICE_Visitor
-{
-	// nothing special yet
-}
-
-/**
- * Style exporter
- *
- * @package ICE
- * @subpackage schemes
- */
-class ICE_Component_Style_Export
-	extends ICE_Component_Asset_Export
-{
-	public function visit( ICE_Visitable $visited )
-	{
-		if ( $visited->supported() ) {
-			$visited->init_styles();
-			$this->push( $visited->style() );
-		}
-	}
-}
-
-/**
- * Script exporter
- *
- * @package ICE
- * @subpackage schemes
- */
-class ICE_Component_Script_Export
-	extends ICE_Component_Asset_Export
-{
-	public function visit( ICE_Visitable $visited )
-	{
-		if ( $visited->supported() ) {
-			$visited->init_scripts();
-			$this->push( $visited->script() );
-		}
-	}
 }

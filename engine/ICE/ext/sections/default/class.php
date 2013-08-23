@@ -22,13 +22,11 @@ class ICE_Ext_Section_Default
 {
 	/**
 	 */
-	public function init_styles()
+	public function init_admin_styles()
 	{
-		parent::init_styles();
+		parent::init_admin_styles();
 
-		// slurp admin styles
-		$this->style()
-			->section( 'admin' )
-			->inject( 'admin', 'admin.css' );
+		// inject admin styles
+		$this->style()->inject( 'admin', 'admin.css' );
 	}
 }

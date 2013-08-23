@@ -111,9 +111,7 @@ class ICE_Ext_Feature_Responsive_Menu
 	{
 		parent::init_scripts();
 
-		if ( !is_admin() ) {
-			wp_enqueue_script( 'jquery-mobilemenu' );
-		}
+		wp_enqueue_script( 'jquery-mobilemenu' );
 	}
 
 	/**
@@ -139,7 +137,7 @@ class ICE_Ext_Feature_Responsive_Menu
 	{
 		// new script helper
 		$script = new ICE_Script();
-		$logic = $script->logic();
+		$logic = $script->logic( 'vars' );
 
 		// add variables
 		$logic->av( 'combine', $this->combine );

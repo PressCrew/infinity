@@ -184,14 +184,10 @@ infinity_shortcodes_init();
 // finalize scheme
 infinity_scheme_finalize();
 
-if ( is_admin() ) {
-	// init admin only components screens
-	infinity_sections_init_screen();
-	infinity_options_init_screen();
-	infinity_screens_init_screen();
-	infinity_widgets_init_screen();
-} else {
-	// init blog components screens
-	infinity_features_init_screen();
-	infinity_shortcodes_init_screen();
-}
+// init component screens
+infinity_sections_init_screen();
+infinity_features_init_screen();
+infinity_options_init_screen();
+infinity_screens_init_screen();
+infinity_widgets_init_screen();
+infinity_shortcodes_init_screen();

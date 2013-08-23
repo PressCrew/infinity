@@ -180,13 +180,6 @@ final class ICE_Scheme extends ICE_Base
 	private $enqueue;
 
 	/**
-	 * The exports manager instance
-	 * 
-	 * @var ICE_Export_Manager
-	 */
-	private $exports;
-
-	/**
 	 * This is a singleton
 	 */
 	private function __construct()
@@ -205,11 +198,6 @@ final class ICE_Scheme extends ICE_Base
 				$this->themes_compiled->add( $theme, $theme );
 			}
 		}
-
-		// set up exports
-		$this->exports = new ICE_Export_Manager();
-		$this->exports->add( 'styles', new ICE_Component_Style_Export( 'dynamic', 'css' ) );
-		$this->exports->add( 'scripts', new ICE_Component_Script_Export( 'dynamic', 'js' ) );
 	}
 
 	/**
@@ -265,7 +253,8 @@ final class ICE_Scheme extends ICE_Base
 		// some scheme initializations must occur after WP theme setup
 		add_action( 'after_setup_theme', array($this, 'init_enqueueing') );
 		add_action( 'after_setup_theme', array($this, 'load_functions') );
-		add_action( 'wp_head', array($this, 'exports_inject'), 11 );
+		add_action( 'wp_head', array($this, 'render_assets'), 11 );
+		add_action( 'admin_head', array($this, 'render_assets'), 11 );
 
 		return $this;
 	}
@@ -292,20 +281,6 @@ final class ICE_Scheme extends ICE_Base
 		}
 
 		throw new Exception( 'The enqueuer has not been initialized yet' );
-	}
-
-	/**
-	 * Get exports manager
-	 *
-	 * @return ICE_Export_Manager
-	 */
-	public function exports()
-	{
-		if ( $this->exports instanceof ICE_Export_Manager ) {
-			return $this->exports;
-		}
-
-		throw new Exception( 'The export manager has not been initialized yet' );
 	}
 
 	/**
@@ -539,47 +514,49 @@ final class ICE_Scheme extends ICE_Base
 	}
 
 	/**
-	 * Inject export files
+	 * Inject dynamic assets.
 	 */
-	public function exports_inject()
+	public function render_assets()
 	{
-		// inject styles
-		$export_styles = $this->exports()->get( 'styles' );
-		$export_scripts = $this->exports()->get( 'scripts' );
-
 		// render em! ?>
 		<!-- dynamic styles -->
 		<style type="text/css">
-			<?php $this->export_render( $export_styles ); ?>
+			<?php $this->render_styles(); ?>
 		</style>
 		<!-- dynamic scripts -->
 		<script type="text/javascript">
-			<?php $this->export_render( $export_scripts ); ?>
+			<?php $this->render_scripts(); ?>
 		</script><?php
-
-//		global $wp_actions;
-//		var_dump( $wp_actions );
 	}
 
 	/**
-	 * Inject one export
-	 *
-	 * @param ICE_Export $export
-	 * @return boolean
+	 * Render all injected styles.
 	 */
-	final protected function export_render( ICE_Export $export )
+	final protected function render_styles()
 	{
-		// loop all component registries and pass them the exporters
+		// loop all component registries
 		foreach ( ICE_Policy::all() as $policy ) {
-			// call accept on the registry for the export
-			$policy->registry()->accept( $export );
+			// loop all components
+			foreach ( $policy->registry()->get_all() as $component ) {
+				// render styles
+				$component->style()->render();
+			}
 		}
+	}
 
-		// render it
-		echo $export->fetch();
-		
-		// all done
-		return true;
+	/**
+	 * Render all injected scripts.
+	 */
+	final protected function render_scripts()
+	{
+		// loop all component registries
+		foreach ( ICE_Policy::all() as $policy ) {
+			// loop all components
+			foreach ( $policy->registry()->get_all() as $component ) {
+				// render scripts
+				$component->script()->render();
+			}
+		}
 	}
 
 	/**

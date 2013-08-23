@@ -95,7 +95,9 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	{
 		foreach ( $this->get_all() as $component ) {
 			if ( $component->supported() ) {
-				$component->init_styles();
+				( true === ICE_IS_ADMIN )
+					? $component->init_admin_styles()
+					: $component->init_styles();
 			}
 		}
 	}
@@ -108,7 +110,9 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 		// init scripts for each registered component
 		foreach ( $this->get_all() as $component ) {
 			if ( $component->supported() ) {
-				$component->init_scripts();
+				( true === ICE_IS_ADMIN )
+					? $component->init_admin_scripts()
+					: $component->init_scripts();
 			}
 		}
 	}

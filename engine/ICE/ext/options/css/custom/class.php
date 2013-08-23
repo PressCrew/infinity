@@ -42,7 +42,7 @@ class ICE_Ext_Option_Css_Custom
 		// did we get anything?
 		if ( !empty( $value ) ) {
 			// have to assume its valid CSS, add as string
-			$style->add_string( $value );
+			$style->add_string( 'css', $value );
 		}
 	}
 }

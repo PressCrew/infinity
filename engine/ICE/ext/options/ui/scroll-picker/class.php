@@ -60,10 +60,8 @@ class ICE_Ext_Option_Ui_Scroll_Picker
 	{
 		parent::init_scripts();
 
-		if ( is_admin() ) {
-			// need scrollpane helper
-			wp_enqueue_script( 'ice-scrollpane' );
-		}
+		// need scrollpane helper
+		wp_enqueue_script( 'ice-scrollpane' );
 	}
 
 	/**
@@ -95,7 +93,7 @@ class ICE_Ext_Option_Ui_Scroll_Picker
 	{
 		// new script helper
 		$script = new ICE_Script();
-		$options = $script->logic();
+		$options = $script->logic( 'vars' );
 
 		// add variables
 		$options->av( 'value', $this->get() );

@@ -50,6 +50,10 @@ if ( !defined( 'ICE_THEMES_COMPILED' ) ) {
  * ICE API: cache get_stylesheet() call for performance 
  */
 define( 'ICE_ACTIVE_THEME', get_stylesheet() );
+/**
+ * ICE API: cache is_admin() call for performance
+ */
+define( 'ICE_IS_ADMIN', is_admin() );
 
 /**
  * include the base class

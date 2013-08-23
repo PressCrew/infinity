@@ -11,17 +11,13 @@
  * @since 1.0
  */
 
-ICE_Loader::load( 'base/exportable', 'base/recursable' );
-
 /**
  * Make assets for components easy
  *
  * @package ICE
  * @subpackage dom
- * @property-read string $name
  */
 abstract class ICE_Asset extends ICE_Base
-	implements ICE_Exportable, ICE_Recursable
 {
 	/**
 	 * @var ICE_Component 
@@ -71,6 +67,13 @@ abstract class ICE_Asset extends ICE_Base
 	private $strings = array();
 
 	/**
+	 * The conditions stack.
+	 *
+	 * @var array
+	 */
+	private $conditions = array();
+
+	/**
 	 * Files that have already been imported
 	 *
 	 * @var ICE_Stack
@@ -108,18 +111,7 @@ abstract class ICE_Asset extends ICE_Base
 	}
 
 	/**
-	 * Return the section for the given name
-	 *
-	 * @param string $name
-	 * @return ICE_Asset
-	 */
-	final public function section( $name )
-	{
-		return $this->get_section( $name );
-	}
-
-	/**
-	 * Enqueue an asset which has already been registered (as a dependancy)
+	 * Enqueue an asset which has already been registered.
 	 * 
 	 * @return ICE_Asset
 	 */
@@ -157,79 +149,19 @@ abstract class ICE_Asset extends ICE_Base
 	}
 
 	/**
-	 * Add a section to the asset
-	 * 
-	 * @param string $name
-	 * @return ICE_Asset 
-	 */
-	final public function add_section( $name )
-	{
-		// get class of this object
-		$class = get_class( $this );
-		
-		// new "sub asset"
-		$asset = new $class( $this->component );
-
-		// add new "sub asset" of same class
-		$this->sections[ $name ] = $asset;
-
-		return $this;
-	}
-
-	/**
-	 * Returns true if this asset has any sections
+	 * Add a dependancy for the given handle.
 	 *
-	 * @return boolean
-	 */
-	final public function has_sections()
-	{
-		return ( count( $this->sections ) );
-	}
-
-	/**
-	 * Returns one of this asset's sections if applicable
-	 *
-	 * @return ICE_Asset
-	 */
-	final public function get_section( $name )
-	{
-		if ( is_string( $name ) ) {
-			return $this->sections[ $name ];
-		} else {
-			return $this;
-		}
-	}
-
-	/**
-	 * Returns all of this asset's sections as an array
-	 *
-	 * @return array
-	 */
-	final public function get_sections()
-	{
-		return $this->sections;
-	}
-
-	/**
-	 */
-	final public function get_children()
-	{
-		return $this->get_sections();
-	}
-
-	/**
-	 * Add a dependancy
-	 *
+	 * @param string $handle Handle of the dependant item
 	 * @param string $dep_handle Handle of the dependancy to add
 	 * @return ICE_Asset
 	 */
-	final public function add_dep( $dep_handle )
+	final public function add_dep( $handle, $dep_handle )
 	{
 		// just in case
 		$dep_handle = trim( $dep_handle );
 
-		if ( strlen( $dep_handle ) && !isset( $this->deps[ $dep_handle ] ) ) {
-			$this->deps[] = $dep_handle;
+		if ( $dep_handle ) {
+			$this->deps[ $handle ][] = $dep_handle;
 		}
 
 		return $this;
@@ -252,23 +184,37 @@ abstract class ICE_Asset extends ICE_Base
 	 */
 	final public function get_deps()
 	{
-		return $this->deps;
-	}
+		// array of deps to return
+		$return_deps = array();
 
-	/**
-	 * Push all of this asset's deps onto the given stack
-	 *
-	 * @return ICE_Asset
-	 */
-	final public function push_deps( ICE_Stack $stack )
-	{
-		foreach ( $this->deps as $dep ) {
-			if ( !$stack->contains( $dep ) ) {
-				$stack->push( $dep );
+		// loop all deps
+		foreach ( $this->deps as $handle => $deps ) {
+			// check conditions for handle
+			if ( true === $this->check_cond( $handle ) ) {
+				// loop all handle's deps
+				foreach ( $deps as $dep ) {
+					// already in stack?
+					if ( false === isset( $return_deps[ $dep ] ) ) {
+						// nope, push it
+						$return_deps[ $dep ] = $dep;
+					}
+				}
 			}
 		}
 
-		return $this;
+		return $return_deps;
+	}
+
+	/**
+	 * Enqueue all dependencies of this asset.
+	 */
+	final public function enqueue_deps()
+	{
+		// loop all deps
+		foreach( $this->get_deps() as $handle ) {
+			// call abstract enqueue method
+			$this->enqueue( $handle );
+		}
 	}
 
 	/**
@@ -343,12 +289,17 @@ abstract class ICE_Asset extends ICE_Base
 	/**
 	 * Push an arbitrary string on the stack
 	 *
+	 * @param handle $handle
 	 * @param string $string
 	 * @return ICE_Asset
 	 */
-	final public function add_string( $string )
+	final public function add_string( $handle, $string )
 	{
-		$this->strings[] = $string;
+		if ( true === is_string( $string ) ) {
+			$this->strings[ $handle ] = $string;
+		} else {
+			throw new InvalidArgumentException( 'The $string parameter must be a string' );
+		}
 
 		return $this;
 	}
@@ -374,77 +325,154 @@ abstract class ICE_Asset extends ICE_Base
 	}
 
 	/**
-	 * Inject static code/markup
+	 * Add a condition for the given handle.
+	 *
+	 * @param string $handle
+	 * @param callable $callback
+	 * @param array $param_arr
+	 * @return ICE_Asset
+	 */
+	final public function add_cond( $handle, $callback, $param_arr = array() )
+	{
+		// callback must be callable
+		if ( is_callable( $callback ) ) {
+			// make sure we got an array for params
+			if ( false === is_array( $param_arr ) ) {
+				throw new InvalidArgumentException( sprintf( 'The parameter list for handle "%s" is not an array', $handle ) );
+			}
+			// set it
+			$this->conditions[ $handle ][] = array( $callback, $param_arr );
+		} else {
+			throw new InvalidArgumentException( sprintf( 'The callback for handle "%s" is not callable', $handle ) );
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Returns true if given handle has one or more conditions set.
+	 *
+	 * @param string $handle
+	 * @return boolean
+	 */
+	final public function has_cond( $handle )
+	{
+		return (
+			true === isset( $this->conditions[ $handle ] ) &&
+			1 <= count( $this->conditions[ $handle ] )
+		);
+	}
+
+	/**
+	 * Return array of conditions for given handle.
+	 *
+	 * If no conditions exist, and empty array will be returned.
+	 *
+	 * @param string $handle
+	 * @return array
+	 */
+	final public function get_cond( $handle )
+	{
+		if ( true === $this->has_cond( $handle ) ) {
+			return $this->conditions[ $handle ];
+		} else {
+			return array();
+		}
+	}
+
+	/**
+	 * Returns true if all conditions set for handle are met.
+	 *
+	 * @param string $handle
+	 * @return boolean
+	 */
+	final public function check_cond( $handle )
+	{
+		// are any conditions set?
+		if ( true === $this->has_cond( $handle ) ) {
+			// yes, grab 'em
+			$conditions = $this->conditions[ $handle ];
+			// loop every condition and test
+			foreach ( $conditions as $condition ) {
+				// nobody uses list any more, i know... deal with it
+				list( $callback, $param_arr ) = $condition;
+				// test it
+				if ( false === call_user_func_array( $callback, $param_arr ) ) {
+					// test failed, bail out
+					return false;
+				}
+			}
+		}
+
+		// no conditions set, or all tests passed, party!
+		return true;
+	}
+
+	/**
+	 * Render static code/markup
 	 *
 	 * @return string
 	 */
-	public function export()
+	public function render()
 	{
-		// the code that will be returned
-		$code = null;
-
-		// handle callbacks
-		if ( $this->has_callbacks() ) {
-			// loop em
-			foreach ( $this->callbacks as $callback ) {
+		// render callbacks
+		foreach ( $this->callbacks as $handle => $callback ) {
+			// check conditions
+			if ( true === $this->check_cond( $handle ) ) {
 				// execute callback with myself as only argument
 				call_user_func( $callback, $this );
 			}
 		}
 
-		// have any files?
-		if ( count( $this->files_export ) ) {
+		// render files
+		foreach ( $this->files_export as $handle => $file ) {
 
-			// loop through all files
-			foreach ( $this->files_export as $file ) {
+			// resolve file path
+			if ( ICE_Files::path_is_absolute( $file ) ) {
+				// its absolute already, which is good
+				$filename = $file;
+			} else {
+				// relative path, need to locate it
+				$filename = $this->component()->locate_file( $file );
+			}
 
-				// resolve file path
-				if ( ICE_Files::path_is_absolute( $file ) ) {
-					// its absolute already, which is good
-					$filename = $file;
-				} else {
-					// relative path, need to locate it
-					$filename = $this->component()->locate_file( $file );
-				}
+			// only import each file once!
+			if ( self::$files_imported->contains( $filename ) ) {
+				// already imported that one
+				continue;
+			} else {
+				// push it on to imported stack
+				self::$files_imported->push( $filename );
+			}
 
-				// only import each file once!
-				if ( self::$files_imported->contains( $filename ) ) {
-					// already imported that one
-					continue;
-				} else {
-					// push it on to imported stack
-					self::$files_imported->push( $filename );
-				}
-				
-				// inject helpful comment ;)
-				//$code .= '/*+++ import source: ' . $filename . ' */' . PHP_EOL;
+			// inject helpful comment ;)
+			//echo .= '/*+++ import source: ' . $filename . ' */' . PHP_EOL;
 
-				// make sure file actually exists
-				if ( ICE_Files::cache($filename)->is_readable() ) {
+			// make sure file actually exists
+			if ( ICE_Files::cache($filename)->is_readable() ) {
 
+				// check conditions
+				if ( true === $this->check_cond( $handle ) ) {
 					// get entire contents of file
-					$code .= $this->get_file_contents( $filename ) . PHP_EOL;
-
-					// success
-					//$code .= '/*--- import complete! */' . PHP_EOL . PHP_EOL;
-
-				} else {
-					//$code .= '/*!!! import failed! */' . PHP_EOL . PHP_EOL;
+					echo $this->get_file_contents( $filename ) . PHP_EOL;
 				}
+
+				// success
+				//echo '/*--- import complete! */' . PHP_EOL . PHP_EOL;
+
+			} else {
+				//echo '/*!!! import failed! */' . PHP_EOL . PHP_EOL;
 			}
 		}
 
-		// handle strings
-		if ( $this->has_strings() ) {
-			//$code .= '/*--- importing strings */' . PHP_EOL;
-			$code .=
-				implode( PHP_EOL, $this->strings ) .
-				str_repeat( PHP_EOL, 2 );
-			//$code .= '/*!!! importing strings complete */' . PHP_EOL;
+		// render strings
+		foreach ( $this->strings as $handle => $string ) {
+			// check conditions
+			if ( true === $this->check_cond( $handle ) ) {
+				// print it
+				echo $string, PHP_EOL, PHP_EOL;
+			}
 		}
-
-		// all done
-		return $code;
 	}
 
 	/**

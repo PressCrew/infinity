@@ -44,23 +44,21 @@ class ICE_Style extends ICE_Asset
 
 	/**
 	 * Add/get a rule for a selector
-	 * 
+	 *
+	 * @param string $handle
 	 * @param string $selector CSS selector to affect
 	 * @return ICE_Style_Rule
 	 */
-	public function rule( $selector )
+	public function rule( $handle, $selector = null )
 	{
-		// hash the selector to make a key
-		$key = md5( trim( $selector ) );
-
 		// get or create a rule
-		if ( isset( $this->rules[ $key ] ) ) {
-			$rule = $this->rules[ $key ];
+		if ( isset( $this->rules[ $handle ] ) ) {
+			$rule = $this->rules[ $handle ];
 		} else {
 			// new rule object
 			$rule = new ICE_Style_Rule( $selector );
 			// add it to rule map
-			$this->rules[ $key ] = $rule;
+			$this->rules[ $handle ] = $rule;
 		}
 
 		// return it for editing
@@ -76,28 +74,24 @@ class ICE_Style extends ICE_Asset
 	}
 
 	/**
-	 * Generate CSS markup for this style's dynamic rules
-	 *
-	 * @return string
+	 * Render CSS markup for this style's dynamic rules
 	 */
-	public function export()
+	public function render()
 	{
-		// the markup that will be returned
-		$markup = parent::export();
+		// run parent first!
+		parent::render();
 
 		// render rules
-		if ( count( $this->rules ) ) {
-			// get markup for each rule
-			foreach ( $this->rules as $rule ) {
-				// append output of rule export
-				$markup .= '/*+++ generating style ***/' . PHP_EOL;
-				$markup .= $rule->export();
-				$markup .= '/*--- style generation complete! */' . PHP_EOL . PHP_EOL;
+		foreach ( $this->rules as $handle => $rule ) {
+			// check conditions
+			if ( true === $this->check_cond( $handle ) ) {
+				// render output of rule export
+				echo
+				'/*+++ generating style ***/', PHP_EOL,
+				$rule->export(),
+				'/*--- style generation complete! */', PHP_EOL, PHP_EOL;
 			}
 		}
-
-		// all done
-		return $markup;
 	}
 
 	/**

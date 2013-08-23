@@ -44,26 +44,24 @@ class ICE_Ext_Option_Ui_Font_Picker
 	}
 	 */
 
-	public function init_styles()
+	public function init_admin_styles()
 	{
-		parent::init_styles();
+		parent::init_admin_styles();
 
-		// slurp admin styles
+		// inject admin styles
 		$this->style()
-			->section( 'admin' )
 			->inject( 'admin', 'admin.css' )
-			->add_dep( 'jquery-multiselect' );
+			->add_dep( 'admin', 'jquery-multiselect' );
 	}
 
-	public function init_scripts()
+	public function init_admin_scripts()
 	{
-		parent::init_scripts();
+		parent::init_admin_scripts();
 
-		// slurp admin scripts
+		// inject admin scripts
 		$this->script()
-			->section( 'admin' )
 			->inject( 'admin', 'admin.js' )
-			->add_dep( 'jquery-multiselect' );
+			->add_dep( 'admin', 'jquery-multiselect' );
 	}
 
 	/**

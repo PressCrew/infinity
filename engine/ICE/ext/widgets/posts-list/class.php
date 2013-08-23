@@ -74,28 +74,25 @@ class ICE_Ext_Widget_Posts_List
 
 	/**
 	 */
-	public function init_styles()
+	public function init_admin_styles()
 	{
-		parent::init_styles();
+		parent::init_admin_styles();
 
-		// slurp admin styles
-		$this->style()
-			->section( 'admin' )
-			->inject( 'admin', 'admin.css' );
+		// inject admin styles
+		$this->style()->inject( 'admin', 'admin.css' );
 	}
 
 	/**
 	 */
-	public function init_scripts()
+	public function init_admin_scripts()
 	{
-		parent::init_scripts();
+		parent::init_admin_scripts();
 
-		// slurp admin scripts
+		// inject admin scripts
 		$this->script()
-			->section( 'admin' )
 			->inject( 'admin', 'admin.js' )
-			->add_dep( 'jquery-cookie' )
-			->add_dep( 'jquery-ui-nestedsortable' );
+			->add_dep( 'admin', 'jquery-cookie' )
+			->add_dep( 'admin', 'jquery-ui-nestedsortable' );
 	}
 
 	/**
