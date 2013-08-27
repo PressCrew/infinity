@@ -1,6 +1,6 @@
 <?php
 /**
- * ICE API: export files helper class file
+ * ICE API: exports helper class file
  *
  * @author Marshall Sorenson <marshall@presscrew.com>
  * @link http://infinity.presscrew.com/
@@ -12,16 +12,11 @@
  */
 
 /**
- * Make exporting dynamic files easy
+ * Make exporting dynamic data easy
  *
- * @todo this should extend ICE_File
  * @package ICE
  * @subpackage utils
  * @uses ICE_Export_Exception
- * @property-read string $name
- * @property-read string $ext
- * @property-read string $path
- * @property-read string $url
  */
 class ICE_Export extends ICE_Base
 {
@@ -36,41 +31,6 @@ class ICE_Export extends ICE_Base
 	const FILE_EXT_DELIM = '.';
 
 	/**
-	 * Set to true once dir props have been populated
-	 *
-	 * @var boolean
-	 */
-	static private $populated = false;
-
-	/**
-	 * Upload directory path for current request
-	 *
-	 * @var string
-	 */
-	static private $upload_dir;
-
-	/**
-	 * Upload directory URL for current request
-	 *
-	 * @var string
-	 */
-	static private $upload_url;
-
-	/**
-	 * Export directory path for current request
-	 *
-	 * @var string
-	 */
-	static private $export_dir;
-
-	/**
-	 * Export URL for current request
-	 *
-	 * @var string
-	 */
-	static private $export_url;
-
-	/**
 	 * Name of the file (without extension)
 	 * 
 	 * @var string 
@@ -83,20 +43,6 @@ class ICE_Export extends ICE_Base
 	 * @var string
 	 */
 	private $ext;
-
-	/**
-	 * Export file path
-	 *
-	 * @var string
-	 */
-	private $path;
-
-	/**
-	 * Export file URL
-	 *
-	 * @var string
-	 */
-	private $url;
 
 	/**
 	 * Stack of objects to retrieve export data from
@@ -122,26 +68,17 @@ class ICE_Export extends ICE_Base
 	/**
 	 * Constructor
 	 *
-	 * @param string $name Name of file to manage RELATIVE to export dir
-	 * @param string $ext File extension of the export file
+	 * @param string $name File name (without extension)
+	 * @param string $ext File extension (without the "dot")
 	 * @param string|array Provide a valid callback which generates the export instead of using the exportable objects stack
 	 */
 	public function __construct( $name, $ext, $callback = null )
 	{
-		// make sure dir info is populated
-		$this->populate_dir_props();
+		throw new Exception( 'This class is currently being re-purposed, stay tuned.' );
 
-		// set primitives
 		$this->name = $name;
 		$this->ext = $ext;
 		$this->callback = $callback;
-
-		// format the complete file name
-		$filename = $this->name . self::FILE_EXT_DELIM . $this->ext;
-
-		// determine file path and url
-		$this->path = self::$export_dir . '/' . $filename;
-		$this->url = self::$export_url . '/' . $filename;
 	}
 
 	/**
@@ -151,68 +88,10 @@ class ICE_Export extends ICE_Base
 		switch( $name ) {
 			case 'name':
 			case 'ext':
-			case 'path':
-			case 'url':
 				return $this->$name;
 			default:
 				return parent::get_property( $name );
 		}
-	}
-
-	/**
-	 * Set static upload directory properties
-	 *
-	 * @internal
-	 * @return boolean
-	 */
-	private function populate_dir_props()
-	{
-		// only populate dir info once
-		if ( !self::$populated ) {
-
-			// get upload directory details
-			$upload_dir = wp_upload_dir();
-
-			// make sure we didn't get an error
-			if ( $upload_dir['error'] == false ) {
-				// set upload dir path and url
-				self::$upload_dir = realpath( $upload_dir['basedir'] );
-				self::$upload_url = $upload_dir['baseurl'];
-				// determine export path and url
-				self::$export_dir = sprintf( '%s/%s/%s', self::$upload_dir, ICE_EXPORTS_SUBDIR, ICE_ACTIVE_THEME );
-				self::$export_url = sprintf( '%s/%s/%s', self::$upload_url, ICE_EXPORTS_SUBDIR, ICE_ACTIVE_THEME );
-				// don't try to set these twice
-				self::$populated = true;
-				// yay
-				return true;
-			}
-
-			throw new ICE_Export_Exception( $upload_dir['error'] );
-		}
-
-		return true;
-	}
-
-	/**
-	 * Get child export instance for name, create if necessary
-	 *
-	 * @param string $name
-	 * @return ICE_Export
-	 */
-	public function child( $name )
-	{
-		// already have this child?
-		if ( !isset( $this->children[ $name ] ) ) {
-			// nope, get class of instance
-			$classname = get_class( $this );
-			// create instance of same class
-			$child = new $classname( $this->name . self::FILE_NAME_DELIM . $name, $this->ext );
-			// push onto children stack
-			$this->children[ $name ] = $child;
-		}
-		
-		// return the child object
-		return $this->children[ $name ];
 	}
 
 	/**
@@ -234,52 +113,13 @@ class ICE_Export extends ICE_Base
 		// handle recursive objects
 		if ( $obj instanceof ICE_Recursable ) {
 			// loop children
-			foreach ( $obj->get_children() as $name => $child ) {
-				// push to child
-				$this->child( $name )->push( $child );
+			foreach ( $obj->get_children() as $child ) {
+				// push child
+				$this->push( $child );
 			}
 		}
 
 		return $this;
-	}
-
-	/**
-	 * Write data to the file
-	 *
-	 * @param string $data
-	 * @return boolean
-	 */
-	public function write( $data = null )
-	{
-		// make sure the export dir exists
-		if ( wp_mkdir_p( self::$export_dir ) ) {
-			// can we write to the export dir?
-			if ( ICE_Files::cache(self::$export_dir)->refresh()->is_writable() ) {
-				// get file instance
-				$file = ICE_Files::cache($this->path)->refresh();
-				// if file already exists, puke if not writeable
-				if ( $file->exists() && !$file->is_writable() ) {
-					throw new ICE_Export_Exception(
-						'Unable to write to the file: ' . $this->path );
-				}
-				// try to write it
-				$bytes = file_put_contents( $file->getPathname(), $data );
-				// any bytes written
-				if ( $bytes ) {
-					// yep, refresh file
-					$file->refresh();
-					// return bytes written
-					return $bytes;
-				}
-				return false;
-			} else {
-				throw new ICE_Export_Exception(
-					'Unable to create the file: ' . $this->path );
-			}
-		} else {
-			throw new ICE_Export_Exception(
-				'Unable to create the directory: ' . self::$export_dir );
-		}
 	}
 
 	/**
@@ -320,26 +160,19 @@ class ICE_Export extends ICE_Base
 	}
 
 	/**
-	 * Returns true if given timestamp is more recent than file last modified time
+	 * Returns true if given timestamp plus stale seconds is less than current time.
 	 *
 	 * @param integer $timestamp Unix timestamp
+	 * @param intenger $stale_seconds Number of seconds after which stale is true
 	 * @return boolean
 	 */
-	public function stale( $timestamp )
+	public function stale( $timestamp, $stale_seconds )
 	{
 		// must be a number
-		if ( is_numeric( $timestamp ) ) {
-			// does file exist?
-			if ( ICE_Files::cache($this->path)->is_readable() ) {
-				// when was file last modified?
-				$mtime = filemtime( $this->path );
-				// is timestamp more recent?
-				if ( (integer) $timestamp > $mtime ) {
-					// yes, its stale
-					return true;
-				}
-			} else {
-				// doesn't exist
+		if ( is_numeric( $timestamp ) && is_numeric( $stale_seconds ) ) {
+			// is current time greater than timestamp + stale seconds?
+			if ( time() > $timestamp + $stale_seconds ) {
+				// yes, its stale
 				return true;
 			}
 		}
@@ -349,33 +182,22 @@ class ICE_Export extends ICE_Base
 	}
 
 	/**
-	 * If given timestamp is more recent than file last modified time, update the file
+	 * If given timestamp plus stale seconds is less than current time, update the data.
 	 *
 	 * @param integer $timestamp Unix timestamp
+	 * @param integer $stale_seconds Number of seconds after which data is considered stale
 	 * @return boolean
 	 */
-	public function refresh( $timestamp )
+	public function refresh( $timestamp, $stale_seconds )
 	{
-		// is file stale?
-		if ( $this->stale( $timestamp ) ) {
+		// is data stale?
+		if ( $this->stale( $timestamp, $stale_seconds ) ) {
 			// yes, update it
 			return $this->update();
 		}
 		
 		// did NOT refresh
 		return false;
-	}
-
-	/**
-	 * Remove the export file
-	 *
-	 * @return boolean
-	 */
-	private function remove()
-	{
-		if ( ICE_Files::cache($this->path)->is_writable() ) {
-			return unlink( $this->path );
-		}
 	}
 }
 
