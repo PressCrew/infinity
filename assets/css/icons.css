@@ -1,32 +1,32 @@
 /* Using some fancy CSS magic to add our icons */
 
-.item-list-tabs * a:before,
-#item-buttons * a:before,
-.sidebar-activity-tabs * a:before,
-.button:before,
-#message p:before,
-#subnav * :before,
-#category-title:before,
-#tag-title:before,
-span.post-tags:before,
-.generic-button a:before,
-#category-title:before,
-#tag-title:before,
-span.post-tags:before,
-.post-meta-data *:before,
-.post-title:before,
-#author-description h3:before,
-.single_add_to_cart_button:before,
-.load-more a:before,
-#whats-new,
-.main-menu * :before,
-.link-home h2 a:before,
-div.link-vote-panel div.clickers a.up:before,
-#bbpress-forums .bbp-forums-list li a:before,
-#favorite-toggle:before,
-#subscription-toggle:before,
-.single-topic h1:before,
-.group-forum-topic #bbpress-forums h3:before {
+.infinity-icons .item-list-tabs * a:before,
+.infinity-icons #item-buttons * a:before,
+.infinity-icons .sidebar-activity-tabs * a:before,
+.infinity-icons .button:before,
+.infinity-icons #message p:before,
+.infinity-icons #subnav * :before,
+.infinity-icons #category-title:before,
+.infinity-icons #tag-title:before,
+.infinity-icons span.post-tags:before,
+.infinity-icons .generic-button a:before,
+.infinity-icons #category-title:before,
+.infinity-icons #tag-title:before,
+.infinity-icons span.post-tags:before,
+.infinity-icons .post-meta-data *:before,
+.infinity-icons .post-title:before,
+.infinity-icons #author-description h3:before,
+.infinity-icons .single_add_to_cart_button:before,
+.infinity-icons .load-more a:before,
+.infinity-icons #whats-new,
+.infinity-icons .main-menu * :before,
+.infinity-icons .link-home h2 a:before,
+.infinity-icons div.link-vote-panel div.clickers a.up:before,
+.infinity-icons #bbpress-forums .bbp-forums-list li a:before,
+.infinity-icons #favorite-toggle:before,
+.infinity-icons #subscription-toggle:before,
+.infinity-icons .single-topic h1:before,
+.infinity-icons .group-forum-topic #bbpress-forums h3:before {
     font-weight: normal;
     font-family: "iconsweetsRegular";
     color: inherit;
@@ -38,32 +38,32 @@ div.link-vote-panel div.clickers a.up:before,
 }
 
 /* WordPress Icons */
-.post-top {
+.infinity-icons .post-top {
     padding-top: 0px
 }
 
 /* Blog Icons */
-#category-title:before {
+.infinity-icons #category-title:before {
     content: "L"
 }
 
-#tag-title:before,
-span.post-tags:before {
+.infinity-icons #tag-title:before,
+.infinity-icons span.post-tags:before {
     content: "."
 }
 
-#author-description h3:before {
+.infinity-icons #author-description h3:before {
     content: "a"
 }
 
 /* ================ */
 /* ! Post Formats   */
 /* ================ */
-.format-quote .post-meta-data {
+.infinity-icons .format-quote .post-meta-data {
     display: none
 }
 
-.format-quote .entry {
+.infinity-icons .format-quote .entry {
     border-left: 5px solid #EEEEEE;
     font-family: "Georgia",serif;
     font-size: 140%;
@@ -72,7 +72,7 @@ span.post-tags:before {
     padding-left: 15px;
 }
 
-.post-title:before {
+.infinity-icons .post-title:before {
     background: none repeat scroll 0 0 #555555;
     border-radius: 50% 50% 50% 50%;
     color: #FFFFFF;
@@ -84,249 +84,249 @@ span.post-tags:before {
     top: -8px;
 }
 
-.format-video .post-title:before {
+.infinity-icons .format-video .post-title:before {
     content: "F"
 }
 
-.format-link .post-title:before {
+.infinity-icons .format-link .post-title:before {
     content: "Q"
 }
 
-.format-gallery .post-title:before {
+.infinity-icons .format-gallery .post-title:before {
     content: "3"
 }
 
-.format-image .post-title:before {
+.infinity-icons .format-image .post-title:before {
     content: "2"
 }
 
-.format-audio .post-title:before {
+.infinity-icons .format-audio .post-title:before {
     content: "4"
 }
 
-.format-chat .post-title:before {
+.infinity-icons .format-chat .post-title:before {
     content: '"'
 }
 
-.format-status .post-title:before {
+.infinity-icons .format-status .post-title:before {
     content: "#"
 }
 
-.format-quote .post-title:before {
+.infinity-icons .format-quote .post-title:before {
     content: "'"
 }
 
 /* Post Meta Icons */
-span.post-author:before {
+.infinity-icons span.post-author:before {
     content: "d"
 }
 
-span.post-category:before {
+.infinity-icons span.post-category:before {
     content: "L"
 }
 
-span.time-posted:before {
+.infinity-icons span.time-posted:before {
     content: "R"
 }
 
-span.post-comments:before,
-span.comments a:before {
+.infinity-icons span.post-comments:before,
+.infinity-icons span.comments a:before {
     content: "#"
 }
 
 /* BuddyPress Icons */
-.activity-comments * :before {
+.infinity-icons .activity-comments * :before {
     display: none
 }
 
-#item-buttons * a:before,
-.activity-meta * a:before,
-.button:before,
-.generic-button a:before {
+.infinity-icons #item-buttons * a:before,
+.infinity-icons .activity-meta * a:before,
+.infinity-icons .button:before,
+.infinity-icons .generic-button a:before {
     display: inline-block;
     font-size: 135%;
     padding: 0 2px 6px 1px;
 }
 
 /* Some Small Padding tweaks to make the icons look sweet */
-div#item-header div.generic-button,
-div#item-header a.button {
+.infinity-icons div#item-header div.generic-button,
+.infinity-icons div#item-header a.button {
     padding: 0 8px
 }
 
-#sidebar .sidebar-activity-tabs ul li a {
+.infinity-icons #sidebar .sidebar-activity-tabs ul li a {
     padding-bottom: 8px;
     padding-top: 4px;
     text-decoration: none;
 }
 
-div#object-nav ul li a {
+.infinity-icons div#object-nav ul li a {
     padding: 4px 6px 8px !important;
     text-decoration: none;
 }
 
-div.activity-type-tabs li a {
+.infinity-icons div.activity-type-tabs li a {
     padding: 4px 6px 8px !important;
     text-decoration: none;
 }
 
-.loading a:before {
+.infinity-icons .loading a:before {
     display: none !important
 }
 
-div.item-list-tabs ul li.loading a {
+.infinity-icons div.item-list-tabs ul li.loading a {
     padding-top: 9px !important
 }
 
 /* Stream Icons. no shorthand CSS to maintain hover effects */
-li#activity-all a:before {
+.infinity-icons li#activity-all a:before {
     content: "s"
 }
 
-li#activity-favorites a:before,
-.button.fav:before,
-.button.unfav:before {
+.infinity-icons li#activity-favorites a:before,
+.infinity-icons .button.fav:before,
+.infinity-icons .button.unfav:before {
     content: "h"
 }
 
-li#activity-friends a:before {
+.infinity-icons li#activity-friends a:before {
     content: "a"
 }
 
-li#activity-groups a:before,
-.widget_bp_groups_widget {
+.infinity-icons li#activity-groups a:before,
+.infinity-icons .widget_bp_groups_widget {
     content: "f"
 }
 
-li#activity-links a:before,
-#nav-links:before {
+.infinity-icons li#activity-links a:before,
+.infinity-icons #nav-links:before {
     content: "Q"
 }
 
-li#activity-mentions a:before {
+.infinity-icons li#activity-mentions a:before {
     content: "#"
 }
 
-li#activity-following a,
-li#following-personal-li a:before {
+.infinity-icons li#activity-following a,
+.infinity-icons li#following-personal-li a:before {
     content: "*"
 }
 
-.acomment-reply:before {
+.infinity-icons .acomment-reply:before {
     content: "w"
 }
 
-.delete-activity:before,
-.generic-button.is_friend a:before,
-.generic-button.pending_friend a:before {
+.infinity-icons .delete-activity:before,
+.infinity-icons .generic-button.is_friend a:before,
+.infinity-icons .generic-button.pending_friend a:before {
     content: "X"
 }
 
-.load-more a:before {
+.infinity-icons .load-more a:before {
 	content: "s"
 }
 
 /* Group Icons */
-li#members-groups-li a:before {
+.infinity-icons li#members-groups-li a:before {
     content: "e"
 }
 
-li#forums-groups-li a:before {
+.infinity-icons li#forums-groups-li a:before {
     content: '"'
 }
 
-li#admin-groups-li a:before,
-li#link-admin-personal-li a:before {
+.infinity-icons li#admin-groups-li a:before,
+.infinity-icons li#link-admin-personal-li a:before {
     content: "i"
 }
 
-li#invite-groups-li a:before {
+.infinity-icons li#invite-groups-li a:before {
     content: "A"
 }
 
-li#home-groups-li a:before,
-li#link-home-personal-li a:before {
+.infinity-icons li#home-groups-li a:before,
+.infinity-icons li#link-home-personal-li a:before {
     content: "0"
 }
 
-li#nav-docs-groups-li a:before,
-#user-docs:before {
+.infinity-icons li#nav-docs-groups-li a:before,
+.infinity-icons #user-docs:before {
     content: "L"
 }
-#bp-create-doc-button:before {
+.infinity-icons #bp-create-doc-button:before {
     content: "C";
     font-size: 165%;
 }
-li#nav-notifications-groups-li a:before {
+.infinity-icons li#nav-notifications-groups-li a:before {
     content: "6"
 }
 
 /* Profile Icons  */
-#user-activity:before {
+.infinity-icons #user-activity:before {
     content: "s"
 }
 
-#user-xprofile:before {
+.infinity-icons #user-xprofile:before {
     content: "?"
 }
 
-#user-friends:before {
+.infinity-icons #user-friends:before {
     content: "a"
 }
 
-#user-groups:before {
+.infinity-icons #user-groups:before {
     content: "f"
 }
 
-#user-profile:before {
+.infinity-icons #user-profile:before {
     content: "?"
 }
 
-#user-links:before {
+.infinity-icons #user-links:before {
     content: "P"
 }
 
-#user-messages:before,
-#nav-invite-anyone:before,
-#user-invite-anyone:before {
+.infinity-icons #user-messages:before,
+.infinity-icons #nav-invite-anyone:before,
+.infinity-icons #user-invite-anyone:before {
     content: "A"
 }
 
-#user-forums:before {
+.infinity-icons #user-forums:before {
     content: '"'
 }
 
-#user-blogs:before,
-#user-sites:before {
+.infinity-icons #user-blogs:before,
+.infinity-icons #user-sites:before {
     content: "C"
 }
 
-li#activity-filter-select label:before {
+.infinity-icons li#activity-filter-select label:before {
     content: "."
 }
 
-a.send-message:before,
-#nav-invite-anyone:before {
+.infinity-icons a.send-message:before,
+.infinity-icons #nav-invite-anyone:before {
     content: "A"
 }
 
-a.friendship-button:before {
+.infinity-icons a.friendship-button:before {
     content: "a"
 }
 
-.follow-button a.follow:before {
+.infinity-icons .follow-button a.follow:before {
     content: "*"
 }
 
-div#post-mention a.mention:before {
+.infinity-icons div#post-mention a.mention:before {
     content: "#"
 }
 
-#user-settings:before {
+.infinity-icons #user-settings:before {
     content: "i"
 }
 
-div#message p {
+.infinity-icons div#message p {
     background-color: #FEFAEB;
     border: 1px solid #F1F1F1;
     border-radius: 4px 4px 4px 4px;
@@ -335,98 +335,98 @@ div#message p {
     padding: 10px 15px;
 }
 
-div#message p:before {
+.infinity-icons div#message p:before {
     content: "_"
 }
 /* BBPress */
-#nav-forums:before,
-#nav-forum:before {
+.infinity-icons #nav-forums:before,
+.infinity-icons #nav-forum:before {
     content: '"'
 }
-#favorite-toggle:before {
+.infinity-icons #favorite-toggle:before {
     content: "h";
     top: 0;
 }
-#subscription-toggle:before {
+.infinity-icons #subscription-toggle:before {
     content: "A";
     position: relative;
     right: -9px;
     top: 0;
 }
-#bbpress-forums .bbp-forums-list li a:before {
+.infinity-icons #bbpress-forums .bbp-forums-list li a:before {
     color: #999999;
     content: "g";
     text-shadow: 0 -1px 0 #E3E7E7;
 }
-.groups #item-buttons .group-button a:before {
+.infinity-icons .groups #item-buttons .group-button a:before {
     content: "#";
     font-size: 150%;
     padding: 0 2px 0 0;
 }
 /* Main Menu Icons */
-.base-menu li ul li a:before {
+.infinity-icons .base-menu li ul li a:before {
     content: none !important
 }
 
 /* Make sure items with an icon line up with non-icon items */
-#main-menu-wrap .icon-groups a,
-#main-menu-wrap .icon-members a,
-#main-menu-wrap .icon-activity a,
-#main-menu-wrap .icon-members a,
-#main-menu-wrap .icon-forums,
-#main-menu-wrap .icon-links a,
-#main-menu-wrap .icon-sites a,
-#main-menu-wrap .icon-blogs a   {
+.infinity-icons #main-menu-wrap .icon-groups a,
+.infinity-icons #main-menu-wrap .icon-members a,
+.infinity-icons #main-menu-wrap .icon-activity a,
+.infinity-icons #main-menu-wrap .icon-members a,
+.infinity-icons #main-menu-wrap .icon-forums,
+.infinity-icons #main-menu-wrap .icon-links a,
+.infinity-icons #main-menu-wrap .icon-sites a,
+.infinity-icons #main-menu-wrap .icon-blogs a   {
 	margin-top: -5px;
 }
 
-#main-menu-wrap .icon-groups a:before {
+.infinity-icons #main-menu-wrap .icon-groups a:before {
     content: "f"
 }
 
-#main-menu-wrap .icon-members a:before {
+.infinity-icons #main-menu-wrap .icon-members a:before {
     content: "e"
 }
 
-#main-menu-wrap .icon-activity a:before {
+.infinity-icons #main-menu-wrap .icon-activity a:before {
     content: "s"
 }
 
-#main-menu-wrap .icon-forums a:before {
+.infinity-icons #main-menu-wrap .icon-forums a:before {
     content: '"'
 }
 
-#main-menu-wrap .icon-links a:before {
+.infinity-icons #main-menu-wrap .icon-links a:before {
     content: "Q"
 }
 
-#main-menu-wrap .icon-sites a:before,
-#main-menu-wrap .icon-blogs a:before {
+.infinity-icons #main-menu-wrap .icon-sites a:before,
+.infinity-icons #main-menu-wrap .icon-blogs a:before {
     content: "C"
 }
-#bp-adminbar-notifications-menu a:before {
+.infinity-icons #bp-adminbar-notifications-menu a:before {
     content: "6"
 }
 
-#bp-adminbar-account-menu a:before {
+.infinity-icons #bp-adminbar-account-menu a:before {
     content: "a"
 }
 
-.login-form-link a:before {
+.infinity-icons .login-form-link a:before {
     content: "y"
 }
 
-#join-us-link a:before {
+.infinity-icons #join-us-link a:before {
     content: "w"
 }
 /* WooCommerce Icons */
-a.add_to_cart_button:before {
+.infinity-icons a.add_to_cart_button:before {
 	content: "$"
 }
-.product_type_variable:before {
+.infinity-icons .product_type_variable:before {
 	content: "l" !important;
 }
-.coupon:before {
+.infinity-icons .coupon:before {
 	 color: inherit;
     font-family: "iconsweetsRegular";
     font-size: 180%;
@@ -440,15 +440,15 @@ a.add_to_cart_button:before {
 	opacity: 0.7;
 }
 /* BuddyPress Links Icons */
-.link-home h2 a:before {
+.infinity-icons .link-home h2 a:before {
     content: "Q";
     font-size: 100%;
     opacity: 0.6;
 }
-div.link-vote-panel div.clickers a.up {
+.infinity-icons div.link-vote-panel div.clickers a.up {
 	background: transparent;
 }
-div.link-vote-panel div.clickers a.up:before {
+.infinity-icons div.link-vote-panel div.clickers a.up:before {
 	color: inherit;
     height: 20px;
     position: relative;

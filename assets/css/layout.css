@@ -17,11 +17,11 @@ infinity-layout-style = off
 /* ================== */
 /* ! Global & Wraps   */
 /* ================== */
-body {
+body.infinity-layout {
     -webkit-font-smoothing: antialiased;
     -webkit-text-size-adjust: none;
 }
-#wrapper {
+.infinity-layout #wrapper {
 	padding-bottom: 20px;
     padding-top: 20px;
     margin: auto;
@@ -29,17 +29,16 @@ body {
 /* ========== */
 /* ! Header   */
 /* ========== */
-#header {
+.infinity-layout #header {
     position: relative;
 }
-
-#header:after {
+.infinity-layout #header:after {
     content:"";
     clear:both;
     display:block;
 }
-
-h1#site-title,div#site-title {
+.infinity-layout h1#site-title,
+.infinity-layout div#site-title {
     line-height: 180%;
     font-weight: bold;
     font-size: 200%;
@@ -47,11 +46,11 @@ h1#site-title,div#site-title {
     width: auto;
     float: left;
 }
-#site-title a {
+.infinity-layout #site-title a {
     margin-bottom: -29px;
     display: block;
 }
-#site-description {
+.infinity-layout #site-description {
     font-style: italic;
     color: #999999;
     position: relative;
@@ -59,30 +58,34 @@ h1#site-title,div#site-title {
     line-height: 180%;
 }
 /* ========================== */
-/* ! /* Navigation Menus */   */
+/* ! /* Navigation Menus */   
 /* ========================== */
 /* Menu Wraps */
 
 /* Top Menu */
-#top-menu-wrap, #sub-menu-wrap {
+.infinity-layout #top-menu-wrap,
+.infinity-layout #sub-menu-wrap {
     position: relative;        
 }
 
-#top-menu-wrap {
+.infinity-layout #top-menu-wrap {
     margin-bottom: -6px;
     /* setting z-index for dropdowns. do not mess with this */
     z-index: 12 !important; 
 }
 
-#main-menu-wrap {
+.infinity-layout #main-menu-wrap {
     padding: 0;
     /* setting z-index for dropdowns. do not mess with this */
     z-index: 11 !important; 
 }
-#main-menu-wrap ul.sub-menu { z-index: 99 !important }
 
-#sub-menu-wrap {
-/* setting z-index for dropdowns. do not mess with this */
+.infinity-layout #main-menu-wrap ul.sub-menu {
+	z-index: 99 !important;
+}
+
+.infinity-layout #sub-menu-wrap {
+	/* setting z-index for dropdowns. do not mess with this */
 	z-index: 10 !important;
     margin-bottom: -3px;
 }
@@ -90,53 +93,55 @@ h1#site-title,div#site-title {
 /* ===================== */
 /* ! Base Menu Styling   */
 /* ===================== */
-#main-menu-wrap .main-menu {
+.infinity-layout #main-menu-wrap .main-menu {
     float: right;
     font-size: 110%;
     width: auto;
 }
-.base-menu {
+.infinity-layout .base-menu {
 	display: inline-block;
     width: 100%;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     webkit-box-sizing: border-box;
 }
-.base-menu ul li {
+.infinity-layout .base-menu ul li {
     float: left;
     position: relative;
     list-style-type: none;
 }
-.base-menu ul li.right {
-float: right;	
+.infinity-layout .base-menu ul li.right {
+	float: right;
 }
-.base-menu ul li li:hover ul,
-.base-menu ul li li.sfHover ul,
-.base-menu ul li li li:hover ul,
-.base-menu ul li li li.sfHover ul,
-.base-menu ul li li li li:hover ul,
-.base-menu ul li li li li.sfHover ul {
+.infinity-layout .base-menu ul li li:hover ul,
+.infinity-layout .base-menu ul li li.sfHover ul,
+.infinity-layout .base-menu ul li li li:hover ul,
+.infinity-layout .base-menu ul li li li.sfHover ul,
+.infinity-layout .base-menu ul li li li li:hover ul,
+.infinity-layout .base-menu ul li li li li.sfHover ul {
     /* match .nav ul width */
     top: -1px;
     left: 180px;
 }
-.base-menu ul li:hover {
+.infinity-layout .base-menu ul li:hover {
     visibility: inherit; /* fixes IE7 'sticky bug' */
 }
-.base-menu ul li:hover li ul,
-.base-menu ul li.sfHover li ul,
-.base-menu ul li li:hover li ul,
-.base-menu ul li li.sfHover li ul,
-.base-menu ul li li li:hover li ul,
-.base-menu ul li li li.sfHover li ul { top: -9999em }
-.base-menu ul li:hover ul,
-.base-menu ul li.sfHover ul {
+.infinity-layout .base-menu ul li:hover li ul,
+.infinity-layout .base-menu ul li.sfHover li ul,
+.infinity-layout .base-menu ul li li:hover li ul,
+.infinity-layout .base-menu ul li li.sfHover li ul,
+.infinity-layout .base-menu ul li li li:hover li ul,
+.infinity-layout .base-menu ul li li li.sfHover li ul {
+	top: -9999em;
+}
+.infinity-layout .base-menu ul li:hover ul,
+.infinity-layout .base-menu ul li.sfHover ul {
     top: 27px;
     /* match top ul list item height */
     left: 0px;
     z-index: 95;
 }
-.base-menu ul ul {
+.infinity-layout .base-menu ul ul {
     top: -9999em;
     width: 210px;
     /* left offset of submenus need to match (see below) */
@@ -145,63 +150,75 @@ float: right;
     z-index: 50;
     position: absolute;
 }
-.base-menu ul ul li {
+.infinity-layout .base-menu ul ul li {
     float: left;
     width: 150px;
     padding: 0 5px 0 5px;
 }
-.base-menu ul ul ul {
+.infinity-layout .base-menu ul ul ul {
 	margin-left: -10px;
 }
-.base-menu ul ul li { width: 85% }
-.base-menu ul ul li:first-child { border-top: none }
-.base-menu ul ul li:last-child { border-bottom: none }
-.base-menu ul ul li a {
+.infinity-layout .base-menu ul ul li {
+	width: 85%;
+}
+.infinity-layout .base-menu ul ul li:first-child {
+	border-top: none;
+}
+.infinity-layout .base-menu ul ul li:last-child {
+	border-bottom: none;
+}
+.infinity-layout .base-menu ul ul li a {
     width: 180px;
 }
-.base-menu ul a {
+.infinity-layout .base-menu ul a {
     float: left;
     padding: 8px 10px;
 }
  /* Page Currently being viewed */
-.base-menu li li a:hover,
-.base-menu li.sfHover li a { background: none }
-.base-menu li li a span.sf-sub-indicator,
-.base-menu li.sfHover li a span.sf-sub-indicator {
+.infinity-layout .base-menu li li a:hover,
+.infinity-layout .base-menu li.sfHover li a {
+	background: none;
+}
+.infinity-layout .base-menu li li a span.sf-sub-indicator,
+.infinity-layout .base-menu li.sfHover li a span.sf-sub-indicator {
     float: right;
     margin: 5px 0 0 0;
 }
-.base-menu li li a span { padding: 0; color: #BBB; }
-.base-menu ul li.sfHover li a,
-.base-menu ul li.sfHover li a:hover,
-.base-menu ul li.sfHover li a span:hover {
-color: #DDD;
+.infinity-layout .base-menu li li a span {
+	padding: 0; color: #BBB;
+}
+.infinity-layout .base-menu ul li.sfHover li a,
+.infinity-layout .base-menu ul li.sfHover li a:hover,
+.infinity-layout .base-menu ul li.sfHover li a span:hover {
+	color: #DDD;
 }
 /*  Make sub menus appear */
-.base-menu ul li:hover ul,
-.base-menu ul li.sfHover ul {
+.infinity-layout .base-menu ul li:hover ul,
+.infinity-layout .base-menu ul li.sfHover ul {
     top: 34px; /* match top ul list item height */
     z-index: 99;
 }
 /* Hide all subs subs (4 levels deep) */
-.base-menu ul li:hover li ul,
-.base-menu ul li.sfHover li ul,
-.base-menu ul li li:hover li ul,
-.base-menu ul li li.sfHover li ul,
-.base-menu ul li li li:hover li ul,
-.base-menu ul li li li.sfHover li ul { top: -9999em }
+.infinity-layout .base-menu ul li:hover li ul,
+.infinity-layout .base-menu ul li.sfHover li ul,
+.infinity-layout .base-menu ul li li:hover li ul,
+.infinity-layout .base-menu ul li li.sfHover li ul,
+.infinity-layout .base-menu ul li li li:hover li ul,
+.infinity-layout .base-menu ul li li li.sfHover li ul {
+	top: -9999em;
+}
 /* Displays all subs subs (4 levels deep) */
-.base-menu ul li li:hover ul,
-.base-menu ul li li.sfHover ul,
-.base-menu ul li li li:hover ul,
-.base-menu ul li li li.sfHover ul,
-.base-menu ul li li li li:hover ul,
-.base-menu ul li li li li.sfHover ul {
+.infinity-layout .base-menu ul li li:hover ul,
+.infinity-layout .base-menu ul li li.sfHover ul,
+.infinity-layout .base-menu ul li li li:hover ul,
+.infinity-layout .base-menu ul li li li.sfHover ul,
+.infinity-layout .base-menu ul li li li li:hover ul,
+.infinity-layout .base-menu ul li li li li.sfHover ul {
     left: 180px; /* match .nav ul width */
     top: -1px;
 }
 /* 2nd level skin */
-.base-menu ul ul {
+.infinity-layout .base-menu ul ul {
     position: absolute;
     top: -9999em;
     width: 180px; /* left offset of submenus need to match (see below) */
@@ -209,48 +226,51 @@ color: #DDD;
     margin: 3px 0 0 0;
     background: #FFF;
 }
-.base-menu ul ul li {
+.infinity-layout .base-menu ul ul li {
     float: left;
     width: 150px;
     background: none;
     padding: 0 5px 0 5px;
 }
-.base-menu li a:hover {
+.infinity-layout .base-menu li a:hover {
     color: #DDD;
 }
-.base-menu ul ul li:first-child { border-top: none }
-.base-menu ul ul li:last-child { border-bottom: none }
-.base-menu ul ul li a {
+.infinity-layout .base-menu ul ul li:first-child {
+	border-top: none;
+}
+.infinity-layout .base-menu ul ul li:last-child {
+	border-bottom: none;
+}
+.infinity-layout .base-menu ul ul li a {
     width: 150px;
 }
-.base-menu ul ul li a:hover {
+.infinity-layout .base-menu ul ul li a:hover {
     padding-left: 12px;
 }
-
-.base-menu:first-child ul li:after{
-content: "";
+.infinity-layout .base-menu:first-child ul li:after {
+	content: "";
 }
-
-.base-menu ul ul li:after {
- content: none !important;
+.infinity-layout .base-menu ul ul li:after {
+	content: none !important;
 }
 
 /* Don't remove this */
-#footer .sub-menu, #footer .sub-menu:before {
-background: none;
-border: 0px;
+.infinity-layout #footer .sub-menu,
+.infinity-layout #footer .sub-menu:before {
+	background: none;
+	border: 0px;
 }
   
 /* =========== 
  ! Content  
  =========== */
  
-#content.sidebar-left {
+.infinity-layout #content.sidebar-left {
 	float: right;
 }
 
 @media only screen and (max-width: 767px) {
-	#content.sidebar-left {
+	.infinity-layout #content.sidebar-left {
 		float: none; 
 	}
 }
@@ -258,56 +278,74 @@ border: 0px;
 /* =========== 
  ! Sidebar   
  =========== */
-#sidebar .widget_search { margin-top: 20px }
-#sidebar .widget_search input[type=text] {
+.infinity-layout #sidebar .widget_search {
+	margin-top: 20px;
+}
+.infinity-layout #sidebar .widget_search input[type=text] {
     width: 110px;
     padding: 2px;
 }
-/* Widgets */
-.widget { margin-bottom: 30px }
 
-#sidebar ul {
+/* Widgets */
+.infinity-layout .widget {
+	margin-bottom: 30px;
+}
+.infinity-layout #sidebar ul {
 	padding: 0px;
 }
 
 /* ========== 
  ! Footer   
  ========== */
-#footer p:last-child { margin-bottom: 0 }
-.footer-widget h3 {
+.infinity-layout #footer p:last-child {
+	margin-bottom: 0;
+}
+.infinity-layout .footer-widget h3 {
     margin-bottom: 10px;
     color: #FEDA71;
     font-size: 16px;
 }
-#footer-widget-right { border-right: none; margin-right: 0px; }
-#footer-widget-left { border-left: none;  margin-left: 0px; }
-#footer-menu  ul li a:hover { color: #777 }
-#footer-menu ul li { display: inline }
-#footer-menu ul li a {
+.infinity-layout #footer-widget-right {
+	border-right: none;
+	margin-right: 0px;
+}
+.infinity-layout #footer-widget-left {
+	border-left: none;
+	margin-left: 0px;
+}
+.infinity-layout #footer-menu ul li a:hover {
+	color: #777;
+}
+.infinity-layout #footer-menu ul li {
+	display: inline;
+}
+.infinity-layout #footer-menu ul li a {
     padding-right: 8px;
 }
-.footer-menu ul li:last-child a { border-right: 0px }
-#footer-info {
+.infinity-layout .footer-menu ul li:last-child a {
+	border-right: 0px;
+}
+.infinity-layout #footer-info {
     overflow: auto;
     padding: 0px;
 }
-#powered-by {
+.infinity-layout #powered-by {
     min-height: 30px;
     padding-top: 10px;
 }
-#copyright-info {
+.infinity-layout #copyright-info {
 	text-align: right;
 }
+
 /* ================== */
 /* ! Page Templates   */
 /* ================== */
-/*page templare sidebar left*/
-.page-template-sidebar-left-template-php #content,
-.page-template-sidebar-left-template-php #sidebar.sidebar-right { 
+
+.infinity-layout .page-template-sidebar-left-template-php #content,
+.infinity-layout .page-template-sidebar-left-template-php #sidebar.sidebar-right {
 	float: right !important 
 }
-
-.page-template-sidebar-left-template-php #sidebar.sidebar-left,
-.page-template-sidebar-left-template-php #sidebar.sidebar-right { 
+.infinity-layout .page-template-sidebar-left-template-php #sidebar.sidebar-left,
+.infinity-layout .page-template-sidebar-left-template-php #sidebar.sidebar-right {
 	float: left !important;
 }

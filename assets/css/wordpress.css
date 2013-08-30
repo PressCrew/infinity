@@ -14,79 +14,81 @@ infinity-wordpress-style = off
 /*
 ================================================== */
 /* Post Meta */
-span.edit-link {
+.infinity-wp span.edit-link {
     margin-left: 1px;
     margin-right: 9px;
     float: right;
 }
-span.edit-link a { color: #999 }
+.infinity-wp span.edit-link a {
+	color: #999;
+}
 /* The actual Posts*/
-.author-avatar {
+.infinity-wp .author-avatar {
     float: left;
     margin-bottom: 0;
     margin-right: 10px;
     margin-top: 0;
 }
-.entry {
+.infinity-wp .entry {
     margin-bottom: 30px;
     margin-top: 30px;
 }
-.post dd.wp-caption p.wp-caption-text,
-.wp-caption-text {
+.infinity-wp .post dd.wp-caption p.wp-caption-text,
+.infinity-wp .wp-caption-text {
     font-style: italic;
     line-height: 17px;
     margin: 0 !important;
     padding: 0 4px 5px 0;
     font-size: 12px;
 }
-.post-meta-data span {
+.infinity-wp .post-meta-data span {
     border-right: 1px solid #DDD;
     margin-right: 5px;
     padding-right: 5px;
 }
-.post .author-box img,
-.comment-avatar-box img {
+.infinity-wp .post .author-box img,
+.infinity-wp .comment-avatar-box img {
     float: none;
     margin: 0;
     border: 4px solid #fff;
 }
-.post img.alignright {
+.infinity-wp .post img.alignright {
     margin: 0 0 2px 7px;
     display: inline;
     padding: 4px;
 }
-.post img.wp-smiley {
+.infinity-wp .post img.wp-smiley {
     float: none !important;
     clear: none !important;
     margin: 0 !important;
     border: none !important;
     padding: 0 !important;
 }
-.post-content {
-margin-bottom: 60px;
+.infinity-wp .post-content {
+	margin-bottom: 60px;
 }
-.post img.alignleft {
+.infinity-wp .post img.alignleft {
     margin: 0 7px 2px 0;
     display: inline;
     padding: 4px;
 }
-.post .aligncenter,
-.post .aligncenter {
+.infinity-wp .post .aligncenter,
+.infinity-wp .post .aligncenter {
     margin-left: auto;
     margin-right: auto;
     display: block;
 }
-.post img.centered,
-img.aligncenter {
+.infinity-wp .post img.centered,
+.infinity-wp img.aligncenter {
     margin-left: auto;
     margin-right: auto;
     display: block;
 }
-.post img {
+.infinity-wp .post img {
     max-width: 100%;
     height: auto;
 }
-.post .wp-caption {
+.infinity-wp .post .wp-caption {
     background-color: #F9F9F9;
     border: 1px solid #DDDDDD;
     border-radius: 3px 3px 3px 3px;
@@ -96,56 +98,62 @@ img.aligncenter {
     padding-top: 4px;
     text-align: center;
 }
-.post .wp-caption img {
+.infinity-wp .post .wp-caption img {
     margin: 0;
     border: 0 none;
     padding: 0;
 }
-.postthumb {
+.infinity-wp .postthumb {
 	margin-bottom: 20px;
 }
-.postthumb img {
+.infinity-wp .postthumb img {
     max-width: 100%;
     height: auto;
 }
-.post .gallery-caption { }
-#single-attachment img {
-margin-top: 25px;
-margin-bottom: 25px;
+.infinity-wp .post .gallery-caption {
+	/* nothing yet */
+}
+.infinity-wp #single-attachment img {
+	margin-top: 25px;
+	margin-bottom: 25px;
 }
 /* Post Titles */
 /* Captions */
 /* Block Quotes */
 /* page links */
-.page-link {
+.infinity-wp .page-link {
     font-weight: bold;
     word-spacing: 0.5em;
     margin: 0 0 22px;
 }
-.page-link a:active,
-.page-link a:hover { color: #FF4B33 }
-.page-link a:link,
-.page-link a:visited {
+.infinity-wp .page-link a:active,
+.infinity-wp .page-link a:hover {
+	color: #FF4B33;
+}
+.infinity-wp .page-link a:link,
+.infinity-wp .page-link a:visited {
     font-weight: normal;
     border: 1px solid #DDD;
     padding: 5px 8px;
 }
-.home .sticky .page-link a {}
+.infinity-wp .home .sticky .page-link a {
+	/* nothing yet */
+}
 /* code in posts */
-.post .alignright {
+.infinity-wp .post .alignright {
     margin-left: 15px;
     float: right;
     margin-bottom: 15px;
 }
-.post .alignleft {
+.infinity-wp .post .alignleft {
     margin-right: 15px;
     float: left;
 }
 /* per post navigation and pagination */
-ul.page-numbers li a,
-ul.page-numbers li span,
-.paged-navigation,
-.comment-navigation {
+.infinity-wp ul.page-numbers li a,
+.infinity-wp ul.page-numbers li span,
+.infinity-wp .paged-navigation,
+.infinity-wp .comment-navigation {
     background: none repeat scroll 0 0 #FFFFFF;
     color: inherit;
     border: 1px solid #DDDDDD;
@@ -158,22 +166,24 @@ ul.page-numbers li span,
     text-align: center;
     word-spacing: 10px;
 }
-ul.page-numbers li a:hover,
-.paged-navigation:hover,
-.comment-navigation:hover {
-background: #444;
-color: #FFF;
+.infinity-wp ul.page-numbers li a:hover,
+.infinity-wp .paged-navigation:hover,
+.infinity-wp .comment-navigation:hover {
+	background: #444;
+	color: #FFF;
 }
-ul.page-numbers {
+.infinity-wp ul.page-numbers {
     text-align: center;
     margin-bottom: 20px;
 }
-ul.page-numbers li span {
-background: #444;
-color: #FFF;
+.infinity-wp ul.page-numbers li span {
+	background: #444;
+	color: #FFF;
 }
-ul.page-numbers li { display: inline }
-.pagination {
+.infinity-wp ul.page-numbers li {
+	display: inline;
+}
+.infinity-wp .pagination {
     border-bottom: 1px solid #EAEAEA;
     height: 16px;
     padding-left: 0px;
@@ -181,19 +191,19 @@ ul.page-numbers li { display: inline }
     color: #888888;
     font-size: 90%;
 }
-.pagination#user-pag,
-.friends .pagination,
-.mygroups .pagination,
-.myblogs .pagination {
+.infinity-wp .pagination#user-pag,
+.infinity-wp .friends .pagination,
+.infinity-wp .mygroups .pagination,
+.infinity-wp .myblogs .pagination {
     background: #F9F9F9;
     border: none;
     padding: 8px 15px;
 }
 /*Post Meta */
-.post-meta-data,
-.comment-meta,
-.comment-options,
-p#breadcrumbs {
+.infinity-wp .post-meta-data,
+.infinity-wp .comment-meta,
+.infinity-wp .comment-options,
+.infinity-wp p#breadcrumbs {
     border-bottom: 1px solid #EFEFEF;
     border-top: 1px solid #EFEFEF;
     color: #AAAAAA;
@@ -203,26 +213,28 @@ p#breadcrumbs {
     padding: 3px 0;
     margin-bottom: 10px;
 }
-span.post-comments {
+.infinity-wp span.post-comments {
 	float: right;
 	margin-right: 5px;
 	border-right: 0px;
 }
-p#breadcrumbs { margin-top: 0px }
+.infinity-wp p#breadcrumbs {
+	margin-top: 0px;
+}
 /* Intro Boxes for authors, categories and tags */
-.post-author-box {
+.infinity-wp .post-author-box {
     float: right;
     padding: 3px;
     display: none;
 }
-.post-author-box img {
+.infinity-wp .post-author-box img {
     width: 50px;
     height: 50px;
 }
-.author-box,
-.category-box,
-.tag-box,
-.info-box {
+.infinity-wp .author-box,
+.infinity-wp .category-box,
+.infinity-wp .tag-box,
+.infinity-wp .info-box {
     margin-bottom: 20px;
     border: 1px solid #DDDDDD;
     background: #F9F9F9;
@@ -231,95 +243,108 @@ p#breadcrumbs { margin-top: 0px }
     -moz-border-radius: 3px;
     padding: 10px 20px;
 }
-
-#category-description p,
-#tag-description p {
-font-style: italic;
-margin-top: 10px;
-margin-bottom: 0px;
+.infinity-wp #category-description p,
+.infinity-wp #tag-description p {
+	font-style: italic;
+	margin-top: 10px;
+	margin-bottom: 0px;
 }
-
-.authorbox h3 {
+.infinity-wp .authorbox h3 {
     font-style: normal;
     margin-bottom: 10px;
     color: #555555;
     font-size: 16px;
 }
-#author-description {
+.infinity-wp #author-description {
     overflow: hidden;
     padding-bottom: 15px;
 }
-#author-description img {
+.infinity-wp #author-description img {
     margin-top: 2px;
     margin-right: 10px;
     float: left;
 }
-#category-description,
-#tag-description {
+.infinity-wp #category-description,
+.infinity-wp #tag-description {
     padding: 10px;
 }
-#author-social {
+.infinity-wp #author-social {
     float: right;
     width: 25%;
 }
 
 /*Search Page*/
 
-.search-title {
+.infinity-wp .search-title {
     font-size: 18px;
     color: #999;
 }
-
-.search-title span {
-color: #444;
+.infinity-wp .search-title span {
+	color: #444;
 }
 
 /* ============ */
 /* ! Comments   */
 /* ============ */
-.comment-content {
+.infinity-wp .comment-content {
     margin-bottom: 40px;
     position: relative;
 }
-#comments {
+.infinity-wp #comments {
     margin-top: 20px;
     position: relative;
 }
-#comments .pingbacks li.pingback { margin: 10px 0 }
-#comments .pingbacks li.pingback .reply { display: none }
-#comments .cancel-comment-reply { margin: 10px 0 }
-#comments .comment-entry p {
+.infinity-wp #comments .pingbacks li.pingback {
+	margin: 10px 0;
+}
+.infinity-wp #comments .pingbacks li.pingback .reply {
+	display: none;
+}
+.infinity-wp #comments .cancel-comment-reply {
+	margin: 10px 0;
+}
+.infinity-wp #comments .comment-entry p {
     padding-left: 10px;
     padding-right: 10px;
     margin: 0 0 20px 62px;
 }
-#comments .bypostauthor { background: #F9F9F9 }
-#comments .comment-head { margin: 0 0 15px 70px }
-#comments .comment-head .name {
+.infinity-wp #comments .bypostauthor {
+	background: #F9F9F9;
+}
+.infinity-wp #comments .comment-head {
+	margin: 0 0 15px 70px;
+}
+.infinity-wp #comments .comment-head .name {
     font-weight: bold;
     margin: 0;
 }
-#comments .comment-head .date,
-#comments .comment-head .edit,
-#comments .comment-head .perma { font-size: 11px }
-#comments .avatar img {
+.infinity-wp #comments .comment-head .date,
+.infinity-wp #comments .comment-head .edit,
+.infinity-wp #comments .comment-head .perma {
+	font-size: 11px;
+}
+.infinity-wp #comments .avatar img {
     vertical-align: middle;
     width: 40px;
     height: 40px;
     margin: 0;
 }
-#comments ul.children {
+.infinity-wp #comments ul.children {
     margin: 10px 10px 0 25px;
     padding: 0;
 }
-#comments .navigation { }
-#comments .navigation a {
+.infinity-wp #comments .navigation {
+	/* nothing yet */
+}
+.infinity-wp #comments .navigation a {
     text-decoration: none;
     margin: 15px 0 0 0;
     display: block;
 }
-#comments .navigation a:hover { }
-#comments blockquote {
+.infinity-wp #comments .navigation a:hover {
+	/* nothing yet */
+}
+.infinity-wp #comments blockquote {
     font-style: italic;
     font-weight: bold;
     line-height: 150%;
@@ -328,48 +353,54 @@ color: #444;
     padding-left: 0;
     padding-top: 20px;
 }
-#comments .comment {
+.infinity-wp #comments .comment {
     margin-top: 10px;
     list-style-type: none;
     width: 100%;
 }
-#comments .comment .comment-container {
+.infinity-wp #comments .comment .comment-container {
     border-bottom: 1px solid #F4F4F4;
     padding-bottom: 15px;
     position: relative;
 }
-#comments h3#pings { margin-top: 25px }
-#comments  .avatar {
+.infinity-wp #comments h3#pings {
+	margin-top: 25px;
+}
+.infinity-wp #comments .avatar {
     float: left;
     margin: 0 15px 10px 0;
 }
-#comments .reply { 
+.infinity-wp #comments .reply {
     left: 0;
     position: absolute;
     top: 60px;
 }
-#comments .reply a { 
+.infinity-wp #comments .reply a {
     font-size: 70%;
     padding: 0 6px;
 }
-#comments h3 { }
-ol.commentlist {
+.infinity-wp #comments h3 {
+	/* nothing yet */
+}
+.infinity-wp ol.commentlist {
     margin-left: 0px;
     list-style: none;
     padding-left: 0px;
 }
-#comments .unapproved {
-font-style: italic;
-color: #999;
+.infinity-wp #comments .unapproved {
+	font-style: italic;
+	color: #999;
 }
 /* The Comments Forms */
-#respond { margin: 40px 0 0 }
-#respond #reply-title small {
+.infinity-wp #respond {
+	margin: 40px 0 0;
+}
+.infinity-wp #respond #reply-title small {
     margin-top: 5px;
     display: block;
     font-size: 13px;
 }
-#respond span.required {
+.infinity-wp #respond span.required {
     color: #CFCFCF;
     display: block;
     float: left;
@@ -377,58 +408,70 @@ color: #999;
     font-weight: bold;
     margin: 4px 0 0 -12px;
 }
-#respond .right {
+.infinity-wp #respond .right {
     float: left;
     width: 380px;
 }
-#respond label {
+.infinity-wp #respond label {
     color: #777777;
     padding: 4px 0;
     font-size: 11px;
 }
-#respond .left {
+.infinity-wp #respond .left {
     margin-right: 15px;
     float: left;
     width: 200px;
 }
-#commentform { margin: 10px 0 0 10px; }
-#commentform input.txt,
-#commentform textarea {
+.infinity-wp #commentform {
+	margin: 10px 0 0 10px;
+}
+.infinity-wp #commentform input.txt,
+.infinity-wp #commentform textarea {
     border-color: #ccc #efefef #efefef #ccc;
     border-width: 1px;
     border-style: solid;
     font-size: inherit;
 }
-li.bypostauthor { background: none repeat scroll 0 0 #F8FDFF !important }
-#commentform input.txt {
+.infinity-wp li.bypostauthor {
+	background: none repeat scroll 0 0 #F8FDFF !important;
+}
+.infinity-wp #commentform input.txt {
     background: #F9F9F9;
     width: 170px;
     color: #666;
     margin: 0 5px 10px 0;
     padding: 5px 7px;
 }
-#commentform textarea {
+.infinity-wp #commentform textarea {
     width: 95%;
     height: auto;
 }
-#commentform #submit { margin: 15px 0 0 0 }
-.form-allowed-tags {
-font-size: 90%;
-color: #777;
+.infinity-wp #commentform #submit {
+	margin: 15px 0 0 0;
 }
-/* Pingsbacks */
-h3#pings { margin: 25px 0 10px 0 }
-.pinglist li {
+.infinity-wp .form-allowed-tags {
+	font-size: 90%;
+	color: #777;
+}
+/* Ping backs */
+.infinity-wp h3#pings {
+	margin: 25px 0 10px 0;
+}
+.infinity-wp .pinglist li {
     list-style-type: decimal;
     margin: 0 0 0 20px;
 }
-.pinglist li .pingcontent {
+.infinity-wp .pinglist li .pingcontent {
     margin: 10px 0;
     display: block;
 }
-.pinglist li .author {
+.infinity-wp .pinglist li .author {
     font-weight: bold;
     font-size: 15px;
 }
-.pinglist li .date { font-size: 11px }
-p.form-allowed-tags { width: 70% }
+.infinity-wp .pinglist li .date {
+	font-size: 11px;
+}
+.infinity-wp p.form-allowed-tags {
+	width: 70%;
+}

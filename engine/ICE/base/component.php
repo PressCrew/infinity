@@ -86,7 +86,14 @@ abstract class ICE_Component
 	 * @var string
 	 */
 	private $aname;
-	
+
+	/**
+	 * A body class to add when this component is active.
+	 *
+	 * @var string
+	 */
+	protected $body_class;
+
 	/**
 	 * Required capabilities, can only be appended
 	 *
@@ -277,6 +284,7 @@ abstract class ICE_Component
 	{
 		switch ( $name ) {
 			case 'aname':
+			case 'body_class':
 			case 'capabilities':
 			case 'class':
 			case 'description':
@@ -582,6 +590,11 @@ abstract class ICE_Component
 			$this->documentation = $this->config( 'documentation' );
 		}
 
+		// set body class
+		if ( $this->config()->contains( 'body_class' ) ) {
+			$this->body_class = $this->config( 'body_class' );
+		}
+
 		// set stylesheet
 		if ( $this->config()->contains( 'style' ) ) {
 			$this->style = $this->config( 'style' );
@@ -652,6 +665,26 @@ abstract class ICE_Component
 
 		// call configure template method
 		$this->configure();
+
+		// maybe hook up body class
+		if ( $this->body_class ) {
+			// do it
+			add_filter( 'body_class', array( $this, 'add_body_class' ) );
+		}
+	}
+
+	/**
+	 * Append body class to given array.
+	 *
+	 * @param array $classes
+	 * @return array
+	 */
+	public function add_body_class( $classes )
+	{
+		// append to classes array
+		$classes[] = esc_attr( $this->body_class );
+		// all done
+		return $classes;
 	}
 
 	/**

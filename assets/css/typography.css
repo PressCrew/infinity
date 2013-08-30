@@ -1,7 +1,8 @@
 /* ============================================= */
 /* ! Typography and Tags (ul, li,a, input etc)   */
 /* ============================================= */
-body {
+
+body.infinity-typog {
     /* Fix for webkit rendering */
     font: 14px/21px "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #444;
@@ -11,59 +12,86 @@ body {
   	-webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, h4, h5, h6 {
+.infinity-typog h1,
+.infinity-typog h2,
+.infinity-typog h3,
+.infinity-typog h4,
+.infinity-typog h5,
+.infinity-typog h6 {
     font-weight: bold;
 }
-h1 {
+
+.infinity-typog h1 {
     font-size: 2em;
     line-height: 1.15em;
     margin: .5em 0 1em 0;
 }
-h2 {
+
+.infinity-typog h2 {
     font-size: 1.75em;
     line-height: 1.15em;
     margin: .5em 0 1em 0;
 }
-h3 {
+
+.infinity-typog h3 {
     font-size: 1.5em;
     line-height: 1.15em;
     margin: .5em 0 1em 0;
 }
-h4 {
+
+.infinity-typog h4 {
     font-size: 1.25em;
     line-height: 1.15em;
     margin: .5em 0 1em 0;
 }
-h5 {
+
+.infinity-typog h5 {
     font-size: 1em;
     line-height: 1.6em;
     margin: 0 0 .5em 0;
 }
-h6 {
+
+.infinity-typog h6 {
     font-size: .75em;
     line-height: 1.6em;
     margin: 0 0 .5em 0;
 }
-h1#category-title,
-h1#tag-title {
+
+.infinity-typog h1#category-title,
+.infinity-typog h1#tag-title {
     font-style: normal;
     color: #999;
     font-size: 114.3%;
     line-height: 18px;
     margin: 0;
 }
-h1#category-title span,
-h1#tag-title span { color: #555 }
 
-h2.page-title a, h2.post-title a, h1.page-title a, h1.post-title a {
+.infinity-typog h1#category-title span,
+.infinity-typog h1#tag-title span {
+	color: #555;
+}
+
+.infinity-typog h2.page-title a,
+.infinity-typog h2.post-title a,
+.infinity-typog h1.page-title a,
+.infinity-typog h1.post-title a {
     margin-bottom: 0;
     margin-top: 0;
 }
-h2.page-title a:hover, h2.post-title a:hover, h1.page-title a:hover, h1.post-title a:hover { color: #999 }
 
-h1 .post-edit-link, h2 .post-edit-link {
+.infinity-typog h2.page-title a:hover,
+.infinity-typog h2.post-title a:hover,
+.infinity-typog h1.page-title a:hover,
+.infinity-typog h1.post-title a:hover {
+	color: #999;
+}
+
+.infinity-typog h1 .post-edit-link,
+.infinity-typog h2 .post-edit-link {
     font-size: 27px !important;
     line-height: 0;
 }
 
-.moretag { margin-left: 10px }
+.infinity-typog .moretag {
+	margin-left: 10px;
+}
