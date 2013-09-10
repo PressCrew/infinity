@@ -118,11 +118,6 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	}
 
 	/**
-	 * Template method to allow localization of scripts
-	 */
-	protected function localize_script() {}
-
-	/**
 	 * Register a component
 	 *
 	 * @param ICE_Component $component

@@ -35,17 +35,6 @@ abstract class ICE_Option_Registry extends ICE_Registry
 		wp_enqueue_script( 'jquery-ui-dialog' );
 		wp_enqueue_script( 'jquery-ui-progressbar' );
 		wp_enqueue_script( 'jquery-ui-tabs' );
-
-		// call localize script *LAST*
-		$this->localize_script();
-	}
-
-	/**
-	 * Template method to allow localization of scripts
-	 */
-	protected function localize_script()
-	{
-		// override this to apply special localizations that apply to your implementation
 	}
 
 	/**
