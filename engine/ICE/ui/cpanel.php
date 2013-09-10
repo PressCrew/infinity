@@ -192,7 +192,7 @@ final class ICE_Ui_Cpanel extends ICE_Base
 
 		// begin rendering ?>
 		<script type="text/javascript">
-			<?php print $script->export(); ?>
+			<?php print $script->render(); ?>
 		</script><?php
 	}
 
