@@ -60,7 +60,7 @@ add_action( 'content_class', 'infinity_content_class' );
 function infinity_get_content_class()
 {
 	// must support grid style feature
-	if ( current_theme_supports( 'infinity-wordpress-style' ) ) {
+	if ( current_theme_supports( 'infinity-wp-support' ) ) {
 		return infinity_get_sidebar_size();
 	}
 }
@@ -85,7 +85,7 @@ add_action( 'sidebar_class', 'infinity_sidebar_class' );
 function infinity_get_sidebar_class()
 {
 	// must support grid style feature
-	if ( current_theme_supports( 'infinity-wordpress-style' ) ) {
+	if ( current_theme_supports( 'infinity-wp-support' ) ) {
 
 		$size = infinity_get_sidebar_size();
 
@@ -119,7 +119,7 @@ function infinity_get_sidebar_class()
 function infinity_get_sidebar_size()
 {
 	// must support grid style feature
-	if ( current_theme_supports( 'infinity-wordpress-style' ) ) {
+	if ( current_theme_supports( 'infinity-wp-support' ) ) {
 		// get sidebar size
 		$size = infinity_option_get( 'infinity-core-options.sidebar-size' );
 		// did we get one?
@@ -140,7 +140,7 @@ function infinity_get_sidebar_size()
  */
 function infinity_grid_fallback()
 {
-	if ( current_theme_supports( 'infinity-wordpress-style' ) ) {
+	if ( current_theme_supports( 'infinity-wp-support' ) ) {
 		// grab sidebar size
 		$size = infinity_get_sidebar_size();
 		// get one?
@@ -166,7 +166,7 @@ add_action( 'open_body', 'infinity_grid_fallback' );
 function infinity_sidebar_position_css()
 {
 	if (
-		current_theme_supports( 'infinity-wordpress-style' ) &&
+		current_theme_supports( 'infinity-wp-support' ) &&
 		infinity_option_get( 'infinity-core-options.sidebar-position' ) != 'right'
 	) {
 		print ' sidebar-left';
@@ -185,7 +185,7 @@ add_action( 'content_class', 'infinity_sidebar_position_css' );
 function infinity_sidebar_left_fallback()
 {
 	if (
-		current_theme_supports( 'infinity-wordpress-style' ) &&
+		current_theme_supports( 'infinity-wp-support' ) &&
 		infinity_option_get( 'infinity-core-options.sidebar-position' ) != 'right'
 	) {
 		// render grid fallback script ?>
