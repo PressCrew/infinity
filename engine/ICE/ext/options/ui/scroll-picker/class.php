@@ -56,9 +56,9 @@ class ICE_Ext_Option_Ui_Scroll_Picker
 	
 	/**
 	 */
-	public function init_scripts()
+	public function init_admin_scripts()
 	{
-		parent::init_scripts();
+		parent::init_admin_scripts();
 
 		// need scrollpane helper
 		wp_enqueue_script( 'ice-scrollpane' );
