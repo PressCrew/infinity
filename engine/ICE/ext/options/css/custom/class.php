@@ -29,7 +29,7 @@ class ICE_Ext_Option_Css_Custom
 		parent::init_styles();
 
 		// add css injection callback
-		$this->style()->cache( 'custom', 'inject_css' );
+		$this->style()->inject( 'custom', 'inject_css' );
 	}
 
 	/**
@@ -42,7 +42,7 @@ class ICE_Ext_Option_Css_Custom
 		// did we get anything?
 		if ( !empty( $value ) ) {
 			// have to assume its valid CSS, add as string
-			$style->add_string( $value );
+			$style->add_string( 'css', $value );
 		}
 	}
 }

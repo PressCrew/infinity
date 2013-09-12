@@ -23,5 +23,5 @@
 	// init menu
 	jQuery('ul#<?php $this->render_id() ?>').menu();
 	// render all of the button script logic
-	<?php print $button_script->export() ?>
+	<?php print $button_script->render() ?>
 </script>

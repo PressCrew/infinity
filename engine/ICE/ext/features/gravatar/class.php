@@ -44,7 +44,7 @@ class ICE_Ext_Feature_Gravatar
 		parent::init_styles();
 
 		// add gravatar image styles callback
-		$this->style()->cache( 'image', 'image_css' );
+		$this->style()->inject( 'image', 'image_css' );
 	}
 	
 	/**
@@ -71,7 +71,7 @@ class ICE_Ext_Feature_Gravatar
 		$opt_bg_color = $this->get_suboption('bg-color')->get();
 
 		// add rules
-		$img = $style->rule( 'img.' . $this->image_class );
+		$img = $style->rule( 'image', 'img.' . $this->image_class );
 
 		if ( $opt_border_width ) {
 			$img->ad( 'border-width', $opt_border_width . 'px' );

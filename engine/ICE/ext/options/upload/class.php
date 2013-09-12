@@ -60,30 +60,22 @@ class ICE_Ext_Option_Upload
 
 	/**
 	 */
-	public function init_styles()
+	public function init_admin_styles()
 	{
-		parent::init_styles();
+		parent::init_admin_styles();
 
-		if ( is_admin() ) {
-			// slurp admin styles
-			$this->style()
-				->section( 'admin' )
-				->cache( 'template', 'template.css' );
-		}
+		// inject admin styles
+		$this->style()->inject( 'template', 'template.css' );
 	}
 
 	/**
 	 */
-	public function init_scripts()
+	public function init_admin_scripts()
 	{
-		parent::init_scripts();
+		parent::init_admin_scripts();
 
-		if ( is_admin() ) {
-			// slurp admin script
-			$this->script()
-				->section( 'admin' )
-				->cache( 'template', 'template.js' );
-		}
+		// inject admin script
+		$this->script()->inject( 'template', 'template.js' );
 	}
 
 	/**

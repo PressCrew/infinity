@@ -31,9 +31,9 @@ class ICE_Webfont extends ICE_Base
 	/**
 	 * Web Font JSON result
 	 * 
-	 * @var ICE_Export
+	 * @var string
 	 */
-	private $export;
+	private $result;
 
 	/**
 	 * Map of initialized services
@@ -55,25 +55,8 @@ class ICE_Webfont extends ICE_Base
 		// add google always (for now)
 		$this->add_google();
 
-		// set up export
-		$this->export = new ICE_Export( 'webfont', 'json', array($this,'update') );
-		
-		// try to refresh
-		$this->export->refresh( time() - $max_age );
-	}
-
-	/**
-	 */
-	public function get_property( $name )
-	{
-		switch ( $name ) {
-			case 'path':
-				return $this->export->get_property( 'path' );
-			case 'url':
-				return $this->export->get_property( 'url' );
-			default:
-				return parent::get_property( $name );
-		}
+		// grab result
+		$this->result = $this->update();
 	}
 
 	/**

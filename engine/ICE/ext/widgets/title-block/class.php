@@ -24,14 +24,12 @@ class ICE_Ext_Widget_Title_Block
 {
 	/**
 	 */
-	public function init_styles()
+	public function init_admin_styles()
 	{
-		parent::init_styles();
+		parent::init_admin_styles();
 
-		// slurp admin styles
-		$this->style()
-			->section( 'admin' )
-			->cache( 'admin', 'admin.css' );
+		// inject admin styles
+		$this->style()->inject( 'admin', 'admin.css' );
 	}
 	
 	/**

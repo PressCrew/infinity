@@ -105,13 +105,6 @@ abstract class ICE_Option extends ICE_Component
 	protected $style_property;
 
 	/**
-	 * Which section to export any dynamic styles to
-	 *
-	 * @var string
-	 */
-	protected $style_section;
-
-	/**
 	 * Used by options which target css selectors
 	 *
 	 * @var string
@@ -139,7 +132,6 @@ abstract class ICE_Option extends ICE_Component
 			case 'name_deprecated':
 			case 'section':
 			case 'style_property':
-			case 'style_section':
 			case 'style_selector':
 			case 'style_unit':
 				return $this->$name;
@@ -224,11 +216,6 @@ abstract class ICE_Option extends ICE_Component
 		// style unit
 		if ( $this->config()->contains( 'style_unit' ) ) {
 			$this->style_unit = $this->config( 'style_unit' );
-		}
-
-		// style section
-		if ( $this->config()->contains( 'style_section' ) ) {
-			$this->style_section = $this->config( 'style_section' );
 		}
 
 		// setup style property object
@@ -595,16 +582,9 @@ abstract class ICE_Option extends ICE_Component
 
 				// add value to component styles if set
 				if ( $style_value->has_value() ) {
-					if ( $this->style_section ) {
-						$rule =
-							$this->style()
-								->section($this->style_section)
-								->rule( $this->format_style_selector() );
-					} else {
-						$rule =
-							$this->style()
-								->rule( $this->format_style_selector() );
-					}
+					// new rule
+					$rule = $this->style()->rule( 'ini', $this->format_style_selector() );
+					// add declaration from style property
 					$rule->add_declaration(
 						$this->__style_property__->get_name(),
 						$this->__style_property__->get_value()->format()

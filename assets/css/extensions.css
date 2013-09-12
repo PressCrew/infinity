@@ -1,0 +1,1636 @@
+/**********************/
+/*   extensions.css   */
+/**********************/
+
+/* ============================================= */
+/* ! Typography and Tags (ul, li,a, input etc)   */
+/* ============================================= */
+
+body.infinity-typog {
+    /* Fix for webkit rendering */
+    font: 14px/21px "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #444;
+    -webkit-text-size-adjust: 100%;
+  	-ms-text-size-adjust: 100%;
+  	text-rendering: optimizeLegibility;
+  	-webkit-font-smoothing: antialiased;
+}
+
+.infinity-typog h1,
+.infinity-typog h2,
+.infinity-typog h3,
+.infinity-typog h4,
+.infinity-typog h5,
+.infinity-typog h6 {
+    font-weight: bold;
+}
+
+.infinity-typog h1 {
+    font-size: 2em;
+    line-height: 1.15em;
+    margin: .5em 0 1em 0;
+}
+
+.infinity-typog h2 {
+    font-size: 1.75em;
+    line-height: 1.15em;
+    margin: .5em 0 1em 0;
+}
+
+.infinity-typog h3 {
+    font-size: 1.5em;
+    line-height: 1.15em;
+    margin: .5em 0 1em 0;
+}
+
+.infinity-typog h4 {
+    font-size: 1.25em;
+    line-height: 1.15em;
+    margin: .5em 0 1em 0;
+}
+
+.infinity-typog h5 {
+    font-size: 1em;
+    line-height: 1.6em;
+    margin: 0 0 .5em 0;
+}
+
+.infinity-typog h6 {
+    font-size: .75em;
+    line-height: 1.6em;
+    margin: 0 0 .5em 0;
+}
+
+.infinity-typog h1#category-title,
+.infinity-typog h1#tag-title {
+    font-style: normal;
+    color: #999;
+    font-size: 114.3%;
+    line-height: 18px;
+    margin: 0;
+}
+
+.infinity-typog h1#category-title span,
+.infinity-typog h1#tag-title span {
+	color: #555;
+}
+
+.infinity-typog h2.page-title a,
+.infinity-typog h2.post-title a,
+.infinity-typog h1.page-title a,
+.infinity-typog h1.post-title a {
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.infinity-typog h2.page-title a:hover,
+.infinity-typog h2.post-title a:hover,
+.infinity-typog h1.page-title a:hover,
+.infinity-typog h1.post-title a:hover {
+	color: #999;
+}
+
+.infinity-typog h1 .post-edit-link,
+.infinity-typog h2 .post-edit-link {
+    font-size: 27px !important;
+    line-height: 0;
+}
+
+.infinity-typog .moretag {
+	margin-left: 10px;
+}
+
+
+/*
+----------------------------------------------------------------
+//LAYOUT
+	+ Global & Wraps
+	+ Header
+	+ Navigation Menus
+	+ Content
+	+ Sidebar
+	+ Footer
+	+ Tables
+	+ Forms
+
+You can disable the css in this file by adding the following code to your child theme config/infinity.ini file
+
+infinity-layout-style = off
+--------------------------------------------------------------*/
+/* ================== */
+/* ! Global & Wraps   */
+/* ================== */
+body.infinity-layout {
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: none;
+}
+.infinity-layout #wrapper {
+	padding-bottom: 20px;
+    padding-top: 20px;
+    margin: auto;
+}
+/* ========== */
+/* ! Header   */
+/* ========== */
+.infinity-layout #header {
+    position: relative;
+}
+.infinity-layout #header:after {
+    content:"";
+    clear:both;
+    display:block;
+}
+.infinity-layout h1#site-title,
+.infinity-layout div#site-title {
+    line-height: 180%;
+    font-weight: bold;
+    font-size: 200%;
+    margin: -15px 0 0;
+    width: auto;
+    float: left;
+}
+.infinity-layout #site-title a {
+    margin-bottom: -29px;
+    display: block;
+}
+.infinity-layout #site-description {
+    font-style: italic;
+    color: #999999;
+    position: relative;
+    font-size: 14px;
+    line-height: 180%;
+}
+/* ========================== */
+/* ! /* Navigation Menus */
+/* ========================== */
+/* Menu Wraps */
+
+/* Top Menu */
+.infinity-layout #top-menu-wrap,
+.infinity-layout #sub-menu-wrap {
+    position: relative;
+}
+
+.infinity-layout #top-menu-wrap {
+    margin-bottom: -6px;
+    /* setting z-index for dropdowns. do not mess with this */
+    z-index: 12 !important;
+}
+
+.infinity-layout #main-menu-wrap {
+    padding: 0;
+    /* setting z-index for dropdowns. do not mess with this */
+    z-index: 11 !important;
+}
+
+.infinity-layout #main-menu-wrap ul.sub-menu {
+	z-index: 99 !important;
+}
+
+.infinity-layout #sub-menu-wrap {
+	/* setting z-index for dropdowns. do not mess with this */
+	z-index: 10 !important;
+    margin-bottom: -3px;
+}
+
+/* ===================== */
+/* ! Base Menu Styling   */
+/* ===================== */
+.infinity-layout #main-menu-wrap .main-menu {
+    float: right;
+    font-size: 110%;
+    width: auto;
+}
+.infinity-layout .base-menu {
+	display: inline-block;
+    width: 100%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    webkit-box-sizing: border-box;
+}
+.infinity-layout .base-menu ul li {
+    float: left;
+    position: relative;
+    list-style-type: none;
+}
+.infinity-layout .base-menu ul li.right {
+	float: right;
+}
+.infinity-layout .base-menu ul li li:hover ul,
+.infinity-layout .base-menu ul li li.sfHover ul,
+.infinity-layout .base-menu ul li li li:hover ul,
+.infinity-layout .base-menu ul li li li.sfHover ul,
+.infinity-layout .base-menu ul li li li li:hover ul,
+.infinity-layout .base-menu ul li li li li.sfHover ul {
+    /* match .nav ul width */
+    top: -1px;
+    left: 180px;
+}
+.infinity-layout .base-menu ul li:hover {
+    visibility: inherit; /* fixes IE7 'sticky bug' */
+}
+.infinity-layout .base-menu ul li:hover li ul,
+.infinity-layout .base-menu ul li.sfHover li ul,
+.infinity-layout .base-menu ul li li:hover li ul,
+.infinity-layout .base-menu ul li li.sfHover li ul,
+.infinity-layout .base-menu ul li li li:hover li ul,
+.infinity-layout .base-menu ul li li li.sfHover li ul {
+	top: -9999em;
+}
+.infinity-layout .base-menu ul li:hover ul,
+.infinity-layout .base-menu ul li.sfHover ul {
+    top: 27px;
+    /* match top ul list item height */
+    left: 0px;
+    z-index: 95;
+}
+.infinity-layout .base-menu ul ul {
+    top: -9999em;
+    width: 210px;
+    /* left offset of submenus need to match (see below) */
+    margin: 3px 0 0 0;
+    padding: 15px 5px 15px 5px;
+    z-index: 50;
+    position: absolute;
+}
+.infinity-layout .base-menu ul ul li {
+    float: left;
+    width: 150px;
+    padding: 0 5px 0 5px;
+}
+.infinity-layout .base-menu ul ul ul {
+	margin-left: -10px;
+}
+.infinity-layout .base-menu ul ul li {
+	width: 85%;
+}
+.infinity-layout .base-menu ul ul li:first-child {
+	border-top: none;
+}
+.infinity-layout .base-menu ul ul li:last-child {
+	border-bottom: none;
+}
+.infinity-layout .base-menu ul ul li a {
+    width: 180px;
+}
+.infinity-layout .base-menu ul a {
+    float: left;
+    padding: 8px 10px;
+}
+ /* Page Currently being viewed */
+.infinity-layout .base-menu li li a:hover,
+.infinity-layout .base-menu li.sfHover li a {
+	background: none;
+}
+.infinity-layout .base-menu li li a span.sf-sub-indicator,
+.infinity-layout .base-menu li.sfHover li a span.sf-sub-indicator {
+    float: right;
+    margin: 5px 0 0 0;
+}
+.infinity-layout .base-menu li li a span {
+	padding: 0; color: #BBB;
+}
+.infinity-layout .base-menu ul li.sfHover li a,
+.infinity-layout .base-menu ul li.sfHover li a:hover,
+.infinity-layout .base-menu ul li.sfHover li a span:hover {
+	color: #DDD;
+}
+/*  Make sub menus appear */
+.infinity-layout .base-menu ul li:hover ul,
+.infinity-layout .base-menu ul li.sfHover ul {
+    top: 34px; /* match top ul list item height */
+    z-index: 99;
+}
+/* Hide all subs subs (4 levels deep) */
+.infinity-layout .base-menu ul li:hover li ul,
+.infinity-layout .base-menu ul li.sfHover li ul,
+.infinity-layout .base-menu ul li li:hover li ul,
+.infinity-layout .base-menu ul li li.sfHover li ul,
+.infinity-layout .base-menu ul li li li:hover li ul,
+.infinity-layout .base-menu ul li li li.sfHover li ul {
+	top: -9999em;
+}
+/* Displays all subs subs (4 levels deep) */
+.infinity-layout .base-menu ul li li:hover ul,
+.infinity-layout .base-menu ul li li.sfHover ul,
+.infinity-layout .base-menu ul li li li:hover ul,
+.infinity-layout .base-menu ul li li li.sfHover ul,
+.infinity-layout .base-menu ul li li li li:hover ul,
+.infinity-layout .base-menu ul li li li li.sfHover ul {
+    left: 180px; /* match .nav ul width */
+    top: -1px;
+}
+/* 2nd level skin */
+.infinity-layout .base-menu ul ul {
+    position: absolute;
+    top: -9999em;
+    width: 180px; /* left offset of submenus need to match (see below) */
+    padding: 15px 5px 15px 5px;
+    margin: 3px 0 0 0;
+    background: #FFF;
+}
+.infinity-layout .base-menu ul ul li {
+    float: left;
+    width: 150px;
+    background: none;
+    padding: 0 5px 0 5px;
+}
+.infinity-layout .base-menu li a:hover {
+    color: #DDD;
+}
+.infinity-layout .base-menu ul ul li:first-child {
+	border-top: none;
+}
+.infinity-layout .base-menu ul ul li:last-child {
+	border-bottom: none;
+}
+.infinity-layout .base-menu ul ul li a {
+    width: 150px;
+}
+.infinity-layout .base-menu ul ul li a:hover {
+    padding-left: 12px;
+}
+.infinity-layout .base-menu:first-child ul li:after {
+	content: "";
+}
+.infinity-layout .base-menu ul ul li:after {
+	content: none !important;
+}
+
+/* Don't remove this */
+.infinity-layout #footer .sub-menu,
+.infinity-layout #footer .sub-menu:before {
+	background: none;
+	border: 0px;
+}
+
+/* ===========
+ ! Content
+ =========== */
+
+.infinity-layout #content.sidebar-left {
+	float: right;
+}
+
+@media only screen and (max-width: 767px) {
+	.infinity-layout #content.sidebar-left {
+		float: none;
+	}
+}
+
+/* ===========
+ ! Sidebar
+ =========== */
+.infinity-layout #sidebar .widget_search {
+	margin-top: 20px;
+}
+.infinity-layout #sidebar .widget_search input[type=text] {
+    width: 110px;
+    padding: 2px;
+}
+
+/* Widgets */
+.infinity-layout .widget {
+	margin-bottom: 30px;
+}
+.infinity-layout #sidebar ul {
+	padding: 0px;
+}
+
+/* ==========
+ ! Footer
+ ========== */
+.infinity-layout #footer p:last-child {
+	margin-bottom: 0;
+}
+.infinity-layout .footer-widget h3 {
+    margin-bottom: 10px;
+    color: #FEDA71;
+    font-size: 16px;
+}
+.infinity-layout #footer-widget-right {
+	border-right: none;
+	margin-right: 0px;
+}
+.infinity-layout #footer-widget-left {
+	border-left: none;
+	margin-left: 0px;
+}
+.infinity-layout #footer-menu ul li a:hover {
+	color: #777;
+}
+.infinity-layout #footer-menu ul li {
+	display: inline;
+}
+.infinity-layout #footer-menu ul li a {
+    padding-right: 8px;
+}
+.infinity-layout .footer-menu ul li:last-child a {
+	border-right: 0px;
+}
+.infinity-layout #footer-info {
+    overflow: auto;
+    padding: 0px;
+}
+.infinity-layout #powered-by {
+    min-height: 30px;
+    padding-top: 10px;
+}
+.infinity-layout #copyright-info {
+	text-align: right;
+}
+
+/* ================== */
+/* ! Page Templates   */
+/* ================== */
+
+.infinity-layout .page-template-sidebar-left-template-php #content,
+.infinity-layout .page-template-sidebar-left-template-php #sidebar.sidebar-right {
+	float: right !important
+}
+.infinity-layout .page-template-sidebar-left-template-php #sidebar.sidebar-left,
+.infinity-layout .page-template-sidebar-left-template-php #sidebar.sidebar-right {
+	float: left !important;
+}
+
+/*
+-----------------------------------------------
+
+	//Buttons
+
+-----------------------------------------------*/
+
+.infinity-btns input.button:active,
+.infinity-btns .button:active {
+	outline: 0; position: relative; top: 1px;
+}
+
+.infinity-btns .generic-button a:hover {
+	border: none;
+}
+
+.infinity-btns a.button,
+.infinity-btns .generic-button,
+.infinity-btns a.more-link,
+.infinity-btns button,
+.infinity-btns input[type="submit"],
+.infinity-btns input[type="reset"],
+.infinity-btns input[type="button"],
+.infinity-btns #review_form #submit {
+    margin-top: 10px;
+    border-top: 1px solid #ccc;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255,255,255,.2)), color-stop(100%, rgba(0,0,0,.2)));
+    background: -webkit-linear-gradient(top, rgba(255,255,255,.2) 0%, rgba(0,0,0,.2) 100%);
+    background: -moz-linear-gradient(top, rgba(255,255,255,.2) 0%, rgba(0,0,0,.2) 100%);
+    background: -o-linear-gradient(top, rgba(255,255,255,.2) 0%, rgba(0,0,0,.2) 100%);
+    background: -ms-linear-gradient(top, rgba(255,255,255,.2) 0%, rgba(0,0,0,.2) 100%);
+    background: linear-gradient(top, rgba(255,255,255,.2) 0%, rgba(0,0,0,.2) 100%);
+    border-left: 1px solid #ccc;
+    font-weight: bold;
+    float: none;
+    text-shadow: 0 1px rgba(255, 255, 255, .75);
+    line-height: 21px;
+    margin-bottom: 10px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    text-decoration: none;
+    color: #444444;
+    border: 1px solid #aaa;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 11px;
+    padding: 8px 12px;
+}
+.infinity-btns .generic-button a {
+	color: #444;
+}
+.infinity-btns a.button:active,
+.infinity-btns button:active,
+.infinity-btns input[type="submit"]:active,
+.infinity-btns input[type="reset"]:active,
+.infinity-btns input[type="button"]:active,
+.infinity-btns #review_form #submit:active {
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0,0,0,.3)), color-stop(100%, rgba(255,255,255,.3)));
+    background: -webkit-linear-gradient(top, rgba(0,0,0,.3) 0%, rgba(255,255,255,.3) 100%);
+    background: -moz-linear-gradient(top, rgba(0,0,0,.3) 0%, rgba(255,255,255,.3) 100%);
+    background: -o-linear-gradient(top, rgba(0,0,0,.3) 0%, rgba(255,255,255,.3) 100%);
+    background: -ms-linear-gradient(top, rgba(0,0,0,.3) 0%, rgba(255,255,255,.3) 100%);
+    background: linear-gradient(top, rgba(0,0,0,.3) 0%, rgba(255,255,255,.3) 100%);
+    border-right: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;
+    border: 1px solid #888;
+}
+.infinity-btns a.button:hover,
+.infinity-btns button:hover,
+.infinity-btns #review_form #submit:hover {
+    border-top: 1px solid #aaa;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255,255,255,.3)), color-stop(100%, rgba(0,0,0,.3)));
+    background: -webkit-linear-gradient(top, rgba(255,255,255,.3) 0%, rgba(0,0,0,.3) 100%);
+    background: -moz-linear-gradient(top, rgba(255,255,255,.3) 0%, rgba(0,0,0,.3) 100%);
+    background: -o-linear-gradient(top, rgba(255,255,255,.3) 0%, rgba(0,0,0,.3) 100%);
+    background: -ms-linear-gradient(top, rgba(255,255,255,.3) 0%, rgba(0,0,0,.3) 100%);
+    background: linear-gradient(top, rgba(255,255,255,.3) 0%, rgba(0,0,0,.3) 100%);
+    border-left: 1px solid #aaa;
+    color: #222;
+    border: 1px solid #888;
+    padding: 8px 12px;
+}
+.infinity-btns .button.full-width,
+.infinity-btns button.full-width,
+.infinity-btns input[type="submit"].full-width,
+.infinity-btns input[type="reset"].full-width,
+.infinity-btns input[type="button"].full-width {
+    text-align: center;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: 100%;
+}
+.infinity-btns .button,
+.infinity-btns .post-tags a,
+.infinity-btns .widget_tag_cloud a,
+.infinity-btns input,
+.infinity-btns textarea {
+    display: inline-block;
+    text-decoration: none;
+    padding: 8px 11px;
+    color: #555;
+    border: 1px solid #dedede;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    margin-bottom: 2px;
+}
+.infinity-btns .button.white,
+.infinity-btns .post-tags a,
+.infinity-btns .widget_tag_cloud a,
+.infinity-btns a.button,
+.infinity-btns .generic-button,
+.infinity-btns a.more-link {
+    background: #f5f5f5;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f9f9f9), to(#f0f0f0));
+    background: -webkit-linear-gradient(top, #f9f9f9, #f0f0f0);
+    background: -moz-linear-gradient(top, #f9f9f9, #f0f0f0);
+    background: -o-linear-gradient(top, #f9f9f9, #f0f0f0);
+    background: -ms-linear-gradient(top, #f9f9f9, #f0f0f0);
+    background: linear-gradient(top, #f9f9f9, #f0f0f0);
+    border-color: #dedede #d8d8d8 #d3d3d3;
+    color: #555;
+    text-shadow: 0 1px 0 #fff;
+    -webkit-box-shadow: 0 1px 1px #eaeaea, inset 0 1px 0 #fbfbfb;
+    -moz-box-shadow: 0 1px 1px #eaeaea, inset 0 1px 0 #fbfbfb;
+    box-shadow: 0 1px 1px #eaeaea, inset 0 1px 0 #fbfbfb;
+}
+.infinity-btns .button.white:hover,
+.infinity-btns .post-tags a:hover,
+.infinity-btns .widget_tag_cloud a:hover,
+.infinity-btns a.button:hover,
+.infinity-btns .generic-button:hover,
+.infinity-btns a.more-link:hover {
+    background: #f4f4f4;
+    background: -webkit-gradient(linear, left top, left bottom, from(#efefef), to(#f8f8f8));
+    background: -webkit-linear-gradient(top, #efefef, #f8f8f8);
+    background: -moz-linear-gradient(top, #efefef, #f8f8f8);
+    background: -o-linear-gradient(top, #efefef, #f8f8f8);
+    background: -ms-linear-gradient(top, #efefef, #f8f8f8);
+    background: linear-gradient(top, #efefef, #f8f8f8);
+    border-color: #c7c7c7 #c3c3c3 #bebebe;
+    text-shadow: 0 1px 0 #fdfdfd;
+    -webkit-box-shadow: 0 1px 1px #ebebeb, inset 0 1px 0 #f3f3f3;
+    -moz-box-shadow: 0 1px 1px #ebebeb, inset 0 1px 0 #f3f3f3;
+    box-shadow: 0 1px 1px #ebebeb, inset 0 1px 0 #f3f3f3;
+}
+.infinity-btns .button.grey {
+    background: #bdbdbd;
+    background: -webkit-gradient(linear, left top, left bottom, from(#cacaca), to(#aeaeae));
+    background: -webkit-linear-gradient(top, #cacaca, #aeaeae);
+    background: -moz-linear-gradient(top, #cacaca, #aeaeae);
+    background: -o-linear-gradient(top, #cacaca, #aeaeae);
+    background: -ms-linear-gradient(top, #cacaca, #aeaeae);
+    background: linear-gradient(top, #cacaca, #aeaeae);
+    border-color: #b5b5b5 #a1a1a1 #8f8f8f;
+    color: #555;
+    text-shadow: 0 1px 0 #d4d4d4;
+    -webkit-box-shadow: 0 1px 1px #c9c9c9, inset 0 1px 0 #d7d7d7;
+    -moz-box-shadow: 0 1px 1px #c9c9c9, inset 0 1px 0 #d7d7d7;
+    box-shadow: 0 1px 1px #c9c9c9, inset 0 1px 0 #d7d7d7;
+}
+.infinity-btns .button.grey:hover {
+    background: #c2c2c2;
+    background: -webkit-gradient(linear, left top, left bottom, from(#bcbcbc), to(#c2c2c2));
+    background: -webkit-linear-gradient(top, #bcbcbc, #c2c2c2);
+    background: -moz-linear-gradient(top, #bcbcbc, #c2c2c2);
+    background: -o-linear-gradient(top, #bcbcbc, #c2c2c2);
+    background: -ms-linear-gradient(top, #bcbcbc, #c2c2c2);
+    background: linear-gradient(top, #bcbcbc, #c2c2c2);
+    border-color: #989898 #8e8e8e #878787;
+    text-shadow: 0 1px 0 #dadada;
+    -webkit-box-shadow: 0 1px 1px #cdcdcd, inset 0 1px 0 #ccc;
+    -moz-box-shadow: 0 1px 1px #cdcdcd, inset 0 1px 0 #ccc;
+    box-shadow: 0 1px 1px #cdcdcd, inset 0 1px 0 #ccc;
+}
+.infinity-btns .button.pink {
+    background: #f67689;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f78297), to(#f56778));
+    background: -webkit-linear-gradient(top, #f78297, #f56778);
+    background: -moz-linear-gradient(top, #f78297, #f56778);
+    background: -o-linear-gradient(top, #f78297, #f56778);
+    background: -ms-linear-gradient(top, #f78297, #f56778);
+    background: linear-gradient(top, #f78297, #f56778);
+    border-color: #df6f8b #da5f75 #d55061;
+    color: #913944;
+    text-shadow: 0 1px 0 #f89ca9;
+    -webkit-box-shadow: 0 1px 1px #c1c1c1, inset 0 1px 0 #f9a1b1;
+    -moz-box-shadow: 0 1px 1px #c1c1c1, inset 0 1px 0 #f9a1b1;
+    box-shadow: 0 1px 1px #c1c1c1, inset 0 1px 0 #f9a1b1;
+}
+.infinity-btns .button.pink:hover {
+    background: #f67c90;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f56c7e), to(#f78297));
+    background: -webkit-linear-gradient(top, #f56c7e, #f78297);
+    background: -moz-linear-gradient(top, #f56c7e, #f78297);
+    background: -o-linear-gradient(top, #f56c7e, #f78297);
+    background: -ms-linear-gradient(top, #f56c7e, #f78297);
+    background: linear-gradient(top, #f56c7e, #f78297);
+    border-color: #c36079 #c25669 #c14e5c;
+    text-shadow: 0 1px 0 #f9a6b4;
+    -webkit-box-shadow: 0 1px 1px #c3c3c3, inset 0 1px 0 #f8909e;
+    -moz-box-shadow: 0 1px 1px #c3c3c3, inset 0 1px 0 #f8909e;
+    box-shadow: 0 1px 1px #c3c3c3, inset 0 1px 0 #f8909e;
+}
+.infinity-btns .button.orange,
+.infinity-btns .orange a,
+.infinity-btns #bpfb_submit {
+    background: #fecc5f;
+    background: -webkit-gradient(linear, left top, left bottom, from(#feda71), to(#febb4a));
+    background: -webkit-linear-gradient(top, #feda71, #febb4a);
+    background: -moz-linear-gradient(top, #feda71, #febb4a);
+    background: -o-linear-gradient(top, #feda71, #febb4a);
+    background: -ms-linear-gradient(top, #feda71, #febb4a);
+    background: linear-gradient(top, #feda71, #febb4a);
+    border-color: #f5b74e #e5a73e #d6982f;
+    color: #996633;
+    text-shadow: 0 1px 0 #fedd9b;
+}
+.infinity-btns .button.orange:hover,
+.infinity-btns #bpfb_submit:hover {
+    background: #fecb5e;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fec354), to(#fecd61));
+    background: -webkit-linear-gradient(top, #fec354, #fecd61);
+    background: -moz-linear-gradient(top, #fec354, #fecd61);
+    background: -o-linear-gradient(top, #fec354, #fecd61);
+    background: -ms-linear-gradient(top, #fec354, #fecd61);
+    background: linear-gradient(top, #fec354, #fecd61);
+    border-color: #d29a3a #cc9436 #c89133;
+    text-shadow: 0 1px 0 #fee1a0;
+    -webkit-box-shadow: 0 1px 1px #d4d4d4, inset 0 1px 0 #fed17e;
+    -moz-box-shadow: 0 1px 1px #d4d4d4, inset 0 1px 0 #fed17e;
+    box-shadow: 0 1px 1px #d4d4d4, inset 0 1px 0 #fed17e;
+}
+.infinity-btns .button.green,
+.infinity-btns .gform_footer input.button,
+.infinity-btns .qq-upload-button {
+    background: #b7d770;
+    background: -webkit-gradient(linear, left top, left bottom, from(#cae285), to(#9fcb57));
+    background: -webkit-linear-gradient(top, #cae285, #9fcb57);
+    background: -moz-linear-gradient(top, #cae285, #9fcb57);
+    background: -o-linear-gradient(top, #cae285, #9fcb57);
+    background: -ms-linear-gradient(top, #cae285, #9fcb57);
+    background: linear-gradient(top, #cae285, #9fcb57);
+    border-color: #adc671 #98b65b #87aa4a;
+    color: #5d7731;
+    text-shadow: 0 1px 0 #cfe5a4!important;
+    -webkit-box-shadow: 0 1px 1px #d3d3d3, inset 0 1px 0 #d7e9a4;
+    -moz-box-shadow: 0 1px 1px #d3d3d3, inset 0 1px 0 #d7e9a4;
+    box-shadow: 0 1px 1px #d3d3d3, inset 0 1px 0 #d7e9a4;
+}
+.infinity-btns .button.green:hover,
+.infinity-btns .gform_footer input.button hover,
+.infinity-btns .qq-upload-button:hover {
+    background: #b9d972;
+    background: -webkit-gradient(linear, left top, left bottom, from(#b8d872), to(#b9d972));
+    background: -webkit-linear-gradient(top, #b8d872, #b9d972);
+    background: -moz-linear-gradient(top, #b8d872, #b9d972);
+    background: -o-linear-gradient(top, #b8d872, #b9d972);
+    background: -ms-linear-gradient(top, #b8d872, #b9d972);
+    background: linear-gradient(top, #b8d872, #b9d972);
+    border-color: #8bb14d #83a648 #7d9e45;
+    text-shadow: 0 1px 0 #d5e8aa;
+    -webkit-box-shadow: 0 1px 1px #d5d5d5, inset 0 1px 0 #cae295;
+    -moz-box-shadow: 0 1px 1px #d5d5d5, inset 0 1px 0 #cae295;
+    box-shadow: 0 1px 1px #d5d5d5, inset 0 1px 0 #cae295;
+}
+.infinity-btns .button.blue {
+    background: #92dbf6;
+    background: -webkit-gradient(linear, left top, left bottom, from(#abe4f8), to(#6fcef3));
+    background: -webkit-linear-gradient(top, #abe4f8, #6fcef3);
+    background: -moz-linear-gradient(top, #abe4f8, #6fcef3);
+    background: -o-linear-gradient(top, #abe4f8, #6fcef3);
+    background: -ms-linear-gradient(top, #abe4f8, #6fcef3);
+    background: linear-gradient(top, #abe4f8, #6fcef3);
+    border-color: #8dc5da #76b7cf #63abc7;
+    color: #42788e;
+    text-shadow: 0 1px 0 #b6e6f9;
+    -webkit-box-shadow: 0 1px 1px #d6d6d6, inset 0 1px 0 #c0ebfa;
+    -moz-box-shadow: 0 1px 1px #d6d6d6, inset 0 1px 0 #c0ebfa;
+    box-shadow: 0 1px 1px #d6d6d6, inset 0 1px 0 #c0ebfa;
+}
+.infinity-btns .button.blue:hover {
+    background: #92dbf6;
+    border-color: #7caec0 #68a3ba #5a9cb5;
+    text-shadow: 0 1px 0 #bee9fa;
+    -webkit-box-shadow: 0 1px 1px #d6d6d6, inset 0 1px 0 #ade4f8;
+    -moz-box-shadow: 0 1px 1px #d6d6d6, inset 0 1px 0 #ade4f8;
+    box-shadow: 0 1px 1px #d6d6d6, inset 0 1px 0 #ade4f8;
+}
+.infinity-btns .button.purple {
+    background: #dfaeda;
+    background: -webkit-gradient(linear, left top, left bottom, from(#e8c4e4), to(#d494ce));
+    background: -webkit-linear-gradient(top, #e8c4e4, #d494ce);
+    background: -moz-linear-gradient(top, #e8c4e4, #d494ce);
+    background: -o-linear-gradient(top, #e8c4e4, #d494ce);
+    background: -ms-linear-gradient(top, #e8c4e4, #d494ce);
+    background: linear-gradient(top, #e8c4e4, #d494ce);
+    border-color: #bc9db9 #ad89aa #a1799d;
+    color: #7b5777;
+    text-shadow: 0 1px 0 #eacae6;
+    -webkit-box-shadow: 0 1px 1px #d5d5d5, inset 0 1px 0 #eed3eb;
+    -moz-box-shadow: 0 1px 1px #d5d5d5, inset 0 1px 0 #eed3eb;
+    box-shadow: 0 1px 1px #d5d5d5, inset 0 1px 0 #eed3eb;
+}
+.infinity-btns .button.purple:hover {
+    background: #e0b1db;
+    background: -webkit-gradient(linear, left top, left bottom, from(#deabd9), to(#e0b1db));
+    background: -webkit-linear-gradient(top, #deabd9, #e0b1db);
+    background: -moz-linear-gradient(top, #deabd9, #e0b1db);
+    background: -o-linear-gradient(top, #deabd9, #e0b1db);
+    background: -ms-linear-gradient(top, #deabd9, #e0b1db);
+    background: linear-gradient(top, #deabd9, #e0b1db);
+    border-color: #a482a0 #9b7897 #947090;
+    text-shadow: 0 1px 0 #ecd0e9;
+    -webkit-box-shadow: 0 1px 1px #cdcdcd, inset 0 1px 0 #ccc;
+    -moz-box-shadow: 0 1px 1px #cdcdcd, inset 0 1px 0 #ccc;
+    box-shadow: 0 1px 1px #cdcdcd, inset 0 1px 0 #ccc;
+}
+.infinity-btns .button.teal {
+    background: #9cedef;
+    background: -webkit-gradient(linear, left top, left bottom, from(#b7f2f4), to(#7ce7ea));
+    background: -webkit-linear-gradient(top, #b7f2f4, #7ce7ea);
+    background: -moz-linear-gradient(top, #b7f2f4, #7ce7ea);
+    background: -o-linear-gradient(top, #b7f2f4, #7ce7ea);
+    background: -ms-linear-gradient(top, #b7f2f4, #7ce7ea);
+    background: linear-gradient(top, #b7f2f4, #7ce7ea);
+    border-color: #90c6c8 #78bdc0 #65b6ba;
+    color: #437b7d;
+    text-shadow: 0 1px 0 #bef3f5;
+    -webkit-box-shadow: 0 1px 1px #d5d5d5, inset 0 1px 0 #c9f5f7;
+    -moz-box-shadow: 0 1px 1px #d5d5d5, inset 0 1px 0 #c9f5f7;
+    box-shadow: 0 1px 1px #d5d5d5, inset 0 1px 0 #c9f5f7;
+}
+.infinity-btns .button.teal:hover {
+    background: #9fedf0;
+    border-color: #7db9bb #6bb2b5 #5dacaf;
+    text-shadow: 0 1px 0 #c5f4f6;
+    -webkit-box-shadow: 0 1px 1px #d5d5d5, inset 0 1px 0 #b7f2f4;
+    -moz-box-shadow: 0 1px 1px #d5d5d5, inset 0 1px 0 #b7f2f4;
+    box-shadow: 0 1px 1px #d5d5d5, inset 0 1px 0 #b7f2f4;
+}
+.infinity-btns .button.darkblue {
+    background: #a5b8c6;
+    background: -webkit-gradient(linear, left top, left bottom, from(#becbd6), to(#88a1b4));
+    background: -webkit-linear-gradient(top, #becbd6, #88a1b4);
+    background: -moz-linear-gradient(top, #becbd6, #88a1b4);
+    background: -o-linear-gradient(top, #becbd6, #88a1b4);
+    background: -ms-linear-gradient(top, #becbd6, #88a1b4);
+    background: linear-gradient(top, #becbd6, #88a1b4);
+    border-color: #a2afb8 #8696a1 #6f818f;
+    color: #515f6a;
+    text-shadow: 0 1px 0 #c4d0d9;
+    -webkit-box-shadow: 0 1px 1px #d3d3d3, inset 0 1px 0 #ced8e0;
+    -moz-box-shadow: 0 1px 1px #d3d3d3, inset 0 1px 0 #ced8e0;
+    box-shadow: 0 1px 1px #d3d3d3, inset 0 1px 0 #ced8e0;
+}
+.infinity-btns .button.darkblue:hover {
+    background: #adbfcb;
+    border-color: #8996a0 #798791 #6c7a85;
+    text-shadow: 0 1px 0 #ced9e0;
+    -webkit-box-shadow: 0 1px 1px #d3d3d3, inset 0 1px 0 #c2cfd8;
+    -moz-box-shadow: 0 1px 1px #d3d3d3, inset 0 1px 0 #c2cfd8;
+    box-shadow: 0 1px 1px #d3d3d3, inset 0 1px 0 #c2cfd8;
+}
+.infinity-btns .button.black {
+    background: #525252;
+    background: -webkit-gradient(linear, left top, left bottom, from(#5e5e5e), to(#434343));
+    background: -webkit-linear-gradient(top, #5e5e5e, #434343);
+    background: -moz-linear-gradient(top, #5e5e5e, #434343);
+    background: -o-linear-gradient(top, #5e5e5e, #434343);
+    background: -ms-linear-gradient(top, #5e5e5e, #434343);
+    background: linear-gradient(top, #5e5e5e, #434343);
+    border-color: #4c4c4c #313131 #1f1f1f;
+    color: #fff;
+    text-shadow: 0 1px 0 #2e2e2e;
+    -webkit-box-shadow: 0 1px 1px #afafaf, inset 0 1px 0 #868686;
+    -moz-box-shadow: 0 1px 1px #afafaf, inset 0 1px 0 #868686;
+    box-shadow: 0 1px 1px #afafaf, inset 0 1px 0 #868686;
+}
+.infinity-btns .button.black:hover {
+    background: #5a5a5a;
+    border-color: #2c2c2c #1c1c1c #101010;
+    text-shadow: 0 1px 0 #363636;
+    -webkit-box-shadow: 0 1px 1px #b1b1b1, inset 0 1px 0 #838383;
+    -moz-box-shadow: 0 1px 1px #b1b1b1, inset 0 1px 0 #838383;
+    box-shadow: 0 1px 1px #b1b1b1, inset 0 1px 0 #838383;
+}
+.infinity-btns .post-tags a {
+    font-size: 10px;
+    padding: 3px 5px;
+    margin-left: 1px;
+    margin-right: 5px;
+}
+.infinity-btns .big {
+    font-size: 16px;
+    padding: 14px 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.infinity-btns .huge {
+    font-size: 20px;
+    padding: 16px 12px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.infinity-btns .widget.widget_tag_cloud a {
+    font-size: 10px;
+    margin: 1px;
+    padding: 5px 8px;
+}
+.infinity-btns #archives-subject li {
+    display: inline;
+    list-style: disc inside none;
+    padding-right: 5px;
+}
+.infinity-btns #archives-subject ul {
+    display: inline;
+    margin: 0;
+}
+
+/*
+-----------------------------------------------
+
+	// Icons
+
+-----------------------------------------------*/
+
+/* Using some fancy CSS magic to add our icons */
+
+.infinity-icons .item-list-tabs * a:before,
+.infinity-icons #item-buttons * a:before,
+.infinity-icons .sidebar-activity-tabs * a:before,
+.infinity-icons .button:before,
+.infinity-icons #message p:before,
+.infinity-icons #subnav * :before,
+.infinity-icons #category-title:before,
+.infinity-icons #tag-title:before,
+.infinity-icons span.post-tags:before,
+.infinity-icons .generic-button a:before,
+.infinity-icons #category-title:before,
+.infinity-icons #tag-title:before,
+.infinity-icons span.post-tags:before,
+.infinity-icons .post-meta-data *:before,
+.infinity-icons .post-title:before,
+.infinity-icons #author-description h3:before,
+.infinity-icons .single_add_to_cart_button:before,
+.infinity-icons .load-more a:before,
+.infinity-icons #whats-new,
+.infinity-icons .main-menu * :before,
+.infinity-icons .link-home h2 a:before,
+.infinity-icons div.link-vote-panel div.clickers a.up:before,
+.infinity-icons #bbpress-forums .bbp-forums-list li a:before,
+.infinity-icons #favorite-toggle:before,
+.infinity-icons #subscription-toggle:before,
+.infinity-icons .single-topic h1:before,
+.infinity-icons .group-forum-topic #bbpress-forums h3:before {
+    font-weight: normal;
+    font-family: "iconsweetsRegular";
+    color: inherit;
+    padding-right: 2px;
+    font-size: 130%;
+    position: relative;
+    top: 2px;
+    text-transform: none;
+}
+
+/* WordPress Icons */
+.infinity-icons .post-top {
+    padding-top: 0px
+}
+
+/* Blog Icons */
+.infinity-icons #category-title:before {
+    content: "L"
+}
+
+.infinity-icons #tag-title:before,
+.infinity-icons span.post-tags:before {
+    content: "."
+}
+
+.infinity-icons #author-description h3:before {
+    content: "a"
+}
+
+/* ================ */
+/* ! Post Formats   */
+/* ================ */
+.infinity-icons .format-quote .post-meta-data {
+    display: none
+}
+
+.infinity-icons .format-quote .entry {
+    border-left: 5px solid #EEEEEE;
+    font-family: "Georgia",serif;
+    font-size: 140%;
+    line-height: 140%;
+    margin-bottom: 18px;
+    padding-left: 15px;
+}
+
+.infinity-icons .post-title:before {
+    background: none repeat scroll 0 0 #555555;
+    border-radius: 50% 50% 50% 50%;
+    color: #FFFFFF;
+    float: right;
+    font-size: 140%;
+    padding: 0 0.8% 1.5%;
+    position: relative;
+    text-shadow: -1px 1px 0 #000000;
+    top: -8px;
+}
+
+.infinity-icons .format-video .post-title:before {
+    content: "F"
+}
+
+.infinity-icons .format-link .post-title:before {
+    content: "Q"
+}
+
+.infinity-icons .format-gallery .post-title:before {
+    content: "3"
+}
+
+.infinity-icons .format-image .post-title:before {
+    content: "2"
+}
+
+.infinity-icons .format-audio .post-title:before {
+    content: "4"
+}
+
+.infinity-icons .format-chat .post-title:before {
+    content: '"'
+}
+
+.infinity-icons .format-status .post-title:before {
+    content: "#"
+}
+
+.infinity-icons .format-quote .post-title:before {
+    content: "'"
+}
+
+/* Post Meta Icons */
+.infinity-icons span.post-author:before {
+    content: "d"
+}
+
+.infinity-icons span.post-category:before {
+    content: "L"
+}
+
+.infinity-icons span.time-posted:before {
+    content: "R"
+}
+
+.infinity-icons span.post-comments:before,
+.infinity-icons span.comments a:before {
+    content: "#"
+}
+
+/* BuddyPress Icons */
+.infinity-icons .activity-comments * :before {
+    display: none
+}
+
+.infinity-icons #item-buttons * a:before,
+.infinity-icons .activity-meta * a:before,
+.infinity-icons .button:before,
+.infinity-icons .generic-button a:before {
+    display: inline-block;
+    font-size: 135%;
+    padding: 0 2px 6px 1px;
+}
+
+/* Some Small Padding tweaks to make the icons look sweet */
+.infinity-icons div#item-header div.generic-button,
+.infinity-icons div#item-header a.button {
+    padding: 0 8px
+}
+
+.infinity-icons #sidebar .sidebar-activity-tabs ul li a {
+    padding-bottom: 8px;
+    padding-top: 4px;
+    text-decoration: none;
+}
+
+.infinity-icons div#object-nav ul li a {
+    padding: 4px 6px 8px !important;
+    text-decoration: none;
+}
+
+.infinity-icons div.activity-type-tabs li a {
+    padding: 4px 6px 8px !important;
+    text-decoration: none;
+}
+
+.infinity-icons .loading a:before {
+    display: none !important
+}
+
+.infinity-icons div.item-list-tabs ul li.loading a {
+    padding-top: 9px !important
+}
+
+/* Stream Icons. no shorthand CSS to maintain hover effects */
+.infinity-icons li#activity-all a:before {
+    content: "s"
+}
+
+.infinity-icons li#activity-favorites a:before,
+.infinity-icons .button.fav:before,
+.infinity-icons .button.unfav:before {
+    content: "h"
+}
+
+.infinity-icons li#activity-friends a:before {
+    content: "a"
+}
+
+.infinity-icons li#activity-groups a:before,
+.infinity-icons .widget_bp_groups_widget {
+    content: "f"
+}
+
+.infinity-icons li#activity-links a:before,
+.infinity-icons #nav-links:before {
+    content: "Q"
+}
+
+.infinity-icons li#activity-mentions a:before {
+    content: "#"
+}
+
+.infinity-icons li#activity-following a,
+.infinity-icons li#following-personal-li a:before {
+    content: "*"
+}
+
+.infinity-icons .acomment-reply:before {
+    content: "w"
+}
+
+.infinity-icons .delete-activity:before,
+.infinity-icons .generic-button.is_friend a:before,
+.infinity-icons .generic-button.pending_friend a:before {
+    content: "X"
+}
+
+.infinity-icons .load-more a:before {
+	content: "s"
+}
+
+/* Group Icons */
+.infinity-icons li#members-groups-li a:before {
+    content: "e"
+}
+
+.infinity-icons li#forums-groups-li a:before {
+    content: '"'
+}
+
+.infinity-icons li#admin-groups-li a:before,
+.infinity-icons li#link-admin-personal-li a:before {
+    content: "i"
+}
+
+.infinity-icons li#invite-groups-li a:before {
+    content: "A"
+}
+
+.infinity-icons li#home-groups-li a:before,
+.infinity-icons li#link-home-personal-li a:before {
+    content: "0"
+}
+
+.infinity-icons li#nav-docs-groups-li a:before,
+.infinity-icons #user-docs:before {
+    content: "L"
+}
+.infinity-icons #bp-create-doc-button:before {
+    content: "C";
+    font-size: 165%;
+}
+.infinity-icons li#nav-notifications-groups-li a:before {
+    content: "6"
+}
+
+/* Profile Icons  */
+.infinity-icons #user-activity:before {
+    content: "s"
+}
+
+.infinity-icons #user-xprofile:before {
+    content: "?"
+}
+
+.infinity-icons #user-friends:before {
+    content: "a"
+}
+
+.infinity-icons #user-groups:before {
+    content: "f"
+}
+
+.infinity-icons #user-profile:before {
+    content: "?"
+}
+
+.infinity-icons #user-links:before {
+    content: "P"
+}
+
+.infinity-icons #user-messages:before,
+.infinity-icons #nav-invite-anyone:before,
+.infinity-icons #user-invite-anyone:before {
+    content: "A"
+}
+
+.infinity-icons #user-forums:before {
+    content: '"'
+}
+
+.infinity-icons #user-blogs:before,
+.infinity-icons #user-sites:before {
+    content: "C"
+}
+
+.infinity-icons li#activity-filter-select label:before {
+    content: "."
+}
+
+.infinity-icons a.send-message:before,
+.infinity-icons #nav-invite-anyone:before {
+    content: "A"
+}
+
+.infinity-icons a.friendship-button:before {
+    content: "a"
+}
+
+.infinity-icons .follow-button a.follow:before {
+    content: "*"
+}
+
+.infinity-icons div#post-mention a.mention:before {
+    content: "#"
+}
+
+.infinity-icons #user-settings:before {
+    content: "i"
+}
+
+.infinity-icons div#message p {
+    background-color: #FEFAEB;
+    border: 1px solid #F1F1F1;
+    border-radius: 4px 4px 4px 4px;
+    display: block;
+    font-size: 12px;
+    padding: 10px 15px;
+}
+
+.infinity-icons div#message p:before {
+    content: "_"
+}
+/* BBPress */
+.infinity-icons #nav-forums:before,
+.infinity-icons #nav-forum:before {
+    content: '"'
+}
+.infinity-icons #favorite-toggle:before {
+    content: "h";
+    top: 0;
+}
+.infinity-icons #subscription-toggle:before {
+    content: "A";
+    position: relative;
+    right: -9px;
+    top: 0;
+}
+.infinity-icons #bbpress-forums .bbp-forums-list li a:before {
+    color: #999999;
+    content: "g";
+    text-shadow: 0 -1px 0 #E3E7E7;
+}
+.infinity-icons .groups #item-buttons .group-button a:before {
+    content: "#";
+    font-size: 150%;
+    padding: 0 2px 0 0;
+}
+/* Main Menu Icons */
+.infinity-icons .base-menu li ul li a:before {
+    content: none !important
+}
+
+/* Make sure items with an icon line up with non-icon items */
+.infinity-icons #main-menu-wrap .icon-groups a,
+.infinity-icons #main-menu-wrap .icon-members a,
+.infinity-icons #main-menu-wrap .icon-activity a,
+.infinity-icons #main-menu-wrap .icon-members a,
+.infinity-icons #main-menu-wrap .icon-forums,
+.infinity-icons #main-menu-wrap .icon-links a,
+.infinity-icons #main-menu-wrap .icon-sites a,
+.infinity-icons #main-menu-wrap .icon-blogs a   {
+	margin-top: -5px;
+}
+
+.infinity-icons #main-menu-wrap .icon-groups a:before {
+    content: "f"
+}
+
+.infinity-icons #main-menu-wrap .icon-members a:before {
+    content: "e"
+}
+
+.infinity-icons #main-menu-wrap .icon-activity a:before {
+    content: "s"
+}
+
+.infinity-icons #main-menu-wrap .icon-forums a:before {
+    content: '"'
+}
+
+.infinity-icons #main-menu-wrap .icon-links a:before {
+    content: "Q"
+}
+
+.infinity-icons #main-menu-wrap .icon-sites a:before,
+.infinity-icons #main-menu-wrap .icon-blogs a:before {
+    content: "C"
+}
+.infinity-icons #bp-adminbar-notifications-menu a:before {
+    content: "6"
+}
+
+.infinity-icons #bp-adminbar-account-menu a:before {
+    content: "a"
+}
+
+.infinity-icons .login-form-link a:before {
+    content: "y"
+}
+
+.infinity-icons #join-us-link a:before {
+    content: "w"
+}
+/* WooCommerce Icons */
+.infinity-icons a.add_to_cart_button:before {
+	content: "$"
+}
+.infinity-icons .product_type_variable:before {
+	content: "l" !important;
+}
+.infinity-icons .coupon:before {
+	 color: inherit;
+    font-family: "iconsweetsRegular";
+    font-size: 180%;
+    font-weight: normal;
+    padding-right: 2px;
+    position: relative;
+    text-transform: none;
+    top: 2px;
+	content: "(";
+	float: left;
+	opacity: 0.7;
+}
+/* BuddyPress Links Icons */
+.infinity-icons .link-home h2 a:before {
+    content: "Q";
+    font-size: 100%;
+    opacity: 0.6;
+}
+.infinity-icons div.link-vote-panel div.clickers a.up {
+	background: transparent;
+}
+.infinity-icons div.link-vote-panel div.clickers a.up:before {
+	color: inherit;
+    height: 20px;
+    position: relative;
+    width: 20px;
+	content: "[";
+}
+
+/*
+----------------------------------------------------------------
+//LAYOUT
++ Global & Wraps
++ Header
++ Navigation Menus
++ Content
++ Sidebar
++ Footer
++ Tables
++ Forms
+
+You can disable the css in this file by adding the following code to your child theme config/infinity.ini file
+
+infinity-design-style = off
+--------------------------------------------------------------*/
+body.infinity-design {
+	background: url("../images/design/bg.png") repeat #FFF;
+}
+.infinity-design h2.page-title a,
+.infinity-design h2.post-title a,
+.infinity-design h1.page-title a,
+.infinity-design h1.post-title a {
+	color: inherit;
+	margin-bottom: 0;
+	margin-top: 0;
+}
+.infinity-design a {
+	color: #628FAA;
+	text-decoration: none;
+	-webkit-transition: color 0.1s linear;
+	-moz-transition: color 0.1s linear;
+	-o-transition: color 0.1s linear;
+	-ms-transition: color 0.1s linear;
+	transition: color 0.1s linear;
+}
+.infinity-design a:hover {
+	color: #666;
+	text-decoration: none;
+}
+/* Global Padding */
+.infinity-design #content,
+.infinity-design #sidebar,
+.infinity-design #content-full,
+.infinity-design #footer,
+.infinity-design #header {
+	padding: 30px;
+}
+
+/* Global Negative Padding */
+.infinity-design #bbpress-forums,
+.infinity-design div.bbp-breadcrumb,
+.infinity-design #item-body form#whats-new-form,
+.infinity-design div.item-list-tabs,
+.infinity-design #powered-by,
+.infinity-design #header #site-title,
+.infinity-design .negative {
+	margin-left: -30px;
+    margin-right: -30px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.infinity-design .main-wrap {
+	background: #FFF;
+}
+.infinity-design #header {
+	background: url("../images/design/header-background.jpg") no-repeat scroll transparent;
+	-webkit-border-radius: 5px 5px 0px 0px;
+	-moz-border-radius: 5px 5px 0px 0px;
+	border-radius: 5px 5px 0px 0px;
+    padding-bottom: 35px;
+    padding-top: 60px;
+}
+/* Also add a border radius to our pseudo element for header background */
+.infinity-design #header:before {
+	-webkit-border-radius: 5px 5px 0px 0px;
+	-moz-border-radius: 5px 5px 0px 0px;
+	border-radius: 5px 5px 0px 0px;
+}
+.infinity-design h1#site-title,
+.infinity-design div#site-title {
+	border-bottom: 2px solid #DDDDDD;
+	-webkit-border-radius: 0 12px 12px 0;
+	-moz-border-radius: 0 12px 12px 0;
+	border-radius: 0 12px 12px 0;
+	border-right: 1px solid #C1C1C1;
+	border-top: 1px solid #D0CECE;
+	padding: 10px 30px 6px;
+}
+/* Global CSS3 Stuff */
+.infinity-design .main-menu,
+.infinity-design .top-menu,
+.infinity-design .top-wrap .sub-menu,
+.infinity-design .item-list-tabs,
+.infinity-design thead:first-child tr th,
+.infinity-design thead:first-child tr td,
+.infinity-design .base-menu ul ul {
+	background-color: #222222;
+	background-image: -webkit-linear-gradient(center top , #333333, #222222);
+	background-image: -moz-linear-gradient(center top , #333333, #222222);
+	background-image: -o-linear-gradient(center top , #333333, #222222);
+	background-image: -ms-linear-gradient(center top , #333333, #222222);
+	background-image: linear-gradient(center top , #333333, #222222);
+	background-repeat: repeat-x;
+	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), 0 -1px 0 rgba(0, 0, 0, 0.1) inset;
+	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), 0 -1px 0 rgba(0, 0, 0, 0.1) inset;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), 0 -1px 0 rgba(0, 0, 0, 0.1) inset;
+	padding-left: 20px;
+	padding-right: 20px;
+	border-bottom: 2px solid #628FAA;
+	border-top: 2px solid #525151;
+}
+.infinity-design #footer .widget h4 {
+	border-bottom: 1px solid #3E3C3C;
+	color: #E0E0E0;
+}
+.infinity-design #footer {
+	padding: 0 30px 5px;
+}
+.infinity-design #powered-by {
+	border-top: 1px solid #434343;
+}
+.infinity-design .footer-widget  {
+    padding-bottom: 10px;
+    padding-top: 20px;
+}
+.infinity-design .author-box,
+.infinity-design .category-box,
+.infinity-design .tag-box,
+.infinity-design .info-box,
+.infinity-design #sidebar,
+.infinity-design .activity-inner,
+.infinity-design div.activity-comments form.ac-form,
+.infinity-design .postthumb img,
+.infinity-design span.activity,
+.infinity-design h1#site-title,
+.infinity-design div#site-title,
+.infinity-design .fluid-width-video-wrapper {
+	background-color: #FFF;
+	background-image: -webkit-linear-gradient(center top , #FFFFFF 0%, #F4F4F4 100%) ;
+	background-image: -moz-linear-gradient(center top , #FFFFFF 0%, #F4F4F4 100%) ;
+	background-image: -o-linear-gradient(center top , #FFFFFF 0%, #F4F4F4 100%) ;
+	background-image: -ms-linear-gradient(center top , #FFFFFF 0%, #F4F4F4 100%) ;
+	background-image: linear-gradient(center top , #FFFFFF 0%, #F4F4F4 100%) ;
+	-image-webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+	-moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+	text-shadow: 0 1px 0 #FFFFFF;
+	border: 0px;
+}
+/* Menus */
+.infinity-design .base-menu ul a,
+.infinity-design div.item-list-tabs ul li a {
+	color: #BFBFBF;
+	font-weight: 400;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+.infinity-design .main-menu {
+	-webkit-border-radius: 6px 6px 6px 6px;
+	-moz-border-radius: 6px 6px 6px 6px;
+	border-radius: 6px 6px 6px 6px;
+	padding: 5px;
+}
+.infinity-design .main-menu ul a {
+	font-weight: 500;
+	-webkit-border-radius: 6px 6px 6px 6px;
+	-moz-border-radius: 6px 6px 6px 6px;
+	border-radius: 6px 6px 6px 6px;
+	margin-right: 10px;
+}
+.infinity-design #main-menu-wrap .sub-menu {
+	margin: 8px 0 0;
+}
+.infinity-design .base-menu .sub-menu {
+	padding-left: 0px !important;
+}
+.infinity-design .widget {
+	margin: 0 0 20px;
+}
+.infinity-design .widget h4 {
+	border-bottom: 1px solid #EDEDED;
+	padding-bottom: 10px;
+}
+/* Footer */
+.infinity-design #footer .widget {
+	color: #BFBFBF;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+.infinity-design h1#category-title,
+.infinity-design h1#tag-title {
+	color: #999;
+	font-size: 16px;
+}
+.infinity-design #category-description,
+.infinity-design #tag-description {
+    padding: 10px 10px 10px 0;
+}
+.infinity-design h1#category-title span,
+.infinity-design h1#tag-title span {
+	color: #555;
+
+}
+.infinity-design .comment-container {
+	padding: 10px;
+}
+.infinity-design .children .comment-container {
+	background: transparent;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+/* BuddyPress */
+.infinity-design img.avatar,
+.infinity-design ul.item-list li img.avatar,
+.infinity-design .fluid-width-video-wrapper {
+	-webkit-border-radius: 3px 3px 3px 3px;
+	-moz-border-radius: 3px 3px 3px 3px;
+	border-radius: 3px 3px 3px 3px;
+	-webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+	-moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+	box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+	margin-left: 0;
+	padding: 0;
+}
+.infinity-design .activity-list .activity-content .activity-inner,
+.infinity-design .activity-list .activity-content blockquote {
+	padding: 20px;
+}
+.infinity-design div.item-options {
+	font-size: 8.8px;
+	margin-bottom: -16px;
+	margin-top: -16px;
+}
+.infinity-design div.item-list-tabs ul li a span {
+	-webkit-border-radius: 4px 4px 4px 4px;
+	-moz-border-radius: 4px 4px 4px 4px;
+	border-radius: 4px 4px 4px 4px;
+	color: #5ABCF8;
+}
+.infinity-design #subnav ul {
+	background: none ;
+	border-bottom: 1px solid #FFFFFF;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	border-top: 0px;
+}
+.infinity-design #subnav.item-list-tabs ul li a {
+	color: #787676;
+	font-weight: 500;
+	text-shadow: none;
+}
+.infinity-design div#subnav.item-list-tabs {
+	border-bottom: 1px solid #E8E8E8;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+.infinity-design a.loading,
+.infinity-design li.loading a {
+	background-image: url( ../images/design/ajax-loader.gif ) !important;
+}
+.infinity-design span.activity {
+	border: 1px solid #EDEDED;
+	-webkit-border-radius: 3px 3px 3px 3px;
+	-moz-border-radius: 3px 3px 3px 3px;
+	border-radius: 3px 3px 3px 3px;
+	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+	-moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+	color: #888888;
+	font-size: 80%;
+	font-weight: bold;
+	margin-bottom: 10px;
+	margin-top: -6px;
+	padding: 0 5px;
+}
+.infinity-design .footer-wrap {
+	background: none repeat scroll 0 0 #2F2F2F;
+	border-top: 1px solid #454545;
+	color: #DDDDDD;
+}
+.infinity-design #copyright-info {
+	text-align: right;
+}
+/* ======== */
+/* ! Misc   */
+/* ======== */
+.infinity-design thead:first-child tr th,
+.infinity-design thead:first-child tr td {
+	padding-left: 10px;
+	padding-right: 10px;
+	color: #DDD;
+}

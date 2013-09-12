@@ -24,28 +24,26 @@ class ICE_Ext_Option_Colorpicker
 {
 	/**
 	 */
-	public function init_styles()
+	public function init_admin_styles()
 	{
-		parent::init_styles();
+		parent::init_admin_styles();
 
-		// slurp admin styles
+		// inject admin styles
 		$this->style()
-			->section( 'admin' )
-			->cache( 'admin', 'admin.css' )
-			->add_dep( 'ice-colorpicker' );
+			->inject( 'admin', 'admin.css' )
+			->add_dep( 'admin', 'ice-colorpicker' );
 	}
 
 	/**
 	 */
-	public function init_scripts()
+	public function init_admin_scripts()
 	{
-		parent::init_scripts();
+		parent::init_admin_scripts();
 
-		// slurp admin script
+		// inject admin script
 		$this->script()
-			->section( 'admin' )
-			->cache( 'wrapper', 'wrapper.js' )
-			->add_dep( 'ice-colorpicker' );
+			->inject( 'wrapper', 'wrapper.js' )
+			->add_dep( 'wrapper', 'ice-colorpicker' );
 	}
 
 }

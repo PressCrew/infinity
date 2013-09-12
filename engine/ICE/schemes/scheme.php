@@ -180,13 +180,6 @@ final class ICE_Scheme extends ICE_Base
 	private $enqueue;
 
 	/**
-	 * The exports manager instance
-	 * 
-	 * @var ICE_Export_Manager
-	 */
-	private $exports;
-
-	/**
 	 * This is a singleton
 	 */
 	private function __construct()
@@ -205,11 +198,6 @@ final class ICE_Scheme extends ICE_Base
 				$this->themes_compiled->add( $theme, $theme );
 			}
 		}
-
-		// set up exports
-		$this->exports = new ICE_Export_Manager();
-		$this->exports->add( 'styles', new ICE_Component_Style_Export( 'dynamic', 'css' ) );
-		$this->exports->add( 'scripts', new ICE_Component_Script_Export( 'dynamic', 'js' ) );
 	}
 
 	/**
@@ -265,8 +253,8 @@ final class ICE_Scheme extends ICE_Base
 		// some scheme initializations must occur after WP theme setup
 		add_action( 'after_setup_theme', array($this, 'init_enqueueing') );
 		add_action( 'after_setup_theme', array($this, 'load_functions') );
-		add_action( 'ice_enqueue_styles', array($this, 'exports_refresh'), 0 );
-		add_action( 'ice_enqueue_scripts', array($this, 'exports_refresh'), 0 );
+		add_action( 'wp_head', array($this, 'render_assets'), 11 );
+		add_action( 'admin_head', array($this, 'render_assets'), 11 );
 
 		return $this;
 	}
@@ -293,20 +281,6 @@ final class ICE_Scheme extends ICE_Base
 		}
 
 		throw new Exception( 'The enqueuer has not been initialized yet' );
-	}
-
-	/**
-	 * Get exports manager
-	 *
-	 * @return ICE_Export_Manager
-	 */
-	public function exports()
-	{
-		if ( $this->exports instanceof ICE_Export_Manager ) {
-			return $this->exports;
-		}
-
-		throw new Exception( 'The export manager has not been initialized yet' );
 	}
 
 	/**
@@ -540,81 +514,49 @@ final class ICE_Scheme extends ICE_Base
 	}
 
 	/**
-	 * Refresh export files if necessary
+	 * Inject dynamic assets.
 	 */
-	public function exports_refresh( $force = false )
+	public function render_assets()
 	{
-		// hard refresh toggle
-		static $hard_refresh = false;
-
-		// export instance depends on which filter is being run
-		switch( current_filter() ) {
-			// enqueue styles action
-			case 'ice_enqueue_styles':
-				// grab the styles exporter
-				$export = $this->exports()->get( 'styles' );
-				break;
-			// enqueue scripts action
-			case 'ice_enqueue_scripts':
-				// grab the scripts exporter
-				$export = $this->exports()->get( 'scripts' );
-				break;
-			// no matching filter... might be a hard refresh
-			default:
-				// force toggled on?
-				if ( true === $force ) {
-					// toggle hard refresh ON
-					$hard_refresh = true;
-					// manually call style enqueuer
-					ICE_Enqueue::instance()->do_enqueue_styles();
-					// manually call script enqueuer
-					ICE_Enqueue::instance()->do_enqueue_scripts();
-					// toggle hard refresh OFF
-					$hard_refresh = false;
-				}
-				// return either way
-				return;
-		}
-
-		// are we using the cache?
-		if ( true == ICE_CACHE_EXPORTS && false == $hard_refresh ) {
-			// yes, loop all config files
-			foreach ( $this->config_files_loaded as $file ) {
-				// get file last mod time
-				$mtime = @filemtime( $file );
-				// check if stale
-				if ( $export->stale( $mtime ) ) {
-					// call export refresher
-					return $this->export_refresh( $export );
-				}
-			}
-			// cache is up to date, did NOT refresh
-			return false;
-		}
-
-		// update the export
-		return $this->export_refresh( $export );
+		// render em! ?>
+		<!-- dynamic styles -->
+		<style type="text/css">
+			<?php $this->render_styles(); ?>
+		</style>
+		<!-- dynamic scripts -->
+		<script type="text/javascript">
+			<?php $this->render_scripts(); ?>
+		</script><?php
 	}
 
 	/**
-	 * Refresh one export
-	 *
-	 * @param ICE_Export $export
-	 * @return boolean
+	 * Render all injected styles.
 	 */
-	final protected function export_refresh( ICE_Export $export )
+	final protected function render_styles()
 	{
-		// loop all component registries and pass them the exporters
+		// loop all component registries
 		foreach ( ICE_Policy::all() as $policy ) {
-			// call accept on the registry for the export
-			$policy->registry()->accept( $export );
+			// loop all components
+			foreach ( $policy->registry()->get_all() as $component ) {
+				// render styles
+				$component->style()->render();
+			}
 		}
+	}
 
-		// update it
-		$export->update();
-		
-		// all done
-		return true;
+	/**
+	 * Render all injected scripts.
+	 */
+	final protected function render_scripts()
+	{
+		// loop all component registries
+		foreach ( ICE_Policy::all() as $policy ) {
+			// loop all components
+			foreach ( $policy->registry()->get_all() as $component ) {
+				// render scripts
+				$component->script()->render();
+			}
+		}
 	}
 
 	/**

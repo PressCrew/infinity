@@ -13,6 +13,7 @@
 
 ICE_Loader::load(
 	'base/componentable',
+	'base/recursable',
 	'base/visitable',
 	'dom/element',
 	'dom/styleable',
@@ -85,7 +86,14 @@ abstract class ICE_Component
 	 * @var string
 	 */
 	private $aname;
-	
+
+	/**
+	 * A body class to add when this component is active.
+	 *
+	 * @var string
+	 */
+	protected $body_class;
+
 	/**
 	 * Required capabilities, can only be appended
 	 *
@@ -164,11 +172,11 @@ abstract class ICE_Component
 	protected $script;
 
 	/**
-	 * Comma separated list of script handles to enqueue
+	 * Array of script handles to pass to enqueuer as dependencies.
 	 *
-	 * @var string
+	 * @var array
 	 */
-	protected $script_depends;
+	protected $script_depends = array();
 
 	/**
 	 * Relative path to custom stylesheet
@@ -178,11 +186,11 @@ abstract class ICE_Component
 	protected $style;
 
 	/**
-	 * Comma separated list of style handles to enqueue
+	 * Array of style handles to pass to enqueuer as dependencies.
 	 *
-	 * @var string
+	 * @var array
 	 */
-	protected $style_depends;
+	protected $style_depends = array();
 	
 	/**
 	 * Relative path to component template file
@@ -276,6 +284,7 @@ abstract class ICE_Component
 	{
 		switch ( $name ) {
 			case 'aname':
+			case 'body_class':
 			case 'capabilities':
 			case 'class':
 			case 'description':
@@ -451,12 +460,8 @@ abstract class ICE_Component
 	public function style()
 	{
 		if ( !$this->__style__ instanceof ICE_Style ) {
-
 			// init style object
 			$this->__style__ = new ICE_Style( $this );
-			
-			// init style sections
-			$this->__style__->add_section( 'admin' );
 		}
 
 		// return it!
@@ -471,12 +476,8 @@ abstract class ICE_Component
 	public function script()
 	{
 		if ( !$this->__script__ instanceof ICE_Script ) {
-
 			// init script object
 			$this->__script__ = new ICE_Script( $this );
-
-			// init script sections
-			$this->__script__->add_section( 'admin' );
 		}
 
 		// return it!
@@ -589,13 +590,14 @@ abstract class ICE_Component
 			$this->documentation = $this->config( 'documentation' );
 		}
 
+		// set body class
+		if ( $this->config()->contains( 'body_class' ) ) {
+			$this->body_class = $this->config( 'body_class' );
+		}
+
 		// set stylesheet
 		if ( $this->config()->contains( 'style' ) ) {
 			$this->style = $this->config( 'style' );
-			$this->style()->cache(
-				$this->element()->id(),
-				ICE_Scheme::instance()->locate_file( $this->style )
-			);
 		}
 
 		// set style dependancies
@@ -609,10 +611,6 @@ abstract class ICE_Component
 		// set script
 		if ( $this->config()->contains( 'script' ) ) {
 			$this->script = $this->config( 'script' );
-			$this->script()->cache(
-				$this->element()->id(),
-				ICE_Scheme::instance()->locate_file( $this->script )
-			);
 		}
 
 		// set script dependancies
@@ -667,6 +665,26 @@ abstract class ICE_Component
 
 		// call configure template method
 		$this->configure();
+
+		// maybe hook up body class
+		if ( $this->body_class ) {
+			// do it
+			add_filter( 'body_class', array( $this, 'add_body_class' ) );
+		}
+	}
+
+	/**
+	 * Append body class to given array.
+	 *
+	 * @param array $classes
+	 * @return array
+	 */
+	public function add_body_class( $classes )
+	{
+		// append to classes array
+		$classes[] = esc_attr( $this->body_class );
+		// all done
+		return $classes;
 	}
 
 	/**
@@ -822,13 +840,29 @@ abstract class ICE_Component
 	 */
 	public function init_styles()
 	{
-		// depend on any styles?
-		if ( $this->style_depends instanceof ICE_Map ) {
-			// enqueue all of them
-			foreach( $this->style_depends as $dep ) {
-				wp_enqueue_style( $dep );
+		// is a style set?
+		if ( $this->style ) {
+			// locate it
+			$path = ICE_Scheme::instance()->locate_file( $this->style );
+			// find it?
+			if ( $path ) {
+				// yep, enqueue it
+				wp_enqueue_style(
+					$this->name,
+					ICE_Files::theme_file_to_url( $path ),
+					$this->style_depends,
+					INFINITY_VERSION
+				);
 			}
 		}
+	}
+
+	/**
+	 * This template method is called "just in time" to enqueue admin styles.
+	 */
+	public function init_admin_styles()
+	{
+		// override me
 	}
 
 	/**
@@ -838,13 +872,29 @@ abstract class ICE_Component
 	 */
 	public function init_scripts()
 	{
-		// depend on any scripts?
-		if ( $this->script_depends instanceof ICE_Map ) {
-			// enqueue all of them
-			foreach( $this->script_depends as $dep ) {
-				wp_enqueue_script( $dep );
+		// is a script set?
+		if ( $this->script ) {
+			// locate it
+			$path = ICE_Scheme::instance()->locate_file( $this->script );
+			// find it?
+			if ( $path ) {
+				// yep, enqueue it
+				wp_enqueue_script(
+					$this->name,
+					ICE_Files::theme_file_to_url( $path ),
+					$this->script_depends,
+					INFINITY_VERSION
+				);
 			}
 		}
+	}
+
+	/**
+	 * This template method is called "just in time" to enqueue admin scripts.
+	 */
+	public function init_admin_scripts()
+	{
+		// override me
 	}
 
 	/**
@@ -1136,53 +1186,4 @@ abstract class ICE_Component
 class ICE_Component_Element extends ICE_Element
 {
 	// nothing special yet, but there will be!
-}
-
-/**
- * Abstract asset exporter
- *
- * @package ICE
- * @subpackage schemes
- */
-abstract class ICE_Component_Asset_Export
-	extends ICE_Export
-		implements ICE_Visitor
-{
-	// nothing special yet
-}
-
-/**
- * Style exporter
- *
- * @package ICE
- * @subpackage schemes
- */
-class ICE_Component_Style_Export
-	extends ICE_Component_Asset_Export
-{
-	public function visit( ICE_Visitable $visited )
-	{
-		if ( $visited->supported() ) {
-			$visited->init_styles();
-			$this->push( $visited->style() );
-		}
-	}
-}
-
-/**
- * Script exporter
- *
- * @package ICE
- * @subpackage schemes
- */
-class ICE_Component_Script_Export
-	extends ICE_Component_Asset_Export
-{
-	public function visit( ICE_Visitable $visited )
-	{
-		if ( $visited->supported() ) {
-			$visited->init_scripts();
-			$this->push( $visited->script() );
-		}
-	}
 }

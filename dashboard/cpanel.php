@@ -161,6 +161,13 @@ function infinity_dashboard_cpanel_setup()
 
 	if ( $action ) {
 
+		// always need jQuery UI (for now)
+		wp_enqueue_script( 'jquery-ui-accordion' );
+		wp_enqueue_script( 'jquery-ui-button' );
+		wp_enqueue_script( 'jquery-ui-dialog' );
+		wp_enqueue_script( 'jquery-ui-progressbar' );
+		wp_enqueue_script( 'jquery-ui-tabs' );
+		
 		// tab action
 		add_action( 'wp_ajax_infinity_tabs_content', 'infinity_dashboard_cpanel_tabs_content' );
 

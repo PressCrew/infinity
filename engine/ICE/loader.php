@@ -35,12 +35,6 @@ define( 'ICE_LIB_PATH', ICE_PATH . '/lib' );
  */
 define( 'ICE_EXT_PATH', ICE_PATH . '/ext' );
 /**
- * ICE API: exports caching toggle
- */
-if ( !defined( 'ICE_CACHE_EXPORTS' ) ) {
-	define( 'ICE_CACHE_EXPORTS', true );
-}
-/**
  * ICE API: exported files sub directory name
  */
 if ( !defined( 'ICE_EXPORTS_SUBDIR' ) ) {
@@ -56,6 +50,10 @@ if ( !defined( 'ICE_THEMES_COMPILED' ) ) {
  * ICE API: cache get_stylesheet() call for performance 
  */
 define( 'ICE_ACTIVE_THEME', get_stylesheet() );
+/**
+ * ICE API: cache is_admin() call for performance
+ */
+define( 'ICE_IS_ADMIN', is_admin() );
 
 /**
  * include the base class

@@ -61,18 +61,24 @@ class ICE_Script extends ICE_Asset
 	}
 
 	/**
-	 * Create and return a new logic object
+	 * Get/Set a new logic object
 	 *
+	 * @param string $handle
 	 * @param string $code valid javascript code
 	 * @return ICE_Script_Logic
 	 */
-	public function logic( $code = null )
+	public function logic( $handle, $code = null )
 	{
-		// new logic object
-		$logic = new ICE_Script_Logic( $code );
-		
-		// add it to logic stack
-		$this->logic_stack[] = $logic;
+		// already exists?
+		if ( true === isset( $this->logic_stack[ $handle ] ) ) {
+			// yep, use that one
+			$logic = $this->logic_stack[ $handle ];
+		} else {
+			// new logic object
+			$logic = new ICE_Script_Logic( $code );
+			// add it to logic stack
+			$this->logic_stack[ $handle ] = $logic;
+		}
 
 		return $logic;
 	}
@@ -88,42 +94,41 @@ class ICE_Script extends ICE_Asset
 	/**
 	 * End logic string
 	 *
+	 * @param string $handle
 	 * @return ICE_Script_Logic
 	 */
-	public function end_logic()
+	public function end_logic( $handle )
 	{
 		// add contents of output buffer to new logic object and return it
-		return $this->logic( ob_get_clean() );
+		return $this->logic( $handle, ob_get_clean() );
 	}
 
 	/**
-	 * Generate javascript markup for this script's dynamic code
-	 *
-	 * @return string
+	 * Render javascript markup for this script's dynamic code
 	 */
-	public function export()
+	public function render()
 	{
-		// the markup that will be returned
-		$code = parent::export();
+		// run parent first!
+		parent::render();
 
 		// render rules
 		if ( count( $this->logic_stack ) ) {
 			
 			// begin script generation
-			$code .= sprintf( '/*+++ begin script: %s */', $this->token ) . PHP_EOL;
+			printf( '/*+++ begin script: %s */', $this->token ) . PHP_EOL;
 			
 			// loop all logic objects
-			foreach ( $this->logic_stack as $logic ) {
-				// append output of logic export
-				$code .= $logic->export();
+			foreach ( $this->logic_stack as $handle => $logic ) {
+				// check condition
+				if ( true === $this->check_cond( $handle ) ) {
+					// render output of logic export
+					echo $logic->export();
+				}
 			}
 			
 			// end script generation
-			$code .= sprintf( '/*+++ end script: %s */', $this->token ) . PHP_EOL . PHP_EOL;
+			printf( '/*+++ end script: %s */', $this->token ) . PHP_EOL . PHP_EOL;
 		}
-
-		// all done
-		return $code;
 	}
 }
 

@@ -41,26 +41,22 @@ class ICE_Ext_Widget_Menu
 	
 	/**
 	 */
-	public function init_styles()
+	public function init_admin_styles()
 	{
-		parent::init_styles();
+		parent::init_admin_styles();
 
-		// slurp admin styles
-		$this->style()
-			->section( 'admin' )
-			->cache( 'admin', 'admin.css' );
+		// inject admin styles
+		$this->style()->inject( 'admin', 'admin.css' );
 	}
 	
 	/**
 	 */
-	public function init_scripts()
+	public function init_admin_scripts()
 	{
-		parent::init_scripts();
+		parent::init_admin_scripts();
 
-		if ( is_admin() ) {
-			// need jquery ui menu
-			wp_enqueue_script( 'jquery-ui-menu' );
-		}
+		// need jquery ui menu
+		wp_enqueue_script( 'jquery-ui-menu' );
 	}
 
 
@@ -161,7 +157,7 @@ class ICE_Ext_Widget_Menu
 			jQuery('a#<?php print $this->element()->id( $item_slug ) ?>').button(<?php print $conf ?>); <?php
 
 			// end capturing
-			$script->end_logic();
+			$script->end_logic( $item_slug );
 			
 			/*\*/ if(0)?></script><?php /*\*/
 		}

@@ -161,12 +161,12 @@ class ICE_Scheme_Enqueue extends ICE_Base
 	 * @return string
 	 */
 	private function make_handle( $theme, $handle )
-	{
-		if ( strpos( $handle, ':' ) ) {
+	{		
+		if ( substr( $handle, 0, 6 ) === 'icenq-' ) {
 			return $handle;
 		}
 
-		return sprintf( '%s:%s', $theme, trim( $handle ) );
+		return sprintf( '%s-%s', $theme, trim( $handle ) );
 	}
 
 	/**
@@ -196,27 +196,12 @@ class ICE_Scheme_Enqueue extends ICE_Base
 		// map of styles and depends
 		$styles = new ICE_Map();
 
-		// get export
-		$export_styles = $this->scheme->exports()->get( 'styles' );
-
-		// build up array of exports
-		if ( is_admin() ) {
-			$exports['dynamic-admin'] = $export_styles->child( 'admin' );
-		} else {
-			$exports['dynamic'] = $export_styles;
-		}
-		
-		// add internal style for every export
-		foreach( $exports as $handle => $export ) {
-			$styles->add( $handle, $export->get_property( 'url' ) );
-		}
-
 		// add the theme style.css LAST
 		$styles->add( 'style', get_bloginfo( 'stylesheet_url' ) );
 
 		// add directive
-		$directive = new ICE_Init_Directive( '@', 'style', $styles );
-		$style_defs->add( '@', $directive, true );
+		$directive = new ICE_Init_Directive( 'icenq', 'style', $styles );
+		$style_defs->add( 'icenq', $directive, true );
 
 		// hook up styles internal handler
 		add_action( 'ice_enqueue_styles', array( $this, 'handle_style_internal' ), 1 );
@@ -236,27 +221,12 @@ class ICE_Scheme_Enqueue extends ICE_Base
 		// map of scripts and script depends
 		$script = new ICE_Map();
 
-		// get export
-		$export_script = $this->scheme->exports()->get( 'scripts' );
+		// add the theme script.js LAST
+		$script->add( 'script', 'script.js' );
 
-		// build up array of exports
-		if ( is_admin() ) {
-			$exports['dynamic-admin'] = $export_script->child( 'admin' );
-		} else {
-			$exports['dynamic'] = $export_script;
-		}
-
-		// add internal script for every export
-		foreach( $exports as $handle => $export ) {
-			$script->add( $handle, $export->get_property( 'url' ) );
-		}
-
-		// any scripts to add?
-		if ( $script->count() ) {
-			// add directive
-			$directive = new ICE_Init_Directive( '@', 'script', $script );
-			$script_defs->add( '@', $directive, true );
-		}
+		// add directive
+		$directive = new ICE_Init_Directive( 'icenq', 'script', $script );
+		$script_defs->add( 'icenq', $directive, true );
 
 		// hook up scripts internal handler
 		add_action( 'ice_enqueue_scripts', array( $this, 'handle_script_internal' ) );
@@ -559,32 +529,8 @@ class ICE_Scheme_Enqueue extends ICE_Base
 					ICE_Scheme::DIRECTIVE_STYLE_DEPS
 				);
 
-			// create new map so we can write to it
-			$style_depends_w = new ICE_Map( $style_depends );
-
-			// start with empty stacks
-			$dep_stack = new ICE_Stack();
-			$dep_admin_stack = new ICE_Stack();
-
-			// add dynamic style depends for every policy
-			foreach( ICE_Policy::all() as $policy ) {
-				// loop through all registered components
-				foreach ( $policy->registry()->get_all() as $component ) {
-					// push deps onto stacks
-					$component->style()->push_deps( $dep_stack );
-					$component->style()->section('admin')->push_deps( $dep_admin_stack );
-				}
-			}
-
-			// add addtl dependancies
-			$dep_map = new ICE_Map();
-			$dep_map->add( '@:dynamic', $dep_stack->to_array() );
-			$dep_map->add( '@:dynamic-admin', $dep_admin_stack->to_array() );
-			$directive_deps = new ICE_Init_Directive( '@', 'style_depends', $dep_map );
-			$style_depends_w->add( '@', $directive_deps, true );
-
 			// init style depends
-			$this->depends( $this->styles, $style_depends_w );
+			$this->depends( $this->styles, $style_depends );
 		}
 
 		// init style action triggers
@@ -645,32 +591,8 @@ class ICE_Scheme_Enqueue extends ICE_Base
 					ICE_Scheme::DIRECTIVE_SCRIPT_DEPS
 				);
 
-			// create new map so we can write to it
-			$script_depends_w = new ICE_Map( $script_depends );
-
-			// start with empty stacks
-			$dep_stack = new ICE_Stack();
-			$dep_admin_stack = new ICE_Stack();
-
-			// add dynamic script depends for every policy
-			foreach( ICE_Policy::all() as $policy ) {
-				// loop through all registered components
-				foreach ( $policy->registry()->get_all() as $component ) {
-					// push deps onto stacks
-					$component->script()->push_deps( $dep_stack );
-					$component->script()->section('admin')->push_deps( $dep_admin_stack );
-				}
-			}
-
-			// add addtl dependancies
-			$dep_map = new ICE_Map();
-			$dep_map->add( '@:dynamic', $dep_stack->to_array() );
-			$dep_map->add( '@:dynamic-admin', $dep_admin_stack->to_array() );
-			$directive_deps = new ICE_Init_Directive( '@', 'script_depends', $dep_map );
-			$script_depends_w->add( '@', $directive_deps, true );
-
 			// init script depends
-			$this->depends( $this->scripts, $script_depends_w );
+			$this->depends( $this->scripts, $script_depends );
 		}
 
 		// init script action triggers
@@ -700,19 +622,19 @@ class ICE_Scheme_Enqueue extends ICE_Base
 	 */
 	public function handle_style_internal()
 	{
+		// enqueue injected style depends for every policy
+		foreach( ICE_Policy::all() as $policy ) {
+			// loop through all registered components
+			foreach ( $policy->registry()->get_all() as $component ) {
+				// call style dep enqueuer
+				$component->style()->enqueue_deps();
+			}
+		}
+
 		// are we at the admin dashboard?
-		if ( is_admin() ) {
-			// yes, enqueue admin styles
-			if ( wp_style_is( '@:dynamic-admin', 'registered' ) ) {
-				wp_enqueue_style( '@:dynamic-admin' );
-			}
-		} else {
-			// enq active theme stylesheet
-			wp_enqueue_style( '@:style' );
-			// enqueue public styles
-			if ( wp_style_is( '@:dynamic', 'registered' ) ) {
-				wp_enqueue_style( '@:dynamic' );
-			}
+		if ( !is_admin() ) {
+			// no, enq active theme stylesheet
+			wp_enqueue_style( 'icenq-style' );
 		}
 	}
 
@@ -768,16 +690,12 @@ class ICE_Scheme_Enqueue extends ICE_Base
 	 */
 	public function handle_script_internal()
 	{
-		// are we at the admin dashboard?
-		if ( is_admin() ) {
-			// yes, enqueue admin scripts
-			if ( wp_script_is( '@:dynamic-admin', 'registered' ) ) {
-				wp_enqueue_script( '@:dynamic-admin' );
-			}
-		} else {
-			// enqueue public scripts
-			if ( wp_script_is( '@:dynamic', 'registered' ) ) {
-				wp_enqueue_script( '@:dynamic' );
+		// enqueue injected script depends for every policy
+		foreach( ICE_Policy::all() as $policy ) {
+			// loop through all registered components
+			foreach ( $policy->registry()->get_all() as $component ) {
+				// call script dep enqueuer
+				$component->script()->enqueue_deps();
 			}
 		}
 	}

@@ -41,9 +41,8 @@ class ICE_Ext_Option_Css_Bg_Image
 	{
 		parent::init_styles();
 
-		// add dynamic styles callback
-		$this->style()
-			->cache( 'remove-image', 'bg_image_override' );
+		// add inject styles callback
+		$this->style()->inject( 'remove-image', 'bg_image_override' );
 	}
 	
 	/**
@@ -57,7 +56,7 @@ class ICE_Ext_Option_Css_Bg_Image
 
 		// is value a literal zero?
 		if ( is_numeric( $value ) && 0 === (integer) $value ) {
-			$rule = $this->style()->rule( $this->format_style_selector() );
+			$rule = $this->style()->rule( 'bg', $this->format_style_selector() );
 			$rule->add_declaration( 'background-image', 'none' );
 		}
 	}

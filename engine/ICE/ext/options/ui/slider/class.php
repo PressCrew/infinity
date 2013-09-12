@@ -98,26 +98,22 @@ class ICE_Ext_Option_Ui_Slider
 	
 	/**
 	 */
-	public function init_styles()
+	public function init_admin_styles()
 	{
-		parent::init_styles();
+		parent::init_admin_styles();
 
-		// slurp admin styles
-		$this->style()
-			->section( 'admin' )
-			->cache( 'admin', 'admin.css' );
+		// inject admin styles
+		$this->style()->inject( 'admin', 'admin.css' );
 	}
 
 	/**
 	 */
-	public function init_scripts()
+	public function init_admin_scripts()
 	{
-		parent::init_scripts();
+		parent::init_admin_scripts();
 
-		if ( is_admin() ) {
-			// need slider helper
-			wp_enqueue_script( 'ice-slider' );
-		}
+		// need slider helper
+		wp_enqueue_script( 'ice-slider' );
 	}
 	
 	/**
@@ -184,7 +180,7 @@ class ICE_Ext_Option_Ui_Slider
 	{
 		// new script helper
 		$script = new ICE_Script();
-		$logic = $script->logic();
+		$logic = $script->logic( 'vars' );
 
 		// set value(s)
 		$value = $this->get();

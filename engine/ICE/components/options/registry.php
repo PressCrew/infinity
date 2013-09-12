@@ -21,32 +21,6 @@ ICE_Loader::load( 'base/registry', 'components/options/factory', 'utils/ajax' );
  */
 abstract class ICE_Option_Registry extends ICE_Registry
 {
-	/**
-	 * Enqueue required scripts
-	 */
-	public function init_scripts()
-	{
-		// call parent
-		parent::init_scripts();
-
-		// jQuery UI is always needed
-		wp_enqueue_script( 'jquery-ui-accordion' );
-		wp_enqueue_script( 'jquery-ui-button' );
-		wp_enqueue_script( 'jquery-ui-dialog' );
-		wp_enqueue_script( 'jquery-ui-progressbar' );
-		wp_enqueue_script( 'jquery-ui-tabs' );
-
-		// call localize script *LAST*
-		$this->localize_script();
-	}
-
-	/**
-	 * Template method to allow localization of scripts
-	 */
-	protected function localize_script()
-	{
-		// override this to apply special localizations that apply to your implementation
-	}
 
 	/**
 	 */
@@ -266,9 +240,6 @@ abstract class ICE_Option_Registry extends ICE_Registry
 					$save_count++;
 				}
 			}
-
-			// hard refresh all scheme exports
-			ICE_Scheme::instance()->exports_refresh( true );
 			
 			// done saving
 			return $save_count;

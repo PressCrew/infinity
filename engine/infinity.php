@@ -135,12 +135,6 @@ define( 'INFINITY_ADMIN_PAGE', INFINITY_SLUG . '-theme' );
 if ( !defined( 'INFINITY_DEV_MODE' ) ) {
 	define( 'INFINITY_DEV_MODE', false );
 }
-	/**
-	 * ICE exports caching toggle
-	 */
-	if ( !defined( 'ICE_CACHE_EXPORTS' ) ) {
-		define( 'ICE_CACHE_EXPORTS', !INFINITY_DEV_MODE );
-	}
 
 /**
  * Load the ICE lib loader
@@ -190,14 +184,10 @@ infinity_shortcodes_init();
 // finalize scheme
 infinity_scheme_finalize();
 
-if ( is_admin() ) {
-	// init admin only components screens
-	infinity_sections_init_screen();
-	infinity_options_init_screen();
-	infinity_screens_init_screen();
-	infinity_widgets_init_screen();
-} else {
-	// init blog components screens
-	infinity_features_init_screen();
-	infinity_shortcodes_init_screen();
-}
+// init component screens
+infinity_sections_init_screen();
+infinity_features_init_screen();
+infinity_options_init_screen();
+infinity_screens_init_screen();
+infinity_widgets_init_screen();
+infinity_shortcodes_init_screen();
