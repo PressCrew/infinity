@@ -75,8 +75,8 @@ $.widget( "juicy.buttonmenu", $.ui.menu, {
 							});
 					}
 					e.stopPropagation();
+					e.preventDefault();
 				}
-				e.preventDefault();
 			});
 	},
 

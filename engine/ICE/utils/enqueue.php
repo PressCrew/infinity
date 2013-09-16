@@ -291,8 +291,6 @@ final class ICE_Enqueue extends ICE_Base
 		$this->register_script(
 			'ice-scrollpane', 'scrollpane.js', array('ice-global', 'jquery-ui-slider') );
 		$this->register_script(
-			'jquery-juicy-browsertabs', 'juicy/jquery.juicy.browsertabs.js', array('jquery-ui-tabs') );
-		$this->register_script(
 			'jquery-juicy-buttonmenu', 'juicy/jquery.juicy.buttonmenu.js', array('jquery-ui-button','jquery-ui-menu') );
 		$this->register_script(
 			'jquery-juicy-buttonselect', 'juicy/jquery.juicy.buttonselect.js', array('jquery-ui-button') );

@@ -88,20 +88,6 @@
 }
 
 /**
- * Browser Tabs
- */
-.juicy-browsertabs > .ui-tabs-panel {
-	min-height: 450px;
-}
-.juicy-browsertabs > .ui-tabs-nav li a {
-	padding: 0.4em 1em 0.5em 1em;
-}
-.juicy-browsertabs > .ui-tabs-nav li .ui-icon-close {
-	float: right;
-	cursor: pointer;
-}
-
-/**
  * Icons
  */
 .ui-icon.juicy-icon-ajax-loader {

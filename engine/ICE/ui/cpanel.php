@@ -107,7 +107,7 @@ final class ICE_Ui_Cpanel extends ICE_Base
 			$children = $this->policy->registry()->get_children( $item );
 			$children_cnt = count( $children ); ?>
 			<li>
-				<a target="<?php if ( !$children_cnt ) $this->render_button_target( $item ); ?>" id="<?php $this->render_id( 'menu', 'item', $item->property( 'name' ) ) ?>" href="<?php if ( !$children_cnt ) print esc_attr( $item->property( 'url' ) ) ?>" title="<?php print esc_attr( $item->property( 'title' ) ) ?>"><?php print esc_attr( $item->property( 'title' ) ) ?></a>
+				<a target="<?php $this->render_button_target( $item ); ?>" id="<?php $this->render_id( 'menu', 'item', $item->property( 'name' ) ) ?>" href="<?php if ( !$children_cnt ) print esc_attr( $item->property( 'url' ) ) ?>" title="<?php print esc_attr( $item->property( 'title' ) ) ?>"><?php print esc_attr( $item->property( 'title' ) ) ?></a>
 				<?php if ( $children_cnt ): ?>
 					<?php $this->render_menu_items( $children ) ?>
 				<?php endif; ?>
@@ -133,9 +133,6 @@ final class ICE_Ui_Cpanel extends ICE_Base
 		if ( $target ) {
 			// use that target
 			print esc_attr( $target );
-		} else {
-			// generate a tab target from the name
-			$this->render_id( 'tab', $item->property( 'name' ) );
 		}
 	}
 
@@ -145,13 +142,72 @@ final class ICE_Ui_Cpanel extends ICE_Base
 	public function render_toolbar_buttons()
 	{
 		$items = $this->policy->registry()->get_all();
-		$items = ICE_Position::sort_priority( $items );
+		$items_sorted = ICE_Position::sort_priority( $items );
 
-		foreach( $items as $item ): ?>
+		foreach( $items_sorted as $item ): ?>
 			<?php if ( $item->property( 'toolbar' ) ): ?>
-				<a target="<?php $this->render_id( 'tab', $item->property( 'name' ) ) ?>" id="<?php $this->render_id( 'toolbarbutton', $item->property( 'name' ) ) ?>" href="<?php print esc_attr( $item->property( 'url' ) ) ?>" title="<?php print esc_attr( $item->property( 'title' ) ) ?>"><?php print esc_attr( $item->property( 'title' ) ) ?></a>
+				<a target="<?php $this->render_button_target( $item ); ?>" id="<?php $this->render_id( 'toolbarbutton', $item->property( 'name' ) ) ?>" href="<?php print esc_attr( $item->property( 'url' ) ) ?>" title="<?php print esc_attr( $item->property( 'title' ) ) ?>"><?php print esc_attr( $item->property( 'title' ) ) ?></a>
 			<?php endif;
 		endforeach;
+	}
+
+	/**
+	 * Print ui tabs widget list markup
+	 *
+	 * @param array $names Array of tab names.
+	 */
+	public function render_tab_list( $names )
+	{
+		// make sure we got an array
+		if ( is_array( $names ) ) {
+			// open list ?>
+			<ul><?php
+			// loop all names
+			foreach( $names as $name ) {
+				// get item
+				$item = $this->policy->registry()->get( $name );
+				// render list item ?>
+				<li><a href="#<?php  $this->render_id( 'tab', $item->property( 'name' ) ) ?>"><?php echo esc_html( $item->property( 'title' ) ) ?></a></li><?php
+			}
+			// close list ?>
+			</ul><?php
+		}
+	}
+
+	/**
+	 * Print ui tabs widget panels markup
+	 *
+	 * @param array $names Array of tab names.
+	 */
+	public function render_tab_panels( $names )
+	{
+		// make sure we got an array
+		if ( is_array( $names ) ) {
+			// loop all items
+			foreach( $names as $name ) {
+				// get the screen
+				$item = $this->policy->registry()->get( $name );
+				// render panel item ?>
+				<div id="<?php $this->render_id( 'tab', $item->property( 'name' ) ) ?>">
+					<p><?php $this->render_tab_content( $item->property( 'name' ) ) ?></p>
+				</div><?php
+			}
+		}
+	}
+
+	/**
+	 * Print ui tabs widget panel content for one item
+	 *
+	 * @param string $name
+	 */
+	public function render_tab_content( $name )
+	{
+		// get the screen
+		$screen = $this->policy->registry()->get( $name );
+
+		if ( $screen instanceof ICE_Screen ) {
+			$screen->render();
+		}
 	}
 
 	/**
@@ -194,32 +250,5 @@ final class ICE_Ui_Cpanel extends ICE_Base
 		<script type="text/javascript">
 			<?php print $script->render(); ?>
 		</script><?php
-	}
-
-	/**
-	 * Print available tabs widget setting
-	 */
-	public function render_available_tabs()
-	{
-		// get all screens from the registry
-		$items = $this->policy->registry()->get_all();
-
-		// make sure we got some items
-		if ( count( $items ) ) {
-
-			// new script helper
-			$script = new ICE_Script();
-			$logic = $script->logic( 'vars' );
-
-			foreach( $items as $item ) {
-				// add variable
-				$logic->av( $item->property( 'name' ), $item->property( 'title' ) );
-			}
-
-			print $logic->export_variables( true );
-
-		} else {
-			print '{}';
-		}
 	}
 }

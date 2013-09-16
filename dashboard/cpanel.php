@@ -50,11 +50,7 @@ function infinity_dashboard_cpanel_actions()
 {
 	return array(
 		// main
-		'start', 'options', 'shortcodes', 'widgets', 'about',
-		// devs
-		'api',
-		// community
-		'news', 'thanks'
+		'start', 'options'
 	);
 }
 
@@ -117,16 +113,29 @@ function infinity_dashboard_cpanel_render_toolbar_buttons()
 }
 
 /**
- * Render control panel available tabs
+ * Render control panel tabs list items
  *
  * @package Infinity
  * @subpackage dashboard
  */
-function infinity_dashboard_cpanel_render_available_tabs()
+function infinity_dashboard_cpanel_render_tab_list()
 {
 	global $infinity_c8c12e68cf;
 
-	$infinity_c8c12e68cf->render_available_tabs();
+	$infinity_c8c12e68cf->render_tab_list( infinity_dashboard_cpanel_actions() );
+}
+
+/**
+ * Render control panel tabs content items
+ *
+ * @package Infinity
+ * @subpackage dashboard
+ */
+function infinity_dashboard_cpanel_render_tab_panels()
+{
+	global $infinity_c8c12e68cf;
+
+	$infinity_c8c12e68cf->render_tab_panels( infinity_dashboard_cpanel_actions() );
 }
 
 /**
@@ -168,31 +177,8 @@ function infinity_dashboard_cpanel_setup()
 		wp_enqueue_script( 'jquery-ui-progressbar' );
 		wp_enqueue_script( 'jquery-ui-tabs' );
 		
-		// tab action
-		add_action( 'wp_ajax_infinity_tabs_content', 'infinity_dashboard_cpanel_tabs_content' );
-
 		// hook for config actions
 		do_action( 'infinity_dashboard_cpanel_setup' );
-	}
-}
-
-/**
- * Output cpanel tab content
- *
- * @package Infinity
- * @subpackage dashboard
- */
-function infinity_dashboard_cpanel_tabs_content()
-{
-	$action = infinity_dashboard_cpanel_action();
-	$screen = Infinity_Screens_Policy::instance()->registry()->get( $action );
-
-	if ( $screen instanceof ICE_Screen ) {
-		ICE_Ajax::responseBegin();
-		$screen->render();
-		ICE_Ajax::responseEnd( true );
-	} else {
-		ICE_Ajax::responseStd( false, sprintf( __('There was an error while trying to load the %s tab content.', infinity_text_domain), $action ) );
 	}
 }
 

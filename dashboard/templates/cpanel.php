@@ -24,23 +24,13 @@
 
 		<!-- toolbar buttons -->
 		<?php infinity_dashboard_cpanel_render_toolbar_buttons(); ?>
-		
-		<?php if ( true === INFINITY_DEV_MODE ): ?>
-			<!-- refresh button -->
-			<a id="infinity-cpanel-refreshbutton" title="<?php _e( 'Refresh current tab', infinity_text_domain ) ?>">
-				<?php _e('Refresh', infinity_text_domain ) ?>
-			</a>
-			<!-- scroll button -->
-			<input id="infinity-cpanel-scrollbutton" type="checkbox" />
-			<label for="infinity-cpanel-scrollbutton" title="<?php _e( 'Toggle scroll bars on/off', infinity_text_domain ) ?>"><?php _e( 'Scrolling', infinity_text_domain ) ?></label>
-		<?php endif; ?>
 
 	</div>
 
 	<!-- tabs -->
 	<div id="infinity-cpanel-tabs">
-		<ul><!-- tabs are injected here --></ul>
-		<!-- panels are injected here -->
+		<?php infinity_dashboard_cpanel_render_tab_list() ?>
+		<?php infinity_dashboard_cpanel_render_tab_panels() ?>
 	</div>
 
 </div>
@@ -55,29 +45,16 @@
 			$( 'a#infinity-cpanel-menubutton' ).button({
 				icons: { secondary: 'ui-icon-triangle-1-s' }
 			});
-	var refreshButton =
-			$( 'a#infinity-cpanel-refreshbutton' ).button({
-				icons: { primary: 'ui-icon-refresh' }
-			});
-	var scrollButton =
-			$( 'input#infinity-cpanel-scrollbutton' ).button({
-				icons: { primary: 'ui-icon-arrow-2-n-s' }
-			});	
 	var menu =
 			$( 'ul#infinity-cpanel-menu' ).buttonmenu({
 				button: menuButton
 			});
 	var toolbar =
 			$( 'div#infinity-cpanel-toolbar' ).toolbar();
+	var tabs =
+			$( 'div#infinity-cpanel-tabs' ).tabs();
 
-	$('div#infinity-cpanel-tabs').cpaneltabs({
-		availableTabs: <?php infinity_dashboard_cpanel_render_available_tabs() ?>,
-		defaultAnchor: 'a#infinity-cpanel-toolbarbutton-start',
-		idPrefix: 'infinity-cpanel-tab-',
-		refreshButton: refreshButton,
-		scrollButton: scrollButton,
-		toolbar: toolbar
-	});
+	initOptionsPanel( $( '#infinity-cpanel-tab-options' ) );
 
 })(jQuery);
 </script>

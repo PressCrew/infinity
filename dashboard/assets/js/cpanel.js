@@ -1,51 +1,4 @@
 
-(function($){
-
-var response = null;
-
-$.widget( 'infinity.cpaneltabs', $.juicy.browsertabs, {
-
-	options: {
-		ajaxOptions: {
-			data: { 'action': 'infinity_tabs_content' },
-			beforeSend: function ( xhr, settings ) {
-				response = null;
-			},
-			dataFilter: function ( data, type ) {
-				response = iceEasyAjax.splitResponseStd( data );
-				return response.content;
-			}
-		},
-		cache: true,
-		cookie: {name: 'cpanel_current_tab', expires: 7},
-		cookieScroll: {name: 'cpanel_scroll', expires: 7},
-		cookieTabs: {name: 'cpanel_open_tabs', expires: 7},
-		sortable: true,
-		// events
-		load: function( event, ui ) {
-			if ( response ) {
-				if ( response.code >= 1 ) {
-					initOptionsPanel( ui.panel );
-					initDocuments( ui.panel );
-				} else {
-					// set up flash message
-					$('<div></div>')
-						.prependTo( ui.panel )
-						.flashmesg({
-							dismiss: true,
-							set: 'error',
-							messageText: response.message
-						})
-						.fadeIn();
-					return;
-				}
-			}
-		}
-	}
-});
-
-})(jQuery)
-
 // init all options
 function initOptions(panel)
 {
@@ -84,12 +37,11 @@ function initOptionsPanel(panel)
 	if ( useCookies ) {
 		last = $.cookie('infinity_cpanel_option_loaded');
 	}
-	
+
 	// setup accordion menu
 	menu.accordion({
-		autoHeight: false,
+		heightStyle: 'content',
 		collapsible: true,
-		clearStyle: true,
 		icons: {
 			header: 'ui-icon-folder-collapsed',
 			headerSelected: 'ui-icon-folder-open'
@@ -150,7 +102,7 @@ function initOptionsPanel(panel)
 					om_state_act = om_state_menu.accordion('option', 'active');
 					om_state_new = ('false' == om_state_cur[1]) ? false : Number(om_state_cur[1]);
 					if (om_state_act !== om_state_new) {
-						om_state_menu.accordion('activate', om_state_new);
+						om_state_menu.accordion('option', 'active', om_state_new);
 					}
 				}
 			}

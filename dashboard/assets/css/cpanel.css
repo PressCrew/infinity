@@ -13,8 +13,12 @@ div#infinity-cpanel {
 	margin-top: 20px;
 }
 
-div#infinity-cpanel > .juicy-browsertabs {
+div#infinity-cpanel > .ui-tabs {
 	min-height: 600px;
+}
+
+div#infinity-cpanel > .ui-tabs-panel {
+	min-height: 450px;
 }
 
 div#infinity-cpanel .ui-widget a,
@@ -86,18 +90,6 @@ div#infinity-cpanel-toolbar {
 	}
 		a#infinity-cpanel-menubutton .ui-button-text {
 			font-size: 14px;
-		}
-	a#infinity-cpanel-refreshbutton,
-	input#infinity-cpanel-scrollbutton + label.ui-button {
-		float: right;
-		left: 8px;
-		right: 8px;
-		top: 3px;
-		}
-		a#infinity-cpanel-refreshbutton .ui-button-text,
-		input#infinity-cpanel-scrollbutton + label.ui-button .ui-button-text {
-			font-size: 12px;
-			padding-left: 20px;
 		}
 	div#infinity-cpanel-toolbar .juicy-buttonmenu {
 		position: absolute;
