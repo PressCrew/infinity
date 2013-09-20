@@ -281,8 +281,6 @@ final class ICE_Enqueue extends ICE_Base
 		$this->register_script(
 			'ice-colorpicker', 'colorpicker.js', array('jquery') );
 		$this->register_script(
-			'jquery-ui-menu', 'jquery.ui.menu.min.js', array( 'jquery-ui-core', 'jquery-ui-widget' ) );
-		$this->register_script(
 			'jquery-ui-nestedsortable', 'jquery.ui.nestedSortable.js', array('jquery', 'jquery-ui-sortable') );
 		$this->register_script(
 			'ice-global', 'global.js', array('ice-colorpicker') );
