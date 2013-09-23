@@ -217,7 +217,7 @@ final class ICE_Enqueue extends ICE_Base
 			// register default ui stylesheet
 			$this->register_style(
 				self::UI_STYLE_HANDLE,
-				'ui/jquery-ui-1.8.16.custom.css'
+				'ui/jquery-ui-1.10.3.custom.css'
 			);
 		}
 
