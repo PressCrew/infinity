@@ -19,11 +19,29 @@
 		<!-- menu -->
 		<a id="infinity-cpanel-menubutton" title="<?php _e( 'infinity', infinity_text_domain ) ?>"><?php _e( 'infinity', infinity_text_domain ) ?></a>
 		<ul id="infinity-cpanel-menu">
-			<?php infinity_dashboard_cpanel_render_menu_items(); ?>
+			<li>
+				<a id="infinity-cpanel-menu-item-comm" href="#" title="Community">Community</a>
+				<ul>
+					<li>
+						<a target="_blank" href="http://community.presscrew.com/" title="Visit Us!">Visit Us!</a>
+					</li>
+					<li>
+						<a target="_blank" href="http://community.presscrew.com/discussions/" title="Forums">Forums</a>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a id="infinity-cpanel-menu-item-devs" href="#" title="Developers">Developers</a>
+				<ul>
+					<li>
+						<a target="_blank" href="http://infinity.presscrew.com/api/" title="API Browser">API Browser</a>
+					</li>
+					<li>
+						<a target="_blank" href="https://github.com/PressCrew/infinity" title="Repo Browser">Repo Browser</a>
+					</li>
+				</ul>
+			</li>
 		</ul>
-
-		<!-- toolbar buttons -->
-		<?php infinity_dashboard_cpanel_render_toolbar_buttons(); ?>
 
 	</div>
 

@@ -87,32 +87,6 @@ function infinity_dashboard_cpanel_render_begin( $id_prefix )
 }
 
 /**
- * Render control panel menu items
- *
- * @package Infinity
- * @subpackage dashboard
- */
-function infinity_dashboard_cpanel_render_menu_items()
-{
-	global $infinity_c8c12e68cf;
-
-	$infinity_c8c12e68cf->render_menu_items();
-}
-
-/**
- * Render control panel toolbar buttons
- *
- * @package Infinity
- * @subpackage dashboard
- */
-function infinity_dashboard_cpanel_render_toolbar_buttons()
-{
-	global $infinity_c8c12e68cf;
-
-	$infinity_c8c12e68cf->render_toolbar_buttons();
-}
-
-/**
  * Render control panel tabs list items
  *
  * @package Infinity

@@ -55,14 +55,8 @@
 /**
  * Button Menu
  */
-.juicy-buttonmenu a.ui-button,
-.juicy-buttonmenu a.ui-button.ui-state-hover {
-	top: 0;
-	margin: 2px;
-	min-width: 120px;
-}
-.juicy-buttonmenu .ui-button-text {
-	text-align: left;
+.juicy-buttonmenu li {
+	min-width: 150px;
 }
 
 /**

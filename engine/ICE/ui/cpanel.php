@@ -60,8 +60,7 @@ final class ICE_Ui_Cpanel extends ICE_Base
 	 */
 	public function render_end()
 	{
-		// buttons script
-		$this->render_scripts();
+		// nothing special yet
 	}
 
 	/**
@@ -85,41 +84,6 @@ final class ICE_Ui_Cpanel extends ICE_Base
 	}
 
 	/**
-	 * Render the control panel menu items
-	 *
-	 * @param array $items An array of screen objects to render
-	 */
-	public function render_menu_items( $items = null )
-	{
-		$close = false;
-
-		if ( empty( $items ) ) {
-			$items = $this->policy->registry()->get_roots();
-		} else {
-			$close = true; ?>
-			<ul><?php
-		}
-
-		// sort em
-		$items = ICE_Position::sort_priority( $items );
-
-		foreach( $items as $item ) {
-			$children = $this->policy->registry()->get_children( $item );
-			$children_cnt = count( $children ); ?>
-			<li>
-				<a target="<?php $this->render_button_target( $item ); ?>" id="<?php $this->render_id( 'menu', 'item', $item->property( 'name' ) ) ?>" href="<?php if ( !$children_cnt ) print esc_attr( $item->property( 'url' ) ) ?>" title="<?php print esc_attr( $item->property( 'title' ) ) ?>"><?php print esc_attr( $item->property( 'title' ) ) ?></a>
-				<?php if ( $children_cnt ): ?>
-					<?php $this->render_menu_items( $children ) ?>
-				<?php endif; ?>
-			</li><?php
-		}
-
-		if ( $close ) : ?>
-			</ul>
-		<?php endif;
-	}
-
-	/**
 	 * Render a button target
 	 *
 	 * @param ICE_Component $item
@@ -134,21 +98,6 @@ final class ICE_Ui_Cpanel extends ICE_Base
 			// use that target
 			print esc_attr( $target );
 		}
-	}
-
-	/**
-	 * Render the control panel toolbar buttons
-	 */
-	public function render_toolbar_buttons()
-	{
-		$items = $this->policy->registry()->get_all();
-		$items_sorted = ICE_Position::sort_priority( $items );
-
-		foreach( $items_sorted as $item ): ?>
-			<?php if ( $item->property( 'toolbar' ) ): ?>
-				<a target="<?php $this->render_button_target( $item ); ?>" id="<?php $this->render_id( 'toolbarbutton', $item->property( 'name' ) ) ?>" href="<?php print esc_attr( $item->property( 'url' ) ) ?>" title="<?php print esc_attr( $item->property( 'title' ) ) ?>"><?php print esc_attr( $item->property( 'title' ) ) ?></a>
-			<?php endif;
-		endforeach;
 	}
 
 	/**
@@ -210,45 +159,4 @@ final class ICE_Ui_Cpanel extends ICE_Base
 		}
 	}
 
-	/**
-	 * Print dynamic buttons javascript
-	 */
-	protected function render_scripts()
-	{
-		// get all screens from the registry
-		$items = $this->policy->registry()->get_all();
-
-		// make sure we got some items
-		if ( count( $items ) ) {
-
-			// new script helper
-			$script = new ICE_Script();
-			$script->begin_logic();
-
-			foreach( $items as $item ) {
-				$conf = null;
-				$icons = $item->icon()->config();
-				if ( $icons ) {
-					$conf = sprintf( '{%s}', $icons );
-				}
-				// menu button and maybe toolbar button ?>
-				$('a#<?php $this->render_id( 'menu', 'item', $item->property( 'name' ) ) ?>').button(<?php print $conf ?>);
-				<?php if ( $item->property( 'toolbar' ) ): ?>
-					$('a#<?php $this->render_id( 'toolbarbutton', $item->property( 'name' ) ) ?>').button(<?php print $conf ?>);
-				<?php endif;
-			}
-
-			$logic = $script->end_logic( 'items' );
-			$logic->set_property( 'alias', true );
-			$logic->set_property( 'ready', true );
-
-		} else {
-			return null;
-		}
-
-		// begin rendering ?>
-		<script type="text/javascript">
-			<?php print $script->render(); ?>
-		</script><?php
-	}
 }
