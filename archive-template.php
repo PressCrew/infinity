@@ -10,7 +10,7 @@
  * @package Infinity
  * @subpackage templates
  */
-infinity_get_header(); ?>
+	get_header(); ?>
 
 	<div id="content" role="main" class="<?php do_action( 'content_class' ); ?>">
 
@@ -33,7 +33,7 @@ infinity_get_header(); ?>
 		</header>
 		<!-- show page thumb -->
 		<?php
-		infinity_get_template_part( 'templates/parts/post-meta-top');	
+		get_template_part( 'templates/parts/post-meta-top');	
 		?>				
 		<!-- the post -->
 		<div class="post" id="post-<?php the_ID(); ?>">
@@ -43,10 +43,10 @@ infinity_get_header(); ?>
 			<div class="entry">
 				<?php
 					the_content( __( '<p class="serif">Read the rest of this page &rarr;</p>', infinity_text_domain ) );
-				?>	
+				?>
 				<?php
-					infinity_get_search_form();
-				?>	
+					get_search_form();
+				?>
 			<div id="archives" class="grid_24">						
 				<div id="archives-recent" class="grid_16 alpha">
 								<h4><?php _e('Last 30 Posts', 'infinity_text_domain') ?></h4>
@@ -96,7 +96,7 @@ infinity_get_header(); ?>
 	</div><!-- #content -->
 
 <?php
-infinity_get_sidebar();
-infinity_get_footer();
+get_sidebar();
+get_footer();
 ?>
 

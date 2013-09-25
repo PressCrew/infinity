@@ -24,14 +24,14 @@
 		<footer id="footer" role="contentinfo">
 			<?php
 				do_action( 'open_footer' );
-				infinity_get_template_part( 'templates/parts/footer-widgets' );
+				get_template_part( 'templates/parts/footer-widgets' );
 			?>
 			<div id="powered-by">
 				<div id="footer-info" class="column ten">
 				<?php
 					// Load Footer Menu only if it's enabled
 					if ( current_theme_supports( 'infinity-footer-menu-setup' ) ) :
-						infinity_get_template_part( 'templates/parts/footer-menu', 'footer' );
+						get_template_part( 'templates/parts/footer-menu', 'footer' );
 					endif;
 				?>
 				</div>

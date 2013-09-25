@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-	infinity_get_header();
+	get_header();
 ?>
 
 	<div id="content" role="main" class="<?php do_action( 'content_class' ); ?>">
@@ -26,7 +26,7 @@
 			</h1>
 			</header>
 			<?php
-				infinity_get_template_part( 'templates/loops/loop', 'excerpt' );
+				get_template_part( 'templates/loops/loop', 'excerpt' );
 			?>
 		</div>
 		<?php
@@ -35,6 +35,6 @@
 		?>
 	</div>
 <?php
-	infinity_get_sidebar();
-	infinity_get_footer();
+	get_sidebar();
+	get_footer();
 ?>

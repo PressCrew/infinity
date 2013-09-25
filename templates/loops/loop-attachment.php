@@ -30,7 +30,7 @@
 					do_action( 'open_loop_single' );
 					?>
 					<?php
-						infinity_get_template_part( 'templates/parts/post-meta-top');	
+						get_template_part( 'templates/parts/post-meta-top');	
 					?>
 					<?php
 						do_action( 'before_single_entry' )
@@ -84,7 +84,7 @@
 								'before' => __( '<p><strong>Pages:</strong> ', infinity_text_domain ),
 								'after' => '</p>', 'next_or_number' => 'number')
 							);
-							infinity_get_template_part( 'templates/parts/author-box');	
+							get_template_part( 'templates/parts/author-box');	
 						?>
 					</div>
 				</div>

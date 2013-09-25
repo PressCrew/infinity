@@ -18,7 +18,7 @@
 <!--[if IE 9 ]>        <html <?php language_attributes(); ?> class="no-js ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html <?php language_attributes(); ?> class="no-js"> <!--<![endif]-->
 <?php
-	infinity_get_template_part( 'templates/parts/header-head');	
+	get_template_part( 'templates/parts/header-head');	
 ?>
 <body <?php body_class() ?> id="infinity-base">
 <?php
@@ -31,7 +31,7 @@
 	?>
 
 	<?php // the header-banner template contains all the markup for the header(logo) and menus. You can easily fork/modify this in your child theme without having to overwrite the entire header.php file.
-		infinity_get_template_part( 'templates/parts/header-banner');
+		get_template_part( 'templates/parts/header-banner');
 	?>
 	<?php
 			do_action( 'open_container' );

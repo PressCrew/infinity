@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-	infinity_get_header();
+	get_header();
 ?>
 	<div id="content" role="main" class="<?php do_action( 'content_class' ); ?>">
 			<?php
@@ -19,7 +19,7 @@
 			do_action( 'open_home' );
 		?>
 			<?php
-				infinity_get_template_part( 'templates/loops/loop', 'index' );
+				get_template_part( 'templates/loops/loop', 'index' );
 			?>
 		<?php
 			do_action( 'close_home' );
@@ -27,6 +27,6 @@
 		?>
 	</div>
 <?php
-	infinity_get_sidebar();
-	infinity_get_footer();
+	get_sidebar();
+	get_footer();
 ?>

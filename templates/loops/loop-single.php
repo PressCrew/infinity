@@ -22,7 +22,7 @@
 			<div <?php post_class(); ?> id="post-<?php the_ID(); ?>">
 				<div class="post-content">
 					<?php
-						infinity_get_template_part( 'templates/parts/post-avatar');	
+						get_template_part( 'templates/parts/post-avatar');	
 					?>			
 					<h1 class="post-title">
 						<?php the_title(); ?>
@@ -33,10 +33,10 @@
 					?>			
 					<!-- show the post thumb? -->
 					<?php
-					infinity_get_template_part( 'templates/parts/post-thumbnail');	
+					get_template_part( 'templates/parts/post-thumbnail');	
 					?>	
 					<?php
-					infinity_get_template_part( 'templates/parts/post-meta-top');	
+					get_template_part( 'templates/parts/post-meta-top');	
 					?>							
 					<?php
 						do_action( 'before_single_entry' )
@@ -59,8 +59,8 @@
 						do_action('after_single_entry');
 					?>
 					<?php
-						infinity_get_template_part('templates/parts/post-meta-bottom'); 
-						infinity_get_template_part( 'templates/parts/author-box');	
+						get_template_part('templates/parts/post-meta-bottom'); 
+						get_template_part( 'templates/parts/author-box');	
 					?>
 				</div>
 				<?php

@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-	infinity_get_header();
+	get_header();
 ?>
 	<div id="content" role="main" class="<?php do_action( 'content_class' ); ?>">
 		<?php
@@ -30,7 +30,7 @@
 						?>
 					</p>
 					<?php
-						infinity_get_search_form();
+						get_search_form();
 					?>
 					
 					<div id="search-recent-posts" class="eight columns">
@@ -63,12 +63,12 @@
 		?>
 	</div>
 	<?php
-		infinity_get_sidebar();
+		get_sidebar();
 	?>
 	<script type="text/javascript">
 		// focus on search field after it has loaded
 		document.getElementById('s') && document.getElementById('s').focus();
 	</script>
 <?php
-	infinity_get_footer();
+	get_footer();
 ?>

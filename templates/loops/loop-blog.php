@@ -34,7 +34,7 @@ while ($wp_query->have_posts()) : $wp_query->the_post();
 					do_action( 'open_loop_post_content' );
 				?>
 				<?php
-				infinity_get_template_part( 'templates/parts/post-meta-top');	
+				get_template_part( 'templates/parts/post-meta-top');	
 				?>				
 				<?php
 				do_action( 'before_post_thumb' );
@@ -42,7 +42,7 @@ while ($wp_query->have_posts()) : $wp_query->the_post();
 				<!-- show the avatar? -->
 				<div class="entry">
 				<?php
-				infinity_get_template_part( 'templates/parts/post-thumbnail');	
+				get_template_part( 'templates/parts/post-thumbnail');	
 				?>	
 					<div class="post-author-box">
 						<?php
@@ -56,7 +56,7 @@ while ($wp_query->have_posts()) : $wp_query->the_post();
 					?>
 				</div>
 				<?php
-					infinity_get_template_part( 'templates/parts/post-meta-bottom');	
+					get_template_part( 'templates/parts/post-meta-bottom');	
 				?>
 				<?php
 					do_action( 'close_loop_post_content' );

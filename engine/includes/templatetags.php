@@ -56,7 +56,7 @@ function infinity_base_author_box()
 
 			// if a user has filled out their description, show a bio on their entries.
 			if ( get_the_author_meta( 'description' ) ):
-				infinity_get_template_part( 'templates/parts/author-box' );
+				get_template_part( 'templates/parts/author-box' );
 			endif;
 
 			// reset the loop so we don't break later queries

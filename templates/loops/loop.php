@@ -34,7 +34,7 @@
 					do_action( 'open_loop_post_content' );
 				?>
 				<?php
-				infinity_get_template_part( 'templates/parts/post-meta-top');	
+				get_template_part( 'templates/parts/post-meta-top');	
 				?>				
 				<?php
 				do_action( 'before_post_thumb' );
@@ -42,7 +42,7 @@
 				<!-- show the avatar? -->
 				<div class="entry">
 				<?php
-					infinity_get_template_part( 'templates/parts/post-thumbnail');	
+					get_template_part( 'templates/parts/post-thumbnail');	
 				?>	
 					<?php
 						do_action( 'before_loop_content' );
@@ -58,7 +58,7 @@
 					do_action( 'close_loop_post_content' );
 				?>
 				<?php
-					infinity_get_template_part( 'templates/parts/post-meta-bottom');	
+					get_template_part( 'templates/parts/post-meta-bottom');	
 				?>
 			<?php
 				do_action( 'close_loop_post' );
@@ -75,7 +75,7 @@
 			<?php _e( 'Not Found', infinity_text_domain ) ?>
 		</h2>
 <?php
-		infinity_get_search_form();
+		get_search_form();
 		do_action( 'loop_not_found' );
 	endif;
 ?>

@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-	infinity_get_header();
+	get_header();
 ?>	
 	<div id="content" role="main" class="<?php do_action( 'content_class' ); ?>">
 	<?php
@@ -26,7 +26,7 @@
 				</h1>
 			</header>
 			<?php
-				infinity_get_template_part( 'templates/loops/loop', 'search' );
+				get_template_part( 'templates/loops/loop', 'search' );
 			else: ?>
 			<div id="post-0" class="post no-results not-found">
 				<h2 class="entry-title">
@@ -41,7 +41,7 @@
 						?>
 					</p>
 					<?php
-						infinity_get_search_form();
+						get_search_form();
 					?>
 				</div>
 			</div>
@@ -52,6 +52,6 @@
 	?>
 	</div>
 <?php
-	infinity_get_sidebar();
-	infinity_get_footer();
+	get_sidebar();
+	get_footer();
 ?>

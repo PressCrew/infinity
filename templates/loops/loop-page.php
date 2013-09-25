@@ -32,7 +32,7 @@
 		?>
 		<!-- show page thumb -->
 		<?php
-		infinity_get_template_part( 'templates/parts/post-thumbnail');	
+		get_template_part( 'templates/parts/post-thumbnail');	
 		?>	
 			<div class="entry">
 				<?php
