@@ -1356,7 +1356,8 @@ You can disable the css in this file by adding the following code to your child 
 infinity-design-style = off
 --------------------------------------------------------------*/
 body.infinity-design {
-	background: url("../images/design/bg.png") repeat #FFF;
+	background-image: url("../images/design/bg.png");
+	background-repeat: repeat;
 }
 .infinity-design h2.page-title a,
 .infinity-design h2.post-title a,

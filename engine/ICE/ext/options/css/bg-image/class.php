@@ -56,7 +56,7 @@ class ICE_Ext_Option_Css_Bg_Image
 
 		// is value a literal zero?
 		if ( is_numeric( $value ) && 0 === (integer) $value ) {
-			$rule = $this->style()->rule( 'bg', $this->format_style_selector() );
+			$rule = $this->style()->rule( 'bg', $this->property( 'style_selector' ) );
 			$rule->add_declaration( 'background-image', 'none' );
 		}
 	}
