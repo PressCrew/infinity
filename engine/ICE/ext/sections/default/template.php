@@ -15,7 +15,7 @@
 ?>
 <div <?php $this->render_attrs() ?>>
 	<div class="ui-widget-header ui-state-active ice-title <?php $this->render_class_title() ?>">
-		<?php $this->render_title(); ?> <?php _e( 'Options', infinity_text_domain ); ?>
+		<?php $this->render_title(); ?> <?php _e( 'Options', 'infinity' ); ?>
 	</div>
 	<div class="ui-widget-content ice-content <?php $this->render_class_content() ?>">
 		<?php $this->component()->render_components() ?>

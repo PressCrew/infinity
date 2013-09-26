@@ -22,7 +22,7 @@
 	<?php if ( has_tag() ) {?>
 		<span class="post-tags">
 			<?php
-				the_tags( __( 'Tags: ', infinity_text_domain ), ' ', '');
+				the_tags( __( 'Tags: ', 'infinity' ), ' ', '');
 			?>
 		</span>
 	<?php } ?>	

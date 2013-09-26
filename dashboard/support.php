@@ -66,9 +66,9 @@ function infinity_dashboard_support_info()
 
 	// show some useful infinity info
 	if ( INFINITY_DEV_MODE ) {
-		$is_developer_mode = __( 'Enabled', infinity_text_domain );
+		$is_developer_mode = __( 'Enabled', 'infinity' );
 	} else {
-		$is_developer_mode = __( 'Disabled', infinity_text_domain );
+		$is_developer_mode = __( 'Disabled', 'infinity' );
 	}
 
 	// get theme info
@@ -88,53 +88,53 @@ function infinity_dashboard_support_info()
 	natcasesort( $active_plugins );
 
 	if ( !$active_plugins ) {
-		$active_plugins[] = __( 'No other plugins are active', infinity_text_domain );
+		$active_plugins[] = __( 'No other plugins are active', 'infinity' );
 	}
 
 	// multisite info
 	if ( defined( 'MULTISITE' ) && MULTISITE == true ) {
 		if ( defined( 'SUBDOMAIN_INSTALL' ) && SUBDOMAIN_INSTALL == true ) {
-			$is_multisite = __( 'subdomain', infinity_text_domain );
+			$is_multisite = __( 'subdomain', 'infinity' );
 		} else {
-			$is_multisite = __( 'subdirectory', infinity_text_domain );
+			$is_multisite = __( 'subdirectory', 'infinity' );
 		}
 	} else {
-		$is_multisite = __( 'no', infinity_text_domain );
+		$is_multisite = __( 'no', 'infinity' );
 	}
 
    // what permalinks are being used?
 	if ( empty( $wp_rewrite->permalink_structure ) ) {
-		$custom_permalinks = __( 'default', infinity_text_domain );
+		$custom_permalinks = __( 'default', 'infinity' );
 	} else {
 		if ( strpos( $wp_rewrite->permalink_structure, 'index.php' ) ) {
-			$custom_permalinks = __( 'almost', infinity_text_domain );
+			$custom_permalinks = __( 'almost', 'infinity' );
 		} else {
-			$custom_permalinks = __( 'custom', infinity_text_domain );
+			$custom_permalinks = __( 'custom', 'infinity' );
 		}
 	}
 ?>
-	<h3><?php _e( 'Installation Details', infinity_text_domain ) ?></h3>
-	<p><?php _e( "If you are having issues with the theme and need support, below is some useful info about your installation.", infinity_text_domain ) ?></p>
-	<p><?php _e( "Please submit this information with your support request so it's easier for us to help you!", infinity_text_domain ) ?></p>
+	<h3><?php _e( 'Installation Details', 'infinity' ) ?></h3>
+	<p><?php _e( "If you are having issues with the theme and need support, below is some useful info about your installation.", 'infinity' ) ?></p>
+	<p><?php _e( "Please submit this information with your support request so it's easier for us to help you!", 'infinity' ) ?></p>
 
-	<h4><?php _e( 'Versions', infinity_text_domain ) ?></h4>
+	<h4><?php _e( 'Versions', 'infinity' ) ?></h4>
 	<ul>
-		<li><?php printf( __( 'Infinity Version: %s', infinity_text_domain ), INFINITY_VERSION ) ?></li>
-		<li><?php printf( __( 'Developer Mode: %s', infinity_text_domain ), $is_developer_mode ) ?></li>
-		<li><?php printf( __( 'BuddyPress: %s', infinity_text_domain ), BP_VERSION ) ?></li>
-		<li><?php printf( __( 'MySQL: %s', infinity_text_domain ), $wpdb->db_version() ) ?></li>
-		<li><?php printf( __( 'Permalinks: %s', infinity_text_domain ), $custom_permalinks ) ?></li>
-		<li><?php printf( __( 'PHP: %s', infinity_text_domain ), phpversion() ) ?></li>
-		<li><?php printf( __( 'WordPress: %s', infinity_text_domain ), $wp_version ) ?></li>
-		<li><?php printf( __( 'WordPress multisite: %s', infinity_text_domain ), $is_multisite ) ?></li>
+		<li><?php printf( __( 'Infinity Version: %s', 'infinity' ), INFINITY_VERSION ) ?></li>
+		<li><?php printf( __( 'Developer Mode: %s', 'infinity' ), $is_developer_mode ) ?></li>
+		<li><?php printf( __( 'BuddyPress: %s', 'infinity' ), BP_VERSION ) ?></li>
+		<li><?php printf( __( 'MySQL: %s', 'infinity' ), $wpdb->db_version() ) ?></li>
+		<li><?php printf( __( 'Permalinks: %s', 'infinity' ), $custom_permalinks ) ?></li>
+		<li><?php printf( __( 'PHP: %s', 'infinity' ), phpversion() ) ?></li>
+		<li><?php printf( __( 'WordPress: %s', 'infinity' ), $wp_version ) ?></li>
+		<li><?php printf( __( 'WordPress multisite: %s', 'infinity' ), $is_multisite ) ?></li>
 	</ul>
 
-	<h4><?php _e( 'Theme', infinity_text_domain ) ?></h4>
+	<h4><?php _e( 'Theme', 'infinity' ) ?></h4>
 	<ul>
-		<li><?php printf( __( 'Current theme: %s version %s', infinity_text_domain ), $theme->Name, $theme->Version ) ?></li>
+		<li><?php printf( __( 'Current theme: %s version %s', 'infinity' ), $theme->Name, $theme->Version ) ?></li>
 	</ul>
 
-	<h4><?php _e( 'Active Plugins', infinity_text_domain ) ?></h4>
+	<h4><?php _e( 'Active Plugins', 'infinity' ) ?></h4>
 	<ul>
 		<?php foreach ( $active_plugins as $plugin ) : ?>
 			<li><?php echo $plugin ?></li>

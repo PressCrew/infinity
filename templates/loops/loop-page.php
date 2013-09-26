@@ -36,11 +36,11 @@
 		?>	
 			<div class="entry">
 				<?php
-					the_content( __( '<p class="serif">Read the rest of this page &rarr;</p>', infinity_text_domain ) );
+					the_content( __( '<p class="serif">Read the rest of this page &rarr;</p>', 'infinity' ) );
 				?>
 			<div style="clear: both;"></div>
 				<?php
-				wp_link_pages( array( 'before' => __( '<p><strong>Pages:</strong> ', infinity_text_domain ), 'after' => '</p>', 'next_or_number' => 'number'));
+				wp_link_pages( array( 'before' => __( '<p><strong>Pages:</strong> ', 'infinity' ), 'after' => '</p>', 'next_or_number' => 'number'));
 				edit_post_link( null, '<p>', '</p>');
 				?>
 			</div>

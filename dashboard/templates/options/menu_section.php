@@ -14,7 +14,7 @@
 <div id="menu___<?php print esc_attr( $section->property( 'name' ) ) ?>">
 	<a><?php print esc_html( $section->property( 'title' ) ) ?></a>
 	<?php if ( empty( $children ) ): ?>
-		<a id="section___<?php print esc_attr( $section->property( 'name' ) ) ?>" class="infinity-cpanel-options-menu-show infinity-cpanel-options-menu-showall" href="#"><?php _e('Show All', infinity_text_domain) ?></a>
+		<a id="section___<?php print esc_attr( $section->property( 'name' ) ) ?>" class="infinity-cpanel-options-menu-show infinity-cpanel-options-menu-showall" href="#"><?php _e('Show All', 'infinity') ?></a>
 	<?php endif; ?>
 </div>
 

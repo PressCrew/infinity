@@ -52,8 +52,8 @@ class ICE_Ext_Feature_Bp_Fb_Autoconnect
 		parent::init();
 
 		// init properties
-		$this->title = __( 'FaceBook Auto Connect', infinity_text_domain );
-		$this->description = __( 'Enables FaceBook Auto Connect support', infinity_text_domain );
+		$this->title = __( 'FaceBook Auto Connect', 'infinity' );
+		$this->description = __( 'Enables FaceBook Auto Connect support', 'infinity' );
 		
 		// add actions on which to render
 		add_action( 'bp_before_account_details_fields', array($this,'render') );

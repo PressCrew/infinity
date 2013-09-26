@@ -19,5 +19,5 @@
 		<?php echo $content ?>
 	</div>
 <?php elseif ( $message ): ?>
-	<div class="alertbox white"><?php _e( 'Sorry, only registered users can see this text.', infinity_text_domain ) ?></div>
+	<div class="alertbox white"><?php _e( 'Sorry, only registered users can see this text.', 'infinity' ) ?></div>
 <?php endif ?>

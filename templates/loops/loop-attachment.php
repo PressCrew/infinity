@@ -23,7 +23,7 @@
 				<div class="post-content">
 					<header>
 					<h1 class="post-title">
-						<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', infinity_text_domain ) ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a>
+						<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', 'infinity' ) ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a>
 					</h1>
 					</header>
 					<?php
@@ -56,10 +56,10 @@
 									<?php
 									if ( wp_attachment_is_image() ) :
 										$metadata = wp_get_attachment_metadata();
-										printf( __( 'Full size is %s pixels', infinity_text_domain ),
+										printf( __( 'Full size is %s pixels', 'infinity' ),
 											sprintf( '<a href="%1$s" title="%2$s">%3$s &times; %4$s</a>',
 												wp_get_attachment_url(),
-												esc_attr( __( 'Link to full size image', infinity_text_domain ) ),
+												esc_attr( __( 'Link to full size image', 'infinity' ) ),
 												$metadata['width'],
 												$metadata['height']
 											)
@@ -69,7 +69,7 @@
 							</span>
 							<span class="post-comments">
 							<?php 
-								comments_popup_link(__('No Comments', infinity_text_domain), __('1 Comment', infinity_text_domain), __('% Comments', infinity_text_domain)); 
+								comments_popup_link(__('No Comments', 'infinity'), __('1 Comment', 'infinity'), __('% Comments', 'infinity')); 
 							?>				
 							</span>
 							<?php
@@ -81,7 +81,7 @@
 						?>
 						<?php
 							wp_link_pages( array(
-								'before' => __( '<p><strong>Pages:</strong> ', infinity_text_domain ),
+								'before' => __( '<p><strong>Pages:</strong> ', 'infinity' ),
 								'after' => '</p>', 'next_or_number' => 'number')
 							);
 							get_template_part( 'templates/parts/author-box');	
@@ -98,7 +98,7 @@
 		endwhile;
 	else: ?>
 		<h1>
-			<?php _e( 'Sorry, no posts matched your criteria.', infinity_text_domain ) ?>
+			<?php _e( 'Sorry, no posts matched your criteria.', 'infinity' ) ?>
 		</h1>
 <?php
 		do_action( 'loop_not_found' );

@@ -30,8 +30,8 @@ class ICE_Ext_Option_Css_Bg_Image
 		parent::init();
 
 		// init directives
-		$this->title = __( 'Background Image', infinity_text_domain );
-		$this->description = __( 'Upload an image to use as the background', infinity_text_domain );
+		$this->title = __( 'Background Image', 'infinity' );
+		$this->description = __( 'Upload an image to use as the background', 'infinity' );
 		$this->style_property = 'background-image';
 	}
 

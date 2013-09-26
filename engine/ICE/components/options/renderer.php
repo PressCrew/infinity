@@ -148,7 +148,7 @@ abstract class ICE_Option_Renderer extends ICE_Renderer
 	{
 		// begin rendering ?>
 		<a class="<?php $this->merge_classes('ice-options-save', 'ice-options-save-all', $class) ?>" href="#">
-			<?php _e( 'Save All', infinity_text_domain ); ?>
+			<?php _e( 'Save All', 'infinity' ); ?>
 		</a><?php
 	}
 	
@@ -161,7 +161,7 @@ abstract class ICE_Option_Renderer extends ICE_Renderer
 	{
 		// begin rendering ?>
 		<a class="<?php $this->merge_classes('ice-options-save', 'ice-options-save-one', $class) ?>" href="#<?php $this->render_name() ?>">
-			<?php _e( 'Save', infinity_text_domain ); ?>
+			<?php _e( 'Save', 'infinity' ); ?>
 		</a><?php
 	}
 
@@ -174,7 +174,7 @@ abstract class ICE_Option_Renderer extends ICE_Renderer
 	{
 		// begin rendering ?>
 		<a class="<?php $this->merge_classes('ice-options-save', 'ice-options-reset-one', $class) ?>" href="#<?php $this->render_name() ?>">
-			<?php _e( 'Reset', infinity_text_domain ); ?>
+			<?php _e( 'Reset', 'infinity' ); ?>
 		</a><?php
 	}
 

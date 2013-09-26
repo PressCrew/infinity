@@ -27,7 +27,7 @@ while ($wp_query->have_posts()) : $wp_query->the_post();
 			<div class="post-content">
 				<!-- post title -->
 				<h2 class="post-title">
-					<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', infinity_text_domain ) ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a>
+					<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', 'infinity' ) ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a>
 					<?php edit_post_link();?>
 				</h2>
 				<?php
@@ -51,7 +51,7 @@ while ($wp_query->have_posts()) : $wp_query->the_post();
 					</div>
 					<?php
 						do_action( 'before_loop_content' );
-						the_excerpt( __( 'Read More', infinity_text_domain ) );
+						the_excerpt( __( 'Read More', 'infinity' ) );
 						do_action( 'after_loop_content' );
 					?>
 				</div>

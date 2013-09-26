@@ -68,7 +68,7 @@ function infinity_dashboard_menu_setup()
 	$theme_name = wp_get_theme()->Name;
 
 	// format page title
-	$page_title = sprintf( __( '%s Options', infinity_text_domain ), $theme_name );
+	$page_title = sprintf( __( '%s Options', 'infinity' ), $theme_name );
 
 	// add appearance submenu item
 	add_theme_page(

@@ -28,8 +28,8 @@ class ICE_Ext_Option_Position_Left_Right
 	public function load_field_options()
 	{
 		return array(
-			'l' => __( 'Left', infinity_text_domain ),
-			'r' => __( 'Right', infinity_text_domain )
+			'l' => __( 'Left', 'infinity' ),
+			'r' => __( 'Right', 'infinity' )
 		);
 	}
 }

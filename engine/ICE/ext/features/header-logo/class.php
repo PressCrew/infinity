@@ -32,8 +32,8 @@ class ICE_Ext_Feature_Header_Logo
 		parent::init();
 
 		// init directives
-		$this->title = __( 'Header Logo', infinity_text_domain );
-		$this->description = __( 'Custom header logo support', infinity_text_domain );
+		$this->title = __( 'Header Logo', 'infinity' );
+		$this->description = __( 'Custom header logo support', 'infinity' );
 	}
 
 	/**

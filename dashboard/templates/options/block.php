@@ -22,12 +22,12 @@ $this->render_begin( 'infinity-cpanel-options-single' );
 	?>
 </div>
 <ul>
-	<li><a href="#<?php $this->render_name() ?>-tabs-1"><?php _e('Edit Setting', infinity_text_domain) ?></a></li>
+	<li><a href="#<?php $this->render_name() ?>-tabs-1"><?php _e('Edit Setting', 'infinity') ?></a></li>
 	<?php if ( $this->has_documentation() ): ?>
-	<li><a href="#<?php $this->render_name() ?>-tabs-2"><?php _e('Documentation', infinity_text_domain) ?></a></li>
+	<li><a href="#<?php $this->render_name() ?>-tabs-2"><?php _e('Documentation', 'infinity') ?></a></li>
 	<?php endif; ?>
 	<?php if ( true == INFINITY_DEV_MODE ): ?>
-		<li><a href="#<?php $this->render_name() ?>-tabs-3"><?php _e('Sample Code', infinity_text_domain) ?></a></li>
+		<li><a href="#<?php $this->render_name() ?>-tabs-3"><?php _e('Sample Code', 'infinity') ?></a></li>
 	<?php endif; ?>
 </ul>
 <div id="<?php $this->render_name() ?>-tabs-1">

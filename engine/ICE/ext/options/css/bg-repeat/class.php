@@ -30,8 +30,8 @@ class ICE_Ext_Option_Css_Bg_Repeat
 		parent::init();
 
 		// init directives
-		$this->title = __( 'Background Image Tiling', infinity_text_domain );
-		$this->description = __( 'Set the tiling mode of the background image', infinity_text_domain );
+		$this->title = __( 'Background Image Tiling', 'infinity' );
+		$this->description = __( 'Set the tiling mode of the background image', 'infinity' );
 		$this->style_property = 'background-repeat';
 		$this->default_value = 'repeat';
 	}

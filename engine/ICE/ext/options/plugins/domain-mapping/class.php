@@ -33,8 +33,8 @@ class ICE_Ext_Option_Plugins_Domain_Mapping
 			parent::init();
 
 			// init directives
-			$this->title = __( 'Custom Domain', infinity_text_domain );
-			$this->description = __( 'Enter the custom domain name you wish to map to your site.', infinity_text_domain );
+			$this->title = __( 'Custom Domain', 'infinity' );
+			$this->description = __( 'Enter the custom domain name you wish to map to your site.', 'infinity' );
 			
 		} else {
 			// not active

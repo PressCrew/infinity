@@ -115,16 +115,16 @@ add_action( 'comment_form_before', 'infinity_enqueue_comments_reply' );
 function infinity_base_register_menus()
 {
 	if ( current_theme_supports( 'infinity-top-menu-setup' ) ) {
-		register_nav_menu( 'over-menu', __( 'Above Header', infinity_text_domain ) );
+		register_nav_menu( 'over-menu', __( 'Above Header', 'infinity' ) );
 	}
 	if ( current_theme_supports( 'infinity-main-menu-setup' ) ) {
-		register_nav_menu( 'main-menu', __( 'Inside Header', infinity_text_domain ) );
+		register_nav_menu( 'main-menu', __( 'Inside Header', 'infinity' ) );
 	}
 	if ( current_theme_supports( 'infinity-sub-menu-setup' ) ) {
-		register_nav_menu( 'sub-menu', __( 'Below Header', infinity_text_domain ) );
+		register_nav_menu( 'sub-menu', __( 'Below Header', 'infinity' ) );
 	}
 	if ( current_theme_supports( 'infinity-footer-menu-setup' ) ) {
-		register_nav_menu( 'footer-menu', __( 'Inside Footer', infinity_text_domain ) );
+		register_nav_menu( 'footer-menu', __( 'Inside Footer', 'infinity' ) );
 	}
 }
 add_action( 'after_setup_theme', 'infinity_base_register_menus' );

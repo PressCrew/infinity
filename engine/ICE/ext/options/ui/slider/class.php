@@ -213,7 +213,7 @@ class ICE_Ext_Option_Ui_Slider
 		// return vars
 		return array(
 			'options' => $logic->export_variables(true),
-			'label' => ( $this->label ) ? $this->label : __( 'Current selection:', infinity_text_domain )
+			'label' => ( $this->label ) ? $this->label : __( 'Current selection:', 'infinity' )
 		);
 	}
 }

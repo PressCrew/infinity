@@ -42,14 +42,14 @@
 			?>
 			<div class="entry">
 				<?php
-					the_content( __( '<p class="serif">Read the rest of this page &rarr;</p>', infinity_text_domain ) );
+					the_content( __( '<p class="serif">Read the rest of this page &rarr;</p>', 'infinity' ) );
 				?>
 				<?php
 					get_search_form();
 				?>
 			<div id="archives" class="grid_24">						
 				<div id="archives-recent" class="grid_16 alpha">
-								<h4><?php _e('Last 30 Posts', 'infinity_text_domain') ?></h4>
+								<h4><?php _e('Last 30 Posts', 'infinity') ?></h4>
 													
 								<ul>
 									<?php $archive_30 = get_posts('numberposts=10');
@@ -60,7 +60,7 @@
 				</div>
 				<div id="archives-month" class="grid_8 omega">				
 								
-								<h4><?php _e('Archives by Month:', 'infinity_text_domain') ?></h4>
+								<h4><?php _e('Archives by Month:', 'infinity') ?></h4>
 								
 								<ul>
 									<?php wp_get_archives('type=monthly'); ?>
@@ -70,7 +70,7 @@
 			</div>	
 			<div id="archives-subject" class="grid_24">
 				
-							<h4><?php _e('Archives by Subject:', 'infinity_text_domain') ?></h4>
+							<h4><?php _e('Archives by Subject:', 'infinity') ?></h4>
 							
 							<ul>
 						 		<?php wp_list_categories( 'title_li=' ); ?>

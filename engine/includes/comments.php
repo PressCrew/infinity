@@ -34,14 +34,14 @@ if ( !function_exists( 'custom_comment' ) ) {
 				<?php endif; ?>
 				<div class="comment-head">
 					<span class="name"><?php the_commenter_link() ?></span>
-					<span class="date"><?php echo get_comment_date(get_option( 'date_format' )) ?> <?php _e('at', infinity_text_domain); ?> <?php echo get_comment_time(get_option( 'time_format' )); ?></span>
-					<span class="perma"><a href="<?php echo get_comment_link(); ?>" title="<?php _e('Direct link to this comment', infinity_text_domain); ?>">#</a></span>
-					<span class="edit"><?php edit_comment_link(__('Edit', infinity_text_domain), '', ''); ?></span>
+					<span class="date"><?php echo get_comment_date(get_option( 'date_format' )) ?> <?php _e('at', 'infinity'); ?> <?php echo get_comment_time(get_option( 'time_format' )); ?></span>
+					<span class="perma"><a href="<?php echo get_comment_link(); ?>" title="<?php _e('Direct link to this comment', 'infinity'); ?>">#</a></span>
+					<span class="edit"><?php edit_comment_link(__('Edit', 'infinity'), '', ''); ?></span>
 				</div><!-- /.comment-head -->
 				<div class="comment-entry"  id="comment-<?php comment_ID(); ?>">
 					<?php comment_text() ?>
 					<?php if ($comment->comment_approved == '0'): ?>
-						<p class='unapproved'><?php _e('Your comment is awaiting moderation.', infinity_text_domain); ?></p>
+						<p class='unapproved'><?php _e('Your comment is awaiting moderation.', 'infinity'); ?></p>
 					<?php endif; ?>
 					<div class="reply">
 						<?php comment_reply_link(array_merge( $args, array('depth' => $depth, 'max_depth' => $args['max_depth']))) ?>

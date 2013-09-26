@@ -30,8 +30,8 @@ class ICE_Ext_Option_Css_Bg_Color
 		parent::init();
 
 		// init directives
-		$this->title = __( 'Background Color', infinity_text_domain );
-		$this->description = __( 'Choose a background color', infinity_text_domain );
+		$this->title = __( 'Background Color', 'infinity' );
+		$this->description = __( 'Choose a background color', 'infinity' );
 		$this->style_property = 'background-color';
 	}
 }

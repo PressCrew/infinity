@@ -20,13 +20,13 @@
 		<article id="post-0" class="post error404 not-found">
 			<header>
 			<h1 class="entry-title">
-				<?php _e( 'Darn it.. Nothing found', infinity_text_domain ); ?>
+				<?php _e( 'Darn it.. Nothing found', 'infinity' ); ?>
 			</h1>
 			</header>
 			<div class="entry-content">
 				<p>
 						<?php
-							_e( 'Sorry, but nothing matched your search criteria. Please try again with some different keywords.', infinity_text_domain );
+							_e( 'Sorry, but nothing matched your search criteria. Please try again with some different keywords.', 'infinity' );
 						?>
 					</p>
 					<?php
@@ -42,7 +42,7 @@
 					<div id="search-categories-widget" class="eight columns">
 
 						<h2 class="widgettitle">
-						<?php _e( 'Most Used Categories', infinity_text_domain ); ?>
+						<?php _e( 'Most Used Categories', 'infinity' ); ?>
 						</h2>
 						<ul>
 						<?php wp_list_categories( array( 'orderby' => 'count', 'order' => 'DESC', 'show_count' => 1, 'title_li' => '', 'number' => 10 ) ); ?>
@@ -51,7 +51,7 @@
 					<div style="clear: both;"></div>
 					<?php
 					/* translators: %1$s: smilie */
-					$archive_content = '<p>' . sprintf( __( 'Try looking in the monthly archives. %1$s', infinity_text_domain ), convert_smilies( ':)' ) ) . '</p>';
+					$archive_content = '<p>' . sprintf( __( 'Try looking in the monthly archives. %1$s', 'infinity' ), convert_smilies( ':)' ) ) . '</p>';
 					the_widget( 'WP_Widget_Archives', array('count' => 0 , 'dropdown' => 1 ), array( 'after_title' => '</h2>'.$archive_content ) );
 					?>
 

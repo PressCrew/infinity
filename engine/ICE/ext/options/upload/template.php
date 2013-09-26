@@ -22,19 +22,19 @@
 <div id="<?php $this->render_id('main') ?>" class="ui-widget <?php $this->render_class( 'widget' ) ?>">
 	<fieldset class="ui-widget-content ui-corner-all">
 		<legend class="ui-widget-header ui-corner-all">
-			<?php _e('Current Image', infinity_text_domain) ?>
+			<?php _e('Current Image', 'infinity') ?>
 		</legend>
 		<p class="ice-content">
 			<img src="<?php print esc_attr( $attach_url ) ?>" alt="" />
 		</p>
 		<div class="ice-controls">
-			<a><?php _e('Upload', infinity_text_domain) ?></a>
-			<a><?php _e('Select', infinity_text_domain) ?></a>
-			<a><?php _e('Zoom', infinity_text_domain) ?></a>
-			<a><?php _e('Trash', infinity_text_domain) ?></a>
+			<a><?php _e('Upload', 'infinity') ?></a>
+			<a><?php _e('Select', 'infinity') ?></a>
+			<a><?php _e('Zoom', 'infinity') ?></a>
+			<a><?php _e('Trash', 'infinity') ?></a>
 			<div class="ice-do-disable">
 				<input type="checkbox">
-				<?php _e( 'Disable image, including default', infinity_text_domain ) ?>
+				<?php _e( 'Disable image, including default', 'infinity' ) ?>
 			</div>
 		</div>
 		
@@ -59,11 +59,11 @@ jQuery(document).ready( function($){
 				url: '<?php echo ICE_IMAGES_URL . '/square_x.png' ?>'
 			},
 			muOptions: {
-				title: '<?php _e( 'Media Uploader', infinity_text_domain ) ?>',
+				title: '<?php _e( 'Media Uploader', 'infinity' ) ?>',
 				dialogClass: '<?php $this->render_class('dialog') ?>'
 			},
 			zoomOptions: {
-				title: '<?php _e( 'Zoom!', infinity_text_domain ) ?>'
+				title: '<?php _e( 'Zoom!', 'infinity' ) ?>'
 			}
 		});
 

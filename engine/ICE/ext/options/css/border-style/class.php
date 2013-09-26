@@ -30,8 +30,8 @@ class ICE_Ext_Option_Css_Border_Style
 		parent::init();
 
 		// init directives
-		$this->title = __( 'Border Style', infinity_text_domain );
-		$this->description = __( 'Choose a style for the border', infinity_text_domain );
+		$this->title = __( 'Border Style', 'infinity' );
+		$this->description = __( 'Choose a style for the border', 'infinity' );
 		$this->style_property = 'border-style';
 	}
 }

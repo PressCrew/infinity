@@ -38,8 +38,8 @@ class ICE_Ext_Option_Css_Overlay_Opacity
 		parent::init();
 
 		// init directives
-		$this->title = __( 'Overlay Opacity', infinity_text_domain );
-		$this->description = __( 'Select the overlay opacity by moving the slider', infinity_text_domain );
+		$this->title = __( 'Overlay Opacity', 'infinity' );
+		$this->description = __( 'Select the overlay opacity by moving the slider', 'infinity' );
 		$this->default_value = 0.2;
 		$this->min = 0;
 		$this->max = 1;

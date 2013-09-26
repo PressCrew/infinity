@@ -60,7 +60,7 @@ class ICE_Ext_Feature_Bp_Support
 				!is_dir( get_stylesheet_directory() . '/members' )
 			) {
 				bp_core_add_admin_notice(
-					__( "You have BuddyPress activated, but the templates are missing from your theme!", infinity_text_domain )
+					__( "You have BuddyPress activated, but the templates are missing from your theme!", 'infinity' )
 				);
 				return false;
 			}

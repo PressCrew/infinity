@@ -29,7 +29,7 @@ class ICE_Ext_Option_Toggle_No
 	{
 		// this is true because you would be testing if "was `no` checked?"
 		return array(
-			true => __( 'No', infinity_text_domain )
+			true => __( 'No', 'infinity' )
 		);
 	}
 }

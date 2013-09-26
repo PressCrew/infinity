@@ -44,12 +44,12 @@
 					<div class="entry">
 						<?php
 							do_action( 'open_single_entry' );
-							the_content( __( 'Read the rest of this entry &rarr;', infinity_text_domain ) ); 
+							the_content( __( 'Read the rest of this entry &rarr;', 'infinity' ) ); 
 					   	?>
 						<div style="clear: both;"></div>
 						<?php
 							wp_link_pages( array(
-								'before' => __( '<p><strong>Pages:</strong> ', infinity_text_domain ),
+								'before' => __( '<p><strong>Pages:</strong> ', 'infinity' ),
 								'after' => '</p>', 'next_or_number' => 'number')
 							);
 							do_action( 'close_single_entry' );
@@ -73,7 +73,7 @@
 		endwhile;
 	else: ?>
 		<h1>
-			<?php _e( 'Sorry, no posts matched your criteria.', infinity_text_domain ) ?>
+			<?php _e( 'Sorry, no posts matched your criteria.', 'infinity' ) ?>
 		</h1>
 <?php
 		do_action( 'loop_not_found' );

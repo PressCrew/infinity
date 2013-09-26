@@ -28,8 +28,8 @@ class ICE_Ext_Option_Position_Top_Bottom
 	public function load_field_options()
 	{
 		return array(
-			't' => __( 'Top', infinity_text_domain ),
-			'b' => __( 'Bottom', infinity_text_domain )
+			't' => __( 'Top', 'infinity' ),
+			'b' => __( 'Bottom', 'infinity' )
 		);
 	}
 }

@@ -28,8 +28,8 @@ class ICE_Ext_Option_Toggle_Yes_No
 	public function load_field_options()
 	{
 		return array(
-			true => __( 'Yes', infinity_text_domain ),
-			false => __( 'No', infinity_text_domain )
+			true => __( 'Yes', 'infinity' ),
+			false => __( 'No', 'infinity' )
 		);
 	}
 }

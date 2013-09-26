@@ -17,7 +17,7 @@
 	<div id="infinity-cpanel-toolbar">
 
 		<!-- menu -->
-		<a id="infinity-cpanel-menubutton" title="<?php _e( 'infinity', infinity_text_domain ) ?>"><?php _e( 'infinity', infinity_text_domain ) ?></a>
+		<a id="infinity-cpanel-menubutton" title="<?php _e( 'infinity', 'infinity' ) ?>"><?php _e( 'infinity', 'infinity' ) ?></a>
 		<ul id="infinity-cpanel-menu">
 			<li>
 				<a id="infinity-cpanel-menu-item-comm" href="#" title="Community">Community</a>

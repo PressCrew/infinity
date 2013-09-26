@@ -37,7 +37,7 @@ function infinity_base_title()
  
 	// Add a page number if necessary:
 	if ( $paged >= 2 || $page >= 2 )
-		echo ' | ' . sprintf( __( 'Page %s', infinity_text_domain ), max( $paged, $page ) );
+		echo ' | ' . sprintf( __( 'Page %s', 'infinity' ), max( $paged, $page ) );
 }
 
 /**
@@ -70,13 +70,13 @@ function infinity_base_author_box()
  */
 function infinity_posted_on()
 {
-	printf( __( '<a href="%1$s" title="%2$s" rel="bookmark"><time class="entry-date" datetime="%3$s" pubdate>%4$s</time></a>', infinity_text_domain ),
+	printf( __( '<a href="%1$s" title="%2$s" rel="bookmark"><time class="entry-date" datetime="%3$s" pubdate>%4$s</time></a>', 'infinity' ),
 		esc_url( get_permalink() ),
 		esc_attr( get_the_time() ),
 		esc_attr( get_the_date( 'c' ) ),
 		esc_html( get_the_date() ),
 		esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
-		esc_attr( sprintf( __( 'View all posts by %s', infinity_text_domain ), get_the_author() ) ),
+		esc_attr( sprintf( __( 'View all posts by %s', 'infinity' ), get_the_author() ) ),
 		get_the_author()
 	);
 }

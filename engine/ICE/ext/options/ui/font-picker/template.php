@@ -27,12 +27,12 @@
 		var options = {};
 		// add application options
 		options.jsonUrl = '<?php print $webfont_url ?>';
-		options.labelSlant = '<?php _e( 'Slant', infinity_text_domain ) ?>';
-		options.labelNormal = '<?php _e( 'Normal', infinity_text_domain ) ?>';
-		options.labelItalic = '<?php _e( 'Italic', infinity_text_domain ) ?>';
-		options.labelService = '<?php _e( 'Service', infinity_text_domain ) ?>';
-		options.labelVariant = '<?php _e( 'Thickness', infinity_text_domain ) ?>';
-		options.labelSubset = '<?php _e( 'Script', infinity_text_domain ) ?>';
+		options.labelSlant = '<?php _e( 'Slant', 'infinity' ) ?>';
+		options.labelNormal = '<?php _e( 'Normal', 'infinity' ) ?>';
+		options.labelItalic = '<?php _e( 'Italic', 'infinity' ) ?>';
+		options.labelService = '<?php _e( 'Service', 'infinity' ) ?>';
+		options.labelVariant = '<?php _e( 'Thickness', 'infinity' ) ?>';
+		options.labelSubset = '<?php _e( 'Script', 'infinity' ) ?>';
 		// add font picker
 		$('div#<?php $this->render_id('toolbar') ?>').fontpicker(options);
 	})(jQuery);
