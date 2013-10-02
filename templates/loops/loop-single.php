@@ -49,7 +49,7 @@
 						<div style="clear: both;"></div>
 						<?php
 							wp_link_pages( array(
-								'before' => __( '<p><strong>Pages:</strong> ', 'infinity' ),
+								'before' => '<p><strong>' . __( 'Pages:', 'infinity' ) . '</strong> ',
 								'after' => '</p>', 'next_or_number' => 'number')
 							);
 							do_action( 'close_single_entry' );

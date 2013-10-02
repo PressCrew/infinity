@@ -115,7 +115,7 @@ function infinity_dashboard_support_info()
 ?>
 	<h3><?php _e( 'Installation Details', 'infinity' ) ?></h3>
 	<p><?php _e( "If you are having issues with the theme and need support, below is some useful info about your installation.", 'infinity' ) ?></p>
-	<p><?php _e( "Please submit this information with your support request so it's easier for us to help you!", 'infinity' ) ?></p>
+	<p><?php _e( "Please submit this information with your support request so its easier for us to help you!", 'infinity' ) ?></p>
 
 	<h4><?php _e( 'Versions', 'infinity' ) ?></h4>
 	<ul>

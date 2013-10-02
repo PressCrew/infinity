@@ -42,7 +42,7 @@
 			?>
 			<div class="entry">
 				<?php
-					the_content( __( '<p class="serif">Read the rest of this page &rarr;</p>', 'infinity' ) );
+					the_content( '<p class="serif">' . __( 'Read the rest of this page &rarr;', 'infinity' ) . '</p>' );
 				?>
 				<?php
 					get_search_form();

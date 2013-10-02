@@ -48,8 +48,8 @@ if ( post_password_required() ) { ?><p class="nocomments"><?php _e('This post is
  	// Comment pagination.
  	if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) { ?>
 	<div class="navigation">
-		<div class="nav-previous fl"><?php previous_comments_link( __( '<span class="meta-nav">&larr;</span> Older Comments', 'infinity' ) ); ?></div>
-		<div class="nav-next fr"><?php next_comments_link( __( 'Newer Comments <span class="meta-nav">&rarr;</span>', 'infinity' ) ); ?></div>
+		<div class="nav-previous fl"><?php previous_comments_link( '<span class="meta-nav">&larr;</span> ' . __( 'Older Comments', 'infinity' ) ); ?></div>
+		<div class="nav-next fr"><?php next_comments_link( __( 'Newer Comments', 'infinity' ) . ' <span class="meta-nav">&rarr;</span>' ); ?></div>
 		<div class="fix"></div><!--/.fix-->
 	</div><!-- .navigation -->
 <?php } // End IF Statement
