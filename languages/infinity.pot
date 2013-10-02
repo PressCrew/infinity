@@ -1,0 +1,915 @@
+# Copyright (C) 2013 PressCrew
+# This file is distributed under the GNU General Public License.
+msgid ""
+msgstr ""
+"Project-Id-Version: &#8734; Infinity 1.2a\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tags/infinity\n"
+"POT-Creation-Date: 2013-10-02 19:43:33+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2013-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: 404.php:23
+msgid "Darn it.. Nothing found"
+msgstr ""
+
+#: 404.php:29 search.php:40
+msgid ""
+"Sorry, but nothing matched your search criteria. Please try again with some "
+"different keywords."
+msgstr ""
+
+#: 404.php:45
+msgid "Most Used Categories"
+msgstr ""
+
+#. translators: %1$s: smilie
+#: 404.php:54
+msgid "Try looking in the monthly archives. %1$s"
+msgstr ""
+
+#: archive-template.php:45 templates/loops/loop-page.php:39
+msgid "Read the rest of this page &rarr;"
+msgstr ""
+
+#: archive-template.php:52
+msgid "Last 30 Posts"
+msgstr ""
+
+#: archive-template.php:63
+msgid "Archives by Month:"
+msgstr ""
+
+#: archive-template.php:73
+msgid "Archives by Subject:"
+msgstr ""
+
+#: archive.php:25
+msgid "You are browsing the archive for %1$s."
+msgstr ""
+
+#: comments.php:13
+msgid "Please do not load this page directly. Thanks!"
+msgstr ""
+
+#: comments.php:16
+msgid "This post is password protected. Enter the password to view comments."
+msgstr ""
+
+#: comments.php:35
+msgid "One Response to %2$s"
+msgid_plural "%1$s Responses to %2$s"
+msgstr[0] ""
+msgstr[1] ""
+
+#: comments.php:51
+msgid "Older Comments"
+msgstr ""
+
+#: comments.php:52
+msgid "Newer Comments"
+msgstr ""
+
+#: comments.php:58
+msgid "Trackbacks/Pingbacks"
+msgstr ""
+
+#: dashboard/loader.php:71
+msgid "%s Options"
+msgstr ""
+
+#: dashboard/support.php:69
+msgid "Enabled"
+msgstr ""
+
+#: dashboard/support.php:71
+msgid "Disabled"
+msgstr ""
+
+#: dashboard/support.php:91
+msgid "No other plugins are active"
+msgstr ""
+
+#: dashboard/support.php:97
+msgid "subdomain"
+msgstr ""
+
+#: dashboard/support.php:99
+msgid "subdirectory"
+msgstr ""
+
+#: dashboard/support.php:102
+msgid "no"
+msgstr ""
+
+#: dashboard/support.php:107
+msgid "default"
+msgstr ""
+
+#: dashboard/support.php:110
+msgid "almost"
+msgstr ""
+
+#: dashboard/support.php:112
+msgid "custom"
+msgstr ""
+
+#: dashboard/support.php:116
+msgid "Installation Details"
+msgstr ""
+
+#: dashboard/support.php:117
+msgid ""
+"If you are having issues with the theme and need support, below is some "
+"useful info about your installation."
+msgstr ""
+
+#: dashboard/support.php:118
+msgid ""
+"Please submit this information with your support request so its easier for "
+"us to help you!"
+msgstr ""
+
+#: dashboard/support.php:120
+msgid "Versions"
+msgstr ""
+
+#: dashboard/support.php:122
+msgid "Infinity Version: %s"
+msgstr ""
+
+#: dashboard/support.php:123
+msgid "Developer Mode: %s"
+msgstr ""
+
+#: dashboard/support.php:124
+msgid "BuddyPress: %s"
+msgstr ""
+
+#: dashboard/support.php:125
+msgid "MySQL: %s"
+msgstr ""
+
+#: dashboard/support.php:126
+msgid "Permalinks: %s"
+msgstr ""
+
+#: dashboard/support.php:127
+msgid "PHP: %s"
+msgstr ""
+
+#: dashboard/support.php:128
+msgid "WordPress: %s"
+msgstr ""
+
+#: dashboard/support.php:129
+msgid "WordPress multisite: %s"
+msgstr ""
+
+#: dashboard/support.php:132
+msgid "Theme"
+msgstr ""
+
+#: dashboard/support.php:134
+msgid "Current theme: %s version %s"
+msgstr ""
+
+#: dashboard/support.php:137
+msgid "Active Plugins"
+msgstr ""
+
+#: dashboard/templates/cpanel.php:20
+msgid "infinity"
+msgstr ""
+
+#: dashboard/templates/cpanel_header.php:2
+msgid "Version:"
+msgstr ""
+
+#: dashboard/templates/options/block.php:25
+msgid "Edit Setting"
+msgstr ""
+
+#: dashboard/templates/options/block.php:27
+msgid "Documentation"
+msgstr ""
+
+#: dashboard/templates/options/block.php:30
+msgid "Sample Code"
+msgstr ""
+
+#: dashboard/templates/options/menu_section.php:17
+msgid "Show All"
+msgstr ""
+
+#: dashboard/templates/screens/typography.php:13
+#: engine/ICE/ext/options/ui/font-picker/template.php:30
+msgid "Slant"
+msgstr ""
+
+#: dashboard/templates/screens/typography.php:14
+#: engine/ICE/ext/options/ui/font-picker/template.php:33
+msgid "Service"
+msgstr ""
+
+#: dashboard/templates/screens/typography.php:15
+#: engine/ICE/ext/options/ui/font-picker/template.php:34
+msgid "Thickness"
+msgstr ""
+
+#: dashboard/templates/screens/typography.php:16
+#: engine/ICE/ext/options/ui/font-picker/template.php:35
+msgid "Script"
+msgstr ""
+
+#: engine/ICE/components/options/registry.php:264
+msgid "%d option successfully updated."
+msgstr ""
+
+#: engine/ICE/components/options/registry.php:266
+msgid "%d options successfully updated."
+msgstr ""
+
+#: engine/ICE/components/options/registry.php:268
+msgid "An error has occurred. No options were updated."
+msgstr ""
+
+#: engine/ICE/components/options/renderer.php:151
+msgid "Save All"
+msgstr ""
+
+#: engine/ICE/components/options/renderer.php:164
+msgid "Save"
+msgstr ""
+
+#: engine/ICE/components/options/renderer.php:177
+msgid "Reset"
+msgstr ""
+
+#: engine/ICE/dom/style.php:681
+msgid "Inherit"
+msgstr ""
+
+#: engine/ICE/dom/style.php:1297
+msgid "Full Tiling"
+msgstr ""
+
+#: engine/ICE/dom/style.php:1298
+msgid "Tile Horizontally Only"
+msgstr ""
+
+#: engine/ICE/dom/style.php:1299
+msgid "Tile Vertically Only"
+msgstr ""
+
+#: engine/ICE/dom/style.php:1300
+msgid "Disable Tiling"
+msgstr ""
+
+#: engine/ICE/dom/style.php:1322
+msgid "No Border"
+msgstr ""
+
+#: engine/ICE/dom/style.php:1323
+msgid "Hidden"
+msgstr ""
+
+#: engine/ICE/dom/style.php:1324
+msgid "Dotted"
+msgstr ""
+
+#: engine/ICE/dom/style.php:1325
+msgid "Dashed"
+msgstr ""
+
+#: engine/ICE/dom/style.php:1326
+msgid "Solid"
+msgstr ""
+
+#: engine/ICE/dom/style.php:1327
+msgid "Double"
+msgstr ""
+
+#: engine/ICE/dom/style.php:1328
+msgid "Groove"
+msgstr ""
+
+#: engine/ICE/dom/style.php:1329
+msgid "Ridge"
+msgstr ""
+
+#: engine/ICE/dom/style.php:1330
+msgid "Inset"
+msgstr ""
+
+#: engine/ICE/dom/style.php:1331
+msgid "Outset"
+msgstr ""
+
+#: engine/ICE/dom/style.php:1345
+msgid "Thin"
+msgstr ""
+
+#: engine/ICE/dom/style.php:1346
+msgid "Medium"
+msgstr ""
+
+#: engine/ICE/dom/style.php:1347
+msgid "Thick"
+msgstr ""
+
+#: engine/ICE/dom/style.php:1360
+msgid "Black"
+msgstr ""
+
+#: engine/ICE/dom/style.php:1361
+msgid "Silver"
+msgstr ""
+
+#: engine/ICE/dom/style.php:1362
+msgid "Gray"
+msgstr ""
+
+#: engine/ICE/dom/style.php:1363
+msgid "White"
+msgstr ""
+
+#: engine/ICE/dom/style.php:1364
+msgid "Maroon"
+msgstr ""
+
+#: engine/ICE/dom/style.php:1365
+msgid "Red"
+msgstr ""
+
+#: engine/ICE/dom/style.php:1366
+msgid "Purple"
+msgstr ""
+
+#: engine/ICE/dom/style.php:1367
+msgid "Fuchsia"
+msgstr ""
+
+#: engine/ICE/dom/style.php:1368
+msgid "Green"
+msgstr ""
+
+#: engine/ICE/dom/style.php:1369
+msgid "Lime"
+msgstr ""
+
+#: engine/ICE/dom/style.php:1370
+msgid "Olive"
+msgstr ""
+
+#: engine/ICE/dom/style.php:1371
+msgid "Yellow"
+msgstr ""
+
+#: engine/ICE/dom/style.php:1372
+msgid "Navy"
+msgstr ""
+
+#: engine/ICE/dom/style.php:1373
+msgid "Blue"
+msgstr ""
+
+#: engine/ICE/dom/style.php:1374
+msgid "Teal"
+msgstr ""
+
+#: engine/ICE/dom/style.php:1375
+msgid "Aqua"
+msgstr ""
+
+#: engine/ICE/dom/style.php:1399
+msgid "Times (serif)"
+msgstr ""
+
+#: engine/ICE/dom/style.php:1400
+msgid "Helvetica (sans-serif)"
+msgstr ""
+
+#: engine/ICE/dom/style.php:1401
+msgid "Courier (monospace)"
+msgstr ""
+
+#: engine/ICE/dom/style.php:1402
+msgid "Zapf-Chancery (cursive)"
+msgstr ""
+
+#: engine/ICE/dom/style.php:1403
+msgid "Western (fantasy)"
+msgstr ""
+
+#: engine/ICE/dom/style.php:1415
+msgid "Lighter"
+msgstr ""
+
+#: engine/ICE/dom/style.php:1416
+#: engine/ICE/ext/options/ui/font-picker/template.php:31
+msgid "Normal"
+msgstr ""
+
+#: engine/ICE/dom/style.php:1417
+msgid "Bold"
+msgstr ""
+
+#: engine/ICE/dom/style.php:1418
+msgid "Bolder"
+msgstr ""
+
+#: engine/ICE/ext/features/bp/fb-autoconnect/class.php:55
+msgid "FaceBook Auto Connect"
+msgstr ""
+
+#: engine/ICE/ext/features/bp/fb-autoconnect/class.php:56
+msgid "Enables FaceBook Auto Connect support"
+msgstr ""
+
+#: engine/ICE/ext/features/bp/support/class.php:63
+msgid ""
+"You have BuddyPress activated, but the templates are missing from your theme!"
+msgstr ""
+
+#: engine/ICE/ext/features/bp/support/class.php:94
+msgid "My Favorites"
+msgstr ""
+
+#: engine/ICE/ext/features/bp/support/class.php:95
+msgid "Accepted"
+msgstr ""
+
+#: engine/ICE/ext/features/bp/support/class.php:96
+msgid "Rejected"
+msgstr ""
+
+#: engine/ICE/ext/features/bp/support/class.php:97
+msgid "Show all comments for this thread"
+msgstr ""
+
+#: engine/ICE/ext/features/bp/support/class.php:98
+msgid "Show all"
+msgstr ""
+
+#: engine/ICE/ext/features/bp/support/class.php:99
+msgid "comments"
+msgstr ""
+
+#: engine/ICE/ext/features/bp/support/class.php:100
+msgid "Close"
+msgstr ""
+
+#: engine/ICE/ext/features/bp/support/class.php:101
+msgid "View"
+msgstr ""
+
+#: engine/ICE/ext/features/bp/support/class.php:102
+msgid "Favorite"
+msgstr ""
+
+#: engine/ICE/ext/features/bp/support/class.php:103
+msgid "Remove Favorite"
+msgstr ""
+
+#: engine/ICE/ext/features/header-logo/class.php:35
+msgid "Header Logo"
+msgstr ""
+
+#: engine/ICE/ext/features/header-logo/class.php:36
+msgid "Custom header logo support"
+msgstr ""
+
+#: engine/ICE/ext/options/categories/class.php:45
+msgid "Categories"
+msgstr ""
+
+#: engine/ICE/ext/options/css/bg-color/class.php:33
+msgid "Background Color"
+msgstr ""
+
+#: engine/ICE/ext/options/css/bg-color/class.php:34
+msgid "Choose a background color"
+msgstr ""
+
+#: engine/ICE/ext/options/css/bg-image/class.php:33
+msgid "Background Image"
+msgstr ""
+
+#: engine/ICE/ext/options/css/bg-image/class.php:34
+msgid "Upload an image to use as the background"
+msgstr ""
+
+#: engine/ICE/ext/options/css/bg-repeat/class.php:33
+msgid "Background Image Tiling"
+msgstr ""
+
+#: engine/ICE/ext/options/css/bg-repeat/class.php:34
+msgid "Set the tiling mode of the background image"
+msgstr ""
+
+#: engine/ICE/ext/options/css/border-style/class.php:33
+msgid "Border Style"
+msgstr ""
+
+#: engine/ICE/ext/options/css/border-style/class.php:34
+msgid "Choose a style for the border"
+msgstr ""
+
+#: engine/ICE/ext/options/plugins/domain-mapping/class.php:36
+msgid "Custom Domain"
+msgstr ""
+
+#: engine/ICE/ext/options/plugins/domain-mapping/class.php:37
+msgid "Enter the custom domain name you wish to map to your site."
+msgstr ""
+
+#: engine/ICE/ext/options/position/left-center-right/class.php:31
+#: engine/ICE/ext/options/position/left-right/class.php:31
+msgid "Left"
+msgstr ""
+
+#: engine/ICE/ext/options/position/left-center-right/class.php:32
+msgid "Center"
+msgstr ""
+
+#: engine/ICE/ext/options/position/left-center-right/class.php:33
+#: engine/ICE/ext/options/position/left-right/class.php:32
+msgid "Right"
+msgstr ""
+
+#: engine/ICE/ext/options/position/top-bottom/class.php:31
+msgid "Top"
+msgstr ""
+
+#: engine/ICE/ext/options/position/top-bottom/class.php:32
+msgid "Bottom"
+msgstr ""
+
+#: engine/ICE/ext/options/toggle/disable/class.php:32
+#: engine/ICE/ext/options/toggle/enable-disable/class.php:32
+msgid "Disable"
+msgstr ""
+
+#: engine/ICE/ext/options/toggle/enable/class.php:31
+#: engine/ICE/ext/options/toggle/enable-disable/class.php:31
+msgid "Enable"
+msgstr ""
+
+#: engine/ICE/ext/options/toggle/no/class.php:32
+#: engine/ICE/ext/options/toggle/yes-no/class.php:32
+msgid "No"
+msgstr ""
+
+#: engine/ICE/ext/options/toggle/off/class.php:32
+#: engine/ICE/ext/options/toggle/on-off/class.php:32
+msgid "Off"
+msgstr ""
+
+#: engine/ICE/ext/options/toggle/on/class.php:31
+#: engine/ICE/ext/options/toggle/on-off/class.php:31
+msgid "On"
+msgstr ""
+
+#: engine/ICE/ext/options/toggle/yes/class.php:31
+#: engine/ICE/ext/options/toggle/yes-no/class.php:31
+msgid "Yes"
+msgstr ""
+
+#: engine/ICE/ext/options/ui/font-picker/template.php:32
+msgid "Italic"
+msgstr ""
+
+#: engine/ICE/ext/options/ui/scroll-picker/template.php:19
+msgid "Current Selection"
+msgstr ""
+
+#: engine/ICE/ext/options/ui/scroll-picker/template.php:23
+msgid "None"
+msgstr ""
+
+#: engine/ICE/ext/options/ui/slider/class.php:216
+msgid "Current selection:"
+msgstr ""
+
+#: engine/ICE/ext/options/upload/class.php:151
+msgid "Failed to lookup attachment URL"
+msgstr ""
+
+#: engine/ICE/ext/options/upload/class.php:154
+msgid "No attachment ID received"
+msgstr ""
+
+#: engine/ICE/ext/options/upload/template.php:25
+msgid "Current Image"
+msgstr ""
+
+#: engine/ICE/ext/options/upload/template.php:31
+msgid "Upload"
+msgstr ""
+
+#: engine/ICE/ext/options/upload/template.php:32
+msgid "Select"
+msgstr ""
+
+#: engine/ICE/ext/options/upload/template.php:33
+msgid "Zoom"
+msgstr ""
+
+#: engine/ICE/ext/options/upload/template.php:34
+#: engine/ICE/ext/widgets/posts-list/class.php:504
+msgid "Trash"
+msgstr ""
+
+#: engine/ICE/ext/options/upload/template.php:37
+msgid "Disable image, including default"
+msgstr ""
+
+#: engine/ICE/ext/options/upload/template.php:62
+msgid "Media Uploader"
+msgstr ""
+
+#: engine/ICE/ext/options/upload/template.php:66
+msgid "Zoom!"
+msgstr ""
+
+#: engine/ICE/ext/sections/default/template.php:18
+msgid "Options"
+msgstr ""
+
+#: engine/ICE/ext/shortcodes/access/template.php:22
+#: engine/ICE/ext/shortcodes/visitor/template.php:22
+msgid "Sorry, only registered users can see this text."
+msgstr ""
+
+#: engine/ICE/ext/widgets/posts-list/class.php:162
+msgid "%d items updated, %d items failed"
+msgstr ""
+
+#: engine/ICE/ext/widgets/posts-list/class.php:171
+msgid "%d items updated"
+msgstr ""
+
+#: engine/ICE/ext/widgets/posts-list/class.php:177
+msgid "No items received"
+msgstr ""
+
+#: engine/ICE/ext/widgets/posts-list/class.php:180
+#: engine/ICE/ext/widgets/posts-list/class.php:216
+msgid "Missing required data"
+msgstr ""
+
+#: engine/ICE/ext/widgets/posts-list/class.php:208
+msgid "Item status updated"
+msgstr ""
+
+#: engine/ICE/ext/widgets/posts-list/class.php:210
+msgid "Item status update failed"
+msgstr ""
+
+#: engine/ICE/ext/widgets/posts-list/class.php:213
+msgid "Invalid item status"
+msgstr ""
+
+#: engine/ICE/ext/widgets/posts-list/class.php:233
+msgid "Item moved to trash"
+msgstr ""
+
+#: engine/ICE/ext/widgets/posts-list/class.php:235
+msgid "Move item to trash failed"
+msgstr ""
+
+#: engine/ICE/ext/widgets/posts-list/class.php:239
+msgid "Missing item id"
+msgstr ""
+
+#: engine/ICE/ext/widgets/posts-list/class.php:475
+msgid "Draft"
+msgstr ""
+
+#: engine/ICE/ext/widgets/posts-list/class.php:477
+msgid "Published"
+msgstr ""
+
+#: engine/ICE/ext/widgets/posts-list/class.php:481
+msgid "Pending"
+msgstr ""
+
+#: engine/ICE/ext/widgets/posts-list/class.php:485
+msgid "Scheduled"
+msgstr ""
+
+#: engine/ICE/ext/widgets/posts-list/class.php:489
+msgid "Trashed"
+msgstr ""
+
+#: engine/ICE/ext/widgets/posts-list/template.php:23
+msgid "Create New"
+msgstr ""
+
+#: engine/api/options.php:574
+msgid "Failed to render options"
+msgstr ""
+
+#: engine/extensions/options/css/overlay-image/class.php:33
+msgid "Background Overlay"
+msgstr ""
+
+#: engine/extensions/options/css/overlay-image/class.php:34
+msgid "Select a texture to use as the background overlay"
+msgstr ""
+
+#: engine/extensions/options/css/overlay-opacity/class.php:41
+msgid "Overlay Opacity"
+msgstr ""
+
+#: engine/extensions/options/css/overlay-opacity/class.php:42
+msgid "Select the overlay opacity by moving the slider"
+msgstr ""
+
+#: engine/includes/base.php:125
+msgid "Above Header"
+msgstr ""
+
+#: engine/includes/base.php:128
+msgid "Inside Header"
+msgstr ""
+
+#: engine/includes/base.php:131
+msgid "Below Header"
+msgstr ""
+
+#: engine/includes/base.php:134
+msgid "Inside Footer"
+msgstr ""
+
+#: engine/includes/comments.php:37
+msgid "at"
+msgstr ""
+
+#: engine/includes/comments.php:38
+msgid "Direct link to this comment"
+msgstr ""
+
+#: engine/includes/comments.php:39
+msgid "Edit"
+msgstr ""
+
+#: engine/includes/comments.php:44
+msgid "Your comment is awaiting moderation."
+msgstr ""
+
+#: engine/includes/templatetags.php:40
+msgid "Page %s"
+msgstr ""
+
+#: engine/includes/templatetags.php:79 templates/parts/author-box.php:29
+msgid "View all posts by %s"
+msgstr ""
+
+#: search.php:24
+msgid "Search Results for: <span>%s</span>"
+msgstr ""
+
+#: search.php:34
+msgid "Nothing Found"
+msgstr ""
+
+#: templates/loops/loop-attachment.php:26 templates/loops/loop-blog.php:30
+#: templates/loops/loop.php:29 templates/parts/post-thumbnail.php:19
+msgid "Permanent Link to"
+msgstr ""
+
+#: templates/loops/loop-attachment.php:59
+msgid "Full size is %s pixels"
+msgstr ""
+
+#: templates/loops/loop-attachment.php:62
+msgid "Link to full size image"
+msgstr ""
+
+#: templates/loops/loop-attachment.php:72
+msgid "No Comments"
+msgstr ""
+
+#: templates/loops/loop-attachment.php:72
+msgid "1 Comment"
+msgstr ""
+
+#: templates/loops/loop-attachment.php:72
+msgid "% Comments"
+msgstr ""
+
+#: templates/loops/loop-attachment.php:84
+msgid "<p><strong>Pages:</strong> "
+msgstr ""
+
+#: templates/loops/loop-attachment.php:101 templates/loops/loop-single.php:76
+msgid "Sorry, no posts matched your criteria."
+msgstr ""
+
+#: templates/loops/loop-blog.php:54 templates/loops/loop.php:52
+msgid "Read More"
+msgstr ""
+
+#: templates/loops/loop-page.php:43 templates/loops/loop-single.php:52
+msgid "Pages:"
+msgstr ""
+
+#: templates/loops/loop-single.php:47
+msgid "Read the rest of this entry &rarr;"
+msgstr ""
+
+#: templates/loops/loop.php:75
+msgid "Not Found"
+msgstr ""
+
+#: templates/parts/header-head.php:34
+msgid "Blog Posts RSS Feed"
+msgstr ""
+
+#: templates/parts/header-head.php:35
+msgid "Blog Posts Atom Feed"
+msgstr ""
+
+#: templates/parts/introduction-boxes.php:22
+msgid "Category Archives: <span>%s</span>"
+msgstr ""
+
+#: templates/parts/introduction-boxes.php:49
+msgid "Tag Archives: <span>%s</span>"
+msgstr ""
+
+#: templates/parts/introduction-boxes.php:76
+msgid "Daily Archives: %s"
+msgstr ""
+
+#: templates/parts/introduction-boxes.php:78
+msgid "Monthly Archives: %s"
+msgstr ""
+
+#: templates/parts/introduction-boxes.php:80
+msgid "Yearly Archives: %s"
+msgstr ""
+
+#: templates/parts/post-meta-bottom.php:25
+msgid "Tags: "
+msgstr ""
+
+#: templates/parts/post-meta-top.php:37
+msgid "No Comments &#187;"
+msgstr ""
+
+#: templates/parts/post-meta-top.php:38
+msgid "1 Comment &#187;"
+msgstr ""
+
+#: templates/parts/post-meta-top.php:39
+msgid "% Comments &#187;"
+msgstr ""
+
+#. Theme Name of the plugin/theme
+msgid "&#8734; Infinity"
+msgstr ""
+
+#. Theme URI of the plugin/theme
+msgid "http://infinity.presscrew.com"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"The \"Base\" theme, is a parent theme based on the Infinity Theming Engine, "
+"which provides a powerful set of templates and default theme options to give "
+"you a great starting point for most projects."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "PressCrew"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://community.presscrew.com/"
+msgstr ""
+
+#. Template Name of the plugin/theme
+msgid "Archive Template"
+msgstr ""
+
+#. Template Name of the plugin/theme
+msgid "Blog Template"
+msgstr ""
+
+#. Template Name of the plugin/theme
+msgid "Full Width Page"
+msgstr ""
+
+#. Template Name of the plugin/theme
+msgid "Sidebar Left Template"
+msgstr ""
+
+#. Template Name of the plugin/theme
+msgid "Sidebar Right Template"
+msgstr ""
