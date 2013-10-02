@@ -134,9 +134,6 @@ require_once INFINITY_ICE_PATH . '/loader.php';
 // initialize ICE
 ICE_Loader::init( INFINITY_ICE_URL );
 
-// setup translation
-load_theme_textdomain( 'infinity', WP_LANG_DIR . '/' . INFINITY_SLUG );
-
 // initialize enqueuer and configure actions
 if ( is_admin() ) {
 	ICE_Enqueue::instance()

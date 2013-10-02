@@ -19,6 +19,13 @@ if ( is_admin() ) {
 	require_once INFINITY_ADMIN_PATH . '/loader.php';
 }
 
+// load infinity text domain
+function infinity_base_textdomain()
+{
+	load_theme_textdomain( 'infinity', INFINITY_LANGUAGES_PATH );
+}
+add_action( 'after_setup_theme', 'infinity_base_textdomain' );
+
 // add post formats
 function infinity_base_post_formats()
 {
