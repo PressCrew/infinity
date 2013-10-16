@@ -46,7 +46,7 @@
 							do_action( 'open_single_entry' );
 							the_content( __( 'Read the rest of this entry &rarr;', 'infinity' ) ); 
 					   	?>
-						<div style="clear: both;"></div>
+						<div class="clear"></div>
 						<?php
 							wp_link_pages( array(
 								'before' => '<p><strong>' . __( 'Pages:', 'infinity' ) . '</strong> ',

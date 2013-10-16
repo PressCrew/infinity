@@ -48,7 +48,7 @@
 						<?php wp_list_categories( array( 'orderby' => 'count', 'order' => 'DESC', 'show_count' => 1, 'title_li' => '', 'number' => 10 ) ); ?>
 						</ul>
 					</div>	
-					<div style="clear: both;"></div>
+					<div class="clear"></div>
 					<?php
 					/* translators: %1$s: smilie */
 					$archive_content = '<p>' . sprintf( __( 'Try looking in the monthly archives. %1$s', 'infinity' ), convert_smilies( ':)' ) ) . '</p>';

@@ -501,6 +501,10 @@ infinity-wp-style = off
 
 /*
 ================================================== */
+/* Base */
+.clear {
+	clear: both;
+}
 /* Post Meta */
 .infinity-wp span.edit-link {
     margin-left: 1px;
