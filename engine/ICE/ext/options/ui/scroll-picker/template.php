@@ -32,6 +32,7 @@
 </div>
 
 <script type="text/javascript">
+//<![CDATA[
 	(function($){
 		// the input
 		var input = $('input[name=<?php $this->render_name() ?>]');
@@ -60,4 +61,5 @@
 		// add scroll pane
 		jQuery('div#<?php $this->render_id('widget') ?>').iceEasyScrollPane(options);
 	})(jQuery);
+//]]>
 </script>

@@ -23,6 +23,7 @@
 </div>
 
 <script type="text/javascript">
+//<![CDATA[
 	(function($){
 		var options = {};
 		// add application options
@@ -36,4 +37,5 @@
 		// add font picker
 		$('div#<?php $this->render_id('toolbar') ?>').fontpicker(options);
 	})(jQuery);
+//]]>
 </script>

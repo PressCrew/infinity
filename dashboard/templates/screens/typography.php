@@ -6,6 +6,7 @@ ICE_Loader::load( 'utils/webfont' );
 <div id="typography-ff"></div>
 
 <script type="text/javascript">
+//<![CDATA[
 	(function($){
 		var options = {};
 		// add application options
@@ -24,4 +25,5 @@ ICE_Loader::load( 'utils/webfont' );
 		// add font picker
 		$('div#typography-ff').fontfilter(options);
 	})(jQuery);
+//]]>
 </script>

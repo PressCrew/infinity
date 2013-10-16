@@ -29,5 +29,7 @@
 </div>
 
 <script type="text/javascript">
+//<![CDATA[
 	widgetPostsListSortable('div#<?php $this->render_id() ?> div.ui-widget-content');
+//]]>
 </script>

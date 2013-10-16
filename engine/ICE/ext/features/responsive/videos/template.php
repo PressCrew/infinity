@@ -17,9 +17,11 @@
 ?>
 <!-- Responsive Videos Feature -->
 <script type="text/javascript">
+//<![CDATA[
 	jQuery(document).ready(function($)
 	{
 		// init fitvids
 		$( '<?php echo $selector ?>' ).fitVids(<?php echo $options ?>);
 	});
+//]]>
 </script>

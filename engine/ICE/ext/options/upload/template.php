@@ -43,6 +43,7 @@
 </div>
 
 <script type="text/javascript">
+//<![CDATA[
 jQuery(document).ready( function($){
 
 	$( 'div#<?php $this->render_id('main') ?>' )
@@ -68,4 +69,5 @@ jQuery(document).ready( function($){
 		});
 
 });
+//]]>
 </script>

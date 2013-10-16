@@ -146,10 +146,12 @@ function infinity_grid_fallback()
 		// get one?
 		if ( $size ):
 			// render script element ?>
-			<script>
+			<script type="text/javascript">
+			//<![CDATA[
 				jQuery(document).ready(function() {
 					jQuery('#content').addClass('column <?php print $size ?>');
 				});
+			//]]>
 			</script><?php
 		endif;
 	}
@@ -189,10 +191,12 @@ function infinity_sidebar_left_fallback()
 		infinity_option_get( 'infinity-core-options.sidebar-position' ) != 'right'
 	) {
 		// render grid fallback script ?>
-		<script>
-		jQuery(document).ready(function() {
-			jQuery('#content').addClass('sidebar-left');
-		});
+		<script type="text/javascript">
+		//<![CDATA[
+			jQuery(document).ready(function() {
+				jQuery('#content').addClass('sidebar-left');
+			});
+		//]]>
 		</script><?php
 	}
 }

@@ -20,8 +20,10 @@
 </ul>
 
 <script type="text/javascript">
+//<![CDATA[
 	// init menu
 	jQuery('ul#<?php $this->render_id() ?>').menu();
 	// render all of the button script logic
 	<?php print $button_script->render() ?>
+//]]>
 </script>

@@ -15,6 +15,7 @@
 ?>
 <!-- Responsive Layout Feature -->
 <script type="text/javascript">
+//<![CDATA[
 	jQuery(document).ready(function($)
 	{
 		// iPhone viewport scaling bug fix //
@@ -38,4 +39,5 @@
 			document.addEventListener( 'gesturestart', gStart, false );
 		}
 	});
+//]]>
 </script>

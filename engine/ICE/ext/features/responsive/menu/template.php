@@ -17,9 +17,11 @@
 ?>
 <!-- Responsive Menu Feature -->
 <script type="text/javascript">
+//<![CDATA[
 	jQuery(document).ready(function($)
 	{
 		// init mobile menu
 		$( '<?php echo $selector ?>' ).mobileMenu(<?php echo $options ?>);
 	});
+//]]>
 </script>

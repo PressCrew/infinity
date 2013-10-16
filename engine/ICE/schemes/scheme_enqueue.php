@@ -752,8 +752,12 @@ class ICE_Scheme_Enqueue extends ICE_Base
 	 */
 	public function handle_script_domain()
 	{
-		// render it
-		?><script type="text/javascript">document.domain = '<?php print $this->script_domain->get_value() ?>';</script><?php
+		// render it ?>
+		<script type="text/javascript">
+		//<![CDATA[
+			document.domain = '<?php print $this->script_domain->get_value() ?>';
+		//]]>
+		</script><?php
 		echo PHP_EOL;
 	}
 

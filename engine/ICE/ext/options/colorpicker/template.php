@@ -21,8 +21,10 @@
 </div>
 
 <script type="text/javascript">
+//<![CDATA[
 	iceEasyColorPicker.init(
 		'input[name=<?php $this->render_name() ?>]',
 		'div#<?php $this->render_id( 'launcher' ) ?>'
 	);
+//]]>
 </script>

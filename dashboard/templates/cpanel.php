@@ -54,6 +54,7 @@
 </div>
 
 <script type="text/javascript">
+//<![CDATA[
 (function($){
 
 	// its pretty safe to hack this code as its all config/preference.
@@ -75,6 +76,7 @@
 	initOptionsPanel( $( '#infinity-cpanel-tab-options' ) );
 
 })(jQuery);
+//]]>
 </script>
 
 <?php

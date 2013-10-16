@@ -525,7 +525,9 @@ final class ICE_Scheme extends ICE_Base
 		</style>
 		<!-- dynamic scripts -->
 		<script type="text/javascript">
+		//<![CDATA[
 			<?php $this->render_scripts(); ?>
+		//]]>
 		</script><?php
 	}
 
