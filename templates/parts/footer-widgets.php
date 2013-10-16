@@ -37,4 +37,4 @@
 		<?php endif; ?>
 	</div>
 <?php endif; ?>
-<div style="clear:both;"></div>
+<div class="clear"></div>
