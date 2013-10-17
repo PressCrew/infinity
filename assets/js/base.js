@@ -41,8 +41,10 @@ jQuery(document).ready(function($)
 	// add a new grid class for register page
 	$('.register #content').addClass('column sixteen');
 
-	// initial sidebar height
-	infinity_sidebar_height();
+	// set initial sidebar height after load
+	$(window).load(function(){
+		infinity_sidebar_height();
+	});
 
 	// bump sidebar height after any ajax requests
 	$( '#sidebar' )
