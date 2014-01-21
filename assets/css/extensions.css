@@ -113,7 +113,7 @@ body.infinity-typog {
 	+ Tables
 	+ Forms
 
-You can disable the css in this file by adding the following code to your child theme config/infinity.ini file
+You can disable the css in this file by adding the following code to your child theme config/global.ini file
 
 infinity-layout-style = off
 --------------------------------------------------------------*/
@@ -1351,7 +1351,7 @@ body.infinity-layout {
 + Tables
 + Forms
 
-You can disable the css in this file by adding the following code to your child theme config/infinity.ini file
+You can disable the css in this file by adding the following code to your child theme config/global.ini file
 
 infinity-design-style = off
 --------------------------------------------------------------*/

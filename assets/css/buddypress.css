@@ -2,7 +2,7 @@
 ----------------------------------------------------------------
 BuddyPress Default Styling.
 
-You can disable the css in this file by adding the following code to your child theme config/infinity.ini file
+You can disable the css in this file by adding the following code to your child theme config/global.ini file
 
 infinity-bp-style = off
 --------------------------------------------------------------*/
