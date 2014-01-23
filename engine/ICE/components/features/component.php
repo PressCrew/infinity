@@ -41,7 +41,7 @@ abstract class ICE_Feature
 		if ( true === $this->suboptions ) {
 			// look for an options configuration file
 			// TODO this should be loading ALL options files in stack
-			$options_file = $this->locate_file( 'options.ini' );
+			$options_file = $this->locate_file( 'options.php' );
 			// find one?
 			if ( $options_file ) {
 				// load using options registry

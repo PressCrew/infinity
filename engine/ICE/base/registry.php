@@ -220,7 +220,7 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	/**
 	 * Return all registered child components of a component
 	 *
-	 * This adheres to parent settings in the component ini file
+	 * This adheres to parent settings in the component config file
 	 *
 	 * @param ICE_Component $component The component object whose children you want to get
 	 * @return array
@@ -272,20 +272,19 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	}
 
 	/**
-	 * Load directives from an ini file
+	 * Load a config file
 	 *
-	 * @uses parse_ini_file()
-	 * @param string $filename Absolute path to the component ini file to parse
+	 * @param string $filename Absolute path to the component config file to parse
 	 * @param string $theme The theme to assign the parsed directives to
 	 * @return boolean
 	 */
 	final public function load_config_file( $filename, $theme )
 	{
-		// try to parse the file into INI sections
-		$sections = parse_ini_file( $filename, true );
+		// try to parse the component config file "sections"
+		$sections = require_once( $filename );
 
 		// get a config?
-		if ( $sections ) {
+		if ( is_array( $sections ) ) {
 			// set the current theme being loaded
 			self::$theme_scope = $theme;
 			// load all parsed sections
@@ -300,7 +299,7 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	}
 
 	/**
-	 * Load components into registry from an array (of parsed ini sections)
+	 * Load components into registry from an array.
 	 *
 	 * @param array $sections_array
 	 * @return boolean
@@ -322,7 +321,7 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	}
 
 	/**
-	 * Load one component into registry from a single parsed ini section (array)
+	 * Load one component into registry from an array
 	 *
 	 * @param string $section_name
 	 * @param array $section_array

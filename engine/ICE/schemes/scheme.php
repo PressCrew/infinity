@@ -36,43 +36,43 @@ final class ICE_Scheme extends ICE_Base
 	 */
 	const DIRECTIVE_SCRIPT_ROOT = 'script_root';
 	/**
-	 * Feature ini section
+	 * Feature config key
 	 */
 	const DIRECTIVE_FEATURE = 'feature';
 	/**
-	 * Style ini section
+	 * Style config key
 	 */
 	const DIRECTIVE_STYLE_DEFS = 'style';
 	/**
-	 * Style depends ini section
+	 * Style depends config key
 	 */
 	const DIRECTIVE_STYLE_DEPS = 'style_depends';
 	/**
-	 * Style actions ini section
+	 * Style actions config key
 	 */
 	const DIRECTIVE_STYLE_ACTS = 'style_actions';
 	/**
-	 * Style conditions ini section
+	 * Style conditions config key
 	 */
 	const DIRECTIVE_STYLE_CONDS = 'style_conditions';
 	/**
-	 * Script ini section
+	 * Script config key
 	 */
 	const DIRECTIVE_SCRIPT_DEFS = 'script';
 	/**
-	 * Script depends ini section
+	 * Script depends config key
 	 */
 	const DIRECTIVE_SCRIPT_DEPS = 'script_depends';
 	/**
-	 * Script actions ini section
+	 * Script actions config key
 	 */
 	const DIRECTIVE_SCRIPT_ACTS = 'script_actions';
 	/**
-	 * Script conditions ini section
+	 * Script conditions config key
 	 */
 	const DIRECTIVE_SCRIPT_CONDS = 'script_conditions';
 	/**
-	 * Advanced settings ini section
+	 * Advanced settings config key
 	 */
 	const DIRECTIVE_ADVANCED = 'advanced';
 	/**
@@ -117,7 +117,7 @@ final class ICE_Scheme extends ICE_Base
 	private $config_dir;
 
 	/**
-	 * Name of the configuration ini file that is preferred by the API
+	 * Name of the configuration file that is preferred by the API
 	 *
 	 * @var string
 	 */
@@ -414,27 +414,27 @@ final class ICE_Scheme extends ICE_Base
 		}
 
 		// get path to config file
-		$ini_file = $this->theme_config_file( $theme, $this->config_file );
+		$config_file = $this->theme_config_file( $theme, $this->config_file );
 
-		// does ini file exist?
-		if ( ICE_Files::cache($ini_file)->is_readable() ) {
+		// does config file exist?
+		if ( ICE_Files::cache($config_file)->is_readable() ) {
 			// parse it
-			$ini = parse_ini_file( $ini_file, true );
+			$config = $this->parse_config_file( $config_file );
 			// push onto loaded stack
-			$this->config_files_loaded->push( $ini_file );
+			$this->config_files_loaded->push( $config_file );
 		} else {
-			// yipes, theme has no ini file.
+			// yipes, theme has no config file.
 			// assume that parent theme is the root theme
-			$ini[self::DIRECTIVE_PARENT_THEME] = $this->root_theme;
+			$config[self::DIRECTIVE_PARENT_THEME] = $this->root_theme;
 		}
 
 		// make sure we got something
-		if ( $ini !== false ) {
+		if ( $config !== false ) {
 
 			// parent theme?
 			$parent_theme =
-				isset( $ini[self::DIRECTIVE_PARENT_THEME] )
-					? $ini[self::DIRECTIVE_PARENT_THEME]
+				isset( $config[self::DIRECTIVE_PARENT_THEME] )
+					? $config[self::DIRECTIVE_PARENT_THEME]
 					: false;
 
 			// recurse up the theme stack if necessary
@@ -447,7 +447,7 @@ final class ICE_Scheme extends ICE_Base
 			$this->themes->push( $theme );
 
 			// loop through directives and set them
-			foreach ( $ini as $name => $value ) {
+			foreach ( $config as $name => $value ) {
 				if ( $name == self::DIRECTIVE_ADVANCED ) {
 					if ( is_array( $value ) ) {
 						foreach ( $value as $name_adv => $value_adv ) {
@@ -467,7 +467,22 @@ final class ICE_Scheme extends ICE_Base
 			}
 
 		} else {
-			throw new Exception( 'Failed to parse theme ini file: ' . $ini_file );
+			throw new Exception( 'Failed to parse theme config file: ' . $config_file );
+		}
+	}
+
+	private function parse_config_file( $filename )
+	{
+		// try to load config array from file
+		$config = require_once( $filename );
+
+		// get a valid config?
+		if ( is_array( $config ) ) {
+			// yep, return it
+			return $config;
+		} else {
+			// not good, return empty array
+			return array();
 		}
 	}
 
@@ -565,7 +580,6 @@ final class ICE_Scheme extends ICE_Base
 	 * Enable components for the scheme by passing a valid policy object
 	 *
 	 * @param ICE_Policy $policy
-	 * @param string $ini_file_name
 	 * @return boolean
 	 */
 	public function enable_component( ICE_Policy $policy )
@@ -573,21 +587,21 @@ final class ICE_Scheme extends ICE_Base
 		// loop through entire theme stack BOTTOM UP and try to load options
 		foreach( $this->theme_stack( false ) as $theme ) {
 
-			// path to ini file
-			$ini_file = $this->theme_config_file( $theme, $policy->get_handle() );
+			// path to config file
+			$config_file = $this->theme_config_file( $theme, $policy->get_handle() );
 
 			// load the option config if it exists
-			if ( ICE_Files::cache($ini_file)->is_readable() ) {
+			if ( ICE_Files::cache($config_file)->is_readable() ) {
 
 				// skip loaded files
-				if ( $this->config_files_loaded->contains( $ini_file ) ) {
+				if ( $this->config_files_loaded->contains( $config_file ) ) {
 					continue;
 				}
 				
-				// try to load ini file
-				if ( $policy->registry()->load_config_file( $ini_file, $theme ) ) {
+				// try to load config file
+				if ( $policy->registry()->load_config_file( $config_file, $theme ) ) {
 					// push onto loaded stack
-					$this->config_files_loaded->push( $ini_file );
+					$this->config_files_loaded->push( $config_file );
 				}
 			}
 		}
@@ -829,7 +843,7 @@ final class ICE_Scheme extends ICE_Base
 		$config_dir = $this->theme_config_dir( $theme );
 
 		// return absolute path to theme file
-		return $this->theme_file( $theme, $config_dir, $filename . '.ini' );
+		return $this->theme_file( $theme, $config_dir, $filename . '.php' );
 	}
 
 	/**

@@ -38,8 +38,8 @@ abstract class ICE_Option_Registry extends ICE_Registry
 
 	public function load_feature_options_file( ICE_Feature $feature, $filename )
 	{
-		// try to parse the options file into INI sections
-		$sections = parse_ini_file( $filename, true );
+		// try to parse the options config file "sections"
+		$sections = require_once( $filename );
 
 		// get any sections?
 		if ( is_array( $sections ) && count( $sections ) ) {

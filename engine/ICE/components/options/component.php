@@ -565,7 +565,7 @@ abstract class ICE_Option extends ICE_Component
 				// add value to component styles if set
 				if ( $style_value->has_value() ) {
 					// new rule
-					$rule = $this->style()->rule( 'ini', $this->style_selector );
+					$rule = $this->style()->rule( 'cfg', $this->style_selector );
 					// add declaration from style property
 					$rule->add_declaration(
 						$this->__style_property__->get_name(),
