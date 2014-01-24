@@ -22,11 +22,6 @@ ICE_Loader::load( 'base/component', 'schemes' );
 abstract class ICE_Option extends ICE_Component
 {
 	/**
-	 * The string on which to split field option key => values
-	 */
-	const FIELD_OPTION_DELIM = '=';
-
-	/**
 	 * If true, a POST value will override the real option value
 	 *
 	 * @var boolean
@@ -237,13 +232,8 @@ abstract class ICE_Option extends ICE_Component
 			// is configured field options a map?
 			if ( $fo_config instanceof ICE_Map ) {
 
-				// loop through all field options
-				foreach ( $fo_config as $field_option ) {
-					// split each one at the delimeter
-					$field_option = explode( self::FIELD_OPTION_DELIM, $field_option, 2 );
-					// add to array
-					$field_options[trim($field_option[0])] = trim($field_option[1]);
-				}
+				// convert to array
+				$field_options = $fo_config->to_array();
 
 			} elseif ( strlen( $fo_config ) ) {
 

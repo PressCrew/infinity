@@ -226,8 +226,8 @@ $features['infinity-core-options.sidebar-position'] = array(
 	'type' => 'radio',
 	'default_value' => 'right',
 	'field_options' => array(
-		'left=Left',
-		'right=Right'
+		'left' => 'Left',
+		'right' => 'Right'
 	)
 );
 
@@ -238,14 +238,14 @@ $features['infinity-core-options.sidebar-size'] = array(
 	'type' => 'select',
 	'default_value' => 'eleven',
 	'field_options' => array(
-		'fourteen=15 percent',
-		'thirteen=20 percent',
-		'twelve=25 percen',
-		'eleven=30 precent',
-		'ten=35 percent',
-		'nine=40 percent',
-		'eight=50 percent',
-		'disable=Disable',
+		'fourteen' => '15 percent',
+		'thirteen' => '20 percent',
+		'twelve' => '25 percent',
+		'eleven' => '30 precent',
+		'ten' => '35 percent',
+		'nine' => '40 percent',
+		'eight' => '50 percent',
+		'disable' => 'Disable'
 	)
 );
 
@@ -810,12 +810,12 @@ $features['infinity-post-gravatar.default-set'] = array(
 	'description' => 'Select the default image set to use',
 	'default_value' => 'mm',
 	'field_options' => array(
-		'404=Return 404 Error',
-		'mm=Mystery Man',
-		'identicon=Identicon',
-		'monsterid=Monster ID',
-		'wavatar=Wavatar',
-		'retro=Retro'
+		'404' => 'Return 404 Error',
+		'mm' => 'Mystery Man',
+		'identicon' => 'Identicon',
+		'monsterid' => 'Monster ID',
+		'wavatar' => 'Wavatar',
+		'retro' => 'Retro'
 	)
 );
 
@@ -838,10 +838,10 @@ $features['infinity-post-gravatar.rating'] = array(
 	'description' => 'Select highest image rating to display',
 	'default_value' => 'g',
 	'field_options' => array(
-		'g=G (suitable for display on all websites with any audience type)',
-		'pg=PG (may contain rude gestures, provocatively dressed individuals, the lesser swear words, or mild violence)',
-		'r=R (may contain such things as harsh profanity, intense violence, nudity, or hard drug use)',
-		'x=X (may contain hardcore sexual imagery or extremely disturbing violence)'
+		'g' => 'G (suitable for display on all websites with any audience type)',
+		'pg' => 'PG (may contain rude gestures, provocatively dressed individuals, the lesser swear words, or mild violence)',
+		'r' => 'R (may contain such things as harsh profanity, intense violence, nudity, or hard drug use)',
+		'x' => 'X (may contain hardcore sexual imagery or extremely disturbing violence)'
 	)
 );
 
