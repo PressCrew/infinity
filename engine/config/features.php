@@ -195,72 +195,67 @@ $features['infinity-core-options'] = array(
 	'title' => 'Custom CSS',
 	'description' => 'Core set of options included with Infinity Base',
 	'options.section' => 'global',
-);
-
-$features['infinity-core-options.text-color'] = array(
-	'type' => 'colorpicker',
-	'title' => 'Text Color',
-	'description' => 'Choose a text color',
-	'style_selector' => 'body.theme-option',
-	'style_property' => 'color',
-);
-
-$features['infinity-core-options.link-color'] = array(
-	'type' => 'colorpicker',
-	'title' => 'Link Color',
-	'description' => 'Choose a link color',
-	'style_selector' => 'body.theme-option a, body.theme-option a:visited',
-	'style_property' => 'color',
-);
-
-$features['infinity-core-options.custom-favicon'] = array(
-	'title' => 'Site Favicon',
-	'description' => 'Upload a favicon for your site',
-	'type' => 'upload',
-);
-
-$features['infinity-core-options.sidebar-position'] = array(
-	'section' => 'sidebar',
-	'title' => 'Sidebar Position',
-	'description' => 'Choose on which side you want to display the sidebar',
-	'type' => 'radio',
-	'default_value' => 'right',
-	'field_options' => array(
-		'left' => 'Left',
-		'right' => 'Right'
+	'options' => array(
+		'text-color' => array(
+			'type' => 'colorpicker',
+			'title' => 'Text Color',
+			'description' => 'Choose a text color',
+			'style_selector' => 'body.theme-option',
+			'style_property' => 'color'
+		),
+		'link-color' => array(
+			'type' => 'colorpicker',
+			'title' => 'Link Color',
+			'description' => 'Choose a link color',
+			'style_selector' => 'body.theme-option a, body.theme-option a:visited',
+			'style_property' => 'color'
+		),
+		'custom-favicon' => array(
+			'type' => 'upload',
+			'title' => 'Site Favicon',
+			'description' => 'Upload a favicon for your site',
+		),
+		'sidebar-position' => array(
+			'section' => 'sidebar',
+			'title' => 'Sidebar Position',
+			'description' => 'Choose on which side you want to display the sidebar',
+			'type' => 'radio',
+			'default_value' => 'right',
+			'field_options' => array(
+				'left' => 'Left',
+				'right' => 'Right'
+			)
+		),
+		'sidebar-size' => array(
+			'section' => 'sidebar',
+			'title' => 'Sidebar Size',
+			'description' => 'Select a sidebar size',
+			'type' => 'select',
+			'default_value' => 'eleven',
+			'field_options' => array(
+				'fourteen' => '15 percent',
+				'thirteen' => '20 percent',
+				'twelve' => '25 percent',
+				'eleven' => '30 precent',
+				'ten' => '35 percent',
+				'nine' => '40 percent',
+				'eight' => '50 percent',
+				'disable' => 'Disable'
+			)
+		),
+		'google-analytics' => array(
+			'type' => 'textarea',
+			'title' => 'Google Analytics Code',
+			'description' => 'Paste your GA Tracking code in the text area below. Including the script tags!'
+		),
+		'footer-text' => array(
+			'section' => 'footer',
+			'type' => 'textarea',
+			'title' => 'Footer Text',
+			'description' => 'The footer text that appears at the bottom of every page, below the widgetized footer areas. This is commonly used for copyright, designed by, and powered by text. HTML tags are allowed.',
+			'default_value' => 'Infinity by <a href=http://infinity.presscrew.com>PressCrew</a> and powered by <a href=http://wordpress.org>WordPress</a>.'
+		)
 	)
-);
-
-$features['infinity-core-options.sidebar-size'] = array(
-	'section' => 'sidebar',
-	'title' => 'Sidebar Size',
-	'description' => 'Select a sidebar size',
-	'type' => 'select',
-	'default_value' => 'eleven',
-	'field_options' => array(
-		'fourteen' => '15 percent',
-		'thirteen' => '20 percent',
-		'twelve' => '25 percent',
-		'eleven' => '30 precent',
-		'ten' => '35 percent',
-		'nine' => '40 percent',
-		'eight' => '50 percent',
-		'disable' => 'Disable'
-	)
-);
-
-$features['infinity-core-options.google-analytics'] = array(
-	'title' => 'Google Analytics Code',
-	'description' => 'Paste your GA Tracking code in the text area below. Including the script tags!',
-	'type' => 'textarea',
-);
-
-$features['infinity-core-options.footer-text'] = array(
-	'section' => 'footer',
-	'title' => 'Footer Text',
-	'description' => 'The footer text that appears at the bottom of every page, below the widgetized footer areas. This is commonly used for copyright, designed by, and powered by text. HTML tags are allowed.',
-	'default_value' => 'Infinity by <a href=http://infinity.presscrew.com>PressCrew</a> and powered by <a href=http://wordpress.org>WordPress</a>.',
-	'type' => 'textarea',
 );
 
 // Custom CSS Feature
@@ -269,13 +264,14 @@ $features['infinity-custom-css'] = array(
 	'type' => 'default',
 	'title' => 'Custom CSS',
 	'description' => 'Allow custom CSS to be provided with theme options',
-);
-
-$features['infinity-custom-css.markup'] = array(
-	'section' => 'global',
-	'type' => 'css/custom',
-	'title' => 'Custom CSS',
-	'description' => 'Enter custom CSS markup to fine tune the look of your site',
+	'options' => array(
+		'markup' => array(
+			'section' => 'global',
+			'type' => 'css/custom',
+			'title' => 'Custom CSS',
+			'description' => 'Enter custom CSS markup to fine tune the look of your site'
+		)
+	)
 );
 
 // Body Layout Feature
@@ -285,53 +281,49 @@ $features['infinity-body-layout'] = array(
 	'title' => 'Body Layout',
 	'description' => 'Change the Body according to your taste',
 	'options.section' => 'layout',
-);
-
-$features['infinity-body-layout.width'] = array(
-	'type' => 'css/length-px',
-	'title' => 'Maximum Width',
-	'description' => 'Set the maximum width of the site\'s content between %min% and %max% pixels by moving the slider.',
-	'min' => 900,
-	'max' => 1250,
-	'step' => 10,
-	'style_selector' => '#wrapper',
-	'style_property' => 'max-width',
-);
-
-$features['infinity-body-layout.background-color'] = array(
-	'type' => 'css/bg-color',
-	'style_selector' => 'body.theme-option',
-);
-
-$features['infinity-body-layout.background-image'] = array(
-	'type' => 'css/bg-image',
-	'style_selector' => 'body.theme-option',
-	'default_value' => 'assets/images/design/bg.png',
-);
-
-$features['infinity-body-layout.background-repeat'] = array(
-	'type' => 'css/bg-repeat',
-	'style_selector' => 'body.theme-option',
-	'parent' => '%feature%.background-image',
-);
-
-$features['infinity-body-layout.overlay-image'] = array(
-	'type' => 'css/overlay-image',
-	'style_selector' => 'body.theme-option',
-);
-
-$features['infinity-body-layout.overlay-opacity'] = array(
-	'type' => 'css/overlay-opacity',
-	'style_selector' => 'body.theme-option:before',
-	'parent' => '%feature%.overlay-image',
-	'linked_image' => '%feature%.overlay-image',
+	'options' => array(
+		'width' => array(
+			'type' => 'css/length-px',
+			'title' => 'Maximum Width',
+			'description' => 'Set the maximum width of the site\'s content between %min% and %max% pixels by moving the slider.',
+			'min' => 900,
+			'max' => 1250,
+			'step' => 10,
+			'style_selector' => '#wrapper',
+			'style_property' => 'max-width'
+		),
+		'background-color' => array(
+			'type' => 'css/bg-color',
+			'style_selector' => 'body.theme-option'
+		),
+		'background-image' => array(
+			'type' => 'css/bg-image',
+			'style_selector' => 'body.theme-option',
+			'default_value' => 'assets/images/design/bg.png'
+		),
+		'background-repeat' => array(
+			'type' => 'css/bg-repeat',
+			'style_selector' => 'body.theme-option',
+			'parent' => '%feature%.background-image'
+		),
+		'overlay-image' => array(
+			'type' => 'css/overlay-image',
+			'style_selector' => 'body.theme-option'
+		),
+		'overlay-opacity' => array(
+			'type' => 'css/overlay-opacity',
+			'style_selector' => 'body.theme-option:before',
+			'parent' => '%feature%.overlay-image',
+			'linked_image' => '%feature%.overlay-image'
+		)
+	)
 );
 
 // Header Logo Feature
 
 $features['infinity-header-logo'] = array(
 	'type' => 'header-logo',
-	'options.section' => 'header',
+	'options.section' => 'header'
 );
 
 // Header Layout Feature
@@ -342,82 +334,74 @@ $features['infinity-header-layout'] = array(
 	'description' => 'Customize the layout and colors of the header',
 	'options.section' => 'header',
 	'options.style_selector' => '#header',
-);
-
-$features['infinity-header-layout.min-height'] = array(
-	'type' => 'css/length-px',
-	'title' => 'Height',
-	'description' => 'Select the height of the header by moving the slider',
-	'min' => 100,
-	'max' => 500,
-	'step' => 10,
-	'style_property' => 'height',
-);
-
-$features['infinity-header-layout.margin-top'] = array(
-	'type' => 'css/length-px',
-	'title' => 'Top Margin',
-	'description' => 'The margin (spacing) between the top of the header and the top of the page.',
-	'min' => 0,
-	'max' => 100,
-	'step' => 2,
-	'style_property' => 'margin-top',
-);
-
-$features['infinity-header-layout.padding-top'] = array(
-	'type' => 'css/length-px',
-	'title' => 'Top Padding',
-	'description' => 'The padding (spacing) between the top of the header and the header content.',
-	'min' => 0,
-	'max' => 100,
-	'step' => 2,
-	'style_property' => 'padding-top',
-);
-
-$features['infinity-header-layout.margin-bottom'] = array(
-	'type' => 'css/length-px',
-	'title' => 'Bottom Margin',
-	'description' => 'The margin (spacing) between the bottom of the header and the top of the content section.',
-	'min' => 0,
-	'max' => 100,
-	'step' => 2,
-	'style_property' => 'margin-bottom',
-);
-
-$features['infinity-header-layout.padding-bottom'] = array(
-	'type' => 'css/length-px',
-	'title' => 'Bottom Padding',
-	'description' => 'The padding (spacing) between the bottom of the header and the header content.',
-	'min' => 0,
-	'max' => 100,
-	'step' => 2,
-	'style_property' => 'padding-bottom',
-);
-
-$features['infinity-header-layout.background-color'] = array(
-	'type' => 'css/bg-color',
-);
-
-$features['infinity-header-layout.background-image'] = array(
-	'type' => 'css/bg-image',
-	'default_value' => 'assets/images/design/header-background.jpg',
-);
-
-$features['infinity-header-layout.background-repeat'] = array(
-	'type' => 'css/bg-repeat',
-	'parent' => '%feature%.background-image',
-);
-
-$features['infinity-header-layout.overlay-image'] = array(
-	'type' => 'css/overlay-image',
-	'style_selector' => '#header',
-);
-
-$features['infinity-header-layout.overlay-opacity'] = array(
-	'type' => 'css/overlay-opacity',
-	'style_selector' => '#header:before',
-	'parent' => '%feature%.overlay-image',
-	'linked_image' => '%feature%.overlay-image',
+	'options' => array(
+		'min-height' => array(
+			'type' => 'css/length-px',
+			'title' => 'Height',
+			'description' => 'Select the height of the header by moving the slider',
+			'min' => 100,
+			'max' => 500,
+			'step' => 10,
+			'style_property' => 'height'
+		),
+		'margin-top' => array(
+			'type' => 'css/length-px',
+			'title' => 'Top Margin',
+			'description' => 'The margin (spacing) between the top of the header and the top of the page.',
+			'min' => 0,
+			'max' => 100,
+			'step' => 2,
+			'style_property' => 'margin-top'
+		),
+		'padding-top' => array(
+			'type' => 'css/length-px',
+			'title' => 'Top Padding',
+			'description' => 'The padding (spacing) between the top of the header and the header content.',
+			'min' => 0,
+			'max' => 100,
+			'step' => 2,
+			'style_property' => 'padding-top'
+		),
+		'margin-bottom' => array(
+			'type' => 'css/length-px',
+			'title' => 'Bottom Margin',
+			'description' => 'The margin (spacing) between the bottom of the header and the top of the content section.',
+			'min' => 0,
+			'max' => 100,
+			'step' => 2,
+			'style_property' => 'margin-bottom'
+		),
+		'padding-bottom' => array(
+			'type' => 'css/length-px',
+			'title' => 'Bottom Padding',
+			'description' => 'The padding (spacing) between the bottom of the header and the header content.',
+			'min' => 0,
+			'max' => 100,
+			'step' => 2,
+			'style_property' => 'padding-bottom'
+		),
+		'background-color' => array(
+			'type' => 'css/bg-color',
+		),
+		'background-image' => array(
+			'type' => 'css/bg-image',
+			'default_value' => 'assets/images/design/header-background.jpg',
+		),
+		'background-repeat' => array(
+			'type' => 'css/bg-repeat',
+			'parent' => '%feature%.background-image'
+		),
+		'overlay-image' => array(
+			'type' => 'css/overlay-image',
+			'style_selector' => '#header'
+		),
+		'overlay-opacity' => array(
+			'type' => 'css/overlay-opacity',
+			'style_selector' => '#header:before',
+			'parent' => '%feature%.overlay-image',
+			'linked_image' => '%feature%.overlay-image'
+		)
+	)
 );
 
 // Main Menu Layout Feature
@@ -428,45 +412,41 @@ $features['infinity-main-menu-layout'] = array(
 	'description' => 'Customize the layout and colors of the menu inside the header.',
 	'options.section' => 'menus-main',
 	'options.style_selector' => '.main-menu',
-);
-
-$features['infinity-main-menu-layout.color-link'] = array(
-	'type' => 'colorpicker',
-	'title' => 'Font Color',
-	'description' => 'Choose a font color for links of the menu inside the header.',
-	'style_selector' => '.main-menu ul li a span',
-	'style_property' => 'color',
-);
-
-$features['infinity-main-menu-layout.font-weight'] = array(
-	'type' => 'select',
-	'title' => 'Font Weight',
-	'description' => 'Choose a font weight for links of the menu inside the header.',
-	'style_selector' => '.main-menu ul li a span',
-	'style_property' => 'font-weight',
-);
-
-$features['infinity-main-menu-layout.padding'] = array(
-	'type' => 'css/length-px',
-	'title' => 'Padding',
-	'description' => 'Select the padding (spacing) around the menu links by moving the slider.',
-	'max' => 30,
-	'style_property' => 'padding',
-);
-
-$features['infinity-main-menu-layout.background-color'] = array(
-	'type' => 'css/bg-color',
-);
-
-$features['infinity-main-menu-layout.overlay-image'] = array(
-	'type' => 'css/overlay-image',
-);
-
-$features['infinity-main-menu-layout.overlay-opacity'] = array(
-	'type' => 'css/overlay-opacity',
-	'style_selector' => '.main-menu:before',
-	'parent' => '%feature%.overlay-image',
-	'linked_image' => '%feature%.overlay-image',
+	'options' => array(
+		'color-link' => array(
+			'type' => 'colorpicker',
+			'title' => 'Font Color',
+			'description' => 'Choose a font color for links of the menu inside the header.',
+			'style_selector' => '.main-menu ul li a span',
+			'style_property' => 'color'
+		),
+		'font-weight' => array(
+			'type' => 'select',
+			'title' => 'Font Weight',
+			'description' => 'Choose a font weight for links of the menu inside the header.',
+			'style_selector' => '.main-menu ul li a span',
+			'style_property' => 'font-weight'
+		),
+		'padding' => array(
+			'type' => 'css/length-px',
+			'title' => 'Padding',
+			'description' => 'Select the padding (spacing) around the menu links by moving the slider.',
+			'max' => 30,
+			'style_property' => 'padding'
+		),
+		'background-color' => array(
+			'type' => 'css/bg-color'
+		),
+		'overlay-image' => array(
+			'type' => 'css/overlay-image'
+		),
+		'overlay-opacity' => array(
+			'type' => 'css/overlay-opacity',
+			'style_selector' => '.main-menu:before',
+			'parent' => '%feature%.overlay-image',
+			'linked_image' => '%feature%.overlay-image'
+		)
+	)
 );
 
 // Top Menu Layout Feature
@@ -477,44 +457,40 @@ $features['infinity-top-menu-layout'] = array(
 	'description' => 'Customize the layout and colors of the menu above the header.',
 	'options.section' => 'menus-top',
 	'options.style_selector' => '.top-menu',
-);
-
-$features['infinity-top-menu-layout.color-link'] = array(
-	'type' => 'colorpicker',
-	'title' => 'Font Color',
-	'description' => 'Choose a font color for links of the menu above the header.',
-	'style_selector' => '.top-menu ul li a span',
-	'style_property' => 'color',
-);
-
-$features['infinity-top-menu-layout.font-weight'] = array(
-	'type' => 'select',
-	'title' => 'Font Weight',
-	'description' => 'Choose a font weight for links of the menu above the header.',
-	'style_selector' => '.top-menu ul li a span',
-	'style_property' => 'font-weight',
-);
-
-$features['infinity-top-menu-layout.background-color'] = array(
-	'type' => 'css/bg-color',
-);
-
-$features['infinity-top-menu-layout.background-color-subitem'] = array(
-	'type' => 'css/bg-color',
-	'title' => 'Sub-item Background',
-	'description' => 'Choose a background color for the submenu items of the menu above the header.',
-	'style_selector' => '.top-menu ul ul',
-);
-
-$features['infinity-top-menu-layout.overlay-image'] = array(
-	'type' => 'css/overlay-image',
-);
-
-$features['infinity-top-menu-layout.overlay-opacity'] = array(
-	'type' => 'css/overlay-opacity',
-	'style_selector' => '.top-menu:before',
-	'parent' => '%feature%.overlay-image',
-	'linked_image' => '%feature%.overlay-image',
+	'options' => array(
+		'color-link' => array(
+			'type' => 'colorpicker',
+			'title' => 'Font Color',
+			'description' => 'Choose a font color for links of the menu above the header.',
+			'style_selector' => '.top-menu ul li a span',
+			'style_property' => 'color'
+		),
+		'font-weight' => array(
+			'type' => 'select',
+			'title' => 'Font Weight',
+			'description' => 'Choose a font weight for links of the menu above the header.',
+			'style_selector' => '.top-menu ul li a span',
+			'style_property' => 'font-weight'
+		),
+		'background-color' => array(
+			'type' => 'css/bg-color'
+		),
+		'background-color-subitem' => array(
+			'type' => 'css/bg-color',
+			'title' => 'Sub-item Background',
+			'description' => 'Choose a background color for the submenu items of the menu above the header.',
+			'style_selector' => '.top-menu ul ul'
+		),
+		'overlay-image' => array(
+			'type' => 'css/overlay-image'
+		),
+		'overlay-opacity' => array(
+			'type' => 'css/overlay-opacity',
+			'style_selector' => '.top-menu:before',
+			'parent' => '%feature%.overlay-image',
+			'linked_image' => '%feature%.overlay-image'
+		)
+	)
 );
 
 // Sub Menu Feature
@@ -525,44 +501,40 @@ $features['infinity-sub-menu-layout'] = array(
 	'description' => 'Customize the layout and colors of the menu below the header.',
 	'options.section' => 'menus-sub',
 	'options.style_selector' => '.sub-menu',
-);
-
-$features['infinity-sub-menu-layout.color-link'] = array(
-	'type' => 'colorpicker',
-	'title' => 'Font Color',
-	'description' => 'Choose a font color for links of the menu below the header.',
-	'style_selector' => '.sub-menu ul li a span',
-	'style_property' => 'color',
-);
-
-$features['infinity-sub-menu-layout.font-weight'] = array(
-	'type' => 'select',
-	'title' => 'Font Weight',
-	'description' => 'Choose a font weight for links of the menu below the header.',
-	'style_selector' => '.sub-menu ul li a span',
-	'style_property' => 'font-weight',
-);
-
-$features['infinity-sub-menu-layout.background-color'] = array(
-	'type' => 'css/bg-color',
-);
-
-$features['infinity-sub-menu-layout.background-color-subitem'] = array(
-	'type' => 'css/bg-color',
-	'title' => 'Sub-item Background',
-	'description' => 'Choose a background color for the submenu items of the menu below the header.',
-	'style_selector' => '.sub-menu ul ul',
-);
-
-$features['infinity-sub-menu-layout.overlay-image'] = array(
-	'type' => 'css/overlay-image',
-);
-
-$features['infinity-sub-menu-layout.overlay-opacity'] = array(
-	'type' => 'css/overlay-opacity',
-	'style_selector' => '.sub-menu:before',
-	'parent' => '%feature%.overlay-image',
-	'linked_image' => '%feature%.overlay-image',
+	'options' => array(
+		'color-link' => array(
+			'type' => 'colorpicker',
+			'title' => 'Font Color',
+			'description' => 'Choose a font color for links of the menu below the header.',
+			'style_selector' => '.sub-menu ul li a span',
+			'style_property' => 'color'
+		),
+		'font-weight' => array(
+			'type' => 'select',
+			'title' => 'Font Weight',
+			'description' => 'Choose a font weight for links of the menu below the header.',
+			'style_selector' => '.sub-menu ul li a span',
+			'style_property' => 'font-weight'
+		),
+		'background-color' => array(
+			'type' => 'css/bg-color'
+		),
+		'background-color-subitem' => array(
+			'type' => 'css/bg-color',
+			'title' => 'Sub-item Background',
+			'description' => 'Choose a background color for the submenu items of the menu below the header.',
+			'style_selector' => '.sub-menu ul ul'
+		),
+		'overlay-image' => array(
+			'type' => 'css/overlay-image'
+		),
+		'overlay-opacity' => array(
+			'type' => 'css/overlay-opacity',
+			'style_selector' => '.sub-menu:before',
+			'parent' => '%feature%.overlay-image',
+			'linked_image' => '%feature%.overlay-image'
+		)
+	)
 );
 
 // Content Styles
@@ -573,46 +545,41 @@ $features['infinity-content-layout'] = array(
 	'description' => 'Customize the layout and colors of the content section.',
 	'options.section' => 'content',
 	'options.style_selector' => '#content',
-);
-
-$features['infinity-content-layout.text-color'] = array(
-	'type' => 'colorpicker',
-	'title' => 'Text Color',
-	'description' => 'Choose a color for text inside the content section.',
-	'style_selector' => '#content a',
-	'style_property' => 'color',
-);
-
-$features['infinity-content-layout.link-color'] = array(
-	'type' => 'colorpicker',
-	'title' => 'Link Color',
-	'description' => 'Choose a color for links inside the content section.',
-	'style_selector' => '#content a',
-	'style_property' => 'color',
-);
-
-$features['infinity-content-layout.background-color'] = array(
-	'type' => 'css/bg-color',
-);
-
-$features['infinity-content-layout.background-image'] = array(
-	'type' => 'css/bg-image',
-);
-
-$features['infinity-content-layout.background-repeat'] = array(
-	'type' => 'css/bg-repeat',
-	'parent' => '%feature%.background-image',
-);
-
-$features['infinity-content-layout.overlay-image'] = array(
-	'type' => 'css/overlay-image',
-);
-
-$features['infinity-content-layout.overlay-opacity'] = array(
-	'type' => 'css/overlay-opacity',
-	'style_selector' => '#content:before',
-	'parent' => '%feature%.overlay-image',
-	'linked_image' => '%feature%.overlay-image',
+	'options' => array(
+		'text-color' => array(
+			'type' => 'colorpicker',
+			'title' => 'Text Color',
+			'description' => 'Choose a color for text inside the content section.',
+			'style_selector' => '#content a',
+			'style_property' => 'color'
+		),
+		'link-color' => array(
+			'type' => 'colorpicker',
+			'title' => 'Link Color',
+			'description' => 'Choose a color for links inside the content section.',
+			'style_selector' => '#content a',
+			'style_property' => 'color'
+		),
+		'background-color' => array(
+			'type' => 'css/bg-color',
+		),
+		'background-image' => array(
+			'type' => 'css/bg-image'
+		),
+		'background-repeat' => array(
+			'type' => 'css/bg-repeat',
+			'parent' => '%feature%.background-image'
+		),
+		'overlay-image' => array(
+			'type' => 'css/overlay-image'
+		),
+		'overlay-opacity' => array(
+			'type' => 'css/overlay-opacity',
+			'style_selector' => '#content:before',
+			'parent' => '%feature%.overlay-image',
+			'linked_image' => '%feature%.overlay-image'
+		)
+	)
 );
 
 // Sidebar Styles
@@ -623,46 +590,41 @@ $features['infinity-sidebar-layout'] = array(
 	'description' => 'Customize the layout and colors of the sidebar',
 	'options.section' => 'sidebar',
 	'options.style_selector' => '#sidebar',
-);
-
-$features['infinity-sidebar-layout.text-color'] = array(
-	'type' => 'colorpicker',
-	'title' => 'Text Color',
-	'description' => 'Choose a color for text in the sidebar.',
-	'style_property' => 'color',
-);
-
-$features['infinity-sidebar-layout.link-color'] = array(
-	'type' => 'colorpicker',
-	'title' => 'Link Color',
-	'description' => 'Choose a color for links in the sidebar.',
-	'style_selector' => '#sidebar a',
-	'style_property' => 'color',
-);
-
-$features['infinity-sidebar-layout.background-color'] = array(
-	'type' => 'css/bg-color',
-);
-
-$features['infinity-sidebar-layout.background-image'] = array(
-	'type' => 'css/bg-image',
-);
-
-$features['infinity-sidebar-layout.background-repeat'] = array(
-	'type' => 'css/bg-repeat',
-	'parent' => '%feature%.background-image',
-);
-
-$features['infinity-sidebar-layout.overlay-image'] = array(
-	'type' => 'css/overlay-image',
-	'style_selector' => '#sidebar',
-);
-
-$features['infinity-sidebar-layout.overlay-opacity'] = array(
-	'type' => 'css/overlay-opacity',
-	'style_selector' => '#sidebar:before',
-	'parent' => '%feature%.overlay-image',
-	'linked_image' => '%feature%.overlay-image',
+	'options' => array(
+		'text-color' => array(
+			'type' => 'colorpicker',
+			'title' => 'Text Color',
+			'description' => 'Choose a color for text in the sidebar.',
+			'style_property' => 'color'
+		),
+		'link-color' => array(
+			'type' => 'colorpicker',
+			'title' => 'Link Color',
+			'description' => 'Choose a color for links in the sidebar.',
+			'style_selector' => '#sidebar a',
+			'style_property' => 'color'
+		),
+		'background-color' => array(
+			'type' => 'css/bg-color'
+		),
+		'background-image' => array(
+			'type' => 'css/bg-image'
+		),
+		'background-repeat' => array(
+			'type' => 'css/bg-repeat',
+			'parent' => '%feature%.background-image'
+		),
+		'overlay-image' => array(
+			'type' => 'css/overlay-image',
+			'style_selector' => '#sidebar'
+		),
+		'overlay-opacity' => array(
+			'type' => 'css/overlay-opacity',
+			'style_selector' => '#sidebar:before',
+			'parent' => '%feature%.overlay-image',
+			'linked_image' => '%feature%.overlay-image'
+		)
+	)
 );
 
 // Widget Layout Feature
@@ -673,45 +635,41 @@ $features['infinity-widget-layout'] = array(
 	'description' => 'Customize the layout and colors of widgets.',
 	'options.section' => 'widgets',
 	'options.style_selector' => '#sidebar .widget',
-);
-
-$features['infinity-widget-layout.color-link'] = array(
-	'type' => 'colorpicker',
-	'title' => 'Widget Title Color',
-	'description' => 'Choose a font color for widget titles.',
-	'style_selector' => '#sidebar .widget h4',
-	'style_property' => 'color',
-);
-
-$features['infinity-widget-layout.font-weight'] = array(
-	'type' => 'select',
-	'title' => 'Font Weight',
-	'description' => 'Choose a font weight for widget titles.',
-	'style_selector' => '#sidebar .widget h4',
-	'style_property' => 'font-weight',
-);
-
-$features['infinity-widget-layout.padding'] = array(
-	'type' => 'css/length-px',
-	'title' => 'Padding',
-	'description' => 'The padding (spacing) between any widget border and it\'s content.',
-	'max' => 30,
-	'style_property' => 'padding',
-);
-
-$features['infinity-widget-layout.background-color'] = array(
-	'type' => 'css/bg-color',
-);
-
-$features['infinity-widget-layout.overlay-image'] = array(
-	'type' => 'css/overlay-image',
-);
-
-$features['infinity-widget-layout.overlay-opacity'] = array(
-	'type' => 'css/overlay-opacity',
-	'style_selector' => '#sidebar .widget:before',
-	'parent' => '%feature%.overlay-image',
-	'linked_image' => '%feature%.overlay-image',
+	'options' => array(
+		'color-link' => array(
+			'type' => 'colorpicker',
+			'title' => 'Widget Title Color',
+			'description' => 'Choose a font color for widget titles.',
+			'style_selector' => '#sidebar .widget h4',
+			'style_property' => 'color'
+		),
+		'font-weight' => array(
+			'type' => 'select',
+			'title' => 'Font Weight',
+			'description' => 'Choose a font weight for widget titles.',
+			'style_selector' => '#sidebar .widget h4',
+			'style_property' => 'font-weight'
+		),
+		'padding' => array(
+			'type' => 'css/length-px',
+			'title' => 'Padding',
+			'description' => 'The padding (spacing) between any widget border and it\'s content.',
+			'max' => 30,
+			'style_property' => 'padding'
+		),
+		'background-color' => array(
+			'type' => 'css/bg-color'
+		),
+		'overlay-image' => array(
+			'type' => 'css/overlay-image'
+		),
+		'overlay-opacity' => array(
+			'type' => 'css/overlay-opacity',
+			'style_selector' => '#sidebar .widget:before',
+			'parent' => '%feature%.overlay-image',
+			'linked_image' => '%feature%.overlay-image'
+		)
+	)
 );
 
 // Footer Layout Feature
@@ -722,55 +680,49 @@ $features['infinity-footer-layout'] = array(
 	'description' => 'Customize the layout and colors of the footer',
 	'options.section' => 'footer',
 	'options.style_selector' => '.footer-wrap',
-);
-
-$features['infinity-footer-layout.text-color'] = array(
-	'type' => 'colorpicker',
-	'title' => 'Text Color',
-	'description' => 'Choose a color for text inside the footer section.',
-	'style_property' => 'color',
-);
-
-$features['infinity-footer-layout.link-color'] = array(
-	'type' => 'colorpicker',
-	'title' => 'Link Color',
-	'description' => 'Choose a color for links inside the footer section.',
-	'style_selector' => '.footer-wrap a',
-	'style_property' => 'color',
-);
-
-$features['infinity-footer-layout.margin-top'] = array(
-	'type' => 'css/length-px',
-	'title' => 'Top Margin',
-	'description' => 'The margin (spacing) between the bottom of the content section and the top of the footer.',
-	'min' => 0,
-	'max' => 100,
-	'step' => 2,
-	'style_property' => 'margin-top',
-);
-
-$features['infinity-footer-layout.background-color'] = array(
-	'type' => 'css/bg-color',
-);
-
-$features['infinity-footer-layout.background-image'] = array(
-	'type' => 'css/bg-image',
-);
-
-$features['infinity-footer-layout.background-repeat'] = array(
-	'type' => 'css/bg-repeat',
-	'parent' => '%feature%.background-image',
-);
-
-$features['infinity-footer-layout.overlay-image'] = array(
-	'type' => 'css/overlay-image',
-);
-
-$features['infinity-footer-layout.overlay-opacity'] = array(
-	'type' => 'css/overlay-opacity',
-	'style_selector' => '.footer-wrap:before',
-	'parent' => '%feature%.overlay-image',
-	'linked_image' => '%feature%.overlay-image',
+	'options' => array(
+		'text-color' => array(
+			'type' => 'colorpicker',
+			'title' => 'Text Color',
+			'description' => 'Choose a color for text inside the footer section.',
+			'style_property' => 'color'
+		),
+		'link-color' => array(
+			'type' => 'colorpicker',
+			'title' => 'Link Color',
+			'description' => 'Choose a color for links inside the footer section.',
+			'style_selector' => '.footer-wrap a',
+			'style_property' => 'color'
+		),
+		'margin-top' => array(
+			'type' => 'css/length-px',
+			'title' => 'Top Margin',
+			'description' => 'The margin (spacing) between the bottom of the content section and the top of the footer.',
+			'min' => 0,
+			'max' => 100,
+			'step' => 2,
+			'style_property' => 'margin-top'
+		),
+		'background-color' => array(
+			'type' => 'css/bg-color'
+		),
+		'background-image' => array(
+			'type' => 'css/bg-image'
+		),
+		'background-repeat' => array(
+			'type' => 'css/bg-repeat',
+			'parent' => '%feature%.background-image'
+		),
+		'overlay-image' => array(
+			'type' => 'css/overlay-image'
+		),
+		'overlay-opacity' => array(
+			'type' => 'css/overlay-opacity',
+			'style_selector' => '.footer-wrap:before',
+			'parent' => '%feature%.overlay-image',
+			'linked_image' => '%feature%.overlay-image'
+		)
+	)
 );
 
 // Additional BuddyPress features
@@ -778,14 +730,14 @@ $features['infinity-footer-layout.overlay-opacity'] = array(
 $features['infinity-bp-fbconnect'] = array(
 	'type' => 'bp/fb-autoconnect',
 	'class' => 'info-box register-intro',
-	'options.section' => 'buddypress',
+	'options.section' => 'buddypress'
 );
 
 $features['infinity-bp-sidebar-setup'] = array(
 	'type' => 'default',
 	'title' => 'BuddyPress Sidebar',
 	'description' => 'Special BuddyPress sidebar registration',
-	'required_feature' => 'infinity-bp-support',
+	'required_feature' => 'infinity-bp-support'
 );
 
 // Post Gravatar Feature
@@ -796,77 +748,70 @@ $features['infinity-post-gravatar'] = array(
 	'description' => 'Total control over post gravatars',
 	'image_class' => 'infinity-post-gravatar',
 	'options.section' => 'gravatars',
-);
-
-$features['infinity-post-gravatar.size'] = array(
-	'type' => 'text',
-	'title' => 'Size',
-	'description' => 'Enter the size in pixels for the Gravatar image',
-);
-
-$features['infinity-post-gravatar.default-set'] = array(
-	'type' => 'select',
-	'title' => 'Default Image Set',
-	'description' => 'Select the default image set to use',
-	'default_value' => 'mm',
-	'field_options' => array(
-		'404' => 'Return 404 Error',
-		'mm' => 'Mystery Man',
-		'identicon' => 'Identicon',
-		'monsterid' => 'Monster ID',
-		'wavatar' => 'Wavatar',
-		'retro' => 'Retro'
+	'options' => array(
+		'size' => array(
+			'type' => 'text',
+			'title' => 'Size',
+			'description' => 'Enter the size in pixels for the Gravatar image'
+		),
+		'default-set' => array(
+			'type' => 'select',
+			'title' => 'Default Image Set',
+			'description' => 'Select the default image set to use',
+			'default_value' => 'mm',
+			'field_options' => array(
+				'404' => 'Return 404 Error',
+				'mm' => 'Mystery Man',
+				'identicon' => 'Identicon',
+				'monsterid' => 'Monster ID',
+				'wavatar' => 'Wavatar',
+				'retro' => 'Retro'
+			)
+		),
+		'default-img' => array(
+			'type' => 'upload',
+			'title' => 'Default Image File',
+			'description' => 'Upload a default Gravatar image (overrides default set)'
+		),
+		'default-force' => array(
+			'type' => 'toggle/yes-no',
+			'title' => 'Force Default',
+			'description' => 'Force default image to always load?',
+			'default_value' => false
+		),
+		'rating' => array(
+			'type' => 'select',
+			'title' => 'Rating',
+			'description' => 'Select highest image rating to display',
+			'default_value' => 'g',
+			'field_options' => array(
+				'g' => 'G (suitable for display on all websites with any audience type)',
+				'pg' => 'PG (may contain rude gestures, provocatively dressed individuals, the lesser swear words, or mild violence)',
+				'r' => 'R (may contain such things as harsh profanity, intense violence, nudity, or hard drug use)',
+				'x' => 'X (may contain hardcore sexual imagery or extremely disturbing violence)'
+			)
+		),
+		'border-width' => array(
+			'type' => 'text',
+			'title' => 'Border Width',
+			'description' => 'Enter a border width in pixels for the Gravatar image'
+		),
+		'border-color' => array(
+			'type' => 'colorpicker',
+			'title' => 'Border Color',
+			'description' => 'Select a color for the Gravatar image border'
+		),
+		'padding' => array(
+			'type' => 'text',
+			'title' => 'Padding',
+			'description' => 'Enter a padding size in pixels for the Gravatar image'
+		),
+		'bg-color' => array(
+			'type' => 'colorpicker',
+			'title' => 'Background Color',
+			'description' => 'Select a background color for the Gravatar image'
+		)
 	)
-);
-
-$features['infinity-post-gravatar.default-img'] = array(
-	'type' => 'upload',
-	'title' => 'Default Image File',
-	'description' => 'Upload a default Gravatar image (overrides default set)',
-);
-
-$features['infinity-post-gravatar.default-force'] = array(
-	'type' => 'toggle/yes-no',
-	'title' => 'Force Default',
-	'description' => 'Force default image to always load?',
-	'default_value' => false
-);
-
-$features['infinity-post-gravatar.rating'] = array(
-	'type' => 'select',
-	'title' => 'Rating',
-	'description' => 'Select highest image rating to display',
-	'default_value' => 'g',
-	'field_options' => array(
-		'g' => 'G (suitable for display on all websites with any audience type)',
-		'pg' => 'PG (may contain rude gestures, provocatively dressed individuals, the lesser swear words, or mild violence)',
-		'r' => 'R (may contain such things as harsh profanity, intense violence, nudity, or hard drug use)',
-		'x' => 'X (may contain hardcore sexual imagery or extremely disturbing violence)'
-	)
-);
-
-$features['infinity-post-gravatar.border-width'] = array(
-	'type' => 'text',
-	'title' => 'Border Width',
-	'description' => 'Enter a border width in pixels for the Gravatar image',
-);
-
-$features['infinity-post-gravatar.border-color'] = array(
-	'type' => 'colorpicker',
-	'title' => 'Border Color',
-	'description' => 'Select a color for the Gravatar image border',
-);
-
-$features['infinity-post-gravatar.padding'] = array(
-	'type' => 'text',
-	'title' => 'Padding',
-	'description' => 'Enter a padding size in pixels for the Gravatar image',
-);
-
-$features['infinity-post-gravatar.bg-color'] = array(
-	'type' => 'colorpicker',
-	'title' => 'Background Color',
-	'description' => 'Select a background color for the Gravatar image',
 );
 
 // return config array to caller
