@@ -20,18 +20,6 @@
 abstract class ICE_Init_Registry extends ICE_Map
 {
 	/**
-	 * Key namespace delimeter 
-	 */
-	const NAMESPACE_DELIM = '.';
-
-	/**
-	 * Default values for other registry namespaces
-	 *
-	 * @var array
-	 */
-	private $__ns_defaults__ = array();
-
-	/**
 	 * Simple cache for storing value for effective theme from stack
 	 * 
 	 * @var array
@@ -66,16 +54,6 @@ abstract class ICE_Init_Registry extends ICE_Map
 	 */
 	public function set( $theme, $name, $value, $ro_value = false, $ro_theme = false )
 	{
-		// does this one have a namespace delimeter?
-		if ( strpos( $name, self::NAMESPACE_DELIM ) ) {
-			// yep, split it
-			$parts = explode( self::NAMESPACE_DELIM, $name, 2 );
-			// set it in the namespaces defaults array
-			$this->__ns_defaults__[ $parts[0] ][ $parts[1] ] = $value;
-			// all done
-			return true;
-		}
-		
 		// convert arrays to maps
 		if ( is_array( $value ) ) {
 			$value = new ICE_Map( $value, $ro_value );
@@ -238,22 +216,6 @@ abstract class ICE_Init_Registry extends ICE_Map
 	{
 		return $this->to_array();
 	}
-
-	/**
-	 * Get defaults for a specific namespace
-	 *
-	 * @param string $ns
-	 * @return array
-	 */
-	final public function get_ns_defaults( $ns )
-	{
-		if ( isset( $this->__ns_defaults__[ $ns ] ) ) {
-			return $this->__ns_defaults__[ $ns ];
-		}
-
-		return array();
-	}
-
 
 	/**
 	 * Lock registry from further addition/removal of data

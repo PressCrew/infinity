@@ -22,6 +22,18 @@ ICE_Loader::load( 'base/registry', 'components/features/factory' );
 abstract class ICE_Feature_Registry extends ICE_Registry
 {
 	/**
+	 * Option name which contains default config.
+	 */
+	const OPT_DEF_NAME = 'defaults';
+
+	/**
+	 * Default option config for features that have one.
+	 *
+	 * @var array
+	 */
+	private $opt_defaults = array();
+
+	/**
 	 */
 	protected function load_config_section( $section_name, $section_array )
 	{
@@ -39,13 +51,8 @@ abstract class ICE_Feature_Registry extends ICE_Registry
 					true === is_array( $section_array['options'] ) &&
 					true === $this->policy()->options() instanceof ICE_Policy
 				) {
-					// yes, loop all sub options
-					foreach( $section_array['options'] as $option => $option_config ) {
-						// inject feature atts into config array
-						$option_config[ 'feature' ] = $feature;
-						// try to load it
-						$this->policy()->options()->registry()->load_feature_option( $option, $option_config );
-					}
+					// yes, call sub options loader
+					$this->load_sub_options( $feature, $section_array['options'] );
 				}
 			}
 
@@ -59,4 +66,73 @@ abstract class ICE_Feature_Registry extends ICE_Registry
 			
 		}
 	}
+
+	/**
+	 * Load sub options for a feature.
+	 *
+	 * @param string $feature
+	 * @param array $options
+	 */
+	private function load_sub_options( $feature, $options )
+	{
+		foreach( $options as $option => $option_config ) {
+			// call sub option loader
+			$this->load_sub_option( $feature, $option, $option_config );
+		}
+	}
+
+	/**
+	 * Load one sub option for a feature.
+	 *
+	 * @param string $feature
+	 * @param string $option
+	 * @param array $option_config
+	 */
+	private function load_sub_option( $feature, $option, $option_config )
+	{
+		// is this the feature option defaults?
+		if ( self::OPT_DEF_NAME === $option ) {
+			// yep, set em
+			$this->load_default_option( $feature, $option_config );
+		} else {
+			// inject feature atts into config array
+			$option_config[ 'feature' ] = $feature;
+			// call special feature option loader
+			$this->policy()->options()->registry()->load_feature_option( $option, $option_config );
+		}
+	}
+
+	/**
+	 * Load default option config for a feature.
+	 *
+	 * @param string $feature
+	 * @param array $option_config
+	 */
+	private function load_default_option( $feature, $option_config )
+	{
+		// already have some defaults set?
+		if ( isset( $this->opt_defaults[ $feature ] ) ) {
+			// yes, merge on top of existing
+			$option_config = array_merge( $this->opt_defaults[ $feature ], $option_config );
+		}
+
+		// set defaults
+		$this->opt_defaults[ $feature ] = $option_config;
+	}
+
+	/**
+	 * Get default option config for a feature.
+	 *
+	 * @param string $feature
+	 * @return array|false
+	 */
+	public function get_default_option( $feature )
+	{
+		if ( isset( $this->opt_defaults[ $feature ] ) ) {
+			return $this->opt_defaults[ $feature ];
+		} else {
+			return false;
+		}
+	}
+
 }

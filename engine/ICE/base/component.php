@@ -530,10 +530,8 @@ abstract class ICE_Component
 
 		// is a feature set?
 		if ( isset( $config_array['feature'] ) ) {
-			// yes, check it for namespace defaults
-			$feature = $this->policy()->features()->registry()->get( $config_array['feature'] );
 			// try to grab defaults
-			$defaults_array = $feature->config()->get_ns_defaults( $this->policy()->get_handle() );
+			$defaults_array = $this->policy()->features()->registry()->get_default_option( $config_array['feature'] );
 			// get any defaults?
 			if ( !empty( $defaults_array ) ) {
 				// merge config *ON TOP OF* defaults

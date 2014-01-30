@@ -194,8 +194,10 @@ $features['infinity-core-options'] = array(
 	'type' => 'default',
 	'title' => 'Custom CSS',
 	'description' => 'Core set of options included with Infinity Base',
-	'options.section' => 'global',
 	'options' => array(
+		'defaults' => array(
+			'section' => 'global'
+		),
 		'text-color' => array(
 			'type' => 'colorpicker',
 			'title' => 'Text Color',
@@ -280,8 +282,10 @@ $features['infinity-body-layout'] = array(
 	'type' => 'default',
 	'title' => 'Body Layout',
 	'description' => 'Change the Body according to your taste',
-	'options.section' => 'layout',
 	'options' => array(
+		'defaults' => array(
+			'section' => 'layout'
+		),
 		'width' => array(
 			'type' => 'css/length-px',
 			'title' => 'Maximum Width',
@@ -323,7 +327,11 @@ $features['infinity-body-layout'] = array(
 
 $features['infinity-header-logo'] = array(
 	'type' => 'header-logo',
-	'options.section' => 'header'
+	'options' => array(
+		'defaults' => array(
+			'section' => 'header'
+		),
+	)
 );
 
 // Header Layout Feature
@@ -332,9 +340,11 @@ $features['infinity-header-layout'] = array(
 	'type' => 'default',
 	'title' => 'Header Styles',
 	'description' => 'Customize the layout and colors of the header',
-	'options.section' => 'header',
-	'options.style_selector' => '#header',
 	'options' => array(
+		'defaults' => array(
+			'section' => 'header',
+			'style_selector' => '#header'
+		),
 		'min-height' => array(
 			'type' => 'css/length-px',
 			'title' => 'Height',
@@ -410,9 +420,11 @@ $features['infinity-main-menu-layout'] = array(
 	'type' => 'default',
 	'title' => 'Main Menu Styles',
 	'description' => 'Customize the layout and colors of the menu inside the header.',
-	'options.section' => 'menus-main',
-	'options.style_selector' => '.main-menu',
 	'options' => array(
+		'defaults' => array(
+			'section' => 'menus-main',
+			'style_selector' => '.main-menu'
+		),
 		'color-link' => array(
 			'type' => 'colorpicker',
 			'title' => 'Font Color',
@@ -455,9 +467,11 @@ $features['infinity-top-menu-layout'] = array(
 	'type' => 'default',
 	'title' => 'Sub Menu Styles',
 	'description' => 'Customize the layout and colors of the menu above the header.',
-	'options.section' => 'menus-top',
-	'options.style_selector' => '.top-menu',
 	'options' => array(
+		'defaults' => array(
+			'section' => 'menus-top',
+			'style_selector' => '.top-menu'
+		),
 		'color-link' => array(
 			'type' => 'colorpicker',
 			'title' => 'Font Color',
@@ -499,9 +513,11 @@ $features['infinity-sub-menu-layout'] = array(
 	'type' => 'default',
 	'title' => 'Sub Menu Styles',
 	'description' => 'Customize the layout and colors of the menu below the header.',
-	'options.section' => 'menus-sub',
-	'options.style_selector' => '.sub-menu',
 	'options' => array(
+		'defaults' => array(
+			'section' => 'menus-sub',
+			'style_selector' => '.sub-menu'
+		),
 		'color-link' => array(
 			'type' => 'colorpicker',
 			'title' => 'Font Color',
@@ -543,9 +559,12 @@ $features['infinity-content-layout'] = array(
 	'type' => 'default',
 	'title' => 'Content Styles',
 	'description' => 'Customize the layout and colors of the content section.',
-	'options.section' => 'content',
-	'options.style_selector' => '#content',
+	
 	'options' => array(
+		'defaults' => array(
+			'section' => 'content',
+			'style_selector' => '#content'
+		),
 		'text-color' => array(
 			'type' => 'colorpicker',
 			'title' => 'Text Color',
@@ -588,9 +607,11 @@ $features['infinity-sidebar-layout'] = array(
 	'type' => 'default',
 	'title' => 'sidebar Styles',
 	'description' => 'Customize the layout and colors of the sidebar',
-	'options.section' => 'sidebar',
-	'options.style_selector' => '#sidebar',
 	'options' => array(
+		'defaults' => array(
+			'section' => 'sidebar',
+			'style_selector' => '#sidebar'
+		),
 		'text-color' => array(
 			'type' => 'colorpicker',
 			'title' => 'Text Color',
@@ -633,9 +654,11 @@ $features['infinity-widget-layout'] = array(
 	'type' => 'default',
 	'title' => 'Widget Styling',
 	'description' => 'Customize the layout and colors of widgets.',
-	'options.section' => 'widgets',
-	'options.style_selector' => '#sidebar .widget',
 	'options' => array(
+		'defaults' => array(
+			'section' => 'widgets',
+			'style_selector' => '#sidebar .widget'
+		),
 		'color-link' => array(
 			'type' => 'colorpicker',
 			'title' => 'Widget Title Color',
@@ -677,10 +700,12 @@ $features['infinity-widget-layout'] = array(
 $features['infinity-footer-layout'] = array(
 	'type' => 'default',
 	'title' => 'footer Styles',
-	'description' => 'Customize the layout and colors of the footer',
-	'options.section' => 'footer',
-	'options.style_selector' => '.footer-wrap',
+	'description' => 'Customize the layout and colors of the footer',	
 	'options' => array(
+		'defaults' => array(
+			'section' => 'footer',
+			'style_selector' => '.footer-wrap'
+		),
 		'text-color' => array(
 			'type' => 'colorpicker',
 			'title' => 'Text Color',
@@ -730,7 +755,11 @@ $features['infinity-footer-layout'] = array(
 $features['infinity-bp-fbconnect'] = array(
 	'type' => 'bp/fb-autoconnect',
 	'class' => 'info-box register-intro',
-	'options.section' => 'buddypress'
+	'options' => array(
+		'defaults' => array(
+			'section' => 'buddypress'
+		),
+	)
 );
 
 $features['infinity-bp-sidebar-setup'] = array(
@@ -746,9 +775,11 @@ $features['infinity-post-gravatar'] = array(
 	'type' => 'gravatar',
 	'title' => 'Post Gravatars',
 	'description' => 'Total control over post gravatars',
-	'image_class' => 'infinity-post-gravatar',
-	'options.section' => 'gravatars',
+	'image_class' => 'infinity-post-gravatar',	
 	'options' => array(
+		'defaults' => array(
+			'section' => 'gravatars'
+		),
 		'size' => array(
 			'type' => 'text',
 			'title' => 'Size',
