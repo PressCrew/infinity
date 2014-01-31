@@ -20,13 +20,6 @@
 abstract class ICE_Init_Registry extends ICE_Map
 {
 	/**
-	 * Simple cache for storing value for effective theme from stack
-	 * 
-	 * @var array
-	 */
-	private $__lookup_cache__ = array();
-
-	/**
 	 * Create a new instance of ICE_Init_Data for storing in the registry
 	 *
 	 * @param string $theme Slug of the theme which is setting this data
@@ -87,12 +80,6 @@ abstract class ICE_Init_Registry extends ICE_Map
 			$result = true;
 		}
 
-		// update cache
-		if ( true === $result ) {
-			// good result, clear cache
-			unset( $this->__lookup_cache__[ $name ] );
-		}
-
 		// lock data map if applicable
 		if ( $ro_value ) {
 			$data->lock();
@@ -105,21 +92,6 @@ abstract class ICE_Init_Registry extends ICE_Map
 
 		// return result
 		return $result;
-	}
-
-	/**
-	 * Remove a data key from the registry (for all themes)
-	 *
-	 * @param string $name
-	 * @return mixed
-	 */
-	public function remove( $name )
-	{
-		// wipe cache for this item
-		unset( $this->__lookup_cache__[ $name ] );
-		
-		// call parent to remove
-		return parent::remove( $name );
 	}
 
 	/**
@@ -140,20 +112,8 @@ abstract class ICE_Init_Registry extends ICE_Map
 	 * @param string $name Name of key to retrieve (slug)
 	 * @return ICE_Init_Data
 	 */
-	public function get( $name, $use_cache = true )
+	public function get( $name )
 	{
-		// use the cache?
-		if ( true === $use_cache ) {
-			// does it exist in the cache (even if null)?
-			if (
-				isset( $this->__lookup_cache__[ $name ] ) ||
-				array_key_exists( $name, $this->__lookup_cache__ )
-			) {
-				// yep, use cached value
-				return $this->__lookup_cache__[ $name ];
-			}
-		}
-
 		// value is null by default
 		$value = null;
 
@@ -172,12 +132,6 @@ abstract class ICE_Init_Registry extends ICE_Map
 					break;
 				}
 			}
-		}
-
-		// update cache if applicable
-		if ( true === $use_cache ) {
-			// cache toggled on, set it
-			$this->__lookup_cache__[ $name ] = $value;
 		}
 
 		// always return looked up value
