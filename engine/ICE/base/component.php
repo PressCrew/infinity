@@ -19,7 +19,7 @@ ICE_Loader::load(
 	'dom/styleable',
 	'dom/scriptable',
 	'utils/export',
-	'init/directive'
+	'init/settings'
 );
 
 /**

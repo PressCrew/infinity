@@ -20,73 +20,73 @@
 final class ICE_Scheme extends ICE_Base
 {
 	/**
-	 * Parent theme directive
+	 * Parent theme setting
 	 */
-	const DIRECTIVE_PARENT_THEME = 'parent_theme';
+	const SETTING_PARENT_THEME = 'parent_theme';
 	/**
-	 * Image root directive
+	 * Image root setting
 	 */
-	const DIRECTIVE_IMAGE_ROOT = 'image_root';
+	const SETTING_IMAGE_ROOT = 'image_root';
 	/**
-	 * Style root directive
+	 * Style root setting
 	 */
-	const DIRECTIVE_STYLE_ROOT = 'style_root';
+	const SETTING_STYLE_ROOT = 'style_root';
 	/**
-	 * Script root directive
+	 * Script root setting
 	 */
-	const DIRECTIVE_SCRIPT_ROOT = 'script_root';
+	const SETTING_SCRIPT_ROOT = 'script_root';
 	/**
 	 * Feature config key
 	 */
-	const DIRECTIVE_FEATURE = 'feature';
+	const SETTING_FEATURE = 'feature';
 	/**
 	 * Style config key
 	 */
-	const DIRECTIVE_STYLE_DEFS = 'style';
+	const SETTING_STYLE_DEFS = 'style';
 	/**
 	 * Style depends config key
 	 */
-	const DIRECTIVE_STYLE_DEPS = 'style_depends';
+	const SETTING_STYLE_DEPS = 'style_depends';
 	/**
 	 * Style actions config key
 	 */
-	const DIRECTIVE_STYLE_ACTS = 'style_actions';
+	const SETTING_STYLE_ACTS = 'style_actions';
 	/**
 	 * Style conditions config key
 	 */
-	const DIRECTIVE_STYLE_CONDS = 'style_conditions';
+	const SETTING_STYLE_CONDS = 'style_conditions';
 	/**
 	 * Script config key
 	 */
-	const DIRECTIVE_SCRIPT_DEFS = 'script';
+	const SETTING_SCRIPT_DEFS = 'script';
 	/**
 	 * Script depends config key
 	 */
-	const DIRECTIVE_SCRIPT_DEPS = 'script_depends';
+	const SETTING_SCRIPT_DEPS = 'script_depends';
 	/**
 	 * Script actions config key
 	 */
-	const DIRECTIVE_SCRIPT_ACTS = 'script_actions';
+	const SETTING_SCRIPT_ACTS = 'script_actions';
 	/**
 	 * Script conditions config key
 	 */
-	const DIRECTIVE_SCRIPT_CONDS = 'script_conditions';
+	const SETTING_SCRIPT_CONDS = 'script_conditions';
 	/**
 	 * Advanced settings config key
 	 */
-	const DIRECTIVE_ADVANCED = 'advanced';
+	const SETTING_ADVANCED = 'advanced';
 	/**
-	 * jQuery UI stylesheet path directive
+	 * jQuery UI stylesheet path setting
 	 */
-	const DIRECTIVE_UI_STYLESHEET = 'ui_stylesheet';
+	const SETTING_UI_STYLESHEET = 'ui_stylesheet';
 	/**
-	 * Script domain directive
+	 * Script domain setting
 	 */
-	const DIRECTIVE_SCRIPT_DOMAIN = 'script_domain';
+	const SETTING_SCRIPT_DOMAIN = 'script_domain';
 	/**
-	 * Options save single directive
+	 * Options save single setting
 	 */
-	const DIRECTIVE_OPT_SAVE_SINGLE = 'options_save_single';
+	const SETTING_OPT_SAVE_SINGLE = 'options_save_single';
 
 	/**
 	 * Singleton instance
@@ -166,11 +166,11 @@ final class ICE_Scheme extends ICE_Base
 	private $theme_stack_topdown;
 
 	/**
-	 * The directives registry instance
+	 * The settings registry instance
 	 * 
-	 * @var ICE_Init_Directive_Registry
+	 * @var ICE_Init_Settings
 	 */
-	private $directives;
+	private $settings;
 
 	/**
 	 * The enqueue helper instance
@@ -187,7 +187,7 @@ final class ICE_Scheme extends ICE_Base
 		// initialize themes map
 		$this->themes = new ICE_Stack();
 		$this->themes_compiled = new ICE_Map();
-		$this->directives = new ICE_Init_Directive_Registry();
+		$this->settings = new ICE_Init_Settings();
 		$this->config_files_loaded = new ICE_Stack();
 
 		// handle compiled themes
@@ -260,13 +260,13 @@ final class ICE_Scheme extends ICE_Base
 	}
 
 	/**
-	 * Return directives registry
+	 * Return settings registry
 	 *
-	 * @return ICE_Init_Directive_Registry
+	 * @return ICE_Init_Settings
 	 */
-	final public function directives()
+	final public function settings()
 	{
-		return $this->directives;
+		return $this->settings;
 	}
 
 	/**
@@ -425,7 +425,7 @@ final class ICE_Scheme extends ICE_Base
 		} else {
 			// yipes, theme has no config file.
 			// assume that parent theme is the root theme
-			$config[self::DIRECTIVE_PARENT_THEME] = $this->root_theme;
+			$config[self::SETTING_PARENT_THEME] = $this->root_theme;
 		}
 
 		// make sure we got something
@@ -433,8 +433,8 @@ final class ICE_Scheme extends ICE_Base
 
 			// parent theme?
 			$parent_theme =
-				isset( $config[self::DIRECTIVE_PARENT_THEME] )
-					? $config[self::DIRECTIVE_PARENT_THEME]
+				isset( $config[self::SETTING_PARENT_THEME] )
+					? $config[self::SETTING_PARENT_THEME]
 					: false;
 
 			// recurse up the theme stack if necessary
@@ -446,17 +446,17 @@ final class ICE_Scheme extends ICE_Base
 			// push onto the stack AFTER recursion
 			$this->themes->push( $theme );
 
-			// loop through directives and set them
+			// loop through settings and set them
 			foreach ( $config as $name => $value ) {
-				if ( $name == self::DIRECTIVE_ADVANCED ) {
+				if ( $name == self::SETTING_ADVANCED ) {
 					if ( is_array( $value ) ) {
 						foreach ( $value as $name_adv => $value_adv ) {
-							$this->directives()->set( $theme, $name_adv, $value_adv, true );
+							$this->settings()->set( $theme, $name_adv, $value_adv );
 						}
 					}
 					continue;
 				} else {
-					$this->directives()->set( $theme, $name, $value, true );
+					$this->settings()->set( $theme, $name, $value );
 				}
 			}
 
@@ -491,14 +491,15 @@ final class ICE_Scheme extends ICE_Base
 	 */
 	private function feature_support()
 	{
+		// try to get features
+		$setting = $this->settings()->get_values( self::SETTING_FEATURE );
+
 		// any features set?
-		if ( $this->directives()->has( self::DIRECTIVE_FEATURE ) ) {
-			// at least one feature was set, get map
-			$map = $this->directives()->get_map( self::DIRECTIVE_FEATURE );
+		if ( $setting ) {
 			// loop through and add theme support for each feature
-			foreach ( $map as $directive ) {
+			foreach ( $setting as $theme => $features ) {
 				// loop all features
-				foreach( $directive->get_value() as $feature => $toggle ) {
+				foreach( $features as $feature => $toggle ) {
 					// toggled on?
 					if ( (boolean) $toggle === true ) {
 						add_theme_support( $feature );
@@ -850,9 +851,9 @@ final class ICE_Scheme extends ICE_Base
 	 * Locate a theme file, giving priority to top themes in the stack
 	 *
 	 * If first argument is a ICE_Map instance, it is expected to be
-	 * a map of theme directives whose values are relative path prefixes.
+	 * a map of theme settings whose values are relative path prefixes.
 	 *
-	 * @param ICE_Map $prefix_map Optional map of directives which define path prefixes
+	 * @param ICE_Map $prefix_map Optional map of settings which define path prefixes
 	 * @param string $file_names,... The file names that make up the RELATIVE path to the theme root
 	 * @return string|false
 	 */
@@ -908,19 +909,22 @@ final class ICE_Scheme extends ICE_Base
 	/**
 	 * Locate a theme asset, giving priority to top themes in the stack
 	 *
-	 * @param string $path_directive The scheme directive which contains the asset path
+	 * @param string $path_setting The scheme setting which contains the asset path
 	 * @return string|false
 	 */
-	private function locate_asset( $path_directive )
+	private function locate_asset( $path_setting )
 	{
+		// try to get path setting
+		$path = $this->settings()->get_value( $path_setting );
+
 		// image root must be set
-		if ( $this->directives()->has( $path_directive ) ) {
+		if ( $path ) {
 			// get all args
 			$args = func_get_args();
 			// throw out the first one
 			array_shift( $args );
-			// add directive path
-			array_unshift( $args, $this->directives()->get_value($path_directive) );
+			// add setting path
+			array_unshift( $args, $path );
 			// locate it
 			return call_user_func_array( array($this,'locate_file'), $args );
 		}
@@ -937,7 +941,7 @@ final class ICE_Scheme extends ICE_Base
 	public function locate_image()
 	{
 		$args = func_get_args();
-		array_unshift( $args, self::DIRECTIVE_IMAGE_ROOT );
+		array_unshift( $args, self::SETTING_IMAGE_ROOT );
 		return call_user_func_array( array($this, 'locate_asset'), $args );
 	}
 
@@ -950,7 +954,7 @@ final class ICE_Scheme extends ICE_Base
 	public function locate_style()
 	{
 		$args = func_get_args();
-		array_unshift( $args, self::DIRECTIVE_STYLE_ROOT );
+		array_unshift( $args, self::SETTING_STYLE_ROOT );
 		return call_user_func_array( array($this, 'locate_asset'), $args );
 	}
 
@@ -963,7 +967,7 @@ final class ICE_Scheme extends ICE_Base
 	public function locate_script()
 	{
 		$args = func_get_args();
-		array_unshift( $args, self::DIRECTIVE_SCRIPT_ROOT );
+		array_unshift( $args, self::SETTING_SCRIPT_ROOT );
 		return call_user_func_array( array($this, 'locate_asset'), $args );
 	}
 

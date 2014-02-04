@@ -101,10 +101,10 @@ class ICE_Scheme_Enqueue extends ICE_Base
 		$this->scheme = $scheme;
 
 		// define script domain
-		$this->script_domain = $this->scheme->directives()->get( ICE_Scheme::DIRECTIVE_SCRIPT_DOMAIN );
+		$this->script_domain = $this->scheme->settings()->get_value( ICE_Scheme::SETTING_SCRIPT_DOMAIN );
 
 		// hook up script domain handler
-		if ( $this->script_domain instanceof ICE_Init_Directive ) {
+		if ( $this->script_domain ) {
 			add_action( 'wp_print_scripts', array( $this, 'handle_script_domain' ) );
 			add_action( 'admin_print_scripts', array( $this, 'handle_script_domain' ) );
 		}
@@ -115,8 +115,8 @@ class ICE_Scheme_Enqueue extends ICE_Base
 
 		// get style defs
 		$style_defs =
-			$this->scheme->directives()->get_map(
-				ICE_Scheme::DIRECTIVE_STYLE_DEFS
+			$this->scheme->settings()->get_values(
+				ICE_Scheme::SETTING_STYLE_DEFS
 			);
 
 		// create new map so we can write to it
@@ -136,8 +136,8 @@ class ICE_Scheme_Enqueue extends ICE_Base
 
 		// get script defs
 		$script_defs =
-			$this->scheme->directives()->get_map(
-				ICE_Scheme::DIRECTIVE_SCRIPT_DEFS
+			$this->scheme->settings()->get_values(
+				ICE_Scheme::SETTING_SCRIPT_DEFS
 			);
 
 		// create new map so we can write to it
@@ -174,34 +174,33 @@ class ICE_Scheme_Enqueue extends ICE_Base
 	 */
 	private function setup_ui()
 	{
-		// get custom ui stylesheet directive
-		$ui_stylesheet = $this->scheme->directives()->get( ICE_Scheme::DIRECTIVE_UI_STYLESHEET );
+		// get custom ui stylesheet setting
+		$ui_stylesheet_value = $this->scheme->settings()->get_value( ICE_Scheme::SETTING_UI_STYLESHEET );
+		$ui_stylesheet_theme = $this->scheme->settings()->get_theme( ICE_Scheme::SETTING_UI_STYLESHEET );
 		
 		// custom ui stylesheet set?
-		if ( $ui_stylesheet instanceof ICE_Init_Directive ) {
+		if ( $ui_stylesheet_value ) {
 			ICE_Enqueue::instance()->ui_stylesheet(
-				ICE_Scheme::instance()->theme_file_url( $ui_stylesheet->get_theme_slug(), $ui_stylesheet->get_value() )
+				ICE_Scheme::instance()->theme_file_url( $ui_stylesheet_theme, $ui_stylesheet_value )
 			);
 		}
 	}
 
 	/**
-	 * Inject internal stylesheets into style directives
+	 * Inject internal stylesheets into style settings
 	 *
 	 * @internal
 	 * @param ICE_Map $style_defs
 	 */
 	private function setup_internal_styles( ICE_Map $style_defs )
 	{
-		// map of styles and depends
-		$styles = new ICE_Map();
+		// style setting
+		$setting = array(
+			'style' => get_bloginfo( 'stylesheet_url' )
+		);
 
 		// add the theme style.css LAST
-		$styles->add( 'style', get_bloginfo( 'stylesheet_url' ) );
-
-		// add directive
-		$directive = new ICE_Init_Directive( 'icenq', 'style', $styles );
-		$style_defs->add( 'icenq', $directive, true );
+		$style_defs->add( 'icenq', $setting, true );
 
 		// hook up styles internal handler
 		add_action( 'ice_enqueue_styles', array( $this, 'handle_style_internal' ), 1 );
@@ -211,23 +210,13 @@ class ICE_Scheme_Enqueue extends ICE_Base
 	}
 
 	/**
-	 * Inject internal scripts into script directives
+	 * Inject internal scripts into script settings
 	 *
 	 * @internal
 	 * @param ICE_Map $script_defs
 	 */
 	private function setup_internal_scripts( ICE_Map $script_defs )
 	{
-		// map of scripts and script depends
-		$script = new ICE_Map();
-
-		// add the theme script.js LAST
-		$script->add( 'script', 'script.js' );
-
-		// add directive
-		$directive = new ICE_Init_Directive( 'icenq', 'script', $script );
-		$script_defs->add( 'icenq', $directive, true );
-
 		// hook up scripts internal handler
 		add_action( 'ice_enqueue_scripts', array( $this, 'handle_script_internal' ) );
 	}
@@ -236,22 +225,19 @@ class ICE_Scheme_Enqueue extends ICE_Base
 	 * Try to define triggers which have been set in the scheme's config
 	 *
 	 * @param ICE_Map $map
-	 * @param ICE_Map $directive_map
+	 * @param array $settings
 	 * @return boolean
 	 */
-	private function define( ICE_Map $map, ICE_Map $directive_map )
+	private function define( ICE_Map $map, $settings )
 	{
 		// loop through and populate trigger map
-		foreach ( $directive_map as $theme => $directive ) {
+		foreach ( $settings as $theme => $setting ) {
 
-			// get value of directive
-			$value = $directive->get_value();
-
-			// is directive value a map?
-			if ( $value instanceof ICE_Map ) {
+			// is setting value an array?
+			if ( is_array( $setting ) ) {
 
 				// yes, add each handle and URL path to map
-				foreach( $value as $handle => $path ) {
+				foreach( $setting as $handle => $path ) {
 
 					// define it
 					$this->define_one( $map, $theme, $handle, $path );
@@ -319,28 +305,25 @@ class ICE_Scheme_Enqueue extends ICE_Base
 	}
 
 	/**
-	 * Set dependancies for specified directives.
+	 * Set dependancies for specified settings.
 	 *
-	 * This is for scheme directives that define a handle with a
+	 * This is for scheme settings that define a handle with a
 	 * value being a delimeted string of dependant style or script handles
 	 *
 	 * @param ICE_Map $map
-	 * @param ICE_Map $directive_map
+	 * @param array $settings
 	 * @return boolean
 	 */
-	private function depends( ICE_Map $map, ICE_Map $directive_map )
+	private function depends( ICE_Map $map, $settings )
 	{
 		// loop through and update triggers map with deps
-		foreach ( $directive_map as $theme => $directive ) {
+		foreach ( $settings as $theme => $setting ) {
 			
-			// get directive value
-			$value = $directive->get_value();
-
-			// is directive value a map?
-			if ( $value instanceof ICE_Map ) {
+			// is setting value an array?
+			if ( is_array( $setting ) ) {
 
 				// yes, add action to each trigger's dependancy stack
-				foreach( $value as $handle => $dep_handles ) {
+				foreach( $setting as $handle => $dep_handles ) {
 
 					// get theme handle
 					$theme_handle = $this->make_handle( $theme, $handle );
@@ -377,36 +360,33 @@ class ICE_Scheme_Enqueue extends ICE_Base
 	}
 
 	/**
-	 * Set triggers for specified directives.
+	 * Set triggers for specified settings.
 	 *
-	 * This is for scheme directives that define a trigger with a
+	 * This is for scheme settings that define a trigger with a
 	 * value being a delimeted string of style or script handles
 	 *
 	 * @param ICE_Map $map
-	 * @param string $directive_name
+	 * @param string $setting_name
 	 * @param string $trigger_type
 	 * @param string $trigger_action
 	 * @return boolean
 	 */
-	private function triggers( ICE_Map $map, $directive_name, $trigger_type, $trigger_action = null )
+	private function triggers( ICE_Map $map, $setting_name, $trigger_type, $trigger_action = null )
 	{
-		// check if at least one theme defined this trigger
-		if ( $this->scheme->directives()->has( $directive_name ) ) {
+		// get trigger settings for all themes
+		$settings = $this->scheme->settings()->get_values( $setting_name );
 
-			// get trigger directives for all themes
-			$directive_map = $this->scheme->directives()->get_map( $directive_name );
+		// check if at least one theme defined this trigger
+		if ( $settings ) {
 
 			// loop through and update triggers map
-			foreach ( $directive_map as $theme => $directive ) {
+			foreach ( $settings as $theme => $setting ) {
 
-				// get value of directive
-				$value = $directive->get_value();
-
-				// is directive value a map?
-				if ( $value instanceof ICE_Map ) {
+				// is setting value an array?
+				if ( is_array( $setting ) ) {
 
 					// yes, add action to each trigger's trigger stack
-					foreach( $value as $action => $handles ) {
+					foreach( $setting as $action => $handles ) {
 
 						// no action params by default
 						$action_params = null;
@@ -449,7 +429,7 @@ class ICE_Scheme_Enqueue extends ICE_Base
 						// is this an actions trigger type?
 						if ( $trigger_type == self::TRIGGER_ACTS ) {
 							// yes, hook it to action handler
-							add_action( $action, array( $this, 'handle_' . $directive_name ) );
+							add_action( $action, array( $this, 'handle_' . $setting_name ) );
 						}
 					}
 				}
@@ -460,7 +440,7 @@ class ICE_Scheme_Enqueue extends ICE_Base
 				// yes, hook up conditions handler
 				add_action(
 					$trigger_action,
-					array( $this, 'handle_' . $directive_name ),
+					array( $this, 'handle_' . $setting_name ),
 					11
 				);
 			}
@@ -520,15 +500,14 @@ class ICE_Scheme_Enqueue extends ICE_Base
 	 */
 	final public function register_styles()
 	{
+		// get dep settings for all themes
+		$style_depends =
+			$this->scheme->settings()->get_values(
+				ICE_Scheme::SETTING_STYLE_DEPS
+			);
+
 		// check if at least one theme defined this dep
-		if ( $this->scheme->directives()->has( ICE_Scheme::DIRECTIVE_STYLE_DEPS ) ) {
-
-			// get dep directives for all themes
-			$style_depends =
-				$this->scheme->directives()->get_map(
-					ICE_Scheme::DIRECTIVE_STYLE_DEPS
-				);
-
+		if ( $style_depends ) {
 			// init style depends
 			$this->depends( $this->styles, $style_depends );
 		}
@@ -536,14 +515,14 @@ class ICE_Scheme_Enqueue extends ICE_Base
 		// init style action triggers
 		$this->triggers(
 			$this->styles,
-			ICE_Scheme::DIRECTIVE_STYLE_ACTS,
+			ICE_Scheme::SETTING_STYLE_ACTS,
 			self::TRIGGER_ACTS
 		);
 
 		// init style condition triggers
 		$this->triggers(
 			$this->styles,
-			ICE_Scheme::DIRECTIVE_STYLE_CONDS,
+			ICE_Scheme::SETTING_STYLE_CONDS,
 			self::TRIGGER_CONDS,
 			'ice_enqueue_styles'
 		);
@@ -582,15 +561,14 @@ class ICE_Scheme_Enqueue extends ICE_Base
 	 */
 	final public function register_scripts()
 	{
+		// get dep settings for all themes
+		$script_depends =
+			$this->scheme->settings()->get_values(
+				ICE_Scheme::SETTING_SCRIPT_DEPS
+			);
+
 		// check if at least one theme defined this dep
-		if ( $this->scheme->directives()->has( ICE_Scheme::DIRECTIVE_SCRIPT_DEPS ) ) {
-
-			// get dep directives for all themes
-			$script_depends =
-				$this->scheme->directives()->get_map(
-					ICE_Scheme::DIRECTIVE_SCRIPT_DEPS
-				);
-
+		if ( $script_depends ) {
 			// init script depends
 			$this->depends( $this->scripts, $script_depends );
 		}
@@ -598,14 +576,14 @@ class ICE_Scheme_Enqueue extends ICE_Base
 		// init script action triggers
 		$this->triggers(
 			$this->scripts,
-			ICE_Scheme::DIRECTIVE_SCRIPT_ACTS,
+			ICE_Scheme::SETTING_SCRIPT_ACTS,
 			self::TRIGGER_ACTS
 		);
 
 		// init script condition triggers
 		$this->triggers(
 			$this->scripts,
-			ICE_Scheme::DIRECTIVE_SCRIPT_CONDS,
+			ICE_Scheme::SETTING_SCRIPT_CONDS,
 			self::TRIGGER_CONDS,
 			'ice_enqueue_scripts'
 		);
@@ -755,7 +733,7 @@ class ICE_Scheme_Enqueue extends ICE_Base
 		// render it ?>
 		<script type="text/javascript">
 		//<![CDATA[
-			document.domain = '<?php print $this->script_domain->get_value() ?>';
+			document.domain = '<?php print $this->script_domain ?>';
 		//]]>
 		</script><?php
 		echo PHP_EOL;

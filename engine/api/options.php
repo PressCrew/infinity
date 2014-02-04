@@ -112,7 +112,7 @@ class Infinity_Options_Renderer extends ICE_Option_Renderer
 	 */
 	private function do_save_single_button()
 	{
-		return ( infinity_scheme_directive( ICE_Scheme::DIRECTIVE_OPT_SAVE_SINGLE ) );
+		return ( infinity_scheme_setting( ICE_Scheme::SETTING_OPT_SAVE_SINGLE ) );
 	}
 
 	/**

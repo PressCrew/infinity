@@ -11,6 +11,8 @@
  * @since 1.0
  */
 
+ICE_Loader::load( 'init/data' );
+
 /**
  * Make maps of initialization data easy
  *

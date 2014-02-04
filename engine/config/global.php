@@ -142,7 +142,7 @@ $global['script_conditions'] = array(
 $global['advanced'] = array(
 	// ---------------------------------------------------------------------
 	// Asset files cascading preferences
-	// These directives are related to the various asset cascading functions
+	// These settings are related to the various asset cascading functions
 	// and DO NOT have anything to do with automatic enqueueing.
 	// ---------------------------------------------------------------------
 
@@ -167,14 +167,14 @@ $global['advanced'] = array(
 
 	// ---------------------------------------------------------------------
 	// Options panel preferences
-	// These directives affect the behavior and display of the options panel
+	// These settings affect the behavior and display of the options panel
 	// ---------------------------------------------------------------------
 
 	// Options panel prefs are under development
 
 	// ---------------------------------------------------------------------
 	// jQuery UI preferences
-	// These directives affect the initialization and behavior of jQuery UI
+	// These settings affect the initialization and behavior of jQuery UI
 	// ---------------------------------------------------------------------
 
 	// Set this to a valid jQuery UI theme stylesheet if you wish to use a

@@ -61,15 +61,15 @@ function infinity_scheme_finalize()
 }
 
 /**
- * Get a scheme directive value
+ * Get a scheme setting value
  *
  * @package Infinity-api
  * @param string $name
  * @return mixed
  */
-function infinity_scheme_directive( $name )
+function infinity_scheme_setting( $name )
 {
-	return ICE_Scheme::instance()->directives()->get($name)->get_value();
+	return ICE_Scheme::instance()->settings()->get_value( $name );
 }
 
 /**
