@@ -328,12 +328,6 @@ class ICE_Scheme_Enqueue extends ICE_Base
 					// get theme handle
 					$theme_handle = $this->make_handle( $theme, $handle );
 
-					// get a string?
-					if ( is_string( $dep_handles) ) {
-						// split dep handles at delimeter
-						$dep_handles = explode( self::ITEM_DELIM, $dep_handles );
-					}
-
 					// loop through each handle
 					foreach ( $dep_handles as $dep_handle ) {
 
@@ -404,9 +398,6 @@ class ICE_Scheme_Enqueue extends ICE_Base
 								throw new Exception( 'Invalid parameter syntax' );
 							}
 						}
-
-						// split handles at delimeter
-						$handles = explode( self::ITEM_DELIM, $handles );
 
 						// loop through each handle
 						foreach ( $handles as $handle ) {

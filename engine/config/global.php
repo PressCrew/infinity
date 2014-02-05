@@ -83,22 +83,29 @@ $global['style'] = array(
 
 // Define dependancies for stylesheets
 // These will NOT fail to load if a required handle isn't registered
-// eg. 'handle' => 'comma,separated,handles'
+// eg. 'handle' => array('comma','separated','handles')
 $global['style_depends'] = array(
-	'cpanel' => 'ice-ui,ice-colorpicker'
+	'cpanel' => array(
+		'ice-ui',
+		'ice-colorpicker'
+	)
 );
 
 // Enqueue specific stylesheets ONLY when an action is called
-// eg. 'action_name' => 'comma,separated,handles'
+// eg. 'action_name' => array('comma','separated','handles')
 $global['style_actions'] = array(
-	'admin_print_styles-appearance_page_infinity-theme' => 'cpanel,options,docs'
+	'admin_print_styles-appearance_page_infinity-theme' => array(
+		'cpanel',
+		'options',
+		'docs'
+	)
 );
 
 // Enqueue specific stylesheets ONLY if a callback function returns TRUE
-// eg. 'function_name' => 'comma,separated,handles'
+// eg. 'function_name' => array('comma','separated','handles')
 $global['style_conditions'] = array(
-	//'is_front_page' => 'google-fonts',
-	//'is_page:about' => 'about-sidebar'
+	//'is_front_page' => array( 'google-fonts' ),
+	//'is_page:about' => array( 'about-sidebar' )
 );
 
 // ------------------------------------------------------------------------------------
@@ -118,22 +125,40 @@ $global['script'] = array(
 // These will NOT fail to load if a required handle isn't registered
 // eg. 'handle' => 'comma,separated,handles'
 $global['script_depends'] = array(
-	'docs' => 'jquery',
-	'cpanel' => 'ice-global,jquery-cookie,jquery-ui-accordion,jquery-ui-position,jquery-ui-sortable,jquery-ui-resizable,jquery-ui-tabs,jquery-juicy-buttonmenu,jquery-juicy-flashmesg,jquery-juicy-toolbar'
+	'docs' =>
+		array(
+			'jquery'
+		),
+	'cpanel' =>
+		array(
+			'ice-global',
+			'jquery-cookie',
+			'jquery-ui-accordion',
+			'jquery-ui-position',
+			'jquery-ui-sortable',
+			'jquery-ui-resizable',
+			'jquery-ui-tabs',
+			'jquery-juicy-buttonmenu',
+			'jquery-juicy-flashmesg',
+			'jquery-juicy-toolbar'
+		)
 );
 
 // Enqueue specific scripts ONLY when an action is called
 // eg. 'action_name' => 'comma,separated,handles'
 $global['script_actions'] = array(
-	'admin_print_scripts-appearance_page_infinity-theme' => 'cpanel,docs'
+	'admin_print_scripts-appearance_page_infinity-theme' => array(
+		'cpanel',
+		'docs'
+	)
 );
 
 // Enqueue specific scripts ONLY if a callback function returns TRUE
 // eg. 'function_name' => 'comma,separated,handles'
 $global['script_conditions'] = array(
-	//'is_front_page' => 'mysliders',
-	//'is_page:about' => 'about-sidebar',
-	'is_not_admin' => 'superfish'
+	//'is_front_page' => array( 'mysliders') ,
+	//'is_page:about' => array( 'about-sidebar' ),
+	'is_not_admin' => array( 'superfish' )
 );
 
 // ===================
