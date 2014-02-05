@@ -21,16 +21,6 @@
 class ICE_Scheme_Enqueue extends ICE_Base
 {
 	/**
-	 * String on which to split "string packed" values
-	 */
-	const ITEM_DELIM = ',';
-
-	/**
-	 * String on which to split "string packed" parameters
-	 */
-	const PARAM_DELIM = ':';
-
-	/**
 	 *  Trigger map path key
 	 */
 	const TRIGGER_PATH = 'path';
@@ -49,11 +39,6 @@ class ICE_Scheme_Enqueue extends ICE_Base
 	 *  Trigger map conditions key
 	 */
 	const TRIGGER_CONDS = 'conditions';
-
-	/**
-	 *  Trigger map parameters key
-	 */
-	const TRIGGER_PARAMS = 'params';
 
 	/**
 	 * The scheme instance which owns this instance
@@ -274,9 +259,6 @@ class ICE_Scheme_Enqueue extends ICE_Base
 		// init empty conditions stack
 		$trigger->add( self::TRIGGER_CONDS, new ICE_Stack() );
 
-		// init empty params stack
-		$trigger->add( self::TRIGGER_PARAMS, new ICE_Stack() );
-
 		// add trigger to main map
 		$map->add( $this->make_handle( $theme, $handle ), $trigger );
 
@@ -380,27 +362,16 @@ class ICE_Scheme_Enqueue extends ICE_Base
 				if ( is_array( $setting ) ) {
 
 					// yes, add action to each trigger's trigger stack
-					foreach( $setting as $action => $handles ) {
+					foreach( $setting as $handle => $actions ) {
 
-						// no action params by default
-						$action_params = null;
-
-						// check for params for action
-						if ( stripos($action, self::PARAM_DELIM) ) {
-							// split action at param delimeter
-							$action_parts = explode( self::PARAM_DELIM, $action );
-							// must have exactly two results
-							if ( count( $action_parts ) == 2 ) {
-								// action is first result
-								$action = $action_parts[0];
-								$action_params = explode( self::ITEM_DELIM, $action_parts[1] );
-							} else {
-								throw new Exception( 'Invalid parameter syntax' );
-							}
+						// is actions NOT an array?
+						if ( false === is_array( $actions ) ) {
+							// convert actions to an array
+							$actions = array( $actions );
 						}
 
-						// loop through each handle
-						foreach ( $handles as $handle ) {
+						// loop through each action
+						foreach ( $actions as $action ) {
 
 							// is this an override situation? (exact handle already in map)
 							if ( !$map->item_at( $handle ) ) {
@@ -412,8 +383,6 @@ class ICE_Scheme_Enqueue extends ICE_Base
 							if ( $map->item_at( $handle ) ) {
 								// push onto trigger's trigger stack
 								$map->item_at($handle)->item_at($trigger_type)->push($action);
-								// push params onto trigger's params stack
-								$map->item_at($handle)->item_at(self::TRIGGER_PARAMS)->copy_from($action_params);
 							}
 						}
 						
@@ -641,7 +610,7 @@ class ICE_Scheme_Enqueue extends ICE_Base
 				// check if ANY of the conditions eval to true
 				foreach( $config_map->item_at(self::TRIGGER_CONDS) as $callback ) {
 					// try to exec the callback
-					if ( function_exists( $callback ) && call_user_func_array($callback,$config_map->item_at(self::TRIGGER_PARAMS)->to_array()) == true ) {
+					if ( function_exists( $callback ) && true === call_user_func( $callback ) ) {
 						// callback exists and evaled to true, enqueue it
 						wp_enqueue_style( $handle );
 						// done with this inner (conditions) loop
@@ -703,7 +672,7 @@ class ICE_Scheme_Enqueue extends ICE_Base
 				// check if ANY of the conditions eval to true
 				foreach( $config_map->item_at(self::TRIGGER_CONDS) as $callback ) {
 					// try to exec the callback
-					if ( function_exists( $callback ) && call_user_func_array($callback,$config_map->item_at(self::TRIGGER_PARAMS)->to_array()) == true ) {
+					if ( function_exists( $callback ) && true === call_user_func( $callback ) ) {
 						// callback exists and evaled to true, enqueue it
 						wp_enqueue_script( $handle );
 						// done with this inner (conditions) loop

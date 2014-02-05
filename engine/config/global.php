@@ -92,20 +92,20 @@ $global['style_depends'] = array(
 );
 
 // Enqueue specific stylesheets ONLY when an action is called
-// eg. 'action_name' => array('comma','separated','handles')
+// eg. 'handle' => 'action_name'
+// eg. 'handle' => array( 'action_one', 'action_two' )
 $global['style_actions'] = array(
-	'admin_print_styles-appearance_page_infinity-theme' => array(
-		'cpanel',
-		'options',
-		'docs'
-	)
+	'cpanel' => 'admin_print_styles-appearance_page_infinity-theme',
+	'options' => 'admin_print_styles-appearance_page_infinity-theme',
+	'docs' => 'admin_print_styles-appearance_page_infinity-theme'
 );
 
 // Enqueue specific stylesheets ONLY if a callback function returns TRUE
-// eg. 'function_name' => array('comma','separated','handles')
+// eg. 'handle' => 'function_name'
+// eg. 'handle' => array( 'function_one', 'function_two' )
 $global['style_conditions'] = array(
-	//'is_front_page' => array( 'google-fonts' ),
-	//'is_page:about' => array( 'about-sidebar' )
+	//'google-fonts' => 'is_front_page',
+	//'about-sidebar' => 'custom_is_page_about'
 );
 
 // ------------------------------------------------------------------------------------
@@ -145,20 +145,20 @@ $global['script_depends'] = array(
 );
 
 // Enqueue specific scripts ONLY when an action is called
-// eg. 'action_name' => 'comma,separated,handles'
+// eg. 'handle' => 'action_name'
+// eg. 'handle' => array( 'action_one', 'action_two' )
 $global['script_actions'] = array(
-	'admin_print_scripts-appearance_page_infinity-theme' => array(
-		'cpanel',
-		'docs'
-	)
+	'cpanel' => 'admin_print_scripts-appearance_page_infinity-theme',
+	'docs' => 'admin_print_scripts-appearance_page_infinity-theme'
 );
 
 // Enqueue specific scripts ONLY if a callback function returns TRUE
-// eg. 'function_name' => 'comma,separated,handles'
+// eg. 'handle' => 'function_name'
+// eg. 'handle' => array( 'function_one', 'function_two' )
 $global['script_conditions'] = array(
-	//'is_front_page' => array( 'mysliders') ,
-	//'is_page:about' => array( 'about-sidebar' ),
-	'is_not_admin' => array( 'superfish' )
+	//'mysliders' => 'is_front_page',
+	//'about-sidebar' => 'custom_is_page_about',
+	'superfish' => 'is_not_admin'
 );
 
 // ===================
