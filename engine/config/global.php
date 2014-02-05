@@ -9,8 +9,8 @@
  * @subpackage config
  */
 
-// The parent theme. Either "infinity", or an ancestor of infinity
-$global['parent_theme'] = "";
+// The parent theme. Either 'infinity', or an ancestor of infinity
+$global['parent_theme'] = '';
 
 // Enable/Disable features. This is the same as calling add_theme_support()
 
@@ -83,7 +83,7 @@ $global['style'] = array(
 
 // Define dependancies for stylesheets
 // These will NOT fail to load if a required handle isn't registered
-// eg. 'handle' => array('comma','separated','handles')
+// eg. 'handle' => array( 'foo', 'bar', 'baz' )
 $global['style_depends'] = array(
 	'cpanel' => array(
 		'ice-ui',
@@ -123,7 +123,7 @@ $global['script'] = array(
 
 // Define dependancies for scripts
 // These will NOT fail to load if a required handle isn't registered
-// eg. 'handle' => 'comma,separated,handles'
+// eg. 'handle' => array( 'foo', 'bar', 'baz' )
 $global['script_depends'] = array(
 	'docs' =>
 		array(
