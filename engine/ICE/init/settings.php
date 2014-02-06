@@ -33,6 +33,22 @@ class ICE_Init_Settings
 	 */
 	public function set( $theme, $name, $value )
 	{
+		// has value already been set for theme?
+		if (
+			true === isset( $this->data[ $name ][ $theme ] ) ||
+			true === isset( $this->data[ $name ] ) &&
+			true === array_key_exists( $theme, $this->data[ $name ] )
+		) {
+			// yes, overwriting is not allowed
+			throw new OverflowException(
+				sprintf(
+					__( 'Cannot overwrite the value of setting "%s" for theme "%s".', 'infinity' ),
+					$name,
+					$theme
+				)
+			);
+		}
+
 		// set the value
 		$this->data[ $name ][ $theme ] = $value;
 	}
