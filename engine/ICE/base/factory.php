@@ -47,28 +47,25 @@ abstract class ICE_Factory extends ICE_Componentable
 	 * Return an instance of a component
 	 *
 	 * @param string $name
-	 * @param array $config
-	 * @return ICE_Component
+	 * @param array $settings
+	 * @return ICE_Component|boolean
 	 */
-	public function create( $name, $config )
+	public function create( $name, $settings )
 	{
-		// puke on empty theme
-		if ( empty( $config['theme'] ) ) {
-			throw new Exception( 'Theme cannot be empty' );
-		}
-
 		// set default type if necessary
-		if ( empty( $config['type'] ) ) {
-			$config['type'] = self::DEFAULT_COMPONENT_TYPE;
+		if ( empty( $settings['type'] ) ) {
+			$settings['type'] = self::DEFAULT_COMPONENT_TYPE;
 		}
 
 		// make sure the extension is loaded
-		$class_name = $this->load_ext( $config['type'] );
+		$class_name = $this->load_ext( $settings['type'] );
 
 		// try to create new component
 		try {
 			// construct it
-			$component = new $class_name( $name, $config['type'], $config['theme'], $this->policy() );
+			$component = new $class_name( $name, $settings['type'], $this->policy() );
+			// push settings to component
+			$component->import_settings( $settings );
 			// return it
 			return $component;
 		// catch missing reqs exception

@@ -22,9 +22,6 @@ ICE_Loader::load( 'components/features/component' );
 class ICE_Ext_Feature_Bp_Fb_Autoconnect
 	extends ICE_Feature
 {
-	/**
-	 */
-	protected $suboptions = true;
 
 	/**
 	 */

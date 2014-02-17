@@ -83,7 +83,7 @@ abstract class ICE_Option extends ICE_Component
 	 *
 	 * @var array
 	 */
-	private $field_options;
+	protected $field_options;
 
 	/**
 	 * The section to which this options is assigned (slug)
@@ -161,56 +161,10 @@ abstract class ICE_Option extends ICE_Component
 		// RUN PARENT FIRST!
 		parent::configure();
 
-		// section
-		if ( $this->config()->contains( 'section' ) ) {
-			$this->set_section( $this->config( 'section' ) );
-		} else {
-			$this->set_section( 'default' );
-		}
-
-		// feature
-		if ( $this->config()->contains( 'feature' ) ) {
-			$this->feature = $this->config( 'feature' );
-		}
-
-		// feature option
-		if ( $this->config()->contains( 'feature_option' ) ) {
-			$this->feature_option = $this->validate_name( $this->config( 'feature_option' ) );
-		}
-
-		// default value
-		if ( $this->config()->contains( 'default_value' ) ) {
-			$this->default_value = $this->config( 'default_value' );
-		}
-		
-		// deprecated name
-		if ( $this->config()->contains( 'name_deprecated' ) ) {
-			$this->name_deprecated = $this->validate_name( $this->config( 'name_deprecated' ) );
-		}
-
-		// css id
-		if ( $this->config()->contains( 'field_id' ) ) {
-			$this->field_id = $this->config( 'field_id' );
-		}
-
-		// css class
-		if ( $this->config()->contains( 'field_class' ) ) {
-			$this->field_class = $this->config( 'field_class' );
-		}
-
-		// style selector
-		if ( $this->config()->contains( 'style_selector' ) ) {
-			$this->style_selector = $this->config( 'style_selector' );
-		}
-
-		// style property
-		if ( $this->config()->contains( 'style_property' ) ) {
-			$this->style_property = $this->config( 'style_property' );
-		}
-		
-		// style unit
-		if ( $this->config()->contains( 'style_unit' ) ) {
-			$this->style_unit = $this->config( 'style_unit' );
+		// empty section?
+		if ( empty( $this->section ) ) {
+			// yes, use default
+			$this->section = 'default';
 		}
 
 		// setup style property object
@@ -222,30 +176,31 @@ abstract class ICE_Option extends ICE_Component
 		if ( !is_admin() ) {
 			return;
 		}
-
+		
+		// init temp field options array
+		$field_options = array();
+		
 		// @todo this grew too big, move to private method
-		if ( is_admin() && $this->config()->contains( 'field_options' ) ) {
+		if ( isset( $this->field_options ) ) {
 
-			// grab field options
-			$fo_config = $this->config( 'field_options' );
+			// is configured field options already an array?
+			if ( is_array( $this->field_options ) ) {
+				
+				// yep, done!
+				return;
 
-			// is configured field options a map?
-			if ( $fo_config instanceof ICE_Map ) {
-
-				// convert to array
-				$field_options = $fo_config->to_array();
-
-			} elseif ( strlen( $fo_config ) ) {
+			// is it a string?
+			} elseif ( is_string( $this->field_options ) ) {
 
 				// possibly a function
-				$callback = $fo_config;
+				$callback = $this->field_options;
 
 				// check if the function exists
 				if ( function_exists( $callback ) ) {
 					// call it
 					$field_options = $callback();
 					// make sure we got an array
-					if ( !is_array( $field_options ) ) {
+					if ( false === is_array( $field_options ) ) {
 						throw new Exception( sprintf( 'The field options callback function "%s" did not return an array', $callback ) );
 					}
 				} else {
@@ -253,13 +208,13 @@ abstract class ICE_Option extends ICE_Component
 				}
 
 			} else {
-				throw new Exception( sprintf( 'The field options for the "%s" option is not configured correctly', $name ) );
+				throw new Exception( sprintf( 'The field options for the "%s" option is not configured correctly', $this->get_property( 'name' ) ) );
 			}
 		
 		} elseif ( $this instanceof ICE_Option_Auto_Field ) {
 
-			// skip if already populated
-			if ( $this->field_options == null ) {
+			// auto field can't overwrite existing options
+			if ( null === $this->field_options ) {
 				// call template method to load options
 				$field_options = $this->load_field_options();
 			}
@@ -267,16 +222,17 @@ abstract class ICE_Option extends ICE_Component
 		} elseif ( $this->__style_property__ ) {
 
 			// check type
-			switch ( true ) {
-				case ( $this instanceof ICE_Ext_Option_Select ):
-				case ( $this instanceof ICE_Ext_Option_Radio ):
-					$field_options = $this->__style_property__->get_list_values();
+			if (
+				true === $this instanceof ICE_Ext_Option_Select ||
+				true === $this instanceof ICE_Ext_Option_Radio
+			) {
+				$field_options = $this->__style_property__->get_list_values();
 			}
 
 		}
 
 		// make sure we ended up with some options
-		if ( isset( $field_options ) && count( $field_options ) >= 1 ) {
+		if ( is_array( $field_options ) && count( $field_options ) >= 1 ) {
 			// finally set them for the option
 			$this->field_options = $field_options;
 		}
@@ -465,30 +421,6 @@ abstract class ICE_Option extends ICE_Component
 	protected function delete_option()
 	{
 		return delete_option( $this->get_api_name() );
-	}
-
-	/**
-	 * Set the section
-	 *
-	 * @param string $section
-	 */
-	protected function set_section( $section )
-	{
-		// lookup the section registry
-		$section_registry = ICE_Policy::instance('ICE_Section_Policy')->registry();
-
-		// get section from section registry
-		$section = $section_registry->get( $section );
-
-		// adding options to parent sections is not allowed
-		foreach ( $section_registry->get_all() as $section_i ) {
-			if ( $section->is_parent_of( $section_i ) ) {
-				throw new Exception(
-					sprintf( 'Cannot add options to section "%s" because it is acting as a parent section', $section->property( 'name' ) ) );
-			}
-		}
-
-		$this->section = $section->property( 'name' );
 	}
 
 	/**
@@ -711,13 +643,15 @@ abstract class ICE_Option_Image
 
 		} elseif ( is_string( $value ) && strlen( $value ) >= 1 ) {
 
-			// try to get raw default value config
-			$default_config = $this->config()->get('default_value');
-
 			// has default config?
-			if ( $default_config ) {
-				// yep, determine path
-				return ICE_Scheme::instance()->theme_file_url( $default_config->get_theme_slug(), $this->default_value );
+			if ( isset( $this->default_value ) ) {
+				// yep, locate theme
+				$theme = ICE_Scheme::instance()->locate_theme( $this->default_value );
+				// get a theme?
+				if ( $theme ) {
+					// yep, return URL of file
+					return ICE_Scheme::instance()->theme_file_url( $theme, $this->default_value );
+				}
 			}
 		}
 
@@ -733,12 +667,13 @@ abstract class ICE_Option_Image
 	{
 		// was a default set?
 		if ( strlen( $this->default_value ) ) {
-			// use default
-			return
-				ICE_Scheme::instance()->theme_file_url(
-					$this->config()->get('default_value')->get_theme_slug(),
-					$this->default_value
-				);
+			// try to get theme
+			$theme = ICE_Scheme::instance()->locate_theme( $this->default_value );
+			// get a theme?
+			if ( $theme ) {
+				// yep, return URL of file
+				return ICE_Scheme::instance()->theme_file_url( $theme, $this->default_value );
+			}
 		}
 
 		// no default set

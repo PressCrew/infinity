@@ -69,19 +69,6 @@ abstract class ICE_Shortcode extends ICE_Component
 	}
 
 	/**
-	 */
-	public function configure()
-	{
-		// RUN PARENT FIRST!
-		parent::configure();
-
-		// attribute defaults
-		if ( $this->config()->contains( 'attributes' ) ) {
-			$this->attributes = $this->config( 'attributes' );
-		}
-	}
-
-	/**
 	 * This method handles all shortcode calls
 	 *
 	 * @param array $atts The shortcode attributes

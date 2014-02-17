@@ -100,7 +100,7 @@ class ICE_Scheme_Enqueue extends ICE_Base
 
 		// get style defs
 		$style_defs =
-			$this->scheme->settings()->get_values(
+			$this->scheme->settings()->get_stack(
 				ICE_Scheme::SETTING_STYLE_DEFS
 			);
 
@@ -121,7 +121,7 @@ class ICE_Scheme_Enqueue extends ICE_Base
 
 		// get script defs
 		$script_defs =
-			$this->scheme->settings()->get_values(
+			$this->scheme->settings()->get_stack(
 				ICE_Scheme::SETTING_SCRIPT_DEFS
 			);
 
@@ -350,7 +350,7 @@ class ICE_Scheme_Enqueue extends ICE_Base
 	private function triggers( ICE_Map $map, $setting_name, $trigger_type, $trigger_action = null )
 	{
 		// get trigger settings for all themes
-		$settings = $this->scheme->settings()->get_values( $setting_name );
+		$settings = $this->scheme->settings()->get_stack( $setting_name );
 
 		// check if at least one theme defined this trigger
 		if ( $settings ) {
@@ -462,7 +462,7 @@ class ICE_Scheme_Enqueue extends ICE_Base
 	{
 		// get dep settings for all themes
 		$style_depends =
-			$this->scheme->settings()->get_values(
+			$this->scheme->settings()->get_stack(
 				ICE_Scheme::SETTING_STYLE_DEPS
 			);
 
@@ -523,7 +523,7 @@ class ICE_Scheme_Enqueue extends ICE_Base
 	{
 		// get dep settings for all themes
 		$script_depends =
-			$this->scheme->settings()->get_values(
+			$this->scheme->settings()->get_stack(
 				ICE_Scheme::SETTING_SCRIPT_DEPS
 			);
 

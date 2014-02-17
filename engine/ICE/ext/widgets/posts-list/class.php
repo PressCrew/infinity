@@ -52,19 +52,6 @@ class ICE_Ext_Widget_Posts_List
 
 	/**
 	 */
-	public function configure()
-	{
-		// RUN PARENT FIRST!
-		parent::configure();
-
-		// css title class
-		if ( $this->config()->contains( 'post_type' ) ) {
-			$this->post_type = (string) $this->config( 'post_type' );
-		}
-	}
-
-	/**
-	 */
 	public function init_ajax()
 	{
 		add_action( 'wp_ajax_ice_widgets_posts_list_save', array( $this, 'ajax_update_hierarchy' ) );

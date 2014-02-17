@@ -47,24 +47,6 @@ class ICE_Ext_Option_Ui_Image_Picker
 				return parent::get_property( $name );
 		}
 	}
-	
-	/**
-	 */
-	public function configure()
-	{
-		// run parent
-		parent::configure();
-		
-		// file directory
-		if ( $this->config()->contains( 'file_directory' ) ) {
-			$this->file_directory = $this->config( 'file_directory' );
-		}
-
-		// file directory
-		if ( $this->config()->contains( 'file_extension' ) ) {
-			$this->file_extension = $this->config( 'file_extension' );
-		}
-	}
 
 	/**
 	 */

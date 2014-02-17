@@ -29,9 +29,9 @@ function infinity_scheme_init()
 		->init( INFINITY_NAME );
 
 	// initialize policies (the order is important here)
+	Infinity_Features_Policy::instance();
 	Infinity_Sections_Policy::instance();
 	Infinity_Options_Policy::instance();
-	Infinity_Features_Policy::instance();
 	Infinity_Screens_Policy::instance();
 	Infinity_Widgets_Policy::instance();
 	Infinity_Shortcodes_Policy::instance();
@@ -50,9 +50,9 @@ function infinity_scheme_init()
 function infinity_scheme_finalize()
 {
 	// finalize registries
+	Infinity_Features_Policy::instance()->registry()->finalize();
 	Infinity_Sections_Policy::instance()->registry()->finalize();
 	Infinity_Options_Policy::instance()->registry()->finalize();
-	Infinity_Features_Policy::instance()->registry()->finalize();
 	Infinity_Screens_Policy::instance()->registry()->finalize();
 	Infinity_Widgets_Policy::instance()->registry()->finalize();
 	Infinity_Shortcodes_Policy::instance()->registry()->finalize();

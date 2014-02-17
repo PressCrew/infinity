@@ -22,9 +22,6 @@ ICE_Loader::load( 'components/features/component' );
 class ICE_Ext_Feature_Echo
 	extends ICE_Feature
 {
-	/**
-	 */
-	protected $suboptions = true;
 	
 	/**
 	 * Actions and their corresponding sub-option names

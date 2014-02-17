@@ -161,10 +161,10 @@ require_once INFINITY_INC_PATH . '/setup.php';
 infinity_scheme_init();
 
 // initialize components
+infinity_features_init();
 infinity_sections_init();
 infinity_options_init();
 infinity_screens_init();
-infinity_features_init();
 infinity_widgets_init();
 infinity_shortcodes_init();
 
@@ -172,8 +172,8 @@ infinity_shortcodes_init();
 infinity_scheme_finalize();
 
 // init component screens
-infinity_sections_init_screen();
 infinity_features_init_screen();
+infinity_sections_init_screen();
 infinity_options_init_screen();
 infinity_screens_init_screen();
 infinity_widgets_init_screen();

@@ -118,64 +118,6 @@ class ICE_Ext_Option_Ui_Slider
 	
 	/**
 	 */
-	public function configure()
-	{
-		// RUN PARENT FIRST!
-		parent::configure();
-
-		// animate
-		if ( $this->config()->contains( 'animate' ) ) {
-			$this->animate = $this->config( 'animate' );
-		}
-
-		// max
-		if ( $this->config()->contains( 'max' ) && is_numeric( $this->config( 'max' ) ) ) {
-			$this->max = $this->config( 'max' );
-		}
-
-		// min
-		if ( $this->config()->contains( 'min' ) && is_numeric( $this->config( 'min' ) ) ) {
-			$this->min = $this->config( 'min' );
-		}
-
-		// orientation
-		if ( $this->config()->contains( 'orientation' ) ) {
-			$this->orientation = (string) $this->config( 'orientation' );
-		}
-
-		// step
-		if ( $this->config()->contains( 'step' ) && is_numeric( $this->config( 'step' ) ) ) {
-			$this->step = $this->config( 'step' );
-		}
-
-		// range
-		if ( $this->config()->contains( 'range' ) && is_numeric( $this->config( 'range' ) )  ) {
-			$this->range = $this->config( 'range' );
-		}
-		
-		// value label
-		if ( $this->config()->contains( 'label' ) ) {
-			$this->label = (string) $this->config( 'label' );
-		}
-
-		// prefix
-		if ( $this->config()->contains( 'prefix' ) ) {
-			$this->prefix = (string) $this->config( 'prefix' );
-		}
-
-		// suffix
-		if ( $this->config()->contains( 'suffix' ) ) {
-			$this->suffix = (string) $this->config( 'suffix' );
-		}
-
-		// delimiter (more than one handle)
-		if ( $this->config()->contains( 'delimiter' ) ) {
-			$this->delimiter = (string) $this->config( 'delimiter' );
-		}
-	}
-
-	/**
-	 */
 	public function get_template_vars()
 	{
 		// new script helper

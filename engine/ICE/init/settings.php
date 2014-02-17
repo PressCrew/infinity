@@ -17,7 +17,7 @@
  * @package ICE
  * @subpackage init
  */
-class ICE_Init_Settings
+class ICE_Init_Settings_Stacked
 {
 	/**
 	 * @var array
@@ -68,35 +68,34 @@ class ICE_Init_Settings
 			return null;
 		}
 	}
-	
+
 	/**
-	 * Get effective value.
+	 * Get effective theme.
 	 *
 	 * @param string $name Name of key to retrieve (slug)
-	 * @return mixed
+	 * @param callable $callback The callback to use to seek to the correct theme stack position.
+	 * @return string
 	 */
-	public function get_value( $name )
+	public function get_theme( $name, $callback = 'end' )
 	{
-		// get effective theme
-		$theme = $this->get_theme( $name );
-
-		// get a theme?
-		if ( $theme ) {
-			// yep, return value for that theme
-			return $this->data[ $name ][ $theme ];
+		// exists in value map?
+		if ( isset( $this->data[ $name ] ) ) {
+			// seek using callback
+			$callback( $this->data[ $name ] );
+			// return current key
+			return key( $this->data[ $name ] );
 		} else {
-			// no value found
 			return null;
 		}
 	}
-	
+
 	/**
-	 * Get all effective values.
+	 * Get value for each theme.
 	 *
 	 * @param string $name Name of key to retrieve (slug)
 	 * @return array
 	 */
-	public function get_values( $name )
+	public function get_stack( $name )
 	{
 		// in value map?
 		if ( isset( $this->data[ $name ] ) ) {
@@ -109,31 +108,68 @@ class ICE_Init_Settings
 	}
 
 	/**
-	 * Get effective theme.
-	 *
-	 * @param string $name Name of key to retrieve (slug)
-	 * @return string
-	 */
-	public function get_theme( $name )
-	{
-		// exists in value map?
-		if ( isset( $this->data[ $name ] ) ) {
-			// yes, seek to end of stack
-			end( $this->data[ $name ] );
-			// return last key in stack
-			return key( $this->data[ $name ] );
-		} else {
-			return null;
-		}
-	}
-
-	/**
-	 * Return all data items as an array
+	 * Return all data items untouched.
 	 *
 	 * @return array
 	 */
-//	public function get_all()
-//	{
-//		return $this->to_array();
-//	}
+	public function get_stack_all()
+	{
+		// return data
+		return $this->data;
+	}
+	
+	/**
+	 * Get effective value.
+	 *
+	 * @param string $name Name of key to retrieve (slug)
+	 * @param callable $callback The callback to use to seek to the correct theme stack position.
+	 * @return mixed
+	 */
+	public function get_value( $name, $callback = 'end' )
+	{
+		// exists in value map?
+		if ( isset( $this->data[ $name ] ) ) {
+			// seek using callback
+			$callback( $this->data[ $name ] );
+			// return value using current
+			return current( $this->data[ $name ] );
+		} else {
+			// not set or null
+			return null;
+		}
+	}
+	
+	/**
+	 * Get effective theme/value pair suitable for use with list().
+	 *
+	 * @param string $name Name of key to retrieve (slug)
+	 * @param callable $callback The callback to use to seek to the correct theme stack position.
+	 * @return array|false
+	 */
+	public function get_value_each( $name, $callback = 'end' )
+	{
+		// exists in value map?
+		if ( isset( $this->data[ $name ] ) ) {
+			// seek using callback
+			$callback( $this->data[ $name ] );
+			// return theme/value pair
+			return array( key( $this->data[ $name ] ), current( $this->data[ $name ] ) );
+		} else {
+			// not set or null
+			return false;
+		}
+	}
+	
+	/**
+	 * Return all data values.
+	 *
+	 * @param callable $callback The callback used to reduce the theme stacked values to one value.
+	 * @return array
+	 */
+	public function get_value_all( $callback = 'end' )
+	{
+		// return mapped array
+		return array_map( $callback, $this->data );
+	}
+
 }

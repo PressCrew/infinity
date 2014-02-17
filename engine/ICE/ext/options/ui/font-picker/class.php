@@ -25,24 +25,6 @@ ICE_Loader::load_ext( 'options/ui/scroll-picker' );
 class ICE_Ext_Option_Ui_Font_Picker
 	extends ICE_Ext_Option_Ui_Scroll_Picker
 {
-	/**
-	 *
-	public function configure()
-	{
-		// file directory
-		if ( $this->config()->contains( 'file_directory' ) ) {
-			$this->file_directory = $this->config( 'file_directory' );
-		}
-
-		// file directory
-		if ( $this->config()->contains( 'file_extension' ) ) {
-			$this->file_extension = $this->config( 'file_extension' );
-		}
-
-		// run parent
-		parent::configure();
-	}
-	 */
 
 	public function init_admin_styles()
 	{

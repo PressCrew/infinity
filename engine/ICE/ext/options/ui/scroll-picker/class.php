@@ -66,29 +66,6 @@ class ICE_Ext_Option_Ui_Scroll_Picker
 
 	/**
 	 */
-	public function configure()
-	{
-		// RUN PARENT FIRST!
-		parent::configure();
-
-		// item width
-		if ( $this->config()->contains( 'item_width' ) ) {
-			$this->item_width = (string) $this->config( 'item_width' );
-		}
-
-		// item height
-		if ( $this->config()->contains( 'item_height' ) ) {
-			$this->item_height = (string) $this->config( 'item_height' );
-		}
-
-		// item margin
-		if ( $this->config()->contains( 'item_margin' ) ) {
-			$this->item_margin = (string) $this->config( 'item_margin' );
-		}
-	}
-
-	/**
-	 */
 	public function get_template_vars()
 	{
 		// new script helper

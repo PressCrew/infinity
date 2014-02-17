@@ -20,13 +20,6 @@
 interface ICE_Configurable
 {
 	/**
-	 * Accept a complete or partial configuration as an array
-	 *
-	 * @param array $config_array
-	 */
-	public function config_array( $config_array );
-
-	/**
 	 * Perform configuration steps
 	 */
 	public function configure();

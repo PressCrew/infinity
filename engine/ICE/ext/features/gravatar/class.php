@@ -46,19 +46,6 @@ class ICE_Ext_Feature_Gravatar
 		// add gravatar image styles callback
 		$this->style()->inject( 'image', 'image_css' );
 	}
-	
-	/**
-	 */
-	public function configure()
-	{
-		// RUN PARENT FIRST!
-		parent::configure();
-
-		// css title class
-		if ( $this->config()->contains( 'image_class' ) ) {
-			$this->image_class = (string) $this->config( 'image_class' );
-		}
-	}
 
 	/**
 	 */

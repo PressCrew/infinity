@@ -34,26 +34,56 @@ abstract class ICE_Feature_Registry extends ICE_Registry
 	private $opt_defaults = array();
 
 	/**
+	 * Feature types that *might* have an options file.
+	 *
+	 * @var array
 	 */
-	protected function load_config_section( $section_name, $section_array )
+	private $opt_files = array(
+		'bp/fb-autoconnect',
+		'echo',
+		'header-logo'
+	);
+	
+	/**
+	 */
+	protected function load_config_array( $comp_name, $settings )
 	{
-		// load like a regular section first
-		if ( true === parent::load_config_section( $section_name, $section_array ) ) {
+		// init sub options array
+		$sub_options = array();
 
-			// feature name is section name
-			$feature = $section_name;
+		// does this feature's type use sub option files?
+		if ( true === in_array( $settings[ 'type' ], $this->opt_files ) ) {
+			// yep, try to load it
+			$file_options = $this->load_sub_options_file( $settings[ 'type' ] );
+			// get any?
+			if ( $file_options ) {
+				// yep, merge em over top of existing
+				$sub_options = array_merge( $sub_options, $file_options );
+			}
+		}
+		
+		// did this feature pass an array of sub options?
+		if (
+			true === isset( $settings['options'] ) &&
+			true === is_array( $settings['options'] )
+		) {
+			// yep, merge them over top of existing
+			$sub_options = array_merge( $sub_options, $settings['options'] );
+		}
 
-			// does theme support this feature?
-			if ( true === current_theme_supports( $feature ) ) {
-				// has any sub options?
-				if (
-					true === isset( $section_array['options'] ) &&
-					true === is_array( $section_array['options'] ) &&
-					true === $this->policy()->options() instanceof ICE_Policy
-				) {
-					// yes, call sub options loader
-					$this->load_sub_options( $feature, $section_array['options'] );
-				}
+		// kill options reference in settings array no matter what
+		unset( $settings['options'] );
+
+		// load like a regular component first
+		if ( true === parent::load_config_array( $comp_name, $settings ) ) {
+
+			// has any sub options?
+			if (
+				0 < count( $sub_options ) &&
+				true === $this->policy()->options() instanceof ICE_Policy
+			) {
+				// yes, call sub options loader
+				$this->load_sub_options( $comp_name, $sub_options );
 			}
 
 			// feature config loaded
@@ -68,6 +98,32 @@ abstract class ICE_Feature_Registry extends ICE_Registry
 	}
 
 	/**
+	 * Load the sub-options file for the given extension.
+	 *
+	 * @param string $ext
+	 * @return array|false
+	 */
+	private function load_sub_options_file( $ext )
+	{
+		// try to get path
+		$path = ICE_Ext_Loader::instance()->locate_file( 'features/' .  $ext, 'options.php' );
+
+		// get a path?
+		if ( $path ) {
+			// yes, try to include
+			$file_options = include( $path );
+			// get an array?
+			if ( is_array( $file_options ) ) {
+				// yep, return it
+				return $file_options;
+			}
+		}
+
+		// file not loaded
+		return false;
+	}
+
+	/**
 	 * Load sub options for a feature.
 	 *
 	 * @param string $feature
@@ -75,9 +131,9 @@ abstract class ICE_Feature_Registry extends ICE_Registry
 	 */
 	private function load_sub_options( $feature, $options )
 	{
-		foreach( $options as $option => $option_config ) {
+		foreach( $options as $option => $settings ) {
 			// call sub option loader
-			$this->load_sub_option( $feature, $option, $option_config );
+			$this->load_sub_option( $feature, $option, $settings );
 		}
 	}
 
@@ -86,19 +142,19 @@ abstract class ICE_Feature_Registry extends ICE_Registry
 	 *
 	 * @param string $feature
 	 * @param string $option
-	 * @param array $option_config
+	 * @param array $settings
 	 */
-	private function load_sub_option( $feature, $option, $option_config )
+	private function load_sub_option( $feature, $option, $settings )
 	{
 		// is this the feature option defaults?
 		if ( self::OPT_DEF_NAME === $option ) {
 			// yep, set em
-			$this->load_default_option( $feature, $option_config );
+			$this->load_default_option( $feature, $settings );
 		} else {
-			// inject feature atts into config array
-			$option_config[ 'feature' ] = $feature;
+			// inject feature into settings array
+			$settings[ 'feature' ] = $feature;
 			// call special feature option loader
-			$this->policy()->options()->registry()->load_feature_option( $option, $option_config );
+			$this->policy()->options()->registry()->load_feature_option( $option, $settings );
 		}
 	}
 
@@ -106,18 +162,18 @@ abstract class ICE_Feature_Registry extends ICE_Registry
 	 * Load default option config for a feature.
 	 *
 	 * @param string $feature
-	 * @param array $option_config
+	 * @param array $settings
 	 */
-	private function load_default_option( $feature, $option_config )
+	private function load_default_option( $feature, $settings )
 	{
 		// already have some defaults set?
 		if ( isset( $this->opt_defaults[ $feature ] ) ) {
 			// yes, merge on top of existing
-			$option_config = array_merge( $this->opt_defaults[ $feature ], $option_config );
+			$settings = array_merge( $this->opt_defaults[ $feature ], $settings );
 		}
 
 		// set defaults
-		$this->opt_defaults[ $feature ] = $option_config;
+		$this->opt_defaults[ $feature ] = $settings;
 	}
 
 	/**

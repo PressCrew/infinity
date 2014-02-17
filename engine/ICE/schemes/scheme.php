@@ -168,7 +168,7 @@ final class ICE_Scheme extends ICE_Base
 	/**
 	 * The settings registry instance
 	 * 
-	 * @var ICE_Init_Settings
+	 * @var ICE_Init_Settings_Stacked
 	 */
 	private $settings;
 
@@ -187,7 +187,7 @@ final class ICE_Scheme extends ICE_Base
 		// initialize themes map
 		$this->themes = new ICE_Stack();
 		$this->themes_compiled = new ICE_Map();
-		$this->settings = new ICE_Init_Settings();
+		$this->settings = new ICE_Init_Settings_Stacked();
 		$this->config_files_loaded = new ICE_Stack();
 
 		// handle compiled themes
@@ -262,7 +262,7 @@ final class ICE_Scheme extends ICE_Base
 	/**
 	 * Return settings registry
 	 *
-	 * @return ICE_Init_Settings
+	 * @return ICE_Init_Settings_Stacked
 	 */
 	final public function settings()
 	{
@@ -492,7 +492,7 @@ final class ICE_Scheme extends ICE_Base
 	private function feature_support()
 	{
 		// try to get features
-		$setting = $this->settings()->get_values( self::SETTING_FEATURE );
+		$setting = $this->settings()->get_stack( self::SETTING_FEATURE );
 
 		// any features set?
 		if ( $setting ) {
@@ -600,7 +600,7 @@ final class ICE_Scheme extends ICE_Base
 				}
 				
 				// try to load config file
-				if ( $policy->registry()->load_config_file( $config_file, $theme ) ) {
+				if ( $policy->registry()->load_config_file( $config_file ) ) {
 					// push onto loaded stack
 					$this->config_files_loaded->push( $config_file );
 				}
@@ -845,6 +845,37 @@ final class ICE_Scheme extends ICE_Base
 
 		// return absolute path to theme file
 		return $this->theme_file( $theme, $config_dir, $filename . '.php' );
+	}
+
+	/**
+	 * Return the first theme in which a relative file path is found.
+	 *
+	 * @param string $relative_path
+	 * @return string|false
+	 */
+	public function locate_theme( $relative_path )
+	{
+		// loop through theme stack
+		foreach ( $this->theme_stack() as $theme ) {
+
+			// is theme in current loop compiled?
+			if ( true === $this->themes_compiled->contains( $theme ) ) {
+				// yep, skip it
+				continue;
+			}
+
+			// build possible absolute path to file
+			$absolute_path = $this->theme_dir( $theme ) . '/' . $relative_path;
+
+			// does file exist?
+			if ( ICE_Files::cache($absolute_path)->is_readable() ) {
+				// yes, return the *theme*
+				return $theme;
+			}
+		}
+
+		// file not found in any theme
+		return false;
 	}
 
 	/**

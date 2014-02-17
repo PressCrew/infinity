@@ -95,10 +95,13 @@ class Infinity_Screen_Factory extends ICE_Screen_Factory
 		// call parent to create component
 		$component = parent::create( $name, $config );
 
-		// check if URL is set
-		if ( !$component->config( 'url' ) ) {
-			// set url
-			$component->config( 'url', INFINITY_AJAX_URL . infinity_screens_route( 'cpanel', $component->property( 'name' ) ) );
+		// try to get URL property
+		$url = $component->get_property( 'url' );
+
+		// is url set?
+		if ( empty( $url ) ) {
+			// nope, set url
+			$component->set_property( 'url', INFINITY_AJAX_URL . infinity_screens_route( 'cpanel', $component->get_property( 'name' ) ) );
 		}
 
 		return $component;

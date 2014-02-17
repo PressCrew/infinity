@@ -23,37 +23,6 @@ abstract class ICE_Feature
 	extends ICE_Component
 {
 	/**
-	 * Sub options toggle
-	 *
-	 * @var boolean
-	 */
-	protected $suboptions = false;
-
-	/**
-	 * @internal
-	 */
-	public function init_registered()
-	{
-		// call parent
-		parent::init_registered();
-
-		// suboptions toggled on?
-		if ( true === $this->suboptions ) {
-			// look for an options configuration file
-			// TODO this should be loading ALL options files in stack
-			$options_file = $this->locate_file( 'options.php' );
-			// find one?
-			if ( $options_file ) {
-				// load using options registry
-				$this->policy()
-					->options()
-					->registry()
-					->load_feature_options_file( $this, $options_file );
-			}
-		}
-	}
-
-	/**
 	 * Check if theme supports this feature
 	 *
 	 * @return boolean

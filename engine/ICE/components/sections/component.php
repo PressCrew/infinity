@@ -54,24 +54,6 @@ abstract class ICE_Section extends ICE_Component
 				return parent::get_property( $name );
 		}
 	}
-	
-	/**
-	 */
-	public function configure()
-	{
-		// RUN PARENT FIRST!
-		parent::configure();
-
-		// css title class
-		if ( $this->config()->contains( 'class_title' ) ) {
-			$this->class_title = $this->config( 'class_title' );
-		}
-
-		// css content class
-		if ( $this->config()->contains( 'class_content' ) ) {
-			$this->class_content = $this->config( 'class_content' );
-		}
-	}
 
 	/**
 	 * Add component to this section's content

@@ -14,7 +14,6 @@
 ICE_Loader::load(
 	'base/componentable',
 	'base/visitable',
-	'init/configuration',
 	'utils/export'
 );
 
@@ -37,18 +36,18 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	const SUB_OPTION_GLUE = '_';
 
 	/**
-	 * Name of the theme currently being loaded
-	 *
-	 * @var string
-	 */
-	static private $theme_scope;
-
-	/**
 	 * Registered components array
 	 *
 	 * @var array
 	 */
 	private $components = array();
+
+	/**
+	 * Raw settings array.
+	 *
+	 * @var array
+	 */
+	private $settings = array();
 
 	/**
 	 */
@@ -147,6 +146,58 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 		}
 
 		return $name;
+	}
+
+	/**
+	 * Substitute value from another init data key into this key's value
+	 *
+	 * @param string $value
+	 * @param array $settings
+	 * @return string
+	 */
+	private function substitute( $value, $settings )
+	{
+		// does string have enough % chars?
+		if ( is_string( $value ) && substr_count( $value, '%' ) >= 2 ) {
+			// matches container
+			$matches = null;
+			// find tokens
+			if ( preg_match_all( '/%(\w+)%/', $value, $matches, PREG_SET_ORDER ) ) {
+				// loop all matches
+				foreach ( $matches as $match ) {
+					// break out strings into vars
+					$str_search = $match[0];
+					$str_name = $match[1];
+					// is data already set?
+					if ( isset( $settings[ $str_name ] ) ) {
+						// return new string
+						$value = str_replace(
+							$str_search,
+							$settings[ $str_name ],
+							$value
+						);
+					} else {
+						throw new Exception( sprintf(
+							'Cannot perform substitution for data value "%s" using value of ' .
+							'data name "%s" because it has not been set', $value, $str_name ) );
+					}
+				}
+			}
+		}
+
+		return $value;
+	}
+
+	/**
+	 * Apply substitution to all configured settings.
+	 */
+	private function substitute_all()
+	{
+		foreach ( $this->settings as $comp_name => $settings ) {
+			foreach ( $settings as $setting => $value ) {
+				$this->settings[ $comp_name ][ $setting ] = $this->substitute( $value, $settings );
+			}
+		}
 	}
 
 	/**
@@ -272,111 +323,106 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	}
 
 	/**
-	 * Load a config file
+	 * Load a config file.
 	 *
-	 * @param string $filename Absolute path to the component config file to parse
-	 * @param string $theme The theme to assign the parsed directives to
+	 * @param string $filename Absolute path to the component config file to parse.
 	 * @return boolean
 	 */
-	final public function load_config_file( $filename, $theme )
+	final public function load_config_file( $filename )
 	{
-		// try to parse the component config file "sections"
-		$sections = require_once( $filename );
+		// get component configurations from file
+		$settings = require_once( $filename );
 
-		// get a config?
-		if ( is_array( $sections ) ) {
-			// set the current theme being loaded
-			self::$theme_scope = $theme;
-			// load all parsed sections
-			$result = $this->load_config_sections( $sections );
-			// remove theme scope
-			self::$theme_scope = null;
-			// all done
-			return $result;
-		}
-
-		return false;
-	}
-
-	/**
-	 * Load components into registry from an array.
-	 *
-	 * @param array $sections_array
-	 * @return boolean
-	 */
-	final protected function load_config_sections( $sections_array )
-	{
-		// must have a non-empty array
-		if ( is_array( $sections_array ) && count( $sections_array ) ) {
-			// loop through each section
-			foreach ( $sections_array as $section_name => $section_array ) {
-				// load one section
-				$this->load_config_section( $section_name, $section_array );
+		// get an array?
+		if ( is_array( $settings ) ) {
+			// loop all component configs
+			foreach( $settings as $comp_name => $settings ) {
+				// load component config
+				$this->load_config_array( $comp_name, $settings );
 			}
-			// all done
+			// file loaded
 			return true;
 		}
 
+		// file NOT loaded
 		return false;
 	}
 
 	/**
-	 * Load one component into registry from an array
+	 * Load one component config into registry from an array.
 	 *
-	 * @param string $section_name
-	 * @param array $section_array
+	 * @param string $comp_name
+	 * @param array $settings
 	 * @return boolean
 	 */
-	protected function load_config_section( $section_name, $section_array )
+	protected function load_config_array( $comp_name, $settings )
 	{
-		return $this->load_config_map( $section_name, $section_array );
+		// does component have config already?
+		if ( isset( $this->settings[ $comp_name ] ) ) {
+			// yep, merge over existing settings
+			$this->settings[ $comp_name ] =
+				array_merge(
+					$this->settings[ $comp_name ],
+					$settings
+				);
+		} else {
+			// nope, just assign it
+			$this->settings[ $comp_name ] = $settings;
+		}
+
+		// config loaded
+		return true;
 	}
 
 	/**
-	 * Load one component given its name and config array
+	 * Create and return a component.
 	 *
-	 * @param string $name
-	 * @param array $config_array
+	 * @param string $comp_name
+	 * @param array $settings
+	 * @return ICE_Component|boolean
+	 */
+	private function create_component( $comp_name, $settings )
+	{
+		// use factory to create new component
+		return
+			$this->policy()->factory()->create(
+				$comp_name,
+				$settings
+			);
+	}
+
+	/**
+	 * Create all configured components using raw settings.
+	 *
 	 * @return boolean
 	 */
-	final protected function load_config_map( $name, $config_array )
+	private function create_components()
 	{
-		// normalize name
-		$name = $this->normalize_name( $name );
-		
-		// push theme onto config
-		$config_array['theme'] = self::theme_scope();
+		// loop all component configurations.
+		foreach( $this->settings as $comp_name => $settings ) {
 
-		// check if already registered
-		if ( isset( $this->components[ $name ] ) ) {
-			// use that one
-			$component = $this->components[ $name ];
-		} else {
-			// use factory to create new component
-			$component =
-				$this->policy()->factory()->create(
-					$name,
-					$config_array
-				);
-			// make sure we got a valid component
-			if ( $component instanceof ICE_Component ) {
-				// register component
-				$this->register( $component );
+			// check if already registered
+			if ( false === $this->has( $comp_name ) ) {
+
+				// create new component
+				$component = $this->create_component( $comp_name, $settings );
+
+				// get a component?
+				if ( $component instanceof ICE_Component ) {
+
+					// register component
+					$this->register( $component );
+				}
+
 			} else {
-				// did not get a component, nothing to do
-				// TODO might want to throw an exception here, this is pretty bad juju
-				return false;
+				// component already registered, not good!
+				throw new OverflowException(
+					sprintf( 'The "%s" component cannot be created twice.', $comp_name )
+				);
 			}
 		}
 
-		// push configuration
-		$component->config_array( $config_array );
-
-		// post registration
-		if ( $component->supported() ) {
-			$component->init_registered();
-		}
-
+		// all done
 		return true;
 	}
 
@@ -385,28 +431,15 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	 */
 	final public function finalize()
 	{
+		// perform substitutions
+		$this->substitute_all();
+
+		// call component creator
+		$this->create_components();
+
 		foreach ( $this->components as $component ) {
 			$component->finalize();
 		}
-	}
-
-	/**
-	 * Return the current theme scope
-	 *
-	 * @return string
-	 */
-	final static public function theme_scope()
-	{
-		// if the theme scope is needed, then its assumed that some kind of
-		// loading or component creation is happening. since theme scope
-		// is required for these procedures, throw an error
-		// if theme scope is null
-		if ( empty( self::$theme_scope ) ) {
-			throw new Exception( 'The theme scope is empty, something went horribly wrong!' );
-		}
-
-		// return the current theme scope
-		return self::$theme_scope;
 	}
 
 	/**

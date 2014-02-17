@@ -158,9 +158,6 @@ final class ICE_Loader extends ICE_Base
 			'styleable' => true
 		),
 		'init' => array(
-			'data' => true,
-			'configuration' => true,
-			'registry' => true,
 			'settings' => true
 		),
 		'parsers' => array(

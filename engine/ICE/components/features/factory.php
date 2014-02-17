@@ -21,5 +21,17 @@ ICE_Loader::load( 'base/factory' );
  */
 class ICE_Feature_Factory extends ICE_Factory
 {
-	// nothing custom yet
+	/**
+	 */
+	public function create( $name, $settings )
+	{
+		// only create if supported
+		if ( true === current_theme_supports( $name ) ) {
+			// supported, call parent
+			return parent::create( $name, $settings );
+		} else {
+			// not supported
+			return false;
+		}
+	}
 }

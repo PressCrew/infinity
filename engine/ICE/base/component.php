@@ -51,13 +51,6 @@ abstract class ICE_Component
 	 * Name of the default templates subdir
 	 */
 	const DEFAULT_TEMPLATE_DIR = 'templates';
-
-	/**
-	 * Component configurations registry
-	 *
-	 * @var ICE_Init_Config
-	 */
-	private $__config__;
 	
 	/**
 	 * Component's DOM element helper
@@ -207,13 +200,6 @@ abstract class ICE_Component
 	protected $title;
 
 	/**
-	 * The theme (slug) which created this component
-	 *
-	 * @var string
-	 */
-	private $theme;
-
-	/**
 	 * The component type
 	 *
 	 * @var string
@@ -223,10 +209,9 @@ abstract class ICE_Component
 	/**
 	 * @param string $name Option name may only contain alphanumeric characters as well as the underscore for use as a word separator.
 	 * @param string $type The type (component extension) of this component
-	 * @param string $theme The theme which originally created this component
 	 * @param ICE_Policy $policy The policy to apply to this component
 	 */
-	final public function __construct( $name, $type, $theme, $policy )
+	final public function __construct( $name, $type, $policy )
 	{
 		// check requirements
 		if ( false === $this->check_reqs() ) {
@@ -238,13 +223,9 @@ abstract class ICE_Component
 		// apply policy
 		$this->policy( $policy );
 
-		// init config and directives registries
-		$this->__config__ = new ICE_Init_Config();
-
 		// init required directives
 		$this->name = $this->validate_name( $name );
 		$this->type = $type;
-		$this->theme = $theme;
 
 		// the "atypical name" is unique across all components
 		$this->aname = $this->format_aname( $this->name );
@@ -300,7 +281,6 @@ abstract class ICE_Component
 			case 'style':
 			case 'style_depends':
 			case 'template':
-			case 'theme':
 			case 'title':
 			case 'type':
 				return $this->$name;
@@ -405,8 +385,9 @@ abstract class ICE_Component
 		// value is null by default
 		$value = null;
 
-		// get raw value of conf
-		$raw_value = $this->config( $name );
+		// TODO this needs to be tested
+		// copy raw value of property
+		$raw_value = $this->$name;
 
 		// is conf data set?
 		if ( $raw_value ) {
@@ -428,7 +409,7 @@ abstract class ICE_Component
 			$value = $default;
 		}
 
-		// set the property
+		// overwrite the property value
 		return $this->$name = $value;
 	}
 	
@@ -485,74 +466,52 @@ abstract class ICE_Component
 	}
 
 	/**
-	 * Return entire config, or return/set the value of one item
+	 * Import component settings and assign to properties.
 	 *
-	 * @param string $name
-	 * @param mixed $value
-	 * @param boolean $ro_value
-	 * @param boolean $ro_theme
-	 * @return ICE_Init_Config|mixed
+	 * @param array $settings
 	 */
-	final public function config( $name = null, $value = null, $ro_value = false, $ro_theme = false )
+	final public function import_settings( $settings )
 	{
-		// this method is just silly flexible
-		switch ( func_num_args() ) {
-
-			// no args, return entire config
-			case 0:
-				return $this->__config__;
-
-			// one arg, return value of one item
-			case 1:
-				// get directive data
-				$data = $this->__config__->get( $name );
-				// return data value or null
-				return ( $data ) ? $data->get_value() : null;
-
-			// more than one arg, we are setting
-			default:
-				// get current theme scope
-				$theme = $this->policy()->registry()->theme_scope();
-				// set it
-				return $this->__config__->set( $theme, $name, $value, $ro_value, $ro_theme );
-		}
-	}
-
-	/**
-	 * Push component config values on to the configuration
-	 *
-	 * @param array $config_array
-	 */
-	final public function config_array( $config_array )
-	{
-		// grab theme from configuration array
-		$theme = $config_array['theme'];
-
 		// is a feature set?
-		if ( isset( $config_array['feature'] ) ) {
+		if ( isset( $settings['feature'] ) ) {
 			// try to grab defaults
-			$defaults_array = $this->policy()->features()->registry()->get_default_option( $config_array['feature'] );
+			$defaults_array = $this->policy()->features()->registry()->get_default_option( $settings['feature'] );
 			// get any defaults?
 			if ( !empty( $defaults_array ) ) {
 				// merge config *ON TOP OF* defaults
-				$config_array = array_merge( $defaults_array, $config_array );
+				$settings = array_merge( $defaults_array, $settings );
 			}
 		}
 
-		foreach ( $config_array as $name => $value ) {
+		// do not allow overwriting these private settings
+		unset(
+			$settings['aname'],
+			$settings['hname'],
+			$settings['name'],
+			$settings['type']
+		);
 
-			// skip these base directives
-			switch ( $name ) {
-				case 'theme':
-				case 'name':
-				case 'type':
-				case 'aname':
-				case 'hname':
-					continue;
+		// loop config
+		foreach ( $settings as $name => $value ) {
+			// does property name start with two underscores?
+			if ( '__' === $name[0] . $name[1] ) {
+				// yes, ignore it
+				continue;
 			}
-
-			// set it
-			$this->__config__->set( $theme, $name, $value );
+			// does property exist?
+			if ( true === property_exists( $this, $name ) ) {
+				// yes, set it
+				$this->$name = $value;
+			} else {
+				// property doesn't exist
+				throw new UnexpectedValueException(
+					sprintf(
+						__( 'The "%s" property does not exist in the "%s" class.', 'infinity' ),
+						$name,
+						get_class( $this )
+					)
+				);
+			}
 		}
 	}
 
@@ -560,95 +519,23 @@ abstract class ICE_Component
 	 */
 	public function configure()
 	{
-		// parent
-		if ( $this->config()->contains( 'parent' ) ) {
-			//  get parent from config
-			$parent = $this->config( 'parent' );
-			// name can't equal parent
-			if ( $this->name != $parent ) {
-				$this->parent = $parent;
-			} else {
-				throw new Exception(
-					sprintf( 'The component "%s" cannot be a parent of itself', $this->name ) );
-			}
+		// parent sanity check
+		if (
+			true === isset( $this->parent ) &&
+			$this->name == $this->parent
+		) {
+			throw new Exception(
+				sprintf( 'The component "%s" cannot be a parent of itself', $this->name ) );
 		}
 
-		// title
-		if ( $this->config()->contains( 'title' ) ) {
-			$this->title = $this->config( 'title' );
+		// capabilities sanity check
+		if (
+			true === isset( $this->capabilities ) &&
+			false === is_array( $this->capabilities )
+		) {
+			throw new Exception(
+				sprintf( 'The capabilities for component "%s" must be an array.', $this->name ) );
 		}
-
-		// desc
-		if ( $this->config()->contains( 'description' ) ) {
-			$this->description = $this->config( 'description' );
-		}
-
-		// documentation
-		if ( $this->config()->contains( 'documentation' ) ) {
-			$this->documentation = $this->config( 'documentation' );
-		}
-
-		// set body class
-		if ( $this->config()->contains( 'body_class' ) ) {
-			$this->body_class = $this->config( 'body_class' );
-		}
-
-		// set stylesheet
-		if ( $this->config()->contains( 'style' ) ) {
-			$this->style = $this->config( 'style' );
-		}
-
-		// set style dependancies
-		if ( $this->config()->contains( 'style_depends' ) ) {
-			// split deps at comma
-			$deps = explode( ',', $this->config( 'style_depends' ) );
-			// set directive
-			$this->style_depends = $deps;
-		}
-
-		// set script
-		if ( $this->config()->contains( 'script' ) ) {
-			$this->script = $this->config( 'script' );
-		}
-
-		// set script dependancies
-		if ( $this->config()->contains( 'script_depends' ) ) {
-			// split deps at comma
-			$deps = explode( ',', $this->config( 'script_depends' ) );
-			// set directive
-			$this->script_depends = $deps;
-		}
-
-		// set template
-		if ( $this->config()->contains( 'template' ) ) {
-			$this->template = $this->config( 'template' );
-		}
-
-		// css id
-		if ( $this->config()->contains( 'id' ) ) {
-			$this->id = $this->config( 'id' );
-		}
-
-		// css class
-		if ( $this->config()->contains( 'class' ) ) {
-			$this->class = $this->config( 'class' );
-		}
-
-		// capabilities
-		if ( $this->config()->contains( 'capabilities' ) ) {
-			$this->add_capabilities( $this->config( 'capabilities' ) );
-		}
-
-		// required feature
-		if ( $this->config()->contains( 'required_feature' ) ) {
-			$this->required_feature = $this->config( 'required_feature' );
-		}
-
-		// set ignore
-		if ( $this->config()->contains( 'ignore' ) ) {
-			$this->ignore = (boolean) $this->config( 'ignore' );
-		}
-
 	}
 
 	/**
@@ -658,9 +545,6 @@ abstract class ICE_Component
 	 */
 	final public function finalize()
 	{
-		// lock configuration
-		$this->config()->lock();
-
 		// call configure template method
 		$this->configure();
 
@@ -754,15 +638,6 @@ abstract class ICE_Component
 	protected function init()
 	{
 		// override this method to initialize special PHP handling for a component
-	}
-
-	/**
-	 * This template method is called immediately after component registration
-	 * @internal
-	 */
-	public function init_registered()
-	{
-		// override this to perform post registration tasks
 	}
 
 	/**

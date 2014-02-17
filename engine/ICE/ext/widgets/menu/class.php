@@ -59,20 +59,6 @@ class ICE_Ext_Widget_Menu
 		wp_enqueue_script( 'jquery-ui-menu' );
 	}
 
-
-	/**
-	 */
-	public function configure()
-	{
-		// RUN PARENT FIRST!
-		parent::configure();
-
-		// menu items
-		if ( $this->config()->contains( 'menu_items' ) ) {
-			$this->menu_items = $this->config( 'menu_items' );
-		}
-	}
-
 	/**
 	 */
 	public function get_template_vars()

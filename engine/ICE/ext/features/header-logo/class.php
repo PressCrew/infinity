@@ -20,9 +20,6 @@
 class ICE_Ext_Feature_Header_Logo
 	extends ICE_Feature
 {
-	/**
-	 */
-	protected $suboptions = true;
 
 	/**
 	 */

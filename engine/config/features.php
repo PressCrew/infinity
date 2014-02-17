@@ -168,7 +168,9 @@ $features['infinity-base-script'] = array(
 	'title' => 'Base Javascript',
 	'description' => 'Some jQuery to spice up the Base Theme',
 	'script' => 'assets/js/base.js',
-	'script_depends' => 'jquery',
+	'script_depends' => array(
+		'jquery'
+	)
 );
 
 $features['infinity-responsive-menu'] = array(
@@ -179,6 +181,7 @@ $features['infinity-responsive-menu'] = array(
 	'switch_width' => 770,
 	'top_option_text' => 'Where to?',
 	'prepend_to' => 'div.mobile-menu-container',
+	'__wassup__' => 'yup'
 );
 
 $features['infinity-responsive-videos'] = array(

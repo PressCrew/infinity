@@ -22,14 +22,31 @@ ICE_Loader::load( 'base/component' );
 abstract class ICE_Screen extends ICE_Component
 {
 	/**
+	 * Target of the screen menu link.
+	 *
 	 * @var string
 	 */
 	protected $target;
 
 	/**
+	 * URL where to find the screen.
+	 *
 	 * @var string
 	 */
 	protected $url;
+
+	/**
+	 * @todo need a better way to set URL from public scope.
+	 */
+	protected function set_property( $name, $value )
+	{
+		switch ( $name ) {
+			case 'url':
+				return $this->$name = $value;
+			default:
+				return parent::set_property( $name, $value );
+		}
+	}
 
 	/**
 	 */
@@ -44,23 +61,4 @@ abstract class ICE_Screen extends ICE_Component
 		}
 	}
 	
-	/**
-	 */
-	public function configure()
-	{
-		// RUN PARENT FIRST!
-		parent::configure();
-
-		// url where to find the screen
-		// @todo add this to documentation when stable
-		if ( $this->config()->contains( 'url' ) ) {
-			$this->url = $this->config( 'url' );
-		}
-
-		// target of the screen menu link
-		// @todo add this to documentation when stable
-		if ( $this->config()->contains( 'target' ) ) {
-			$this->target = $this->config( 'target' );
-		}
-	}
 }

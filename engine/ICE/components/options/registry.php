@@ -20,79 +20,41 @@ ICE_Loader::load( 'base/registry', 'components/options/factory', 'utils/ajax' );
  * @subpackage options
  */
 abstract class ICE_Option_Registry extends ICE_Registry
-{
-
+{	
 	/**
-	 */
-	protected function load_config_section( $section_name, $section_array )
-	{
-		// does this load as a feature option?
-		if ( $this->load_feature_option( $section_name, $section_array ) ) {
-			// yes, skip standard loading
-			return true;
-		} else {
-			// no, not a feature option, call parent
-			return parent::load_config_section( $section_name, $section_array );
-		}
-	}
-
-	public function load_feature_options_file( ICE_Feature $feature, $filename )
-	{
-		// try to parse the options config file "sections"
-		$sections = require_once( $filename );
-
-		// get any sections?
-		if ( is_array( $sections ) && count( $sections ) ) {
-			// inject required feature directive into every option config
-			foreach ( $sections as $name => &$config) {
-				// set the feature
-				$config['feature'] = $feature->property( 'name' );
-			}
-		}
-
-		// load the sections as normal
-		return $this->load_config_sections( $sections );
-	}
-	
-	/**
-	 * Load option config as a feature option if syntax of name matches pattern
-	 * or if the "feature" directive is set.
+	 * Load option config as a feature option if the "feature" setting is set.
 	 *
 	 * @param string $name
-	 * @param array $config
+	 * @param array $settings
 	 * @return boolean
 	 */
-	public function load_feature_option( $name, $config )
+	public function load_feature_option( $name, $settings )
 	{
 		// feature explicitly set?
-		if ( isset( $config['feature'] ) ) {
+		if ( isset( $settings['feature'] ) ) {
 
 			// format option name
-			$option_name = ICE_Registry::format_suboption( $config['feature'], $name );
+			$option_name = ICE_Registry::format_suboption( $settings['feature'], $name );
+			
+			// set feature option
+			$settings[ 'feature_option' ] = $name;
 
-			// make sure feature is registered
-			if ( $this->policy()->features()->registry()->has( $config['feature'] ) ) {
+			// set required feature
+			$settings['required_feature'] = $settings['feature'];
 
-				// set feature option
-				$config[ 'feature_option' ] = $name;
+			// clean up parent
+			if ( isset( $settings['parent'] ) ) {
+				$settings['parent'] = $this->normalize_name( $settings['parent'] );
+			}
 
-				// set required feature
-				$config['required_feature'] = $config['feature'];
-
-				// clean up parent
-				if ( isset( $config['parent'] ) ) {
-					$config['parent'] = $this->normalize_name( $config['parent'] );
-				}
-
-				// call parent config loader
-				if ( $this->load_config_map( $option_name, $config ) ) {
-					// successfully loaded feature sub option
-					return true;
-				} else {
-					// this is really bad
-					throw new Exception( sprintf(
-						'Failed to load "%s" as an option for feature "%s"', $option_name, $config['feature'] ) );
-				}
+			// call parent config loader
+			if ( $this->load_config_array( $option_name, $settings ) ) {
+				// successfully loaded feature sub option
+				return true;
+			} else {
+				// this is really bad
+				throw new Exception( sprintf(
+					'Failed to load "%s" as an option for feature "%s"', $option_name, $settings['feature'] ) );
 			}
 		}
 
