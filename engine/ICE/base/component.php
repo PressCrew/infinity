@@ -261,7 +261,7 @@ abstract class ICE_Component
 
 	/**
 	 */
-	protected function get_property( $name )
+	public function get_property( $name )
 	{
 		switch ( $name ) {
 			case 'aname':
@@ -816,7 +816,7 @@ abstract class ICE_Component
 	 */
 	public function is_parent_of( ICE_Component $component )
 	{
-		return $this->name == $component->property( 'parent' );
+		return $this->name == $component->get_property( 'parent' );
 	}
 
 	/**

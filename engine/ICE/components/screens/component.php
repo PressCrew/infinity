@@ -50,7 +50,7 @@ abstract class ICE_Screen extends ICE_Component
 
 	/**
 	 */
-	protected function get_property( $name )
+	public function get_property( $name )
 	{
 		switch ( $name ) {
 			case 'url':

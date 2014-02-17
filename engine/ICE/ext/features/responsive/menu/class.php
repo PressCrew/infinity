@@ -74,7 +74,7 @@ class ICE_Ext_Feature_Responsive_Menu
 
 	/**
 	 */
-	protected function get_property( $name )
+	public function get_property( $name )
 	{
 		switch ( $name ) {
 			case 'combine':

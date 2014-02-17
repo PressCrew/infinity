@@ -22,7 +22,7 @@
 <div id="<?php $this->render_id('widget') ?>" class="ice-controls">
 <?php
 	// render hidden input(s)
-	if ( $this->component()->property( 'range' ) ) {
+	if ( $this->component()->get_property( 'range' ) ) {
 		// its a range, loop values
 		// @todo this is very similar to the input group loop, move to base renderer
 		foreach ( $this->component()->get() as $value ) {

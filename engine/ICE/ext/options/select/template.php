@@ -19,7 +19,7 @@ $selected_value = $this->component()->get();
 ?>
 <select name="<?php $this->render_name() ?>" id="<?php $this->render_field_id() ?>" class="<?php $this->render_field_class() ?>">
 	<option value="">--- Select One ---</option>
-	<?php foreach ( $this->component()->property( 'field_options' ) as $value => $text ):
+	<?php foreach ( $this->component()->get_property( 'field_options' ) as $value => $text ):
 		$selected = ( $value == $selected_value ) ? ' selected="selected"' : null; ?>
 		<option value="<?php print esc_attr( $value ) ?>"<?php print $selected ?>><?php print esc_html( $text ) ?></option>
 	<?php endforeach; ?>

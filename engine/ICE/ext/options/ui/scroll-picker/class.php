@@ -42,7 +42,7 @@ class ICE_Ext_Option_Ui_Scroll_Picker
 	
 	/**
 	 */
-	protected function get_property( $name )
+	public function get_property( $name )
 	{
 		switch ( $name ) {
 			case 'item_height':
@@ -82,7 +82,7 @@ class ICE_Ext_Option_Ui_Scroll_Picker
 		return array(
 			'value' => $this->get(),
 			'scroll_options' => $options->export_variables(true),
-			'field_options' => $this->property( 'field_options' )
+			'field_options' => $this->get_property( 'field_options' )
 		);
 	}
 
@@ -93,6 +93,6 @@ class ICE_Ext_Option_Ui_Scroll_Picker
 	 */
 	public function render_field_option( $value )
 	{
-		print esc_html( $this->property( 'field_options' )->item_at( $value ) );
+		print esc_html( $this->get_property( 'field_options' )->item_at( $value ) );
 	}
 }

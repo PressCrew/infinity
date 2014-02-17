@@ -75,7 +75,7 @@ abstract class ICE_Option_Registry extends ICE_Registry
 
 		// render options that require this one
 		foreach ( $this->get_all() as $sibling_option ) {
-			if ( $option->property( 'name' ) == $sibling_option->property( 'parent' ) ) {
+			if ( $option->get_property( 'name' ) == $sibling_option->get_property( 'parent' ) ) {
 				$options[] = $sibling_option;
 			}
 		}
@@ -98,7 +98,7 @@ abstract class ICE_Option_Registry extends ICE_Registry
 		foreach ( parent::get_all() as $option ) {
 
 			// do section names match?
-			if ( $section->property( 'name' ) != $option->property( 'section' ) ) {
+			if ( $section->get_property( 'name' ) != $option->get_property( 'section' ) ) {
 				continue;
 			}
 
@@ -126,7 +126,7 @@ abstract class ICE_Option_Registry extends ICE_Registry
 
 		foreach ( $options as $key => $option ) {
 			// remove options that require another option
-			if ( $option->property( 'parent' ) ) {
+			if ( $option->get_property( 'parent' ) ) {
 				unset( $options[$key] );
 			}
 			// remove options that aren't supported
@@ -180,16 +180,16 @@ abstract class ICE_Option_Registry extends ICE_Registry
 					// get the option
 					$option = $this->get( $option_name );
 					// look for option name as POST key
-					if ( array_key_exists( $option->property( 'name' ), $_POST ) ) {
+					if ( array_key_exists( $option->get_property( 'name' ), $_POST ) ) {
 						// reset?
 						if ( $reset_options ) {
 							$option->delete();
 						} else {
 							// get new value
-							$new_value = $_POST[$option->property( 'name' )];
+							$new_value = $_POST[$option->get_property( 'name' )];
 							// strip slashes from new value?
 							if ( is_scalar( $new_value ) ) {
-								$new_value = stripslashes( $_POST[$option->property( 'name' )] );
+								$new_value = stripslashes( $_POST[$option->get_property( 'name' )] );
 							}
 							// update it
 							$option->update( $new_value );

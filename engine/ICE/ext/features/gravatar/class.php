@@ -27,7 +27,7 @@ class ICE_Ext_Feature_Gravatar
 
 	/**
 	 */
-	protected function get_property( $name )
+	public function get_property( $name )
 	{
 		switch ( $name ) {
 			case 'image_class':

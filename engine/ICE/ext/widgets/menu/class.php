@@ -29,7 +29,7 @@ class ICE_Ext_Widget_Menu
 
 	/**
 	 */
-	protected function get_property( $name )
+	public function get_property( $name )
 	{
 		switch ( $name ) {
 			case 'menu_items':

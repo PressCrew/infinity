@@ -56,7 +56,7 @@ abstract class ICE_Option_Renderer extends ICE_Renderer
 	public function render_label()
 	{
 		// get title property
-		$title = $this->component()->property( 'title' )
+		$title = $this->component()->get_property( 'title' )
 
 		// begin rendering label tag ?>
 		<label for="<?php $this->render_name() ?>" title="<?php print esc_attr( $title ) ?>"><?php print esc_attr( $title ) ?></label><?php
@@ -125,7 +125,7 @@ abstract class ICE_Option_Renderer extends ICE_Renderer
 	final public function render_field_id( $css_id = null )
 	{
 		if ( empty( $css_id ) ) {
-			$css_id = $this->component()->property( 'field_id' );
+			$css_id = $this->component()->get_property( 'field_id' );
 		}
 
 		print esc_attr( $css_id );
@@ -136,7 +136,7 @@ abstract class ICE_Option_Renderer extends ICE_Renderer
 	 */
 	final public function render_field_class()
 	{
-		print esc_attr( $this->component()->property( 'field_class' ) );
+		print esc_attr( $this->component()->get_property( 'field_class' ) );
 	}
 
 	/**

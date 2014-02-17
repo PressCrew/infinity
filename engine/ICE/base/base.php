@@ -20,7 +20,7 @@
 abstract class ICE_Base
 {
 	/**
-	 * Default magic getter
+	 * Default magic getter.
 	 *
 	 * @param string $name
 	 * @throws Exception
@@ -32,7 +32,7 @@ abstract class ICE_Base
 	}
 
 	/**
-	 * Default magic setter
+	 * Default magic setter.
 	 *
 	 * @param string $name
 	 * @param mixed $value
@@ -45,7 +45,7 @@ abstract class ICE_Base
 	}
 
 	/**
-	 * Default magic issetter
+	 * Default magic issetter.
 	 *
 	 * @param string $name
 	 */
@@ -56,7 +56,7 @@ abstract class ICE_Base
 	}
 
 	/**
-	 * Default magic unsetter
+	 * Default magic unsetter.
 	 *
 	 * @param string $name
 	 */
@@ -67,7 +67,7 @@ abstract class ICE_Base
 	}
 
 	/**
-	 * Default magic caller
+	 * Default magic caller.
 	 *
 	 * @param string $name
 	 * @param array $arguments
@@ -79,7 +79,7 @@ abstract class ICE_Base
 	}
 
 	/**
-	 * Default toStringer
+	 * Default toStringer.
 	 *
 	 * @return string
 	 */
@@ -90,35 +90,19 @@ abstract class ICE_Base
 	}
 	
 	/**
-	 * Getter/Setter
-	 * 
-	 * @param string $name
-	 * @param mixed $value
-	 * @return mixed
-	 */
-	public function property( $name, $value = null )
-	{
-		if ( func_num_args() === 1 ) {
-			return $this->get_property( $name );
-		} else {
-			return $this->set_property( $name, $value );
-		}
-	}
-	
-	/**
-	 * Getter
+	 * Default getter.
 	 *
 	 * @param string $name Property name
 	 * @return mixed
 	 */
-	protected function get_property( $name )
+	public function get_property( $name )
 	{
 		throw new Exception(
 			sprintf( 'The "%s" property is not accessible for reading.', $name ) );
 	}
 	
 	/**
-	 * Setter
+	 * Default setter.
 	 * 
 	 * @param string $name Property name
 	 * @param mixed $value Property value

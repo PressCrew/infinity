@@ -125,9 +125,9 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	final protected function register( ICE_Component $component )
 	{
 		// has the component already been registered?
-		if ( !isset( $this->components[ $component->property( 'name' ) ] ) ) {
+		if ( !isset( $this->components[ $component->get_property( 'name' ) ] ) ) {
 			// register it
-			$this->components[ $component->property( 'name' ) ] = $component;
+			$this->components[ $component->get_property( 'name' ) ] = $component;
 		}
 
 		return true;
@@ -252,10 +252,10 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 			// include ignored?
 			if ( !$include_ignored ) {
 				// check ignore toggle
-				if ( $component->property( 'ignore' ) ) {
+				if ( $component->get_property( 'ignore' ) ) {
 					// component is explicitly ignored
 					continue;
-				} elseif ( $component->property( 'parent' ) && $component->parent()->property( 'ignore' ) ) {
+				} elseif ( $component->get_property( 'parent' ) && $component->parent()->get_property( 'ignore' ) ) {
 					// component parent is ignored, applies to this child
 					continue;
 				}
@@ -307,9 +307,9 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 		// loop through all registered components
 		foreach ( $this->get_all() as $component ) {
 			// components must NOT have a parent set
-			if ( null === $component->property( 'parent' ) ) {
+			if ( null === $component->get_property( 'parent' ) ) {
 				// filter on component names
-				if ( empty( $component_names ) || in_array( $component->property( 'name' ), $component_names, true ) ) {
+				if ( empty( $component_names ) || in_array( $component->get_property( 'name' ), $component_names, true ) ) {
 					// component must be supported
 					if ( $component->supported() ) {
 						// append to return array

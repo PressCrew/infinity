@@ -77,7 +77,7 @@ class ICE_Ext_Option_Ui_Slider
 
 	/**
 	 */
-	protected function get_property( $name )
+	public function get_property( $name )
 	{
 		switch ( $name ) {
 			case 'animate':

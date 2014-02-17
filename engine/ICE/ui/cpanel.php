@@ -91,7 +91,7 @@ final class ICE_Ui_Cpanel extends ICE_Base
 	protected function render_button_target( ICE_Component $item )
 	{
 		// get target
-		$target = $item->property( 'target' );
+		$target = $item->get_property( 'target' );
 
 		// was a target set explicitly?
 		if ( $target ) {
@@ -116,7 +116,7 @@ final class ICE_Ui_Cpanel extends ICE_Base
 				// get item
 				$item = $this->policy->registry()->get( $name );
 				// render list item ?>
-				<li><a href="#<?php  $this->render_id( 'tab', $item->property( 'name' ) ) ?>"><?php echo esc_html( $item->property( 'title' ) ) ?></a></li><?php
+				<li><a href="#<?php  $this->render_id( 'tab', $item->get_property( 'name' ) ) ?>"><?php echo esc_html( $item->get_property( 'title' ) ) ?></a></li><?php
 			}
 			// close list ?>
 			</ul><?php
@@ -137,8 +137,8 @@ final class ICE_Ui_Cpanel extends ICE_Base
 				// get the screen
 				$item = $this->policy->registry()->get( $name );
 				// render panel item ?>
-				<div id="<?php $this->render_id( 'tab', $item->property( 'name' ) ) ?>">
-					<p><?php $this->render_tab_content( $item->property( 'name' ) ) ?></p>
+				<div id="<?php $this->render_id( 'tab', $item->get_property( 'name' ) ) ?>">
+					<p><?php $this->render_tab_content( $item->get_property( 'name' ) ) ?></p>
 				</div><?php
 			}
 		}

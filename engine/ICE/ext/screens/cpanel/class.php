@@ -63,7 +63,7 @@ class ICE_Ext_Screen_Cpanel
 
 	/**
 	 */
-	protected function get_property( $name )
+	public function get_property( $name )
 	{
 		switch ( $name ) {
 			case 'icon_primary':

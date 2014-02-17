@@ -39,7 +39,7 @@ class ICE_Ext_Feature_Responsive_Videos
 
 	/**
 	 */
-	protected function get_property( $name )
+	public function get_property( $name )
 	{
 		switch ( $name ) {
 			case 'custom_selector':

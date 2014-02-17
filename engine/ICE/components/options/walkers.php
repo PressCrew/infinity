@@ -44,7 +44,7 @@ class ICE_Option_Walker_Category extends Walker_Category
 		$output .= sprintf(
 			'<input type="checkbox" value="%s" name="%s[]" class="%s"%s /><label>%s</label>',
 			esc_attr( $category->term_id ),
-			esc_attr( $option->property( 'name' ) ),
+			esc_attr( $option->get_property( 'name' ) ),
 			esc_attr( $option->field_class ),
 			( in_array( $category->term_id, $selected ) ) ? ' checked="checked"' : null,
 			apply_filters( 'list_cats', esc_attr( $category->name ), $category )
@@ -99,7 +99,7 @@ class ICE_Option_Walker_Page extends Walker_Page
 		$output .= sprintf(
 			'<input type="checkbox" value="%s" name="%s[]" class="%s"%s /><label>%s</label>',
 			esc_attr( $page->ID ),
-			esc_attr( $option->property( 'name' ) ),
+			esc_attr( $option->get_property( 'name' ) ),
 			esc_attr( $option->field_class ),
 			( in_array( $page->ID, $selected ) ) ? ' checked="checked"' : null,
 			apply_filters( 'the_title', $page->post_title, $page->ID )

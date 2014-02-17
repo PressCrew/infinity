@@ -115,7 +115,7 @@ abstract class ICE_Option extends ICE_Component
 
 	/**
 	 */
-	protected function get_property( $name )
+	public function get_property( $name )
 	{
 		switch ( $name ) {
 			case 'default_value':
@@ -288,8 +288,8 @@ abstract class ICE_Option extends ICE_Component
 	 */
 	public function get()
 	{
-		if ( $this->__post_override__ === true && isset( $_POST[$this->property( 'name' )] ) ) {
-			return $_POST[$this->property( 'name' )];
+		if ( $this->__post_override__ === true && isset( $_POST[$this->get_property( 'name' )] ) ) {
+			return $_POST[$this->get_property( 'name' )];
 		} else {
 			return $this->get_option();
 		}
@@ -313,7 +313,7 @@ abstract class ICE_Option extends ICE_Component
 			is_array( $result ) && 0 === count( $result )
 		) {
 			// no result, maybe check deprecated name
-			$name_deprecated = $this->property( 'name_deprecated' );
+			$name_deprecated = $this->get_property( 'name_deprecated' );
 
 			// if a deprecated name is set, try to get its value
 			if ( $name_deprecated ) {

@@ -37,7 +37,7 @@ class ICE_Ext_Option_Ui_Image_Picker
 
 	/**
 	 */
-	protected function get_property( $name )
+	public function get_property( $name )
 	{
 		switch ( $name ) {
 			case 'file_directory':
@@ -91,7 +91,7 @@ class ICE_Ext_Option_Ui_Image_Picker
 	 */
 	public function render_field_option( $value )
 	{
-		$fo = $this->property( 'field_options' );
+		$fo = $this->get_property( 'field_options' );
 		
 		// render an img tag ?>
 		<div style="background-repeat: repeat; background-image: url('<?php print esc_attr( $fo[$value] ) ?>'); width: <?php print esc_attr( $this->item_width ) ?>; height: <?php print esc_attr( $this->item_height ) ?>"></div><?php

@@ -47,7 +47,7 @@ abstract class ICE_Shortcode extends ICE_Component
 
 	/**
 	 */
-	protected function get_property( $name )
+	public function get_property( $name )
 	{
 		switch ( $name ) {
 			case 'attributes':
@@ -65,7 +65,7 @@ abstract class ICE_Shortcode extends ICE_Component
 		parent::init();
 
 		// set up handler
-		add_shortcode( $this->property( 'name' ), array( $this, 'render_handler' ) );
+		add_shortcode( $this->get_property( 'name' ), array( $this, 'render_handler' ) );
 	}
 
 	/**

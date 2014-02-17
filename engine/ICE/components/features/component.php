@@ -29,7 +29,7 @@ abstract class ICE_Feature
 	 */
 	public function supported()
 	{
-		if ( !current_theme_supports( $this->property( 'name' ) ) ) {
+		if ( !current_theme_supports( $this->get_property( 'name' ) ) ) {
 			return false;
 		}
 

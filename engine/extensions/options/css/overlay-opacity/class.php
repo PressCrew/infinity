@@ -63,7 +63,7 @@ class ICE_Ext_Option_Css_Overlay_Opacity
 
 	/**
 	 */
-	protected function get_property( $name )
+	public function get_property( $name )
 	{
 		switch ( $name ) {
 			case 'linked_image':
