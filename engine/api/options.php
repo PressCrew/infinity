@@ -217,6 +217,7 @@ function infinity_option_render_end()
 function infinity_options_render_menu( $args = null )
 {
 	// define default args
+	$defaults = new stdClass;
 	$defaults->sections = null;
 
 	// parse the args
