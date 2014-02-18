@@ -17,7 +17,7 @@
  * @package ICE
  * @subpackage init
  */
-class ICE_Init_Settings_Stacked
+class ICE_Init_Settings
 {
 	/**
 	 * @var array

@@ -168,7 +168,7 @@ final class ICE_Scheme extends ICE_Base
 	/**
 	 * The settings registry instance
 	 * 
-	 * @var ICE_Init_Settings_Stacked
+	 * @var ICE_Init_Settings
 	 */
 	private $settings;
 
@@ -187,7 +187,7 @@ final class ICE_Scheme extends ICE_Base
 		// initialize themes map
 		$this->themes = new ICE_Stack();
 		$this->themes_compiled = new ICE_Map();
-		$this->settings = new ICE_Init_Settings_Stacked();
+		$this->settings = new ICE_Init_Settings();
 		$this->config_files_loaded = new ICE_Stack();
 
 		// handle compiled themes
@@ -262,7 +262,7 @@ final class ICE_Scheme extends ICE_Base
 	/**
 	 * Return settings registry
 	 *
-	 * @return ICE_Init_Settings_Stacked
+	 * @return ICE_Init_Settings
 	 */
 	final public function settings()
 	{
