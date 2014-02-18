@@ -68,11 +68,6 @@ require_once ICE_PATH . '/base/base.php';
 final class ICE_Loader extends ICE_Base
 {
 	/**
-	 * Delimeter at which to split library paths
-	 */
-	const PATH_DELIM = '/';
-
-	/**
 	 * Singleton instance
 	 *
 	 * @var ICE_Loader
