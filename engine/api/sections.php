@@ -11,7 +11,13 @@
  * @since 1.0
  */
 
-ICE_Loader::load( 'components/sections' );
+ICE_Loader::load(
+	'components/sections/component',
+	'components/sections/factory',
+	'components/sections/policy',
+	'components/sections/registry',
+	'components/sections/renderer'
+);
 
 /**
  * Infinity Theme: sections policy

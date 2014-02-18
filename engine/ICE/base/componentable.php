@@ -11,7 +11,10 @@
  * @since 1.0
  */
 
-ICE_Loader::load( 'base/policeable', 'base/configurable' );
+ICE_Loader::load(
+	'base/policeable',
+	'base/configurable'
+);
 
 /**
  * Make managing components with policies easy

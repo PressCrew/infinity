@@ -11,7 +11,10 @@
  * @since 1.0
  */
 
-ICE_Loader::load( 'base/registry', 'components/sections/factory' );
+ICE_Loader::load(
+	'base/registry',
+	'components/sections/factory'
+);
 
 /**
  * Make keeping track of sections easy

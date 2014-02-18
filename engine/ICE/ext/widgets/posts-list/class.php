@@ -11,7 +11,10 @@
  * @since 1.0
  */
 
-ICE_Loader::load( 'components/widgets/component', 'utils/ajax' );
+ICE_Loader::load(
+	'components/widgets/component',
+	'utils/ajax'
+);
 
 /**
  * Posts list widget

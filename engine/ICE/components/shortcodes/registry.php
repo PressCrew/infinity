@@ -11,7 +11,10 @@
  * @since 1.0
  */
 
-ICE_Loader::load( 'base/registry', 'components/shortcodes/factory' );
+ICE_Loader::load(
+	'base/registry',
+	'components/shortcodes/factory'
+);
 
 /**
  * Make keeping track of shortcodes easy

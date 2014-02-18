@@ -11,7 +11,10 @@
  * @since 1.0
  */
 
-ICE_Loader::load( 'base/registry', 'components/features/factory' );
+ICE_Loader::load(
+	'base/registry',
+	'components/features/factory'
+);
 
 /**
  * Make keeping track of features easy

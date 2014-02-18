@@ -11,7 +11,13 @@
  * @since 1.0
  */
 
-ICE_Loader::load( 'components/widgets' );
+ICE_Loader::load(
+	'components/widgets/component',
+	'components/widgets/factory',
+	'components/widgets/policy',
+	'components/widgets/registry',
+	'components/widgets/renderer'
+);
 
 /**
  * Infinity Theme: widgets policy

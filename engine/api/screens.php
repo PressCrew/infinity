@@ -11,7 +11,13 @@
  * @since 1.0
  */
 
-ICE_Loader::load( 'components/screens' );
+ICE_Loader::load(
+	'components/screens/component',
+	'components/screens/factory',
+	'components/screens/policy',
+	'components/screens/registry',
+	'components/screens/renderer'
+);
 
 /**
  * Name of the route param (GET|POST)

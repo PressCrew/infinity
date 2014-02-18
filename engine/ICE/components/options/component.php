@@ -11,7 +11,11 @@
  * @since 1.0
  */
 
-ICE_Loader::load( 'base/component', 'schemes' );
+ICE_Loader::load(
+	'base/component',
+	'schemes/scheme',
+	'schemes/scheme_enqueue'
+);
 
 /**
  * Make an option easy

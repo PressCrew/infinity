@@ -11,7 +11,13 @@
  * @since 1.0
  */
 
-ICE_Loader::load( 'components/shortcodes' );
+ICE_Loader::load(
+	'components/shortcodes/component',
+	'components/shortcodes/factory',
+	'components/shortcodes/policy',
+	'components/shortcodes/registry',
+	'components/shortcodes/renderer'
+);
 
 /**
  * Infinity Theme: shortcodes policy

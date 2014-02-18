@@ -80,112 +80,6 @@ final class ICE_Loader extends ICE_Base
 	private static $instance;
 
 	/**
-	 * Available libs
-	 *
-	 * @var array
-	 */
-	private static $pkgs = array(
-		'base' => array(
-			'component' => true,
-			'componentable' => true,
-			'configurable' => true,
-			'exportable' => true,
-			'factory' => true,
-			'policy' => true,
-			'policeable' => true,
-			'recursable' => true,
-			'registry' => true,
-			'renderer' => true,
-			'visitable' => true
-		),
-		'collections' => array(
-			'map' => true,
-			'map_iterator' => true,
-			'stack' => true,
-			'stack_iterator' => true
-		),
-		'components' => array(
-			'features' => array(
-				'component' => true,
-				'factory' => true,
-				'renderer' => true,
-				'policy' => true,
-				'registry' => true
-			),
-			'options' => array(
-				'component' => true,
-				'factory' => true,
-				'renderer' => true,
-				'policy' => true,
-				'registry' => true,
-				'walkers' => true
-			),
-			'screens' => array(
-				'component' => true,
-				'factory' => true,
-				'renderer' => true,
-				'policy' => true,
-				'registry' => true
-			),
-			'sections' => array(
-				'component' => true,
-				'factory' => true,
-				'renderer' => true,
-				'policy' => true,
-				'registry' => true
-			),
-			'shortcodes' => array(
-				'component' => true,
-				'factory' => true,
-				'renderer' => true,
-				'policy' => true,
-				'registry' => true
-			),
-			'widgets' => array(
-				'component' => true,
-				'factory' => true,
-				'renderer' => true,
-				'policy' => true,
-				'registry' => true
-			)
-		),
-		'dom' => array(
-			'asset' => true,
-			'element' => true,
-			'script' => true,
-			'scriptable' => true,
-			'style' => true,
-			'styleable' => true
-		),
-		'init' => array(
-			'settings' => true
-		),
-		'parsers' => array(
-			'packages' => true
-		),
-		'schemes' => array(
-			'scheme' => true,
-			'scheme_enqueue' => true
-		),
-		'ui' => array(
-			'cpanel' => true,
-			'icon' => true,
-			'iconable' => true,
-			'position' => true,
-			'positionable' => true
-		),
-		'utils' => array(
-			'ajax' => true,
-			'enqueue' => true,
-			'export' => true,
-			'file' => true,
-			'file_cache' => true,
-			'files' => true,
-			'webfont' => true
-		)
-	);
-
-	/**
 	 * This is a singleton
 	 */
 	private function __construct() {}
@@ -220,7 +114,10 @@ final class ICE_Loader extends ICE_Base
 
 			// load really important classes
 			self::$instance->load(
-				'collections',
+				'collections/map',
+				'collections/map_iterator',
+				'collections/stack',
+				'collections/stack_iterator',
 				'utils/files',
 				'utils/enqueue'
 			);
@@ -239,7 +136,7 @@ final class ICE_Loader extends ICE_Base
 
 		// loop through all libs
 		foreach ( $libs as $lib ) {
-			self::$instance->load_one( $lib );
+			self::$instance->load_file( $lib );
 		}
 	}
 
@@ -261,64 +158,16 @@ final class ICE_Loader extends ICE_Base
 	}
 
 	/**
-	 * Load a single lib
-	 *
-	 * @param string $lib
-	 * @return true|void
-	 */
-	private function load_one( $lib )
-	{
-		// set files
-		$files = is_array( $lib ) ? $lib : explode( self::PATH_DELIM, $lib );
-
-		// files can't be empty
-		if ( count( $files ) ) {
-			// base pkgs
-			$pkgs = self::$pkgs;
-			// check all libs
-			foreach ( $files as $file ) {
-				// is file a pkg key?
-				if ( isset( $pkgs[$file] ) ) {
-					// is it an array?
-					if ( is_array( $pkgs[$file] ) ) {
-						// its a pkg, go to next level
-						$pkgs = $pkgs[$file];
-					} elseif ( true === $pkgs[$file] ) {
-						// its a file, load it
-						return $this->load_file( array_pop( $files ), $files );
-					} else {
-						throw new Exception(
-							sprintf( 'The library path "%s" is not valid.', $lib ) );
-					}
-				}
-			}
-		} else {
-			throw new Exception( 'The library path is empty.' );
-		}
-
-		// loading entire pkg
-		foreach( array_keys( $pkgs ) as $pkg_file ) {
-			$this->load_file( $pkg_file, $files );
-		}
-	}
-
-	/**
-	 * Load a library file
+	 * Load a library file relative to ICE_PATH
 	 *
 	 * @param string $file
-	 * @param array|string $pkg
 	 * @return true
 	 */
-	private function load_file( $file, $pkg )
+	private function load_file( $file )
 	{
-		// build up file path
-		$path =
-			ICE_PATH .
-			'/' . implode( '/', $pkg ) .
-			'/' . $file . '.php';
-
-		// load it
-		require_once $path;
+		// load file
+		require_once ICE_PATH . '/' . $file . '.php';
+		// all done
 		return true;
 	}
 

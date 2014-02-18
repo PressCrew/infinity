@@ -10,7 +10,9 @@
  * @since 1.0
  */
 
-ICE_Loader::load( 'schemes' );
+ICE_Loader::load(
+	'schemes/scheme'
+);
 
 /**
  * Initialize and load the scheme for the active theme

@@ -11,7 +11,11 @@
  * @since 1.0
  */
 
-ICE_Loader::load( 'base/registry', 'components/options/factory', 'utils/ajax' );
+ICE_Loader::load(
+	'base/registry',
+	'components/options/factory',
+	'utils/ajax'
+);
 
 /**
  * Make keeping track of options easy

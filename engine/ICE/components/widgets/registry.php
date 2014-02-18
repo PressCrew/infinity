@@ -11,7 +11,10 @@
  * @since 1.0
  */
 
-ICE_Loader::load( 'base/registry', 'components/widgets/factory' );
+ICE_Loader::load(
+	'base/registry',
+	'components/widgets/factory'
+);
 
 /**
  * Make keeping track of widgets easy

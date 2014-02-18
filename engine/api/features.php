@@ -11,7 +11,13 @@
  * @since 1.0
  */
 
-ICE_Loader::load( 'components/features' );
+ICE_Loader::load(
+	'components/features/component',
+	'components/features/factory',
+	'components/features/policy',
+	'components/features/registry',
+	'components/features/renderer'
+);
 
 /**
  * Infinity Theme: features policy
