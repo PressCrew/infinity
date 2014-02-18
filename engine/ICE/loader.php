@@ -131,7 +131,7 @@ final class ICE_Loader extends ICE_Base
 
 		// loop through all libs
 		foreach ( $libs as $lib ) {
-			self::$instance->load_file( $lib );
+			self::$instance->load_lib( $lib );
 		}
 	}
 
@@ -155,13 +155,13 @@ final class ICE_Loader extends ICE_Base
 	/**
 	 * Load a library file relative to ICE_PATH
 	 *
-	 * @param string $file
+	 * @param string $lib
 	 * @return true
 	 */
-	private function load_file( $file )
+	private function load_lib( $lib )
 	{
 		// load file
-		require_once ICE_PATH . '/' . $file . '.php';
+		require_once ICE_PATH . '/' . $lib . '.php';
 		// all done
 		return true;
 	}
