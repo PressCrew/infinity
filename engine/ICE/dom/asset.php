@@ -449,7 +449,7 @@ abstract class ICE_Asset extends ICE_Base
 			//echo .= '/*+++ import source: ' . $filename . ' */' . PHP_EOL;
 
 			// make sure file actually exists
-			if ( ICE_Files::cache($filename)->is_readable() ) {
+			if ( is_readable( $filename ) ) {
 
 				// check conditions
 				if ( true === $this->check_cond( $handle ) ) {

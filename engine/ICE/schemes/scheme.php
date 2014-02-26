@@ -417,7 +417,7 @@ final class ICE_Scheme extends ICE_Base
 		$config_file = $this->theme_config_file( $theme, $this->config_file );
 
 		// does config file exist?
-		if ( ICE_Files::cache($config_file)->is_readable() ) {
+		if ( is_readable( $config_file )  ) {
 			// parse it
 			$config = $this->parse_config_file( $config_file );
 			// push onto loaded stack
@@ -517,7 +517,7 @@ final class ICE_Scheme extends ICE_Base
 			// load functions file if it exists
 			$filename = $this->theme_file( $theme, 'functions.php' );
 			// try to load it
-			if ( ICE_Files::cache($filename)->is_readable() ) {
+			if ( is_readable( $filename ) ) {
 				require_once $filename;
 			}
 		}
@@ -586,7 +586,7 @@ final class ICE_Scheme extends ICE_Base
 			$config_file = $this->theme_config_file( $theme, $policy->get_handle() );
 
 			// load the option config if it exists
-			if ( ICE_Files::cache($config_file)->is_readable() ) {
+			if ( is_readable( $config_file ) ) {
 
 				// skip loaded files
 				if ( $this->config_files_loaded->contains( $config_file ) ) {
@@ -659,7 +659,7 @@ final class ICE_Scheme extends ICE_Base
 				foreach ( $template_paths as $template_path ) {
 
 					// does it exist?
-					if ( ICE_Files::cache($template_path)->is_readable() ) {
+					if ( is_readable( $template_path ) ) {
 						// load it?
 						if ($load) {
 							load_template( $template_path );
@@ -862,7 +862,7 @@ final class ICE_Scheme extends ICE_Base
 			$absolute_path = $this->theme_dir( $theme ) . '/' . $relative_path;
 
 			// does file exist?
-			if ( ICE_Files::cache($absolute_path)->is_readable() ) {
+			if ( is_readable( $absolute_path ) ) {
 				// yes, return the *theme*
 				return $theme;
 			}
@@ -923,7 +923,7 @@ final class ICE_Scheme extends ICE_Base
 			$stack_file .= '/' . implode( '/', $file_names );
 
 			// does stack file exist?
-			if ( ICE_Files::cache($stack_file)->is_readable() ) {
+			if ( is_readable( $stack_file ) ) {
 				return $stack_file;
 			}
 		}

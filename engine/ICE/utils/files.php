@@ -11,8 +11,6 @@
  * @since 1.0
  */
 
-ICE_Loader::load( 'utils/file_cache' );
-
 /**
  * Make the File System Easy
  *
@@ -22,13 +20,6 @@ ICE_Loader::load( 'utils/file_cache' );
  */
 final class ICE_Files extends ICE_Base
 {
-	/**
-	 * File cache instance
-	 * 
-	 * @var ICE_File_Cache
-	 */
-	private static $fcache;
-
 	/**
 	 * Cached doc root
 	 *
@@ -253,31 +244,6 @@ final class ICE_Files extends ICE_Base
 		return true;
 	}
 	
-	/**
-	 * Returns fstat instance for a file from the cache
-	 *
-	 * @param string $filename
-	 * @return ICE_File
-	 */
-	public static function cache( $filename )
-	{
-		return self::file_cache()->get($filename);
-	}
-	
-	/**
-	 * Return file cache instance
-	 *
-	 * @return ICE_File_Cache
-	 */
-	private static function file_cache()
-	{
-		if ( !self::$fcache instanceof ICE_File_Cache ) {
-			self::$fcache = new ICE_File_Cache();
-		}
-		
-		return self::$fcache;
-	}
-
 	/**
 	 * List all files in a directory filtered by a regular expression
 	 *

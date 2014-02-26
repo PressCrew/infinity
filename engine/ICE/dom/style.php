@@ -104,11 +104,8 @@ class ICE_Style extends ICE_Asset
 		// get content?
 		if ( $content ) {
 
-			// new file info instance
-			$fi = new ICE_File( $filename );
-
 			// save last filename
-			$this->last_dirname = $fi->getPath();
+			$this->last_dirname = dirname( $filename );
 			
 			// replace all CSS url() values
 			return preg_replace_callback( '/url\s*\([\'\"\s]*([^\'\"\s]*)[\'\"\s]*\)/', array($this, 'fix_url_path'), $content );
