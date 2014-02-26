@@ -124,10 +124,13 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	 */
 	final protected function register( ICE_Component $component )
 	{
+		// get the name property
+		$name = $component->get_property( 'name' );
+
 		// has the component already been registered?
-		if ( !isset( $this->components[ $component->get_property( 'name' ) ] ) ) {
+		if ( false === isset( $this->components[ $name ] ) ) {
 			// register it
-			$this->components[ $component->get_property( 'name' ) ] = $component;
+			$this->components[ $name ] = $component;
 		}
 
 		return true;
