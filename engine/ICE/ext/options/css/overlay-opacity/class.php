@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-ICE_Loader::load_ext( 'options/ui/slider' );
+$this->load( 'ui/slider' );
 
 /**
  * CSS overlay opacity

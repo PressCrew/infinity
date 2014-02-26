@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-ICE_Loader::load_ext( 'options/ui/overlay-picker' );
+$this->load( 'ui/overlay-picker' );
 
 /**
  * CSS overlay image
@@ -34,7 +34,6 @@ class ICE_Ext_Option_Css_Overlay_Image
 		$this->description = __( 'Select a texture to use as the background overlay', 'infinity' );
 		$this->item_width = '100px';
 		$this->item_height = '100px';
-		$this->file_directory = 'assets/images/textures';
 		$this->file_extension = 'png';
 	}
 }

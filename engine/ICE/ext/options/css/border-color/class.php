@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-ICE_Loader::load_ext( 'options/colorpicker' );
+$this->load( 'colorpicker' );
 
 /**
  * CSS Border Color Picker

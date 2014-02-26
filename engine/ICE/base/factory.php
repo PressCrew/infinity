@@ -11,7 +11,10 @@
  * @since 1.0
  */
 
-ICE_Loader::load( 'base/componentable' );
+ICE_Loader::load(
+	'base/componentable',
+	'base/extensions'
+);
 
 /**
  * Make creating concrete components easy
@@ -25,23 +28,6 @@ abstract class ICE_Factory extends ICE_Componentable
 	 * Component type to use when none configured
 	 */
 	const DEFAULT_COMPONENT_TYPE = 'default';
-
-	/**
-	 * Load a component extension
-	 *
-	 * Override this class to load component class files which exist outside of ICE's path
-	 *
-	 * @param string $ext Name of the extension
-	 * @return string Name of the class which was loaded
-	 */
-	public function load_ext( $ext )
-	{
-		// expand extension name
-		$ext_full = $this->policy()->get_handle() . '/' . $ext;
-
-		// try to load it with extension loader
-		return ICE_Ext_Loader::load_one( $ext_full );
-	}
 
 	/**
 	 * Return an instance of a component
@@ -58,7 +44,7 @@ abstract class ICE_Factory extends ICE_Componentable
 		}
 
 		// make sure the extension is loaded
-		$class_name = $this->load_ext( $settings['type'] );
+		$class_name = $this->policy()->extensions()->load( $settings['type'] );
 
 		// try to create new component
 		try {

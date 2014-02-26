@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-ICE_Loader::load_ext( 'options/css/length-px' );
+$this->load( 'css/length-px' );
 
 /**
  * CSS Border Width Slider

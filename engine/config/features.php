@@ -11,6 +11,12 @@
  * @subpackage config
  */
 
+// overlay image defaults
+$overlay_image = array(
+	'type' => 'css/overlay-image',
+	'file_directory' => 'assets/images/textures'
+);
+
 // Core WordPress Features
 
 $features['infinity-core-sidebar-setup'] = array(
@@ -313,8 +319,7 @@ $features['infinity-body-layout'] = array(
 			'style_selector' => 'body.theme-option',
 			'parent' => '%feature%.background-image'
 		),
-		'overlay-image' => array(
-			'type' => 'css/overlay-image',
+		'overlay-image' => $overlay_image + array(
 			'style_selector' => 'body.theme-option'
 		),
 		'overlay-opacity' => array(
@@ -404,8 +409,7 @@ $features['infinity-header-layout'] = array(
 			'type' => 'css/bg-repeat',
 			'parent' => '%feature%.background-image'
 		),
-		'overlay-image' => array(
-			'type' => 'css/overlay-image',
+		'overlay-image' => $overlay_image + array(
 			'style_selector' => '#header'
 		),
 		'overlay-opacity' => array(
@@ -452,9 +456,7 @@ $features['infinity-main-menu-layout'] = array(
 		'background-color' => array(
 			'type' => 'css/bg-color'
 		),
-		'overlay-image' => array(
-			'type' => 'css/overlay-image'
-		),
+		'overlay-image' => $overlay_image,
 		'overlay-opacity' => array(
 			'type' => 'css/overlay-opacity',
 			'style_selector' => '.main-menu:before',
@@ -498,9 +500,7 @@ $features['infinity-top-menu-layout'] = array(
 			'description' => 'Choose a background color for the submenu items of the menu above the header.',
 			'style_selector' => '.top-menu ul ul'
 		),
-		'overlay-image' => array(
-			'type' => 'css/overlay-image'
-		),
+		'overlay-image' => $overlay_image,
 		'overlay-opacity' => array(
 			'type' => 'css/overlay-opacity',
 			'style_selector' => '.top-menu:before',
@@ -544,9 +544,7 @@ $features['infinity-sub-menu-layout'] = array(
 			'description' => 'Choose a background color for the submenu items of the menu below the header.',
 			'style_selector' => '.sub-menu ul ul'
 		),
-		'overlay-image' => array(
-			'type' => 'css/overlay-image'
-		),
+		'overlay-image' => $overlay_image,
 		'overlay-opacity' => array(
 			'type' => 'css/overlay-opacity',
 			'style_selector' => '.sub-menu:before',
@@ -592,9 +590,7 @@ $features['infinity-content-layout'] = array(
 			'type' => 'css/bg-repeat',
 			'parent' => '%feature%.background-image'
 		),
-		'overlay-image' => array(
-			'type' => 'css/overlay-image'
-		),
+		'overlay-image' => $overlay_image,
 		'overlay-opacity' => array(
 			'type' => 'css/overlay-opacity',
 			'style_selector' => '#content:before',
@@ -638,8 +634,7 @@ $features['infinity-sidebar-layout'] = array(
 			'type' => 'css/bg-repeat',
 			'parent' => '%feature%.background-image'
 		),
-		'overlay-image' => array(
-			'type' => 'css/overlay-image',
+		'overlay-image' => $overlay_image + array(
 			'style_selector' => '#sidebar'
 		),
 		'overlay-opacity' => array(
@@ -686,9 +681,7 @@ $features['infinity-widget-layout'] = array(
 		'background-color' => array(
 			'type' => 'css/bg-color'
 		),
-		'overlay-image' => array(
-			'type' => 'css/overlay-image'
-		),
+		'overlay-image' => $overlay_image,
 		'overlay-opacity' => array(
 			'type' => 'css/overlay-opacity',
 			'style_selector' => '#sidebar .widget:before',
@@ -741,9 +734,7 @@ $features['infinity-footer-layout'] = array(
 			'type' => 'css/bg-repeat',
 			'parent' => '%feature%.background-image'
 		),
-		'overlay-image' => array(
-			'type' => 'css/overlay-image'
-		),
+		'overlay-image' => $overlay_image,
 		'overlay-opacity' => array(
 			'type' => 'css/overlay-opacity',
 			'style_selector' => '.footer-wrap:before',

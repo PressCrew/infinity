@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-ICE_Loader::load_ext( 'options/input-group' );
+$this->load( 'input-group' );
 
 /**
  * Radio option

@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-ICE_Loader::load_ext( 'options/checkbox' );
+$this->load( 'checkbox' );
 
 /**
  * Off checkbox option

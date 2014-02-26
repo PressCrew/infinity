@@ -12,7 +12,7 @@
  */
 
 ICE_Loader::load( 'utils/webfont' );
-ICE_Loader::load_ext( 'options/ui/scroll-picker' );
+$this->load( 'ui/scroll-picker' );
 
 /**
  * UI Font Picker

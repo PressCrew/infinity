@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-ICE_Loader::load_ext( 'options/ui/image-picker' );
+$this->load( 'ui/image-picker' );
 
 /**
  * UI Overlay Picker

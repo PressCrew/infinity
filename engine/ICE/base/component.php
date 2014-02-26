@@ -686,12 +686,14 @@ abstract class ICE_Component
 		// loop reflection stack
 		/* @var $reflection ReflectionClass */
 		foreach ( $reflection_stack as $reflection ) {
-			// get class parts from extension loader
-			$class_parts = ICE_Ext_Loader::instance()->loaded( $reflection->getName(), true );
+			// get ext type from extension registery
+			$ext_type = $this->policy()->extensions()->loaded( $reflection->getName(), true );
+			// get class parts by splitting at slashes
+			$class_parts = explode( '/', $ext_type );
 			// css class
 			$class = array_merge(
 				array( self::API_PREFIX ),
-				array_slice( $class_parts, 1 )
+				$class_parts
 			);
 			// add element class
 			$this->element()->add_class( $class );
@@ -963,18 +965,7 @@ abstract class ICE_Component
 	 */
 	final public function locate_file( $filename )
 	{
-		// loop class ancestry
-		foreach ( $this->reflect_stack() as $reflection ) {
-			// call ext loader file locator helper
-			$located = ICE_Ext_Loader::instance()->locate_file( $reflection->getName(), $filename );
-			// anything?
-			if ( $located ) {
-				return $located;
-			}
-		}
-
-		// no file found :(
-		return false;
+		return $this->policy()->extensions()->locate_file( $this->type, $filename );
 	}
 
 	/**

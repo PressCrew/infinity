@@ -35,17 +35,6 @@ abstract class ICE_Feature_Registry extends ICE_Registry
 	 * @var array
 	 */
 	private $opt_defaults = array();
-
-	/**
-	 * Feature types that *might* have an options file.
-	 *
-	 * @var array
-	 */
-	private $opt_files = array(
-		'bp/fb-autoconnect',
-		'echo',
-		'header-logo'
-	);
 	
 	/**
 	 */
@@ -53,18 +42,19 @@ abstract class ICE_Feature_Registry extends ICE_Registry
 	{
 		// init sub options array
 		$sub_options = array();
-
-		// does this feature's type use sub option files?
-		if ( true === in_array( $settings[ 'type' ], $this->opt_files ) ) {
-			// yep, try to load it
-			$file_options = $this->load_sub_options_file( $settings[ 'type' ] );
-			// get any?
-			if ( $file_options ) {
-				// yep, merge em over top of existing
-				$sub_options = array_merge( $sub_options, $file_options );
-			}
-		}
 		
+		// get extension settings
+		$ext_settings = $this->policy()->extensions()->get_settings( $settings[ 'type' ] );
+
+		// does this feature's type have bundled options?
+		if (
+			true === isset( $ext_settings['options'] ) &&
+			count( $ext_settings['options'] ) >= 1
+		) {
+			// yep, merge em over top of existing
+			$sub_options = array_merge( $sub_options, $ext_settings['options'] );
+		}
+
 		// did this feature pass an array of sub options?
 		if (
 			true === isset( $settings['options'] ) &&
@@ -98,32 +88,6 @@ abstract class ICE_Feature_Registry extends ICE_Registry
 			return false;
 			
 		}
-	}
-
-	/**
-	 * Load the sub-options file for the given extension.
-	 *
-	 * @param string $ext
-	 * @return array|false
-	 */
-	private function load_sub_options_file( $ext )
-	{
-		// try to get path
-		$path = ICE_Ext_Loader::instance()->locate_file( 'features/' .  $ext, 'options.php' );
-
-		// get a path?
-		if ( $path ) {
-			// yes, try to include
-			$file_options = include( $path );
-			// get an array?
-			if ( is_array( $file_options ) ) {
-				// yep, return it
-				return $file_options;
-			}
-		}
-
-		// file not loaded
-		return false;
 	}
 
 	/**

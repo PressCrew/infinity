@@ -460,12 +460,6 @@ final class ICE_Scheme extends ICE_Base
 				}
 			}
 
-			// make sure theme is NOT compiled in
-			if ( false === $this->themes_compiled->contains( $theme ) ) {
-				// add extension dir to extension loader
-				ICE_Ext_Loader::path( $this->theme_file( $theme, $this->exts_dir ) );
-			}
-
 		} else {
 			throw new Exception( 'Failed to parse theme config file: ' . $config_file );
 		}

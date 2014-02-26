@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-ICE_Loader::load_ext( 'options/ui/scroll-picker' );
+$this->load( 'ui/scroll-picker' );
 
 /**
  * UI Image Picker

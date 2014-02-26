@@ -33,6 +33,11 @@ abstract class ICE_Policy extends ICE_Base
 	static protected $calling_class;
 
 	/**
+	 * @var ICE_Extensions
+	 */
+	private $extensions;
+
+	/**
 	 * @var ICE_Registry
 	 */
 	private $registry;
@@ -48,11 +53,21 @@ abstract class ICE_Policy extends ICE_Base
 	private $renderer;
 
 	/**
+	 * Singleton constructor.
+	 *
 	 * @internal
 	 */
 	final protected function __construct()
 	{
-		// singleton
+		// set up extensions registry
+		$this->extensions = new ICE_Extensions( $this );
+
+		// register bundled extensions
+		$this->extensions->register_file(
+			ICE_EXT_PATH . '/' .
+			$this->get_handle( true ) . '/' .
+			'register.php'
+		);
 	}
 
 	/**
@@ -183,6 +198,17 @@ abstract class ICE_Policy extends ICE_Base
 	 * @return ICE_Renderer
 	 */
 	abstract public function new_renderer();
+
+	/**
+	 * Return extensions registry instance.
+	 *
+	 * @return ICE_Extensions
+	 */
+	final public function extensions()
+	{
+		// return extensions registry
+		return $this->extensions;
+	}
 
 	/**
 	 * Return the registry instance

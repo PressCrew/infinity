@@ -441,47 +441,6 @@ final class ICE_Files extends ICE_Base
 		return substr( $file_name, self::$document_root_length );
 	}
 
-	/**
-	 * Create a class name from a file name
-	 *
-	 * @param string $file_name File name
-	 * @param string $prefix Optional class prefix
-	 * @return string
-	 */
-	static public function file_to_class( $file_name, $prefix = null )
-	{
-		// the parts to merge
-		$parts = array();
-
-		// is file name already an array?
-		if ( is_array( $file_name ) ) {
-			// yep, clean it up
-			foreach ( $file_name as $file_part ) {
-				$parts[] = self::file_to_class( $file_part );
-			}
-		} else {
-			// split at common delimeters
-			$parts = preg_split( '/[_.\/\\-]/', $file_name );
-		}
-
-		// if last part is php, kill it
-		if ( end( $parts ) == 'php' ) {
-			array_pop( $parts );
-		}
-
-		// upper case the first char of every part
-		foreach ( $parts as &$ext_part ) {
-			$ext_part = ucfirst( $ext_part );
-		}
-
-		// add prefix if necessary
-		if ( strlen( $prefix ) ) {
-			array_unshift( $parts, $prefix );
-		}
-
-		// join them with underscores
-		return implode( '_', $parts );
-	}
 }
 
 /**
