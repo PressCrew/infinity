@@ -11,8 +11,6 @@
  * @since 1.0
  */
 
-$this->load( 'radio' );
-
 /**
  * Top/Bottom radio option
  *

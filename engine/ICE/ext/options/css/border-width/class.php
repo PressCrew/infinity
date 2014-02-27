@@ -11,8 +11,6 @@
  * @since 1.0
  */
 
-$this->load( 'css/length-px' );
-
 /**
  * CSS Border Width Slider
  *

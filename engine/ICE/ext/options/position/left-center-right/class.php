@@ -11,8 +11,6 @@
  * @since 1.0
  */
 
-$this->load( 'radio' );
-
 /**
  * Left/Center/Right radio option
  *

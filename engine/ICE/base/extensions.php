@@ -19,6 +19,7 @@
  */
 class ICE_Extensions
 {
+	const KEY_EXTENDS = 'extends';
 	const KEY_PATH = 'path';
 	const KEY_CLASS = 'class';
 	const KEY_OPTS = 'options';
@@ -41,10 +42,11 @@ class ICE_Extensions
 	private $defaults = array(
 		self::KEY_PATH => '',
 		self::KEY_CLASS => '',
-		self::KEY_OPTS => array(),
+		self::KEY_EXTENDS => false,
 		self::KEY_TPL => false,
 		self::KEY_STYLE => false,
-		self::KEY_SCRIPT => false
+		self::KEY_SCRIPT => false,
+		self::KEY_OPTS => array()
 	);
 
 	/**
@@ -140,7 +142,14 @@ class ICE_Extensions
 			$class_name = $this->extensions[ $ext ][ self::KEY_CLASS ];
 			// does that class exist?
 			if ( false === class_exists( $class_name, false ) ) {
-				// nope, load the file
+				// nope, get extends from settings
+				$extends = $this->extensions[ $ext ][ self::KEY_EXTENDS ];
+				// does it extend anything?
+				if ( false === empty( $extends ) ) {
+					// yes, recursive load
+					$this->load( $extends );
+				}
+				// load the file
 				$this->load_file( $ext, 'class.php' );
 				// did the file we just loaded define the class we were expecting?
 				if ( true === class_exists( $class_name ) ) {
