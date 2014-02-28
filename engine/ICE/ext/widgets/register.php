@@ -22,8 +22,7 @@ $this->register(
 	'menu',
 	array(
 		'class' => 'ICE_Ext_Widget_Menu',
-		'template' => true,
-		'style' => 'admin.css'
+		'template' => true
 	)
 );
 
@@ -31,16 +30,13 @@ $this->register(
 	'posts-list',
 	array(
 		'class' => 'ICE_Ext_Widget_Posts_List',
-		'template' => true,
-		'style' => 'admin.css',
-		'script' => 'admin.js'
+		'template' => true
 	)
 );
 
 $this->register(
 	'title-block',
 	array(
-		'class' => 'ICE_Ext_Widget_Title_Block',
-		'style' => 'admin.css'
+		'class' => 'ICE_Ext_Widget_Title_Block'
 	)
 );

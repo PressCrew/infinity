@@ -24,8 +24,6 @@ class ICE_Extensions
 	const KEY_CLASS = 'class';
 	const KEY_OPTS = 'options';
 	const KEY_TPL = 'template';
-	const KEY_STYLE = 'style';
-	const KEY_SCRIPT = 'script';
 
 	/**
 	 * Path prefix to use if path setting is relative.
@@ -44,8 +42,6 @@ class ICE_Extensions
 		self::KEY_CLASS => '',
 		self::KEY_EXTENDS => false,
 		self::KEY_TPL => false,
-		self::KEY_STYLE => false,
-		self::KEY_SCRIPT => false,
 		self::KEY_OPTS => array()
 	);
 

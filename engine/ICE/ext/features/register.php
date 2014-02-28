@@ -68,7 +68,6 @@ $this->register(
 	array(
 		'class' => 'ICE_Ext_Feature_Header_Logo',
 		'template' => true,
-		'style' => 'logo.css',
 		'options' => array(
 			'image' => array(
 				'type' => 'upload',

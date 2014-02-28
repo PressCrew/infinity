@@ -40,9 +40,7 @@ $this->register(
 	array(
 		'extends' => 'text',
 		'class' => 'ICE_Ext_Option_Colorpicker',
-		'template' => true,
-		'style' => 'admin.css',
-		'script' => 'wrapper.js'
+		'template' => true
 	)
 );
 
@@ -332,9 +330,7 @@ $this->register(
 	array(
 		'extends' => 'ui/scroll-picker',
 		'class' => 'ICE_Ext_Option_Ui_Font_Picker',
-		'template' => true,
-		'style' => 'admin.css',
-		'script' => 'admin.js'
+		'template' => true
 	)
 );
 
@@ -366,8 +362,7 @@ $this->register(
 	'ui/slider',
 	array(
 		'class' => 'ICE_Ext_Option_Ui_Slider',
-		'template' => true,
-		'style' => 'admin.css'
+		'template' => true
 	)
 );
 
@@ -375,8 +370,6 @@ $this->register(
 	'upload',
 	array(
 		'class' => 'ICE_Ext_Option_Upload',
-		'template' => true,
-		'style' => 'template.css',
-		'script' => 'template.js'
+		'template' => true
 	)
 );

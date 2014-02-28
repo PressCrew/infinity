@@ -15,7 +15,6 @@ $this->register(
 	'default',
 	array(
 		'class' => 'ICE_Ext_Section_Default',
-		'template' => true,
-		'style' => 'admin.css'
+		'template' => true
 	)
 );
