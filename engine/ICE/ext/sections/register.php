@@ -15,6 +15,6 @@ $this->register(
 	'default',
 	array(
 		'class' => 'ICE_Ext_Section_Default',
-		'template' => true
+		'template' => self::DEFAULT_TPL
 	)
 );

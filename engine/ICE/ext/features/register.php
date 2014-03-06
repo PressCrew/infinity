@@ -16,7 +16,7 @@ $this->register(
 	'bp/fb-autoconnect',
 	array(
 		'class' => 'ICE_Ext_Feature_Bp_Fb_Autoconnect',
-		'template' => true,
+		'template' => self::DEFAULT_TPL,
 		'options' => array(
 			'toggle' => array(
 				'type' => 'toggle/yes-no',
@@ -49,7 +49,7 @@ $this->register(
 	'echo',
 	array(
 		'class' => 'ICE_Ext_Feature_Echo',
-		'template' => true
+		'template' => self::DEFAULT_TPL
 	)
 );
 
@@ -58,7 +58,7 @@ $this->register(
 	'echo',
 	array(
 		'class' => 'ICE_Ext_Feature_Gravatar',
-		'template' => true
+		'template' => self::DEFAULT_TPL
 	)
 );
 
@@ -67,7 +67,7 @@ $this->register(
 	'header-logo',
 	array(
 		'class' => 'ICE_Ext_Feature_Header_Logo',
-		'template' => true,
+		'template' => self::DEFAULT_TPL,
 		'options' => array(
 			'image' => array(
 				'type' => 'upload',
@@ -136,7 +136,7 @@ $this->register(
 	'responsive/layout',
 	array(
 		'class' => 'ICE_Ext_Feature_Responsive_Layout',
-		'template' => true
+		'template' => self::DEFAULT_TPL
 	)
 );
 
@@ -145,7 +145,7 @@ $this->register(
 	'responsive/menu',
 	array(
 		'class' => 'ICE_Ext_Feature_Responsive_Menu',
-		'template' => true
+		'template' => self::DEFAULT_TPL
 	)
 );
 
@@ -154,6 +154,6 @@ $this->register(
 	'responsive/videos',
 	array(
 		'class' => 'ICE_Ext_Feature_Responsive_Videos',
-		'template' => true
+		'template' => self::DEFAULT_TPL
 	)
 );

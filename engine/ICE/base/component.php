@@ -934,7 +934,7 @@ abstract class ICE_Component
 			return $template;
 		} else {
 			// try to locate the default template
-			return $this->locate_file( 'template.php' );
+			return $this->policy()->extensions()->get_template_path( $this->type );
 		}
 	}
 

@@ -15,7 +15,7 @@ $this->register(
 	'access',
 	array(
 		'class' => 'ICE_Ext_Shortcode_Access',
-		'template' => true
+		'template' => self::DEFAULT_TPL
 	)
 );
 
@@ -23,6 +23,6 @@ $this->register(
 	'visitor',
 	array(
 		'class' => 'ICE_Ext_Shortcode_Visitor',
-		'template' => true
+		'template' => self::DEFAULT_TPL
 	)
 );

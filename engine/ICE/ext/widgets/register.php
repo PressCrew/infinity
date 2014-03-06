@@ -22,7 +22,7 @@ $this->register(
 	'menu',
 	array(
 		'class' => 'ICE_Ext_Widget_Menu',
-		'template' => true
+		'template' => self::DEFAULT_TPL
 	)
 );
 
@@ -30,7 +30,7 @@ $this->register(
 	'posts-list',
 	array(
 		'class' => 'ICE_Ext_Widget_Posts_List',
-		'template' => true
+		'template' => self::DEFAULT_TPL
 	)
 );
 

@@ -15,7 +15,7 @@ $this->register(
 	'categories',
 	array(
 		'class' => 'ICE_Ext_Option_Categories',
-		'template' => true
+		'template' => self::DEFAULT_TPL
 	)
 );
 
@@ -23,7 +23,7 @@ $this->register(
 	'category',
 	array(
 		'class' => 'ICE_Ext_Option_Category',
-		'template' => true
+		'template' => self::DEFAULT_TPL
 	)
 );
 
@@ -40,7 +40,7 @@ $this->register(
 	array(
 		'extends' => 'text',
 		'class' => 'ICE_Ext_Option_Colorpicker',
-		'template' => true
+		'template' => self::DEFAULT_TPL
 	)
 );
 
@@ -128,7 +128,7 @@ $this->register(
 	'input',
 	array(
 		'class' => 'ICE_Ext_Option_Input',
-		'template' => true
+		'template' => self::DEFAULT_TPL
 	)
 );
 
@@ -137,7 +137,7 @@ $this->register(
 	array(
 		'extends' => 'input',
 		'class' => 'ICE_Ext_Option_Input_Group',
-		'template' => true
+		'template' => self::DEFAULT_TPL
 	)
 );
 
@@ -145,7 +145,7 @@ $this->register(
 	'page',
 	array(
 		'class' => 'ICE_Ext_Option_Page',
-		'template' => true
+		'template' => self::DEFAULT_TPL
 	)
 );
 
@@ -153,7 +153,7 @@ $this->register(
 	'pages',
 	array(
 		'class' => 'ICE_Ext_Option_Pages',
-		'template' => true
+		'template' => self::DEFAULT_TPL
 	)
 );
 
@@ -217,7 +217,7 @@ $this->register(
 	'select',
 	array(
 		'class' => 'ICE_Ext_Option_Select',
-		'template' => true
+		'template' => self::DEFAULT_TPL
 	)
 );
 
@@ -249,7 +249,7 @@ $this->register(
 	'textarea',
 	array(
 		'class' => 'ICE_Ext_Option_Textarea',
-		'template' => true
+		'template' => self::DEFAULT_TPL
 	)
 );
 
@@ -330,7 +330,7 @@ $this->register(
 	array(
 		'extends' => 'ui/scroll-picker',
 		'class' => 'ICE_Ext_Option_Ui_Font_Picker',
-		'template' => true
+		'template' => self::DEFAULT_TPL
 	)
 );
 
@@ -354,7 +354,7 @@ $this->register(
 	'ui/scroll-picker',
 	array(
 		'class' => 'ICE_Ext_Option_Ui_Scroll_Picker',
-		'template' => true
+		'template' => self::DEFAULT_TPL
 	)
 );
 
@@ -362,7 +362,7 @@ $this->register(
 	'ui/slider',
 	array(
 		'class' => 'ICE_Ext_Option_Ui_Slider',
-		'template' => true
+		'template' => self::DEFAULT_TPL
 	)
 );
 
@@ -370,6 +370,6 @@ $this->register(
 	'upload',
 	array(
 		'class' => 'ICE_Ext_Option_Upload',
-		'template' => true
+		'template' => self::DEFAULT_TPL
 	)
 );

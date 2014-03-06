@@ -26,6 +26,11 @@ class ICE_Extensions
 	const KEY_TPL = 'template';
 
 	/**
+	 * Default template file name.
+	 */
+	const DEFAULT_TPL = 'template.php';
+
+	/**
 	 * Path prefix to use if path setting is relative.
 	 * 
 	 * @var string 
@@ -194,15 +199,13 @@ class ICE_Extensions
 	 */
 	private function load_file( $ext, $file )
 	{
-		// get path from settings
-		$path = $this->extensions[ $ext ][ self::KEY_PATH ];
-			
+		// reference path setting
+		$path =& $this->extensions[ $ext ][ self::KEY_PATH ];
+
 		// is path empty?
 		if ( empty( $path ) ) {
 			// yes, use magic
 			$path = $this->path_prefix . '/' . $ext;
-			// update the setting to avoid doing this again
-			$this->extensions[ $ext ][ self::KEY_PATH ] = $path;
 		}
 
 		// try to load file
@@ -210,6 +213,80 @@ class ICE_Extensions
 
 		// all done
 		return true;
+	}
+
+	/**
+	 * Resolve an extension file path (with default hint).
+	 *
+	 * This differs from locate_file() in that it resolves default paths which have been
+	 * set via register(). These can be absolute paths that live *outside* of the extension
+	 * path.
+	 *
+	 * @param string $ext The extension.
+	 * @param string $key The file setting key.
+	 * @param string $default Default file name hint. Used to short circuit absolute path check (performance).
+	 * @return string
+	 */
+	private function resolve_file( $ext, $key, $default )
+	{
+		// init file
+		$file = null;
+
+		// is file key set for extension?
+		if ( false === empty( $this->extensions[ $ext ][ $key ] ) ) {
+			// get the file
+			$file = $this->extensions[ $ext ][ $key ];
+		}
+
+		// empty string by default
+		$path_resolved = '';
+
+		// is file set?
+		if ( null !== $file ) {
+			// get the path
+			$path = $this->extensions[ $ext ][ self::KEY_PATH ];
+			// is it a relative path?
+			if (
+				// default is always relative
+				$default === $file ||
+				// check if NOT absolute
+				false === ICE_Files::path_is_absolute( $file )
+			) {
+				// its relative, prepend it with the path
+				$path_resolved = $path . '/' . $file;
+			} else {
+				// hopefully an absolute path, use as is
+				$path_resolved = $file;
+			}
+		} else {
+			// call parent file resolver
+			$path_resolved = $this->resolve_parent_file( $ext, $key, $default );
+		}
+
+		// return resolved path
+		return $path_resolved;
+	}
+
+	/**
+	 * Resolve an extension's *parent* file path (with default hint).
+	 *
+	 * @param string $ext The extension.
+	 * @param string $key The file setting key.
+	 * @param string $default Default file name hint. Used to short circuit absolute path check (performance).
+	 * @return string
+	 */
+	private function resolve_parent_file( $ext, $key, $default )
+	{
+		// does it extend anything?
+		if ( false === empty( $this->extensions[ $ext ][ self::KEY_EXTENDS ] ) ) {
+			// get extends
+			$extends = $this->extensions[ $ext ][ self::KEY_EXTENDS ];
+			// call resursively to resolve path
+			return $this->resolve_file( $extends, $key, $default );
+		}
+
+		// doesn't extend anything
+		return '';
 	}
 
 	/**
@@ -248,18 +325,26 @@ class ICE_Extensions
 	 */
 	public function locate_parent_file( $ext, $filename )
 	{
-		// get ext class
-		$class = $this->extensions[ $ext ][ self::KEY_CLASS ];
-		// reflect it
-		$reflection = new ReflectionClass( $class );
-		// get parent class
-		$parent_class = $reflection->getParentClass();
-		// is parent extension loaded
-		if ( true === isset( $this->loaded[ $parent_class->name ] ) ) {
-			// grab parent extension from loaded
-			$parent_ext = $this->loaded[ $parent_class->name ];
-			// recurse with parent extension
-			return $this->locate_file( $parent_ext, $filename );
+		// does it extend anything?
+		if ( false === empty( $this->extensions[ $ext ][ self::KEY_EXTENDS ] ) ) {
+			// get extends
+			$extends = $this->extensions[ $ext ][ self::KEY_EXTENDS ];
+			// call locate file
+			return $this->locate_file( $extends, $filename );
 		}
+
+		// doesn't extend anything
+		return false;
+	}
+
+	/**
+	 * Get template path for extension type.
+	 *
+	 * @param string $ext
+	 * @return string
+	 */
+	public function get_template_path( $ext )
+	{
+		return $this->resolve_file( $ext, self::KEY_TPL, self::DEFAULT_TPL );
 	}
 }
