@@ -307,42 +307,6 @@ abstract class ICE_Component
 	 */
 
 	/**
-	 * Return array of ReflectionClass objects for the current component's ancestory
-	 *
-	 * @return array
-	 */
-	private function reflect_stack()
-	{
-		// the stack of reflection objects to return
-		$stack = array();
-
-		// what class am i?
-		$reflection = new ReflectionClass( $this );
-
-		// i am the first one for the stack
-		$stack[] = $reflection;
-
-		// loop class ancestry
-		while( $parent_class = $reflection->getParentClass() ) {
-			// load next ancestory
-			$reflection = new ReflectionClass( $parent_class->name );
-			// is next parent class the base component?
-			if ( $reflection->getParentClass()->name == 'ICE_Component') {
-				// yep, we are done
-				break;
-			} elseif ( $reflection->isAbstract() ) {
-				// skip abstract classes
-				continue;
-			} else {
-				// push on to stack
-				$stack[] = $reflection;
-			}
-		}
-
-		return $stack;
-	}
-
-	/**
 	 */
 	public function accept( ICE_Visitor $visitor )
 	{
@@ -674,22 +638,19 @@ abstract class ICE_Component
 			->set_slug( self::API_PREFIX )
 			->set_class_suffix_offset( 1 );
 
-		// get reflection stack
-		$reflection_stack = array_reverse( $this->reflect_stack() );
-
 		// component type
 		$comp_type = $this->policy()->get_handle( false );
 
 		// classes start with abstract component type
 		$this->element()->add_class( array( self::API_PREFIX, $comp_type ) );
 
-		// loop reflection stack
-		/* @var $reflection ReflectionClass */
-		foreach ( $reflection_stack as $reflection ) {
-			// get ext type from extension registery
-			$ext_type = $this->policy()->extensions()->loaded( $reflection->getName(), true );
+		// get ancestors
+		$ancestors = $this->policy()->extensions()->get_ancestory( $this->type );
+
+		// loop ancestors
+		while ( $ancestors ) {
 			// get class parts by splitting at slashes
-			$class_parts = explode( '/', $ext_type );
+			$class_parts = explode( '/', array_pop( $ancestors ) );
 			// css class
 			$class = array_merge(
 				array( self::API_PREFIX ),

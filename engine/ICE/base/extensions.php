@@ -58,13 +58,6 @@ class ICE_Extensions
 	private $extensions = array();
 
 	/**
-	 * Array of loaded classes and their extension type.
-	 *
-	 * @var array
-	 */
-	private $loaded = array();
-
-	/**
 	 * Constructor.
 	 *
 	 * @param ICE_Policy $policy
@@ -128,6 +121,32 @@ class ICE_Extensions
 	}
 
 	/**
+	 * Get extension ancestory for given extension type (including self).
+	 *
+	 * @param string $ext
+	 * @return array
+	 */
+	public function get_ancestory( $ext )
+	{
+		// init the stack
+		$ancestors = array();
+
+		// is extension registered?
+		if ( isset( $this->extensions[ $ext ] ) ) {
+			// yep, first item on stack
+			$ancestors[] = $ext;
+			// does it extend anything?
+			while( false === empty( $this->extensions[ $ext ][ self::KEY_EXTENDS ] ) ) {
+				// append to stack and bump hierarchy
+				$ancestors[] = $ext = $this->extensions[ $ext ][ self::KEY_EXTENDS ];
+			}
+		}
+
+		// all done
+		return $ancestors;
+	}
+
+	/**
 	 * Loads an extension and returns the name of the extension class.
 	 *
 	 * @param string $ext
@@ -153,10 +172,7 @@ class ICE_Extensions
 				// load the file
 				$this->load_file( $ext, 'class.php' );
 				// did the file we just loaded define the class we were expecting?
-				if ( true === class_exists( $class_name ) ) {
-					// yep, add class => ext to loaded array
-					$this->loaded[ $class_name ] = $ext;
-				} else {
+				if ( false === class_exists( $class_name, false ) ) {
 					// nope, class STILL not defined, fatal
 					throw new RuntimeException(
 						sprintf( 'The class "%s" does not exist', $class_name ) );
@@ -169,25 +185,6 @@ class ICE_Extensions
 			throw new UnexpectedValueException(
 				sprintf( 'Failed to load the "%s" extension: Not registered', $ext ) );
 		}
-	}
-
-	/**
-	 * Returns true or ext name for the given class if it has been loaded.
-	 *
-	 * @param string $class_name Class name to check.
-	 * @param boolean $return_string Set to true to return ext name (string) instead of (boolean)
-	 * @return boolean|string
-	 */
-	public function loaded( $class_name, $return_string = false )
-	{
-		// is class in loaded array?
-		if ( true === isset( $this->loaded[ $class_name ] ) ) {
-			// yep return array or true
-			return ( true === $return_string ) ? $this->loaded[ $class_name ] : true;
-		}
-
-		// class not loaded
-		return false;
 	}
 
 	/**
