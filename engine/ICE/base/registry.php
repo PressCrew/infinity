@@ -43,6 +43,13 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	private $components = array();
 
 	/**
+	 * Enabled components array.
+	 *
+	 * @var array
+	 */
+	private $components_enabled = array();
+
+	/**
 	 * Raw settings array.
 	 *
 	 * @var array
@@ -53,7 +60,7 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	 */
 	public function accept( ICE_Visitor $visitor )
 	{
-		foreach ( $this->components as $component ) {
+		foreach ( $this->components_enabled as $component ) {
 			$component->accept( $visitor );
 		}
 	}
@@ -131,6 +138,13 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 		if ( false === isset( $this->components[ $name ] ) ) {
 			// register it
 			$this->components[ $name ] = $component;
+			// get the ignore property
+			$ignore = $component->get_property( 'ignore' );
+			// ignored?
+			if ( true !== $ignore ) {
+				// nope, add to enabled components
+				$this->components_enabled[ $name ] = $component;
+			}
 		}
 
 		return true;
@@ -247,28 +261,14 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	 */
 	final public function get_all( $include_ignored = false )
 	{
-		// components to return
-		$components = array();
-
-		// loop through and compare names
-		foreach ( $this->components as $component ) {
-			// include ignored?
-			if ( !$include_ignored ) {
-				// check ignore toggle
-				if ( $component->get_property( 'ignore' ) ) {
-					// component is explicitly ignored
-					continue;
-				} elseif ( $component->get_property( 'parent' ) && $component->parent()->get_property( 'ignore' ) ) {
-					// component parent is ignored, applies to this child
-					continue;
-				}
-			}
-			// add to array
-			$components[] = $component;
+		// do they want ignored as well?
+		if ( true === $include_ignored ) {
+			// yep, return all components
+			return $this->components;
+		} else {
+			// return only enabled components
+			return $this->components_enabled;
 		}
-
-		// return them
-		return $components;
 	}
 
 	/**
@@ -440,7 +440,7 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 		// call component creator
 		$this->create_components();
 
-		foreach ( $this->components as $component ) {
+		foreach ( $this->components_enabled as $component ) {
 			$component->finalize();
 		}
 	}
