@@ -106,7 +106,7 @@ class ICE_Style extends ICE_Asset
 
 			// save last filename
 			$this->last_dirname = dirname( $filename );
-			
+
 			// replace all CSS url() values
 			return preg_replace_callback( '/url\s*\([\'\"\s]*([^\'\"\s]*)[\'\"\s]*\)/', array($this, 'fix_url_path'), $content );
 		}
@@ -241,96 +241,216 @@ class ICE_Style_Rule extends ICE_Base
 }
 
 /**
- * Any style value which has a unit should implement this interface
+ * A style value container and formatter
  *
  * @package ICE
  * @subpackage dom
  */
-interface ICE_Style_Unitable
+abstract class ICE_Style_Value extends ICE_Base
 {
 	/**
-	 * Return the style unit object assigned to this object
+	 * The shared flyweight instances.
 	 *
-	 * @return ICE_Style_Unit
+	 * @var array
 	 */
-	public function unit();
-}
-
-/**
- * A unit of measure for a style value
- *
- * @package ICE
- * @subpackage dom
- */
-abstract class ICE_Style_Unit extends ICE_Base
-{
-	/**
-	 * The current unit
-	 *
-	 * @var string
-	 */
-	private $value;
+	static private $flyweights = array();
 
 	/**
-	 * Validate the given unit
+	 * Get flyweight instance for type.
 	 *
-	 * @param string $unit The unit to validate
-	 * @return boolean
+	 * @param string $type
+	 * @return ICE_Style_Value
 	 */
-	abstract protected function validate( $unit );
-
-	/**
-	 * Get the unit
-	 *
-	 * @return string
-	 */
-	public function get()
+	final static public function get_flyweight( $type )
 	{
-		return $this->value;
-	}
-
-	/**
-	 * Set the unit
-	 *
-	 * @param string $unit The unit to set
-	 * @return boolean
-	 */
-	public function set( $unit )
-	{
-		$unit = (string) $unit;
-		
-		if ( $this->validate( $unit ) ) {
-			$this->value = $unit;
-			return true;
+		// is instance missing for type?
+		if ( false === isset( self::$flyweights[ $type ] ) ) {
+			// yep, format class
+			$class = 'ICE_Style_Value_' . $type;
+			// create static instance
+			self::$flyweights[ $type ] = new $class();
 		}
 
-		return false;
+		// return static instance
+		return self::$flyweights[ $type ];
 	}
+
+	/**
+	 * Format the value as a string.
+	 *
+	 * @param ICE_Style_Property_Primitive $property
+	 * @return string
+	 */
+	public function format( ICE_Style_Property_Primitive $property )
+	{
+		return $property->get_value();
+	}
+
+	/**
+	 * Validate the value
+	 *
+	 * @param ICE_Style_Property_Primitive $property
+	 * @param mixed $value
+	 */
+	abstract public function validate( ICE_Style_Property_Primitive $property, $value );
 }
 
 /**
- * A style unit representing "no unit"
+ * A style integer value
  *
  * @package ICE
  * @subpackage dom
  */
-class ICE_Style_Unit_None extends ICE_Style_Unit
+class ICE_Style_Value_Integer extends ICE_Style_Value
 {
 	/**
 	 */
-	protected function validate( $unit )
+	public function validate( ICE_Style_Property_Primitive $property, $value )
 	{
-		return ( null === $unit || '' === $unit );
+		throw new Exception( 'I need some work' );
 	}
 }
 
 /**
- * A style value length unit of measure
+ * A style number value
  *
  * @package ICE
  * @subpackage dom
  */
-class ICE_Style_Unit_Length extends ICE_Style_Unit
+class ICE_Style_Value_Number extends ICE_Style_Value
+{
+	/**
+	 */
+	public function validate( ICE_Style_Property_Primitive $property, $value )
+	{
+		return ( is_numeric( $value ) );
+	}
+}
+
+/**
+ * A style string value
+ *
+ * @package ICE
+ * @subpackage dom
+ */
+class ICE_Style_Value_String extends ICE_Style_Value
+{
+	/**
+	 */
+	public function validate( ICE_Style_Property_Primitive $property, $value )
+	{
+		// pretty much have to allow anything here
+		return true;
+	}
+
+	/**
+	 */
+	public function format( ICE_Style_Property_Primitive $property )
+	{
+		return sprintf( '"%s"', esc_attr( $property->get_value() ) );
+	}
+}
+
+/**
+ * A style color value
+ *
+ * @package ICE
+ * @subpackage dom
+ */
+class ICE_Style_Value_Color extends ICE_Style_Value
+{
+	/**
+	 */
+	public function validate( ICE_Style_Property_Primitive $property, $value )
+	{
+		// color must be a hex or alpha string
+		return ( preg_match( '/^(#[0-9a-f]{3,6})|([a-z-]+)$/', $value ) );
+	}
+}
+
+/**
+ * A style URI value
+ *
+ * @package ICE
+ * @subpackage dom
+ */
+class ICE_Style_Value_Uri extends ICE_Style_Value
+{
+	/**
+	 */
+	public function validate( ICE_Style_Property_Primitive $property, $value )
+	{
+		return true;
+	}
+
+	/**
+	 */
+	public function format( ICE_Style_Property_Primitive $property )
+	{
+		// simply wrap it with a URL call
+		return sprintf( "url('%s')", $property->get_value() );
+	}
+}
+
+/**
+ * A style counter value
+ *
+ * @package ICE
+ * @subpackage dom
+ */
+class ICE_Style_Value_Counter extends ICE_Style_Value
+{
+	/**
+	 */
+	public function validate( ICE_Style_Property_Primitive $property, $value )
+	{
+		throw new Exception( 'I need some work' );
+	}
+}
+
+/**
+ * A style identifier value
+ *
+ * @package ICE
+ * @subpackage dom
+ */
+class ICE_Style_Value_Identifier extends ICE_Style_Value
+{
+	/**
+	 */
+	public function validate( ICE_Style_Property_Primitive $property, $value )
+	{
+		throw new Exception( 'I need some work' );
+	}
+}
+
+/**
+ * A style enumeration value
+ *
+ * @package ICE
+ * @subpackage dom
+ */
+class ICE_Style_Value_Enum extends ICE_Style_Value
+{
+	/**
+	 */
+	public function validate( ICE_Style_Property_Primitive $property, $value )
+	{
+		// get enums from property
+		$enums = $property->get_value_list();
+
+		// check if value is a key
+		return isset( $enums[ $value ] );
+	}
+}
+
+/**
+ * A style length value
+ *
+ * @package ICE
+ * @subpackage dom
+ */
+class ICE_Style_Value_Length extends ICE_Style_Value
 {
 	/**
 	 * Allowed units
@@ -351,388 +471,21 @@ class ICE_Style_Unit_Length extends ICE_Style_Unit
 
 	/**
 	 */
-	protected function validate( $unit )
+	public function validate( ICE_Style_Property_Primitive $property, $value )
 	{
-		return isset( self::$units[ $unit ] );
-	}
-}
-
-/**
- * A style value percentage unit of measure
- * 
- * @package ICE
- * @subpackage dom
- */
-class ICE_Style_Unit_Percentage extends ICE_Style_Unit
-{
-	/**
-	 */
-	protected function validate( $unit )
-	{
-		return ( '%' === $unit );
-	}
-}
-
-/**
- * A style value container and formatter
- *
- * @package ICE
- * @subpackage dom
- */
-abstract class ICE_Style_Value
-	extends ICE_Base implements ICE_Style_Unitable
-{
-	/**
-	 * The current value
-	 *
-	 * @var mixed
-	 */
-	private $value;
-
-	/**
-	 * The unit object for this value
-	 *
-	 * @var ICE_Style_Unit
-	 */
-	private $unit;
-
-	/**
-	 * Constructor
-	 */
-	public function __construct()
-	{
-		$this->unit = $this->new_unit();
-	}
-
-	/**
-	 */
-	public function __toString()
-	{
-		return $this->format();
-	}
-
-	/**
-	 * Return the value
-	 *
-	 * @return string
-	 */
-	public function get_value()
-	{
-		return $this->value;
-	}
-
-	/**
-	 * Return true if value is set
-	 *
-	 * @return boolean
-	 */
-	public function has_value()
-	{
-		return ( null !== $this->value);
-	}
-
-	/**
-	 * Set the value
-	 *
-	 * @return boolean
-	 */
-	public function set_value( $value )
-	{
-		// nulls are ok
-		if ( null === $value ) {
-			// explicitly set to null
-			$this->value = null;
-			return true;
-		}
-
-		// validate it
-		if ( $this->validate( $value ) ) {
-			// set it
-			$this->value = $value;
-			return true;
-		}
-
-		// invalid value
-		return false;
-	}
-	
-	/**
-	 * Set the value and unit for this value container
-	 *
-	 * @param mixed $value The value to set
-	 * @param string $unit The unit to set (optional)
-	 * @return type
-	 */
-	public function set( $value, $unit = null )
-	{
-		// try to set value
-		if ( true === $this->set_value( $value ) ) {
-			// get a unit?
-			if ( $unit ) {
-				// yep, try to set it
-				return $this->unit()->set( $unit );
+		// must be at least 3 chars
+		if ( strlen( $value ) >= 3 ) {
+			// get last two chars
+			$unit = substr( $value, -2 );
+			// check against whitelist
+			if ( true === isset( self::$units[ $unit ] ) ) {
+				// must be numeric
+				return is_numeric( substr( $value, 0, -2 ) );
 			}
-			// we set value only
-			return true;
 		}
 
-		// set value failed
+		// invalid
 		return false;
-	}
-
-	/**
-	 */
-	public function unit()
-	{
-		return $this->unit;
-	}
-
-	/**
-	 * Return the correct unit type for this value
-	 *
-	 * @return ICE_Style_Unit_None
-	 */
-	protected function new_unit()
-	{
-		return new ICE_Style_Unit_None();
-	}
-
-	/**
-	 * Format the value as a string
-	 *
-	 * @return string
-	 */
-	public function format()
-	{
-		return $this->value . $this->unit()->get();
-	}
-
-	/**
-	 * Validate the value
-	 *
-	 * @param mixed $value
-	 */
-	abstract protected function validate( $value );
-}
-
-/**
- * A style integer value
- *
- * @package ICE
- * @subpackage dom
- */
-class ICE_Style_Value_Integer extends ICE_Style_Value
-{
-	/**
-	 */
-	public function validate( $value )
-	{
-		throw new Exception( 'I need some work' );
-	}
-}
-
-/**
- * A style number value
- *
- * @package ICE
- * @subpackage dom
- */
-class ICE_Style_Value_Number extends ICE_Style_Value
-{
-	/**
-	 */
-	public function validate( $value )
-	{
-		return ( is_numeric( $value ) );
-	}
-}
-
-/**
- * A style string value
- *
- * @package ICE
- * @subpackage dom
- */
-class ICE_Style_Value_String extends ICE_Style_Value
-{
-	/**
-	 */
-	public function validate( $value )
-	{
-		// pretty much have to allow anything here
-		return true;
-	}
-
-	/**
-	 */
-	public function format()
-	{
-		return sprintf( '"%s"', esc_attr( $this->get_value() ) );
-	}
-}
-
-/**
- * A style color value
- * 
- * @package ICE
- * @subpackage dom
- */
-class ICE_Style_Value_Color extends ICE_Style_Value
-{
-	/**
-	 */
-	public function validate( $value )
-	{
-		// color must be a hex or alpha string
-		return ( preg_match( '/^(#[0-9a-f]{3,6})|([a-z-]+)$/', $value ) );
-	}
-}
-
-/**
- * A style URI value
- *
- * @package ICE
- * @subpackage dom
- */
-class ICE_Style_Value_Uri extends ICE_Style_Value
-{
-	/**
-	 */
-	public function validate( $value )
-	{
-		return true;
-	}
-
-	/**
-	 * @return type
-	 */
-	public function format()
-	{
-		// simply wrap it with a URL call
-		return sprintf( "url('%s')", $this->get_value() );
-	}
-}
-
-/**
- * A style counter value
- *
- * @package ICE
- * @subpackage dom
- */
-class ICE_Style_Value_Counter extends ICE_Style_Value
-{
-	/**
-	 */
-	public function validate( $value )
-	{
-		throw new Exception( 'I need some work' );
-	}
-}
-
-/**
- * A style identifier value
- *
- * @package ICE
- * @subpackage dom
- */
-class ICE_Style_Value_Identifier extends ICE_Style_Value
-{
-	/**
-	 */
-	public function validate( $value )
-	{
-		throw new Exception( 'I need some work' );
-	}
-}
-
-/**
- * A style enumeration value
- *
- * @package ICE
- * @subpackage dom
- */
-class ICE_Style_Value_Enum extends ICE_Style_Value
-{
-	/**
-	 * @var array
-	 */
-	private $values = array();
-
-	/**
-	 * Constructor
-	 *
-	 * @param array $values An array of possible values
-	 */
-	public function __construct( $values = null )
-	{
-		// run parent contructor
-		parent::__construct();
-
-		// were values passed?
-		if ( is_array( $values ) && count( $values ) ) {
-			// yes, use them
-			$this->values = $values;
-		}
-
-		// every property allows inherit
-		$this->values[ 'inherit' ] = __( 'Inherit', 'infinity' );
-	}
-
-	/**
-	 * Return values array
-	 *
-	 * @return array
-	 */
-	public function get_values()
-	{
-		return $this->values;
-	}
-
-	/**
-	 * Add an allowed value to this enumeration
-	 *
-	 * @param string $string A valid property value
-	 * @param string $desc Short description of the value
-	 * @return ICE_Map
-	 */
-	public function add( $string, $desc )
-	{
-		return $this->values[ $string ] = $desc;
-	}
-
-	/**
-	 * Check that given value is an allowed value
-	 *
-	 * @param string $value
-	 * @return boolean
-	 */
-	protected function validate( $value )
-	{
-		return isset( $this->values[ $value ] );
-	}
-}
-
-/**
- * A style length value
- *
- * @package ICE
- * @subpackage dom
- */
-class ICE_Style_Value_Length extends ICE_Style_Value
-{
-	/**
-	 * @return ICE_Style_Unit_Length
-	 */
-	protected function new_unit()
-	{
-		return new ICE_Style_Unit_Length();
-	}
-
-	/**
-	 */
-	public function validate( $value )
-	{
-		return is_numeric( $value );
 	}
 }
 
@@ -745,18 +498,22 @@ class ICE_Style_Value_Length extends ICE_Style_Value
 class ICE_Style_Value_Percentage extends ICE_Style_Value
 {
 	/**
-	 * @return ICE_Style_Unit_Percentage
 	 */
-	protected function new_unit()
+	public function validate( ICE_Style_Property_Primitive $property, $value )
 	{
-		return new ICE_Style_Unit_Percentage();
-	}
+		// must be at least 2 chars
+		if ( strlen( $value ) >= 2 ) {
+			// get last char
+			$unit = substr( $value, -1 );
+			// must be a percent sign
+			if ( '%' === $unit ) {
+				// must be numeric
+				return is_numeric( substr( $value, 0, -1 ) );
+			}
+		}
 
-	/**
-	 */
-	public function validate( $value )
-	{
-		return is_numeric( $value );
+		// invalid
+		return false;
 	}
 }
 
@@ -812,27 +569,11 @@ abstract class ICE_Style_Property extends ICE_Base
 
 	/**
 	 * Set the value for this property
-	 * 
-	 * @param mixed $value The value to set
-	 * @param string $unit The unit for the value (not supported by every property)
-	 * @return boolean
-	 */
-	abstract public function set_value( $value, $unit = null );
-	
-	/**
-	 * Get the style unit object which is set for the current style value object
-	 * 
-	 * @return string
-	 */
-	abstract public function get_unit();
-	
-	/**
-	 * Set the unit for the style unit object which is set for the current style value object
 	 *
-	 * @param string $value The unit to set
+	 * @param mixed $value The value to set
 	 * @return boolean
 	 */
-	abstract public function set_unit( $value );
+	abstract public function set_value( $value );
 
 	/**
 	 * Return the formatted property
@@ -845,7 +586,7 @@ abstract class ICE_Style_Property extends ICE_Base
 
 /**
  * A simple style property which has a single value
- * 
+ *
  * @package ICE
  * @subpackage dom
  */
@@ -902,11 +643,30 @@ final class ICE_Style_Property_Primitive extends ICE_Style_Property
 	const KEY_ENUM = 512;
 
 	/**
+	 * @var ICE_Style_Value
+	 */
+	private $value_helper;
+	
+	/**
 	 * An array of possible style value objects for this property
 	 *
 	 * @var array
 	 */
-	private $values = array();
+	private $value_helpers = array();
+
+	/**
+	 * Array of whitelist value => description pairs.
+	 * 
+	 * @var array 
+	 */
+	private $value_list = array();
+
+	/**
+	 * The current value (including unit).
+	 *
+	 * @var integer|string
+	 */
+	private $value;
 
 	/**
 	 */
@@ -916,63 +676,45 @@ final class ICE_Style_Property_Primitive extends ICE_Style_Property
 	}
 
 	/**
-	 * Return an array of values which are usable as a list
-	 *
-	 * Basically just test if one of the possible values is an enumeration and
-	 * return all of the enumerations as an array.
+	 * Return the value list.
 	 *
 	 * @return array
 	 */
-	public function get_list_values()
+	public function get_value_list()
 	{
-		foreach ( $this->values as $style_value ) {
-			if ( $style_value instanceof ICE_Style_Value_Enum ) {
-				return $style_value->get_values();
-			}
-		}
+		return $this->value_list;
+	}
 
-		throw new Exception( sprintf(
-			'The "%s" property has no value type compatible with a list', $this->name ) );
+	/**
+	 * Return true if value is set.
+	 *
+	 * @return boolean
+	 */
+	public function has_value()
+	{
+		return ( null !== $this->value );
 	}
 
 	/**
 	 */
 	public function get_value()
 	{
-		foreach ( $this->values as $style_value ) {
-			if ( $style_value->has_value() ) {
-				return $style_value;
-			}
-		}
-
-		return null;
+		return $this->value;
 	}
 
 	/**
 	 */
-	public function set_value( $value, $unit = null )
+	public function set_value( $value )
 	{
-		foreach ( $this->values as $style_value ) {
-			if ( $style_value->set( $value, $unit ) === true ) {
+		foreach ( $this->value_helpers as $value_helper ) {
+			if ( true === $value_helper->validate( $this, $value ) ) {
+				$this->value_helper = $value_helper;
+				$this->value = $value;
 				return true;
 			}
 		}
 
 		return false;
-	}
-
-	/**
-	 */
-	public function get_unit()
-	{
-		return $this->get_value()->unit();
-	}
-
-	/**
-	 */
-	public function set_unit( $unit )
-	{
-		return $this->get_value()->unit()->set( $unit );
 	}
 
 	/**
@@ -983,7 +725,17 @@ final class ICE_Style_Property_Primitive extends ICE_Style_Property
 			$format = '%s: %s';
 		}
 
-		return sprintf( $format, $this->name, $this->get_value()->format() );
+		return sprintf( $format, $this->name, $this->format_value() );
+	}
+
+	/**
+	 * Return formatted value only.
+	 *
+	 * @return string
+	 */
+	public function format_value()
+	{
+		return $this->value_helper->format( $this );
 	}
 
 	/**
@@ -991,8 +743,8 @@ final class ICE_Style_Property_Primitive extends ICE_Style_Property
 	 */
 	public function add_color()
 	{
-		if ( !isset( $this->values[ self::KEY_COLOR ] ) ) {
-			$this->values[ self::KEY_COLOR ] = new ICE_Style_Value_Color();
+		if ( !isset( $this->value_helpers[ self::KEY_COLOR ] ) ) {
+			$this->value_helpers[ self::KEY_COLOR ] = ICE_Style_Value::get_flyweight( 'Color' );
 		}
 
 		return $this;
@@ -1001,13 +753,14 @@ final class ICE_Style_Property_Primitive extends ICE_Style_Property
 	/**
 	 * Add enumeration as a possible value type
 	 */
-	public function add_enum( $string, $desc = null )
+	public function add_enum( $key, $desc = null )
 	{
-		if ( !isset( $this->values[ self::KEY_ENUM ] ) ) {
-			$this->values[ self::KEY_ENUM ] = new ICE_Style_Value_Enum();
+		if ( !isset( $this->value_helpers[ self::KEY_ENUM ] ) ) {
+			$this->value_helpers[ self::KEY_ENUM ] = ICE_Style_Value::get_flyweight( 'Enum' );
+			$this->value_list[ 'inherit' ] = __( 'Inherit', 'infinity' );
 		}
 
-		$this->values[ self::KEY_ENUM ]->add( $string, $desc );
+		$this->value_list[ $key ] = $desc;
 
 		return $this;
 	}
@@ -1017,8 +770,8 @@ final class ICE_Style_Property_Primitive extends ICE_Style_Property
 	 */
 	public function add_length()
 	{
-		if ( !isset( $this->values[ self::KEY_LENGTH ] ) ) {
-			$this->values[ self::KEY_LENGTH ] = new ICE_Style_Value_Length();
+		if ( !isset( $this->value_helpers[ self::KEY_LENGTH ] ) ) {
+			$this->value_helpers[ self::KEY_LENGTH ] = ICE_Style_Value::get_flyweight( 'Length' );
 		}
 
 		return $this;
@@ -1029,8 +782,8 @@ final class ICE_Style_Property_Primitive extends ICE_Style_Property
 	 */
 	public function add_number()
 	{
-		if ( !isset( $this->values[ self::KEY_NUMBER ] ) ) {
-			$this->values[ self::KEY_NUMBER ] = new ICE_Style_Value_Number();
+		if ( !isset( $this->value_helpers[ self::KEY_NUMBER ] ) ) {
+			$this->value_helpers[ self::KEY_NUMBER ] = ICE_Style_Value::get_flyweight( 'Number' );
 		}
 
 		return $this;
@@ -1041,8 +794,8 @@ final class ICE_Style_Property_Primitive extends ICE_Style_Property
 	 */
 	public function add_percentage()
 	{
-		if ( !isset( $this->values[ self::KEY_PERCENTAGE ] ) ) {
-			$this->values[ self::KEY_PERCENTAGE ] = new ICE_Style_Value_Percentage();
+		if ( !isset( $this->value_helpers[ self::KEY_PERCENTAGE ] ) ) {
+			$this->value_helpers[ self::KEY_PERCENTAGE ] = ICE_Style_Value::get_flyweight( 'Percentage' );
 		}
 
 		return $this;
@@ -1053,8 +806,8 @@ final class ICE_Style_Property_Primitive extends ICE_Style_Property
 	 */
 	public function add_string()
 	{
-		if ( !isset( $this->values[ self::KEY_STRING ] ) ) {
-			$this->values[ self::KEY_STRING ] = new ICE_Style_Value_String();
+		if ( !isset( $this->value_helpers[ self::KEY_STRING ] ) ) {
+			$this->value_helpers[ self::KEY_STRING ] = ICE_Style_Value::get_flyweight( 'String' );
 		}
 
 		return $this;
@@ -1065,8 +818,8 @@ final class ICE_Style_Property_Primitive extends ICE_Style_Property
 	 */
 	public function add_uri()
 	{
-		if ( !isset( $this->values[ self::KEY_URI ] ) ) {
-			$this->values[ self::KEY_URI ] = new ICE_Style_Value_Uri();
+		if ( !isset( $this->value_helpers[ self::KEY_URI ] ) ) {
+			$this->value_helpers[ self::KEY_URI ] = ICE_Style_Value::get_flyweight( 'Uri' );
 		}
 
 		return $this;
@@ -1126,57 +879,15 @@ final class ICE_Style_Property_Composite extends ICE_Style_Property
 
 	/**
 	 */
-	public function set_value( $value, $unit = null )
+	public function set_value( $value )
 	{
 		if ( !is_array( $value ) || !$value instanceof ArrayAccess ) {
 			throw new Exception( 'Value must be an array or accessible as an array' );
 		}
 
-		if ( null !== $unit && ( !is_array( $unit ) || !$unit instanceof ArrayAccess ) ) {
-			throw new Exception( 'Unit must be an array or accessible as an array' );
-		}
-
 		foreach ( $this->properties as $property ) {
 			if ( isset( $value[$property->name] ) ) {
-				$property->set_value(
-					$value[$property->name],
-					isset( $unit[$property->name] ) ? $unit[$property->name] : null
-				);
-			}
-		}
-		
-		return true;
-	}
-
-	/**
-	 */
-	public function get_unit()
-	{
-		$map = new ICE_Map();
-
-		foreach ( $this->properties as $property ) {
-			$style_value = $property->get_value();
-			if ( $style_value instanceof ICE_Style_Unitable ) {
-				$map->add( $property->name, $style_value->unit() );
-			}
-		}
-
-		return $map;
-	}
-
-	/**
-	 */
-	public function set_unit( $unit )
-	{
-		if ( $unit instanceof ICE_Map ) {
-			foreach ( $this->properties as $property ) {
-				if ( $unit->contains( $property->name ) ) {
-					$property->set_unit( $unit->item_at( $property->name ) );
-				}
-			}
-		} else {
-			foreach ( $this->properties as $property ) {
-				$property->set_unit( $unit );
+				$property->set_value( $value[$property->name] );
 			}
 		}
 
@@ -1193,9 +904,9 @@ final class ICE_Style_Property_Composite extends ICE_Style_Property
 		// loop all properties
 		foreach( $this->properties as $primitive ) {
 			// is value set on this property?
-			if ( isset( $primitive->value ) ) {
+			if ( $primitive->has_value() ) {
 				// yes, push it onto the values array
-				array_push( $values, $primitive->get_value()->format() );
+				array_push( $values, $primitive->format_value() );
 			}
 		}
 
@@ -1237,7 +948,7 @@ final class ICE_Style_Property_Factory extends ICE_Base
 		if ( !self::$instance instanceof self ) {
 			self::$instance = new self();
 		}
-		
+
 		return self::$instance;
 	}
 
@@ -1327,7 +1038,7 @@ final class ICE_Style_Property_Factory extends ICE_Base
 				->add_enum( 'inset', __( 'Inset', 'infinity' ) )
 				->add_enum( 'outset', __( 'Outset', 'infinity' ) );
 	}
-	
+
 	/**
 	 * Return a new border-width property object
 	 *
@@ -1453,7 +1164,7 @@ final class ICE_Style_Property_Factory extends ICE_Base
 
 	/**
 	 * Return a new margin-top property object
-	 * 
+	 *
 	 * @return ICE_Style_Property
 	 */
 	protected function prop_margin_top()
@@ -1490,7 +1201,7 @@ final class ICE_Style_Property_Factory extends ICE_Base
 	{
 		return $this->prop_margin( 'margin-left' );
 	}
-	
+
 	/**
 	 * Return a new max length property object
 	 *

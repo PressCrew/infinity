@@ -230,7 +230,7 @@ abstract class ICE_Option extends ICE_Component
 				true === $this instanceof ICE_Ext_Option_Select ||
 				true === $this instanceof ICE_Ext_Option_Radio
 			) {
-				$field_options = $this->__style_property__->get_list_values();
+				$field_options = $this->__style_property__->get_value_list();
 			}
 
 		}
@@ -483,21 +483,17 @@ abstract class ICE_Option extends ICE_Component
 			}
 
 			// try to set the value
-			if ( null !== $value && $this->__style_property__->set_value( $value, $this->style_unit ) ) {
-
-				// get the style value
-				$style_value = $this->__style_property__->get_value();
-
-				// add value to component styles if set
-				if ( $style_value->has_value() ) {
-					// new rule
-					$rule = $this->style()->rule( 'cfg', $this->style_selector );
-					// add declaration from style property
-					$rule->add_declaration(
-						$this->__style_property__->get_name(),
-						$this->__style_property__->get_value()->format()
-					);
-				}
+			if (
+				null !== $value &&
+				true === $this->__style_property__->set_value( $value . $this->style_unit )
+			) {
+				// new rule
+				$rule = $this->style()->rule( 'cfg', $this->style_selector );
+				// add declaration from style property
+				$rule->add_declaration(
+					$this->__style_property__->get_name(),
+					$this->__style_property__->format_value()
+				);
 			}
 
 		}
