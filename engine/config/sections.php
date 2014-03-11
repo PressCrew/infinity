@@ -9,79 +9,126 @@
  * @subpackage config
  */
 
-$sections['general'] = array(
-	'title' => 'General'
+$this->register(
+	'general',
+	array(
+		'title' => 'General'
+	)
 );
 
-$sections['global'] = array(
-	'title' => 'Global'
+$this->register(
+	'global',
+	array(
+		'title' => 'Global'
+	)
 );
 
-$sections['custom'] = array(
-	'title' => 'Custom'
+$this->register(
+	'custom',
+	array(
+		'title' => 'Custom'
+	)
 );
 
-$sections['layout'] = array(
-	'title' => 'Layout'
+$this->register(
+	'layout',
+	array(
+		'title' => 'Layout'
+	)
 );
 
-$sections['header'] = array(
-	'title' => 'Header'
+$this->register(
+	'header',
+	array(
+		'title' => 'Header'
+	)
 );
 
-$sections['menus'] = array(
-	'title' => 'Menus'
+$this->register(
+	'menus',
+	array(
+		'title' => 'Menus'
+	)
 );
 
-$sections['menus-top'] = array(
-	'parent' => 'menus',
-	'title' => 'Above Header'
+$this->register(
+	'menus-top',
+	array(
+		'parent' => 'menus',
+		'title' => 'Above Header'
+	)
 );
 
-$sections['menus-main'] = array(
-	'parent' => 'menus',
-	'title' => 'Inside Header'
+$this->register(
+	'menus-main',
+	array(
+		'parent' => 'menus',
+		'title' => 'Inside Header'
+	)
 );
 
-$sections['menus-sub'] = array(
-	'parent' => 'menus',
-	'title' => 'Below Header'
+$this->register(
+	'menus-sub',
+	array(
+		'parent' => 'menus',
+		'title' => 'Below Header'
+	)
 );
 
-$sections['content'] = array(
-	'title' => 'Content'
+$this->register(
+	'content',
+	array(
+		'title' => 'Content'
+	)
 );
 
-$sections['sidebar'] = array(
-	'title' => 'Sidebar'
+$this->register(
+	'sidebar',
+	array(
+		'title' => 'Sidebar'
+	)
 );
 
-$sections['widgets'] = array(
-	'title' => 'Widgets'
+$this->register(
+	'widgets',
+	array(
+		'title' => 'Widgets'
+	)
 );
 
-$sections['footer'] = array(
-	'title' => 'Footer'
+$this->register(
+	'footer',
+	array(
+		'title' => 'Footer'
+	)
 );
 
-$sections['buddypress'] = array(
-	'title' => 'BuddyPress'
+$this->register(
+	'buddypress',
+	array(
+		'title' => 'BuddyPress'
+	)
 );
 
-$sections['whitelabel'] = array(
-	'title' => 'White Label'
+$this->register(
+	'whitelabel',
+	array(
+		'title' => 'White Label'
+	)
 );
 
-$sections['gravatars'] = array(
-	'title' => 'Post Gravatars'
+$this->register(
+	'gravatars',
+	array(
+		'title' => 'Post Gravatars'
+	)
 );
 
 // Fall Back
 
-$sections['default'] = array(
-	'title' => 'Other'
+$this->register(
+	'default',
+	array(
+		'title' => 'Other'
+	)
 );
-
-
-// return config array to caller
-return $sections;

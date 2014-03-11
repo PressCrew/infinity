@@ -594,7 +594,7 @@ final class ICE_Scheme extends ICE_Base
 				}
 				
 				// try to load config file
-				if ( $policy->registry()->load_config_file( $config_file ) ) {
+				if ( $policy->registry()->register_file( $config_file ) ) {
 					// push onto loaded stack
 					$this->config_files_loaded->push( $config_file );
 				}

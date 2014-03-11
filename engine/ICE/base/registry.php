@@ -299,29 +299,25 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	}
 
 	/**
-	 * Load a config file.
+	 * Register a component's settings.
 	 *
-	 * @param string $filename Absolute path to the component config file to parse.
+	 * @param string $name
+	 * @param array $settings
 	 * @return boolean
 	 */
-	final public function load_config_file( $filename )
+	public function register( $name, $settings )
 	{
-		// get component configurations from file
-		$settings = require_once( $filename );
+		return $this->load_config_array( $name, $settings );
+	}
 
-		// get an array?
-		if ( is_array( $settings ) ) {
-			// loop all component configs
-			foreach( $settings as $comp_name => $settings ) {
-				// load component config
-				$this->load_config_array( $comp_name, $settings );
-			}
-			// file loaded
-			return true;
-		}
-
-		// file NOT loaded
-		return false;
+	/**
+	 * Load a file in context so it can make calls to register() in scope.
+	 *
+	 * @param string $filename
+	 */
+	public function register_file( $filename )
+	{
+		require_once $filename;
 	}
 
 	/**

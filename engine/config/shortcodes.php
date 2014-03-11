@@ -9,20 +9,23 @@
  * @subpackage config
  */
 
-$shortcodes['access'] = array(
-	'type' => 'access',
-	'title' => 'Access Check',
-	'description' => 'Display content to logged in users only',
-	'attributes' => array(
-		"capability=read"
+$this->register(
+	'access',
+	array(
+		'type' => 'access',
+		'title' => 'Access Check',
+		'description' => 'Display content to logged in users only',
+		'attributes' => array(
+			"capability=read"
+		)
 	)
 );
 
-$shortcodes['visitor'] = array(
-	'type' => 'visitor',
-	'title' => 'Visitor Content',
-	'description' => 'Display content to non-logged in users only'
+$this->register(
+	'visitor',
+	array(
+		'type' => 'visitor',
+		'title' => 'Visitor Content',
+		'description' => 'Display content to non-logged in users only'
+	)
 );
-
-// return config array to caller
-return $shortcodes;

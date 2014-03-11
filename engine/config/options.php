@@ -9,17 +9,15 @@
  * @subpackage config
  */
 
-$options = array();
-
 // See options.examples.php for more advanced configuration examples
 
-//$options['example'] = array(
-//	'type' => 'text',
-//	'section' => 'general',
-//	'title' => 'Short description',
-//	'description' => 'Long Description',
-//	'default_value' => 'Hello World',
+//$this->register(
+//	'example',
+//	array(
+//		'type' => 'text',
+//		'section' => 'general',
+//		'title' => 'Short description',
+//		'description' => 'Long Description',
+//		'default_value' => 'Hello World',
+//	)
 //);
-
-// return config array to caller
-return $options;

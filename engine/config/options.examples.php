@@ -19,7 +19,8 @@
 
 // ui/slider with one handle
 // this option stores a single number (integer)
-$options['slider-one'] =
+$this->register(
+	'slider-one',
 	array(
 		'type' => 'ui/slider',
 		'section' => 'general',
@@ -30,11 +31,13 @@ $options['slider-one'] =
 		'step' => 1,
 		'label' => 'You selected:',
 		'default_value' => 7
-	);
+	)
+);
 
 // ui/slider with two handles (range)
 // this option stores a two item array, one item for each selected value
-$options['slider-two'] =
+$this->register(
+	'slider-two',
 	array(
 		'type' => 'ui/slider',
 		'section' => 'general',
@@ -46,4 +49,5 @@ $options['slider-two'] =
 		'range' => 2,
 		'label' => 'Your range is:',
 		'default_value' => array( 25, 75 )
-	);
+	)
+);

@@ -9,12 +9,11 @@
  * @subpackage config
  */
 
-$widgets['pages-list'] = array(
-	'type' => 'posts-list',
-	'title' => 'Edit blog pages',
-	'description' => 'Edit your blog pages and modify the order',
-	'post_type' => 'page'
+$this->register( 'pages-list',
+	array(
+		'type' => 'posts-list',
+		'title' => 'Edit blog pages',
+		'description' => 'Edit your blog pages and modify the order',
+		'post_type' => 'page'
+	)
 );
-
-// return config array to caller
-return $widgets;
