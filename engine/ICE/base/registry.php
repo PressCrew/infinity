@@ -124,33 +124,6 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	}
 
 	/**
-	 * Register a component
-	 *
-	 * @param ICE_Component $component
-	 * @return boolean
-	 */
-	final protected function register( ICE_Component $component )
-	{
-		// get the name property
-		$name = $component->get_property( 'name' );
-
-		// has the component already been registered?
-		if ( false === isset( $this->components[ $name ] ) ) {
-			// register it
-			$this->components[ $name ] = $component;
-			// get the ignore property
-			$ignore = $component->get_property( 'ignore' );
-			// ignored?
-			if ( true !== $ignore ) {
-				// nope, add to enabled components
-				$this->components_enabled[ $name ] = $component;
-			}
-		}
-
-		return true;
-	}
-
-	/**
 	 * Normalize a component name which may have "dots" in it
 	 *
 	 * @param string $name
@@ -414,7 +387,13 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 				if ( $component instanceof ICE_Component ) {
 
 					// register component
-					$this->register( $component );
+					$this->components[ $comp_name ] = $component;
+
+					// ignored?
+					if ( false === isset( $settings[ 'ignore' ] ) ) {
+						// nope, add to enabled components
+						$this->components_enabled[ $comp_name ] = $component;
+					}
 				}
 
 			} else {
