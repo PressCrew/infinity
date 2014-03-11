@@ -33,13 +33,6 @@ abstract class ICE_Option extends ICE_Component
 	private $__post_override__ = false;
 
 	/**
-	 * Local style property object
-	 *
-	 * @var ICE_Style_Property
-	 */
-	private $__style_property__ = false;
-
-	/**
 	 * Default value of the option
 	 *
 	 * @var mixed
@@ -154,7 +147,6 @@ abstract class ICE_Option extends ICE_Component
 	public function init_styles()
 	{
 		parent::init_styles();
-		$this->refresh_style_property();
 		$this->generate_style_property();
 	}
 
@@ -170,9 +162,6 @@ abstract class ICE_Option extends ICE_Component
 			// yes, use default
 			$this->section = 'default';
 		}
-
-		// setup style property object
-		$this->refresh_style_property();
 
 		// field options
 		
@@ -223,14 +212,19 @@ abstract class ICE_Option extends ICE_Component
 				$field_options = $this->load_field_options();
 			}
 
-		} elseif ( $this->__style_property__ ) {
+		} else {
 
 			// check type
 			if (
-				true === $this instanceof ICE_Ext_Option_Select ||
-				true === $this instanceof ICE_Ext_Option_Radio
+				$this->style_selector &&
+				$this->style_property &&
+				(
+					true === $this instanceof ICE_Ext_Option_Select ||
+					true === $this instanceof ICE_Ext_Option_Radio
+				)
 			) {
-				$field_options = $this->__style_property__->get_value_list();
+				$style_prop = ICE_Style_Property_Factory::instance()->create( $this->style_property );
+				$field_options = $style_prop->get_value_list();
 			}
 
 		}
@@ -452,26 +446,10 @@ abstract class ICE_Option extends ICE_Component
 	}
 
 	/**
-	 * @todo need to get rid of this mess once fields component is working
-	 */
-	private function refresh_style_property()
-	{
-		// set to null in case it should not exist anymore
-		$this->__style_property__ = null;
-
-		// must have selector and property
-		if ( $this->style_selector && $this->style_property ) {
-			// setup property object
-			$this->__style_property__ =
-				ICE_Style_Property_Factory::instance()->create( $this->style_property );
-		}
-	}
-
-	/**
 	 */
 	private function generate_style_property()
 	{
-		if ( $this->__style_property__ ) {
+		if ( $this->style_selector && $this->style_property ) {
 
 			// determine value to set
 			if ( $this instanceof ICE_Option_Attachment_Image ) {
@@ -483,19 +461,12 @@ abstract class ICE_Option extends ICE_Component
 			}
 
 			// try to set the value
-			if (
-				null !== $value &&
-				true === $this->__style_property__->set_value( $value . $this->style_unit )
-			) {
+			if ( null !== $value ) {
 				// new rule
 				$rule = $this->style()->rule( 'cfg', $this->style_selector );
-				// add declaration from style property
-				$rule->add_declaration(
-					$this->__style_property__->get_name(),
-					$this->__style_property__->format_value()
-				);
+				// add style property
+				$rule->add_property( $this->style_property, $value . $this->style_unit );
 			}
-
 		}
 	}
 }

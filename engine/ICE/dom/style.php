@@ -158,11 +158,22 @@ class ICE_Style_Rule extends ICE_Base
 	private $selector;
 
 	/**
-	 * The declarations
+	 * The declarations.
+	 *
+	 * These are imported and exported "as is"
 	 *
 	 * @var array
 	 */
 	private $declarations = array();
+
+	/**
+	 * The properties.
+	 *
+	 * These are passed through style property validators and formatters.
+	 *
+	 * @var array
+	 */
+	private $properties = array();
 
 	/**
 	 * Constructor
@@ -205,6 +216,17 @@ class ICE_Style_Rule extends ICE_Base
 	}
 
 	/**
+	 * Add a property.
+	 *
+	 * @param string $property
+	 * @param mixed $value This should NOT be formatted in any way.
+	 */
+	public function add_property( $property, $value )
+	{
+		$this->properties[ $property ] = $value;
+	}
+
+	/**
 	 * Generate CSS markup for this rule
 	 *
 	 * @param array $declarations
@@ -230,6 +252,13 @@ class ICE_Style_Rule extends ICE_Base
 		// add each dec
 		foreach ( $declarations as $property => $value ) {
 			$markup .= sprintf( "\t%s: %s;", $property, $value ) . PHP_EOL;
+		}
+
+		// add each prop
+		foreach ( $this->properties as $property => $value ) {
+			$style_prop = ICE_Style_Property_Factory::instance()->create( $property );
+			$style_prop->set_value( $value );
+			$markup .= "\t" . $style_prop->format() . PHP_EOL;
 		}
 
 		// close
@@ -725,7 +754,7 @@ final class ICE_Style_Property_Primitive extends ICE_Style_Property
 			$format = '%s: %s';
 		}
 
-		return sprintf( $format, $this->name, $this->format_value() );
+		return sprintf( $format, $this->get_name(), $this->format_value() );
 	}
 
 	/**
