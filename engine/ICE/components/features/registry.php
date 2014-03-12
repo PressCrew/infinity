@@ -35,103 +35,56 @@ abstract class ICE_Feature_Registry extends ICE_Registry
 	 * @var array
 	 */
 	private $opt_defaults = array();
-	
+
 	/**
 	 */
-	protected function load_config_array( $comp_name, $settings )
+	public function register( $name, $settings )
 	{
-		// init sub options array
-		$sub_options = array();
-		
-		// get extension settings
-		$ext_settings = $this->policy()->extensions()->get_settings( $settings[ 'type' ] );
-
-		// does this feature's type have bundled options?
-		if (
-			true === isset( $ext_settings['options'] ) &&
-			count( $ext_settings['options'] ) >= 1
-		) {
-			// yep, merge em over top of existing
-			$sub_options = array_merge( $sub_options, $ext_settings['options'] );
-		}
-
-		// did this feature pass an array of sub options?
-		if (
-			true === isset( $settings['options'] ) &&
-			true === is_array( $settings['options'] )
-		) {
-			// yep, merge them over top of existing
-			$sub_options = array_merge( $sub_options, $settings['options'] );
-		}
-
-		// kill options reference in settings array no matter what
-		unset( $settings['options'] );
-
 		// load like a regular component first
-		if ( true === parent::load_config_array( $comp_name, $settings ) ) {
+		if ( true === parent::register( $name, $settings ) ) {
 
-			// has any sub options?
-			if (
-				0 < count( $sub_options ) &&
-				true === $this->policy()->options() instanceof ICE_Policy
-			) {
-				// yes, call sub options loader
-				$this->load_sub_options( $comp_name, $sub_options );
+			// get extension settings
+			$ext_settings = $this->policy()->extensions()->get_settings( $settings[ 'type' ] );
+
+			// does this feature's type have bundled options?
+			if ( true === isset( $ext_settings[ 'options' ] ) ) {
+				// yep, loop all bundled options
+				foreach( $ext_settings[ 'options' ] as $so_name => $so_settings ) {
+					// register the sub option settings
+					$this->register_suboption( $name, $so_name, $so_settings );
+				}
 			}
 
-			// feature config loaded
+			// feature registered
 			return true;
-
-		} else {
-
-			// feature config *not* loaded
-			return false;
-			
 		}
+
+		// feature not registered
+		return false;
 	}
 
 	/**
-	 * Load sub options for a feature.
-	 *
-	 * @param string $feature
-	 * @param array $options
-	 */
-	private function load_sub_options( $feature, $options )
-	{
-		foreach( $options as $option => $settings ) {
-			// call sub option loader
-			$this->load_sub_option( $feature, $option, $settings );
-		}
-	}
-
-	/**
-	 * Load one sub option for a feature.
+	 * Register one sub option for a feature.
 	 *
 	 * @param string $feature
 	 * @param string $option
 	 * @param array $settings
 	 */
-	private function load_sub_option( $feature, $option, $settings )
+	public function register_suboption( $feature, $option, $settings )
 	{
-		// is this the feature option defaults?
-		if ( self::OPT_DEF_NAME === $option ) {
-			// yep, set em
-			$this->load_default_option( $feature, $settings );
-		} else {
-			// inject feature into settings array
-			$settings[ 'feature' ] = $feature;
-			// call special feature option loader
-			$this->policy()->options()->registry()->load_feature_option( $option, $settings );
-		}
+		// inject feature into settings array
+		$settings[ 'feature' ] = $feature;
+		// call special feature option loader
+		return $this->policy()->options()->registry()->register_feature_option( $option, $settings );
 	}
 
 	/**
-	 * Load default option config for a feature.
+	 * Register suboption default setting values for a feature.
 	 *
 	 * @param string $feature
 	 * @param array $settings
 	 */
-	private function load_default_option( $feature, $settings )
+	public function register_suboption_defaults( $feature, $settings )
 	{
 		// already have some defaults set?
 		if ( isset( $this->opt_defaults[ $feature ] ) ) {
@@ -144,15 +97,15 @@ abstract class ICE_Feature_Registry extends ICE_Registry
 	}
 
 	/**
-	 * Get default option config for a feature.
+	 * Get default suboption values for given feature name.
 	 *
-	 * @param string $feature
+	 * @param string $name
 	 * @return array|false
 	 */
-	public function get_default_option( $feature )
+	public function get_suboption_defaults( $name )
 	{
-		if ( isset( $this->opt_defaults[ $feature ] ) ) {
-			return $this->opt_defaults[ $feature ];
+		if ( isset( $this->opt_defaults[ $name ] ) ) {
+			return $this->opt_defaults[ $name ];
 		} else {
 			return false;
 		}

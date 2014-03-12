@@ -439,7 +439,7 @@ abstract class ICE_Component
 		// is a feature set?
 		if ( isset( $settings['feature'] ) ) {
 			// try to grab defaults
-			$defaults_array = $this->policy()->features()->registry()->get_default_option( $settings['feature'] );
+			$defaults_array = $this->policy()->features()->registry()->get_suboption_defaults( $settings['feature'] );
 			// get any defaults?
 			if ( !empty( $defaults_array ) ) {
 				// merge config *ON TOP OF* defaults

@@ -32,7 +32,7 @@ abstract class ICE_Option_Registry extends ICE_Registry
 	 * @param array $settings
 	 * @return boolean
 	 */
-	public function load_feature_option( $name, $settings )
+	public function register_feature_option( $name, $settings )
 	{
 		// feature explicitly set?
 		if ( isset( $settings['feature'] ) ) {
@@ -51,8 +51,8 @@ abstract class ICE_Option_Registry extends ICE_Registry
 				$settings['parent'] = $this->normalize_name( $settings['parent'] );
 			}
 
-			// call parent config loader
-			if ( $this->load_config_array( $option_name, $settings ) ) {
+			// call register method
+			if ( $this->register( $option_name, $settings ) ) {
 				// successfully loaded feature sub option
 				return true;
 			} else {

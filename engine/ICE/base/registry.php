@@ -299,18 +299,6 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	}
 
 	/**
-	 * Register a component's settings.
-	 *
-	 * @param string $name
-	 * @param array $settings
-	 * @return boolean
-	 */
-	public function register( $name, $settings )
-	{
-		return $this->load_config_array( $name, $settings );
-	}
-
-	/**
 	 * Load a file in context so it can make calls to register() in scope.
 	 *
 	 * @param string $filename
@@ -321,25 +309,25 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	}
 
 	/**
-	 * Load one component config into registry from an array.
+	 * Register a component's settings.
 	 *
-	 * @param string $comp_name
+	 * @param string $name
 	 * @param array $settings
 	 * @return boolean
 	 */
-	protected function load_config_array( $comp_name, $settings )
+	public function register( $name, $settings )
 	{
 		// does component have config already?
-		if ( isset( $this->settings[ $comp_name ] ) ) {
+		if ( isset( $this->settings[ $name ] ) ) {
 			// yep, merge over existing settings
-			$this->settings[ $comp_name ] =
+			$this->settings[ $name ] =
 				array_merge(
-					$this->settings[ $comp_name ],
+					$this->settings[ $name ],
 					$settings
 				);
 		} else {
 			// nope, just assign it
-			$this->settings[ $comp_name ] = $settings;
+			$this->settings[ $name ] = $settings;
 		}
 
 		// config loaded
