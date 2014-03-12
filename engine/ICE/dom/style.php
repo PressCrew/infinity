@@ -352,7 +352,7 @@ class ICE_Style_Value_Number extends ICE_Style_Value
 	 */
 	public function validate( ICE_Style_Property_Primitive $property, $value )
 	{
-		return ( is_numeric( $value ) );
+		return is_numeric( $value );
 	}
 }
 
@@ -393,7 +393,7 @@ class ICE_Style_Value_Color extends ICE_Style_Value
 	public function validate( ICE_Style_Property_Primitive $property, $value )
 	{
 		// color must be a hex or alpha string
-		return ( preg_match( '/^(#[0-9a-f]{3,6})|([a-z-]+)$/', $value ) );
+		return (boolean) preg_match( '/^(#[0-9a-f]{3,6})|([a-z-]+)$/', $value );
 	}
 }
 
