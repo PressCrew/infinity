@@ -258,7 +258,7 @@ class ICE_Style_Rule extends ICE_Base
 		foreach ( $this->properties as $property => $value ) {
 			$style_prop = ICE_Style_Property_Factory::instance()->create( $property );
 			$style_prop->set_value( $value );
-			$markup .= "\t" . $style_prop->format() . PHP_EOL;
+			$markup .= "\t" . $style_prop->format() . ';' . PHP_EOL;
 		}
 
 		// close
