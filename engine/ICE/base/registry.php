@@ -139,43 +139,22 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	}
 
 	/**
-	 * Substitute value from another init data key into this key's value
+	 * Substitute values from sibling settings.
 	 *
-	 * @param string $value
+	 * @param string $key
 	 * @param array $settings
 	 * @return string
 	 */
-	private function substitute( $value, $settings )
+	private function substitute( $key, &$settings )
 	{
-		// does string have enough % chars?
-		if ( is_string( $value ) && substr_count( $value, '%' ) >= 2 ) {
-			// matches container
-			$matches = null;
-			// find tokens
-			if ( preg_match_all( '/%(\w+)%/', $value, $matches, PREG_SET_ORDER ) ) {
-				// loop all matches
-				foreach ( $matches as $match ) {
-					// break out strings into vars
-					$str_search = $match[0];
-					$str_name = $match[1];
-					// is data already set?
-					if ( isset( $settings[ $str_name ] ) ) {
-						// return new string
-						$value = str_replace(
-							$str_search,
-							$settings[ $str_name ],
-							$value
-						);
-					} else {
-						throw new Exception( sprintf(
-							'Cannot perform substitution for data value "%s" using value of ' .
-							'data name "%s" because it has not been set', $value, $str_name ) );
-					}
-				}
-			}
+		// loop all settings
+		foreach( $settings as $skey => &$sval ) {
+			// wrap key with delim
+			$search[] = '%' . $skey . '%';
 		}
-
-		return $value;
+		
+		// replace it
+		return str_replace( $search, $settings, $settings[ $key ] );
 	}
 
 	/**
@@ -183,9 +162,18 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	 */
 	private function substitute_all()
 	{
-		foreach ( $this->settings as $comp_name => $settings ) {
-			foreach ( $settings as $setting => $value ) {
-				$this->settings[ $comp_name ][ $setting ] = $this->substitute( $value, $settings );
+		// subject keys to replace value of
+		$keys = array( 'parent', 'title', 'description', 'linked_image' );
+
+		// loop all registered settings
+		foreach ( $this->settings as &$settings ) {
+			// loop all keys
+			foreach( $keys as $key ) {
+				// is key set in settings?
+				if ( true === isset( $settings[ $key ] ) ) {
+					// yep, attempt to substitute
+					$settings[ $key ] = $this->substitute( $key, $settings );
+				}
 			}
 		}
 	}
