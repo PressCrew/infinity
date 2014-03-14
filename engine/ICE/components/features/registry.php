@@ -72,10 +72,8 @@ abstract class ICE_Feature_Registry extends ICE_Registry
 	 */
 	public function register_suboption( $feature, $option, $settings )
 	{
-		// inject feature into settings array
-		$settings[ 'feature' ] = $feature;
 		// call special feature option loader
-		return $this->policy()->options()->registry()->register_feature_option( $option, $settings );
+		return $this->policy()->options()->registry()->register_feature_option( $feature, $option, $settings );
 	}
 
 	/**

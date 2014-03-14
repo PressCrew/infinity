@@ -28,39 +28,33 @@ abstract class ICE_Option_Registry extends ICE_Registry
 	/**
 	 * Load option config as a feature option if the "feature" setting is set.
 	 *
-	 * @param string $name
+	 * @param string $feature
+	 * @param string $option
 	 * @param array $settings
 	 * @return boolean
 	 */
-	public function register_feature_option( $name, $settings )
+	public function register_feature_option( $feature, $option, $settings )
 	{
-		// feature explicitly set?
-		if ( isset( $settings['feature'] ) ) {
+		// format option name
+		$suboption = ICE_Registry::format_suboption( $feature, $option );
 
-			// format option name
-			$option_name = ICE_Registry::format_suboption( $settings['feature'], $name );
-			
-			// set required feature
-			$settings['required_feature'] = $settings['feature'];
+		// set feature and required feature
+		$settings['feature'] = $settings['required_feature'] = $feature;
 
-			// clean up parent
-			if ( isset( $settings['parent'] ) ) {
-				$settings['parent'] = $this->normalize_name( $settings['parent'] );
-			}
-
-			// call register method
-			if ( $this->register( $option_name, $settings ) ) {
-				// successfully loaded feature sub option
-				return true;
-			} else {
-				// this is really bad
-				throw new Exception( sprintf(
-					'Failed to load "%s" as an option for feature "%s"', $option_name, $settings['feature'] ) );
-			}
+		// clean up parent
+		if ( isset( $settings['parent'] ) ) {
+			$settings['parent'] = $this->normalize_name( $settings['parent'] );
 		}
 
-		// not a feature option
-		return false;
+		// call register method
+		if ( $this->register( $suboption, $settings ) ) {
+			// successfully loaded feature sub option
+			return true;
+		}
+
+		// this is really bad
+		throw new Exception( sprintf(
+			'Failed to load "%s" as a suboption for feature "%s"', $suboption, $feature ) );
 	}
 
 	/**
