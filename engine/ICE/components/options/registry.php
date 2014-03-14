@@ -40,9 +40,6 @@ abstract class ICE_Option_Registry extends ICE_Registry
 			// format option name
 			$option_name = ICE_Registry::format_suboption( $settings['feature'], $name );
 			
-			// set feature option
-			$settings[ 'feature_option' ] = $name;
-
 			// set required feature
 			$settings['required_feature'] = $settings['feature'];
 

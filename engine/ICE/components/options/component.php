@@ -55,13 +55,6 @@ abstract class ICE_Option extends ICE_Component
 	protected $feature;
 
 	/**
-	 * The feature option name (not prefixed)
-	 *
-	 * @var string
-	 */
-	protected $feature_option;
-
-	/**
 	 * The CSS class to apply to the option's input field
 	 *
 	 * @var string
@@ -117,7 +110,6 @@ abstract class ICE_Option extends ICE_Component
 		switch ( $name ) {
 			case 'default_value':
 			case 'feature':
-			case 'feature_option':
 			case 'field_class':
 			case 'field_id':
 			case 'field_options':
