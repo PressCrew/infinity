@@ -68,14 +68,7 @@ require_once ICE_PATH . '/base/base.php';
 final class ICE_Loader extends ICE_Base
 {
 	/**
-	 * Singleton instance
-	 *
-	 * @var ICE_Loader
-	 */
-	private static $instance;
-
-	/**
-	 * This is a singleton
+	 * This is a static singleton.
 	 */
 	private function __construct() {}
 
@@ -88,11 +81,8 @@ final class ICE_Loader extends ICE_Base
 	 */
 	final static public function init( $ice_url )
 	{
-		// new instance if necessary
-		if ( !self::$instance instanceof self ) {
-
-			// define api ext prefixes
-			define( 'ICE_EXT_PREFIX', 'ICE_Ext' );
+		// define constants if necessary
+		if ( false === defined( 'ICE_URL' ) ) {
 
 			// define ICE urls
 			define( 'ICE_URL', $ice_url );
@@ -104,11 +94,11 @@ final class ICE_Loader extends ICE_Base
 			// is this an AJAX request?
 			define( 'ICE_AJAX_REQUEST', defined( 'DOING_AJAX' ) );
 
-			// create singleton instance
-			self::$instance = new self();
+			// define api ext prefixes
+			define( 'ICE_EXT_PREFIX', 'ICE_Ext' );
 
 			// load really important classes
-			self::$instance->load(
+			self::load(
 				'collections/map',
 				'collections/map_iterator',
 				'collections/stack',
@@ -131,7 +121,7 @@ final class ICE_Loader extends ICE_Base
 
 		// loop through all libs
 		foreach ( $libs as $lib ) {
-			self::$instance->load_lib( $lib );
+			self::load_lib( $lib );
 		}
 	}
 
@@ -139,14 +129,11 @@ final class ICE_Loader extends ICE_Base
 	 * Load a library file relative to ICE_PATH
 	 *
 	 * @param string $lib
-	 * @return true
 	 */
-	private function load_lib( $lib )
+	final public static function load_lib( $lib )
 	{
 		// load file
 		require_once ICE_PATH . '/' . $lib . '.php';
-		// all done
-		return true;
 	}
 
 	/**
@@ -154,7 +141,7 @@ final class ICE_Loader extends ICE_Base
 	 *
 	 * @param string $file,... An unlimited number of files to load
 	 */
-	public function load_wp_lib()
+	final public static function load_wp_lib()
 	{
 		foreach( func_get_args() as $file ) {
 			require_once ABSPATH . 'wp-includes/' . $file . '.php';
@@ -166,7 +153,7 @@ final class ICE_Loader extends ICE_Base
 	 *
 	 * @param string $file,... An unlimited number of files to load
 	 */
-	public function load_wpadmin_lib()
+	final public static function load_wpadmin_lib()
 	{
 		foreach( func_get_args() as $file ) {
 			require_once ABSPATH . 'wp-admin/includes/' . $file . '.php';
