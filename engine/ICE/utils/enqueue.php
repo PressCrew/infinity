@@ -234,11 +234,6 @@ final class ICE_Enqueue extends ICE_Base
 			'ui.css',
 			array( 'jquery-juicy' )
 		);
-		
-		$this->register_style(
-			'ice-colorpicker',
-			'colorpicker.css'
-		);
 
 		do_action('ice_init_styles');
 		do_action('ice_register_styles');
@@ -279,11 +274,9 @@ final class ICE_Enqueue extends ICE_Base
 		$this->register_script(
 			'webfont', 'webfont.js' );
 		$this->register_script(
-			'ice-colorpicker', 'colorpicker.js', array('jquery') );
-		$this->register_script(
 			'jquery-ui-nestedsortable', 'jquery.ui.nestedSortable.js', array('jquery', 'jquery-ui-sortable') );
 		$this->register_script(
-			'ice-global', 'global.js', array('ice-colorpicker') );
+			'ice-global', 'global.js' );
 		$this->register_script(
 			'ice-slider', 'slider.js', array('ice-global', 'jquery-ui-slider') );
 		$this->register_script(

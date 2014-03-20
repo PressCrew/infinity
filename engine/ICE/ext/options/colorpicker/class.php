@@ -26,10 +26,7 @@ class ICE_Ext_Option_Colorpicker
 	{
 		parent::init_admin_styles();
 
-		// inject admin styles
-		$this->style()
-			->inject( 'admin', 'admin.css' )
-			->add_dep( 'admin', 'ice-colorpicker' );
+		wp_enqueue_style( 'wp-color-picker' );
 	}
 
 	/**
@@ -38,10 +35,7 @@ class ICE_Ext_Option_Colorpicker
 	{
 		parent::init_admin_scripts();
 
-		// inject admin script
-		$this->script()
-			->inject( 'wrapper', 'wrapper.js' )
-			->add_dep( 'wrapper', 'ice-colorpicker' );
+		wp_enqueue_script( 'wp-color-picker' );
 	}
 
 }

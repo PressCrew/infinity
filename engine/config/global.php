@@ -86,8 +86,7 @@ $global['style'] = array(
 // eg. 'handle' => array( 'foo', 'bar', 'baz' )
 $global['style_depends'] = array(
 	'cpanel' => array(
-		'ice-ui',
-		'ice-colorpicker'
+		'ice-ui'
 	)
 );
 
