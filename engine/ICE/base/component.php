@@ -208,24 +208,26 @@ abstract class ICE_Component
 
 	/**
 	 * @param string $name Option name may only contain alphanumeric characters as well as the underscore for use as a word separator.
-	 * @param string $type The type (component extension) of this component
+	 * @param array $settings The settings of this component
 	 * @param ICE_Policy $policy The policy to apply to this component
 	 */
-	final public function __construct( $name, $type, $policy )
+	final public function __construct( $name, $settings, $policy )
 	{
 		// check requirements
 		if ( false === $this->check_reqs() ) {
 			// can't construct object, external requirements are missing or broken
 			throw new ICE_Missing_Reqs_Exception(
-				sprintf( 'Cannot construct the "%s" %s component: requirements check failed', $name, $type ) );
+				sprintf( 'Cannot construct the "%s" %s component: requirements check failed', $name, $settings['type'] ) );
 		}
 
 		// apply policy
 		$this->policy( $policy );
 
+		// import settings FIRST so private properties are overwritten
+		$this->import_settings( $settings );
+
 		// init required directives
 		$this->name = $this->validate_name( $name );
-		$this->type = $type;
 
 		// the "atypical name" is unique across all components
 		$this->aname = $this->format_aname( $this->name );
@@ -434,7 +436,7 @@ abstract class ICE_Component
 	 *
 	 * @param array $settings
 	 */
-	final public function import_settings( $settings )
+	private function import_settings( $settings )
 	{
 		// is a feature set?
 		if ( isset( $settings['feature'] ) ) {
@@ -447,18 +449,10 @@ abstract class ICE_Component
 			}
 		}
 
-		// do not allow overwriting these private settings
-		unset(
-			$settings['aname'],
-			$settings['hname'],
-			$settings['name'],
-			$settings['type']
-		);
-
 		// loop config
 		foreach ( $settings as $name => $value ) {
-			// does property name start with two underscores?
-			if ( '__' === $name[0] . $name[1] ) {
+			// does property name start with an underscore?
+			if ( '_' === $name[0] ) {
 				// yes, ignore it
 				continue;
 			}
@@ -468,7 +462,7 @@ abstract class ICE_Component
 				$this->$name = $value;
 			} else {
 				// property doesn't exist
-				throw new UnexpectedValueException(
+				throw new OutOfBoundsException (
 					sprintf(
 						__( 'The "%s" property does not exist in the "%s" class.', 'infinity' ),
 						$name,

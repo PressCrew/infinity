@@ -49,11 +49,7 @@ abstract class ICE_Factory extends ICE_Componentable
 		// try to create new component
 		try {
 			// construct it
-			$component = new $class_name( $name, $settings['type'], $this->policy() );
-			// push settings to component
-			$component->import_settings( $settings );
-			// return it
-			return $component;
+			return new $class_name( $name, $settings, $this->policy() );
 		// catch missing reqs exception
 		} catch ( ICE_Missing_Reqs_Exception $e ) {
 			// failed to create component due to missing reqs
