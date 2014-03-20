@@ -713,7 +713,8 @@ abstract class ICE_Component
 					$this->name,
 					ICE_Files::theme_file_to_url( $path ),
 					$this->script_depends,
-					INFINITY_VERSION
+					INFINITY_VERSION,
+					true
 				);
 			}
 		}

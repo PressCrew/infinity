@@ -24,7 +24,7 @@
 
 <script type="text/javascript">
 //<![CDATA[
-	(function($){
+	jQuery(document).ready(function($){
 		var options = {};
 		// add application options
 		options.jsonUrl = '<?php print $webfont_url ?>';
@@ -36,6 +36,6 @@
 		options.labelSubset = '<?php _e( 'Script', 'infinity' ) ?>';
 		// add font picker
 		$('div#<?php $this->render_id('toolbar') ?>').fontpicker(options);
-	})(jQuery);
+	});
 //]]>
 </script>

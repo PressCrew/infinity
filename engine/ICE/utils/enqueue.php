@@ -177,14 +177,15 @@ final class ICE_Enqueue extends ICE_Base
 	 * @param string $src
 	 * @param array $deps
 	 */
-	private function register_script( $handle, $src, $deps = false )
+	private function register_script( $handle, $src, $deps = array(), $ver = false, $in_footer = false )
 	{
 		return
 			wp_register_script(
 				$handle,
 				sprintf( '%s/%s', ICE_JS_URL, $src ),
 				$deps,
-				ICE_VERSION
+				$ver,
+				$in_footer
 			);
 	}
 
@@ -260,39 +261,39 @@ final class ICE_Enqueue extends ICE_Base
 		
 		// register popular jQuery plugins
 		$this->register_script(
-			'jquery-cookie', 'jquery.kookie.js', array('jquery') );
+			'jquery-cookie', 'jquery.kookie.js', array('jquery'), ICE_VERSION, true );
 		$this->register_script(
-			'jquery-fitvids', 'jquery.fitvids.js', array('jquery') );
+			'jquery-fitvids', 'jquery.fitvids.js', array('jquery'), '1.0', true );
 		$this->register_script(
-			'jquery-mobilemenu', 'jquery.mobilemenu.js', array('jquery') );
+			'jquery-mobilemenu', 'jquery.mobilemenu.js', array('jquery'), ICE_VERSION, true );
 		$this->register_script(
-			'jquery-transit', 'jquery.transit.min.js', array('jquery') );
+			'jquery-transit', 'jquery.transit.min.js', array('jquery'), ICE_VERSION, true );
 
 		// register default scripts
 		$this->register_script(
-			'modernizr-custom', 'modernizr-custom.js' );
+			'modernizr-custom', 'modernizr-custom.js', array(), '2.6.1', false );
 		$this->register_script(
-			'webfont', 'webfont.js' );
+			'webfont', 'webfont.js', array(), ICE_VERSION, true );
 		$this->register_script(
-			'jquery-ui-nestedsortable', 'jquery.ui.nestedSortable.js', array('jquery', 'jquery-ui-sortable') );
+			'jquery-ui-nestedsortable', 'jquery.ui.nestedSortable.js', array('jquery', 'jquery-ui-sortable'), '1.3.4', true );
 		$this->register_script(
-			'ice-global', 'global.js' );
+			'ice-global', 'global.js', array(), ICE_VERSION, true );
 		$this->register_script(
-			'ice-slider', 'slider.js', array('ice-global', 'jquery-ui-slider') );
+			'ice-slider', 'slider.js', array('ice-global', 'jquery-ui-slider'), ICE_VERSION, true );
 		$this->register_script(
-			'ice-scrollpane', 'scrollpane.js', array('ice-global', 'jquery-ui-slider') );
+			'ice-scrollpane', 'scrollpane.js', array('ice-global', 'jquery-ui-slider'), ICE_VERSION, true );
 		$this->register_script(
-			'jquery-juicy-buttonmenu', 'juicy/jquery.juicy.buttonmenu.js', array('jquery-ui-button','jquery-ui-menu') );
+			'jquery-juicy-buttonmenu', 'juicy/jquery.juicy.buttonmenu.js', array('jquery-ui-button','jquery-ui-menu'), ICE_VERSION, true );
 		$this->register_script(
-			'jquery-juicy-buttonselect', 'juicy/jquery.juicy.buttonselect.js', array('jquery-ui-button') );
+			'jquery-juicy-buttonselect', 'juicy/jquery.juicy.buttonselect.js', array('jquery-ui-button'), ICE_VERSION, true );
 		$this->register_script(
-			'jquery-juicy-flashmesg', 'juicy/jquery.juicy.flashmesg.js', array('jquery-ui-widget') );
+			'jquery-juicy-flashmesg', 'juicy/jquery.juicy.flashmesg.js', array('jquery-ui-widget'), ICE_VERSION, true );
 		$this->register_script(
-			'jquery-juicy-titlebox', 'juicy/jquery.juicy.titlebox.js', array('jquery-ui-widget') );
+			'jquery-juicy-titlebox', 'juicy/jquery.juicy.titlebox.js', array('jquery-ui-widget'), ICE_VERSION, true );
 		$this->register_script(
-			'jquery-juicy-toolbar', 'juicy/jquery.juicy.toolbar.js', array('jquery-ui-widget','jquery-ui-button') );
+			'jquery-juicy-toolbar', 'juicy/jquery.juicy.toolbar.js', array('jquery-ui-widget','jquery-ui-button'), ICE_VERSION, true );
 		$this->register_script(
-			'jquery-juicy-fontfilter', 'juicy/jquery.juicy.fontfilter.js', array('jquery-juicy-titlebox','jquery-juicy-buttonselect','ice-slider','webfont') );
+			'jquery-juicy-fontfilter', 'juicy/jquery.juicy.fontfilter.js', array('jquery-juicy-titlebox','jquery-juicy-buttonselect','ice-slider','webfont'), ICE_VERSION, true );
 
 		// localize
 		$this->localize_scripts();

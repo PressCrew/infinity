@@ -7,7 +7,7 @@ ICE_Loader::load( 'utils/webfont' );
 
 <script type="text/javascript">
 //<![CDATA[
-	(function($){
+	jQuery(document).ready(function($){
 		var options = {};
 		// add application options
 		options.jsonUrl = '<?php print ICE_Webfont::instance(0)->get_property( 'url' ) ?>';
@@ -24,6 +24,6 @@ ICE_Loader::load( 'utils/webfont' );
 			};
 		// add font picker
 		$('div#typography-ff').fontfilter(options);
-	})(jQuery);
+	});
 //]]>
 </script>

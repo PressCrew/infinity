@@ -148,8 +148,8 @@ function infinity_grid_fallback()
 			// render script element ?>
 			<script type="text/javascript">
 			//<![CDATA[
-				jQuery(document).ready(function() {
-					jQuery('#content').addClass('column <?php print $size ?>');
+				jQuery(document).ready(function($) {
+					$('#content').addClass('column <?php print $size ?>');
 				});
 			//]]>
 			</script><?php
@@ -193,8 +193,8 @@ function infinity_sidebar_left_fallback()
 		// render grid fallback script ?>
 		<script type="text/javascript">
 		//<![CDATA[
-			jQuery(document).ready(function() {
-				jQuery('#content').addClass('sidebar-left');
+			jQuery(document).ready(function($) {
+				$('#content').addClass('sidebar-left');
 			});
 		//]]>
 		</script><?php

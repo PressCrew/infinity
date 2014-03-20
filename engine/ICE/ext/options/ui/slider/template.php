@@ -40,16 +40,17 @@
 
 <script type="text/javascript">
 //<![CDATA[
-	jQuery(function(){
-		jQuery('#<?php $this->render_id('widget') ?>')
-			.iceEasySlider(
-				<?php print $options ?>)
-			.iceEasySlider(
-				'updateInput',
-				'#<?php $this->render_id('widget') ?> input')
-			.iceEasySlider(
-				'updateDisplay',
-				'#<?php $this->render_id() ?> span.ice-content');
-	});
+jQuery(document).ready(function($){
+	// setup slider
+	$('#<?php $this->render_id('widget') ?>')
+		.iceEasySlider(
+			<?php print $options ?>)
+		.iceEasySlider(
+			'updateInput',
+			'#<?php $this->render_id('widget') ?> input')
+		.iceEasySlider(
+			'updateDisplay',
+			'#<?php $this->render_id() ?> span.ice-content');
+});
 //]]>
 </script>

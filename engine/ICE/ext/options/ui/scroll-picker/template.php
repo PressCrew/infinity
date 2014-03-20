@@ -33,7 +33,7 @@
 
 <script type="text/javascript">
 //<![CDATA[
-	(function($){
+	jQuery(document).ready(function($){
 		// the input
 		var input = $('input[name=<?php $this->render_name() ?>]');
 		// options from component
@@ -59,7 +59,7 @@
 			}
 		};
 		// add scroll pane
-		jQuery('div#<?php $this->render_id('widget') ?>').iceEasyScrollPane(options);
-	})(jQuery);
+		$('div#<?php $this->render_id('widget') ?>').iceEasyScrollPane(options);
+	});
 //]]>
 </script>

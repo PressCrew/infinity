@@ -512,7 +512,9 @@ class ICE_Scheme_Enqueue extends ICE_Base
 		wp_register_script(
 			$handle,
 			$config_map->item_at(self::TRIGGER_PATH),
-			$deps
+			$deps,
+			false,
+			true
 		);
 	}
 
