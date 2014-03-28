@@ -74,6 +74,16 @@ abstract class ICE_Section extends ICE_Component
 	}
 
 	/**
+	 * Return array containing all components which have been added.
+	 *
+	 * @return array
+	 */
+	public function get_components()
+	{
+		return $this->__components__;
+	}
+
+	/**
 	 * Render all components
 	 */
 	public function render_components()
