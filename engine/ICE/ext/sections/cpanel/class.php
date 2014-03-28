@@ -1,6 +1,6 @@
 <?php
 /**
- * ICE API: section extensions, default section class file
+ * ICE API: section extensions, cpanel section class file
  *
  * @author Marshall Sorenson <marshall@presscrew.com>
  * @link http://infinity.presscrew.com/
@@ -12,13 +12,21 @@
  */
 
 /**
- * Default section
+ * Cpanel section
  *
  * @package ICE-extensions
  * @subpackage sections
  */
-class ICE_Ext_Section_Default
+class ICE_Ext_Section_Cpanel
 	extends ICE_Section
 {
-	// nothing special yet
+	/**
+	 */
+	public function init_admin_styles()
+	{
+		parent::init_admin_styles();
+
+		// inject admin styles
+		$this->style()->inject( 'admin', 'admin.css' );
+	}
 }

@@ -12,6 +12,7 @@
 $this->register(
 	'general',
 	array(
+		'type' => 'cpanel',
 		'title' => 'General'
 	)
 );
@@ -19,6 +20,7 @@ $this->register(
 $this->register(
 	'global',
 	array(
+		'type' => 'cpanel',
 		'title' => 'Global'
 	)
 );
@@ -26,6 +28,7 @@ $this->register(
 $this->register(
 	'custom',
 	array(
+		'type' => 'cpanel',
 		'title' => 'Custom'
 	)
 );
@@ -33,6 +36,7 @@ $this->register(
 $this->register(
 	'layout',
 	array(
+		'type' => 'cpanel',
 		'title' => 'Layout'
 	)
 );
@@ -40,6 +44,7 @@ $this->register(
 $this->register(
 	'header',
 	array(
+		'type' => 'cpanel',
 		'title' => 'Header'
 	)
 );
@@ -47,6 +52,7 @@ $this->register(
 $this->register(
 	'menus',
 	array(
+		'type' => 'cpanel',
 		'title' => 'Menus'
 	)
 );
@@ -54,6 +60,7 @@ $this->register(
 $this->register(
 	'menus-top',
 	array(
+		'type' => 'cpanel',
 		'parent' => 'menus',
 		'title' => 'Above Header'
 	)
@@ -62,6 +69,7 @@ $this->register(
 $this->register(
 	'menus-main',
 	array(
+		'type' => 'cpanel',
 		'parent' => 'menus',
 		'title' => 'Inside Header'
 	)
@@ -70,6 +78,7 @@ $this->register(
 $this->register(
 	'menus-sub',
 	array(
+		'type' => 'cpanel',
 		'parent' => 'menus',
 		'title' => 'Below Header'
 	)
@@ -78,6 +87,7 @@ $this->register(
 $this->register(
 	'content',
 	array(
+		'type' => 'cpanel',
 		'title' => 'Content'
 	)
 );
@@ -85,6 +95,7 @@ $this->register(
 $this->register(
 	'sidebar',
 	array(
+		'type' => 'cpanel',
 		'title' => 'Sidebar'
 	)
 );
@@ -92,6 +103,7 @@ $this->register(
 $this->register(
 	'widgets',
 	array(
+		'type' => 'cpanel',
 		'title' => 'Widgets'
 	)
 );
@@ -99,6 +111,7 @@ $this->register(
 $this->register(
 	'footer',
 	array(
+		'type' => 'cpanel',
 		'title' => 'Footer'
 	)
 );
@@ -106,6 +119,7 @@ $this->register(
 $this->register(
 	'buddypress',
 	array(
+		'type' => 'cpanel',
 		'title' => 'BuddyPress'
 	)
 );
@@ -113,6 +127,7 @@ $this->register(
 $this->register(
 	'whitelabel',
 	array(
+		'type' => 'cpanel',
 		'title' => 'White Label'
 	)
 );
@@ -120,6 +135,7 @@ $this->register(
 $this->register(
 	'gravatars',
 	array(
+		'type' => 'cpanel',
 		'title' => 'Post Gravatars'
 	)
 );
@@ -129,6 +145,7 @@ $this->register(
 $this->register(
 	'default',
 	array(
+		'type' => 'cpanel',
 		'title' => 'Other'
 	)
 );

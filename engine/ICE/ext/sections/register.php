@@ -18,3 +18,11 @@ $this->register(
 		'template' => self::DEFAULT_TPL
 	)
 );
+
+$this->register(
+	'cpanel',
+	array(
+		'class' => 'ICE_Ext_Section_Cpanel',
+		'template' => self::DEFAULT_TPL
+	)
+);

@@ -1,6 +1,6 @@
 <?php
 /**
- * ICE API: section extensions, default section template file
+ * ICE API: section extensions, cpanel section template file
  *
  * @author Marshall Sorenson <marshall@presscrew.com>
  * @link http://infinity.presscrew.com/
@@ -14,5 +14,10 @@
 /* @var $this ICE_Section_Renderer */
 ?>
 <div <?php $this->render_attrs() ?>>
-	<?php $this->component()->render_components() ?>
+	<div class="ui-widget-header ui-state-active ice-title <?php $this->render_class_title() ?>">
+		<?php $this->render_title(); ?> <?php _e( 'Options', 'infinity' ); ?>
+	</div>
+	<div class="ui-widget-content ice-content <?php $this->render_class_content() ?>">
+		<?php $this->component()->render_components() ?>
+	</div>
 </div>
