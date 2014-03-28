@@ -344,4 +344,15 @@ class ICE_Extensions
 	{
 		return $this->resolve_file( $ext, self::KEY_TPL, self::DEFAULT_TPL );
 	}
+
+	/**
+	 * Get parent template path for extension type.
+	 *
+	 * @param string $ext
+	 * @return string
+	 */
+	public function get_parent_template_path( $ext )
+	{
+		return $this->resolve_parent_file( $ext, self::KEY_TPL, self::DEFAULT_TPL );
+	}
 }
