@@ -91,27 +91,7 @@ class Infinity_Screens_Registry extends ICE_Screen_Registry
  */
 class Infinity_Screen_Factory extends ICE_Screen_Factory
 {
-	/**
-	 */
-	public function create( $name, $config )
-	{
-		// DO NOT TRY THIS YOURSELF
-		// @todo this is a temporary solution until the configuration strategy is improved
-
-		// call parent to create component
-		$component = parent::create( $name, $config );
-
-		// try to get URL property
-		$url = $component->get_property( 'url' );
-
-		// is url set?
-		if ( empty( $url ) ) {
-			// nope, set url
-			$component->set_property( 'url', INFINITY_AJAX_URL . infinity_screens_route( 'cpanel', $component->get_property( 'name' ) ) );
-		}
-
-		return $component;
-	}
+	// nothing custom yet
 }
 
 /**

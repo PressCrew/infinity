@@ -36,25 +36,12 @@ abstract class ICE_Screen extends ICE_Component
 	protected $url;
 
 	/**
-	 * @todo need a better way to set URL from public scope.
-	 */
-	protected function set_property( $name, $value )
-	{
-		switch ( $name ) {
-			case 'url':
-				return $this->$name = $value;
-			default:
-				return parent::set_property( $name, $value );
-		}
-	}
-
-	/**
 	 */
 	public function get_property( $name )
 	{
 		switch ( $name ) {
-			case 'url':
 			case 'target':
+			case 'url':
 				return $this->$name;
 			default:
 				return parent::get_property( $name );
