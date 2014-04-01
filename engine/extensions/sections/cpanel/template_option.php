@@ -47,9 +47,9 @@ $renderer->render_begin( 'infinity-cpanel-options-single' );
 	<div class="infinity-docs"><?php $renderer->render_documentation( ICE_Scheme::instance()->theme_documentation_dirs() ) ?></div>
 </div>
 <?php endif; ?>
-<?php if ( is_admin() && 1 == constant( 'INFINITY_DEV_MODE' ) ): ?>
+<?php if ( true == INFINITY_DEV_MODE ): ?>
 <div id="<?php $renderer->render_name() ?>-tabs-3">
-	<p><?php $renderer->render_sample_code() ?></p>
+	<p><?php include 'template_sample_code.php'; ?></p>
 </div>
 <?php endif;
 

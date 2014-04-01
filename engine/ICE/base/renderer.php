@@ -304,13 +304,6 @@ abstract class ICE_Renderer extends ICE_Componentable
 	}
 
 	/**
-	 * Render sample code for this component
-	 * 
-	 * @todo this should be defined by an interface
-	 */
-	public function render_sample_code() {}
-
-	/**
 	 * Load the component template
 	 */
 	final public function load_template()

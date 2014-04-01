@@ -159,10 +159,13 @@ abstract class ICE_Option_Renderer extends ICE_Renderer
 	 */
 	public function render_save_one( $class = null )
 	{
-		// begin rendering ?>
-		<a class="<?php $this->merge_classes('ice-options-save', 'ice-options-save-one', $class) ?>" href="#<?php $this->render_name() ?>">
-			<?php _e( 'Save', 'infinity' ); ?>
-		</a><?php
+		// check scheme setting
+		if ( ICE_Scheme::instance()->settings()->get_value( ICE_Scheme::SETTING_OPT_SAVE_SINGLE ) ):
+			// begin rendering ?>
+			<a class="<?php $this->merge_classes('ice-options-save', 'ice-options-save-one', $class) ?>" href="#<?php $this->render_name() ?>">
+				<?php _e( 'Save', 'infinity' ); ?>
+			</a><?php
+		endif;
 	}
 
 	/**
@@ -176,6 +179,21 @@ abstract class ICE_Option_Renderer extends ICE_Renderer
 		<a class="<?php $this->merge_classes('ice-options-save', 'ice-options-reset-one', $class) ?>" href="#<?php $this->render_name() ?>">
 			<?php _e( 'Reset', 'infinity' ); ?>
 		</a><?php
+	}
+
+	/**
+	 * Renders option save buttons
+	 */
+	final public function render_buttons()
+	{
+		// save all
+		$this->render_save_all();
+
+		// save one
+		$this->render_save_one();
+
+		// reset one
+		$this->render_reset_one();
 	}
 
 	/**

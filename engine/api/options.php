@@ -71,27 +71,8 @@ class Infinity_Options_Policy extends ICE_Option_Policy
  */
 class Infinity_Options_Registry extends ICE_Option_Registry
 {
-	/**
-	 * Set up form handler
-	 *
-	 * @internal
-	 * @return void
-	 */
-	static public function init_form_processing()
-	{
-		if ( empty( $_POST[Infinity_Options_Renderer::FIELD_MANIFEST] ) ) {
-			return;
-		}
-
-		// add form processing
-		if ( defined('DOING_AJAX') ) {
-			add_action( 'wp_ajax_infinity_options_update', array( Infinity_Options_Policy::instance()->registry(), 'process_form_ajax' ) );
-		} else {
-			add_action( 'load-appearance_page_' . INFINITY_ADMIN_PAGE, array( Infinity_Options_Policy::instance()->registry(), 'process_form' ) );
-		}
-	}
+	// nothing custom yet
 }
-add_action( 'wp_loaded', array( 'Infinity_Options_Registry', 'init_form_processing' ) );
 
 /**
  * Infinity Theme: option factory
@@ -112,63 +93,7 @@ class Infinity_Option_Factory extends ICE_Option_Factory
  */
 class Infinity_Options_Renderer extends ICE_Option_Renderer
 {
-	/**
-	 * Returns true if single save button should be displayed
-	 *
-	 * @return boolean
-	 */
-	private function do_save_single_button()
-	{
-		return ( infinity_scheme_setting( ICE_Scheme::SETTING_OPT_SAVE_SINGLE ) );
-	}
-
-	/**
-	 * Override render option method to customize output
-	 */
-	protected function render_output()
-	{
-		// load option block template
-		$this->load_dash_template( 'block' );
-	}
-
-	/**
-	 * Renders option save buttons
-	 */
-	final public function render_buttons()
-	{
-		// save all
-		$this->render_save_all();
-
-		// save one?
-		if ( $this->do_save_single_button() ) {
-			$this->render_save_one();
-		}
-		
-		$this->render_reset_one();
-	}
-
-	/**
-	 * Render sample code for this option
-	 */
-	final public function render_sample_code()
-	{
-		// load sample code template
-		$this->load_dash_template( 'sample_code' );
-	}
-
-	/**
-	 * Load a dashboard template
-	 *
-	 * @param string $name Template name
-	 */
-	protected function load_dash_template( $name )
-	{
-		// find template
-		$template = infinity_dashboard_locate_template( 'options/' . $name . '.php' );
-
-		// include it
-		include $template;
-	}
+	// nothing custom yet
 }
 
 //
@@ -583,3 +508,26 @@ function infinity_options_render_options_screen()
 
 }
 add_action( 'wp_ajax_infinity_options_screen', 'infinity_options_render_options_screen' );
+
+/**
+ * Initialize options form handling.
+ *
+ * @package Infinity-api
+ * @subpackage options
+ */
+function infinity_options_init_form_processing()
+{
+	// is field manifest set in POST?
+	if ( empty( $_POST[ Infinity_Options_Renderer::FIELD_MANIFEST ] ) ) {
+		// nope, just return
+		return;
+	}
+
+	// add form processing
+	if ( defined( 'DOING_AJAX' ) ) {
+		add_action( 'wp_ajax_infinity_options_update', array( Infinity_Options_Policy::instance()->registry(), 'process_form_ajax' ) );
+	} else {
+		add_action( 'load-appearance_page_' . INFINITY_ADMIN_PAGE, array( Infinity_Options_Policy::instance()->registry(), 'process_form' ) );
+	}
+}
+add_action( 'wp_loaded', 'infinity_options_init_form_processing' );
