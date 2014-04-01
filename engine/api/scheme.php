@@ -31,12 +31,12 @@ function infinity_scheme_init()
 		->init( INFINITY_NAME );
 
 	// initialize policies (the order is important here)
-	Infinity_Features_Policy::instance();
-	Infinity_Sections_Policy::instance();
-	Infinity_Options_Policy::instance();
-	Infinity_Screens_Policy::instance();
-	Infinity_Widgets_Policy::instance();
-	Infinity_Shortcodes_Policy::instance();
+	ICE_Feature_Policy::instance();
+	ICE_Section_Policy::instance();
+	ICE_Option_Policy::instance();
+	ICE_Screen_Policy::instance();
+	ICE_Widget_Policy::instance();
+	ICE_Shortcode_Policy::instance();
 
 	do_action( 'infinity_scheme_init' );
 
@@ -52,12 +52,12 @@ function infinity_scheme_init()
 function infinity_scheme_finalize()
 {
 	// finalize registries
-	Infinity_Features_Policy::instance()->registry()->finalize();
-	Infinity_Sections_Policy::instance()->registry()->finalize();
-	Infinity_Options_Policy::instance()->registry()->finalize();
-	Infinity_Screens_Policy::instance()->registry()->finalize();
-	Infinity_Widgets_Policy::instance()->registry()->finalize();
-	Infinity_Shortcodes_Policy::instance()->registry()->finalize();
+	ICE_Feature_Policy::instance()->registry()->finalize();
+	ICE_Section_Policy::instance()->registry()->finalize();
+	ICE_Option_Policy::instance()->registry()->finalize();
+	ICE_Screen_Policy::instance()->registry()->finalize();
+	ICE_Widget_Policy::instance()->registry()->finalize();
+	ICE_Shortcode_Policy::instance()->registry()->finalize();
 
 	return true;
 }

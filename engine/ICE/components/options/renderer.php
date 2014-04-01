@@ -19,7 +19,7 @@ ICE_Loader::load( 'base/renderer' );
  * @package ICE-components
  * @subpackage options
  */
-abstract class ICE_Option_Renderer extends ICE_Renderer
+class ICE_Option_Renderer extends ICE_Renderer
 {
 	/**
 	 * The field which contains all of the options which were rendered

@@ -22,13 +22,46 @@ ICE_Loader::load( 'base/policy' );
  * @package ICE-components
  * @subpackage features
  */
-abstract class ICE_Feature_Policy extends ICE_Policy
+class ICE_Feature_Policy extends ICE_Policy
 {
+	/**
+	 * @return ICE_Feature_Policy
+	 */
+	static public function instance()
+	{
+		self::$calling_class = __CLASS__;
+		return parent::instance();
+	}
+
 	/**
 	 * @return string
 	 */
 	public function get_handle( $plural = true )
 	{
 		return ( $plural ) ? 'features' : 'feature';
+	}
+
+	/**
+	 * @return ICE_Feature_Registry
+	 */
+	final public function new_registry()
+	{
+		return new ICE_Feature_Registry();
+	}
+
+	/**
+	 * @return ICE_Feature_Factory
+	 */
+	final public function new_factory()
+	{
+		return new ICE_Feature_Factory();
+	}
+
+	/**
+	 * @return ICE_Feature_Renderer
+	 */
+	final public function new_renderer()
+	{
+		return new ICE_Feature_Renderer();
 	}
 }

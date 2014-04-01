@@ -22,7 +22,7 @@ ICE_Loader::load(
  * @package ICE-components
  * @subpackage shortcodes
  */
-abstract class ICE_Shortcode_Registry extends ICE_Registry
+class ICE_Shortcode_Registry extends ICE_Registry
 {
 	// nothing custom yet
 }

@@ -19,7 +19,7 @@ ICE_Loader::load( 'base/renderer' );
  * @package ICE-components
  * @subpackage features
  */
-abstract class ICE_Feature_Renderer extends ICE_Renderer
+class ICE_Feature_Renderer extends ICE_Renderer
 {
 	// nothing custom yet
 }

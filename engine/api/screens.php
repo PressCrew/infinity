@@ -29,82 +29,6 @@ define( 'INFINITY_ROUTE_PARAM', 'route' );
  */
 define( 'INFINITY_ROUTE_DELIM', '/' );
 
-/**
- * Infinity Theme: screens policy
- *
- * @package Infinity-api
- * @subpackage screens
- */
-class Infinity_Screens_Policy extends ICE_Screen_Policy
-{
-	/**
-	 * @return ICE_Screen_Policy
-	 */
-	static public function instance()
-	{
-		self::$calling_class = __CLASS__;
-		return parent::instance();
-	}
-	
-	/**
-	 * @return Infinity_Screens_Registry
-	 */
-	final public function new_registry()
-	{
-		return new Infinity_Screens_Registry();
-	}
-
-	/**
-	 * @return Infinity_Screen_Factory
-	 */
-	final public function new_factory()
-	{
-		return new Infinity_Screen_Factory();
-	}
-
-	/**
-	 * @return Infinity_Screens_Renderer
-	 */
-	final public function new_renderer()
-	{
-		return new Infinity_Screens_Renderer();
-	}
-
-}
-
-/**
- * Infinity Theme: screens registry
- *
- * @package Infinity-api
- * @subpackage screens
- */
-class Infinity_Screens_Registry extends ICE_Screen_Registry
-{
-	// nothing custom yet
-}
-
-/**
- * Infinity Theme: section factory
- *
- * @package Infinity-api
- * @subpackage screens
- */
-class Infinity_Screen_Factory extends ICE_Screen_Factory
-{
-	// nothing custom yet
-}
-
-/**
- * Infinity Theme: screens renderer
- *
- * @package Infinity-api
- * @subpackage screens
- */
-class Infinity_Screens_Renderer extends ICE_Screen_Renderer
-{
-	// nothing custom yet
-}
-
 //
 // Helpers
 //
@@ -118,7 +42,7 @@ class Infinity_Screens_Renderer extends ICE_Screen_Renderer
 function infinity_screens_init()
 {
 	// component policy
-	$screens_policy = Infinity_Screens_Policy::instance();
+	$screens_policy = ICE_Screen_Policy::instance();
 
 	// enable component
 	ICE_Scheme::instance()->enable_component( $screens_policy );
@@ -136,10 +60,10 @@ function infinity_screens_init_screen()
 {
 	// init ajax OR screen reqs (not both)
 	if ( defined( 'DOING_AJAX') ) {
-		Infinity_Screens_Policy::instance()->registry()->init_ajax();
+		ICE_Screen_Policy::instance()->registry()->init_ajax();
 		do_action( 'infinity_screens_init_ajax' );
 	} else {
-		Infinity_Screens_Policy::instance()->registry()->init_screen();
+		ICE_Screen_Policy::instance()->registry()->init_screen();
 		do_action( 'infinity_screens_init_screen' );
 	}
 }
@@ -257,5 +181,5 @@ function infinity_screens_route_param( $offset )
  */
 function infinity_screen_fetch( $screen_name )
 {
-	return Infinity_Screens_Policy::instance()->registry()->get( $screen_name );
+	return ICE_Screen_Policy::instance()->registry()->get( $screen_name );
 }

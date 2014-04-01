@@ -19,7 +19,7 @@ ICE_Loader::load( 'base/renderer' );
  * @package ICE-components
  * @subpackage sections
  */
-abstract class ICE_Section_Renderer extends ICE_Renderer
+class ICE_Section_Renderer extends ICE_Renderer
 {
 	/**
 	 * Render the title class

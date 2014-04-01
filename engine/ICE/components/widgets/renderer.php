@@ -19,7 +19,7 @@ ICE_Loader::load( 'base/renderer' );
  * @package ICE-components
  * @subpackage widgets
  */
-abstract class ICE_Widget_Renderer extends ICE_Renderer
+class ICE_Widget_Renderer extends ICE_Renderer
 {
 	// nothing custom yet
 }

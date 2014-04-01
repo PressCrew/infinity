@@ -19,7 +19,7 @@ ICE_Loader::load( 'base/renderer' );
  * @package ICE-components
  * @subpackage shortcodes
  */
-abstract class ICE_Shortcode_Renderer extends ICE_Renderer
+class ICE_Shortcode_Renderer extends ICE_Renderer
 {
 	// nothing custom yet
 }

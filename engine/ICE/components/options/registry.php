@@ -23,7 +23,7 @@ ICE_Loader::load(
  * @package ICE-components
  * @subpackage options
  */
-abstract class ICE_Option_Registry extends ICE_Registry
+class ICE_Option_Registry extends ICE_Registry
 {	
 	/**
 	 * Load option config as a feature option if the "feature" setting is set.

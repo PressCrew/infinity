@@ -22,7 +22,7 @@ ICE_Loader::load( 'base/policy' );
  * @package ICE-components
  * @subpackage options
  */
-abstract class ICE_Option_Policy extends ICE_Policy
+class ICE_Option_Policy extends ICE_Policy
 {
 	/**
 	 * The body class for option overrides
@@ -32,11 +32,44 @@ abstract class ICE_Option_Policy extends ICE_Policy
 	private $body_class = 'theme-option';
 
 	/**
+	 * @return ICE_Option_Policy
+	 */
+	static public function instance()
+	{
+		self::$calling_class = __CLASS__;
+		return parent::instance();
+	}
+
+	/**
 	 * @return string
 	 */
 	public function get_handle( $plural = true )
 	{
 		return ( $plural ) ? 'options' : 'option';
+	}
+
+	/**
+	 * @return ICE_Option_Registry
+	 */
+	final public function new_registry()
+	{
+		return new ICE_Option_Registry();
+	}
+
+	/**
+	 * @return ICE_Option_Factory
+	 */
+	final public function new_factory()
+	{
+		return new ICE_Option_Factory();
+	}
+
+	/**
+	 * @return ICE_Option_Renderer
+	 */
+	final public function new_renderer()
+	{
+		return new ICE_Option_Renderer();
 	}
 
 	/**

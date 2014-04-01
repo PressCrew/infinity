@@ -22,7 +22,7 @@ ICE_Loader::load(
  * @package ICE-components
  * @subpackage widgets
  */
-abstract class ICE_Widget_Registry extends ICE_Registry
+class ICE_Widget_Registry extends ICE_Registry
 {
 	// nothing custom yet
 }

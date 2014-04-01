@@ -22,7 +22,7 @@ ICE_Loader::load(
  * @package ICE-components
  * @subpackage features
  */
-abstract class ICE_Feature_Registry extends ICE_Registry
+class ICE_Feature_Registry extends ICE_Registry
 {
 	/**
 	 * Option name which contains default config.

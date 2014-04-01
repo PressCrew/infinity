@@ -22,13 +22,46 @@ ICE_Loader::load( 'base/policy' );
  * @package ICE-components
  * @subpackage widgets
  */
-abstract class ICE_Widget_Policy extends ICE_Policy
+class ICE_Widget_Policy extends ICE_Policy
 {
+	/**
+	 * @return ICE_Widget_Policy
+	 */
+	static public function instance()
+	{
+		self::$calling_class = __CLASS__;
+		return parent::instance();
+	}
+
 	/**
 	 * @return string
 	 */
 	public function get_handle( $plural = true )
 	{
 		return ( $plural ) ? 'widgets' : 'widget';
+	}
+
+	/**
+	 * @return ICE_Widget_Registry
+	 */
+	final public function new_registry()
+	{
+		return new ICE_Widget_Registry();
+	}
+
+	/**
+	 * @return ICE_Widget_Factory
+	 */
+	final public function new_factory()
+	{
+		return new ICE_Widget_Factory();
+	}
+
+	/**
+	 * @return ICE_Widget_Renderer
+	 */
+	final public function new_renderer()
+	{
+		return new ICE_Widget_Renderer();
 	}
 }

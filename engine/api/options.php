@@ -20,82 +20,6 @@ ICE_Loader::load(
 	'components/options/renderer'
 );
 
-/**
- * Infinity Theme: options policy
- *
- * @package Infinity-api
- * @subpackage options
- */
-class Infinity_Options_Policy extends ICE_Option_Policy
-{
-	/**
-	 * @return ICE_Option_Policy
-	 */
-	static public function instance()
-	{
-		self::$calling_class = __CLASS__;
-		return parent::instance();
-	}
-	
-	/**
-	 * @return Infinity_Options_Registry
-	 */
-	final public function new_registry()
-	{
-		return new Infinity_Options_Registry();
-	}
-
-	/**
-	 * @return Infinity_Option_Factory
-	 */
-	final public function new_factory()
-	{
-		return new Infinity_Option_Factory();
-	}
-
-	/**
-	 * @return Infinity_Options_Renderer
-	 */
-	final public function new_renderer()
-	{
-		return new Infinity_Options_Renderer();
-	}
-
-}
-
-/**
- * Infinity Theme: options registry
- *
- * @package Infinity-api
- * @subpackage options
- */
-class Infinity_Options_Registry extends ICE_Option_Registry
-{
-	// nothing custom yet
-}
-
-/**
- * Infinity Theme: option factory
- *
- * @package Infinity-api
- * @subpackage options
- */
-class Infinity_Option_Factory extends ICE_Option_Factory
-{
-	// nothing custom yet
-}
-
-/**
- * Infinity Theme: options renderer
- *
- * @package Infinity-api
- * @subpackage options
- */
-class Infinity_Options_Renderer extends ICE_Option_Renderer
-{
-	// nothing custom yet
-}
-
 //
 // Helpers
 //
@@ -109,7 +33,7 @@ class Infinity_Options_Renderer extends ICE_Option_Renderer
 function infinity_options_init()
 {
 	// component policy
-	$options_policy = Infinity_Options_Policy::instance();
+	$options_policy = ICE_Option_Policy::instance();
 
 	// enable component
 	ICE_Scheme::instance()->enable_component( $options_policy );
@@ -127,10 +51,10 @@ function infinity_options_init_screen()
 {
 	// init ajax OR screen reqs (not both)
 	if ( defined( 'DOING_AJAX') ) {
-		Infinity_Options_Policy::instance()->registry()->init_ajax();
+		ICE_Option_Policy::instance()->registry()->init_ajax();
 		do_action( 'infinity_options_init_ajax' );
 	} else {
-		Infinity_Options_Policy::instance()->registry()->init_screen();
+		ICE_Option_Policy::instance()->registry()->init_screen();
 		do_action( 'infinity_options_init_screen' );
 	}
 }
@@ -160,7 +84,7 @@ function infinity_option( $option_name, $output = true )
  */
 function infinity_option_image_src( $option_name, $size = 'thumbnail' )
 {
-	return Infinity_Options_Policy::instance()->registry()->get( $option_name )->get_image_src( $size );
+	return ICE_Option_Policy::instance()->registry()->get( $option_name )->get_image_src( $size );
 }
 
 /**
@@ -174,7 +98,7 @@ function infinity_option_image_src( $option_name, $size = 'thumbnail' )
  */
 function infinity_option_image_url( $option_name, $size = 'thumbnail' )
 {
-	return Infinity_Options_Policy::instance()->registry()->get( $option_name )->get_image_url( $size );
+	return ICE_Option_Policy::instance()->registry()->get( $option_name )->get_image_url( $size );
 }
 
 /**
@@ -187,7 +111,7 @@ function infinity_option_image_url( $option_name, $size = 'thumbnail' )
  */
 function infinity_option_fetch( $option_name )
 {
-	return Infinity_Options_Policy::instance()->registry()->get( $option_name );
+	return ICE_Option_Policy::instance()->registry()->get( $option_name );
 }
 
 /**
@@ -374,7 +298,7 @@ function infinity_options_render_menu( $args = null )
 	}
 
 	// get section registriy for this theme
-	$sections_registry = Infinity_Sections_Policy::instance()->registry();
+	$sections_registry = ICE_Section_Policy::instance()->registry();
 
 	// get only "root" sections
 	$sections = $sections_registry->get_roots( $get_sections );
@@ -396,8 +320,8 @@ function infinity_options_render_menu( $args = null )
 function infinity_options_render_menu_section( ICE_Section $section )
 {
 	// get registries for this theme
-	$sections_registry = Infinity_Sections_Policy::instance()->registry();
-	$options_registry = Infinity_Options_Policy::instance()->registry();
+	$sections_registry = ICE_Section_Policy::instance()->registry();
+	$options_registry = ICE_Option_Policy::instance()->registry();
 	
 	// get children of this section
 	$children = $sections_registry->get_children( $section );
@@ -466,14 +390,14 @@ function infinity_options_render_options_screen()
 	$options = array();
 
 	// look up section
-	$section = Infinity_Sections_Policy::instance()->registry()->get( $load_section );
+	$section = ICE_Section_Policy::instance()->registry()->get( $load_section );
 
 	// did we get a valid section?
 	if ( $section instanceof ICE_Section ) {
 		// load specific option?
 		if ( $load_option ) {
 			// look up the single option
-			$option = Infinity_Options_Policy::instance()->registry()->get( $load_option );
+			$option = ICE_Option_Policy::instance()->registry()->get( $load_option );
 			// did we get a valid option?
 			if ( $option instanceof ICE_Option ) {
 				// add it to options to array
@@ -481,7 +405,7 @@ function infinity_options_render_options_screen()
 			}
 		} else {
 			// get all options for the section
-			$options = Infinity_Options_Policy::instance()->registry()->get_menu_options( $section );
+			$options = ICE_Option_Policy::instance()->registry()->get_menu_options( $section );
 		}
 	}
 
@@ -518,16 +442,16 @@ add_action( 'wp_ajax_infinity_options_screen', 'infinity_options_render_options_
 function infinity_options_init_form_processing()
 {
 	// is field manifest set in POST?
-	if ( empty( $_POST[ Infinity_Options_Renderer::FIELD_MANIFEST ] ) ) {
+	if ( empty( $_POST[ ICE_Option_Renderer::FIELD_MANIFEST ] ) ) {
 		// nope, just return
 		return;
 	}
 
 	// add form processing
 	if ( defined( 'DOING_AJAX' ) ) {
-		add_action( 'wp_ajax_infinity_options_update', array( Infinity_Options_Policy::instance()->registry(), 'process_form_ajax' ) );
+		add_action( 'wp_ajax_infinity_options_update', array( ICE_Option_Policy::instance()->registry(), 'process_form_ajax' ) );
 	} else {
-		add_action( 'load-appearance_page_' . INFINITY_ADMIN_PAGE, array( Infinity_Options_Policy::instance()->registry(), 'process_form' ) );
+		add_action( 'load-appearance_page_' . INFINITY_ADMIN_PAGE, array( ICE_Option_Policy::instance()->registry(), 'process_form' ) );
 	}
 }
 add_action( 'wp_loaded', 'infinity_options_init_form_processing' );

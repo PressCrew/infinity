@@ -19,82 +19,6 @@ ICE_Loader::load(
 	'components/widgets/renderer'
 );
 
-/**
- * Infinity Theme: widgets policy
- *
- * @package Infinity-api
- * @subpackage widgets
- */
-class Infinity_Widgets_Policy extends ICE_Widget_Policy
-{
-	/**
-	 * @return ICE_Widget_Policy
-	 */
-	static public function instance()
-	{
-		self::$calling_class = __CLASS__;
-		return parent::instance();
-	}
-	
-	/**
-	 * @return Infinity_Widgets_Registry
-	 */
-	final public function new_registry()
-	{
-		return new Infinity_Widgets_Registry();
-	}
-
-	/**
-	 * @return Infinity_Widget_Factory
-	 */
-	final public function new_factory()
-	{
-		return new Infinity_Widget_Factory();
-	}
-
-	/**
-	 * @return Infinity_Widgets_Renderer
-	 */
-	final public function new_renderer()
-	{
-		return new Infinity_Widgets_Renderer();
-	}
-
-}
-
-/**
- * Infinity Theme: widgets registry
- *
- * @package Infinity-api
- * @subpackage widgets
- */
-class Infinity_Widgets_Registry extends ICE_Widget_Registry
-{
-	// nothing custom yet
-}
-
-/**
- * Infinity Theme: section factory
- *
- * @package Infinity-api
- * @subpackage widgets
- */
-class Infinity_Widget_Factory extends ICE_Widget_Factory
-{
-	// nothing custom yet
-}
-
-/**
- * Infinity Theme: widgets renderer
- *
- * @package Infinity-api
- * @subpackage widgets
- */
-class Infinity_Widgets_Renderer extends ICE_Widget_Renderer
-{
-	// nothing custom yet
-}
-
 //
 // Helpers
 //
@@ -110,7 +34,7 @@ class Infinity_Widgets_Renderer extends ICE_Widget_Renderer
  */
 function infinity_widget( $widget_name, $output = true )
 {
-	return Infinity_Widgets_Policy::instance()->registry()->get($widget_name)->render( $output );
+	return ICE_Widget_Policy::instance()->registry()->get($widget_name)->render( $output );
 }
 
 /**
@@ -122,7 +46,7 @@ function infinity_widget( $widget_name, $output = true )
 function infinity_widgets_init()
 {
 	// component policy
-	$widgets_policy = Infinity_Widgets_Policy::instance();
+	$widgets_policy = ICE_Widget_Policy::instance();
 
 	// enable component
 	ICE_Scheme::instance()->enable_component( $widgets_policy );
@@ -140,10 +64,10 @@ function infinity_widgets_init_screen()
 {
 	// init ajax OR widget reqs (not both)
 	if ( defined( 'DOING_AJAX') ) {
-		Infinity_Widgets_Policy::instance()->registry()->init_ajax();
+		ICE_Widget_Policy::instance()->registry()->init_ajax();
 		do_action( 'infinity_widgets_init_ajax' );
 	} else {
-		Infinity_Widgets_Policy::instance()->registry()->init_screen();
+		ICE_Widget_Policy::instance()->registry()->init_screen();
 		do_action( 'infinity_widgets_init_widget' );
 	}
 }
