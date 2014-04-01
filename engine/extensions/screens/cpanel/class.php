@@ -1,10 +1,10 @@
 <?php
 /**
- * ICE API: screen extensions, cpanel screen class file
+ * Infinity Theme: screen extensions, cpanel screen class file.
  *
  * @author Marshall Sorenson <marshall@presscrew.com>
  * @link http://infinity.presscrew.com/
- * @copyright Copyright (C) 2010-2011 Marshall Sorenson
+ * @copyright Copyright (C) 2010-2014 Marshall Sorenson
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
  * @package ICE-extensions
  * @subpackage screens
@@ -14,28 +14,24 @@
 ICE_Loader::load( 'ui/iconable', 'ui/positionable' );
 
 /**
- * Cpanel screen
+ * Cpanel screen.
  *
- * @package ICE-extensions
- * @subpackage screens
- * @property-read string $icon_primary
- * @property-read string $icon_secondary
- * @property-read integer $priority
- * @property-read boolean $toolbar
+ * @package Infinity
+ * @subpackage extensions
  */
-class ICE_Ext_Screen_Cpanel
+class Infinity_Ext_Screen_Cpanel
 	extends ICE_Screen
 		implements ICE_Iconable, ICE_Positionable
 {
 	/**
-	 * The icon object
+	 * The icon object.
 	 * 
 	 * @var ICE_Icon
 	 */
 	private $__icon__;
 
 	/**
-	 * The position object
+	 * The position object.
 	 *
 	 * @var ICE_Position
 	 */
@@ -102,7 +98,7 @@ class ICE_Ext_Screen_Cpanel
 	}
 
 	/**
-	 * Set/Return the icon object
+	 * Set/Return the icon object.
 	 *
 	 * @param ICE_Icon $icon
 	 * @return ICE_Icon
@@ -117,7 +113,7 @@ class ICE_Ext_Screen_Cpanel
 	}
 
 	/**
-	 * Set/Return the position object
+	 * Set/Return the position object.
 	 *
 	 * @param ICE_Position $position
 	 * @return ICE_Position

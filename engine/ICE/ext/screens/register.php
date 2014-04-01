@@ -12,8 +12,8 @@
  */
 
 $this->register(
-	'cpanel',
+	'default',
 	array(
-		'class' => 'ICE_Ext_Screen_Cpanel'
+		'class' => 'ICE_Ext_Screen_Default'
 	)
 );

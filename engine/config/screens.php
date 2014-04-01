@@ -9,6 +9,15 @@
  * @subpackage config
  */
 
+// register cpanel screen extension
+$this->policy()->extensions()->register(
+	'cpanel',
+	array(
+		'path' => INFINITY_ENGINE_PATH . '/extensions/screens/cpanel',
+		'class' => 'Infinity_Ext_Screen_Cpanel'
+	)
+);
+
 $this->register(
 	'start',
 	array(

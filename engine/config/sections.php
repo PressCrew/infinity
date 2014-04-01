@@ -9,6 +9,16 @@
  * @subpackage config
  */
 
+// register cpanel section extension
+$this->policy()->extensions()->register(
+	'cpanel',
+	array(
+		'path' => INFINITY_ENGINE_PATH . '/extensions/sections/cpanel',
+		'class' => 'Infinity_Ext_Section_Cpanel',
+		'template' => 'template.php'
+	)
+);
+
 $this->register(
 	'general',
 	array(
