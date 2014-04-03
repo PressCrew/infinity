@@ -239,10 +239,8 @@ abstract class ICE_Renderer extends ICE_Componentable
 
 	/**
 	 * Render documentation for this component
-	 *
-	 * @param array $doc_dirs Directory paths under which to search for doc page file
 	 */
-	final public function render_documentation( $doc_dirs )
+	final public function render_documentation()
 	{
 		// get doc setting
 		$documentation = $this->component->get_property( 'documentation' );
@@ -250,11 +248,11 @@ abstract class ICE_Renderer extends ICE_Componentable
 		// is documentation set?
 		if ( $documentation ) {
 			// boolean value?
-			if ( is_numeric( $documentation ) ) {
+			if ( is_bool( $documentation ) ) {
 				// use auto naming?
-				if ( (boolean) $documentation == true ) {
-					// yes, page is component name
-					$page = $this->policy()->get_handle() . '/' . $this->component->get_property( 'name' );
+				if ( true === $documentation ) {
+					// yes, file is generic name
+					$page = 'docs.php';
 				} else {
 					// no, documentation disabled
 					return;
@@ -264,11 +262,14 @@ abstract class ICE_Renderer extends ICE_Componentable
 				$page = $documentation;
 			}
 
-			// new easy doc object
-			$doc = new ICE_Docs( $doc_dirs, $page );
+			// try to locate it
+			$located = $this->component()->locate_file( $page );
 
-			// publish it!
-			$doc->publish();
+			// maybe include it
+			if ( $located ) {
+				// TODO this should probably be buffered and escaped.
+				include $located;
+			}
 		}
 	}
 

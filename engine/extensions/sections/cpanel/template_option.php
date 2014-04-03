@@ -44,7 +44,7 @@ $renderer->render_begin( 'infinity-cpanel-options-single' );
 </div>
 <?php if ( $renderer->has_documentation() ): ?>
 <div id="<?php $renderer->render_name() ?>-tabs-2">
-	<div class="infinity-docs"><?php $renderer->render_documentation( ICE_Scheme::instance()->theme_documentation_dirs() ) ?></div>
+	<div class="infinity-docs"><?php $renderer->render_documentation() ?></div>
 </div>
 <?php endif; ?>
 <?php if ( true == INFINITY_DEV_MODE ): ?>

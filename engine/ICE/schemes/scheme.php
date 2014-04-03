@@ -722,16 +722,6 @@ final class ICE_Scheme extends ICE_Base
 	}
 
 	/**
-	 * Return array of all theme documentation dirs
-	 *
-	 * @return array
-	 */
-	public function theme_documentation_dirs()
-	{
-		return $this->theme_dirs( $this->docs_dir );
-	}
-
-	/**
 	 * Return path to a theme file
 	 *
 	 * @param string $theme
