@@ -25,15 +25,6 @@ ICE_Loader::load( 'base/policy' );
 class ICE_Widget_Policy extends ICE_Policy
 {
 	/**
-	 * @return ICE_Widget_Policy
-	 */
-	static public function instance()
-	{
-		self::$calling_class = __CLASS__;
-		return parent::instance();
-	}
-
-	/**
 	 * @return string
 	 */
 	public function get_handle( $plural = true )

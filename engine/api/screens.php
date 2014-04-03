@@ -42,7 +42,7 @@ define( 'INFINITY_ROUTE_DELIM', '/' );
 function infinity_screens_init()
 {
 	// component policy
-	$screens_policy = ICE_Screen_Policy::instance();
+	$screens_policy = ICE_Policy::screens();
 
 	// enable component
 	ICE_Scheme::instance()->enable_component( $screens_policy );
@@ -60,10 +60,10 @@ function infinity_screens_init_screen()
 {
 	// init ajax OR screen reqs (not both)
 	if ( defined( 'DOING_AJAX') ) {
-		ICE_Screen_Policy::instance()->registry()->init_ajax();
+		ICE_Policy::screens()->registry()->init_ajax();
 		do_action( 'infinity_screens_init_ajax' );
 	} else {
-		ICE_Screen_Policy::instance()->registry()->init_screen();
+		ICE_Policy::screens()->registry()->init_screen();
 		do_action( 'infinity_screens_init_screen' );
 	}
 }
@@ -181,5 +181,5 @@ function infinity_screens_route_param( $offset )
  */
 function infinity_screen_fetch( $screen_name )
 {
-	return ICE_Screen_Policy::instance()->registry()->get( $screen_name );
+	return ICE_Policy::screens()->registry()->get( $screen_name );
 }

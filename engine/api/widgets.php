@@ -34,7 +34,7 @@ ICE_Loader::load(
  */
 function infinity_widget( $widget_name, $output = true )
 {
-	return ICE_Widget_Policy::instance()->registry()->get($widget_name)->render( $output );
+	return ICE_Policy::widgets()->registry()->get($widget_name)->render( $output );
 }
 
 /**
@@ -46,7 +46,7 @@ function infinity_widget( $widget_name, $output = true )
 function infinity_widgets_init()
 {
 	// component policy
-	$widgets_policy = ICE_Widget_Policy::instance();
+	$widgets_policy = ICE_Policy::widgets();
 
 	// enable component
 	ICE_Scheme::instance()->enable_component( $widgets_policy );
@@ -64,10 +64,10 @@ function infinity_widgets_init_screen()
 {
 	// init ajax OR widget reqs (not both)
 	if ( defined( 'DOING_AJAX') ) {
-		ICE_Widget_Policy::instance()->registry()->init_ajax();
+		ICE_Policy::widgets()->registry()->init_ajax();
 		do_action( 'infinity_widgets_init_ajax' );
 	} else {
-		ICE_Widget_Policy::instance()->registry()->init_screen();
+		ICE_Policy::widgets()->registry()->init_screen();
 		do_action( 'infinity_widgets_init_widget' );
 	}
 }

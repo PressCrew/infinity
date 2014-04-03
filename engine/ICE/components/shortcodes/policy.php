@@ -23,16 +23,7 @@ ICE_Loader::load( 'base/policy' );
  * @subpackage shortcodes
  */
 class ICE_Shortcode_Policy extends ICE_Policy
-{
-	/**
-	 * @return ICE_Shortcode_Policy
-	 */
-	static public function instance()
-	{
-		self::$calling_class = __CLASS__;
-		return parent::instance();
-	}
-	
+{	
 	/**
 	 * @return string
 	 */

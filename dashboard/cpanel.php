@@ -66,7 +66,7 @@ function infinity_dashboard_cpanel_factory()
 	ICE_Loader::load( 'ui/cpanel' );
 
 	// new control panel instance using screens policy
-	$cpanel = new ICE_Ui_Cpanel( ICE_Screen_Policy::instance() );
+	$cpanel = new ICE_Ui_Cpanel( ICE_Policy::screens() );
 	
 	return $cpanel;
 }

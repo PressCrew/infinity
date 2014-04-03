@@ -23,14 +23,29 @@
 abstract class ICE_Policy extends ICE_Base
 {
 	/**
+	 * @todo Provide public method for overriding class settings.
 	 * @var array
 	 */
-	static private $instances = array();
+	static private $classes = array(
+		'option' => 'ICE_Option_Policy',
+		'feature' => 'ICE_Feature_Policy',
+		'section' => 'ICE_Section_Policy',
+		'screen' => 'ICE_Screen_Policy',
+		'shortcode' => 'ICE_Shortcode_Policy',
+		'widget' => 'ICE_Widget_Policy'
+	);
 
 	/**
-	 * @var string
+	 * @var array
 	 */
-	static protected $calling_class;
+	static private $instances = array(
+		'option' => null,
+		'feature' => null,
+		'section' => null,
+		'screen' => null,
+		'shortcode' => null,
+		'widget' => null
+	);
 
 	/**
 	 * @var ICE_Extensions
@@ -71,28 +86,22 @@ abstract class ICE_Policy extends ICE_Base
 	}
 
 	/**
-	 * Get policy instance
+	 * Get policy instance for given type.
 	 *
-	 * @param string $class Return policy instance which is instance of this class
+	 * @param string $type Return policy instance which is this type of class.
 	 * @return ICE_Policy
 	 */
-	static public function instance( $class = null )
+	static public function instance( $type )
 	{
-		// is this a lookup?
-		if ( $class ) {
-			foreach ( self::$instances as $instance ) {
-				if ( $instance instanceof $class ) {
-					return $instance;
-				}
-			}
-		} else {
-			// create new instance?
-			if ( !isset( self::$instances[ self::$calling_class ] ) ) {
-				self::$instances[ self::$calling_class ] = new self::$calling_class();
-			}
-			// return it
-			return self::$instances[ self::$calling_class ];
+		// create new instance?
+		if ( false === isset( self::$instances[ $type ] ) ) {
+			// yep, get class name
+			$class_name = self::$classes[ $type ];
+			// create it
+			self::$instances[ $type ] = new $class_name();
 		}
+		// return it
+		return self::$instances[ $type ];
 	}
 
 	/**
@@ -102,24 +111,7 @@ abstract class ICE_Policy extends ICE_Base
 	 */
 	final static public function all()
 	{
-		$all = array();
-		$options_class = null;
-		$options_policy = null;
-
-		foreach( self::$instances as $class => $policy ) {
-			if ( $policy instanceof ICE_Option_Policy ) {
-				$options_class = $class;
-				$options_policy = $policy;
-			} else {
-				$all[$class] = $policy;
-			}
-		}
-		
-		if ( $options_class ) {
-			$all[ $options_class ] = $options_policy;
-		}
-
-		return $all;
+		return self::$instances;
 	}
 
 	/**
@@ -127,15 +119,7 @@ abstract class ICE_Policy extends ICE_Base
 	 */
 	final static public function features()
 	{
-		return self::instance( 'ICE_Feature_Policy' );
-	}
-
-	/**
-	 * @return ICE_Widget_Policy
-	 */
-	final static public function widgets()
-	{
-		return self::instance( 'ICE_Widget_Policy' );
+		return self::instance( 'feature' );
 	}
 
 	/**
@@ -143,7 +127,7 @@ abstract class ICE_Policy extends ICE_Base
 	 */
 	final static public function options()
 	{
-		return self::instance( 'ICE_Option_Policy' );
+		return self::instance( 'option' );
 	}
 
 	/**
@@ -151,7 +135,7 @@ abstract class ICE_Policy extends ICE_Base
 	 */
 	final static public function screens()
 	{
-		return self::instance( 'ICE_Screen_Policy' );
+		return self::instance( 'screen' );
 	}
 
 	/**
@@ -159,7 +143,7 @@ abstract class ICE_Policy extends ICE_Base
 	 */
 	final static public function sections()
 	{
-		return self::instance( 'ICE_Section_Policy' );
+		return self::instance( 'section' );
 	}
 
 	/**
@@ -167,7 +151,15 @@ abstract class ICE_Policy extends ICE_Base
 	 */
 	final static public function shortcodes()
 	{
-		return self::instance( 'ICE_Shortcode_Policy' );
+		return self::instance( 'shortcode' );
+	}
+
+	/**
+	 * @return ICE_Widget_Policy
+	 */
+	final static public function widgets()
+	{
+		return self::instance( 'widget' );
 	}
 
 	/**

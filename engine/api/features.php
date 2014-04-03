@@ -37,7 +37,7 @@ function infinity_feature( $feature_name, $output = true )
 	// is feature supported?
 	if ( current_theme_supports( $feature_name ) ) {
 		// yes, render it
-		return ICE_Feature_Policy::instance()->registry()->get($feature_name)->render( $output );
+		return ICE_Policy::features()->registry()->get($feature_name)->render( $output );
 	} else {
 		// not supported
 		return false;
@@ -57,7 +57,7 @@ function infinity_feature_fetch( $feature_name )
 	// is feature supported?
 	if ( current_theme_supports( $feature_name ) ) {
 		// yes, return it
-		return ICE_Feature_Policy::instance()->registry()->get($feature_name);
+		return ICE_Policy::features()->registry()->get($feature_name);
 	} else {
 		// not supported
 		return false;
@@ -73,7 +73,7 @@ function infinity_feature_fetch( $feature_name )
 function infinity_features_init()
 {
 	// component policies
-	$features_policy = ICE_Feature_Policy::instance();
+	$features_policy = ICE_Policy::features();
 
 	// enable components
 	ICE_Scheme::instance()->enable_component( $features_policy );
@@ -91,10 +91,10 @@ function infinity_features_init_screen()
 {
 	// init ajax OR screen reqs (not both)
 	if ( defined( 'DOING_AJAX') ) {
-		ICE_Feature_Policy::instance()->registry()->init_ajax();
+		ICE_Policy::features()->registry()->init_ajax();
 		do_action( 'infinity_features_init_ajax' );
 	} else {
-		ICE_Feature_Policy::instance()->registry()->init_screen();
+		ICE_Policy::features()->registry()->init_screen();
 		do_action( 'infinity_features_init_screen' );
 	}
 }

@@ -32,7 +32,7 @@ ICE_Loader::load(
 function infinity_shortcodes_init()
 {
 	// component policy
-	$shortcodes_policy = ICE_Shortcode_Policy::instance();
+	$shortcodes_policy = ICE_Policy::shortcodes();
 
 	// enable component
 	ICE_Scheme::instance()->enable_component( $shortcodes_policy );
@@ -50,10 +50,10 @@ function infinity_shortcodes_init_screen()
 {
 	// init ajax OR screen reqs (not both)
 	if ( defined( 'DOING_AJAX') ) {
-		ICE_Shortcode_Policy::instance()->registry()->init_ajax();
+		ICE_Policy::shortcodes()->registry()->init_ajax();
 		do_action( 'infinity_shortcodes_init_ajax' );
 	} else {
-		ICE_Shortcode_Policy::instance()->registry()->init_screen();
+		ICE_Policy::shortcodes()->registry()->init_screen();
 		do_action( 'infinity_shortcodes_init_screen' );
 	}
 }

@@ -32,7 +32,7 @@ ICE_Loader::load(
 function infinity_sections_init()
 {
 	// component policies
-	$sections_policy = ICE_Section_Policy::instance();
+	$sections_policy = ICE_Policy::sections();
 
 	// enable component
 	ICE_Scheme::instance()->enable_component( $sections_policy );
@@ -50,10 +50,10 @@ function infinity_sections_init_screen()
 {
 	// init ajax OR screen reqs (not both)
 	if ( defined( 'DOING_AJAX') ) {
-		ICE_Section_Policy::instance()->registry()->init_ajax();
+		ICE_Policy::sections()->registry()->init_ajax();
 		do_action( 'infinity_sections_init_ajax' );
 	} else {
-		ICE_Section_Policy::instance()->registry()->init_screen();
+		ICE_Policy::sections()->registry()->init_screen();
 		do_action( 'infinity_sections_init_screen' );
 	}
 }

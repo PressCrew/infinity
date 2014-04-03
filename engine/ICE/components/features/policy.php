@@ -25,15 +25,6 @@ ICE_Loader::load( 'base/policy' );
 class ICE_Feature_Policy extends ICE_Policy
 {
 	/**
-	 * @return ICE_Feature_Policy
-	 */
-	static public function instance()
-	{
-		self::$calling_class = __CLASS__;
-		return parent::instance();
-	}
-
-	/**
 	 * @return string
 	 */
 	public function get_handle( $plural = true )

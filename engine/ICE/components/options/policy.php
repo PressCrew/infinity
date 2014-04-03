@@ -32,15 +32,6 @@ class ICE_Option_Policy extends ICE_Policy
 	private $body_class = 'theme-option';
 
 	/**
-	 * @return ICE_Option_Policy
-	 */
-	static public function instance()
-	{
-		self::$calling_class = __CLASS__;
-		return parent::instance();
-	}
-
-	/**
 	 * @return string
 	 */
 	public function get_handle( $plural = true )
