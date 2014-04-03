@@ -124,13 +124,6 @@ final class ICE_Scheme extends ICE_Base
 	private $config_file;
 
 	/**
-	 * Relative path to the exts dir relative to the theme's template path
-	 *
-	 * @var string
-	 */
-	private $exts_dir;
-
-	/**
 	 * Relative path to the docs dir relative to the theme's template path
 	 *
 	 * @var string
@@ -341,25 +334,6 @@ final class ICE_Scheme extends ICE_Base
 			$this->docs_dir = $dir_name;
 		} else {
 			throw new Exception( 'Cannot set docs dir, already set' );
-		}
-
-		return $this;
-	}
-
-	/**
-	 * Set the name of the dir under the child themes where the extensions directory lives
-	 *
-	 * @param string $dir_name
-	 * @return boolean
-	 */
-	final public function set_exts_dir( $dir_name )
-	{
-		// only set if not already
-		if ( empty( $this->exts_dir ) ) {
-			// set property
-			$this->exts_dir = $dir_name;
-		} else {
-			throw new Exception( 'Cannot set extensions dir, already set' );
 		}
 
 		return $this;
