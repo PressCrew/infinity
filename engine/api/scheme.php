@@ -44,19 +44,11 @@ function infinity_scheme_init( $types )
  * Finalize scheme for the active theme
  *
  * @package Infinity-api
- * @return boolean
  */
 function infinity_scheme_finalize()
 {
-	// finalize registries
-	ICE_Policy::features()->registry()->finalize();
-	ICE_Policy::sections()->registry()->finalize();
-	ICE_Policy::options()->registry()->finalize();
-	ICE_Policy::screens()->registry()->finalize();
-	ICE_Policy::widgets()->registry()->finalize();
-	ICE_Policy::shortcodes()->registry()->finalize();
-
-	return true;
+	// finalize the scheme
+	ICE_Scheme::instance()->finalize();
 }
 
 /**

@@ -559,6 +559,18 @@ final class ICE_Scheme extends ICE_Base
 	}
 
 	/**
+	 * Finalize the scheme.
+	 */
+	final public function finalize()
+	{
+		// loop all component registries
+		foreach ( ICE_Policy::all() as $policy ) {
+			// finalize each registry
+			$policy->registry()->finalize();
+		}
+	}
+
+	/**
 	 * If template exists in scheme, return it, otherwise return the original template
 	 *
 	 * @internal
