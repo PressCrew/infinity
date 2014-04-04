@@ -169,9 +169,6 @@ infinity_scheme_init(
 	)
 );
 
-// finalize scheme
-infinity_scheme_finalize();
-
 // init component screens
 infinity_features_init_screen();
 infinity_sections_init_screen();

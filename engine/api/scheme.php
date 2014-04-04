@@ -37,18 +37,11 @@ function infinity_scheme_init( $types )
 		$scheme->enable_component( $type );
 	}
 
-	do_action( 'infinity_scheme_init', $types );
-}
-
-/**
- * Finalize scheme for the active theme
- *
- * @package Infinity-api
- */
-function infinity_scheme_finalize()
-{
 	// finalize the scheme
-	ICE_Scheme::instance()->finalize();
+	$scheme->finalize();
+
+	// scheme initialization is done
+	do_action( 'infinity_scheme_init', $types );
 }
 
 /**
