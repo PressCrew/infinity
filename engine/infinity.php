@@ -168,11 +168,3 @@ infinity_scheme_init(
 		'widget'
 	)
 );
-
-// init component screens
-infinity_features_init_screen();
-infinity_sections_init_screen();
-infinity_options_init_screen();
-infinity_screens_init_screen();
-infinity_widgets_init_screen();
-infinity_shortcodes_init_screen();

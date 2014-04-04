@@ -25,24 +25,6 @@ ICE_Loader::load(
 //
 
 /**
- * Initialize options screen requirements
- *
- * @package Infinity-api
- * @subpackage options
- */
-function infinity_options_init_screen()
-{
-	// init ajax OR screen reqs (not both)
-	if ( defined( 'DOING_AJAX') ) {
-		ICE_Policy::options()->registry()->init_ajax();
-		do_action( 'infinity_options_init_ajax' );
-	} else {
-		ICE_Policy::options()->registry()->init_screen();
-		do_action( 'infinity_options_init_screen' );
-	}
-}
-
-/**
  * Render an option (field only)
  *
  * @package Infinity-api

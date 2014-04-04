@@ -63,21 +63,3 @@ function infinity_feature_fetch( $feature_name )
 		return false;
 	}
 }
-
-/**
- * Initialize features screen requirements
- *
- * @package Infinity-api
- * @subpackage features
- */
-function infinity_features_init_screen()
-{
-	// init ajax OR screen reqs (not both)
-	if ( defined( 'DOING_AJAX') ) {
-		ICE_Policy::features()->registry()->init_ajax();
-		do_action( 'infinity_features_init_ajax' );
-	} else {
-		ICE_Policy::features()->registry()->init_screen();
-		do_action( 'infinity_features_init_screen' );
-	}
-}

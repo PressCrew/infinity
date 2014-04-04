@@ -68,10 +68,10 @@ class ICE_Option_Policy extends ICE_Policy
 	public function finalize()
 	{
 		// run parent first
-		if ( true === parent::finalize() ) {
-			// hook in to body class filter
-			add_filter( 'body_class', array( $this, 'add_body_class' ) );
-		}
+		parent::finalize();
+
+		// hook in to body class filter
+		add_filter( 'body_class', array( $this, 'add_body_class' ) );
 	}
 
 	/**

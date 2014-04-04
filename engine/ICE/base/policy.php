@@ -239,12 +239,11 @@ abstract class ICE_Policy extends ICE_Base
 	}
 
 	/**
-	 * This template method is called when this policy is enabled
-	 *
-	 * @return boolean
+	 * This template method is called when this scheme is finalized.
 	 */
 	public function finalize()
 	{
-		return true;
+		// finalize the registry
+		$this->registry()->finalize();
 	}
 }

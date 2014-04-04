@@ -37,9 +37,6 @@ function infinity_scheme_init( $types )
 		$scheme->enable_component( $type );
 	}
 
-	// finalize the scheme
-	$scheme->finalize();
-
 	// scheme initialization is done
 	do_action( 'infinity_scheme_init', $types );
 }

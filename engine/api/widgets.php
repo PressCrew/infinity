@@ -36,21 +36,3 @@ function infinity_widget( $widget_name, $output = true )
 {
 	return ICE_Policy::widgets()->registry()->get($widget_name)->render( $output );
 }
-
-/**
- * Initialize widgets screen requirements
- *
- * @package Infinity-api
- * @subpackage widgets
- */
-function infinity_widgets_init_screen()
-{
-	// init ajax OR widget reqs (not both)
-	if ( defined( 'DOING_AJAX') ) {
-		ICE_Policy::widgets()->registry()->init_ajax();
-		do_action( 'infinity_widgets_init_ajax' );
-	} else {
-		ICE_Policy::widgets()->registry()->init_screen();
-		do_action( 'infinity_widgets_init_widget' );
-	}
-}

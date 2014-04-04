@@ -237,8 +237,9 @@ final class ICE_Scheme extends ICE_Base
 		$this->feature_support();
 
 		// some scheme initializations must occur after WP theme setup
-		add_action( 'after_setup_theme', array($this, 'init_enqueueing') );
-		add_action( 'after_setup_theme', array($this, 'load_functions') );
+		add_action( 'after_setup_theme', array($this, 'init_enqueueing'), 9 );
+		add_action( 'after_setup_theme', array($this, 'load_functions'), 9 );
+		add_action( 'after_setup_theme', array($this, 'finalize'), 9 );
 		add_action( 'wp_head', array($this, 'render_assets'), 11 );
 		add_action( 'admin_head', array($this, 'render_assets'), 11 );
 
@@ -552,9 +553,6 @@ final class ICE_Scheme extends ICE_Base
 			}
 		}
 
-		// finalize policy
-		$policy->finalize();
-
 		return true;
 	}
 
@@ -565,8 +563,8 @@ final class ICE_Scheme extends ICE_Base
 	{
 		// loop all component registries
 		foreach ( ICE_Policy::all() as $policy ) {
-			// finalize each registry
-			$policy->registry()->finalize();
+			// finalize component policy
+			$policy->finalize();
 		}
 	}
 

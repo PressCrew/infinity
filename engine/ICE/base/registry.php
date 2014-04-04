@@ -66,9 +66,22 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	}
 
 	/**
+	 * Initialize correct response depending on environment.
+	 */
+	protected function init_response()
+	{
+		// init ajax OR screen reqs (not both)
+		if ( defined( 'DOING_AJAX' ) ) {
+			$this->init_ajax();
+		} else {
+			$this->init_screen();
+		}
+	}
+
+	/**
 	 * Init ajax requirements
 	 */
-	public function init_ajax()
+	protected function init_ajax()
 	{
 		// init ajax for each registered component
 		foreach ( $this->get_all() as $component ) {
@@ -81,7 +94,7 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	/**
 	 * Init screen dependencies for all applicable components to be rendered
 	 */
-	public function init_screen()
+	protected function init_screen()
 	{
 		add_action( 'ice_init_styles', array($this, 'init_styles') );
 		add_action( 'ice_init_scripts', array($this, 'init_scripts') );
@@ -391,9 +404,14 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 		// call component creator
 		$this->create_components();
 
+		// loop all enabled components
 		foreach ( $this->components_enabled as $component ) {
+			// finalize it
 			$component->finalize();
 		}
+
+		// initialize the response
+		$this->init_response();
 	}
 
 	/**
