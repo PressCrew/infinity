@@ -18,27 +18,27 @@ ICE_Loader::load(
  * Initialize and load the scheme for the active theme
  *
  * @package Infinity-api
- * @return boolean
+ * @param array $types Component types to initialize.
+ * @return void
  */
-function infinity_scheme_init()
+function infinity_scheme_init( $types )
 {
+	// get scheme instance
+	$scheme = ICE_Scheme::instance();
+
 	// initialize the scheme
-	ICE_Scheme::instance()
+	$scheme
 		->set_config_file( 'global' )
 		->set_config_dir( INFINITY_ENGINE_DIR . '/config' )
 		->init( INFINITY_NAME );
 
-	// initialize policies (the order is important here)
-	ICE_Policy::features();
-	ICE_Policy::sections();
-	ICE_Policy::options();
-	ICE_Policy::screens();
-	ICE_Policy::widgets();
-	ICE_Policy::shortcodes();
+	// loop all types
+	foreach ( $types as $type ) {
+		// enable component type
+		$scheme->enable_component( $type );
+	}
 
-	do_action( 'infinity_scheme_init' );
-
-	return true;
+	do_action( 'infinity_scheme_init', $types );
 }
 
 /**

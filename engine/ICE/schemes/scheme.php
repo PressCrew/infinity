@@ -522,13 +522,16 @@ final class ICE_Scheme extends ICE_Base
 	}
 
 	/**
-	 * Enable components for the scheme by passing a valid policy object
+	 * Enable components for the scheme by passing a valid component type.
 	 *
-	 * @param ICE_Policy $policy
+	 * @param string $type The component type to enable.
 	 * @return boolean
 	 */
-	public function enable_component( ICE_Policy $policy )
+	public function enable_component( $type )
 	{
+		// get the policy for the type
+		$policy = ICE_Policy::instance( $type );
+
 		// loop through entire theme stack BOTTOM UP and try to load options
 		foreach( $this->theme_stack( false ) as $theme ) {
 

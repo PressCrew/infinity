@@ -157,16 +157,17 @@ require_once INFINITY_API_PATH . '/shortcodes.php';
 // load theme setup
 require_once INFINITY_INC_PATH . '/setup.php';
 
-// initialize scheme
-infinity_scheme_init();
-
-// initialize components
-infinity_features_init();
-infinity_sections_init();
-infinity_options_init();
-infinity_screens_init();
-infinity_widgets_init();
-infinity_shortcodes_init();
+// initialize scheme (the order is important here)
+infinity_scheme_init(
+	array(
+		'feature',
+		'section',
+		'option',
+		'screen',
+		'shortcode',
+		'widget'
+	)
+);
 
 // finalize scheme
 infinity_scheme_finalize();

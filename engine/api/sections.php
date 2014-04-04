@@ -24,23 +24,6 @@ ICE_Loader::load(
 //
 
 /**
- * Initialize sections environment
- *
- * @package Infinity-api
- * @subpackage sections
- */
-function infinity_sections_init()
-{
-	// component policies
-	$sections_policy = ICE_Policy::sections();
-
-	// enable component
-	ICE_Scheme::instance()->enable_component( $sections_policy );
-
-	do_action( 'infinity_sections_init' );
-}
-
-/**
  * Initialize sections screen requirements
  *
  * @package Infinity-api

@@ -25,23 +25,6 @@ ICE_Loader::load(
 //
 
 /**
- * Initialize options environment
- *
- * @package Infinity-api
- * @subpackage options
- */
-function infinity_options_init()
-{
-	// component policy
-	$options_policy = ICE_Policy::options();
-
-	// enable component
-	ICE_Scheme::instance()->enable_component( $options_policy );
-	
-	do_action( 'infinity_options_init' );
-}
-
-/**
  * Initialize options screen requirements
  *
  * @package Infinity-api

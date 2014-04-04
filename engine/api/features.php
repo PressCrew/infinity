@@ -65,23 +65,6 @@ function infinity_feature_fetch( $feature_name )
 }
 
 /**
- * Initialize features environment
- *
- * @package Infinity-api
- * @subpackage features
- */
-function infinity_features_init()
-{
-	// component policies
-	$features_policy = ICE_Policy::features();
-
-	// enable components
-	ICE_Scheme::instance()->enable_component( $features_policy );
-
-	do_action( 'infinity_features_init' );
-}
-
-/**
  * Initialize features screen requirements
  *
  * @package Infinity-api

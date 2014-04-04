@@ -34,23 +34,6 @@ define( 'INFINITY_ROUTE_DELIM', '/' );
 //
 
 /**
- * Initialize screens environment
- *
- * @package Infinity-api
- * @subpackage screens
- */
-function infinity_screens_init()
-{
-	// component policy
-	$screens_policy = ICE_Policy::screens();
-
-	// enable component
-	ICE_Scheme::instance()->enable_component( $screens_policy );
-
-	do_action( 'infinity_screens_init' );
-}
-
-/**
  * Initialize screens screen requirements
  *
  * @package Infinity-api

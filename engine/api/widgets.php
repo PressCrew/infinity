@@ -38,23 +38,6 @@ function infinity_widget( $widget_name, $output = true )
 }
 
 /**
- * Initialize widgets environment
- *
- * @package Infinity-api
- * @subpackage widgets
- */
-function infinity_widgets_init()
-{
-	// component policy
-	$widgets_policy = ICE_Policy::widgets();
-
-	// enable component
-	ICE_Scheme::instance()->enable_component( $widgets_policy );
-
-	do_action( 'infinity_widgets_init' );
-}
-
-/**
  * Initialize widgets screen requirements
  *
  * @package Infinity-api

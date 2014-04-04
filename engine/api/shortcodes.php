@@ -24,23 +24,6 @@ ICE_Loader::load(
 //
 
 /**
- * Initialize shortcodes environment
- *
- * @package Infinity-api
- * @subpackage shortcodes
- */
-function infinity_shortcodes_init()
-{
-	// component policy
-	$shortcodes_policy = ICE_Policy::shortcodes();
-
-	// enable component
-	ICE_Scheme::instance()->enable_component( $shortcodes_policy );
-
-	do_action( 'infinity_shortcodes_init' );
-}
-
-/**
  * Initialize shortcodes screen requirements
  *
  * @package Infinity-api
