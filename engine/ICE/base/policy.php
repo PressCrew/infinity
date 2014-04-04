@@ -38,14 +38,7 @@ abstract class ICE_Policy extends ICE_Base
 	/**
 	 * @var array
 	 */
-	static private $instances = array(
-		'option' => null,
-		'feature' => null,
-		'section' => null,
-		'screen' => null,
-		'shortcode' => null,
-		'widget' => null
-	);
+	static private $instances = array();
 
 	/**
 	 * @var ICE_Extensions
