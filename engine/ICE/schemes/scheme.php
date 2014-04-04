@@ -289,13 +289,12 @@ final class ICE_Scheme extends ICE_Base
 	 */
 	final public function set_config_dir( $dir_name )
 	{
-		if ( empty( $this->config_dir ) ) {
+		if ( null === $this->config_dir ) {
 			$this->config_dir = $dir_name;
+			return true;
 		} else {
 			throw new Exception( 'Cannot set config dir, already set' );
 		}
-
-		return $this;
 	}
 
 	/**
@@ -306,13 +305,12 @@ final class ICE_Scheme extends ICE_Base
 	 */
 	final public function set_config_file( $file_name )
 	{
-		if ( empty( $this->config_file ) ) {
+		if ( null === $this->config_file ) {
 			$this->config_file = $file_name;
+			return true;
 		} else {
 			throw new Exception( 'Cannot set config file, already set' );
 		}
-
-		return $this;
 	}
 
 	/**

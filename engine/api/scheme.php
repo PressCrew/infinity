@@ -27,10 +27,9 @@ function infinity_scheme_init( $types )
 	$scheme = ICE_Scheme::instance();
 
 	// initialize the scheme
-	$scheme
-		->set_config_file( 'global' )
-		->set_config_dir( INFINITY_ENGINE_DIR . '/config' )
-		->init( INFINITY_NAME );
+	$scheme->set_config_file( 'global' );
+	$scheme->set_config_dir( INFINITY_ENGINE_DIR . '/config' );
+	$scheme->init( INFINITY_NAME );
 
 	// loop all types
 	foreach ( $types as $type ) {
