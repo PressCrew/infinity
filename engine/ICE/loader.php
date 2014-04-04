@@ -41,12 +41,6 @@ if ( !defined( 'ICE_EXPORTS_SUBDIR' ) ) {
 	define( 'ICE_EXPORTS_SUBDIR', 'exports' );
 }
 /**
- * ICE API: compiled themes hint
- */
-if ( !defined( 'ICE_THEMES_COMPILED' ) ) {
-	define( 'ICE_THEMES_COMPILED', null );
-}
-/**
  * ICE API: cache get_stylesheet() call for performance 
  */
 define( 'ICE_ACTIVE_THEME', get_stylesheet() );

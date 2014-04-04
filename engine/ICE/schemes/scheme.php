@@ -138,13 +138,6 @@ final class ICE_Scheme extends ICE_Base
 	private $themes;
 
 	/**
-	 * Themes which have been compiled into one theme
-	 *
-	 * @var ICE_Map
-	 */
-	private $themes_compiled;
-
-	/**
 	 * Cache of reversed theme stack array
 	 *
 	 * @var array
@@ -172,18 +165,8 @@ final class ICE_Scheme extends ICE_Base
 	{
 		// initialize themes map
 		$this->themes = new ICE_Stack();
-		$this->themes_compiled = new ICE_Map();
 		$this->settings = new ICE_Init_Settings();
 		$this->config_files_loaded = new ICE_Stack();
-
-		// handle compiled themes
-		if ( defined( 'ICE_THEMES_COMPILED' ) && ICE_THEMES_COMPILED !== null ) {
-			// split at comma
-			foreach( explode( ',', ICE_THEMES_COMPILED ) as $theme ) {
-				// push on to compiled themes map
-				$this->themes_compiled->add( $theme, $theme );
-			}
-		}
 	}
 
 	/**
@@ -216,16 +199,8 @@ final class ICE_Scheme extends ICE_Base
 		// set base theme
 		$this->base_theme = $base_theme;
 
-		// is there at least one compiled themes?
-		if ( $this->themes_compiled->count() >= 1 ) {
-			// copy all compiled themes
-			$compiled = $this->themes_compiled->to_array();
-			// use highest ancestor
-			$this->root_theme = key( $compiled );
-		} else {
-			// no compiled theme, root is template
-			$this->root_theme = get_template();
-		}
+		// root theme is always template
+		$this->root_theme = get_template();
 
 		// load it
 		$this->load();
@@ -675,11 +650,7 @@ final class ICE_Scheme extends ICE_Base
 	 */
 	final public function theme_dir( $theme )
 	{
-		if ( true === $this->themes_compiled->contains( $theme ) ) {
-			return ICE_Files::theme_dir( $this->base_theme );
-		} else {
-			return ICE_Files::theme_dir( $theme );
-		}
+		return ICE_Files::theme_dir( $theme );
 	}
 
 	/**
@@ -698,11 +669,8 @@ final class ICE_Scheme extends ICE_Base
 
 		// loop through theme stack
 		foreach ( $this->theme_stack() as $theme ) {
-			// make sure theme is NOT compiled in
-			if ( false === $this->themes_compiled->contains( $theme ) ) {
-				// add to list of paths
-				$paths[] = $this->theme_file( $theme, $file_names );
-			}
+			// add to list of paths
+			$paths[] = $this->theme_file( $theme, $file_names );
 		}
 
 		return $paths;
@@ -749,12 +717,6 @@ final class ICE_Scheme extends ICE_Base
 	{
 		// get all args
 		$args = func_get_args();
-
-		// is this theme compiled?
-		if ( $this->themes_compiled->contains( $theme ) ) {
-			// theme is base theme
-			$args[0] = $this->base_theme;
-		}
 		
 		return call_user_func_array( array( 'ICE_Files', 'theme_file_url' ), $args );
 	}
@@ -767,14 +729,8 @@ final class ICE_Scheme extends ICE_Base
 	 */
 	final public function theme_config_dir( $theme )
 	{
-		// is this theme compiled?
-		if ( $this->themes_compiled->contains( $theme ) ) {
-			// yes, append theme name to config dir path
-			return $this->config_dir . '/' . $theme;
-		} else {
-			// no, use config dir path as is
-			return $this->config_dir;
-		}
+		// return config dir as is
+		return $this->config_dir;
 	}
 
 	/**
@@ -802,12 +758,6 @@ final class ICE_Scheme extends ICE_Base
 	{
 		// loop through theme stack
 		foreach ( $this->theme_stack() as $theme ) {
-
-			// is theme in current loop compiled?
-			if ( true === $this->themes_compiled->contains( $theme ) ) {
-				// yep, skip it
-				continue;
-			}
 
 			// build possible absolute path to file
 			$absolute_path = $this->theme_dir( $theme ) . '/' . $relative_path;
@@ -855,12 +805,6 @@ final class ICE_Scheme extends ICE_Base
 
 		// loop through theme stack
 		foreach ( $this->theme_stack() as $theme ) {
-
-			// is theme in current loop compiled?
-			if ( true === $this->themes_compiled->contains( $theme ) ) {
-				// yep, skip it
-				continue;
-			}
 
 			// build path to stackfile
 			$stack_file = $this->theme_dir( $theme );
