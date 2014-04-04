@@ -35,12 +35,6 @@ define( 'ICE_LIB_PATH', ICE_PATH . '/lib' );
  */
 define( 'ICE_EXT_PATH', ICE_PATH . '/ext' );
 /**
- * ICE API: exported files sub directory name
- */
-if ( !defined( 'ICE_EXPORTS_SUBDIR' ) ) {
-	define( 'ICE_EXPORTS_SUBDIR', 'exports' );
-}
-/**
  * ICE API: cache get_stylesheet() call for performance 
  */
 define( 'ICE_ACTIVE_THEME', get_stylesheet() );
