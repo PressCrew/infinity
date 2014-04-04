@@ -26,7 +26,6 @@ function infinity_scheme_init()
 	ICE_Scheme::instance()
 		->set_config_file( 'global' )
 		->set_config_dir( INFINITY_ENGINE_DIR . '/config' )
-		->set_docs_dir( INFINITY_ENGINE_DIR . '/documents' )
 		->init( INFINITY_NAME );
 
 	// initialize policies (the order is important here)

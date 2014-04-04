@@ -124,13 +124,6 @@ final class ICE_Scheme extends ICE_Base
 	private $config_file;
 
 	/**
-	 * Relative path to the docs dir relative to the theme's template path
-	 *
-	 * @var string
-	 */
-	private $docs_dir;
-
-	/**
 	 * Stack of config files that have been loaded
 	 *
 	 * @var ICE_Stack
@@ -317,23 +310,6 @@ final class ICE_Scheme extends ICE_Base
 			$this->config_file = $file_name;
 		} else {
 			throw new Exception( 'Cannot set config file, already set' );
-		}
-
-		return $this;
-	}
-
-	/**
-	 * Set the name of the dir under the child themes where the documents directory lives
-	 *
-	 * @param string $dir_name
-	 * @return boolean
-	 */
-	final public function set_docs_dir( $dir_name )
-	{
-		if ( empty( $this->docs_dir ) ) {
-			$this->docs_dir = $dir_name;
-		} else {
-			throw new Exception( 'Cannot set docs dir, already set' );
 		}
 
 		return $this;
