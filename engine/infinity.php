@@ -133,17 +133,7 @@ require_once INFINITY_ICE_PATH . '/loader.php';
 
 // initialize ICE
 ICE_Loader::init( INFINITY_ICE_URL );
-
-// initialize enqueuer and configure actions
-if ( is_admin() ) {
-	ICE_Enqueue::instance()
-		->styles_on_action( 'load-appearance_page_' . INFINITY_ADMIN_PAGE )
-		->scripts_on_action( 'load-appearance_page_' . INFINITY_ADMIN_PAGE );
-} else {
-	ICE_Enqueue::instance()
-		->styles_on_action( 'wp_enqueue_scripts' )
-		->scripts_on_action( 'wp_enqueue_scripts' );
-}
+ICE_Enqueue::init( 'load-appearance_page_' . INFINITY_ADMIN_PAGE );
 
 // load Infinity API
 require_once INFINITY_API_PATH . '/scheme.php';

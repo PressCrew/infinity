@@ -87,6 +87,25 @@ final class ICE_Enqueue extends ICE_Base
 	}
 
 	/**
+	 * Initialize enqueuing and set which actions to enqueue assets on.
+	 *
+	 * @param string $admin_action The admin action.
+	 * @param string $blog_action The blog (public) action.
+	 */
+	static public function init( $admin_action, $blog_action = 'wp_enqueue_scripts' )
+	{
+		if ( is_admin() ) {
+			self::instance()
+				->styles_on_action( $admin_action )
+				->scripts_on_action( $admin_action );
+		} else {
+			self::instance()
+				->styles_on_action( $blog_action )
+				->scripts_on_action( $blog_action );
+		}
+	}
+
+	/**
 	 * Add an action on which to attach the style enqueuer
 	 *
 	 * @param string $action
