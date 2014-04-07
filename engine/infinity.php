@@ -137,24 +137,9 @@ ICE_Enqueue::init( 'load-appearance_page_' . INFINITY_ADMIN_PAGE );
 
 // load Infinity API
 require_once INFINITY_API_PATH . '/scheme.php';
-require_once INFINITY_API_PATH . '/sections.php';
-require_once INFINITY_API_PATH . '/options.php';
-require_once INFINITY_API_PATH . '/features.php';
-require_once INFINITY_API_PATH . '/widgets.php';
-require_once INFINITY_API_PATH . '/screens.php';
-require_once INFINITY_API_PATH . '/shortcodes.php';
 
 // load theme setup
 require_once INFINITY_INC_PATH . '/setup.php';
 
-// initialize scheme (the order is important here)
-infinity_scheme_init(
-	array(
-		'feature',
-		'section',
-		'option',
-		'screen',
-		'shortcode',
-		'widget'
-	)
-);
+// initialize scheme
+infinity_scheme_init();

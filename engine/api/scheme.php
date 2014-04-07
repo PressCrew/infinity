@@ -14,14 +14,21 @@ ICE_Loader::load(
 	'schemes/scheme'
 );
 
+// load components api
+require_once INFINITY_API_PATH . '/sections.php';
+require_once INFINITY_API_PATH . '/options.php';
+require_once INFINITY_API_PATH . '/features.php';
+require_once INFINITY_API_PATH . '/widgets.php';
+require_once INFINITY_API_PATH . '/screens.php';
+require_once INFINITY_API_PATH . '/shortcodes.php';
+
 /**
  * Initialize and load the scheme for the active theme
  *
  * @package Infinity-api
- * @param array $types Component types to initialize.
  * @return void
  */
-function infinity_scheme_init( $types )
+function infinity_scheme_init()
 {
 	// get scheme instance
 	$scheme = ICE_Scheme::instance();
@@ -31,14 +38,16 @@ function infinity_scheme_init( $types )
 	$scheme->set_config_dir( INFINITY_ENGINE_DIR . '/config' );
 	$scheme->init( INFINITY_NAME );
 
-	// loop all types
-	foreach ( $types as $type ) {
-		// enable component type
-		$scheme->enable_component( $type );
-	}
+	// enable components
+	$scheme->enable_component( 'feature' );
+	$scheme->enable_component( 'section' );
+	$scheme->enable_component( 'option' );
+	$scheme->enable_component( 'screen' );
+	$scheme->enable_component( 'shortcode' );
+	$scheme->enable_component( 'widget' );
 
 	// scheme initialization is done
-	do_action( 'infinity_scheme_init', $types );
+	do_action( 'infinity_scheme_init' );
 }
 
 /**
