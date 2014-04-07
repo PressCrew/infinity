@@ -136,7 +136,7 @@ ICE_Loader::init( INFINITY_ICE_URL );
 ICE_Enqueue::init( 'load-appearance_page_' . INFINITY_ADMIN_PAGE );
 
 // load Infinity API
-require_once INFINITY_API_PATH . '/scheme.php';
+require_once INFINITY_API_PATH . '/loader.php';
 
 // load theme setup
 require_once INFINITY_INC_PATH . '/setup.php';

@@ -1,6 +1,6 @@
 <?php
 /**
- * Infinity Theme: scheme initilization file
+ * Infinity Theme: api loader and scheme helper file
  *
  * @author Marshall Sorenson <marshall@presscrew.com>
  * @link http://infinity.presscrew.com/
@@ -10,9 +10,8 @@
  * @since 1.0
  */
 
-ICE_Loader::load(
-	'schemes/scheme'
-);
+// load scheme class
+ICE_Loader::load( 'schemes/scheme' );
 
 // load components api
 require_once INFINITY_API_PATH . '/sections.php';
