@@ -172,43 +172,6 @@ final class ICE_Enqueue extends ICE_Base
 	}
 
 	/**
-	 * Register a ICE style
-	 *
-	 * @param string $handle
-	 * @param string $src
-	 * @param array $deps
-	 */
-	private function register_style( $handle, $src, $deps = false )
-	{
-		return
-			wp_register_style(
-				$handle,
-				sprintf( '%s/%s', ICE_CSS_URL, $src ),
-				$deps,
-				ICE_VERSION
-			);
-	}
-
-	/**
-	 * Register a ICE script
-	 *
-	 * @param string $handle
-	 * @param string $src
-	 * @param array $deps
-	 */
-	private function register_script( $handle, $src, $deps = array(), $ver = false, $in_footer = false )
-	{
-		return
-			wp_register_script(
-				$handle,
-				sprintf( '%s/%s', ICE_JS_URL, $src ),
-				$deps,
-				$ver,
-				$in_footer
-			);
-	}
-
-	/**
 	 * Call enqueue styles action
 	 *
 	 * Never call this manually unless you really know what you are doing!
@@ -231,27 +194,27 @@ final class ICE_Enqueue extends ICE_Base
 			// register custom ui stylesheet
 			wp_register_style(
 				self::UI_STYLE_HANDLE,
-				$this->ui_stylesheet
+				ICE_CSS_URL . '/' . $this->ui_stylesheet
 			);
 		} else {
 			// register default ui stylesheet
-			$this->register_style(
+			wp_register_style(
 				self::UI_STYLE_HANDLE,
-				'ui/jquery-ui-1.10.3.custom.css'
+				ICE_CSS_URL . '/ui/jquery-ui-1.10.3.custom.css'
 			);
 		}
 
 		// register default styles
 
-		$this->register_style(
+		wp_register_style(
 			'jquery-juicy',
-			'juicy/jquery.juicy.css',
+			ICE_CSS_URL . '/juicy/jquery.juicy.css',
 			array( self::UI_STYLE_HANDLE )
 		);
 
-		$this->register_style(
+		wp_register_style(
 			'ice-ui',
-			'ui.css',
+			ICE_CSS_URL . '/ui.css',
 			array( 'jquery-juicy' )
 		);
 
@@ -279,40 +242,136 @@ final class ICE_Enqueue extends ICE_Base
 		}
 		
 		// register popular jQuery plugins
-		$this->register_script(
-			'jquery-cookie', 'jquery.kookie.js', array('jquery'), ICE_VERSION, true );
-		$this->register_script(
-			'jquery-fitvids', 'jquery.fitvids.js', array('jquery'), '1.0', true );
-		$this->register_script(
-			'jquery-mobilemenu', 'jquery.mobilemenu.js', array('jquery'), ICE_VERSION, true );
-		$this->register_script(
-			'jquery-transit', 'jquery.transit.min.js', array('jquery'), ICE_VERSION, true );
+
+		wp_register_script(
+			'jquery-cookie',
+			ICE_JS_URL . '/jquery.kookie.js',
+			array( 'jquery' ),
+			ICE_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'jquery-fitvids',
+			ICE_JS_URL . '/jquery.fitvids.js',
+			array( 'jquery' ),
+			'1.0',
+			true
+		);
+
+		wp_register_script(
+			'jquery-mobilemenu',
+			ICE_JS_URL . '/jquery.mobilemenu.js',
+			array( 'jquery' ),
+			ICE_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'jquery-transit',
+			ICE_JS_URL . '/jquery.transit.min.js',
+			array( 'jquery' ),
+			ICE_VERSION,
+			true
+		);
 
 		// register default scripts
-		$this->register_script(
-			'modernizr-custom', 'modernizr-custom.js', array(), '2.6.1', false );
-		$this->register_script(
-			'webfont', 'webfont.js', array(), ICE_VERSION, true );
-		$this->register_script(
-			'jquery-ui-nestedsortable', 'jquery.ui.nestedSortable.js', array('jquery', 'jquery-ui-sortable'), '1.3.4', true );
-		$this->register_script(
-			'ice-global', 'global.js', array(), ICE_VERSION, true );
-		$this->register_script(
-			'ice-slider', 'slider.js', array('ice-global', 'jquery-ui-slider'), ICE_VERSION, true );
-		$this->register_script(
-			'ice-scrollpane', 'scrollpane.js', array('ice-global', 'jquery-ui-slider'), ICE_VERSION, true );
-		$this->register_script(
-			'jquery-juicy-buttonmenu', 'juicy/jquery.juicy.buttonmenu.js', array('jquery-ui-button','jquery-ui-menu'), ICE_VERSION, true );
-		$this->register_script(
-			'jquery-juicy-buttonselect', 'juicy/jquery.juicy.buttonselect.js', array('jquery-ui-button'), ICE_VERSION, true );
-		$this->register_script(
-			'jquery-juicy-flashmesg', 'juicy/jquery.juicy.flashmesg.js', array('jquery-ui-widget'), ICE_VERSION, true );
-		$this->register_script(
-			'jquery-juicy-titlebox', 'juicy/jquery.juicy.titlebox.js', array('jquery-ui-widget'), ICE_VERSION, true );
-		$this->register_script(
-			'jquery-juicy-toolbar', 'juicy/jquery.juicy.toolbar.js', array('jquery-ui-widget','jquery-ui-button'), ICE_VERSION, true );
-		$this->register_script(
-			'jquery-juicy-fontfilter', 'juicy/jquery.juicy.fontfilter.js', array('jquery-juicy-titlebox','jquery-juicy-buttonselect','ice-slider','webfont'), ICE_VERSION, true );
+
+		wp_register_script(
+			'modernizr-custom',
+			ICE_JS_URL . '/modernizr-custom.js',
+			array(),
+			'2.6.1',
+			false
+		);
+
+		wp_register_script(
+			'webfont',
+			ICE_JS_URL . '/webfont.js',
+			array(),
+			ICE_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'jquery-ui-nestedsortable',
+			ICE_JS_URL . '/jquery.ui.nestedSortable.js',
+			array( 'jquery', 'jquery-ui-sortable' ),
+			'1.3.4',
+			true
+		);
+
+		wp_register_script(
+			'ice-global',
+			ICE_JS_URL . '/global.js',
+			array(),
+			ICE_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'ice-slider',
+			ICE_JS_URL . '/slider.js',
+			array( 'ice-global', 'jquery-ui-slider' ),
+			ICE_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'ice-scrollpane',
+			ICE_JS_URL . '/scrollpane.js',
+			array( 'ice-global', 'jquery-ui-slider' ),
+			ICE_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'jquery-juicy-buttonmenu',
+			ICE_JS_URL . '/juicy/jquery.juicy.buttonmenu.js',
+			array( 'jquery-ui-button', 'jquery-ui-menu' ),
+			ICE_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'jquery-juicy-buttonselect',
+			ICE_JS_URL . '/juicy/jquery.juicy.buttonselect.js',
+			array( 'jquery-ui-button' ),
+			ICE_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'jquery-juicy-flashmesg',
+			ICE_JS_URL . '/juicy/jquery.juicy.flashmesg.js',
+			array( 'jquery-ui-widget' ),
+			ICE_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'jquery-juicy-titlebox',
+			ICE_JS_URL . '/juicy/jquery.juicy.titlebox.js',
+			array( 'jquery-ui-widget' ),
+			ICE_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'jquery-juicy-toolbar',
+			ICE_JS_URL . '/juicy/jquery.juicy.toolbar.js',
+			array( 'jquery-ui-widget', 'jquery-ui-button' ),
+			ICE_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'jquery-juicy-fontfilter',
+			ICE_JS_URL . '/juicy/jquery.juicy.fontfilter.js',
+			array( 'jquery-juicy-titlebox', 'jquery-juicy-buttonselect', 'ice-slider', 'webfont' ),
+			ICE_VERSION,
+			true
+		);
 
 		// localize
 		$this->localize_scripts();
