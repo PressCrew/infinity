@@ -19,6 +19,32 @@ if ( is_admin() ) {
 	require_once INFINITY_ADMIN_PATH . '/loader.php';
 }
 
+// register base assets
+function infinity_base_assets()
+{
+	// style.css
+	ice_register_style(
+		'infinity-style',
+		array(
+			'src' => get_stylesheet_uri(),
+			'priority' => 99999,
+			'condition' => 'is_not_admin'
+		)
+	);
+
+	// superfish script
+	ice_register_script(
+		'superfish',
+		array(
+			'src' => INFINITY_THEME_URL . '/assets/js/superfish.js',
+			'in_footer' => true,
+			'condition' => 'is_not_admin'
+		)
+	);
+
+}
+add_action( 'after_setup_theme', 'infinity_base_assets' );
+
 // load infinity text domain
 function infinity_base_textdomain()
 {

@@ -13,8 +13,7 @@
 
 ICE_Loader::load(
 	'base/component',
-	'schemes/scheme',
-	'schemes/scheme_enqueue'
+	'schemes/scheme'
 );
 
 /**

@@ -68,98 +68,6 @@ $global['feature'] = array(
 	'infinity-post-gravatar' => false
 );
 
-// ------------------------------------------------------------------------------------
-// Automatic style enqueuing is handled by the next three sections
-// Important: Styles will NEVER be enqueued, UNLESS an action or condition is set
-// ------------------------------------------------------------------------------------
-
-// Define your stylesheets
-// eg. 'handle' => 'path/to/file.css'
-$global['style'] = array(
-	'cpanel' => 'dashboard/assets/css/cpanel.css',
-	'options' => 'dashboard/assets/css/options.css',
-	'docs' => 'dashboard/assets/css/docs.css'
-);
-
-// Define dependancies for stylesheets
-// These will NOT fail to load if a required handle isn't registered
-// eg. 'handle' => array( 'foo', 'bar', 'baz' )
-$global['style_depends'] = array(
-	'cpanel' => array(
-		'ice-ui'
-	)
-);
-
-// Enqueue specific stylesheets ONLY when an action is called
-// eg. 'handle' => 'action_name'
-// eg. 'handle' => array( 'action_one', 'action_two' )
-$global['style_actions'] = array(
-	'cpanel' => 'admin_print_styles-appearance_page_infinity-theme',
-	'options' => 'admin_print_styles-appearance_page_infinity-theme',
-	'docs' => 'admin_print_styles-appearance_page_infinity-theme'
-);
-
-// Enqueue specific stylesheets ONLY if a callback function returns TRUE
-// eg. 'handle' => 'function_name'
-// eg. 'handle' => array( 'function_one', 'function_two' )
-$global['style_conditions'] = array(
-	//'google-fonts' => 'is_front_page',
-	//'about-sidebar' => 'custom_is_page_about'
-);
-
-// ------------------------------------------------------------------------------------
-// Automatic script enqueuing is handled by the next three sections
-// Important: Scripts will NEVER be enqueued, UNLESS an action or condition is set
-// ------------------------------------------------------------------------------------
-
-// Define your scripts
-// eg. 'handle' => 'path/to/file.js'
-$global['script'] = array(
-	'superfish' => 'assets/js/superfish.js',
-	'cpanel' => 'dashboard/assets/js/cpanel.js',
-	'docs' => 'dashboard/assets/js/docs.js'
-);
-
-// Define dependancies for scripts
-// These will NOT fail to load if a required handle isn't registered
-// eg. 'handle' => array( 'foo', 'bar', 'baz' )
-$global['script_depends'] = array(
-	'docs' =>
-		array(
-			'jquery'
-		),
-	'cpanel' =>
-		array(
-			'ice-global',
-			'jquery-cookie',
-			'jquery-ui-accordion',
-			'jquery-ui-position',
-			'jquery-ui-sortable',
-			'jquery-ui-resizable',
-			'jquery-ui-tabs',
-			'jquery-juicy-buttonmenu',
-			'jquery-juicy-flashmesg',
-			'jquery-juicy-toolbar'
-		)
-);
-
-// Enqueue specific scripts ONLY when an action is called
-// eg. 'handle' => 'action_name'
-// eg. 'handle' => array( 'action_one', 'action_two' )
-$global['script_actions'] = array(
-	'cpanel' => 'admin_print_scripts-appearance_page_infinity-theme',
-	'docs' => 'admin_print_scripts-appearance_page_infinity-theme'
-);
-
-// Enqueue specific scripts ONLY if a callback function returns TRUE
-// eg. 'handle' => 'function_name'
-// eg. 'handle' => array( 'function_one', 'function_two' )
-$global['script_conditions'] = array(
-	//'mysliders' => 'is_front_page',
-	//'about-sidebar' => 'custom_is_page_about',
-	'superfish' => 'is_not_admin'
-);
-
 // ===================
 //  Advanced Settings
 // ===================
@@ -185,10 +93,6 @@ $global['advanced'] = array(
 	// Then your script root would be: script_root = "content/js"
 	'script_root' => 'assets/js',
 
-	// Set the script domain to automatically generate a document.domain expression
-	// in the header of every page, including all admin dashboard pages.
-	//'script_domain' => 'mydomain.com',
-
 	// ---------------------------------------------------------------------
 	// Options panel preferences
 	// These settings affect the behavior and display of the options panel
@@ -200,10 +104,6 @@ $global['advanced'] = array(
 	// jQuery UI preferences
 	// These settings affect the initialization and behavior of jQuery UI
 	// ---------------------------------------------------------------------
-
-	// Set this to a valid jQuery UI theme stylesheet if you wish to use a
-	// theme other than the default which is defined internally
-	//'ui_stylesheet' => 'path/to/ui-custom.css',
 
 	// The default is to always show two save buttons.
 	// Set this to false if you only want to show the "Save All" button

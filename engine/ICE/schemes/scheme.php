@@ -40,49 +40,13 @@ final class ICE_Scheme extends ICE_Base
 	 */
 	const SETTING_FEATURE = 'feature';
 	/**
-	 * Style config key
-	 */
-	const SETTING_STYLE_DEFS = 'style';
-	/**
-	 * Style depends config key
-	 */
-	const SETTING_STYLE_DEPS = 'style_depends';
-	/**
-	 * Style actions config key
-	 */
-	const SETTING_STYLE_ACTS = 'style_actions';
-	/**
-	 * Style conditions config key
-	 */
-	const SETTING_STYLE_CONDS = 'style_conditions';
-	/**
 	 * Script config key
 	 */
 	const SETTING_SCRIPT_DEFS = 'script';
 	/**
-	 * Script depends config key
-	 */
-	const SETTING_SCRIPT_DEPS = 'script_depends';
-	/**
-	 * Script actions config key
-	 */
-	const SETTING_SCRIPT_ACTS = 'script_actions';
-	/**
-	 * Script conditions config key
-	 */
-	const SETTING_SCRIPT_CONDS = 'script_conditions';
-	/**
 	 * Advanced settings config key
 	 */
 	const SETTING_ADVANCED = 'advanced';
-	/**
-	 * jQuery UI stylesheet path setting
-	 */
-	const SETTING_UI_STYLESHEET = 'ui_stylesheet';
-	/**
-	 * Script domain setting
-	 */
-	const SETTING_SCRIPT_DOMAIN = 'script_domain';
 	/**
 	 * Options save single setting
 	 */
@@ -152,13 +116,6 @@ final class ICE_Scheme extends ICE_Base
 	private $settings;
 
 	/**
-	 * The enqueue helper instance
-	 * 
-	 * @var ICE_Scheme_Enqueue
-	 */
-	private $enqueue;
-
-	/**
 	 * This is a singleton
 	 */
 	private function __construct()
@@ -212,7 +169,6 @@ final class ICE_Scheme extends ICE_Base
 		$this->feature_support();
 
 		// some scheme initializations must occur after WP theme setup
-		add_action( 'after_setup_theme', array($this, 'init_enqueueing'), 9 );
 		add_action( 'after_setup_theme', array($this, 'load_functions'), 9 );
 		add_action( 'after_setup_theme', array($this, 'finalize'), 9 );
 		add_action( 'wp_head', array($this, 'render_assets'), 11 );
@@ -229,32 +185,6 @@ final class ICE_Scheme extends ICE_Base
 	final public function settings()
 	{
 		return $this->settings;
-	}
-
-	/**
-	 * Get scheme enqueue helper
-	 *
-	 * @return ICE_Scheme_Enqueue
-	 */
-	public function enqueue()
-	{
-		if ( $this->enqueue instanceof ICE_Scheme_Enqueue ) {
-			return $this->enqueue;
-		}
-
-		throw new Exception( 'The enqueuer has not been initialized yet' );
-	}
-
-	/**
-	 * Don't ever call this manually
-	 *
-	 * @internal
-	 */
-	public function init_enqueueing()
-	{
-		if ( !$this->enqueue instanceof ICE_Scheme_Enqueue ) {
-			$this->enqueue = new ICE_Scheme_Enqueue( $this );
-		}
 	}
 
 	/**

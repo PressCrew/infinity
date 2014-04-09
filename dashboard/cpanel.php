@@ -143,18 +143,90 @@ function infinity_dashboard_cpanel_setup()
 	$action = infinity_dashboard_cpanel_action();
 
 	if ( $action ) {
-
-		// always need jQuery UI (for now)
-		wp_enqueue_script( 'jquery-ui-accordion' );
-		wp_enqueue_script( 'jquery-ui-button' );
-		wp_enqueue_script( 'jquery-ui-dialog' );
-		wp_enqueue_script( 'jquery-ui-progressbar' );
-		wp_enqueue_script( 'jquery-ui-tabs' );
-		
 		// hook for config actions
 		do_action( 'infinity_dashboard_cpanel_setup' );
 	}
 }
+
+/**
+ * Handle registration of cpanel assets.
+ *
+ * @package Infinity
+ * @subpackage dashboard
+ */
+function infinity_dashboard_cpanel_assets()
+{
+	// cpanel styles
+	ice_register_style(
+		'infinity-cpanel',
+		array(
+			'src' => INFINITY_THEME_URL . '/dashboard/assets/css/cpanel.css',
+			'deps' => array( 'ice-ui' ),
+			'action' => 'admin_print_styles-appearance_page_infinity-theme',
+			'condition' => 'is_admin'
+		)
+	);
+
+	// options styles
+	ice_register_style(
+		'infinity-options',
+		array(
+			'src' => INFINITY_THEME_URL . '/dashboard/assets/css/options.css',
+			'action' => 'admin_print_styles-appearance_page_infinity-theme',
+			'condition' => 'is_admin'
+		)
+	);
+
+	// docs styles
+	ice_register_style(
+		'infinity-docs',
+		array(
+			'src' => INFINITY_THEME_URL . '/dashboard/assets/css/docs.css',
+			'action' => 'admin_print_styles-appearance_page_infinity-theme',
+			'condition' => 'is_admin'
+		)
+	);
+
+	// cpanel script
+	ice_register_script(
+		'cpanel',
+		array(
+			'src' => INFINITY_THEME_URL . '/dashboard/assets/js/cpanel.js',
+			'deps' => array(
+				'ice-global',
+				'jquery-cookie',
+				'jquery-ui-accordion',
+				'jquery-ui-button',
+				'jquery-ui-dialog',
+				'jquery-ui-position',
+				'jquery-ui-progressbar',
+				'jquery-ui-sortable',
+				'jquery-ui-resizable',
+				'jquery-ui-tabs',
+				'jquery-juicy-buttonmenu',
+				'jquery-juicy-flashmesg',
+				'jquery-juicy-toolbar'
+			),
+			'in_footer' => true,
+			'action' => 'admin_print_scripts-appearance_page_infinity-theme',
+			'condition' => 'is_admin'
+		)
+	);
+
+	// docs script
+	ice_register_script(
+		'docs',
+		array(
+			'src' => INFINITY_THEME_URL . '/dashboard/assets/js/docs.js',
+			'deps' => array( 'jquery' ),
+			'in_footer' => true,
+			'action' => 'admin_print_scripts-appearance_page_infinity-theme',
+			'condition' => 'is_admin'
+		)
+	);
+
+}
+add_action( 'infinity_dashboard_cpanel_setup', 'infinity_dashboard_cpanel_assets' );
 
 //
 // Screens
