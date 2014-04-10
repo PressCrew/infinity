@@ -78,13 +78,6 @@ final class ICE_Scheme extends ICE_Base
 	 * @var string
 	 */
 	private $config_file;
-
-	/**
-	 * Stack of config files that have been loaded
-	 *
-	 * @var ICE_Stack
-	 */
-	private $config_files_loaded;
 	
 	/**
 	 * Theme stack
@@ -115,7 +108,6 @@ final class ICE_Scheme extends ICE_Base
 		// initialize themes map
 		$this->themes = new ICE_Stack();
 		$this->settings = new ICE_Init_Settings();
-		$this->config_files_loaded = new ICE_Stack();
 	}
 
 	/**
@@ -265,8 +257,6 @@ final class ICE_Scheme extends ICE_Base
 		if ( is_readable( $config_file )  ) {
 			// parse it
 			$config = $this->parse_config_file( $config_file );
-			// push onto loaded stack
-			$this->config_files_loaded->push( $config_file );
 		} else {
 			// yipes, theme has no config file.
 			// assume that parent theme is the root theme
@@ -430,19 +420,10 @@ final class ICE_Scheme extends ICE_Base
 			// path to config file
 			$config_file = $this->theme_config_file( $theme, $policy->get_handle() );
 
-			// load the option config if it exists
+			// does the option config exist?
 			if ( is_readable( $config_file ) ) {
-
-				// skip loaded files
-				if ( $this->config_files_loaded->contains( $config_file ) ) {
-					continue;
-				}
-				
-				// try to load config file
-				if ( $policy->registry()->register_file( $config_file ) ) {
-					// push onto loaded stack
-					$this->config_files_loaded->push( $config_file );
-				}
+				// yep, try to load it
+				$policy->registry()->register_file( $config_file );
 			}
 		}
 
