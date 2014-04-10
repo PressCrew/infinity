@@ -127,9 +127,7 @@ class ICE_Ext_Option_Ui_Slider
 		// set value(s)
 		$value = $this->get();
 
-		if ( $value instanceof ICE_Map ) {
-			$logic->av( 'values', $value->to_array() );
-		} elseif ( is_array( $value ) ) {
+		if ( is_array( $value ) ) {
 			$logic->av( 'values', $value );
 		} elseif ( is_numeric( $value ) ) {
 			$logic->av( 'value', $value );
