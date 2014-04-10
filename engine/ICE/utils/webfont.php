@@ -36,22 +36,19 @@ class ICE_Webfont extends ICE_Base
 	private $result;
 
 	/**
-	 * Map of initialized services
+	 * Array of initialized services.
 	 * 
-	 * @var ICE_Map
+	 * @var array
 	 */
-	private $services;
+	private $services = array();
 
 	/**
-	 * Constructor
+	 * Constructor.
 	 *
 	 * @param integer $max_age
 	 */
 	private function __construct( $max_age = 86400 )
 	{
-		// initialize services map
-		$this->services = new ICE_Map();
-
 		// add google always (for now)
 		$this->add_google();
 
@@ -82,11 +79,9 @@ class ICE_Webfont extends ICE_Base
 	public function add_google()
 	{
 		// has service been initialized?
-		if ( !$this->services->contains( 'google' ) ) {
-			// create new instance
-			$google = new ICE_Webfont_Service_Google();
+		if ( false === isset( $this->services['google'] ) ) {
 			// add to services registry
-			$this->services->add( 'google', $google );
+			$this->services['google'] = new ICE_Webfont_Service_Google();
 		}
 
 		// return self
