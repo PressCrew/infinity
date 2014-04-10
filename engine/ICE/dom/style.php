@@ -874,9 +874,9 @@ final class ICE_Style_Property_Composite extends ICE_Style_Property
 	 * Constructor
 	 *
 	 * @param string $name Name of the property to create
-	 * @param ICE_Stack $primitives Stack of primitive properties which make up this composite
+	 * @param array $primitives Array of primitive property objects which make up this composite.
 	 */
-	public function __construct( $name, ICE_Stack $primitives )
+	public function __construct( $name, $primitives )
 	{
 		throw new Exception( 'Composite style properties are not yet fully supported!' );
 
