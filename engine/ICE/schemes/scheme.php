@@ -40,10 +40,6 @@ final class ICE_Scheme extends ICE_Base
 	 */
 	const SETTING_FEATURE = 'feature';
 	/**
-	 * Advanced settings config key
-	 */
-	const SETTING_ADVANCED = 'advanced';
-	/**
 	 * Options save single setting
 	 */
 	const SETTING_OPT_SAVE_SINGLE = 'options_save_single';
@@ -296,18 +292,10 @@ final class ICE_Scheme extends ICE_Base
 			// push onto the stack AFTER recursion
 			$this->themes->push( $theme );
 
-			// loop through settings and set them
+			// loop through config
 			foreach ( $config as $name => $value ) {
-				if ( $name == self::SETTING_ADVANCED ) {
-					if ( is_array( $value ) ) {
-						foreach ( $value as $name_adv => $value_adv ) {
-							$this->settings()->set( $theme, $name_adv, $value_adv );
-						}
-					}
-					continue;
-				} else {
-					$this->settings()->set( $theme, $name, $value );
-				}
+				// apply setting for theme
+				$this->settings()->set( $theme, $name, $value );
 			}
 
 		} else {

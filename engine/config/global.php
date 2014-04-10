@@ -68,48 +68,35 @@ $global['feature'] = array(
 	'infinity-post-gravatar' => false
 );
 
-// ===================
-//  Advanced Settings
-// ===================
-$global['advanced'] = array(
-	// ---------------------------------------------------------------------
-	// Asset files cascading preferences
-	// These settings are related to the various asset cascading functions
-	// and DO NOT have anything to do with automatic enqueueing.
-	// ---------------------------------------------------------------------
+// ---------------------------------------------------------------------
+// Asset files cascading preferences
+// These settings are related to the various asset cascading functions
+// and DO NOT have anything to do with automatic enqueueing.
+// ---------------------------------------------------------------------
 
-	// The root image directory, relative to your theme root
-	// If your image directory is: wp-content/themes/my-theme/content/img
-	// Then your image root would be: 'image_root' => 'content/img'
-	'image_root' => 'assets/images',
+// The root image directory, relative to your theme root
+// If your image directory is: wp-content/themes/my-theme/content/img
+// Then your image root would be: 'image_root' => 'content/img'
+$global['image_root'] = 'assets/images';
 
-	// The root style directory, relative to your theme root
-	// If your style directory is: wp-content/themes/my-theme/content/css
-	// Then your style root would be: 'style_root' => 'content/css'
-	'style_root' => 'assets/css',
+// The root style directory, relative to your theme root
+// If your style directory is: wp-content/themes/my-theme/content/css
+// Then your style root would be: 'style_root' => 'content/css'
+$global['style_root'] = 'assets/css';
 
-	// The root script directory, relative to your theme root
-	// If your script directory is: wp-content/themes/my-theme/content/js
-	// Then your script root would be: script_root = "content/js"
-	'script_root' => 'assets/js',
+// The root script directory, relative to your theme root
+// If your script directory is: wp-content/themes/my-theme/content/js
+// Then your script root would be: script_root = "content/js"
+$global['style_root'] = 'assets/js';
 
-	// ---------------------------------------------------------------------
-	// Options panel preferences
-	// These settings affect the behavior and display of the options panel
-	// ---------------------------------------------------------------------
+// ---------------------------------------------------------------------
+// jQuery UI preferences
+// These settings affect the initialization and behavior of jQuery UI
+// ---------------------------------------------------------------------
 
-	// Options panel prefs are under development
-
-	// ---------------------------------------------------------------------
-	// jQuery UI preferences
-	// These settings affect the initialization and behavior of jQuery UI
-	// ---------------------------------------------------------------------
-
-	// The default is to always show two save buttons.
-	// Set this to false if you only want to show the "Save All" button
-	'options_save_single' => true,
-
-);
+// The default is to always show two save buttons.
+// Set this to false if you only want to show the "Save All" button.
+$global['options_save_single'] = true;
 
 // return config array to caller
 return $global;
