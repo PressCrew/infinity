@@ -25,13 +25,6 @@ abstract class ICE_Asset extends ICE_Base
 	private $component;
 
 	/**
-	 * Stack of sections
-	 * 
-	 * @var ICE_Map
-	 */
-	private $sections = array();
-
-	/**
 	 * Script dependancies
 	 *
 	 * @var array
