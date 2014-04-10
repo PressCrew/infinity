@@ -98,7 +98,7 @@ class ICE_Export extends ICE_Base
 	 * Push an exportable object onto the stack
 	 *
 	 * @param ICE_Exportable $obj
-	 * @return ICE_Stack
+	 * @return array
 	 */
 	public function push( ICE_Exportable $obj )
 	{
