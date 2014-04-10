@@ -67,11 +67,11 @@ abstract class ICE_Asset extends ICE_Base
 	private $conditions = array();
 
 	/**
-	 * Files that have already been imported
+	 * Files that have already been imported.
 	 *
-	 * @var ICE_Stack
+	 * @var array
 	 */
-	private static $files_imported;
+	private static $files_imported = array();
 
 	/**
 	 * Constructor
@@ -81,11 +81,6 @@ abstract class ICE_Asset extends ICE_Base
 		// get a component?
 		if ( $component ) {
 			$this->component = $component;
-		}
-
-		// init files imported stack
-		if ( !self::$files_imported instanceof ICE_Stack ) {
-			self::$files_imported = new ICE_Stack();
 		}
 	}
 
@@ -430,12 +425,12 @@ abstract class ICE_Asset extends ICE_Base
 			}
 
 			// only import each file once!
-			if ( self::$files_imported->contains( $filename ) ) {
+			if ( in_array( $filename, self::$files_imported ) )  {
 				// already imported that one
 				continue;
 			} else {
 				// push it on to imported stack
-				self::$files_imported->push( $filename );
+				self::$files_imported[] = $filename;
 			}
 
 			// inject helpful comment ;)
