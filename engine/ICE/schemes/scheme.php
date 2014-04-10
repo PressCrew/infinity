@@ -40,10 +40,6 @@ final class ICE_Scheme extends ICE_Base
 	 */
 	const SETTING_FEATURE = 'feature';
 	/**
-	 * Script config key
-	 */
-	const SETTING_SCRIPT_DEFS = 'script';
-	/**
 	 * Advanced settings config key
 	 */
 	const SETTING_ADVANCED = 'advanced';
