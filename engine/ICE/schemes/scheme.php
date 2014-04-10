@@ -672,12 +672,8 @@ final class ICE_Scheme extends ICE_Base
 	}
 
 	/**
-	 * Locate a theme file, giving priority to top themes in the stack
+	 * Locate a theme file, giving priority to top themes in the stack.
 	 *
-	 * If first argument is a ICE_Map instance, it is expected to be
-	 * a map of theme settings whose values are relative path prefixes.
-	 *
-	 * @param ICE_Map $prefix_map Optional map of settings which define path prefixes
 	 * @param string $file_names,... The file names that make up the RELATIVE path to the theme root
 	 * @return string|false
 	 */
@@ -686,18 +682,9 @@ final class ICE_Scheme extends ICE_Base
 		// get all args
 		$file_names = func_get_args();
 
-		// no prefix map by default
-		$prefix_map = null;
-
-		// prefixes map?
-		if ( !empty( $file_names ) ) {
-			if ( $file_names[0] instanceof ICE_Map ) {
-				$prefix_map = array_shift( $file_names );
-			}
-		}
-
-		// still have something?
+		// have something?
 		if ( empty( $file_names ) ) {
+			// nope, bail out
 			return false;
 		}
 
@@ -707,20 +694,17 @@ final class ICE_Scheme extends ICE_Base
 			// build path to stackfile
 			$stack_file = $this->theme_dir( $theme );
 
-			// inject prefix?
-			if ( $prefix_map && $prefix_map->contains($theme) ) {
-				$stack_file .= '/' . $prefix_map->item_at($theme)->get_value();
-			}
-
 			// append requested path
 			$stack_file .= '/' . implode( '/', $file_names );
 
 			// does stack file exist?
 			if ( is_readable( $stack_file ) ) {
+				// yep, return it
 				return $stack_file;
 			}
 		}
 
+		// file not located
 		return false;
 	}
 
