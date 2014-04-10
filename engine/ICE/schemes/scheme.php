@@ -80,11 +80,11 @@ final class ICE_Scheme extends ICE_Base
 	private $config_file;
 	
 	/**
-	 * Theme stack
+	 * Theme stack.
 	 *
-	 * @var ICE_Stack
+	 * @var array
 	 */
-	private $themes;
+	private $themes = array();
 
 	/**
 	 * Cache of reversed theme stack array
@@ -105,8 +105,7 @@ final class ICE_Scheme extends ICE_Base
 	 */
 	private function __construct()
 	{
-		// initialize themes map
-		$this->themes = new ICE_Stack();
+		// initialize settings instance
 		$this->settings = new ICE_Init_Settings();
 	}
 
@@ -279,7 +278,7 @@ final class ICE_Scheme extends ICE_Base
 			}
 
 			// push onto the stack AFTER recursion
-			$this->themes->push( $theme );
+			$this->themes[] = $theme;
 
 			// loop through config
 			foreach ( $config as $name => $value ) {
@@ -519,7 +518,7 @@ final class ICE_Scheme extends ICE_Base
 	public function theme_stack( $top_down = true )
 	{
 		// is there anything in the stack yet?
-		if ( $this->themes->count() === 0 ) {
+		if ( 0 === count( $this->themes ) ) {
 			// not good. throw an exception here so we don't have to
 			// act paranoid and check the result of every call to this.
 			throw new Exception( 'You are trying to get the theme stack before it has been loaded' );
@@ -530,13 +529,13 @@ final class ICE_Scheme extends ICE_Base
 			// empty cache?
 			if ( null === $this->theme_stack_topdown ) {
 				// populate cache
-				$this->theme_stack_topdown = $this->themes->to_array( true );
+				$this->theme_stack_topdown = array_reverse( $this->themes, true );
 			}
 			// return reversed array
 			return $this->theme_stack_topdown;
 		} else {
 			// return array as is
-			return $this->themes->to_array();
+			return $this->themes;
 		}
 		
 	}
