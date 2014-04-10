@@ -87,8 +87,6 @@ final class ICE_Loader extends ICE_Base
 
 			// load really important classes
 			self::load(
-				'collections/map',
-				'collections/map_iterator',
 				'utils/files',
 				'utils/enqueue'
 			);
