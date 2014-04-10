@@ -161,7 +161,6 @@ final class ICE_Scheme extends ICE_Base
 		$this->feature_support();
 
 		// some scheme initializations must occur after WP theme setup
-		add_action( 'after_setup_theme', array($this, 'load_functions'), 9 );
 		add_action( 'after_setup_theme', array($this, 'finalize'), 9 );
 		add_action( 'wp_head', array($this, 'render_assets'), 11 );
 		add_action( 'admin_head', array($this, 'render_assets'), 11 );
@@ -344,21 +343,26 @@ final class ICE_Scheme extends ICE_Base
 	}
 
 	/**
-	 * Try to load function files for themes in stack
+	 * Try to manually load a functions.php file for a theme.
 	 *
-	 * @internal
+	 * @param string $theme The theme's slug.
+	 * @return boolean
 	 */
-	public function load_functions()
+	public function load_functions( $theme )
 	{
-		// loop through theme stack
-		foreach ( $this->theme_stack() as $theme  ) {
-			// load functions file if it exists
-			$filename = $this->theme_file( $theme, 'functions.php' );
-			// try to load it
-			if ( is_readable( $filename ) ) {
-				require_once $filename;
-			}
+		// get filename
+		$filename = $this->theme_file( $theme, 'functions.php' );
+
+		// does it exist?
+		if ( is_readable( $filename ) ) {
+			// yep, load it
+			require_once $filename;
+			// success
+			return true;
 		}
+
+		// failed to load
+		return false;
 	}
 
 	/**
