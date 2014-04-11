@@ -14,59 +14,7 @@ $global['parent_theme'] = '';
 
 // Enable/Disable features. This is the same as calling add_theme_support()
 
-$global['feature'] = array(
-	// WordPress Setup
-	'menus' => true,
-	'post-thumbnails' => true,
-	'infinity-sidebar-setup' => true,
-	'infinity-top-menu-setup' => true,
-	'infinity-main-menu-setup' => true,
-	'infinity-sub-menu-setup' => true,
-	'infinity-footer-menu-setup' => true,
-	'infinity-post-thumbnails' => true,
-	'infinity-introduction-boxes' => true,
-	'infinity-post-avatars' => true,
-	'infinity-author-box' => true,
-	'infinity-pagination' => true,
-	// Core Support
-	'infinity-wp-support' => true,
-	'infinity-ext-support' => true,
-	'infinity-resp-support' => true,
-	// Styles
-	'infinity-wp-style' => true,
-	'infinity-typog-style' => true,
-	'infinity-layout-style' => true,
-	'infinity-buttons-style' => true,
-	'infinity-design-style' => true,
-	'infinity-font-iconsweets' => true,
-	'infinity-icons-style' => true,
-	// Scripts
-	'infinity-base-script' => true,
-	'infinity-responsive-menu' => true,
-	'infinity-responsive-videos' => true,
-	// Options Features
-	'infinity-core-options' => true,
-	'infinity-body-layout' => true,
-	'infinity-header-logo' => true,
-	'infinity-header-layout' => true,
-	'infinity-sidebar-layout' => true,
-	'infinity-content-layout' => true,
-	'infinity-footer-layout' => true,
-	'infinity-main-menu-layout' => true,
-	'infinity-widget-layout' => true,
-	'infinity-sub-menu-layout' => true,
-	'infinity-top-menu-layout' => true,
-	'infinity-main-menu-divider' => false,
-	'infinity-body-layout' => true,
-	'infinity-custom-css' => true,
-	// BuddyPress
-	'infinity-bp-support' => true,
-	'infinity-bp-style' => true,
-	'infinity-bp-fbconnect' => true,
-	'infinity-bp-sidebar-setup' => true,
-	// Other Features
-	'infinity-post-gravatar' => false
-);
+$global['feature'] = array();
 
 // ---------------------------------------------------------------------
 // Asset files cascading preferences

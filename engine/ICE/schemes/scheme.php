@@ -152,7 +152,7 @@ final class ICE_Scheme extends ICE_Base
 		$this->feature_support();
 
 		// some scheme initializations must occur after WP theme setup
-		add_action( 'after_setup_theme', array($this, 'finalize'), 9 );
+		add_action( 'after_setup_theme', array($this, 'finalize'), 101 );
 		add_action( 'wp_head', array($this, 'render_assets'), 11 );
 		add_action( 'admin_head', array($this, 'render_assets'), 11 );
 

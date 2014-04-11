@@ -19,6 +19,66 @@ if ( is_admin() ) {
 	require_once INFINITY_ADMIN_PATH . '/loader.php';
 }
 
+/**
+ * Add support for base features.
+ */
+function infinity_base_features()
+{
+	// Core Support
+	add_theme_support( 'infinity-wp-support' );
+	add_theme_support( 'infinity-ext-support' );
+	add_theme_support( 'infinity-resp-support' );
+	
+	// WordPress Setup
+	add_theme_support( 'menus' );
+	add_theme_support( 'post-thumbnails' );
+	add_theme_support( 'infinity-sidebar-setup' );
+	add_theme_support( 'infinity-top-menu-setup' );
+	add_theme_support( 'infinity-main-menu-setup' );
+	add_theme_support( 'infinity-sub-menu-setup' );
+	add_theme_support( 'infinity-footer-menu-setup' );
+	add_theme_support( 'infinity-post-thumbnails' );
+	add_theme_support( 'infinity-introduction-boxes' );
+	add_theme_support( 'infinity-post-avatars' );
+	add_theme_support( 'infinity-author-box' );
+	add_theme_support( 'infinity-pagination' );
+	
+	// Styles
+	add_theme_support( 'infinity-wp-style' );
+	add_theme_support( 'infinity-typog-style' );
+	add_theme_support( 'infinity-layout-style' );
+	add_theme_support( 'infinity-buttons-style' );
+	add_theme_support( 'infinity-design-style' );
+	add_theme_support( 'infinity-font-iconsweets' );
+	add_theme_support( 'infinity-icons-style' );
+	
+	// Scripts
+	add_theme_support( 'infinity-base-script' );
+	add_theme_support( 'infinity-responsive-menu' );
+	add_theme_support( 'infinity-responsive-videos' );
+	
+	// Options Features
+	add_theme_support( 'infinity-core-options' );
+	add_theme_support( 'infinity-body-layout' );
+	add_theme_support( 'infinity-header-logo' );
+	add_theme_support( 'infinity-header-layout' );
+	add_theme_support( 'infinity-sidebar-layout' );
+	add_theme_support( 'infinity-content-layout' );
+	add_theme_support( 'infinity-footer-layout' );
+	add_theme_support( 'infinity-main-menu-layout' );
+	add_theme_support( 'infinity-widget-layout' );
+	add_theme_support( 'infinity-sub-menu-layout' );
+	add_theme_support( 'infinity-top-menu-layout' );
+	add_theme_support( 'infinity-custom-css' );
+	
+	// BuddyPress
+	add_theme_support( 'infinity-bp-support' );
+	add_theme_support( 'infinity-bp-style' );
+	add_theme_support( 'infinity-bp-fbconnect' );
+	add_theme_support( 'infinity-bp-sidebar-setup' );
+}
+add_action( 'after_setup_theme', 'infinity_base_features' );
+
 // register base assets
 function infinity_base_assets()
 {
@@ -123,7 +183,7 @@ function infinity_base_post_thumb_sizes()
 		add_image_size( 'thumbnail-post', 210, 160, true );
 	}
 }
-add_action( 'after_setup_theme', 'infinity_base_post_thumb_sizes' );
+add_action( 'after_setup_theme', 'infinity_base_post_thumb_sizes', 20 );
 
 /**
  * Enqueue Comment Script
@@ -160,7 +220,7 @@ function infinity_base_register_menus()
 		register_nav_menu( 'footer-menu', __( 'Inside Footer', 'infinity' ) );
 	}
 }
-add_action( 'after_setup_theme', 'infinity_base_register_menus' );
+add_action( 'init', 'infinity_base_register_menus' );
 
 /**
  * Display a nav menu using a custom walker
