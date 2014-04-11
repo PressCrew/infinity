@@ -130,13 +130,6 @@ abstract class ICE_Component
 	protected $id;
 
 	/**
-	 * Whether or not this component should be ignored
-	 *
-	 * @var boolean
-	 */
-	protected $ignore;
-	
-	/**
 	 * The parent component (slug)
 	 *
 	 * @var string
@@ -274,7 +267,6 @@ abstract class ICE_Component
 			case 'documentation':
 			case 'hname':
 			case 'id':
-			case 'ignore':
 			case 'name':
 			case 'parent':
 			case 'required_feature':
@@ -953,9 +945,7 @@ abstract class ICE_Component
 	 */
 	public function render( $output = true )
 	{
-		if ( $this->ignore ) {
-			throw new Exception( 'Cannot render a component that has been ignored' );
-		} elseif ( $this->renderable() ) {
+		if ( $this->renderable() ) {
 			if ( $output === true ) {
 				$this->policy()->renderer()->render( $this, true );
 				return true;
@@ -975,11 +965,7 @@ abstract class ICE_Component
 	 */
 	public function render_bypass()
 	{
-		if ( $this->ignore ) {
-			throw new Exception( 'Cannot render a component that has been ignored' );
-		} else {
-			return $this->policy()->renderer()->render_bypass( $this );
-		}
+		return $this->policy()->renderer()->render_bypass( $this );
 	}
 
 	/**

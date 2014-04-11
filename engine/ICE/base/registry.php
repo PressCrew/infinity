@@ -230,19 +230,12 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	/**
 	 * Return all registered components as an array
 	 *
-	 * @param boolean $include_ignored Set to true to also return components which have ignore set to true
 	 * @return array
 	 */
-	final public function get_all( $include_ignored = false )
+	final public function get_all()
 	{
-		// do they want ignored as well?
-		if ( true === $include_ignored ) {
-			// yep, return all components
-			return $this->components;
-		} else {
-			// return only enabled components
-			return $this->components_enabled;
-		}
+		// return only enabled components
+		return $this->components_enabled;
 	}
 
 	/**
@@ -318,6 +311,16 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	 */
 	public function register( $name, $settings )
 	{
+		// COMPAT check for ignore setting
+		if ( isset( $settings[ 'ignore' ] ) ) {
+			// do not create it
+			if ( WP_DEBUG ) {
+				throw new OutOfBoundsException( 'The "ignore" setting is no longer valid.' );
+			} else {
+				continue;
+			}
+		}
+
 		// does component have config already?
 		if ( isset( $this->settings[ $name ] ) ) {
 			// yep, merge over existing settings
@@ -374,11 +377,8 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 					// register component
 					$this->components[ $comp_name ] = $component;
 
-					// ignored?
-					if ( false === isset( $settings[ 'ignore' ] ) ) {
-						// nope, add to enabled components
-						$this->components_enabled[ $comp_name ] = $component;
-					}
+					// add to enabled components
+					$this->components_enabled[ $comp_name ] = $component;
 				}
 
 			} else {
