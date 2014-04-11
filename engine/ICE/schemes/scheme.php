@@ -36,10 +36,6 @@ final class ICE_Scheme extends ICE_Base
 	 */
 	const SETTING_SCRIPT_ROOT = 'script_root';
 	/**
-	 * Feature config key
-	 */
-	const SETTING_FEATURE = 'feature';
-	/**
 	 * Options save single setting
 	 */
 	const SETTING_OPT_SAVE_SINGLE = 'options_save_single';
@@ -147,9 +143,6 @@ final class ICE_Scheme extends ICE_Base
 
 		// add filters
 		$this->add_filters();
-
-		// run theme feature support helper
-		$this->feature_support();
 
 		// some scheme initializations must occur after WP theme setup
 		add_action( 'after_setup_theme', array($this, 'finalize'), 101 );
@@ -303,31 +296,6 @@ final class ICE_Scheme extends ICE_Base
 		} else {
 			// not good, return empty array
 			return array();
-		}
-	}
-
-	/**
-	 * Enable/disable feature support
-	 */
-	private function feature_support()
-	{
-		// try to get features
-		$setting = $this->settings()->get_stack( self::SETTING_FEATURE );
-
-		// any features set?
-		if ( $setting ) {
-			// loop through and add theme support for each feature
-			foreach ( $setting as $theme => $features ) {
-				// loop all features
-				foreach( $features as $feature => $toggle ) {
-					// toggled on?
-					if ( (boolean) $toggle === true ) {
-						add_theme_support( $feature );
-					} else {
-						remove_theme_support( $feature );
-					}
-				}
-			}
 		}
 	}
 

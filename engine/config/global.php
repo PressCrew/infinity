@@ -12,10 +12,6 @@
 // The parent theme. Either 'infinity', or an ancestor of infinity
 $global['parent_theme'] = '';
 
-// Enable/Disable features. This is the same as calling add_theme_support()
-
-$global['feature'] = array();
-
 // ---------------------------------------------------------------------
 // Asset files cascading preferences
 // These settings are related to the various asset cascading functions
