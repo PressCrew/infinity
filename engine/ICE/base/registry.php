@@ -43,13 +43,6 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	private $components = array();
 
 	/**
-	 * Enabled components array.
-	 *
-	 * @var array
-	 */
-	private $components_enabled = array();
-
-	/**
 	 * Raw settings array.
 	 *
 	 * @var array
@@ -60,7 +53,7 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	 */
 	public function accept( ICE_Visitor $visitor )
 	{
-		foreach ( $this->components_enabled as $component ) {
+		foreach ( $this->components as $component ) {
 			$component->accept( $visitor );
 		}
 	}
@@ -226,8 +219,8 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	 */
 	final public function get_all()
 	{
-		// return only enabled components
-		return $this->components_enabled;
+		// return all components
+		return $this->components;
 	}
 
 	/**
@@ -365,10 +358,8 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 
 				// get a component?
 				if ( $component instanceof ICE_Component ) {
-					// register component
+					// add to components stack
 					$this->components[ $comp_name ] = $component;
-					// add to enabled components
-					$this->components_enabled[ $comp_name ] = $component;
 				}
 
 			} else {
@@ -394,8 +385,8 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 		// call component creator
 		$this->create_components();
 
-		// loop all enabled components
-		foreach ( $this->components_enabled as $component ) {
+		// loop all components
+		foreach ( $this->components as $component ) {
 			// finalize it
 			$component->finalize();
 		}
