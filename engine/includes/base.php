@@ -37,7 +37,6 @@ function infinity_base_features()
 	add_theme_support( 'infinity-main-menu-setup' );
 	add_theme_support( 'infinity-sub-menu-setup' );
 	add_theme_support( 'infinity-footer-menu-setup' );
-	add_theme_support( 'infinity-post-thumbnails' );
 	add_theme_support( 'infinity-introduction-boxes' );
 	add_theme_support( 'infinity-post-avatars' );
 	add_theme_support( 'infinity-author-box' );
@@ -173,7 +172,6 @@ add_filter( 'body_class', 'infinity_base_admin_bar_class' );
 function infinity_base_post_thumb_sizes()
 {
 	if (
-		current_theme_supports( 'infinity-post-thumbnails' ) &&
 		current_theme_supports( 'post-thumbnails' )
 	) {
 		set_post_thumbnail_size( 35, 35, true );

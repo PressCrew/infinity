@@ -74,15 +74,6 @@ $this->register(
 );
 
 $this->register(
-	'infinity-post-thumbnails',
-	array(
-		'type' => 'default',
-		'title' => 'Post Thumbnails',
-		'description' => 'Enable post thumbnails'
-	)
-);
-
-$this->register(
 	'infinity-post-avatars',
 	array(
 		'type' => 'default',
