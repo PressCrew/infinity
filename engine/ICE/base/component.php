@@ -203,13 +203,16 @@ abstract class ICE_Component
 	 * @param string $name Option name may only contain alphanumeric characters as well as the underscore for use as a word separator.
 	 * @param array $settings The settings of this component
 	 * @param ICE_Policy $policy The policy to apply to this component
+	 * @throws ICE_Requirements_Exception
+	 * @throws ICE_Initialization_Exception
+	 * @throws ICE_Capabilities_Exception
 	 */
 	final public function __construct( $name, $settings, $policy )
 	{
 		// check requirements
 		if ( false === $this->check_reqs() ) {
-			// can't construct object, external requirements are missing or broken
-			throw new ICE_Missing_Reqs_Exception(
+			// missing reqs
+			throw new ICE_Requirements_Exception(
 				sprintf( 'Cannot construct the "%s" %s component: requirements check failed', $name, $settings['type'] ) );
 		}
 
@@ -229,7 +232,25 @@ abstract class ICE_Component
 		$this->hname = $this->format_hname( $this->aname );
 
 		// run init template method
+		// TODO fix all init() methods so it can be run on 'init' action instead of here
 		$this->init();
+		
+		// call configure template method
+		$this->configure();
+
+		// check support
+		if ( false === $this->check_support() ) {
+			// not supported
+			throw new ICE_Initialization_Exception(
+				sprintf( 'Cannot construct the "%s" %s component: support check failed', $name, $settings['type'] ) );
+		}
+
+		// check caps
+		if ( false === $this->check_caps() ) {
+			// not enough permission
+			throw new ICE_Capabilities_Exception(
+				sprintf( 'Cannot construct the "%s" %s component: capabilities check failed', $name, $settings['type'] ) );
+		}
 	}
 
 	/**
@@ -382,9 +403,7 @@ abstract class ICE_Component
 			// new element object
 			$this->__element__ = new ICE_Component_Element();
 			// initialize the element
-			if ( $this->supported() ) {
-				$this->init_element();
-			}
+			$this->init_element();
 		}
 
 		// return it!
@@ -495,9 +514,6 @@ abstract class ICE_Component
 	 */
 	final public function finalize()
 	{
-		// call configure template method
-		$this->configure();
-
 		// maybe hook up body class
 		if ( $this->body_class ) {
 			// do it
@@ -725,7 +741,7 @@ abstract class ICE_Component
 	 *
 	 * @return boolean
 	 */
-	public function supported()
+	public function check_support()
 	{
 		// is a required feature set?
 		if ( null !== $this->required_feature ) {
@@ -736,8 +752,8 @@ abstract class ICE_Component
 			}
 		}
 
-		// always check capabilities!
-		return $this->check_caps();
+		// ok by default
+		return true;
 	}
 
 	/**

@@ -74,25 +74,21 @@ abstract class ICE_Renderer extends ICE_Componentable
 	 */
 	final public function render( ICE_Component $component, $output = true )
 	{
-		// check feature support
-		if ( $component->supported() ) {
+		// set as currently rendering component
+		$this->component = $component;
 
-			// set as currently rendering component
-			$this->component = $component;
+		// handle output buffering if applicable
+		if ( $output === false ) {
+			ob_start();
+		}
 
-			// handle output buffering if applicable
-			if ( $output === false ) {
-				ob_start();
-			}
+		// render the output
+		$this->render_output();
+		$this->rendered[] = $component;
 
-			// render the output
-			$this->render_output();
-			$this->rendered[] = $component;
-
-			// return results if output buffering is on
-			if ( $output === false ) {
-				return ob_get_clean();
-			}
+		// return results if output buffering is on
+		if ( $output === false ) {
+			return ob_get_clean();
 		}
 	}
 
@@ -104,18 +100,14 @@ abstract class ICE_Renderer extends ICE_Componentable
 	 */
 	final public function render_bypass( ICE_Component $component )
 	{
-		// check feature support
-		if ( $component->supported() ) {
+		// set as currently rendering component
+		$this->component = $component;
 
-			// set as currently rendering component
-			$this->component = $component;
+		// mark as rendered
+		$this->rendered[] = $component;
 
-			// mark as rendered
-			$this->rendered[] = $component;
-
-			// return myself
-			return $this;
-		}
+		// return myself
+		return $this;
 	}
 
 	/**

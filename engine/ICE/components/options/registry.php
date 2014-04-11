@@ -124,10 +124,6 @@ class ICE_Option_Registry extends ICE_Registry
 			if ( $option->get_property( 'parent' ) ) {
 				unset( $options[$key] );
 			}
-			// remove options that aren't supported
-			if ( !$option->supported() ) {
-				unset( $options[$key] );
-			}
 		}
 
 		return $options;

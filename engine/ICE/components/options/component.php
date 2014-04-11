@@ -354,21 +354,19 @@ abstract class ICE_Option extends ICE_Component
 	 */
 	public function update( $value )
 	{
-		if ( $this->check_caps() ) {
-			// force numeric values to floats since it could be an int or a float
-			if ( is_numeric( $value ) ) {
-				$value = floatval( $value );
-			}
-			// is the value null, an empty string, or equal to the default value?
-			if ( $value === null || $value === '' || $value === $this->default_value ) {
-				// its pointless to store this option
-				// try to delete it in case it already exists
-				return $this->delete();
-			} else {
-				// create or update it
-				if ( $this->update_option( $value ) ) {
-					return true;
-				}
+		// force numeric values to floats since it could be an int or a float
+		if ( is_numeric( $value ) ) {
+			$value = floatval( $value );
+		}
+		// is the value null, an empty string, or equal to the default value?
+		if ( $value === null || $value === '' || $value === $this->default_value ) {
+			// its pointless to store this option
+			// try to delete it in case it already exists
+			return $this->delete();
+		} else {
+			// create or update it
+			if ( $this->update_option( $value ) ) {
+				return true;
 			}
 		}
 
@@ -393,10 +391,8 @@ abstract class ICE_Option extends ICE_Component
 	 */
 	public function delete()
 	{
-		if ( $this->check_caps() ) {
-			if ( $this->delete_option() ) {
-				return true;
-			}
+		if ( $this->delete_option() ) {
+			return true;
 		}
 
 		return false;

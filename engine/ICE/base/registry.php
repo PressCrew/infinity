@@ -85,9 +85,7 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	{
 		// init ajax for each registered component
 		foreach ( $this->get_all() as $component ) {
-			if ( $component->supported() ) {
-				$component->init_ajax();
-			}
+			$component->init_ajax();
 		}
 	}
 
@@ -101,9 +99,7 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 		
 		// init screen for each registered component
 		foreach ( $this->get_all() as $component ) {
-			if ( $component->supported() ) {
-				$component->init_screen();
-			}
+			$component->init_screen();
 		}
 	}
 
@@ -113,11 +109,9 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	public function init_styles()
 	{
 		foreach ( $this->get_all() as $component ) {
-			if ( $component->supported() ) {
-				( true === ICE_IS_ADMIN )
-					? $component->init_admin_styles()
-					: $component->init_styles();
-			}
+			( true === ICE_IS_ADMIN )
+				? $component->init_admin_styles()
+				: $component->init_styles();
 		}
 	}
 
@@ -128,11 +122,9 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	{
 		// init scripts for each registered component
 		foreach ( $this->get_all() as $component ) {
-			if ( $component->supported() ) {
-				( true === ICE_IS_ADMIN )
-					? $component->init_admin_scripts()
-					: $component->init_scripts();
-			}
+			( true === ICE_IS_ADMIN )
+				? $component->init_admin_scripts()
+				: $component->init_scripts();
 		}
 	}
 
@@ -280,11 +272,8 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 			if ( null === $component->get_property( 'parent' ) ) {
 				// filter on component names
 				if ( empty( $component_names ) || in_array( $component->get_property( 'name' ), $component_names, true ) ) {
-					// component must be supported
-					if ( $component->supported() ) {
-						// append to return array
-						$components[] = $component;
-					}
+					// append to return array
+					$components[] = $component;
 				}
 			}
 		}
@@ -347,12 +336,15 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	 */
 	private function create_component( $comp_name, $settings )
 	{
-		// use factory to create new component
-		return
-			$this->policy()->factory()->create(
-				$comp_name,
-				$settings
-			);
+		// try to create component
+		try {
+			// call factory create method
+			return $this->policy()->factory()->create( $comp_name, $settings );
+		// catch enviro exception
+		} catch ( ICE_Environment_Exception $e ) {
+			// create failed
+			return false;
+		}
 	}
 
 	/**
@@ -373,10 +365,8 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 
 				// get a component?
 				if ( $component instanceof ICE_Component ) {
-
 					// register component
 					$this->components[ $comp_name ] = $component;
-
 					// add to enabled components
 					$this->components_enabled[ $comp_name ] = $component;
 				}

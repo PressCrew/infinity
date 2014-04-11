@@ -30,13 +30,13 @@ abstract class ICE_Feature
 	 *
 	 * @return boolean
 	 */
-	public function supported()
+	public function check_support()
 	{
 		if ( !current_theme_supports( $this->get_property( 'name' ) ) ) {
 			return false;
 		}
 
-		return parent::supported();
+		return parent::check_support();
 	}
 	
 }

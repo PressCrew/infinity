@@ -243,10 +243,37 @@ abstract class ICE_Base
 }
 
 /**
- * This exception should be thrown when a fatal error occurs due
+ * This exception is thrown when a fatal error occurs due
+ * to an incomplete and/or insecure environment at runtime.
+ */
+abstract class ICE_Environment_Exception extends RuntimeException
+{
+	// nothing special yet
+}
+
+/**
+ * This exception is thrown when a fatal error occurs due
  * to missing or otherwise broken external requirements.
  */
-class ICE_Missing_Reqs_Exception extends RuntimeException
+class ICE_Requirements_Exception extends ICE_Environment_Exception
+{
+	// nothing special yet
+}
+
+/**
+ * This exception is thrown when a fatal error occurs due
+ * to inadequate permissions and/or capabilities.
+ */
+class ICE_Capabilities_Exception extends ICE_Environment_Exception
+{
+	// nothing special yet
+}
+
+/**
+ * This exception is thrown when a fatal error occurs due
+ * to missing or uninitialized settings and/or data.
+ */
+class ICE_Initialization_Exception extends ICE_Environment_Exception
 {
 	// nothing special yet
 }

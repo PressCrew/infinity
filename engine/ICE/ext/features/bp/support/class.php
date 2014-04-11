@@ -36,9 +36,9 @@ class ICE_Ext_Feature_Bp_Support
 
 	/**
 	 */
-	public function supported()
+	public function check_support()
 	{
-		if ( true === parent::supported() ) {
+		if ( true === parent::check_support() ) {
 			return $this->is_active();
 		}
 
@@ -49,31 +49,27 @@ class ICE_Ext_Feature_Bp_Support
 	 */
 	protected function init()
 	{
-		// make sure component is supported
-		if ( $this->supported() ) {
+		parent::init();
 
-			parent::init();
-
-			if (
-				is_admin() &&
-				!is_dir( get_template_directory() . '/members' ) &&
-				!is_dir( get_stylesheet_directory() . '/members' )
-			) {
-				bp_core_add_admin_notice(
-					__( "You have BuddyPress activated, but the templates are missing from your theme!", 'infinity' )
-				);
-				return false;
-			}
-
-			$this->setup_theme();
-
-			// addtl filters
-			add_filter( 'bp_no_access_mode', array( $this, 'use_wplogin' ) );
-			add_filter( 'bp_get_activity_action_pre_meta', array( $this, 'secondary_avatars' ), 10, 2 );
-
-			// addtl actions
-			add_action( 'open_sidebar', array( $this, 'message_notices' ) );
+		if (
+			is_admin() &&
+			!is_dir( get_template_directory() . '/members' ) &&
+			!is_dir( get_stylesheet_directory() . '/members' )
+		) {
+			bp_core_add_admin_notice(
+				__( "You have BuddyPress activated, but the templates are missing from your theme!", 'infinity' )
+			);
+			return false;
 		}
+
+		$this->setup_theme();
+
+		// addtl filters
+		add_filter( 'bp_no_access_mode', array( $this, 'use_wplogin' ) );
+		add_filter( 'bp_get_activity_action_pre_meta', array( $this, 'secondary_avatars' ), 10, 2 );
+
+		// addtl actions
+		add_action( 'open_sidebar', array( $this, 'message_notices' ) );
 	}
 
 	/**
