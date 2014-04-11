@@ -36,17 +36,6 @@ class ICE_Ext_Feature_Bp_Support
 
 	/**
 	 */
-	public function check_support()
-	{
-		if ( true === parent::check_support() ) {
-			return $this->is_active();
-		}
-
-		return false;
-	}
-
-	/**
-	 */
 	protected function init()
 	{
 		parent::init();
