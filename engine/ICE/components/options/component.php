@@ -122,16 +122,6 @@ abstract class ICE_Option extends ICE_Component
 				return parent::get_property( $name );
 		}
 	}
-	
-	/**
-	 */
-	protected function init()
-	{
-		parent::init();
-
-		// user must be allowed to manage options
-		$this->add_capabilities( 'manage_options' );
-	}
 
 	/**
 	 */
