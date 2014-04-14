@@ -11,13 +11,17 @@
  * @since 1.2
  */
 
+ICE_Loader::load(
+	'base/componentable'
+);
+
 /**
  * Make tracking custom extensions easy.
  *
  * @package ICE
  * @subpackage init
  */
-class ICE_Extensions
+class ICE_Extensions extends ICE_Componentable
 {
 	const KEY_EXTENDS = 'extends';
 	const KEY_PATH = 'path';
@@ -64,6 +68,9 @@ class ICE_Extensions
 	 */
 	public function __construct( ICE_Policy $policy )
 	{
+		// apply the policy
+		$this->policy( $policy );
+
 		// determine path prefix
 		$this->path_prefix = ICE_EXT_PATH . '/' . $policy->get_handle( true );
 	}
