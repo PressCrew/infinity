@@ -76,6 +76,22 @@ class ICE_Extensions extends ICE_Componentable
 	}
 
 	/**
+	 * Return an instance of an extension.
+	 *
+	 * @param string $ext
+	 * @param string $name
+	 * @return object
+	 */
+	public function create( $ext, $name )
+	{
+		// make sure the extension is loaded
+		$class_name = $this->load( $ext );
+
+		// construct it
+		return new $class_name( $name, $ext, $this->policy() );
+	}
+
+	/**
 	 * Register an extension.
 	 *
 	 * @param string $ext
