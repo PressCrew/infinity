@@ -264,6 +264,9 @@ li#nav-notifications-groups-li a:before {
 #request-membership-groups-li a:before {
     content: "y"
 }
+li#group-blog-groups-li a:before { 
+	content: "C"; 
+} 
 
 /* Profile Icons  */
 #user-activity:before {
