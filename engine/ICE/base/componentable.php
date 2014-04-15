@@ -30,11 +30,46 @@ abstract class ICE_Componentable
 		implements ICE_Policeable
 {
 	/**
-	 * Policy instance
+	 * Policy instance.
 	 *
 	 * @var ICE_Policy
 	 */
 	private $policy;
+
+	/**
+	 * Policy instance shortcut.
+	 *
+	 * @var ICE_Policy
+	 */
+	protected $_policy;
+
+	/**
+	 * Extensions instance shortcut.
+	 *
+	 * @var ICE_Extensions
+	 */
+	protected $_extensions;
+
+	/**
+	 * Registry instance shortcut.
+	 *
+	 * @var ICE_Registry
+	 */
+	protected $_registry;
+
+	/**
+	 * Factory instance shortcut.
+	 *
+	 * @var ICE_Factory
+	 */
+	protected $_factory;
+
+	/**
+	 * Renderer instance shortcut.
+	 *
+	 * @var ICE_Renderer
+	 */
+	protected $_renderer;
 	
 	/**
 	 * Return the policy
@@ -47,7 +82,14 @@ abstract class ICE_Componentable
 		// setter
 		if ( $policy ) {
 			if ( empty( $this->policy ) ) {
+				// set the policy instance
 				$this->policy = $policy;
+				// set the shortcut instances
+				$this->_policy = $policy;
+				$this->_extensions = $policy->extensions();
+				$this->_registry = $policy->registry();
+				$this->_factory = $policy->factory();
+				$this->_renderer = $policy->renderer();
 			} else {
 				throw new Exception( 'Cannot overwrite policy once set' );
 			}
