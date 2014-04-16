@@ -43,13 +43,6 @@ abstract class ICE_Componentable
 	protected $_policy;
 
 	/**
-	 * Extensions instance shortcut.
-	 *
-	 * @var ICE_Extensions
-	 */
-	protected $_extensions;
-
-	/**
 	 * Registry instance shortcut.
 	 *
 	 * @var ICE_Registry
@@ -85,7 +78,6 @@ abstract class ICE_Componentable
 				$this->policy = $policy;
 				// set the shortcut instances
 				$this->_policy = $policy;
-				$this->_extensions = $policy->extensions();
 				$this->_registry = $policy->registry();
 				$this->_factory = $policy->factory();
 				$this->_renderer = $policy->renderer();
