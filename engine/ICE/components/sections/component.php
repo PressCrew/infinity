@@ -56,6 +56,20 @@ abstract class ICE_Section extends ICE_Component
 	}
 
 	/**
+	 */
+	protected function configure()
+	{
+		// RUN PARENT FIRST!
+		parent::configure();
+
+		// import settings
+		$this->import_settings( array(
+			'class_content',
+			'class_title'
+		));
+	}
+
+	/**
 	 * Add component to this section's content
 	 *
 	 * @param ICE_Component $component

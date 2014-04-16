@@ -56,10 +56,28 @@ abstract class ICE_Shortcode extends ICE_Component
 				return parent::get_property( $name );
 		}
 	}
-	
+
 	/**
 	 */
-	protected function init()
+	protected function configure()
+	{
+		// RUN PARENT FIRST!
+		parent::configure();
+
+		// import settings
+		$this->import_settings(
+			array(
+				'attributes'
+			),
+			array(
+				'attributes' => 'array'
+			)
+		);
+	}
+
+	/**
+	 */
+	public function init()
 	{
 		// run parent
 		parent::init();

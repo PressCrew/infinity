@@ -74,10 +74,24 @@ class Infinity_Ext_Screen_Cpanel
 
 	/**
 	 */
-	public function configure()
+	protected function configure()
 	{
 		// RUN PARENT FIRST!
 		parent::configure();
+
+		// import settings
+		$this->import_settings(
+			array(
+				'icon_primary',
+				'icon_secondary',
+				'priority',
+				'toolbar'
+			),
+			array(
+				'priority' => 'integer',
+				'toolbar' => 'boolean'
+			)
+		);
 
 		// set up icons
 		if ( $this->icon() ) {

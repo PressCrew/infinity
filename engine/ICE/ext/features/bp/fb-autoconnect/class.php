@@ -25,6 +25,18 @@ class ICE_Ext_Feature_Bp_Fb_Autoconnect
 
 	/**
 	 */
+	protected function configure()
+	{
+		// set defaults first
+		$this->title = __( 'FaceBook Auto Connect', 'infinity' );
+		$this->description = __( 'Enables FaceBook Auto Connect support', 'infinity' );
+
+		// run parent
+		parent::configure();
+	}
+	
+	/**
+	 */
 	public function check_reqs()
 	{
 		// is buddypress active?
@@ -43,14 +55,10 @@ class ICE_Ext_Feature_Bp_Fb_Autoconnect
 	
 	/**
 	 */
-	protected function init()
+	public function init()
 	{
 		// run parent init method
 		parent::init();
-
-		// init properties
-		$this->title = __( 'FaceBook Auto Connect', 'infinity' );
-		$this->description = __( 'Enables FaceBook Auto Connect support', 'infinity' );
 		
 		// add actions on which to render
 		add_action( 'bp_before_account_details_fields', array($this,'render') );

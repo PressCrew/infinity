@@ -41,6 +41,19 @@ class ICE_Ext_Widget_Menu
 				return parent::get_property( $name );
 		}
 	}
+
+	/**
+	 */
+	protected function configure()
+	{
+		// run parent first
+		parent::configure();
+
+		// import settings
+		$this->import_settings( array(
+			'menu_items'
+		));
+	}
 	
 	/**
 	 */

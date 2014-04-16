@@ -22,14 +22,14 @@ class ICE_Ext_Option_Css_Border_Style
 {
 	/**
 	 */
-	protected function init()
+	protected function configure()
 	{
-		// run parent
-		parent::init();
-
-		// init directives
+		// set defaults first
 		$this->title = __( 'Border Style', 'infinity' );
 		$this->description = __( 'Choose a style for the border', 'infinity' );
 		$this->style_property = 'border-style';
+
+		// run parent
+		parent::configure();
 	}
 }

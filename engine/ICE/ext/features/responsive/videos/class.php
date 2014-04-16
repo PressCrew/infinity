@@ -26,7 +26,7 @@ class ICE_Ext_Feature_Responsive_Videos
 	/**
 	 * Custom selector for additional video players
 	 *
-	 * @var boolean
+	 * @var string
 	 */
 	protected $custom_selector;
 	
@@ -52,7 +52,7 @@ class ICE_Ext_Feature_Responsive_Videos
 	
 	/**
 	 */
-	protected function init()
+	public function init()
 	{
 		// run parent init method
 		parent::init();
@@ -72,14 +72,16 @@ class ICE_Ext_Feature_Responsive_Videos
 
 	/**
 	 */
-	public function configure()
+	protected function configure()
 	{
 		// RUN PARENT FIRST!
 		parent::configure();
 
-		// init properties
-		$this->import_property( 'custom_selector', 'string' );
-		$this->import_property( 'target_selector', 'string' );
+		// import settings
+		$this->import_settings( array(
+			'custom_selector',
+			'target_selector'
+		));
 	}
 	
 	/**

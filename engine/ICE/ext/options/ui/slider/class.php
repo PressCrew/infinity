@@ -95,6 +95,36 @@ class ICE_Ext_Option_Ui_Slider
 				return parent::get_property( $name );
 		}
 	}
+
+	/**
+	 */
+	protected function configure()
+	{
+		// run parent first
+		parent::configure();
+
+		// import settings
+		$this->import_settings(
+			array(
+				'animate',
+				'delimiter',
+				'label',
+				'max',
+				'min',
+				'orientation',
+				'prefix',
+				'range',
+				'step',
+				'suffix'
+			),
+			array(
+				'max' => 'integer',
+				'min' => 'integer',
+				'range' => 'boolean',
+				'step' => 'integer'
+			)
+		);
+	}
 	
 	/**
 	 */

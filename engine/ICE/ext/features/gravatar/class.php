@@ -36,6 +36,19 @@ class ICE_Ext_Feature_Gravatar
 				return parent::get_property( $name );
 		}
 	}
+
+	/**
+	 */
+	protected function configure()
+	{
+		// run parent first
+		parent::configure();
+
+		// import settings
+		$this->import_settings( array(
+			'image_class'
+		));
+	}
 	
 	/**
 	 */

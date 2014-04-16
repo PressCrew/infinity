@@ -41,13 +41,18 @@ class ICE_Ext_Widget_Posts_List
 				return parent::get_property( $name );
 		}
 	}
-	
+
 	/**
 	 */
-	protected function init()
+	protected function configure()
 	{
-		// run parent
-		parent::init();
+		// run parent first
+		parent::configure();
+
+		// import settings
+		$this->import_settings( array(
+			'post_type'
+		));
 
 		// requires edit posts
 		$this->add_capabilities( 'edit_posts' );

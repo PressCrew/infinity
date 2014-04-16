@@ -30,7 +30,7 @@ ICE_Loader::load(
  */
 abstract class ICE_Component
 	extends ICE_Componentable
-		implements ICE_Recursable, ICE_Visitable, ICE_Configurable, ICE_Styleable, ICE_Scriptable
+		implements ICE_Recursable, ICE_Visitable, ICE_Styleable, ICE_Scriptable
 {
 	/**
 	 * Persistence algorithms should use this as a prefix
@@ -201,26 +201,23 @@ abstract class ICE_Component
 
 	/**
 	 * @param string $name Option name may only contain alphanumeric characters as well as the underscore for use as a word separator.
-	 * @param array $settings The settings of this component
+	 * @param string $type The extension type of this component
 	 * @param ICE_Policy $policy The policy to apply to this component
 	 * @throws ICE_Requirements_Exception
 	 * @throws ICE_Initialization_Exception
 	 * @throws ICE_Capabilities_Exception
 	 */
-	final public function __construct( $name, $settings, $policy )
+	final public function __construct( $name, $type, $policy )
 	{
+		// apply policy
+		$this->policy( $policy );
+		
 		// check requirements
 		if ( false === $this->check_reqs() ) {
 			// missing reqs
 			throw new ICE_Requirements_Exception(
-				sprintf( 'Cannot construct the "%s" %s component: requirements check failed', $name, $settings['type'] ) );
+				sprintf( 'Cannot construct the "%s" %s component: requirements check failed', $name, $type ) );
 		}
-
-		// apply policy
-		$this->policy( $policy );
-
-		// import settings FIRST so private properties are overwritten
-		$this->import_settings( $settings );
 
 		// init required directives
 		$this->name = $this->validate_name( $name );
@@ -231,10 +228,9 @@ abstract class ICE_Component
 		// the "hash name" is the crc32 hex hash of the aname
 		$this->hname = $this->format_hname( $this->aname );
 
-		// run init template method
-		// TODO fix all init() methods so it can be run on 'init' action instead of here
-		$this->init();
-		
+		// the type of this component
+		$this->type = $type;
+
 		// call configure template method
 		$this->configure();
 
@@ -242,14 +238,14 @@ abstract class ICE_Component
 		if ( false === $this->check_support() ) {
 			// not supported
 			throw new ICE_Initialization_Exception(
-				sprintf( 'Cannot construct the "%s" %s component: support check failed', $name, $settings['type'] ) );
+				sprintf( 'Cannot construct the "%s" %s component: support check failed', $name, $type ) );
 		}
 
 		// check caps
 		if ( false === $this->check_caps() ) {
 			// not enough permission
 			throw new ICE_Capabilities_Exception(
-				sprintf( 'Cannot construct the "%s" %s component: capabilities check failed', $name, $settings['type'] ) );
+				sprintf( 'Cannot construct the "%s" %s component: capabilities check failed', $name, $type ) );
 		}
 	}
 
@@ -346,52 +342,44 @@ abstract class ICE_Component
 	}
 
 	/**
-	 * Copy a configuration setting to a property
+	 * Copy configuration settings to properties.
 	 *
 	 * This method only works for properties which are *locally accessible*, which means
 	 * they must have been declared as protected or public (even though public would be silly!).
 	 *
-	 * @param string $name Name of the setting to copy from the configuration
-	 * @param null|string $type null: no type casting, string|integer|float|boolean|array: cast to type
-	 * @param mixed $default If set, this value will be used if setting is missing from configuration
+	 * Example: $this->import_settings( array( 'foo' => 'string' ) );
+	 *
+	 * @param array $settings Settings to copy from the configuration.
+	 * @param array $types Map of settings to their type. Valid types are: string|integer|float|boolean|array
 	 * @return boolean
 	 */
-	final protected function import_property( $name, $type = null, $default = null )
+	final protected function import_settings( $config, $types = array() )
 	{
-		// was a default passed?
-		$has_default = ( func_num_args() >= 3 );
+		// get all raw setting values
+		$raw_values = $this->_registry->get_settings( $this->name );
 
-		// value is null by default
-		$value = null;
-
-		// TODO this needs to be tested
-		// copy raw value of property
-		$raw_value = $this->$name;
-
-		// is conf data set?
-		if ( $raw_value ) {
-			// type cast?
-			if ( $type ) {
-				try {
+		// loop raw values, NOT settings
+		foreach ( $raw_values as $setting => $raw_value ) {
+			// is conf data set?
+			if ( in_array( $setting, $config ) ) {
+				// type cast?
+				if ( isset( $types[ $setting ] ) ) {
 					// try to cast it
-					$value = $this->cast( $raw_value, $type );
-				} catch ( Exception $e ) {
-					// type cast failed, value NOT set
+					try {
+						// call cast helper
+						$this->$setting = $this->cast( $raw_value, $types[ $setting ] );
+					} catch ( Exception $e ) {
+						// type cast failed, value NOT set
+						continue;
+					}
+				} else {
+					// no type passed, use value as is
+					$this->$setting = $raw_value;
 				}
-			} else {
-				// no type passed, use value as is
-				$value = $raw_value;
 			}
-		// handle default
-		} elseif ( true == $has_default ) {
-			// use default value
-			$value = $default;
 		}
-
-		// overwrite the property value
-		return $this->$name = $value;
 	}
-	
+
 	/**
 	 * Return element helper instance
 	 *
@@ -443,51 +431,36 @@ abstract class ICE_Component
 	}
 
 	/**
-	 * Import component settings and assign to properties.
-	 *
-	 * @param array $settings
 	 */
-	private function import_settings( $settings )
+	protected function configure()
 	{
-		// is a feature set?
-		if ( isset( $settings['feature'] ) ) {
-			// try to grab defaults
-			$defaults_array = $this->policy()->features()->registry()->get_suboption_defaults( $settings['feature'] );
-			// get any defaults?
-			if ( !empty( $defaults_array ) ) {
-				// merge config *ON TOP OF* defaults
-				$settings = array_merge( $defaults_array, $settings );
-			}
-		}
+		// import settings
+		$this->import_settings(
+			array(
+				'body_class',
+				'capabilities',
+				'class',
+				'description',
+				'documentation',
+				'id',
+				'parent',
+				'required_feature',
+				'script',
+				'script_depends',
+				'style',
+				'style_depends',
+				'template',
+				'title'
+			),
+			array(
+				'capabilities' => 'array',
+				'class' => 'array',
+				'documentation' => 'boolean',
+				'script_depends' => 'array',
+				'style_depends' => 'array'
+			)
+		);
 
-		// loop config
-		foreach ( $settings as $name => $value ) {
-			// does property name start with an underscore?
-			if ( '_' === $name[0] ) {
-				// yes, ignore it
-				continue;
-			}
-			// does property exist?
-			if ( true === property_exists( $this, $name ) ) {
-				// yes, set it
-				$this->$name = $value;
-			} else {
-				// property doesn't exist
-				throw new OutOfBoundsException (
-					sprintf(
-						__( 'The "%s" property does not exist in the "%s" class.', 'infinity' ),
-						$name,
-						get_class( $this )
-					)
-				);
-			}
-		}
-	}
-
-	/**
-	 */
-	public function configure()
-	{
 		// parent sanity check
 		if (
 			true === isset( $this->parent ) &&
@@ -495,15 +468,6 @@ abstract class ICE_Component
 		) {
 			throw new Exception(
 				sprintf( 'The component "%s" cannot be a parent of itself', $this->name ) );
-		}
-
-		// capabilities sanity check
-		if (
-			true === isset( $this->capabilities ) &&
-			false === is_array( $this->capabilities )
-		) {
-			throw new Exception(
-				sprintf( 'The capabilities for component "%s" must be an array.', $this->name ) );
 		}
 	}
 
@@ -601,7 +565,7 @@ abstract class ICE_Component
 	/**
 	 * This template method is called at the end of the constructor
 	 */
-	protected function init()
+	public function init()
 	{
 		// override this method to initialize special PHP handling for a component
 	}

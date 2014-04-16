@@ -31,16 +31,24 @@ class ICE_Ext_Option_Upload
 
 	/**
 	 */
-	protected function init()
+	protected function configure()
+	{
+		// run parent
+		parent::configure();
+		
+		// upload files is required
+		$this->add_capabilities( 'upload_files' );
+	}
+
+	/**
+	 */
+	public function init()
 	{
 		// always run parent first
 		parent::init();
 
 		// run init once
 		$this->init_once();
-
-		// upload files is required
-		$this->add_capabilities( 'upload_files' );
 	}
 
 	/**

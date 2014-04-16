@@ -36,7 +36,7 @@ class ICE_Ext_Feature_Bp_Support
 
 	/**
 	 */
-	protected function init()
+	public function init()
 	{
 		parent::init();
 

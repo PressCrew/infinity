@@ -22,16 +22,15 @@ class ICE_Ext_Option_Css_Overlay_Image
 {
 	/**
 	 */
-	protected function init()
+	protected function configure()
 	{
-		// run parent
-		parent::init();
-
-		// init directives
+		// set defaults first
 		$this->title = __( 'Background Overlay', 'infinity' );
 		$this->description = __( 'Select a texture to use as the background overlay', 'infinity' );
 		$this->item_width = '100px';
 		$this->item_height = '100px';
-		$this->file_extension = 'png';
+
+		// run parent
+		parent::configure();
 	}
 }

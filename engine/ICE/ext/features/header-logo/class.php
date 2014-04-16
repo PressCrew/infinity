@@ -23,14 +23,14 @@ class ICE_Ext_Feature_Header_Logo
 
 	/**
 	 */
-	protected function init()
+	protected function configure()
 	{
-		// run parent
-		parent::init();
-
-		// init directives
+		// set defaults first
 		$this->title = __( 'Header Logo', 'infinity' );
 		$this->description = __( 'Custom header logo support', 'infinity' );
+
+		// run parent
+		parent::configure();
 	}
 
 	/**
@@ -38,7 +38,7 @@ class ICE_Ext_Feature_Header_Logo
 	public function init_styles()
 	{
 		parent::init_styles();
-		
+
 		// add static logo styles and callback
 		$this->style()
 			->inject( 'logo', 'logo.css' )

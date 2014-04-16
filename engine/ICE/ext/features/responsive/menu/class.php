@@ -92,7 +92,7 @@ class ICE_Ext_Feature_Responsive_Menu
 	
 	/**
 	 */
-	protected function init()
+	public function init()
 	{
 		// run parent init method
 		parent::init();
@@ -116,19 +116,28 @@ class ICE_Ext_Feature_Responsive_Menu
 
 	/**
 	 */
-	public function configure()
+	protected function configure()
 	{
 		// RUN PARENT FIRST!
 		parent::configure();
 
-		// init properties
-		$this->import_property( 'combine', 'boolean' );
-		$this->import_property( 'group_page_text', 'string' );
-		$this->import_property( 'nested', 'boolean' );
-		$this->import_property( 'prepend_to', 'string' );
-		$this->import_property( 'switch_width', 'integer' );
-		$this->import_property( 'target_selector', 'string' );
-		$this->import_property( 'top_option_text', 'string' );
+		// import settings
+		$this->import_settings(
+			array(
+				'combine',
+				'group_page_text',
+				'nested',
+				'prepend_to',
+				'switch_width',
+				'target_selector',
+				'top_option_text'
+			),
+			array(
+				'combine' => 'boolean',
+				'nested' => 'boolean',
+				'switch_width' => 'integer',
+			)
+		);
 	}
 	
 	/**

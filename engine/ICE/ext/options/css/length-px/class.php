@@ -22,11 +22,11 @@
 class ICE_Ext_Option_Css_Length_Px
 	extends ICE_Ext_Option_Ui_Slider
 {
-	protected function init()
+	/**
+	 */
+	protected function configure()
 	{
-		parent::init();
-
-		// initialize directives
+		// set defaults first
 		$this->description = 'Select the number of pixels by moving the slider';
 		$this->max = 5;
 		$this->min = 0;
@@ -34,5 +34,8 @@ class ICE_Ext_Option_Css_Length_Px
 		$this->style_unit = 'px';
 		$this->suffix = ' pixels';
 		$this->title = 'Pixels';
+
+		// run parent
+		parent::configure();
 	}
 }

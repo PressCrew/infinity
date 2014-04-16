@@ -61,13 +61,27 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	/**
 	 * Initialize correct response depending on environment.
 	 */
-	protected function init_response()
+	public function init_response()
 	{
+		// init components
+		$this->init();
+
 		// init ajax OR screen reqs (not both)
 		if ( defined( 'DOING_AJAX' ) ) {
 			$this->init_ajax();
 		} else {
 			$this->init_screen();
+		}
+	}
+
+	/**
+	 * Init all components.
+	 */
+	protected function init()
+	{
+		// run init for each registered component
+		foreach ( $this->get_all() as $component ) {
+			$component->init();
 		}
 	}
 
@@ -275,6 +289,43 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	}
 
 	/**
+	 * Return the value of a setting for the given item name.
+	 *
+	 * @param string $name
+	 * @param string $setting
+	 * @return mixed
+	 */
+	public function get_setting( $name, $setting )
+	{
+		// is setting set?
+		if ( isset( $this->settings[ $name ][ $setting ] ) ) {
+			// yep, return it
+			return $this->settings[ $name ][ $setting ];
+		}
+
+		// return null by default
+		return null;
+	}
+
+	/**
+	 * Return the entire settings stack for the given item name.
+	 *
+	 * @param string $name
+	 * @return array
+	 */
+	public function get_settings( $name )
+	{
+		// any settings set?
+		if ( isset( $this->settings[ $name ] ) ) {
+			// yep, return it
+			return $this->settings[ $name ];
+		}
+
+		// return empty array by default
+		return array();
+	}
+
+	/**
 	 * Load a file in context so it can make calls to register() in scope.
 	 *
 	 * @param string $filename
@@ -324,15 +375,15 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	 * Create and return a component.
 	 *
 	 * @param string $comp_name
-	 * @param array $settings
+	 * @param string $type
 	 * @return ICE_Component|boolean
 	 */
-	private function create_component( $comp_name, $settings )
+	private function create_component( $comp_name, $type )
 	{
 		// try to create component
 		try {
 			// call factory create method
-			return $this->policy()->factory()->create( $comp_name, $settings );
+			return $this->policy()->factory()->create( $comp_name, $type );
 		// catch enviro exception
 		} catch ( ICE_Environment_Exception $e ) {
 			// create failed
@@ -348,13 +399,24 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	private function create_components()
 	{
 		// loop all component configurations.
-		foreach( $this->settings as $comp_name => $settings ) {
+		foreach( $this->settings as $comp_name => &$settings ) {
 
 			// check if already registered
 			if ( false === $this->has( $comp_name ) ) {
 
+				// is a feature set?
+				if ( isset( $settings['feature'] ) ) {
+					// try to grab defaults
+					$defaults_array = $this->policy()->features()->registry()->get_suboption_defaults( $settings['feature'] );
+					// get any defaults?
+					if ( !empty( $defaults_array ) ) {
+						// merge config *ON TOP OF* defaults
+						$settings = array_merge( $defaults_array, $settings );
+					}
+				}
+
 				// create new component
-				$component = $this->create_component( $comp_name, $settings );
+				$component = $this->create_component( $comp_name, $settings['type'] );
 
 				// get a component?
 				if ( $component instanceof ICE_Component ) {
@@ -391,8 +453,8 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 			$component->finalize();
 		}
 
-		// initialize the response
-		$this->init_response();
+		// initialize the response on the "init" action
+		add_action( 'init', array( $this, 'init_response' ) );
 	}
 
 	/**

@@ -33,21 +33,18 @@ abstract class ICE_Factory extends ICE_Componentable
 	 * Return an instance of a component
 	 *
 	 * @param string $name
-	 * @param array $settings
+	 * @param string $type
 	 * @return ICE_Component|boolean
 	 */
-	public function create( $name, $settings )
+	public function create( $name, $type )
 	{
 		// set default type if necessary
-		if ( empty( $settings['type'] ) ) {
-			$settings['type'] = self::DEFAULT_COMPONENT_TYPE;
+		if ( empty( $type ) ) {
+			$type = self::DEFAULT_COMPONENT_TYPE;
 		}
 
-		// make sure the extension is loaded
-		$class_name = $this->policy()->extensions()->load( $settings['type'] );
-
-		// construct it
-		return new $class_name( $name, $settings, $this->policy() );
+		// call extension create
+		return $this->policy()->extensions()->create( $type, $name );
 	}
 
 }

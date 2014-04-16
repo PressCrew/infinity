@@ -22,15 +22,15 @@ class ICE_Ext_Option_Css_Bg_Repeat
 {
 	/**
 	 */
-	protected function init()
+	protected function configure()
 	{
-		// run parent
-		parent::init();
-
-		// init directives
+		// set defaults first
 		$this->title = __( 'Background Image Tiling', 'infinity' );
 		$this->description = __( 'Set the tiling mode of the background image', 'infinity' );
 		$this->style_property = 'background-repeat';
 		$this->default_value = 'repeat';
+
+		// run parent
+		parent::configure();
 	}
 }

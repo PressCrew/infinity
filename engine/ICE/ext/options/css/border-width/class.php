@@ -20,13 +20,16 @@
 class ICE_Ext_Option_Css_Border_Width
 	extends ICE_Ext_Option_Css_Length_Px
 {
-	protected function init()
+	/**
+	 */
+	protected function configure()
 	{
-		parent::init();
-
-		// initialize directives
+		// set defaults first
 		$this->title = 'Border Width';
 		$this->description = 'Select the width of the border by moving the slider';
 		$this->style_property = 'border-width';
+
+		// run parent
+		parent::configure();
 	}
 }

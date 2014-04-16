@@ -27,24 +27,6 @@ class ICE_Ext_Option_Css_Overlay_Opacity
 	 * @var string
 	 */
 	protected $linked_image;
-	
-	/**
-	 */
-	protected function init()
-	{
-		// run parent
-		parent::init();
-
-		// init directives
-		$this->title = __( 'Overlay Opacity', 'infinity' );
-		$this->description = __( 'Select the overlay opacity by moving the slider', 'infinity' );
-		$this->default_value = 0.2;
-		$this->min = 0;
-		$this->max = 1;
-		$this->step = 0.01;
-		$this->suffix = ' level';
-		$this->style_property = 'opacity';
-	}
 
 	/**
 	 */
@@ -73,13 +55,25 @@ class ICE_Ext_Option_Css_Overlay_Opacity
 
 	/**
 	 */
-	public function configure()
+	protected function configure()
 	{
-		// RUN PARENT FIRST!
+		// set defaults first
+		$this->title = __( 'Overlay Opacity', 'infinity' );
+		$this->description = __( 'Select the overlay opacity by moving the slider', 'infinity' );
+		$this->default_value = 0.2;
+		$this->min = 0;
+		$this->max = 1;
+		$this->step = 0.01;
+		$this->suffix = ' level';
+		$this->style_property = 'opacity';
+
+		// run parent
 		parent::configure();
 
-		// init properties
-		$this->import_property( 'linked_image', 'string' );
+		// import settings
+		$this->import_settings( array(
+			'linked_image'
+		));
 	}
 
 	/**

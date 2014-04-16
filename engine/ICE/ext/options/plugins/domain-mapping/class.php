@@ -22,17 +22,25 @@ class ICE_Ext_Option_Plugins_Domain_Mapping
 {
 	/**
 	 */
-	protected function init()
+	protected function configure()
+	{
+		// set defaults first
+		$this->title = __( 'Custom Domain', 'infinity' );
+		$this->description = __( 'Enter the custom domain name you wish to map to your site.', 'infinity' );
+
+		// run parent
+		parent::configure();
+	}
+
+	/**
+	 */
+	public function init()
 	{
 		// is the plugin active?
 		if ( $this->plugin_active() ) {
 
 			// yes, ok to init
 			parent::init();
-
-			// init directives
-			$this->title = __( 'Custom Domain', 'infinity' );
-			$this->description = __( 'Enter the custom domain name you wish to map to your site.', 'infinity' );
 			
 		} else {
 			// not active

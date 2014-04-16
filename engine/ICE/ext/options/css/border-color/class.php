@@ -20,13 +20,16 @@
 class ICE_Ext_Option_Css_Border_Color
 	extends ICE_Ext_Option_Colorpicker
 {
-	protected function init()
+	/**
+	 */
+	protected function configure()
 	{
-		parent::init();
-
-		// initialize directives
+		// set defaults first
 		$this->title = 'Border Color';
 		$this->description = 'Choose a color for the border';
 		$this->style_property = 'border-color';
+
+		// run parent
+		parent::configure();
 	}
 }

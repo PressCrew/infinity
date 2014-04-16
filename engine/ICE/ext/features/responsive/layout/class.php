@@ -24,7 +24,7 @@ class ICE_Ext_Feature_Responsive_Layout
 {
 	/**
 	 */
-	protected function init()
+	public function init()
 	{
 		// run parent init method
 		parent::init();

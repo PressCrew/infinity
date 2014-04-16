@@ -47,5 +47,18 @@ abstract class ICE_Screen extends ICE_Component
 				return parent::get_property( $name );
 		}
 	}
-	
+
+	/**
+	 */
+	protected function configure()
+	{
+		// RUN PARENT FIRST!
+		parent::configure();
+
+		// import settings
+		$this->import_settings( array(
+			'target',
+			'url'
+		));
+	}
 }

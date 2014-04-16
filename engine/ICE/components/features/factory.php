@@ -23,12 +23,12 @@ class ICE_Feature_Factory extends ICE_Factory
 {
 	/**
 	 */
-	public function create( $name, $settings )
+	public function create( $name, $type )
 	{
 		// only create if supported
 		if ( true === current_theme_supports( $name ) ) {
 			// supported, call parent
-			return parent::create( $name, $settings );
+			return parent::create( $name, $type );
 		} else {
 			// not supported
 			return false;

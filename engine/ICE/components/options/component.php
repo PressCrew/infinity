@@ -44,7 +44,7 @@ abstract class ICE_Option extends ICE_Component
 	 *
 	 * @var string
 	 */
-	private $name_deprecated;
+	protected $name_deprecated;
 	
 	/**
 	 * The feature for which this option was created (slug)
@@ -133,16 +133,27 @@ abstract class ICE_Option extends ICE_Component
 
 	/**
 	 */
-	public function configure()
+	protected function configure()
 	{
-		// RUN PARENT FIRST!
+		// set defaults
+		$this->section = 'default';
+
+		// run parent
 		parent::configure();
 
-		// empty section?
-		if ( empty( $this->section ) ) {
-			// yes, use default
-			$this->section = 'default';
-		}
+		// import settings
+		$this->import_settings( array(
+			'default_value',
+			'feature',
+			'field_class',
+			'field_id',
+			'field_options',
+			'name_deprecated',
+			'section',
+			'style_property',
+			'style_selector',
+			'style_unit'
+		));
 
 		// field options
 		

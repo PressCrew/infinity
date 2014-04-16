@@ -22,9 +22,9 @@ class ICE_Ext_Option_Text
 {
 	/**
 	 */
-	protected function init()
+	protected function configure()
 	{
-		parent::init();
+		parent::configure();
 		$this->input_type( 'text' );
 	}
 }

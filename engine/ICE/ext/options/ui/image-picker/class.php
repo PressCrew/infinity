@@ -31,7 +31,7 @@ class ICE_Ext_Option_Ui_Image_Picker
 	/**
 	 * @var string
 	 */
-	protected $file_extension;
+	protected $file_extension = 'png';
 
 	/**
 	 */
@@ -44,6 +44,20 @@ class ICE_Ext_Option_Ui_Image_Picker
 			default:
 				return parent::get_property( $name );
 		}
+	}
+
+	/**
+	 */
+	protected function configure()
+	{
+		// import settings
+		$this->import_settings( array(
+			'file_directory',
+			'file_extension'
+		));
+
+		// run parent after importing settings
+		parent::configure();
 	}
 
 	/**

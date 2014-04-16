@@ -12,8 +12,7 @@
  */
 
 ICE_Loader::load(
-	'base/policeable',
-	'base/configurable'
+	'base/policeable'
 );
 
 /**

@@ -53,6 +53,21 @@ class ICE_Ext_Option_Ui_Scroll_Picker
 				return parent::get_property( $name );
 		}
 	}
+
+	/**
+	 */
+	protected function configure()
+	{
+		// run parent first
+		parent::configure();
+
+		// import settings
+		$this->import_settings( array(
+			'item_height',
+			'item_margin',
+			'item_width'
+		));
+	}
 	
 	/**
 	 */
