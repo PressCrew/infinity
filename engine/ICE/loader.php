@@ -89,6 +89,33 @@ final class ICE_Loader extends ICE_Base
 				'utils/files',
 				'utils/enqueue'
 			);
+
+			// add init actions callback
+			add_action( 'init', array( __CLASS__, 'do_init_actions' ), 9 );
+		}
+	}
+
+	/**
+	 * Call special ICE init actions.
+	 */
+	final static public function do_init_actions()
+	{
+		// always do this one
+		do_action( 'ice_init' );
+		
+		// inside /wp-admin ?
+		if ( ICE_IS_ADMIN ) {
+			// ajax request?
+			if ( ICE_IS_AJAX ) {
+				// yep, do ajax action
+				do_action( 'ice_init_ajax' );
+			} else {
+				// nope, do dashboard action
+				do_action( 'ice_init_dash' );
+			}
+		} else {
+			// must be the blog side of things
+			do_action( 'ice_init_blog' );
 		}
 	}
 
