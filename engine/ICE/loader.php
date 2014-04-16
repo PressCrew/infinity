@@ -82,9 +82,6 @@ final class ICE_Loader extends ICE_Base
 			// is this an AJAX request?
 			define( 'ICE_AJAX_REQUEST', defined( 'DOING_AJAX' ) );
 
-			// define api ext prefixes
-			define( 'ICE_EXT_PREFIX', 'ICE_Ext' );
-
 			// load really important classes
 			self::load(
 				'utils/files',
