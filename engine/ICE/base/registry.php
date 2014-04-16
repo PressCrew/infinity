@@ -383,7 +383,7 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 		// try to create component
 		try {
 			// call factory create method
-			return $this->policy()->factory()->create( $comp_name, $type );
+			return $this->_factory->create( $comp_name, $type );
 		// catch enviro exception
 		} catch ( ICE_Environment_Exception $e ) {
 			// create failed
@@ -407,7 +407,7 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 				// is a feature set?
 				if ( isset( $settings['feature'] ) ) {
 					// try to grab defaults
-					$defaults_array = $this->policy()->features()->registry()->get_suboption_defaults( $settings['feature'] );
+					$defaults_array = $this->_policy->features()->registry()->get_suboption_defaults( $settings['feature'] );
 					// get any defaults?
 					if ( !empty( $defaults_array ) ) {
 						// merge config *ON TOP OF* defaults

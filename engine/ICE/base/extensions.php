@@ -88,7 +88,7 @@ class ICE_Extensions extends ICE_Componentable
 		$class_name = $this->load( $ext );
 
 		// construct it
-		return new $class_name( $name, $ext, $this->policy() );
+		return new $class_name( $name, $ext, $this->_policy );
 	}
 
 	/**

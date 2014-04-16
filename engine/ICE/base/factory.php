@@ -44,7 +44,7 @@ abstract class ICE_Factory extends ICE_Componentable
 		}
 
 		// call extension create
-		return $this->policy()->extensions()->create( $type, $name );
+		return $this->_policy->extensions()->create( $type, $name );
 	}
 
 }

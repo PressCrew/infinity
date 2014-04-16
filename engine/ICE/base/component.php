@@ -257,7 +257,7 @@ abstract class ICE_Component
 	 */
 	protected function format_aname( $name = null )
 	{
-		return $this->policy()->get_handle( false ) . '/' . $name;
+		return $this->_policy->get_handle( false ) . '/' . $name;
 	}
 
 	/**
@@ -605,13 +605,13 @@ abstract class ICE_Component
 			->set_class_suffix_offset( 1 );
 
 		// component type
-		$comp_type = $this->policy()->get_handle( false );
+		$comp_type = $this->_policy->get_handle( false );
 
 		// classes start with abstract component type
 		$this->element()->add_class( array( self::API_PREFIX, $comp_type ) );
 
 		// get ancestors
-		$ancestors = $this->policy()->extensions()->get_ancestory( $this->type );
+		$ancestors = $this->_policy->extensions()->get_ancestory( $this->type );
 
 		// loop ancestors
 		while ( $ancestors ) {
@@ -733,7 +733,7 @@ abstract class ICE_Component
 		} else {
 			throw new Exception( sprintf(
 				'The %s name "%s" does not match the allowed pattern',
-				$this->policy()->get_handle(), $name
+				$this->_policy->get_handle(), $name
 			));
 		}
 	}
@@ -761,7 +761,7 @@ abstract class ICE_Component
 		// is a parent set
 		if ( $this->parent ) {
 			// yes, look it up from the registry and return
-			return $this->policy()->registry()->get( $this->parent );
+			return $this->_registry->get( $this->parent );
 		} else {
 			throw new Exception(
 				sprintf( 'The "%s" component does not have a parent set', $this->name ) );
@@ -775,7 +775,7 @@ abstract class ICE_Component
 	 */
 	public function get_children()
 	{
-		return $this->policy()->registry()->get_children( $this );
+		return $this->_registry->get_children( $this );
 	}
 
 	/**
@@ -805,7 +805,7 @@ abstract class ICE_Component
 		$option_name = $this->format_suboption( $name );
 
 		// get and return it
-		return $this->policy()->options()->registry()->get( $option_name );
+		return $this->_policy->options()->registry()->get( $option_name );
 	}
 
 	/**
@@ -820,7 +820,7 @@ abstract class ICE_Component
 		$option_name = $this->format_suboption( $name );
 
 		// get and return it
-		return $this->policy()->options()->registry()->has( $option_name );
+		return $this->_policy->options()->registry()->has( $option_name );
 	}
 
 	/**
@@ -862,7 +862,7 @@ abstract class ICE_Component
 			return $template;
 		} else {
 			// try to locate the default template
-			return $this->policy()->extensions()->get_template_path( $this->type );
+			return $this->_policy->extensions()->get_template_path( $this->type );
 		}
 	}
 
@@ -893,7 +893,7 @@ abstract class ICE_Component
 	 */
 	final public function locate_file( $filename )
 	{
-		return $this->policy()->extensions()->locate_file( $this->type, $filename );
+		return $this->_policy->extensions()->locate_file( $this->type, $filename );
 	}
 
 	/**
@@ -927,10 +927,10 @@ abstract class ICE_Component
 	{
 		if ( $this->renderable() ) {
 			if ( $output === true ) {
-				$this->policy()->renderer()->render( $this, true );
+				$this->_renderer->render( $this, true );
 				return true;
 			} else {
-				return $this->policy()->renderer()->render( $this, $output );
+				return $this->_renderer->render( $this, $output );
 			}
 		} else {
 			// not renderable
@@ -945,7 +945,7 @@ abstract class ICE_Component
 	 */
 	public function render_bypass()
 	{
-		return $this->policy()->renderer()->render_bypass( $this );
+		return $this->_renderer->render_bypass( $this );
 	}
 
 	/**
