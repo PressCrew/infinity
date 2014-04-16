@@ -454,7 +454,7 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 		}
 
 		// initialize the response on the "init" action
-		add_action( 'init', array( $this, 'init_response' ) );
+		add_action( 'ice_init', array( $this, 'init_response' ) );
 	}
 
 	/**
