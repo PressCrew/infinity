@@ -42,6 +42,11 @@ define( 'ICE_ACTIVE_THEME', get_stylesheet() );
  * ICE API: cache is_admin() call for performance
  */
 define( 'ICE_IS_ADMIN', is_admin() );
+/**
+ * ICE API: cache doing ajax check for performance
+ */
+define( 'ICE_IS_AJAX', defined( 'DOING_AJAX' ) );
+
 
 /**
  * include the base class
@@ -78,9 +83,6 @@ final class ICE_Loader extends ICE_Base
 			define( 'ICE_CSS_URL', ICE_ASSETS_URL . '/css' );
 			define( 'ICE_IMAGES_URL', ICE_ASSETS_URL . '/images' );
 			define( 'ICE_JS_URL', ICE_ASSETS_URL . '/js' );
-
-			// is this an AJAX request?
-			define( 'ICE_AJAX_REQUEST', defined( 'DOING_AJAX' ) );
 
 			// load really important classes
 			self::load(
