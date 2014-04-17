@@ -70,6 +70,13 @@ final class ICE_Enqueue extends ICE_Base
 	private $style_actions = array();
 
 	/**
+	 * The style objects stack.
+	 *
+	 * @var array
+	 */
+	private $style_objects = array();
+
+	/**
 	 * The style settings stack.
 	 *
 	 * @var array
@@ -89,6 +96,13 @@ final class ICE_Enqueue extends ICE_Base
 	 * @var array
 	 */
 	private $script_actions = array();
+
+	/**
+	 * The script objects stack.
+	 *
+	 * @var array
+	 */
+	private $script_objects = array();
 
 	/**
 	 * The script settings stack.
@@ -511,6 +525,58 @@ final class ICE_Enqueue extends ICE_Base
 	}
 
 	/**
+	 * Add an existing style for later enqueueing.
+	 *
+	 * @param string $handle
+	 * @param array $args
+	 */
+	public function enqueue_style( $handle, $args = array() )
+	{
+		// init local vars
+		$action = $priority = null;
+
+		// default args
+		$defaults = array(
+			'action' => $this->style_action,
+			'priority' => 10,
+			'condition' => null
+		);
+
+		// parse em
+		$settings = wp_parse_args( $args, $defaults );
+
+		// extract em
+		extract( $settings, EXTR_IF_EXISTS );
+
+		// been hooked yet?
+		if ( false === isset( $this->style_actions[ $action ] ) ) {
+			// nope, hook into action
+			add_action( $action, array( $this, 'do_enqueue_style' ), $priority, 0 );
+		}
+
+		// push handle onto style actions array
+		$this->style_actions[ $action ][] = $handle;
+
+		// push settings onto settings array
+		$this->style_settings[ $handle ] = $settings;
+	}
+
+	public function enqueue_style_obj( ICE_Style $style, $args = array() )
+	{
+		// get a unique handle
+		$handle = $this->make_style_handle();
+
+		// add to style objects stack
+		$this->style_objects[ $handle ] = $style;
+
+		// call standard enqueuer
+		$this->enqueue_style( $handle, $args );
+
+		// return the handle for caller's reference
+		return $handle;
+	}
+
+	/**
 	 * Register a style for later enqueueing.
 	 *
 	 * @param string $handle
@@ -552,6 +618,58 @@ final class ICE_Enqueue extends ICE_Base
 
 		// push settings onto settings array
 		$this->style_settings[ $handle ] = $settings;
+	}
+
+	/**
+	 * Add a script for later enqueueing.
+	 *
+	 * @param string $handle
+	 * @param array $args
+	 */
+	public function enqueue_script( $handle, $args = array() )
+	{
+		// init local vars
+		$action = $priority = null;
+
+		// default args
+		$defaults = array(
+			'action' => $this->script_action,
+			'priority' => 10,
+			'condition' => null
+		);
+
+		// parse em
+		$settings = wp_parse_args( $args, $defaults );
+
+		// extract em
+		extract( $settings, EXTR_IF_EXISTS );
+
+		// been hooked yet?
+		if ( false === isset( $this->script_actions[ $action ] ) ) {
+			// nope, hook into action
+			add_action( $action, array( $this, 'do_enqueue_script' ), $priority, 0 );
+		}
+
+		// push handle onto script actions array
+		$this->script_actions[ $action ][] = $handle;
+
+		// push settings onto settings array
+		$this->script_settings[ $handle ] = $settings;
+	}
+
+	public function enqueue_script_obj( ICE_Script $script, $args = array() )
+	{
+		// get a unique handle
+		$handle = $this->make_script_handle();
+
+		// add to script objects stack
+		$this->script_objects[ $handle ] = $script;
+
+		// call standard enqueuer
+		$this->enqueue_script( $handle, $args );
+
+		// return the handle for caller's reference
+		return $handle;
 	}
 
 	/**
@@ -625,11 +743,72 @@ final class ICE_Enqueue extends ICE_Base
 		// no conditions set, or all conditions eval'd true
 		return true;
 	}
+
+	private function make_style_handle()
+	{
+		do {
+			$handle = mt_rand();
+		} while( isset( $this->style_settings[ $handle ] ) );
+
+		return $handle;
+	}
+
+	private function make_script_handle()
+	{
+		do {
+			$handle = mt_rand();
+		} while( isset( $this->script_settings[ $handle ] ) );
+
+		return $handle;
+	}
+
+	public function render_styles()
+	{
+		// loop all style objects
+		foreach( $this->style_objects as $style ) {
+			// render each one
+			$style->render();
+		}
+		/* @var $style ICE_Style */
+	}
+
+	public function render_scripts()
+	{
+		// loop all script objects
+		foreach( $this->script_objects as $script ) {
+			// render each one
+			$script->render();
+		}
+		/* @var $script ICE_Style */
+	}
 }
 
 //
 // Helpers
 //
+
+/**
+ * Add a style for later enqueuing.
+ *
+ * @see ICE_Enqueue::enqueue_style()
+ * @param string $handle
+ * @param array $args
+ */
+function ice_enqueue_style( $handle, $args = array() )
+{
+	ICE_Enqueue::instance()->enqueue_style( $handle, $args );
+}
+
+/**
+ * Enqueue a dynamic style object.
+ *
+ * @see ICE_Enqueue::enqueue_style_obj()
+ * @param ICE_Style $style
+ */
+function ice_enqueue_style_obj( ICE_Style $style )
+{
+	ICE_Enqueue::instance()->enqueue_style_obj( $style );
+}
 
 /**
  * Register a style for later enqueuing.
@@ -644,6 +823,39 @@ function ice_register_style( $handle, $args )
 }
 
 /**
+ * Render all dynamic styles.
+ *
+ * @see ICE_Enqueue::render_styles()
+ */
+function ice_render_styles()
+{
+	ICE_Enqueue::instance()->render_styles();
+}
+
+/**
+ * Add a script for later enqueuing.
+ *
+ * @see ICE_Enqueue::enqueue_script()
+ * @param string $handle
+ * @param array $args
+ */
+function ice_enqueue_script( $handle, $args = array() )
+{
+	ICE_Enqueue::instance()->enqueue_script( $handle, $args = array() );
+}
+
+/**
+ * Add a script object for later enqueuing.
+ *
+ * @see ICE_Enqueue::enqueue_script_obj()
+ * @param ICE_Script $script
+ */
+function ice_enqueue_script_obj( $script, $args = array() )
+{
+	ICE_Enqueue::instance()->enqueue_script_obj( $script, $args = array() );
+}
+
+/**
  * Register a script for later enqueuing.
  *
  * @see ICE_Enqueue::register_script()
@@ -653,4 +865,14 @@ function ice_register_style( $handle, $args )
 function ice_register_script( $handle, $args )
 {
 	ICE_Enqueue::instance()->register_script( $handle, $args );
+}
+
+/**
+ * Render all dynamic scripts.
+ *
+ * @see ICE_Enqueue::render_scripts()
+ */
+function ice_render_scripts()
+{
+	ICE_Enqueue::instance()->render_scripts();
 }
