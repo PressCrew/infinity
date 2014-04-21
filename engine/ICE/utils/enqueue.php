@@ -12,134 +12,56 @@
  */
 
 /**
- * Make enqueing assets Easy
+ * Make enqueing assets easy.
  *
  * @package ICE
  * @subpackage utils
  */
-final class ICE_Enqueue extends ICE_Base
+abstract class ICE_Enqueue extends ICE_Base
 {
 	/**
-	 * Script which handles the AJAX requests
-	 */
-	const SCRIPT_AJAX = 'admin-ajax.php';
-
-	/**
-	 * Script which accepts the async upload
-	 */
-	const SCRIPT_ASYNC = 'async-upload.php';
-	
-	/**
-	 * Default UI style handle
-	 */
-	const UI_STYLE_HANDLE = 'jquery-ui-custom';
-
-	/**
-	 * Singleton instance
-	 * 
-	 * @var ICE_Enqueue
-	 */
-	static private $instance;
-
-	/**
-	 * Will be set to true once style enqueuer has been executed
+	 * Will be set to true once enqueue setup has been executed.
 	 * 
 	 * @var boolean 
 	 */
-	private $did_styles = false;
-
-	/**
-	 * Will be set to true once script enqueuer has been executed
-	 * 
-	 * @var boolean
-	 */
-	private $did_scripts = false;
+	private $did_setup = false;
 
 	/**
 	 * The default style action to use if none specified.
 	 *
 	 * @var string
 	 */
-	private $style_action;
+	private $default_action;
 
 	/**
 	 * The style actions stack.
 	 *
 	 * @var array
 	 */
-	private $style_actions = array();
+	private $actions = array();
 
 	/**
 	 * The style objects stack.
 	 *
 	 * @var array
 	 */
-	private $style_objects = array();
+	private $objects = array();
 
 	/**
-	 * The style settings stack.
+	 * The settings stack.
 	 *
 	 * @var array
 	 */
-	private $style_settings = array();
-
-	/**
-	 * The default script action to use if none specified.
-	 *
-	 * @var string
-	 */
-	private $script_action;
-
-	/**
-	 * The script actions stack.
-	 *
-	 * @var array
-	 */
-	private $script_actions = array();
-
-	/**
-	 * The script objects stack.
-	 *
-	 * @var array
-	 */
-	private $script_objects = array();
-
-	/**
-	 * The script settings stack.
-	 *
-	 * @var array
-	 */
-	private $script_settings = array();
-
-	/**
-	 * The stylesheet URL for the UI theme.
-	 *
-	 * @var string
-	 */
-	private $ui_stylesheet;
+	private $settings = array();
 
 	/**
 	 * Constructor
 	 * 
 	 * @internal
 	 */
-	private function __construct()
+	protected function __construct()
 	{
 		// this is a singleton
-	}
-
-	/**
-	 * Return singleton instance
-	 *
-	 * @return ICE_Enqueue
-	 */
-	static public function instance()
-	{
-		if ( !self::$instance instanceof self ) {
-			self::$instance = new self();
-		}
-
-		return self::$instance;
 	}
 
 	/**
@@ -150,63 +72,376 @@ final class ICE_Enqueue extends ICE_Base
 	 */
 	static public function init( $admin_action, $blog_action = 'wp_enqueue_scripts' )
 	{
+		// get instances
+		$styles = ICE_Styles::instance();
+		$scripts = ICE_Scripts::instance();
+
 		if ( is_admin() ) {
-			self::instance()
-				->styles_on_action( $admin_action )
-				->scripts_on_action( $admin_action );
+			$styles->set_default_action( $admin_action );
+			$scripts->set_default_action( $admin_action );
 		} else {
-			self::instance()
-				->styles_on_action( $blog_action )
-				->scripts_on_action( $blog_action );
+			$styles->set_default_action( $blog_action );
+			$scripts->set_default_action( $blog_action );
 		}
+	}
+
+	/**
+	 * Call the WP enqueuer.
+	 *
+	 * @param string $handle
+	 */
+	abstract protected function enqueue_now( $handle );
+
+	/**
+	 * The template method is called just in time to register defaults.
+	 */
+	abstract protected function register_defaults();
+
+	/**
+	 * Set the action on which to attach this asset enqueuer.
+	 *
+	 * @param string $action
+	 * @param integer $priority
+	 */
+	public function set_default_action( $action, $priority = 99999 )
+	{
+		// must not have been set yet!
+		if ( null === $this->default_action ) {
+			// set default action
+			$this->default_action = $action;
+			// enqueue styles on given action
+			add_action( $action, array($this, 'do_enqueue_setup'), $priority );
+		}
+	}
+
+	/**
+	 * Handles internal setup before any assets are enqueued.
+	 *
+	 * Never call this manually unless you really know what you are doing!
+	 *
+	 * @internal
+	 */
+	public function do_enqueue_setup()
+	{
+		// already run?
+		if ( true === $this->did_setup ) {
+			// yep, don't run again
+			return;
+		}
+
+		// register default assets
+		$this->register_defaults();
+
+		// enqueue deps
+		$this->enqueue_deps();
+
+		// update toggle
+		$this->did_setup = true;
+	}
+
+	/**
+	 * Maybe enqueue assets attached to current filter.
+	 */
+	public function do_enqueue_now()
+	{
+		// action is current filter
+		$action = current_filter();
+
+		// loop through handles on this action
+		foreach( $this->actions[ $action ] as $handle ) {
+			// test conditions
+			if ( $this->check_condition( $this->settings[ $handle ][ 'condition' ] ) ) {
+				// enqueue it
+				$this->enqueue_now( $handle );
+			}
+		}
+	}
+
+	/**
+	 * Handle enqueuing of special asset dependancies.
+	 *
+	 * @internal
+	 */
+	public function enqueue_deps()
+	{
+		// loop all asset objects
+		foreach( $this->objects as $object ) {
+			// enqueue injected asset depends
+			$object->enqueue_deps();
+		}
+		/* @var $object ICE_Asset */
+	}
+
+	/**
+	 * Register an asset for later enqueueing.
+	 *
+	 * @param string $handle
+	 * @param array $args
+	 */
+	protected function register_asset( $handle, $args )
+	{
+		// init some vars
+		$action = $priority = null;
+
+		// default args
+		$defaults = array(
+			'action' => $this->default_action,
+			'priority' => 10,
+			'condition' => null
+		);
+
+		// parse em
+		$settings = wp_parse_args( $args, $defaults );
+
+		// extract em
+		extract( $settings, EXTR_IF_EXISTS );
+
+		// been hooked yet?
+		if ( false === isset( $this->actions[ $action ] ) ) {
+			// nope, hook into action
+			add_action( $action, array( $this, 'do_enqueue_now' ), $priority, 0 );
+		}
+
+		// push handle onto style actions array
+		$this->actions[ $action ][] = $handle;
+
+		// push settings onto settings array
+		$this->settings[ $handle ] = $settings;
+	}
+
+	/**
+	 * Add an asset for later enqueueing.
+	 *
+	 * @param string $handle
+	 * @param array $args
+	 */
+	public function enqueue( $handle, $args = array() )
+	{
+		// default args
+		$defaults = array(
+			'action' => $this->default_action,
+			'priority' => 10,
+			'condition' => null
+		);
+
+		// parse em
+		$settings = wp_parse_args( $args, $defaults );
+
+		// call register asset
+		$this->register_asset( $handle, $settings );
+	}
+
+	/**
+	 * Add an asset object for later enqueuing.
+	 *
+	 * @param ICE_Asset $asset
+	 * @param array $args
+	 * @return string The handle which was generated.
+	 */
+	public function enqueue_object( ICE_Asset $asset, $args = array() )
+	{
+		// get a unique handle
+		$handle = $this->generate_handle();
+
+		// add to asset objects stack
+		$this->objects[ $handle ] = $asset;
+
+		// call standard enqueuer
+		$this->enqueue( $handle, $args );
+
+		// return the handle for caller's reference
+		return $handle;
+	}
+
+	/**
+	 * Test if condition callback(s) eval to true.
+	 *
+	 * @param string|array $condition
+	 * @return boolean
+	 */
+	private function check_condition( $condition )
+	{
+		// have a condition?
+		if ( false === empty( $condition ) ) {
+
+			// condition must be an array so we can loop it
+			settype( $condition, 'array' );
+
+			// loop all conditions
+			foreach( $condition as $callback ) {
+				// try to exec the callback
+				if ( false === is_callable( $callback ) || true !== call_user_func( $callback ) ) {
+					// callback did not eval to true, test failed
+					return false;
+				}
+			}
+		}
+
+		// no conditions set, or all conditions eval'd true
+		return true;
+	}
+
+	/**
+	 * Generate a unique handle which does not yet exist in settings stack.
+	 *
+	 * @return string
+	 */
+	private function generate_handle()
+	{
+		do {
+			$handle = mt_rand();
+		} while( isset( $this->settings[ $handle ] ) );
+
+		return $handle;
+	}
+
+	/**
+	 * Call render() method on every object in asset object stack.
+	 */
+	public function render()
+	{
+		// loop all asset objects
+		foreach( $this->objects as $object ) {
+			// render it
+			$object->render();
+		}
+		/* @var $object ICE_Asset */
+	}
+}
+
+/**
+ * Make enqueing styles easy.
+ *
+ * @package ICE
+ * @subpackage utils
+ */
+class ICE_Styles extends ICE_Enqueue
+{
+	/**
+	 * Default UI style handle
+	 */
+	const UI_STYLE_HANDLE = 'jquery-ui-custom';
+
+	/**
+	 * Singleton instance
+	 *
+	 * @var ICE_Styles
+	 */
+	static private $instance;
+
+	/**
+	 * The stylesheet URL for the UI theme.
+	 *
+	 * @var string
+	 */
+	private $ui_stylesheet;
+
+	/**
+	 */
+	protected function __construct()
+	{
+		// run parent
+		parent::__construct();
 
 		// set default UI stylesheet
-		self::instance()
-			->ui_stylesheet( ICE_CSS_URL . '/ui/jquery-ui-1.10.3.custom.css' );
+		$this->ui_stylesheet( ICE_CSS_URL . '/ui/jquery-ui-1.10.3.custom.css' );
 	}
 
 	/**
-	 * Add an action on which to attach the style enqueuer
+	 * Return singleton instance
 	 *
-	 * @param string $action
-	 * @param integer $priority
+	 * @return ICE_Styles
 	 */
-	public function styles_on_action( $action, $priority = null )
+	static public function instance()
 	{
-		// set default action
-		$this->style_action = $action;
-		
-		// handle empty priority
-		if ( empty( $priority ) ) {
-			$priority = 99999;
+		if ( !self::$instance instanceof self ) {
+			self::$instance = new self();
 		}
-		
-		// enqueue styles on given action
-		add_action( $action, array($this, 'do_enqueue_styles'), $priority );
 
-		return $this;
+		return self::$instance;
+	}
+	
+	/**
+	 */
+	protected function enqueue_now( $handle )
+	{
+		wp_enqueue_style( $handle );
 	}
 
 	/**
-	 * Add an action on which to attach the script enqueuer
-	 *
-	 * @param string $action
-	 * @param integer $priority
 	 */
-	public function scripts_on_action( $action, $priority = null )
+	protected function register_defaults()
 	{
-		// set default script action
-		$this->script_action = $action;
+		wp_register_style(
+			self::UI_STYLE_HANDLE,
+			$this->ui_stylesheet
+		);
 
-		// handle empty priority
-		if ( empty( $priority ) ) {
-			$priority = 99999;
+		wp_register_style(
+			'jquery-juicy',
+			ICE_CSS_URL . '/juicy/jquery.juicy.css',
+			array( self::UI_STYLE_HANDLE )
+		);
+
+		wp_register_style(
+			'ice-ui',
+			ICE_CSS_URL . '/ui.css',
+			array( 'jquery-juicy' )
+		);
+
+		do_action('ice_init_styles');
+		do_action('ice_register_styles');
+		do_action('ice_enqueue_styles');
+	}
+	
+	/**
+	 * Register a style for later enqueueing.
+	 *
+	 * @param string $handle
+	 * @param array $args
+	 */
+	public function register( $handle, $args )
+	{
+		// init local vars
+		$src = $deps = $ver = $media = null;
+
+		// default args
+		$defaults = array(
+			'src' => null,
+			'deps' => array(),
+			'ver' => false,
+			'media' => 'all'
+		);
+
+		// parse em
+		$settings = wp_parse_args( $args, $defaults );
+
+		// extract em
+		extract( $settings, EXTR_IF_EXISTS );
+
+		// register style with wp
+		wp_register_style( $handle, $src, $deps, $ver, $media );
+
+		// register this asset
+		$this->register_asset( $handle, $settings );
+	}
+
+	/**
+	 * @todo remove this once deprecated!!
+	 */
+	public function enqueue_deps()
+	{
+		// call parent
+		parent::enqueue_deps();
+
+		// enqueue injected style depends for every policy
+		foreach( ICE_Policy::all() as $policy ) {
+			// loop through all registered components
+			foreach ( $policy->registry()->get_all() as $component ) {
+				// call style dep enqueuer
+				$component->style()->enqueue_deps();
+			}
 		}
-
-		// enqueue scripts on given action
-		add_action( $action, array($this, 'do_enqueue_scripts'), $priority );
-
-		return $this;
 	}
 
 	/**
@@ -229,140 +464,58 @@ final class ICE_Enqueue extends ICE_Base
 		// return it
 		return $this->ui_stylesheet;
 	}
+}
+
+/**
+ * Make enqueing scripts easy.
+ *
+ * @package ICE
+ * @subpackage utils
+ */
+class ICE_Scripts extends ICE_Enqueue
+{
+	/**
+	 * Script which handles the AJAX requests
+	 */
+	const SCRIPT_AJAX = 'admin-ajax.php';
 
 	/**
-	 * Call enqueue styles action
-	 *
-	 * Never call this manually unless you really know what you are doing!
-	 *
-	 * @internal
+	 * Script which accepts the async upload
 	 */
-	public function do_enqueue_styles()
+	const SCRIPT_ASYNC = 'async-upload.php';
+	
+	/**
+	 * Singleton instance
+	 *
+	 * @var ICE_Scripts
+	 */
+	static private $instance;
+
+	/**
+	 * Return singleton instance
+	 *
+	 * @return ICE_Scripts
+	 */
+	static public function instance()
 	{
-		// already run?
-		if ( true === $this->did_styles ) {
-			// yep, don't run again
-			return;
-		} else {
-			// update toggle
-			$this->did_styles = true;
+		if ( !self::$instance instanceof self ) {
+			self::$instance = new self();
 		}
 
-		// register default styles
-		
-		wp_register_style(
-			self::UI_STYLE_HANDLE,
-			$this->ui_stylesheet
-		);
-
-		wp_register_style(
-			'jquery-juicy',
-			ICE_CSS_URL . '/juicy/jquery.juicy.css',
-			array( self::UI_STYLE_HANDLE )
-		);
-
-		wp_register_style(
-			'ice-ui',
-			ICE_CSS_URL . '/ui.css',
-			array( 'jquery-juicy' )
-		);
-
-		// hook up styles internal handler
-		add_action( 'ice_enqueue_styles', array( $this, 'do_enqueue_style_deps' ), 1 );
-
-		do_action('ice_init_styles');
-		do_action('ice_register_styles');
-		do_action('ice_enqueue_styles');
+		return self::$instance;
+	}
+	
+	/**
+	 */
+	protected function enqueue_now( $handle )
+	{
+		wp_enqueue_script( $handle );
 	}
 
 	/**
-	 * Maybe enqueue styles attached to current filter.
 	 */
-	public function do_enqueue_style()
+	public function register_defaults()
 	{
-		// action is current filter
-		$action = current_filter();
-
-		// loop through handles on this action
-		foreach( $this->style_actions[ $action ] as $handle ) {
-			// test conditions
-			if ( $this->check_condition( $this->style_settings[ $handle ][ 'condition' ] ) ) {
-				// enqueue it
-				wp_enqueue_style( $handle );
-			}
-		}
-	}
-
-	/**
-	 * Handle enqueing style dependancies
-	 *
-	 * @internal
-	 */
-	public function do_enqueue_style_deps()
-	{
-		// enqueue injected style depends for every policy
-		foreach( ICE_Policy::all() as $policy ) {
-			// loop through all registered components
-			foreach ( $policy->registry()->get_all() as $component ) {
-				// call style dep enqueuer
-				$component->style()->enqueue_deps();
-			}
-		}
-	}
-
-	/**
-	 * Maybe enqueue scripts attached to current filter.
-	 */
-	public function do_enqueue_script()
-	{
-		// action is current filter
-		$action = current_filter();
-
-		// loop through handles on this action
-		foreach( $this->script_actions[ $action ] as $handle ) {
-			// test conditions
-			if ( $this->check_condition( $this->script_settings[ $handle ][ 'condition' ] ) ) {
-				// enqueue it
-				wp_enqueue_script( $handle );
-			}
-		}
-	}
-
-	/**
-	 * Handle enqueuing script dependancies.
-	 *
-	 * @internal
-	 */
-	public function do_enqueue_script_deps()
-	{
-		// enqueue injected script depends for every policy
-		foreach( ICE_Policy::all() as $policy ) {
-			// loop through all registered components
-			foreach ( $policy->registry()->get_all() as $component ) {
-				// call script dep enqueuer
-				$component->script()->enqueue_deps();
-			}
-		}
-	}
-
-	/**
-	 * Call enqueue scripts action
-	 *
-	 * Never call this manually unless you really know what you are doing!
-	 *
-	 * @internal
-	 */
-	public function do_enqueue_scripts()
-	{
-		// already run?
-		if ( true === $this->did_scripts ) {
-			// yep, don't run again
-			return;
-		} else {
-			// update toggle
-			$this->did_scripts = true;
-		}
-		
 		// register popular jQuery plugins
 
 		wp_register_script(
@@ -496,11 +649,8 @@ final class ICE_Enqueue extends ICE_Base
 		);
 
 		// localize
-		$this->localize_scripts();
+		$this->localize();
 
-		// hook up scripts internal handler
-		add_action( 'ice_enqueue_scripts', array( $this, 'do_enqueue_script_deps' ), 1 );
-		
 		// actions!
 		do_action('ice_init_scripts');
 		do_action('ice_register_scripts');
@@ -511,7 +661,7 @@ final class ICE_Enqueue extends ICE_Base
 	/**
 	 * Localize internal scripts
 	 */
-	private function localize_scripts()
+	private function localize()
 	{
 		wp_localize_script(
 			'ice-global',
@@ -521,155 +671,6 @@ final class ICE_Enqueue extends ICE_Base
 				'async_url' => admin_url( self::SCRIPT_ASYNC )
 			)
 		);
-
-	}
-
-	/**
-	 * Add an existing style for later enqueueing.
-	 *
-	 * @param string $handle
-	 * @param array $args
-	 */
-	public function enqueue_style( $handle, $args = array() )
-	{
-		// init local vars
-		$action = $priority = null;
-
-		// default args
-		$defaults = array(
-			'action' => $this->style_action,
-			'priority' => 10,
-			'condition' => null
-		);
-
-		// parse em
-		$settings = wp_parse_args( $args, $defaults );
-
-		// extract em
-		extract( $settings, EXTR_IF_EXISTS );
-
-		// been hooked yet?
-		if ( false === isset( $this->style_actions[ $action ] ) ) {
-			// nope, hook into action
-			add_action( $action, array( $this, 'do_enqueue_style' ), $priority, 0 );
-		}
-
-		// push handle onto style actions array
-		$this->style_actions[ $action ][] = $handle;
-
-		// push settings onto settings array
-		$this->style_settings[ $handle ] = $settings;
-	}
-
-	public function enqueue_style_obj( ICE_Style $style, $args = array() )
-	{
-		// get a unique handle
-		$handle = $this->make_style_handle();
-
-		// add to style objects stack
-		$this->style_objects[ $handle ] = $style;
-
-		// call standard enqueuer
-		$this->enqueue_style( $handle, $args );
-
-		// return the handle for caller's reference
-		return $handle;
-	}
-
-	/**
-	 * Register a style for later enqueueing.
-	 *
-	 * @param string $handle
-	 * @param array $args
-	 */
-	public function register_style( $handle, $args )
-	{
-		// init local vars
-		$src = $deps = $ver = $media = $action = $priority = null;
-
-		// default args
-		$defaults = array(
-			'src' => null,
-			'deps' => array(),
-			'ver' => false,
-			'media' => 'all',
-			'action' => $this->style_action,
-			'priority' => 10,
-			'condition' => null
-		);
-
-		// parse em
-		$settings = wp_parse_args( $args, $defaults );
-
-		// extract em
-		extract( $settings, EXTR_IF_EXISTS );
-
-		// register style
-		wp_register_style( $handle, $src, $deps, $ver, $media );
-
-		// been hooked yet?
-		if ( false === isset( $this->style_actions[ $action ] ) ) {
-			// nope, hook into action
-			add_action( $action, array( $this, 'do_enqueue_style' ), $priority, 0 );
-		}
-
-		// push handle onto style actions array
-		$this->style_actions[ $action ][] = $handle;
-
-		// push settings onto settings array
-		$this->style_settings[ $handle ] = $settings;
-	}
-
-	/**
-	 * Add a script for later enqueueing.
-	 *
-	 * @param string $handle
-	 * @param array $args
-	 */
-	public function enqueue_script( $handle, $args = array() )
-	{
-		// init local vars
-		$action = $priority = null;
-
-		// default args
-		$defaults = array(
-			'action' => $this->script_action,
-			'priority' => 10,
-			'condition' => null
-		);
-
-		// parse em
-		$settings = wp_parse_args( $args, $defaults );
-
-		// extract em
-		extract( $settings, EXTR_IF_EXISTS );
-
-		// been hooked yet?
-		if ( false === isset( $this->script_actions[ $action ] ) ) {
-			// nope, hook into action
-			add_action( $action, array( $this, 'do_enqueue_script' ), $priority, 0 );
-		}
-
-		// push handle onto script actions array
-		$this->script_actions[ $action ][] = $handle;
-
-		// push settings onto settings array
-		$this->script_settings[ $handle ] = $settings;
-	}
-
-	public function enqueue_script_obj( ICE_Script $script, $args = array() )
-	{
-		// get a unique handle
-		$handle = $this->make_script_handle();
-
-		// add to script objects stack
-		$this->script_objects[ $handle ] = $script;
-
-		// call standard enqueuer
-		$this->enqueue_script( $handle, $args );
-
-		// return the handle for caller's reference
-		return $handle;
 	}
 
 	/**
@@ -678,20 +679,17 @@ final class ICE_Enqueue extends ICE_Base
 	 * @param string $handle
 	 * @param array $args
 	 */
-	public function register_script( $handle, $args )
+	public function register( $handle, $args )
 	{
 		// init local vars
-		$src = $deps = $ver = $in_footer = $action = $priority = null;
+		$src = $deps = $ver = $in_footer = null;
 
 		// default args
 		$defaults = array(
 			'src' => null,
 			'deps' => array(),
 			'ver' => false,
-			'in_footer' => false,
-			'action' => $this->script_action,
-			'priority' => 10,
-			'condition' => null
+			'in_footer' => false
 		);
 
 		// parse em
@@ -700,86 +698,29 @@ final class ICE_Enqueue extends ICE_Base
 		// extract em
 		extract( $settings, EXTR_IF_EXISTS );
 
-		// register script
+		// register script with wp
 		wp_register_script( $handle, $src, $deps, $ver, $in_footer );
 
-		// been hooked yet?
-		if ( false === isset( $this->script_actions[ $action ] ) ) {
-			// nope, hook into action
-			add_action( $action, array( $this, 'do_enqueue_script' ), $priority, 0 );
-		}
-
-		// push handle onto script actions array
-		$this->script_actions[ $action ][] = $handle;
-
-		// push settings onto settings array
-		$this->script_settings[ $handle ] = $settings;
+		// call register asset
+		$this->register_asset( $handle, $settings );
 	}
 
 	/**
-	 * Test if condition callback(s) eval to true.
-	 *
-	 * @param string|array $condition
-	 * @return boolean
+	 * @todo remove this once deprecated!!
 	 */
-	private function check_condition( $condition )
+	public function enqueue_deps()
 	{
-		// have a condition?
-		if ( false === empty( $condition ) ) {
+		// run parent
+		parent::enqueue_deps();
 
-			// condition must be an array so we can loop it
-			settype( $condition, 'array' );
-
-			// loop all conditions
-			foreach( $condition as $callback ) {
-				// try to exec the callback
-				if ( false === is_callable( $callback ) || true !== call_user_func( $callback ) ) {
-					// callback did not eval to true, test failed
-					return false;
-				}
+		// enqueue injected script depends for every policy
+		foreach( ICE_Policy::all() as $policy ) {
+			// loop through all registered components
+			foreach ( $policy->registry()->get_all() as $component ) {
+				// call script dep enqueuer
+				$component->script()->enqueue_deps();
 			}
 		}
-
-		// no conditions set, or all conditions eval'd true
-		return true;
-	}
-
-	private function make_style_handle()
-	{
-		do {
-			$handle = mt_rand();
-		} while( isset( $this->style_settings[ $handle ] ) );
-
-		return $handle;
-	}
-
-	private function make_script_handle()
-	{
-		do {
-			$handle = mt_rand();
-		} while( isset( $this->script_settings[ $handle ] ) );
-
-		return $handle;
-	}
-
-	public function render_styles()
-	{
-		// loop all style objects
-		foreach( $this->style_objects as $style ) {
-			// render each one
-			$style->render();
-		}
-		/* @var $style ICE_Style */
-	}
-
-	public function render_scripts()
-	{
-		// loop all script objects
-		foreach( $this->script_objects as $script ) {
-			// render each one
-			$script->render();
-		}
-		/* @var $script ICE_Style */
 	}
 }
 
@@ -790,89 +731,89 @@ final class ICE_Enqueue extends ICE_Base
 /**
  * Add a style for later enqueuing.
  *
- * @see ICE_Enqueue::enqueue_style()
+ * @see ICE_Styles::enqueue()
  * @param string $handle
  * @param array $args
  */
 function ice_enqueue_style( $handle, $args = array() )
 {
-	ICE_Enqueue::instance()->enqueue_style( $handle, $args );
+	ICE_Styles::instance()->enqueue( $handle, $args );
 }
 
 /**
  * Enqueue a dynamic style object.
  *
- * @see ICE_Enqueue::enqueue_style_obj()
+ * @see ICE_Styles::enqueue_object()
  * @param ICE_Style $style
  */
 function ice_enqueue_style_obj( ICE_Style $style )
 {
-	ICE_Enqueue::instance()->enqueue_style_obj( $style );
+	ICE_Styles::instance()->enqueue_object( $style );
 }
 
 /**
  * Register a style for later enqueuing.
  *
- * @see ICE_Enqueue::register_style()
+ * @see ICE_Styles::register()
  * @param string $handle
  * @param array $args
  */
 function ice_register_style( $handle, $args )
 {
-	ICE_Enqueue::instance()->register_style( $handle, $args );
+	ICE_Styles::instance()->register( $handle, $args );
 }
 
 /**
  * Render all dynamic styles.
  *
- * @see ICE_Enqueue::render_styles()
+ * @see ICE_Styles::render()
  */
 function ice_render_styles()
 {
-	ICE_Enqueue::instance()->render_styles();
+	ICE_Styles::instance()->render();
 }
 
 /**
  * Add a script for later enqueuing.
  *
- * @see ICE_Enqueue::enqueue_script()
+ * @see ICE_Scripts::enqueue()
  * @param string $handle
  * @param array $args
  */
 function ice_enqueue_script( $handle, $args = array() )
 {
-	ICE_Enqueue::instance()->enqueue_script( $handle, $args = array() );
+	ICE_Scripts::instance()->enqueue( $handle, $args = array() );
 }
 
 /**
  * Add a script object for later enqueuing.
  *
- * @see ICE_Enqueue::enqueue_script_obj()
+ * @see ICE_Scripts::enqueue_object()
  * @param ICE_Script $script
  */
 function ice_enqueue_script_obj( $script, $args = array() )
 {
-	ICE_Enqueue::instance()->enqueue_script_obj( $script, $args = array() );
+	ICE_Scripts::instance()->enqueue_object( $script, $args = array() );
 }
 
 /**
  * Register a script for later enqueuing.
  *
- * @see ICE_Enqueue::register_script()
+ * @see ICE_Scripts::register()
  * @param string $handle
  * @param array $args
  */
 function ice_register_script( $handle, $args )
 {
-	ICE_Enqueue::instance()->register_script( $handle, $args );
+	ICE_Scripts::instance()->register( $handle, $args );
 }
 
 /**
  * Render all dynamic scripts.
  *
- * @see ICE_Enqueue::render_scripts()
+ * @see ICE_Scripts::render_scripts()
  */
 function ice_render_scripts()
 {
-	ICE_Enqueue::instance()->render_scripts();
+	ICE_Scripts::instance()->render();
 }
