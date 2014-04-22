@@ -24,25 +24,35 @@ ICE_Loader::load( 'utils/webfont' );
 class ICE_Ext_Option_Ui_Font_Picker
 	extends ICE_Ext_Option_Ui_Scroll_Picker
 {
-
-	public function init_admin_styles()
+	/**
+	 */
+	public function init()
 	{
-		parent::init_admin_styles();
+		// run parent
+		parent::init();
 
-		// inject admin styles
-		$this->style()
-			->inject( 'admin', 'admin.css' )
-			->add_dep( 'admin', 'jquery-multiselect' );
+		// setup dashboard assets
+		add_action( 'ice_init_dash', array( $this, 'setup_dash_assets' ) );
 	}
 
-	public function init_admin_scripts()
+	/**
+	 * Setup dashboard assets.
+	 */
+	public function setup_dash_assets()
 	{
-		parent::init_admin_scripts();
+		// dynamic styles
+		$style = new ICE_Style( $this );
+		$style->inject( 'admin', 'admin.css' );
+		$style->add_dep( 'admin', 'jquery-multiselect' );
+		// enqueue it
+		ice_enqueue_style_obj( $style );
 
-		// inject admin scripts
-		$this->script()
-			->inject( 'admin', 'admin.js' )
-			->add_dep( 'admin', 'jquery-multiselect' );
+		// dynamic scripts
+		$script = new ICE_Script( $this );
+		$script->inject( 'admin', 'admin.js' );
+		$script->add_dep( 'admin', 'jquery-multiselect' );
+		// enqueue it
+		ice_enqueue_script_obj( $script );
 	}
 
 	/**
