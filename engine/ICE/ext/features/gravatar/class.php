@@ -49,15 +49,28 @@ class ICE_Ext_Feature_Gravatar
 			'image_class'
 		));
 	}
-	
+
 	/**
 	 */
-	public function init_styles()
+	public function init()
 	{
-		parent::init_styles();
+		// run parent
+		parent::init();
 
-		// add gravatar image styles callback
-		$this->style()->inject( 'image', 'image_css' );
+		// enqueue styles
+		add_action( 'ice_init_blog', array( $this, 'do_enqueue_styles' ) );
+	}
+
+	/**
+	 * Enqueue styles.
+	 */
+	public function do_enqueue_styles()
+	{
+		// dynamic styles
+		$style = new ICE_Style( $this );
+		$style->inject( 'image', 'image_css' );
+		// enqueue it
+		ice_enqueue_style_obj( $style );
 	}
 
 	/**
