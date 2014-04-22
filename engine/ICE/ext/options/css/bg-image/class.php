@@ -33,16 +33,15 @@ class ICE_Ext_Option_Css_Bg_Image
 		parent::configure();
 	}
 
-	/**
-	 */
-	public function init_styles()
+	public function init()
 	{
-		parent::init_styles();
+		// run parent
+		parent::init();
 
-		// add inject styles callback
-		$this->style()->inject( 'remove-image', 'bg_image_override' );
+		// enqueue bg image override
+		add_action( 'ice_init_blog', array( $this, 'bg_image_override' ) );
 	}
-	
+
 	/**
 	 * Add a rule to kill any background image that might be set,
 	 * if the background image was explicitly disabled (zero value).
@@ -54,8 +53,12 @@ class ICE_Ext_Option_Css_Bg_Image
 
 		// is value a literal zero?
 		if ( is_numeric( $value ) && 0 === (integer) $value ) {
-			$rule = $this->style()->rule( 'bg', $this->get_property( 'style_selector' ) );
+			// dynamic styles
+			$style = new ICE_Style( $this );
+			$rule = $style->rule( 'bg', $this->get_property( 'style_selector' ) );
 			$rule->add_declaration( 'background-image', 'none' );
+			// enqueue it
+			ice_enqueue_style_obj( $style );
 		}
 	}
 }
