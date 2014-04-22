@@ -353,6 +353,7 @@ final class ICE_Scheme extends ICE_Base
 				$component->style()->render();
 			}
 		}
+		ICE_Styles::instance()->render();
 	}
 
 	/**
@@ -368,6 +369,7 @@ final class ICE_Scheme extends ICE_Base
 				$component->script()->render();
 			}
 		}
+		ICE_Scripts::instance()->render();
 	}
 
 	/**
