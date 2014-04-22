@@ -101,16 +101,15 @@ abstract class ICE_Enqueue extends ICE_Base
 	 * Set the action on which to attach this asset enqueuer.
 	 *
 	 * @param string $action
-	 * @param integer $priority
 	 */
-	public function set_default_action( $action, $priority = 99999 )
+	public function set_default_action( $action )
 	{
 		// must not have been set yet!
 		if ( null === $this->default_action ) {
 			// set default action
 			$this->default_action = $action;
 			// enqueue styles on given action
-			add_action( $action, array($this, 'do_enqueue_setup'), $priority );
+			add_action( $action, array($this, 'do_enqueue_setup'), 1 );
 		}
 	}
 
