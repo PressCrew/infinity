@@ -59,15 +59,16 @@ class ICE_Ext_Feature_Bp_Support
 
 		// addtl actions
 		add_action( 'open_sidebar', array( $this, 'message_notices' ) );
+
+		// setup scripts
+		add_action( 'ice_init_blog', array( $this, 'do_setup_scripts' ) );
 	}
 
 	/**
 	 * @internal copied from bp-default/functions.php
 	 */
-	public function init_scripts()
+	public function do_setup_scripts()
 	{
-		parent::init_scripts();
-
 		// Bump this when changes are made to bust cache
 		$version = '20120110';
 
