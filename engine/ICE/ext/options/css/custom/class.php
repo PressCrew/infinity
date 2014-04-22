@@ -22,12 +22,25 @@ class ICE_Ext_Option_Css_Custom
 {
 	/**
 	 */
-	public function init_styles()
+	public function init()
 	{
-		parent::init_styles();
+		// run parent
+		parent::init();
 
-		// add css injection callback
-		$this->style()->inject( 'custom', 'inject_css' );
+		// setup actions
+		add_action( 'ice_init_blog', array( $this, 'setup_styles' ) );
+	}
+
+	/**
+	 * Setup styles.
+	 */
+	public function setup_styles()
+	{
+		// dynamic styles
+		$style = new ICE_Style( $this );
+		$style->inject( 'custom', 'inject_css' );
+		// enqueue it
+		ice_enqueue_style_obj( $style );
 	}
 
 	/**
