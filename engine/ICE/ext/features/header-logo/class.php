@@ -33,16 +33,23 @@ class ICE_Ext_Feature_Header_Logo
 		parent::configure();
 	}
 
-	/**
-	 */
-	public function init_styles()
+	public function init()
 	{
-		parent::init_styles();
+		// run parent
+		parent::init();
 
-		// add static logo styles and callback
-		$this->style()
-			->inject( 'logo', 'logo.css' )
-			->inject( 'logo-gen', 'logo_styles' );
+		// enqueue blog styles
+		add_action( 'ice_init_blog', array( $this, 'blog_styles' ) );
+	}
+
+	public function blog_styles()
+	{
+		// dynamic styles
+		$style = new ICE_Style( $this );
+		$style->inject( 'logo', 'logo.css' );
+		$style->inject( 'logo-gen', 'logo_styles' );
+		// enqueue it
+		ice_enqueue_style_obj( $style );
 	}
 
 	/**
