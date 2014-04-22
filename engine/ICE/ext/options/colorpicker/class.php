@@ -22,20 +22,21 @@ class ICE_Ext_Option_Colorpicker
 {
 	/**
 	 */
-	public function init_admin_styles()
+	public function init()
 	{
-		parent::init_admin_styles();
+		// run parent
+		parent::init();
 
-		wp_enqueue_style( 'wp-color-picker' );
+		// enqueue dash assets
+		add_action( 'ice_init_dash', array( $this, 'do_enqueue_dash' ) );
 	}
-
+	
 	/**
 	 */
-	public function init_admin_scripts()
+	public function do_enqueue_dash()
 	{
-		parent::init_admin_scripts();
-
-		wp_enqueue_script( 'wp-color-picker' );
+		ice_enqueue_style( 'wp-color-picker' );
+		ice_enqueue_script( 'wp-color-picker' );
 	}
 
 }
