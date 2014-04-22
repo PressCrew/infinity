@@ -57,17 +57,11 @@ class ICE_Ext_Feature_Responsive_Videos
 		// run parent init method
 		parent::init();
 
-		// add actions
+		// setup actions
+		add_action( 'ice_init_blog', array( $this, 'setup_scripts' ) );
+
+		// template actions
 		add_action( 'open_body', array( $this, 'render' ) );
-	}
-
-	/**
-	 */
-	public function init_scripts()
-	{
-		parent::init_scripts();
-
-		wp_enqueue_script( 'jquery-fitvids' );
 	}
 
 	/**
@@ -82,6 +76,14 @@ class ICE_Ext_Feature_Responsive_Videos
 			'custom_selector',
 			'target_selector'
 		));
+	}
+
+	/**
+	 * Setup scripts.
+	 */
+	public function setup_scripts()
+	{
+		ice_enqueue_script( 'jquery-fitvids' );
 	}
 	
 	/**
