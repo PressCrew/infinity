@@ -97,21 +97,15 @@ class ICE_Ext_Feature_Responsive_Menu
 		// run parent init method
 		parent::init();
 
+		// enqueue scripts
+		add_action( 'ice_init_blog', array( $this, 'enqueue_scripts' ) );
+
 		// add actions
 		add_action( 'open_body', array( $this, 'render' ) );
 		add_action( 'open_wrapper', array( $this, 'menu_container' ) );
 
 		// add filter
 		add_filter( 'loginout', array( $this, 'loginout_filter' ) );
-	}
-
-	/**
-	 */
-	public function init_scripts()
-	{
-		parent::init_scripts();
-
-		wp_enqueue_script( 'jquery-mobilemenu' );
 	}
 
 	/**
@@ -139,7 +133,15 @@ class ICE_Ext_Feature_Responsive_Menu
 			)
 		);
 	}
-	
+
+	/**
+	 * Enqueue scripts.
+	 */
+	public function enqueue_scripts()
+	{
+		ice_enqueue_script( 'jquery-mobilemenu' );
+	}
+
 	/**
 	 */
 	public function get_template_vars()
