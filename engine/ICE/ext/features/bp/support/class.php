@@ -214,41 +214,4 @@ class ICE_Ext_Feature_Bp_Support
 		// render the link ?>
 		<a class="<?php print esc_attr( $class ) ?> button" href="<?php bp_activity_thread_permalink() ?>"><?php print $title ?></a><?php
 	}
-
-	/**
-	 * Copy a BuddyPress theme from the plugin dir to another location
-	 *
-	 * @internal this method is unused but may come in useful some day
-	 * @param string $dst_dir
-	 * @param string $theme
-	 * @return boolean
-	 */
-	private function copy_theme( $dst_dir, $theme = 'bp-default' )
-	{
-		$src_dir = BP_PLUGIN_DIR . '/bp-themes/' . $theme;
-
-		// theme subdir names
-		$dirs = array(
-			'activity',
-			'blogs',
-			'forums',
-			'groups',
-			'members',
-			'registration'
-		);
-
-		// loop all dirs and copy
-		foreach ( $dirs as $dir ) {
-			// format paths
-			$src_path = sprintf( '%s/%s', $src_dir, $dir );
-			$dst_path = sprintf( '%s/%s', $dst_dir, $dir );
-			// try to copy
-			if ( !ICE_files::path_copy( $src_path, $dst_path ) ) {
-				return false;
-			}
-		}
-
-		return true;
-	}
-
 }
