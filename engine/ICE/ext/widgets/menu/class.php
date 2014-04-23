@@ -57,22 +57,28 @@ class ICE_Ext_Widget_Menu
 	
 	/**
 	 */
-	public function init_admin_styles()
+	public function init()
 	{
-		parent::init_admin_styles();
+		// run parent
+		parent::init();
 
-		// inject admin styles
-		$this->style()->inject( 'admin', 'admin.css' );
+		// setup dashboard assets
+		add_action( 'ice_init_dash', array( $this, 'setup_dash_assets' ) );
 	}
-	
-	/**
-	 */
-	public function init_admin_scripts()
-	{
-		parent::init_admin_scripts();
 
-		// need jquery ui menu
-		wp_enqueue_script( 'jquery-ui-menu' );
+	/**
+	 * Setup dashboard assets.
+	 */
+	public function setup_dash_assets()
+	{
+		// dynamic styles
+		$style = new ICE_Style( $this );
+		$style->inject( 'admin', 'admin.css' );
+		// enqueue it
+		ice_enqueue_style_obj( $style );
+
+		// enqueue jquery ui menu script
+		ice_enqueue_script( 'jquery-ui-menu' );
 	}
 
 	/**
