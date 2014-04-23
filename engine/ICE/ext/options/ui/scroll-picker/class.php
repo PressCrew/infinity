@@ -71,12 +71,22 @@ class ICE_Ext_Option_Ui_Scroll_Picker
 	
 	/**
 	 */
-	public function init_admin_scripts()
+	public function init()
 	{
-		parent::init_admin_scripts();
+		// run parent
+		parent::init();
 
+		// setup admin scripts
+		add_action( 'ice_init_dash', array( $this, 'setup_dash_scripts' ) );
+	}
+
+	/**
+	 * Setup scripts.
+	 */
+	public function setup_dash_scripts()
+	{
 		// need scrollpane helper
-		wp_enqueue_script( 'ice-scrollpane' );
+		ice_enqueue_script( 'ice-scrollpane' );
 	}
 
 	/**
