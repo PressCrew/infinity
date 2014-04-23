@@ -128,22 +128,28 @@ class ICE_Ext_Option_Ui_Slider
 	
 	/**
 	 */
-	public function init_admin_styles()
+	public function init()
 	{
-		parent::init_admin_styles();
+		// run parent
+		parent::init();
 
-		// inject admin styles
-		$this->style()->inject( 'admin', 'admin.css' );
+		// setup dash assets
+		add_action( 'ice_init_dash', array( $this, 'setup_dash_assets' ) );
 	}
 
 	/**
+	 * Setup dashboard assets.
 	 */
-	public function init_admin_scripts()
+	public function setup_dash_assets()
 	{
-		parent::init_admin_scripts();
+		// dynamic styles
+		$style = new ICE_Style( $this );
+		$style->inject( 'admin', 'admin.css' );
+		// enqueue it
+		ice_enqueue_style_obj( $style );
 
-		// need slider helper
-		wp_enqueue_script( 'ice-slider' );
+		// enqueue slider helper
+		ice_enqueue_script( 'ice-slider' );
 	}
 	
 	/**
