@@ -22,11 +22,24 @@ class Infinity_Ext_Section_Cpanel
 {
 	/**
 	 */
-	public function init_admin_styles()
+	public function init()
 	{
-		parent::init_admin_styles();
+		// run parent
+		parent::init();
 
-		// inject admin styles
-		$this->style()->inject( 'admin', 'admin.css' );
+		// setup dashboard styles
+		add_action( 'ice_init_dash', array( $this, 'setup_dash_styles' ) );
+	}
+
+	/**
+	 * Setup dashboard styles.
+	 */
+	public function setup_dash_styles()
+	{
+		// dynamic styles
+		$style = new ICE_Style( $this );
+		$style->inject( 'admin', 'admin.css' );
+		// enqueue it
+		ice_enqueue_style_obj( $style );
 	}
 }
