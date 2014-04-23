@@ -60,34 +60,46 @@ class ICE_Ext_Widget_Posts_List
 
 	/**
 	 */
-	public function init_ajax()
+	public function init()
+	{
+		// run parent
+		parent::init();
+
+		// setup dashboard assets
+		add_action( 'ice_init_dash', array( $this, 'setup_dash_assets' ) );
+		
+		// setup ajax actions
+		add_action( 'ice_init_ajax', array( $this, 'setup_dash_ajax' ) );
+	}
+
+	/**
+	 * Setup dashboard assets.
+	 */
+	public function setup_dash_assets()
+	{
+		// dynamic styles
+		$style = new ICE_Style( $this );
+		$style->inject( 'admin', 'admin.css' );
+		// enqueue it
+		ice_enqueue_style_obj( $style );
+
+		// dynamic scripts
+		$script = new ICE_Script( $this );
+		$script->inject( 'admin', 'admin.js' );
+		$script->add_dep( 'admin', 'jquery-cookie' );
+		$script->add_dep( 'admin', 'jquery-ui-nestedsortable' );
+		// enqueue it
+		ice_enqueue_script_obj( $script );
+	}
+
+	/**
+	 * Setup dashboard ajax callbacks.
+	 */
+	public function setup_dash_ajax()
 	{
 		add_action( 'wp_ajax_ice_widgets_posts_list_save', array( $this, 'ajax_update_hierarchy' ) );
 		add_action( 'wp_ajax_ice_widgets_posts_list_item_status', array( $this, 'ajax_post_status' ) );
 		add_action( 'wp_ajax_ice_widgets_posts_list_item_trash', array( $this, 'ajax_post_trash' ) );
-	}
-
-	/**
-	 */
-	public function init_admin_styles()
-	{
-		parent::init_admin_styles();
-
-		// inject admin styles
-		$this->style()->inject( 'admin', 'admin.css' );
-	}
-
-	/**
-	 */
-	public function init_admin_scripts()
-	{
-		parent::init_admin_scripts();
-
-		// inject admin scripts
-		$this->script()
-			->inject( 'admin', 'admin.js' )
-			->add_dep( 'admin', 'jquery-cookie' )
-			->add_dep( 'admin', 'jquery-ui-nestedsortable' );
 	}
 
 	/**
