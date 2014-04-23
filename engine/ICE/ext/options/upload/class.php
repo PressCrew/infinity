@@ -49,6 +49,12 @@ class ICE_Ext_Option_Upload
 
 		// run init once
 		$this->init_once();
+
+		// setup dashboard assets
+		add_action( 'ice_init_dash', array( $this, 'setup_dash_assets' ) );
+
+		// setup dashboard ajax
+		add_action( 'ice_init_ajax', array( $this, 'setup_dash_ajax' ) );
 	}
 
 	/**
@@ -67,31 +73,28 @@ class ICE_Ext_Option_Upload
 	}
 
 	/**
+	 * Setup dashboard assets.
 	 */
-	public function init_admin_styles()
+	public function setup_dash_assets()
 	{
-		parent::init_admin_styles();
+		// dynamic styles
+		$style = new ICE_Style( $this );
+		$style->inject( 'template', 'template.css' );
+		// enqueue it
+		ice_enqueue_style_obj( $style );
 
-		// inject admin styles
-		$this->style()->inject( 'template', 'template.css' );
+		// dynamic scripts
+		$script = new ICE_Script( $this );
+		$script->inject( 'template', 'template.js' );
+		// enqueue it
+		ice_enqueue_script_obj( $script );
 	}
 
 	/**
+	 * Setup dashboard ajax callbacks.
 	 */
-	public function init_admin_scripts()
+	public function setup_dash_ajax()
 	{
-		parent::init_admin_scripts();
-
-		// inject admin script
-		$this->script()->inject( 'template', 'template.js' );
-	}
-
-	/**
-	 */
-	public function init_ajax()
-	{
-		parent::init_ajax();
-
 		add_action( 'wp_ajax_ice_options_uploader_media_url', array( $this, 'ajax_media_url' ) );
 	}
 
