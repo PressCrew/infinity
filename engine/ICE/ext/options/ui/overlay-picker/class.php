@@ -24,12 +24,25 @@ class ICE_Ext_Option_Ui_Overlay_Picker
 {
 	/**
 	 */
-	public function init_styles()
+	public function init()
 	{
-		parent::init_styles();
+		// run parent
+		parent::init();
 
-		// add bg image style callback
-		$this->style()->inject( 'bgimage-gen', 'bg_image_style' );
+		// setup styles
+		add_action( 'ice_init_blog', array( $this, 'setup_styles' ) );
+	}
+
+	/**
+	 * Setup styles.
+	 */
+	public function setup_styles()
+	{
+		// dynamic styles
+		$style = new ICE_Style( $this );
+		$style->inject( 'bgimage-gen', 'bg_image_style' );
+		// enqueue it
+		ice_enqueue_style_obj( $style );
 	}
 
 	/**
