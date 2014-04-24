@@ -46,13 +46,6 @@ abstract class ICE_Asset extends ICE_Base
 	private $strings = array();
 
 	/**
-	 * The conditions stack.
-	 *
-	 * @var array
-	 */
-	private $conditions = array();
-
-	/**
 	 * Files that have already been imported.
 	 *
 	 * @var array
@@ -194,90 +187,6 @@ abstract class ICE_Asset extends ICE_Base
 	}
 
 	/**
-	 * Add a condition for the given handle.
-	 *
-	 * @param string $handle
-	 * @param callable $callback
-	 * @param array $param_arr
-	 * @return ICE_Asset
-	 */
-	final public function add_cond( $handle, $callback, $param_arr = array() )
-	{
-		// callback must be callable
-		if ( is_callable( $callback ) ) {
-			// make sure we got an array for params
-			if ( false === is_array( $param_arr ) ) {
-				throw new InvalidArgumentException( sprintf( 'The parameter list for handle "%s" is not an array', $handle ) );
-			}
-			// set it
-			$this->conditions[ $handle ][] = array( $callback, $param_arr );
-		} else {
-			throw new InvalidArgumentException( sprintf( 'The callback for handle "%s" is not callable', $handle ) );
-		}
-
-		return $this;
-	}
-
-	/**
-	 * Returns true if given handle has one or more conditions set.
-	 *
-	 * @param string $handle
-	 * @return boolean
-	 */
-	final public function has_cond( $handle )
-	{
-		return (
-			true === isset( $this->conditions[ $handle ] ) &&
-			1 <= count( $this->conditions[ $handle ] )
-		);
-	}
-
-	/**
-	 * Return array of conditions for given handle.
-	 *
-	 * If no conditions exist, and empty array will be returned.
-	 *
-	 * @param string $handle
-	 * @return array
-	 */
-	final public function get_cond( $handle )
-	{
-		if ( true === $this->has_cond( $handle ) ) {
-			return $this->conditions[ $handle ];
-		} else {
-			return array();
-		}
-	}
-
-	/**
-	 * Returns true if all conditions set for handle are met.
-	 *
-	 * @param string $handle
-	 * @return boolean
-	 */
-	final public function check_cond( $handle )
-	{
-		// are any conditions set?
-		if ( true === $this->has_cond( $handle ) ) {
-			// yes, grab 'em
-			$conditions = $this->conditions[ $handle ];
-			// loop every condition and test
-			foreach ( $conditions as $condition ) {
-				// nobody uses list any more, i know... deal with it
-				list( $callback, $param_arr ) = $condition;
-				// test it
-				if ( false === call_user_func_array( $callback, $param_arr ) ) {
-					// test failed, bail out
-					return false;
-				}
-			}
-		}
-
-		// no conditions set, or all tests passed, party!
-		return true;
-	}
-
-	/**
 	 * Render static code/markup
 	 *
 	 * @return string
@@ -286,11 +195,8 @@ abstract class ICE_Asset extends ICE_Base
 	{
 		// render callbacks
 		foreach ( $this->callbacks as $handle => $callback ) {
-			// check conditions
-			if ( true === $this->check_cond( $handle ) ) {
-				// execute callback with myself as only argument
-				call_user_func( $callback, $this );
-			}
+			// execute callback with myself as only argument
+			call_user_func( $callback, $this );
 		}
 
 		// render files
@@ -320,11 +226,8 @@ abstract class ICE_Asset extends ICE_Base
 			// make sure file actually exists
 			if ( is_readable( $filename ) ) {
 
-				// check conditions
-				if ( true === $this->check_cond( $handle ) ) {
-					// get entire contents of file
-					echo $this->get_file_contents( $filename ) . PHP_EOL;
-				}
+				// get entire contents of file
+				echo $this->get_file_contents( $filename ) . PHP_EOL;
 
 				// success
 				//echo '/*--- import complete! */' . PHP_EOL . PHP_EOL;
@@ -336,11 +239,8 @@ abstract class ICE_Asset extends ICE_Base
 
 		// render strings
 		foreach ( $this->strings as $handle => $string ) {
-			// check conditions
-			if ( true === $this->check_cond( $handle ) ) {
-				// print it
-				echo $string, PHP_EOL, PHP_EOL;
-			}
+			// print it
+			echo $string, PHP_EOL, PHP_EOL;
 		}
 	}
 

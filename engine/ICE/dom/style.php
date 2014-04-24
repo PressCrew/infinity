@@ -83,14 +83,11 @@ class ICE_Style extends ICE_Asset
 
 		// render rules
 		foreach ( $this->rules as $handle => $rule ) {
-			// check conditions
-			if ( true === $this->check_cond( $handle ) ) {
-				// render output of rule export
-				echo
-				'/*+++ generating style ***/', PHP_EOL,
-				$rule->export(),
-				'/*--- style generation complete! */', PHP_EOL, PHP_EOL;
-			}
+			// render output of rule export
+			echo
+			'/*+++ generating style ***/', PHP_EOL,
+			$rule->export(),
+			'/*--- style generation complete! */', PHP_EOL, PHP_EOL;
 		}
 	}
 

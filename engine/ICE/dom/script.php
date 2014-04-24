@@ -119,11 +119,8 @@ class ICE_Script extends ICE_Asset
 			
 			// loop all logic objects
 			foreach ( $this->logic_stack as $handle => $logic ) {
-				// check condition
-				if ( true === $this->check_cond( $handle ) ) {
-					// render output of logic export
-					echo $logic->export();
-				}
+				// render output of logic export
+				echo $logic->export();
 			}
 			
 			// end script generation
