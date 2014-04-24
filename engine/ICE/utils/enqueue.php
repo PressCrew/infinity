@@ -136,9 +136,6 @@ abstract class ICE_Enqueue extends ICE_Base
 		// register default assets
 		$this->register_defaults();
 
-		// enqueue deps
-		$this->enqueue_deps();
-
 		// update toggle
 		$this->did_setup = true;
 	}
@@ -159,21 +156,6 @@ abstract class ICE_Enqueue extends ICE_Base
 				$this->enqueue_now( $handle );
 			}
 		}
-	}
-
-	/**
-	 * Handle enqueuing of special asset dependancies.
-	 *
-	 * @internal
-	 */
-	public function enqueue_deps()
-	{
-		// loop all asset objects
-		foreach( $this->objects as $object ) {
-			// enqueue injected asset depends
-			$object->enqueue_deps();
-		}
-		/* @var $object ICE_Asset */
 	}
 
 	/**
