@@ -426,24 +426,6 @@ class ICE_Styles extends ICE_Enqueue
 	}
 
 	/**
-	 * @todo remove this once deprecated!!
-	 */
-	public function enqueue_deps()
-	{
-		// call parent
-		parent::enqueue_deps();
-
-		// enqueue injected style depends for every policy
-		foreach( ICE_Policy::all() as $policy ) {
-			// loop through all registered components
-			foreach ( $policy->registry()->get_all() as $component ) {
-				// call style dep enqueuer
-				$component->style()->enqueue_deps();
-			}
-		}
-	}
-
-	/**
 	 * Set/Get UI style sheet
 	 *
 	 * Get or set the stylesheet URL of the jQuery UI style sheet that should
@@ -702,24 +684,6 @@ class ICE_Scripts extends ICE_Enqueue
 
 		// call register asset
 		$this->register_asset( $handle, $settings );
-	}
-
-	/**
-	 * @todo remove this once deprecated!!
-	 */
-	public function enqueue_deps()
-	{
-		// run parent
-		parent::enqueue_deps();
-
-		// enqueue injected script depends for every policy
-		foreach( ICE_Policy::all() as $policy ) {
-			// loop through all registered components
-			foreach ( $policy->registry()->get_all() as $component ) {
-				// call script dep enqueuer
-				$component->script()->enqueue_deps();
-			}
-		}
 	}
 }
 
