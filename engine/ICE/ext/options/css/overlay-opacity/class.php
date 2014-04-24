@@ -30,19 +30,6 @@ class ICE_Ext_Option_Css_Overlay_Opacity
 
 	/**
 	 */
-	public function init_styles()
-	{
-		parent::init_styles();
-
-		// is a linked image set?
-		if ( false === $this->check_linked_image() ) {
-			// nope, clear all rules
-			$this->style()->clear_rules();
-		}
-	}
-
-	/**
-	 */
 	public function get_property( $name )
 	{
 		switch ( $name ) {
@@ -77,9 +64,22 @@ class ICE_Ext_Option_Css_Overlay_Opacity
 	}
 
 	/**
+	 */
+	public function inject_auto_style( ICE_Style $style )
+	{
+		// check linked image
+		if ( true === $this->check_linked_image() ) {
+			// good to go
+			parent::inject_auto_style( $style );
+		}
+	}
+	
+	/**
+	 * Check if linked image has been set and if it has a value.
+	 *
 	 * @return boolean
 	 */
-	public function check_linked_image()
+	protected function check_linked_image()
 	{
 		// linked image set?
 		if ( $this->linked_image ) {
@@ -89,8 +89,7 @@ class ICE_Ext_Option_Css_Overlay_Opacity
 			return ( !empty( $ne_option ) );
 		}
 
-		// no linked image
+		// no linked image set
 		return true;
 	}
-
 }
