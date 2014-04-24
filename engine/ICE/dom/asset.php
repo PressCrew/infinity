@@ -99,37 +99,6 @@ abstract class ICE_Asset extends ICE_Base
 	abstract public function enqueue( $handle );
 
 	/**
-	 * Add a file or callback from which to inject dynamic asset code.
-	 *
-	 * @param string $handle
-	 * @param string|array $file_or_callback
-	 * @return ICE_Asset
-	 */
-	final public function inject( $handle, $file_or_callback )
-	{
-		// does string have an extension?
-		if ( is_string( $file_or_callback) && strpos( $file_or_callback, '.' ) ) {
-			// string contains a dot, assume its a file
-			$this->add_file( $handle, $file_or_callback, true );
-		} else {
-			// nope... determine if it could be a callback
-			if ( method_exists( $this->component(), $file_or_callback ) ) {
-				// its a method of the component
-				$this->add_callback(
-					$handle,
-					array( $this->component(), $file_or_callback )
-				);
-			} elseif ( is_callable( $file_or_callback, true ) ) {
-				// it *might* be a valid callback
-				$this->add_callback( $handle, $file_or_callback );
-			}
-		}
-
-		// maintain chain
-		return $this;
-	}
-
-	/**
 	 * Add a dependancy for the given handle.
 	 *
 	 * @param string $handle Handle of the dependant item
