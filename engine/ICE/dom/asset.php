@@ -25,13 +25,6 @@ abstract class ICE_Asset extends ICE_Base
 	private $component;
 
 	/**
-	 * Script dependancies
-	 *
-	 * @var array
-	 */
-	private $deps = array();
-
-	/**
 	 * The files to import.
 	 *
 	 * @var array
@@ -97,75 +90,6 @@ abstract class ICE_Asset extends ICE_Base
 	 * @return ICE_Asset
 	 */
 	abstract public function enqueue( $handle );
-
-	/**
-	 * Add a dependancy for the given handle.
-	 *
-	 * @param string $handle Handle of the dependant item
-	 * @param string $dep_handle Handle of the dependancy to add
-	 * @return ICE_Asset
-	 */
-	final public function add_dep( $handle, $dep_handle )
-	{
-		// just in case
-		$dep_handle = trim( $dep_handle );
-
-		if ( $dep_handle ) {
-			$this->deps[ $handle ][] = $dep_handle;
-		}
-
-		return $this;
-	}
-
-	/**
-	 * Return true if at least one dep has been added
-	 *
-	 * @return boolen
-	 */
-	final public function has_deps()
-	{
-		return ( count( $this->deps ) );
-	}
-
-	/**
-	 * Return array of dep handles
-	 *
-	 * @return array
-	 */
-	final public function get_deps()
-	{
-		// array of deps to return
-		$return_deps = array();
-
-		// loop all deps
-		foreach ( $this->deps as $handle => $deps ) {
-			// check conditions for handle
-			if ( true === $this->check_cond( $handle ) ) {
-				// loop all handle's deps
-				foreach ( $deps as $dep ) {
-					// already in stack?
-					if ( false === isset( $return_deps[ $dep ] ) ) {
-						// nope, push it
-						$return_deps[ $dep ] = $dep;
-					}
-				}
-			}
-		}
-
-		return $return_deps;
-	}
-
-	/**
-	 * Enqueue all dependencies of this asset.
-	 */
-	final public function enqueue_deps()
-	{
-		// loop all deps
-		foreach( $this->get_deps() as $handle ) {
-			// call abstract enqueue method
-			$this->enqueue( $handle );
-		}
-	}
 
 	/**
 	 * Add a file to import.
