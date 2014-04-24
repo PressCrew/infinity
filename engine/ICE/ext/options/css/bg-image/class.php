@@ -58,7 +58,7 @@ class ICE_Ext_Option_Css_Bg_Image
 			$rule = $style->rule( 'bg', $this->get_property( 'style_selector' ) );
 			$rule->add_declaration( 'background-image', 'none' );
 			// enqueue it
-			ice_enqueue_style_obj( $style );
+			$style->enqueue();
 		}
 	}
 }

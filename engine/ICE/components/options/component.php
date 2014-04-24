@@ -437,8 +437,7 @@ abstract class ICE_Option extends ICE_Component
 			// yep, handle dynamic styles
 			$style = new ICE_Style( $this );
 			$style->add_callback( 'auto_style', array( $this, 'inject_auto_style' ) );
-			// enqueue it
-			ice_enqueue_style_obj( $style );
+			$style->enqueue();
 		}
 	}
 

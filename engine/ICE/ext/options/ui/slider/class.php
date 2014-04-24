@@ -145,8 +145,7 @@ class ICE_Ext_Option_Ui_Slider
 		// dynamic styles
 		$style = new ICE_Style( $this );
 		$style->add_file( 'admin', 'admin.css' );
-		// enqueue it
-		ice_enqueue_style_obj( $style );
+		$style->enqueue();
 
 		// enqueue slider helper
 		ice_enqueue_script( 'ice-slider' );

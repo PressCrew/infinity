@@ -41,8 +41,7 @@ class ICE_Ext_Widget_Title_Block
 		// dynamic styles
 		$style = new ICE_Style( $this );
 		$style->add_file( 'admin', 'admin.css' );
-		// enqueue it
-		ice_enqueue_style_obj( $style );
+		$style->enqueue();
 	}
 	
 	/**

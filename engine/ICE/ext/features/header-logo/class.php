@@ -48,8 +48,7 @@ class ICE_Ext_Feature_Header_Logo
 		$style = new ICE_Style( $this );
 		$style->add_file( 'logo', 'logo.css' );
 		$style->add_callback( 'logo-gen', array( $this, 'logo_styles' ) );
-		// enqueue it
-		ice_enqueue_style_obj( $style );
+		$style->enqueue();
 	}
 
 	/**

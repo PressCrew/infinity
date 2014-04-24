@@ -84,14 +84,12 @@ class ICE_Ext_Widget_Posts_List
 		// dynamic styles
 		$style = new ICE_Style( $this );
 		$style->add_file( 'admin', 'admin.css' );
-		// enqueue it
-		ice_enqueue_style_obj( $style );
+		$style->enqueue();
 
 		// dynamic scripts
 		$script = new ICE_Script( $this );
 		$script->add_file( 'admin', 'admin.js' );
-		// enqueue it
-		ice_enqueue_script_obj( $script );
+		$script->enqueue();
 	}
 
 	/**

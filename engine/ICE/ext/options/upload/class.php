@@ -80,14 +80,12 @@ class ICE_Ext_Option_Upload
 		// dynamic styles
 		$style = new ICE_Style( $this );
 		$style->add_file( 'template', 'template.css' );
-		// enqueue it
-		ice_enqueue_style_obj( $style );
+		$style->enqueue();
 
 		// dynamic scripts
 		$script = new ICE_Script( $this );
 		$script->add_file( 'template', 'template.js' );
-		// enqueue it
-		ice_enqueue_script_obj( $script );
+		$script->enqueue();
 	}
 
 	/**

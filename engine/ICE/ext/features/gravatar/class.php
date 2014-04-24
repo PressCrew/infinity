@@ -69,8 +69,7 @@ class ICE_Ext_Feature_Gravatar
 		// dynamic styles
 		$style = new ICE_Style( $this );
 		$style->add_callback( 'image', array( $this, 'image_css' ) );
-		// enqueue it
-		ice_enqueue_style_obj( $style );
+		$style->enqueue();
 	}
 
 	/**

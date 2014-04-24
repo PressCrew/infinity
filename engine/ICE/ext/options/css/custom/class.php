@@ -39,8 +39,7 @@ class ICE_Ext_Option_Css_Custom
 		// dynamic styles
 		$style = new ICE_Style( $this );
 		$style->add_callback( 'custom', array( $this, 'inject_css' ) );
-		// enqueue it
-		ice_enqueue_style_obj( $style );
+		$style->enqueue();
 	}
 
 	/**

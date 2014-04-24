@@ -41,8 +41,7 @@ class ICE_Ext_Option_Ui_Overlay_Picker
 		// dynamic styles
 		$style = new ICE_Style( $this );
 		$style->add_callback( 'bgimage-gen', array( $this, 'bg_image_style' ) );
-		// enqueue it
-		ice_enqueue_style_obj( $style );
+		$style->enqueue();
 	}
 
 	/**
