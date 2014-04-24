@@ -392,10 +392,6 @@ class ICE_Styles extends ICE_Enqueue
 			ICE_CSS_URL . '/ui.css',
 			array( 'jquery-juicy' )
 		);
-
-		do_action('ice_init_styles');
-		do_action('ice_register_styles');
-		do_action('ice_enqueue_styles');
 	}
 	
 	/**
@@ -636,12 +632,6 @@ class ICE_Scripts extends ICE_Enqueue
 
 		// localize
 		$this->localize();
-
-		// actions!
-		do_action('ice_init_scripts');
-		do_action('ice_register_scripts');
-		do_action('ice_enqueue_scripts');
-		do_action('ice_localize_scripts');
 	}
 
 	/**
