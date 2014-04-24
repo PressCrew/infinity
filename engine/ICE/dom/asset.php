@@ -32,18 +32,11 @@ abstract class ICE_Asset extends ICE_Base
 	private $deps = array();
 
 	/**
-	 * The files to enqueue
+	 * The files to import.
 	 *
 	 * @var array
 	 */
 	private $files = array();
-
-	/**
-	 * The files to export
-	 *
-	 * @var array
-	 */
-	private $files_export = array();
 
 	/**
 	 * Export callbacks
@@ -206,21 +199,16 @@ abstract class ICE_Asset extends ICE_Base
 	}
 
 	/**
-	 * Add a file
+	 * Add a file to import.
 	 *
 	 * @param string $handle
 	 * @param string $file
-	 * @param boolean $inject
 	 * @return ICE_Asset
 	 */
-	final public function add_file( $handle, $file, $inject = false )
+	final public function add_file( $handle, $file  )
 	{
-		// push file onto applicable stack
-		if ( true === $inject ) {
-			$this->files_export[ $handle ] = $file;
-		} else {
-			$this->files[ $handle ] = $file;
-		}
+		// push file onto stack
+		$this->files[ $handle ] = $file;
 
 		// maintain chain
 		return $this;
@@ -413,7 +401,7 @@ abstract class ICE_Asset extends ICE_Base
 		}
 
 		// render files
-		foreach ( $this->files_export as $handle => $file ) {
+		foreach ( $this->files as $handle => $file ) {
 
 			// resolve file path
 			if ( ICE_Files::path_is_absolute( $file ) ) {
