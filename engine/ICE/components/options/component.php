@@ -125,17 +125,6 @@ abstract class ICE_Option extends ICE_Component
 
 	/**
 	 */
-	public function init()
-	{
-		// run parent
-		parent::init();
-
-		// setup style property
-		add_action( 'ice_init_blog', array( $this, 'setup_auto_style' ) );
-	}
-
-	/**
-	 */
 	protected function configure()
 	{
 		// set defaults
@@ -437,10 +426,12 @@ abstract class ICE_Option extends ICE_Component
 	}
 
 	/**
-	 * Setup style property automatically.
 	 */
 	public function setup_auto_style()
 	{
+		// run parent
+		parent::setup_auto_style();
+
 		// have a style selector AND style property?
 		if ( $this->style_selector && $this->style_property ) {
 			// yep, handle dynamic styles

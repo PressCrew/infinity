@@ -59,79 +59,14 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	}
 
 	/**
-	 * Initialize correct response depending on environment.
-	 */
-	public function init_response()
-	{
-		// init components
-		$this->init();
-
-		// init ajax OR screen reqs (not both)
-		if ( defined( 'DOING_AJAX' ) ) {
-			$this->init_ajax();
-		} else {
-			$this->init_screen();
-		}
-	}
-
-	/**
 	 * Init all components.
 	 */
-	protected function init()
+	public function init()
 	{
-		// run init for each registered component
+		// loop all components
 		foreach ( $this->get_all() as $component ) {
+			// call init on each one
 			$component->init();
-		}
-	}
-
-	/**
-	 * Init ajax requirements
-	 */
-	protected function init_ajax()
-	{
-		// init ajax for each registered component
-		foreach ( $this->get_all() as $component ) {
-			$component->init_ajax();
-		}
-	}
-
-	/**
-	 * Init screen dependencies for all applicable components to be rendered
-	 */
-	protected function init_screen()
-	{
-		add_action( 'ice_init_styles', array($this, 'init_styles') );
-		add_action( 'ice_init_scripts', array($this, 'init_scripts') );
-		
-		// init screen for each registered component
-		foreach ( $this->get_all() as $component ) {
-			$component->init_screen();
-		}
-	}
-
-	/**
-	 * Enqueue required styles
-	 */
-	public function init_styles()
-	{
-		foreach ( $this->get_all() as $component ) {
-			( true === ICE_IS_ADMIN )
-				? $component->init_admin_styles()
-				: $component->init_styles();
-		}
-	}
-
-	/**
-	 * Enqueue required scripts
-	 */
-	public function init_scripts()
-	{
-		// init scripts for each registered component
-		foreach ( $this->get_all() as $component ) {
-			( true === ICE_IS_ADMIN )
-				? $component->init_admin_scripts()
-				: $component->init_scripts();
 		}
 	}
 
@@ -454,7 +389,7 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 		}
 
 		// initialize the response on the "init" action
-		add_action( 'ice_init', array( $this, 'init_response' ) );
+		add_action( 'ice_init', array( $this, 'init' ) );
 	}
 
 	/**

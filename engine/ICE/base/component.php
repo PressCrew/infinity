@@ -517,27 +517,14 @@ abstract class ICE_Component
 	}
 
 	/**
-	 * This template method is called at the end of the constructor
+	 * This template method is called on the WordPress 'init' action.
 	 */
 	public function init()
 	{
-		// override this method to initialize special PHP handling for a component
-	}
-
-	/**
-	 * This template method is called if the current request is AJAX
-	 */
-	public function init_ajax()
-	{
-		// override this method to initialize special AJAX handling for an option
-	}
-
-	/**
-	 * This template method is called on the option renderer init_screen method
-	 */
-	public function init_screen()
-	{
-		// override this method to initialize special screen handling for an option
+		// setup auto styles
+		add_action( 'ice_init_blog', array( $this, 'setup_auto_style' ) );
+		// setup auto scripts
+		add_action( 'ice_init_blog', array( $this, 'setup_auto_script' ) );
 	}
 
 	/**
@@ -590,11 +577,9 @@ abstract class ICE_Component
 	}
 
 	/**
-	 * This template method is called "just in time" to enqueue styles
-	 *
-	 * Override this method to initialize special style handling for a component
+	 * Automatic style enqueuing setup callback.
 	 */
-	public function init_styles()
+	public function setup_auto_style()
 	{
 		// is a style set?
 		if ( $this->style ) {
@@ -614,19 +599,9 @@ abstract class ICE_Component
 	}
 
 	/**
-	 * This template method is called "just in time" to enqueue admin styles.
+	 * Automatic script enqueuing setup callback.
 	 */
-	public function init_admin_styles()
-	{
-		// override me
-	}
-
-	/**
-	 * This template method is called "just in time" to enqueue scripts
-	 *
-	 * Override this method to initialize special script handling for a component
-	 */
-	public function init_scripts()
+	public function setup_auto_script()
 	{
 		// is a script set?
 		if ( $this->script ) {
@@ -644,14 +619,6 @@ abstract class ICE_Component
 				);
 			}
 		}
-	}
-
-	/**
-	 * This template method is called "just in time" to enqueue admin scripts.
-	 */
-	public function init_admin_scripts()
-	{
-		// override me
 	}
 
 	/**
