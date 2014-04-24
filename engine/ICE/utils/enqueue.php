@@ -681,17 +681,6 @@ function ice_enqueue_style( $handle, $args = array() )
 }
 
 /**
- * Enqueue a dynamic style object.
- *
- * @see ICE_Styles::enqueue_object()
- * @param ICE_Style $style
- */
-function ice_enqueue_style_obj( ICE_Style $style )
-{
-	ICE_Styles::instance()->enqueue_object( $style );
-}
-
-/**
  * Register a style for later enqueuing.
  *
  * @see ICE_Styles::register()
@@ -723,17 +712,6 @@ function ice_render_styles()
 function ice_enqueue_script( $handle, $args = array() )
 {
 	ICE_Scripts::instance()->enqueue( $handle, $args = array() );
-}
-
-/**
- * Add a script object for later enqueuing.
- *
- * @see ICE_Scripts::enqueue_object()
- * @param ICE_Script $script
- */
-function ice_enqueue_script_obj( $script, $args = array() )
-{
-	ICE_Scripts::instance()->enqueue_object( $script, $args = array() );
 }
 
 /**
