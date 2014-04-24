@@ -79,13 +79,13 @@ class ICE_Ext_Widget_Posts_List
 	{
 		// dynamic styles
 		$style = new ICE_Style( $this );
-		$style->inject( 'admin', 'admin.css' );
+		$style->add_file( 'admin', 'admin.css' );
 		// enqueue it
 		ice_enqueue_style_obj( $style );
 
 		// dynamic scripts
 		$script = new ICE_Script( $this );
-		$script->inject( 'admin', 'admin.js' );
+		$script->add_file( 'admin', 'admin.js' );
 		$script->add_dep( 'admin', 'jquery-cookie' );
 		$script->add_dep( 'admin', 'jquery-ui-nestedsortable' );
 		// enqueue it
