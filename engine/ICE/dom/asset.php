@@ -78,11 +78,12 @@ abstract class ICE_Asset extends ICE_Base
 	}
 
 	/**
-	 * Enqueue an asset which has already been registered.
-	 * 
+	 * Enqueue this asset by sending it to the enqueue utility.
+	 *
+	 * @param array $args
 	 * @return ICE_Asset
 	 */
-	abstract public function enqueue( $handle );
+	abstract public function enqueue( $args = array() );
 
 	/**
 	 * Add a file to import.

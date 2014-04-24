@@ -55,9 +55,9 @@ class ICE_Script extends ICE_Asset
 
 	/**
 	 */
-	final public function enqueue( $handle )
+	final public function enqueue( $args = array() )
 	{
-		wp_enqueue_script( $handle );
+		ICE_Scripts::instance()->enqueue_object( $this, $args );
 	}
 
 	/**

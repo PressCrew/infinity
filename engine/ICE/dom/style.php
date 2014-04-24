@@ -37,9 +37,9 @@ class ICE_Style extends ICE_Asset
 
 	/**
 	 */
-	final public function enqueue( $handle )
+	final public function enqueue( $args = array() )
 	{
-		wp_enqueue_style( $handle );
+		ICE_Styles::instance()->enqueue_object( $this, $args );
 	}
 
 	/**
