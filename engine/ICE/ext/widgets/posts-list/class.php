@@ -77,6 +77,10 @@ class ICE_Ext_Widget_Posts_List
 	 */
 	public function setup_dash_assets()
 	{
+		// dependancies
+		ice_enqueue_script( 'jquery-cookie' );
+		ice_enqueue_script( 'jquery-ui-nestedsortable' );
+
 		// dynamic styles
 		$style = new ICE_Style( $this );
 		$style->add_file( 'admin', 'admin.css' );
@@ -86,8 +90,6 @@ class ICE_Ext_Widget_Posts_List
 		// dynamic scripts
 		$script = new ICE_Script( $this );
 		$script->add_file( 'admin', 'admin.js' );
-		$script->add_dep( 'admin', 'jquery-cookie' );
-		$script->add_dep( 'admin', 'jquery-ui-nestedsortable' );
 		// enqueue it
 		ice_enqueue_script_obj( $script );
 	}

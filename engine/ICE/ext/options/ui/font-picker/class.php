@@ -40,17 +40,19 @@ class ICE_Ext_Option_Ui_Font_Picker
 	 */
 	public function setup_dash_assets()
 	{
+		// dependancies
+		ice_enqueue_style( 'jquery-multiselect' );
+		ice_enqueue_script( 'jquery-multiselect' );
+
 		// dynamic styles
 		$style = new ICE_Style( $this );
 		$style->add_file( 'admin', 'admin.css' );
-		$style->add_dep( 'admin', 'jquery-multiselect' );
 		// enqueue it
 		ice_enqueue_style_obj( $style );
 
 		// dynamic scripts
 		$script = new ICE_Script( $this );
 		$script->add_file( 'admin', 'admin.js' );
-		$script->add_dep( 'admin', 'jquery-multiselect' );
 		// enqueue it
 		ice_enqueue_script_obj( $script );
 	}
