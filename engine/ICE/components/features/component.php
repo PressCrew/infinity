@@ -12,8 +12,7 @@
  */
 
 ICE_Loader::load(
-	'base/component',
-	'dom/styleable'
+	'base/component'
 );
 
 /**

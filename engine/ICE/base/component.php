@@ -16,8 +16,8 @@ ICE_Loader::load(
 	'base/recursable',
 	'base/visitable',
 	'dom/element',
-	'dom/styleable',
-	'dom/scriptable',
+	'dom/style',
+	'dom/script',
 	'utils/export',
 	'init/settings'
 );
@@ -30,7 +30,7 @@ ICE_Loader::load(
  */
 abstract class ICE_Component
 	extends ICE_Componentable
-		implements ICE_Recursable, ICE_Visitable, ICE_Styleable, ICE_Scriptable
+		implements ICE_Recursable, ICE_Visitable
 {
 	/**
 	 * Persistence algorithms should use this as a prefix
@@ -58,20 +58,6 @@ abstract class ICE_Component
 	 * @var ICE_Component_Element
 	 */
 	private $__element__;
-
-	/**
-	 * Component's styling if applicable
-	 *
-	 * @var ICE_Style
-	 */
-	private $__style__;
-
-	/**
-	 * Component's scripting if applicable
-	 *
-	 * @var ICE_Script
-	 */
-	private $__script__;
 
 	/**
 	 * The component atypical name which can be used to identify this component instance across components and persistently across requests
@@ -396,38 +382,6 @@ abstract class ICE_Component
 
 		// return it!
 		return $this->__element__;
-	}
-
-	/**
-	 * Return style object
-	 *
-	 * @return ICE_Style
-	 */
-	public function style()
-	{
-		if ( !$this->__style__ instanceof ICE_Style ) {
-			// init style object
-			$this->__style__ = new ICE_Style( $this );
-		}
-
-		// return it!
-		return $this->__style__;
-	}
-
-	/**
-	 * Return script object
-	 *
-	 * @return ICE_Script
-	 */
-	public function script()
-	{
-		if ( !$this->__script__ instanceof ICE_Script ) {
-			// init script object
-			$this->__script__ = new ICE_Script( $this );
-		}
-
-		// return it!
-		return $this->__script__;
 	}
 
 	/**

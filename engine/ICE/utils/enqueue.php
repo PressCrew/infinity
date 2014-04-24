@@ -11,6 +11,11 @@
  * @since 1.0
  */
 
+ICE_Loader::load(
+	'dom/style',
+	'dom/script'
+);
+
 /**
  * Make enqueing assets easy.
  *
