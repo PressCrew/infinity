@@ -125,10 +125,13 @@ abstract class ICE_Option extends ICE_Component
 
 	/**
 	 */
-	public function init_styles()
+	public function init()
 	{
-		parent::init_styles();
-		$this->generate_style_property();
+		// run parent
+		parent::init();
+
+		// setup style property
+		add_action( 'ice_init_blog', array( $this, 'setup_auto_style' ) );
 	}
 
 	/**
@@ -434,27 +437,42 @@ abstract class ICE_Option extends ICE_Component
 	}
 
 	/**
+	 * Setup style property automatically.
 	 */
-	private function generate_style_property()
+	public function setup_auto_style()
 	{
+		// have a style selector AND style property?
 		if ( $this->style_selector && $this->style_property ) {
+			// yep, handle dynamic styles
+			$style = new ICE_Style( $this );
+			$style->inject( 'auto_style', 'inject_auto_style' );
+			// enqueue it
+			ice_enqueue_style_obj( $style );
+		}
+	}
 
-			// determine value to set
-			if ( $this instanceof ICE_Option_Attachment_Image ) {
-				$value = $this->get_image_url( 'full' );
-			} elseif ( $this instanceof ICE_Option_Static_Image ) {
-				$value = $this->get_image_url();
-			} else {
-				$value = $this->get();
-			}
+	/**
+	 * Inject style rule if this option has a value set.
+	 *
+	 * @param ICE_Style $style
+	 */
+	public function inject_auto_style( ICE_Style $style )
+	{
+		// determine value to get
+		if ( $this instanceof ICE_Option_Attachment_Image ) {
+			$value = $this->get_image_url( 'full' );
+		} elseif ( $this instanceof ICE_Option_Static_Image ) {
+			$value = $this->get_image_url();
+		} else {
+			$value = $this->get();
+		}
 
-			// try to set the value
-			if ( null !== $value ) {
-				// new rule
-				$rule = $this->style()->rule( 'cfg', $this->style_selector );
-				// add style property
-				$rule->add_property( $this->style_property, $value . $this->style_unit );
-			}
+		// is there are value set?
+		if ( null !== $value ) {
+			// yep, new rule
+			$rule = $style->rule( 'first', $this->style_selector );
+			// add style property
+			$rule->add_property( $this->style_property, $value . $this->style_unit );
 		}
 	}
 }
