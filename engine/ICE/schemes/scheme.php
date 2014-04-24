@@ -330,46 +330,14 @@ final class ICE_Scheme extends ICE_Base
 		// render em! ?>
 		<!-- dynamic styles -->
 		<style type="text/css">
-			<?php $this->render_styles(); ?>
+			<?php ICE_Styles::instance()->render(); ?>
 		</style>
 		<!-- dynamic scripts -->
 		<script type="text/javascript">
 		//<![CDATA[
-			<?php $this->render_scripts(); ?>
+			<?php ICE_Scripts::instance()->render(); ?>
 		//]]>
 		</script><?php
-	}
-
-	/**
-	 * Render all injected styles.
-	 */
-	final protected function render_styles()
-	{
-		// loop all component registries
-		foreach ( ICE_Policy::all() as $policy ) {
-			// loop all components
-			foreach ( $policy->registry()->get_all() as $component ) {
-				// render styles
-				$component->style()->render();
-			}
-		}
-		ICE_Styles::instance()->render();
-	}
-
-	/**
-	 * Render all injected scripts.
-	 */
-	final protected function render_scripts()
-	{
-		// loop all component registries
-		foreach ( ICE_Policy::all() as $policy ) {
-			// loop all components
-			foreach ( $policy->registry()->get_all() as $component ) {
-				// render scripts
-				$component->script()->render();
-			}
-		}
-		ICE_Scripts::instance()->render();
 	}
 
 	/**
