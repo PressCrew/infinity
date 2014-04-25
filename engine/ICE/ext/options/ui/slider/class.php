@@ -142,12 +142,8 @@ class ICE_Ext_Option_Ui_Slider
 	 */
 	public function setup_dash_assets()
 	{
-		// dynamic styles
-		$style = new ICE_Style( $this );
-		$style->add_file( 'admin', 'admin.css' );
-		$style->enqueue();
-
-		// enqueue slider helper
+		// enqueue dependencies
+		ice_enqueue_style( 'ice-ext-dash' );
 		ice_enqueue_script( 'ice-slider' );
 	}
 	

@@ -77,10 +77,8 @@ class ICE_Ext_Option_Upload
 	 */
 	public function setup_dash_assets()
 	{
-		// dynamic styles
-		$style = new ICE_Style( $this );
-		$style->add_file( 'template', 'template.css' );
-		$style->enqueue();
+		// enqueue dependencies
+		ice_enqueue_style( 'ice-ext-dash' );
 
 		// dynamic scripts
 		$script = new ICE_Script( $this );

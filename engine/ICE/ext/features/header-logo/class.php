@@ -44,9 +44,11 @@ class ICE_Ext_Feature_Header_Logo
 
 	public function blog_styles()
 	{
+		// enqueue dependencies
+		ice_enqueue_style( 'ice-ext-blog' );
+
 		// dynamic styles
 		$style = new ICE_Style( $this );
-		$style->add_file( 'logo', 'logo.css' );
 		$style->add_callback( 'logo-gen', array( $this, 'logo_styles' ) );
 		$style->enqueue();
 	}

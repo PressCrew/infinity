@@ -38,10 +38,8 @@ class ICE_Ext_Widget_Title_Block
 	 */
 	public function setup_dash_styles()
 	{
-		// dynamic styles
-		$style = new ICE_Style( $this );
-		$style->add_file( 'admin', 'admin.css' );
-		$style->enqueue();
+		// enqueue dependencies
+		ice_enqueue_style( 'ice-ext-dash' );
 	}
 	
 	/**

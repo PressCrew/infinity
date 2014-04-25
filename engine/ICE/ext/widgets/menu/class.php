@@ -71,12 +71,8 @@ class ICE_Ext_Widget_Menu
 	 */
 	public function setup_dash_assets()
 	{
-		// dynamic styles
-		$style = new ICE_Style( $this );
-		$style->add_file( 'admin', 'admin.css' );
-		$style->enqueue();
-
-		// enqueue jquery ui menu script
+		// enqueue dependencies
+		ice_enqueue_style( 'ice-ext-dash' );
 		ice_enqueue_script( 'jquery-ui-menu' );
 	}
 

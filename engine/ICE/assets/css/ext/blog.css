@@ -1,0 +1,36 @@
+/**
+ * Copyright (C) 2010-2014  Marshall Sorenson
+ *
+ * Contact Information:
+ *     marshall@presscrew.com
+ *     http://infinity.presscrew.com/
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+
+/**
+ * features/header-logo
+ */
+h1.icext-feature.icext-header-logo,
+div.icext-feature.icext-header-logo {
+    margin: 0;
+}
+h1.icext-feature.icext-header-logo a,
+div.icext-feature.icext-header-logo a {
+	display: block;
+	position: absolute;
+	margin: 0;
+}
+

@@ -374,6 +374,18 @@ class ICE_Styles extends ICE_Enqueue
 			ICE_CSS_URL . '/ui.css',
 			array( 'jquery-juicy' )
 		);
+
+		wp_register_style(
+			'ice-ext-blog',
+			ICE_CSS_URL . '/ext/blog.css',
+			array( 'ice-ui' )
+		);
+
+		wp_register_style(
+			'ice-ext-dash',
+			ICE_CSS_URL . '/ext/dash.css',
+			array( 'ice-ui' )
+		);
 	}
 	
 	/**
