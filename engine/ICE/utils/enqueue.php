@@ -167,12 +167,12 @@ abstract class ICE_Enqueue extends ICE_Base
 	}
 
 	/**
-	 * Register an asset for later enqueueing.
+	 * Add an asset for later enqueueing.
 	 *
 	 * @param string $handle
 	 * @param array $args
 	 */
-	protected function register_asset( $handle, $args )
+	public function enqueue( $handle, $args )
 	{
 		// init some vars
 		$action = $priority = $condition = null;
@@ -201,28 +201,6 @@ abstract class ICE_Enqueue extends ICE_Base
 
 		// push settings onto settings array
 		$this->settings[ $handle ] = $settings;
-	}
-
-	/**
-	 * Add an asset for later enqueueing.
-	 *
-	 * @param string $handle
-	 * @param array $args
-	 */
-	public function enqueue( $handle, $args = array() )
-	{
-		// default args
-		$defaults = array(
-			'action' => $this->default_action,
-			'priority' => 10,
-			'condition' => null
-		);
-
-		// parse em
-		$settings = wp_parse_args( $args, $defaults );
-
-		// call register asset
-		$this->register_asset( $handle, $settings );
 	}
 
 	/**
@@ -424,8 +402,8 @@ class ICE_Styles extends ICE_Enqueue
 		// register style with wp
 		wp_register_style( $handle, $src, $deps, $ver, $media );
 
-		// register this asset
-		$this->register_asset( $handle, $settings );
+		// call delayed enqueuer
+		$this->enqueue( $handle, $settings );
 	}
 
 	/**
@@ -679,8 +657,8 @@ class ICE_Scripts extends ICE_Enqueue
 		// register script with wp
 		wp_register_script( $handle, $src, $deps, $ver, $in_footer );
 
-		// call register asset
-		$this->register_asset( $handle, $settings );
+		// call delayed enqueuer
+		$this->enqueue( $handle, $settings );
 	}
 }
 
