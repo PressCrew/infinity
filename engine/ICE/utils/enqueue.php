@@ -167,12 +167,12 @@ abstract class ICE_Enqueue extends ICE_Base
 	}
 
 	/**
-	 * Add an asset for later enqueueing.
+	 * Add the settings for a handle and configure actions.
 	 *
 	 * @param string $handle
 	 * @param array $args
 	 */
-	public function enqueue( $handle, $args )
+	protected function add( $handle, $args )
 	{
 		// init some vars
 		$action = $priority = $condition = null;
@@ -204,6 +204,21 @@ abstract class ICE_Enqueue extends ICE_Base
 	}
 
 	/**
+	 * Add an asset for later enqueueing.
+	 *
+	 * @param string $handle
+	 * @param array $args
+	 */
+	public function enqueue( $handle, $args )
+	{
+		// has already been added?
+		if ( false === $this->check_enqueued( $handle ) ) {
+			// nope, add it
+			$this->add( $handle, $args );
+		}
+	}
+
+	/**
 	 * Add an asset object for later enqueuing.
 	 *
 	 * @param ICE_Asset $asset
@@ -219,10 +234,21 @@ abstract class ICE_Enqueue extends ICE_Base
 		$this->objects[ $handle ] = $asset;
 
 		// call standard enqueuer
-		$this->enqueue( $handle, $args );
+		$this->add( $handle, $args );
 
 		// return the handle for caller's reference
 		return $handle;
+	}
+
+	/**
+	 * Returns true if handle has already been added for later enqueuing.
+	 *
+	 * @param string $handle
+	 * @return boolean
+	 */
+	protected function check_enqueued( $handle )
+	{
+		return isset( $this->settings[ $handle ] );
 	}
 
 	/**
@@ -382,6 +408,12 @@ class ICE_Styles extends ICE_Enqueue
 	 */
 	public function register( $handle, $args )
 	{
+		// has already been enqueued?
+		if ( true === $this->check_enqueued( $handle ) ) {
+			// yes, don't overwrite
+			return;
+		}
+
 		// init local vars
 		$src = $deps = $ver = $media = null;
 
@@ -403,7 +435,7 @@ class ICE_Styles extends ICE_Enqueue
 		wp_register_style( $handle, $src, $deps, $ver, $media );
 
 		// call delayed enqueuer
-		$this->enqueue( $handle, $settings );
+		$this->add( $handle, $settings );
 	}
 
 	/**
@@ -637,6 +669,12 @@ class ICE_Scripts extends ICE_Enqueue
 	 */
 	public function register( $handle, $args )
 	{
+		// has already been enqueued?
+		if ( true === $this->check_enqueued( $handle ) ) {
+			// yes, don't overwrite
+			return;
+		}
+
 		// init local vars
 		$src = $deps = $ver = $in_footer = null;
 
@@ -658,7 +696,7 @@ class ICE_Scripts extends ICE_Enqueue
 		wp_register_script( $handle, $src, $deps, $ver, $in_footer );
 
 		// call delayed enqueuer
-		$this->enqueue( $handle, $settings );
+		$this->add( $handle, $settings );
 	}
 }
 
