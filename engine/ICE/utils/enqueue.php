@@ -145,13 +145,21 @@ abstract class ICE_Enqueue extends ICE_Base
 	 */
 	public function do_enqueue_now()
 	{
-		// action is current filter
-		$action = current_filter();
+		global $wp_filter;
 
-		// loop through handles on this action
-		foreach( $this->actions[ $action ] as $handle ) {
+		// get current action
+		$action = current_filter();
+		
+		// get current priority
+		$priority = key( $wp_filter[ $action ] );
+
+		// loop through handles on this action/priority
+		foreach( $this->actions[ $action ][ $priority ] as $handle => $has_cond ) {
 			// test conditions
-			if ( $this->check_condition( $this->settings[ $handle ][ 'condition' ] ) ) {
+			if (
+				false === $has_cond ||
+				true === $this->check_condition( $this->settings[ $handle ][ 'condition' ] )
+			) {
 				// enqueue it
 				$this->enqueue_now( $handle );
 			}
@@ -167,7 +175,7 @@ abstract class ICE_Enqueue extends ICE_Base
 	protected function register_asset( $handle, $args )
 	{
 		// init some vars
-		$action = $priority = null;
+		$action = $priority = $condition = null;
 
 		// default args
 		$defaults = array(
@@ -183,13 +191,13 @@ abstract class ICE_Enqueue extends ICE_Base
 		extract( $settings, EXTR_IF_EXISTS );
 
 		// been hooked yet?
-		if ( false === isset( $this->actions[ $action ] ) ) {
-			// nope, hook into action
+		if ( false === isset( $this->actions[ $action ][ $priority ] ) ) {
+			// nope, hook into action at given priority
 			add_action( $action, array( $this, 'do_enqueue_now' ), $priority, 0 );
 		}
 
-		// push handle onto style actions array
-		$this->actions[ $action ][] = $handle;
+		// push handle onto actions array
+		$this->actions[ $action ][ $priority ][ $handle ] = isset( $condition );
 
 		// push settings onto settings array
 		$this->settings[ $handle ] = $settings;
