@@ -29,13 +29,6 @@ class ICE_Style extends ICE_Asset
 	private $rules = array();
 
 	/**
-	 * Parent dir of last filename being fixed for css url() values
-	 *
-	 * @var string
-	 */
-	private $last_dirname;
-
-	/**
 	 */
 	final public function enqueue( $args = array() )
 	{
@@ -89,52 +82,6 @@ class ICE_Style extends ICE_Asset
 			$rule->export(),
 			'/*--- style generation complete! */', PHP_EOL, PHP_EOL;
 		}
-	}
-
-	/**
-	 */
-	protected function get_file_contents( $filename )
-	{
-		// run parent to get content
-		$content = parent::get_file_contents( $filename );
-
-		// get content?
-		if ( $content ) {
-
-			// save last filename
-			$this->last_dirname = dirname( $filename );
-
-			// replace all CSS url() values
-			return preg_replace_callback( '/url\s*\([\'\"\s]*([^\'\"\s]*)[\'\"\s]*\)/', array($this, 'fix_url_path'), $content );
-		}
-	}
-
-	/**
-	 * @internal
-	 * @param array $matches
-	 * @return string
-	 */
-	protected function fix_url_path( $matches )
-	{
-		// path is index 2
-		$path = $matches[1];
-
-		// fix if applicable
-		switch ( true ) {
-			// absolute path to doc root, leave alone
-			case ( $path{0} == '/' ):
-				break;
-			// absolute URL, leave alone
-			case ( preg_match( '/^https?:\/\//', $path ) ):
-				break;
-			// anything else needs to be resolved
-			default:
-				$path = ICE_Files::path_resolve( $this->last_dirname, $path );
-				$path = ICE_Files::file_to_uri_path( $path );
-		}
-
-		// return fixed url value
-		return sprintf( "url('%s')", $path );
 	}
 }
 
