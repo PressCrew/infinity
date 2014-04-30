@@ -21,20 +21,6 @@
 final class ICE_Files extends ICE_Base
 {
 	/**
-	 * Cached doc root
-	 *
-	 * @var string
-	 */
-	static private $document_root;
-
-	/**
-	 * Cached doc root length
-	 *
-	 * @var string
-	 */
-	static private $document_root_length;
-
-	/**
 	 * Cached WordPress root (derived from ABSPATH).
 	 *
 	 * @var string
@@ -68,25 +54,6 @@ final class ICE_Files extends ICE_Base
 	 * @var array
 	 */
 	static private $theme_root_uri = array();
-
-	/**
-	 * Set the doc root variables if not already set
-	 *
-	 * @return string
-	 */
-	public static function document_root()
-	{
-		if ( empty( self::$document_root ) ) {
-			$theme_root = self::theme_root();
-			$theme_root_uri = self::theme_root_uri();
-			$uri_parts = parse_url( $theme_root_uri );
-			$path_length = strlen( $uri_parts['path'] );
-			self::$document_root = substr_replace( $theme_root, '', $path_length * -1 );
-			self::$document_root_length = strlen( self::$document_root );
-		}
-		
-		return self::$document_root;
-	}
 
 	/**
 	 * Return the absolute path to the WordPress root.
@@ -172,76 +139,6 @@ final class ICE_Files extends ICE_Base
 
 		// replace double and single back slashes with single forward slash
 		return preg_replace( '/[\\\]{1,2}/', '/', $path_clean );
-	}
-
-	/**
-	 * Split a path at forward '/' OR backward '\' slashes
-	 *
-	 * @param string $path
-	 * @return array
-	 */
-	public static function path_split ( $path )
-	{
-		// clean up the path
-		$path_clean = self::path_normalize( $path );
-
-		// split at forward slashes
-		return preg_split( '/\//', $path_clean, null, PREG_SPLIT_NO_EMPTY );
-	}
-
-	/**
-	 * Resolve a file path like realpath() does, but without following symlinks,
-	 * and without requiring that the file exists
-	 *
-	 * @param array|string $file_names,... One array or an unlimited number of file names
-	 * @return string
-	 */
-	public static function path_resolve()
-	{
-		// get all args
-		$args = func_get_args();
-
-		// if two or more args, we got some file names
-		if ( is_array($args[0]) ) {
-			$file_names = $args[0];
-		} else {
-			$file_names = $args;
-		}
-
-		// maybe files array
-		$file_names_maybe = array();
-
-		// merge all paths
-		foreach( $file_names as $file_name ) {
-			// split and add to maybe list
-			foreach( self::path_split( $file_name ) as $sub_path ) {
-				$file_names_maybe[] = $sub_path;
-			}
-		}
-
-		// final files array
-		$file_names_clean = array();
-
-		// resolve
-		foreach( $file_names_maybe as $maybe_file ) {
-			// handle relative traversal in absolute paths
-			if ( $maybe_file == '' ) {
-				// empty file, skip
-				continue;
-			} elseif ( $maybe_file == '.' ) {
-				// single dot, skip
-				continue;
-			} elseif ( $maybe_file == '..' ) {
-				// two dots, remove last dir "up"
-				array_pop( $file_names_clean );
-				continue;
-			}
-			// push file name onto final array
-			$file_names_clean[] = $maybe_file;
-		}
-
-		// format the final path
-		return '/' . implode( '/', $file_names_clean );
 	}
 
 	/**
@@ -416,21 +313,6 @@ final class ICE_Files extends ICE_Base
 		}
 
 		return self::theme_dir_url( $theme ) . '/' . implode( '/', $file_names );
-	}
-
-	/**
-	 * Convert fully qualified file path to absolute uri path
-	 *
-	 * @param string $file_name File name
-	 * @return string
-	 */
-	static public function file_to_uri_path( $file_name )
-	{
-		// make sure doc root is cached
-		self::document_root();
-
-		// return only uri path portion
-		return substr( $file_name, self::$document_root_length );
 	}
 
 	/**
