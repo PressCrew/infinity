@@ -419,34 +419,6 @@ final class ICE_Files extends ICE_Base
 	}
 
 	/**
-	 * Return path to a theme file relative to theme root
-	 *
-	 * @param string $file_path
-	 */
-	static public function theme_file_to_rel( $file_path )
-	{
-		// convert path to be realtive to themes root
-		return str_replace( self::theme_root() . '/', '', $file_path );
-	}
-
-	/**
-	 * Return URL to a theme file given an absolute file system path
-	 *
-	 * @param string $file_path
-	 */
-	static public function theme_file_to_url( $file_path )
-	{
-		// convert path to be relative to themes root
-		$relative_path = self::theme_file_to_rel( $file_path );
-		// split it up
-		$file_names = self::path_split( $relative_path );
-		// theme is first arg, beautiful!
-		$theme = array_shift( $file_names );
-		// return as url
-		return self::theme_file_url( $theme, $file_names );
-	}
-
-	/**
 	 * Convert fully qualified file path to absolute uri path
 	 *
 	 * @param string $file_name File name
