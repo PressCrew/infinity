@@ -121,7 +121,7 @@ function infinity_image_url( $path )
 	// locate image in scheme stack
 	$image_path = infinity_image_path( $path );
 	// convert path to url
-	return ($image_path) ? ICE_Files::theme_file_to_url($image_path) : null;
+	return ($image_path) ? ICE_Files::file_to_site_url($image_path) : null;
 }
 
 /**
@@ -147,7 +147,7 @@ function infinity_style_url( $path )
 	// locate style in scheme stack
 	$style_path = infinity_style_path( $path );
 	// convert path to url
-	return ($style_path) ? ICE_Files::theme_file_to_url($style_path) : null;
+	return ($style_path) ? ICE_Files::file_to_site_url($style_path) : null;
 }
 
 /**
@@ -173,7 +173,7 @@ function infinity_script_url( $path )
 	// locate script in scheme stack
 	$script_path = infinity_script_path( $path );
 	// convert path to url
-	return ($script_path) ? ICE_Files::theme_file_to_url($script_path) : null;
+	return ($script_path) ? ICE_Files::file_to_site_url($script_path) : null;
 }
 
 /**

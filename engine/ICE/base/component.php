@@ -590,7 +590,7 @@ abstract class ICE_Component
 				// yep, enqueue it
 				wp_enqueue_style(
 					$this->name,
-					ICE_Files::theme_file_to_url( $path ),
+					ICE_Files::file_to_site_url( $path ),
 					$this->style_depends,
 					INFINITY_VERSION
 				);
@@ -612,7 +612,7 @@ abstract class ICE_Component
 				// yep, enqueue it
 				wp_enqueue_script(
 					$this->name,
-					ICE_Files::theme_file_to_url( $path ),
+					ICE_Files::file_to_site_url( $path ),
 					$this->script_depends,
 					INFINITY_VERSION,
 					true
@@ -831,7 +831,7 @@ abstract class ICE_Component
 		// was a path found?
 		if ( $path ) {
 			// yes, use files util to get URL
-			return ICE_Files::theme_file_to_url( $path );
+			return ICE_Files::file_to_site_url( $path );
 		}
 
 		// no file found

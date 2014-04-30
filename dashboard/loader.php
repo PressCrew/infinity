@@ -129,7 +129,7 @@ function infinity_dashboard_image( $name )
 	$path = infinity_locate_file( INFINITY_ADMIN_DIR . '/assets/images/' . $name );
 
 	if ( $path ) {
-		return ICE_Files::theme_file_to_url( $path );
+		return ICE_Files::file_to_site_url( $path );
 	} else {
 		return '';
 	}

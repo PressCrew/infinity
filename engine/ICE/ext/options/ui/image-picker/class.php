@@ -81,7 +81,7 @@ class ICE_Ext_Option_Ui_Image_Picker
 						// format the array
 						foreach ( $images as $key => $value ) {
 							// value is absolute URL
-							$field_options[$key] = ICE_Files::theme_file_to_url($value);
+							$field_options[$key] = ICE_Files::file_to_site_url($value);
 						}
 						// all done, return them
 						return $field_options;
@@ -123,7 +123,7 @@ class ICE_Ext_Option_Ui_Image_Picker
 			// find that dir path?
 			if ( $path ) {
 				// yep, return as url
-				return ICE_Files::theme_file_to_url( $path . '/' . $value );
+				return ICE_Files::file_to_site_url( $path . '/' . $value );
 			}
 		}
 
