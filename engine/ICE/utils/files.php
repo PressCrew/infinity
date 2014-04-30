@@ -35,6 +35,27 @@ final class ICE_Files extends ICE_Base
 	static private $document_root_length;
 
 	/**
+	 * Cached WordPress root (derived from ABSPATH).
+	 *
+	 * @var string
+	 */
+	static private $wordpress_root;
+
+	/**
+	 * Cached WordPress root length.
+	 *
+	 * @var integer
+	 */
+	static private $wordpress_root_length;
+
+	/**
+	 * Cached WordPress root uri.
+	 *
+	 * @var string
+	 */
+	static private $wordpress_root_uri;
+
+	/**
 	 * Cached theme root path
 	 *
 	 * @var array
@@ -65,6 +86,39 @@ final class ICE_Files extends ICE_Base
 		}
 		
 		return self::$document_root;
+	}
+
+	/**
+	 * Return the absolute path to the WordPress root.
+	 *
+	 * @return string
+	 */
+	public static function wordpress_root()
+	{
+		if ( empty( self::$wordpress_root ) ) {
+			self::$wordpress_root = self::path_normalize( rtrim( ABSPATH, '/\\' ) );
+			self::$wordpress_root_length = strlen( self::$wordpress_root );
+		}
+
+		return self::$wordpress_root;
+	}
+
+	/**
+	 * Return WordPress's root URL.
+	 *
+	 * @see site_url()
+	 * @return string
+	 */
+	static public function wordpress_root_uri()
+	{
+		// handle cache miss
+		if ( empty( self::$wordpress_root_uri ) ) {
+			// populate it
+			self::$wordpress_root_uri = site_url();
+		}
+
+		// return cached value
+		return self::$wordpress_root_uri;
 	}
 
 	/**
@@ -407,6 +461,32 @@ final class ICE_Files extends ICE_Base
 		return substr( $file_name, self::$document_root_length );
 	}
 
+	/**
+	 * Convert fully qualified file path to absolute WordPress site path (unqualified).
+	 *
+	 * @param string $file_name File name
+	 * @return string
+	 */
+	static public function file_to_site_path( $file_name )
+	{
+		// make sure wordpress root is cached
+		self::wordpress_root();
+
+		// return only uri path portion
+		return substr( $file_name, self::$wordpress_root_length );
+	}
+
+	/**
+	 * Convert fully qualified file path to a WordPress site URL (fully qualified).
+	 *
+	 * @param string $file_name File name
+	 * @return string
+	 */
+	static public function file_to_site_url( $file_name )
+	{
+		// return uri appended to site url
+		return self::wordpress_root_uri() . self::file_to_site_path( $file_name );
+	}
 }
 
 /**
