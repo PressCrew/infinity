@@ -96,8 +96,11 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	{
 		// loop all settings
 		foreach( $settings as $skey => &$sval ) {
-			// wrap key with delim
-			$search[] = '%' . $skey . '%';
+			// only scalar values can be injected into strings safely
+			if ( true === is_scalar( $sval ) ) {
+				// wrap key with delim
+				$search[] = '%' . $skey . '%';
+			}
 		}
 		
 		// replace it
