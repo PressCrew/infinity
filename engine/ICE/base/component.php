@@ -522,9 +522,9 @@ abstract class ICE_Component
 	public function init()
 	{
 		// setup auto styles
-		add_action( 'ice_init_blog', array( $this, 'setup_auto_style' ) );
+		$this->setup_auto_style();
 		// setup auto scripts
-		add_action( 'ice_init_blog', array( $this, 'setup_auto_script' ) );
+		$this->setup_auto_script();
 	}
 
 	/**
@@ -577,9 +577,9 @@ abstract class ICE_Component
 	}
 
 	/**
-	 * Automatic style enqueuing setup callback.
+	 * Setup automatic style enqueuing.
 	 */
-	public function setup_auto_style()
+	protected function setup_auto_style()
 	{
 		// is a style set?
 		if ( $this->style ) {
@@ -587,21 +587,22 @@ abstract class ICE_Component
 			$path = ICE_Scheme::instance()->locate_file( $this->style );
 			// find it?
 			if ( $path ) {
-				// yep, enqueue it
-				wp_enqueue_style(
+				// yep, register it
+				ice_register_style(
 					$this->name,
-					ICE_Files::file_to_site_url( $path ),
-					$this->style_depends,
-					INFINITY_VERSION
+					array(
+						'src' => ICE_Files::file_to_site_url( $path ),
+						'deps' => $this->style_depends
+					)
 				);
 			}
 		}
 	}
 
 	/**
-	 * Automatic script enqueuing setup callback.
+	 * Setup automatic script enqueuing.
 	 */
-	public function setup_auto_script()
+	protected function setup_auto_script()
 	{
 		// is a script set?
 		if ( $this->script ) {
@@ -609,13 +610,14 @@ abstract class ICE_Component
 			$path = ICE_Scheme::instance()->locate_file( $this->script );
 			// find it?
 			if ( $path ) {
-				// yep, enqueue it
-				wp_enqueue_script(
+				// yep, register it
+				ice_register_script(
 					$this->name,
-					ICE_Files::file_to_site_url( $path ),
-					$this->script_depends,
-					INFINITY_VERSION,
-					true
+					array(
+						'src' => ICE_Files::file_to_site_url( $path ),
+						'deps' => $this->script_depends,
+						'in_footer' => true
+					)
 				);
 			}
 		}
