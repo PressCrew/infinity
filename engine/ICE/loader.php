@@ -92,6 +92,26 @@ final class ICE_Loader extends ICE_Base
 
 			// add init actions callback
 			add_action( 'init', array( __CLASS__, 'do_init_actions' ), 9 );
+
+			// in dashboard?
+			if ( ICE_IS_ADMIN ) {
+				// add theme activation callback
+				add_action( 'load-themes.php', array( __CLASS__, 'do_activated_actions' ) );
+			}
+		}
+	}
+
+	/**
+	 * Call special ICE theme activation actions.
+	 */
+	final static public function do_activated_actions()
+	{
+		global $pagenow;
+
+		// was i just activated?
+		if ( $pagenow == 'themes.php' && isset( $_GET['activated'] ) ) {
+			// exec activation hook
+			do_action( 'ice_theme_activated' );
 		}
 	}
 
