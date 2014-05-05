@@ -268,42 +268,35 @@ abstract class ICE_Option extends ICE_Component
 	}
 
 	/**
-	 * Get (read) the value of this option from the database
+	 * Get (read) the value of this option from the database.
 	 *
 	 * @return mixed
 	 */
 	protected function get_option()
 	{
-		// return option value from database
-		return get_option( $this->get_api_name(), $this->default_value );
+		// return theme mod value
+		return get_theme_mod( $this->get_property( 'name' ), $this->default_value );
 	}
 
 	/**
-	 * Returns true if a row for the option exists in the database
+	 * Returns true if a key for the option exists in the theme mods array.
 	 *
 	 * @param boolean $ignore_default Set to true to ignore any default value that might be set
 	 * @return boolean
 	 */
 	public function is_set( $ignore_default = false )
 	{
-		global $wpdb;
-
 		// any default value?
 		if ( false === $ignore_default && null !== $this->default_value ) {
 			// a default value is set, no need to look in the database
 			return true;
 		}
 
-		// check if the option exists in the database
-		$count = $wpdb->get_var(
-			$wpdb->prepare(
-				"SELECT COUNT(*) FROM {$wpdb->options} WHERE option_name = %s LIMIT 1",
-				$this->get_api_name()
-			)
-		);
+		// get all theme mods
+		$mods = get_theme_mods();
 
-		// return result of count as boolean
-		return (boolean) $count;
+		// check if the option exists
+		return ( is_array( $mods ) && isset( $mods[ $this->name ] ) );
 	}
 
 	/**
@@ -334,14 +327,14 @@ abstract class ICE_Option extends ICE_Component
 	}
 
 	/**
-	 * Update the real option in the database
+	 * Update the real option in the database.
 	 *
-	 * @param mixed $value New option value
+	 * @param mixed $value New option value.
 	 * @return boolean
 	 */
 	protected function update_option( $value )
 	{
-		return update_option( $this->get_api_name(), $value );
+		return set_theme_mod( $this->get_property( 'name' ), $value );
 	}
 
 	/**
@@ -365,31 +358,7 @@ abstract class ICE_Option extends ICE_Component
 	 */
 	protected function delete_option()
 	{
-		return delete_option( $this->get_api_name() );
-	}
-
-	/**
-	 * Get the full name for API option
-	 *
-	 * @return string
-	 */
-	private function get_api_name( $hname = null )
-	{
-		// handle empty hname
-		if ( null === $hname ) {
-			// use current property
-			$hname = $this->get_property( 'hname' );
-		}
-
-		// return formatted api name
-		return implode(
-			self::API_DELIM,
-			array(
-				self::API_PREFIX,
-				$hname,
-				ICE_ACTIVE_THEME
-			)
-		);
+		return remove_theme_mod( $this->get_property( 'name' ) );
 	}
 
 	/**
