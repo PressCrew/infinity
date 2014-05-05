@@ -39,14 +39,6 @@ abstract class ICE_Option extends ICE_Component
 	protected $default_value;
 
 	/**
-	 * An optional deprecated component name to check in situations
-	 * where the name has changed after it has been used to store data.
-	 *
-	 * @var string
-	 */
-	protected $name_deprecated;
-	
-	/**
 	 * The feature for which this option was created (slug)
 	 *
 	 * @var string
@@ -112,7 +104,6 @@ abstract class ICE_Option extends ICE_Component
 			case 'field_class':
 			case 'field_id':
 			case 'field_options':
-			case 'name_deprecated':
 			case 'section':
 			case 'style_property':
 			case 'style_selector':
@@ -140,7 +131,6 @@ abstract class ICE_Option extends ICE_Component
 			'field_class',
 			'field_id',
 			'field_options',
-			'name_deprecated',
 			'section',
 			'style_property',
 			'style_selector',
@@ -284,31 +274,8 @@ abstract class ICE_Option extends ICE_Component
 	 */
 	protected function get_option()
 	{
-		// get option value from database
-		$result = get_option( $this->get_api_name(), $this->default_value );
-
-		// is the result empty?
-		if (
-			null === $result ||
-			is_string( $result ) && '' === $result ||
-			is_bool( $result ) && false === $result ||
-			is_array( $result ) && 0 === count( $result )
-		) {
-			// no result, maybe check deprecated name
-			$name_deprecated = $this->get_property( 'name_deprecated' );
-
-			// if a deprecated name is set, try to get its value
-			if ( $name_deprecated ) {
-				// get the atypical name
-				$aname = $this->format_aname( $name_deprecated );
-				// get the hash name
-				$hname = $this->format_hname( $aname );
-				// try to get value of deprectated option name from the database
-				$result = get_option( $this->get_api_name( $hname ), $this->default_value );
-			}
-		}
-
-		return $result;
+		// return option value from database
+		return get_option( $this->get_api_name(), $this->default_value );
 	}
 
 	/**
