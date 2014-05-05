@@ -25,6 +25,11 @@ ICE_Loader::load(
 abstract class ICE_Option extends ICE_Component
 {
 	/**
+	 * All options are stored in the theme mod array under this key.
+	 */
+	const MOD_KEY = 'icext_options';
+
+	/**
 	 * If true, a POST value will override the real option value
 	 *
 	 * @var boolean
@@ -274,16 +279,16 @@ abstract class ICE_Option extends ICE_Component
 	 */
 	protected function get_option()
 	{
-		// get all theme mods
-		$mods = get_theme_mods();
+		// get all options
+		$options = get_theme_mod( self::MOD_KEY );
 
 		// get comp name
 		$name = $this->get_property( 'name' );
 		
 		// does the option exist?
-		if ( is_array( $mods ) && isset( $mods[ $name ] ) ) {
+		if ( is_array( $options ) && isset( $options[ $name ] ) ) {
 			// yes, return it
-			return $mods[ $name ];
+			return $options[ $name ];
 		} else {
 			// no, return default value
 			return $this->default_value;
@@ -304,11 +309,11 @@ abstract class ICE_Option extends ICE_Component
 			return true;
 		}
 
-		// get all theme mods
-		$mods = get_theme_mods();
+		// get all options
+		$options = get_theme_mod( self::MOD_KEY );
 
 		// check if the option exists
-		return ( is_array( $mods ) && isset( $mods[ $this->name ] ) );
+		return ( is_array( $options ) && isset( $options[ $this->get_property( 'name' ) ] ) );
 	}
 
 	/**
@@ -327,7 +332,7 @@ abstract class ICE_Option extends ICE_Component
 		if ( $value === null || $value === '' || $value === $this->default_value ) {
 			// its pointless to store this option
 			// try to delete it in case it already exists
-			return $this->delete();
+			return $this->delete_option();
 		} else {
 			// create or update it
 			if ( $this->update_option( $value ) ) {
@@ -346,7 +351,14 @@ abstract class ICE_Option extends ICE_Component
 	 */
 	protected function update_option( $value )
 	{
-		return set_theme_mod( $this->get_property( 'name' ), $value );
+		// get all options
+		$options = get_theme_mod( self::MOD_KEY );
+		// set the key (name)
+		$options[ $this->get_property( 'name' ) ] = $value;
+		// update it
+		set_theme_mod( self::MOD_KEY, $options );
+		// all done
+		return true;
 	}
 
 	/**
@@ -356,21 +368,22 @@ abstract class ICE_Option extends ICE_Component
 	 */
 	public function delete()
 	{
-		if ( $this->delete_option() ) {
-			return true;
-		}
-
-		return false;
+		return $this->delete_option();
 	}
 
 	/**
-	 * Delete the option from the database
-	 *
-	 * @return boolean
+	 * Delete the option from the database.
 	 */
 	protected function delete_option()
 	{
-		return remove_theme_mod( $this->get_property( 'name' ) );
+		// get options
+		$options = get_theme_mod( self::MOD_KEY );
+		// unset key (name)
+		unset( $options[ $this->get_property( 'name' ) ] );
+		// update it
+		set_theme_mod( self::MOD_KEY, $options );
+		// all done
+		return true;
 	}
 
 	/**
