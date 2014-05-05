@@ -31,18 +31,10 @@ require_once INFINITY_ADMIN_PATH . '/support.php';
  */
 function infinity_dashboard_activated()
 {
-	global $pagenow;
-
-	// was i just activated?
-	if (
-		$pagenow == 'themes.php' &&
-		isset( $_GET['activated'] )
-	) {
-		// exec activation hook
-		do_action( 'infinity_dashboard_activated' );
-	}
+	// exec activation hook
+	do_action( 'infinity_dashboard_activated' );
 }
-add_action( 'load-themes.php', 'infinity_dashboard_activated' );
+add_action( 'ice_theme_activated', 'infinity_dashboard_activated' );
 
 /**
  * Redirect to admin page on activation
