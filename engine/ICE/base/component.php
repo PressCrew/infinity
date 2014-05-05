@@ -205,14 +205,22 @@ abstract class ICE_Component
 				sprintf( 'Cannot construct the "%s" %s component: requirements check failed', $name, $type ) );
 		}
 
-		// init required directives
-		$this->name = $this->validate_name( $name );
+		// does name match required format?
+		if ( preg_match( '/^[a-z][a-z0-9]*((_|-)[a-z0-9]+)*$/', $name ) ) {
+			// yes, set it
+			$this->name = $name;
+		} else {
+			throw new Exception( sprintf(
+				'The %s name "%s" does not match the allowed pattern',
+				$policy->get_handle(), $name
+			));
+		}
 
 		// the "atypical name" is unique across all components
-		$this->aname = $this->format_aname( $this->name );
+		$this->aname = $policy->get_handle( false ) . '/' . $name;
 
 		// the "hash name" is the crc32 hex hash of the aname
-		$this->hname = $this->format_hname( $this->aname );
+		$this->hname = hash( 'crc32', $this->aname );
 
 		// the type of this component
 		$this->type = $type;
@@ -233,28 +241,6 @@ abstract class ICE_Component
 			throw new ICE_Capabilities_Exception(
 				sprintf( 'Cannot construct the "%s" %s component: capabilities check failed', $name, $type ) );
 		}
-	}
-
-	/**
-	 * Return an atypical name for the given component name
-	 *
-	 * @param string $name
-	 * @return string
-	 */
-	protected function format_aname( $name = null )
-	{
-		return $this->_policy->get_handle( false ) . '/' . $name;
-	}
-
-	/**
-	 * Return a hash name for the given component atypical name
-	 *
-	 * @param type $aname
-	 * @return type
-	 */
-	protected function format_hname( $aname )
-	{
-		return hash( 'crc32', $aname );
 	}
 
 	/**
