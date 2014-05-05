@@ -507,17 +507,10 @@ abstract class ICE_Component
 	 */
 	public function init()
 	{
-		// is a style set?
-		if ( $this->style ) {
-			// setup auto style
-			add_action( 'ice_init_blog', array( $this, 'setup_auto_style' ) );
-		}
-		
-		// is a script set?
-		if ( $this->script ) {
-			// setup auto script
-			add_action( 'ice_init_blog', array( $this, 'setup_auto_script' ) );
-		}
+		// setup auto style
+		add_action( 'ice_init_blog', array( $this, 'setup_auto_style' ) );
+		// setup auto script
+		add_action( 'ice_init_blog', array( $this, 'setup_auto_script' ) );
 	}
 
 	/**
@@ -574,19 +567,21 @@ abstract class ICE_Component
 	 */
 	public function setup_auto_style()
 	{
-		// locate it
-		$path = ICE_Scheme::instance()->locate_file( $this->style );
-		
-		// find it?
-		if ( $path ) {
-			// yep, register it
-			ice_register_style(
-				$this->name,
-				array(
-					'src' => ICE_Files::file_to_site_url( $path ),
-					'deps' => $this->style_depends
-				)
-			);
+		// is a style set?
+		if ( $this->style ) {
+			// locate it
+			$path = ICE_Scheme::instance()->locate_file( $this->style );
+			// find it?
+			if ( $path ) {
+				// yep, register it
+				ice_register_style(
+					$this->name,
+					array(
+						'src' => ICE_Files::file_to_site_url( $path ),
+						'deps' => $this->style_depends
+					)
+				);
+			}
 		}
 	}
 
@@ -595,20 +590,22 @@ abstract class ICE_Component
 	 */
 	public function setup_auto_script()
 	{
-		// locate it
-		$path = ICE_Scheme::instance()->locate_file( $this->script );
-		
-		// find it?
-		if ( $path ) {
-			// yep, register it
-			ice_register_script(
-				$this->name,
-				array(
-					'src' => ICE_Files::file_to_site_url( $path ),
-					'deps' => $this->script_depends,
-					'in_footer' => true
-				)
-			);
+		// is a script set?
+		if ( $this->script ) {
+			// locate it
+			$path = ICE_Scheme::instance()->locate_file( $this->script );
+			// find it?
+			if ( $path ) {
+				// yep, register it
+				ice_register_script(
+					$this->name,
+					array(
+						'src' => ICE_Files::file_to_site_url( $path ),
+						'deps' => $this->script_depends,
+						'in_footer' => true
+					)
+				);
+			}
 		}
 	}
 
