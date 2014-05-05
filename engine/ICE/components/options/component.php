@@ -274,8 +274,20 @@ abstract class ICE_Option extends ICE_Component
 	 */
 	protected function get_option()
 	{
-		// return theme mod value
-		return get_theme_mod( $this->get_property( 'name' ), $this->default_value );
+		// get all theme mods
+		$mods = get_theme_mods();
+
+		// get comp name
+		$name = $this->get_property( 'name' );
+		
+		// does the option exist?
+		if ( is_array( $mods ) && isset( $mods[ $name ] ) ) {
+			// yes, return it
+			return $mods[ $name ];
+		} else {
+			// no, return default value
+			return $this->default_value;
+		}
 	}
 
 	/**
