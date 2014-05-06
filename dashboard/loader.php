@@ -66,7 +66,7 @@ function infinity_dashboard_menu_setup()
 	add_theme_page(
 		apply_filters( 'infinity_dashboard_menu_setup_page_title', $page_title, $theme_name ),
 		apply_filters( 'infinity_dashboard_menu_setup_menu_title', $page_title, $theme_name ),
-		'manage_options',
+		'edit_theme_options',
 		INFINITY_ADMIN_PAGE,
 		'infinity_dashboard_cpanel_screen'
 	);
