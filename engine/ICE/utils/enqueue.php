@@ -389,8 +389,7 @@ class ICE_Styles extends ICE_Enqueue
 
 		wp_register_style(
 			'ice-ext-blog',
-			ICE_CSS_URL . '/ext/blog.css',
-			array( 'ice-ui' )
+			ICE_CSS_URL . '/ext/blog.css'
 		);
 
 		wp_register_style(
