@@ -205,7 +205,6 @@ abstract class ICE_Policy extends ICE_Base
 		// handle empty registry
 		if ( !$this->registry instanceof ICE_Registry ) {
 			$this->registry = $this->new_registry();
-			$this->registry->policy( $this );
 		}
 		return $this->registry;
 	}
@@ -219,7 +218,6 @@ abstract class ICE_Policy extends ICE_Base
 	{
 		if ( !$this->factory instanceof ICE_Factory ) {
 			$this->factory = $this->new_factory();
-			$this->factory->policy( $this );
 		}
 		return $this->factory;
 	}
@@ -233,7 +231,6 @@ abstract class ICE_Policy extends ICE_Base
 	{
 		if ( !$this->renderer instanceof ICE_Renderer ) {
 			$this->renderer = $this->new_renderer();
-			$this->renderer->policy( $this );
 		}
 		return $this->renderer;
 	}

@@ -11,10 +11,6 @@
  * @since 1.0
  */
 
-ICE_Loader::load(
-	'base/policeable'
-);
-
 /**
  * Make managing components with policies easy
  *
@@ -24,9 +20,7 @@ ICE_Loader::load(
  * @package ICE
  * @subpackage base
  */
-abstract class ICE_Componentable
-	extends ICE_Base
-		implements ICE_Policeable
+abstract class ICE_Componentable extends ICE_Base
 {
 	/**
 	 * Policy instance.
@@ -43,54 +37,25 @@ abstract class ICE_Componentable
 	protected $_policy;
 
 	/**
-	 * Registry instance shortcut.
+	 * Constructor.
 	 *
-	 * @var ICE_Registry
+	 * @param ICE_Policy $policy
 	 */
-	protected $_registry;
+	public function __construct( ICE_Policy $policy )
+	{
+		// set the policy instance
+		$this->policy = $policy;
+		// set the shortcut instance
+		$this->_policy = $policy;
+	}
 
-	/**
-	 * Factory instance shortcut.
-	 *
-	 * @var ICE_Factory
-	 */
-	protected $_factory;
-
-	/**
-	 * Renderer instance shortcut.
-	 *
-	 * @var ICE_Renderer
-	 */
-	protected $_renderer;
-	
 	/**
 	 * Return the policy
 	 *
-	 * @param ICE_Policy $policy
 	 * @return ICE_Policy
 	 */
-	final public function policy( ICE_Policy $policy = null )
+	final public function policy()
 	{
-		// setter
-		if ( $policy ) {
-			if ( empty( $this->policy ) ) {
-				// set the policy instance
-				$this->policy = $policy;
-				// set the shortcut instances
-				$this->_policy = $policy;
-				$this->_registry = $policy->registry();
-				$this->_factory = $policy->factory();
-				$this->_renderer = $policy->renderer();
-			} else {
-				throw new Exception( 'Cannot overwrite policy once set' );
-			}
-		}
-
-		// getter
-		if ( $this->policy instanceof ICE_Policy ) {
-			return $this->policy;
-		} else {
-			throw new Exception( 'No policy has been set' );
-		}
+		return $this->policy;
 	}
 }

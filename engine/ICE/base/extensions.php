@@ -68,8 +68,8 @@ class ICE_Extensions extends ICE_Componentable
 	 */
 	public function __construct( ICE_Policy $policy )
 	{
-		// apply the policy
-		$this->policy( $policy );
+		// call parent
+		parent::__construct( $policy );
 
 		// determine path prefix
 		$this->path_prefix = ICE_EXT_PATH . '/' . $policy->get_handle( true );
@@ -88,7 +88,7 @@ class ICE_Extensions extends ICE_Componentable
 		$class_name = $this->load( $ext );
 
 		// construct it
-		return new $class_name( $name, $ext, $this->_policy );
+		return new $class_name( $this->_policy, $name, $ext );
 	}
 
 	/**

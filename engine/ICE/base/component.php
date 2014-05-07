@@ -186,18 +186,18 @@ abstract class ICE_Component
 	private $type;
 
 	/**
+	 * @param ICE_Policy $policy The policy to apply to this component
 	 * @param string $name Option name may only contain alphanumeric characters as well as the underscore for use as a word separator.
 	 * @param string $type The extension type of this component
-	 * @param ICE_Policy $policy The policy to apply to this component
 	 * @throws ICE_Requirements_Exception
 	 * @throws ICE_Initialization_Exception
 	 * @throws ICE_Capabilities_Exception
 	 */
-	final public function __construct( $name, $type, $policy )
+	final public function __construct( ICE_Policy $policy, $name, $type )
 	{
-		// apply policy
-		$this->policy( $policy );
-		
+		// call parent
+		parent::__construct( $policy );
+
 		// check requirements
 		if ( false === $this->check_reqs() ) {
 			// missing reqs
@@ -328,7 +328,7 @@ abstract class ICE_Component
 	final protected function import_settings( $config, $types = array() )
 	{
 		// get all raw setting values
-		$raw_values = $this->_registry->get_settings( $this->name );
+		$raw_values = $this->_policy->registry()->get_settings( $this->name );
 
 		// loop raw values, NOT settings
 		foreach ( $raw_values as $setting => $raw_value ) {
@@ -670,7 +670,7 @@ abstract class ICE_Component
 		// is a parent set
 		if ( $this->parent ) {
 			// yes, look it up from the registry and return
-			return $this->_registry->get( $this->parent );
+			return $this->_policy->registry()->get( $this->parent );
 		} else {
 			throw new Exception(
 				sprintf( 'The "%s" component does not have a parent set', $this->name ) );
@@ -684,7 +684,7 @@ abstract class ICE_Component
 	 */
 	public function get_children()
 	{
-		return $this->_registry->get_children( $this );
+		return $this->_policy->registry()->get_children( $this );
 	}
 
 	/**
@@ -836,10 +836,10 @@ abstract class ICE_Component
 	{
 		if ( $this->renderable() ) {
 			if ( $output === true ) {
-				$this->_renderer->render( $this, true );
+				$this->_policy->renderer()->render( $this, true );
 				return true;
 			} else {
-				return $this->_renderer->render( $this, $output );
+				return $this->_policy->renderer()->render( $this, $output );
 			}
 		} else {
 			// not renderable
@@ -854,7 +854,7 @@ abstract class ICE_Component
 	 */
 	public function render_bypass()
 	{
-		return $this->_renderer->render_bypass( $this );
+		return $this->_policy->renderer()->render_bypass( $this );
 	}
 
 	/**

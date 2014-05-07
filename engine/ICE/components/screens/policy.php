@@ -37,7 +37,7 @@ class ICE_Screen_Policy extends ICE_Policy
 	 */
 	final public function new_registry()
 	{
-		return new ICE_Screen_Registry();
+		return new ICE_Screen_Registry( $this );
 	}
 
 	/**
@@ -45,7 +45,7 @@ class ICE_Screen_Policy extends ICE_Policy
 	 */
 	final public function new_factory()
 	{
-		return new ICE_Screen_Factory();
+		return new ICE_Screen_Factory( $this );
 	}
 
 	/**
@@ -53,6 +53,6 @@ class ICE_Screen_Policy extends ICE_Policy
 	 */
 	final public function new_renderer()
 	{
-		return new ICE_Screen_Renderer();
+		return new ICE_Screen_Renderer( $this );
 	}
 }

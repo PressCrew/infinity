@@ -321,7 +321,7 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 		// try to create component
 		try {
 			// call factory create method
-			return $this->_factory->create( $comp_name, $type );
+			return $this->_policy->factory()->create( $comp_name, $type );
 		// catch enviro exception
 		} catch ( ICE_Environment_Exception $e ) {
 			// create failed

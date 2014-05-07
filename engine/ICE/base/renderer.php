@@ -34,7 +34,7 @@ abstract class ICE_Renderer extends ICE_Componentable
 	 * @var array
 	 */
 	private $rendered = array();
-
+	
 	/**
 	 * Return component which is currently being rendered
 	 *

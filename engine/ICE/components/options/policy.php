@@ -44,7 +44,7 @@ class ICE_Option_Policy extends ICE_Policy
 	 */
 	final public function new_registry()
 	{
-		return new ICE_Option_Registry();
+		return new ICE_Option_Registry( $this );
 	}
 
 	/**
@@ -52,7 +52,7 @@ class ICE_Option_Policy extends ICE_Policy
 	 */
 	final public function new_factory()
 	{
-		return new ICE_Option_Factory();
+		return new ICE_Option_Factory( $this );
 	}
 
 	/**
@@ -60,7 +60,7 @@ class ICE_Option_Policy extends ICE_Policy
 	 */
 	final public function new_renderer()
 	{
-		return new ICE_Option_Renderer();
+		return new ICE_Option_Renderer( $this );
 	}
 
 	/**

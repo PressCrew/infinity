@@ -37,7 +37,7 @@ class ICE_Section_Policy extends ICE_Policy
 	 */
 	final public function new_registry()
 	{
-		return new ICE_Section_Registry();
+		return new ICE_Section_Registry( $this );
 	}
 
 	/**
@@ -45,7 +45,7 @@ class ICE_Section_Policy extends ICE_Policy
 	 */
 	final public function new_factory()
 	{
-		return new ICE_Section_Factory();
+		return new ICE_Section_Factory( $this );
 	}
 
 	/**
@@ -53,6 +53,6 @@ class ICE_Section_Policy extends ICE_Policy
 	 */
 	final public function new_renderer()
 	{
-		return new ICE_Section_Renderer();
+		return new ICE_Section_Renderer( $this );
 	}
 }
