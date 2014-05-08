@@ -78,7 +78,7 @@ class ICE_Ext_Option_Plugins_Domain_Mapping
 		// is the domain valid?
 		if ( $this->validate_domain( $value ) ) {
 			// is a domain set already?
-			if ( $this->get_option() ) {
+			if ( $this->get() ) {
 				// yes, update statement
 				$statement =
 					$wpdb->prepare("

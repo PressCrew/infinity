@@ -265,125 +265,24 @@ abstract class ICE_Option extends ICE_Component
 	 */
 	public function get()
 	{
-		if ( $this->__post_override__ === true && isset( $_POST[$this->get_property( 'name' )] ) ) {
-			return $_POST[$this->get_property( 'name' )];
-		} else {
-			return $this->get_option();
-		}
-	}
-
-	/**
-	 * Get (read) the value of this option from the database.
-	 *
-	 * @return mixed
-	 */
-	protected function get_option()
-	{
-		// get all options
-		$options = get_theme_mod( self::MOD_KEY );
-
-		// get comp name
+		// get component name
 		$name = $this->get_property( 'name' );
-		
-		// does the option exist?
-		if ( is_array( $options ) && isset( $options[ $name ] ) ) {
-			// yes, return it
-			return $options[ $name ];
+
+		// post override?
+		if (
+			true === $this->__post_override__ &&
+			true === isset( $_POST[ $name ] )
+		) {
+			// yep, return POST value
+			return $_POST[ $name ];
 		} else {
-			// no, return default value
-			return $this->default_value;
+			// no, return real value from registry
+			return
+				$this->policy()->registry()->get_theme_mod(
+					$name,
+					$this->default_value
+				);
 		}
-	}
-
-	/**
-	 * Returns true if a key for the option exists in the theme mods array.
-	 *
-	 * @param boolean $ignore_default Set to true to ignore any default value that might be set
-	 * @return boolean
-	 */
-	public function is_set( $ignore_default = false )
-	{
-		// any default value?
-		if ( false === $ignore_default && null !== $this->default_value ) {
-			// a default value is set, no need to look in the database
-			return true;
-		}
-
-		// get all options
-		$options = get_theme_mod( self::MOD_KEY );
-
-		// check if the option exists
-		return ( is_array( $options ) && isset( $options[ $this->get_property( 'name' ) ] ) );
-	}
-
-	/**
-	 * Update the value of this option
-	 *
-	 * @param mixed $value
-	 * @return boolean
-	 */
-	public function update( $value )
-	{
-		// force numeric values to floats since it could be an int or a float
-		if ( is_numeric( $value ) ) {
-			$value = floatval( $value );
-		}
-		// is the value null, an empty string, or equal to the default value?
-		if ( $value === null || $value === '' || $value === $this->default_value ) {
-			// its pointless to store this option
-			// try to delete it in case it already exists
-			return $this->delete_option();
-		} else {
-			// create or update it
-			if ( $this->update_option( $value ) ) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	/**
-	 * Update the real option in the database.
-	 *
-	 * @param mixed $value New option value.
-	 * @return boolean
-	 */
-	protected function update_option( $value )
-	{
-		// get all options
-		$options = get_theme_mod( self::MOD_KEY );
-		// set the key (name)
-		$options[ $this->get_property( 'name' ) ] = $value;
-		// update it
-		set_theme_mod( self::MOD_KEY, $options );
-		// all done
-		return true;
-	}
-
-	/**
-	 * Delete this option completely from the database
-	 *
-	 * @return boolean
-	 */
-	public function delete()
-	{
-		return $this->delete_option();
-	}
-
-	/**
-	 * Delete the option from the database.
-	 */
-	protected function delete_option()
-	{
-		// get options
-		$options = get_theme_mod( self::MOD_KEY );
-		// unset key (name)
-		unset( $options[ $this->get_property( 'name' ) ] );
-		// update it
-		set_theme_mod( self::MOD_KEY, $options );
-		// all done
-		return true;
 	}
 
 	/**

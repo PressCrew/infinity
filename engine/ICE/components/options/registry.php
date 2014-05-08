@@ -14,7 +14,8 @@
 ICE_Loader::load(
 	'base/registry',
 	'components/options/factory',
-	'utils/ajax'
+	'utils/ajax',
+	'utils/mod'
 );
 
 /**
@@ -24,7 +25,24 @@ ICE_Loader::load(
  * @subpackage options
  */
 class ICE_Option_Registry extends ICE_Registry
-{	
+{
+	/**
+	 * The modifications wrapper instance.
+	 * 
+	 * @var ICE_Mod
+	 */
+	private $theme_mod;
+
+	/**
+	 */
+	public function __construct( ICE_Policy $policy )
+	{
+		// call parent
+		parent::__construct( $policy );
+		// init mod wrapper
+		$this->theme_mod = new ICE_Mod( 'icext_options' );
+	}
+
 	/**
 	 * Load option config as a feature option if the "feature" setting is set.
 	 *
@@ -55,6 +73,19 @@ class ICE_Option_Registry extends ICE_Registry
 		// this is really bad
 		throw new Exception( sprintf(
 			'Failed to load "%s" as a suboption for feature "%s"', $suboption, $feature ) );
+	}
+
+	/**
+	 * Return the theme modification value for given key.
+	 *
+	 * @param string $key
+	 * @param mixed $default
+	 * @return mixed
+	 */
+	public function get_theme_mod( $key, $default )
+	{
+		// return value from mod wrapper
+		return $this->theme_mod->get( $key, $default );
 	}
 
 	/**
@@ -168,31 +199,33 @@ class ICE_Option_Registry extends ICE_Registry
 
 				// is this option registered?
 				if ( $this->has( $option_name ) ) {
-					// get the option
-					$option = $this->get( $option_name );
 					// look for option name as POST key
-					if ( array_key_exists( $option->get_property( 'name' ), $_POST ) ) {
+					if ( array_key_exists( $option_name, $_POST ) ) {
 						// reset?
 						if ( $reset_options ) {
-							$option->delete();
+							// remove value completely
+							$this->theme_mod->remove( $option_name );
 						} else {
 							// get new value
-							$new_value = $_POST[$option->get_property( 'name' )];
+							$new_value = $_POST[ $option_name ];
 							// strip slashes from new value?
 							if ( is_scalar( $new_value ) ) {
-								$new_value = stripslashes( $_POST[$option->get_property( 'name' )] );
+								$new_value = stripslashes( $_POST[ $option_name ] );
 							}
 							// update it
-							$option->update( $new_value );
+							$this->theme_mod->update( $option_name, $new_value );
 						}
 					} else {
-						// not in POST, delete it
-						$option->delete();
+						// not in POST, remove it
+						$this->theme_mod->remove( $option_name );
 					}
 					// increment the count
 					$save_count++;
 				}
 			}
+
+			// save the changes
+			$this->theme_mod->save();
 			
 			// done saving
 			return $save_count;
