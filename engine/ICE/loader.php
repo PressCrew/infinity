@@ -97,6 +97,8 @@ final class ICE_Loader extends ICE_Base
 			if ( ICE_IS_ADMIN ) {
 				// add theme activation callback
 				add_action( 'load-themes.php', array( __CLASS__, 'do_activated_actions' ) );
+				// add upgrade callback
+				add_action( 'ice_theme_activated', array( __CLASS__, 'upgrade' ), 1 );
 			}
 		}
 	}
@@ -137,6 +139,19 @@ final class ICE_Loader extends ICE_Base
 			// must be the blog side of things
 			do_action( 'ice_init_blog' );
 		}
+	}
+
+	/**
+	 * Run upgrade helper.
+	 */
+	final static public function upgrade()
+	{
+		// load upgrade lib
+		ICE_Loader::load_lib( 'utils/upgrade' );
+		// new upgrade instance
+		$upgrade = new ICE_Upgrade_1_2();
+		// run it
+		$upgrade->run();
 	}
 
 	/**

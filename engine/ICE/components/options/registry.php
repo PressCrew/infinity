@@ -89,6 +89,38 @@ class ICE_Option_Registry extends ICE_Registry
 	}
 
 	/**
+	 * Set the theme modification value for given key.
+	 *
+	 * @param string $key
+	 * @param mixed $value
+	 */
+	public function set_theme_mod( $key, $value )
+	{
+		// call set theme mods as an array
+		$this->set_theme_mods( array( $key => $value ) );
+	}
+
+	/**
+	 * Set the theme modification value for all key=>value pairs.
+	 *
+	 * @param array $list
+	 */
+	public function set_theme_mods( $list )
+	{
+		// loop entire list
+		foreach( $list as $key => $value ) {
+			// make sure key is a valid option name
+			if ( $this->has( $key ) ) {
+				// set value using mod wrapper
+				$this->theme_mod->update( $key, $value );
+			}
+		}
+
+		// save all changes
+		$this->theme_mod->save();
+	}
+
+	/**
 	 * Return sibling options as an array
 	 *
 	 * @param ICE_Option $option
