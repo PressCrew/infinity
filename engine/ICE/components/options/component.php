@@ -25,11 +25,6 @@ ICE_Loader::load(
 abstract class ICE_Option extends ICE_Component
 {
 	/**
-	 * All options are stored in the theme mod array under this key.
-	 */
-	const MOD_KEY = 'icext_options';
-
-	/**
 	 * If true, a POST value will override the real option value
 	 *
 	 * @var boolean
