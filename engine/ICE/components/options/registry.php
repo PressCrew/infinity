@@ -238,11 +238,13 @@ class ICE_Option_Registry extends ICE_Registry
 							// remove value completely
 							$this->theme_mod->remove( $option_name );
 						} else {
-							// get new value
-							$new_value = $_POST[ $option_name ];
-							// strip slashes from new value?
-							if ( is_scalar( $new_value ) ) {
+							// is new value a string?
+							if ( is_string( $_POST[ $option_name ] ) ) {
+								// yep, strip slashes
 								$new_value = stripslashes( $_POST[ $option_name ] );
+							} else {
+								// nope, use as is
+								$new_value = $_POST[ $option_name ];
 							}
 							// is new value numeric?
 							if ( is_numeric( $new_value ) ) {
