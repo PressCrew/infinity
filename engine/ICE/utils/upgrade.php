@@ -71,7 +71,7 @@ abstract class ICE_Upgrade extends ICE_Base
 		// update version property
 		$this->version = $version;
 		// update stored version
-		$this->mod->update( 'version', $version );
+		$this->mod->set( 'version', $version );
 		// write changes
 		$this->mod->save();
 	}

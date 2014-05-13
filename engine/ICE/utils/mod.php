@@ -140,7 +140,7 @@ class ICE_Mod extends ICE_Base
 	 * @param string $key
 	 * @param mixed $value
 	 */
-	public function update( $key, $value )
+	public function set( $key, $value )
 	{
 		// is value numeric?
 		if ( is_numeric( $value ) ) {

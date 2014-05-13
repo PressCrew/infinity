@@ -112,7 +112,7 @@ class ICE_Option_Registry extends ICE_Registry
 			// make sure key is a valid option name
 			if ( $this->has( $key ) ) {
 				// set value using mod wrapper
-				$this->theme_mod->update( $key, $value );
+				$this->theme_mod->set( $key, $value );
 			}
 		}
 
@@ -245,7 +245,7 @@ class ICE_Option_Registry extends ICE_Registry
 								$new_value = stripslashes( $_POST[ $option_name ] );
 							}
 							// update it
-							$this->theme_mod->update( $option_name, $new_value );
+							$this->theme_mod->set( $option_name, $new_value );
 						}
 					} else {
 						// not in POST, remove it
