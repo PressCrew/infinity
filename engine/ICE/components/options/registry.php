@@ -40,7 +40,7 @@ class ICE_Option_Registry extends ICE_Registry
 		// call parent
 		parent::__construct( $policy );
 		// init mod wrapper
-		$this->theme_mod = new ICE_Mod( 'icext_options' );
+		$this->theme_mod = new ICE_Mod( 'ice_options' );
 	}
 
 	/**
