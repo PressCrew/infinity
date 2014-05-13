@@ -244,6 +244,11 @@ class ICE_Option_Registry extends ICE_Registry
 							if ( is_scalar( $new_value ) ) {
 								$new_value = stripslashes( $_POST[ $option_name ] );
 							}
+							// is new value numeric?
+							if ( is_numeric( $new_value ) ) {
+								// yep, force it to float since it could be an int or a float
+								settype( $new_value, 'float' );
+							}
 							// update it
 							$this->theme_mod->set( $option_name, $new_value );
 						}

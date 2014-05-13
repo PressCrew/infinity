@@ -142,12 +142,6 @@ class ICE_Mod extends ICE_Base
 	 */
 	public function set( $key, $value )
 	{
-		// is value numeric?
-		if ( is_numeric( $value ) ) {
-			// yep, force it to float since it could be an int or a float
-			settype( $value, 'float' );
-		}
-
 		// is the value null or an empty string?
 		if ( $value === null || $value === '' ) {
 			// its pointless to store this option
