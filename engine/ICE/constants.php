@@ -34,3 +34,11 @@ define( 'ICE_IS_ADMIN', is_admin() );
  * ICE API: cache doing ajax check for performance.
  */
 define( 'ICE_IS_AJAX', defined( 'DOING_AJAX' ) );
+/**
+ * ICE API: will be true if dashboard interface is showing.
+ */
+define( 'ICE_IS_DASH', ( true === ICE_IS_ADMIN && false === ICE_IS_AJAX ) );
+/**
+ * ICE API: will be true if blog (front end) is showing.
+ */
+define( 'ICE_IS_BLOG', ( false === ICE_IS_ADMIN && false === ICE_IS_AJAX ) );
