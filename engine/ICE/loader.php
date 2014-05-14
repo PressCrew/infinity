@@ -14,42 +14,22 @@
  * Check if ICE has been included already
  * @ignore
  */
-if ( defined( 'ICE_VERSION' ) ) {
+if ( defined( 'ICE_PATH' ) ) {
 	return;
 }
 
 /**
- * ICE API: version
- */
-define( 'ICE_VERSION', '1.2a' );
-/**
- * ICE API: root directory
+ * ICE API: root directory.
  */
 define( 'ICE_PATH', dirname( __FILE__ ) );
-/**
- * ICE API: library directory (3rd party)
- */
-define( 'ICE_LIB_PATH', ICE_PATH . '/lib' );
-/**
- * ICE API: extensions library directory
- */
-define( 'ICE_EXT_PATH', ICE_PATH . '/ext' );
-/**
- * ICE API: cache get_stylesheet() call for performance 
- */
-define( 'ICE_ACTIVE_THEME', get_stylesheet() );
-/**
- * ICE API: cache is_admin() call for performance
- */
-define( 'ICE_IS_ADMIN', is_admin() );
-/**
- * ICE API: cache doing ajax check for performance
- */
-define( 'ICE_IS_AJAX', defined( 'DOING_AJAX' ) );
-
 
 /**
- * include the base class
+ * Include the core constants.
+ */
+require_once ICE_PATH . '/constants.php';
+
+/**
+ * Include the base class.
  */
 require_once ICE_PATH . '/base/base.php';
 
