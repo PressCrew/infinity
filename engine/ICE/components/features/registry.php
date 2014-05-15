@@ -25,11 +25,6 @@ ICE_Loader::load(
 class ICE_Feature_Registry extends ICE_Registry
 {
 	/**
-	 * Option name which contains default config.
-	 */
-	const OPT_DEF_NAME = 'defaults';
-
-	/**
 	 * Default option config for features that have one.
 	 *
 	 * @var array
