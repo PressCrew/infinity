@@ -14,7 +14,6 @@
 ICE_Loader::load(
 	'utils/ajax',
 	'components/options/component',
-	'components/options/factory',
 	'components/options/policy',
 	'components/options/registry',
 	'components/options/renderer'

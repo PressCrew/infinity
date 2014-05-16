@@ -13,7 +13,6 @@
 
 ICE_Loader::load(
 	'components/widgets/component',
-	'components/widgets/factory',
 	'components/widgets/policy',
 	'components/widgets/registry',
 	'components/widgets/renderer'

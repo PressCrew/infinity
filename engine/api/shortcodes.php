@@ -13,7 +13,6 @@
 
 ICE_Loader::load(
 	'components/shortcodes/component',
-	'components/shortcodes/factory',
 	'components/shortcodes/policy',
 	'components/shortcodes/registry',
 	'components/shortcodes/renderer'

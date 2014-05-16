@@ -41,11 +41,11 @@ class ICE_Screen_Policy extends ICE_Policy
 	}
 
 	/**
-	 * @return ICE_Screen_Factory
+	 * @return ICE_Extensions
 	 */
-	final public function new_factory()
+	final public function new_extensions()
 	{
-		return new ICE_Screen_Factory( $this );
+		return new ICE_Extensions( $this );
 	}
 
 	/**

@@ -13,7 +13,6 @@
 
 ICE_Loader::load(
 	'components/sections/component',
-	'components/sections/factory',
 	'components/sections/policy',
 	'components/sections/registry',
 	'components/sections/renderer'

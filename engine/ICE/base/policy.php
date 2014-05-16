@@ -11,6 +11,8 @@
  * @since 1.0
  */
 
+ICE_Loader::load_lib( 'base/extensions' );
+
 /**
  * Make customizing component implementations easy
  *
@@ -49,34 +51,11 @@ abstract class ICE_Policy extends ICE_Base
 	 * @var ICE_Registry
 	 */
 	private $registry;
-
-	/**
-	 * @var ICE_Factory
-	 */
-	private $factory;
 	
 	/**
 	 * @var ICE_Renderer
 	 */
 	private $renderer;
-
-	/**
-	 * Singleton constructor.
-	 *
-	 * @internal
-	 */
-	final protected function __construct()
-	{
-		// set up extensions registry
-		$this->extensions = new ICE_Extensions( $this );
-
-		// register bundled extensions
-		$this->extensions->register_file(
-			ICE_EXT_PATH . '/' .
-			$this->get_handle( true ) . '/' .
-			'register.php'
-		);
-	}
 
 	/**
 	 * Get policy instance for given type.
@@ -171,11 +150,11 @@ abstract class ICE_Policy extends ICE_Base
 	abstract public function new_registry();
 	
 	/**
-	 * Return a new instance of a component factory
+	 * Return a new instance of an extensions manager
 	 *
-	 * @return ICE_Factory
+	 * @return ICE_Extensions
 	 */
-	abstract public function new_factory();
+	abstract public function new_extensions();
 
 	/**
 	 * Return a new instance of a component renderer
@@ -191,7 +170,16 @@ abstract class ICE_Policy extends ICE_Base
 	 */
 	final public function extensions()
 	{
-		// return extensions registry
+		if ( !$this->extensions instanceof ICE_Extensions ) {
+			// create new instance
+			$this->extensions = $this->new_extensions();
+			// register bundled extensions
+			$this->extensions->register_file(
+				ICE_EXT_PATH . '/' .
+				$this->get_handle( true ) . '/' .
+				'register.php'
+			);
+		}
 		return $this->extensions;
 	}
 
@@ -207,19 +195,6 @@ abstract class ICE_Policy extends ICE_Base
 			$this->registry = $this->new_registry();
 		}
 		return $this->registry;
-	}
-	
-	/**
-	 * Return the factory instance
-	 *
-	 * @return ICE_Section_Factory
-	 */
-	final public function factory()
-	{
-		if ( !$this->factory instanceof ICE_Factory ) {
-			$this->factory = $this->new_factory();
-		}
-		return $this->factory;
 	}
 
 	/**

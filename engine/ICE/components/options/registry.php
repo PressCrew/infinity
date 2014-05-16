@@ -13,7 +13,6 @@
 
 ICE_Loader::load(
 	'base/registry',
-	'components/options/factory',
 	'utils/ajax',
 	'utils/mod'
 );
