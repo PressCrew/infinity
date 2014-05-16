@@ -26,6 +26,11 @@ ICE_Loader::load(
 abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 {
 	/**
+	 * Component type to use when none configured.
+	 */
+	const DEFAULT_TYPE = 'default';
+
+	/**
 	 * Sub option delimeter
 	 */
 	const SUB_OPTION_DELIM = '.';
@@ -316,12 +321,17 @@ abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	 * @param string $type
 	 * @return ICE_Component|boolean
 	 */
-	private function create_component( $comp_name, $type )
+	protected function create_component( $comp_name, $type )
 	{
+		// set default type if necessary
+		if ( empty( $type ) ) {
+			$type = self::DEFAULT_TYPE;
+		}
+
 		// try to create component
 		try {
-			// call factory create method
-			return $this->_policy->factory()->create( $comp_name, $type );
+			// call extensions create method
+			return $this->_policy->extensions()->create( $type, $comp_name );
 		// catch enviro exception
 		} catch ( ICE_Environment_Exception $e ) {
 			// create failed

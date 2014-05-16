@@ -104,4 +104,18 @@ class ICE_Feature_Registry extends ICE_Registry
 		}
 	}
 
+	/**
+	 */
+	protected function create_component($comp_name, $type)
+	{
+		// only create if supported
+		if ( true === current_theme_supports( $comp_name ) ) {
+			// supported, call parent
+			return parent::create_component( $comp_name, $type );
+		} else {
+			// not supported
+			return false;
+		}
+	}
+
 }
