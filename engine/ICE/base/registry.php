@@ -289,11 +289,13 @@ class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	{
 		// COMPAT check for ignore setting
 		if ( isset( $settings[ 'ignore' ] ) ) {
-			// do not create it
+			// is debug on?
 			if ( WP_DEBUG ) {
+				// debug is on, throw exception
 				throw new OutOfBoundsException( 'The "ignore" setting is no longer valid.' );
 			} else {
-				continue;
+				// debug is off, do not create but fail silently
+				return true;
 			}
 		}
 
