@@ -13,9 +13,7 @@
 
 ICE_Loader::load(
 	'components/screens/component',
-	'components/screens/policy',
-	'components/screens/registry',
-	'components/screens/renderer'
+	'components/screens/policy'
 );
 
 /**

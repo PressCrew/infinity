@@ -31,28 +31,4 @@ class ICE_Widget_Policy extends ICE_Policy
 	{
 		return ( $plural ) ? 'widgets' : 'widget';
 	}
-
-	/**
-	 * @return ICE_Widget_Registry
-	 */
-	final public function new_registry()
-	{
-		return new ICE_Widget_Registry( $this );
-	}
-
-	/**
-	 * @return ICE_Extensions
-	 */
-	final public function new_extensions()
-	{
-		return new ICE_Extensions( $this );
-	}
-
-	/**
-	 * @return ICE_Widget_Renderer
-	 */
-	final public function new_renderer()
-	{
-		return new ICE_Widget_Renderer( $this );
-	}
 }

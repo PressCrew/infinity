@@ -23,7 +23,7 @@ ICE_Loader::load(
  * @package ICE
  * @subpackage base
  */
-abstract class ICE_Registry extends ICE_Componentable implements ICE_Visitable
+class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 {
 	/**
 	 * Component type to use when none configured.

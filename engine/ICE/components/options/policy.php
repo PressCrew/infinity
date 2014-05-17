@@ -48,14 +48,6 @@ class ICE_Option_Policy extends ICE_Policy
 	}
 
 	/**
-	 * @return ICE_Extensions
-	 */
-	final public function new_extensions()
-	{
-		return new ICE_Extensions( $this );
-	}
-
-	/**
 	 * @return ICE_Option_Renderer
 	 */
 	final public function new_renderer()

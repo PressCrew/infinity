@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-/* @var $this ICE_Shortcode_Renderer */
+/* @var $this ICE_Renderer */
 ?>
 
 <?php if ( $content ): ?>

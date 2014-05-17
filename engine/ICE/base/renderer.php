@@ -19,7 +19,7 @@ ICE_Loader::load( 'base/componentable' );
  * @package ICE
  * @subpackage base
  */
-abstract class ICE_Renderer extends ICE_Componentable
+class ICE_Renderer extends ICE_Componentable
 {
 	/**
 	 * The current component being rendered

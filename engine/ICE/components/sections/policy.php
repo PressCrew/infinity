@@ -33,22 +33,6 @@ class ICE_Section_Policy extends ICE_Policy
 	}
 
 	/**
-	 * @return ICE_Section_Registry
-	 */
-	final public function new_registry()
-	{
-		return new ICE_Section_Registry( $this );
-	}
-
-	/**
-	 * @return ICE_Extensions
-	 */
-	final public function new_extensions()
-	{
-		return new ICE_Extensions( $this );
-	}
-
-	/**
 	 * @return ICE_Section_Renderer
 	 */
 	final public function new_renderer()

@@ -14,7 +14,7 @@
  * @since 1.0
  */
 
-/* @var $this ICE_Widget_Renderer */
+/* @var $this ICE_Renderer */
 ?>
 <div <?php $this->render_attrs() ?>>
 	<div class="ui-widget-header">

@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-/* @var $this ICE_Feature_Renderer */
+/* @var $this ICE_Renderer */
 ?>
 <div <?php $this->render_attrs() ?>>
 	<?php print $content ?>

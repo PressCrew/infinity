@@ -31,28 +31,4 @@ class ICE_Shortcode_Policy extends ICE_Policy
 	{
 		return ( $plural ) ? 'shortcodes' : 'shortcode';
 	}
-
-	/**
-	 * @return ICE_Shortcode_Registry
-	 */
-	final public function new_registry()
-	{
-		return new ICE_Shortcode_Registry( $this );
-	}
-
-	/**
-	 * @return ICE_Extensions
-	 */
-	final public function new_extensions()
-	{
-		return new ICE_Extensions( $this );
-	}
-
-	/**
-	 * @return ICE_Shortcode_Renderer
-	 */
-	final public function new_renderer()
-	{
-		return new ICE_Shortcode_Renderer( $this );
-	}
 }

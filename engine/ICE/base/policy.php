@@ -143,25 +143,34 @@ abstract class ICE_Policy extends ICE_Base
 	abstract public function get_handle( $plural = true );
 
 	/**
-	 * Return a new instance of a component registry
+	 * Return a new instance of a component registry.
 	 *
 	 * @return ICE_Registry
 	 */
-	abstract public function new_registry();
+	protected function new_registry()
+	{
+		return new ICE_Registry( $this );
+	}
 	
 	/**
-	 * Return a new instance of an extensions manager
+	 * Return a new instance of an extensions manager.
 	 *
 	 * @return ICE_Extensions
 	 */
-	abstract public function new_extensions();
+	protected function new_extensions()
+	{
+		return new ICE_Extensions( $this );
+	}
 
 	/**
 	 * Return a new instance of a component renderer
 	 *
 	 * @return ICE_Renderer
 	 */
-	abstract public function new_renderer();
+	protected function new_renderer()
+	{
+		return new ICE_Renderer( $this );
+	}
 
 	/**
 	 * Return extensions registry instance.

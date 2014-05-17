@@ -31,28 +31,4 @@ class ICE_Screen_Policy extends ICE_Policy
 	{
 		return ( $plural ) ? 'screens' : 'screen';
 	}
-
-	/**
-	 * @return ICE_Screen_Registry
-	 */
-	final public function new_registry()
-	{
-		return new ICE_Screen_Registry( $this );
-	}
-
-	/**
-	 * @return ICE_Extensions
-	 */
-	final public function new_extensions()
-	{
-		return new ICE_Extensions( $this );
-	}
-
-	/**
-	 * @return ICE_Screen_Renderer
-	 */
-	final public function new_renderer()
-	{
-		return new ICE_Screen_Renderer( $this );
-	}
 }

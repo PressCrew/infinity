@@ -39,20 +39,4 @@ class ICE_Feature_Policy extends ICE_Policy
 	{
 		return new ICE_Feature_Registry( $this );
 	}
-
-	/**
-	 * @return ICE_Extensions
-	 */
-	final public function new_extensions()
-	{
-		return new ICE_Extensions( $this );
-	}
-
-	/**
-	 * @return ICE_Feature_Renderer
-	 */
-	final public function new_renderer()
-	{
-		return new ICE_Feature_Renderer( $this );
-	}
 }

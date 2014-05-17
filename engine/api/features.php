@@ -14,8 +14,7 @@
 ICE_Loader::load(
 	'components/features/component',
 	'components/features/policy',
-	'components/features/registry',
-	'components/features/renderer'
+	'components/features/registry'
 );
 
 //

@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-/* @var $this ICE_Widget_Renderer */
+/* @var $this ICE_Renderer */
 /* @var $button_script ICE_Script */
 ?>
 

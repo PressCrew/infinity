@@ -14,7 +14,6 @@
 ICE_Loader::load(
 	'components/sections/component',
 	'components/sections/policy',
-	'components/sections/registry',
 	'components/sections/renderer'
 );
 

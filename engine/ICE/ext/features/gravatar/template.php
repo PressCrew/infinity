@@ -11,7 +11,7 @@
  * @since 1.0
  */
 
-/* @var $this ICE_Feature_Renderer */
+/* @var $this ICE_Renderer */
 ?>
 <?php if ( in_the_loop() ): ?>
 	<img src="<?php print $this->url() ?>" <?php $this->render_attrs( $this->component()->image_class ) ?>>
