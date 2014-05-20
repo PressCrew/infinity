@@ -57,6 +57,7 @@ class ICE_Ext_Option_Ui_Overlay_Picker
 			$rule2->ad( 'left', 0 );
 			$rule2->ad( 'bottom', 0 );
 			$rule2->ad( 'background-image', sprintf( 'url("%s")', $url ) );
+			$rule2->ad( 'display', 'block' );
 		}
 	}
 }
