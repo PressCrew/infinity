@@ -46,7 +46,7 @@ class ICE_Ext_Option_Ui_Overlay_Picker
 			// element rule
 			$rule1 = $style->rule( 'container', $this->format_style_selector() );
 			$rule1->ad( 'position', 'relative' );
-			$rule1->ad( 'z-index', 0 );
+			$rule1->ad( 'z-index', 9 );
 			// pseudo element rule
 			$rule2 = $style->rule( 'image', $this->format_style_selector() . ':before' );
 			$rule2->ad( 'content', '""' );
