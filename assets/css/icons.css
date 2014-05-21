@@ -355,9 +355,6 @@ div#message p:before {
 }
 #subscription-toggle:before {
     content: "A";
-    position: relative;
-    right: -9px;
-    top: 0;
 }
 #bbpress-forums .bbp-forums-list li a:before {
     color: #999999;
