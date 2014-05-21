@@ -160,13 +160,8 @@ pre code {
 }
 legend {
   display: block;
-  width: 100%;
-  margin-bottom: 27px;
   font-size: 19.5px;
-  line-height: 36px;
   color: #666;
-  border-bottom: 1px solid #eee;
-  -webkit-margin-collapse: separate;
 }
 label,
 input,
