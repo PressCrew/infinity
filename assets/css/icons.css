@@ -193,8 +193,7 @@ li#activity-friends a:before {
     content: "a"
 }
 
-li#activity-groups a:before,
-.widget_bp_groups_widget {
+li#activity-groups a:before {
     content: "f"
 }
 
