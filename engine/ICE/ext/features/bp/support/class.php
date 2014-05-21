@@ -87,7 +87,7 @@ class ICE_Ext_Feature_Bp_Support
 		$version = '20120110';
 
 		// the global BuddyPress JS - Ajax will not work without it
-		wp_enqueue_script( 'dtheme-ajax-js', BP_PLUGIN_URL . '/bp-themes/bp-default/_inc/global.js', array( 'jquery' ), $version );
+		wp_enqueue_script( 'dtheme-ajax-js', BP_PLUGIN_URL . '/bp-themes/bp-default/_inc/global.js', array( 'jquery' ), bp_get_version() );
 
 		// Add words that we need to use in JS to the end of the page so they can be translated and still used.
 		$params = array(
@@ -95,12 +95,14 @@ class ICE_Ext_Feature_Bp_Support
 			'accepted'          => __( 'Accepted', 'buddypress' ),
 			'rejected'          => __( 'Rejected', 'buddypress' ),
 			'show_all_comments' => __( 'Show all comments for this thread', 'buddypress' ),
+			'show_x_comments'   => __( 'Show all %d comments', 'buddypress' ),
 			'show_all'          => __( 'Show all', 'buddypress' ),
 			'comments'          => __( 'comments', 'buddypress' ),
 			'close'             => __( 'Close', 'buddypress' ),
 			'view'              => __( 'View', 'buddypress' ),
 			'mark_as_fav'	    => __( 'Favorite', 'buddypress' ),
-			'remove_fav'	    => __( 'Remove Favorite', 'buddypress' )
+			'remove_fav'	    => __( 'Remove Favorite', 'buddypress' ),
+			'unsaved_changes'   => __( 'Your profile has unsaved changes. If you leave the page, the changes will be lost.', 'buddypress' ),
 		);
 
 		wp_localize_script( 'dtheme-ajax-js', 'BP_DTheme', $params );
