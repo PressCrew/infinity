@@ -32,7 +32,7 @@ class ICE_Compat_Option
 			ICE_Option::API_DELIM,
 			array(
 				ICE_Option::API_PREFIX,
-				$option->get_property( 'hname' ),
+				$option->get_hname(),
 				ICE_ACTIVE_THEME
 			)
 		);
