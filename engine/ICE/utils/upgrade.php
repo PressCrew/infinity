@@ -171,7 +171,7 @@ class ICE_Upgrade_1_2 extends ICE_Upgrade_1_1
 			// get a value?
 			if ( false !== $old_value ) {
 				// yes, get option name
-				$name = $option->get_property( 'name' );
+				$name = $option->get_name();
 				// push onto new values
 				$new_values[ $name ] = $old_value;
 				// push onto api names

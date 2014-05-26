@@ -11,17 +11,17 @@
  * @subpackage dashboard-templates
  */
 ?>
-<div id="menu___<?php print esc_attr( $section->get_property( 'name' ) ) ?>">
+<div id="menu___<?php print esc_attr( $section->get_name() ) ?>">
 	<a><?php print esc_html( $section->get_property( 'title' ) ) ?></a>
 	<?php if ( empty( $children ) ): ?>
-		<a id="section___<?php print esc_attr( $section->get_property( 'name' ) ) ?>" class="infinity-cpanel-options-menu-show infinity-cpanel-options-menu-showall" href="#"><?php _e('Show All', 'infinity') ?></a>
+		<a id="section___<?php print esc_attr( $section->get_name() ) ?>" class="infinity-cpanel-options-menu-show infinity-cpanel-options-menu-showall" href="#"><?php _e('Show All', 'infinity') ?></a>
 	<?php endif; ?>
 </div>
 
 <?php
 	if ( $children ):
 		// render all children sections ?>
-		<div><div id="submenu___<?php print esc_attr( $section->get_property( 'name' ) ) ?>" class="infinity-cpanel-options-menu infinity-cpanel-options-submenu">
+		<div><div id="submenu___<?php print esc_attr( $section->get_name() ) ?>" class="infinity-cpanel-options-menu infinity-cpanel-options-submenu">
 			<?php
 				foreach ( $children as $child ):
 					infinity_options_render_menu_section( $child );

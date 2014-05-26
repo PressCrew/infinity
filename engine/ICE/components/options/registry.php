@@ -132,7 +132,7 @@ class ICE_Option_Registry extends ICE_Registry
 
 		// render options that require this one
 		foreach ( $this->get_all() as $sibling_option ) {
-			if ( $option->get_property( 'name' ) == $sibling_option->get_property( 'parent' ) ) {
+			if ( $option->get_name() == $sibling_option->get_property( 'parent' ) ) {
 				$options[] = $sibling_option;
 			}
 		}
@@ -155,7 +155,7 @@ class ICE_Option_Registry extends ICE_Registry
 		foreach ( parent::get_all() as $option ) {
 
 			// do section names match?
-			if ( $section->get_property( 'name' ) != $option->get_property( 'section' ) ) {
+			if ( $section->get_name() != $option->get_property( 'section' ) ) {
 				continue;
 			}
 

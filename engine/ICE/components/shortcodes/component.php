@@ -83,7 +83,7 @@ abstract class ICE_Shortcode extends ICE_Component
 		parent::init();
 
 		// set up handler
-		add_shortcode( $this->get_property( 'name' ), array( $this, 'render_handler' ) );
+		add_shortcode( $this->get_name(), array( $this, 'render_handler' ) );
 	}
 
 	/**

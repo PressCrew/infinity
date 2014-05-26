@@ -77,13 +77,13 @@ abstract class ICE_Section extends ICE_Component
 	public function add_component( ICE_Component $component )
 	{
 		// does component section match my name?
-		if ( $component->get_property( 'section' ) == $this->get_property( 'name' ) ) {
+		if ( $component->get_property( 'section' ) == $this->get_name() ) {
 			// yep, add to components array
 			$this->__components__[] = $component;
 		} else {
 			// not good
 			throw new Exception(
-				sprintf( 'The component "%s" is not assigned to the section "%s"', $component->get_property( 'name' ), $this->get_property( 'name' ) ) );
+				sprintf( 'The component "%s" is not assigned to the section "%s"', $component->get_name(), $this->get_property( 'section' ) ) );
 		}
 	}
 

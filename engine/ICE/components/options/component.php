@@ -175,7 +175,7 @@ abstract class ICE_Option extends ICE_Component
 				}
 
 			} else {
-				throw new Exception( sprintf( 'The field options for the "%s" option is not configured correctly', $this->get_property( 'name' ) ) );
+				throw new Exception( sprintf( 'The field options for the "%s" option is not configured correctly', $this->get_name() ) );
 			}
 		
 		} elseif ( $this instanceof ICE_Option_Auto_Field ) {
@@ -261,7 +261,7 @@ abstract class ICE_Option extends ICE_Component
 	public function get()
 	{
 		// get component name
-		$name = $this->get_property( 'name' );
+		$name = $this->get_name();
 
 		// post override?
 		if (

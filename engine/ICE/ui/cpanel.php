@@ -116,7 +116,7 @@ final class ICE_Ui_Cpanel extends ICE_Base
 				// get item
 				$item = $this->policy->registry()->get( $name );
 				// render list item ?>
-				<li><a href="#<?php  $this->render_id( 'tab', $item->get_property( 'name' ) ) ?>"><?php echo esc_html( $item->get_property( 'title' ) ) ?></a></li><?php
+				<li><a href="#<?php  $this->render_id( 'tab', $item->get_name() ) ?>"><?php echo esc_html( $item->get_property( 'title' ) ) ?></a></li><?php
 			}
 			// close list ?>
 			</ul><?php
@@ -137,8 +137,8 @@ final class ICE_Ui_Cpanel extends ICE_Base
 				// get the screen
 				$item = $this->policy->registry()->get( $name );
 				// render panel item ?>
-				<div id="<?php $this->render_id( 'tab', $item->get_property( 'name' ) ) ?>">
-					<p><?php $this->render_tab_content( $item->get_property( 'name' ) ) ?></p>
+				<div id="<?php $this->render_id( 'tab', $item->get_name() ) ?>">
+					<p><?php $this->render_tab_content( $item->get_name() ) ?></p>
 				</div><?php
 			}
 		}

@@ -115,7 +115,7 @@ class ICE_Renderer extends ICE_Componentable
 	 */
 	public function render_name()
 	{
-		print esc_attr( $this->component->get_property( 'name' ) );
+		print esc_attr( $this->component->get_name() );
 	}
 
 	/**

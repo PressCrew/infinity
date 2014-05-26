@@ -9,7 +9,7 @@
  */
 
 // get option name
-$option_name = $renderer->component()->get_property( 'name' );
+$option_name = $renderer->component()->get_name();
 
 // render the sample code (escaped PHP markup) ?>
 <strong>Test if this has been set</strong>

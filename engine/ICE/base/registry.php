@@ -221,7 +221,7 @@ class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 			// components must NOT have a parent set
 			if ( null === $component->get_property( 'parent' ) ) {
 				// filter on component names
-				if ( empty( $component_names ) || in_array( $component->get_property( 'name' ), $component_names, true ) ) {
+				if ( empty( $component_names ) || in_array( $component->get_name(), $component_names, true ) ) {
 					// append to return array
 					$components[] = $component;
 				}

@@ -244,6 +244,16 @@ abstract class ICE_Component
 	}
 
 	/**
+	 * Return name property.
+	 *
+	 * @return string
+	 */
+	public function get_name()
+	{
+		return $this->name;
+	}
+
+	/**
 	 */
 	public function get_property( $name )
 	{
@@ -256,7 +266,6 @@ abstract class ICE_Component
 			case 'documentation':
 			case 'hname':
 			case 'id':
-			case 'name':
 			case 'parent':
 			case 'required_feature':
 			case 'script':
