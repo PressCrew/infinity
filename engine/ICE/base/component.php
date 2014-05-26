@@ -258,7 +258,6 @@ abstract class ICE_Component
 	public function get_property( $name )
 	{
 		switch ( $name ) {
-			case 'aname':
 			case 'body_class':
 			case 'capabilities':
 			case 'class':
