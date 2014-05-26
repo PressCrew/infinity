@@ -264,6 +264,16 @@ abstract class ICE_Component
 	}
 
 	/**
+	 * Return type property.
+	 *
+	 * @return string
+	 */
+	public function get_type()
+	{
+		return $this->type;
+	}
+
+	/**
 	 */
 	public function get_property( $name )
 	{
@@ -282,7 +292,6 @@ abstract class ICE_Component
 			case 'style_depends':
 			case 'template':
 			case 'title':
-			case 'type':
 				return $this->$name;
 			default:
 				return parent::get_property( $name );
