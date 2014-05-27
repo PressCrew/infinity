@@ -55,7 +55,7 @@ $this->register(
 
 // Gravatar
 $this->register(
-	'echo',
+	'gravatar',
 	array(
 		'class' => 'ICE_Ext_Feature_Gravatar',
 		'template' => self::DEFAULT_TPL
