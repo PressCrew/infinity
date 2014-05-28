@@ -1269,7 +1269,7 @@ final class ICE_Style_Property_Factory extends ICE_Base
 	 */
 	protected function prop_background_color()
 	{
-		return $this->prop_color( 'background-color' );
+		return $this->prop_color( 'background' );
 	}
 
 	/**
