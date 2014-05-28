@@ -11,7 +11,7 @@
  */
 
 // load scheme class
-ICE_Loader::load( 'schemes/scheme' );
+ICE_Loader::load( 'base/scheme' );
 
 // load components api
 require_once INFINITY_API_PATH . '/sections.php';
