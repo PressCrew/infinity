@@ -48,13 +48,6 @@ final class ICE_Scheme extends ICE_Base
 	static private $instance;
 
 	/**
-	 * Name of the base theme
-	 *
-	 * @var string
-	 */
-	private $base_theme;
-
-	/**
 	 * Name of the root theme
 	 *
 	 * @var string
@@ -122,18 +115,14 @@ final class ICE_Scheme extends ICE_Base
 	/**
 	 * One time initialization helper
 	 *
-	 * @param string $base_theme
 	 * @return ICE_Scheme
 	 */
-	public function init( $base_theme )
+	public function init()
 	{
-		// do not init same scheme twice
-		if ( $this->base_theme ) {
+		// do not init scheme twice
+		if ( $this->root_theme ) {
 			return;
 		}
-
-		// set base theme
-		$this->base_theme = $base_theme;
 
 		// root theme is always template
 		$this->root_theme = get_template();
@@ -526,7 +515,7 @@ final class ICE_Scheme extends ICE_Base
 
 		// handle empty theme
 		if ( empty( $theme ) ) {
-			$theme = $this->base_theme;
+			$theme = $this->root_theme;
 		}
 
 		// one or more args left, then we got some file names

@@ -35,7 +35,7 @@ function infinity_scheme_init()
 	// initialize the scheme
 	$scheme->set_config_file( 'global' );
 	$scheme->set_config_dir( INFINITY_ENGINE_DIR . '/config' );
-	$scheme->init( INFINITY_NAME );
+	$scheme->init();
 
 	// enable components
 	$scheme->enable_component( 'feature' );
