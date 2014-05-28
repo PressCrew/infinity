@@ -128,7 +128,7 @@ final class ICE_Scheme extends ICE_Base
 		$this->root_theme = get_template();
 
 		// load it
-		$this->load();
+		$this->load( ICE_ACTIVE_THEME );
 
 		// add filters
 		$this->add_filters();
@@ -223,14 +223,8 @@ final class ICE_Scheme extends ICE_Base
 	 * @param string $theme Theme's *directory name*
 	 * @return boolean
 	 */
-	public function load( $theme = null )
+	public function load( $theme )
 	{
-		// was a theme passed?
-		if ( empty( $theme ) ) {
-			// fall back to using active theme
-			$theme = ICE_ACTIVE_THEME;
-		}
-
 		// get path to config file
 		$config_file = $this->theme_config_file( $theme, $this->config_file );
 
