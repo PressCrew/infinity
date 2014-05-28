@@ -186,3 +186,37 @@ final class ICE_Loader extends ICE_Base
 	}
 
 }
+
+//
+// Helpers
+//
+
+/**
+ * Include an arbitrary file safely in an empty scope.
+ *
+ * @param string $filename
+ * @param boolean $once
+ */
+function ice_loader_safe_include( $filename, $once = true )
+{
+	if ( true === $once ) {
+		include_once $filename;
+	} else {
+		include $filename;
+	}
+}
+
+/**
+ * Require an arbitrary file safely in an empty scope.
+ *
+ * @param string $filename
+ * @param boolean $once
+ */
+function ice_loader_safe_require( $filename, $once = true )
+{
+	if ( true === $once ) {
+		require_once $filename;
+	} else {
+		require $filename;
+	}
+}
