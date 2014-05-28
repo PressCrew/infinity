@@ -9,8 +9,9 @@
  * @subpackage config
  */
 
-// The parent theme. Either 'infinity', or an ancestor of infinity
-$global['parent_theme'] = '';
+// The parent theme.
+// Your child theme should set this to either 'infinity', or an ancestor of infinity.
+ice_update_setting( INFINITY_NAME, 'parent_theme', null );
 
 // ---------------------------------------------------------------------
 // Asset files cascading preferences
@@ -18,20 +19,20 @@ $global['parent_theme'] = '';
 // and DO NOT have anything to do with automatic enqueueing.
 // ---------------------------------------------------------------------
 
-// The root image directory, relative to your theme root
+// The root image directory, relative to your theme root.
 // If your image directory is: wp-content/themes/my-theme/content/img
-// Then your image root would be: 'image_root' => 'content/img'
-$global['image_root'] = 'assets/images';
+// Then your image root would be: 'content/img'
+ice_update_setting( INFINITY_NAME, 'image_root',  'assets/images' );
 
-// The root style directory, relative to your theme root
+// The root style directory, relative to your theme root.
 // If your style directory is: wp-content/themes/my-theme/content/css
-// Then your style root would be: 'style_root' => 'content/css'
-$global['style_root'] = 'assets/css';
+// Then your style root would be: 'content/css'
+ice_update_setting( INFINITY_NAME, 'style_root',  'assets/css' );
 
-// The root script directory, relative to your theme root
+// The root script directory, relative to your theme root.
 // If your script directory is: wp-content/themes/my-theme/content/js
-// Then your script root would be: script_root = "content/js"
-$global['style_root'] = 'assets/js';
+// Then your script root would be: script_root = 'content/js'
+ice_update_setting( INFINITY_NAME, 'script_root',  'assets/js' );
 
 // ---------------------------------------------------------------------
 // jQuery UI preferences
@@ -40,7 +41,4 @@ $global['style_root'] = 'assets/js';
 
 // The default is to always show two save buttons.
 // Set this to false if you only want to show the "Save All" button.
-$global['options_save_single'] = true;
-
-// return config array to caller
-return $global;
+ice_update_setting( INFINITY_NAME, 'options_save_single', true );

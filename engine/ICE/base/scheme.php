@@ -230,56 +230,24 @@ final class ICE_Scheme extends ICE_Base
 
 		// does config file exist?
 		if ( is_readable( $config_file )  ) {
-			// parse it
-			$config = $this->parse_config_file( $config_file );
+			// load it
+			ice_loader_safe_require( $config_file );
 		} else {
-			// yipes, theme has no config file.
-			// assume that parent theme is the root theme
-			$config[self::SETTING_PARENT_THEME] = $this->root_theme;
+			// no config file found, assume root theme is parent
+			$this->settings->set( $theme, self::SETTING_PARENT_THEME, $this->root_theme );
 		}
 
-		// make sure we got something
-		if ( $config !== false ) {
+		// get parent theme
+		$parent_theme = $this->settings->get( $theme, self::SETTING_PARENT_THEME );
 
-			// parent theme?
-			$parent_theme =
-				isset( $config[self::SETTING_PARENT_THEME] )
-					? $config[self::SETTING_PARENT_THEME]
-					: false;
-
-			// recurse up the theme stack if necessary
-			if ( $parent_theme ) {
-				// load it
-				$this->load( $parent_theme );
-			}
-
-			// push onto the stack AFTER recursion
-			$this->themes[] = $theme;
-
-			// loop through config
-			foreach ( $config as $name => $value ) {
-				// apply setting for theme
-				$this->settings()->set( $theme, $name, $value );
-			}
-
-		} else {
-			throw new Exception( 'Failed to parse theme config file: ' . $config_file );
+		// is parent theme set?
+		if ( null !== $parent_theme ) {
+			// yes, recurse up the theme stack
+			$this->load( $parent_theme );
 		}
-	}
 
-	private function parse_config_file( $filename )
-	{
-		// try to load config array from file
-		$config = require_once( $filename );
-
-		// get a valid config?
-		if ( is_array( $config ) ) {
-			// yep, return it
-			return $config;
-		} else {
-			// not good, return empty array
-			return array();
-		}
+		// push onto the stack AFTER recursion
+		$this->themes[] = $theme;
 	}
 
 	/**
@@ -810,4 +778,32 @@ final class ICE_Scheme extends ICE_Base
 			return get_search_form( $echo );
 		}
 	}
+}
+
+//
+// Helpers
+//
+
+/**
+ * Get the value of a global setting.
+ *
+ * @param string $theme Theme name.
+ * @param string $name Setting name.
+ * @return mixed
+ */
+function ice_get_setting( $theme, $name )
+{
+	return ICE_Scheme::instance()->settings()->get( $theme, $name );
+}
+
+/**
+ * Set the value of a global setting.
+ *
+ * @param string $theme Theme name.
+ * @param string $name Setting name.
+ * @param mixed $value Setting value.
+ */
+function ice_update_setting( $theme, $name, $value )
+{
+	ICE_Scheme::instance()->settings()->set( $theme, $name, $value );
 }
