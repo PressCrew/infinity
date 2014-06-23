@@ -33,12 +33,3 @@ ice_update_setting( INFINITY_NAME, 'style_root',  'assets/css' );
 // If your script directory is: wp-content/themes/my-theme/content/js
 // Then your script root would be: script_root = 'content/js'
 ice_update_setting( INFINITY_NAME, 'script_root',  'assets/js' );
-
-// ---------------------------------------------------------------------
-// jQuery UI preferences
-// These settings affect the initialization and behavior of jQuery UI
-// ---------------------------------------------------------------------
-
-// The default is to always show two save buttons.
-// Set this to false if you only want to show the "Save All" button.
-ice_update_setting( INFINITY_NAME, 'options_save_single', true );

@@ -71,7 +71,7 @@ class ICE_Ext_Feature_Bp_Fb_Autoconnect
 		// determine if template should be rendered
 		if ( true === parent::renderable() ) {
 			// grab toggle option from registry
-			$opt_toggle = $this->get_suboption( 'toggle' );
+			$opt_toggle = $this->get_grouped( 'option', 'toggle' );
 			// check if toggle is on
 			if ( $opt_toggle && true == $opt_toggle->get() ) {
 				return true;

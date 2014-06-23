@@ -32,3 +32,18 @@ class ICE_Shortcode_Policy extends ICE_Policy
 		return ( $plural ) ? 'shortcodes' : 'shortcode';
 	}
 }
+
+//
+// Helpers
+//
+
+/**
+ * Register a shortcode.
+ *
+ * @param array $args
+ * @param array $defaults
+ */
+function ice_register_shortcode( $args, $defaults = array() )
+{
+	ICE_Policy::shortcodes()->registry()->register( $args, $defaults );
+}

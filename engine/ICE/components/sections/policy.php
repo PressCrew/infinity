@@ -40,3 +40,18 @@ class ICE_Section_Policy extends ICE_Policy
 		return new ICE_Section_Renderer( $this );
 	}
 }
+
+//
+// Helpers
+//
+
+/**
+ * Register a section.
+ *
+ * @param array $args
+ * @param array $defaults
+ */
+function ice_register_section( $args, $defaults = array() )
+{
+	ICE_Policy::sections()->registry()->register( $args, $defaults );
+}

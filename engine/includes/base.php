@@ -24,57 +24,47 @@ if ( is_admin() ) {
  */
 function infinity_base_features()
 {
-	// Core Support
-	add_theme_support( 'infinity-wp-support' );
-	add_theme_support( 'infinity-ext-support' );
-	add_theme_support( 'infinity-resp-support' );
-	
-	// WordPress Setup
+	// WordPress Support
 	add_theme_support( 'menus' );
 	add_theme_support( 'post-thumbnails' );
-	add_theme_support( 'infinity-sidebar-setup' );
-	add_theme_support( 'infinity-top-menu-setup' );
-	add_theme_support( 'infinity-main-menu-setup' );
-	add_theme_support( 'infinity-sub-menu-setup' );
-	add_theme_support( 'infinity-footer-menu-setup' );
-	add_theme_support( 'infinity-introduction-boxes' );
-	add_theme_support( 'infinity-post-avatars' );
-	add_theme_support( 'infinity-author-box' );
-	add_theme_support( 'infinity-pagination' );
+
+	// WordPress Setup
+	add_theme_support( 'infinity-post', 'intro-boxes', 'avatars', 'author-boxes', 'pagination' );
+	add_theme_support( 'infinity-wp', 'support', 'style' );
+	add_theme_support( 'infinity-base', 'script' );
 	
-	// Styles
-	add_theme_support( 'infinity-wp-style' );
-	add_theme_support( 'infinity-typog-style' );
-	add_theme_support( 'infinity-layout-style' );
-	add_theme_support( 'infinity-buttons-style' );
-	add_theme_support( 'infinity-design-style' );
-	add_theme_support( 'infinity-font-iconsweets' );
-	add_theme_support( 'infinity-icons-style' );
-	
-	// Scripts
-	add_theme_support( 'infinity-base-script' );
-	add_theme_support( 'infinity-responsive-menu' );
-	add_theme_support( 'infinity-responsive-videos' );
-	
-	// Options Features
-	add_theme_support( 'infinity-core-options' );
-	add_theme_support( 'infinity-body-layout' );
-	add_theme_support( 'infinity-header-logo' );
-	add_theme_support( 'infinity-header-layout' );
-	add_theme_support( 'infinity-sidebar-layout' );
-	add_theme_support( 'infinity-content-layout' );
-	add_theme_support( 'infinity-footer-layout' );
-	add_theme_support( 'infinity-main-menu-layout' );
-	add_theme_support( 'infinity-widget-layout' );
-	add_theme_support( 'infinity-sub-menu-layout' );
-	add_theme_support( 'infinity-top-menu-layout' );
-	add_theme_support( 'infinity-custom-css' );
+	// Fonts
+	add_theme_support( 'infinity-font', 'iconsweets' );
+
+	// Responsive Support
+	add_theme_support( 'infinity-resp', 'support', 'menu', 'videos' );
+
+	// Extension Layouts
+	add_theme_support( 'infinity-ext', 'support' );
+	add_theme_support( 'infinity-typog', 'style' );
+	add_theme_support( 'infinity-layout', 'style' );
+	add_theme_support( 'infinity-buttons', 'style' );
+	add_theme_support( 'infinity-design', 'style' );
+	add_theme_support( 'infinity-icons', 'style' );
+
+	// Extension Options
+	add_theme_support( 'infinity-header', 'layout' );
+	add_theme_support( 'infinity-header-logo', 'support' );
+	add_theme_support( 'infinity-sidebar', 'setup', 'layout' );
+	add_theme_support( 'infinity-top-menu', 'setup', 'layout' );
+	add_theme_support( 'infinity-main-menu', 'setup', 'layout' );
+	add_theme_support( 'infinity-sub-menu', 'setup', 'layout' );
+	add_theme_support( 'infinity-footer-menu', 'setup' );
+	add_theme_support( 'infinity-core', 'options' );
+	add_theme_support( 'infinity-body', 'layout' );
+	add_theme_support( 'infinity-content', 'layout' );
+	add_theme_support( 'infinity-footer', 'layout' );
+	add_theme_support( 'infinity-widget', 'layout' );
+	add_theme_support( 'infinity-custom', 'css' );
 	
 	// BuddyPress
-	add_theme_support( 'infinity-bp-support' );
-	add_theme_support( 'infinity-bp-style' );
-	add_theme_support( 'infinity-bp-fbconnect' );
-	add_theme_support( 'infinity-bp-sidebar-setup' );
+	add_theme_support( 'infinity-bp', 'support', 'style', 'sidebar-setup' );
+	add_theme_support( 'infinity-bp-fbconnect', 'support' );
 }
 add_action( 'after_setup_theme', 'infinity_base_features' );
 
@@ -205,16 +195,16 @@ add_action( 'comment_form_before', 'infinity_enqueue_comments_reply' );
  */
 function infinity_base_register_menus()
 {
-	if ( current_theme_supports( 'infinity-top-menu-setup' ) ) {
+	if ( current_theme_supports( 'infinity-top-menu', 'setup' ) ) {
 		register_nav_menu( 'over-menu', __( 'Above Header', 'infinity' ) );
 	}
-	if ( current_theme_supports( 'infinity-main-menu-setup' ) ) {
+	if ( current_theme_supports( 'infinity-main-menu', 'setup' ) ) {
 		register_nav_menu( 'main-menu', __( 'Inside Header', 'infinity' ) );
 	}
-	if ( current_theme_supports( 'infinity-sub-menu-setup' ) ) {
+	if ( current_theme_supports( 'infinity-sub-menu', 'setup' ) ) {
 		register_nav_menu( 'sub-menu', __( 'Below Header', 'infinity' ) );
 	}
-	if ( current_theme_supports( 'infinity-footer-menu-setup' ) ) {
+	if ( current_theme_supports( 'infinity-footer-menu', 'setup' ) ) {
 		register_nav_menu( 'footer-menu', __( 'Inside Footer', 'infinity' ) );
 	}
 }
@@ -361,7 +351,7 @@ function infinity_base_paginate()
    global $wp_query, $wp_rewrite;
 
    // is pagination feature enabled?
-   if ( false == current_theme_supports( 'infinity-pagination' ) ) {
+   if ( false == current_theme_supports( 'infinity-post', 'pagination' ) ) {
 	   // not enabled, abort
 	   return;
    }

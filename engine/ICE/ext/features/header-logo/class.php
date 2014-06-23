@@ -60,7 +60,7 @@ class ICE_Ext_Feature_Header_Logo
 		// check parent
 		if ( true === parent::renderable() ) {
 			// get toggle option
-			$opt_toggle = (boolean) $this->get_suboption('toggle')->get();
+			$opt_toggle = (boolean) $this->get_grouped( 'option', 'toggle' )->get();
 			// enabled?
 			if ( true === $opt_toggle ) {
 				// yep, check image url
@@ -81,7 +81,7 @@ class ICE_Ext_Feature_Header_Logo
 	 */
 	public function image_url()
 	{
-		$src = $this->get_suboption('image')->get_image_src('full');
+		$src = $this->get_grouped( 'option', 'image' )->get_image_src('full');
 
 		return ( isset($src[0]) ) ? $src[0] : null;
 	}
@@ -98,11 +98,11 @@ class ICE_Ext_Feature_Header_Logo
 		}
 
 		// options
-		$opt_upload = $this->get_suboption('image');
-		$opt_pos = $this->get_suboption('pos')->get();
-		$opt_top = $this->get_suboption('top')->get();
-		$opt_left = $this->get_suboption('left')->get();
-		$opt_right = $this->get_suboption('right')->get();
+		$opt_upload = $this->get_grouped( 'option', 'image' );
+		$opt_pos = $this->get_grouped( 'option', 'pos' )->get();
+		$opt_top = $this->get_grouped( 'option', 'top' )->get();
+		$opt_left = $this->get_grouped( 'option', 'left' )->get();
+		$opt_right = $this->get_grouped( 'option', 'right' )->get();
 
 		// get attachment image data
 		$data = $opt_upload->get_image_src( 'full' );

@@ -40,3 +40,19 @@ class ICE_Feature_Policy extends ICE_Policy
 		return new ICE_Feature_Registry( $this );
 	}
 }
+
+
+//
+// Helpers
+//
+
+/**
+ * Register a feature.
+ *
+ * @param array $args
+ * @param array $defaults
+ */
+function ice_register_feature( $args, $defaults = array() )
+{
+	ICE_Policy::features()->registry()->register( $args, $defaults );
+}

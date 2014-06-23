@@ -77,7 +77,7 @@ class ICE_Ext_Feature_Echo
 			// grab option name
 			$option_name = $this->__actions__[ $filter ];
 			// get content from sub option
-			$this->__content__ = $this->get_suboption( $option_name )->get();
+			$this->__content__ = $this->get_grouped( 'option', $option_name )->get();
 		} else {
 			// get content from template method
 			$this->__content__ = $this->get_fallback_content();

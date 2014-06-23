@@ -30,13 +30,13 @@
 				<div id="footer-info" class="column ten">
 				<?php
 					// Load Footer Menu only if it's enabled
-					if ( current_theme_supports( 'infinity-footer-menu-setup' ) ) :
+					if ( current_theme_supports( 'infinity-footer-menu', 'setup' ) ) :
 						get_template_part( 'templates/parts/footer-menu', 'footer' );
 					endif;
 				?>
 				</div>
 				<div id="copyright-info" class="column six">	
-					<?php echo infinity_option_get( 'infinity-core-options.footer-text' ); ?>
+					<?php echo infinity_option_get( 'infinity-core.footer-text' ); ?>
 				</div>
 			</div>
 			<?php

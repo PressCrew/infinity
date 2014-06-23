@@ -25,11 +25,11 @@
 function infinity_base_widgets_setup()
 {
 	// sidebars enabled?
-	if ( current_theme_supports( 'infinity-sidebar-setup' ) ) {
+	if ( current_theme_supports( 'infinity-sidebar', 'setup' ) ) {
 		// yep, register base sidebars
 		infinity_base_register_sidebars();
 		// BuddyPress sidebars enabled?
-		if ( current_theme_supports( 'infinity-bp-sidebar-setup' ) ) {
+		if ( current_theme_supports( 'infinity-bp', 'sidebar-setup' ) ) {
 			// yep, register BP sidebars
 			infinity_base_register_bp_sidebars();
 		}
@@ -192,7 +192,7 @@ function infinity_base_sidebar( $index, $admin_text )
 function infinity_base_sidebars()
 {
 	// is sidebar setup toggled on?
-	if ( current_theme_supports( 'infinity-sidebar-setup' ) ) {
+	if ( current_theme_supports( 'infinity-sidebar', 'setup' ) ) {
 
 		// show global sidebar (always try to load this one)
 		infinity_base_sidebar( 'sitewide-sidebar', 'Sitewide Sidebar' );
@@ -204,7 +204,7 @@ function infinity_base_sidebars()
 
 	// is BP sidebar feature toggled on?
 	if (
-		current_theme_supports( 'infinity-bp-sidebar-setup' ) &&
+		current_theme_supports( 'infinity-bp', 'sidebar-setup' ) &&
 		function_exists( 'bp_is_user' ) &&
 		function_exists( 'bp_is_current_component' ) &&
 		is_page()

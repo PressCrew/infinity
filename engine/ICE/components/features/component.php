@@ -30,8 +30,8 @@ abstract class ICE_Feature
 	 * @return boolean
 	 */
 	public function check_support()
-	{
-		if ( !current_theme_supports( $this->get_name() ) ) {
+	{		
+		if ( false === current_theme_supports( $this->get_group(), $this->get_name() ) ) {
 			return false;
 		}
 

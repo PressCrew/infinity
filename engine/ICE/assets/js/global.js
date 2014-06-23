@@ -110,10 +110,6 @@
 				var $option = $(this),
 					$form = $option.closest('form');
 
-				// save all button
-				$('a.ice-options-save-all', $option)
-					.button({icons: {primary: "ui-icon-arrowthick-2-n-s"}});
-					
 				// save one button
 				$('a.ice-options-save-one', $option)
 					.button({icons: {primary: "ui-icon-arrowthick-1-e"}});
@@ -141,7 +137,7 @@
 					// form data
 					var data =
 						'action=' + action +
-						'&option_names=' + opt_name +
+						'&option_name=' + opt_name +
 						'&option_reset=' + new Number( opt_reset ) +
 						'&' + $form.serialize()
 

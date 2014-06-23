@@ -162,20 +162,23 @@ class ICE_Upgrade_1_2 extends ICE_Upgrade_1_1
 		// old api names array
 		$api_names = array();
 
-		// loop all options
-		foreach( $registry->get_all() as $option ) {
-			// get deprecated api name
-			$api_name = ICE_Compat_Option::get_api_name( $option );
-			// get old value
-			$old_value = get_option( $api_name );
-			// get a value?
-			if ( false !== $old_value ) {
-				// yes, get option name
-				$name = $option->get_name();
-				// push onto new values
-				$new_values[ $name ] = $old_value;
-				// push onto api names
-				$api_names[] = $api_name;
+		// loop all option groups
+		foreach( $registry->get_all() as $options ) {
+			// loop all options
+			foreach( $options as $option ) {
+				// get deprecated api name
+				$api_name = ICE_Compat_Option::get_api_name( $option );
+				// get old value
+				$old_value = get_option( $api_name );
+				// get a value?
+				if ( false !== $old_value ) {
+					// yes, get option name
+					$name = $option->get_name();
+					// push onto new values
+					$new_values[ $name ] = $old_value;
+					// push onto api names
+					$api_names[] = $api_name;
+				}
 			}
 		}
 		

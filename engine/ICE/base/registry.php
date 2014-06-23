@@ -31,14 +31,24 @@ class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	const DEFAULT_TYPE = 'default';
 
 	/**
-	 * Sub option delimeter
+	 * Component group to use when none configured.
 	 */
-	const SUB_OPTION_DELIM = '.';
+	const DEFAULT_GROUP = 'default';
 
 	/**
-	 * Sub option glue
+	 * Sub item delimeter.
 	 */
-	const SUB_OPTION_GLUE = '_';
+	const SUB_ITEM_DELIM = '.';
+
+	/**
+	 * Array of valid component groups.
+	 *
+	 * @var array
+	 */
+	static private $groups =
+		array(
+			'default' => true
+		);
 
 	/**
 	 * Registered components array
@@ -55,11 +65,70 @@ class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	private $settings = array();
 
 	/**
+	 * Theme support callback.
+	 *
+	 * @param bool $supported Defaults to true.
+	 * @param array $args Additional args passed to current_theme_supports().
+	 * @param array $features Array passed to add_theme_support().
+	 * @return bool
+	 */
+	static public function supports( $supported, $args, $features )
+	{
+		// make sure supported up to this point
+		if ( true === $supported ) {
+			// get values from args that aren't in features
+			$diff = array_diff( $args, $features );
+			// empty diff means all args supported
+			return empty( $diff );
+		}
+
+		// no supported
+		return false;
+	}
+
+	/**
+	 * Add a component group.
+	 * 
+	 * @param string $name
+	 */
+	static public function add_group( $name )
+	{
+		// does name match valid format?
+		if ( 1 === preg_match( '/^([a-z0-9]+[-]?)*[a-z0-9]+$/', $name ) ) {
+			// yes, add to valid groups
+			self::$groups[ $name ] = true;
+			// add dynamic supports filter
+			add_filter( 'current_theme_supports-' . $name, array('ICE_Registry','supports'), 10, 3 );
+		} else {
+			throw new Exception( sprintf(
+				'The group name "%s" does not match the allowed pattern', $name
+			));
+		}
+	}
+
+	/**
+	 * Returns true if given group name exists.
+	 *
+	 * @param string $name
+	 * @return boolean
+	 */
+	public function is_group( $name )
+	{
+		// is name a key in the groups array?
+		return isset( self::$groups[ $name ] );
+	}
+
+	/**
 	 */
 	public function accept( ICE_Visitor $visitor )
 	{
-		foreach ( $this->components as $component ) {
-			$component->accept( $visitor );
+		// loop all grouped components
+		foreach ( $this->components as $group_components ) {
+			// loop all components
+			foreach ( $group_components as $component ) {
+				// call accept
+				$component->accept( $visitor );
+			}
 		}
 	}
 
@@ -68,26 +137,14 @@ class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	 */
 	public function init()
 	{
-		// loop all components
-		foreach ( $this->get_all() as $component ) {
-			// call init on each one
-			$component->init();
+		// loop all grouped components
+		foreach ( $this->components as $group_components ) {
+			// loop all components
+			foreach ( $group_components as $component ) {
+				// call init on each one
+				$component->init();
+			}
 		}
-	}
-
-	/**
-	 * Normalize a component name which may have "dots" in it
-	 *
-	 * @param string $name
-	 * @return string
-	 */
-	final protected function normalize_name( $name )
-	{
-		if ( strpos( $name, self::SUB_OPTION_DELIM ) !== false ) {
-			return str_replace( self::SUB_OPTION_DELIM, self::SUB_OPTION_GLUE, $name );
-		}
-
-		return $name;
 	}
 
 	/**
@@ -97,17 +154,17 @@ class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	 * @param array $settings
 	 * @return string
 	 */
-	private function substitute( $key, &$settings )
+	private function substitute( $key, $settings )
 	{
 		// loop all settings
-		foreach( $settings as $skey => &$sval ) {
+		foreach( $settings as $skey => $sval ) {
 			// only scalar values can be injected into strings safely
 			if ( true === is_scalar( $sval ) ) {
 				// wrap key with delim
 				$search[] = '%' . $skey . '%';
 			}
 		}
-		
+
 		// replace it
 		return str_replace( $search, $settings, $settings[ $key ] );
 	}
@@ -118,16 +175,21 @@ class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	private function substitute_all()
 	{
 		// subject keys to replace value of
-		$keys = array( 'parent', 'title', 'description', 'linked_image' );
+		$keys = array( 'title', 'description', 'linked_image' );
 
-		// loop all registered settings
-		foreach ( $this->settings as &$settings ) {
-			// loop all keys
-			foreach( $keys as $key ) {
-				// is key set in settings?
-				if ( true === isset( $settings[ $key ] ) ) {
-					// yep, attempt to substitute
-					$settings[ $key ] = $this->substitute( $key, $settings );
+		// loop all grouped settings
+		foreach ( $this->settings as $group => $group_settings ) {
+			// loop all settings
+			foreach ( $group_settings as $name => $settings ) {
+				// reduce settings to only scalars
+				$scalar_settings = array_filter( $settings, 'is_scalar' );
+				// loop all keys
+				foreach( $keys as $key ) {
+					// is key set in settings?
+					if ( true === isset( $scalar_settings[ $key ] ) ) {
+						// yep, attempt to substitute
+						$this->settings[ $group ][ $name ][ $key ] = $this->substitute( $key, $scalar_settings );
+					}
 				}
 			}
 		}
@@ -137,32 +199,28 @@ class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	 * Returns true if a component has been registered
 	 *
 	 * @param string $name
+	 * @param string $group
 	 * @return boolean
 	 */
-	final public function has( $name )
+	final public function has( $name, $group = self::DEFAULT_GROUP )
 	{
-		// normalize name
-		$name = $this->normalize_name( $name );
-
-		// call contains method of map class
-		return isset( $this->components[ $name ] );
+		// is name registered for given group?
+		return isset( $this->components[ $group ][ $name ] );
 	}
 
 	/**
-	 * Return a registered component object by name
+	 * Return a registered component object by name and optionally group.
 	 *
 	 * @param string $name
+	 * @param string $group
 	 * @return ICE_Component
 	 */
-	final public function get( $name )
+	final public function get( $name, $group = self::DEFAULT_GROUP )
 	{
-		// normalize name
-		$name = $this->normalize_name( $name );
-
-		// check registry
-		if ( isset( $this->components[ $name ] ) ) {
-			// from top of stack
-			return $this->components[ $name ];
+		// are both group and name keys set?
+		if ( true === isset( $this->components[ $group ][ $name ] ) ) {
+			// yes, return component at those keys
+			return $this->components[ $group ][ $name ];
 		}
 
 		// didn't find it
@@ -170,14 +228,38 @@ class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	}
 
 	/**
-	 * Return all registered components as an array
+	 * Get component by passing [group].[name] syntax.
 	 *
+	 * @param string $name
+	 * @return ICE_Component
+	 */
+	final public function get_fancy( $name )
+	{
+		$parts = explode( self::SUB_ITEM_DELIM, $name );
+
+		if ( count( $parts ) > 1 ) {
+			return $this->get( $parts[1], $parts[0] );
+		} else {
+			return $this->get( $name );
+		}
+	}
+
+	/**
+	 * Return all registered components as an array, optionally limited to a specific group.
+	 *
+	 * @param string $group
 	 * @return array
 	 */
-	final public function get_all()
+	final public function get_all( $group = null )
 	{
-		// return all components
-		return $this->components;
+		// is group null?
+		if ( null === $group ) {
+			// yes, return all components
+			return $this->components;
+		} else {
+			// return only for specific group
+			return $this->components[ $group ];
+		}
 	}
 
 	/**
@@ -193,10 +275,15 @@ class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 		// the components that will be returned
 		$components = array();
 
-		// find all registered component where parent is the target component
-		foreach ( $this->get_all() as $component_i ) {
-			if ( $component->is_parent_of( $component_i ) ) {
-				$components[] = $component_i;
+		// loop all grouped components
+		foreach ( $this->components as $group_components ) {
+			// loop all components
+			foreach ( $group_components as $component_i ) {
+				// is given component parent of this one?
+				if ( $component->is_parent_of( $component_i ) ) {
+					// yes, push onto stack
+					$components[] = $component_i;
+				}
 			}
 		}
 
@@ -216,14 +303,17 @@ class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 		// components to be returned
 		$components = array();
 
-		// loop through all registered components
-		foreach ( $this->get_all() as $component ) {
-			// components must NOT have a parent set
-			if ( null === $component->get_property( 'parent' ) ) {
-				// filter on component names
-				if ( empty( $component_names ) || in_array( $component->get_name(), $component_names, true ) ) {
-					// append to return array
-					$components[] = $component;
+		// loop all grouped components
+		foreach ( $this->components as $group_components ) {
+			// loop all components
+			foreach ( $group_components as $component ) {
+				// components must NOT have a parent set
+				if ( null === $component->get_property( 'parent' ) ) {
+					// filter on component names
+					if ( empty( $component_names ) || in_array( $component->get_name(), $component_names, true ) ) {
+						// append to return array
+						$components[] = $component;
+					}
 				}
 			}
 		}
@@ -232,18 +322,19 @@ class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	}
 
 	/**
-	 * Return the value of a setting for the given item name.
+	 * Return the value of a setting for the given item name and optionally group.
 	 *
-	 * @param string $name
 	 * @param string $setting
+	 * @param string $name
+	 * @param string $group
 	 * @return mixed
 	 */
-	public function get_setting( $name, $setting )
+	public function get_setting( $setting, $name, $group = self::DEFAULT_GROUP )
 	{
 		// is setting set?
-		if ( isset( $this->settings[ $name ][ $setting ] ) ) {
+		if ( isset( $this->settings[ $group ][ $name ][ $setting ] ) ) {
 			// yep, return it
-			return $this->settings[ $name ][ $setting ];
+			return $this->settings[ $group ][ $name ][ $setting ];
 		}
 
 		// return null by default
@@ -251,17 +342,18 @@ class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	}
 
 	/**
-	 * Return the entire settings stack for the given item name.
+	 * Return the entire settings stack for the given item name, and optionally group name.
 	 *
 	 * @param string $name
+	 * @param string $group
 	 * @return array
 	 */
-	public function get_settings( $name )
+	public function get_settings( $name, $group = self::DEFAULT_GROUP )
 	{
 		// any settings set?
-		if ( isset( $this->settings[ $name ] ) ) {
+		if ( isset( $this->settings[ $group ][ $name ] ) ) {
 			// yep, return it
-			return $this->settings[ $name ];
+			return $this->settings[ $group ][ $name ];
 		}
 
 		// return empty array by default
@@ -281,12 +373,51 @@ class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	/**
 	 * Register a component's settings.
 	 *
-	 * @param string $name
-	 * @param array $settings
+	 * @param array $args
 	 * @return boolean
 	 */
-	public function register( $name, $settings )
+	final public function register( $args, $defaults = array() )
 	{
+		// merge args over defaults to get final settings
+		$settings = array_merge( $defaults, $args );
+
+		// does component have a name set?
+		if ( true === isset( $settings[ 'name' ] ) ) {
+			// yes, but does name match required format?
+			if ( 1 === preg_match( '/^[a-z][a-z0-9]*(-[a-z0-9]+)*$/', $settings[ 'name' ] ) ) {
+				// yep, set it
+				$name = $settings[ 'name' ];
+			} else {
+				// invalid name
+				throw new Exception( sprintf(
+					'The %s name "%s" does not match the allowed pattern.',
+					$this->_policy->get_handle(), $settings[ 'name' ]
+				));
+			}
+		} else {
+			// missing name
+			throw new Exception( sprintf(
+				'The "name" setting is missing for a %s component.',
+				$this->_policy->get_handle()
+			));
+		}
+
+		// does component have a group set?
+		if ( true === isset( $settings[ 'group' ] ) ) {
+			// yep, but is it valid?
+			if ( true === $this->is_group( $settings[ 'group' ] ) ) {
+				// yep, use it!
+				$group = $settings[ 'group' ];
+			} else {
+				// developer error, throw exception
+				throw new Exception( sprintf(
+					'The component group "%s" does not exit.', $settings[ 'group' ]
+				));
+			}
+		} else {
+			$group = $settings[ 'group' ] = self::DEFAULT_GROUP;
+		}
+
 		// COMPAT check for ignore setting
 		if ( isset( $settings[ 'ignore' ] ) ) {
 			// is debug on?
@@ -298,18 +429,18 @@ class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 				return true;
 			}
 		}
-
+		
 		// does component have config already?
-		if ( isset( $this->settings[ $name ] ) ) {
+		if ( isset( $this->settings[ $group ][ $name ] ) ) {
 			// yep, merge over existing settings
-			$this->settings[ $name ] =
+			$this->settings[ $group ][ $name ] =
 				array_merge(
-					$this->settings[ $name ],
+					$this->settings[ $group ][ $name ],
 					$settings
 				);
 		} else {
 			// nope, just assign it
-			$this->settings[ $name ] = $settings;
+			$this->settings[ $group ][ $name ] = $settings;
 		}
 
 		// config loaded
@@ -319,21 +450,16 @@ class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	/**
 	 * Create and return a component.
 	 *
-	 * @param string $comp_name
+	 * @param string $name
 	 * @param string $type
 	 * @return ICE_Component|boolean
 	 */
-	protected function create_component( $comp_name, $type )
+	protected function create_component( $name, $group, $type = self::DEFAULT_TYPE )
 	{
-		// set default type if necessary
-		if ( empty( $type ) ) {
-			$type = self::DEFAULT_TYPE;
-		}
-
 		// try to create component
 		try {
 			// call extensions create method
-			return $this->_policy->extensions()->create( $type, $comp_name );
+			return $this->_policy->extensions()->create( $type, $name, $group );
 		// catch enviro exception
 		} catch ( ICE_Environment_Exception $e ) {
 			// create failed
@@ -348,38 +474,32 @@ class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	 */
 	private function create_components()
 	{
-		// loop all component configurations.
-		foreach( $this->settings as $comp_name => &$settings ) {
+		// loop all grouped settings
+		foreach( $this->settings as $group => $group_settings ) {
 
-			// check if already registered
-			if ( false === $this->has( $comp_name ) ) {
+			// loop all settings
+			foreach( $group_settings as $name => $settings ) {
 
-				// is a feature set?
-				if ( isset( $settings['feature'] ) ) {
-					// try to grab defaults
-					$defaults_array = $this->_policy->features()->registry()->get_suboption_defaults( $settings['feature'] );
-					// get any defaults?
-					if ( !empty( $defaults_array ) ) {
-						// merge config *ON TOP OF* defaults
-						$settings = array_merge( $defaults_array, $settings );
+				// check if already registered
+				if ( false === isset( $this->components[ $group ][ $name ] ) ) {
+		
+					// create new component
+					$component = $this->create_component( $name, $settings['group'], $settings['type'] );
+
+					// get a component?
+					if ( $component instanceof ICE_Component ) {
+						// add to components stack
+						$this->components[ $group ][ $name ] = $component;
 					}
+
+				} else {
+					// component already registered, not good!
+					throw new OverflowException(
+						sprintf( 'The "%s" component cannot be created twice.', $name )
+					);
 				}
-
-				// create new component
-				$component = $this->create_component( $comp_name, $settings['type'] );
-
-				// get a component?
-				if ( $component instanceof ICE_Component ) {
-					// add to components stack
-					$this->components[ $comp_name ] = $component;
-				}
-
-			} else {
-				// component already registered, not good!
-				throw new OverflowException(
-					sprintf( 'The "%s" component cannot be created twice.', $comp_name )
-				);
 			}
+
 		}
 
 		// all done
@@ -397,26 +517,30 @@ class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 		// call component creator
 		$this->create_components();
 
-		// loop all components
-		foreach ( $this->components as $component ) {
-			// finalize it
-			$component->finalize();
+		// loop all component groups
+		foreach ( $this->components as $group_components ) {
+			// loop all components
+			foreach( $group_components as $component ) {
+				// finalize it
+				$component->finalize();
+			}
 		}
 
 		// initialize the response on the "init" action
 		add_action( 'ice_init', array( $this, 'init' ) );
 	}
+}
 
-	/**
-	 * Format a suboption using the glue string
-	 *
-	 * @param string $comp_name
-	 * @param string $option_name
-	 * @return string
-	 */
-	final static public function format_suboption( $comp_name, $option_name )
-	{
-		// join the two strings with the glue character
-		return $comp_name . self::SUB_OPTION_GLUE . $option_name;
-	}
+//
+// Helpers
+//
+
+/**
+ * Register a component group.
+ *
+ * @param string $name
+ */
+function ice_register_group( $name )
+{
+	ICE_Registry::add_group( $name );
 }

@@ -17,7 +17,7 @@
 <div class="top-wrap row <?php do_action( 'top_wrap_class' ); ?>">
 	<?php
 		// Load Top Menu only if it's enabled
-		if ( current_theme_supports( 'infinity-top-menu-setup' ) ) :
+		if ( current_theme_supports( 'infinity-top-menu', 'setup' ) ) :
 		get_template_part( 'templates/parts/top-menu', 'header' );
 		endif;
 	?>
@@ -26,7 +26,7 @@
 		<div id="logo-menu-wrap">
 			<?php
 				do_action( 'open_header' );
-				if ( !infinity_feature( 'infinity-header-logo' ) ):
+				if ( !infinity_feature( 'support', 'infinity-header-logo' ) ):
 			?>
 			<?php
 				$heading_tag = ( is_home() || is_front_page() ) ? 'h1' : 'div';
@@ -38,7 +38,7 @@
 			<?php
 				endif;
 				// Load Main Menu only if it's enabled
-				if ( current_theme_supports( 'infinity-main-menu-setup' ) ) :
+				if ( current_theme_supports( 'infinity-main-menu', 'setup' ) ) :
 				get_template_part( 'templates/parts/main-menu', 'header' );
 				endif;
 				do_action( 'close_header' );
@@ -47,7 +47,7 @@
 	</header><!-- end header -->
 	<?php
 		// Load Sub Menu only if it's enabled
-		if ( current_theme_supports( 'infinity-sub-menu-setup' ) ) :
+		if ( current_theme_supports( 'infinity-sub-menu', 'setup' ) ) :
 			get_template_part( 'templates/parts/sub-menu', 'header' );
 		endif;
 	?>

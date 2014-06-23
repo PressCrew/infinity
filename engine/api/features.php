@@ -26,16 +26,16 @@ ICE_Loader::load(
  *
  * @package Infinity-api
  * @subpackage features
- * @param string $feature_name
- * @param boolean $output
- * @return string|false
+ * @param string $name
+ * @param string $group
+ * @return void|false
  */
-function infinity_feature( $feature_name, $output = true )
+function infinity_feature( $name, $group = 'default' )
 {
 	// is feature supported?
-	if ( current_theme_supports( $feature_name ) ) {
+	if ( current_theme_supports( $group, $name ) ) {
 		// yes, render it
-		return ICE_Policy::features()->registry()->get($feature_name)->render( $output );
+		return ICE_Policy::features()->registry()->get( $name, $group )->render();
 	} else {
 		// not supported
 		return false;
@@ -47,15 +47,16 @@ function infinity_feature( $feature_name, $output = true )
  *
  * @package Infinity-api
  * @subpackage features
- * @param string $feature_name
+ * @param string $name
+ * @param string $group
  * @return ICE_Feature|false
  */
-function infinity_feature_fetch( $feature_name )
+function infinity_feature_fetch( $name, $group = 'default' )
 {
 	// is feature supported?
-	if ( current_theme_supports( $feature_name ) ) {
-		// yes, return it
-		return ICE_Policy::features()->registry()->get($feature_name);
+	if ( current_theme_supports( $group, $name ) ) {
+		// yes, render it
+		return ICE_Policy::features()->registry()->get( $name, $group );
 	} else {
 		// not supported
 		return false;

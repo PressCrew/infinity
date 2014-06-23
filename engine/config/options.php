@@ -11,9 +11,9 @@
 
 // See options.examples.php for more advanced configuration examples
 
-//$this->register(
-//	'example',
+//ice_register_option(
 //	array(
+//		'name' => 'example',
 //		'type' => 'text',
 //		'section' => 'general',
 //		'title' => 'Short description',

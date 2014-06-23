@@ -10,7 +10,8 @@
  */
 
 // register cpanel section extension
-$this->policy()->extensions()->register(
+ice_register_extension(
+	'section',
 	'cpanel',
 	array(
 		'path' => INFINITY_ENGINE_PATH . '/extensions/sections/cpanel',
@@ -19,132 +20,132 @@ $this->policy()->extensions()->register(
 	)
 );
 
-$this->register(
-	'general',
+ice_register_section(
 	array(
+		'name' => 'general',
 		'type' => 'cpanel',
 		'title' => 'General'
 	)
 );
 
-$this->register(
-	'global',
+ice_register_section(
 	array(
+		'name' => 'global',
 		'type' => 'cpanel',
 		'title' => 'Global'
 	)
 );
 
-$this->register(
-	'custom',
+ice_register_section(
 	array(
+		'name' => 'custom',
 		'type' => 'cpanel',
 		'title' => 'Custom'
 	)
 );
 
-$this->register(
-	'layout',
+ice_register_section(
 	array(
+		'name' => 'layout',
 		'type' => 'cpanel',
 		'title' => 'Layout'
 	)
 );
 
-$this->register(
-	'header',
+ice_register_section(
 	array(
+		'name' => 'header',
 		'type' => 'cpanel',
 		'title' => 'Header'
 	)
 );
 
-$this->register(
-	'menus',
+ice_register_section(
 	array(
+		'name' => 'menus',
 		'type' => 'cpanel',
 		'title' => 'Menus'
 	)
 );
 
-$this->register(
-	'menus-top',
+ice_register_section(
 	array(
+		'name' => 'menus-top',
 		'type' => 'cpanel',
 		'parent' => 'menus',
 		'title' => 'Above Header'
 	)
 );
 
-$this->register(
-	'menus-main',
+ice_register_section(
 	array(
+		'name' => 'menus-main',
 		'type' => 'cpanel',
 		'parent' => 'menus',
 		'title' => 'Inside Header'
 	)
 );
 
-$this->register(
-	'menus-sub',
+ice_register_section(
 	array(
+		'name' => 'menus-sub',
 		'type' => 'cpanel',
 		'parent' => 'menus',
 		'title' => 'Below Header'
 	)
 );
 
-$this->register(
-	'content',
+ice_register_section(
 	array(
+		'name' => 'content',
 		'type' => 'cpanel',
 		'title' => 'Content'
 	)
 );
 
-$this->register(
-	'sidebar',
+ice_register_section(
 	array(
+		'name' => 'sidebar',
 		'type' => 'cpanel',
 		'title' => 'Sidebar'
 	)
 );
 
-$this->register(
-	'widgets',
+ice_register_section(
 	array(
+		'name' => 'widgets',
 		'type' => 'cpanel',
 		'title' => 'Widgets'
 	)
 );
 
-$this->register(
-	'footer',
+ice_register_section(
 	array(
+		'name' => 'footer',
 		'type' => 'cpanel',
 		'title' => 'Footer'
 	)
 );
 
-$this->register(
-	'buddypress',
+ice_register_section(
 	array(
+		'name' => 'buddypress',
 		'type' => 'cpanel',
 		'title' => 'BuddyPress'
 	)
 );
 
-$this->register(
-	'whitelabel',
+ice_register_section(
 	array(
+		'name' => 'whitelabel',
 		'type' => 'cpanel',
 		'title' => 'White Label'
 	)
 );
 
-$this->register(
-	'gravatars',
+ice_register_section(
 	array(
+		'name' => 'gravatars',
 		'type' => 'cpanel',
 		'title' => 'Post Gravatars'
 	)
@@ -152,9 +153,9 @@ $this->register(
 
 // Fall Back
 
-$this->register(
-	'default',
+ice_register_section(
 	array(
+		'name' => 'default',
 		'type' => 'cpanel',
 		'title' => 'Other'
 	)

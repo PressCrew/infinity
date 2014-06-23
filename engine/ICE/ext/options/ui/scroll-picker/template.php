@@ -35,7 +35,7 @@
 //<![CDATA[
 	jQuery(document).ready(function($){
 		// the input
-		var input = $('input[name=<?php $this->render_name() ?>]');
+		var input = $('input[name="<?php $this->render_name() ?>"]');
 		// options from component
 		var options = <?php print $scroll_options ?>;
 		// add application options

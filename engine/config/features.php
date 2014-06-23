@@ -12,1380 +12,1640 @@
  */
 
 // overlay image defaults
-$overlay_image = array(
+$overlay_image_defaults = array(
 	'type' => 'css/overlay-image',
 	'file_directory' => 'assets/images/textures'
 );
 
-// Core WordPress Features
+//
+// Core Group
+//
+ice_register_group( 'infinity-core' );
 
-$this->register(
-	'infinity-core-sidebar-setup',
-	array(
-		'type' => 'default',
-		'title' => 'Sidebar Setup',
-		'description' => 'Sidebar Registration'
-	)
-);
-
-$this->register(
-	'infinity-top-menu-setup',
-	array(
-		'type' => 'default',
-		'title' => 'Above Header Menu Setup',
-		'description' => 'Register the menu above the header.'
-	)
-);
-
-$this->register(
-	'infinity-main-menu-setup',
-	array(
-		'type' => 'default',
-		'title' => 'Inside Header Menu Setup',
-		'description' => 'Register the menu inside the header.'
-	)
-);
-
-$this->register(
-	'infinity-sub-menu-setup',
-	array(
-		'type' => 'default',
-		'title' => 'Below Header Menu Setup',
-		'description' => 'Register the menu below the header.'
-	)
-);
-
-$this->register(
-	'infinity-footer-menu-setup',
-	array(
-		'type' => 'default',
-		'title' => 'Footer Menu Setup',
-		'description' => 'Register the footer menu.'
-	)
-);
-
-$this->register(
-	'infinity-pagination',
-	array(
-		'type' => 'default',
-		'title' => 'Pagination',
-		'description' => 'Enable pagination for your (custom) posts'
-	)
-);
-
-$this->register(
-	'infinity-post-avatars',
-	array(
-		'type' => 'default',
-		'title' => 'Post Avatars',
-		'description' => 'Enable Post avatars being displayed on single posts and pages'
-	)
-);
-
-$this->register(
-	'infinity-author-box',
-	array(
-		'type' => 'default',
-		'title' => 'Author Box',
-		'description' => 'Enable About the Author Boxes being displayed on single posts and author archives'
-	)
-);
-
-$this->register(
-	'infinity-introduction-boxes',
-	array(
-		'type' => 'default',
-		'title' => 'Introduction Boxes',
-		'description' => 'Introduction boxes that show above category, tag and author archives'
-	)
-);
-
-// Base Stylesheets
-
-$this->register(
-	'infinity-font-iconsweets',
-	array(
-		'type' => 'default',
-		'title' => 'The Icon Font-Face being used',
-		'description' => 'Icons',
-		'style' => 'assets/fonts/iconsweets.css'
-	)
-);
-
-$this->register(
-	'infinity-wp-support',
-	array(
-		'type' => 'default',
-		'title' => 'Wordpress Support',
-		'description' => 'Enables WordPress support',
-		'style' => 'assets/css/wordpress.css'
-	)
-);
-
-$this->register(
-	'infinity-bp-support',
-	array(
-		'type' => 'bp/support',
-		'title' => 'BuddyPress Support',
-		'description' => 'Enables BuddyPress support',
-		'style' => 'assets/css/buddypress.css'
-	)
-);
-
-$this->register(
-	'infinity-ext-support',
-	array(
-		'type' => 'default',
-		'title' => 'Extension Styles',
-		'description' => 'Enables extensions support',
-		'style' => 'assets/css/extensions.css'
-	)
-);
-
-$this->register(
-	'infinity-resp-support',
-	array(
-		'type' => 'responsive/layout',
-		'title' => 'Responsive Layout',
-		'description' => 'Enables responsive layout support',
-		'style' => 'assets/css/responsive.css'
-	)
-);
-
-// Base feature styling toggles
-
-$this->register(
-	'infinity-wp-style',
-	array(
-		'type' => 'default',
-		'title' => 'wordpress Styles',
-		'description' => 'The base WordPress styling',
-		'body_class' => 'infinity-wp'
-	)
-);
-
-$this->register(
-	'infinity-bp-style',
-	array(
-		'type' => 'default',
-		'title' => 'BuddyPress Styles',
-		'description' => 'The base BuddyPress styles',
-		'body_class' => 'infinity-bp'
-	)
-);
-
-$this->register(
-	'infinity-typog-style',
-	array(
-		'type' => 'default',
-		'title' => 'Typography Styles',
-		'description' => 'The base Typography styling',
-		'body_class' => 'infinity-typog'
-	)
-);
-
-$this->register(
-	'infinity-layout-style',
-	array(
-		'type' => 'default',
-		'title' => 'layout Styles',
-		'description' => 'The base layout styling',
-		'body_class' => 'infinity-layout'
-	)
-);
-
-$this->register(
-	'infinity-buttons-style',
-	array(
-		'type' => 'default',
-		'title' => 'extras Styles',
-		'description' => 'The base buttons styling',
-		'body_class' => 'infinity-btns'
-	)
-);
-
-$this->register(
-	'infinity-icons-style',
-	array(
-		'type' => 'default',
-		'title' => 'The Icons used across the theme',
-		'description' => 'Icons',
-		'body_class' => 'infinity-icons'
-	)
-);
-
-$this->register(
-	'infinity-design-style',
-	array(
-		'type' => 'default',
-		'title' => 'Design Styles',
-		'description' => 'The styles which fancy things up a bit',
-		'body_class' => 'infinity-design'
-	)
-);
-
-// Base Scripts
-
-$this->register(
-	'infinity-base-script',
-	array(
-		'type' => 'default',
-		'title' => 'Base Javascript',
-		'description' => 'Some jQuery to spice up the Base Theme',
-		'script' => 'assets/js/base.js',
-		'script_depends' => array(
-			'jquery'
+	// Global Options
+	ice_register_feature(
+		array(
+			'name' => 'options',
+			'group' => 'infinity-core',
+			'type' => 'default',
+			'title' => 'Custom CSS',
+			'description' => 'Core set of options included with Infinity Base'
 		)
-	)
-);
+	);
 
-$this->register(
-	'infinity-responsive-menu',
-	array(
-		'type' => 'responsive/menu',
-		'title' => 'Responsive Menu',
-		'description' => 'Enables the responsive menu javascript',
-		'target_selector' => '.sf-menu',
-		'switch_width' => 770,
-		'top_option_text' => 'Where to?',
-		'prepend_to' => 'div.mobile-menu-container'
-	)
-);
+		$infinity_core_options_defaults = array(
+			'group' => 'infinity-core',
+			'section' => 'global',
+			'required_feature' => 'options'
+		);
 
-$this->register(
-	'infinity-responsive-videos',
-	array(
-		'type' => 'responsive/videos',
-		'title' => 'Responsive Videos',
-		'description' => 'Enables the responsive videos javascript',
-		'target_selector' => '#wrapper'
-	)
-);
+		ice_register_option(
+			array(
+				'name' => 'text-color',
+				'type' => 'colorpicker',
+				'title' => 'Text Color',
+				'description' => 'Choose a text color',
+				'style_selector' => 'body.theme-option',
+				'style_property' => 'color'
+			),
+			$infinity_core_options_defaults
+		);
 
-// Global Options Feature
+		ice_register_option(
+			array(
+				'name' => 'link-color',
+				'type' => 'colorpicker',
+				'title' => 'Link Color',
+				'description' => 'Choose a link color',
+				'style_selector' => 'body.theme-option a, body.theme-option a:visited',
+				'style_property' => 'color'
+			),
+			$infinity_core_options_defaults
+		);
 
-$this->register(
-	'infinity-core-options',
-	array(
-		'type' => 'default',
-		'title' => 'Custom CSS',
-		'description' => 'Core set of options included with Infinity Base'
-	)
-);
+		ice_register_option(
+			array(
+				'name' => 'custom-favicon',
+				'type' => 'upload',
+				'title' => 'Site Favicon',
+				'description' => 'Upload a favicon for your site'
+			),
+			$infinity_core_options_defaults
+		);
 
-$this->register_suboption_defaults(
-	'infinity-core-options',
-	array(
-		'section' => 'global'
-	)
-);
+		ice_register_option(
+			array(
+				'name' => 'sidebar-position',
+				'section' => 'sidebar',
+				'title' => 'Sidebar Position',
+				'description' => 'Choose on which side you want to display the sidebar',
+				'type' => 'radio',
+				'default_value' => 'right',
+				'field_options' => array(
+					'left' => 'Left',
+					'right' => 'Right'
+				)
+			),
+			$infinity_core_options_defaults
+		);
 
-$this->register_suboption(
-	'infinity-core-options',
-	'text-color',
-	array(
-		'type' => 'colorpicker',
-		'title' => 'Text Color',
-		'description' => 'Choose a text color',
-		'style_selector' => 'body.theme-option',
-		'style_property' => 'color'
-	)
-);
+		ice_register_option(
+			array(
+				'name' => 'sidebar-size',
+				'section' => 'sidebar',
+				'title' => 'Sidebar Size',
+				'description' => 'Select a sidebar size',
+				'type' => 'select',
+				'default_value' => 'eleven',
+				'field_options' => array(
+					'fourteen' => '15 percent',
+					'thirteen' => '20 percent',
+					'twelve' => '25 percent',
+					'eleven' => '30 precent',
+					'ten' => '35 percent',
+					'nine' => '40 percent',
+					'eight' => '50 percent',
+					'disable' => 'Disable'
+				)
+			),
+			$infinity_core_options_defaults
+		);
 
-$this->register_suboption(
-	'infinity-core-options',
-	'link-color',
-	array(
-		'type' => 'colorpicker',
-		'title' => 'Link Color',
-		'description' => 'Choose a link color',
-		'style_selector' => 'body.theme-option a, body.theme-option a:visited',
-		'style_property' => 'color'
-	)
-);
+		ice_register_option(
+			array(
+				'name' => 'google-analytics',
+				'type' => 'textarea',
+				'title' => 'Google Analytics Code',
+				'description' => 'Paste your GA Tracking code in the text area below. Including the script tags!'
+			),
+			$infinity_core_options_defaults
+		);
 
-$this->register_suboption(
-	'infinity-core-options',
-	'custom-favicon',
-	array(
-		'type' => 'upload',
-		'title' => 'Site Favicon',
-		'description' => 'Upload a favicon for your site'
-	)
-);
+		ice_register_option(
+			array(
+				'name' => 'footer-text',
+				'section' => 'footer',
+				'type' => 'textarea',
+				'title' => 'Footer Text',
+				'description' => 'The footer text that appears at the bottom of every page, below the widgetized footer areas. This is commonly used for copyright, designed by, and powered by text. HTML tags are allowed.',
+				'default_value' => 'Infinity by <a href=http://infinity.presscrew.com>PressCrew</a> and powered by <a href=http://wordpress.org>WordPress</a>.'
+			),
+			$infinity_core_options_defaults
+		);
 
-$this->register_suboption(
-	'infinity-core-options',
-	'sidebar-position',
-	array(
-		'section' => 'sidebar',
-		'title' => 'Sidebar Position',
-		'description' => 'Choose on which side you want to display the sidebar',
-		'type' => 'radio',
-		'default_value' => 'right',
-		'field_options' => array(
-			'left' => 'Left',
-			'right' => 'Right'
+//
+// Top Menu Group
+//
+ice_register_group( 'infinity-top-menu' );
+
+	// Top Menu Setup
+	ice_register_feature(
+		array(
+			'name' => 'setup',
+			'group' => 'infinity-top-menu',
+			'type' => 'default',
+			'title' => 'Above Header Menu Setup',
+			'description' => 'Register the menu above the header.'
 		)
-	)
-);
+	);
 
-$this->register_suboption(
-	'infinity-core-options',
-	'sidebar-size',
-	array(
-		'section' => 'sidebar',
-		'title' => 'Sidebar Size',
-		'description' => 'Select a sidebar size',
-		'type' => 'select',
-		'default_value' => 'eleven',
-		'field_options' => array(
-			'fourteen' => '15 percent',
-			'thirteen' => '20 percent',
-			'twelve' => '25 percent',
-			'eleven' => '30 precent',
-			'ten' => '35 percent',
-			'nine' => '40 percent',
-			'eight' => '50 percent',
-			'disable' => 'Disable'
+	// Top Menu Layout
+	ice_register_feature(
+		array(
+			'name' => 'layout',
+			'group' => 'infinity-top-menu',
+			'type' => 'default',
+			'title' => 'Sub Menu Styles',
+			'description' => 'Customize the layout and colors of the menu above the header.'
 		)
-	)
-);
-
-$this->register_suboption(
-	'infinity-core-options',
-	'google-analytics',
-	array(
-		'type' => 'textarea',
-		'title' => 'Google Analytics Code',
-		'description' => 'Paste your GA Tracking code in the text area below. Including the script tags!'
-	)
-);
-
-$this->register_suboption(
-	'infinity-core-options',
-	'footer-text',
-	array(
-		'section' => 'footer',
-		'type' => 'textarea',
-		'title' => 'Footer Text',
-		'description' => 'The footer text that appears at the bottom of every page, below the widgetized footer areas. This is commonly used for copyright, designed by, and powered by text. HTML tags are allowed.',
-		'default_value' => 'Infinity by <a href=http://infinity.presscrew.com>PressCrew</a> and powered by <a href=http://wordpress.org>WordPress</a>.'
-	)
-);
-
-// Custom CSS Feature
-
-$this->register(
-	'infinity-custom-css',
-	array(
-		'type' => 'default',
-		'title' => 'Custom CSS',
-		'description' => 'Allow custom CSS to be provided with theme options'
-	)
-);
-
-$this->register_suboption(
-	'infinity-custom-css',
-	'markup',
-	array(
-		'section' => 'global',
-		'type' => 'css/custom',
-		'title' => 'Custom CSS',
-		'description' => 'Enter custom CSS markup to fine tune the look of your site'
-	)
-);
-
-// Body Layout Feature
-
-$this->register(
-	'infinity-body-layout',
-	array(
-		'type' => 'default',
-		'title' => 'Body Layout',
-		'description' => 'Change the Body according to your taste'
-	)
-);
-
-$this->register_suboption_defaults(
-	'infinity-body-layout',
-	array(
-		'section' => 'layout'
-	)
-);
-
-$this->register_suboption(
-	'infinity-body-layout',
-	'width',
-	array(
-		'type' => 'css/length-px',
-		'title' => 'Maximum Width',
-		'description' => 'Set the maximum width of the site\'s content between %min% and %max% pixels by moving the slider.',
-		'min' => 900,
-		'max' => 1250,
-		'step' => 10,
-		'style_selector' => '#wrapper',
-		'style_property' => 'max-width'
-	)
-);
-
-$this->register_suboption(
-	'infinity-body-layout',
-	'background-color',
-	array(
-		'type' => 'css/bg-color',
-		'style_selector' => 'body.theme-option'
-	)
-);
-
-$this->register_suboption(
-	'infinity-body-layout',
-	'background-image',
-	array(
-		'type' => 'css/bg-image',
-		'style_selector' => 'body.theme-option',
-		'default_value' => 'assets/images/design/bg.png'
-	)
-);
-
-$this->register_suboption(
-	'infinity-body-layout',
-	'background-repeat',
-	array(
-		'type' => 'css/bg-repeat',
-		'style_selector' => 'body.theme-option',
-		'parent' => '%feature%.background-image'
-	)
-);
-
-$this->register_suboption(
-	'infinity-body-layout',
-	'overlay-image',
-	$overlay_image +
-	array(
-		'style_selector' => 'body.theme-option'
-	)
-);
-
-$this->register_suboption(
-	'infinity-body-layout',
-	'overlay-opacity',
-	array(
-		'type' => 'css/overlay-opacity',
-		'style_selector' => 'body.theme-option:before',
-		'parent' => '%feature%.overlay-image',
-		'linked_image' => '%feature%.overlay-image'
-	)
-);
-
-// Header Logo Feature
-
-$this->register(
-	'infinity-header-logo',
-	array(
-		'type' => 'header-logo'
-	)
-);
-
-$this->register_suboption_defaults(
-	'infinity-header-logo',
-	array(
-		'section' => 'header'
-	)
-);
-
-// Header Layout Feature
-
-$this->register(
-	'infinity-header-layout',
-	array(
-		'type' => 'default',
-		'title' => 'Header Styles',
-		'description' => 'Customize the layout and colors of the header'
-	)
-);
-
-$this->register_suboption_defaults(
-	'infinity-header-layout',
-	array(
-		'section' => 'header',
-		'style_selector' => '#header'
-	)
-);
-
-$this->register_suboption(
-	'infinity-header-layout',
-	'min-height',
-	array(
-		'type' => 'css/length-px',
-		'title' => 'Height',
-		'description' => 'Select the height of the header by moving the slider',
-		'min' => 100,
-		'max' => 500,
-		'step' => 10,
-		'style_property' => 'height'
-	)
-);
-
-$this->register_suboption(
-	'infinity-header-layout',
-	'margin-top',
-	array(
-		'type' => 'css/length-px',
-		'title' => 'Top Margin',
-		'description' => 'The margin (spacing) between the top of the header and the top of the page.',
-		'min' => 0,
-		'max' => 100,
-		'step' => 2,
-		'style_property' => 'margin-top'
-	)
-);
-
-$this->register_suboption(
-	'infinity-header-layout',
-	'padding-top',
-	array(
-		'type' => 'css/length-px',
-		'title' => 'Top Padding',
-		'description' => 'The padding (spacing) between the top of the header and the header content.',
-		'min' => 0,
-		'max' => 100,
-		'step' => 2,
-		'style_property' => 'padding-top'
-	)
-);
-
-$this->register_suboption(
-	'infinity-header-layout',
-	'margin-bottom',
-	array(
-		'type' => 'css/length-px',
-		'title' => 'Bottom Margin',
-		'description' => 'The margin (spacing) between the bottom of the header and the top of the content section.',
-		'min' => 0,
-		'max' => 100,
-		'step' => 2,
-		'style_property' => 'margin-bottom'
-	)
-);
-
-$this->register_suboption(
-	'infinity-header-layout',
-	'padding-bottom',
-	array(
-		'type' => 'css/length-px',
-		'title' => 'Bottom Padding',
-		'description' => 'The padding (spacing) between the bottom of the header and the header content.',
-		'min' => 0,
-		'max' => 100,
-		'step' => 2,
-		'style_property' => 'padding-bottom'
-	)
-);
-
-$this->register_suboption(
-	'infinity-header-layout',
-	'background-color',
-	array(
-		'type' => 'css/bg-color',
-	)
-);
-
-$this->register_suboption(
-	'infinity-header-layout',
-	'background-image',
-	array(
-		'type' => 'css/bg-image',
-		'default_value' => 'assets/images/design/header-background.jpg',
-	)
-);
-
-$this->register_suboption(
-	'infinity-header-layout',
-	'background-repeat',
-	array(
-		'type' => 'css/bg-repeat',
-		'parent' => '%feature%.background-image'
-	)
-);
-
-$this->register_suboption(
-	'infinity-header-layout',
-	'overlay-image',
-	$overlay_image +
-	array(
-		'style_selector' => '#header'
-	)
-);
-
-$this->register_suboption(
-	'infinity-header-layout',
-	'overlay-opacity',
-	array(
-		'type' => 'css/overlay-opacity',
-		'style_selector' => '#header:before',
-		'parent' => '%feature%.overlay-image',
-		'linked_image' => '%feature%.overlay-image'
-	)
-);
-
-// Main Menu Layout Feature
-
-$this->register(
-	'infinity-main-menu-layout',
-	array(
-		'type' => 'default',
-		'title' => 'Main Menu Styles',
-		'description' => 'Customize the layout and colors of the menu inside the header.'
-	)
-);
-
-$this->register_suboption_defaults(
-	'infinity-main-menu-layout',
-	array(
-		'section' => 'menus-main',
-		'style_selector' => '.main-menu'
-	)	
-);
-
-$this->register_suboption(
-	'infinity-main-menu-layout',
-	'color-link',
-	array(
-		'type' => 'colorpicker',
-		'title' => 'Font Color',
-		'description' => 'Choose a font color for links of the menu inside the header.',
-		'style_selector' => '.main-menu ul li a span',
-		'style_property' => 'color'
-	)
-);
-
-$this->register_suboption(
-	'infinity-main-menu-layout',
-	'font-weight',
-	array(
-		'type' => 'select',
-		'title' => 'Font Weight',
-		'description' => 'Choose a font weight for links of the menu inside the header.',
-		'style_selector' => '.main-menu ul li a span',
-		'style_property' => 'font-weight'
-	)
-);
-
-$this->register_suboption(
-	'infinity-main-menu-layout',
-	'padding',
-	array(
-		'type' => 'css/length-px',
-		'title' => 'Padding',
-		'description' => 'Select the padding (spacing) around the menu links by moving the slider.',
-		'max' => 30,
-		'style_property' => 'padding'
-	)
-);
-
-$this->register_suboption(
-	'infinity-main-menu-layout',
-	'background-color',
-	array(
-		'type' => 'css/bg-color'
-	)
-);
-
-$this->register_suboption(
-	'infinity-main-menu-layout',
-	'overlay-image',
-	$overlay_image
-);
-
-$this->register_suboption(
-	'infinity-main-menu-layout',
-	'overlay-opacity',
-	array(
-		'type' => 'css/overlay-opacity',
-		'style_selector' => '.main-menu:before',
-		'parent' => '%feature%.overlay-image',
-		'linked_image' => '%feature%.overlay-image'
-	)
-);
-
-// Top Menu Layout Feature
-
-$this->register(
-	'infinity-top-menu-layout',
-	array(
-		'type' => 'default',
-		'title' => 'Sub Menu Styles',
-		'description' => 'Customize the layout and colors of the menu above the header.'
-	)
-);
-
-$this->register_suboption_defaults(
-	'infinity-top-menu-layout',
-	array(
-		'section' => 'menus-top',
-		'style_selector' => '.top-menu'
-	)
-);
-
-$this->register_suboption(
-	'infinity-top-menu-layout',
-	'color-link',
-	array(
-		'type' => 'colorpicker',
-		'title' => 'Font Color',
-		'description' => 'Choose a font color for links of the menu above the header.',
-		'style_selector' => '.top-menu ul li a span',
-		'style_property' => 'color'
-	)
-);
-
-$this->register_suboption(
-	'infinity-top-menu-layout',
-	'font-weight',
-	array(
-		'type' => 'select',
-		'title' => 'Font Weight',
-		'description' => 'Choose a font weight for links of the menu above the header.',
-		'style_selector' => '.top-menu ul li a span',
-		'style_property' => 'font-weight'
-	)
-);
-
-$this->register_suboption(
-	'infinity-top-menu-layout',
-	'background-color',
-	array(
-		'type' => 'css/bg-color'
-	)
-);
-
-$this->register_suboption(
-	'infinity-top-menu-layout',
-	'background-color-subitem',
-	array(
-		'type' => 'css/bg-color',
-		'title' => 'Sub-item Background',
-		'description' => 'Choose a background color for the submenu items of the menu above the header.',
-		'style_selector' => '.top-menu ul ul'
-	)
-);
-
-$this->register_suboption(
-	'infinity-top-menu-layout',
-	'overlay-image',
-	$overlay_image
-);
-
-$this->register_suboption(
-	'infinity-top-menu-layout',
-	'overlay-opacity',
-	array(
-		'type' => 'css/overlay-opacity',
-		'style_selector' => '.top-menu:before',
-		'parent' => '%feature%.overlay-image',
-		'linked_image' => '%feature%.overlay-image'
-	)
-);
-
-// Sub Menu Feature
-
-$this->register(
-	'infinity-sub-menu-layout',
-	array(
-		'type' => 'default',
-		'title' => 'Sub Menu Styles',
-		'description' => 'Customize the layout and colors of the menu below the header.'
-	)
-);
-
-$this->register_suboption_defaults(
-	'infinity-sub-menu-layout',
-	array(
-		'section' => 'menus-sub',
-		'style_selector' => '.sub-menu'
-	)
-);
-
-$this->register_suboption(
-	'infinity-sub-menu-layout',
-	'color-link',
-	array(
-		'type' => 'colorpicker',
-		'title' => 'Font Color',
-		'description' => 'Choose a font color for links of the menu below the header.',
-		'style_selector' => '.sub-menu ul li a span',
-		'style_property' => 'color'
-	)
-);
-
-$this->register_suboption(
-	'infinity-sub-menu-layout',
-	'font-weight',
-	array(
-		'type' => 'select',
-		'title' => 'Font Weight',
-		'description' => 'Choose a font weight for links of the menu below the header.',
-		'style_selector' => '.sub-menu ul li a span',
-		'style_property' => 'font-weight'
-	)
-);
-
-$this->register_suboption(
-	'infinity-sub-menu-layout',
-	'background-color',
-	array(
-		'type' => 'css/bg-color'
-	)
-);
-
-$this->register_suboption(
-	'infinity-sub-menu-layout',
-	'background-color-subitem',
-	array(
-		'type' => 'css/bg-color',
-		'title' => 'Sub-item Background',
-		'description' => 'Choose a background color for the submenu items of the menu below the header.',
-		'style_selector' => '.sub-menu ul ul'
-	)		
-);
-
-$this->register_suboption(
-	'infinity-sub-menu-layout',
-	'overlay-image',
-	$overlay_image
-);
-
-$this->register_suboption(
-	'infinity-sub-menu-layout',
-	'overlay-opacity',
-	array(
-		'type' => 'css/overlay-opacity',
-		'style_selector' => '.sub-menu:before',
-		'parent' => '%feature%.overlay-image',
-		'linked_image' => '%feature%.overlay-image'
-	)
-);
-
-// Content Styles
-
-$this->register(
-	'infinity-content-layout',
-	array(
-		'type' => 'default',
-		'title' => 'Content Styles',
-		'description' => 'Customize the layout and colors of the content section.'
-	)
-);
-
-$this->register_suboption_defaults(
-	'infinity-content-layout',
-	array(
-		'section' => 'content',
-		'style_selector' => '#content'
-	)
-);
-
-$this->register_suboption(
-	'infinity-content-layout',
-	'text-color',
-	array(
-		'type' => 'colorpicker',
-		'title' => 'Text Color',
-		'description' => 'Choose a color for text inside the content section.',
-		'style_selector' => '#content a',
-		'style_property' => 'color'
-	)
-);
-
-$this->register_suboption(
-	'infinity-content-layout',
-	'link-color',
-	array(
-		'type' => 'colorpicker',
-		'title' => 'Link Color',
-		'description' => 'Choose a color for links inside the content section.',
-		'style_selector' => '#content a',
-		'style_property' => 'color'
-	)
-);
-
-$this->register_suboption(
-	'infinity-content-layout',
-	'background-color',
-	array(
-		'type' => 'css/bg-color',
-	)
-);
-
-$this->register_suboption(
-	'infinity-content-layout',
-	'background-image',
-	array(
-		'type' => 'css/bg-image'
-	)
-);
-
-$this->register_suboption(
-	'infinity-content-layout',
-	'background-repeat',
-	array(
-		'type' => 'css/bg-repeat',
-		'parent' => '%feature%.background-image'
-	)
-);
-
-$this->register_suboption(
-	'infinity-content-layout',
-	'overlay-image',
-	$overlay_image
-);
-
-$this->register_suboption(
-	'infinity-content-layout',
-	'overlay-opacity',
-	array(
-		'type' => 'css/overlay-opacity',
-		'style_selector' => '#content:before',
-		'parent' => '%feature%.overlay-image',
-		'linked_image' => '%feature%.overlay-image'
-	)
-);
-
-// Sidebar Styles
-
-$this->register(
-	'infinity-sidebar-layout',
-	array(
-		'type' => 'default',
-		'title' => 'sidebar Styles',
-		'description' => 'Customize the layout and colors of the sidebar'
-	)
-);
-
-$this->register_suboption_defaults(
-	'infinity-sidebar-layout',
-	array(
-		'section' => 'sidebar',
-		'style_selector' => '#sidebar'
-	)
-);
-
-$this->register_suboption(
-	'infinity-sidebar-layout',
-	'text-color',
-	array(
-		'type' => 'colorpicker',
-		'title' => 'Text Color',
-		'description' => 'Choose a color for text in the sidebar.',
-		'style_property' => 'color'
-	)
-);
-
-$this->register_suboption(
-	'infinity-sidebar-layout',
-	'link-color',
-	array(
-		'type' => 'colorpicker',
-		'title' => 'Link Color',
-		'description' => 'Choose a color for links in the sidebar.',
-		'style_selector' => '#sidebar a',
-		'style_property' => 'color'
-	)
-);
-
-$this->register_suboption(
-	'infinity-sidebar-layout',
-	'background-color',
-	array(
-		'type' => 'css/bg-color'
-	)
-);
-
-$this->register_suboption(
-	'infinity-sidebar-layout',
-	'background-image',
-	array(
-		'type' => 'css/bg-image'
-	)
-);
-
-$this->register_suboption(
-	'infinity-sidebar-layout',
-	'background-repeat',
-	array(
-		'type' => 'css/bg-repeat',
-		'parent' => '%feature%.background-image'
-	)
-);
-
-$this->register_suboption(
-	'infinity-sidebar-layout',
-	'overlay-image',
-	$overlay_image +
-	array(
-		'style_selector' => '#sidebar'
-	)
-);
-
-$this->register_suboption(
-	'infinity-sidebar-layout',
-	'overlay-opacity',
-	array(
-		'type' => 'css/overlay-opacity',
-		'style_selector' => '#sidebar:before',
-		'parent' => '%feature%.overlay-image',
-		'linked_image' => '%feature%.overlay-image'
-	)
-);
-
-// Widget Layout Feature
-
-$this->register(
-	'infinity-widget-layout',
-	array(
-		'type' => 'default',
-		'title' => 'Widget Styling',
-		'description' => 'Customize the layout and colors of widgets.'
-	)
-);
-
-$this->register_suboption_defaults(
-	'infinity-widget-layout',
-	array(
-		'section' => 'widgets',
-		'style_selector' => '#sidebar .widget'
-	)
-);
-
-$this->register_suboption(
-	'infinity-widget-layout',
-	'color-link',
-	array(
-		'type' => 'colorpicker',
-		'title' => 'Widget Title Color',
-		'description' => 'Choose a font color for widget titles.',
-		'style_selector' => '#sidebar .widget h4',
-		'style_property' => 'color'
-	)
-);
-
-$this->register_suboption(
-	'infinity-widget-layout',
-	'font-weight',
-	array(
-		'type' => 'select',
-		'title' => 'Font Weight',
-		'description' => 'Choose a font weight for widget titles.',
-		'style_selector' => '#sidebar .widget h4',
-		'style_property' => 'font-weight'
-	)
-);
-
-$this->register_suboption(
-	'infinity-widget-layout',
-	'padding',
-	array(
-		'type' => 'css/length-px',
-		'title' => 'Padding',
-		'description' => 'The padding (spacing) between any widget border and it\'s content.',
-		'max' => 30,
-		'style_property' => 'padding'
-	)
-);
-
-$this->register_suboption(
-	'infinity-widget-layout',
-	'background-color',
-	array(
-		'type' => 'css/bg-color'
-	)
-);
-
-$this->register_suboption(
-	'infinity-widget-layout',
-	'overlay-image',
-	$overlay_image
-);
-
-$this->register_suboption(
-	'infinity-widget-layout',
-	'overlay-opacity',
-	array(
-		'type' => 'css/overlay-opacity',
-		'style_selector' => '#sidebar .widget:before',
-		'parent' => '%feature%.overlay-image',
-		'linked_image' => '%feature%.overlay-image'
-	)
-);
-
-// Footer Layout Feature
-
-$this->register(
-	'infinity-footer-layout',
-	array(
-		'type' => 'default',
-		'title' => 'footer Styles',
-		'description' => 'Customize the layout and colors of the footer'
-	)
-);
-
-$this->register_suboption_defaults(
-	'infinity-footer-layout',
-	array(
-		'section' => 'footer',
-		'style_selector' => '.footer-wrap'
-	)
-);
-
-$this->register_suboption(
-	'infinity-footer-layout',
-	'text-color',
-	array(
-		'type' => 'colorpicker',
-		'title' => 'Text Color',
-		'description' => 'Choose a color for text inside the footer section.',
-		'style_property' => 'color'
-	)
-);
-
-$this->register_suboption(
-	'infinity-footer-layout',
-	'text-color',
-	array(
-		'type' => 'colorpicker',
-		'title' => 'Text Color',
-		'description' => 'Choose a color for text inside the footer section.',
-		'style_property' => 'color'
-	)
-);
-
-$this->register_suboption(
-	'infinity-footer-layout',
-	'link-color',
-	array(
-		'type' => 'colorpicker',
-		'title' => 'Link Color',
-		'description' => 'Choose a color for links inside the footer section.',
-		'style_selector' => '.footer-wrap a',
-		'style_property' => 'color'
-	)
-);
-
-$this->register_suboption(
-	'infinity-footer-layout',
-	'margin-top',
-	array(
-		'type' => 'css/length-px',
-		'title' => 'Top Margin',
-		'description' => 'The margin (spacing) between the bottom of the content section and the top of the footer.',
-		'min' => 0,
-		'max' => 100,
-		'step' => 2,
-		'style_property' => 'margin-top'
-	)
-);
-
-$this->register_suboption(
-	'infinity-footer-layout',
-	'background-color',
-	array(
-		'type' => 'css/bg-color'
-	)
-);
-
-$this->register_suboption(
-	'infinity-footer-layout',
-	'background-image',
-	array(
-		'type' => 'css/bg-image'
-	)
-);
-
-$this->register_suboption(
-	'infinity-footer-layout',
-	'background-repeat',
-	array(
-		'type' => 'css/bg-repeat',
-		'parent' => '%feature%.background-image'
-	)
-);
-
-$this->register_suboption(
-	'infinity-footer-layout',
-	'background-repeat',
-	array(
-		'type' => 'css/bg-repeat',
-		'parent' => '%feature%.background-image'
-	)
-);
-
-$this->register_suboption(
-	'infinity-footer-layout',
-	'overlay-image',
-	$overlay_image
-);
-
-$this->register_suboption(
-	'infinity-footer-layout',
-	'overlay-opacity',
-	array(
-		'type' => 'css/overlay-opacity',
-		'style_selector' => '.footer-wrap:before',
-		'parent' => '%feature%.overlay-image',
-		'linked_image' => '%feature%.overlay-image'
-	)
-);
-
-// Additional BuddyPress features
-
-$this->register(
-	'infinity-bp-fbconnect',
-	array(
-		'type' => 'bp/fb-autoconnect',
-		'class' => 'info-box register-intro'
-	)
-);
-
-$this->register_suboption_defaults(
-	'infinity-bp-fbconnect',
-	array(
-		'section' => 'buddypress'
-	)
-);
-
-$this->register(
-	'infinity-bp-sidebar-setup',
-	array(
-		'type' => 'default',
-		'title' => 'BuddyPress Sidebar',
-		'description' => 'Special BuddyPress sidebar registration',
-		'required_feature' => 'infinity-bp-support'
-	)
-);
-
-// Post Gravatar Feature
-
-$this->register(
-	'infinity-post-gravatar',
-	array(
-		'type' => 'gravatar',
-		'title' => 'Post Gravatars',
-		'description' => 'Total control over post gravatars',
-		'image_class' => 'infinity-post-gravatar'
-	)
-);
-
-$this->register_suboption_defaults(
-	'infinity-post-gravatar',
-	array(
-		'section' => 'gravatars'
-	)
-);
-
-$this->register_suboption(
-	'infinity-post-gravatar',
-	'size',
-	array(
-		'type' => 'text',
-		'title' => 'Size',
-		'description' => 'Enter the size in pixels for the Gravatar image'
-	)
-);
-
-$this->register_suboption(
-	'infinity-post-gravatar',
-	'default-set',
-	array(
-		'type' => 'select',
-		'title' => 'Default Image Set',
-		'description' => 'Select the default image set to use',
-		'default_value' => 'mm',
-		'field_options' => array(
-			'404' => 'Return 404 Error',
-			'mm' => 'Mystery Man',
-			'identicon' => 'Identicon',
-			'monsterid' => 'Monster ID',
-			'wavatar' => 'Wavatar',
-			'retro' => 'Retro'
+	);
+
+		$infinity_top_menu_defaults = array(
+			'group' => 'infinity-top-menu',
+			'section' => 'menus-top',
+			'required_feature' => 'layout'
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'color-link',		
+				'type' => 'colorpicker',
+				'title' => 'Font Color',
+				'description' => 'Choose a font color for links of the menu above the header.',
+				'style_selector' => '.top-menu ul li a span',
+				'style_property' => 'color'
+			),
+			$infinity_top_menu_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'font-weight',
+				'type' => 'select',
+				'title' => 'Font Weight',
+				'description' => 'Choose a font weight for links of the menu above the header.',
+				'style_selector' => '.top-menu ul li a span',
+				'style_property' => 'font-weight'
+			),
+			$infinity_top_menu_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'background-color',
+				'type' => 'css/bg-color',
+				'style_selector' => '.top-menu'
+			),
+			$infinity_top_menu_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'background-color-subitem',
+				'type' => 'css/bg-color',
+				'title' => 'Sub-item Background',
+				'description' => 'Choose a background color for the submenu items of the menu above the header.',
+				'style_selector' => '.top-menu ul ul'
+			),
+			$infinity_top_menu_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'overlay-image',
+				'group' => 'infinity-top-menu',
+				'section' => 'menus-top',
+				'style_selector' => '.top-menu'
+			),
+			array_merge( $infinity_top_menu_defaults, $overlay_image_defaults )
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'overlay-opacity',
+				'type' => 'css/overlay-opacity',
+				'style_selector' => '.top-menu:before',
+				'parent' => 'overlay-image',
+				'linked_image' => 'overlay-image'
+			),
+			$infinity_top_menu_defaults
+		);
+
+//
+// Main Menu Group
+//
+ice_register_group( 'infinity-main-menu' );
+
+	// Main Menu Setup
+	ice_register_feature(
+		array(
+			'name' => 'setup',
+			'group' => 'infinity-main-menu',
+			'type' => 'default',
+			'title' => 'Inside Header Menu Setup',
+			'description' => 'Register the menu inside the header.'
 		)
-	)
-);
+	);
 
-$this->register_suboption(
-	'infinity-post-gravatar',
-	'default-img',
-	array(
-		'type' => 'upload',
-		'title' => 'Default Image File',
-		'description' => 'Upload a default Gravatar image (overrides default set)'
-	)
-);
-
-$this->register_suboption(
-	'infinity-post-gravatar',
-	'default-force',
-	array(
-		'type' => 'toggle/yes-no',
-		'title' => 'Force Default',
-		'description' => 'Force default image to always load?',
-		'default_value' => false
-	)
-);
-
-$this->register_suboption(
-	'infinity-post-gravatar',
-	'rating',
-	array(
-		'type' => 'select',
-		'title' => 'Rating',
-		'description' => 'Select highest image rating to display',
-		'default_value' => 'g',
-		'field_options' => array(
-			'g' => 'G (suitable for display on all websites with any audience type)',
-			'pg' => 'PG (may contain rude gestures, provocatively dressed individuals, the lesser swear words, or mild violence)',
-			'r' => 'R (may contain such things as harsh profanity, intense violence, nudity, or hard drug use)',
-			'x' => 'X (may contain hardcore sexual imagery or extremely disturbing violence)'
+	// Main Menu Layout
+	ice_register_feature(
+		array(
+			'name' => 'layout',
+			'group' => 'infinity-main-menu',
+			'type' => 'default',
+			'title' => 'Main Menu Styles',
+			'description' => 'Customize the layout and colors of the menu inside the header.'
 		)
-	)
-);
+	);
+	
+		$infinity_main_menu_defaults = array(
+			'group' => 'infinity-main-menu',
+			'section' => 'menus-main',
+			'required_feature' => 'layout'
+		);
+		
+		ice_register_option(
+			array(
+				'name' => 'color-link',
+				'type' => 'colorpicker',
+				'title' => 'Font Color',
+				'description' => 'Choose a font color for links of the menu inside the header.',
+				'style_selector' => '.main-menu ul li a span',
+				'style_property' => 'color'
+			),
+			$infinity_main_menu_defaults
+		);
 
-$this->register_suboption(
-	'infinity-post-gravatar',
-	'border-width',
-	array(
-		'type' => 'text',
-		'title' => 'Border Width',
-		'description' => 'Enter a border width in pixels for the Gravatar image'
-	)
-);
+		ice_register_option(
+			array(
+				'name' => 'font-weight',
+				'type' => 'select',
+				'title' => 'Font Weight',
+				'description' => 'Choose a font weight for links of the menu inside the header.',
+				'style_selector' => '.main-menu ul li a span',
+				'style_property' => 'font-weight'
+			),
+			$infinity_main_menu_defaults
+		);
 
-$this->register_suboption(
-	'infinity-post-gravatar',
-	'border-color',
-	array(
-		'type' => 'colorpicker',
-		'title' => 'Border Color',
-		'description' => 'Select a color for the Gravatar image border'
-	)
-);
+		ice_register_option(
+			array(
+				'name' => 'padding',
+				'type' => 'css/length-px',
+				'title' => 'Padding',
+				'description' => 'Select the padding (spacing) around the menu links by moving the slider.',
+				'max' => 30,
+				'style_selector' => '.main-menu',
+				'style_property' => 'padding'
+			),
+			$infinity_main_menu_defaults
+		);
 
-$this->register_suboption(
-	'infinity-post-gravatar',
-	'padding',
-	array(
-		'type' => 'text',
-		'title' => 'Padding',
-		'description' => 'Enter a padding size in pixels for the Gravatar image'
-	)
-);
+		ice_register_option(
+			array(
+				'name' => 'background-color',
+				'type' => 'css/bg-color',
+				'style_selector' => '.main-menu'
+			),
+			$infinity_main_menu_defaults
+		);
 
-$this->register_suboption(
-	'infinity-post-gravatar',
-	'bg-color',
-	array(
-		'type' => 'colorpicker',
-		'title' => 'Background Color',
-		'description' => 'Select a background color for the Gravatar image'
-	)
-);
+		ice_register_option(
+			array(
+				'name' => 'overlay-image',
+				'style_selector' => '.main-menu'
+			),
+			array_merge( $infinity_main_menu_defaults, $overlay_image_defaults )
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'overlay-opacity',
+				'type' => 'css/overlay-opacity',
+				'style_selector' => '.main-menu:before',
+				'parent' => 'overlay-image',
+				'linked_image' => 'overlay-image'
+			),
+			$infinity_main_menu_defaults
+		);
+
+//
+// Sub Menu Group
+//
+ice_register_group( 'infinity-sub-menu' );
+
+	// Sub Menu Setup
+	ice_register_feature(
+		array(
+			'name' => 'setup',
+			'group' => 'infinity-sub-menu',
+			'type' => 'default',
+			'title' => 'Below Header Menu Setup',
+			'description' => 'Register the menu below the header.'
+		)
+	);
+
+	// Sub Menu Layout
+	ice_register_feature(
+		array(
+			'name' => 'layout',
+			'group' => 'infinity-sub-menu',
+			'type' => 'default',
+			'title' => 'Sub Menu Styles',
+			'description' => 'Customize the layout and colors of the menu below the header.'
+		)
+	);
+	
+		$infinity_sub_menu_defaults = array(
+			'group' => 'infinity-sub-menu',
+			'section' => 'menus-sub',
+			'required_feature' => 'layout'
+		);
+		
+		ice_register_option(
+			array(
+				'name' => 'color-link',
+				'type' => 'colorpicker',
+				'title' => 'Font Color',
+				'description' => 'Choose a font color for links of the menu below the header.',
+				'style_selector' => '.sub-menu ul li a span',
+				'style_property' => 'color'
+			),
+			$infinity_sub_menu_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'font-weight',
+				'type' => 'select',
+				'title' => 'Font Weight',
+				'description' => 'Choose a font weight for links of the menu below the header.',
+				'style_selector' => '.sub-menu ul li a span',
+				'style_property' => 'font-weight'
+			),
+			$infinity_sub_menu_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'background-color',
+				'type' => 'css/bg-color',
+				'style_selector' => '.sub-menu'
+			),
+			$infinity_sub_menu_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'background-color-subitem',
+				'type' => 'css/bg-color',
+				'title' => 'Sub-item Background',
+				'description' => 'Choose a background color for the submenu items of the menu below the header.',
+				'style_selector' => '.sub-menu ul ul'
+			),
+			$infinity_sub_menu_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'overlay-image',
+				'style_selector' => '.sub-menu'
+			),
+			array_merge( $infinity_sub_menu_defaults, $overlay_image_defaults )
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'overlay-opacity',
+				'type' => 'css/overlay-opacity',
+				'style_selector' => '.sub-menu:before',
+				'parent' => 'overlay-image',
+				'linked_image' => 'overlay-image'
+			),
+			$infinity_sub_menu_defaults
+		);
+
+//
+// Footer Menu Group
+//
+ice_register_group( 'infinity-footer-menu' );
+
+	// Footer Menu Setup
+	ice_register_feature(
+		array(
+			'name' => 'setup',
+			'group' => 'infinity-footer-menu',
+			'type' => 'default',
+			'title' => 'Footer Menu Setup',
+			'description' => 'Register the footer menu.'
+		)
+	);
+
+
+//
+// Sidebar Group
+//
+ice_register_group( 'infinity-sidebar' );
+
+	// Sidebar Setup
+	ice_register_feature(
+		array(
+			'name' => 'setup',
+			'group' => 'infinity-sidebar',
+			'type' => 'default',
+			'title' => 'Sidebar Setup',
+			'description' => 'Sidebar Registration'
+		)
+	);
+
+	// Sidebar Layout
+	ice_register_feature(
+		array(
+			'name' => 'layout',
+			'group' => 'infinity-sidebar',
+			'type' => 'default',
+			'title' => 'sidebar Styles',
+			'description' => 'Customize the layout and colors of the sidebar'
+		)
+	);
+
+		$infinity_sidebar_layout_defaults = array(
+			'group' => 'infinity-sidebar',
+			'section' => 'sidebar',
+			'required_feature' => 'layout',
+			'style_selector' => '#sidebar'
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'text-color',
+				'type' => 'colorpicker',
+				'title' => 'Text Color',
+				'description' => 'Choose a color for text in the sidebar.',
+				'style_property' => 'color'
+			),
+			$infinity_sidebar_layout_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'link-color',
+				'type' => 'colorpicker',
+				'title' => 'Link Color',
+				'description' => 'Choose a color for links in the sidebar.',
+				'style_selector' => '#sidebar a',
+				'style_property' => 'color'
+			),
+			$infinity_sidebar_layout_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'background-color',
+				'type' => 'css/bg-color',
+			),
+			$infinity_sidebar_layout_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'background-image',
+				'type' => 'css/bg-image',
+			),
+			$infinity_sidebar_layout_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'background-repeat',
+				'type' => 'css/bg-repeat',
+				'parent' => 'background-image',
+			),
+			$infinity_sidebar_layout_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'overlay-image',
+			),
+			array_merge( $infinity_sidebar_layout_defaults, $overlay_image_defaults )
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'overlay-opacity',
+				'type' => 'css/overlay-opacity',
+				'style_selector' => '#sidebar:before',
+				'parent' => 'overlay-image',
+				'linked_image' => 'overlay-image'
+			),
+			$infinity_sidebar_layout_defaults
+		);
+
+//
+// Post Group
+//
+ice_register_group( 'infinity-post' );
+
+	// Post Pagination
+	ice_register_feature(
+		array(
+			'name' => 'pagination',
+			'group' => 'infinity-post',
+			'type' => 'default',
+			'title' => 'Pagination',
+			'description' => 'Enable pagination for your (custom) posts'
+		)
+	);
+
+	// Introduction boxes
+	ice_register_feature(
+		array(
+			'name' => 'intro-boxes',
+			'group' => 'infinity-post',
+			'type' => 'default',
+			'title' => 'Introduction Boxes',
+			'description' => 'Introduction boxes that show above category, tag and author archives'
+		)
+	);
+
+	// Author Boxes
+	ice_register_feature(
+		array(
+			'name' => 'author-boxes',
+			'group' => 'infinity-post',
+			'type' => 'default',
+			'title' => 'Author Boxes',
+			'description' => 'Enable About the Author Boxes being displayed on single posts and author archives'
+		)
+	);
+
+	// Post Avatars
+	ice_register_feature(
+		array(
+			'name' => 'avatars',
+			'group' => 'infinity-post',
+			'type' => 'default',
+			'title' => 'Post Avatars',
+			'description' => 'Enable Post avatars being displayed on single posts and pages'
+		)
+	);
+
+	// Post Gravatars
+	ice_register_feature(
+		array(
+			'name' => 'gravatar',
+			'group' => 'infinity-post',
+			'type' => 'gravatar',
+			'title' => 'Post Gravatars',
+			'description' => 'Total control over post gravatars',
+			'image_class' => 'infinity-post-gravatar'
+		)
+	);
+
+		$infinity_post_grav_defaults = array(
+			'group' => 'infinity-post',
+			'section' => 'gravatars',
+			'required_feature' => 'gravatar'
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'size',
+				'type' => 'text',
+				'title' => 'Size',
+				'description' => 'Enter the size in pixels for the Gravatar image'
+			),
+			$infinity_post_grav_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'default-set',
+				'type' => 'select',
+				'title' => 'Default Image Set',
+				'description' => 'Select the default image set to use',
+				'default_value' => 'mm',
+				'field_options' => array(
+					'404' => 'Return 404 Error',
+					'mm' => 'Mystery Man',
+					'identicon' => 'Identicon',
+					'monsterid' => 'Monster ID',
+					'wavatar' => 'Wavatar',
+					'retro' => 'Retro'
+				)
+			),
+			$infinity_post_grav_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'default-img',
+				'type' => 'upload',
+				'title' => 'Default Image File',
+				'description' => 'Upload a default Gravatar image (overrides default set)'
+			),
+			$infinity_post_grav_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'default-force',
+				'type' => 'toggle/yes-no',
+				'title' => 'Force Default',
+				'description' => 'Force default image to always load?',
+				'default_value' => false
+			),
+			$infinity_post_grav_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'rating',
+				'type' => 'select',
+				'title' => 'Rating',
+				'description' => 'Select highest image rating to display',
+				'default_value' => 'g',
+				'field_options' => array(
+					'g' => 'G (suitable for display on all websites with any audience type)',
+					'pg' => 'PG (may contain rude gestures, provocatively dressed individuals, the lesser swear words, or mild violence)',
+					'r' => 'R (may contain such things as harsh profanity, intense violence, nudity, or hard drug use)',
+					'x' => 'X (may contain hardcore sexual imagery or extremely disturbing violence)'
+				)
+			),
+			$infinity_post_grav_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'border-width',
+				'type' => 'text',
+				'title' => 'Border Width',
+				'description' => 'Enter a border width in pixels for the Gravatar image'
+			),
+			$infinity_post_grav_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'border-color',
+				'type' => 'colorpicker',
+				'title' => 'Border Color',
+				'description' => 'Select a color for the Gravatar image border'
+			),
+			$infinity_post_grav_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'padding',
+				'type' => 'text',
+				'title' => 'Padding',
+				'description' => 'Enter a padding size in pixels for the Gravatar image'
+			),
+			$infinity_post_grav_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'bg-color',
+				'type' => 'colorpicker',
+				'title' => 'Background Color',
+				'description' => 'Select a background color for the Gravatar image'
+			),
+			$infinity_post_grav_defaults
+		);
+
+//
+// Font Group
+//
+ice_register_group( 'infinity-font' );
+
+	// Icon Sweets
+	ice_register_feature(
+		array(
+			'name' => 'iconsweets',
+			'group' => 'infinity-font',
+			'type' => 'default',
+			'title' => 'The Icon Font-Face being used',
+			'description' => 'Icons',
+			'style' => 'assets/fonts/iconsweets.css'
+		)
+	);
+
+//
+// WP Group
+//
+ice_register_group( 'infinity-wp' );
+
+	// WordPress Support
+	ice_register_feature(
+		array(
+			'name' => 'support',
+			'group' => 'infinity-wp',
+			'type' => 'default',
+			'title' => 'Wordpress Support',
+			'description' => 'Enables WordPress support',
+			'style' => 'assets/css/wordpress.css'
+		)
+	);
+	
+	// Base WordPress Styles
+	ice_register_feature(
+		array(
+			'name' => 'style',
+			'group' => 'infinity-wp',
+			'type' => 'default',
+			'title' => 'WordPress Styles',
+			'description' => 'The base WordPress styling',
+			'body_class' => 'infinity-wp'
+		)
+	);
+
+//
+// BP Group
+//
+ice_register_group( 'infinity-bp' );
+
+	// BuddyPress support
+	ice_register_feature(
+		array(
+			'name' => 'support',
+			'group' => 'infinity-bp',
+			'type' => 'bp/support',
+			'title' => 'BuddyPress Support',
+			'description' => 'Enables BuddyPress support',
+			'style' => 'assets/css/buddypress.css'
+		)
+	);
+
+	// Base BuddyPress Styles
+	ice_register_feature(
+		array(
+			'name' => 'style',
+			'group' => 'infinity-bp',
+			'type' => 'default',
+			'title' => 'BuddyPress Styles',
+			'description' => 'The base BuddyPress styles',
+			'body_class' => 'infinity-bp'
+		)
+	);
+
+	// BP Sidebar Setup
+	ice_register_feature(
+		array(
+			'name' => 'sidebar-setup',
+			'group' => 'infinity-bp',
+			'section' => 'buddypress',
+			'type' => 'default',
+			'title' => 'BuddyPress Sidebar',
+			'description' => 'Special BuddyPress sidebar registration',
+			'required_feature' => 'infinity-bp-support'
+		)
+	);
+
+//
+// BP FBConnect Group
+//
+ice_register_group( 'infinity-bp-fbconnect' );
+
+	// BP Facebook Connect Support
+	ice_register_feature(
+		array(
+			'name' => 'support',
+			'group' => 'infinity-bp-fbconnect',
+			'type' => 'bp/fb-autoconnect',
+			'class' => 'info-box register-intro'
+		)
+	);
+		ice_register_option(
+			array(
+				'name' => 'toggle',
+				'group' => 'infinity-bp-fbconnect',
+				'section' => 'buddypress',
+				'type' => 'toggle/yes-no',
+				'required_feature' => 'support',
+				'title' => 'FaceBook Connect',
+				'description' => 'Show connect with Facebook button?',
+				'default_value' => true
+			)
+		);
+
+//
+// Extensions Group
+//
+ice_register_group( 'infinity-ext' );
+
+	// Extensions Support
+	ice_register_feature(
+		array(
+			'name' => 'support',
+			'group' => 'infinity-ext',
+			'type' => 'default',
+			'title' => 'Extension Styles',
+			'description' => 'Enables extensions support',
+			'style' => 'assets/css/extensions.css'
+		)
+	);
+
+//
+// Responsive Group
+//
+ice_register_group( 'infinity-resp' );
+
+	// Responsive Layout Support
+	ice_register_feature(
+		array(
+			'name' => 'support',
+			'group' => 'infinity-resp',
+			'type' => 'responsive/layout',
+			'title' => 'Responsive Layout',
+			'description' => 'Enables responsive layout support',
+			'style' => 'assets/css/responsive.css'
+		)
+	);
+
+	// Responsive Menus
+	ice_register_feature(
+		array(
+			'name' => 'menu',
+			'group' => 'infinity-resp',
+			'type' => 'responsive/menu',
+			'title' => 'Responsive Menu',
+			'description' => 'Enables the responsive menu javascript',
+			'target_selector' => '.sf-menu',
+			'switch_width' => 770,
+			'top_option_text' => 'Where to?',
+			'prepend_to' => 'div.mobile-menu-container'
+		)
+	);
+
+	// Responsive Videos
+	ice_register_feature(
+		array(
+			'name' => 'videos',
+			'group' => 'infinity-resp',
+			'type' => 'responsive/videos',
+			'title' => 'Responsive Videos',
+			'description' => 'Enables the responsive videos javascript',
+			'target_selector' => '#wrapper'
+		)
+	);
+
+//
+// Typography Group
+//
+ice_register_group( 'infinity-typog' );
+
+	// Typography Styles
+	ice_register_feature(
+		array(
+			'name' => 'style',
+			'group' => 'infinity-typog',
+			'type' => 'default',
+			'title' => 'Typography Styles',
+			'description' => 'The base Typography styling',
+			'body_class' => 'infinity-typog'
+		)
+	);
+
+//
+// Layout Group
+//
+ice_register_group( 'infinity-layout' );
+
+	// Layout Styles
+	ice_register_feature(
+		array(
+			'name' => 'style',
+			'group' => 'infinity-layout',
+			'type' => 'default',
+			'title' => 'Layout Styles',
+			'description' => 'The base layout styling',
+			'body_class' => 'infinity-layout'
+		)
+	);
+
+//
+// Buttons Group
+//
+ice_register_group( 'infinity-buttons' );
+
+	// Button Styles
+	ice_register_feature(
+		array(
+			'name' => 'style',
+			'group' => 'infinity-buttons',
+			'type' => 'default',
+			'title' => 'extras Styles',
+			'description' => 'The base buttons styling',
+			'body_class' => 'infinity-btns'
+		)
+	);
+
+//
+// Icons Group
+//
+ice_register_group( 'infinity-icons' );
+
+	// Icon Styles
+	ice_register_feature(
+		array(
+			'name' => 'style',
+			'group' => 'infinity-icons',
+			'type' => 'default',
+			'title' => 'The Icons used across the theme',
+			'description' => 'Icons',
+			'body_class' => 'infinity-icons'
+		)
+	);
+
+//
+// Design Group
+//
+ice_register_group( 'infinity-design' );
+
+	// Design Styles
+	ice_register_feature(
+		array(
+			'name' => 'style',
+			'group' => 'infinity-design',
+			'type' => 'default',
+			'title' => 'Design Styles',
+			'description' => 'The styles which fancy things up a bit',
+			'body_class' => 'infinity-design'
+		)
+	);
+
+//
+// Base Group
+//
+ice_register_group( 'infinity-base' );
+
+	// Base Scripts
+	ice_register_feature(
+		array(
+			'name' => 'script',
+			'group' => 'infinity-base',
+			'type' => 'default',
+			'title' => 'Base Javascript',
+			'description' => 'Some jQuery to spice up the Base Theme',
+			'script' => 'assets/js/base.js',
+			'script_depends' => array(
+				'jquery'
+			)
+		)
+	);
+
+//
+// Custom Group
+//
+ice_register_group( 'infinity-custom' );
+
+	// Custom CSS
+	ice_register_feature(
+		array(
+			'name' => 'css',
+			'group' => 'infinity-custom',
+			'type' => 'default',
+			'title' => 'Custom CSS',
+			'description' => 'Allow custom CSS to be provided with theme options'
+		)
+	);
+		ice_register_option(
+			array(
+				'name' => 'markup',
+				'group' => 'infinity-custom',
+				'section' => 'global',
+				'type' => 'css/custom',
+				'title' => 'Custom CSS',
+				'description' => 'Enter custom CSS markup to fine tune the look of your site'
+			)
+		);
+
+//
+// Body Group
+//
+ice_register_group( 'infinity-body' );
+
+	// Body Layout
+	ice_register_feature(
+		array(
+			'name' => 'layout',
+			'group' => 'infinity-body',
+			'type' => 'default',
+			'title' => 'Body Layout',
+			'description' => 'Change the Body according to your taste'
+		)
+	);
+
+		$infinity_body_layout_defaults = array(
+			'group' => 'infinity-body',
+			'section' => 'layout',
+			'required_feature' => 'layout',
+			'style_selector' => 'body.theme-option'
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'width',
+				'type' => 'css/length-px',
+				'title' => 'Maximum Width',
+				'description' => 'Set the maximum width of the site\'s content between %min% and %max% pixels by moving the slider.',
+				'min' => 900,
+				'max' => 1250,
+				'step' => 10,
+				'style_selector' => '#wrapper',
+				'style_property' => 'max-width'
+			),
+			$infinity_body_layout_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'background-color',
+				'type' => 'css/bg-color'
+			),
+			$infinity_body_layout_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'background-image',
+				'type' => 'css/bg-image',
+				'default_value' => 'assets/images/design/bg.png'
+			),
+			$infinity_body_layout_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'background-repeat',
+				'type' => 'css/bg-repeat',
+				'parent' => 'background-image'
+			),
+			$infinity_body_layout_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'overlay-image',
+			),
+			array_merge( $infinity_body_layout_defaults, $overlay_image_defaults )
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'overlay-opacity',
+				'type' => 'css/overlay-opacity',
+				'style_selector' => 'body.theme-option:before',
+				'parent' => 'overlay-image',
+				'linked_image' => 'overlay-image'
+			),
+			$infinity_body_layout_defaults
+		);
+
+//
+// Header Group
+//
+ice_register_group( 'infinity-header' );
+
+	// Header Layout
+	ice_register_feature(
+		array(
+			'name' => 'layout',
+			'group' => 'infinity-header',
+			'type' => 'default',
+			'title' => 'Header Styles',
+			'description' => 'Customize the layout and colors of the header'
+		)
+	);
+
+		$infinity_header_layout_defaults = array(
+			'group' => 'infinity-header',
+			'section' => 'header',
+			'required_feature' => 'layout',
+			'style_selector' => '#header'
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'min-height',
+				'type' => 'css/length-px',
+				'title' => 'Height',
+				'description' => 'Select the height of the header by moving the slider',
+				'min' => 100,
+				'max' => 500,
+				'step' => 10,
+				'style_property' => 'height'
+			),
+			$infinity_header_layout_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'margin-top',
+				'type' => 'css/length-px',
+				'title' => 'Top Margin',
+				'description' => 'The margin (spacing) between the top of the header and the top of the page.',
+				'min' => 0,
+				'max' => 100,
+				'step' => 2,
+				'style_property' => 'margin-top'
+			),
+			$infinity_header_layout_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'padding-top',
+				'type' => 'css/length-px',
+				'title' => 'Top Padding',
+				'description' => 'The padding (spacing) between the top of the header and the header content.',
+				'min' => 0,
+				'max' => 100,
+				'step' => 2,
+				'style_property' => 'padding-top'
+			),
+			$infinity_header_layout_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'margin-bottom',
+				'type' => 'css/length-px',
+				'title' => 'Bottom Margin',
+				'description' => 'The margin (spacing) between the bottom of the header and the top of the content section.',
+				'min' => 0,
+				'max' => 100,
+				'step' => 2,
+				'style_property' => 'margin-bottom'
+			),
+			$infinity_header_layout_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'padding-bottom',
+				'type' => 'css/length-px',
+				'title' => 'Bottom Padding',
+				'description' => 'The padding (spacing) between the bottom of the header and the header content.',
+				'min' => 0,
+				'max' => 100,
+				'step' => 2,
+				'style_property' => 'padding-bottom'
+			),
+			$infinity_header_layout_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'background-color',
+				'type' => 'css/bg-color'
+			),
+			$infinity_header_layout_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'background-image',
+				'type' => 'css/bg-image',
+				'default_value' => 'assets/images/design/header-background.jpg'
+			),
+			$infinity_header_layout_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'background-repeat',
+				'type' => 'css/bg-repeat',
+				'parent' => 'background-image'
+			),
+			$infinity_header_layout_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'overlay-image'
+			),
+			array_merge( $infinity_header_layout_defaults, $overlay_image_defaults )
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'overlay-opacity',
+				'type' => 'css/overlay-opacity',
+				'style_selector' => '#header:before',
+				'parent' => 'overlay-image',
+				'linked_image' => 'overlay-image'
+			),
+			$infinity_header_layout_defaults
+		);
+
+//
+// Header Logo Group
+//
+ice_register_group( 'infinity-header-logo' );
+
+	// Header Logo
+	ice_register_feature(
+		array(
+			'name' => 'support',
+			'group' => 'infinity-header-logo',
+			'type' => 'header-logo'
+		)
+	);
+
+		$infinity_header_logo_defaults = array(
+			'group' => 'infinity-header-logo',
+			'section' => 'header',
+			'required_feature' => 'support'
+		);
+
+		ice_register_option(
+			 array(
+				'name' => 'image',
+				'type' => 'upload',
+				'title' => 'Logo Image',
+				'description' => 'Upload a custom logo to appear in the header'
+			),
+			$infinity_header_logo_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'toggle',
+				'type' => 'toggle/on-off',
+				'title' => 'Logo Image On/Off',
+				'description' => 'Turn this Off to prevent any image logo from displaying, even the default.',
+				'default_value' => true,
+				'parent' => 'image'
+			),
+			$infinity_header_logo_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'pos',
+				'type' => 'position/left-center-right',
+				'title' => 'Logo Position',
+				'description' => 'Select a position for the logo',
+				'default_value' => 'l',
+				'parent' => 'image',
+			),
+			$infinity_header_logo_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'top',
+				'type' => 'ui/slider',
+				'title' => 'Logo Top Spacing',
+				'description' => 'Enter a height in pixels for top spacing',
+				'min' => 0,
+				'max' => 100,
+				'step' => 1,
+				'suffix' => ' pixels',
+				'style_selector' => '.icext-feature.icext-header-logo a',
+				'style_property' => 'margin-top',
+				'style_unit' => 'px',
+				'parent' => 'image',
+			),
+			$infinity_header_logo_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'left',
+				'type' => 'ui/slider',
+				'title' => 'Logo Left Spacing',
+				'description' => 'Enter a width in pixels for left spacing',
+				'min' => 0,
+				'max' => 250,
+				'step' => 1,
+				'suffix' => ' pixels',
+				'style_selector' => '.icext-feature.icext-header-logo a',
+				'style_property' => 'margin-left',
+				'style_unit' => 'px',
+				'parent' => 'image',
+			),
+			$infinity_header_logo_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'right',
+				'type' => 'ui/slider',
+				'title' => 'Logo Right Spacing',
+				'description' => 'Enter a width in pixels for right spacing',
+				'min' => 0,
+				'max' => 250,
+				'step' => 1,
+				'suffix' => ' pixels',
+				'style_selector' => '.icext-feature.icext-header-logo a',
+				'style_property' => 'margin-right',
+				'style_unit' => 'px',
+				'parent' => 'image',
+			),
+			$infinity_header_logo_defaults
+		);
+
+//
+// Content Group
+//
+ice_register_group( 'infinity-content' );
+
+	// Content Styles
+	ice_register_feature(
+		array(
+			'name' => 'layout',
+			'group' => 'infinity-content',
+			'type' => 'default',
+			'title' => 'Content Styles',
+			'description' => 'Customize the layout and colors of the content section.'
+		)
+	);
+
+		$infinity_content_layout_defaults = array(
+			'group' => 'infinity-content',
+			'section' => 'content',
+			'required_feature' => 'layout',
+			'style_selector' => '#content'
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'text-color',
+				'type' => 'colorpicker',
+				'title' => 'Text Color',
+				'description' => 'Choose a color for text inside the content section.',
+				'style_selector' => '#content a',
+				'style_property' => 'color'
+			),
+			$infinity_content_layout_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'link-color',
+				'type' => 'colorpicker',
+				'title' => 'Link Color',
+				'description' => 'Choose a color for links inside the content section.',
+				'style_selector' => '#content a',
+				'style_property' => 'color'
+			),
+			$infinity_content_layout_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'background-color',
+				'type' => 'css/bg-color'
+			),
+			$infinity_content_layout_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'background-image',
+				'type' => 'css/bg-image'
+			),
+			$infinity_content_layout_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'background-repeat',
+				'type' => 'css/bg-repeat',
+				'parent' => 'background-image'
+			),
+			$infinity_content_layout_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'overlay-image',
+				'group' => 'infinity-content',
+				'section' => 'content'
+			),
+			array_merge( $infinity_content_layout_defaults, $overlay_image_defaults )
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'overlay-opacity',
+				'type' => 'css/overlay-opacity',
+				'style_selector' => '#content:before',
+				'parent' => 'overlay-image',
+				'linked_image' => 'overlay-image'
+			),
+			$infinity_content_layout_defaults
+		);
+
+//
+// Widget Group
+//
+ice_register_group( 'infinity-widget' );
+
+	// Widget Layout
+	ice_register_feature(
+		array(
+			'name' => 'layout',
+			'group' => 'infinity-widget',
+			'type' => 'default',
+			'title' => 'Widget Styling',
+			'description' => 'Customize the layout and colors of widgets.'
+		)
+	);
+
+		$infinity_widget_layout_defaults = array(
+			'group' => 'infinity-widget',
+			'section' => 'widgets',
+			'required_feature' => 'layout',
+			'style_selector' => '#sidebar .widget'
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'color-link',
+				'type' => 'colorpicker',
+				'title' => 'Widget Title Color',
+				'description' => 'Choose a font color for widget titles.',
+				'style_selector' => '#sidebar .widget h4',
+				'style_property' => 'color'
+			),
+			$infinity_widget_layout_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'font-weight',
+				'type' => 'select',
+				'title' => 'Font Weight',
+				'description' => 'Choose a font weight for widget titles.',
+				'style_selector' => '#sidebar .widget h4',
+				'style_property' => 'font-weight'
+			),
+			$infinity_widget_layout_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'padding',
+				'type' => 'css/length-px',
+				'title' => 'Padding',
+				'description' => 'The padding (spacing) between any widget border and it\'s content.',
+				'max' => 30,
+				'style_property' => 'padding'
+			),
+			$infinity_widget_layout_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'background-color',
+				'type' => 'css/bg-color',
+			),
+			$infinity_widget_layout_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'overlay-image'
+			),
+			array_merge( $infinity_widget_layout_defaults, $overlay_image_defaults )
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'overlay-opacity',
+				'type' => 'css/overlay-opacity',
+				'style_selector' => '#sidebar .widget:before',
+				'parent' => 'overlay-image',
+				'linked_image' => 'overlay-image'
+			),
+			$infinity_widget_layout_defaults
+		);
+
+//
+// Footer Group
+//
+ice_register_group( 'infinity-footer' );
+
+	// Footer Layout
+	ice_register_feature(
+		array(
+			'name' => 'layout',
+			'group' => 'infinity-footer',
+			'type' => 'default',
+			'title' => 'footer Styles',
+			'description' => 'Customize the layout and colors of the footer'
+		)
+	);
+
+		$infinity_footer_layout_defaults = array(
+			'group' => 'infinity-footer',
+			'section' => 'footer',
+			'required_feature' => 'layout',
+			'style_selector' => '.footer-wrap'
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'text-color',
+				'type' => 'colorpicker',
+				'title' => 'Text Color',
+				'description' => 'Choose a color for text inside the footer section.',
+				'style_property' => 'color'
+			),
+			$infinity_footer_layout_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'text-color',
+				'type' => 'colorpicker',
+				'title' => 'Text Color',
+				'description' => 'Choose a color for text inside the footer section.',
+				'style_property' => 'color'
+			),
+			$infinity_footer_layout_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'link-color',
+				'type' => 'colorpicker',
+				'title' => 'Link Color',
+				'description' => 'Choose a color for links inside the footer section.',
+				'style_selector' => '.footer-wrap a',
+				'style_property' => 'color'
+			),
+			$infinity_footer_layout_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'margin-top',
+				'type' => 'css/length-px',
+				'title' => 'Top Margin',
+				'description' => 'The margin (spacing) between the bottom of the content section and the top of the footer.',
+				'min' => 0,
+				'max' => 100,
+				'step' => 2,
+				'style_property' => 'margin-top'
+			),
+			$infinity_footer_layout_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'background-color',
+				'type' => 'css/bg-color',
+			),
+			$infinity_footer_layout_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'background-image',
+				'type' => 'css/bg-image',
+			),
+			$infinity_footer_layout_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'background-repeat',
+				'type' => 'css/bg-repeat',
+				'parent' => 'background-image',
+			),
+			$infinity_footer_layout_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'background-repeat',
+				'type' => 'css/bg-repeat',
+				'parent' => 'background-image',
+			),
+			$infinity_footer_layout_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'overlay-image'
+			),
+			array_merge( $infinity_footer_layout_defaults, $overlay_image_defaults )
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'overlay-opacity',
+				'type' => 'css/overlay-opacity',
+				'style_selector' => '.footer-wrap:before',
+				'parent' => 'overlay-image',
+				'linked_image' => 'overlay-image'
+			),
+			$infinity_footer_layout_defaults
+		);

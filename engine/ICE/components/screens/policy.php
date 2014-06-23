@@ -32,3 +32,18 @@ class ICE_Screen_Policy extends ICE_Policy
 		return ( $plural ) ? 'screens' : 'screen';
 	}
 }
+
+//
+// Helpers
+//
+
+/**
+ * Register a screen.
+ *
+ * @param array $args
+ * @param array $defaults
+ */
+function ice_register_screen( $args, $defaults = array() )
+{
+	ICE_Policy::screens()->registry()->register( $args, $defaults );
+}

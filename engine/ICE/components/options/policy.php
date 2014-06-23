@@ -90,3 +90,18 @@ class ICE_Option_Policy extends ICE_Policy
 		return $classes;
 	}
 }
+
+//
+// Helpers
+//
+
+/**
+ * Register an option.
+ *
+ * @param array $args
+ * @param array $defaults
+ */
+function ice_register_option( $args, $defaults = array() )
+{
+	ICE_Policy::options()->registry()->register( $args, $defaults );
+}

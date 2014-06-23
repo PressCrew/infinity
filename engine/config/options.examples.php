@@ -19,9 +19,9 @@
 
 // ui/slider with one handle
 // this option stores a single number (integer)
-$this->register(
-	'slider-one',
+ice_register_option(
 	array(
+		'name' => 'slider-one',
 		'type' => 'ui/slider',
 		'section' => 'general',
 		'title' => 'One Handle Slider',
@@ -36,9 +36,9 @@ $this->register(
 
 // ui/slider with two handles (range)
 // this option stores a two item array, one item for each selected value
-$this->register(
-	'slider-two',
+ice_register_option(
 	array(
+		'name' => 'slider-two',
 		'type' => 'ui/slider',
 		'section' => 'general',
 		'title' => 'Two Handle Slider',

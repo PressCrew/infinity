@@ -39,13 +39,6 @@ abstract class ICE_Option extends ICE_Component
 	protected $default_value;
 
 	/**
-	 * The feature for which this option was created (slug)
-	 *
-	 * @var string
-	 */
-	protected $feature;
-
-	/**
 	 * The CSS class to apply to the option's input field
 	 *
 	 * @var string
@@ -100,7 +93,6 @@ abstract class ICE_Option extends ICE_Component
 	{
 		switch ( $name ) {
 			case 'default_value':
-			case 'feature':
 			case 'field_class':
 			case 'field_id':
 			case 'field_options':
@@ -127,7 +119,6 @@ abstract class ICE_Option extends ICE_Component
 		// import settings
 		$this->import_settings( array(
 			'default_value',
-			'feature',
 			'field_class',
 			'field_id',
 			'field_options',
@@ -261,7 +252,7 @@ abstract class ICE_Option extends ICE_Component
 	public function get()
 	{
 		// get component name
-		$name = $this->get_name();
+		$name = $this->get_group() . '_' . $this->get_name();
 
 		// post override?
 		if (

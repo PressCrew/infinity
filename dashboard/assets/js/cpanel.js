@@ -69,7 +69,7 @@ function initOptionsPanel(panel)
 	// cpanel options page menu item clicks
 	$('div.infinity-cpanel-options-menu a.infinity-cpanel-options-menu-show', panel).bind('click',
 		function(){
-			loadOption($(this).attr('id'), panel);
+			loadOption(this, panel);
 			return false;
 		}
 	);
@@ -112,10 +112,13 @@ function initOptionsPanel(panel)
 	}
 
 	// load option screen
-	function loadOption(id, panel)
+	function loadOption(anchor, panel)
 	{
 		// what to load?
-		var load = id.split('___');
+		var id = $(anchor).attr('id'),
+			section = $(anchor).attr('data-ice-section'),
+			group = $(anchor).attr('data-ice-group'),
+			name = $(anchor).attr('data-ice-name');
 
 		// message element
 		var message =
@@ -129,8 +132,9 @@ function initOptionsPanel(panel)
 			iceEasyGlobalL10n.ajax_url,
 			{
 				'action': 'infinity_options_screen',
-				'load_section': load[1],
-				'load_option': (load[3]) ? load[3] : ''
+				'load_section': section,
+				'load_group': group,
+				'load_name': name
 			},
 			function(r) {
 				var sr = iceEasyAjax.splitResponseStd(r);

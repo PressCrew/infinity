@@ -77,10 +77,10 @@ class ICE_Ext_Feature_Gravatar
 	public function image_css( $style )
 	{
 		// options
-		$opt_border_width = $this->get_suboption('border-width')->get();
-		$opt_border_color = $this->get_suboption('border-color')->get();
-		$opt_padding = $this->get_suboption('padding')->get();
-		$opt_bg_color = $this->get_suboption('bg-color')->get();
+		$opt_border_width = $this->get_grouped( 'option', 'border-width' )->get();
+		$opt_border_color = $this->get_grouped( 'option','border-color' )->get();
+		$opt_padding = $this->get_grouped( 'option', 'padding' )->get();
+		$opt_bg_color = $this->get_grouped( 'option', 'bg-color' )->get();
 
 		// add rules
 		$img = $style->rule( 'image', 'img.' . $this->image_class );
@@ -107,11 +107,11 @@ class ICE_Ext_Feature_Gravatar
 	public function url()
 	{
 		// options
-		$opt_size = $this->get_suboption('size')->get();
-		$opt_default_set = $this->get_suboption('default-set')->get();
-		$opt_default_img = $this->get_suboption('default-img')->get_image_url();
-		$opt_default_force = $this->get_suboption('default-force')->get();
-		$opt_rating = $this->get_suboption('option_rating')->get();
+		$opt_size = $this->get_grouped( 'option', 'size' )->get();
+		$opt_default_set = $this->get_grouped( 'option', 'default-set' )->get();
+		$opt_default_img = $this->get_grouped( 'option', 'default-img' )->get_image_url();
+		$opt_default_force = $this->get_grouped( 'option', 'default-force' )->get();
+		$opt_rating = $this->get_grouped( 'option', 'option_rating' )->get();
 
 		// the hash
 		$hash = md5( strtolower( trim( get_the_author_meta( 'user_email' ) ) ) );

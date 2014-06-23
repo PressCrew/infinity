@@ -9,8 +9,9 @@
  * @subpackage config
  */
 
-$this->register( 'pages-list',
+ice_register_widget( 
 	array(
+		'name' => 'pages-list',
 		'type' => 'posts-list',
 		'title' => 'Edit blog pages',
 		'description' => 'Edit your blog pages and modify the order',

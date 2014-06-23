@@ -26,7 +26,6 @@ class ICE_Extensions extends ICE_Componentable
 	const KEY_EXTENDS = 'extends';
 	const KEY_PATH = 'path';
 	const KEY_CLASS = 'class';
-	const KEY_OPTS = 'options';
 	const KEY_TPL = 'template';
 
 	/**
@@ -50,8 +49,7 @@ class ICE_Extensions extends ICE_Componentable
 		self::KEY_PATH => '',
 		self::KEY_CLASS => '',
 		self::KEY_EXTENDS => false,
-		self::KEY_TPL => false,
-		self::KEY_OPTS => array()
+		self::KEY_TPL => false
 	);
 
 	/**
@@ -80,15 +78,16 @@ class ICE_Extensions extends ICE_Componentable
 	 *
 	 * @param string $ext
 	 * @param string $name
+	 * @param string $group
 	 * @return object
 	 */
-	public function create( $ext, $name )
+	public function create( $ext, $name, $group = 'default' )
 	{
 		// make sure the extension is loaded
 		$class_name = $this->load( $ext );
 
 		// construct it
-		return new $class_name( $this->_policy, $name, $ext );
+		return new $class_name( $this->_policy, $ext, $name, $group );
 	}
 
 	/**
@@ -378,4 +377,21 @@ class ICE_Extensions extends ICE_Componentable
 	{
 		return $this->resolve_parent_file( $ext, self::KEY_TPL, self::DEFAULT_TPL );
 	}
+}
+
+
+//
+// Helpers
+//
+
+/**
+ * Register an extension.
+ *
+ * @param string $policy The component type.
+ * @param string $ext The extension type.
+ * @param array $settings Array of settings.
+ */
+function ice_register_extension( $policy, $ext, $settings )
+{
+	ICE_Policy::instance( $policy )->extensions()->register( $ext, $settings );
 }

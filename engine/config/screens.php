@@ -10,7 +10,8 @@
  */
 
 // register cpanel screen extension
-$this->policy()->extensions()->register(
+ice_register_extension(
+	'screen',
 	'cpanel',
 	array(
 		'path' => INFINITY_ENGINE_PATH . '/extensions/screens/cpanel',
@@ -18,9 +19,9 @@ $this->policy()->extensions()->register(
 	)
 );
 
-$this->register(
-	'start',
+ice_register_screen(
 	array(
+		'name' => 'start',
 		'type' => 'cpanel',
 		'title' => 'Start',
 		'priority' => 10,
@@ -28,9 +29,9 @@ $this->register(
 	)
 );
 
-$this->register(
-	'options',
+ice_register_screen(
 	array(
+		'name' => 'options',
 		'type' => 'cpanel',
 		'title' => 'Options',
 		'priority' => 20,

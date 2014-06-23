@@ -9,9 +9,9 @@
  * @subpackage config
  */
 
-$this->register(
-	'access',
+ice_register_shortcode(
 	array(
+		'name' => 'access',
 		'type' => 'access',
 		'title' => 'Access Check',
 		'description' => 'Display content to logged in users only',
@@ -21,9 +21,9 @@ $this->register(
 	)
 );
 
-$this->register(
-	'visitor',
+ice_register_shortcode(
 	array(
+		'name' => 'visitor',
 		'type' => 'visitor',
 		'title' => 'Visitor Content',
 		'description' => 'Display content to non-logged in users only'

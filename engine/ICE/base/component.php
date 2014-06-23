@@ -102,6 +102,20 @@ abstract class ICE_Component
 	protected $documentation;
 
 	/**
+	 * The component group
+	 *
+	 * @var string
+	 */
+	private $group;
+
+	/**
+	 * The component group prefixed name.
+	 *
+	 * @var string
+	 */
+	private $gname;
+
+	/**
 	 * The component hash name. A crc32 hash of the aname in hex format
 	 *
 	 * @var string
@@ -187,13 +201,14 @@ abstract class ICE_Component
 
 	/**
 	 * @param ICE_Policy $policy The policy to apply to this component
-	 * @param string $name Option name may only contain alphanumeric characters as well as the underscore for use as a word separator.
 	 * @param string $type The extension type of this component
+	 * @param string $name Option name may only contain alphanumeric characters as well as the underscore for use as a word separator.
+	 * @param string $group The (optional) group of this component
 	 * @throws ICE_Requirements_Exception
 	 * @throws ICE_Initialization_Exception
 	 * @throws ICE_Capabilities_Exception
 	 */
-	final public function __construct( ICE_Policy $policy, $name, $type )
+	final public function __construct( ICE_Policy $policy, $type, $name, $group = 'default' )
 	{
 		// call parent
 		parent::__construct( $policy );
@@ -205,26 +220,20 @@ abstract class ICE_Component
 				sprintf( 'Cannot construct the "%s" %s component: requirements check failed', $name, $type ) );
 		}
 
-		// does name match required format?
-		if ( preg_match( '/^[a-z][a-z0-9]*((_|-)[a-z0-9]+)*$/', $name ) ) {
-			// yes, set it
-			$this->name = $name;
-		} else {
-			throw new Exception( sprintf(
-				'The %s name "%s" does not match the allowed pattern',
-				$policy->get_handle(), $name
-			));
-		}
+		// set core properties
+		$this->type = $type;
+		$this->name = $name;
+		$this->group = $group;
+
+		// the "group prefixed name"
+		$this->gname = ( $group ) ? $group . '-' . $name : $name;
 
 		// the "atypical name" is unique across all components
-		$this->aname = $policy->get_handle( false ) . '/' . $name;
+		$this->aname = $policy->get_handle( false ) . '/' . $this->gname;
 
 		// the "hash name" is the crc32 hex hash of the aname
 		$this->hname = hash( 'crc32', $this->aname );
-
-		// the type of this component
-		$this->type = $type;
-
+		
 		// call configure template method
 		$this->configure();
 
@@ -251,6 +260,16 @@ abstract class ICE_Component
 	public function get_name()
 	{
 		return $this->name;
+	}
+
+	/**
+	 * Return group property.
+	 *
+	 * @return string
+	 */
+	public function get_group()
+	{
+		return $this->group;
 	}
 
 	/**
@@ -354,7 +373,7 @@ abstract class ICE_Component
 	final protected function import_settings( $config, $types = array() )
 	{
 		// get all raw setting values
-		$raw_values = $this->_policy->registry()->get_settings( $this->name );
+		$raw_values = $this->_policy->registry()->get_settings( $this->name, $this->group );
 
 		// loop raw values, NOT settings
 		foreach ( $raw_values as $setting => $raw_value ) {
@@ -428,10 +447,7 @@ abstract class ICE_Component
 		);
 
 		// parent sanity check
-		if (
-			true === isset( $this->parent ) &&
-			$this->name == $this->parent
-		) {
+		if ( $this->name === $this->parent ) {
 			throw new Exception(
 				sprintf( 'The component "%s" cannot be a parent of itself', $this->name ) );
 		}
@@ -601,7 +617,7 @@ abstract class ICE_Component
 			if ( $path ) {
 				// yep, register it
 				ice_register_style(
-					$this->name,
+					$this->gname,
 					array(
 						'src' => ICE_Files::file_to_site_url( $path ),
 						'deps' => $this->style_depends
@@ -624,7 +640,7 @@ abstract class ICE_Component
 			if ( $path ) {
 				// yep, register it
 				ice_register_script(
-					$this->name,
+					$this->gname,
 					array(
 						'src' => ICE_Files::file_to_site_url( $path ),
 						'deps' => $this->script_depends,
@@ -645,7 +661,7 @@ abstract class ICE_Component
 		// is a required feature set?
 		if ( null !== $this->required_feature ) {
 			// check for theme support
-			if ( false == current_theme_supports( $this->required_feature ) ) {
+			if ( false == current_theme_supports( $this->group, $this->required_feature ) ) {
 				// no theme support
 				return false;
 			}
@@ -656,24 +672,6 @@ abstract class ICE_Component
 	}
 
 	/**
-	 * Set the name
-	 *
-	 * @param string $name
-	 */
-	final protected function validate_name( $name )
-	{
-		// name must adhere to a strict format
-		if ( preg_match( '/^[a-z][a-z0-9]*((_|-)[a-z0-9]+)*$/', $name ) ) {
-			return $name;
-		} else {
-			throw new Exception( sprintf(
-				'The %s name "%s" does not match the allowed pattern',
-				$this->_policy->get_handle(), $name
-			));
-		}
-	}
-
-	/**
 	 * Returns true if component is parent of given component
 	 *
 	 * @param ICE_Component $component
@@ -681,26 +679,10 @@ abstract class ICE_Component
 	 */
 	public function is_parent_of( ICE_Component $component )
 	{
-		return $this->name == $component->get_property( 'parent' );
-	}
-
-	/**
-	 * Return the parent component (if set)
-	 *
-	 * Always check if parent is set first to avoid an exception being thrown
-	 *
-	 * @return ICE_Component
-	 */
-	public function parent()
-	{
-		// is a parent set
-		if ( $this->parent ) {
-			// yes, look it up from the registry and return
-			return $this->_policy->registry()->get( $this->parent );
-		} else {
-			throw new Exception(
-				sprintf( 'The "%s" component does not have a parent set', $this->name ) );
-		}
+		return (
+			$this->group === $component->get_group() &&
+			$this->name === $component->get_property( 'parent' )
+		);
 	}
 
 	/**
@@ -714,48 +696,18 @@ abstract class ICE_Component
 	}
 
 	/**
-	 * Format a suboption name using the glue character defined in the registry
+	 * Return component of given policy belonging to same group.
 	 *
-	 * @param string $name
-	 * @return string
-	 */
-	public function format_suboption( $name )
-	{
-		// call registry suboption format helper
-		return ICE_Registry::format_suboption( $this->name, $name );
-	}
-
-	/**
-	 * Return sub-option of this component by passing ONLY the sub-option
-	 * portion of the component name.
+	 * To retrieve the "color" option object, simply call $feature->get_grouped( 'option', 'color');
 	 *
-	 * To retrieve the "color" option object, simply call $feature->get_suboption('color');
-	 *
-	 * @param string $name Name of the sub-option
+	 * @param string $policy The component policy handle.
+	 * @param string $name Name of the component.
 	 * @return array
 	 */
-	public function get_suboption( $name )
+	public function get_grouped( $policy, $name )
 	{
-		// build up option name
-		$option_name = $this->format_suboption( $name );
-
 		// get and return it
-		return $this->_policy->options()->registry()->get( $option_name );
-	}
-
-	/**
-	 * Check if suboption is registered
-	 *
-	 * @param string $name
-	 * @return boolean
-	 */
-	public function has_suboption( $name )
-	{
-		// build up option name
-		$option_name = $this->format_suboption( $name );
-
-		// get and return it
-		return $this->_policy->options()->registry()->has( $option_name );
+		return ICE_Policy::instance( $policy )->registry()->get( $name, $this->group );
 	}
 
 	/**

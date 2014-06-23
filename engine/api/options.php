@@ -48,7 +48,7 @@ function infinity_option( $option_name, $output = true )
  */
 function infinity_option_image_src( $option_name, $size = 'thumbnail' )
 {
-	return ICE_Policy::options()->registry()->get( $option_name )->get_image_src( $size );
+	return ICE_Policy::options()->registry()->get_fancy( $option_name )->get_image_src( $size );
 }
 
 /**
@@ -62,7 +62,7 @@ function infinity_option_image_src( $option_name, $size = 'thumbnail' )
  */
 function infinity_option_image_url( $option_name, $size = 'thumbnail' )
 {
-	return ICE_Policy::options()->registry()->get( $option_name )->get_image_url( $size );
+	return ICE_Policy::options()->registry()->get_fancy( $option_name )->get_image_url( $size );
 }
 
 /**
@@ -75,7 +75,7 @@ function infinity_option_image_url( $option_name, $size = 'thumbnail' )
  */
 function infinity_option_fetch( $option_name )
 {
-	return ICE_Policy::options()->registry()->get( $option_name );
+	return ICE_Policy::options()->registry()->get_fancy( $option_name );
 }
 
 /**
@@ -174,18 +174,6 @@ function infinity_option_render_buttons()
 {
 	global $infinity_246f86b591;
 	return $infinity_246f86b591->render_buttons();
-}
-
-/**
- * Render the save all button element for the option
- *
- * @package Infinity-api
- * @subpackage options
- */
-function infinity_option_render_save_all()
-{
-	global $infinity_246f86b591;
-	return $infinity_246f86b591->render_save_all();
 }
 
 /**
@@ -329,11 +317,18 @@ function infinity_options_render_options_screen()
 		ICE_Ajax::responseStd( false, 'Missing required "load_section" parameter' );
 	}
 
-	// option
-	$load_option = null;
+	// group
+	$load_group = null;
 
-	if ( !empty($_POST['load_option']) ) {
-		$load_option = $_POST['load_option'];
+	if ( !empty($_POST['load_group']) ) {
+		$load_group = $_POST['load_group'];
+	}
+
+	// name
+	$load_name = null;
+
+	if ( !empty($_POST['load_name']) ) {
+		$load_name = $_POST['load_name'];
 	}
 
 	// options to render
@@ -345,9 +340,9 @@ function infinity_options_render_options_screen()
 	// did we get a valid section?
 	if ( $section instanceof ICE_Section ) {
 		// load specific option?
-		if ( $load_option ) {
+		if ( $load_name ) {
 			// look up the single option
-			$option = ICE_Policy::options()->registry()->get( $load_option );
+			$option = ICE_Policy::options()->registry()->get( $load_name, $load_group );
 			// did we get a valid option?
 			if ( $option instanceof ICE_Option ) {
 				// add it to options to array
@@ -391,8 +386,8 @@ add_action( 'wp_ajax_infinity_options_screen', 'infinity_options_render_options_
  */
 function infinity_options_init_form_processing()
 {
-	// is field manifest set in POST?
-	if ( empty( $_POST[ ICE_Option_Renderer::FIELD_MANIFEST ] ) ) {
+	// is admin?
+	if ( false === ICE_IS_ADMIN ) {
 		// nope, just return
 		return;
 	}

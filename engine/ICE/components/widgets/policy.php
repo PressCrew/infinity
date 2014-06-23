@@ -32,3 +32,18 @@ class ICE_Widget_Policy extends ICE_Policy
 		return ( $plural ) ? 'widgets' : 'widget';
 	}
 }
+
+//
+// Helpers
+//
+
+/**
+ * Register a widget.
+ *
+ * @param array $args
+ * @param array $defaults
+ */
+function ice_register_widget( $args, $defaults = array() )
+{
+	ICE_Policy::widgets()->registry()->register( $args, $defaults );
+}

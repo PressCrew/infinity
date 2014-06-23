@@ -22,11 +22,6 @@ ICE_Loader::load( 'base/renderer' );
 class ICE_Option_Renderer extends ICE_Renderer
 {
 	/**
-	 * The field which contains all of the options which were rendered
-	 */
-	const FIELD_MANIFEST = '__opt_manifest__';
-
-	/**
 	 * Renders option container opening and flash message elements
 	 *
 	 * @param string $block_class Additonal class(es) for the options block container
@@ -35,7 +30,6 @@ class ICE_Option_Renderer extends ICE_Renderer
 	{
 		// begin rendering ?>
 		<div <?php $this->render_attrs( 'ice-options-block', $block_class ) ?>>
-			<?php $this->render_manifest() ?>
 			<div class="ice-options-mesg">
 				<!-- flash messages for this option will render here -->
 			</div><?php
@@ -138,19 +132,6 @@ class ICE_Option_Renderer extends ICE_Renderer
 	{
 		print esc_attr( $this->component()->get_property( 'field_class' ) );
 	}
-
-	/**
-	 * Render save all options button
-	 *
-	 * @param string $class
-	 */
-	public function render_save_all( $class = null )
-	{
-		// begin rendering ?>
-		<a class="<?php $this->merge_classes('ice-options-save', 'ice-options-save-all', $class) ?>" href="#">
-			<?php _e( 'Save All', 'infinity' ); ?>
-		</a><?php
-	}
 	
 	/**
 	 * Render save one option button
@@ -159,13 +140,10 @@ class ICE_Option_Renderer extends ICE_Renderer
 	 */
 	public function render_save_one( $class = null )
 	{
-		// check scheme setting
-		if ( ICE_Scheme::instance()->settings()->get_value( ICE_Scheme::SETTING_OPT_SAVE_SINGLE ) ):
-			// begin rendering ?>
-			<a class="<?php $this->merge_classes('ice-options-save', 'ice-options-save-one', $class) ?>" href="#<?php $this->render_name() ?>">
-				<?php _e( 'Save', 'infinity' ); ?>
-			</a><?php
-		endif;
+		// begin rendering ?>
+		<a class="<?php $this->merge_classes('ice-options-save', 'ice-options-save-one', $class) ?>" href="#<?php $this->render_name() ?>">
+			<?php _e( 'Save', 'infinity' ); ?>
+		</a><?php
 	}
 
 	/**
@@ -186,22 +164,10 @@ class ICE_Option_Renderer extends ICE_Renderer
 	 */
 	final public function render_buttons()
 	{
-		// save all
-		$this->render_save_all();
-
 		// save one
 		$this->render_save_one();
 
 		// reset one
 		$this->render_reset_one();
-	}
-
-	/**
-	 * Render a hidden input which appends the current option name to the manifest
-	 */
-	final public function render_manifest()
-	{
-		// begin rendering ?>
-		<input type="hidden" name="<?php print self::FIELD_MANIFEST ?>[]" value="<?php $this->render_name() ?>" /><?php
 	}
 }

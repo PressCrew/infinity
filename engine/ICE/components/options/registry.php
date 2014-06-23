@@ -43,38 +43,6 @@ class ICE_Option_Registry extends ICE_Registry
 	}
 
 	/**
-	 * Load option config as a feature option if the "feature" setting is set.
-	 *
-	 * @param string $feature
-	 * @param string $option
-	 * @param array $settings
-	 * @return boolean
-	 */
-	public function register_feature_option( $feature, $option, $settings )
-	{
-		// format option name
-		$suboption = ICE_Registry::format_suboption( $feature, $option );
-
-		// set feature and required feature
-		$settings['feature'] = $settings['required_feature'] = $feature;
-
-		// clean up parent
-		if ( isset( $settings['parent'] ) ) {
-			$settings['parent'] = $this->normalize_name( $settings['parent'] );
-		}
-
-		// call register method
-		if ( $this->register( $suboption, $settings ) ) {
-			// successfully loaded feature sub option
-			return true;
-		}
-
-		// this is really bad
-		throw new Exception( sprintf(
-			'Failed to load "%s" as a suboption for feature "%s"', $suboption, $feature ) );
-	}
-
-	/**
 	 * Return the theme modification value for given key.
 	 *
 	 * @param string $key
@@ -120,7 +88,7 @@ class ICE_Option_Registry extends ICE_Registry
 	}
 
 	/**
-	 * Return sibling options as an array
+	 * Return sibling options as an array.
 	 *
 	 * @param ICE_Option $option
 	 * @return array
@@ -130,10 +98,15 @@ class ICE_Option_Registry extends ICE_Registry
 		// options to return
 		$options = array();
 
-		// render options that require this one
-		foreach ( $this->get_all() as $sibling_option ) {
-			if ( $option->get_name() == $sibling_option->get_property( 'parent' ) ) {
-				$options[] = $sibling_option;
+		// loop all option groups
+		foreach ( $this->get_all() as $grp_options ) {
+			// loop all group options
+			foreach ( $grp_options as $grp_option ) {
+				// is passed option parent of this option?
+				if ( true === $option->is_parent_of( $grp_option ) ) {
+					// yes, push onto stack.
+					$options[] = $grp_option;
+				}
 			}
 		}
 
@@ -151,16 +124,17 @@ class ICE_Option_Registry extends ICE_Registry
 		// options to return
 		$options = array();
 
-		// loop through and compare names
-		foreach ( parent::get_all() as $option ) {
-
-			// do section names match?
-			if ( $section->get_name() != $option->get_property( 'section' ) ) {
-				continue;
+		// loop option groups
+		foreach ( parent::get_all() as $grp_options ) {
+			// loop group options
+			foreach ( $grp_options as $grp_option ) {
+				// do section names match?
+				if ( $section->get_name() != $grp_option->get_property( 'section' ) ) {
+					continue;
+				}
+				// add to array
+				$options[] = $grp_option;
 			}
-
-			// add to array
-			$options[] = $option;
 		}
 
 		// return them
@@ -177,7 +151,7 @@ class ICE_Option_Registry extends ICE_Registry
 	 * @return array
 	 */
 	public function get_menu_options( ICE_Section $section = null )
-	{
+	{		
 		// get all options for section
 		$options = $this->get_for_section( $section );
 
@@ -200,17 +174,15 @@ class ICE_Option_Registry extends ICE_Registry
 	{
 		if ( empty( $_POST ) ) {
 			return false;
-		} elseif ( isset( $_POST[ICE_Option_Renderer::FIELD_MANIFEST] ) ) {
+		} else {
 
 			// check nonce
 			check_admin_referer( 'ice_options_update' );
 
-			$manifest = $_POST[ICE_Option_Renderer::FIELD_MANIFEST];
-
-			// "save only these" option names if param is set
-			$save_options =
-				!empty( $_POST['option_names'] ) ?
-				explode( ',', $_POST['option_names'] ) : null;
+			// get option name to save
+			$option_name =
+				!empty( $_POST['option_name'] ) ?
+				$_POST['option_name'] : null;
 
 			// do a reset if option reset param is set
 			$reset_options =
@@ -220,46 +192,43 @@ class ICE_Option_Registry extends ICE_Registry
 			// keep track of how many were updated
 			$save_count = 0;
 
-			// loop through manifest options
-			foreach ( $manifest as $option_name ) {
+			// split option name at underscore to get group and name
+			$split = explode( '_', $option_name );
 
-				// skip options that don't exist in save options if set
-				if ( !empty( $save_options ) && !in_array( $option_name, $save_options ) ) {
-					continue;
-				}
+			$group = $split[0];
+			$name = $split[1];
 
-				// is this option registered?
-				if ( $this->has( $option_name ) ) {
-					// look for option name as POST key
-					if ( array_key_exists( $option_name, $_POST ) ) {
-						// reset?
-						if ( $reset_options ) {
-							// remove value completely
-							$this->theme_mod->remove( $option_name );
-						} else {
-							// is new value a string?
-							if ( is_string( $_POST[ $option_name ] ) ) {
-								// yep, strip slashes
-								$new_value = stripslashes( $_POST[ $option_name ] );
-							} else {
-								// nope, use as is
-								$new_value = $_POST[ $option_name ];
-							}
-							// is new value numeric?
-							if ( is_numeric( $new_value ) ) {
-								// yep, force it to float since it could be an int or a float
-								settype( $new_value, 'float' );
-							}
-							// update it
-							$this->theme_mod->set( $option_name, $new_value );
-						}
-					} else {
-						// not in POST, remove it
+			// is this option registered?
+			if ( $this->has( $name, $group ) ) {
+				// look for option name as POST key
+				if ( array_key_exists( $option_name, $_POST ) ) {
+					// reset?
+					if ( $reset_options ) {
+						// remove value completely
 						$this->theme_mod->remove( $option_name );
+					} else {
+						// is new value a string?
+						if ( is_string( $_POST[ $option_name ] ) ) {
+							// yep, strip slashes
+							$new_value = stripslashes( $_POST[ $option_name ] );
+						} else {
+							// nope, use as is
+							$new_value = $_POST[ $option_name ];
+						}
+						// is new value numeric?
+						if ( is_numeric( $new_value ) ) {
+							// yep, force it to float since it could be an int or a float
+							settype( $new_value, 'float' );
+						}
+						// update it
+						$this->theme_mod->set( $option_name, $new_value );
 					}
-					// increment the count
-					$save_count++;
+				} else {
+					// not in POST, remove it
+					$this->theme_mod->remove( $option_name );
 				}
+				// increment the count
+				$save_count++;
 			}
 
 			// save the changes
@@ -268,8 +237,6 @@ class ICE_Option_Registry extends ICE_Registry
 			// done saving
 			return $save_count;
 
-		} else {
-			throw new Exception( 'No manifest was rendered' );
 		}
 	}
 

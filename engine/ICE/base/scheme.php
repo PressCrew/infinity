@@ -35,10 +35,6 @@ final class ICE_Scheme extends ICE_Base
 	 * Script root setting
 	 */
 	const SETTING_SCRIPT_ROOT = 'script_root';
-	/**
-	 * Options save single setting
-	 */
-	const SETTING_OPT_SAVE_SINGLE = 'options_save_single';
 
 	/**
 	 * Singleton instance

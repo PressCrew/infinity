@@ -84,7 +84,7 @@ class ICE_Ext_Option_Css_Overlay_Opacity
 		// linked image set?
 		if ( $this->linked_image ) {
 			// get it
-			$ne_option = $this->policy()->registry()->get( $this->linked_image )->get();
+			$ne_option = $this->policy()->registry()->get( $this->linked_image, $this->get_group() )->get();
 			// return true if NOT empty
 			return ( !empty( $ne_option ) );
 		}
