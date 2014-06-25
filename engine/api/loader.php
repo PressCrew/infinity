@@ -29,21 +29,8 @@ require_once INFINITY_API_PATH . '/shortcodes.php';
  */
 function infinity_scheme_init()
 {
-	// get scheme instance
-	$scheme = ICE_Scheme::instance();
-
 	// initialize the scheme
-	$scheme->set_config_file( 'global' );
-	$scheme->set_config_dir( INFINITY_ENGINE_DIR . '/config' );
-	$scheme->init();
-
-	// enable components
-	$scheme->enable_component( 'feature' );
-	$scheme->enable_component( 'section' );
-	$scheme->enable_component( 'option' );
-	$scheme->enable_component( 'screen' );
-	$scheme->enable_component( 'shortcode' );
-	$scheme->enable_component( 'widget' );
+	ICE_Scheme::instance()->init( INFINITY_ENGINE_DIR . '/infinity-config.php' );
 
 	// scheme initialization is done
 	do_action( 'infinity_scheme_init' );

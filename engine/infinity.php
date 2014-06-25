@@ -85,6 +85,11 @@ define( 'INFINITY_ICE_URL', INFINITY_ENGINE_URL . '/ICE' );
 define( 'INFINITY_API_PATH', INFINITY_ENGINE_PATH . '/api' );
 
 /**
+ * Infinity config directory path
+ */
+define( 'INFINITY_CONFIG_PATH', INFINITY_ENGINE_PATH . '/config' );
+
+/**
  * Infinity includes directory path
  */
 define( 'INFINITY_INC_PATH', INFINITY_ENGINE_PATH . '/includes' );

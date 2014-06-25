@@ -51,13 +51,6 @@ final class ICE_Scheme extends ICE_Base
 	private $root_theme;
 
 	/**
-	 * Relative path to the config dir relative to the theme's template path
-	 *
-	 * @var string
-	 */
-	private $config_dir;
-
-	/**
 	 * Name of the configuration file that is preferred by the API
 	 *
 	 * @var string
@@ -111,13 +104,17 @@ final class ICE_Scheme extends ICE_Base
 	/**
 	 * One time initialization helper
 	 *
-	 * @return ICE_Scheme
+	 * @param string $config_file Path to config file relative the theme dir.
 	 */
-	public function init()
+	public function init( $config_file )
 	{
-		// do not init scheme twice
-		if ( $this->root_theme ) {
-			return;
+		// is config file null?
+		if ( null === $this->config_file ) {
+			// yes, set it
+			$this->config_file = $config_file;
+		} else {
+			// already set, not good
+			throw new Exception( 'The scheme can only be initialized one time.' );
 		}
 
 		// root theme is always template
@@ -133,8 +130,6 @@ final class ICE_Scheme extends ICE_Base
 		add_action( 'after_setup_theme', array($this, 'finalize'), 101 );
 		add_action( 'wp_head', array($this, 'render_assets'), 11 );
 		add_action( 'admin_head', array($this, 'render_assets'), 11 );
-
-		return $this;
 	}
 
 	/**
@@ -145,38 +140,6 @@ final class ICE_Scheme extends ICE_Base
 	final public function settings()
 	{
 		return $this->settings;
-	}
-
-	/**
-	 * Set the name of the dir under the child themes where the config file lives
-	 *
-	 * @param string $dir_name
-	 * @return boolean
-	 */
-	final public function set_config_dir( $dir_name )
-	{
-		if ( null === $this->config_dir ) {
-			$this->config_dir = $dir_name;
-			return true;
-		} else {
-			throw new Exception( 'Cannot set config dir, already set' );
-		}
-	}
-
-	/**
-	 * Set the name of the config file that your API uses
-	 *
-	 * @param string $file_name
-	 * @return boolean
-	 */
-	final public function set_config_file( $file_name )
-	{
-		if ( null === $this->config_file ) {
-			$this->config_file = $file_name;
-			return true;
-		} else {
-			throw new Exception( 'Cannot set config file, already set' );
-		}
 	}
 
 	/**
@@ -222,7 +185,7 @@ final class ICE_Scheme extends ICE_Base
 	public function load( $theme )
 	{
 		// get path to config file
-		$config_file = $this->theme_config_file( $theme, $this->config_file );
+		$config_file = $this->theme_file( $theme, $this->config_file );
 
 		// does config file exist?
 		if ( is_readable( $config_file )  ) {
@@ -285,33 +248,6 @@ final class ICE_Scheme extends ICE_Base
 			<?php ICE_Scripts::instance()->render(); ?>
 		//]]>
 		</script><?php
-	}
-
-	/**
-	 * Enable components for the scheme by passing a valid component type.
-	 *
-	 * @param string $type The component type to enable.
-	 * @return boolean
-	 */
-	public function enable_component( $type )
-	{
-		// get the policy for the type
-		$policy = ICE_Policy::instance( $type );
-
-		// loop through entire theme stack BOTTOM UP and try to load options
-		foreach( $this->theme_stack( false ) as $theme ) {
-
-			// path to config file
-			$config_file = $this->theme_config_file( $theme, $policy->get_handle() );
-
-			// does the option config exist?
-			if ( is_readable( $config_file ) ) {
-				// yep, try to load it
-				$policy->registry()->register_file( $config_file );
-			}
-		}
-
-		return true;
 	}
 
 	/**
@@ -502,33 +438,6 @@ final class ICE_Scheme extends ICE_Base
 		$args = func_get_args();
 		
 		return call_user_func_array( array( 'ICE_Files', 'theme_file_url' ), $args );
-	}
-
-	/**
-	 * Return path to a specific theme's configuration file
-	 *
-	 * @param string $theme
-	 * @return string
-	 */
-	final public function theme_config_dir( $theme )
-	{
-		// return config dir as is
-		return $this->config_dir;
-	}
-
-	/**
-	 * Return path to a specific theme's configuration file
-	 *
-	 * @param string $theme
-	 * @return string
-	 */
-	final public function theme_config_file( $theme, $filename )
-	{
-		// the relative config dir path
-		$config_dir = $this->theme_config_dir( $theme );
-
-		// return absolute path to theme file
-		return $this->theme_file( $theme, $config_dir, $filename . '.php' );
 	}
 
 	/**

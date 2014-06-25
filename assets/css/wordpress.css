@@ -494,11 +494,6 @@ This CSS file contains all the default WordPress Styling.
 	+ Meta & Breadcrumbs
 	+ Author/Category/Tag Boxes
 	+ Comments
-
-You can disable the css in this file by adding the following code to your child theme config/global.php file
-
-infinity-wp-style = off
-
 /*
 ================================================== */
 /* Base */

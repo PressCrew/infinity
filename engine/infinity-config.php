@@ -33,3 +33,11 @@ ice_update_setting( INFINITY_NAME, 'style_root',  'assets/css' );
 // If your script directory is: wp-content/themes/my-theme/content/js
 // Then your script root would be: script_root = 'content/js'
 ice_update_setting( INFINITY_NAME, 'script_root',  'assets/js' );
+
+// Load component config files
+require_once INFINITY_CONFIG_PATH . '/features.php';
+require_once INFINITY_CONFIG_PATH . '/options.php';
+require_once INFINITY_CONFIG_PATH . '/screens.php';
+require_once INFINITY_CONFIG_PATH . '/sections.php';
+require_once INFINITY_CONFIG_PATH . '/shortcodes.php';
+require_once INFINITY_CONFIG_PATH . '/widgets.php';
