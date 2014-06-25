@@ -16,7 +16,7 @@ ice_register_shortcode(
 		'title' => 'Access Check',
 		'description' => 'Display content to logged in users only',
 		'attributes' => array(
-			"capability=read"
+			'capability' => 'read'
 		)
 	)
 );

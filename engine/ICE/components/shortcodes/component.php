@@ -22,11 +22,6 @@ ICE_Loader::load( 'base/component' );
 abstract class ICE_Shortcode extends ICE_Component
 {
 	/**
-	 * Config attribute default override delimeter
-	 */
-	const DEFAULT_ATTR_DELIM = '=';
-
-	/**
 	 * Attributes passed to handler
 	 *
 	 * @var array
@@ -97,22 +92,8 @@ abstract class ICE_Shortcode extends ICE_Component
 		// any config att overrides set?
 		if ( is_array( $this->attributes ) ) {
 
-			// atts from config
-			$config_atts = array();
-
-			// need to split up the values
-			foreach ( $this->attributes as $attribute ) {
-				// split at delim
-				$a_parts = explode( self::DEFAULT_ATTR_DELIM, $attribute );
-				// should be exactly two parts
-				if ( count( $a_parts ) == 2 ) {
-					// first part is key, second part is value
-					$config_atts[$a_parts[0]] = $a_parts[1];
-				}
-			}
-
 			// merge the config defaults over top of the core defaults
-			$def_atts = array_merge( $this->default_atts(), $config_atts );
+			$def_atts = array_merge( $this->default_atts(), $this->attributes );
 			
 		} else {
 			// just use the core defaults
