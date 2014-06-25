@@ -27,12 +27,20 @@ class ICE_Compat_Option
 	 */
 	static public function get_api_name( ICE_Option $option )
 	{
-		// return formatted api name
+		// pre 1.2 alpha aname format
+		$aname = sprintf(
+			'%s/%s_%s',
+			$option->policy()->get_handle( false ),
+			$option->get_group(),
+			$option->get_name()
+		);
+
+		// return old api name
 		return implode(
-			ICE_Option::API_DELIM,
+			ICE_Component::API_DELIM,
 			array(
 				ICE_Option::API_PREFIX,
-				$option->get_hname(),
+				hash( 'crc32', $aname ),
 				ICE_ACTIVE_THEME
 			)
 		);

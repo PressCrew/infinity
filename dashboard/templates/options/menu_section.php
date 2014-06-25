@@ -14,14 +14,14 @@
 <div id="menu_<?php print esc_attr( $section->get_name() ) ?>">
 	<a><?php print esc_html( $section->get_property( 'title' ) ) ?></a>
 	<?php if ( empty( $children ) ): ?>
-		<a id="infinity_section_<?php print esc_attr( $section->get_hname() ) ?>" data-ice-section="<?php print esc_attr( $section->get_name() ) ?>" class="infinity-cpanel-options-menu-show infinity-cpanel-options-menu-showall" href="#"><?php _e('Show All', 'infinity') ?></a>
+		<a id="infinity_<?php print esc_attr( $section->get_aname() ) ?>" data-ice-section="<?php print esc_attr( $section->get_name() ) ?>" class="infinity-cpanel-options-menu-show infinity-cpanel-options-menu-showall" href="#"><?php _e('Show All', 'infinity') ?></a>
 	<?php endif; ?>
 </div>
 
 <?php
 	if ( $children ):
 		// render all children sections ?>
-		<div><div id="submenu_<?php print esc_attr( $section->get_name() ) ?>" class="infinity-cpanel-options-menu infinity-cpanel-options-submenu">
+		<div><div id="infinity_submenu_<?php print esc_attr( $section->get_aname() ) ?>" class="infinity-cpanel-options-menu infinity-cpanel-options-submenu">
 			<?php
 				foreach ( $children as $child ):
 					infinity_options_render_menu_section( $child );

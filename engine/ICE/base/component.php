@@ -43,6 +43,11 @@ abstract class ICE_Component
 	const API_DELIM = '.';
 
 	/**
+	 * Delimeter to use when generating HTML attributes from two or more strings.
+	 */
+	const ATTR_DELIM = '_';
+
+	/**
 	 * Name of the default section
 	 */
 	const DEFAULT_SECTION = 'default';
@@ -107,20 +112,6 @@ abstract class ICE_Component
 	 * @var string
 	 */
 	private $group;
-
-	/**
-	 * The component group prefixed name.
-	 *
-	 * @var string
-	 */
-	private $gname;
-
-	/**
-	 * The component hash name. A crc32 hash of the aname in hex format
-	 *
-	 * @var string
-	 */
-	private $hname;
 
 	/**
 	 * The CSS id to set for the component's container
@@ -225,14 +216,11 @@ abstract class ICE_Component
 		$this->name = $name;
 		$this->group = $group;
 
-		// the "group prefixed name"
-		$this->gname = ( $group ) ? $group . '-' . $name : $name;
-
 		// the "atypical name" is unique across all components
-		$this->aname = $policy->get_handle( false ) . '/' . $this->gname;
-
-		// the "hash name" is the crc32 hex hash of the aname
-		$this->hname = hash( 'crc32', $this->aname );
+		$this->aname =
+			$policy->get_handle( false ) .
+			self::ATTR_DELIM . $this->group .
+			self::ATTR_DELIM . $this->name;
 		
 		// call configure template method
 		$this->configure();
@@ -273,13 +261,13 @@ abstract class ICE_Component
 	}
 
 	/**
-	 * Return hash name property.
+	 * Return aname property.
 	 *
 	 * @return string
 	 */
-	public function get_hname()
+	public function get_aname()
 	{
-		return $this->hname;
+		return $this->aname;
 	}
 
 	/**
@@ -564,7 +552,7 @@ abstract class ICE_Component
 		if ( $this->id ) {
 			$element_id = $this->id;
 		} else {
-			$element_id = self::API_PREFIX . '-' . $this->hname;
+			$element_id = self::API_PREFIX . self::ATTR_DELIM . $this->aname;
 		}
 		
 		// set preferences
@@ -617,7 +605,7 @@ abstract class ICE_Component
 			if ( $path ) {
 				// yep, register it
 				ice_register_style(
-					$this->gname,
+					$this->aname,
 					array(
 						'src' => ICE_Files::file_to_site_url( $path ),
 						'deps' => $this->style_depends
@@ -640,7 +628,7 @@ abstract class ICE_Component
 			if ( $path ) {
 				// yep, register it
 				ice_register_script(
-					$this->gname,
+					$this->aname,
 					array(
 						'src' => ICE_Files::file_to_site_url( $path ),
 						'deps' => $this->script_depends,
