@@ -20,7 +20,7 @@
 		?>
 		<div class="page" id="blog-tag">
 			<?php
-				if ( current_theme_supports( 'infinity-post', 'intro-boxes' ) ) :
+				if ( current_theme_supports( 'infinity:post', 'intro-boxes' ) ) :
 				get_template_part( 'templates/parts/introduction-boxes' );
 				endif;
 				get_template_part( 'templates/loops/loop', 'tag' );

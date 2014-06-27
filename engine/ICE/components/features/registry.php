@@ -21,18 +21,5 @@ ICE_Loader::load_lib( 'base/registry' );
  */
 class ICE_Feature_Registry extends ICE_Registry
 {
-	/**
-	 */
-	protected function create_component( $name, $group, $type = self::DEFAULT_TYPE )
-	{
-		// only create if supported
-		if ( true === current_theme_supports( $group, $name ) ) {
-			// supported, call parent
-			return parent::create_component( $name, $group, $type );
-		} else {
-			// not supported
-			return false;
-		}
-	}
-
+	// nothing special yet
 }

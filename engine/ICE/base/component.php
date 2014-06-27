@@ -40,7 +40,7 @@ abstract class ICE_Component
 	/**
 	 * Persistence algorithms should use this as a delimeter where valid
 	 */
-	const API_DELIM = '.';
+	const API_DELIM = ':';
 
 	/**
 	 * Delimeter to use when generating HTML attributes from two or more strings.
@@ -649,7 +649,7 @@ abstract class ICE_Component
 		// is a required feature set?
 		if ( null !== $this->required_feature ) {
 			// check for theme support
-			if ( false == current_theme_supports( $this->group, $this->required_feature ) ) {
+			if ( false == current_theme_supports( ICE_SLUG . self::API_DELIM . $this->group, $this->required_feature ) ) {
 				// no theme support
 				return false;
 			}

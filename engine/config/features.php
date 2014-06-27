@@ -20,13 +20,13 @@ $overlay_image_defaults = array(
 //
 // Core Group
 //
-ice_register_group( 'infinity-core' );
+ice_register_group( 'core' );
 
 	// Global Options
 	ice_register_feature(
 		array(
 			'name' => 'options',
-			'group' => 'infinity-core',
+			'group' => 'core',
 			'type' => 'default',
 			'title' => 'Custom CSS',
 			'description' => 'Core set of options included with Infinity Base'
@@ -34,7 +34,7 @@ ice_register_group( 'infinity-core' );
 	);
 
 		$infinity_core_options_defaults = array(
-			'group' => 'infinity-core',
+			'group' => 'core',
 			'section' => 'global',
 			'required_feature' => 'options'
 		);
@@ -136,13 +136,13 @@ ice_register_group( 'infinity-core' );
 //
 // Top Menu Group
 //
-ice_register_group( 'infinity-top-menu' );
+ice_register_group( 'top-menu' );
 
 	// Top Menu Setup
 	ice_register_feature(
 		array(
 			'name' => 'setup',
-			'group' => 'infinity-top-menu',
+			'group' => 'top-menu',
 			'type' => 'default',
 			'title' => 'Above Header Menu Setup',
 			'description' => 'Register the menu above the header.'
@@ -153,7 +153,7 @@ ice_register_group( 'infinity-top-menu' );
 	ice_register_feature(
 		array(
 			'name' => 'layout',
-			'group' => 'infinity-top-menu',
+			'group' => 'top-menu',
 			'type' => 'default',
 			'title' => 'Sub Menu Styles',
 			'description' => 'Customize the layout and colors of the menu above the header.'
@@ -161,7 +161,7 @@ ice_register_group( 'infinity-top-menu' );
 	);
 
 		$infinity_top_menu_defaults = array(
-			'group' => 'infinity-top-menu',
+			'group' => 'top-menu',
 			'section' => 'menus-top',
 			'required_feature' => 'layout'
 		);
@@ -213,7 +213,7 @@ ice_register_group( 'infinity-top-menu' );
 		ice_register_option(
 			array(
 				'name' => 'overlay-image',
-				'group' => 'infinity-top-menu',
+				'group' => 'top-menu',
 				'section' => 'menus-top',
 				'style_selector' => '.top-menu'
 			),
@@ -234,13 +234,13 @@ ice_register_group( 'infinity-top-menu' );
 //
 // Main Menu Group
 //
-ice_register_group( 'infinity-main-menu' );
+ice_register_group( 'main-menu' );
 
 	// Main Menu Setup
 	ice_register_feature(
 		array(
 			'name' => 'setup',
-			'group' => 'infinity-main-menu',
+			'group' => 'main-menu',
 			'type' => 'default',
 			'title' => 'Inside Header Menu Setup',
 			'description' => 'Register the menu inside the header.'
@@ -251,7 +251,7 @@ ice_register_group( 'infinity-main-menu' );
 	ice_register_feature(
 		array(
 			'name' => 'layout',
-			'group' => 'infinity-main-menu',
+			'group' => 'main-menu',
 			'type' => 'default',
 			'title' => 'Main Menu Styles',
 			'description' => 'Customize the layout and colors of the menu inside the header.'
@@ -259,7 +259,7 @@ ice_register_group( 'infinity-main-menu' );
 	);
 	
 		$infinity_main_menu_defaults = array(
-			'group' => 'infinity-main-menu',
+			'group' => 'main-menu',
 			'section' => 'menus-main',
 			'required_feature' => 'layout'
 		);
@@ -332,13 +332,13 @@ ice_register_group( 'infinity-main-menu' );
 //
 // Sub Menu Group
 //
-ice_register_group( 'infinity-sub-menu' );
+ice_register_group( 'sub-menu' );
 
 	// Sub Menu Setup
 	ice_register_feature(
 		array(
 			'name' => 'setup',
-			'group' => 'infinity-sub-menu',
+			'group' => 'sub-menu',
 			'type' => 'default',
 			'title' => 'Below Header Menu Setup',
 			'description' => 'Register the menu below the header.'
@@ -349,7 +349,7 @@ ice_register_group( 'infinity-sub-menu' );
 	ice_register_feature(
 		array(
 			'name' => 'layout',
-			'group' => 'infinity-sub-menu',
+			'group' => 'sub-menu',
 			'type' => 'default',
 			'title' => 'Sub Menu Styles',
 			'description' => 'Customize the layout and colors of the menu below the header.'
@@ -357,7 +357,7 @@ ice_register_group( 'infinity-sub-menu' );
 	);
 	
 		$infinity_sub_menu_defaults = array(
-			'group' => 'infinity-sub-menu',
+			'group' => 'sub-menu',
 			'section' => 'menus-sub',
 			'required_feature' => 'layout'
 		);
@@ -428,13 +428,13 @@ ice_register_group( 'infinity-sub-menu' );
 //
 // Footer Menu Group
 //
-ice_register_group( 'infinity-footer-menu' );
+ice_register_group( 'footer-menu' );
 
 	// Footer Menu Setup
 	ice_register_feature(
 		array(
 			'name' => 'setup',
-			'group' => 'infinity-footer-menu',
+			'group' => 'footer-menu',
 			'type' => 'default',
 			'title' => 'Footer Menu Setup',
 			'description' => 'Register the footer menu.'
@@ -445,13 +445,13 @@ ice_register_group( 'infinity-footer-menu' );
 //
 // Sidebar Group
 //
-ice_register_group( 'infinity-sidebar' );
+ice_register_group( 'sidebar' );
 
 	// Sidebar Setup
 	ice_register_feature(
 		array(
 			'name' => 'setup',
-			'group' => 'infinity-sidebar',
+			'group' => 'sidebar',
 			'type' => 'default',
 			'title' => 'Sidebar Setup',
 			'description' => 'Sidebar Registration'
@@ -462,7 +462,7 @@ ice_register_group( 'infinity-sidebar' );
 	ice_register_feature(
 		array(
 			'name' => 'layout',
-			'group' => 'infinity-sidebar',
+			'group' => 'sidebar',
 			'type' => 'default',
 			'title' => 'sidebar Styles',
 			'description' => 'Customize the layout and colors of the sidebar'
@@ -470,7 +470,7 @@ ice_register_group( 'infinity-sidebar' );
 	);
 
 		$infinity_sidebar_layout_defaults = array(
-			'group' => 'infinity-sidebar',
+			'group' => 'sidebar',
 			'section' => 'sidebar',
 			'required_feature' => 'layout',
 			'style_selector' => '#sidebar'
@@ -545,13 +545,13 @@ ice_register_group( 'infinity-sidebar' );
 //
 // Post Group
 //
-ice_register_group( 'infinity-post' );
+ice_register_group( 'post' );
 
 	// Post Pagination
 	ice_register_feature(
 		array(
 			'name' => 'pagination',
-			'group' => 'infinity-post',
+			'group' => 'post',
 			'type' => 'default',
 			'title' => 'Pagination',
 			'description' => 'Enable pagination for your (custom) posts'
@@ -562,7 +562,7 @@ ice_register_group( 'infinity-post' );
 	ice_register_feature(
 		array(
 			'name' => 'intro-boxes',
-			'group' => 'infinity-post',
+			'group' => 'post',
 			'type' => 'default',
 			'title' => 'Introduction Boxes',
 			'description' => 'Introduction boxes that show above category, tag and author archives'
@@ -573,7 +573,7 @@ ice_register_group( 'infinity-post' );
 	ice_register_feature(
 		array(
 			'name' => 'author-boxes',
-			'group' => 'infinity-post',
+			'group' => 'post',
 			'type' => 'default',
 			'title' => 'Author Boxes',
 			'description' => 'Enable About the Author Boxes being displayed on single posts and author archives'
@@ -584,7 +584,7 @@ ice_register_group( 'infinity-post' );
 	ice_register_feature(
 		array(
 			'name' => 'avatars',
-			'group' => 'infinity-post',
+			'group' => 'post',
 			'type' => 'default',
 			'title' => 'Post Avatars',
 			'description' => 'Enable Post avatars being displayed on single posts and pages'
@@ -595,7 +595,7 @@ ice_register_group( 'infinity-post' );
 	ice_register_feature(
 		array(
 			'name' => 'gravatar',
-			'group' => 'infinity-post',
+			'group' => 'post',
 			'type' => 'gravatar',
 			'title' => 'Post Gravatars',
 			'description' => 'Total control over post gravatars',
@@ -604,7 +604,7 @@ ice_register_group( 'infinity-post' );
 	);
 
 		$infinity_post_grav_defaults = array(
-			'group' => 'infinity-post',
+			'group' => 'post',
 			'section' => 'gravatars',
 			'required_feature' => 'gravatar'
 		);
@@ -719,13 +719,13 @@ ice_register_group( 'infinity-post' );
 //
 // Font Group
 //
-ice_register_group( 'infinity-font' );
+ice_register_group( 'font' );
 
 	// Icon Sweets
 	ice_register_feature(
 		array(
 			'name' => 'iconsweets',
-			'group' => 'infinity-font',
+			'group' => 'font',
 			'type' => 'default',
 			'title' => 'The Icon Font-Face being used',
 			'description' => 'Icons',
@@ -736,13 +736,13 @@ ice_register_group( 'infinity-font' );
 //
 // WP Group
 //
-ice_register_group( 'infinity-wp' );
+ice_register_group( 'wp' );
 
 	// WordPress Support
 	ice_register_feature(
 		array(
 			'name' => 'support',
-			'group' => 'infinity-wp',
+			'group' => 'wp',
 			'type' => 'default',
 			'title' => 'Wordpress Support',
 			'description' => 'Enables WordPress support',
@@ -754,7 +754,7 @@ ice_register_group( 'infinity-wp' );
 	ice_register_feature(
 		array(
 			'name' => 'style',
-			'group' => 'infinity-wp',
+			'group' => 'wp',
 			'type' => 'default',
 			'title' => 'WordPress Styles',
 			'description' => 'The base WordPress styling',
@@ -765,13 +765,13 @@ ice_register_group( 'infinity-wp' );
 //
 // BP Group
 //
-ice_register_group( 'infinity-bp' );
+ice_register_group( 'bp' );
 
 	// BuddyPress support
 	ice_register_feature(
 		array(
 			'name' => 'support',
-			'group' => 'infinity-bp',
+			'group' => 'bp',
 			'type' => 'bp/support',
 			'title' => 'BuddyPress Support',
 			'description' => 'Enables BuddyPress support',
@@ -783,7 +783,7 @@ ice_register_group( 'infinity-bp' );
 	ice_register_feature(
 		array(
 			'name' => 'style',
-			'group' => 'infinity-bp',
+			'group' => 'bp',
 			'type' => 'default',
 			'title' => 'BuddyPress Styles',
 			'description' => 'The base BuddyPress styles',
@@ -795,25 +795,25 @@ ice_register_group( 'infinity-bp' );
 	ice_register_feature(
 		array(
 			'name' => 'sidebar-setup',
-			'group' => 'infinity-bp',
+			'group' => 'bp',
 			'section' => 'buddypress',
 			'type' => 'default',
 			'title' => 'BuddyPress Sidebar',
 			'description' => 'Special BuddyPress sidebar registration',
-			'required_feature' => 'infinity-bp-support'
+			'required_feature' => 'support'
 		)
 	);
 
 //
 // BP FBConnect Group
 //
-ice_register_group( 'infinity-bp-fbconnect' );
+ice_register_group( 'bp-fbconnect' );
 
 	// BP Facebook Connect Support
 	ice_register_feature(
 		array(
 			'name' => 'support',
-			'group' => 'infinity-bp-fbconnect',
+			'group' => 'bp-fbconnect',
 			'type' => 'bp/fb-autoconnect',
 			'class' => 'info-box register-intro'
 		)
@@ -821,7 +821,7 @@ ice_register_group( 'infinity-bp-fbconnect' );
 		ice_register_option(
 			array(
 				'name' => 'toggle',
-				'group' => 'infinity-bp-fbconnect',
+				'group' => 'bp-fbconnect',
 				'section' => 'buddypress',
 				'type' => 'toggle/yes-no',
 				'required_feature' => 'support',
@@ -834,13 +834,13 @@ ice_register_group( 'infinity-bp-fbconnect' );
 //
 // Extensions Group
 //
-ice_register_group( 'infinity-ext' );
+ice_register_group( 'ext' );
 
 	// Extensions Support
 	ice_register_feature(
 		array(
 			'name' => 'support',
-			'group' => 'infinity-ext',
+			'group' => 'ext',
 			'type' => 'default',
 			'title' => 'Extension Styles',
 			'description' => 'Enables extensions support',
@@ -851,13 +851,13 @@ ice_register_group( 'infinity-ext' );
 //
 // Responsive Group
 //
-ice_register_group( 'infinity-resp' );
+ice_register_group( 'resp' );
 
 	// Responsive Layout Support
 	ice_register_feature(
 		array(
 			'name' => 'support',
-			'group' => 'infinity-resp',
+			'group' => 'resp',
 			'type' => 'responsive/layout',
 			'title' => 'Responsive Layout',
 			'description' => 'Enables responsive layout support',
@@ -869,7 +869,7 @@ ice_register_group( 'infinity-resp' );
 	ice_register_feature(
 		array(
 			'name' => 'menu',
-			'group' => 'infinity-resp',
+			'group' => 'resp',
 			'type' => 'responsive/menu',
 			'title' => 'Responsive Menu',
 			'description' => 'Enables the responsive menu javascript',
@@ -884,7 +884,7 @@ ice_register_group( 'infinity-resp' );
 	ice_register_feature(
 		array(
 			'name' => 'videos',
-			'group' => 'infinity-resp',
+			'group' => 'resp',
 			'type' => 'responsive/videos',
 			'title' => 'Responsive Videos',
 			'description' => 'Enables the responsive videos javascript',
@@ -895,13 +895,13 @@ ice_register_group( 'infinity-resp' );
 //
 // Typography Group
 //
-ice_register_group( 'infinity-typog' );
+ice_register_group( 'typog' );
 
 	// Typography Styles
 	ice_register_feature(
 		array(
 			'name' => 'style',
-			'group' => 'infinity-typog',
+			'group' => 'typog',
 			'type' => 'default',
 			'title' => 'Typography Styles',
 			'description' => 'The base Typography styling',
@@ -912,13 +912,13 @@ ice_register_group( 'infinity-typog' );
 //
 // Layout Group
 //
-ice_register_group( 'infinity-layout' );
+ice_register_group( 'layout' );
 
 	// Layout Styles
 	ice_register_feature(
 		array(
 			'name' => 'style',
-			'group' => 'infinity-layout',
+			'group' => 'layout',
 			'type' => 'default',
 			'title' => 'Layout Styles',
 			'description' => 'The base layout styling',
@@ -929,13 +929,13 @@ ice_register_group( 'infinity-layout' );
 //
 // Buttons Group
 //
-ice_register_group( 'infinity-buttons' );
+ice_register_group( 'buttons' );
 
 	// Button Styles
 	ice_register_feature(
 		array(
 			'name' => 'style',
-			'group' => 'infinity-buttons',
+			'group' => 'buttons',
 			'type' => 'default',
 			'title' => 'extras Styles',
 			'description' => 'The base buttons styling',
@@ -946,13 +946,13 @@ ice_register_group( 'infinity-buttons' );
 //
 // Icons Group
 //
-ice_register_group( 'infinity-icons' );
+ice_register_group( 'icons' );
 
 	// Icon Styles
 	ice_register_feature(
 		array(
 			'name' => 'style',
-			'group' => 'infinity-icons',
+			'group' => 'icons',
 			'type' => 'default',
 			'title' => 'The Icons used across the theme',
 			'description' => 'Icons',
@@ -963,13 +963,13 @@ ice_register_group( 'infinity-icons' );
 //
 // Design Group
 //
-ice_register_group( 'infinity-design' );
+ice_register_group( 'design' );
 
 	// Design Styles
 	ice_register_feature(
 		array(
 			'name' => 'style',
-			'group' => 'infinity-design',
+			'group' => 'design',
 			'type' => 'default',
 			'title' => 'Design Styles',
 			'description' => 'The styles which fancy things up a bit',
@@ -980,13 +980,13 @@ ice_register_group( 'infinity-design' );
 //
 // Base Group
 //
-ice_register_group( 'infinity-base' );
+ice_register_group( 'base' );
 
 	// Base Scripts
 	ice_register_feature(
 		array(
 			'name' => 'script',
-			'group' => 'infinity-base',
+			'group' => 'base',
 			'type' => 'default',
 			'title' => 'Base Javascript',
 			'description' => 'Some jQuery to spice up the Base Theme',
@@ -1000,13 +1000,13 @@ ice_register_group( 'infinity-base' );
 //
 // Custom Group
 //
-ice_register_group( 'infinity-custom' );
+ice_register_group( 'custom' );
 
 	// Custom CSS
 	ice_register_feature(
 		array(
 			'name' => 'css',
-			'group' => 'infinity-custom',
+			'group' => 'custom',
 			'type' => 'default',
 			'title' => 'Custom CSS',
 			'description' => 'Allow custom CSS to be provided with theme options'
@@ -1015,7 +1015,7 @@ ice_register_group( 'infinity-custom' );
 		ice_register_option(
 			array(
 				'name' => 'markup',
-				'group' => 'infinity-custom',
+				'group' => 'custom',
 				'section' => 'global',
 				'type' => 'css/custom',
 				'title' => 'Custom CSS',
@@ -1026,13 +1026,13 @@ ice_register_group( 'infinity-custom' );
 //
 // Body Group
 //
-ice_register_group( 'infinity-body' );
+ice_register_group( 'body' );
 
 	// Body Layout
 	ice_register_feature(
 		array(
 			'name' => 'layout',
-			'group' => 'infinity-body',
+			'group' => 'body',
 			'type' => 'default',
 			'title' => 'Body Layout',
 			'description' => 'Change the Body according to your taste'
@@ -1040,7 +1040,7 @@ ice_register_group( 'infinity-body' );
 	);
 
 		$infinity_body_layout_defaults = array(
-			'group' => 'infinity-body',
+			'group' => 'body',
 			'section' => 'layout',
 			'required_feature' => 'layout',
 			'style_selector' => 'body.theme-option'
@@ -1108,13 +1108,13 @@ ice_register_group( 'infinity-body' );
 //
 // Header Group
 //
-ice_register_group( 'infinity-header' );
+ice_register_group( 'header' );
 
 	// Header Layout
 	ice_register_feature(
 		array(
 			'name' => 'layout',
-			'group' => 'infinity-header',
+			'group' => 'header',
 			'type' => 'default',
 			'title' => 'Header Styles',
 			'description' => 'Customize the layout and colors of the header'
@@ -1122,7 +1122,7 @@ ice_register_group( 'infinity-header' );
 	);
 
 		$infinity_header_layout_defaults = array(
-			'group' => 'infinity-header',
+			'group' => 'header',
 			'section' => 'header',
 			'required_feature' => 'layout',
 			'style_selector' => '#header'
@@ -1245,19 +1245,19 @@ ice_register_group( 'infinity-header' );
 //
 // Header Logo Group
 //
-ice_register_group( 'infinity-header-logo' );
+ice_register_group( 'header-logo' );
 
 	// Header Logo
 	ice_register_feature(
 		array(
 			'name' => 'support',
-			'group' => 'infinity-header-logo',
+			'group' => 'header-logo',
 			'type' => 'header-logo'
 		)
 	);
 
 		$infinity_header_logo_defaults = array(
-			'group' => 'infinity-header-logo',
+			'group' => 'header-logo',
 			'section' => 'header',
 			'required_feature' => 'support'
 		);
@@ -1353,13 +1353,13 @@ ice_register_group( 'infinity-header-logo' );
 //
 // Content Group
 //
-ice_register_group( 'infinity-content' );
+ice_register_group( 'content' );
 
 	// Content Styles
 	ice_register_feature(
 		array(
 			'name' => 'layout',
-			'group' => 'infinity-content',
+			'group' => 'content',
 			'type' => 'default',
 			'title' => 'Content Styles',
 			'description' => 'Customize the layout and colors of the content section.'
@@ -1367,7 +1367,7 @@ ice_register_group( 'infinity-content' );
 	);
 
 		$infinity_content_layout_defaults = array(
-			'group' => 'infinity-content',
+			'group' => 'content',
 			'section' => 'content',
 			'required_feature' => 'layout',
 			'style_selector' => '#content'
@@ -1425,7 +1425,7 @@ ice_register_group( 'infinity-content' );
 		ice_register_option(
 			array(
 				'name' => 'overlay-image',
-				'group' => 'infinity-content',
+				'group' => 'content',
 				'section' => 'content'
 			),
 			array_merge( $infinity_content_layout_defaults, $overlay_image_defaults )
@@ -1445,13 +1445,13 @@ ice_register_group( 'infinity-content' );
 //
 // Widget Group
 //
-ice_register_group( 'infinity-widget' );
+ice_register_group( 'widget' );
 
 	// Widget Layout
 	ice_register_feature(
 		array(
 			'name' => 'layout',
-			'group' => 'infinity-widget',
+			'group' => 'widget',
 			'type' => 'default',
 			'title' => 'Widget Styling',
 			'description' => 'Customize the layout and colors of widgets.'
@@ -1459,7 +1459,7 @@ ice_register_group( 'infinity-widget' );
 	);
 
 		$infinity_widget_layout_defaults = array(
-			'group' => 'infinity-widget',
+			'group' => 'widget',
 			'section' => 'widgets',
 			'required_feature' => 'layout',
 			'style_selector' => '#sidebar .widget'
@@ -1530,13 +1530,13 @@ ice_register_group( 'infinity-widget' );
 //
 // Footer Group
 //
-ice_register_group( 'infinity-footer' );
+ice_register_group( 'footer' );
 
 	// Footer Layout
 	ice_register_feature(
 		array(
 			'name' => 'layout',
-			'group' => 'infinity-footer',
+			'group' => 'footer',
 			'type' => 'default',
 			'title' => 'footer Styles',
 			'description' => 'Customize the layout and colors of the footer'
@@ -1544,7 +1544,7 @@ ice_register_group( 'infinity-footer' );
 	);
 
 		$infinity_footer_layout_defaults = array(
-			'group' => 'infinity-footer',
+			'group' => 'footer',
 			'section' => 'footer',
 			'required_feature' => 'layout',
 			'style_selector' => '.footer-wrap'

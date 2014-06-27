@@ -31,7 +31,7 @@ abstract class ICE_Feature
 	 */
 	public function check_support()
 	{		
-		if ( false === current_theme_supports( $this->get_group(), $this->get_name() ) ) {
+		if ( false === current_theme_supports( ICE_SLUG . self::API_DELIM . $this->get_group(), $this->get_name() ) ) {
 			return false;
 		}
 

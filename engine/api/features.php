@@ -33,7 +33,7 @@ ICE_Loader::load(
 function infinity_feature( $name, $group = 'default' )
 {
 	// is feature supported?
-	if ( current_theme_supports( $group, $name ) ) {
+	if ( current_theme_supports( ICE_SLUG . ICE_Feature::API_DELIM . $group, $name ) ) {
 		// yes, render it
 		return ICE_Policy::features()->registry()->get( $name, $group )->render();
 	} else {
@@ -54,7 +54,7 @@ function infinity_feature( $name, $group = 'default' )
 function infinity_feature_fetch( $name, $group = 'default' )
 {
 	// is feature supported?
-	if ( current_theme_supports( $group, $name ) ) {
+	if ( current_theme_supports( ICE_SLUG . ICE_Feature::API_DELIM . $group, $name ) ) {
 		// yes, render it
 		return ICE_Policy::features()->registry()->get( $name, $group );
 	} else {

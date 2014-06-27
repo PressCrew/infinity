@@ -137,7 +137,7 @@ if ( !defined( 'INFINITY_DEV_MODE' ) ) {
 require_once INFINITY_ICE_PATH . '/loader.php';
 
 // initialize ICE
-ICE_Loader::init( INFINITY_ICE_URL );
+ICE_Loader::init( INFINITY_SLUG, INFINITY_ICE_URL );
 ICE_Enqueue::init( 'load-appearance_page_' . INFINITY_ADMIN_PAGE );
 
 // load Infinity API

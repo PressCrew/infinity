@@ -50,12 +50,16 @@ final class ICE_Loader extends ICE_Base
 	 *
 	 * You must tell ICE at what URL its root directory is located
 	 *
+	 * @param string $ice_slug The static slug/prefix
 	 * @param string $ice_url The absolute URL to ICE root
 	 */
-	final static public function init( $ice_url )
+	final static public function init( $ice_slug, $ice_url )
 	{
 		// define constants if necessary
-		if ( false === defined( 'ICE_URL' ) ) {
+		if ( false === defined( 'ICE_SLUG' ) ) {
+
+			// define ICE slug
+			define( 'ICE_SLUG', $ice_slug );
 
 			// define ICE urls
 			define( 'ICE_URL', $ice_url );

@@ -38,7 +38,7 @@ class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	/**
 	 * Sub item delimeter.
 	 */
-	const SUB_ITEM_DELIM = '.';
+	const SUB_ITEM_DELIM = ':';
 
 	/**
 	 * Array of valid component groups.
@@ -98,7 +98,7 @@ class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 			// yes, add to valid groups
 			self::$groups[ $name ] = true;
 			// add dynamic supports filter
-			add_filter( 'current_theme_supports-' . $name, array('ICE_Registry','supports'), 10, 3 );
+			add_filter( 'current_theme_supports-' . ICE_SLUG . ':' . $name, array('ICE_Registry','supports'), 10, 3 );
 		} else {
 			throw new Exception( sprintf(
 				'The group name "%s" does not match the allowed pattern', $name
