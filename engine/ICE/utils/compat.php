@@ -37,7 +37,7 @@ class ICE_Compat_Option
 
 		// return old api name
 		return implode(
-			ICE_Component::API_DELIM,
+			'.',
 			array(
 				ICE_Option::API_PREFIX,
 				hash( 'crc32', $aname ),
