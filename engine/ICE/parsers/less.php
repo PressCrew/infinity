@@ -54,7 +54,7 @@ final class ICE_Less extends ICE_Base
 	public static function lessphp( $text, $import_dir = null )
 	{
 		// load library
-		require_once ICE_LIB_DIR . '/lessphp/less.inc.php';
+		require_once ICE_LIB_PATH . '/lessphp/less.inc.php';
 
 		// new parser instance
 		$less = new lessc();
