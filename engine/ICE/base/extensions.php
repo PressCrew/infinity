@@ -241,6 +241,8 @@ class ICE_Extensions extends ICE_Componentable
 	 * set via register(). These can be absolute paths that live *outside* of the extension
 	 * path.
 	 *
+	 * If the value at $key evaluates to boolean true, the given default file name is used.
+	 *
 	 * @param string $ext The extension.
 	 * @param string $key The file setting key.
 	 * @param string $default Default file name hint. Used to short circuit absolute path check (performance).
@@ -253,8 +255,14 @@ class ICE_Extensions extends ICE_Componentable
 
 		// is file key set for extension?
 		if ( false === empty( $this->extensions[ $ext ][ $key ] ) ) {
-			// get the file
-			$file = $this->extensions[ $ext ][ $key ];
+			// is file setting key set to boolean true?
+			if ( true === $this->extensions[ $ext ][ $key ] ) {
+				// yes, use the given default
+				$file = $default;
+			} else {
+				// use the file setting as is
+				$file = $this->extensions[ $ext ][ $key ];
+			}
 		}
 
 		// empty string by default
