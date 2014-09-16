@@ -209,19 +209,16 @@ class ICE_Extensions extends ICE_Componentable
 	private function load_file( $ext, $file )
 	{
 		// reference path setting
-		$path =& $this->extensions[ $ext ][ self::KEY_PATH ];
+		$path = $this->extensions[ $ext ][ self::KEY_PATH ];
 
 		// is path empty?
-		if ( empty( $path ) ) {
+		if ( true === empty( $path ) ) {
 			// yes, use magic
 			$path = $this->path_prefix . '/' . $ext;
 		}
 
 		// try to load file
 		require_once $path . '/' . $file;
-
-		// all done
-		return true;
 	}
 
 	/**
