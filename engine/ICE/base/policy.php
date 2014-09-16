@@ -183,7 +183,7 @@ abstract class ICE_Policy extends ICE_Base
 			// create new instance
 			$this->extensions = $this->new_extensions();
 			// register bundled extensions
-			$this->extensions->register_file(
+			ice_loader_safe_require(
 				ICE_EXT_PATH . '/' .
 				$this->get_handle( true ) . '/' .
 				'register.php'
