@@ -11,18 +11,20 @@
  * @since 1.2
  */
 
-$this->register(
+ice_register_extension(
+	'shortcode',
 	'access',
 	array(
 		'class' => 'ICE_Ext_Shortcode_Access',
-		'template' => self::DEFAULT_TPL
+		'template' => true
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'shortcode',
 	'visitor',
 	array(
 		'class' => 'ICE_Ext_Shortcode_Visitor',
-		'template' => self::DEFAULT_TPL
+		'template' => true
 	)
 );

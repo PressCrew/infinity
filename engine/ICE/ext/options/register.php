@@ -11,23 +11,26 @@
  * @since 1.2
  */
 
-$this->register(
+ice_register_extension(
+	'option',
 	'categories',
 	array(
 		'class' => 'ICE_Ext_Option_Categories',
-		'template' => self::DEFAULT_TPL
+		'template' => true
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'category',
 	array(
 		'class' => 'ICE_Ext_Option_Category',
-		'template' => self::DEFAULT_TPL
+		'template' => true
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'checkbox',
 	array(
 		'extends' => 'input-group',
@@ -35,16 +38,18 @@ $this->register(
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'colorpicker',
 	array(
 		'extends' => 'text',
 		'class' => 'ICE_Ext_Option_Colorpicker',
-		'template' => self::DEFAULT_TPL
+		'template' => true
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'css/bg-color',
 	array(
 		'extends' => 'colorpicker',
@@ -52,7 +57,8 @@ $this->register(
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'css/bg-image',
 	array(
 		'extends' => 'upload',
@@ -60,7 +66,8 @@ $this->register(
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'css/bg-repeat',
 	array(
 		'extends' => 'select',
@@ -68,7 +75,8 @@ $this->register(
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'css/border-color',
 	array(
 		'extends' => 'colorpicker',
@@ -76,7 +84,8 @@ $this->register(
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'css/border-style',
 	array(
 		'extends' => 'select',
@@ -84,7 +93,8 @@ $this->register(
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'css/border-width',
 	array(
 		'extends' => 'css/length-px',
@@ -92,7 +102,8 @@ $this->register(
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'css/custom',
 	array(
 		'extends' => 'textarea',
@@ -100,7 +111,8 @@ $this->register(
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'css/length-px',
 	array(
 		'extends' => 'ui/slider',
@@ -108,7 +120,8 @@ $this->register(
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'css/overlay-image',
 	array(
 		'extends' => 'ui/overlay-picker',
@@ -116,7 +129,8 @@ $this->register(
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'css/overlay-opacity',
 	array(
 		'extends' => 'ui/slider',
@@ -124,40 +138,45 @@ $this->register(
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'input',
 	array(
 		'class' => 'ICE_Ext_Option_Input',
-		'template' => self::DEFAULT_TPL
+		'template' => true
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'input-group',
 	array(
 		'extends' => 'input',
 		'class' => 'ICE_Ext_Option_Input_Group',
-		'template' => self::DEFAULT_TPL
+		'template' => true
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'page',
 	array(
 		'class' => 'ICE_Ext_Option_Page',
-		'template' => self::DEFAULT_TPL
+		'template' => true
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'pages',
 	array(
 		'class' => 'ICE_Ext_Option_Pages',
-		'template' => self::DEFAULT_TPL
+		'template' => true
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'plugins/domain-mapping',
 	array(
 		'extends' => 'text',
@@ -165,7 +184,8 @@ $this->register(
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'position/left-center-right',
 	array(
 		'extends' => 'radio',
@@ -173,7 +193,8 @@ $this->register(
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'position/left-right',
 	array(
 		'extends' => 'radio',
@@ -181,7 +202,8 @@ $this->register(
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'position/top-bottom',
 	array(
 		'extends' => 'radio',
@@ -189,7 +211,8 @@ $this->register(
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'post',
 	array(
 		'extends' => 'select',
@@ -197,7 +220,8 @@ $this->register(
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'posts',
 	array(
 		'extends' => 'checkbox',
@@ -205,7 +229,8 @@ $this->register(
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'radio',
 	array(
 		'extends' => 'input-group',
@@ -213,15 +238,17 @@ $this->register(
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'select',
 	array(
 		'class' => 'ICE_Ext_Option_Select',
-		'template' => self::DEFAULT_TPL
+		'template' => true
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'tag',
 	array(
 		'extends' => 'select',
@@ -229,7 +256,8 @@ $this->register(
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'tags',
 	array(
 		'extends' => 'checkbox',
@@ -237,7 +265,8 @@ $this->register(
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'text',
 	array(
 		'extends' => 'input',
@@ -245,15 +274,17 @@ $this->register(
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'textarea',
 	array(
 		'class' => 'ICE_Ext_Option_Textarea',
-		'template' => self::DEFAULT_TPL
+		'template' => true
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'toggle/disable',
 	array(
 		'extends' => 'checkbox',
@@ -261,7 +292,8 @@ $this->register(
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'toggle/enable',
 	array(
 		'extends' => 'checkbox',
@@ -269,7 +301,8 @@ $this->register(
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'toggle/enable-disable',
 	array(
 		'extends' => 'radio',
@@ -277,7 +310,8 @@ $this->register(
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'toggle/no',
 	array(
 		'extends' => 'checkbox',
@@ -285,7 +319,8 @@ $this->register(
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'toggle/off',
 	array(
 		'extends' => 'checkbox',
@@ -293,7 +328,8 @@ $this->register(
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'toggle/on',
 	array(
 		'extends' => 'checkbox',
@@ -301,7 +337,8 @@ $this->register(
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'toggle/on-off',
 	array(
 		'extends' => 'radio',
@@ -309,7 +346,8 @@ $this->register(
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'toggle/yes',
 	array(
 		'extends' => 'checkbox',
@@ -317,7 +355,8 @@ $this->register(
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'toggle/yes-no',
 	array(
 		'extends' => 'radio',
@@ -325,16 +364,18 @@ $this->register(
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'ui/font-picker',
 	array(
 		'extends' => 'ui/scroll-picker',
 		'class' => 'ICE_Ext_Option_Ui_Font_Picker',
-		'template' => self::DEFAULT_TPL
+		'template' => true
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'ui/image-picker',
 	array(
 		'extends' => 'ui/scroll-picker',
@@ -342,7 +383,8 @@ $this->register(
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'ui/overlay-picker',
 	array(
 		'extends' => 'ui/image-picker',
@@ -350,26 +392,29 @@ $this->register(
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'ui/scroll-picker',
 	array(
 		'class' => 'ICE_Ext_Option_Ui_Scroll_Picker',
-		'template' => self::DEFAULT_TPL
+		'template' => true
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'ui/slider',
 	array(
 		'class' => 'ICE_Ext_Option_Ui_Slider',
-		'template' => self::DEFAULT_TPL
+		'template' => true
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'option',
 	'upload',
 	array(
 		'class' => 'ICE_Ext_Option_Upload',
-		'template' => self::DEFAULT_TPL
+		'template' => true
 	)
 );

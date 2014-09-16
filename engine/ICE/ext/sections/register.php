@@ -11,10 +11,11 @@
  * @since 1.2
  */
 
-$this->register(
+ice_register_extension(
+	'section',
 	'default',
 	array(
 		'class' => 'ICE_Ext_Section_Default',
-		'template' => self::DEFAULT_TPL
+		'template' => true
 	)
 );

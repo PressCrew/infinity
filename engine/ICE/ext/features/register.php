@@ -12,16 +12,18 @@
  */
 
 // BuddyPress FaceBook Autoconnect
-$this->register(
+ice_register_extension(
+	'feature',
 	'bp/fb-autoconnect',
 	array(
 		'class' => 'ICE_Ext_Feature_Bp_Fb_Autoconnect',
-		'template' => self::DEFAULT_TPL
+		'template' => true
 	)
 );
 
 // BuddyPress Plugin Support
-$this->register(
+ice_register_extension(
+	'feature',
 	'bp/support',
 	array(
 		'class' => 'ICE_Ext_Feature_Bp_Support'
@@ -29,7 +31,8 @@ $this->register(
 );
 
 // Default (generic feature)
-$this->register(
+ice_register_extension(
+	'feature',
 	'default',
 	array(
 		'class' => 'ICE_Ext_Feature_Default'
@@ -37,55 +40,61 @@ $this->register(
 );
 
 // Echo
-$this->register(
+ice_register_extension(
+	'feature',
 	'echo',
 	array(
 		'class' => 'ICE_Ext_Feature_Echo',
-		'template' => self::DEFAULT_TPL
+		'template' => true
 	)
 );
 
 // Gravatar
-$this->register(
+ice_register_extension(
+	'feature',
 	'gravatar',
 	array(
 		'class' => 'ICE_Ext_Feature_Gravatar',
-		'template' => self::DEFAULT_TPL
+		'template' => true
 	)
 );
 
 // Header Logo
-$this->register(
+ice_register_extension(
+	'feature',
 	'header-logo',
 	array(
 		'class' => 'ICE_Ext_Feature_Header_Logo',
-		'template' => self::DEFAULT_TPL
+		'template' => true
 	)
 );
 
 // Responsive Layout
-$this->register(
+ice_register_extension(
+	'feature',
 	'responsive/layout',
 	array(
 		'class' => 'ICE_Ext_Feature_Responsive_Layout',
-		'template' => self::DEFAULT_TPL
+		'template' => true
 	)
 );
 
 // Responsive Menu
-$this->register(
+ice_register_extension(
+	'feature',
 	'responsive/menu',
 	array(
 		'class' => 'ICE_Ext_Feature_Responsive_Menu',
-		'template' => self::DEFAULT_TPL
+		'template' => true
 	)
 );
 
 // Responsive Video
-$this->register(
+ice_register_extension(
+	'feature',
 	'responsive/videos',
 	array(
 		'class' => 'ICE_Ext_Feature_Responsive_Videos',
-		'template' => self::DEFAULT_TPL
+		'template' => true
 	)
 );

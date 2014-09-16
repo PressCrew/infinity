@@ -11,30 +11,34 @@
  * @since 1.2
  */
 
-$this->register(
+ice_register_extension(
+	'widget',
 	'default',
 	array(
 		'class' => 'ICE_Ext_Widget_Default'
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'widget',
 	'menu',
 	array(
 		'class' => 'ICE_Ext_Widget_Menu',
-		'template' => self::DEFAULT_TPL
+		'template' => true
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'widget',
 	'posts-list',
 	array(
 		'class' => 'ICE_Ext_Widget_Posts_List',
-		'template' => self::DEFAULT_TPL
+		'template' => true
 	)
 );
 
-$this->register(
+ice_register_extension(
+	'widget',
 	'title-block',
 	array(
 		'class' => 'ICE_Ext_Widget_Title_Block'

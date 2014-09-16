@@ -11,7 +11,8 @@
  * @since 1.2
  */
 
-$this->register(
+ice_register_extension(
+	'screen',
 	'default',
 	array(
 		'class' => 'ICE_Ext_Screen_Default'
