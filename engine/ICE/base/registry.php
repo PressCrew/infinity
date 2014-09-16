@@ -361,16 +361,6 @@ class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	}
 
 	/**
-	 * Load a file in context so it can make calls to register() in scope.
-	 *
-	 * @param string $filename
-	 */
-	public function register_file( $filename )
-	{
-		require_once $filename;
-	}
-
-	/**
 	 * Register a component's settings.
 	 *
 	 * @param array $args

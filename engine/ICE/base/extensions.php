@@ -118,16 +118,6 @@ class ICE_Extensions extends ICE_Componentable
 	}
 
 	/**
-	 * Load a file in context so it can make calls to register() in scope.
-	 *
-	 * @param string $filename
-	 */
-	public function register_file( $filename )
-	{
-		require_once $filename;
-	}
-
-	/**
 	 * Return all settings for given extension.
 	 *
 	 * @param string $ext
