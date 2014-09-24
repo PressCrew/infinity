@@ -83,6 +83,20 @@ class ICE_Ext_Feature_Bp_Support
 	{
 		parent::init_scripts();
 
+		// Enqueue various scripts
+		wp_enqueue_script( 'bp-jquery-query' );
+		wp_enqueue_script( 'bp-jquery-cookie' );
+
+		// Enqueue scrollTo only on activity pages
+		if ( bp_is_activity_component() ) {
+			wp_enqueue_script( 'bp-jquery-scroll-to' );
+		}
+
+		// Enqueue members widget JS just in case
+		if ( is_active_widget( false, false, 'bp_core_members_widget' ) && ! is_admin() && ! is_network_admin() ) {
+			wp_enqueue_script( 'bp-widget-members' );
+		}
+
 		// Bump this when changes are made to bust cache
 		$version = '20120110';
 
