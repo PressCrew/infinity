@@ -272,9 +272,21 @@ The Infinity Base Grid.
    -moz-box-sizing: border-box;
    -webkit-box-sizing: border-box;
 }
+
+/* Fix WP Editor, which assumes W3C box model */
 .wp-editor-wrap * {
-    -moz-box-sizing: content-box !important;
+	box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	-webkit-box-sizing: content-box;
 }
+
+/* Except Quicktags buttons, which do use border-box! */
+.wp-editor-wrap .quicktags-toolbar * {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box; 
+}
+
 /* The Grid ---------------------- */
 .row { width: 1050px; max-width: 100%; min-width: 768px; margin: 0 auto; }
 .row .row { width: auto; max-width: none; min-width: 0; margin: 0 -15px; }
