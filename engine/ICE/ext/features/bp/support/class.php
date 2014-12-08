@@ -89,16 +89,4 @@ class ICE_Ext_Feature_Bp_Support
 			return false;
 		}
 	}
-
-	/**
-	 * Render a special activity entry anchor
-	 *
-	 * @param string $class
-	 * @param string $title
-	 */
-	protected function render_activity_entry_link( $class, $title )
-	{
-		// render the link ?>
-		<a class="<?php print esc_attr( $class ) ?> button" href="<?php bp_activity_thread_permalink() ?>"><?php print $title ?></a><?php
-	}
 }
