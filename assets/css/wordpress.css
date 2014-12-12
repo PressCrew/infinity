@@ -43,14 +43,14 @@ label { cursor: pointer; }
 legend { border: 0; *margin-left: -7px; padding: 0; }
 button, input, select, textarea { font-size: 100%; margin: 0; vertical-align: baseline; *vertical-align: middle; }
 select {
-    background-color: #FFFFFF;
-    border: 1px solid #C4C1C1;
-    border-radius: 2px 2px 2px 2px;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.17);
-    color: #777777;
-    font-size: 90%;
-    font-weight: bold;
-    padding: 4px 2px 2px;
+	background-color: #FFFFFF;
+	border: 1px solid #C4C1C1;
+	border-radius: 2px 2px 2px 2px;
+	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.17);
+	color: #777777;
+	font-size: 90%;
+	font-weight: bold;
+	padding: 4px 2px 2px;
 }
 button, input { line-height: normal; }
 button, input[type="button"], input[type="reset"], input[type="submit"] { cursor: pointer; -webkit-appearance: button; *overflow: visible; }
@@ -80,103 +80,103 @@ ul.large li { line-height: 21px; }
 
 /* Tables ---------------------- */
 table {
-  width: 100%;
-  margin-bottom: 18px;
+	width: 100%;
+	margin-bottom: 18px;
 }
 th, td {
-  padding: 8px;
-  line-height: 18px;
-  text-align: left;
-  border-top: 1px solid #ddd;
+	padding: 8px;
+	line-height: 18px;
+	text-align: left;
+	border-top: 1px solid #ddd;
 }
 th {
-  font-weight: bold;
-  vertical-align: bottom;
+	font-weight: bold;
+	vertical-align: bottom;
 }
 td {
-  vertical-align: middle;
+	vertical-align: middle;
 }
 thead:first-child tr th, thead:first-child tr td {
-  border-top: 0;
+	border-top: 0;
 }
 tbody + tbody {
-  border-top: 2px solid #ddd;
+	border-top: 2px solid #ddd;
 }
 .post dl { margin-bottom: 18px }
 .post dl dt { font-weight: bold }
 .muted { color: #bfbfbf }
 blockquote {
-    margin-bottom: 18px;
-    border-left: 5px solid #eee;
-    padding-left: 15px;
+	margin-bottom: 18px;
+	border-left: 5px solid #eee;
+	padding-left: 15px;
 }
 blockquote small {
-    display: block;
-    font-size: 85.7%;
-    font-weight: 300;
-    line-height: 18px;
-    color: #bfbfbf;
+	display: block;
+	font-size: 85.7%;
+	font-weight: 300;
+	line-height: 18px;
+	color: #bfbfbf;
 }
 blockquote p {
-    font-size: 100%;
-    font-weight: 300;
-    margin-bottom: 0;
+	font-size: 100%;
+	font-weight: 300;
+	margin-bottom: 0;
 }
 address {
-    display: block;
-    line-height: 18px;
-    margin-bottom: 18px;
+	display: block;
+	line-height: 18px;
+	margin-bottom: 18px;
 }
 code, pre {
-    padding: 0 3px 2px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
+	padding: 0 3px 2px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
 }
 code {
-    background-color: #fee9cc;
-    color: rgba(0, 0, 0, 0.75);
-    padding: 1px 3px;
+	background-color: #fee9cc;
+	color: rgba(0, 0, 0, 0.75);
+	padding: 1px 3px;
 }
 pre {
-    display: block;
-    padding: 8.5px;
-    margin: 0 0 18px;
-    line-height: 18px;
-    font-size: 85.7%;
-    border: 1px solid #ccc;
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    white-space: pre;
-    white-space: pre-wrap;
-    word-wrap: break-word;
+	display: block;
+	padding: 8.5px;
+	margin: 0 0 18px;
+	line-height: 18px;
+	font-size: 85.7%;
+	border: 1px solid #ccc;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	white-space: pre;
+	white-space: pre-wrap;
+	word-wrap: break-word;
 }
 pre code {
 	background: transparent;
 }
 legend {
-  display: block;
-  font-size: 19.5px;
-  color: #666;
+	display: block;
+	font-size: 19.5px;
+	color: #666;
 }
 label,
 input,
 select,
 textarea {
-  font-size: normal;
-  font-weight: 13px;
-  line-height: 18px;
-  margin-bottom: 10px;
+	font-size: normal;
+	font-weight: 13px;
+	line-height: 18px;
+	margin-bottom: 10px;
 }
 label {
-    color: #999999;
-    display: block;
-    font-size: 80%;
-    font-weight: bold;
-    margin: 5px 0;
-    text-transform: uppercase;
+	color: #999999;
+	display: block;
+	font-size: 80%;
+	font-weight: bold;
+	margin: 5px 0;
+	text-transform: uppercase;
 }
 label ul {
 	padding: 0;
@@ -187,78 +187,77 @@ label li {
 	font-weight: normal;
 }
 input[type=image], input[type=checkbox], input[type=radio] {
-  width: auto;
-  height: auto;
-  padding: 0;
-  margin: 3px;
-  *margin-top: 0;
-  /* IE6-7 */
-
-  line-height: normal;
-  border: none;
-  cursor: pointer;
+	width: auto;
+	height: auto;
+	padding: 0;
+	margin: 3px;
+	*margin-top: 0;
+	/* IE6-7 */
+	line-height: normal;
+	border: none;
+	cursor: pointer;
 }
 input[type=file] {
-  padding: initial;
-  line-height: initial;
-  border: initial;
-  background-color: #ffffff;
-  background-color: initial;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
+	padding: initial;
+	line-height: initial;
+	border: initial;
+	background-color: #ffffff;
+	background-color: initial;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
 }
 input[type=button], input[type=reset], input[type=submit] {
-  width: auto;
-  height: auto;
+	width: auto;
+	height: auto;
 }
 select, input[type=file] {
-  height: 27px;
-  *margin-top: 4px;
-  /* For IE7, add top margin to align select with labels */
-  line-height: 27px;
+	height: 27px;
+	*margin-top: 4px;
+	/* For IE7, add top margin to align select with labels */
+	line-height: 27px;
 }
 select[multiple], select[size] {
-  height: inherit;
+	height: inherit;
 }
 input[type=image] {
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
 }
 textarea {
-  height: auto;
+	height: auto;
 }
 .radio, .checkbox {
-  padding-left: 18px;
+	padding-left: 18px;
 }
 .radio input[type=radio], .checkbox input[type=checkbox] {
-  float: left;
-  margin-left: -18px;
+	float: left;
+	margin-left: -18px;
  }
 input, textarea {
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
-  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
-  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
-  -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
-  -ms-transition: border linear 0.2s, box-shadow linear 0.2s;
-  -o-transition: border linear 0.2s, box-shadow linear 0.2s;
-  transition: border linear 0.2s, box-shadow linear 0.2s;
-  padding: 10px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
+	-webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+	-moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+	-ms-transition: border linear 0.2s, box-shadow linear 0.2s;
+	-o-transition: border linear 0.2s, box-shadow linear 0.2s;
+	transition: border linear 0.2s, box-shadow linear 0.2s;
+	padding: 10px;
 }
 input:focus, textarea:focus {
-  border-color: rgba(82, 168, 236, 0.8);
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
-  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
-  outline: 0;
+	border-color: rgba(82, 168, 236, 0.8);
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+	-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+	outline: 0;
 }
 input[type=file]:focus, input[type=checkbox]:focus, select:focus {
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-  outline: 1px dotted #666;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	outline: 1px dotted #666;
 }
 
 /* ! The Grid
@@ -268,9 +267,9 @@ The Infinity Base Grid.
 /*
 ================================================== */
 * {
-   box-sizing: border-box;
-   -moz-box-sizing: border-box;
-   -webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
 }
 
 /* Fix WP Editor, which assumes W3C box model */
@@ -426,34 +425,34 @@ img { -ms-interpolation-mode: bicubic; }
 
 /* Mobile Grid and Overrides ---------------------- */
 @media only screen and (max-width: 767px) { body { -webkit-text-size-adjust: none; -ms-text-size-adjust: none; width: 100%; min-width: 0; margin-left: 0; margin-right: 0; padding-left: 0; padding-right: 0; }
-  .row { width: auto; min-width: 0; margin-left: 0; margin-right: 0; }
-  .column, .columns { width: auto !important; float: none; }
-  .column:last-child, .columns:last-child { float: none; }
-  [class*="column"] + [class*="column"]:last-child { float: none; }
-  .column:before, .columns:before, .column:after, .columns:after { content: ""; display: table; }
-  .column:after, .columns:after { clear: both; }
-  .offset-by-one, .offset-by-two, .offset-by-three, .offset-by-four, .offset-by-five, .offset-by-six, .offset-by-seven, .offset-by-eight, .offset-by-nine, .offset-by-ten, .offset-by-eleven, .offset-by-twelve, .offset-by-thirteen, .offset-by-fourteen { margin-left: 0 !important; }
-  .push-two, .push-three, .push-four, .push-five, .push-six, .push-seven, .push-eight, .push-nine, .push-ten, .push-eleven, .push-twelve, .push-thirteen, .push-fourteen { left: auto; }
-  .pull-two, .pull-three, .pull-four, .pull-five, .pull-six, .pull-seven, .pull-eight, .pull-nine, .pull-ten, .pull-eleven, .pull-twelve, .pull-thirteen, .pull-fourteen { right: auto; }
-  /* Mobile 4-column Grid */
-  .row .mobile-one { width: 25% !important; float: left; padding: 0 15px; }
-  .row .mobile-one:last-child { float: right; }
-  .row.collapse .mobile-one { padding: 0; }
-  .row .mobile-two { width: 50% !important; float: left; padding: 0 15px; }
-  .row .mobile-two:last-child { float: right; }
-  .row.collapse .mobile-two { padding: 0; }
-  .row .mobile-three { width: 75% !important; float: left; padding: 0 15px; }
-  .row .mobile-three:last-child { float: right; }
-  .row.collapse .mobile-three { padding: 0; }
-  .row .mobile-four { width: 100% !important; float: left; padding: 0 15px; }
-  .row .mobile-four:last-child { float: right; }
-  .row.collapse .mobile-four { padding: 0; }
-  .push-one-mobile { left: 25%; }
-  .pull-one-mobile { right: 25%; }
-  .push-two-mobile { left: 50%; }
-  .pull-two-mobile { right: 50%; }
-  .push-three-mobile { left: 75%; }
-  .pull-three-mobile { right: 75%; } }
+	.row { width: auto; min-width: 0; margin-left: 0; margin-right: 0; }
+	.column, .columns { width: auto !important; float: none; }
+	.column:last-child, .columns:last-child { float: none; }
+	[class*="column"] + [class*="column"]:last-child { float: none; }
+	.column:before, .columns:before, .column:after, .columns:after { content: ""; display: table; }
+	.column:after, .columns:after { clear: both; }
+	.offset-by-one, .offset-by-two, .offset-by-three, .offset-by-four, .offset-by-five, .offset-by-six, .offset-by-seven, .offset-by-eight, .offset-by-nine, .offset-by-ten, .offset-by-eleven, .offset-by-twelve, .offset-by-thirteen, .offset-by-fourteen { margin-left: 0 !important; }
+	.push-two, .push-three, .push-four, .push-five, .push-six, .push-seven, .push-eight, .push-nine, .push-ten, .push-eleven, .push-twelve, .push-thirteen, .push-fourteen { left: auto; }
+	.pull-two, .pull-three, .pull-four, .pull-five, .pull-six, .pull-seven, .pull-eight, .pull-nine, .pull-ten, .pull-eleven, .pull-twelve, .pull-thirteen, .pull-fourteen { right: auto; }
+	/* Mobile 4-column Grid */
+	.row .mobile-one { width: 25% !important; float: left; padding: 0 15px; }
+	.row .mobile-one:last-child { float: right; }
+	.row.collapse .mobile-one { padding: 0; }
+	.row .mobile-two { width: 50% !important; float: left; padding: 0 15px; }
+	.row .mobile-two:last-child { float: right; }
+	.row.collapse .mobile-two { padding: 0; }
+	.row .mobile-three { width: 75% !important; float: left; padding: 0 15px; }
+	.row .mobile-three:last-child { float: right; }
+	.row.collapse .mobile-three { padding: 0; }
+	.row .mobile-four { width: 100% !important; float: left; padding: 0 15px; }
+	.row .mobile-four:last-child { float: right; }
+	.row.collapse .mobile-four { padding: 0; }
+	.push-one-mobile { left: 25%; }
+	.pull-one-mobile { right: 25%; }
+	.push-two-mobile { left: 50%; }
+	.pull-two-mobile { right: 50%; }
+	.push-three-mobile { left: 75%; }
+	.pull-three-mobile { right: 75%; } }
 /* Block Grids ---------------------- */
 /* These are 2-up, 3-up, 4-up and 5-up ULs, suited
 for repeating blocks of content. Add 'mobile' to
@@ -469,7 +468,6 @@ that IE7/8 do not support :nth-child.
 .block-grid > li { display: block; height: auto !important; float: left; }
 
 .block-grid.one-up > li { width: 100%; padding: 0 0 15px; }
-
 
 .block-grid.two-up > li { width: 50%; padding: 0 15px 15px; }
 
@@ -489,8 +487,7 @@ that IE7/8 do not support :nth-child.
 /*  .block-grid.five-up>li:nth-child(5n+1) {clear: left;} */
 /* Mobile Block Grids */
 @media only screen and (max-width: 767px) { .block-grid.mobile { margin-left: 0; }
-  .block-grid.mobile > li { float: none; width: 100%; margin-left: 0; } }
-
+	.block-grid.mobile > li { float: none; width: 100%; margin-left: 0; } }
 
 /* ! WordPress Support
 
@@ -509,100 +506,100 @@ This CSS file contains all the default WordPress Styling.
 }
 /* Post Meta */
 .infinity-wp span.edit-link {
-    margin-left: 1px;
-    margin-right: 9px;
-    float: right;
+	margin-left: 1px;
+	margin-right: 9px;
+	float: right;
 }
 .infinity-wp span.edit-link a {
 	color: #999;
 }
 /* The actual Posts*/
 .infinity-wp .author-avatar {
-    float: left;
-    margin-bottom: 0;
-    margin-right: 10px;
-    margin-top: 0;
+	float: left;
+	margin-bottom: 0;
+	margin-right: 10px;
+	margin-top: 0;
 }
 .infinity-wp .entry {
-    margin-bottom: 30px;
-    margin-top: 30px;
+	margin-bottom: 30px;
+	margin-top: 30px;
 }
 .infinity-wp .post dd.wp-caption p.wp-caption-text,
 .infinity-wp .wp-caption-text {
-    font-style: italic;
-    line-height: 17px;
-    margin: 0 !important;
-    padding: 0 4px 5px 0;
-    font-size: 12px;
+	font-style: italic;
+	line-height: 17px;
+	margin: 0 !important;
+	padding: 0 4px 5px 0;
+	font-size: 12px;
 }
 .infinity-wp .post-meta-data span {
-    border-right: 1px solid #DDD;
-    margin-right: 5px;
-    padding-right: 5px;
+	border-right: 1px solid #DDD;
+	margin-right: 5px;
+	padding-right: 5px;
 }
 .infinity-wp .post .author-box img,
 .infinity-wp .comment-avatar-box img {
-    float: none;
-    margin: 0;
-    border: 4px solid #fff;
+	float: none;
+	margin: 0;
+	border: 4px solid #fff;
 }
 .infinity-wp .post img.alignright {
-    margin: 0 0 2px 7px;
-    display: inline;
-    padding: 4px;
+	margin: 0 0 2px 7px;
+	display: inline;
+	padding: 4px;
 }
 .infinity-wp .post img.wp-smiley {
-    float: none !important;
-    clear: none !important;
-    margin: 0 !important;
-    border: none !important;
-    padding: 0 !important;
+	float: none !important;
+	clear: none !important;
+	margin: 0 !important;
+	border: none !important;
+	padding: 0 !important;
 }
 .infinity-wp .post-content {
 	margin-bottom: 60px;
 }
 .infinity-wp .post img.alignleft {
-    margin: 0 7px 2px 0;
-    display: inline;
-    padding: 4px;
+	margin: 0 7px 2px 0;
+	display: inline;
+	padding: 4px;
 }
 .infinity-wp .post .aligncenter,
 .infinity-wp .post .aligncenter {
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
 }
 .infinity-wp .post img.centered,
 .infinity-wp img.aligncenter {
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
 }
 .infinity-wp .post img {
-    max-width: 100%;
-    height: auto;
+	max-width: 100%;
+	height: auto;
 }
 .infinity-wp .post .wp-caption {
-    background-color: #F9F9F9;
-    border: 1px solid #DDDDDD;
-    border-radius: 3px 3px 3px 3px;
-    font-size: 90%;
-    font-style: italic;
-    padding-bottom: 7px;
-    padding-top: 4px;
-    text-align: center;
+	background-color: #F9F9F9;
+	border: 1px solid #DDDDDD;
+	border-radius: 3px 3px 3px 3px;
+	font-size: 90%;
+	font-style: italic;
+	padding-bottom: 7px;
+	padding-top: 4px;
+	text-align: center;
 }
 .infinity-wp .post .wp-caption img {
-    margin: 0;
-    border: 0 none;
-    padding: 0;
+	margin: 0;
+	border: 0 none;
+	padding: 0;
 }
 .infinity-wp .postthumb {
 	margin-bottom: 20px;
 }
 .infinity-wp .postthumb img {
-    max-width: 100%;
-    height: auto;
+	max-width: 100%;
+	height: auto;
 }
 .infinity-wp .post .gallery-caption {
 	/* nothing yet */
@@ -616,9 +613,9 @@ This CSS file contains all the default WordPress Styling.
 /* Block Quotes */
 /* page links */
 .infinity-wp .page-link {
-    font-weight: bold;
-    word-spacing: 0.5em;
-    margin: 0 0 22px;
+	font-weight: bold;
+	word-spacing: 0.5em;
+	margin: 0 0 22px;
 }
 .infinity-wp .page-link a:active,
 .infinity-wp .page-link a:hover {
@@ -626,39 +623,39 @@ This CSS file contains all the default WordPress Styling.
 }
 .infinity-wp .page-link a:link,
 .infinity-wp .page-link a:visited {
-    font-weight: normal;
-    border: 1px solid #DDD;
-    padding: 5px 8px;
+	font-weight: normal;
+	border: 1px solid #DDD;
+	padding: 5px 8px;
 }
 .infinity-wp .home .sticky .page-link a {
 	/* nothing yet */
 }
 /* code in posts */
 .infinity-wp .post .alignright {
-    margin-left: 15px;
-    float: right;
-    margin-bottom: 15px;
+	margin-left: 15px;
+	float: right;
+	margin-bottom: 15px;
 }
 .infinity-wp .post .alignleft {
-    margin-right: 15px;
-    float: left;
+	margin-right: 15px;
+	float: left;
 }
 /* per post navigation and pagination */
 .infinity-wp ul.page-numbers li a,
 .infinity-wp ul.page-numbers li span,
 .infinity-wp .paged-navigation,
 .infinity-wp .comment-navigation {
-    background: none repeat scroll 0 0 #FFFFFF;
-    color: inherit;
-    border: 1px solid #DDDDDD;
-    border-radius: 4px 4px 4px 4px;
-    font-size: 14px;
-    font-weight: bold;
-    height: 38px;
-    margin: 0 2px 10px 0;
-    padding: 5px 8px;
-    text-align: center;
-    word-spacing: 10px;
+	background: none repeat scroll 0 0 #FFFFFF;
+	color: inherit;
+	border: 1px solid #DDDDDD;
+	border-radius: 4px 4px 4px 4px;
+	font-size: 14px;
+	font-weight: bold;
+	height: 38px;
+	margin: 0 2px 10px 0;
+	padding: 5px 8px;
+	text-align: center;
+	word-spacing: 10px;
 }
 .infinity-wp ul.page-numbers li a:hover,
 .infinity-wp .paged-navigation:hover,
@@ -667,8 +664,8 @@ This CSS file contains all the default WordPress Styling.
 	color: #FFF;
 }
 .infinity-wp ul.page-numbers {
-    text-align: center;
-    margin-bottom: 20px;
+	text-align: center;
+	margin-bottom: 20px;
 }
 .infinity-wp ul.page-numbers li span {
 	background: #444;
@@ -678,34 +675,34 @@ This CSS file contains all the default WordPress Styling.
 	display: inline;
 }
 .infinity-wp .pagination {
-    border-bottom: 1px solid #EAEAEA;
-    height: 16px;
-    padding-left: 0px;
-    padding-bottom: 10px;
-    color: #888888;
-    font-size: 90%;
+	border-bottom: 1px solid #EAEAEA;
+	height: 16px;
+	padding-left: 0px;
+	padding-bottom: 10px;
+	color: #888888;
+	font-size: 90%;
 }
 .infinity-wp .pagination#user-pag,
 .infinity-wp .friends .pagination,
 .infinity-wp .mygroups .pagination,
 .infinity-wp .myblogs .pagination {
-    background: #F9F9F9;
-    border: none;
-    padding: 8px 15px;
+	background: #F9F9F9;
+	border: none;
+	padding: 8px 15px;
 }
 /*Post Meta */
 .infinity-wp .post-meta-data,
 .infinity-wp .comment-meta,
 .infinity-wp .comment-options,
 .infinity-wp p#breadcrumbs {
-    border-bottom: 1px solid #EFEFEF;
-    border-top: 1px solid #EFEFEF;
-    color: #AAAAAA;
-    font-size: 11.5px;
-    margin-top: 10px;
-    min-height: 20px;
-    padding: 3px 0;
-    margin-bottom: 10px;
+	border-bottom: 1px solid #EFEFEF;
+	border-top: 1px solid #EFEFEF;
+	color: #AAAAAA;
+	font-size: 11.5px;
+	margin-top: 10px;
+	min-height: 20px;
+	padding: 3px 0;
+	margin-bottom: 10px;
 }
 .infinity-wp span.post-comments {
 	float: right;
@@ -717,25 +714,25 @@ This CSS file contains all the default WordPress Styling.
 }
 /* Intro Boxes for authors, categories and tags */
 .infinity-wp .post-author-box {
-    float: right;
-    padding: 3px;
-    display: none;
+	float: right;
+	padding: 3px;
+	display: none;
 }
 .infinity-wp .post-author-box img {
-    width: 50px;
-    height: 50px;
+	width: 50px;
+	height: 50px;
 }
 .infinity-wp .author-box,
 .infinity-wp .category-box,
 .infinity-wp .tag-box,
 .infinity-wp .info-box {
-    margin-bottom: 20px;
-    border: 1px solid #DDDDDD;
-    background: #F9F9F9;
-    border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    padding: 10px 20px;
+	margin-bottom: 20px;
+	border: 1px solid #DDDDDD;
+	background: #F9F9F9;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	padding: 10px 20px;
 }
 .infinity-wp #category-description p,
 .infinity-wp #tag-description p {
@@ -744,34 +741,34 @@ This CSS file contains all the default WordPress Styling.
 	margin-bottom: 0px;
 }
 .infinity-wp .authorbox h3 {
-    font-style: normal;
-    margin-bottom: 10px;
-    color: #555555;
-    font-size: 16px;
+	font-style: normal;
+	margin-bottom: 10px;
+	color: #555555;
+	font-size: 16px;
 }
 .infinity-wp #author-description {
-    overflow: hidden;
-    padding-bottom: 15px;
+	overflow: hidden;
+	padding-bottom: 15px;
 }
 .infinity-wp #author-description img {
-    margin-top: 2px;
-    margin-right: 10px;
-    float: left;
+	margin-top: 2px;
+	margin-right: 10px;
+	float: left;
 }
 .infinity-wp #category-description,
 .infinity-wp #tag-description {
-    padding: 10px;
+	padding: 10px;
 }
 .infinity-wp #author-social {
-    float: right;
-    width: 25%;
+	float: right;
+	width: 25%;
 }
 
 /*Search Page*/
 
 .infinity-wp .search-title {
-    font-size: 18px;
-    color: #999;
+	font-size: 18px;
+	color: #999;
 }
 .infinity-wp .search-title span {
 	color: #444;
@@ -781,12 +778,12 @@ This CSS file contains all the default WordPress Styling.
 /* ! Comments   */
 /* ============ */
 .infinity-wp .comment-content {
-    margin-bottom: 40px;
-    position: relative;
+	margin-bottom: 40px;
+	position: relative;
 }
 .infinity-wp #comments {
-    margin-top: 20px;
-    position: relative;
+	margin-top: 20px;
+	position: relative;
 }
 .infinity-wp #comments .pingbacks li.pingback {
 	margin: 10px 0;
@@ -798,9 +795,9 @@ This CSS file contains all the default WordPress Styling.
 	margin: 10px 0;
 }
 .infinity-wp #comments .comment-entry p {
-    padding-left: 10px;
-    padding-right: 10px;
-    margin: 0 0 20px 62px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin: 0 0 20px 62px;
 }
 .infinity-wp #comments .bypostauthor {
 	background: #F9F9F9;
@@ -809,8 +806,8 @@ This CSS file contains all the default WordPress Styling.
 	margin: 0 0 15px 70px;
 }
 .infinity-wp #comments .comment-head .name {
-    font-weight: bold;
-    margin: 0;
+	font-weight: bold;
+	margin: 0;
 }
 .infinity-wp #comments .comment-head .date,
 .infinity-wp #comments .comment-head .edit,
@@ -818,68 +815,68 @@ This CSS file contains all the default WordPress Styling.
 	font-size: 11px;
 }
 .infinity-wp #comments .avatar img {
-    vertical-align: middle;
-    width: 40px;
-    height: 40px;
-    margin: 0;
+	vertical-align: middle;
+	width: 40px;
+	height: 40px;
+	margin: 0;
 }
 .infinity-wp #comments ul.children {
-    margin: 10px 10px 0 25px;
-    padding: 0;
+	margin: 10px 10px 0 25px;
+	padding: 0;
 }
 .infinity-wp #comments .navigation {
 	/* nothing yet */
 }
 .infinity-wp #comments .navigation a {
-    text-decoration: none;
-    margin: 15px 0 0 0;
-    display: block;
+	text-decoration: none;
+	margin: 15px 0 0 0;
+	display: block;
 }
 .infinity-wp #comments .navigation a:hover {
 	/* nothing yet */
 }
 .infinity-wp #comments blockquote {
-    font-style: italic;
-    font-weight: bold;
-    line-height: 150%;
-    margin-left: 71px;
-    padding-bottom: 5px;
-    padding-left: 0;
-    padding-top: 20px;
+	font-style: italic;
+	font-weight: bold;
+	line-height: 150%;
+	margin-left: 71px;
+	padding-bottom: 5px;
+	padding-left: 0;
+	padding-top: 20px;
 }
 .infinity-wp #comments .comment {
-    margin-top: 10px;
-    list-style-type: none;
-    width: 100%;
+	margin-top: 10px;
+	list-style-type: none;
+	width: 100%;
 }
 .infinity-wp #comments .comment .comment-container {
-    border-bottom: 1px solid #F4F4F4;
-    padding-bottom: 15px;
-    position: relative;
+	border-bottom: 1px solid #F4F4F4;
+	padding-bottom: 15px;
+	position: relative;
 }
 .infinity-wp #comments h3#pings {
 	margin-top: 25px;
 }
 .infinity-wp #comments .avatar {
-    float: left;
-    margin: 0 15px 10px 0;
+	float: left;
+	margin: 0 15px 10px 0;
 }
 .infinity-wp #comments .reply {
-    left: 0;
-    position: absolute;
-    top: 60px;
+	left: 0;
+	position: absolute;
+	top: 60px;
 }
 .infinity-wp #comments .reply a {
-    font-size: 70%;
-    padding: 0 6px;
+	font-size: 70%;
+	padding: 0 6px;
 }
 .infinity-wp #comments h3 {
 	/* nothing yet */
 }
 .infinity-wp ol.commentlist {
-    margin-left: 0px;
-    list-style: none;
-    padding-left: 0px;
+	margin-left: 0px;
+	list-style: none;
+	padding-left: 0px;
 }
 .infinity-wp #comments .unapproved {
 	font-style: italic;
@@ -890,55 +887,55 @@ This CSS file contains all the default WordPress Styling.
 	margin: 40px 0 0;
 }
 .infinity-wp #respond #reply-title small {
-    margin-top: 5px;
-    display: block;
-    font-size: 13px;
+	margin-top: 5px;
+	display: block;
+	font-size: 13px;
 }
 .infinity-wp #respond span.required {
-    color: #CFCFCF;
-    display: block;
-    float: left;
-    font-size: 16px;
-    font-weight: bold;
-    margin: 4px 0 0 -12px;
+	color: #CFCFCF;
+	display: block;
+	float: left;
+	font-size: 16px;
+	font-weight: bold;
+	margin: 4px 0 0 -12px;
 }
 .infinity-wp #respond .right {
-    float: left;
-    width: 380px;
+	float: left;
+	width: 380px;
 }
 .infinity-wp #respond label {
-    color: #777777;
-    padding: 4px 0;
-    font-size: 11px;
+	color: #777777;
+	padding: 4px 0;
+	font-size: 11px;
 }
 .infinity-wp #respond .left {
-    margin-right: 15px;
-    float: left;
-    width: 200px;
+	margin-right: 15px;
+	float: left;
+	width: 200px;
 }
 .infinity-wp #commentform {
 	margin: 10px 0 0 10px;
 }
 .infinity-wp #commentform input.txt,
 .infinity-wp #commentform textarea {
-    border-color: #ccc #efefef #efefef #ccc;
-    border-width: 1px;
-    border-style: solid;
-    font-size: inherit;
+	border-color: #ccc #efefef #efefef #ccc;
+	border-width: 1px;
+	border-style: solid;
+	font-size: inherit;
 }
 .infinity-wp li.bypostauthor {
 	background: none repeat scroll 0 0 #F8FDFF !important;
 }
 .infinity-wp #commentform input.txt {
-    background: #F9F9F9;
-    width: 170px;
-    color: #666;
-    margin: 0 5px 10px 0;
-    padding: 5px 7px;
+	background: #F9F9F9;
+	width: 170px;
+	color: #666;
+	margin: 0 5px 10px 0;
+	padding: 5px 7px;
 }
 .infinity-wp #commentform textarea {
-    width: 95%;
-    height: auto;
+	width: 95%;
+	height: auto;
 }
 .infinity-wp #commentform #submit {
 	margin: 15px 0 0 0;
@@ -952,16 +949,16 @@ This CSS file contains all the default WordPress Styling.
 	margin: 25px 0 10px 0;
 }
 .infinity-wp .pinglist li {
-    list-style-type: decimal;
-    margin: 0 0 0 20px;
+	list-style-type: decimal;
+	margin: 0 0 0 20px;
 }
 .infinity-wp .pinglist li .pingcontent {
-    margin: 10px 0;
-    display: block;
+	margin: 10px 0;
+	display: block;
 }
 .infinity-wp .pinglist li .author {
-    font-weight: bold;
-    font-size: 15px;
+	font-weight: bold;
+	font-size: 15px;
 }
 .infinity-wp .pinglist li .date {
 	font-size: 11px;
