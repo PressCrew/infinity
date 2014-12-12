@@ -1,632 +1,390 @@
-/*
-----------------------------------------------------------------
-BuddyPress Default Styling.
+
+/*--------------------------------------------------------------
+0 - Infinity BP
 --------------------------------------------------------------*/
-
-/* ============================== */
-/* BuddyPress Infinity Tweaks  */
-/* ============================== */
-.infinity-bp span.highlight,
-.infinity-bp span.activity,
-.infinity-bp div#message p,
-.infinity-bp .generic-button,
-.infinity-bp .activity-list div.activity-meta a {
-    display: inline-block;
-    text-decoration: none;
-/*    font: bold 11px/12px;*/
-    padding: 3px 6px;
-}
-.infinity-bp .activity-list .activity-header a:first-child {
-	padding: 0px;
-}
-.infinity-bp .activity-header p {
-	margin-bottom: 0px;
-}
-.infinity-bp div#message p {
-    font-weight: bold;
-    padding-left: 22px;
-}
-.infinity-bp #sidebar div#message p {
-    padding-left: 10px;
-}
-.infinity-bp span.activity {
-    background: #F9F9F9;
-    font-weight: normal;
-    margin-top: 6px;
-    font-size: 85%;
-}
-.infinity-bp .activity-read-more {
-	margin-left: 5px;
-}
-
-/* > Item Headers (Profiles, Groups)
+/*--------------------------------------------------------------
+0.1 - Global Tweaks
 --------------------------------------------------------------*/
-.infinity-bp div#item-header {
-    margin-bottom: 15px;
-}
-.infinity-bp div#item-header h2 {
-	margin-bottom: 5px;
-}
-.infinity-bp div#item-header span.activity,
-.infinity-bp div#item-header h2 span.highlight {
-    font-size: 85%;
-}
-.infinity-bp div#item-header h2 span.highlight {
-    font-size: 11.5px;
-    font-weight: bold;
-}
-.infinity-bp div#item-header h2 span.highlight span {
-    top: -1px;
-	right: 0;
-	font-size: 85%;
-	background: #444444;
-	margin-bottom: 0;
-}
-.infinity-bp div#item-header div#item-meta {
-    font-size: 85%;
-    color: #777;
-}
-.infinity-bp div#item-header div#item-actions h3 {
-    font-size: 100%;
-}
-.infinity-bp div#item-header ul li {
-	list-style: none outside none;
-}
-.infinity-bp div#item-header div.generic-button,
-.infinity-bp div#item-header a.button {
-    font-size: 85%;
-}
-.infinity-bp div#item-header div#message.info p {
-	background: #f9f9f9;
-}
-
-/* > Item Lists (Activity, Friend, Group lists)
---------------------------------------------------------------*/
-
-.infinity-bp ul.item-list {
-    padding: 0;
-}
-.infinity-bp ul.item-list li {
-    padding: 20px 0 10px;
-	list-style: none outside none;
-}
-.infinity-bp .widget img.avatar {
-     float: left;
-}
-.infinity-bp ul.item-list li div.item-title,
-.infinity-bp ul.item-list li h4 {
-    width: 100%;
-}
-.infinity-bp ul.item-list li div.item-title span {
-    font-size: 100%;
-}
-.infinity-bp ul.item-list li div.item-desc {
-	font-size: 85%;
-    width: 68%;
-}
-.infinity-bp ul.item-list li div.meta {
-    font-size: 85%;
-}
-.infinity-bp #sidebar .item-meta {
-	position: relative;
-}
 .infinity-bp .item-avatar {
 	float: left;
 }
-.infinity-bp ul.item-list li h5 span.small {
-    font-size: 85%;
-}
-
-/* > Item Tabs
---------------------------------------------------------------*/
-
-.infinity-bp div.item-list-tabs {
-    min-height: 37px;
-    position: relative;
-    clear: both;
-}
-.infinity-bp .item-list-tabs {
-	background: none repeat scroll 0 0 #222222;
-}
-.infinity-bp div.item-list-tabs ul {
-    overflow: hidden;
-    margin: 0;
-    padding: 0;
-}
-.infinity-bp div.item-list-tabs ul li {
-	list-style: none;
-}
-.infinity-bp div.item-list-tabs ul li a:hover {
-    color: #ddd;
-    background: #000;
-}
-.infinity-bp div.item-list-tabs ul li.last {
-    color: #bfbdbd;
-    font-size: 85%;
-    margin-bottom: -4px;
-    text-transform: inherit;
-}
-.infinity-bp div.item-list-tabs#subnav ul li {
-	margin-top: 0;
-}
-.infinity-bp div.item-list-tabs ul li.last label {
-	display: inline;
-}
-.infinity-bp div.item-list-tabs ul li.last select {
-    display: inline-block;
-    margin-left: 8px;
-    margin-top: 4px;
-}
-.infinity-bp li#activity-filter-select label {
+.infinity-bp #buddypress span.highlight,
+.infinity-bp #buddypress span.activity,
+.infinity-bp #buddypress div#message p,
+.infinity-bp #buddypress .generic-button,
+.infinity-bp #buddypress .activity-list div.activity-meta a {
 	display: inline-block;
+	text-decoration: none;
+	font: 11px/12px "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	padding: 3px 6px;
 }
-.infinity-bp div.item-list-tabs ul li a,
-.infinity-bp div.item-list-tabs ul li span {
-    padding: 8px 10px;
+.infinity-bp #buddypress .jcrop-holder img,
+.infinity-bp #buddypress #avatar-crop-pane img {
+	max-width: none;
 }
-.infinity-bp div.item-list-tabs ul li span {
-	color: #777;
+
+/*--------------------------------------------------------------
+0.2 - Sidebar
+--------------------------------------------------------------*/
+.infinity-bp #sidebar .item-meta {
+	position: relative;
 }
-.infinity-bp div.item-list-tabs ul li a span {
-    display: inline;
-    padding: 0;
-    color: inherit;
+.infinity-bp #buddypress #sidebar div#message p {
+	padding-left: 10px;
 }
-.infinity-bp div.item-list-tabs ul li a span {
-	padding: 2px 5px;
-	color: #999999;
-    background: none repeat scroll 0 0 #333333;
-    font-size: 75%;
-    margin-left: 2px;
-}
-.infinity-bp div.item-list-tabs ul li.selected a,
-.infinity-bp div.item-list-tabs ul li.current a {
-    background: none repeat scroll 0 0 #000;
-    color: #dddddd;
-}
-.infinity-bp div.item-list-tabs ul li.selected a span,
-.infinity-bp div.item-list-tabs ul li.current a span,
-.infinity-bp div.item-list-tabs ul li a:hover span {
-	background-color: #444;
-}
-.infinity-bp div.item-list-tabs ul li.selected a span,
-.infinity-bp div.item-list-tabs ul li.current a span {
-	background-color: #555;
-}
-.infinity-bp div.item-list-tabs ul li.loading a {
-	padding-left: 25px !important;
-}
-.infinity-bp div#subnav.item-list-tabs {
+/*--------------------------------------------------------------
+1 - Navigation
+--------------------------------------------------------------*/
+/*--------------------------------------------------------------
+1.1 - Pagination
+--------------------------------------------------------------*/
+.infinity-bp #buddypress div.pagination#user-pag,
+.infinity-bp #buddypress div.pagination#pag-top {
+	line-height: 100%;
+	margin-top: -10px;
+	margin-bottom: 10px;
 	background: transparent;
 }
-.infinity-bp div#subnav.item-list-tabs ul li a {
-	color: #999;
-}
-.infinity-bp div#subnav.item-list-tabs ul li.current a {
-    background: transparent;
-    color: #444444;
-}
-.infinity-bp div#subnav.item-list-tabs ul li a:hover {
-    color: #222;
-    background: transparent;
-}
-.infinity-bp div#subnav.item-list-tabs {
-    border-bottom: 1px solid #E8E8E8;
-    border-top: 0 solid;
-    font-family: inherit;
-    margin-bottom: 20px;
-    overflow: hidden;
+.infinity-bp #buddypress div.pagination .pag-count {
+	font-style: italic;
 }
 
-/* > Directories (Members, Groups, Blogs, Forums)
+/*--------------------------------------------------------------
+2 - WordPress
+--------------------------------------------------------------*/
+/*--------------------------------------------------------------
+2.1 - Images
 --------------------------------------------------------------*/
 
-.infinity-bp div.dir-search {
-	float: right;
+/*--------------------------------------------------------------
+3.0 - BuddyPress
+--------------------------------------------------------------*/
+/*--------------------------------------------------------------
+3.1 - Activity
+--------------------------------------------------------------*/
+.infinity-bp #buddypress #item-body form#whats-new-form {
+	margin-top: 20px;
+	border: none;
+}
+.infinity-bp #buddypress .home-page form#whats-new-form {
+	margin-bottom: 30px;
+}
+.infinity-bp #buddypress form#whats-new-form h5 {
+	margin: 0px 0 13px 76px;
+	font-weight: bold;
+	font-size: 1.2em;
+	color: #555555;
+	padding: 0 0 0;
+	line-height: 25px;
+}
+.infinity-bp #buddypress form#whats-new-form #whats-new-submit {
+	margin-top: 5px;
+}
+.infinity-bp #buddypress form#whats-new-form #whats-new-submit input#aw-whats-new-submit{
+	margin: 0 10px 0 0;
+}
+
+/*--------------------------------------------------------------
+3.1.1 - Activity Listing
+--------------------------------------------------------------*/
+.infinity-bp #buddypress ul.activity-list > li:first-child {
+	padding-top: 20px;
+}
+.infinity-bp #buddypress .activity-list li .activity-inreplyto {
+	color: #a6a6a6;
+}
+.infinity-bp #buddypress .activity-list .activity-content .activity-inner p {
+	margin: 0;
+}
+.infinity-bp #buddypress .activity-list .activity-content .activity-header img.avatar {
+	display: none;
+}
+.infinity-bp #buddypress .activity-list .activity-content .activity-inner,
+.infinity-bp #buddypress .activity-list .activity-content blockquote {
+	background: #fbfbfb;
+	border: 1px solid #f4f4f4;
+	margin: 15px 0 15px 5px;
+	padding: 10px;
+}
+.infinity-bp #buddypress .activity-inner img {
+	max-width: 100% !important;
+	height: auto;
+}
+
+/*--------------------------------------------------------------
+3.1.2 - Activity Comments
+--------------------------------------------------------------*/
+.infinity-bp #buddypress a.bp-primary-action span,
+.infinity-bp #buddypress #reply-title small a span {
+	background: none repeat scroll 0 0 #696868;
+	border: 1px solid #ffffff;
+	border-radius: 3px 3px 3px 3px;
+	color: #efefef;
+	padding: 2px 4px 0;
+	text-shadow: 0 1px 0 #222222;
+}
+.infinity-bp #buddypress div.activity-comments ul {
+	padding: 0;
+}
+.infinity-bp #buddypress div.activity-comments ul li {
+	background: #fbfbfb;
+	border: 1px solid #f4f4f4;
+}
+.infinity-bp #content #buddypress div.activity-comments li {
+	background: #fbfbfb;
+	border: 1px solid #f4f4f4;
+	padding: 10px 15px;
+}
+.infinity-bp #buddypress div.activity-comments form.ac-form {
+	border: 1px solid #f1f1f1;
+}
+
+/*--------------------------------------------------------------
+3.3 - Directories - Members, Groups, Blogs, Forums
+--------------------------------------------------------------*/
+.infinity-bp #buddypress div.dir-search {
 	margin-top: -60px;
 	width: 50%;
 	text-align: right;
 }
-.infinity-bp .dir-form {
-	margin-bottom: 30px;
-}
-.infinity-bp div.dir-search input[type=text] {
-    display: inline-block;
-    margin-right: 10px;
-}
-.infinity-bp div.dir-search label {
+.infinity-bp #buddypress div.dir-search label {
 	display: inline-block;
 }
-.infinity-bp #content .item-title a {
+.infinity-bp #buddypress div.dir-search input[type=text],
+.infinity-bp #buddypress li.groups-members-search input[type=text] {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+.infinity-bp #buddypress .dir-form {
+	margin-bottom: 30px;
+}
+.infinity-bp #buddypress .dir-form h3 .button {
+	margin-bottom: 0;
+	margin-top: 0;
+	padding: 2px 12px;
+}
+.infinity-bp #buddypress .dir-form .info-box {
+	float: left;
+	margin-top: 10px;
+}
+
+.infinity-bp #content #buddypress .item-title a {
 	font-size: 120%;
 }
-.infinity-bp .dir-form h3 .button {
-    margin-bottom: 0;
-    margin-top: 0;
-    padding: 2px 12px;
-}
-.infinity-bp .dir-form .info-box {
-    float: left;
-    margin-top: 10px;
-}
 
-
-/* > Pagination
+/*--------------------------------------------------------------
+3.4 - Errors / Success Messages
 --------------------------------------------------------------*/
-
-.infinity-bp div.pagination .pag-count {
-	float: none;
-	line-height: 5px;
-	font-style: italic;
+.infinity-bp #buddypress div#message p {
+	font-weight: bold;
 }
-.infinity-bp div.pagination .pagination-links {
-    margin-top: -10px;
+.infinity-bp #buddypress ul.button-nav li a {
+	padding: 8px 10px;
+	font-weight: bold;
 }
-.infinity-bp div.item-options {
-    color: #73C1E6;
-    font-size: 80%;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-.infinity-bp div.item-options a {
-    padding-bottom: 2px;
-    padding-top: 2px;
-}
-.infinity-bp div.item-avatar img {
-    display: block;
-    float: left;
-    margin: 5px 5px 5px 0;
-}
-.infinity-bp .avatar-block {
-	overflow: hidden;
+.infinity-bp #buddypress ul.button-nav li.current a {
+	background: none repeat scroll 0 0 #efefef;
+	border: 1px solid #dddddd;
+	border-radius: 3px 3px 3px 3px;
+	margin-bottom: 20px;
 }
 
-
-/* > Error / Success Messages
+/*--------------------------------------------------------------
+3.5 - Forms
 --------------------------------------------------------------*/
-
-.infinity-bp div#message p {
-    font-size: 85%;
-}
-.infinity-bp ul.button-nav {
-	padding-left: 0px;
-	clear: both;
-	height: 45px;
-}
-.infinity-bp ul.button-nav li {
-	list-style: none;
-}
-.infinity-bp ul.button-nav li a {
-    padding: 8px 10px;
-    font-weight: bold;
-}
-.infinity-bp ul.button-nav li.current a {
-    background: none repeat scroll 0 0 #EFEFEF;
-    border: 1px solid #DDDDDD;
-    border-radius: 3px 3px 3px 3px;
-    margin-bottom: 20px;
-}
-
-
-/* > Input Forms
---------------------------------------------------------------*/
-
-.infinity-bp form.standard-form p.description {
-	font-size: 85%;
+.infinity-bp #buddypress form.standard-form p.description {
 	font-style: italic;
 	margin: -5px 0 15px;
 }
-.infinity-bp #invite-list ul {
-	padding: 0;
-}
-.infinity-bp #invite-list ul li {
-	list-style: none;
-}
-.infinity-bp .action .button {
-	padding: 3px 8px;
-	font-size: 75%;
+
+.infinity-bp.infinity-btns #buddypress .generic-button a {
+	color: #444;
 }
 
-
-/* > Data Tables
+/*--------------------------------------------------------------
+3.6 - Ajax Loading
 --------------------------------------------------------------*/
 
-.infinity-bp table tr td.thread-info p.thread-excerpt {
-    font-size: 85%;
-}
-.infinity-bp table tr.alt {
+/*--------------------------------------------------------------
+3.7 - Forums, Tables and Topics
+--------------------------------------------------------------*/
+.infinity-bp #buddypress ul#topic-post-list li.alt {
 	background: #fbfbfb;
 }
-.infinity-bp table.forum tr > td:first-child,
-.infinity-bp table.forum tr > th:first-child {
-	padding-left: 20px;
-}
-.infinity-bp .forums .pagination {
-	padding: 10px 10px 10px 20px;
-}
-.infinity-bp table.forum {
-    margin: 0;
-    width: auto;
-	border: 1px solid #fef8f8;
-}
-.infinity-bp table.forum td p.topic-text {
-    font-size: 85%;
-}
-.infinity-bp table.forum td.td-freshness {
-    font-size: 85%;
-}
-.infinity-bp table.forum th#th-freshness {
-    width: 10%;
-    text-align: center;
-}
-
-
-/* > Activity Stream Posting
---------------------------------------------------------------*/
-
-.infinity-bp form#whats-new-form {
-	margin-bottom: 30px;
-}
-.infinity-bp #item-body form#whats-new-form {
-    margin-top: 20px;
-    border: none;
-}
-.infinity-bp form#whats-new-form h5 {
-	margin: 0px 0 13px 76px;
-	font-weight: bold;
-	font-size: 1.2em;
-    color: #555555;
-    padding: 0 0 0;
-    line-height: 25px;
-}
-.infinity-bp form#whats-new-form textarea {
-	height: 60px !important;
-	font-size: 110%;
-}
-.infinity-bp form#whats-new-form #whats-new-submit {
-    margin-top: -10px;
-}
-.infinity-bp #whats-new-options {
-    height: 0;
-    overflow: hidden;
-}
-
-
-/* > Activity Stream Listing
---------------------------------------------------------------*/
-
-.infinity-bp ul.activity-list > li:first-child {
-	padding-top: 20px;
-}
-.infinity-bp .activity-list li.mini .activity-avatar img.avatar,
-.infinity-bp .activity-list li.mini .activity-avatar img.FB_profile_pic {
-	width: 40px;
-    height: 40px;
-    margin-bottom: 20px;
-}
-.infinity-bp .activity-list li.mini .activity-content {
-	margin-right: 175px;
-}
-.infinity-bp .activity-list li.mini .activity-content p {
-    margin: 3px 0 0;
-    width: 84%;
-}
-.infinity-bp .activity-list li.mini .activity-meta {
-    top: 15px;
-}
-.infinity-bp .activity-list li.mini .activity-comments {
-    font-size: 100%;
-}
-.infinity-bp .activity-list li .activity-inreplyto {
-	font-size: 85%;
-    color: #a6a6a6;
-    margin-top: 20px;
-}
-.infinity-bp .activity-list .activity-content {
-    margin-top: -20px;
-}
-.infinity-bp body.activity-permalink .activity-list li .activity-content {
-    font-size: 130%;
-    margin-left: 106px;
-    margin-top: -25px;
-}
-.infinity-bp .activity-list .activity-content .activity-header,
-.infinity-bp .activity-list .activity-content .comment-header {
-    font-size: 85%;
-    line-height: 180%;
-}
-.infinity-bp .activity-list .activity-content span.activity-header-meta a {
-    font-size: 85%;
-    color: #777;
-}
-.infinity-bp a.bp-primary-action span,
-.infinity-bp #reply-title small a span {
-    background: none repeat scroll 0 0 #696868;
-    border: 1px solid #FFFFFF;
-    border-radius: 3px 3px 3px 3px;
-    color: #EFEFEF;
-    font-size: 85%;
-    margin-left: 2px;
-    padding: 2px 4px 0;
-    text-shadow: 0 1px 0 #222222;
-}
-.infinity-bp .activity-list .activity-content span.activity-header-meta a:hover {
-    color: inherit;
-    text-decoration: none;
-}
-.infinity-bp .activity-list .activity-content .activity-inner p {
+.infinity-bp #buddypress div#new-topic-post {
 	margin: 0;
 }
-.infinity-bp .activity-inner img {
-	max-width: 100% !important;
-	height: auto; ;
+.infinity-bp #buddypress table#message-threads {
+	border: 0 none;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	padding: 0;
 }
-.infinity-bp .activity-list .activity-content .activity-inner,
-.infinity-bp .activity-list .activity-content blockquote {
-    background: #fbfbfb;
-    border: 1px solid #F4F4F4;
-    margin: 15px 0 15px 5px;
-    overflow: hidden;
-    padding: 10px;
+.infinity-bp #buddypress table.forum {
+	border: 1px solid #fef8f8;
 }
-/* Backwards compatibility. */
-.infinity-bp .activity-list li.load-more {
-    min-height: 40px;
+/*-------------------------------------------------------------------------
+3.8 - Headers, Lists and Tabs - Activity, Groups, Blogs, Forums, Profiles
+-------------------------------------------------------------------------*/
+.infinity-bp #buddypress span.activity {
+	background: #f9f9f9;
+	font-weight: normal;
+	margin-top: 6px;
+}
+.infinity-bp #buddypress div#item-header {
+	margin-bottom: 15px;
+}
+.infinity-bp #buddypress div#item-header h2 {
+	margin-bottom: 5px;
+}
+.infinity-bp #buddypress div#item-header h2 span.highlight {
+	font-weight: bold;
+}
+.infinity-bp #buddypress div#item-header h2 span.highlight span {
+	background: #444444;
+	margin-bottom: 0;
+	right: 0;
+	top: -1px;
+}
+.infinity-bp #buddypress div#item-header div#item-meta {
+	color: #777;
+}
+.infinity-bp #buddypress div#item-header div#item-actions h3 {
+	font-size: 100%;
+}
+.infinity-bp #buddypress div#item-header ul li {
+	list-style: none outside none;
+}
+.infinity-bp #buddypress div#item-header div#message.info p {
+	background: #f9f9f9;
+}
+.infinity-bp #buddypress ul.item-list li {
+	padding: 20px 0 10px;
+	list-style: none outside none;
+}
+.infinity-bp #buddypress ul.item-list li div.item-title,
+.infinity-bp #buddypress ul.item-list li h4 {
+	width: 100%;
+}
+.infinity-bp #buddypress ul.item-list li div.item-desc {
+	width: 68%;
+}
+.infinity-bp #buddypress div.item-list-tabs {
+	background: none repeat scroll 0 0 #222222;
+	min-height: 37px;
 }
 
+.infinity-bp #buddypress div.item-list-tabs ul li.last {
+	color: #bfbdbd;
+	margin-bottom: -4px;
+	text-transform: inherit;
+}
+.infinity-bp #buddypress div.item-list-tabs#subnav ul li a {
+	color: #999;
+}
+.infinity-bp #buddypress div.item-list-tabs#subnav ul li a:hover {
+	color: #222;
+	background: transparent;
+}
+.infinity-bp #buddypress div.item-list-tabs#subnav ul li.current a {
+	background: transparent;
+	color: #444444;
+}
+.infinity-bp #buddypress div.item-list-tabs ul li.last label {
+	display: inline;
+}
+.infinity-bp #buddypress div.item-list-tabs ul li.last select {
+	display: inline-block;
+	margin-left: 8px;
+	margin-top: 4px;
+}
+.infinity-bp #buddypress div.item-list-tabs ul li a,
+.infinity-bp #buddypress div.item-list-tabs ul li span {
+	padding: 8px 10px;
+}
+.infinity-bp #buddypress div.item-list-tabs ul li span {
+	color: #777;
+}
+.infinity-bp #buddypress div.item-list-tabs ul li a span {
+	padding: 2px 5px;
+	color: #999999;
+	background: none repeat scroll 0 0 #333333;
+	margin-left: 2px;
+}
+.infinity-bp #buddypress div.item-list-tabs ul li.selected a,
+.infinity-bp #buddypress div.item-list-tabs ul li.current a {
+	background: none repeat scroll 0 0 #000;
+	color: #dddddd;
+}
+.infinity-bp #buddypress div.item-list-tabs ul li.selected a span,
+.infinity-bp #buddypress div.item-list-tabs ul li.current a span,
+.infinity-bp #buddypress div.item-list-tabs ul li a:hover span {
+	background-color: #444;
+}
+.infinity-bp #buddypress div.item-list-tabs ul li.selected a span,
+.infinity-bp #buddypress div.item-list-tabs ul li.current a span {
+	background-color: #555;
+}
+.infinity-bp #buddypress div.item-list-tabs#subnav {
+	border-bottom: 1px solid #e8e8e8;
+	border-top: 0 solid;
+	font-family: inherit;
+	padding-bottom: 5px;
+}
 
-/* > Activity Stream Comments
+/*--------------------------------------------------------------
+3.9 - Private Messaging Threads
 --------------------------------------------------------------*/
-
-.infinity-bp .activity-permalink div.activity {
-    margin-left: 30px;
-    margin-right: 10px;
-    margin-top: 20px;
+.infinity-bp #buddypress table#message-threads th + th,
+.infinity-bp #buddypress table#message-threads td + td {
+	border-left: 0px solid #f2f2f2;
 }
-.infinity-bp .activity-list div.activity-meta a {
-	font-size: 75%;
-}
-.infinity-bp div.activity-comments ul {
-    padding: 0;
-}
-.infinity-bp div.activity-comments ul li {
-    background: #fbfbfb;
-    border: 1px solid #f4f4f4;
-    padding: 5px;
-}
-.infinity-bp div.activity-comments div.acomment-avatar img {
-    height: 30px;
-    width: 30px;
-}
-.infinity-bp div.activity-comments div.acomment-content {
-    font-size: 95%;
-    margin-left: 49px;
-}
-.infinity-bp #content div.activity-comments li {
-    background: #FBFBFB;
-    border: 1px solid #F4F4F4;
-    padding: 10px 15px;
-}
-.infinity-bp body.activity-permalink div.activity-comments div.acomment-content {
-	font-size: 120%;
-}
-.infinity-bp div.activity-comments div.acomment-meta {
-    font-size: 85%;
-}
-.infinity-bp div.acomment-options a {
-    font-size: 80%;
-    padding: 0 10px;
-}
-.infinity-bp div.activity-comments form.ac-form {
-    border: 1px solid #f1f1f1;
-}
-.infinity-bp div.activity-comments form textarea {
-    font-size: 85%;
-}
-.infinity-bp div.activity-comments form div.ac-reply-avatar {
-    height: 25px;
-    width: 25px;
-}
-.infinity-bp div.acomment-avatar img {
-    height: 40px;
-    width: 40px;
-}
-.infinity-bp div.ac-reply-avatar img {
-    height: 25px;
-    width: 25px;
-}
-.infinity-bp div.activity-comments form div.ac-reply-content {
-    margin-left: 25px;
-    font-size: 85%;
-}
-
-
-/* > Private Message Threads
---------------------------------------------------------------*/
-
-.infinity-bp table#message-threads {
-    border: 0 none;
-    font-size: 95%;
-    margin-bottom: 20px;
-    margin-top: 20px;
-    padding: 0;
-}
-.infinity-bp table#message-threads th + th,
-.infinity-bp table#message-threads td + td {
-	border-left: 0px solid #F2F2F2;
-}
-.infinity-bp table#message-threads tr.unread td {
-    background: #fff9db;
-    border-top: 1px solid #ffe8c4;
-    border-bottom: 1px solid #ffe8c4;
-}
-.infinity-bp li span.unread-count,
-.infinity-bp tr.unread span.unread-count {
-    background: none repeat scroll 0 0 #DD0000;
-	padding: 2px 6px;
-    border-radius: 3px 3px 3px 3px;
-    font-size: 85%;
-    left: 4px;
-    position: relative;
-}
-.infinity-bp #content .messages .avatar {
-    height: 45px;
-    width: 45px;
-}
-.infinity-bp .messages th,
-.infinity-bp .messages td {
-    border-top: 1px solid #F4F4F4;
-    line-height: 18px;
-    padding: 15px 10px 15px 0;
-    text-align: left;
-}
-.infinity-bp div.messages-options-nav {
-	font-size: 85%;
-    background: transparent;
-    padding: 8px 15px;
+.infinity-bp #buddypress div.messages-options-nav {
+	background: transparent;
+	padding: 8px 15px;
 	border-bottom: 1px solid #dddddd;
-    border-top: 1px solid #dddddd;
+	border-top: 1px solid #dddddd;
 }
-.infinity-bp div.messages-options-nav select {
+.infinity-bp #buddypress div.messages-options-nav select {
 	float: right;
 }
-.infinity-bp .thread-options .button {
-    font-size: 85%;
-    left: 10px;
-    line-height: 21px;
-    padding: 0 7px;
-    position: relative;
-}
-.infinity-bp div#message-thread strong {
-    font-size: 110%;
-}
-.infinity-bp div#message-thread div.message-content {
-	margin-left: 55px;
-}
-.infinity-bp #message-threads .thread-avatar {
-	width: 8%;
-}
 
-
-/* > Group Forum Topics
+/*--------------------------------------------------------------
+3.10 - Extended Profiles
 --------------------------------------------------------------*/
 
-.infinity-bp ul#topic-post-list li.alt {
-	background: #fbfbfb;
-}
-.infinity-bp div.admin-links {
-    font-size: 85%;
-}
-.infinity-bp div#topic-meta div.admin-links {
-    bottom: 4px;
-}
-.infinity-bp div#new-topic-post {
-    margin: 0;
-    padding: 1px 0 0 0;
+/*--------------------------------------------------------------
+3.11 - Widgets
+--------------------------------------------------------------*/
+.infinity-bp .widget.buddypress div.item-options {
+	color: #73c1e6;
+	font-weight: bold;
+	text-transform: uppercase;
 }
 
-/*Core Fixes*/
-.infinity-bp .jcrop-holder img,
-.infinity-bp #avatar-crop-pane img {
-    max-width: none;
+.infinity-bp .widget.buddypress div.item-options a {
+	padding-bottom: 2px;
+	padding-top: 2px;
 }
+
+.infinity-bp .widget.buddypress div.item-avatar img {
+	display: block;
+	float: left;
+	margin: 5px 5px 5px 0;
+}
+
+/*--------------------------------------------------------------
+4.0 - Media Queries
+--------------------------------------------------------------*/
+/*--------------------------------------------------------------
+4.1 - Smartphones - landscape
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+4.2 - Smartphones - portrait
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+4.2 - Smartphones - smaller screen sizes
+--------------------------------------------------------------*/
