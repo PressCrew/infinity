@@ -7,13 +7,10 @@
 /* ============================================= */
 
 body.infinity-typog {
-    /* Fix for webkit rendering */
-    font: 14px/21px "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: #444;
-    -webkit-text-size-adjust: 100%;
-  	-ms-text-size-adjust: 100%;
-  	text-rendering: optimizeLegibility;
-  	-webkit-font-smoothing: antialiased;
+	font: 14px/21px "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: #444;
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
 }
 
 .infinity-typog h1,
@@ -22,52 +19,52 @@ body.infinity-typog {
 .infinity-typog h4,
 .infinity-typog h5,
 .infinity-typog h6 {
-    font-weight: bold;
+	font-weight: bold;
 }
 
 .infinity-typog h1 {
-    font-size: 2em;
-    line-height: 1.15em;
-    margin: .5em 0 1em 0;
+	font-size: 2em;
+	line-height: 1.15em;
+	margin: .5em 0 1em 0;
 }
 
 .infinity-typog h2 {
-    font-size: 1.75em;
-    line-height: 1.15em;
-    margin: .5em 0 1em 0;
+	font-size: 1.75em;
+	line-height: 1.15em;
+	margin: .5em 0 1em 0;
 }
 
 .infinity-typog h3 {
-    font-size: 1.5em;
-    line-height: 1.15em;
-    margin: .5em 0 1em 0;
+	font-size: 1.5em;
+	line-height: 1.15em;
+	margin: .5em 0 1em 0;
 }
 
 .infinity-typog h4 {
-    font-size: 1.25em;
-    line-height: 1.15em;
-    margin: .5em 0 1em 0;
+	font-size: 1.25em;
+	line-height: 1.15em;
+	margin: .5em 0 1em 0;
 }
 
 .infinity-typog h5 {
-    font-size: 1em;
-    line-height: 1.6em;
-    margin: 0 0 .5em 0;
+	font-size: 1em;
+	line-height: 1.6em;
+	margin: 0 0 .5em 0;
 }
 
 .infinity-typog h6 {
-    font-size: .75em;
-    line-height: 1.6em;
-    margin: 0 0 .5em 0;
+	font-size: .75em;
+	line-height: 1.6em;
+	margin: 0 0 .5em 0;
 }
 
 .infinity-typog h1#category-title,
 .infinity-typog h1#tag-title {
-    font-style: normal;
-    color: #999;
-    font-size: 114.3%;
-    line-height: 18px;
-    margin: 0;
+	font-style: normal;
+	color: #999;
+	font-size: 110%;
+	line-height: 18px;
+	margin: 0;
 }
 
 .infinity-typog h1#category-title span,
@@ -79,8 +76,8 @@ body.infinity-typog {
 .infinity-typog h2.post-title a,
 .infinity-typog h1.page-title a,
 .infinity-typog h1.post-title a {
-    margin-bottom: 0;
-    margin-top: 0;
+	margin-bottom: 0;
+	margin-top: 0;
 }
 
 .infinity-typog h2.page-title a:hover,
@@ -92,8 +89,8 @@ body.infinity-typog {
 
 .infinity-typog h1 .post-edit-link,
 .infinity-typog h2 .post-edit-link {
-    font-size: 27px !important;
-    line-height: 0;
+	font-size: 27px !important;
+	line-height: 0;
 }
 
 .infinity-typog .moretag {
@@ -118,44 +115,43 @@ body.infinity-typog {
 /* ! Global & Wraps   */
 /* ================== */
 body.infinity-layout {
-    -webkit-font-smoothing: antialiased;
-    -webkit-text-size-adjust: none;
+	-webkit-text-size-adjust: none;
 }
 .infinity-layout #wrapper {
 	padding-bottom: 20px;
-    padding-top: 20px;
-    margin: auto;
+	padding-top: 20px;
+	margin: auto;
 }
 /* ========== */
 /* ! Header   */
 /* ========== */
 .infinity-layout #header {
-    position: relative;
+	position: relative;
 }
 .infinity-layout #header:after {
-    content:"";
-    clear:both;
-    display:block;
+	content:"";
+	clear:both;
+	display:block;
 }
 .infinity-layout h1#site-title,
 .infinity-layout div#site-title {
-    line-height: 180%;
-    font-weight: bold;
-    font-size: 200%;
-    margin: -15px 0 0;
-    width: auto;
-    float: left;
+	line-height: 180%;
+	font-weight: bold;
+	font-size: 200%;
+	margin: -15px 0 0;
+	width: auto;
+	float: left;
 }
 .infinity-layout #site-title a {
-    margin-bottom: -29px;
-    display: block;
+	margin-bottom: -29px;
+	display: block;
 }
 .infinity-layout #site-description {
-    font-style: italic;
-    color: #999999;
-    position: relative;
-    font-size: 14px;
-    line-height: 180%;
+	font-style: italic;
+	color: #999999;
+	position: relative;
+	font-size: 14px;
+	line-height: 180%;
 }
 /* ========================== */
 /* ! /* Navigation Menus */
@@ -165,19 +161,19 @@ body.infinity-layout {
 /* Top Menu */
 .infinity-layout #top-menu-wrap,
 .infinity-layout #sub-menu-wrap {
-    position: relative;
+	position: relative;
 }
 
 .infinity-layout #top-menu-wrap {
-    margin-bottom: -6px;
-    /* setting z-index for dropdowns. do not mess with this */
-    z-index: 12 !important;
+	margin-bottom: -6px;
+	/* setting z-index for dropdowns. do not mess with this */
+	z-index: 12 !important;
 }
 
 .infinity-layout #main-menu-wrap {
-    padding: 0;
-    /* setting z-index for dropdowns. do not mess with this */
-    z-index: 11 !important;
+	padding: 0;
+	/* setting z-index for dropdowns. do not mess with this */
+	z-index: 11 !important;
 }
 
 .infinity-layout #main-menu-wrap ul.sub-menu {
@@ -187,28 +183,28 @@ body.infinity-layout {
 .infinity-layout #sub-menu-wrap {
 	/* setting z-index for dropdowns. do not mess with this */
 	z-index: 10 !important;
-    margin-bottom: -3px;
+	margin-bottom: -3px;
 }
 
 /* ===================== */
 /* ! Base Menu Styling   */
 /* ===================== */
 .infinity-layout #main-menu-wrap .main-menu {
-    float: right;
-    font-size: 110%;
-    width: auto;
+	float: right;
+	font-size: 110%;
+	width: auto;
 }
 .infinity-layout .base-menu {
 	display: inline-block;
-    width: 100%;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    webkit-box-sizing: border-box;
+	width: 100%;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	webkit-box-sizing: border-box;
 }
 .infinity-layout .base-menu ul li {
-    float: left;
-    position: relative;
-    list-style-type: none;
+	float: left;
+	position: relative;
+	list-style-type: none;
 }
 .infinity-layout .base-menu ul li.right {
 	float: right;
@@ -219,12 +215,12 @@ body.infinity-layout {
 .infinity-layout .base-menu ul li li li.sfHover ul,
 .infinity-layout .base-menu ul li li li li:hover ul,
 .infinity-layout .base-menu ul li li li li.sfHover ul {
-    /* match .nav ul width */
-    top: -1px;
-    left: 180px;
+	/* match .nav ul width */
+	top: -1px;
+	left: 180px;
 }
 .infinity-layout .base-menu ul li:hover {
-    visibility: inherit; /* fixes IE7 'sticky bug' */
+	visibility: inherit; /* fixes IE7 'sticky bug' */
 }
 .infinity-layout .base-menu ul li:hover li ul,
 .infinity-layout .base-menu ul li.sfHover li ul,
@@ -236,24 +232,24 @@ body.infinity-layout {
 }
 .infinity-layout .base-menu ul li:hover ul,
 .infinity-layout .base-menu ul li.sfHover ul {
-    top: 27px;
-    /* match top ul list item height */
-    left: 0px;
-    z-index: 95;
+	top: 27px;
+	/* match top ul list item height */
+	left: 0px;
+	z-index: 95;
 }
 .infinity-layout .base-menu ul ul {
-    top: -9999em;
-    width: 210px;
-    /* left offset of submenus need to match (see below) */
-    margin: 3px 0 0 0;
-    padding: 15px 5px 15px 5px;
-    z-index: 50;
-    position: absolute;
+	top: -9999em;
+	width: 210px;
+	/* left offset of submenus need to match (see below) */
+	margin: 3px 0 0 0;
+	padding: 15px 5px 15px 5px;
+	z-index: 50;
+	position: absolute;
 }
 .infinity-layout .base-menu ul ul li {
-    float: left;
-    width: 150px;
-    padding: 0 5px 0 5px;
+	float: left;
+	width: 150px;
+	padding: 0 5px 0 5px;
 }
 .infinity-layout .base-menu ul ul ul {
 	margin-left: -10px;
@@ -268,11 +264,11 @@ body.infinity-layout {
 	border-bottom: none;
 }
 .infinity-layout .base-menu ul ul li a {
-    width: 180px;
+	width: 180px;
 }
 .infinity-layout .base-menu ul a {
-    float: left;
-    padding: 8px 10px;
+	float: left;
+	padding: 8px 10px;
 }
  /* Page Currently being viewed */
 .infinity-layout .base-menu li li a:hover,
@@ -281,8 +277,8 @@ body.infinity-layout {
 }
 .infinity-layout .base-menu li li a span.sf-sub-indicator,
 .infinity-layout .base-menu li.sfHover li a span.sf-sub-indicator {
-    float: right;
-    margin: 5px 0 0 0;
+	float: right;
+	margin: 5px 0 0 0;
 }
 .infinity-layout .base-menu li li a span {
 	padding: 0; color: #BBB;
@@ -295,8 +291,8 @@ body.infinity-layout {
 /*  Make sub menus appear */
 .infinity-layout .base-menu ul li:hover ul,
 .infinity-layout .base-menu ul li.sfHover ul {
-    top: 34px; /* match top ul list item height */
-    z-index: 99;
+	top: 34px; /* match top ul list item height */
+	z-index: 99;
 }
 /* Hide all subs subs (4 levels deep) */
 .infinity-layout .base-menu ul li:hover li ul,
@@ -314,26 +310,26 @@ body.infinity-layout {
 .infinity-layout .base-menu ul li li li.sfHover ul,
 .infinity-layout .base-menu ul li li li li:hover ul,
 .infinity-layout .base-menu ul li li li li.sfHover ul {
-    left: 180px; /* match .nav ul width */
-    top: -1px;
+	left: 180px; /* match .nav ul width */
+	top: -1px;
 }
 /* 2nd level skin */
 .infinity-layout .base-menu ul ul {
-    position: absolute;
-    top: -9999em;
-    width: 180px; /* left offset of submenus need to match (see below) */
-    padding: 15px 5px 15px 5px;
-    margin: 3px 0 0 0;
-    background: #FFF;
+	position: absolute;
+	top: -9999em;
+	width: 180px; /* left offset of submenus need to match (see below) */
+	padding: 15px 5px 15px 5px;
+	margin: 3px 0 0 0;
+	background: #FFF;
 }
 .infinity-layout .base-menu ul ul li {
-    float: left;
-    width: 150px;
-    background: none;
-    padding: 0 5px 0 5px;
+	float: left;
+	width: 150px;
+	background: none;
+	padding: 0 5px 0 5px;
 }
 .infinity-layout .base-menu li a:hover {
-    color: #DDD;
+	color: #DDD;
 }
 .infinity-layout .base-menu ul ul li:first-child {
 	border-top: none;
@@ -342,10 +338,10 @@ body.infinity-layout {
 	border-bottom: none;
 }
 .infinity-layout .base-menu ul ul li a {
-    width: 150px;
+	width: 150px;
 }
 .infinity-layout .base-menu ul ul li a:hover {
-    padding-left: 12px;
+	padding-left: 12px;
 }
 .infinity-layout .base-menu:first-child ul li:after {
 	content: "";
@@ -382,8 +378,8 @@ body.infinity-layout {
 	margin-top: 20px;
 }
 .infinity-layout #sidebar .widget_search input[type=text] {
-    width: 110px;
-    padding: 2px;
+	width: 110px;
+	padding: 2px;
 }
 
 /* Widgets */
@@ -401,9 +397,9 @@ body.infinity-layout {
 	margin-bottom: 0;
 }
 .infinity-layout .footer-widget h3 {
-    margin-bottom: 10px;
-    color: #FEDA71;
-    font-size: 16px;
+	margin-bottom: 10px;
+	color: #FEDA71;
+	font-size: 16px;
 }
 .infinity-layout #footer-widget-right {
 	border-right: none;
@@ -420,18 +416,18 @@ body.infinity-layout {
 	display: inline;
 }
 .infinity-layout #footer-menu ul li a {
-    padding-right: 8px;
+	padding-right: 8px;
 }
 .infinity-layout .footer-menu ul li:last-child a {
 	border-right: 0px;
 }
 .infinity-layout #footer-info {
-    overflow: auto;
-    padding: 0px;
+	overflow: auto;
+	padding: 0px;
 }
 .infinity-layout #powered-by {
-    min-height: 30px;
-    padding-top: 10px;
+	min-height: 30px;
+	padding-top: 10px;
 }
 .infinity-layout #copyright-info {
 	text-align: right;
@@ -474,30 +470,30 @@ body.infinity-layout {
 .infinity-btns input[type="reset"],
 .infinity-btns input[type="button"],
 .infinity-btns #review_form #submit {
-    margin-top: 10px;
-    border-top: 1px solid #ccc;
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255,255,255,.2)), color-stop(100%, rgba(0,0,0,.2)));
-    background: -webkit-linear-gradient(top, rgba(255,255,255,.2) 0%, rgba(0,0,0,.2) 100%);
-    background: -moz-linear-gradient(top, rgba(255,255,255,.2) 0%, rgba(0,0,0,.2) 100%);
-    background: -o-linear-gradient(top, rgba(255,255,255,.2) 0%, rgba(0,0,0,.2) 100%);
-    background: -ms-linear-gradient(top, rgba(255,255,255,.2) 0%, rgba(0,0,0,.2) 100%);
-    background: linear-gradient(top, rgba(255,255,255,.2) 0%, rgba(0,0,0,.2) 100%);
-    border-left: 1px solid #ccc;
-    font-weight: bold;
-    float: none;
-    text-shadow: 0 1px rgba(255, 255, 255, .75);
-    line-height: 21px;
-    margin-bottom: 10px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    text-decoration: none;
-    color: #444444;
-    border: 1px solid #aaa;
-    cursor: pointer;
-    display: inline-block;
-    font-size: 11px;
-    padding: 8px 12px;
+	margin-top: 10px;
+	border-top: 1px solid #ccc;
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255,255,255,.2)), color-stop(100%, rgba(0,0,0,.2)));
+	background: -webkit-linear-gradient(top, rgba(255,255,255,.2) 0%, rgba(0,0,0,.2) 100%);
+	background: -moz-linear-gradient(top, rgba(255,255,255,.2) 0%, rgba(0,0,0,.2) 100%);
+	background: -o-linear-gradient(top, rgba(255,255,255,.2) 0%, rgba(0,0,0,.2) 100%);
+	background: -ms-linear-gradient(top, rgba(255,255,255,.2) 0%, rgba(0,0,0,.2) 100%);
+	background: linear-gradient(top, rgba(255,255,255,.2) 0%, rgba(0,0,0,.2) 100%);
+	border-left: 1px solid #ccc;
+	font-weight: bold;
+	float: none;
+	text-shadow: 0 1px rgba(255, 255, 255, .75);
+	line-height: 21px;
+	margin-bottom: 10px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	text-decoration: none;
+	color: #444444;
+	border: 1px solid #aaa;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 11px;
+	padding: 8px 12px;
 }
 .infinity-btns .generic-button a {
 	color: #444;
@@ -508,55 +504,55 @@ body.infinity-layout {
 .infinity-btns input[type="reset"]:active,
 .infinity-btns input[type="button"]:active,
 .infinity-btns #review_form #submit:active {
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0,0,0,.3)), color-stop(100%, rgba(255,255,255,.3)));
-    background: -webkit-linear-gradient(top, rgba(0,0,0,.3) 0%, rgba(255,255,255,.3) 100%);
-    background: -moz-linear-gradient(top, rgba(0,0,0,.3) 0%, rgba(255,255,255,.3) 100%);
-    background: -o-linear-gradient(top, rgba(0,0,0,.3) 0%, rgba(255,255,255,.3) 100%);
-    background: -ms-linear-gradient(top, rgba(0,0,0,.3) 0%, rgba(255,255,255,.3) 100%);
-    background: linear-gradient(top, rgba(0,0,0,.3) 0%, rgba(255,255,255,.3) 100%);
-    border-right: 1px solid #aaa;
-    border-bottom: 1px solid #aaa;
-    border: 1px solid #888;
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0,0,0,.3)), color-stop(100%, rgba(255,255,255,.3)));
+	background: -webkit-linear-gradient(top, rgba(0,0,0,.3) 0%, rgba(255,255,255,.3) 100%);
+	background: -moz-linear-gradient(top, rgba(0,0,0,.3) 0%, rgba(255,255,255,.3) 100%);
+	background: -o-linear-gradient(top, rgba(0,0,0,.3) 0%, rgba(255,255,255,.3) 100%);
+	background: -ms-linear-gradient(top, rgba(0,0,0,.3) 0%, rgba(255,255,255,.3) 100%);
+	background: linear-gradient(top, rgba(0,0,0,.3) 0%, rgba(255,255,255,.3) 100%);
+	border-right: 1px solid #aaa;
+	border-bottom: 1px solid #aaa;
+	border: 1px solid #888;
 }
 .infinity-btns a.button:hover,
 .infinity-btns button:hover,
 .infinity-btns #review_form #submit:hover {
-    border-top: 1px solid #aaa;
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255,255,255,.3)), color-stop(100%, rgba(0,0,0,.3)));
-    background: -webkit-linear-gradient(top, rgba(255,255,255,.3) 0%, rgba(0,0,0,.3) 100%);
-    background: -moz-linear-gradient(top, rgba(255,255,255,.3) 0%, rgba(0,0,0,.3) 100%);
-    background: -o-linear-gradient(top, rgba(255,255,255,.3) 0%, rgba(0,0,0,.3) 100%);
-    background: -ms-linear-gradient(top, rgba(255,255,255,.3) 0%, rgba(0,0,0,.3) 100%);
-    background: linear-gradient(top, rgba(255,255,255,.3) 0%, rgba(0,0,0,.3) 100%);
-    border-left: 1px solid #aaa;
-    color: #222;
-    border: 1px solid #888;
-    padding: 8px 12px;
+	border-top: 1px solid #aaa;
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255,255,255,.3)), color-stop(100%, rgba(0,0,0,.3)));
+	background: -webkit-linear-gradient(top, rgba(255,255,255,.3) 0%, rgba(0,0,0,.3) 100%);
+	background: -moz-linear-gradient(top, rgba(255,255,255,.3) 0%, rgba(0,0,0,.3) 100%);
+	background: -o-linear-gradient(top, rgba(255,255,255,.3) 0%, rgba(0,0,0,.3) 100%);
+	background: -ms-linear-gradient(top, rgba(255,255,255,.3) 0%, rgba(0,0,0,.3) 100%);
+	background: linear-gradient(top, rgba(255,255,255,.3) 0%, rgba(0,0,0,.3) 100%);
+	border-left: 1px solid #aaa;
+	color: #222;
+	border: 1px solid #888;
+	padding: 8px 12px;
 }
 .infinity-btns .button.full-width,
 .infinity-btns button.full-width,
 .infinity-btns input[type="submit"].full-width,
 .infinity-btns input[type="reset"].full-width,
 .infinity-btns input[type="button"].full-width {
-    text-align: center;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    width: 100%;
+	text-align: center;
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+	width: 100%;
 }
 .infinity-btns .button,
 .infinity-btns .post-tags a,
 .infinity-btns .widget_tag_cloud a,
 .infinity-btns input,
 .infinity-btns textarea {
-    display: inline-block;
-    text-decoration: none;
-    padding: 8px 11px;
-    color: #555;
-    border: 1px solid #dedede;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    margin-bottom: 2px;
+	display: inline-block;
+	text-decoration: none;
+	padding: 8px 11px;
+	color: #555;
+	border: 1px solid #dedede;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	margin-bottom: 2px;
 }
 .infinity-btns .button.white,
 .infinity-btns .post-tags a,
@@ -564,19 +560,19 @@ body.infinity-layout {
 .infinity-btns a.button,
 .infinity-btns .generic-button,
 .infinity-btns a.more-link {
-    background: #f5f5f5;
-    background: -webkit-gradient(linear, left top, left bottom, from(#f9f9f9), to(#f0f0f0));
-    background: -webkit-linear-gradient(top, #f9f9f9, #f0f0f0);
-    background: -moz-linear-gradient(top, #f9f9f9, #f0f0f0);
-    background: -o-linear-gradient(top, #f9f9f9, #f0f0f0);
-    background: -ms-linear-gradient(top, #f9f9f9, #f0f0f0);
-    background: linear-gradient(top, #f9f9f9, #f0f0f0);
-    border-color: #dedede #d8d8d8 #d3d3d3;
-    color: #555;
-    text-shadow: 0 1px 0 #fff;
-    -webkit-box-shadow: 0 1px 1px #eaeaea, inset 0 1px 0 #fbfbfb;
-    -moz-box-shadow: 0 1px 1px #eaeaea, inset 0 1px 0 #fbfbfb;
-    box-shadow: 0 1px 1px #eaeaea, inset 0 1px 0 #fbfbfb;
+	background: #f5f5f5;
+	background: -webkit-gradient(linear, left top, left bottom, from(#f9f9f9), to(#f0f0f0));
+	background: -webkit-linear-gradient(top, #f9f9f9, #f0f0f0);
+	background: -moz-linear-gradient(top, #f9f9f9, #f0f0f0);
+	background: -o-linear-gradient(top, #f9f9f9, #f0f0f0);
+	background: -ms-linear-gradient(top, #f9f9f9, #f0f0f0);
+	background: linear-gradient(top, #f9f9f9, #f0f0f0);
+	border-color: #dedede #d8d8d8 #d3d3d3;
+	color: #555;
+	text-shadow: 0 1px 0 #fff;
+	-webkit-box-shadow: 0 1px 1px #eaeaea, inset 0 1px 0 #fbfbfb;
+	-moz-box-shadow: 0 1px 1px #eaeaea, inset 0 1px 0 #fbfbfb;
+	box-shadow: 0 1px 1px #eaeaea, inset 0 1px 0 #fbfbfb;
 }
 .infinity-btns .button.white:hover,
 .infinity-btns .post-tags a:hover,
@@ -584,291 +580,291 @@ body.infinity-layout {
 .infinity-btns a.button:hover,
 .infinity-btns .generic-button:hover,
 .infinity-btns a.more-link:hover {
-    background: #f4f4f4;
-    background: -webkit-gradient(linear, left top, left bottom, from(#efefef), to(#f8f8f8));
-    background: -webkit-linear-gradient(top, #efefef, #f8f8f8);
-    background: -moz-linear-gradient(top, #efefef, #f8f8f8);
-    background: -o-linear-gradient(top, #efefef, #f8f8f8);
-    background: -ms-linear-gradient(top, #efefef, #f8f8f8);
-    background: linear-gradient(top, #efefef, #f8f8f8);
-    border-color: #c7c7c7 #c3c3c3 #bebebe;
-    text-shadow: 0 1px 0 #fdfdfd;
-    -webkit-box-shadow: 0 1px 1px #ebebeb, inset 0 1px 0 #f3f3f3;
-    -moz-box-shadow: 0 1px 1px #ebebeb, inset 0 1px 0 #f3f3f3;
-    box-shadow: 0 1px 1px #ebebeb, inset 0 1px 0 #f3f3f3;
+	background: #f4f4f4;
+	background: -webkit-gradient(linear, left top, left bottom, from(#efefef), to(#f8f8f8));
+	background: -webkit-linear-gradient(top, #efefef, #f8f8f8);
+	background: -moz-linear-gradient(top, #efefef, #f8f8f8);
+	background: -o-linear-gradient(top, #efefef, #f8f8f8);
+	background: -ms-linear-gradient(top, #efefef, #f8f8f8);
+	background: linear-gradient(top, #efefef, #f8f8f8);
+	border-color: #c7c7c7 #c3c3c3 #bebebe;
+	text-shadow: 0 1px 0 #fdfdfd;
+	-webkit-box-shadow: 0 1px 1px #ebebeb, inset 0 1px 0 #f3f3f3;
+	-moz-box-shadow: 0 1px 1px #ebebeb, inset 0 1px 0 #f3f3f3;
+	box-shadow: 0 1px 1px #ebebeb, inset 0 1px 0 #f3f3f3;
 }
 .infinity-btns .button.grey {
-    background: #bdbdbd;
-    background: -webkit-gradient(linear, left top, left bottom, from(#cacaca), to(#aeaeae));
-    background: -webkit-linear-gradient(top, #cacaca, #aeaeae);
-    background: -moz-linear-gradient(top, #cacaca, #aeaeae);
-    background: -o-linear-gradient(top, #cacaca, #aeaeae);
-    background: -ms-linear-gradient(top, #cacaca, #aeaeae);
-    background: linear-gradient(top, #cacaca, #aeaeae);
-    border-color: #b5b5b5 #a1a1a1 #8f8f8f;
-    color: #555;
-    text-shadow: 0 1px 0 #d4d4d4;
-    -webkit-box-shadow: 0 1px 1px #c9c9c9, inset 0 1px 0 #d7d7d7;
-    -moz-box-shadow: 0 1px 1px #c9c9c9, inset 0 1px 0 #d7d7d7;
-    box-shadow: 0 1px 1px #c9c9c9, inset 0 1px 0 #d7d7d7;
+	background: #bdbdbd;
+	background: -webkit-gradient(linear, left top, left bottom, from(#cacaca), to(#aeaeae));
+	background: -webkit-linear-gradient(top, #cacaca, #aeaeae);
+	background: -moz-linear-gradient(top, #cacaca, #aeaeae);
+	background: -o-linear-gradient(top, #cacaca, #aeaeae);
+	background: -ms-linear-gradient(top, #cacaca, #aeaeae);
+	background: linear-gradient(top, #cacaca, #aeaeae);
+	border-color: #b5b5b5 #a1a1a1 #8f8f8f;
+	color: #555;
+	text-shadow: 0 1px 0 #d4d4d4;
+	-webkit-box-shadow: 0 1px 1px #c9c9c9, inset 0 1px 0 #d7d7d7;
+	-moz-box-shadow: 0 1px 1px #c9c9c9, inset 0 1px 0 #d7d7d7;
+	box-shadow: 0 1px 1px #c9c9c9, inset 0 1px 0 #d7d7d7;
 }
 .infinity-btns .button.grey:hover {
-    background: #c2c2c2;
-    background: -webkit-gradient(linear, left top, left bottom, from(#bcbcbc), to(#c2c2c2));
-    background: -webkit-linear-gradient(top, #bcbcbc, #c2c2c2);
-    background: -moz-linear-gradient(top, #bcbcbc, #c2c2c2);
-    background: -o-linear-gradient(top, #bcbcbc, #c2c2c2);
-    background: -ms-linear-gradient(top, #bcbcbc, #c2c2c2);
-    background: linear-gradient(top, #bcbcbc, #c2c2c2);
-    border-color: #989898 #8e8e8e #878787;
-    text-shadow: 0 1px 0 #dadada;
-    -webkit-box-shadow: 0 1px 1px #cdcdcd, inset 0 1px 0 #ccc;
-    -moz-box-shadow: 0 1px 1px #cdcdcd, inset 0 1px 0 #ccc;
-    box-shadow: 0 1px 1px #cdcdcd, inset 0 1px 0 #ccc;
+	background: #c2c2c2;
+	background: -webkit-gradient(linear, left top, left bottom, from(#bcbcbc), to(#c2c2c2));
+	background: -webkit-linear-gradient(top, #bcbcbc, #c2c2c2);
+	background: -moz-linear-gradient(top, #bcbcbc, #c2c2c2);
+	background: -o-linear-gradient(top, #bcbcbc, #c2c2c2);
+	background: -ms-linear-gradient(top, #bcbcbc, #c2c2c2);
+	background: linear-gradient(top, #bcbcbc, #c2c2c2);
+	border-color: #989898 #8e8e8e #878787;
+	text-shadow: 0 1px 0 #dadada;
+	-webkit-box-shadow: 0 1px 1px #cdcdcd, inset 0 1px 0 #ccc;
+	-moz-box-shadow: 0 1px 1px #cdcdcd, inset 0 1px 0 #ccc;
+	box-shadow: 0 1px 1px #cdcdcd, inset 0 1px 0 #ccc;
 }
 .infinity-btns .button.pink {
-    background: #f67689;
-    background: -webkit-gradient(linear, left top, left bottom, from(#f78297), to(#f56778));
-    background: -webkit-linear-gradient(top, #f78297, #f56778);
-    background: -moz-linear-gradient(top, #f78297, #f56778);
-    background: -o-linear-gradient(top, #f78297, #f56778);
-    background: -ms-linear-gradient(top, #f78297, #f56778);
-    background: linear-gradient(top, #f78297, #f56778);
-    border-color: #df6f8b #da5f75 #d55061;
-    color: #913944;
-    text-shadow: 0 1px 0 #f89ca9;
-    -webkit-box-shadow: 0 1px 1px #c1c1c1, inset 0 1px 0 #f9a1b1;
-    -moz-box-shadow: 0 1px 1px #c1c1c1, inset 0 1px 0 #f9a1b1;
-    box-shadow: 0 1px 1px #c1c1c1, inset 0 1px 0 #f9a1b1;
+	background: #f67689;
+	background: -webkit-gradient(linear, left top, left bottom, from(#f78297), to(#f56778));
+	background: -webkit-linear-gradient(top, #f78297, #f56778);
+	background: -moz-linear-gradient(top, #f78297, #f56778);
+	background: -o-linear-gradient(top, #f78297, #f56778);
+	background: -ms-linear-gradient(top, #f78297, #f56778);
+	background: linear-gradient(top, #f78297, #f56778);
+	border-color: #df6f8b #da5f75 #d55061;
+	color: #913944;
+	text-shadow: 0 1px 0 #f89ca9;
+	-webkit-box-shadow: 0 1px 1px #c1c1c1, inset 0 1px 0 #f9a1b1;
+	-moz-box-shadow: 0 1px 1px #c1c1c1, inset 0 1px 0 #f9a1b1;
+	box-shadow: 0 1px 1px #c1c1c1, inset 0 1px 0 #f9a1b1;
 }
 .infinity-btns .button.pink:hover {
-    background: #f67c90;
-    background: -webkit-gradient(linear, left top, left bottom, from(#f56c7e), to(#f78297));
-    background: -webkit-linear-gradient(top, #f56c7e, #f78297);
-    background: -moz-linear-gradient(top, #f56c7e, #f78297);
-    background: -o-linear-gradient(top, #f56c7e, #f78297);
-    background: -ms-linear-gradient(top, #f56c7e, #f78297);
-    background: linear-gradient(top, #f56c7e, #f78297);
-    border-color: #c36079 #c25669 #c14e5c;
-    text-shadow: 0 1px 0 #f9a6b4;
-    -webkit-box-shadow: 0 1px 1px #c3c3c3, inset 0 1px 0 #f8909e;
-    -moz-box-shadow: 0 1px 1px #c3c3c3, inset 0 1px 0 #f8909e;
-    box-shadow: 0 1px 1px #c3c3c3, inset 0 1px 0 #f8909e;
+	background: #f67c90;
+	background: -webkit-gradient(linear, left top, left bottom, from(#f56c7e), to(#f78297));
+	background: -webkit-linear-gradient(top, #f56c7e, #f78297);
+	background: -moz-linear-gradient(top, #f56c7e, #f78297);
+	background: -o-linear-gradient(top, #f56c7e, #f78297);
+	background: -ms-linear-gradient(top, #f56c7e, #f78297);
+	background: linear-gradient(top, #f56c7e, #f78297);
+	border-color: #c36079 #c25669 #c14e5c;
+	text-shadow: 0 1px 0 #f9a6b4;
+	-webkit-box-shadow: 0 1px 1px #c3c3c3, inset 0 1px 0 #f8909e;
+	-moz-box-shadow: 0 1px 1px #c3c3c3, inset 0 1px 0 #f8909e;
+	box-shadow: 0 1px 1px #c3c3c3, inset 0 1px 0 #f8909e;
 }
 .infinity-btns .button.orange,
 .infinity-btns .orange a,
 .infinity-btns #bpfb_submit {
-    background: #fecc5f;
-    background: -webkit-gradient(linear, left top, left bottom, from(#feda71), to(#febb4a));
-    background: -webkit-linear-gradient(top, #feda71, #febb4a);
-    background: -moz-linear-gradient(top, #feda71, #febb4a);
-    background: -o-linear-gradient(top, #feda71, #febb4a);
-    background: -ms-linear-gradient(top, #feda71, #febb4a);
-    background: linear-gradient(top, #feda71, #febb4a);
-    border-color: #f5b74e #e5a73e #d6982f;
-    color: #996633;
-    text-shadow: 0 1px 0 #fedd9b;
+	background: #fecc5f;
+	background: -webkit-gradient(linear, left top, left bottom, from(#feda71), to(#febb4a));
+	background: -webkit-linear-gradient(top, #feda71, #febb4a);
+	background: -moz-linear-gradient(top, #feda71, #febb4a);
+	background: -o-linear-gradient(top, #feda71, #febb4a);
+	background: -ms-linear-gradient(top, #feda71, #febb4a);
+	background: linear-gradient(top, #feda71, #febb4a);
+	border-color: #f5b74e #e5a73e #d6982f;
+	color: #996633;
+	text-shadow: 0 1px 0 #fedd9b;
 }
 .infinity-btns .button.orange:hover,
 .infinity-btns #bpfb_submit:hover {
-    background: #fecb5e;
-    background: -webkit-gradient(linear, left top, left bottom, from(#fec354), to(#fecd61));
-    background: -webkit-linear-gradient(top, #fec354, #fecd61);
-    background: -moz-linear-gradient(top, #fec354, #fecd61);
-    background: -o-linear-gradient(top, #fec354, #fecd61);
-    background: -ms-linear-gradient(top, #fec354, #fecd61);
-    background: linear-gradient(top, #fec354, #fecd61);
-    border-color: #d29a3a #cc9436 #c89133;
-    text-shadow: 0 1px 0 #fee1a0;
-    -webkit-box-shadow: 0 1px 1px #d4d4d4, inset 0 1px 0 #fed17e;
-    -moz-box-shadow: 0 1px 1px #d4d4d4, inset 0 1px 0 #fed17e;
-    box-shadow: 0 1px 1px #d4d4d4, inset 0 1px 0 #fed17e;
+	background: #fecb5e;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fec354), to(#fecd61));
+	background: -webkit-linear-gradient(top, #fec354, #fecd61);
+	background: -moz-linear-gradient(top, #fec354, #fecd61);
+	background: -o-linear-gradient(top, #fec354, #fecd61);
+	background: -ms-linear-gradient(top, #fec354, #fecd61);
+	background: linear-gradient(top, #fec354, #fecd61);
+	border-color: #d29a3a #cc9436 #c89133;
+	text-shadow: 0 1px 0 #fee1a0;
+	-webkit-box-shadow: 0 1px 1px #d4d4d4, inset 0 1px 0 #fed17e;
+	-moz-box-shadow: 0 1px 1px #d4d4d4, inset 0 1px 0 #fed17e;
+	box-shadow: 0 1px 1px #d4d4d4, inset 0 1px 0 #fed17e;
 }
 .infinity-btns .button.green,
 .infinity-btns .gform_footer input.button,
 .infinity-btns .qq-upload-button {
-    background: #b7d770;
-    background: -webkit-gradient(linear, left top, left bottom, from(#cae285), to(#9fcb57));
-    background: -webkit-linear-gradient(top, #cae285, #9fcb57);
-    background: -moz-linear-gradient(top, #cae285, #9fcb57);
-    background: -o-linear-gradient(top, #cae285, #9fcb57);
-    background: -ms-linear-gradient(top, #cae285, #9fcb57);
-    background: linear-gradient(top, #cae285, #9fcb57);
-    border-color: #adc671 #98b65b #87aa4a;
-    color: #5d7731;
-    text-shadow: 0 1px 0 #cfe5a4!important;
-    -webkit-box-shadow: 0 1px 1px #d3d3d3, inset 0 1px 0 #d7e9a4;
-    -moz-box-shadow: 0 1px 1px #d3d3d3, inset 0 1px 0 #d7e9a4;
-    box-shadow: 0 1px 1px #d3d3d3, inset 0 1px 0 #d7e9a4;
+	background: #b7d770;
+	background: -webkit-gradient(linear, left top, left bottom, from(#cae285), to(#9fcb57));
+	background: -webkit-linear-gradient(top, #cae285, #9fcb57);
+	background: -moz-linear-gradient(top, #cae285, #9fcb57);
+	background: -o-linear-gradient(top, #cae285, #9fcb57);
+	background: -ms-linear-gradient(top, #cae285, #9fcb57);
+	background: linear-gradient(top, #cae285, #9fcb57);
+	border-color: #adc671 #98b65b #87aa4a;
+	color: #5d7731;
+	text-shadow: 0 1px 0 #cfe5a4!important;
+	-webkit-box-shadow: 0 1px 1px #d3d3d3, inset 0 1px 0 #d7e9a4;
+	-moz-box-shadow: 0 1px 1px #d3d3d3, inset 0 1px 0 #d7e9a4;
+	box-shadow: 0 1px 1px #d3d3d3, inset 0 1px 0 #d7e9a4;
 }
 .infinity-btns .button.green:hover,
 .infinity-btns .gform_footer input.button hover,
 .infinity-btns .qq-upload-button:hover {
-    background: #b9d972;
-    background: -webkit-gradient(linear, left top, left bottom, from(#b8d872), to(#b9d972));
-    background: -webkit-linear-gradient(top, #b8d872, #b9d972);
-    background: -moz-linear-gradient(top, #b8d872, #b9d972);
-    background: -o-linear-gradient(top, #b8d872, #b9d972);
-    background: -ms-linear-gradient(top, #b8d872, #b9d972);
-    background: linear-gradient(top, #b8d872, #b9d972);
-    border-color: #8bb14d #83a648 #7d9e45;
-    text-shadow: 0 1px 0 #d5e8aa;
-    -webkit-box-shadow: 0 1px 1px #d5d5d5, inset 0 1px 0 #cae295;
-    -moz-box-shadow: 0 1px 1px #d5d5d5, inset 0 1px 0 #cae295;
-    box-shadow: 0 1px 1px #d5d5d5, inset 0 1px 0 #cae295;
+	background: #b9d972;
+	background: -webkit-gradient(linear, left top, left bottom, from(#b8d872), to(#b9d972));
+	background: -webkit-linear-gradient(top, #b8d872, #b9d972);
+	background: -moz-linear-gradient(top, #b8d872, #b9d972);
+	background: -o-linear-gradient(top, #b8d872, #b9d972);
+	background: -ms-linear-gradient(top, #b8d872, #b9d972);
+	background: linear-gradient(top, #b8d872, #b9d972);
+	border-color: #8bb14d #83a648 #7d9e45;
+	text-shadow: 0 1px 0 #d5e8aa;
+	-webkit-box-shadow: 0 1px 1px #d5d5d5, inset 0 1px 0 #cae295;
+	-moz-box-shadow: 0 1px 1px #d5d5d5, inset 0 1px 0 #cae295;
+	box-shadow: 0 1px 1px #d5d5d5, inset 0 1px 0 #cae295;
 }
 .infinity-btns .button.blue {
-    background: #92dbf6;
-    background: -webkit-gradient(linear, left top, left bottom, from(#abe4f8), to(#6fcef3));
-    background: -webkit-linear-gradient(top, #abe4f8, #6fcef3);
-    background: -moz-linear-gradient(top, #abe4f8, #6fcef3);
-    background: -o-linear-gradient(top, #abe4f8, #6fcef3);
-    background: -ms-linear-gradient(top, #abe4f8, #6fcef3);
-    background: linear-gradient(top, #abe4f8, #6fcef3);
-    border-color: #8dc5da #76b7cf #63abc7;
-    color: #42788e;
-    text-shadow: 0 1px 0 #b6e6f9;
-    -webkit-box-shadow: 0 1px 1px #d6d6d6, inset 0 1px 0 #c0ebfa;
-    -moz-box-shadow: 0 1px 1px #d6d6d6, inset 0 1px 0 #c0ebfa;
-    box-shadow: 0 1px 1px #d6d6d6, inset 0 1px 0 #c0ebfa;
+	background: #92dbf6;
+	background: -webkit-gradient(linear, left top, left bottom, from(#abe4f8), to(#6fcef3));
+	background: -webkit-linear-gradient(top, #abe4f8, #6fcef3);
+	background: -moz-linear-gradient(top, #abe4f8, #6fcef3);
+	background: -o-linear-gradient(top, #abe4f8, #6fcef3);
+	background: -ms-linear-gradient(top, #abe4f8, #6fcef3);
+	background: linear-gradient(top, #abe4f8, #6fcef3);
+	border-color: #8dc5da #76b7cf #63abc7;
+	color: #42788e;
+	text-shadow: 0 1px 0 #b6e6f9;
+	-webkit-box-shadow: 0 1px 1px #d6d6d6, inset 0 1px 0 #c0ebfa;
+	-moz-box-shadow: 0 1px 1px #d6d6d6, inset 0 1px 0 #c0ebfa;
+	box-shadow: 0 1px 1px #d6d6d6, inset 0 1px 0 #c0ebfa;
 }
 .infinity-btns .button.blue:hover {
-    background: #92dbf6;
-    border-color: #7caec0 #68a3ba #5a9cb5;
-    text-shadow: 0 1px 0 #bee9fa;
-    -webkit-box-shadow: 0 1px 1px #d6d6d6, inset 0 1px 0 #ade4f8;
-    -moz-box-shadow: 0 1px 1px #d6d6d6, inset 0 1px 0 #ade4f8;
-    box-shadow: 0 1px 1px #d6d6d6, inset 0 1px 0 #ade4f8;
+	background: #92dbf6;
+	border-color: #7caec0 #68a3ba #5a9cb5;
+	text-shadow: 0 1px 0 #bee9fa;
+	-webkit-box-shadow: 0 1px 1px #d6d6d6, inset 0 1px 0 #ade4f8;
+	-moz-box-shadow: 0 1px 1px #d6d6d6, inset 0 1px 0 #ade4f8;
+	box-shadow: 0 1px 1px #d6d6d6, inset 0 1px 0 #ade4f8;
 }
 .infinity-btns .button.purple {
-    background: #dfaeda;
-    background: -webkit-gradient(linear, left top, left bottom, from(#e8c4e4), to(#d494ce));
-    background: -webkit-linear-gradient(top, #e8c4e4, #d494ce);
-    background: -moz-linear-gradient(top, #e8c4e4, #d494ce);
-    background: -o-linear-gradient(top, #e8c4e4, #d494ce);
-    background: -ms-linear-gradient(top, #e8c4e4, #d494ce);
-    background: linear-gradient(top, #e8c4e4, #d494ce);
-    border-color: #bc9db9 #ad89aa #a1799d;
-    color: #7b5777;
-    text-shadow: 0 1px 0 #eacae6;
-    -webkit-box-shadow: 0 1px 1px #d5d5d5, inset 0 1px 0 #eed3eb;
-    -moz-box-shadow: 0 1px 1px #d5d5d5, inset 0 1px 0 #eed3eb;
-    box-shadow: 0 1px 1px #d5d5d5, inset 0 1px 0 #eed3eb;
+	background: #dfaeda;
+	background: -webkit-gradient(linear, left top, left bottom, from(#e8c4e4), to(#d494ce));
+	background: -webkit-linear-gradient(top, #e8c4e4, #d494ce);
+	background: -moz-linear-gradient(top, #e8c4e4, #d494ce);
+	background: -o-linear-gradient(top, #e8c4e4, #d494ce);
+	background: -ms-linear-gradient(top, #e8c4e4, #d494ce);
+	background: linear-gradient(top, #e8c4e4, #d494ce);
+	border-color: #bc9db9 #ad89aa #a1799d;
+	color: #7b5777;
+	text-shadow: 0 1px 0 #eacae6;
+	-webkit-box-shadow: 0 1px 1px #d5d5d5, inset 0 1px 0 #eed3eb;
+	-moz-box-shadow: 0 1px 1px #d5d5d5, inset 0 1px 0 #eed3eb;
+	box-shadow: 0 1px 1px #d5d5d5, inset 0 1px 0 #eed3eb;
 }
 .infinity-btns .button.purple:hover {
-    background: #e0b1db;
-    background: -webkit-gradient(linear, left top, left bottom, from(#deabd9), to(#e0b1db));
-    background: -webkit-linear-gradient(top, #deabd9, #e0b1db);
-    background: -moz-linear-gradient(top, #deabd9, #e0b1db);
-    background: -o-linear-gradient(top, #deabd9, #e0b1db);
-    background: -ms-linear-gradient(top, #deabd9, #e0b1db);
-    background: linear-gradient(top, #deabd9, #e0b1db);
-    border-color: #a482a0 #9b7897 #947090;
-    text-shadow: 0 1px 0 #ecd0e9;
-    -webkit-box-shadow: 0 1px 1px #cdcdcd, inset 0 1px 0 #ccc;
-    -moz-box-shadow: 0 1px 1px #cdcdcd, inset 0 1px 0 #ccc;
-    box-shadow: 0 1px 1px #cdcdcd, inset 0 1px 0 #ccc;
+	background: #e0b1db;
+	background: -webkit-gradient(linear, left top, left bottom, from(#deabd9), to(#e0b1db));
+	background: -webkit-linear-gradient(top, #deabd9, #e0b1db);
+	background: -moz-linear-gradient(top, #deabd9, #e0b1db);
+	background: -o-linear-gradient(top, #deabd9, #e0b1db);
+	background: -ms-linear-gradient(top, #deabd9, #e0b1db);
+	background: linear-gradient(top, #deabd9, #e0b1db);
+	border-color: #a482a0 #9b7897 #947090;
+	text-shadow: 0 1px 0 #ecd0e9;
+	-webkit-box-shadow: 0 1px 1px #cdcdcd, inset 0 1px 0 #ccc;
+	-moz-box-shadow: 0 1px 1px #cdcdcd, inset 0 1px 0 #ccc;
+	box-shadow: 0 1px 1px #cdcdcd, inset 0 1px 0 #ccc;
 }
 .infinity-btns .button.teal {
-    background: #9cedef;
-    background: -webkit-gradient(linear, left top, left bottom, from(#b7f2f4), to(#7ce7ea));
-    background: -webkit-linear-gradient(top, #b7f2f4, #7ce7ea);
-    background: -moz-linear-gradient(top, #b7f2f4, #7ce7ea);
-    background: -o-linear-gradient(top, #b7f2f4, #7ce7ea);
-    background: -ms-linear-gradient(top, #b7f2f4, #7ce7ea);
-    background: linear-gradient(top, #b7f2f4, #7ce7ea);
-    border-color: #90c6c8 #78bdc0 #65b6ba;
-    color: #437b7d;
-    text-shadow: 0 1px 0 #bef3f5;
-    -webkit-box-shadow: 0 1px 1px #d5d5d5, inset 0 1px 0 #c9f5f7;
-    -moz-box-shadow: 0 1px 1px #d5d5d5, inset 0 1px 0 #c9f5f7;
-    box-shadow: 0 1px 1px #d5d5d5, inset 0 1px 0 #c9f5f7;
+	background: #9cedef;
+	background: -webkit-gradient(linear, left top, left bottom, from(#b7f2f4), to(#7ce7ea));
+	background: -webkit-linear-gradient(top, #b7f2f4, #7ce7ea);
+	background: -moz-linear-gradient(top, #b7f2f4, #7ce7ea);
+	background: -o-linear-gradient(top, #b7f2f4, #7ce7ea);
+	background: -ms-linear-gradient(top, #b7f2f4, #7ce7ea);
+	background: linear-gradient(top, #b7f2f4, #7ce7ea);
+	border-color: #90c6c8 #78bdc0 #65b6ba;
+	color: #437b7d;
+	text-shadow: 0 1px 0 #bef3f5;
+	-webkit-box-shadow: 0 1px 1px #d5d5d5, inset 0 1px 0 #c9f5f7;
+	-moz-box-shadow: 0 1px 1px #d5d5d5, inset 0 1px 0 #c9f5f7;
+	box-shadow: 0 1px 1px #d5d5d5, inset 0 1px 0 #c9f5f7;
 }
 .infinity-btns .button.teal:hover {
-    background: #9fedf0;
-    border-color: #7db9bb #6bb2b5 #5dacaf;
-    text-shadow: 0 1px 0 #c5f4f6;
-    -webkit-box-shadow: 0 1px 1px #d5d5d5, inset 0 1px 0 #b7f2f4;
-    -moz-box-shadow: 0 1px 1px #d5d5d5, inset 0 1px 0 #b7f2f4;
-    box-shadow: 0 1px 1px #d5d5d5, inset 0 1px 0 #b7f2f4;
+	background: #9fedf0;
+	border-color: #7db9bb #6bb2b5 #5dacaf;
+	text-shadow: 0 1px 0 #c5f4f6;
+	-webkit-box-shadow: 0 1px 1px #d5d5d5, inset 0 1px 0 #b7f2f4;
+	-moz-box-shadow: 0 1px 1px #d5d5d5, inset 0 1px 0 #b7f2f4;
+	box-shadow: 0 1px 1px #d5d5d5, inset 0 1px 0 #b7f2f4;
 }
 .infinity-btns .button.darkblue {
-    background: #a5b8c6;
-    background: -webkit-gradient(linear, left top, left bottom, from(#becbd6), to(#88a1b4));
-    background: -webkit-linear-gradient(top, #becbd6, #88a1b4);
-    background: -moz-linear-gradient(top, #becbd6, #88a1b4);
-    background: -o-linear-gradient(top, #becbd6, #88a1b4);
-    background: -ms-linear-gradient(top, #becbd6, #88a1b4);
-    background: linear-gradient(top, #becbd6, #88a1b4);
-    border-color: #a2afb8 #8696a1 #6f818f;
-    color: #515f6a;
-    text-shadow: 0 1px 0 #c4d0d9;
-    -webkit-box-shadow: 0 1px 1px #d3d3d3, inset 0 1px 0 #ced8e0;
-    -moz-box-shadow: 0 1px 1px #d3d3d3, inset 0 1px 0 #ced8e0;
-    box-shadow: 0 1px 1px #d3d3d3, inset 0 1px 0 #ced8e0;
+	background: #a5b8c6;
+	background: -webkit-gradient(linear, left top, left bottom, from(#becbd6), to(#88a1b4));
+	background: -webkit-linear-gradient(top, #becbd6, #88a1b4);
+	background: -moz-linear-gradient(top, #becbd6, #88a1b4);
+	background: -o-linear-gradient(top, #becbd6, #88a1b4);
+	background: -ms-linear-gradient(top, #becbd6, #88a1b4);
+	background: linear-gradient(top, #becbd6, #88a1b4);
+	border-color: #a2afb8 #8696a1 #6f818f;
+	color: #515f6a;
+	text-shadow: 0 1px 0 #c4d0d9;
+	-webkit-box-shadow: 0 1px 1px #d3d3d3, inset 0 1px 0 #ced8e0;
+	-moz-box-shadow: 0 1px 1px #d3d3d3, inset 0 1px 0 #ced8e0;
+	box-shadow: 0 1px 1px #d3d3d3, inset 0 1px 0 #ced8e0;
 }
 .infinity-btns .button.darkblue:hover {
-    background: #adbfcb;
-    border-color: #8996a0 #798791 #6c7a85;
-    text-shadow: 0 1px 0 #ced9e0;
-    -webkit-box-shadow: 0 1px 1px #d3d3d3, inset 0 1px 0 #c2cfd8;
-    -moz-box-shadow: 0 1px 1px #d3d3d3, inset 0 1px 0 #c2cfd8;
-    box-shadow: 0 1px 1px #d3d3d3, inset 0 1px 0 #c2cfd8;
+	background: #adbfcb;
+	border-color: #8996a0 #798791 #6c7a85;
+	text-shadow: 0 1px 0 #ced9e0;
+	-webkit-box-shadow: 0 1px 1px #d3d3d3, inset 0 1px 0 #c2cfd8;
+	-moz-box-shadow: 0 1px 1px #d3d3d3, inset 0 1px 0 #c2cfd8;
+	box-shadow: 0 1px 1px #d3d3d3, inset 0 1px 0 #c2cfd8;
 }
 .infinity-btns .button.black {
-    background: #525252;
-    background: -webkit-gradient(linear, left top, left bottom, from(#5e5e5e), to(#434343));
-    background: -webkit-linear-gradient(top, #5e5e5e, #434343);
-    background: -moz-linear-gradient(top, #5e5e5e, #434343);
-    background: -o-linear-gradient(top, #5e5e5e, #434343);
-    background: -ms-linear-gradient(top, #5e5e5e, #434343);
-    background: linear-gradient(top, #5e5e5e, #434343);
-    border-color: #4c4c4c #313131 #1f1f1f;
-    color: #fff;
-    text-shadow: 0 1px 0 #2e2e2e;
-    -webkit-box-shadow: 0 1px 1px #afafaf, inset 0 1px 0 #868686;
-    -moz-box-shadow: 0 1px 1px #afafaf, inset 0 1px 0 #868686;
-    box-shadow: 0 1px 1px #afafaf, inset 0 1px 0 #868686;
+	background: #525252;
+	background: -webkit-gradient(linear, left top, left bottom, from(#5e5e5e), to(#434343));
+	background: -webkit-linear-gradient(top, #5e5e5e, #434343);
+	background: -moz-linear-gradient(top, #5e5e5e, #434343);
+	background: -o-linear-gradient(top, #5e5e5e, #434343);
+	background: -ms-linear-gradient(top, #5e5e5e, #434343);
+	background: linear-gradient(top, #5e5e5e, #434343);
+	border-color: #4c4c4c #313131 #1f1f1f;
+	color: #fff;
+	text-shadow: 0 1px 0 #2e2e2e;
+	-webkit-box-shadow: 0 1px 1px #afafaf, inset 0 1px 0 #868686;
+	-moz-box-shadow: 0 1px 1px #afafaf, inset 0 1px 0 #868686;
+	box-shadow: 0 1px 1px #afafaf, inset 0 1px 0 #868686;
 }
 .infinity-btns .button.black:hover {
-    background: #5a5a5a;
-    border-color: #2c2c2c #1c1c1c #101010;
-    text-shadow: 0 1px 0 #363636;
-    -webkit-box-shadow: 0 1px 1px #b1b1b1, inset 0 1px 0 #838383;
-    -moz-box-shadow: 0 1px 1px #b1b1b1, inset 0 1px 0 #838383;
-    box-shadow: 0 1px 1px #b1b1b1, inset 0 1px 0 #838383;
+	background: #5a5a5a;
+	border-color: #2c2c2c #1c1c1c #101010;
+	text-shadow: 0 1px 0 #363636;
+	-webkit-box-shadow: 0 1px 1px #b1b1b1, inset 0 1px 0 #838383;
+	-moz-box-shadow: 0 1px 1px #b1b1b1, inset 0 1px 0 #838383;
+	box-shadow: 0 1px 1px #b1b1b1, inset 0 1px 0 #838383;
 }
 .infinity-btns .post-tags a {
-    font-size: 10px;
-    padding: 3px 5px;
-    margin-left: 1px;
-    margin-right: 5px;
+	font-size: 10px;
+	padding: 3px 5px;
+	margin-left: 1px;
+	margin-right: 5px;
 }
 .infinity-btns .big {
-    font-size: 16px;
-    padding: 14px 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+	font-size: 16px;
+	padding: 14px 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 .infinity-btns .huge {
-    font-size: 20px;
-    padding: 16px 12px;
-    margin-top: 15px;
-    margin-bottom: 15px;
+	font-size: 20px;
+	padding: 16px 12px;
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
 .infinity-btns .widget.widget_tag_cloud a {
-    font-size: 10px;
-    margin: 1px;
-    padding: 5px 8px;
+	font-size: 10px;
+	margin: 1px;
+	padding: 5px 8px;
 }
 .infinity-btns #archives-subject li {
-    display: inline;
-    list-style: disc inside none;
-    padding-right: 5px;
+	display: inline;
+	list-style: disc inside none;
+	padding-right: 5px;
 }
 .infinity-btns #archives-subject ul {
-    display: inline;
-    margin: 0;
+	display: inline;
+	margin: 0;
 }
 
 /*
@@ -907,199 +903,199 @@ body.infinity-layout {
 .infinity-icons #subscription-toggle:before,
 .infinity-icons .single-topic h1:before,
 .infinity-icons .group-forum-topic #bbpress-forums h3:before {
-    font-weight: normal;
-    font-family: "iconsweetsRegular";
-    color: inherit;
-    padding-right: 2px;
-    font-size: 130%;
-    position: relative;
-    top: 2px;
-    text-transform: none;
+	font-weight: normal;
+	font-family: "iconsweetsRegular";
+	color: inherit;
+	padding-right: 2px;
+	font-size: 130%;
+	position: relative;
+	top: 2px;
+	text-transform: none;
 }
 
 /* WordPress Icons */
 .infinity-icons .post-top {
-    padding-top: 0px
+	padding-top: 0px
 }
 
 /* Blog Icons */
 .infinity-icons #category-title:before {
-    content: "L"
+	content: "L"
 }
 
 .infinity-icons #tag-title:before,
 .infinity-icons span.post-tags:before {
-    content: "."
+	content: "."
 }
 
 .infinity-icons #author-description h3:before {
-    content: "a"
+	content: "a"
 }
 
 /* ================ */
 /* ! Post Formats   */
 /* ================ */
 .infinity-icons .format-quote .post-meta-data {
-    display: none
+	display: none
 }
 
 .infinity-icons .format-quote .entry {
-    border-left: 5px solid #EEEEEE;
-    font-family: "Georgia",serif;
-    font-size: 140%;
-    line-height: 140%;
-    margin-bottom: 18px;
-    padding-left: 15px;
+	border-left: 5px solid #EEEEEE;
+	font-family: "Georgia",serif;
+	font-size: 140%;
+	line-height: 140%;
+	margin-bottom: 18px;
+	padding-left: 15px;
 }
 
 .infinity-icons .post-title:before {
-    background: none repeat scroll 0 0 #555555;
-    border-radius: 50% 50% 50% 50%;
-    color: #FFFFFF;
-    float: right;
-    font-size: 140%;
-    padding: 0 0.8% 1.5%;
-    position: relative;
-    text-shadow: -1px 1px 0 #000000;
-    top: -8px;
+	background: none repeat scroll 0 0 #555555;
+	border-radius: 50% 50% 50% 50%;
+	color: #FFFFFF;
+	float: right;
+	font-size: 140%;
+	padding: 0 0.8% 1.5%;
+	position: relative;
+	text-shadow: -1px 1px 0 #000000;
+	top: -8px;
 }
 
 .infinity-icons .format-video .post-title:before {
-    content: "F"
+	content: "F"
 }
 
 .infinity-icons .format-link .post-title:before {
-    content: "Q"
+	content: "Q"
 }
 
 .infinity-icons .format-gallery .post-title:before {
-    content: "3"
+	content: "3"
 }
 
 .infinity-icons .format-image .post-title:before {
-    content: "2"
+	content: "2"
 }
 
 .infinity-icons .format-audio .post-title:before {
-    content: "4"
+	content: "4"
 }
 
 .infinity-icons .format-chat .post-title:before {
-    content: '"'
+	content: '"'
 }
 
 .infinity-icons .format-status .post-title:before {
-    content: "#"
+	content: "#"
 }
 
 .infinity-icons .format-quote .post-title:before {
-    content: "'"
+	content: "'"
 }
 
 /* Post Meta Icons */
 .infinity-icons span.post-author:before {
-    content: "d"
+	content: "d"
 }
 
 .infinity-icons span.post-category:before {
-    content: "L"
+	content: "L"
 }
 
 .infinity-icons span.time-posted:before {
-    content: "R"
+	content: "R"
 }
 
 .infinity-icons span.post-comments:before,
 .infinity-icons span.comments a:before {
-    content: "#"
+	content: "#"
 }
 
 /* BuddyPress Icons */
 .infinity-icons .activity-comments * :before {
-    display: none
+	display: none
 }
 
 .infinity-icons #item-buttons * a:before,
 .infinity-icons .activity-meta * a:before,
 .infinity-icons .button:before,
 .infinity-icons .generic-button a:before {
-    display: inline-block;
-    font-size: 135%;
-    padding: 0 2px 6px 1px;
+	display: inline-block;
+	font-size: 135%;
+	padding: 0 2px 6px 1px;
 }
 
 /* Some Small Padding tweaks to make the icons look sweet */
 .infinity-icons div#item-header div.generic-button,
 .infinity-icons div#item-header a.button {
-    padding: 0 8px
+	padding: 0 8px
 }
 
 .infinity-icons #sidebar .sidebar-activity-tabs ul li a {
-    padding-bottom: 8px;
-    padding-top: 4px;
-    text-decoration: none;
+	padding-bottom: 8px;
+	padding-top: 4px;
+	text-decoration: none;
 }
 
 .infinity-icons div#object-nav ul li a {
-    padding: 4px 6px 8px !important;
-    text-decoration: none;
+	padding: 4px 6px 8px !important;
+	text-decoration: none;
 }
 
 .infinity-icons div.activity-type-tabs li a {
-    padding: 4px 6px 8px !important;
-    text-decoration: none;
+	padding: 4px 6px 8px !important;
+	text-decoration: none;
 }
 
 .infinity-icons .loading a:before {
-    display: none !important
+	display: none !important
 }
 
 .infinity-icons div.item-list-tabs ul li.loading a {
-    padding-top: 9px !important
+	padding-top: 9px !important
 }
 
 /* Stream Icons. no shorthand CSS to maintain hover effects */
 .infinity-icons li#activity-all a:before {
-    content: "s"
+	content: "s"
 }
 
 .infinity-icons li#activity-favorites a:before,
 .infinity-icons .button.fav:before,
 .infinity-icons .button.unfav:before {
-    content: "h"
+	content: "h"
 }
 
 .infinity-icons li#activity-friends a:before {
-    content: "a"
+	content: "a"
 }
 
 .infinity-icons li#activity-groups a:before,
 .infinity-icons .widget_bp_groups_widget {
-    content: "f"
+	content: "f"
 }
 
 .infinity-icons li#activity-links a:before,
 .infinity-icons #nav-links:before {
-    content: "Q"
+	content: "Q"
 }
 
 .infinity-icons li#activity-mentions a:before {
-    content: "#"
+	content: "#"
 }
 
 .infinity-icons li#activity-following a,
 .infinity-icons li#following-personal-li a:before {
-    content: "*"
+	content: "*"
 }
 
 .infinity-icons .acomment-reply:before {
-    content: "w"
+	content: "w"
 }
 
 .infinity-icons .delete-activity:before,
 .infinity-icons .generic-button.is_friend a:before,
 .infinity-icons .generic-button.pending_friend a:before {
-    content: "X"
+	content: "X"
 }
 
 .infinity-icons .load-more a:before {
@@ -1108,144 +1104,148 @@ body.infinity-layout {
 
 /* Group Icons */
 .infinity-icons li#members-groups-li a:before {
-    content: "e"
+	content: "e"
 }
 
 .infinity-icons li#forums-groups-li a:before {
-    content: '"'
+	content: '"'
 }
 
 .infinity-icons li#admin-groups-li a:before,
 .infinity-icons li#link-admin-personal-li a:before {
-    content: "i"
+	content: "i"
 }
 
 .infinity-icons li#invite-groups-li a:before {
-    content: "A"
+	content: "A"
 }
 
 .infinity-icons li#home-groups-li a:before,
 .infinity-icons li#link-home-personal-li a:before {
-    content: "0"
+	content: "0"
 }
 
 .infinity-icons li#nav-docs-groups-li a:before,
 .infinity-icons #user-docs:before {
-    content: "L"
+	content: "L"
 }
 .infinity-icons #bp-create-doc-button:before {
-    content: "C";
-    font-size: 165%;
+	content: "C";
+	font-size: 165%;
 }
 .infinity-icons li#nav-notifications-groups-li a:before {
-    content: "6"
+	content: "6"
 }
 
 /* Profile Icons  */
 .infinity-icons #user-activity:before {
-    content: "s"
+	content: "s"
 }
 
 .infinity-icons #user-xprofile:before {
-    content: "?"
+	content: "?"
 }
 
 .infinity-icons #user-friends:before {
-    content: "a"
+	content: "a"
 }
 
 .infinity-icons #user-groups:before {
-    content: "f"
+	content: "f"
 }
 
 .infinity-icons #user-profile:before {
-    content: "?"
+	content: "?"
+}
+
+.infinity-icons #user-notifications:before {
+	content: "Y"
 }
 
 .infinity-icons #user-links:before {
-    content: "P"
+	content: "P"
 }
 
 .infinity-icons #user-messages:before,
 .infinity-icons #nav-invite-anyone:before,
 .infinity-icons #user-invite-anyone:before {
-    content: "A"
+	content: "A"
 }
 
 .infinity-icons #user-forums:before {
-    content: '"'
+	content: '"'
 }
 
 .infinity-icons #user-blogs:before,
 .infinity-icons #user-sites:before {
-    content: "C"
+	content: "C"
 }
 
 .infinity-icons li#activity-filter-select label:before {
-    content: "."
+	content: "."
 }
 
 .infinity-icons a.send-message:before,
 .infinity-icons #nav-invite-anyone:before {
-    content: "A"
+	content: "A"
 }
 
 .infinity-icons a.friendship-button:before {
-    content: "a"
+	content: "a"
 }
 
 .infinity-icons .follow-button a.follow:before {
-    content: "*"
+	content: "*"
 }
 
 .infinity-icons div#post-mention a.mention:before {
-    content: "#"
+	content: "#"
 }
 
 .infinity-icons #user-settings:before {
-    content: "i"
+	content: "i"
 }
 
 .infinity-icons div#message p {
-    background-color: #FEFAEB;
-    border: 1px solid #F1F1F1;
-    border-radius: 4px 4px 4px 4px;
-    display: block;
-    font-size: 12px;
-    padding: 10px 15px;
+	background-color: #FEFAEB;
+	border: 1px solid #F1F1F1;
+	border-radius: 4px 4px 4px 4px;
+	display: block;
+	font-size: 12px;
+	padding: 10px 15px;
 }
 
 .infinity-icons div#message p:before {
-    content: "_"
+	content: "_"
 }
 /* BBPress */
 .infinity-icons #nav-forums:before,
 .infinity-icons #nav-forum:before {
-    content: '"'
+	content: '"'
 }
 .infinity-icons #favorite-toggle:before {
-    content: "h";
-    top: 0;
+	content: "h";
+	top: 0;
 }
 .infinity-icons #subscription-toggle:before {
-    content: "A";
-    position: relative;
-    right: -9px;
-    top: 0;
+	content: "A";
+	position: relative;
+	right: -9px;
+	top: 0;
 }
 .infinity-icons #bbpress-forums .bbp-forums-list li a:before {
-    color: #999999;
-    content: "g";
-    text-shadow: 0 -1px 0 #E3E7E7;
+	color: #999999;
+	content: "g";
+	text-shadow: 0 -1px 0 #E3E7E7;
 }
 .infinity-icons .groups #item-buttons .group-button a:before {
-    content: "#";
-    font-size: 150%;
-    padding: 0 2px 0 0;
+	content: "#";
+	font-size: 150%;
+	padding: 0 2px 0 0;
 }
 /* Main Menu Icons */
 .infinity-icons .base-menu li ul li a:before {
-    content: none !important
+	content: none !important
 }
 
 /* Make sure items with an icon line up with non-icon items */
@@ -1261,43 +1261,43 @@ body.infinity-layout {
 }
 
 .infinity-icons #main-menu-wrap .icon-groups a:before {
-    content: "f"
+	content: "f"
 }
 
 .infinity-icons #main-menu-wrap .icon-members a:before {
-    content: "e"
+	content: "e"
 }
 
 .infinity-icons #main-menu-wrap .icon-activity a:before {
-    content: "s"
+	content: "s"
 }
 
 .infinity-icons #main-menu-wrap .icon-forums a:before {
-    content: '"'
+	content: '"'
 }
 
 .infinity-icons #main-menu-wrap .icon-links a:before {
-    content: "Q"
+	content: "Q"
 }
 
 .infinity-icons #main-menu-wrap .icon-sites a:before,
 .infinity-icons #main-menu-wrap .icon-blogs a:before {
-    content: "C"
+	content: "C"
 }
 .infinity-icons #bp-adminbar-notifications-menu a:before {
-    content: "6"
+	content: "6"
 }
 
 .infinity-icons #bp-adminbar-account-menu a:before {
-    content: "a"
+	content: "a"
 }
 
 .infinity-icons .login-form-link a:before {
-    content: "y"
+	content: "y"
 }
 
 .infinity-icons #join-us-link a:before {
-    content: "w"
+	content: "w"
 }
 /* WooCommerce Icons */
 .infinity-icons a.add_to_cart_button:before {
@@ -1308,31 +1308,31 @@ body.infinity-layout {
 }
 .infinity-icons .coupon:before {
 	 color: inherit;
-    font-family: "iconsweetsRegular";
-    font-size: 180%;
-    font-weight: normal;
-    padding-right: 2px;
-    position: relative;
-    text-transform: none;
-    top: 2px;
+	font-family: "iconsweetsRegular";
+	font-size: 180%;
+	font-weight: normal;
+	padding-right: 2px;
+	position: relative;
+	text-transform: none;
+	top: 2px;
 	content: "(";
 	float: left;
 	opacity: 0.7;
 }
 /* BuddyPress Links Icons */
 .infinity-icons .link-home h2 a:before {
-    content: "Q";
-    font-size: 100%;
-    opacity: 0.6;
+	content: "Q";
+	font-size: 100%;
+	opacity: 0.6;
 }
 .infinity-icons div.link-vote-panel div.clickers a.up {
 	background: transparent;
 }
 .infinity-icons div.link-vote-panel div.clickers a.up:before {
 	color: inherit;
-    height: 20px;
-    position: relative;
-    width: 20px;
+	height: 20px;
+	position: relative;
+	width: 20px;
 	content: "[";
 }
 
@@ -1392,9 +1392,9 @@ body.infinity-design {
 .infinity-design #header #site-title,
 .infinity-design .negative {
 	margin-left: -30px;
-    margin-right: -30px;
-    padding-left: 30px;
-    padding-right: 30px;
+	margin-right: -30px;
+	padding-left: 30px;
+	padding-right: 30px;
 }
 
 .infinity-design .main-wrap {
@@ -1405,8 +1405,8 @@ body.infinity-design {
 	-webkit-border-radius: 5px 5px 0px 0px;
 	-moz-border-radius: 5px 5px 0px 0px;
 	border-radius: 5px 5px 0px 0px;
-    padding-bottom: 35px;
-    padding-top: 60px;
+	padding-bottom: 35px;
+	padding-top: 60px;
 }
 /* Also add a border radius to our pseudo element for header background */
 .infinity-design #header:before {
@@ -1458,8 +1458,8 @@ body.infinity-design {
 	border-top: 1px solid #434343;
 }
 .infinity-design .footer-widget  {
-    padding-bottom: 10px;
-    padding-top: 20px;
+	padding-bottom: 10px;
+	padding-top: 20px;
 }
 .infinity-design .author-box,
 .infinity-design .category-box,
@@ -1530,7 +1530,7 @@ body.infinity-design {
 }
 .infinity-design #category-description,
 .infinity-design #tag-description {
-    padding: 10px 10px 10px 0;
+	padding: 10px 10px 10px 0;
 }
 .infinity-design h1#category-title span,
 .infinity-design h1#tag-title span {
