@@ -56,12 +56,12 @@ class ICE_Ext_Option_Ui_Overlay_Picker
 			// element rule
 			$rule1 = $style->rule( 'container', $this->get_property( 'style_selector' ) );
 			$rule1->ad( 'position', 'relative' );
-			$rule1->ad( 'z-index', 9 );
+			$rule1->ad( 'z-index', 110 );
 			// pseudo element rule
 			$rule2 = $style->rule( 'image', $this->get_property( 'style_selector' ) . ':before' );
 			$rule2->ad( 'content', '""' );
 			$rule2->ad( 'position', 'absolute' );
-			$rule2->ad( 'z-index', -1 );
+			$rule2->ad( 'z-index', -20 );
 			$rule2->ad( 'top', 0 );
 			$rule2->ad( 'right', 0 );
 			$rule2->ad( 'left', 0 );
