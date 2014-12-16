@@ -115,6 +115,7 @@ body.infinity-typog {
 /* ! Global & Wraps   */
 /* ================== */
 body.infinity-layout {
+	-webkit-font-smoothing: antialiased;
 	-webkit-text-size-adjust: none;
 }
 .infinity-layout #wrapper {
@@ -127,6 +128,7 @@ body.infinity-layout {
 /* ========== */
 .infinity-layout #header {
 	position: relative;
+	z-index: 112 !important;
 }
 .infinity-layout #header:after {
 	content:"";
@@ -161,29 +163,31 @@ body.infinity-layout {
 /* Top Menu */
 .infinity-layout #top-menu-wrap,
 .infinity-layout #sub-menu-wrap {
-	position: relative;
+	position: relative; /* CMW - I think this gets excluded for #sub-menu-wrap because of the declaration below */
 }
 
 .infinity-layout #top-menu-wrap {
 	margin-bottom: -6px;
 	/* setting z-index for dropdowns. do not mess with this */
-	z-index: 12 !important;
+	z-index: 120 !important;
 }
 
 .infinity-layout #main-menu-wrap {
 	padding: 0;
 	/* setting z-index for dropdowns. do not mess with this */
-	z-index: 11 !important;
+	z-index: 110 !important;
 }
 
 .infinity-layout #main-menu-wrap ul.sub-menu {
-	z-index: 99 !important;
+	z-index: 150 !important;
 }
 
 .infinity-layout #sub-menu-wrap {
 	/* setting z-index for dropdowns. do not mess with this */
-	z-index: 10 !important;
+	z-index: 111 !important;
 	margin-bottom: -3px;
+	position: relative; /* CMW - redeclaring works */
+	min-height: 36px;
 }
 
 /* ===================== */
@@ -199,7 +203,7 @@ body.infinity-layout {
 	width: 100%;
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
-	webkit-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
 }
 .infinity-layout .base-menu ul li {
 	float: left;
@@ -216,8 +220,8 @@ body.infinity-layout {
 .infinity-layout .base-menu ul li li li li:hover ul,
 .infinity-layout .base-menu ul li li li li.sfHover ul {
 	/* match .nav ul width */
-	top: -1px;
-	left: 180px;
+	top: -5px;
+	left: 190px;
 }
 .infinity-layout .base-menu ul li:hover {
 	visibility: inherit; /* fixes IE7 'sticky bug' */
@@ -237,6 +241,10 @@ body.infinity-layout {
 	left: 0px;
 	z-index: 95;
 }
+/* display as block, or hover fails to work properly when text wraps */
+.infinity-layout .base-menu a span {
+	display: block;
+}
 .infinity-layout .base-menu ul ul {
 	top: -9999em;
 	width: 210px;
@@ -248,8 +256,7 @@ body.infinity-layout {
 }
 .infinity-layout .base-menu ul ul li {
 	float: left;
-	width: 150px;
-	padding: 0 5px 0 5px;
+	width: 180px;
 }
 .infinity-layout .base-menu ul ul ul {
 	margin-left: -10px;
@@ -285,6 +292,9 @@ body.infinity-layout {
 }
 .infinity-layout .base-menu ul li.sfHover li a,
 .infinity-layout .base-menu ul li.sfHover li a:hover,
+.infinity-layout .base-menu ul li.sfHover > a span,
+.infinity-layout .base-menu ul li.sfHover li.sfHover > a span,
+.infinity-layout .base-menu ul li.sfHover li.sfHover li.sfHover > a span,
 .infinity-layout .base-menu ul li.sfHover li a span:hover {
 	color: #DDD;
 }
@@ -292,7 +302,7 @@ body.infinity-layout {
 .infinity-layout .base-menu ul li:hover ul,
 .infinity-layout .base-menu ul li.sfHover ul {
 	top: 34px; /* match top ul list item height */
-	z-index: 99;
+	z-index: 150;
 }
 /* Hide all subs subs (4 levels deep) */
 .infinity-layout .base-menu ul li:hover li ul,
@@ -310,8 +320,8 @@ body.infinity-layout {
 .infinity-layout .base-menu ul li li li.sfHover ul,
 .infinity-layout .base-menu ul li li li li:hover ul,
 .infinity-layout .base-menu ul li li li li.sfHover ul {
-	left: 180px; /* match .nav ul width */
-	top: -1px;
+	left: 190px; /* match .nav ul width */
+	top: -5px;
 }
 /* 2nd level skin */
 .infinity-layout .base-menu ul ul {
@@ -324,9 +334,8 @@ body.infinity-layout {
 }
 .infinity-layout .base-menu ul ul li {
 	float: left;
-	width: 150px;
+	width: 180px;
 	background: none;
-	padding: 0 5px 0 5px;
 }
 .infinity-layout .base-menu li a:hover {
 	color: #DDD;
@@ -338,10 +347,11 @@ body.infinity-layout {
 	border-bottom: none;
 }
 .infinity-layout .base-menu ul ul li a {
-	width: 150px;
+	width: 180px;
 }
 .infinity-layout .base-menu ul ul li a:hover {
-	padding-left: 12px;
+	/* removed odd movement */
+	/* padding-left: 12px; */
 }
 .infinity-layout .base-menu:first-child ul li:after {
 	content: "";
