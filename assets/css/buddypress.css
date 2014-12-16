@@ -143,6 +143,7 @@
 3.3 - Directories - Members, Groups, Blogs, Forums
 --------------------------------------------------------------*/
 .infinity-bp #buddypress div.dir-search {
+	float: right;
 	margin-top: -60px;
 	width: 50%;
 	text-align: right;
