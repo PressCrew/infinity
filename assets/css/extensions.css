@@ -1079,8 +1079,7 @@ body.infinity-layout {
 	content: "a"
 }
 
-.infinity-icons li#activity-groups a:before,
-.infinity-icons .widget_bp_groups_widget {
+.infinity-icons li#activity-groups a:before {
 	content: "f"
 }
 
@@ -1130,6 +1129,10 @@ body.infinity-layout {
 	content: "A"
 }
 
+.infinity-icons li#notifications-personal-li a:before {
+	content: "_";
+}
+
 .infinity-icons li#home-groups-li a:before,
 .infinity-icons li#link-home-personal-li a:before {
 	content: "0"
@@ -1145,6 +1148,13 @@ body.infinity-layout {
 }
 .infinity-icons li#nav-notifications-groups-li a:before {
 	content: "6"
+}
+
+.infinity-icons #request-membership-groups-li a:before {
+	content: "y"
+}
+.infinity-icons li#group-blog-groups-li a:before {
+	content: "C";
 }
 
 /* Profile Icons  */
@@ -1239,6 +1249,8 @@ body.infinity-layout {
 }
 .infinity-icons #subscription-toggle:before {
 	content: "A";
+}
+.infinity-icons .bbp-header #subscription-toggle:before {
 	position: relative;
 	right: -9px;
 	top: 0;
@@ -1334,16 +1346,6 @@ body.infinity-layout {
 	content: "Q";
 	font-size: 100%;
 	opacity: 0.6;
-}
-.infinity-icons div.link-vote-panel div.clickers a.up {
-	background: transparent;
-}
-.infinity-icons div.link-vote-panel div.clickers a.up:before {
-	color: inherit;
-	height: 20px;
-	position: relative;
-	width: 20px;
-	content: "[";
 }
 
 /*
