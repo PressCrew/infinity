@@ -1362,19 +1362,26 @@ body.infinity-layout {
 --------------------------------------------------------------*/
 
 body.infinity-design {
-	background-image: url("../images/design/bg.png");
-	background-repeat: repeat;
+	background: url("../images/bg-body.gif") repeat transparent;
+	border-top: 5px solid #4B4A47;
+	font: 90%/140% "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .infinity-design h2.page-title a,
 .infinity-design h2.post-title a,
 .infinity-design h1.page-title a,
 .infinity-design h1.post-title a {
-	color: inherit;
-	margin-bottom: 0;
+	color: #545454;
+	margin-top: 0;
+}
+.infinity-design h2.page-title,
+.infinity-design h2.post-title,
+.infinity-design h1.page-title,
+.infinity-design h1.post-title {
+	color: #545454;
 	margin-top: 0;
 }
 .infinity-design a {
-	color: #628FAA;
+	color: #4183C4;
 	text-decoration: none;
 	-webkit-transition: color 0.1s linear;
 	-moz-transition: color 0.1s linear;
@@ -1383,95 +1390,66 @@ body.infinity-design {
 	transition: color 0.1s linear;
 }
 .infinity-design a:hover {
-	color: #666;
+	text-decoration: underline;
+}
+.infinity-design .base-menu a:hover,
+.infinity-design #object-nav a:hover,
+.infinity-design #subnav a:hover,
+.infinity-design #logo-menu-wrap a:hover,
+.infinity-design .sidebar-activity-tabs a:hover,
+.infinity-design #main-menu-wrap a span:hover {
+	border: none;
 	text-decoration: none;
 }
-/* Global Padding */
-.infinity-design #content,
-.infinity-design #sidebar,
-.infinity-design #content-full,
-.infinity-design #footer,
 .infinity-design #header {
-	padding: 30px;
-}
-
-/* Global Negative Padding */
-.infinity-design #bbpress-forums,
-.infinity-design div.bbp-breadcrumb,
-.infinity-design #item-body form#whats-new-form,
-.infinity-design div.item-list-tabs,
-.infinity-design #powered-by,
-.infinity-design #header #site-title,
-.infinity-design .negative {
-	margin-left: -30px;
-	margin-right: -30px;
-	padding-left: 30px;
-	padding-right: 30px;
-}
-
-.infinity-design .main-wrap {
-	background: #FFF;
-}
-.infinity-design #header {
-	background: url("../images/design/header-background.jpg") no-repeat scroll transparent;
-	-webkit-border-radius: 5px 5px 0px 0px;
-	-moz-border-radius: 5px 5px 0px 0px;
+	background: #111;
 	border-radius: 5px 5px 0px 0px;
-	padding-bottom: 35px;
-	padding-top: 60px;
 }
 /* Also add a border radius to our pseudo element for header background */
 .infinity-design #header:before {
-	-webkit-border-radius: 5px 5px 0px 0px;
-	-moz-border-radius: 5px 5px 0px 0px;
 	border-radius: 5px 5px 0px 0px;
 }
 .infinity-design h1#site-title,
 .infinity-design div#site-title {
 	border-bottom: 2px solid #DDDDDD;
-	-webkit-border-radius: 0 12px 12px 0;
-	-moz-border-radius: 0 12px 12px 0;
 	border-radius: 0 12px 12px 0;
 	border-right: 1px solid #C1C1C1;
 	border-top: 1px solid #D0CECE;
-	padding: 10px 30px 6px;
+}
+.infinity-design #site-description {
+	font-style: italic;
+	color: #999999;
+}
+.infinity-design .main-wrap {
+	background: #FFF;
 }
 /* Global CSS3 Stuff */
-.infinity-design .main-menu,
 .infinity-design .top-menu,
 .infinity-design .top-wrap .sub-menu,
 .infinity-design .item-list-tabs,
+.infinity-design .footer-wrap,
 .infinity-design thead:first-child tr th,
 .infinity-design thead:first-child tr td,
-.infinity-design .base-menu ul ul {
-	background-color: #222222;
-	background-image: -webkit-linear-gradient(center top , #333333, #222222);
-	background-image: -moz-linear-gradient(center top , #333333, #222222);
-	background-image: -o-linear-gradient(center top , #333333, #222222);
-	background-image: -ms-linear-gradient(center top , #333333, #222222);
-	background-image: linear-gradient(center top , #333333, #222222);
+.infinity-design .base-menu ul ul,
+.infinity-design .sidebar-activity-tabs ul li.current,
+.infinity-design .sidebar-activity-tabs ul li.selected,
+.infinity-design .docs .toggle-switch,
+.infinity-design .post-title:before,
+.infinity-design .doc-content-wrapper .toggle-switch,
+.infinity-design .mobile-menu-container,
+.infinity-design .info-box h3,
+.infinity-design #bbpress-forums li.bbp-header {
+	background-color: #333333; /* for IE */
+	background-image: -webkit-linear-gradient(top, #333333 0%, #222222 100%);
+	background-image: -moz-linear-gradient(top, #333333 0%, #222222 100%);
+	background-image: -o-linear-gradient(top, #333333 0%, #222222 100%);
+	background-image: -ms-linear-gradient(top, #333333 0%, #222222 100%);
+	background-image: linear-gradient(top, #333333 0%, #222222 100%);
 	background-repeat: repeat-x;
 	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), 0 -1px 0 rgba(0, 0, 0, 0.1) inset;
-	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), 0 -1px 0 rgba(0, 0, 0, 0.1) inset;
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), 0 -1px 0 rgba(0, 0, 0, 0.1) inset;
-	padding-left: 20px;
-	padding-right: 20px;
-	border-bottom: 2px solid #628FAA;
+	border-bottom: 1px solid #292525;
 	border-top: 2px solid #525151;
-}
-.infinity-design #footer .widget h4 {
-	border-bottom: 1px solid #3E3C3C;
-	color: #E0E0E0;
-}
-.infinity-design #footer {
-	padding: 0 30px 5px;
-}
-.infinity-design #powered-by {
-	border-top: 1px solid #434343;
-}
-.infinity-design .footer-widget  {
-	padding-bottom: 10px;
-	padding-top: 20px;
 }
 .infinity-design .author-box,
 .infinity-design .category-box,
@@ -1484,160 +1462,392 @@ body.infinity-design {
 .infinity-design span.activity,
 .infinity-design h1#site-title,
 .infinity-design div#site-title,
-.infinity-design .fluid-width-video-wrapper {
-	background-color: #FFF;
-	background-image: -webkit-linear-gradient(center top , #FFFFFF 0%, #F4F4F4 100%) ;
-	background-image: -moz-linear-gradient(center top , #FFFFFF 0%, #F4F4F4 100%) ;
-	background-image: -o-linear-gradient(center top , #FFFFFF 0%, #F4F4F4 100%) ;
-	background-image: -ms-linear-gradient(center top , #FFFFFF 0%, #F4F4F4 100%) ;
-	background-image: linear-gradient(center top , #FFFFFF 0%, #F4F4F4 100%) ;
-	-image-webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-	-moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+.infinity-design #inner-sidebar,
+.infinity-design .sidebar-activity-tabs ul li,
+.infinity-design div#subnav.item-list-tabs,
+.infinity-design #top-homepage,
+.infinity-design .fluid-width-video-wrapper,
+.infinity-design #bbpress-forums .bbp-breadcrumb,
+.infinity-design #bbpress-forums li.bbp-footer,
+.infinity-design .bbp-reply-header {
+	background-color: #FAFAFA; /* for IE */
+	background-image: -webkit-linear-gradient(top, #FFFFFF 0%, #F4F4F4 100%);
+	background-image: -moz-linear-gradient(top, #FFFFFF 0%, #F4F4F4 100%);
+	background-image: -o-linear-gradient(top, #FFFFFF 0%, #F4F4F4 100%);
+	background-image: -ms-linear-gradient(top, #FFFFFF 0%, #F4F4F4 100%);
+	background-image: linear-gradient(top, #FFFFFF 0%, #F4F4F4 100%);
+	-webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
 	text-shadow: 0 1px 0 #FFFFFF;
 	border: 0px;
 }
 /* Menus */
 .infinity-design .base-menu ul a,
-.infinity-design div.item-list-tabs ul li a {
-	color: #BFBFBF;
+.infinity-design div.item-list-tabs ul li a,
+.infinity-design div.item-list-tabs ul li span,
+.infinity-design #footer-menu ul li a {
+	color: #FFF;
 	font-weight: 400;
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
+.infinity-design .base-menu ul a:hover,
+.infinity-design div.item-list-tabs ul li a:hover,
+.infinity-design div.item-list-tabs ul li span:hover,
+.infinity-design #footer-menu ul li a:hover {
+	color: #BBB;
+}
 .infinity-design .main-menu {
-	-webkit-border-radius: 6px 6px 6px 6px;
-	-moz-border-radius: 6px 6px 6px 6px;
 	border-radius: 6px 6px 6px 6px;
-	padding: 5px;
+	font-size: 115%;
 }
 .infinity-design .main-menu ul a {
 	font-weight: 500;
-	-webkit-border-radius: 6px 6px 6px 6px;
-	-moz-border-radius: 6px 6px 6px 6px;
 	border-radius: 6px 6px 6px 6px;
-	margin-right: 10px;
 }
-.infinity-design #main-menu-wrap .sub-menu {
-	margin: 8px 0 0;
+.infinity-design .main-menu ul a:hover {
+	background: url("../images/bg-body.gif") repeat transparent;
 }
-.infinity-design .base-menu .sub-menu {
-	padding-left: 0px !important;
+.infinity-design .base-menu ul li.current-cat a,
+.infinity-design .base-menu ul li.current_page_item a,
+.infinity-design .base-menu ul li.current-menu-item a {
+	font-weight: bold;
+	background: url("../images/bg-body.gif") repeat transparent;
 }
-.infinity-design .widget {
-	margin: 0 0 20px;
-}
-.infinity-design .widget h4 {
+.infinity-design .widget h4,
+.infinity-design #vertical-activity-tabs h4 {
 	border-bottom: 1px solid #EDEDED;
-	padding-bottom: 10px;
 }
 /* Footer */
-.infinity-design #footer .widget {
-	color: #BFBFBF;
+.infinity-design #footer .footer-widget {
+	color: #EFEFEF;
+	font-weight: 400;
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+	width: 33%;
 }
+.infinity-design #footer .widget h4 {
+	border-bottom: 1px solid #3E3C3C;
+	color: #FFF;
+}
+.infinity-design #content .homepage-widget {
+	width: 33%;
+}
+.infinity-design #powered-by {
+	min-height: inherit;
+}
+/* WordPress */
 .infinity-design h1#category-title,
 .infinity-design h1#tag-title {
 	color: #999;
-	font-size: 16px;
-}
-.infinity-design #category-description,
-.infinity-design #tag-description {
-	padding: 10px 10px 10px 0;
+	font-size: 125%;
 }
 .infinity-design h1#category-title span,
 .infinity-design h1#tag-title span {
 	color: #555;
-
-}
-.infinity-design .comment-container {
-	padding: 10px;
-}
-.infinity-design .children .comment-container {
-	background: transparent;
-	-webkit-box-shadow: none;
-	-moz-box-shadow: none;
-	box-shadow: none;
 }
 /* BuddyPress */
-.infinity-design img.avatar,
+.infinity-design #item-header-avatar img.avatar {
+	-webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+	border-radius: 8px;
+}
 .infinity-design ul.item-list li img.avatar,
-.infinity-design .fluid-width-video-wrapper {
-	-webkit-border-radius: 3px 3px 3px 3px;
-	-moz-border-radius: 3px 3px 3px 3px;
+.infinity-design #whats-new-avatar img,
+.infinity-design .item-avatar img,
+.infinity-design .bbp-author-avatar img,
+.infinity-design .messages .avatar {
 	border-radius: 3px 3px 3px 3px;
-	-webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
-	-moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
-	box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
-	margin-left: 0;
-	padding: 0;
+	-webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
 }
-.infinity-design .activity-list .activity-content .activity-inner,
-.infinity-design .activity-list .activity-content blockquote {
-	padding: 20px;
+/* Activity Stream */
+.infinity-design div.activity-meta {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+	filter: alpha(opacity=50);
+	opacity: 0.5;
 }
-.infinity-design div.item-options {
-	font-size: 8.8px;
-	margin-bottom: -16px;
-	margin-top: -16px;
+.infinity-design div.activity-meta:hover {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+	filter: alpha(opacity=100);
+	opacity: 1;
+	-webkit-transition-property: opacity;
+	-moz-transition-property: opacity;
+	-o-transition-property: opacity;
+	-ms-transition-property: opacity;
+	transition-property: opacity;
+	-webkit-transition-duration: 0.4s;
+	-moz-transition-duration: 0.4s;
+	-o-transition-duration: 0.4s;
+	-ms-transition-duration: 0.4s;
+	transition-duration: 0.4s;
+}
+.infinity-design #vertical-activity-tabs ul li a {
+	background-color: transparent;
+	color: #777;
+	font-weight: bold;
+	text-shadow: none;
+}
+.infinity-design #vertical-activity-tabs ul li a:hover {
+	color: #222;
+}
+.infinity-design #vertical-activity-tabs ul li.selected a {
+	color: #EFEFEF;
 }
 .infinity-design div.item-list-tabs ul li a span {
-	-webkit-border-radius: 4px 4px 4px 4px;
-	-moz-border-radius: 4px 4px 4px 4px;
 	border-radius: 4px 4px 4px 4px;
-	color: #5ABCF8;
+	color: #999;
 }
 .infinity-design #subnav ul {
-	background: none ;
-	border-bottom: 1px solid #FFFFFF;
+	background: none;
 	-webkit-box-shadow: none;
-	-moz-box-shadow: none;
 	box-shadow: none;
-	border-top: 0px;
+}
+.infinity-design ul.item-list li:last-child {
+	border-bottom: 0px;
 }
 .infinity-design #subnav.item-list-tabs ul li a {
 	color: #787676;
-	font-weight: 500;
+	font-weight: bold;
 	text-shadow: none;
 }
 .infinity-design div#subnav.item-list-tabs {
 	border-bottom: 1px solid #E8E8E8;
+	border-top: 1px solid #EEEEEE;
 	-webkit-box-shadow: none;
-	-moz-box-shadow: none;
 	box-shadow: none;
 }
-.infinity-design a.loading,
-.infinity-design li.loading a {
-	background-image: url( ../images/design/ajax-loader.gif ) !important;
+.infinity-design #sidebar .item-list-tabs li.loading a {
+	background: transparent !important;
+	background-image: url("../images/ajax-loader.gif" ) !important;
+	background-repeat: no-repeat !important;
+	background-position: 5px 8px !important;
 }
 .infinity-design span.activity {
-	border: 1px solid #EDEDED;
-	-webkit-border-radius: 3px 3px 3px 3px;
-	-moz-border-radius: 3px 3px 3px 3px;
 	border-radius: 3px 3px 3px 3px;
 	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
-	-moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
 	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
-	color: #888888;
-	font-size: 80%;
-	font-weight: bold;
-	margin-bottom: 10px;
-	margin-top: -6px;
-	padding: 0 5px;
+	color: #777777;
+	font-size: 75%;
+	font-weight: 400;
 }
-.infinity-design .footer-wrap {
-	background: none repeat scroll 0 0 #2F2F2F;
+.infinity-design #powered-by {
 	border-top: 1px solid #454545;
 	color: #DDDDDD;
+	font-weight: bold;
 }
-.infinity-design #copyright-info {
-	text-align: right;
+.infinity-design #item-body form#whats-new-form {
+	background: none repeat scroll 0 0 #F8F8F8;
+	border-bottom: 1px solid #DDDDDD;
+}
+.infinity-design .bp-user #item-buttons .generic-button a:hover,
+.infinity-design #profile-nav-menu a:hover {
+	color: #4183C4;
+}
+.infinity-design .bp-user #item-buttons .generic-button a {
+	font-size: 120%;
+}
+.infinity-design #profile-nav-menu {
+	margin-bottom: -35px;
+	margin-top: -10px;
+}
+.infinity-design #profile-nav-menu a {
+	font-size: 90%;
+}
+.infinity-design .sidebar-activity-tabs ul li a {
+	color: #777;
+	font-weight: bold;
+}
+.infinity-design .sidebar-activity-tabs ul li a:hover {
+	color: #222;
+}
+.infinity-design .sidebar-activity-tabs ul li span,
+.infinity-design .sidebar-activity-tabs ul li.current span,
+.infinity-design .sidebar-activity-tabs ul li.selected span {
+	background: none repeat scroll 0 0 #FFFFFF;
+	border: 1px solid #DDDDDD;
+	border-radius: 4px 4px 4px 4px;
+	color: #A6A4A3;
+	font-size: 75%;
+	font-weight: bold;
+}
+.infinity-design .sidebar-activity-tabs ul li.current span,
+.infinity-design .sidebar-activity-tabs ul li.selected span {
+	background: none repeat scroll 0 0 #333333;
+	color: #999999;
+	border: 1px solid #282828;
+}
+.infinity-design #vertical-activity-tabs ul li span {
+	background: transparent;
+}
+.infinity-design .sidebar-activity-tabs ul li.current,
+.infinity-design .sidebar-activity-tabs ul li.selected {
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+.infinity-design .sidebar-activity-tabs .profile-subnav li.selected {
+	border-top: 1px solid #3E3D3D;
+	background: #265079;
+}
+.infinity-design .sidebar-activity-tabs ul.profile-subnav li.current.selected a {
+	color: #FFF;
+	font-weight: bold;
+}
+.infinity-design .sidebar-activity-tabs ul li.current a,
+.infinity-design .sidebar-activity-tabs ul li.selected a {
+	color: #EFEFEF;
+	font-weight: bold;
+}
+.infinity-design .sidebar-activity-tabs ul li:hover a {
+	font-weight: bold;
+}
+.infinity-design .sidebar-activity-tabs ul.profile-subnav li:hover {
+	background: #444;
+}
+/* Second Level */
+.infinity-design #object-nav ul.profile-subnav {
+	border-bottom: 0 none;
+	border-top: 1px solid #1A1A1A;
+}
+.infinity-design ul.profile-subnav li {
+	text-shadow: 0 1px 0 #111111;
+	border-top: 1px solid #444;
+	border-bottom: 1px solid #333;
+	background: none repeat scroll 0 0 #363636;
+}
+.infinity-design ul.profile-subnav li a:before {
+	color: #4D4D4D;
+	content: "+" !important;
+	font-size: 100%;
+	margin-left: 0;
+	padding-right: 7px;
+	position: relative;
+	top: 1px;
+}
+.infinity-design .sidebar-activity-tabs ul li.current ul.profile-subnav li a {
+	color: #AAAAAA;
+	font-weight: normal;
+}
+.infinity-design ul.profile-subnav li.current a:before {
+	color: inherit;
+}
+.infinity-design .sidebar-activity-tabs ul li.current ul.profile-subnav li a:hover {
+	color: #FFF;
+}
+.infinity-design .edit-notifications-button:before {
+	content: "_";
+}
+.infinity-design .edit-avatar-button:before {
+	content: "2";
+}
+.infinity-design .edit-password-button:before {
+	content: "y";
+}
+.infinity-design .edit-profile-button:before {
+	content: "9";
+}
+.infinity-design #nav-announcements-groups-li a:before {
+	content: "6"
 }
 /* ======== */
 /* ! Misc   */
 /* ======== */
 .infinity-design thead:first-child tr th,
 .infinity-design thead:first-child tr td {
-	padding-left: 10px;
-	padding-right: 10px;
 	color: #DDD;
+}
+.infinity-design div#invite-list {
+	background: none repeat scroll 0 0 #F5F5F5;
+	border: 1px solid #E4E4E4;
+}
+.infinity-design ul.item-list li {
+	border-bottom: 1px solid #F5F5F5;
+	padding-top: 30px;
+	padding-bottom: 20px;
+}
+/* ========== */
+/* ! HomePage */
+/* ========== */
+.infinity-design .flexslider .slides img {
+	-webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+.infinity-design .flex-caption {
+	background-image: url("../images/slides-bg.png");
+	color: #FFF;
+	text-shadow: 0 1px 0 #000000;
+	border-top: 1px solid #545353;
+}
+.infinity-design .flex-caption h2 {
+	color: #EFEFEF;
+}
+/* ======== */
+/* ! Docs   */
+/* ======== */
+.infinity-design thead:first-child tr th a,
+.infinity-design thead:first-child tr td a {
+	color: #EFEFEF;
+}
+.infinity-design .docs .doc-tabs {
+	background: none repeat scroll 0 0 #FFFFFF;
+}
+.infinity-design .docs .doc-tabs li a {
+	border-radius: 5px 5px 5px 5px;
+}
+.infinity-design .docs .toggle-content {
+	border: 1px solid #DDD;
+	border-radius: 0px 0px 3px 3px;
+}
+.infinity-design .docs div.docs-info-header {
+	background: transparent;
+}
+/* Email Nofications */
+.infinity-design .single-item .group-subscription-div {
+	color: green;
+}
+/* BBPress */
+.infinity-design #bbpress-forums .bbp-breadcrumb {
+	border-bottom: 1px solid #EAEAEA;
+	border-top: 1px solid #F9F9F9;
+}
+.infinity-design .single-topic h1:before,
+.infinity-design .group-forum-topic #bbpress-forums h3:before {
+	background: #4183C4;
+	border-radius: 10px 10px 10px 10px;
+	color: #FFFFFF;
+	content: "#";
+	font-size: 90%;
+	margin-right: 5px;
+	padding: 0 8px 7px;
+	text-shadow: 0 1px 0 #4F5256;
+}
+.infinity-design .bbp-topic-meta a,
+.infinity-design .bbp-topic-freshness a {
+	color: #777;
+}
+.infinity-design #bbpress-forums div.bbp-topic-header,
+.infinity-design #bbpress-forums div.bbp-reply-header,
+.infinity-design .bbp-header {
+	color: #777;
+}
+.infinity-design .info-box h3,
+.infinity-design #bbpress-forums li.bbp-header {
+	color: #FFF;
+}
+.infinity-design .bbp-topic-meta {
+	font-size: 85%;
+}
+.infinity-design .bbp-breadcrumb-current,
+.infinity-design .bbp-topic-meta,
+.infinity-design .bbp-pagination {
+	color: #999;
+}
+.infinity-design #bbpress-forums div.odd,
+.infinity-design #bbpress-forums ul.odd {
+	background-color: #FFFFFF;
+}
+.infinity-design #bbpress-forums div.wp-editor-container {
+	border: 1px solid #ddd;
+}
+/* Third Pary Plugin Fixes */
+.infinity-design #links-personal-li #links-order-select,
+.infinity-design #links-personal-li #links-category-select {
+	display: none;
 }
