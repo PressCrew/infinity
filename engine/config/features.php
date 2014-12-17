@@ -1073,7 +1073,7 @@ ice_register_group( 'body' );
 			array(
 				'name' => 'background-image',
 				'type' => 'css/bg-image',
-				'default_value' => 'assets/images/design/bg.png'
+				'default_value' => 'assets/images/design/bg-body.gif'
 			),
 			$infinity_body_layout_defaults
 		);

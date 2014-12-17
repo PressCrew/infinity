@@ -1362,7 +1362,6 @@ body.infinity-layout {
 --------------------------------------------------------------*/
 
 body.infinity-design {
-	background: url("../images/bg-body.gif") repeat transparent;
 	border-top: 5px solid #4B4A47;
 	font: 90%/140% "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -1505,13 +1504,13 @@ body.infinity-design {
 	border-radius: 6px 6px 6px 6px;
 }
 .infinity-design .main-menu ul a:hover {
-	background: url("../images/bg-body.gif") repeat transparent;
+	background: url("../images/design/bg-body.gif") repeat transparent;
 }
 .infinity-design .base-menu ul li.current-cat a,
 .infinity-design .base-menu ul li.current_page_item a,
 .infinity-design .base-menu ul li.current-menu-item a {
 	font-weight: bold;
-	background: url("../images/bg-body.gif") repeat transparent;
+	background: url("../images/design/bg-body.gif") repeat transparent;
 }
 .infinity-design .widget h4,
 .infinity-design #vertical-activity-tabs h4 {
@@ -1617,7 +1616,7 @@ body.infinity-design {
 }
 .infinity-design #sidebar .item-list-tabs li.loading a {
 	background: transparent !important;
-	background-image: url("../images/ajax-loader.gif" ) !important;
+	background-image: url("../images/design/ajax-loader.gif" ) !important;
 	background-repeat: no-repeat !important;
 	background-position: 5px 8px !important;
 }
@@ -1770,7 +1769,7 @@ body.infinity-design {
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
 }
 .infinity-design .flex-caption {
-	background-image: url("../images/slides-bg.png");
+	background-image: url("../images/slider/bg.png");
 	color: #FFF;
 	text-shadow: 0 1px 0 #000000;
 	border-top: 1px solid #545353;
