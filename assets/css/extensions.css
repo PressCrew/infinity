@@ -118,17 +118,87 @@ body.infinity-layout {
 	-webkit-font-smoothing: antialiased;
 	-webkit-text-size-adjust: none;
 }
+/* Global Padding */
+.infinity-layout #content,
+.infinity-layout #sidebar,
+.infinity-layout #content-full,
+.infinity-layout #footer,
+.infinity-layout #header{
+	padding: 30px;
+}
+/* Global Negative Horizontal Padding */
+.infinity-layout #bbpress-forums,
+.infinity-layout div.bbp-breadcrumb,
+.infinity-layout #item-body form#whats-new-form,
+.infinity-layout div.item-list-tabs,
+.infinity-layout #powered-by,
+.infinity-layout #header #site-title,
+.infinity-layout .negative,
+.infinity-layout #group-navigation,
+.infinity-layout #profile-sidebar,
+.infinity-layout .sidebar-activity-tabs,
+.infinity-layout #sidebar .widget h4,
+.infinity-layout #vertical-activity-tabs,
+.infinity-layout .sidebar-activity-tabs ul li,
+.infinity-layout #content ul.item-list li {
+	margin-left: -30px;
+    margin-right: -30px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+/* Global Negative Vertical Padding */
+.infinity-layout #profile-sidebar {
+	margin-bottom: -30px;
+    margin-top: -30px;
+    padding-bottom: 30px;
+    padding-top: 30px;
+}
 .infinity-layout #wrapper {
 	padding-bottom: 20px;
 	padding-top: 20px;
 	margin: auto;
 }
+/* =========== */
+/* ! HomePage  */
+/* =========== */
+.infinity-layout #top-homepage {
+	margin: -30px -30px 30px;
+	overflow: hidden;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 30px;
+}
+.infinity-layout #top-homepage .flexslider {
+	border: 0px;
+	border-radius: 0px;
+	margin: 0 0 60px;
+	position: relative;
+}
+.infinity-layout .flex-caption {
+	bottom: 0;
+	position: absolute;
+	width: inherit;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+.infinity-layout .flex-caption p,
+.infinity-layout .flex-caption h3 {
+	padding-left: 15px;
+	padding-right: 15px;
+}
+.infinity-layout .flex-caption h3 a {
+	color: #FFF;
+}
+
 /* ========== */
 /* ! Header   */
 /* ========== */
 .infinity-layout #header {
 	position: relative;
 	z-index: 112 !important;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    height: 120px;
 }
 .infinity-layout #header:after {
 	content:"";
@@ -141,6 +211,7 @@ body.infinity-layout {
 	font-weight: bold;
 	font-size: 200%;
 	margin: -15px 0 0;
+	padding: 10px 30px 6px;
 	width: auto;
 	float: left;
 }
@@ -173,13 +244,9 @@ body.infinity-layout {
 }
 
 .infinity-layout #main-menu-wrap {
-	padding: 0;
+	padding: 10px 0 0;
 	/* setting z-index for dropdowns. do not mess with this */
 	z-index: 110 !important;
-}
-
-.infinity-layout #main-menu-wrap ul.sub-menu {
-	z-index: 150 !important;
 }
 
 .infinity-layout #sub-menu-wrap {
@@ -193,14 +260,11 @@ body.infinity-layout {
 /* ===================== */
 /* ! Base Menu Styling   */
 /* ===================== */
-.infinity-layout #main-menu-wrap .main-menu {
-	float: right;
-	font-size: 110%;
-	width: auto;
-}
 .infinity-layout .base-menu {
 	display: inline-block;
 	width: 100%;
+	padding-left: 20px;
+	padding-right: 20px;
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
@@ -360,9 +424,43 @@ body.infinity-layout {
 	content: none !important;
 }
 
-/* Don't remove this */
-.infinity-layout #footer .sub-menu,
-.infinity-layout #footer .sub-menu:before {
+/* Main Menu Styling */
+.infinity-layout .main-menu {
+	float: right;
+	font-size: 110%;
+	width: auto;
+	padding: 5px;
+}
+.infinity-layout .main-menu ul a {
+	margin-right: 10px;
+}
+
+/* Sub Menu Styling */
+html body.infinity-layout .top-wrap ul.sub-menu {
+    position: absolute;
+    z-index: 150;
+}
+.infinity-layout .top-wrap .base-menu ul.sub-menu {
+    border-top: 0;
+    position: absolute;
+}
+.infinity-layout .base-menu ul.sub-menu {
+	margin: 8px 0 0;
+	padding: 0 !important;
+	z-index: 150 !important;
+}
+.infinity-layout .main-menu ul.sub-menu a {
+	margin-right: 0;
+}
+.infinity-layout #main-menu-wrap ul.sub-menu ul.sub-menu {
+	margin-top: 0;
+}
+.infinity-layout #main-menu-wrap ul ul li.sfHover ul {
+	left: 180px; /* match .nav ul width */
+	top: -2px;
+}
+.infinity-layout #footer ul.sub-menu,
+.infinity-layout #footer ul.sub-menu:before {
 	background: none;
 	border: 0px;
 }
@@ -381,6 +479,12 @@ body.infinity-layout {
 	}
 }
 
+.infinity-layout #content .widget .item-list li {
+	margin: auto;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
 /* ===========
  ! Sidebar
  =========== */
@@ -394,7 +498,7 @@ body.infinity-layout {
 
 /* Widgets */
 .infinity-layout .widget {
-	margin-bottom: 30px;
+	margin: 0 0 20px
 }
 .infinity-layout #sidebar ul {
 	padding: 0px;
@@ -403,6 +507,9 @@ body.infinity-layout {
 /* ==========
  ! Footer
  ========== */
+.infinity-layout #footer {
+	padding-top: 0px;
+}
 .infinity-layout #footer p:last-child {
 	margin-bottom: 0;
 }
@@ -1515,6 +1622,8 @@ body.infinity-design {
 .infinity-design .widget h4,
 .infinity-design #vertical-activity-tabs h4 {
 	border-bottom: 1px solid #EDEDED;
+	padding-bottom: 10px;
+	padding-top: 10px;
 }
 /* Footer */
 .infinity-design #footer .footer-widget {
