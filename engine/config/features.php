@@ -96,7 +96,7 @@ ice_register_group( 'core' );
 				'title' => 'Sidebar Size',
 				'description' => 'Select a sidebar size',
 				'type' => 'select',
-				'default_value' => 'eleven',
+				'default_value' => 'twelve',
 				'field_options' => array(
 					'fourteen' => '15 percent',
 					'thirteen' => '20 percent',
@@ -1209,8 +1209,7 @@ ice_register_group( 'header' );
 		ice_register_option(
 			array(
 				'name' => 'background-image',
-				'type' => 'css/bg-image',
-				'default_value' => 'assets/images/design/header-background.jpg'
+				'type' => 'css/bg-image'
 			),
 			$infinity_header_layout_defaults
 		);
