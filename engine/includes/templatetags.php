@@ -81,6 +81,21 @@ function infinity_posted_on()
 	);
 }
 
+// define the_post_name() tag if not already exists.
+if ( false === function_exists( 'the_post_name' ) ) {
+	/**
+	* Echo the post name (slug)
+	*/
+	function the_post_name()
+	{
+		// use global post
+		global $post;
+
+		// post_name property is the slug
+		echo $post->post_name;
+	}
+}
+
 //
 // Custom Conditionals
 //

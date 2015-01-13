@@ -22,6 +22,16 @@ require_once INFINITY_INC_PATH . '/templatetags.php';
 require_once INFINITY_INC_PATH . '/walkers.php';
 require_once INFINITY_INC_PATH . '/options.php';
 
+/**
+ * Maybe include Commons In a Box functionality
+ *
+ * @todo this is likely not a permanent strategy. just trying to move things along!
+ */
+if ( true === class_exists( 'Commons_In_A_Box', false ) ) {
+	// commons in a box loader exists, assume it's loaded
+	require_once INFINITY_INC_PATH . '/setup-cbox.php';
+}
+
 ////////////////////////////////////////////////////
 //
 // IMPORTANT:
