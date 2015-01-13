@@ -45,6 +45,18 @@ function cbox_create_excerpt( $text, $length = 425, $options = array() ) {
 }
 
 /**
+ * Is there more than one profile group tab?
+ *
+ * @since 1.2
+ * @return bool
+ */
+function cbox_profile_has_multiple_tabs()
+{
+	global $profile_template;
+	return $profile_template->group_count > 1;
+}
+
+/**
  * Automagically create a front page if one has not been set already
  */
 function cbox_theme_auto_create_home_page()
