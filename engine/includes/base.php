@@ -64,6 +64,7 @@ function infinity_base_features()
 	
 	// BuddyPress
 	add_theme_support( 'infinity:bp', 'support', 'style', 'sidebar-setup' );
+	add_theme_support( 'infinity:bp-plugins', 'support', 'style' );
 	add_theme_support( 'infinity:bp-fbconnect', 'support' );
 }
 add_action( 'after_setup_theme', 'infinity_base_features' );

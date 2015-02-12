@@ -805,6 +805,35 @@ ice_register_group( 'bp' );
 	);
 
 //
+// BP Plugins Compat Group
+//
+ice_register_group( 'bp-plugins' );
+
+	// Popular BuddyPress plugin support
+	ice_register_feature(
+		array(
+			'name' => 'support',
+			'group' => 'bp-plugins',
+			'type' => 'default',
+			'title' => 'BuddyPress Plugins Support',
+			'description' => 'Popular BuddyPress plugins support',
+			'style' => 'assets/css/buddypress-plugins.css'
+		)
+	);
+
+	// Popular BuddyPress plugin styles
+	ice_register_feature(
+		array(
+			'name' => 'style',
+			'group' => 'bp-plugins',
+			'type' => 'default',
+			'title' => 'BuddyPress Plugins Styles',
+			'description' => 'Popular BuddyPress plugins support styles',
+//			'body_class' => 'infinity-bp'
+		)
+	);
+
+//
 // BP FBConnect Group
 //
 ice_register_group( 'bp-fbconnect' );
