@@ -48,8 +48,8 @@ class ICE_Ext_Feature_Bp_Protect
 		parent::init();
 
 		// init properties
-		$this->title = __( 'BuddyPress Protect', infinity_text_domain );
-		$this->description = __( 'Restrict access to your BuddyPress components to members only', infinity_text_domain );
+		$this->title = __( 'BuddyPress Protect', 'infinity' );
+		$this->description = __( 'Restrict access to your BuddyPress components to members only', 'infinity' );
 
 		// add action to get_header
 		add_action( 'wp', array($this,'maybe_redirect'), 1 );
