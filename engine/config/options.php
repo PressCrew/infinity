@@ -21,3 +21,44 @@
 //		'default_value' => 'Hello World',
 //	)
 //);
+
+//
+// CBOX Group
+//
+ice_register_group( 'cbox' );
+
+	$infinity_cbox_options_defaults = array(
+		'group' => 'cbox',
+		'section' => 'global'
+	);
+
+	ice_register_option(
+		array(
+			'name' => 'cbox-thumb-height',
+			'title' => 'Post thumbnail height',
+			'description' => 'The height in pixels of the featured images',
+			'type' => 'ui/slider',
+			'min' => 100,
+			'max' => 1500,
+			'step' => 10,
+			'label' => 'Height in pixels:',
+			'default_value' => 240
+		),
+		$infinity_cbox_options_defaults
+	);
+
+	ice_register_option(
+		array(
+			'name' => 'cbox-thumb-width',
+			'title' => 'Post thumbnail width',
+			'description' => 'The width in pixels of the featured images',
+			'type' => 'ui/slider',
+			'min' => 100,
+			'max' => 1500,
+			'step' => 10,
+			'label' => 'Width in pixels:',
+			'default_value' => 865,
+			'parent' => 'cbox-thumb-height'
+		),
+		$infinity_cbox_options_defaults
+	);
