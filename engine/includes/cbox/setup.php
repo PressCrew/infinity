@@ -99,7 +99,7 @@ function cbox_theme_auto_create_home_page()
 			) );
 
 			// set the new page as the frontpage and use our homepage template
-			update_post_meta( $home_page_id, '_wp_page_template', 'templates/homepage-template.php' );
+			update_post_meta( $home_page_id, '_wp_page_template', 'homepage-template.php' );
 			update_option( 'show_on_front', 'page' );
 			update_option( 'page_on_front', $home_page_id );
 			update_option( '_cbox_theme_auto_create_home_page', $home_page_id );

@@ -200,7 +200,7 @@ add_action('manage_features_posts_custom_column', 'cbox_site_features_column_con
  */
 function cbox_theme_flex_slider_script()
 {
-	if ( is_page_template('templates/homepage-template.php') ) {
+	if ( is_page_template('homepage-template.php') ) {
 		// render script tag ?>
 		<script type="text/javascript">
 			jQuery(document).ready(function(){
