@@ -38,7 +38,7 @@ if ( !defined( 'BP_AVATAR_FULL_HEIGHT' ) ) {
 function cbox_theme_magic_sidebars()
 {
 	// load requirements
-	require_once 'widget-setter.php';
+	require_once INFINITY_INC_PATH . '/cbox/widget-setter.php';
 
 	// auto sidebar population
 	cbox_theme_populate_sidebars();
@@ -51,7 +51,7 @@ add_action( 'infinity_dashboard_activated', 'cbox_theme_magic_sidebars' );
 function cbox_theme_magic_menus()
 {
 	// load requirements
-	require_once 'buddypress/menus.php';
+	require_once INFINITY_INC_PATH . '/cbox/menus.php';
 
 	// add our default sub-menu
 	cbox_theme_add_default_sub_menu();
@@ -64,7 +64,7 @@ add_action( 'get_header', 'cbox_theme_magic_menus' );
 function cbox_theme_register_widgets()
 {
 	// load requirements
-	require_once 'buddypress/widgets.php';
+	require_once INFINITY_INC_PATH . '/cbox/widgets.php';
 
 	// register it
 	if ( bp_is_active( 'blogs' ) ) {
