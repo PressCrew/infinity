@@ -62,3 +62,28 @@ ice_register_group( 'cbox' );
 		),
 		$infinity_cbox_options_defaults
 	);
+
+	ice_register_option(
+		array(
+			// TODO import old name format as commented out for compat
+			// 'name' => 'cbox_button_color',
+			'name' => 'cbox-button-color',
+			'type' => 'select',
+			'title' => 'Button Color',
+			'description' => 'Choose a button color',
+			'field_options' => array(
+				'orange' => 'Orange',
+				'blue' => 'Blue',
+				'darkblue' => 'Navy Blue',
+				'black' => 'Black',
+				'purple' => 'Purple',
+				'grey' => 'Grey',
+				'teal' => 'Teal',
+				'purple' => 'Purple',
+				'green' => 'Green',
+				'white' => 'White'
+			),
+			'default_value' => 'orange'
+		),
+		$infinity_cbox_options_defaults
+	);

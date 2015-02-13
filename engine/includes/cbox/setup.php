@@ -122,17 +122,13 @@ function cbox_theme_auto_create_home_page()
 }
 add_action( 'wp', 'cbox_theme_auto_create_home_page' );
 
-
-// TODO temporarily bailing on remaining items, will tackle as additional commits
-return;
-
 /**
  * Custom jQuery Buttons
  */
 function cbox_theme_custom_buttons()
 {
 	// get button color option
-	$cbox_button_color = infinity_option_get( 'cbox_button_color' );
+	$cbox_button_color = infinity_option_get( 'cbox:cbox-button-color' );
 
 	// render script tag ?>
 	<script>
@@ -152,6 +148,9 @@ function cbox_theme_custom_buttons()
 	</script><?php
 }
 add_action( 'close_body', 'cbox_theme_custom_buttons' );
+
+// TODO temporarily bailing on remaining items, will tackle as additional commits
+return;
 
 //
 // Slider
