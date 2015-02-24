@@ -233,6 +233,9 @@ class ICE_Option_Registry extends ICE_Registry
 
 			// save the changes
 			$this->theme_mod->save();
+
+			// fire after save hook
+			do_action( 'ice_option_registry_process_form' );
 			
 			// done saving
 			return $save_count;
