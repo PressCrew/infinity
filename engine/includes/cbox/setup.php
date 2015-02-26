@@ -149,9 +149,6 @@ function cbox_theme_custom_buttons()
 }
 add_action( 'close_body', 'cbox_theme_custom_buttons' );
 
-// TODO temporarily bailing on remaining items, will tackle as additional commits
-return;
-
 //
 // Slider
 //
@@ -166,11 +163,14 @@ function cbox_theme_init_cmb()
 	}
 }
 
+// load the dynamic thumb plugin
+require_once ICE_LIB_PATH . '/otf_regen_thumbs.php';
+
 /**
  * Slider setup
  */
 function cbox_theme_slider_setup()
-{
+{	
 	// load slider setup
 	require_once( INFINITY_INC_PATH . '/feature-slider/setup.php' );
 

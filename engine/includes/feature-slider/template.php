@@ -17,11 +17,11 @@
 <?php
 
 // slider type
-$slider_type = (int) infinity_option_get( 'cbox_flex_slider' );
+$slider_type = (int) infinity_option_get( 'cbox:cbox-flex-slider' );
 
 //slider sizes
-$sliderheight = infinity_option_get( 'cbox-flex-slider-height' );
-$sliderwidth = infinity_option_get( 'cbox-flex-slider-width' );
+$sliderheight = infinity_option_get( 'cbox:cbox-flex-slider-height' );
+$sliderwidth = infinity_option_get( 'cbox:cbox-flex-slider-width' );
 
 // locate no slides image url
 $no_slides_url  = infinity_image_url( 'slides-bg.png' );
@@ -32,9 +32,9 @@ $query_args = array();
 
 $query_args['order'] = 'ASC';
 
-$posts_per_page = infinity_option_get( 'cbox_flex_slider_amount' );
+$posts_per_page = infinity_option_get( 'cbox:cbox-flex-slider-amount' );
 if ( ! empty( $posts_per_page ) ) {
-	$query_args['posts_per_page'] = (int) infinity_option_get( 'cbox_flex_slider_amount' );
+	$query_args['posts_per_page'] = (int) infinity_option_get( 'cbox:cbox-flex-slider-amount' );
 } else {
 	$query_args['posts_per_page'] = '-1';
 }
@@ -48,7 +48,7 @@ if ( $slider_type == 1 ) {
 
 // post category
 if ( $slider_type == 2 ) {
-	$cat_id = infinity_option_get( 'cbox_flex_slider_category' );
+	$cat_id = infinity_option_get( 'cbox:cbox-flex-slider-category' );
 	$cat    = get_category( $cat_id );
 
 	$query_args['cat'] = $cat_id;
@@ -99,7 +99,7 @@ if( $slider_query->have_posts() ) :
 		<li>
 			<!-- Image -->
 			<a href="<?php echo $slide_url; ?>">
-				<?php the_post_thumbnail( array( 'width' => $sliderwidth, 'height' => $sliderheight, 'crop' => true ) ) ?>
+				<?php the_post_thumbnail( array( $sliderwidth, $sliderheight ) ) ?>
 			</a>
 
 			<!-- Caption -->

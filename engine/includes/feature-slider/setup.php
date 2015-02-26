@@ -14,7 +14,7 @@ add_action( 'after_setup_theme', 'cbox_thumb_sizes', 20 );
  */
 function cbox_theme_feature_setup()
 {
-	$slider_type = (int) infinity_option_get( 'cbox_flex_slider' );
+	$slider_type = (int) infinity_option_get( 'cbox:cbox-flex-slider' );
 
 	// Don't register post type if slider is not in post type mode
 	if ( $slider_type != 1 ) {
@@ -51,7 +51,7 @@ function cbox_theme_feature_setup()
 
 	register_post_type( 'features', $args );
 }
-add_action( 'after_setup_theme', 'cbox_theme_feature_setup', 20 );
+add_action( 'after_setup_theme', 'cbox_theme_feature_setup', 101 );
 
 add_filter( 'cmb_meta_boxes', 'cmb_sample_metaboxes' );
 /**
@@ -63,7 +63,7 @@ add_filter( 'cmb_meta_boxes', 'cmb_sample_metaboxes' );
 function cmb_sample_metaboxes( $meta_boxes = array() ) {
 
 	// Check which slider option is set
-	$slider_type = (int) infinity_option_get( 'cbox_flex_slider' );
+	$slider_type = (int) infinity_option_get( 'cbox:cbox-flex-slider' );
 
 	// Show meta boxes only on Features post type
 	if ( $slider_type == 1 ) {
@@ -213,8 +213,8 @@ function cbox_theme_flex_slider_script()
 					video: true,
 	  				useCSS: false,
 	  				controls: false,
-	  				pause : <?php echo infinity_option_get( 'cbox_flex_slider_time' ); ?>000,
-	  				speed: <?php echo infinity_option_get( 'cbox_flex_slider_transition' ); ?>
+	  				pause : <?php echo infinity_option_get( 'cbox:cbox-flex-slider-time' ); ?>,
+	  				speed: <?php echo infinity_option_get( 'cbox:cbox-flex-slider-transition' ); ?>
 				});
 
 			});
@@ -239,7 +239,7 @@ function cbox_featured_post_admin_footer() {
 		case 'post-new.php' :
 		case 'post.php' :
 
-		$cat_id = infinity_option_get( 'cbox_flex_slider_category' );
+		$cat_id = infinity_option_get( 'cbox:cbox-flex-slider-category' );
 	?>
 
 <script type="text/javascript">

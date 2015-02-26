@@ -38,6 +38,14 @@ ice_register_section(
 
 ice_register_section(
 	array(
+		'name' => 'homepage',
+		'type' => 'cpanel',
+		'title' => 'Home Page'
+	)
+);
+
+ice_register_section(
+	array(
 		'name' => 'custom',
 		'type' => 'cpanel',
 		'title' => 'Custom'

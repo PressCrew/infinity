@@ -87,3 +87,123 @@ ice_register_group( 'cbox' );
 		),
 		$infinity_cbox_options_defaults
 	);
+
+	ice_register_option(
+		array(
+			// TODO import old name format as commented out for compat
+			// 'name' => 'cbox_flex_slider',
+			'name' => 'cbox-flex-slider',
+			'type' => 'select',
+			'section' => 'homepage',
+			'title' => 'Slider Setup',
+			'description' => 'If you enable the slider you can choose what type of content you want to display. You can choose between displaying images or videos that you have added through the Site Features custom post type or showing images/videos from posts from a category of your choosing. If you choose the latter, there are some options you can set at the bottom of this page',
+			'field_options' => array(
+				0 => 'Do not display',
+				1 => 'Show Site Features',
+				2 => 'Show Featured Post from a Category'
+			),
+			'default_value' => 1
+		),
+		$infinity_cbox_options_defaults
+	);
+
+	ice_register_option(
+		array(
+			'name' => 'cbox-flex-slider-height',
+			'section' => 'homepage',
+			'title' => 'Slider Height',
+			'description' => 'The height of the slider in pixels.',
+			'type' => 'ui/slider',
+			'min' => 100,
+			'max' => 1000,
+			'step' => 10,
+			'label' => 'Height in pixels:',
+			'default_value' => 344,
+//			'parent' => 'cbox-flex-slider'
+		),
+		$infinity_cbox_options_defaults
+	);
+
+	ice_register_option(
+		array(
+			'name' => 'cbox-flex-slider-width',
+			'section' => 'homepage',
+			'title' => 'Slider Width',
+			'description' => 'The width of the slider in pixels.',
+			'type' => 'ui/slider',
+			'min' => 200,
+			'max' => 2000,
+			'step' => 10,
+			'label' => 'Width in pixels:',
+			'default_value' => 670,
+//			'parent' => 'cbox-flex-slider'
+		),
+		$infinity_cbox_options_defaults
+	);
+
+	ice_register_option(
+		array(
+			// TODO import old name format as commented out for compat
+			// 'name' => 'cbox_flex_slider_amount',
+			'name' => 'cbox-flex-slider-amount',
+			'section' => 'homepage',
+			'title' => 'Number of Posts',
+			'description' => 'Enter the number of posts you want to feature.',
+			'type' => 'text',
+			'default_value' => 0,
+//			'parent' => 'cbox-flex-slider'
+		),
+		$infinity_cbox_options_defaults
+	);
+
+	ice_register_option(
+		array(
+			// TODO import old name format as commented out for compat
+			// 'name' => 'cbox_flex_slider_time',
+			'name' => 'cbox-flex-slider-time',
+			'section' => 'homepage',
+			'title' => 'Slider Delay',
+			'description' => 'The number of milliseconds between slide changes (1 second = 1000 milliseconds).',
+			'type' => 'ui/slider',
+			'min' => 1000,
+			'max' => 10000,
+			'step' => 10,
+			'label' => 'Time in milliseconds:',
+			'default_value' => 5000,
+//			'parent' => 'cbox-flex-slider'
+		),
+		$infinity_cbox_options_defaults
+	);
+
+	ice_register_option(
+		array(
+			// TODO import old name format as commented out for compat
+			// 'name' => 'cbox_flex_slider_transition',
+			'name' => 'cbox-flex-slider-transition',
+			'section' => 'homepage',
+			'title' => 'Transition Speed',
+			'description' => 'The number of milliseconds it takes the slide to change (1 second = 1000 milliseconds).',
+			'type' => 'ui/slider',
+			'min' => 200,
+			'max' => 5000,
+			'step' => 10,
+			'label' => 'Time in milliseconds:',
+			'default_value' => 600,
+//			'parent' => 'cbox-flex-slider'
+		),
+		$infinity_cbox_options_defaults
+	);
+
+	ice_register_option(
+		array(
+			// TODO import old name format as commented out for compat
+			// 'name' => 'cbox_flex_slider_category',
+			'name' => 'cbox-flex-slider-category',
+			'section' => 'homepage',
+			'title' => 'Featured Slider Category',
+			'description' => 'From which category do you want to show posts? This ONLY works when your slider is set to to show Featured Posts.',
+			'type' => 'category',
+//			'parent' => 'cbox-flex-slider'
+		),
+		$infinity_cbox_options_defaults
+	);
