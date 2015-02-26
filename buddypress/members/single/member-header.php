@@ -11,14 +11,6 @@
 
 <?php do_action( 'bp_before_member_header' ); ?>
 
-<div id="item-header-avatar">
-	<a href="<?php bp_displayed_user_link(); ?>">
-
-		<?php bp_displayed_user_avatar( 'type=full' ); ?>
-
-	</a>
-</div><!-- #item-header-avatar -->
-
 <div id="item-header-content">
 
 	<?php if ( bp_is_active( 'activity' ) && bp_activity_do_mentions() ) : ?>
@@ -40,12 +32,6 @@
 			</div>
 
 		<?php endif; ?>
-
-		<div id="item-buttons">
-
-			<?php do_action( 'bp_member_header_actions' ); ?>
-
-		</div><!-- #item-buttons -->
 
 		<?php
 		/***
