@@ -12,6 +12,8 @@ get_header(); ?>
 		<div id="container">
 			<div id="content-full" role="main">
 
+				<?php do_action( 'bbp_before_main_content' ); ?>
+
 				<?php do_action( 'bbp_template_notices' ); ?>
 
 				<?php while ( have_posts() ) : the_post(); ?>
@@ -34,6 +36,8 @@ get_header(); ?>
 					<?php endif; ?>
 
 				<?php endwhile; ?>
+
+				<?php do_action( 'bbp_after_main_content' ); ?>
 
 			</div><!-- #content -->
 		</div><!-- #container -->
