@@ -21,6 +21,15 @@ ice_register_extension(
 	)
 );
 
+// BuddyPress Protect
+ice_register_extension(
+	'feature',
+	'bp/protect',
+	array(
+		'class' => 'ICE_Ext_Feature_Bp_Protect'
+	)
+);
+
 // BuddyPress Plugin Support
 ice_register_extension(
 	'feature',

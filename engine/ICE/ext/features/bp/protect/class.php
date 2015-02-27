@@ -2,8 +2,6 @@
 /**
  * ICE API: feature extensions, BuddyPress protect components feature class file
  *
- * This extension is PREMIUM and purchase is required to get support!
- *
  * @author Marshall Sorenson <marshall@presscrew.com>
  * @link http://infinity.presscrew.com/
  * @copyright Copyright (C) 2010-2011 Marshall Sorenson
@@ -26,10 +24,6 @@ class ICE_Ext_Feature_Bp_Protect
 {
 	/**
 	 */
-	protected $suboptions = true;
-
-	/**
-	 */
 	public function check_reqs()
 	{
 		// is buddypress active?
@@ -42,7 +36,7 @@ class ICE_Ext_Feature_Bp_Protect
 	
 	/**
 	 */
-	protected function init()
+	public function init()
 	{
 		// run parent init method
 		parent::init();
@@ -66,7 +60,7 @@ class ICE_Ext_Feature_Bp_Protect
 		}
 
 		// grab toggle option from registry
-		$opt_toggle = $this->get_suboption( 'toggle' );
+		$opt_toggle = $this->get_grouped( 'option', 'toggle' );
 
 		// is option toggled on?
 		if ( $opt_toggle && true == $opt_toggle->get() ) {
@@ -80,5 +74,3 @@ class ICE_Ext_Feature_Bp_Protect
 		}
 	}
 }
-
-?>

@@ -861,6 +861,32 @@ ice_register_group( 'bp-fbconnect' );
 		);
 
 //
+// BP Protect Group
+//
+ice_register_group( 'bp-protect' );
+
+	// BP Protect Support
+	ice_register_feature(
+		array(
+			'name' => 'support',
+			'group' => 'bp-protect',
+			'type' => 'bp/protect'
+		)
+	);
+		ice_register_option(
+			array(
+				'name' => 'toggle',
+				'group' => 'bp-protect',
+				'section' => 'buddypress',
+				'type' => 'toggle/on-off',
+				'required_feature' => 'support',
+				'title' => 'Private Community',
+				'description' => 'Turn this option on to restrict access to your BuddyPress components to members only.',
+				'default_value' => false
+			)
+		);
+
+//
 // Extensions Group
 //
 ice_register_group( 'ext' );
