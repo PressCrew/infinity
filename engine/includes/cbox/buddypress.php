@@ -189,7 +189,7 @@ add_action( 'bp_after_member_body', 'cbox_theme_reinstate_user_options_nav' );
 function cbox_theme_buddypress_tour()
 {
 	if ( bp_is_activity_component() && !bp_is_user() && is_user_logged_in() ) {
-		infinity_feature( 'cbox-buddypress-tour' );
+		infinity_feature( 'activity', 'bp-tour' );
 	}
 }
 add_action( 'close_body', 'cbox_theme_buddypress_tour' );

@@ -25,10 +25,6 @@ ICE_Loader::load( 'components/features/component' );
 class ICE_Ext_Feature_Scripts_Joyride
 	extends ICE_Feature
 {
-	/**
-	 */
-	protected $suboptions = true;
-
 	// local properties
 
 	/**
@@ -138,7 +134,7 @@ class ICE_Ext_Feature_Scripts_Joyride
 
 	/**
 	 */
-	protected function get_property( $name )
+	public function get_property( $name )
 	{
 		switch ( $name ) {
 			case 'cookie_domain':
@@ -164,7 +160,7 @@ class ICE_Ext_Feature_Scripts_Joyride
 
 	/**
 	 */
-	protected function init()
+	public function init()
 	{
 		// run parent
 		parent::init();
@@ -173,24 +169,19 @@ class ICE_Ext_Feature_Scripts_Joyride
 		$this->title = __( 'Joyride Plugin' );
 		$this->description = __( 'A wrapper for the jQuery Joyride plugin' );
 		$this->id = 'joyRideTipContent';
+		$this->cookie_monster = true;
+		$this->tip_content = '#' . $this->id;
+
+		// enqueue assets
+		add_action( 'ice_init_blog', array( $this, 'enqueue_assets' ) );
 	}
 	
 	/**
 	 */
-	public function init_styles()
+	public function enqueue_assets()
 	{
-		parent::init_styles();
-
 		// need joyride styles
 		wp_enqueue_style( 'joyride', $this->locate_file_url( 'assets/joyride.css' ) );
-	}
-
-	/**
-	 */
-	public function init_scripts()
-	{
-		parent::init_scripts();
-
 		// need joyride script
 		wp_enqueue_script( 'joyride', $this->locate_file_url( 'assets/jquery.joyride.js' ) );
 	}
@@ -202,22 +193,35 @@ class ICE_Ext_Feature_Scripts_Joyride
 		// RUN PARENT FIRST!
 		parent::configure();
 
-		// init properties
-		$this->import_property( 'tip_location', 'string' );
-		$this->import_property( 'scroll_speed', 'integer' );
-		$this->import_property( 'timer', 'integer' );
-		$this->import_property( 'start_timer_on_click', 'boolean' );
-		$this->import_property( 'next_button', 'boolean' );
-		$this->import_property( 'tip_animation', 'string' );
-		$this->import_property( 'tip_animation_fade_speed', 'integer' );
-		$this->import_property( 'cookie_monster', 'boolean', true );
-		$this->import_property( 'cookie_domain' );
-		$this->import_property( 'cookie_name', 'string' );
-		$this->import_property( 'tip_container', 'string' );
-		$this->import_property( 'inline', 'boolean' );
-		$this->import_property( 'tip_content', 'string', '#' . $this->id );
-		$this->import_property( 'post_ride_callback', 'string' );
-		$this->import_property( 'post_step_callback', 'string' );
+		// import settings
+		$this->import_settings(
+			array(
+				'tip_location',
+				'scroll_speed',
+				'timer',
+				'start_timer_on_click',
+				'next_button',
+				'tip_animation',
+				'tip_animation_fade_speed',
+				'cookie_monster',
+				'cookie_domain',
+				'cookie_name',
+				'tip_container',
+				'inline',
+				'tip_content',
+				'post_ride_callback',
+				'post_step_callback'
+			),
+			array(
+				'scroll_speed' => 'integer',
+				'timer' => 'integer',
+				'start_timer_on_click' => 'boolean',
+				'next_button' => 'boolean',
+				'tip_animation_fade_speed' => 'boolean',
+				'cookie_monster' => 'boolean',
+				'inline' => 'boolean'
+			)
+		);
 	}
 
 	/**
@@ -226,7 +230,7 @@ class ICE_Ext_Feature_Scripts_Joyride
 	{
 		// new script helper
 		$script = new ICE_Script();
-		$logic = $script->logic();
+		$logic = $script->logic( 'vars' );
 
 		// add variables
 		$logic->av( 'tipLocation', $this->tip_location );
@@ -254,12 +258,12 @@ class ICE_Ext_Feature_Scripts_Joyride
 	/**
 	 * Render the content for a suboption
 	 *
-	 * @param string $suboption Name of the suboption to render
+	 * @param string $option_name Name of the option to render
 	 */
-	public function render_content( $suboption )
+	public function render_content( $option_name )
 	{
 		// try to get suboption
-		$option = $this->get_suboption( $suboption );
+		$option = $this->get_grouped( 'option', $option_name );
 
 		// get an option?
 		if ( $option ) {
@@ -269,5 +273,3 @@ class ICE_Ext_Feature_Scripts_Joyride
 	}
 
 }
-
-?>

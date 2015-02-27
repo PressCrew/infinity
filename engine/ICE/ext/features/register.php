@@ -107,3 +107,23 @@ ice_register_extension(
 		'template' => true
 	)
 );
+
+// Joyride Script
+ice_register_extension(
+	'feature',
+	'scripts/joyride',
+	array(
+		'class' => 'ICE_Ext_Feature_Scripts_Joyride',
+		'template' => true
+	)
+);
+
+// BuddyPress Joyride Tour
+ice_register_extension(
+	'feature',
+	'bp/tour',
+	array(
+		'extends' => 'scripts/joyride',
+		'class' => 'ICE_Ext_Feature_Bp_Tour'
+	)
+);

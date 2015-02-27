@@ -11,8 +11,6 @@
  * @since 1.0
  */
 
-ICE_Loader::load_ext( 'features/scripts/joyride' );
-
 /**
  * BuddyPress tour feature
  *
@@ -24,7 +22,7 @@ class ICE_Ext_Feature_Bp_Tour
 {
 	/**
 	 */
-	protected function init()
+	public function init()
 	{
 		// run parent
 		parent::init();
@@ -35,16 +33,6 @@ class ICE_Ext_Feature_Bp_Tour
 
 		// add action for the activity element renderer
 		add_action( 'bp_before_activity_loop', array( $this, 'render_activity_element' ) );
-	}
-	
-	/**
-	 */
-	public function init_styles()
-	{
-		parent::init_styles();
-
-		// add static logo styles and callback
-		$this->style()->cache( 'style', 'style.css' );
 	}
 
 	/**
@@ -57,5 +45,3 @@ class ICE_Ext_Feature_Bp_Tour
 	}
 
 }
-
-?>

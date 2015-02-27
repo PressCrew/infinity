@@ -887,6 +887,107 @@ ice_register_group( 'bp-protect' );
 		);
 
 //
+// BP Tour Group
+//
+ice_register_group( 'bp-tour' );
+
+	// BP Protect Support
+	ice_register_feature(
+		array(
+			'name' => 'activity',
+			'group' => 'bp-tour',
+			'type' => 'bp/tour',
+			'cookie_name' => 'buddypress-tour'
+		)
+	);
+		$infinity_bp_tour_defaults = array(
+			'group' => 'bp-tour',
+			'type' => 'textarea',
+			'section' => 'buddypress',
+			'field_class' => 'css-editor'
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'start',
+				'title' => 'Activity Stream Tour',
+				'description' => 'The first text that is being displayed before the tour starts.',
+				'default_value' => "<h4>Hi there!</h4> It seems that this is the first time you've visited our Activity Stream, so let's give you a quick tour of our Features! Ready? Let's do this!"
+			),
+			$infinity_bp_tour_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'all',
+				'title' => 'All Members Text',
+				'description' => 'The text explaining the All Members button.',
+				'default_value' => "<h4>All Members</h4> If you like to get a nice overview of <em>all the activity</em> posted by our community, this is the button to click!"
+			),
+			$infinity_bp_tour_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'friends',
+				'title' => 'Friends Text',
+				'description' => 'The text explaining the Friends button.',
+				'default_value' => "<h4>My Friends</h4> Keep track of what your friends are doing. No buddies yet? Why don't you make some by visting the Members Directory!</a>"
+			),
+			$infinity_bp_tour_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'groups',
+				'title' => 'Groups Text',
+				'description' => 'The text explaining the Groups button.',
+				'default_value' => "<h4>My Groups</h4> By clicking the &quot;My Groups&quot; button you can keep track of what's happening in the groups you've joined. Not a member of a group yet? Check out the Groups Directory!</a>"
+			),
+			$infinity_bp_tour_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'mentions',
+				'title' => 'Mentions Text',
+				'description' => 'The text explaining the Mentions button.',
+				'default_value' => "<h4>Mentions</h4> You can easily &quot;Mention&quot; others in your updates or forum posts across our community. As soon as someone mentions you using @yourname you'll see these mentions appear under this button."
+			),
+			$infinity_bp_tour_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'favorites',
+				'title' => 'Favorites Text',
+				'description' => 'The text explaining the Favorites button.',
+				'default_value' => "<h4>Keep Track</h4> If there's a conversation brewing that you find interesting, you can add your voice by clicking on the <strong>Comment</strong> button. By using the <strong>Favorite</strong> button you can easily bookmark the conversation so you go back to it back later. Go ahead and <strong>try it</strong> by clicking on a &quot;Favorite&quot; button!"
+			),
+			$infinity_bp_tour_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'filter',
+				'title' => 'Filter Text',
+				'description' => 'The text explaining the filter dropdown.',
+				'default_value' => "<h4>Use the filter!</h4> You can filter the stream to only show the items that have caught your interest. For instance you could use the filter <strong>Posts</strong> to show blog posts from across our network. Awesome!"
+			),
+			$infinity_bp_tour_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'update',
+				'title' => 'Update Text',
+				'description' => 'The last text in the tour prompting your user to post an update.',
+				'default_value' => "<h4>Update Away!</h4> We have taught you everything you need to know to get started! It's time for you to post your first update. Good luck young grasshopper, we've taught you well!"
+			),
+			$infinity_bp_tour_defaults
+		);
+
+//
 // Extensions Group
 //
 ice_register_group( 'ext' );

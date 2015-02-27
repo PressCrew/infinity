@@ -37,3 +37,12 @@ h1.icext-feature.icext-header-logo img,
 div.icext-feature.icext-header-logo img {
 	max-width: none;
 }
+
+/**
+ * features/bp/tour
+ */
+#activity-tour-favorites {
+	left: 30%;
+	position: relative;
+	top: 211px;
+}
