@@ -658,9 +658,7 @@ html body.infinity-layout .top-wrap ul.sub-menu {
 }
 .infinity-btns .button,
 .infinity-btns .post-tags a,
-.infinity-btns .widget_tag_cloud a,
-.infinity-btns input,
-.infinity-btns textarea {
+.infinity-btns .widget_tag_cloud a {
 	display: inline-block;
 	text-decoration: none;
 	padding: 8px 11px;
