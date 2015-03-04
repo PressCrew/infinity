@@ -1099,6 +1099,44 @@ ice_register_group( 'buttons' );
 		)
 	);
 
+	// Button Colors
+	ice_register_feature(
+		array(
+			'name' => 'color',
+			'group' => 'buttons',
+			'type' => 'default',
+			'title' => 'Custom button colors',
+			'description' => 'Custom button colors.',
+			'body_class' => 'infinity-btns'
+		)
+	);
+
+		ice_register_option(
+			array(
+				// TODO import old name format(s) as commented out for compat
+				// 'name' => 'cbox_button_color',
+				'name' => 'custom-color',
+				'group' => 'buttons',
+				'section' => 'global',
+				'type' => 'select',
+				'title' => 'Button Color',
+				'description' => 'Choose a button color.',
+				'field_options' => array(
+					'orange' => 'Orange',
+					'blue' => 'Blue',
+					'darkblue' => 'Navy Blue',
+					'black' => 'Black',
+					'purple' => 'Purple',
+					'grey' => 'Grey',
+					'teal' => 'Teal',
+					'purple' => 'Purple',
+					'green' => 'Green',
+					'white' => 'White'
+				),
+				'default_value' => 'orange'
+			)
+		);
+
 //
 // Icons Group
 //

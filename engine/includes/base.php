@@ -43,7 +43,7 @@ function infinity_base_features()
 	add_theme_support( 'infinity:ext', 'support' );
 	add_theme_support( 'infinity:typog', 'style' );
 	add_theme_support( 'infinity:layout', 'style' );
-	add_theme_support( 'infinity:buttons', 'style' );
+	add_theme_support( 'infinity:buttons', 'style', 'color' );
 	add_theme_support( 'infinity:design', 'style' );
 	add_theme_support( 'infinity:icons', 'style' );
 

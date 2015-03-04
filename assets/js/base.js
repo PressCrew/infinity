@@ -38,9 +38,6 @@ jQuery(document).ready(function($)
 		});
 	}
 
-	// buttons
-	$('.comment-reply-link').addClass('button');
-
 	// add a new grid class for register page
 	$('.register #content').addClass('column sixteen');
 
@@ -69,6 +66,9 @@ jQuery(document).ready(function($)
 
 	// initial hover effects
 	infinity_theme_overlay();
+
+	// buttons styling and color
+	infinity_theme_buttons( infinity_base.button_color );
 });
 
 // make the sidebar and content area the same size
@@ -92,4 +92,29 @@ function infinity_theme_overlay()
 	}, function() {
 		jQuery(this).parent('.post-thumb').find('img').stop().animate({opacity : 1}, 200);
 	});
+}
+
+function infinity_theme_buttons( button_color )
+{
+	var
+		selExcl =
+			'#previous-next, #upload, div.submit, div.reply, #groups_search_submit',
+		selButton =
+			'.bp-primary-action, div.group-button, .generic-button .acomment-reply, div.not_friends, ' +
+			'.bp-secondary-action, .view-post, .comment-reply-link, input[type="submit"], .submit, ' +
+			'#item-buttons .generic-button, #aw-whats-new-submit, .activity-comments submit, #upload',
+		selWhite =
+			'.bp-primary-action, div.group-button, .generic-button .acomment-reply, div.not_friends, ' +
+			'.bp-secondary-action, .view-post, .comment-reply-link, div.pending, .dir-list .group-button, ' +
+			'.dir-list .friendship-button',
+		selColor =
+			'.standard-form .button, .not_friends, .group-button, .dir-form .button, .not-following, ' +
+			'#item-buttons .group-button, #bp-create-doc-button, input[type="submit"], .submit, ' +
+			'#item-buttons .generic-button, #aw-whats-new-submit, .activity-comments submit',
+		selColorExcl =
+			selExcl + ', div.pending, .dir-list .group-button, .dir-list .friendship-button';
+
+	jQuery(selButton).not(selExcl).addClass('button');
+	jQuery(selWhite).not(selExcl).addClass('white');
+	jQuery(selColor).not(selColorExcl).addClass(button_color);
 }

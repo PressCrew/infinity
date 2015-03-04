@@ -201,3 +201,32 @@ function infinity_sidebar_left_fallback()
 	}
 }
 add_action( 'open_body', 'infinity_sidebar_left_fallback' );
+
+/**
+ * Action callback for localizing scripts that are enqueued in the footer.
+ *
+ * @package Infinity
+ * @subpackage base
+ */
+function infinity_localize_footer_scripts()
+{
+	// data to pass to localizer
+	$base_script = array(
+		'button_color' => 'orange'
+	);
+
+	// is custom colors enabled
+	if ( current_theme_supports( 'infinity:buttons', 'color' ) ) {
+		// get button color
+		$btn_color = infinity_option_get( 'buttons:custom-color' );
+		// did we get a color?
+		if ( false === empty( $btn_color ) ) {
+			// yep, override it
+			$base_script[ 'button_color' ] = $btn_color;
+		}
+	}
+
+	// call localizer
+	wp_localize_script( 'feature_base_script', 'infinity_base', $base_script );
+}
+add_action( 'wp_print_footer_scripts', 'infinity_localize_footer_scripts', 9 );
