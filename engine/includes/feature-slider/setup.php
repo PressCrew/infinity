@@ -3,44 +3,43 @@
 /**
  * Register custom "Features" post type
  */
-function cbox_theme_feature_setup()
+function infinity_slider_register_post_type()
 {
-	// Don't register post type if slider is not in post type mode
-	if ( infinity_slider_mode() !== 1 ) {
-		return;
+	// only register post type if slider is in post type mode
+	if ( infinity_slider_mode() === 2 ) {
+
+		$labels = array(
+			'name'               => _x( 'Featured Slider', 'post type general name', 'infinity' ),
+			'singular_name'      => _x( 'Featured Slide', 'post type singular name', 'infinity' ),
+			'all_items'          => _x( 'All Slides', 'infinity' ),
+			'add_new'            => _x( 'Add Slide', 'infobox', 'infinity' ),
+			'add_new_item'       => __( 'Add Slide', 'infinity' ),
+			'edit_item'          => __( 'Edit Slide', 'infinity' ),
+			'new_item'           => __( 'New Slide', 'infinity' ),
+			'search_items'       => __( 'Search slides', 'infinity' ),
+			'not_found'          => __( 'No slides found', 'infinity' ),
+			'not_found_in_trash' => __( 'No slides found in trash', 'infinity' ),
+			'parent_item_colon'  => ''
+		);
+
+		$args = array(
+			'labels'             => $labels,
+			'public'             => true,
+			'publicly_queryable' => true,
+			'show_ui'            => true,
+			'query_var'          => true,
+			'rewrite'            => true,
+			'capability_type'    => 'post',
+			'hierarchical'       => false,
+			'menu_position'      => null,
+			'menu_icon'          => infinity_image_url( 'slides-icon.png' ),
+			'supports'           => array( 'title', 'editor', 'thumbnail' )
+		);
+
+		register_post_type( 'features', $args );
 	}
-
-	$labels = array(
-		'name'               => _x( 'Featured Slider', 'post type general name', 'infinity' ),
-		'singular_name'      => _x( 'Featured Slide', 'post type singular name', 'infinity' ),
-		'all_items'          => _x( 'All Slides', 'infinity' ),
-		'add_new'            => _x( 'Add Slide', 'infobox', 'infinity' ),
-		'add_new_item'       => __( 'Add Slide', 'infinity' ),
-		'edit_item'          => __( 'Edit Slide', 'infinity' ),
-		'new_item'           => __( 'New Slide', 'infinity' ),
-		'search_items'       => __( 'Search slides', 'infinity' ),
-		'not_found'          => __( 'No slides found', 'infinity' ),
-		'not_found_in_trash' => __( 'No slides found in trash', 'infinity' ),
-		'parent_item_colon'  => ''
-	);
-
-	$args = array(
-		'labels'             => $labels,
-		'public'             => true,
-		'publicly_queryable' => true,
-		'show_ui'            => true,
-		'query_var'          => true,
-		'rewrite'            => true,
-		'capability_type'    => 'post',
-		'hierarchical'       => false,
-		'menu_position'      => null,
-		'menu_icon'          => infinity_image_url( 'slides-icon.png' ),
-		'supports'           => array( 'title', 'editor', 'thumbnail' )
-	);
-
-	register_post_type( 'features', $args );
 }
-add_action( 'after_setup_theme', 'cbox_theme_feature_setup', 101 );
+add_action( 'after_setup_theme', 'infinity_slider_register_post_type', 101 );
 
 add_filter( 'cmb_meta_boxes', 'cmb_sample_metaboxes' );
 /**
