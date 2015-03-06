@@ -10,7 +10,7 @@
  */
 infinity_get_header();
 
-$slider = infinity_option_get( 'slider:mode' ) > 0;
+$slider = infinity_slider_is_enabled();
 ?>
 <div id="content" role="main" class="column sixteen">
 	<div id="top-homepage" class="row">
