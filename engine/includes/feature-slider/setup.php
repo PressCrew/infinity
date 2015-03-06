@@ -1,13 +1,4 @@
 <?php
-/**
- * Add new Post Thumbnail size for slider
- */
-function cbox_thumb_sizes() {
-	if ( current_theme_supports( 'post-thumbnails' ) ) {
-		add_image_size( 'slider-image', 635, 344, true );
-	}
-}
-add_action( 'after_setup_theme', 'cbox_thumb_sizes', 20 );
 
 /**
  * Register custom "Features" post type
