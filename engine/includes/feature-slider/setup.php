@@ -5,10 +5,8 @@
  */
 function cbox_theme_feature_setup()
 {
-	$slider_type = (int) infinity_option_get( 'slider:mode' );
-
 	// Don't register post type if slider is not in post type mode
-	if ( $slider_type != 1 ) {
+	if ( infinity_slider_mode() !== 1 ) {
 		return;
 	}
 
@@ -53,17 +51,20 @@ add_filter( 'cmb_meta_boxes', 'cmb_sample_metaboxes' );
  */
 function cmb_sample_metaboxes( $meta_boxes = array() ) {
 
-	// Check which slider option is set
-	$slider_type = (int) infinity_option_get( 'slider:mode' );
-
-	// Show meta boxes only on Features post type
-	if ( $slider_type == 1 ) {
-		$cbox_slider_type = 'features';
-	}
-	// Or show them on all posts when a Featured Category is used for the slider
-	if ( $slider_type == 2 ) {
-		$cbox_slider_type = 'post';
-		add_action( 'admin_footer', 'cbox_featured_post_admin_footer' );
+	// determine when to show metaboxes
+	switch( infinity_slider_mode() ) {	
+		// show only on 'features' post type
+		case 1:
+			$cbox_slider_type = 'features';
+			break;
+		// show them on all posts when a category is used for the slider
+		case 2:
+			$cbox_slider_type = 'post';
+			add_action( 'admin_footer', 'cbox_featured_post_admin_footer' );
+			break;
+		// don't show metaboxes
+		default:
+			return;
 	}
 
 	// Start with an underscore to hide fields from custom fields list
@@ -234,6 +235,28 @@ function cbox_featured_post_admin_footer() {
 }
 
 /**
+ * Return the value of the slider mode.
+ *
+ * @staticvar boolean $mode Cached value of mode setting.
+ * @param boolean $force Set to true to bypass cached value of mode and get live option setting.
+ * @return integer
+ */
+function infinity_slider_mode( $force = false )
+{
+	// mode is null by default
+	static $mode = null;
+
+	// is mode null?
+	if ( null === $mode || true === $force ) {
+		// yep, get the setting
+		$mode = (integer) infinity_option_get( 'slider:mode' );
+	}
+
+	// return mode
+	return $mode;
+}
+
+/**
  * Returns true if slider theme support is enabled and slider mode is set to a display option.
  *
  * @return boolean
@@ -242,10 +265,8 @@ function infinity_slider_is_enabled()
 {
 	// is slider support on?
 	if ( true === current_theme_supports( 'infinity:slider' ) ) {
-		// it's supported, get slider mode
-		$mode = infinity_option_get( 'slider:mode' );
-		// check mode value
-		return ( true === is_numeric( $mode ) && (int) $mode >= 1 );
+		// check slider mode value
+		return ( infinity_slider_mode() >= 1 );
 	}
 
 	// slider not enabled

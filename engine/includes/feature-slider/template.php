@@ -17,7 +17,7 @@
 <?php
 
 // slider type
-$slider_type = (int) infinity_option_get( 'slider:mode' );
+$slider_mode = infinity_slider_mode();
 
 //slider sizes
 $sliderheight = infinity_option_get( 'slider:height' );
@@ -40,14 +40,14 @@ if ( ! empty( $posts_per_page ) ) {
 }
 
 // site features
-if ( $slider_type == 1 ) {
+if ( $slider_mode == 1 ) {
 	$query_args['post_type'] = 'features';
 
 	$no_slider_text = __( 'Did you know you can easily add introduction slides to your homepage? Simply visit your admin panel and add a new <strong>Featured Slide</strong>.', 'cbox-theme' );
 }
 
 // post category
-if ( $slider_type == 2 ) {
+if ( $slider_mode == 2 ) {
 	$cat_id = infinity_option_get( 'slider:category' );
 	$cat    = get_category( $cat_id );
 
