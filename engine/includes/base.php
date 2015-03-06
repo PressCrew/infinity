@@ -61,7 +61,8 @@ function infinity_base_features()
 	add_theme_support( 'infinity:footer', 'layout' );
 	add_theme_support( 'infinity:widget', 'layout' );
 	add_theme_support( 'infinity:custom', 'css' );
-	
+	add_theme_support( 'infinity:slider', 'features', 'category' );
+
 	// BuddyPress
 	add_theme_support( 'infinity:bp', 'support', 'style', 'sidebar-setup' );
 	add_theme_support( 'infinity:bp-plugins', 'support', 'style' );
@@ -84,30 +85,11 @@ function infinity_base_assets()
 		)
 	);
 
-	// bxslider styles
-	ice_register_style(
-		'bxslider',
-		array(
-			'src' => INFINITY_THEME_URL . '/assets/css/bxslider/jquery.bxslider.css',
-			'condition' => 'is_not_admin'
-		)
-	);
-
 	// superfish script
 	ice_register_script(
 		'superfish',
 		array(
 			'src' => INFINITY_THEME_URL . '/assets/js/superfish.js',
-			'in_footer' => true,
-			'condition' => 'is_not_admin'
-		)
-	);
-
-	// bxslider script
-	ice_register_script(
-		'bxslider',
-		array(
-			'src' => INFINITY_THEME_URL . '/assets/js/jquery.bxslider.min.js',
 			'in_footer' => true,
 			'condition' => 'is_not_admin'
 		)

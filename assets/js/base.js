@@ -69,6 +69,11 @@ jQuery(document).ready(function($)
 
 	// buttons styling and color
 	infinity_theme_buttons( infinity_base.button_color );
+
+	// slider initialization
+	if ( typeof infinity_slider_options !== 'undefined' ) {
+		infinity_slider_init( '.slides', infinity_slider_options );
+	}
 });
 
 // make the sidebar and content area the same size
@@ -117,4 +122,9 @@ function infinity_theme_buttons( button_color )
 	jQuery(selButton).not(selExcl).addClass('button');
 	jQuery(selWhite).not(selExcl).addClass('white');
 	jQuery(selColor).not(selColorExcl).addClass(button_color);
+}
+
+function infinity_slider_init( selector, options )
+{
+	jQuery( selector ).bxSlider( options );
 }

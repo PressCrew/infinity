@@ -14,7 +14,7 @@ add_action( 'after_setup_theme', 'cbox_thumb_sizes', 20 );
  */
 function cbox_theme_feature_setup()
 {
-	$slider_type = (int) infinity_option_get( 'cbox:cbox-flex-slider' );
+	$slider_type = (int) infinity_option_get( 'slider:mode' );
 
 	// Don't register post type if slider is not in post type mode
 	if ( $slider_type != 1 ) {
@@ -63,7 +63,7 @@ add_filter( 'cmb_meta_boxes', 'cmb_sample_metaboxes' );
 function cmb_sample_metaboxes( $meta_boxes = array() ) {
 
 	// Check which slider option is set
-	$slider_type = (int) infinity_option_get( 'cbox:cbox-flex-slider' );
+	$slider_type = (int) infinity_option_get( 'slider:mode' );
 
 	// Show meta boxes only on Features post type
 	if ( $slider_type == 1 ) {
@@ -196,34 +196,6 @@ add_filter('manage_features_posts_columns', 'cbox_site_features_column', 10);
 add_action('manage_features_posts_custom_column', 'cbox_site_features_column_content', 10, 2);
 
 /**
- * Enqueues Slider JS at the bottom of the homepage
- */
-function cbox_theme_flex_slider_script()
-{
-	if ( is_page_template('homepage-template.php') ) {
-		// render script tag ?>
-		<script type="text/javascript">
-			jQuery(document).ready(function(){
-
-				jQuery('.slides').bxSlider({
-					adaptiveHeight: true,
-					auto: true,
-	  				autoHover: true,
-					mode: 'fade',
-					video: true,
-	  				useCSS: false,
-	  				controls: false,
-	  				pause : <?php echo infinity_option_get( 'cbox:cbox-flex-slider-time' ); ?>,
-	  				speed: <?php echo infinity_option_get( 'cbox:cbox-flex-slider-transition' ); ?>
-				});
-
-			});
-		</script><?php
-	}
-}
-add_action( 'close_body', 'cbox_theme_flex_slider_script' );
-
-/**
  * Add inline JS to toggle "Slide Options" metabox on a "Post" admin page.
  *
  * When the slider's featured category is checked in the "Post" admin page,
@@ -239,7 +211,7 @@ function cbox_featured_post_admin_footer() {
 		case 'post-new.php' :
 		case 'post.php' :
 
-		$cat_id = infinity_option_get( 'cbox:cbox-flex-slider-category' );
+		$cat_id = infinity_option_get( 'slider:category' );
 	?>
 
 <script type="text/javascript">
@@ -269,3 +241,120 @@ function cbox_featured_post_admin_footer() {
 			break;
 	}
 }
+
+/**
+ * Returns true if slider theme support is enabled and slider mode is set to a display option.
+ *
+ * @return boolean
+ */
+function infinity_slider_is_enabled()
+{
+	// is slider support on?
+	if ( true === current_theme_supports( 'infinity:slider' ) ) {
+		// it's supported, get slider mode
+		$mode = infinity_option_get( 'slider:mode' );
+		// check mode value
+		return ( true === is_numeric( $mode ) && (int) $mode >= 1 );
+	}
+
+	// slider not enabled
+	return false;
+}
+
+/**
+ * Returns true if slider is enabled and the current page is using the slider template.
+ *
+ * @return boolean
+ */
+function infinity_slider_is_on_page()
+{
+	return (
+		true === infinity_slider_is_enabled() &&
+		true === is_page_template( 'homepage-template.php' )
+	);
+}
+
+/**
+ * Register slider assets
+ */
+function infinity_slider_register_assets()
+{
+	// bxslider styles
+	ice_register_style(
+		'bxslider',
+		array(
+			'src' => INFINITY_THEME_URL . '/assets/css/bxslider/jquery.bxslider.css',
+			'condition' => 'infinity_slider_is_on_page'
+		)
+	);
+
+	// bxslider script
+	ice_register_script(
+		'bxslider',
+		array(
+			'src' => INFINITY_THEME_URL . '/assets/js/jquery.bxslider.min.js',
+			'in_footer' => true,
+			'condition' => 'infinity_slider_is_on_page'
+		)
+	);
+}
+add_action( 'after_setup_theme', 'infinity_slider_register_assets', 11 );
+
+/**
+ * Action callback for localizing bxslider script in the footer.
+ *
+ * @package Infinity
+ * @subpackage base
+ */
+function infinity_localize_slider_script()
+{
+	// is slider enabled?
+	if ( true === infinity_slider_is_enabled() ) {
+
+		// options to convert to JS object
+		$options = array(
+			'adaptiveHeight' => true,
+			'auto' => true,
+			'autoHover' => true,
+			'mode' => 'fade',
+			'video' => true,
+			'useCSS' => false,
+			'controls' => false,
+			'pause' =>  5000,
+			'speed' => 600
+		);
+
+		// get time option
+		$time = infinity_option_get( 'slider:time' );
+
+		// did we get a time?
+		if ( false === empty( $time ) ) {
+			// yep, override it
+			$options[ 'pause' ] = $time;
+		}
+
+		// get transition option
+		$trans = infinity_option_get( 'slider:transition' );
+
+		// did we get a transition?
+		if ( false === empty( $trans ) ) {
+			// yep, override it
+			$options[ 'speed' ] = $trans;
+		}
+
+		// pass through filter
+		$options_final = apply_filters( 'infinity_localize_slider_script_options', $options );
+
+		// new script object
+		$script = new ICE_Script();
+
+		// create logic helper and add our variable
+		$script
+			->logic( 'vars' )
+			->add_variable( 'infinity_slider_options', (object) $options_final );
+		
+		// spit it out
+		$script->render( true );
+	}
+}
+add_action( 'wp_print_footer_scripts', 'infinity_localize_slider_script', 9 );
