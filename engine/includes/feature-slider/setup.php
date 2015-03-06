@@ -297,7 +297,7 @@ add_action( 'after_setup_theme', 'infinity_slider_register_assets', 11 );
  * @package Infinity
  * @subpackage base
  */
-function infinity_localize_slider_script()
+function infinity_slider_localize_script()
 {
 	// is slider enabled?
 	if ( true === infinity_slider_is_enabled() ) {
@@ -334,7 +334,7 @@ function infinity_localize_slider_script()
 		}
 
 		// pass through filter
-		$options_final = apply_filters( 'infinity_localize_slider_script_options', $options );
+		$options_final = apply_filters( 'infinity_slider_localize_script_options', $options );
 
 		// new script object
 		$script = new ICE_Script();
@@ -348,4 +348,4 @@ function infinity_localize_slider_script()
 		$script->render( true );
 	}
 }
-add_action( 'wp_print_footer_scripts', 'infinity_localize_slider_script', 9 );
+add_action( 'wp_print_footer_scripts', 'infinity_slider_localize_script', 9 );
