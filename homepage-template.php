@@ -8,9 +8,11 @@
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
  * @since 1.0
  */
-infinity_get_header();
+
+get_header();
 
 $slider = infinity_slider_is_enabled();
+
 ?>
 <div id="content" role="main" class="column sixteen">
 	<div id="top-homepage" class="row">
@@ -64,7 +66,6 @@ $slider = infinity_slider_is_enabled();
         do_action( 'close_home' );
         do_action( 'close_content' );
     ?>
-</div>
-<?php
-    infinity_get_footer();
-?>
+</div><?php
+
+get_footer();
