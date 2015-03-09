@@ -6,7 +6,7 @@
 function infinity_slider_register_post_type()
 {
 	// only register post type if slider is in post type mode
-	if ( infinity_slider_mode() === 2 ) {
+	if ( infinity_slider_mode() === 1 ) {
 
 		$labels = array(
 			'name'               => _x( 'Featured Slider', 'post type general name', 'infinity' ),
