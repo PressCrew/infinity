@@ -41,55 +41,50 @@ function infinity_slider_register_post_type()
 }
 add_action( 'after_setup_theme', 'infinity_slider_register_post_type', 101 );
 
-add_filter( 'cmb_meta_boxes', 'cmb_sample_metaboxes' );
 /**
  * Define the metabox and field configurations.
  *
  * @param  array $meta_boxes
  * @return array
  */
-function cmb_sample_metaboxes( $meta_boxes = array() ) {
+function infinity_slider_register_metaboxes( $meta_boxes = array() ) {
 
 	// determine when to show metaboxes
 	switch( infinity_slider_mode() ) {	
 		// show only on 'features' post type
 		case 1:
-			$cbox_slider_type = 'features';
+			$slider_type = 'features';
 			break;
 		// show them on all posts when a category is used for the slider
 		case 2:
-			$cbox_slider_type = 'post';
-			add_action( 'admin_footer', 'cbox_featured_post_admin_footer' );
+			$slider_type = 'post';
 			break;
 		// don't show metaboxes
 		default:
 			return;
 	}
 
-	// Start with an underscore to hide fields from custom fields list
-	$prefix = '_cbox_';
-
 	$meta_boxes[] = array(
-		'id'         => 'cbox_slider_options',
-		'title'      => __( 'Slide Options', 'cbox-theme' ),
-		'pages'      => array( $cbox_slider_type ), // Post type
+		'id'         => 'infinity_slider_general_options',
+		'title'      => __( 'Slide Options', 'infinity' ),
+		'pages'      => array( $slider_type ), // Post type
 		'context'    => 'normal',
 		'priority'   => 'high',
 		'show_names' => true, // Show field names on the left
 		'fields'     => array(
 			array(
-				'name' => __( 'Slide Caption', 'cbox-theme' ),
-				'desc' => __( 'Write down the text you would like to display in the slider. You can leave this empty if you want to show an excerpt of the post you have written above.', 'cbox-theme' ),
-				'id'   => $prefix . 'slider_excerpt',
+				'name' => __( 'Slide Caption', 'infinity' ),
+				'desc' => __( 'Write down the text you would like to display in the slider. You can leave this empty if you want to show an excerpt of the post you have written above.', 'infinity' ),
+				'id'   => INFINITY_META_KEY_PREFIX . 'slider_excerpt',
 				'type' => 'wysiwyg',
 					'options' => array(
 					    'media_buttons' => false, // show insert/upload button(s)
 					),
 			),
 			array(
-				'name'    => __( 'Hide Caption?', 'cbox-theme' ),
-				'desc'    => __( 'Do you want to completely hide the caption for this slide? This will only display your slide image', 'cbox-theme' ),
-				'id'      => $prefix . 'hide_caption',
+				'name'    => __( 'Hide Caption?', 'infinity' ),
+				'desc'    => __( 'Do you want to completely hide the caption for this slide? This will only display your slide image', 'infinity' ),
+				'id'      => INFINITY_META_KEY_PREFIX . 'slider_hide_caption',
 				'type'    => 'radio_inline',
 				'std' => 'no',
 				'options' => array(
@@ -98,9 +93,9 @@ function cmb_sample_metaboxes( $meta_boxes = array() ) {
 				),
 			),
 			array(
-				'name' => __( 'Custom URL', 'cbox-theme' ),
-				'desc' => __( 'The full URL you would like the slide to point to. Example: http://www.google.com.  Leave this blank to use the regular slider post permalink.', 'cbox-theme' ),
-				'id'   => $prefix . 'custom_url',
+				'name' => __( 'Custom URL', 'infinity' ),
+				'desc' => __( 'The full URL you would like the slide to point to. Example: http://www.google.com.  Leave this blank to use the regular slider post permalink.', 'infinity' ),
+				'id'   => INFINITY_META_KEY_PREFIX . 'slider_custom_url',
 				'type' => 'text',
 			),
 		),
@@ -108,17 +103,17 @@ function cmb_sample_metaboxes( $meta_boxes = array() ) {
 
 	// Add other metaboxes as needed
 	$meta_boxes[] = array(
-			'id'         => 'cbox_video_options',
-			'title'      => __( 'Video Options', 'cbox-theme' ),
-			'pages'      => array( $cbox_slider_type ), // Post type
+			'id'         => 'infinity_slider_video_options',
+			'title'      => __( 'Video Options', 'infinity' ),
+			'pages'      => array( $slider_type ), // Post type
 			'context'    => 'normal',
 			'priority'   => 'high',
 			'show_names' => true, // Show field names on the left
 			'fields' => array(
 				array(
-					'name'    => __( 'Embed a Video?', 'cbox-theme' ),
-					'desc'    => __( 'Do you want to display a video inside your slide? Note: The video will replace your caption text and slide image.', 'cbox-theme' ),
-					'id'      => $prefix . 'enable_custom_video',
+					'name'    => __( 'Embed a Video?', 'infinity' ),
+					'desc'    => __( 'Do you want to display a video inside your slide? Note: The video will replace your caption text and slide image.', 'infinity' ),
+					'id'      => INFINITY_META_KEY_PREFIX . 'slider_video_enable',
 					'type'    => 'radio_inline',
 					'std' => 'no',
 					'options' => array(
@@ -127,9 +122,9 @@ function cmb_sample_metaboxes( $meta_boxes = array() ) {
 					),
 				),
 				array(
-					'name' => __( 'Video URL', 'cbox-theme' ),
-					'desc' => __( 'Enter a Youtube or Vimeo URL. example: http://www.youtube.com/watch?v=iMuFYnvSsZg', 'cbox-theme' ),
-					'id'   => $prefix . 'video_url',
+					'name' => __( 'Video URL', 'infinity' ),
+					'desc' => __( 'Enter a Youtube or Vimeo URL. example: http://www.youtube.com/watch?v=iMuFYnvSsZg', 'infinity' ),
+					'id'   => INFINITY_META_KEY_PREFIX . 'slider_video_url',
 					'type' => 'oembed',
 				),
 			)
@@ -137,6 +132,7 @@ function cmb_sample_metaboxes( $meta_boxes = array() ) {
 
 	return $meta_boxes;
 }
+add_filter( 'cmb_meta_boxes', 'infinity_slider_register_metaboxes' );
 
 /**
  * Fetch slide image to show on the Site Features index
@@ -154,7 +150,7 @@ function cbox_get_featured_slide( $post_ID ) {
  * Add new column to the Site Features index
  */
 function cbox_site_features_column( $defaults ) {
-	$defaults['featured_image'] = __( 'Slide Image', 'cbox-theme' );
+	$defaults['featured_image'] = __( 'Slide Image', 'infinity' );
 	return $defaults;
 }
 
@@ -195,43 +191,55 @@ add_action('manage_features_posts_custom_column', 'cbox_site_features_column_con
  *
  * This is only used if the slider is set to use a post category.
  *
- * @since 1.0.7
+ * @since 1.2
  */
-function cbox_featured_post_admin_footer() {
-	switch ( $GLOBALS['hook_suffix'] ) {
-		case 'post-new.php' :
-		case 'post.php' :
-
-		$cat_id = infinity_option_get( 'slider:category' );
-	?>
-
-<script type="text/javascript">
-//<![CDATA[
-	jQuery(function($) {
-		function cbox_toggle_metaboxes() {
-			$('#cbox_slider_options, #cbox_video_options').hide();
-
-			$('#categorychecklist input[type="checkbox"]').each(function(i,e){
-				var id = $(this).attr('id').match(/-([0-9]*)$/i);
-				id = (id && id[1]) ? parseInt(id[1]) : null ;
-
-				if ($.inArray(id, [<?php echo $cat_id; ?>]) > -1 && $(this).is(':checked')) {
-					$('#cbox_slider_options, #cbox_video_options').show();
-				}
-			});
+function infinity_slider_admin_footer_script()
+{
+	// is slider mode set to category?
+	if ( 2 === infinity_slider_mode() ) {
+		// switch on hook suffix
+		switch ( $GLOBALS['hook_suffix'] ) {
+			// post edit screens
+			case 'post-new.php' :
+			case 'post.php' :
+				// get category id set in slider options
+				$cat_id = infinity_option_get( 'slider:category' );
+				break;
+			// every other screen
+			default:
+				// bail
+				return;
 		}
-
-		$('#taxonomy-category').on( 'click', '#categorychecklist input[type="checkbox"]', cbox_toggle_metaboxes );
-
-		cbox_toggle_metaboxes();
-	});
-//]]>
-</script>
-
-	<?php
-			break;
+	} else {
+		// other slider mode, bail
+		return;
 	}
+
+	// render the embedded footer script ?>
+	<script type="text/javascript">
+	//<![CDATA[
+		jQuery(function($) {
+			function infinity_slider_toggle_metaboxes() {
+				$('#infinity_slider_general_options, #infinity_slider_video_options').hide();
+
+				$('#categorychecklist input[type="checkbox"]').each(function(i,e){
+					var id = $(this).attr('id').match(/-([0-9]*)$/i);
+					id = (id && id[1]) ? parseInt(id[1]) : null ;
+
+					if ($.inArray(id, [<?php echo $cat_id; ?>]) > -1 && $(this).is(':checked')) {
+						$('#infinity_slider_general_options, #infinity_slider_video_options').show();
+					}
+				});
+			}
+
+			$('#taxonomy-category').on( 'click', '#categorychecklist input[type="checkbox"]', infinity_slider_toggle_metaboxes );
+
+			infinity_slider_toggle_metaboxes();
+		});
+	//]]>
+	</script><?php
 }
+add_action( 'admin_footer', 'infinity_slider_admin_footer_script' );
 
 /**
  * Return the value of the slider mode.
@@ -369,3 +377,33 @@ function infinity_slider_localize_script()
 	}
 }
 add_action( 'wp_print_footer_scripts', 'infinity_slider_localize_script', 9 );
+
+/**
+ * Rename all deprecated slider postmeta keys known to exist for older theme versions.
+ *
+ * @global wpdb $wpdb
+ */
+function infinity_slider_compat_postmeta_keys()
+{
+	global $wpdb;
+
+	// build up old => new key names map
+	$keymap = array(
+		'_cbox_custom_url' => INFINITY_META_KEY_PREFIX . 'slider_custom_url',
+		'_cbox_hide_caption' => INFINITY_META_KEY_PREFIX . 'slider_hide_caption',
+		'_cbox_slider_excerpt' => INFINITY_META_KEY_PREFIX . 'slider_excerpt',
+		'_cbox_enable_custom_video' => INFINITY_META_KEY_PREFIX . 'slider_video_enable',
+		'_cbox_video_url' => INFINITY_META_KEY_PREFIX . 'slider_video_url'
+	);
+
+	// loop the key map
+	foreach( $keymap as $old_key => $new_key ) {
+		// update every row matching old key with new key
+		$wpdb->update(
+			$wpdb->postmeta,
+			array( 'meta_key' => $new_key ),
+			array( 'meta_key' => $old_key )
+		);
+	}
+}
+add_action( 'infinity_dashboard_activated', 'infinity_slider_compat_postmeta_keys' );

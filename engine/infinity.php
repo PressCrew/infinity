@@ -55,6 +55,13 @@ if ( !defined( 'INFINITY_NAME' ) ) {
 }
 
 /**
+ * Infinity post meta key prefix
+ */
+if ( !defined( 'INFINITY_META_KEY_PREFIX' ) ) {
+	define( 'INFINITY_META_KEY_PREFIX', '_infinity_' );
+}
+
+/**
  * Infinity theme directory path
  */
 define( 'INFINITY_THEME_PATH', realpath( get_theme_root( INFINITY_NAME ) . '/' . INFINITY_NAME ) );

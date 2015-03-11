@@ -43,7 +43,7 @@ if ( ! empty( $posts_per_page ) ) {
 if ( $slider_mode == 1 ) {
 	$query_args['post_type'] = 'features';
 
-	$no_slider_text = __( 'Did you know you can easily add introduction slides to your homepage? Simply visit your admin panel and add a new <strong>Featured Slide</strong>.', 'cbox-theme' );
+	$no_slider_text = __( 'Did you know you can easily add introduction slides to your homepage? Simply visit your admin panel and add a new <strong>Featured Slide</strong>.', 'infinity' );
 }
 
 // post category
@@ -53,7 +53,7 @@ if ( $slider_mode == 2 ) {
 
 	$query_args['cat'] = $cat_id;
 
-	$no_slider_text = sprintf( __( 'Did you know you can easily add introduction slides to your homepage? Simply visit your admin panel and add a new post in the <strong>%s</strong> category.', 'cbox-theme' ), $cat->name );
+	$no_slider_text = sprintf( __( 'Did you know you can easily add introduction slides to your homepage? Simply visit your admin panel and add a new post in the <strong>%s</strong> category.', 'infinity' ), $cat->name );
 }
 
 // setup the slider query
@@ -72,7 +72,7 @@ if( $slider_query->have_posts() ) :
 		$slider_query->the_post();
 
 		// slide URL
-		$slide_url = get_post_meta( $post->ID, '_cbox_custom_url', true );
+		$slide_url = get_post_meta( $post->ID,  INFINITY_META_KEY_PREFIX . 'slider_custom_url', true );
 		if ( empty( $slide_url ) ) {
 			$slide_url = get_permalink();
 		} else {
@@ -80,16 +80,16 @@ if( $slider_query->have_posts() ) :
 		}
 
 		// caption
-		$hide_caption = get_post_meta( $post->ID, '_cbox_hide_caption', true );
+		$hide_caption = get_post_meta( $post->ID, INFINITY_META_KEY_PREFIX . 'slider_hide_caption', true );
 		if ( ! $hide_caption ) { $hide_caption = "no"; }
 
-		$slider_excerpt = wpautop( get_post_meta( get_the_ID(), $prefix . '_cbox_slider_excerpt', true ) );
+		$slider_excerpt = wpautop( get_post_meta( get_the_ID(), INFINITY_META_KEY_PREFIX . 'slider_excerpt', true ) );
 		if ( empty( $slider_excerpt ) ) {
 			$slider_excerpt = apply_filters( 'the_content', cbox_create_excerpt( get_the_content() ) );
 		}
 
 		// video
-		$video_value = get_post_meta( $post->ID, '_cbox_enable_custom_video', true);
+		$video_value = get_post_meta( $post->ID, INFINITY_META_KEY_PREFIX . 'slider_video_enable', true);
 		if ( ! $video_value ) { $video_value = "no"; }
 
 ?>
@@ -117,14 +117,14 @@ if( $slider_query->have_posts() ) :
 		</li>
 	<?php elseif ( $video_value == "yes" ): /* Display a video if one has been set */ ?>
 		<li class="slide-video-embed">
-			<?php echo apply_filters( 'the_content', get_post_meta( get_the_ID(), $prefix . '_cbox_video_url', true ) ); ?>
+			<?php echo apply_filters( 'the_content', get_post_meta( get_the_ID(), INFINITY_META_KEY_PREFIX . 'slider_video_url', true ) ); ?>
 		</li>
 	<?php /* Fallback to default slide if no features are present */ else :?>
 
 		<li>
 			<img src="<?php echo $no_slides_url ?>" width="<?php echo esc_attr( $sliderwidth ) ?>" height="319" alt="" style="height:319px;" />
 				<div class="flex-caption">
-					<h3><?php _e( 'No slides added yet!', 'cbox-theme' ); ?></h3>
+					<h3><?php _e( 'No slides added yet!', 'infinity' ); ?></h3>
 					<p><?php echo $no_slider_text; ?></p>
 				</div>
 		</li>
@@ -141,7 +141,7 @@ else:
 			<img src="<?php echo $no_slides_url ?>" width="<?php echo esc_attr( $sliderwidth ) ?>" height="319" alt="" style="height:319px;" />
 
 			<div class="flex-caption">
-				<h3><?php _e( 'No slides added yet!', 'cbox-theme' ); ?></h3>
+				<h3><?php _e( 'No slides added yet!', 'infinity' ); ?></h3>
 				<p><?php echo $no_slider_text; ?></p>
 			</div>
 		</li>
