@@ -1222,7 +1222,7 @@ ice_register_group( 'custom' );
 //
 ice_register_group( 'slider' );
 
-	// Slider post_type='features' support
+	// Slider post_type='infinity_slider' support
 	ice_register_feature(
 		array(
 			'name' => 'custom',

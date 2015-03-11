@@ -42,7 +42,7 @@ if ( ! empty( $posts_per_page ) ) {
 
 // site features
 if ( $slider_mode == 1 ) {
-	$query_args['post_type'] = 'features';
+	$query_args['post_type'] = 'infinity_slider';
 
 	$no_slider_text = __( 'Did you know you can easily add introduction slides to your homepage? Simply visit your admin panel and add a new <strong>Custom Slide</strong>.', 'infinity' );
 }

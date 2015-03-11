@@ -5,41 +5,49 @@
  */
 function infinity_slider_register_post_type()
 {
-	// only register post type if slider is in post type mode
+	$labels = array(
+		'name'               => _x( 'Custom Slides', 'post type general name', 'infinity' ),
+		'singular_name'      => _x( 'Custom Slide', 'post type singular name', 'infinity' ),
+		'all_items'          => __( 'All Slides', 'infinity' ),
+		'add_new'            => __( 'Add Slide', 'infinity' ),
+		'add_new_item'       => __( 'Add Slide', 'infinity' ),
+		'edit_item'          => __( 'Edit Slide', 'infinity' ),
+		'new_item'           => __( 'New Slide', 'infinity' ),
+		'search_items'       => __( 'Search slides', 'infinity' ),
+		'not_found'          => __( 'No slides found', 'infinity' ),
+		'not_found_in_trash' => __( 'No slides found in trash', 'infinity' ),
+		'parent_item_colon'  => ''
+	);
+
+	$args = array(
+		'labels'             => $labels,
+		'public'             => true,
+		'publicly_queryable' => true,
+		'show_ui'            => true,
+		'query_var'          => true,
+		'rewrite'            => array( 'slug' => 'slide' ),
+		'capability_type'    => 'post',
+		'hierarchical'       => false,
+		'menu_position'      => null,
+		'menu_icon'          => infinity_image_url( 'slider/icon.png' ),
+		'supports'           => array( 'title', 'editor', 'thumbnail' )
+	);
+
+	register_post_type( 'infinity_slider', $args );
+}
+
+/**
+ * Setup custom post type for the slider.
+ */
+function infinity_slider_setup_post_type()
+{
+	// is slider in post type mode?
 	if ( infinity_slider_mode() === 1 ) {
-
-		$labels = array(
-			'name'               => _x( 'Custom Slides', 'post type general name', 'infinity' ),
-			'singular_name'      => _x( 'Custom Slide', 'post type singular name', 'infinity' ),
-			'all_items'          => __( 'All Slides', 'infinity' ),
-			'add_new'            => __( 'Add Slide', 'infinity' ),
-			'add_new_item'       => __( 'Add Slide', 'infinity' ),
-			'edit_item'          => __( 'Edit Slide', 'infinity' ),
-			'new_item'           => __( 'New Slide', 'infinity' ),
-			'search_items'       => __( 'Search slides', 'infinity' ),
-			'not_found'          => __( 'No slides found', 'infinity' ),
-			'not_found_in_trash' => __( 'No slides found in trash', 'infinity' ),
-			'parent_item_colon'  => ''
-		);
-
-		$args = array(
-			'labels'             => $labels,
-			'public'             => true,
-			'publicly_queryable' => true,
-			'show_ui'            => true,
-			'query_var'          => true,
-			'rewrite'            => true,
-			'capability_type'    => 'post',
-			'hierarchical'       => false,
-			'menu_position'      => null,
-			'menu_icon'          => infinity_image_url( 'slides-icon.png' ),
-			'supports'           => array( 'title', 'editor', 'thumbnail' )
-		);
-
-		register_post_type( 'features', $args );
+		// yep, register it
+		infinity_slider_register_post_type();
 	}
 }
-add_action( 'after_setup_theme', 'infinity_slider_register_post_type', 101 );
+add_action( 'after_setup_theme', 'infinity_slider_setup_post_type', 101 );
 
 /**
  * Define the metabox and field configurations.
@@ -51,9 +59,9 @@ function infinity_slider_register_metaboxes( $meta_boxes = array() ) {
 
 	// determine when to show metaboxes
 	switch( infinity_slider_mode() ) {	
-		// show only on 'features' post type
+		// show only on 'infinity_slider' post type
 		case 1:
-			$slider_type = 'features';
+			$slider_type = 'infinity_slider';
 			break;
 		// show them on all posts when a category is used for the slider
 		case 2:
@@ -175,7 +183,7 @@ function infinity_slider_custom_column_add( $columns )
 	// return it
 	return $columns;
 }
-add_filter( 'manage_features_posts_columns', 'infinity_slider_custom_column_add' );
+add_filter( 'manage_infinity_slider_posts_columns', 'infinity_slider_custom_column_add' );
 
 /**
  * Show the slide image in the new column.
@@ -196,7 +204,7 @@ function infinity_slider_custom_column_content( $column_name, $post_id )
 		}
 	}
 }
-add_action( 'manage_features_posts_custom_column', 'infinity_slider_custom_column_content', 10, 2 );
+add_action( 'manage_infinity_slider_posts_custom_column', 'infinity_slider_custom_column_content', 10, 2 );
 
 /**
  * Renames the 'Featured Image' metabox for the slider's custom post type.
@@ -207,14 +215,14 @@ add_action( 'manage_features_posts_custom_column', 'infinity_slider_custom_colum
 function infinity_slider_rename_image_metabox()
 {
 	// remove default meta box
-	remove_meta_box( 'postimagediv', 'features', 'side' );
+	remove_meta_box( 'postimagediv', 'infinity_slider', 'side' );
 	
 	// replace with our custom one
 	add_meta_box(
 		'postimagediv',
 		__( 'Slide Image' ),
 		'post_thumbnail_meta_box',
-		'features',
+		'infinity_slider',
 		'side',
 		'high'
 	);
@@ -444,3 +452,47 @@ function infinity_slider_compat_postmeta_keys()
 	}
 }
 add_action( 'infinity_dashboard_activated', 'infinity_slider_compat_postmeta_keys' );
+
+/**
+ * Rename all deprecated post types known to exist for older theme versions.
+ *
+ * @global wpdb $wpdb
+ */
+function infinity_slider_compat_post_types()
+{
+	global $wpdb;
+
+	// make sure current post type is registered
+	infinity_slider_register_post_type();
+
+	// build up old => new types map
+	$typemap = array(
+		'features' => 'infinity_slider'
+	);
+
+	// loop the type map
+	foreach( $typemap as $old_type => $new_type ) {
+
+		// get all posts of old type
+		$posts = get_posts( array(
+			'post_status' => array( 'any', 'trash', 'auto-draft' ),
+			'post_type' => $old_type
+		));
+
+		// loop all posts
+		foreach( $posts as $post ) {
+			// set the new post type
+			set_post_type( $post->ID, $new_type );
+			// fix guid field
+			$wpdb->update(
+				$wpdb->posts,
+				array( 'guid' => get_permalink( $post->ID ) ),
+				array( 'ID' => $post->ID )
+			);
+		}
+	}
+
+	// flush rewrite rules just in case
+	flush_rewrite_rules();
+}
+add_action( 'infinity_dashboard_activated', 'infinity_slider_compat_post_types' );
