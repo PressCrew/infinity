@@ -61,7 +61,7 @@ function infinity_base_features()
 	add_theme_support( 'infinity:footer', 'layout' );
 	add_theme_support( 'infinity:widget', 'layout' );
 	add_theme_support( 'infinity:custom', 'css' );
-	add_theme_support( 'infinity:slider', 'features', 'category' );
+	add_theme_support( 'infinity:slider', 'custom', 'category' );
 
 	// BuddyPress
 	add_theme_support( 'infinity:bp', 'support', 'style', 'sidebar-setup' );

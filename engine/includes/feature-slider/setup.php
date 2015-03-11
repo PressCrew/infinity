@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Register custom "Features" post type
+ * Register custom post type for the slider.
  */
 function infinity_slider_register_post_type()
 {
@@ -9,10 +9,10 @@ function infinity_slider_register_post_type()
 	if ( infinity_slider_mode() === 1 ) {
 
 		$labels = array(
-			'name'               => _x( 'Featured Slider', 'post type general name', 'infinity' ),
-			'singular_name'      => _x( 'Featured Slide', 'post type singular name', 'infinity' ),
-			'all_items'          => _x( 'All Slides', 'infinity' ),
-			'add_new'            => _x( 'Add Slide', 'infobox', 'infinity' ),
+			'name'               => _x( 'Custom Slides', 'post type general name', 'infinity' ),
+			'singular_name'      => _x( 'Custom Slide', 'post type singular name', 'infinity' ),
+			'all_items'          => __( 'All Slides', 'infinity' ),
+			'add_new'            => __( 'Add Slide', 'infinity' ),
 			'add_new_item'       => __( 'Add Slide', 'infinity' ),
 			'edit_item'          => __( 'Edit Slide', 'infinity' ),
 			'new_item'           => __( 'New Slide', 'infinity' ),
@@ -135,52 +135,91 @@ function infinity_slider_register_metaboxes( $meta_boxes = array() ) {
 add_filter( 'cmb_meta_boxes', 'infinity_slider_register_metaboxes' );
 
 /**
- * Fetch slide image to show on the Site Features index
+ * Get a slide's image url.
+ *
+ * @param integer $post_id The post id.
+ * @param string $size The size of the thumbnail to get.
+ * @return string The thumbnail url.
  */
-function cbox_get_featured_slide( $post_ID ) {
-	$post_thumbnail_id = get_post_thumbnail_id($post_ID);
+function infinity_slider_get_image_url( $post_id, $size='thumbnail' )
+{
+	// get post thumbnail id
+	$thumb_id = get_post_thumbnail_id($post_id);
 
-	if ($post_thumbnail_id){
-		$post_thumbnail_img = wp_get_attachment_image_src($post_thumbnail_id, 'width=200&height=110&crop=1&crop_from_position=center,left');
-		return $post_thumbnail_img[0];
+	// get one?
+	if ( true === is_numeric( $thumb_id ) ) {
+		// yes, get image src array
+		$thumb_img = wp_get_attachment_image_src( (int) $thumb_id, $size );
+		// get something?
+		if ( true === isset( $thumb_img[0] ) ) {
+			// yes, return it
+			return $thumb_img[0];
+		}
 	}
+
+	// not good
+	return '';
 }
 
 /**
- * Add new column to the Site Features index
- */
-function cbox_site_features_column( $defaults ) {
-	$defaults['featured_image'] = __( 'Slide Image', 'infinity' );
-	return $defaults;
-}
-
-/**
- * Renames the 'Featured Image' metabox for the 'features' post type.
+ * Add new column to the Custom Slides index.
  *
- * To rename the metabox, we actually have to remove the 'Featured Image'
- * metabox and replace it with a custom one with the same functionality.
- *
- * @since 1.0.6
+ * @param array $columns Array of columns passed by filter.
+ * @return array
  */
-function cbox_rename_featured_image_metabox() {
-	remove_meta_box( 'postimagediv', 'features', 'side' );
-	add_meta_box( 'postimagediv', __( 'Slide Image' ), 'post_thumbnail_meta_box', 'features', 'side', 'high' );
+function infinity_slider_custom_column_add( $columns )
+{
+	// add our column to the array
+	$columns[ 'infinity_slider_image' ] = __( 'Slide Image', 'infinity' );
+	
+	// return it
+	return $columns;
 }
-add_action( 'add_meta_boxes', 'cbox_rename_featured_image_metabox' );
+add_filter( 'manage_features_posts_columns', 'infinity_slider_custom_column_add' );
 
 /**
- * Show the slide image in the new column
+ * Show the slide image in the new column.
+ *
+ * @param string $column_name The name of the column being rendered.
+ * @param integer $post_id The post id of the column being rendered.
  */
-function cbox_site_features_column_content( $column_name, $post_ID ) {
-	if ($column_name == 'featured_image') {
-		$post_featured_image = cbox_get_featured_slide($post_ID);
-		if ( $post_featured_image ){
-			echo '<img src="' . $post_featured_image . '" />';
+function infinity_slider_custom_column_content( $column_name, $post_id )
+{
+	// is this our column?
+	if ( $column_name === 'infinity_slider_image' ) {
+		// yes, try to get the thumb url
+		$thumb_url = infinity_slider_get_image_url( $post_id );
+		// did we get one?
+		if ( false === empty( $thumb_url ) ) {
+			// yes, render it
+			?><img src="<?php echo $thumb_url ?>" /><?php
 		}
 	}
 }
-add_filter('manage_features_posts_columns', 'cbox_site_features_column', 10);
-add_action('manage_features_posts_custom_column', 'cbox_site_features_column_content', 10, 2);
+add_action( 'manage_features_posts_custom_column', 'infinity_slider_custom_column_content', 10, 2 );
+
+/**
+ * Renames the 'Featured Image' metabox for the slider's custom post type.
+ *
+ * To rename the metabox, we actually have to remove the 'Featured Image'
+ * metabox and replace it with a custom one with the same functionality.
+ */
+function infinity_slider_rename_image_metabox()
+{
+	// remove default meta box
+	remove_meta_box( 'postimagediv', 'features', 'side' );
+	
+	// replace with our custom one
+	add_meta_box(
+		'postimagediv',
+		__( 'Slide Image' ),
+		'post_thumbnail_meta_box',
+		'features',
+		'side',
+		'high'
+	);
+}
+add_action( 'add_meta_boxes', 'infinity_slider_rename_image_metabox' );
 
 /**
  * Add inline JS to toggle "Slide Options" metabox on a "Post" admin page.
@@ -190,8 +229,6 @@ add_action('manage_features_posts_custom_column', 'cbox_site_features_column_con
  * Options" metaboxes.
  *
  * This is only used if the slider is set to use a post category.
- *
- * @since 1.2
  */
 function infinity_slider_admin_footer_script()
 {

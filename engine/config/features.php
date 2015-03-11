@@ -1225,11 +1225,11 @@ ice_register_group( 'slider' );
 	// Slider post_type='features' support
 	ice_register_feature(
 		array(
-			'name' => 'features',
+			'name' => 'custom',
 			'group' => 'slider',
 			'type' => 'default',
-			'title' => 'Featured Slider',
-			'description' => 'Adds the Featured Slides post type for managing slide content.'
+			'title' => 'Custom Slider',
+			'description' => 'Adds a custom post type for managing slides.'
 		)
 	);
 
@@ -1258,13 +1258,13 @@ ice_register_group( 'slider' );
 				'title' => 'Slider Mode',
 				'description' =>
 					'If you enable the slider you can choose what type of content you want to display. ' .
-					'You can choose between displaying images or videos that you have added through the ' .
-					'Site Features custom post type or showing images/videos from posts from a category of your choosing. ' .
+					'You can choose between displaying images and videos that you have added through the ' .
+					'Custom Slides screen or showing images and videos from posts from a category of your choosing. ' .
 					'If you choose the latter, there are some options you can set at the bottom of this page.',
 				'field_options' => array(
 					0 => 'Do not display',
-					1 => 'Show Site Features',
-					2 => 'Show Featured Post from a Category'
+					1 => 'Show Custom Slides',
+					2 => 'Show Category'
 				),
 				'default_value' => 1
 			),
@@ -1358,8 +1358,8 @@ ice_register_group( 'slider' );
 				// 'name' => 'cbox_flex_slider_category',
 				'name' => 'category',
 				'section' => 'homepage',
-				'title' => 'Featured Slider Category',
-				'description' => 'From which category do you want to show posts? This ONLY works when your slider is set to to show Featured Posts.',
+				'title' => 'Slider Category',
+				'description' => 'From which category do you want to show posts? This ONLY works when your slider is set to Show Category.',
 				'type' => 'category'
 			),
 			$infinity_slider_options_defaults

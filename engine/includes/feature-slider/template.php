@@ -1,12 +1,13 @@
 <?php
 /**
- * Template Name: Features or Category Slider
+ * Template Name: Custom or Category Slider
  *
- * This template either displays Slides taken from the "Features" custom post type.
- * Or Loops through posts from a certain category. This is based on the theme options set by
- * the user.
+ * This template either displays Slides taken from the custom post type,
+ * or loops through posts from a certain category. This is based on the
+ * theme options set by the user.
  *
  * @author Bowe Frankema <bowe@presscrew.com>
+ * @author Marshall Sorenson <marshall@presscrew.com>
  * @link http://infinity.presscrew.com/
  * @copyright Copyright (C) 2010-2011 Bowe Frankema
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
@@ -43,7 +44,7 @@ if ( ! empty( $posts_per_page ) ) {
 if ( $slider_mode == 1 ) {
 	$query_args['post_type'] = 'features';
 
-	$no_slider_text = __( 'Did you know you can easily add introduction slides to your homepage? Simply visit your admin panel and add a new <strong>Featured Slide</strong>.', 'infinity' );
+	$no_slider_text = __( 'Did you know you can easily add introduction slides to your homepage? Simply visit your admin panel and add a new <strong>Custom Slide</strong>.', 'infinity' );
 }
 
 // post category
@@ -119,7 +120,7 @@ if( $slider_query->have_posts() ) :
 		<li class="slide-video-embed">
 			<?php echo apply_filters( 'the_content', get_post_meta( get_the_ID(), INFINITY_META_KEY_PREFIX . 'slider_video_url', true ) ); ?>
 		</li>
-	<?php /* Fallback to default slide if no features are present */ else :?>
+	<?php /* Fallback to default slide if no custom slides are present */ else :?>
 
 		<li>
 			<img src="<?php echo $no_slides_url ?>" width="<?php echo esc_attr( $sliderwidth ) ?>" height="319" alt="" style="height:319px;" />
@@ -136,7 +137,7 @@ if( $slider_query->have_posts() ) :
 else:
 ?>
 
-		<!-- Fallback to default slide if no features are present -->
+		<!-- Fallback to default slide if no custom slides are present -->
 		<li>
 			<img src="<?php echo $no_slides_url ?>" width="<?php echo esc_attr( $sliderwidth ) ?>" height="319" alt="" style="height:319px;" />
 
