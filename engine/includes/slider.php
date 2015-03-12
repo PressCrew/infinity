@@ -1,5 +1,8 @@
 <?php
 
+// load the dynamic thumb plugin
+require_once ICE_LIB_PATH . '/otf_regen_thumbs.php';
+
 /**
  * Register custom post type for the slider.
  */
@@ -47,7 +50,18 @@ function infinity_slider_setup_post_type()
 		infinity_slider_register_post_type();
 	}
 }
-add_action( 'after_setup_theme', 'infinity_slider_setup_post_type', 101 );
+add_action( 'after_setup_theme', 'infinity_slider_setup_post_type', 102 );
+
+/**
+ * Load metaboxes class callback: https://github.com/jaredatch/Custom-Metaboxes-and-Fields-for-WordPress
+ */
+function infinity_slider_init_metaboxes()
+{
+	if ( !class_exists( 'cmb_Meta_Box' ) ) {
+		require_once( INFINITY_INC_PATH . '/metaboxes/init.php' );
+	}
+}
+add_action( 'init', 'infinity_slider_init_metaboxes', 9999 );
 
 /**
  * Define the metabox and field configurations.

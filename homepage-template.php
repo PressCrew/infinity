@@ -20,7 +20,7 @@ $slider = infinity_slider_is_enabled();
 		<div id="flex-slider-wrap-full" class="column ten">
 			<!-- load template for the slider-->
 			<?php
-				infinity_load_template( 'engine/includes/feature-slider/template.php' );
+				get_template_part( 'templates/parts/slider' );
 			?>
 			<!-- end -->
 		</div>

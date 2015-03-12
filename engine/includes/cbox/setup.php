@@ -121,33 +121,3 @@ function cbox_theme_auto_create_home_page()
 	}
 }
 add_action( 'wp', 'cbox_theme_auto_create_home_page' );
-
-//
-// Slider
-//
-
-/**
- * Load metaboxes class callback: https://github.com/jaredatch/Custom-Metaboxes-and-Fields-for-WordPress
- */
-function cbox_theme_init_cmb()
-{
-	if ( !class_exists( 'cmb_Meta_Box' ) ) {
-		require_once( INFINITY_INC_PATH . '/metaboxes/init.php' );
-	}
-}
-
-// load the dynamic thumb plugin
-require_once ICE_LIB_PATH . '/otf_regen_thumbs.php';
-
-/**
- * Slider setup
- */
-function cbox_theme_slider_setup()
-{	
-	// load slider setup
-	require_once( INFINITY_INC_PATH . '/feature-slider/setup.php' );
-
-	// load meta box lib (a bit later)
-	add_action( 'init', 'cbox_theme_init_cmb', 9999 );
-}
-add_action( 'after_setup_theme', 'cbox_theme_slider_setup' );
