@@ -12,13 +12,6 @@
  */
 
 /**
- * Don't allow WordPress to move widgets over to this theme, as it messes with
- * our own widget setup routine
- */
-remove_action( 'after_switch_theme', '_wp_sidebars_changed' );
-add_action( 'after_switch_theme', 'retrieve_widgets' );
-
-/**
  * Options page title and menu title
  */
 function cbox_theme_menu_title()
