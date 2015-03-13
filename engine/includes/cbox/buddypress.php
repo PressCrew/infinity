@@ -59,21 +59,6 @@ function cbox_theme_magic_menus()
 add_action( 'get_header', 'cbox_theme_magic_menus' );
 
 /**
- * Register custom cbox widgets
- */
-function cbox_theme_register_widgets()
-{
-	// load requirements
-	require_once INFINITY_INC_PATH . '/cbox/widgets.php';
-
-	// register it
-	if ( bp_is_active( 'blogs' ) ) {
-		register_widget( "CBox_BP_Blogs_Recent_Posts_Widget" );
-	}
-}
-add_action( 'widgets_init', 'cbox_theme_register_widgets' );
-
-/**
  * Add Activity Tabs on the Stream Directory
  */
 function cbox_theme_activity_tabs()
