@@ -44,8 +44,8 @@ function infinity_slider_register_post_type()
  */
 function infinity_slider_setup_post_type()
 {
-	// is slider in post type mode?
-	if ( infinity_slider_mode() === 1 ) {
+	// is slider in custom post type mode?
+	if ( infinity_slider_is_mode( 'custom' ) ) {
 		// yep, register it
 		infinity_slider_register_post_type();
 	}
@@ -72,7 +72,7 @@ add_action( 'init', 'infinity_slider_init_metaboxes', 9999 );
 function infinity_slider_register_metaboxes( $meta_boxes = array() ) {
 
 	// determine when to show metaboxes
-	switch( infinity_slider_mode() ) {	
+	switch( infinity_slider_get_mode() ) {	
 		// show only on 'infinity_slider' post type
 		case 1:
 			$slider_type = 'infinity_slider';
@@ -255,14 +255,14 @@ add_action( 'add_meta_boxes', 'infinity_slider_rename_image_metabox' );
 function infinity_slider_admin_footer_script()
 {
 	// is slider mode set to category?
-	if ( 2 === infinity_slider_mode() ) {
+	if ( infinity_slider_is_mode( 'category' ) ) {
 		// switch on hook suffix
 		switch ( $GLOBALS['hook_suffix'] ) {
 			// post edit screens
 			case 'post-new.php' :
 			case 'post.php' :
 				// get category id set in slider options
-				$cat_id = infinity_option_get( 'slider:category' );
+				$cat_id = infinity_slider_get_category_id();
 				break;
 			// every other screen
 			default:
@@ -307,7 +307,7 @@ add_action( 'admin_footer', 'infinity_slider_admin_footer_script' );
  * @param boolean $force Set to true to bypass cached value of mode and get live option setting.
  * @return integer
  */
-function infinity_slider_mode( $force = false )
+function infinity_slider_get_mode( $force = false )
 {
 	// mode is null by default
 	static $mode = null;
@@ -323,6 +323,66 @@ function infinity_slider_mode( $force = false )
 }
 
 /**
+ * Return slider width setting.
+ *
+ * @return string
+ */
+function infinity_slider_get_width()
+{
+	return infinity_option_get( 'slider:width' );
+}
+
+/**
+ * Return slider height setting.
+ *
+ * @return string
+ */
+function infinity_slider_get_height()
+{
+	return infinity_option_get( 'slider:height' );
+}
+
+/**
+ * Return slider category id setting.
+ *
+ * @return integer
+ */
+function infinity_slider_get_category_id()
+{
+	return (int) infinity_option_get( 'slider:category' );
+}
+
+/**
+ * Return slider time setting.
+ *
+ * @return integer
+ */
+function infinity_slider_get_time()
+{
+	return (int) infinity_option_get( 'slider:time' );
+}
+
+/**
+ * Return slider transition setting.
+ *
+ * @return integer
+ */
+function infinity_slider_get_transition()
+{
+	return (int) infinity_option_get( 'slider:transition' );
+}
+
+/**
+ * Return slider amount setting.
+ *
+ * @return integer
+ */
+function infinity_slider_get_amount()
+{
+	return (int) infinity_option_get( 'slider:amount' );
+}
+
+/**
  * Returns true if slider theme support is enabled and slider mode is set to a display option.
  *
  * @return boolean
@@ -332,7 +392,7 @@ function infinity_slider_is_enabled()
 	// is slider support on?
 	if ( true === current_theme_supports( 'infinity:slider' ) ) {
 		// check slider mode value
-		return ( infinity_slider_mode() >= 1 );
+		return ( infinity_slider_get_mode() >= 1 );
 	}
 
 	// slider not enabled
@@ -350,6 +410,23 @@ function infinity_slider_is_on_page()
 		true === infinity_slider_is_enabled() &&
 		true === is_page_template( 'homepage-template.php' )
 	);
+}
+
+function infinity_slider_is_mode( $mode )
+{
+	switch( $mode ) {
+		// custom mode check
+		case 1:
+		case 'custom':
+			return ( infinity_slider_get_mode() === 1 );
+		// category mode check
+		case 2:
+		case 'category':
+			return ( infinity_slider_get_mode() === 2 );
+	}
+
+	// no mode match
+	return false;
 }
 
 /**
@@ -378,6 +455,356 @@ function infinity_slider_register_assets()
 }
 add_action( 'after_setup_theme', 'infinity_slider_register_assets', 11 );
 
+//
+// Template tags
+//
+
+/**
+ * Set up slider query and return true if loop should continue.
+ *
+ * @global WP_Query $infinity_slider_query
+ * @return boolean
+ */
+function infinity_slider_have_slides()
+{
+	global $infinity_slider_query;
+
+	// do we need to set up slider query?
+	if ( true === empty( $infinity_slider_query ) ) {
+
+		// yes, setup default slider query args
+		$query_args = array(
+			'order' => 'ASC',
+			'posts_per_page' => '-1'
+		);
+
+		// get slider amount setting
+		$posts_per_page = infinity_slider_get_amount();
+
+		// get a custom amount?
+		if ( false === empty( $posts_per_page ) ) {
+			// yes, override default
+			$query_args['posts_per_page'] = $posts_per_page;
+		}
+
+		// custom mode?
+		if ( infinity_slider_is_mode( 'custom' ) ) {
+			// yes, use our custom post type
+			$query_args['post_type'] = 'infinity_slider';
+		}
+
+		// category mode?
+		if ( infinity_slider_is_mode( 'category' ) ) {
+			// yes, use configured category
+			$query_args['cat'] = infinity_slider_get_category_id();
+		}
+
+		// new slider query
+		$infinity_slider_query = new WP_Query( $query_args );
+	}
+
+	// did we get anything?
+	return $infinity_slider_query->have_posts();
+}
+
+/**
+ * Set up next slide for the loop.
+ * 
+ * @global WP_Query $infinity_slider_query
+ */
+function infinity_slider_the_slide()
+{
+	global $infinity_slider_query;
+
+	// tell query object to setup the slide
+	$infinity_slider_query->the_post();
+}
+
+/**
+ * Returns true if current slide's caption should be shown.
+ *
+ * @return boolean
+ */
+function infinity_slider_the_slide_show_caption()
+{
+	// try to get hide caption setting for post
+	$hide_caption = get_post_meta( get_the_ID(), INFINITY_META_KEY_PREFIX . 'slider_hide_caption', true );
+
+	// return true unless hide caption is explicitly "yes"
+	return ( 'yes' !== $hide_caption );
+}
+
+/**
+ * Returns true if current slide has video enabled.
+ *
+ * @return boolean
+ */
+function infinity_slider_the_slide_show_video()
+{
+	// try to get video enable setting for post
+	$video_enabled = get_post_meta( get_the_ID(), INFINITY_META_KEY_PREFIX . 'slider_video_enable', true );
+
+	// return true if enable video is explicitly "yes"
+	return ( 'yes' === $video_enabled );
+}
+
+/**
+ * Returns true if current slide has a post thumbnail.
+ * 
+ * @return booleanS
+ */
+function infinity_slider_the_slide_has_thumbnail()
+{
+	return has_post_thumbnail();
+}
+
+/**
+ * Print the post thumbnail for the current slide.
+ */
+function infinity_slider_the_slide_thumbnail()
+{
+	the_post_thumbnail( array( infinity_slider_get_width(), infinity_slider_get_height() ) );
+}
+
+/**
+ * Return post thumbnail of the current slide.
+ *
+ * @param integer $slide_id The post id of the slide to retrieve thumbnail for.
+ * @return string
+ */
+function infinity_slider_get_the_slide_thumbnail( $slide_id = null )
+{
+	return get_the_post_thumbnail( $slide_id, array( infinity_slider_get_width(), infinity_slider_get_height() ) );
+}
+
+/**
+ * Print permalink of the current slide.
+ */
+function infinity_slider_the_slide_permalink()
+{
+	echo esc_url( infinity_slider_get_the_slide_permalink() );
+}
+
+/**
+ * Return permalink for the current slide.
+ *
+ * @return string
+ */
+function infinity_slider_get_the_slide_permalink()
+{
+	// try to get custom URL from post meta
+	$custom_url = get_post_meta( get_the_ID(),  INFINITY_META_KEY_PREFIX . 'slider_custom_url', true );
+
+	// did we get a custom url?
+	if ( false === empty( $custom_url ) ) {
+		// yes, return it
+		return $custom_url;
+	} else {
+		// no, return default permalink
+		return get_the_permalink();
+	}
+}
+
+/**
+ * Print the title for the current slide.
+ */
+function infinity_slider_the_slide_title()
+{
+	the_title();
+}
+
+/**
+ * Return the title of the current slide.
+ *
+ * @return string
+ */
+function infinity_slider_get_the_slide_title()
+{
+	return get_the_title();
+}
+
+/**
+ * Print the excerpt for the current slide.
+ */
+function infinity_slider_the_slide_excerpt()
+{
+	echo infinity_slider_get_the_slide_excerpt();
+}
+
+/**
+ * Return the excerpt for the current slide.
+ *
+ * @return string
+ */
+function infinity_slider_get_the_slide_excerpt()
+{
+	// try to get custom excerpt from post meta
+	$custom_excerpt = get_post_meta( get_the_ID(), INFINITY_META_KEY_PREFIX . 'slider_excerpt', true );
+
+	// did we get a custom excerpt string?
+	if ( false === empty( $custom_excerpt ) ) {
+		// yes, use it
+		return wpautop( $custom_excerpt );
+	} else {
+		// no, use generate excerpt from
+		return apply_filters( 'the_content', cbox_create_excerpt( get_the_content() ) );
+	}
+}
+
+/**
+ * Print the video url for the current slide.
+ */
+function infinity_slider_the_slide_video_content()
+{
+	echo apply_filters( 'the_content', infinity_slider_get_the_slide_video_url() );
+}
+
+/**
+ * Print the video url for the current slide.
+ */
+function infinity_slider_the_slide_video_url()
+{
+	echo infinity_slider_get_the_slide_video_url();
+}
+
+/**
+ * Return the video url for the current slide.
+ *
+ * @return string
+ */
+function infinity_slider_get_the_slide_video_url()
+{
+	// try to get video url from post meta
+	$video_url = get_post_meta( get_the_ID(), INFINITY_META_KEY_PREFIX . 'slider_video_url', true );
+
+	// did we get a video url?
+	if ( false === empty( $video_url ) ) {
+		// yes, use it
+		return $video_url;
+	} else {
+		// no, this is bad
+		return false;
+	}
+}
+
+/**
+ * Print slider width setting.
+ *
+ * @param boolean $escape Set to true to make value attribute safe.
+ */
+function infinity_slider_width( $escape = true )
+{
+	if ( true === $escape ) {
+		echo esc_attr( infinity_slider_get_width() );
+	} else {
+		echo infinity_slider_get_width();
+	}
+}
+
+/**
+ * Print slider height setting.
+ *
+ * @param boolean $escape Set to true to make value attribute safe.
+ */
+function infinity_slider_height( $escape = true )
+{
+	if ( true === $escape ) {
+		echo esc_attr( infinity_slider_get_height() );
+	} else {
+		echo infinity_slider_get_height();
+	}
+}
+
+/**
+ * Print url of no slides image.
+ *
+ * @param boolean $escape Set to true to make value attribute safe.
+ */
+function infinity_slider_no_slides_image_url( $escape = true )
+{
+	if ( true === $escape ) {
+		echo esc_attr( infinity_slider_get_no_slides_image_url() );
+	} else {
+		echo infinity_slider_get_no_slides_image_url();
+	}
+}
+
+/**
+ * Return url of no slides image.
+ *
+ * @staticvar string $url Cached image url.
+ * @return string
+ */
+function infinity_slider_get_no_slides_image_url()
+{
+	// cache url for performance
+	static $url = null;
+
+	// is url null?
+	if ( null === $url ) {
+		// find the image url
+		$url  = infinity_image_url( 'slider/bg.png' );
+	}
+
+	// return it
+	return $url;
+}
+
+/**
+ * Print title text for no slides found.
+ */
+function infinity_slider_no_slides_title()
+{
+	_e( 'No slides have been added yet!', 'infinity' );
+}
+
+/**
+ * Print helpful text for no slides found.
+ */
+function infinity_slider_no_slides_help()
+{
+	// start helpful text
+	_e( 'Did you know you can easily add slides to your homepage?', 'infinity' );
+
+	// add a space
+	echo ' ';
+
+	// more helpful text depending on mode
+	if ( infinity_slider_is_mode( 'custom' ) ) {
+		// need to add custom slides
+		_e( 'Simply go to the admin dashboard and add a new <strong>Custom Slide</strong>.', 'infinity' );
+	} elseif ( infinity_slider_is_mode( 'category' ) ) {
+		// get category object
+		$category = get_category( infinity_slider_get_category_id() );
+		// need to add posts to configured category
+		printf(
+			__( 'Simply go to the admin dashboard and add a new post to the <strong>%s</strong> category.', 'infinity' ),
+			$category->name
+		);
+	}
+}
+
+/**
+ * Print helpful text for slide missing content.
+ */
+function infinity_slider_no_content_help()
+{
+	// start helpful text
+	_e( 'This slide has no content!', 'infinity' );
+
+	// add a space
+	echo ' ';
+
+	// more helpful text depending on mode
+	if ( infinity_slider_is_mode( 'custom' ) ) {
+		// need to edit this custom slide
+		_e( 'Please go to the admin dashboard and edit this <strong>Custom Slide</strong>.', 'infinity' );
+	} elseif ( infinity_slider_is_mode( 'category' ) ) {
+		// need to edit the post
+		_e( 'Please go to the admin dashboard and edit this post.', 'infinity' );
+	}
+}
+
 /**
  * Action callback for localizing bxslider script in the footer.
  *
@@ -403,7 +830,7 @@ function infinity_slider_localize_script()
 		);
 
 		// get time option
-		$time = infinity_option_get( 'slider:time' );
+		$time = infinity_slider_get_time();
 
 		// did we get a time?
 		if ( false === empty( $time ) ) {
@@ -412,7 +839,7 @@ function infinity_slider_localize_script()
 		}
 
 		// get transition option
-		$trans = infinity_option_get( 'slider:transition' );
+		$trans = infinity_slider_get_transition();
 
 		// did we get a transition?
 		if ( false === empty( $trans ) ) {
@@ -436,6 +863,10 @@ function infinity_slider_localize_script()
 	}
 }
 add_action( 'wp_print_footer_scripts', 'infinity_slider_localize_script', 9 );
+
+//
+// Compat functions
+//
 
 /**
  * Rename all deprecated slider postmeta keys known to exist for older theme versions.
