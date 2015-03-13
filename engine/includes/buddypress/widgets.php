@@ -8,7 +8,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
  * @package Infinity
  * @subpackage base
- * @since 1.0
+ * @since 1.2
  */
 
 /**
