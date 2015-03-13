@@ -22,18 +22,6 @@ add_filter( 'infinity_dashboard_menu_setup_page_title', 'cbox_theme_menu_title' 
 add_filter( 'infinity_dashboard_menu_setup_menu_title', 'cbox_theme_menu_title' );
 
 /**
- * Is there more than one profile group tab?
- *
- * @since 1.2
- * @return bool
- */
-function cbox_profile_has_multiple_tabs()
-{
-	global $profile_template;
-	return $profile_template->group_count > 1;
-}
-
-/**
  * Automagically create a front page if one has not been set already
  */
 function cbox_theme_auto_create_home_page()
