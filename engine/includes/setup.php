@@ -29,6 +29,7 @@ require_once INFINITY_INC_PATH . '/options.php';
  */
 if ( true === class_exists( 'BP_Component', false ) ) {
 	// BP component exists, assume it's loaded
+	require_once INFINITY_INC_PATH . '/buddypress/setup.php';
 	require_once INFINITY_INC_PATH . '/buddypress/functions.php';
 	require_once INFINITY_INC_PATH . '/buddypress/widgets.php';
 }
