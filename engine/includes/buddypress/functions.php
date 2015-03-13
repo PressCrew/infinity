@@ -30,3 +30,16 @@ function infinity_bp_create_excerpt( $text, $length = 425, $options = array() )
 		return substr( $text, 0, $length ) . ' [&hellip;]';
 	}
 }
+
+//
+// Conditionals
+//
+
+if ( false == function_exists( 'is_activity_page' ) ) {
+	/**
+	 * Activity Stream Conditional
+	 */
+	function is_activity_page() {
+		return ( bp_is_activity_component() && !bp_is_user() );
+	}
+}

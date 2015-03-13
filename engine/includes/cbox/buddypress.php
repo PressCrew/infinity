@@ -332,16 +332,3 @@ function cbox_theme_the_profile_group_field_ids() {
 
 	echo implode( ',', wp_parse_id_list( buddypress()->profile->all_field_ids ) );
 }
-
-//
-// Helpers
-//
-
-if ( false == function_exists( 'is_activity_page' ) ) {
-	/**
-	 * Activity Stream Conditional
-	 */
-	function is_activity_page() {
-		return ( bp_is_activity_component() && !bp_is_user() );
-	}
-}
