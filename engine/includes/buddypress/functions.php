@@ -12,6 +12,41 @@
  */
 
 /**
+ * Populate the $groups_template global for use outside the loop
+ *
+ * We build the group navigation outside the groups loop. In order to use BP's
+ * group template functions while building the nav, we must have the template
+ * global populated. In this function, we fill in any missing data, based on
+ * the current group.
+ *
+ * This issue should be fixed more elegantly upstream in BuddyPress, ideally
+ * by making the template functions fall back on the current group when the
+ * loop global is not populated.
+ *
+ * @see cbox-theme#155
+ */
+function infinity_bp_populate_group_global()
+{
+	global $groups_template;
+
+	if (
+		true === bp_is_group() &&
+		true === isset( $groups_template->groups[0]->group_id ) &&
+		true === empty( $groups_template->groups[0]->name )
+	) {
+		// get the current group
+		$current_group = groups_get_current_group();
+
+		// fill in all missing properties
+		foreach ( $current_group as $cur_key => $cur_value ) {
+			if ( ! isset( $groups_template->groups[0]->{$cur_key} ) ) {
+				$groups_template->groups[0]->{$cur_key} = $cur_value;
+			}
+		}
+	}
+}
+
+/**
  * Create an excerpt
  *
  * Uses bp_create_excerpt() when available. Otherwise falls back on a very
