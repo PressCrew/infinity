@@ -22,22 +22,6 @@ add_filter( 'infinity_dashboard_menu_setup_page_title', 'cbox_theme_menu_title' 
 add_filter( 'infinity_dashboard_menu_setup_menu_title', 'cbox_theme_menu_title' );
 
 /**
- * Create an excerpt
- *
- * Uses bp_create_excerpt() when available. Otherwise falls back on a very
- * rough approximation, ignoring the fancy params passed.
- *
- * @since 1.0.5
- */
-function cbox_create_excerpt( $text, $length = 425, $options = array() ) {
-	if ( function_exists( 'bp_create_excerpt' ) ) {
-		return bp_create_excerpt( $text, $length, $options );
-	} else {
-		return substr( $text, 0, $length ) . ' [&hellip;]';
-	}
-}
-
-/**
  * Is there more than one profile group tab?
  *
  * @since 1.2

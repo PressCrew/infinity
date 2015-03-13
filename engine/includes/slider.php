@@ -647,7 +647,7 @@ function infinity_slider_get_the_slide_excerpt()
 		return wpautop( $custom_excerpt );
 	} else {
 		// no, use generate excerpt from
-		return apply_filters( 'the_content', cbox_create_excerpt( get_the_content() ) );
+		return apply_filters( 'the_content', infinity_bp_create_excerpt( get_the_content() ) );
 	}
 }
 
