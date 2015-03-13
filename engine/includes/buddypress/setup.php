@@ -35,6 +35,26 @@ if ( !defined( 'BP_AVATAR_FULL_HEIGHT' ) ) {
 //
 
 /**
+ * Make sure BuddyPress items that are attached to 'bp_head' are added.
+ *
+ * 'bp_head' is a hook that is hardcoded in bp-default's header.php.  So we
+ * add the same hook here attached to the 'wp_head' action if it hasn't
+ * already been added.
+ *
+ * This hook is used by BP to add activity item feeds.  Other plugins like
+ * BuddyPress Courseware also uses this hook.
+ */
+function infinity_bp_head_action()
+{
+	// was bp_head added yet?
+	if ( false === has_action( 'wp_head', 'bp_head' ) ) {
+		// no, add it
+		add_action( 'wp_head', 'bp_head' );
+	}
+}
+add_action( 'wp_head', 'infinity_bp_head_action', 0 );
+
+/**
  * Add Activity Tabs on the Stream Directory
  */
 function infinity_bp_sidebar_activity_tabs()

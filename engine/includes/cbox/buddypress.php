@@ -104,21 +104,6 @@ function cbox_fix_bbp_new_topic_button() {
 add_action( 'bp_actions', 'cbox_fix_bbp_new_topic_button' );
 
 /**
- * Make sure BuddyPress items that are attached to 'bp_head' are added to CBOX
- * Theme.
- *
- * 'bp_head' is a hook that is hardcoded in bp-default's header.php.  So we
- * add the same hook here attached to the 'wp_head' action.
- *
- * This hook is used by BP to add activity item feeds.  Other plugins like
- * BuddyPress Courseware also uses this hook.
- */
-function cbox_add_bp_head() {
-	do_action( 'bp_head' );
-}
-add_action( 'wp_head', 'cbox_add_bp_head' );
-
-/**
  * When running BuddyPress Docs, don't allow theme compatibility mode to kick in
  *
  * @since 1.0.5
