@@ -1,10 +1,34 @@
 <?php
+/**
+ * ICE API: widgets helper class file
+ *
+ * @author Boone Gorges <boone@gorg.es>
+ * @author Marshall Sorenson <marshall@presscrew.com>
+ * @link http://infinity.presscrew.com/
+ * @copyright Copyright (C) 2012-2015 CUNY Academic Commons, Marshall Sorenson
+ * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
+ * @package ICE
+ * @subpackage utils
+ * @since 1.2
+ */
 
 /**
- * Utility class for dealing with sidebar widgets
+ * Utility class for dealing with sidebar widgets.
  */
-class CBox_Widget_Setter {
-	public static function set_widget( $args ) {
+class ICE_Widget_Setter
+{
+	/**
+	 * Set a widget if it's id is not yet registered.
+	 *
+	 * @global array $wp_registered_sidebars
+	 * @global array $wp_registered_widget_updates
+	 * @param array $args
+	 * @return \WP_Error|bool
+	 */
+	public static function set_widget( $args )
+	{
+		global $wp_registered_sidebars, $wp_registered_widget_updates;
+
 		$r = wp_parse_args( $args, array(
 			'id_base' => '',
 			'sidebar_id' => '',
@@ -20,7 +44,6 @@ class CBox_Widget_Setter {
 			return new WP_Error( 'widget_does_not_exist', 'Widget does not exist' );
 		}
 
-		global $wp_registered_sidebars;
 		if ( ! isset( $wp_registered_sidebars[ $sidebar_id ] ) ) {
 			return new WP_Error( 'sidebar_does_not_exist', 'Sidebar does not exist' );
 		}
@@ -65,7 +88,6 @@ class CBox_Widget_Setter {
 		// Because of the way WP_Widget::update_callback() works, gotta fake the $_POST
 		$_POST['widget-' . $id_base] = $all_settings;
 
-		global $wp_registered_widget_updates, $wp_registered_widget_controls;
 		foreach ( (array) $wp_registered_widget_updates as $name => $control ) {
 
 			if ( $name == $id_base ) {
@@ -82,21 +104,30 @@ class CBox_Widget_Setter {
 		$sidebars[ $sidebar_id ] = $sidebar;
 		wp_set_sidebars_widgets( $sidebars );
 
-		update_option( $option_name, $all_settings );
+		return update_option( $option_name, $all_settings );
 	}
 
 	/**
-	 * Checks to see whether a sidebar is already populated
+	 * Returns true if a sidebar is already populated.
+	 *
+	 * @param string $sidebar_id The id of the sidebar to check.
+	 * @return bool
 	 */
-	public static function is_sidebar_populated( $sidebar_id ) {
+	public static function is_sidebar_populated( $sidebar_id )
+	{
 		$sidebars = wp_get_sidebars_widgets();
-		return ! empty( $sidebars[ $sidebar_id ] );
+		return ( false ===  empty( $sidebars[ $sidebar_id ] ) );
 	}
 
 	/**
-	 * Moves all active widgets from a given sidebar into the inactive array
+	 * Moves all active widgets from a given sidebar into the inactive array.
+	 *
+	 * @param string $sidebar_id
+	 * @param string $delete_to
+	 * @return \WP_Error|void
 	 */
-	public static function clear_sidebar( $sidebar_id, $delete_to = 'inactive' ) {
+	public static function clear_sidebar( $sidebar_id, $delete_to = 'inactive' )
+	{
 		$sidebars = wp_get_sidebars_widgets();
 		if ( ! isset( $sidebars[ $sidebar_id ] ) ) {
 			return new WP_Error( 'sidebar_does_not_exist', 'Sidebar does not exist' );
@@ -111,12 +142,14 @@ class CBox_Widget_Setter {
 	}
 
 	/**
-	 * Check to see whether a widget has been registered
+	 * Returns true if a widget with the given id_base is currently registered.
 	 *
+	 * @global WP_Widget_Factory $wp_widget_factory
 	 * @param string $id_base
 	 * @return bool
 	 */
-	public static function widget_exists( $id_base ) {
+	public static function widget_exists( $id_base )
+	{
 		global $wp_widget_factory;
 
 		foreach ( $wp_widget_factory->widgets as $w ) {
