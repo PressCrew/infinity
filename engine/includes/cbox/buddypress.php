@@ -19,7 +19,7 @@ if ( false == function_exists( 'bp_is_member' ) ) {
 function cbox_theme_magic_sidebars()
 {
 	// load requirements
-	require_once INFINITY_INC_PATH . '/cbox/widget-setter.php';
+	ICE_Loader::load( 'utils/widget-setter' );
 
 	// auto sidebar population
 	cbox_theme_populate_sidebars();
