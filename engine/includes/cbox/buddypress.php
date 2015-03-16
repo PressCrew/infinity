@@ -40,17 +40,6 @@ function cbox_theme_magic_menus()
 add_action( 'get_header', 'cbox_theme_magic_menus' );
 
 /**
- * Render tour feature markup
- */
-function cbox_theme_buddypress_tour()
-{
-	if ( bp_is_activity_component() && !bp_is_user() && is_user_logged_in() ) {
-		infinity_feature( 'activity', 'bp-tour' );
-	}
-}
-add_action( 'close_body', 'cbox_theme_buddypress_tour' );
-
-/**
  * Temporarily fix the "New Topic" button when using bbPress with BP.
  *
  * @todo Remove this when bbPress addresses this.
