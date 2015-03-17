@@ -12,29 +12,6 @@
  */
 
 /**
- * Change Default Avatar Size
- */
-if ( !defined( 'BP_AVATAR_THUMB_WIDTH' ) ) {
-	define( 'BP_AVATAR_THUMB_WIDTH', 80 );
-}
-
-if ( !defined( 'BP_AVATAR_THUMB_HEIGHT' ) ) {
-	define( 'BP_AVATAR_THUMB_HEIGHT', 80 );
-}
-
-if ( !defined( 'BP_AVATAR_FULL_WIDTH' ) ) {
-	define( 'BP_AVATAR_FULL_WIDTH', 300 );
-}
-
-if ( !defined( 'BP_AVATAR_FULL_HEIGHT' ) ) {
-	define( 'BP_AVATAR_FULL_HEIGHT', 300 );
-}
-
-//
-// Template Actions
-//
-
-/**
  * Add Activity Tabs on the Stream Directory
  */
 function infinity_bp_sidebar_activity_tabs()
