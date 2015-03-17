@@ -1,7 +1,17 @@
 <?php
 
 /**
- * Populates sidebars throughout the theme on activation
+ * Automagically set up sidebars on theme activation.
+ */
+function cbox_theme_magic_sidebars()
+{
+	// auto sidebar population
+	cbox_theme_populate_sidebars();
+}
+add_action( 'infinity_dashboard_activated', 'cbox_theme_magic_sidebars' );
+
+/**
+ * Populates sidebars throughout the theme.
  *
  * When activating cbox-theme, this function is triggered. It checks each of
  * cbox-theme's sidebars, and for each one that is empty, it sets up a number
@@ -11,7 +21,10 @@
  * @uses ICE_Widget_Setter
  * @since 1.0
  */
-function cbox_theme_populate_sidebars() {
+function cbox_theme_populate_sidebars()
+{
+	// load widget utils
+	ICE_Loader::load( 'utils/widget-setter' );
 
 	// Homepage Top Right
 	if ( ! ICE_Widget_Setter::is_sidebar_populated( 'homepage-top-right' ) ) {

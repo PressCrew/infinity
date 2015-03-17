@@ -1,6 +1,6 @@
 <?php
 /**
- * Infinity Theme: cbox
+ * Infinity Theme: cbox base functionality
  *
  * @author Marshall Sorenson <marshall@presscrew.com>
  * @link http://infinity.presscrew.com/

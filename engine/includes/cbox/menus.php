@@ -1,21 +1,30 @@
 <?php
 
 /**
+ * Automagically set up menus on theme activiation.
+ * 
+ * @global int $blog_id
+ */
+function cbox_theme_magic_menus()
+{
+	global $blog_id;
+	
+	// make sure we are on the root bp blog
+	if ( (int) BP_ROOT_BLOG === (int) $blog_id ) {
+		// add our default sub-menu
+		cbox_theme_add_default_sub_menu();
+	}
+}
+add_action( 'infinity_dashboard_activated', 'cbox_theme_magic_menus' );
+
+/**
  * Sets up a default sub menu in the CBOX theme.
  *
  * This function is fired on 'get_header' on the frontend to give CBOX
  * components a chance to configure from the admin area (like BP Docs).
  */
 function cbox_theme_add_default_sub_menu()
-{
-	global $blog_id;
-
-	// make sure we are on the root bp blog
-	if ( (int) BP_ROOT_BLOG !== (int) $blog_id ) {
-		// bail
-		return false;
-	}
-	
+{	
 	// load menu utils
 	ICE_Loader::load( 'utils/menus' );
 
@@ -23,7 +32,7 @@ function cbox_theme_add_default_sub_menu()
 	$menu_mgr = new ICE_Menu_Manager( 'cbox-sub-menu' );
 
 	// try to register it
-	if ( true === $menu_mgr->register( 'Default Social Menu' ) ) {
+	if ( true === $menu_mgr->register() ) {
 
 		// add home page
 		$menu_mgr->add_item(

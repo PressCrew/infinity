@@ -3,42 +3,6 @@
  * Commons In A Box Theme: BuddyPress setup
  */
 
-// abort if bp not active
-if ( false == function_exists( 'bp_is_member' ) ) {
-	// return to calling script
-	return;
-}
-
-//
-// Actions
-//
-
-/**
- * Automagically set up sidebars
- */
-function cbox_theme_magic_sidebars()
-{
-	// load requirements
-	ICE_Loader::load( 'utils/widget-setter' );
-
-	// auto sidebar population
-	cbox_theme_populate_sidebars();
-}
-add_action( 'infinity_dashboard_activated', 'cbox_theme_magic_sidebars' );
-
-/**
- * Automagically set up menus
- */
-function cbox_theme_magic_menus()
-{
-	// load requirements
-	require_once INFINITY_INC_PATH . '/cbox/menus.php';
-
-	// add our default sub-menu
-	cbox_theme_add_default_sub_menu();
-}
-add_action( 'get_header', 'cbox_theme_magic_menus' );
-
 /**
  * Temporarily fix the "New Topic" button when using bbPress with BP.
  *
