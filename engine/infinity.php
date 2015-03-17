@@ -150,8 +150,8 @@ ICE_Enqueue::init( 'load-appearance_page_' . INFINITY_ADMIN_PAGE );
 // load Infinity API
 require_once INFINITY_API_PATH . '/loader.php';
 
-// load theme setup
-require_once INFINITY_INC_PATH . '/setup.php';
+// load theme includes
+require_once INFINITY_ENGINE_PATH . '/includes.php';
 
 // initialize scheme
 infinity_scheme_init();

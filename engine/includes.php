@@ -1,6 +1,6 @@
 <?php
 /**
- * Infinity Theme: WordPress setup
+ * Infinity Theme: includes
  *
  * @author Marshall Sorenson <marshall@presscrew.com>
  * @link http://infinity.presscrew.com/
