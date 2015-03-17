@@ -39,7 +39,7 @@ if ( true === class_exists( 'BP_Component', false ) ) {
  */
 if ( true === class_exists( 'Commons_In_A_Box', false ) ) {
 	// commons in a box loader exists, assume it's loaded
-	require_once INFINITY_INC_PATH . '/cbox/setup.php';
+	require_once INFINITY_INC_PATH . '/cbox.php';
 }
 
 ////////////////////////////////////////////////////
