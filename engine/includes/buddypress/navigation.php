@@ -1,6 +1,6 @@
 <?php
 /**
- * Infinity Theme: BuddyPress global setup
+ * Infinity Theme: BuddyPress navigation
  *
  * @author Marshall Sorenson <marshall@presscrew.com>
  * @link http://infinity.presscrew.com/
