@@ -1,6 +1,6 @@
 <?php
 /**
- * Infinity Theme: cbox setup
+ * Infinity Theme: cbox compat
  *
  * @author Marshall Sorenson <marshall@presscrew.com>
  * @link http://infinity.presscrew.com/
@@ -14,6 +14,6 @@
 /**
  * Load requirements.
  */
-require_once INFINITY_INC_PATH . '/cbox/base.php';
-require_once INFINITY_INC_PATH . '/cbox/menus.php';
-require_once INFINITY_INC_PATH . '/cbox/sidebars.php';
+require_once INFINITY_PLUGINS_PATH . '/commons-in-a-box/base.php';
+require_once INFINITY_PLUGINS_PATH . '/commons-in-a-box/menus.php';
+require_once INFINITY_PLUGINS_PATH . '/commons-in-a-box/sidebars.php';

@@ -16,6 +16,7 @@ infinity_plugin_compat( 'bbpress', 'bbpress.php' );
 infinity_plugin_compat( 'buddypress', 'buddypress.php' );
 infinity_plugin_compat( 'buddypress-docs', 'buddypress-docs.php' );
 infinity_plugin_compat( 'buddypress-docs-wiki', 'buddypress-docs-wiki.php' );
+infinity_plugin_compat( 'commons-in-a-box', 'commons-in-a-box.php' );
 
 //
 // Helpers
