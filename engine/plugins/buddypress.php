@@ -33,6 +33,6 @@ if ( !defined( 'BP_AVATAR_FULL_HEIGHT' ) ) {
 /**
  * Load requirements
  */
-require_once INFINITY_INC_PATH . '/buddypress/base.php';
-require_once INFINITY_INC_PATH . '/buddypress/navigation.php';
-require_once INFINITY_INC_PATH . '/buddypress/widgets.php';
+require_once INFINITY_PLUGINS_PATH . '/buddypress/base.php';
+require_once INFINITY_PLUGINS_PATH . '/buddypress/navigation.php';
+require_once INFINITY_PLUGINS_PATH . '/buddypress/widgets.php';

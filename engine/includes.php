@@ -25,14 +25,6 @@ require_once INFINITY_INC_PATH . '/walkers.php';
 require_once INFINITY_INC_PATH . '/options.php';
 
 /**
- * Maybe include BuddyPress functionality
- */
-if ( true === class_exists( 'BP_Component', false ) ) {
-	// BP component exists, assume it's loaded
-	require_once INFINITY_INC_PATH . '/buddypress.php';
-}
-
-/**
  * Maybe include Commons In a Box functionality
  *
  * @todo this is likely not a permanent strategy. just trying to move things along!

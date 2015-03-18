@@ -13,6 +13,7 @@
 
 // load all plugin compat
 infinity_plugin_compat( 'bbpress', 'bbpress.php' );
+infinity_plugin_compat( 'buddypress', 'buddypress.php' );
 infinity_plugin_compat( 'buddypress-docs', 'buddypress-docs.php' );
 infinity_plugin_compat( 'buddypress-docs-wiki', 'buddypress-docs-wiki.php' );
 
