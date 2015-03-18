@@ -100,6 +100,23 @@ if ( false === function_exists( 'the_post_name' ) ) {
 // Custom Conditionals
 //
 
+if ( false === function_exists( 'is_forum_page' ) ) {
+	/**
+	 * Returns true if on any forum page.
+	 *
+	 * @package Infinity
+	 * @subpackage conditionals
+	 * @return boolean
+	 */
+	function is_forum_page()
+	{
+		return (
+			true === function_exists( 'infinity_bbpress_is_page' ) &&
+			true === infinity_bbpress_is_page()
+		);
+	}
+}
+
 /**
  * Returns true if not in admin dir
  *

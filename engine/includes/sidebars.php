@@ -281,7 +281,7 @@ function infinity_base_sidebars()
 		// show home sidebar
 		return infinity_base_sidebar( 'home-sidebar', 'Home Sidebar' );
 
-	} elseif ( function_exists( 'is_bbpress' ) && is_bbpress() ) {
+	} elseif ( is_forum_page() ) {
 
 		// show forums sidebar
 		return infinity_base_sidebar( 'forums-sidebar', 'Forums Sidebar' );

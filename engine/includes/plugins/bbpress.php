@@ -16,6 +16,19 @@
 //
 
 /**
+ * Retuns true if on any bbPress page.
+ *
+ * @return bool
+ */
+function infinity_bbpress_is_page()
+{
+	return (
+		true === function_exists( 'is_bbpress' ) &&
+		true === is_bbpress()
+	);
+}
+
+/**
  * Render new topic button.
  *
  * @uses bp_button() to render button html.
