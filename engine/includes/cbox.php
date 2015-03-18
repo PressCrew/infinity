@@ -17,4 +17,3 @@
 require_once INFINITY_INC_PATH . '/cbox/base.php';
 require_once INFINITY_INC_PATH . '/cbox/menus.php';
 require_once INFINITY_INC_PATH . '/cbox/sidebars.php';
-require_once INFINITY_INC_PATH . '/cbox/buddypress.php';
