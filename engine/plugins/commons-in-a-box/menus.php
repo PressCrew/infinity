@@ -75,7 +75,7 @@ function cbox_theme_add_default_sub_menu()
 			)
 		);
 		// is BuddyPress Docs Wiki plugin loaded?
-		if ( defined( 'BP_DOCS_WIKI_SLUG' ) ) {
+		if ( infinity_plugin_supported( 'buddypress-docs-wiki' ) ) {
 			// yep, add wiki page
 			$menu_mgr->add_item(
 				array(
