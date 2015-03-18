@@ -16,3 +16,9 @@ if ( true === function_exists( 'bbpress' ) ) {
 	// yes, load support
 	require_once INFINITY_INC_PATH . '/plugins/bbpress.php';
 }
+
+// is buddypress-docs loaded?
+if ( true === function_exists( 'bp_docs_init' ) ) {
+	// yes, load support
+	require_once INFINITY_INC_PATH . '/plugins/buddypress-docs.php';
+}
