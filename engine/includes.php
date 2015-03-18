@@ -23,7 +23,6 @@ require_once INFINITY_INC_PATH . '/comments.php';
 require_once INFINITY_INC_PATH . '/templatetags.php';
 require_once INFINITY_INC_PATH . '/walkers.php';
 require_once INFINITY_INC_PATH . '/options.php';
-require_once INFINITY_INC_PATH . '/plugins.php';
 
 /**
  * Maybe include BuddyPress functionality

@@ -67,6 +67,6 @@ function infinity_plugin_compat( $plugin, $filename )
 	// is plugin loaded?
 	if ( true === infinity_plugin_supported( $plugin ) ) {
 		// yep, load the file
-		require_once INFINITY_INC_PATH . '/plugins/' . $filename;
+		require_once INFINITY_PLUGINS_PATH . '/' . $filename;
 	}
 }

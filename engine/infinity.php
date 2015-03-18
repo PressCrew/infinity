@@ -102,6 +102,11 @@ define( 'INFINITY_CONFIG_PATH', INFINITY_ENGINE_PATH . '/config' );
 define( 'INFINITY_INC_PATH', INFINITY_ENGINE_PATH . '/includes' );
 
 /**
+ * Infinity plugins compat directory path
+ */
+define( 'INFINITY_PLUGINS_PATH', INFINITY_ENGINE_PATH . '/plugins' );
+
+/**
  * Infinity admin directory relative path
  */
 define( 'INFINITY_ADMIN_DIR', 'dashboard' );
@@ -152,6 +157,9 @@ require_once INFINITY_API_PATH . '/loader.php';
 
 // load theme includes
 require_once INFINITY_ENGINE_PATH . '/includes.php';
+
+// load theme plugins compat
+require_once INFINITY_ENGINE_PATH . '/plugins.php';
 
 // initialize scheme
 infinity_scheme_init();
