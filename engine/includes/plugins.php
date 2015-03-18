@@ -22,3 +22,9 @@ if ( true === function_exists( 'bp_docs_init' ) ) {
 	// yes, load support
 	require_once INFINITY_INC_PATH . '/plugins/buddypress-docs.php';
 }
+
+// is buddypress-docs-wiki loaded?
+if ( true === function_exists( 'bpdw_init' ) ) {
+	// yes, load support
+	require_once INFINITY_INC_PATH . '/plugins/buddypress-docs-wiki.php';
+}
