@@ -47,7 +47,9 @@ function infinity_plugin_supported( $name )
 			// BuddyPress Docs wiki
 			'buddypress-docs-wiki' =>	function_exists( 'bpdw_init' ),
 			// Commons In A Box
-			'commons-in-a-box' =>		function_exists( 'cbox' )
+			'commons-in-a-box' =>		function_exists( 'cbox' ),
+			// WordPress SEO
+			'wordpress-seo' =>			function_exists( 'wpseo_init' )
 		);
 	}
 	
