@@ -307,7 +307,7 @@ function cbox_theme_populate_sidebars()
 	// Homepage Right
 	if ( ! ICE_Widget_Setter::is_sidebar_populated( 'forums-sidebar' ) ) {
 
-		if ( function_exists( 'bbpress' ) ) {
+		if ( infinity_plugin_supported( 'bbpress' ) ) {
 			ICE_Widget_Setter::set_widget( array(
 				'id_base'    => 'bbp_views_widget',
 				'sidebar_id' => 'forums-sidebar',
@@ -340,7 +340,7 @@ function cbox_theme_populate_sidebars()
 
 	} // End forums-sidebar
 
-	if ( function_exists( 'bpdw_slug' ) ) {
+	if ( infinity_plugin_supported( 'buddypress-docs-wiki' ) ) {
 		$create_url = trailingslashit( home_url( bpdw_slug() ) ) . trailingslashit( BP_DOCS_CREATE_SLUG );
 
 		// Wiki Sidebar
