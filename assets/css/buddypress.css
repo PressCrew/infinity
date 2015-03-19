@@ -179,7 +179,7 @@
     right: 20px;
     top: 10px;
 }
-.infinity-bp #buddypress .sidebar-activity-tabs {
+.infinity-bp .sidebar-activity-tabs {
 	padding-bottom: 30px;
 }
 .infinity-bp #buddypress #vertical-activity-tabs {
@@ -483,31 +483,31 @@
 .infinity-bp #buddypress #profile-nav-menu ul {
 	list-style: none outside none;
 }
-.infinity-bp #buddypress .sidebar-activity-tabs ul {
+.infinity-bp .sidebar-activity-tabs ul {
 	list-style: none outside none;
 	margin: 30px 0 0;
 }
-.infinity-bp #buddypress .sidebar-activity-tabs ul li {
+.infinity-bp .sidebar-activity-tabs ul li {
 	padding-bottom: 3px;
 	padding-top: 5px;
 }
-.infinity-bp #buddypress .sidebar-activity-tabs ul li a {
+.infinity-bp .sidebar-activity-tabs ul li a {
 	display: block;
 	padding-bottom: 10px;
 	padding-right: 0;
 	padding-top: 10px;
 }
-.infinity-bp #buddypress .sidebar-activity-tabs ul li.current,
-.infinity-bp #buddypress .sidebar-activity-tabs ul li.selected {
+.infinity-bp .sidebar-activity-tabs ul li.current,
+.infinity-bp .sidebar-activity-tabs ul li.selected {
 	padding: 10px 0 12px 30px;
 }
-.infinity-bp #buddypress .sidebar-activity-tabs .profile-subnav li.selected {
+.infinity-bp .sidebar-activity-tabs .profile-subnav li.selected {
 	padding-bottom: 3px;
 	padding-left: 30px;
 	padding-top: 5px;
 }
-.infinity-bp #buddypress .sidebar-activity-tabs ul li.current a,
-.infinity-bp #buddypress .sidebar-activity-tabs ul li.selected a {
+.infinity-bp .sidebar-activity-tabs ul li.current a,
+.infinity-bp .sidebar-activity-tabs ul li.selected a {
 	margin-bottom: -10px;
 	margin-top: -5px;
 }
@@ -527,9 +527,9 @@
 .infinity-bp #buddypress .groups div#subnav.item-list-tabs .sidebar-activity-tabs {
 	margin-bottom: 30px;
 }
-.infinity-bp #buddypress .sidebar-activity-tabs ul li span,
-.infinity-bp #buddypress .sidebar-activity-tabs ul li.current span,
-.infinity-bp #buddypress .sidebar-activity-tabs ul li.selected span {
+.infinity-bp .sidebar-activity-tabs ul li span,
+.infinity-bp .sidebar-activity-tabs ul li.current span,
+.infinity-bp .sidebar-activity-tabs ul li.selected span {
 	display: inline;
 	margin-left: 2px;
 	padding: 2px 5px;
@@ -551,7 +551,7 @@
 .infinity-bp #buddypress ul.profile-subnav li a {
 	padding-left: 30px;
 }
-.infinity-bp #buddypress .sidebar-activity-tabs ul li.current ul.profile-subnav li a {
+.infinity-bp .sidebar-activity-tabs ul li.current ul.profile-subnav li a {
 	padding-bottom: 8px;
 	padding-top: 8px;
 	margin: inherit;
