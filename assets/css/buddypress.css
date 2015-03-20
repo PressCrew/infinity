@@ -254,6 +254,12 @@
 .infinity-bp #buddypress li.groups-members-search input[type=text] {
 	display: inline-block;
 	margin-right: 10px;
+	padding: 8px 12px;
+	border: 1px solid #dedede;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	font-size: 100%;
 }
 
 .infinity-bp #buddypress .dir-form {
