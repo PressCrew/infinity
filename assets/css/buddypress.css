@@ -175,9 +175,8 @@
 	margin-bottom: 0;
 }
 .infinity-bp #buddypress .activity-list li.mini .activity-meta {
-    position: absolute;
-    right: 20px;
-    top: 10px;
+    margin-top: 0;
+    padding-top: 0;
 }
 .infinity-bp .sidebar-activity-tabs {
 	padding-bottom: 30px;
@@ -316,7 +315,7 @@
 	margin: -5px 0 15px;
 }
 
-.infinity-bp.infinity-btns #buddypress .generic-button a {
+.infinity-bp #buddypress .generic-button a {
 	color: #444;
 }
 
@@ -518,10 +517,13 @@
 	margin-top: -5px;
 }
 /* Profile Action Buttons */
-.infinity-bp #buddypress .bp-user #item-buttons .generic-button,
-.infinity-bp #buddypress #profile-nav-menu a {
+.infinity-bp.bp-user #item-buttons .generic-button,
+.infinity-bp.bp-user #profile-nav-menu a {
+	color: inherit;
 	background: none repeat scroll 0 0 transparent;
 	border: 0 none;
+	text-shadow: inherit;
+	-moz-box-shadow: none;
 	-webkit-box-shadow: none;
 	box-shadow: none;
 	display: block;
@@ -576,8 +578,8 @@
 	list-style: none;
 }
 /* FIX:  hide the horizontal navigation on settings pages using CSS */
-.infinity-bp #buddypress .settings #item-nav,
-.infinity-bp #buddypress #content #object-nav {
+.infinity-bp #content #buddypress .settings #item-nav,
+.infinity-bp #content #buddypress #object-nav {
 	display: none;
 }
 

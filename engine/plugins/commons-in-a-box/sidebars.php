@@ -29,7 +29,7 @@ function cbox_theme_populate_sidebars()
 	// Homepage Top Right
 	if ( ! ICE_Widget_Setter::is_sidebar_populated( 'homepage-top-right' ) ) {
 
-		$welcome_text = sprintf( __( '<p><a class="button green" href="%s">Join us</a> or <a class="button white" href="%s">Login</a></p>', 'cbox-theme' ), bp_get_root_domain() . '/' . bp_get_signup_slug() . '/', wp_login_url() );
+		$welcome_text = sprintf( __( '<p><a class="button" href="%s">Join us</a> or <a class="button" href="%s">Login</a></p>', 'cbox-theme' ), bp_get_root_domain() . '/' . bp_get_signup_slug() . '/', wp_login_url() );
 
 		if ( current_user_can( 'edit_theme_options' ) ) {
 			$welcome_text = sprintf( __( '<p>To modify the text of this widget, and other widgets you see throughout the site, visit <a href="%s">Dashboard > Appearance > Widgets</a>.', 'cbox-theme' ), admin_url( 'widgets.php' ) ) . $welcome_text;

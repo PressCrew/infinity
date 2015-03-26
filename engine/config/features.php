@@ -1131,6 +1131,7 @@ ice_register_group( 'buttons' );
 					'teal' => 'Teal',
 					'purple' => 'Purple',
 					'green' => 'Green',
+					'pink' => 'Pink',
 					'white' => 'White'
 				),
 				'default_value' => 'orange'
