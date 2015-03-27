@@ -816,8 +816,7 @@ ice_register_group( 'bp-plugins' );
 			'group' => 'bp-plugins',
 			'type' => 'default',
 			'title' => 'BuddyPress Plugins Support',
-			'description' => 'Popular BuddyPress plugins support',
-			'style' => 'assets/css/buddypress-plugins.css'
+			'description' => 'Popular BuddyPress plugins support'
 		)
 	);
 
@@ -829,6 +828,7 @@ ice_register_group( 'bp-plugins' );
 			'type' => 'default',
 			'title' => 'BuddyPress Plugins Styles',
 			'description' => 'Popular BuddyPress plugins support styles',
+			'style' => 'assets/css/buddypress-plugins.css'
 //			'body_class' => 'infinity-bp'
 		)
 	);
