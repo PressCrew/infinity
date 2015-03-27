@@ -99,5 +99,9 @@ function infinity_theme_overlay()
 
 function infinity_slider_init( selector, options )
 {
-	jQuery( selector ).bxSlider( options );
+	var el = jQuery( selector );
+
+	if ( 0 < el.length && typeof el.bxSlider !== 'undefined' ) {
+		el.bxSlider( options );
+	}
 }
