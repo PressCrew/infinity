@@ -1424,14 +1424,14 @@ body.infinity-design {
 .infinity-design div.item-list-tabs ul li a span,
 .infinity-design #buddypress div.item-list-tabs ul li a,
 .infinity-design #buddypress div.item-list-tabs ul li a span {
-/*	color: #fff;
-	font-weight: 400;*/
+	color: #fff;
+	font-weight: 400;
 }
 .infinity-design div.item-list-tabs ul li a:hover,
 .infinity-design div.item-list-tabs ul li a span:hover,
 .infinity-design #buddypress div.item-list-tabs ul li a:hover,
 .infinity-design #buddypress div.item-list-tabs ul li a span:hover {
-	/*color: #bbb;*/
+	color: #bbb;
 }
 .infinity-design div.item-list-tabs ul li a span,
 .infinity-design #buddypress div.item-list-tabs ul li a span {
