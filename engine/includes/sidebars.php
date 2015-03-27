@@ -111,6 +111,36 @@ function infinity_base_register_sidebars()
 		'Footer Right',
 		'The right footer widget'
 	);
+	// homepage top right
+	infinity_base_register_sidebar(
+		'homepage-top-right',
+		'Homepage Top Right',
+		'The Top Right Widget next to the Slider'
+	);
+	// homepage center
+	infinity_base_register_sidebar(
+		'homepage-center-widget',
+		'Homepage Center Widget',
+		'The Full Width Center Widget on the Homepage'
+	);
+	// homepage left
+	infinity_base_register_sidebar(
+		'homepage-left',
+		'Homepage Left',
+		'The Left Widget on the Homepage'
+	);
+	// homepage middle
+	infinity_base_register_sidebar(
+		'homepage-middle',
+		'Homepage Middle',
+		'The Middle Widget on the Homepage'
+	);
+	// homepage right
+	infinity_base_register_sidebar(
+		'homepage-right',
+		'Homepage Right',
+		'The right Widget on the Homepage'
+	);
 }
 
 /**
@@ -251,7 +281,7 @@ function infinity_base_sidebars()
 		// show home sidebar
 		return infinity_base_sidebar( 'home-sidebar', 'Home Sidebar' );
 
-	} elseif ( function_exists( 'is_bbpress' ) && is_bbpress() ) {
+	} elseif ( is_forum_page() ) {
 
 		// show forums sidebar
 		return infinity_base_sidebar( 'forums-sidebar', 'Forums Sidebar' );

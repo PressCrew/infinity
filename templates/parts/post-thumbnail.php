@@ -12,10 +12,17 @@
  * @subpackage templates
  * @since 1.0
  */
-?>
-<!-- show the post thumb? -->
-<?php if ( current_theme_supports( 'post-thumbnails' ) && has_post_thumbnail() ):?>
-<figure class="postthumb">
-	<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', 'infinity' ) ?> <?php the_title_attribute(); ?>"><?php the_post_thumbnail('post-image'); ?></a>
-</figure>
-<?php endif;?>
+
+// show the post thumb?
+if ( current_theme_supports( 'post-thumbnails' ) && has_post_thumbnail() ):
+
+	// yep, get settings
+	$thumbheight = infinity_option_get( 'thumbs:image-height' );
+	$thumbwidth = infinity_option_get( 'thumbs:image-width' );
+
+	// spit out the thumb ?>
+	<figure class="postthumb">
+		<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', 'infinity' ) ?> <?php the_title_attribute(); ?>"><?php the_post_thumbnail( array( $thumbwidth, $thumbheight ) ) ?></a>
+	</figure><?php
+
+endif;

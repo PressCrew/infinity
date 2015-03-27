@@ -21,6 +21,21 @@ function infinity_google_analytics()
 add_action( 'close_body', 'infinity_google_analytics' );
 
 /**
+ * Render tour feature markup.
+ */
+function infinity_buddypress_tour()
+{
+	if (
+		true === bp_is_activity_component() &&
+		false === bp_is_user() &&
+		true === is_user_logged_in()
+	) {
+		infinity_feature( 'activity', 'bp-tour' );
+	}
+}
+add_action( 'close_body', 'infinity_buddypress_tour' );
+
+/**
  * Custom Favicon
  *
  * @package Infinity

@@ -106,25 +106,31 @@ class ICE_Script extends ICE_Asset
 	/**
 	 * Render javascript markup for this script's dynamic code
 	 */
-	public function render()
+	public function render( $wrap = false )
 	{
+		// render opening tag?
+		if ( true === $wrap ) {
+			// yep, render it
+			?><script type="text/javascript"><?php
+		}
+
 		// run parent first!
 		parent::render();
 
 		// render rules
 		if ( count( $this->logic_stack ) ) {
-			
-			// begin script generation
-			printf( '/*+++ begin script: %s */', $this->token ) . PHP_EOL;
-			
 			// loop all logic objects
 			foreach ( $this->logic_stack as $handle => $logic ) {
 				// render output of logic export
 				echo $logic->export();
 			}
-			
-			// end script generation
-			printf( '/*+++ end script: %s */', $this->token ) . PHP_EOL . PHP_EOL;
+		}
+
+		// render closing tag?
+		if ( true === $wrap ) {
+			// yep, render it
+			?></script>
+			<?php
 		}
 	}
 }
@@ -281,28 +287,8 @@ class ICE_Script_Logic extends ICE_Base
 		
 		// add each variable
 		foreach ( $this->variables as $name => $value ) {
-			// format the var
-			switch ( true ) {
-				case is_numeric( $value ):
-					$vars[$name] = $value;
-					break;
-				case is_bool( $value ):
-					$vars[$name] = ( $value ) ? 'true' : 'false';
-					break;
-				case ( null === $value ):
-					$vars[$name] = 'null';
-					break;
-				case is_string( $value ):
-					if ( $this->is_object_literal( $value ) ) {
-						$vars[$name] = $value;
-					} else {
-						$vars[$name] = sprintf( "'%s'", $value );
-					}
-					break;
-				case is_array( $value ):
-					$vars[$name] = sprintf( "['%s']", implode( "','", $value ) );
-					break;
-			}
+			// format the value
+			$vars[$name] = $this->format_value( $value );
 		}
 
 		// assignment operator
@@ -337,7 +323,7 @@ class ICE_Script_Logic extends ICE_Base
 	public function export()
 	{
 		// begin logic generation
-		$code = sprintf( '/*+++ begin logic: %s */', $this->token ) . PHP_EOL;
+		$code = '';
 
 		// wrap with alias?
 		if ( $this->alias ) {
@@ -388,13 +374,140 @@ class ICE_Script_Logic extends ICE_Base
 			$code .= '})(jQuery);' . PHP_EOL;
 		}
 		
-		// end logic generation
-		$code .= sprintf( '/*+++ end logic: %s */', $this->token ) . PHP_EOL;
-
 		// all done
 		return $code;
 	}
 
+	/**
+	 * Format a value so that it can be rendered as valid javascript.
+	 *
+	 * @param mixed $value
+	 * @return string
+	 */
+	protected function format_value( $value )
+	{
+		// get switchy
+		switch ( true ) {
+
+			// null
+			case ( null === $value ):
+				return $this->format_null();
+
+			// boolean
+			case is_bool( $value ):
+				return $this->format_boolean( $value );
+
+			// number
+			case is_numeric( $value ):
+				return $this->format_number( $value );
+
+			// string
+			case is_string( $value ):
+				return $this->format_string( $value );
+
+			// array
+			case is_array( $value ):
+				return $this->format_array( $value );
+
+			// object
+			case is_object( $value ):
+				return $this->format_object( $value );
+		}
+
+		// make it null by default
+		return $this->format_null();
+	}
+
+	/**
+	 * Return a string representation of NULL.
+	 *
+	 * @return string
+	 */
+	protected function format_null()
+	{
+		return 'null';
+	}
+
+	/**
+	 * Return a string representation of a boolean.
+	 *
+	 * @param boolean $value
+	 * @return string
+	 */
+	protected function format_boolean( $value )
+	{
+		return ( true === (boolean) $value ) ? 'true' : 'false';
+	}
+
+	/**
+	 * Return a string representation of a number.
+	 *
+	 * @param mixed $value
+	 * @return string
+	 */
+	protected function format_number( $value )
+	{
+		return (string) $value;
+	}
+
+	/**
+	 * Return a single quoted string with single quotes escaped.
+	 *
+	 * @param string $value
+	 * @return string
+	 */
+	protected function format_string( $value )
+	{
+		// check if object literal
+		if ( $this->is_object_literal( $value ) ) {
+			// yep, don't touch it
+			return $value;
+		} else {
+			// regular string
+			return "'" . str_replace( "'", "\\'", $value ) . "'";
+		}
+	}
+
+	/**
+	 * Return a string representation of an array.
+	 *
+	 * @param array $in
+	 * @return string
+	 */
+	protected function format_array( $in )
+	{
+		// array of formatted values
+		$out = array();
+
+		// loop every value and format
+		foreach( $in as $value ) {
+			$out[] = $this->format_value( $value );
+		}
+
+		// return formatted array syntax
+		return '[' . implode( ',', $out ) . ']';
+	}
+
+	/**
+	 * Return a string representation of an object.
+	 *
+	 * @param object $in
+	 * @return string
+	 */
+	protected function format_object( $in )
+	{
+		// array of formatted values
+		$out = array();
+
+		// loop every value and format
+		foreach( $in as $key => $value ) {
+			$out[] = "'" . $key . "': " .  $this->format_value( $value );
+		}
+
+		// return formatted array syntax
+		return '{' . implode( ',', $out ) . '}';
+	}
+	
 	/**
 	 * Returns true if string is *probably* an object literal
 	 *

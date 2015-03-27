@@ -21,6 +21,15 @@ ice_register_extension(
 	)
 );
 
+// BuddyPress Protect
+ice_register_extension(
+	'feature',
+	'bp/protect',
+	array(
+		'class' => 'ICE_Ext_Feature_Bp_Protect'
+	)
+);
+
 // BuddyPress Plugin Support
 ice_register_extension(
 	'feature',
@@ -96,5 +105,25 @@ ice_register_extension(
 	array(
 		'class' => 'ICE_Ext_Feature_Responsive_Videos',
 		'template' => true
+	)
+);
+
+// Joyride Script
+ice_register_extension(
+	'feature',
+	'scripts/joyride',
+	array(
+		'class' => 'ICE_Ext_Feature_Scripts_Joyride',
+		'template' => true
+	)
+);
+
+// BuddyPress Joyride Tour
+ice_register_extension(
+	'feature',
+	'bp/tour',
+	array(
+		'extends' => 'scripts/joyride',
+		'class' => 'ICE_Ext_Feature_Bp_Tour'
 	)
 );

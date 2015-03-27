@@ -20,24 +20,53 @@
 
 /**
  * Print the <title> tag based on what is being viewed.
+ *
+ * If the WordPress SEO plugin is supported, wp_title() is called with no args.
+ *
+ * @global int $page
+ * @global int $paged
+ * @uses infinity_plugin_supported()
  */
 function infinity_base_title()
 {
 	global $page, $paged;
- 
-	wp_title( '|', true, 'right' );
- 
-	// Add the blog name.
-	bloginfo( 'name' );
- 
-	// Add the blog description for the home/front page.
-	$site_description = get_bloginfo( 'description', 'display' );
-	if ( $site_description && ( is_home() || is_front_page() ) )
-		echo " | $site_description";
- 
-	// Add a page number if necessary:
-	if ( $paged >= 2 || $page >= 2 )
-		echo ' | ' . sprintf( __( 'Page %s', 'infinity' ), max( $paged, $page ) );
+
+	// is WordPress SEO plugin supported?
+	if ( true === infinity_plugin_supported( 'wordpress-seo' ) ) {
+
+		// yes, print title with no args
+		wp_title();
+		
+	} else {
+		
+		// no, print our own seo title
+		wp_title( '|', true, 'right' );
+
+		// add the blog name.
+		bloginfo( 'name' );
+
+		// try to get the blog description
+		$site_description = get_bloginfo( 'description', 'display' );
+
+		// got a site desc and on home/front page?
+		if (
+			false === empty( $site_description ) &&
+			true === (
+				true === is_home() ||
+				true === is_front_page()
+			)
+		) {
+			// yes, print it
+			echo ' | ' . $site_description;
+		}
+
+		// have a page number?
+		if ( $paged >= 2 || $page >= 2 ) {
+			// yes, print it
+			echo ' | ';
+			printf( __( 'Page %s', 'infinity' ), max( $paged, $page ) );
+		}
+	}
 }
 
 /**
@@ -81,9 +110,41 @@ function infinity_posted_on()
 	);
 }
 
+// define the_post_name() tag if not already exists.
+if ( false === function_exists( 'the_post_name' ) ) {
+	/**
+	* Echo the post name (slug)
+	*/
+	function the_post_name()
+	{
+		// use global post
+		global $post;
+
+		// post_name property is the slug
+		echo $post->post_name;
+	}
+}
+
 //
 // Custom Conditionals
 //
+
+if ( false === function_exists( 'is_forum_page' ) ) {
+	/**
+	 * Returns true if on any forum page.
+	 *
+	 * @package Infinity
+	 * @subpackage conditionals
+	 * @return boolean
+	 */
+	function is_forum_page()
+	{
+		return (
+			true === infinity_plugin_supported( 'bbpress' ) &&
+			true === infinity_bbpress_is_page()
+		);
+	}
+}
 
 /**
  * Returns true if not in admin dir

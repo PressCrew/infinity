@@ -38,7 +38,7 @@ class ICE_Ext_Option_Category
 			'echo'               => true,
 			'selected'           => $this->get(),
 			'hierarchical'       => false,
-			'name'               => $this->get_name(),
+			'name'               => $this->get_group() . '_' . $this->get_name(),
 			'id'                 => $this->field_id,
 			'class'              => $this->field_class,
 			'depth'              => false,

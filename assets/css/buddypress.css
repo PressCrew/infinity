@@ -5,18 +5,82 @@
 /*--------------------------------------------------------------
 0.1 - Global Tweaks
 --------------------------------------------------------------*/
-.infinity-bp .item-avatar {
+.infinity-bp .item-avatar,
+.infinity-bp #buddypress .item-avatar {
 	float: left;
 }
+/* Avatars */
+.infinity-bp #buddypress ul.item-list li img.avatar,
+.infinity-bp #buddypress #whats-new-avatar img,
+.infinity-bp #buddypress .item-avatar img {
+	margin-left: 0;
+	padding: 0;
+	height: auto;
+}
+/* IE8 expects floats to have width or they lose hasLayout */
+.infinity-bp div.item-avatar,
+.infinity-bp #buddypress div.item-avatar {
+	width: 55px;
+	height: 60px;
+}
+.infinity-bp ul.item-list div.item-avatar,
+.infinity-bp #buddypress ul.item-list div.item-avatar {
+	width: 50px;
+	height: 50px;
+}
+.infinity-bp #buddypress form#whats-new-form #whats-new-avatar {
+	width: 60px;
+	height: 60px;
+}
+.infinity-bp #buddypress div#item-header ul#group-admins li,
+.infinity-bp #buddypress div#item-header ul#group-mods li {
+	width: 34px;
+	height: 34px;
+}
+/* end IE8 avatar fixes */
+.infinity-bp ul.item-list li img.avatar,
+.infinity-bp #buddypress ul.item-list li img.avatar {
+	width: 40px;
+	height: 40px;
+}
+.infinity-bp .avatar-block,
+.infinity-bp #buddypress .avatar-block,
+.infinity-bp .activity-avatar,
+.infinity-bp #buddypress .activity-avatar {
+	padding-left: 2px;
+}
+.infinity-bp #buddypress #whats-new-avatar img {
+	width: 60px;
+	height: 60px;
+}
+/* Get rid of the Group Avatars in the stream updates */
+.infinity-bp #buddypress .activity-header .avatar {
+	display: none;
+}
+/* Don't break the menubar avatar icon in IE8 */
+.infinity-bp #wpadminbar img {
+	max-width: none;
+}
+
+.infinity-bp span.highlight,
 .infinity-bp #buddypress span.highlight,
+.infinity-bp span.activity,
 .infinity-bp #buddypress span.activity,
 .infinity-bp #buddypress div#message p,
+.infinity-bp .generic-button,
 .infinity-bp #buddypress .generic-button,
+.infinity-bp .activity-list div.activity-meta a,
 .infinity-bp #buddypress .activity-list div.activity-meta a {
 	display: inline-block;
 	text-decoration: none;
 	font: 11px/12px "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	padding: 3px 6px;
+}
+
+.infinity-bp #buddypress thead:first-child tr th,
+.infinity-bp #buddypress thead:first-child tr td {
+	padding-left: 10px;
+	padding-right: 10px;
 }
 .infinity-bp #buddypress .jcrop-holder img,
 .infinity-bp #buddypress #avatar-crop-pane img {
@@ -29,7 +93,7 @@
 .infinity-bp #sidebar .item-meta {
 	position: relative;
 }
-.infinity-bp #buddypress #sidebar div#message p {
+.infinity-bp #sidebar div#message p {
 	padding-left: 10px;
 }
 /*--------------------------------------------------------------
@@ -62,11 +126,15 @@
 /*--------------------------------------------------------------
 3.1 - Activity
 --------------------------------------------------------------*/
+.infinity-bp #buddypress form#whats-new-form {
+	padding-bottom: 10px;
+}
 .infinity-bp #buddypress #item-body form#whats-new-form {
-	margin-top: 20px;
+	margin-top: -20px;
+	padding-top: 30px;
 	border: none;
 }
-.infinity-bp #buddypress .home-page form#whats-new-form {
+.infinity-bp.home-page #buddypress form#whats-new-form {
 	margin-bottom: 30px;
 }
 .infinity-bp #buddypress form#whats-new-form h5 {
@@ -98,17 +166,58 @@
 }
 .infinity-bp #buddypress .activity-list .activity-content .activity-header img.avatar {
 	display: none;
+	float: none;
+	height: 20px;
+	margin: 0 5px 0 0;
+	width: 20px;
 }
 .infinity-bp #buddypress .activity-list .activity-content .activity-inner,
 .infinity-bp #buddypress .activity-list .activity-content blockquote {
 	background: #fbfbfb;
 	border: 1px solid #f4f4f4;
-	margin: 15px 0 15px 5px;
-	padding: 10px;
+	margin: 15px 5px 15px 5px;
+	padding: 20px;
 }
 .infinity-bp #buddypress .activity-inner img {
 	max-width: 100% !important;
 	height: auto;
+}
+.infinity-bp #buddypress div.activity-meta {
+	margin-bottom: 0;
+}
+.infinity-bp #buddypress .activity-list li.mini .activity-meta {
+    margin-top: 0;
+    padding-top: 0;
+}
+.infinity-bp .sidebar-activity-tabs {
+	padding-bottom: 30px;
+}
+.infinity-bp #vertical-activity-tabs {
+	background: none repeat scroll 0 0 transparent;
+	margin-top: 0;
+}
+.infinity-bp #vertical-activity-tabs,
+.infinity-bp #group-navigation,
+.infinity-bp #profile-navigation {
+	border: 0 none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+.infinity-bp #vertical-activity-tabs ul li {
+	float: none !important;
+}
+.infinity-bp #vertical-activity-tabs ul {
+	overflow: inherit;
+}
+.infinity-bp #buddypress #subnav ul {
+	border-top: 0px;
+	padding: 0;
+}
+.infinity-bp #sidebar .item-list-tabs li.loading a {
+	padding-left: 30px !important;
+}
+.infinity-bp #buddypress .activity-list div.activity-meta a {
+	font-size: 70%;
 }
 
 /*--------------------------------------------------------------
@@ -143,6 +252,7 @@
 3.3 - Directories - Members, Groups, Blogs, Forums
 --------------------------------------------------------------*/
 .infinity-bp #buddypress div.dir-search {
+	float: right;
 	margin-top: -60px;
 	width: 50%;
 	text-align: right;
@@ -154,6 +264,12 @@
 .infinity-bp #buddypress li.groups-members-search input[type=text] {
 	display: inline-block;
 	margin-right: 10px;
+	padding: 8px 12px;
+	border: 1px solid #dedede;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	font-size: 100%;
 }
 
 .infinity-bp #buddypress .dir-form {
@@ -171,6 +287,18 @@
 
 .infinity-bp #content #buddypress .item-title a {
 	font-size: 120%;
+}
+
+.infinity-bp #buddypress form#send-invite-form .main-column {
+	margin-left: 190px;
+}
+
+.infinity-bp #buddypress div#invite-list {
+	height: 400px;
+	overflow: scroll;
+	padding: 5px;
+	width: 160px;
+	float: left;
 }
 
 /*--------------------------------------------------------------
@@ -198,7 +326,8 @@
 	margin: -5px 0 15px;
 }
 
-.infinity-bp.infinity-btns #buddypress .generic-button a {
+.infinity-bp .generic-button a,
+.infinity-bp #buddypress .generic-button a {
 	color: #444;
 }
 
@@ -230,7 +359,9 @@
 .infinity-bp #buddypress span.activity {
 	background: #f9f9f9;
 	font-weight: normal;
-	margin-top: 6px;
+	margin-top: 0;
+	margin-bottom: 7px;
+	padding: 0 5px;
 }
 .infinity-bp #buddypress div#item-header {
 	margin-bottom: 15px;
@@ -247,6 +378,10 @@
 	right: 0;
 	top: -1px;
 }
+.infinity-bp #buddypress #item-header-avatar img {
+	width: auto; /* fixes display in IE8 */
+	float: none;
+}
 .infinity-bp #buddypress div#item-header div#item-meta {
 	color: #777;
 }
@@ -259,6 +394,9 @@
 .infinity-bp #buddypress div#item-header div#message.info p {
 	background: #f9f9f9;
 }
+.infinity-bp #buddypress div#item-header div#item-header-content {
+	margin-left: 0;
+}
 .infinity-bp #buddypress ul.item-list li {
 	padding: 20px 0 10px;
 	list-style: none outside none;
@@ -270,9 +408,14 @@
 .infinity-bp #buddypress ul.item-list li div.item-desc {
 	width: 68%;
 }
+.infinity-bp #buddypress ul.item-list li div.action {
+    right: 30px;
+}
 .infinity-bp #buddypress div.item-list-tabs {
 	background: none repeat scroll 0 0 #222222;
 	min-height: 37px;
+	clear: both;
+	position: relative;
 }
 
 .infinity-bp #buddypress div.item-list-tabs ul li.last {
@@ -305,6 +448,7 @@
 }
 .infinity-bp #buddypress div.item-list-tabs ul li span {
 	color: #777;
+	border: 1px solid #555;
 }
 .infinity-bp #buddypress div.item-list-tabs ul li a span {
 	padding: 2px 5px;
@@ -324,7 +468,7 @@
 }
 .infinity-bp #buddypress div.item-list-tabs ul li.selected a span,
 .infinity-bp #buddypress div.item-list-tabs ul li.current a span {
-	background-color: #555;
+	border-color: #666;
 }
 .infinity-bp #buddypress div.item-list-tabs#subnav {
 	border-bottom: 1px solid #e8e8e8;
@@ -354,10 +498,134 @@
 3.10 - Extended Profiles
 --------------------------------------------------------------*/
 
+.infinity-bp #buddypress #profile-nav-menu ul {
+	list-style: none outside none;
+}
+.infinity-bp .sidebar-activity-tabs ul {
+	list-style: none outside none;
+}
+.infinity-bp .sidebar-activity-tabs ul li {
+	padding-bottom: 3px;
+	padding-top: 5px;
+}
+.infinity-bp .sidebar-activity-tabs ul li a {
+	display: block;
+	padding-bottom: 10px;
+	padding-right: 0;
+	padding-top: 10px;
+}
+.infinity-bp .sidebar-activity-tabs ul li.current,
+.infinity-bp .sidebar-activity-tabs ul li.selected {
+	padding: 10px 0 12px 30px;
+}
+.infinity-bp .sidebar-activity-tabs .profile-subnav li.selected {
+	padding-bottom: 3px;
+	padding-left: 30px;
+	padding-top: 5px;
+}
+.infinity-bp .sidebar-activity-tabs ul li.current a,
+.infinity-bp .sidebar-activity-tabs ul li.selected a {
+	margin-bottom: -10px;
+	margin-top: -5px;
+}
+/* Profile Action Buttons */
+.infinity-bp.bp-user #item-buttons .generic-button,
+.infinity-bp.bp-user #profile-nav-menu a {
+	color: inherit;
+	background: none repeat scroll 0 0 transparent;
+	border: 0 none;
+	text-shadow: inherit;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	display: block;
+	margin-bottom: -18px;
+	padding: 3px 8px;
+}
+/* Profile Navigation and Groups Navigation */
+/* First Level */
+.infinity-bp.groups #buddypress div#subnav.item-list-tabs .sidebar-activity-tabs {
+	margin-bottom: 30px;
+}
+.infinity-bp .sidebar-activity-tabs ul li span,
+.infinity-bp .sidebar-activity-tabs ul li.current span,
+.infinity-bp .sidebar-activity-tabs ul li.selected span {
+	display: inline;
+	margin-left: 2px;
+	padding: 2px 5px;
+}
+/* Second Level */
+.infinity-bp #buddypress #object-nav ul.profile-subnav {
+    margin: 15px 0 -12px -30px;
+    padding-left: 30px;
+}
+.infinity-bp #buddypress ul.profile-subnav li {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	margin-right: 0px;
+	font-size: 90%;
+}
+.infinity-bp #buddypress ul.profile-subnav li a:before {
+	padding-left: 30px;
+}
+.infinity-bp #buddypress ul.profile-subnav li a {
+	padding-left: 30px;
+}
+.infinity-bp .sidebar-activity-tabs ul li.current ul.profile-subnav li a {
+	padding-bottom: 8px;
+	padding-top: 8px;
+	margin: inherit;
+}
+/* XProfile */
+.infinity-bp #buddypress .field-visibility-settings {
+	margin-top: 0.5em;
+}
+.infinity-bp #buddypress .field-visibility-settings legend {
+	border: 0;
+	font-size: 1em;
+	line-height: normal;
+	margin: 0;
+}
+.infinity-bp #buddypress .field-visibility-settings li {
+	list-style: none;
+}
+/* FIX:  hide the horizontal navigation on settings pages using CSS */
+.infinity-bp #content #buddypress .settings #item-nav,
+.infinity-bp #content #buddypress #object-nav {
+	display: none;
+}
+
+.infinity-bp #buddypress .registration .error {
+	background: #DE3434;
+	border: 1px solid #BB4747;
+	border-radius: 4px;
+	color: white;
+	margin-bottom: 0.5em;
+	padding: 0.3em;
+	width: 85%;
+}
+.infinity-bp #buddypress span.label {
+	color: #999;
+	display: block;
+	font-size: 80%;
+	font-weight: bold;
+	margin: 5px 0;
+	text-transform: uppercase;
+}
+.infinity-bp #buddypress #profile-details-section .checkbox span.label,
+.infinity-bp #buddypress .checkbox .error {
+	margin-left: -1.3em;
+}
+
 /*--------------------------------------------------------------
 3.11 - Widgets
 --------------------------------------------------------------*/
 .infinity-bp .widget.buddypress div.item-options {
+	float: right;
+	margin-right: 0px;
+	margin-top: -45px;
+	margin-bottom: -16px;
+	font-size: 70%;
 	color: #73c1e6;
 	font-weight: bold;
 	text-transform: uppercase;

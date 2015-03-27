@@ -96,7 +96,7 @@ ice_register_group( 'core' );
 				'title' => 'Sidebar Size',
 				'description' => 'Select a sidebar size',
 				'type' => 'select',
-				'default_value' => 'eleven',
+				'default_value' => 'twelve',
 				'field_options' => array(
 					'fourteen' => '15 percent',
 					'thirteen' => '20 percent',
@@ -172,7 +172,7 @@ ice_register_group( 'top-menu' );
 				'type' => 'colorpicker',
 				'title' => 'Font Color',
 				'description' => 'Choose a font color for links of the menu above the header.',
-				'style_selector' => '.top-menu ul li a span',
+				'style_selector' => 'body.theme-option .top-menu ul li a span',
 				'style_property' => 'color'
 			),
 			$infinity_top_menu_defaults
@@ -184,7 +184,7 @@ ice_register_group( 'top-menu' );
 				'type' => 'select',
 				'title' => 'Font Weight',
 				'description' => 'Choose a font weight for links of the menu above the header.',
-				'style_selector' => '.top-menu ul li a span',
+				'style_selector' => 'body.theme-option .top-menu ul li a span',
 				'style_property' => 'font-weight'
 			),
 			$infinity_top_menu_defaults
@@ -194,7 +194,7 @@ ice_register_group( 'top-menu' );
 			array(
 				'name' => 'background-color',
 				'type' => 'css/bg-color',
-				'style_selector' => '.top-menu'
+				'style_selector' => 'body.theme-option .top-menu'
 			),
 			$infinity_top_menu_defaults
 		);
@@ -205,7 +205,7 @@ ice_register_group( 'top-menu' );
 				'type' => 'css/bg-color',
 				'title' => 'Sub-item Background',
 				'description' => 'Choose a background color for the submenu items of the menu above the header.',
-				'style_selector' => '.top-menu ul ul'
+				'style_selector' => 'body.theme-option .top-menu ul ul'
 			),
 			$infinity_top_menu_defaults
 		);
@@ -215,7 +215,7 @@ ice_register_group( 'top-menu' );
 				'name' => 'overlay-image',
 				'group' => 'top-menu',
 				'section' => 'menus-top',
-				'style_selector' => '.top-menu'
+				'style_selector' => 'body.theme-option .top-menu'
 			),
 			array_merge( $infinity_top_menu_defaults, $overlay_image_defaults )
 		);
@@ -224,7 +224,7 @@ ice_register_group( 'top-menu' );
 			array(
 				'name' => 'overlay-opacity',
 				'type' => 'css/overlay-opacity',
-				'style_selector' => '.top-menu:before',
+				'style_selector' => 'body.theme-option .top-menu:before',
 				'parent' => 'overlay-image',
 				'linked_image' => 'overlay-image'
 			),
@@ -270,7 +270,7 @@ ice_register_group( 'main-menu' );
 				'type' => 'colorpicker',
 				'title' => 'Font Color',
 				'description' => 'Choose a font color for links of the menu inside the header.',
-				'style_selector' => '.main-menu ul li a span',
+				'style_selector' => 'body.theme-option .main-menu ul li a span',
 				'style_property' => 'color'
 			),
 			$infinity_main_menu_defaults
@@ -282,7 +282,7 @@ ice_register_group( 'main-menu' );
 				'type' => 'select',
 				'title' => 'Font Weight',
 				'description' => 'Choose a font weight for links of the menu inside the header.',
-				'style_selector' => '.main-menu ul li a span',
+				'style_selector' => 'body.theme-option .main-menu ul li a span',
 				'style_property' => 'font-weight'
 			),
 			$infinity_main_menu_defaults
@@ -295,7 +295,7 @@ ice_register_group( 'main-menu' );
 				'title' => 'Padding',
 				'description' => 'Select the padding (spacing) around the menu links by moving the slider.',
 				'max' => 30,
-				'style_selector' => '.main-menu',
+				'style_selector' => 'body.theme-option .main-menu',
 				'style_property' => 'padding'
 			),
 			$infinity_main_menu_defaults
@@ -305,7 +305,7 @@ ice_register_group( 'main-menu' );
 			array(
 				'name' => 'background-color',
 				'type' => 'css/bg-color',
-				'style_selector' => '.main-menu'
+				'style_selector' => 'body.theme-option .main-menu'
 			),
 			$infinity_main_menu_defaults
 		);
@@ -313,7 +313,7 @@ ice_register_group( 'main-menu' );
 		ice_register_option(
 			array(
 				'name' => 'overlay-image',
-				'style_selector' => '.main-menu'
+				'style_selector' => 'body.theme-option .main-menu'
 			),
 			array_merge( $infinity_main_menu_defaults, $overlay_image_defaults )
 		);
@@ -322,7 +322,7 @@ ice_register_group( 'main-menu' );
 			array(
 				'name' => 'overlay-opacity',
 				'type' => 'css/overlay-opacity',
-				'style_selector' => '.main-menu:before',
+				'style_selector' => 'body.theme-option .main-menu:before',
 				'parent' => 'overlay-image',
 				'linked_image' => 'overlay-image'
 			),
@@ -368,7 +368,7 @@ ice_register_group( 'sub-menu' );
 				'type' => 'colorpicker',
 				'title' => 'Font Color',
 				'description' => 'Choose a font color for links of the menu below the header.',
-				'style_selector' => '.sub-menu ul li a span',
+				'style_selector' => 'body.theme-option .sub-menu ul li a span',
 				'style_property' => 'color'
 			),
 			$infinity_sub_menu_defaults
@@ -380,7 +380,7 @@ ice_register_group( 'sub-menu' );
 				'type' => 'select',
 				'title' => 'Font Weight',
 				'description' => 'Choose a font weight for links of the menu below the header.',
-				'style_selector' => '.sub-menu ul li a span',
+				'style_selector' => 'body.theme-option .sub-menu ul li a span',
 				'style_property' => 'font-weight'
 			),
 			$infinity_sub_menu_defaults
@@ -390,7 +390,7 @@ ice_register_group( 'sub-menu' );
 			array(
 				'name' => 'background-color',
 				'type' => 'css/bg-color',
-				'style_selector' => '.sub-menu'
+				'style_selector' => 'body.theme-option .sub-menu'
 			),
 			$infinity_sub_menu_defaults
 		);
@@ -401,7 +401,7 @@ ice_register_group( 'sub-menu' );
 				'type' => 'css/bg-color',
 				'title' => 'Sub-item Background',
 				'description' => 'Choose a background color for the submenu items of the menu below the header.',
-				'style_selector' => '.sub-menu ul ul'
+				'style_selector' => 'body.theme-option .sub-menu ul ul'
 			),
 			$infinity_sub_menu_defaults
 		);
@@ -409,7 +409,7 @@ ice_register_group( 'sub-menu' );
 		ice_register_option(
 			array(
 				'name' => 'overlay-image',
-				'style_selector' => '.sub-menu'
+				'style_selector' => 'body.theme-option .sub-menu'
 			),
 			array_merge( $infinity_sub_menu_defaults, $overlay_image_defaults )
 		);
@@ -418,7 +418,7 @@ ice_register_group( 'sub-menu' );
 			array(
 				'name' => 'overlay-opacity',
 				'type' => 'css/overlay-opacity',
-				'style_selector' => '.sub-menu:before',
+				'style_selector' => 'body.theme-option .sub-menu:before',
 				'parent' => 'overlay-image',
 				'linked_image' => 'overlay-image'
 			),
@@ -473,7 +473,7 @@ ice_register_group( 'sidebar' );
 			'group' => 'sidebar',
 			'section' => 'sidebar',
 			'required_feature' => 'layout',
-			'style_selector' => '#sidebar'
+			'style_selector' => 'body.theme-option #sidebar'
 		);
 
 		ice_register_option(
@@ -493,7 +493,7 @@ ice_register_group( 'sidebar' );
 				'type' => 'colorpicker',
 				'title' => 'Link Color',
 				'description' => 'Choose a color for links in the sidebar.',
-				'style_selector' => '#sidebar a',
+				'style_selector' => 'body.theme-option #sidebar a',
 				'style_property' => 'color'
 			),
 			$infinity_sidebar_layout_defaults
@@ -535,7 +535,7 @@ ice_register_group( 'sidebar' );
 			array(
 				'name' => 'overlay-opacity',
 				'type' => 'css/overlay-opacity',
-				'style_selector' => '#sidebar:before',
+				'style_selector' => 'body.theme-option #sidebar:before',
 				'parent' => 'overlay-image',
 				'linked_image' => 'overlay-image'
 			),
@@ -805,6 +805,35 @@ ice_register_group( 'bp' );
 	);
 
 //
+// BP Plugins Compat Group
+//
+ice_register_group( 'bp-plugins' );
+
+	// Popular BuddyPress plugin support
+	ice_register_feature(
+		array(
+			'name' => 'support',
+			'group' => 'bp-plugins',
+			'type' => 'default',
+			'title' => 'BuddyPress Plugins Support',
+			'description' => 'Popular BuddyPress plugins support'
+		)
+	);
+
+	// Popular BuddyPress plugin styles
+	ice_register_feature(
+		array(
+			'name' => 'style',
+			'group' => 'bp-plugins',
+			'type' => 'default',
+			'title' => 'BuddyPress Plugins Styles',
+			'description' => 'Popular BuddyPress plugins support styles',
+			'style' => 'assets/css/buddypress-plugins.css'
+//			'body_class' => 'infinity-bp'
+		)
+	);
+
+//
 // BP FBConnect Group
 //
 ice_register_group( 'bp-fbconnect' );
@@ -829,6 +858,133 @@ ice_register_group( 'bp-fbconnect' );
 				'description' => 'Show connect with Facebook button?',
 				'default_value' => true
 			)
+		);
+
+//
+// BP Protect Group
+//
+ice_register_group( 'bp-protect' );
+
+	// BP Protect Support
+	ice_register_feature(
+		array(
+			'name' => 'support',
+			'group' => 'bp-protect',
+			'type' => 'bp/protect'
+		)
+	);
+		ice_register_option(
+			array(
+				'name' => 'toggle',
+				'group' => 'bp-protect',
+				'section' => 'buddypress',
+				'type' => 'toggle/on-off',
+				'required_feature' => 'support',
+				'title' => 'Private Community',
+				'description' => 'Turn this option on to restrict access to your BuddyPress components to members only.',
+				'default_value' => false
+			)
+		);
+
+//
+// BP Tour Group
+//
+ice_register_group( 'bp-tour' );
+
+	// BP Protect Support
+	ice_register_feature(
+		array(
+			'name' => 'activity',
+			'group' => 'bp-tour',
+			'type' => 'bp/tour',
+			'cookie_name' => 'buddypress-tour'
+		)
+	);
+		$infinity_bp_tour_defaults = array(
+			'group' => 'bp-tour',
+			'type' => 'textarea',
+			'section' => 'buddypress',
+			'field_class' => 'css-editor'
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'start',
+				'title' => 'Activity Stream Tour',
+				'description' => 'The first text that is being displayed before the tour starts.',
+				'default_value' => "<h4>Hi there!</h4> It seems that this is the first time you've visited our Activity Stream, so let's give you a quick tour of our Features! Ready? Let's do this!"
+			),
+			$infinity_bp_tour_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'all',
+				'title' => 'All Members Text',
+				'description' => 'The text explaining the All Members button.',
+				'default_value' => "<h4>All Members</h4> If you like to get a nice overview of <em>all the activity</em> posted by our community, this is the button to click!"
+			),
+			$infinity_bp_tour_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'friends',
+				'title' => 'Friends Text',
+				'description' => 'The text explaining the Friends button.',
+				'default_value' => "<h4>My Friends</h4> Keep track of what your friends are doing. No buddies yet? Why don't you make some by visting the Members Directory!</a>"
+			),
+			$infinity_bp_tour_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'groups',
+				'title' => 'Groups Text',
+				'description' => 'The text explaining the Groups button.',
+				'default_value' => "<h4>My Groups</h4> By clicking the &quot;My Groups&quot; button you can keep track of what's happening in the groups you've joined. Not a member of a group yet? Check out the Groups Directory!</a>"
+			),
+			$infinity_bp_tour_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'mentions',
+				'title' => 'Mentions Text',
+				'description' => 'The text explaining the Mentions button.',
+				'default_value' => "<h4>Mentions</h4> You can easily &quot;Mention&quot; others in your updates or forum posts across our community. As soon as someone mentions you using @yourname you'll see these mentions appear under this button."
+			),
+			$infinity_bp_tour_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'favorites',
+				'title' => 'Favorites Text',
+				'description' => 'The text explaining the Favorites button.',
+				'default_value' => "<h4>Keep Track</h4> If there's a conversation brewing that you find interesting, you can add your voice by clicking on the <strong>Comment</strong> button. By using the <strong>Favorite</strong> button you can easily bookmark the conversation so you go back to it back later. Go ahead and <strong>try it</strong> by clicking on a &quot;Favorite&quot; button!"
+			),
+			$infinity_bp_tour_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'filter',
+				'title' => 'Filter Text',
+				'description' => 'The text explaining the filter dropdown.',
+				'default_value' => "<h4>Use the filter!</h4> You can filter the stream to only show the items that have caught your interest. For instance you could use the filter <strong>Posts</strong> to show blog posts from across our network. Awesome!"
+			),
+			$infinity_bp_tour_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'update',
+				'title' => 'Update Text',
+				'description' => 'The last text in the tour prompting your user to post an update.',
+				'default_value' => "<h4>Update Away!</h4> We have taught you everything you need to know to get started! It's time for you to post your first update. Good luck young grasshopper, we've taught you well!"
+			),
+			$infinity_bp_tour_defaults
 		);
 
 //
@@ -943,6 +1099,45 @@ ice_register_group( 'buttons' );
 		)
 	);
 
+	// Button Colors
+	ice_register_feature(
+		array(
+			'name' => 'color',
+			'group' => 'buttons',
+			'type' => 'default',
+			'title' => 'Custom button colors',
+			'description' => 'Custom button colors.',
+			'body_class' => 'infinity-btns'
+		)
+	);
+
+		ice_register_option(
+			array(
+				// TODO import old name format(s) as commented out for compat
+				// 'name' => 'cbox_button_color',
+				'name' => 'custom-color',
+				'group' => 'buttons',
+				'section' => 'global',
+				'type' => 'select',
+				'title' => 'Button Color',
+				'description' => 'Choose a button color.',
+				'field_options' => array(
+					'orange' => 'Orange',
+					'blue' => 'Blue',
+					'darkblue' => 'Navy Blue',
+					'black' => 'Black',
+					'purple' => 'Purple',
+					'grey' => 'Grey',
+					'teal' => 'Teal',
+					'purple' => 'Purple',
+					'green' => 'Green',
+					'pink' => 'Pink',
+					'white' => 'White'
+				),
+				'default_value' => 'orange'
+			)
+		);
+
 //
 // Icons Group
 //
@@ -1024,6 +1219,154 @@ ice_register_group( 'custom' );
 		);
 
 //
+// Slider Group
+//
+ice_register_group( 'slider' );
+
+	// Slider post_type='infinity_slider' support
+	ice_register_feature(
+		array(
+			'name' => 'custom',
+			'group' => 'slider',
+			'type' => 'default',
+			'title' => 'Custom Slider',
+			'description' => 'Adds a custom post type for managing slides.'
+		)
+	);
+
+	// Slider post/page category support
+	ice_register_feature(
+		array(
+			'name' => 'category',
+			'group' => 'slider',
+			'type' => 'default',
+			'title' => 'Category Slider',
+			'description' => 'Adds the option to use a category\'s featured images for slide content.'
+		)
+	);
+
+		$infinity_slider_options_defaults = array(
+			'group' => 'slider',
+			'section' => 'homepage'
+		);
+
+		ice_register_option(
+			array(
+				// TODO import old name format as commented out for compat
+				// 'name' => 'cbox_flex_slider',
+				'name' => 'mode',
+				'type' => 'select',
+				'title' => 'Slider Mode',
+				'description' =>
+					'If you enable the slider you can choose what type of content you want to display. ' .
+					'You can choose between displaying images and videos that you have added through the ' .
+					'Custom Slides screen or showing images and videos from posts from a category of your choosing. ' .
+					'If you choose the latter, there are some options you can set at the bottom of this page.',
+				'field_options' => array(
+					0 => 'Do not display',
+					1 => 'Show Custom Slides',
+					2 => 'Show Category'
+				),
+				'default_value' => 1
+			),
+			$infinity_slider_options_defaults
+		);
+
+		ice_register_option(
+			array(
+				// TODO import old name format as commented out for compat
+				// 'name' => 'cbox-flex-slider-height',
+				'name' => 'height',
+				'title' => 'Slider Height',
+				'description' => 'The height of the slider in pixels.',
+				'type' => 'ui/slider',
+				'min' => 100,
+				'max' => 1000,
+				'step' => 10,
+				'label' => 'Height in pixels:',
+				'default_value' => 344
+			),
+			$infinity_slider_options_defaults
+		);
+
+		ice_register_option(
+			array(
+				// TODO import old name format as commented out for compat
+				// 'name' => 'cbox-flex-slider-width',
+				'name' => 'width',
+				'title' => 'Slider Width',
+				'description' => 'The width of the slider in pixels.',
+				'type' => 'ui/slider',
+				'min' => 200,
+				'max' => 2000,
+				'step' => 10,
+				'label' => 'Width in pixels:',
+				'default_value' => 670
+			),
+			$infinity_slider_options_defaults
+		);
+
+		ice_register_option(
+			array(
+				// TODO import old name format as commented out for compat
+				// 'name' => 'cbox_flex_slider_amount',
+				'name' => 'amount',
+				'title' => 'Number of Slides',
+				'description' => 'Enter the number of slides you want to show.',
+				'type' => 'text',
+				'default_value' => 0
+			),
+			$infinity_slider_options_defaults
+		);
+
+		ice_register_option(
+			array(
+				// TODO import old name format as commented out for compat
+				// 'name' => 'cbox_flex_slider_time',
+				'name' => 'time',
+				'title' => 'Slider Delay',
+				'description' => 'The number of milliseconds between slide changes (1 second = 1000 milliseconds).',
+				'type' => 'ui/slider',
+				'min' => 1000,
+				'max' => 10000,
+				'step' => 10,
+				'label' => 'Time in milliseconds:',
+				'default_value' => 5000
+			),
+			$infinity_slider_options_defaults
+		);
+
+		ice_register_option(
+			array(
+				// TODO import old name format as commented out for compat
+				// 'name' => 'cbox_flex_slider_transition',
+				'name' => 'transition',
+				'title' => 'Transition Speed',
+				'description' => 'The number of milliseconds it takes the slide to change (1 second = 1000 milliseconds).',
+				'type' => 'ui/slider',
+				'min' => 200,
+				'max' => 5000,
+				'step' => 10,
+				'label' => 'Time in milliseconds:',
+				'default_value' => 600
+			),
+			$infinity_slider_options_defaults
+		);
+
+		ice_register_option(
+			array(
+				// TODO import old name format as commented out for compat
+				// 'name' => 'cbox_flex_slider_category',
+				'name' => 'category',
+				'section' => 'homepage',
+				'title' => 'Slider Category',
+				'description' => 'From which category do you want to show posts? This ONLY works when your slider is set to Show Category.',
+				'type' => 'category'
+			),
+			$infinity_slider_options_defaults
+		);
+
+//
 // Body Group
 //
 ice_register_group( 'body' );
@@ -1055,7 +1398,7 @@ ice_register_group( 'body' );
 				'min' => 900,
 				'max' => 1250,
 				'step' => 10,
-				'style_selector' => '#wrapper',
+				'style_selector' => 'body.theme-option #wrapper',
 				'style_property' => 'max-width'
 			),
 			$infinity_body_layout_defaults
@@ -1073,7 +1416,7 @@ ice_register_group( 'body' );
 			array(
 				'name' => 'background-image',
 				'type' => 'css/bg-image',
-				'default_value' => 'assets/images/design/bg.png'
+				'default_value' => 'assets/images/design/bg-body.gif'
 			),
 			$infinity_body_layout_defaults
 		);
@@ -1125,7 +1468,7 @@ ice_register_group( 'header' );
 			'group' => 'header',
 			'section' => 'header',
 			'required_feature' => 'layout',
-			'style_selector' => '#header'
+			'style_selector' => 'body.theme-option #header'
 		);
 
 		ice_register_option(
@@ -1209,8 +1552,7 @@ ice_register_group( 'header' );
 		ice_register_option(
 			array(
 				'name' => 'background-image',
-				'type' => 'css/bg-image',
-				'default_value' => 'assets/images/design/header-background.jpg'
+				'type' => 'css/bg-image'
 			),
 			$infinity_header_layout_defaults
 		);
@@ -1235,7 +1577,7 @@ ice_register_group( 'header' );
 			array(
 				'name' => 'overlay-opacity',
 				'type' => 'css/overlay-opacity',
-				'style_selector' => '#header:before',
+				'style_selector' => 'body.theme-option #header:before',
 				'parent' => 'overlay-image',
 				'linked_image' => 'overlay-image'
 			),
@@ -1370,7 +1712,7 @@ ice_register_group( 'content' );
 			'group' => 'content',
 			'section' => 'content',
 			'required_feature' => 'layout',
-			'style_selector' => '#content'
+			'style_selector' => 'body.theme-option #content'
 		);
 
 		ice_register_option(
@@ -1379,7 +1721,7 @@ ice_register_group( 'content' );
 				'type' => 'colorpicker',
 				'title' => 'Text Color',
 				'description' => 'Choose a color for text inside the content section.',
-				'style_selector' => '#content a',
+				'style_selector' => 'body.theme-option #content a',
 				'style_property' => 'color'
 			),
 			$infinity_content_layout_defaults
@@ -1391,7 +1733,7 @@ ice_register_group( 'content' );
 				'type' => 'colorpicker',
 				'title' => 'Link Color',
 				'description' => 'Choose a color for links inside the content section.',
-				'style_selector' => '#content a',
+				'style_selector' => 'body.theme-option #content a',
 				'style_property' => 'color'
 			),
 			$infinity_content_layout_defaults
@@ -1435,7 +1777,7 @@ ice_register_group( 'content' );
 			array(
 				'name' => 'overlay-opacity',
 				'type' => 'css/overlay-opacity',
-				'style_selector' => '#content:before',
+				'style_selector' => 'body.theme-option #content:before',
 				'parent' => 'overlay-image',
 				'linked_image' => 'overlay-image'
 			),
@@ -1462,7 +1804,7 @@ ice_register_group( 'widget' );
 			'group' => 'widget',
 			'section' => 'widgets',
 			'required_feature' => 'layout',
-			'style_selector' => '#sidebar .widget'
+			'style_selector' => 'body.theme-option #sidebar .widget'
 		);
 
 		ice_register_option(
@@ -1471,7 +1813,7 @@ ice_register_group( 'widget' );
 				'type' => 'colorpicker',
 				'title' => 'Widget Title Color',
 				'description' => 'Choose a font color for widget titles.',
-				'style_selector' => '#sidebar .widget h4',
+				'style_selector' => 'body.theme-option #sidebar .widget h4',
 				'style_property' => 'color'
 			),
 			$infinity_widget_layout_defaults
@@ -1483,7 +1825,7 @@ ice_register_group( 'widget' );
 				'type' => 'select',
 				'title' => 'Font Weight',
 				'description' => 'Choose a font weight for widget titles.',
-				'style_selector' => '#sidebar .widget h4',
+				'style_selector' => 'body.theme-option #sidebar .widget h4',
 				'style_property' => 'font-weight'
 			),
 			$infinity_widget_layout_defaults
@@ -1520,7 +1862,7 @@ ice_register_group( 'widget' );
 			array(
 				'name' => 'overlay-opacity',
 				'type' => 'css/overlay-opacity',
-				'style_selector' => '#sidebar .widget:before',
+				'style_selector' => 'body.theme-option #sidebar .widget:before',
 				'parent' => 'overlay-image',
 				'linked_image' => 'overlay-image'
 			),
@@ -1547,7 +1889,7 @@ ice_register_group( 'footer' );
 			'group' => 'footer',
 			'section' => 'footer',
 			'required_feature' => 'layout',
-			'style_selector' => '.footer-wrap'
+			'style_selector' => 'body.theme-option .footer-wrap'
 		);
 
 		ice_register_option(
@@ -1578,7 +1920,7 @@ ice_register_group( 'footer' );
 				'type' => 'colorpicker',
 				'title' => 'Link Color',
 				'description' => 'Choose a color for links inside the footer section.',
-				'style_selector' => '.footer-wrap a',
+				'style_selector' => 'body.theme-option .footer-wrap a',
 				'style_property' => 'color'
 			),
 			$infinity_footer_layout_defaults
@@ -1643,7 +1985,7 @@ ice_register_group( 'footer' );
 			array(
 				'name' => 'overlay-opacity',
 				'type' => 'css/overlay-opacity',
-				'style_selector' => '.footer-wrap:before',
+				'style_selector' => 'body.theme-option .footer-wrap:before',
 				'parent' => 'overlay-image',
 				'linked_image' => 'overlay-image'
 			),

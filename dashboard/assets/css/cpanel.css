@@ -2,10 +2,6 @@
 /* ! Control Panel Styling   */
 /* ========================= */
 
-body.appearance_page_infinity-theme {
-	background: url('../../../assets/images/design/bg.png') repeat -4px -2px;
-}
-
 /* main container */
 div#infinity-cpanel {
 	max-width: 1000px;

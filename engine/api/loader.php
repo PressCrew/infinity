@@ -30,7 +30,7 @@ require_once INFINITY_API_PATH . '/shortcodes.php';
 function infinity_scheme_init()
 {
 	// initialize the scheme
-	ICE_Scheme::instance()->init( INFINITY_ENGINE_DIR . '/infinity-config.php' );
+	ICE_Scheme::instance()->init( INFINITY_ENGINE_DIR . '/config.php' );
 
 	// scheme initialization is done
 	do_action( 'infinity_scheme_init' );

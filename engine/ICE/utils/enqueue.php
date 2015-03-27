@@ -641,6 +641,22 @@ class ICE_Scripts extends ICE_Enqueue
 			true
 		);
 
+		wp_register_script(
+			'ice-ext-blog',
+			ICE_JS_URL . '/ext/blog.js',
+			array(),
+			ICE_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'ice-ext-dash',
+			ICE_JS_URL . '/ext/dash.js',
+			array(),
+			ICE_VERSION,
+			true
+		);
+
 		// localize
 		$this->localize();
 	}

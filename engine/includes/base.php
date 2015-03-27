@@ -43,7 +43,7 @@ function infinity_base_features()
 	add_theme_support( 'infinity:ext', 'support' );
 	add_theme_support( 'infinity:typog', 'style' );
 	add_theme_support( 'infinity:layout', 'style' );
-	add_theme_support( 'infinity:buttons', 'style' );
+	add_theme_support( 'infinity:buttons', 'style', 'color' );
 	add_theme_support( 'infinity:design', 'style' );
 	add_theme_support( 'infinity:icons', 'style' );
 
@@ -61,10 +61,14 @@ function infinity_base_features()
 	add_theme_support( 'infinity:footer', 'layout' );
 	add_theme_support( 'infinity:widget', 'layout' );
 	add_theme_support( 'infinity:custom', 'css' );
-	
+	add_theme_support( 'infinity:slider', 'custom', 'category' );
+
 	// BuddyPress
 	add_theme_support( 'infinity:bp', 'support', 'style', 'sidebar-setup' );
+	add_theme_support( 'infinity:bp-plugins', 'support', 'style' );
 	add_theme_support( 'infinity:bp-fbconnect', 'support' );
+	add_theme_support( 'infinity:bp-protect', 'support' );
+	add_theme_support( 'infinity:bp-tour', 'activity' );
 }
 add_action( 'after_setup_theme', 'infinity_base_features' );
 

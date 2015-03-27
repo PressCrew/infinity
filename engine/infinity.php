@@ -55,6 +55,13 @@ if ( !defined( 'INFINITY_NAME' ) ) {
 }
 
 /**
+ * Infinity post meta key prefix
+ */
+if ( !defined( 'INFINITY_META_KEY_PREFIX' ) ) {
+	define( 'INFINITY_META_KEY_PREFIX', '_infinity_' );
+}
+
+/**
  * Infinity theme directory path
  */
 define( 'INFINITY_THEME_PATH', realpath( get_theme_root( INFINITY_NAME ) . '/' . INFINITY_NAME ) );
@@ -93,6 +100,11 @@ define( 'INFINITY_CONFIG_PATH', INFINITY_ENGINE_PATH . '/config' );
  * Infinity includes directory path
  */
 define( 'INFINITY_INC_PATH', INFINITY_ENGINE_PATH . '/includes' );
+
+/**
+ * Infinity plugins compat directory path
+ */
+define( 'INFINITY_PLUGINS_PATH', INFINITY_ENGINE_PATH . '/plugins' );
 
 /**
  * Infinity admin directory relative path
@@ -143,8 +155,11 @@ ICE_Enqueue::init( 'load-appearance_page_' . INFINITY_ADMIN_PAGE );
 // load Infinity API
 require_once INFINITY_API_PATH . '/loader.php';
 
-// load theme setup
-require_once INFINITY_INC_PATH . '/setup.php';
+// load theme includes
+require_once INFINITY_ENGINE_PATH . '/includes.php';
+
+// load theme plugins compat
+require_once INFINITY_ENGINE_PATH . '/plugins.php';
 
 // initialize scheme
 infinity_scheme_init();
