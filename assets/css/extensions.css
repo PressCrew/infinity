@@ -1314,16 +1314,12 @@ body.infinity-design {
 }
 /* Menus */
 .infinity-design .base-menu ul a,
-.infinity-design div.item-list-tabs ul li a,
-.infinity-design div.item-list-tabs ul li span,
 .infinity-design #footer-menu ul li a {
 	color: #FFF;
 	font-weight: 400;
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 .infinity-design .base-menu ul a:hover,
-.infinity-design div.item-list-tabs ul li a:hover,
-.infinity-design div.item-list-tabs ul li span:hover,
 .infinity-design #footer-menu ul li a:hover {
 	color: #BBB;
 }
@@ -1348,7 +1344,6 @@ body.infinity-design {
 .infinity-design #vertical-activity-tabs h4 {
 	border-bottom: 1px solid #EDEDED;
 	padding-bottom: 10px;
-	padding-top: 10px;
 }
 /* Footer */
 .infinity-design #footer .footer-widget {
@@ -1425,7 +1420,21 @@ body.infinity-design {
 .infinity-design #vertical-activity-tabs ul li.selected a {
 	color: #EFEFEF;
 }
-.infinity-design div.item-list-tabs ul li a span {
+.infinity-design div.item-list-tabs ul li a,
+.infinity-design div.item-list-tabs ul li a span,
+.infinity-design #buddypress div.item-list-tabs ul li a,
+.infinity-design #buddypress div.item-list-tabs ul li a span {
+/*	color: #fff;
+	font-weight: 400;*/
+}
+.infinity-design div.item-list-tabs ul li a:hover,
+.infinity-design div.item-list-tabs ul li a span:hover,
+.infinity-design #buddypress div.item-list-tabs ul li a:hover,
+.infinity-design #buddypress div.item-list-tabs ul li a span:hover {
+	/*color: #bbb;*/
+}
+.infinity-design div.item-list-tabs ul li a span,
+.infinity-design #buddypress div.item-list-tabs ul li a span {
 	border-radius: 4px 4px 4px 4px;
 	color: #999;
 }
@@ -1485,9 +1494,26 @@ body.infinity-design {
 .infinity-design #profile-nav-menu a {
 	font-size: 90%;
 }
+.infinity-design .sidebar-activity-tabs ul li {
+	padding-bottom: 3px;
+	padding-top: 5px;
+}
 .infinity-design .sidebar-activity-tabs ul li a {
 	color: #777;
 	font-weight: bold;
+	display: block;
+	padding-bottom: 10px;
+	padding-right: 0;
+	padding-top: 10px;
+}
+.infinity-design .sidebar-activity-tabs ul li.current,
+.infinity-design .sidebar-activity-tabs ul li.selected {
+	padding: 10px 0 12px 30px;
+}
+.infinity-design .sidebar-activity-tabs .profile-subnav li.selected {
+	padding-bottom: 3px;
+	padding-left: 30px;
+	padding-top: 5px;
 }
 .infinity-design .sidebar-activity-tabs ul li a:hover {
 	color: #222;
@@ -1506,7 +1532,7 @@ body.infinity-design {
 .infinity-design .sidebar-activity-tabs ul li.selected span {
 	background: none repeat scroll 0 0 #333333;
 	color: #999999;
-	border: 1px solid #282828;
+	border: 1px solid #555;
 }
 .infinity-design #vertical-activity-tabs ul li span {
 	background: transparent;
@@ -1527,6 +1553,8 @@ body.infinity-design {
 .infinity-design .sidebar-activity-tabs ul li.selected a {
 	color: #EFEFEF;
 	font-weight: bold;
+	margin-bottom: -10px;
+	margin-top: -5px;
 }
 .infinity-design .sidebar-activity-tabs ul li:hover a {
 	font-weight: bold;
@@ -1538,8 +1566,15 @@ body.infinity-design {
 .infinity-design #object-nav ul.profile-subnav {
 	border-bottom: 0 none;
 	border-top: 1px solid #1A1A1A;
+    margin: 15px 0 -12px -30px;
+    padding-left: 30px;
 }
 .infinity-design ul.profile-subnav li {
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	margin-right: 0px;
+	font-size: 90%;
 	text-shadow: 0 1px 0 #111111;
 	border-top: 1px solid #444;
 	border-bottom: 1px solid #333;
@@ -1550,13 +1585,20 @@ body.infinity-design {
 	content: "+" !important;
 	font-size: 100%;
 	margin-left: 0;
+	padding-left: 30px;
 	padding-right: 7px;
 	position: relative;
 	top: 1px;
 }
+.infinity-design ul.profile-subnav li a {
+	padding-left: 30px;
+}
 .infinity-design .sidebar-activity-tabs ul li.current ul.profile-subnav li a {
 	color: #AAAAAA;
 	font-weight: normal;
+	padding-bottom: 8px;
+	padding-top: 8px;
+	margin: inherit;
 }
 .infinity-design ul.profile-subnav li.current a:before {
 	color: inherit;
