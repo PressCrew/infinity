@@ -172,7 +172,7 @@ ice_register_group( 'top-menu' );
 				'type' => 'colorpicker',
 				'title' => 'Font Color',
 				'description' => 'Choose a font color for links of the menu above the header.',
-				'style_selector' => '.top-menu ul li a span',
+				'style_selector' => 'body.theme-option .top-menu ul li a span',
 				'style_property' => 'color'
 			),
 			$infinity_top_menu_defaults
@@ -184,7 +184,7 @@ ice_register_group( 'top-menu' );
 				'type' => 'select',
 				'title' => 'Font Weight',
 				'description' => 'Choose a font weight for links of the menu above the header.',
-				'style_selector' => '.top-menu ul li a span',
+				'style_selector' => 'body.theme-option .top-menu ul li a span',
 				'style_property' => 'font-weight'
 			),
 			$infinity_top_menu_defaults
@@ -194,7 +194,7 @@ ice_register_group( 'top-menu' );
 			array(
 				'name' => 'background-color',
 				'type' => 'css/bg-color',
-				'style_selector' => '.top-menu'
+				'style_selector' => 'body.theme-option .top-menu'
 			),
 			$infinity_top_menu_defaults
 		);
@@ -205,7 +205,7 @@ ice_register_group( 'top-menu' );
 				'type' => 'css/bg-color',
 				'title' => 'Sub-item Background',
 				'description' => 'Choose a background color for the submenu items of the menu above the header.',
-				'style_selector' => '.top-menu ul ul'
+				'style_selector' => 'body.theme-option .top-menu ul ul'
 			),
 			$infinity_top_menu_defaults
 		);
@@ -215,7 +215,7 @@ ice_register_group( 'top-menu' );
 				'name' => 'overlay-image',
 				'group' => 'top-menu',
 				'section' => 'menus-top',
-				'style_selector' => '.top-menu'
+				'style_selector' => 'body.theme-option .top-menu'
 			),
 			array_merge( $infinity_top_menu_defaults, $overlay_image_defaults )
 		);
@@ -224,7 +224,7 @@ ice_register_group( 'top-menu' );
 			array(
 				'name' => 'overlay-opacity',
 				'type' => 'css/overlay-opacity',
-				'style_selector' => '.top-menu:before',
+				'style_selector' => 'body.theme-option .top-menu:before',
 				'parent' => 'overlay-image',
 				'linked_image' => 'overlay-image'
 			),
@@ -270,7 +270,7 @@ ice_register_group( 'main-menu' );
 				'type' => 'colorpicker',
 				'title' => 'Font Color',
 				'description' => 'Choose a font color for links of the menu inside the header.',
-				'style_selector' => '.main-menu ul li a span',
+				'style_selector' => 'body.theme-option .main-menu ul li a span',
 				'style_property' => 'color'
 			),
 			$infinity_main_menu_defaults
@@ -282,7 +282,7 @@ ice_register_group( 'main-menu' );
 				'type' => 'select',
 				'title' => 'Font Weight',
 				'description' => 'Choose a font weight for links of the menu inside the header.',
-				'style_selector' => '.main-menu ul li a span',
+				'style_selector' => 'body.theme-option .main-menu ul li a span',
 				'style_property' => 'font-weight'
 			),
 			$infinity_main_menu_defaults
@@ -295,7 +295,7 @@ ice_register_group( 'main-menu' );
 				'title' => 'Padding',
 				'description' => 'Select the padding (spacing) around the menu links by moving the slider.',
 				'max' => 30,
-				'style_selector' => '.main-menu',
+				'style_selector' => 'body.theme-option .main-menu',
 				'style_property' => 'padding'
 			),
 			$infinity_main_menu_defaults
@@ -305,7 +305,7 @@ ice_register_group( 'main-menu' );
 			array(
 				'name' => 'background-color',
 				'type' => 'css/bg-color',
-				'style_selector' => '.main-menu'
+				'style_selector' => 'body.theme-option .main-menu'
 			),
 			$infinity_main_menu_defaults
 		);
@@ -313,7 +313,7 @@ ice_register_group( 'main-menu' );
 		ice_register_option(
 			array(
 				'name' => 'overlay-image',
-				'style_selector' => '.main-menu'
+				'style_selector' => 'body.theme-option .main-menu'
 			),
 			array_merge( $infinity_main_menu_defaults, $overlay_image_defaults )
 		);
@@ -322,7 +322,7 @@ ice_register_group( 'main-menu' );
 			array(
 				'name' => 'overlay-opacity',
 				'type' => 'css/overlay-opacity',
-				'style_selector' => '.main-menu:before',
+				'style_selector' => 'body.theme-option .main-menu:before',
 				'parent' => 'overlay-image',
 				'linked_image' => 'overlay-image'
 			),
@@ -368,7 +368,7 @@ ice_register_group( 'sub-menu' );
 				'type' => 'colorpicker',
 				'title' => 'Font Color',
 				'description' => 'Choose a font color for links of the menu below the header.',
-				'style_selector' => '.sub-menu ul li a span',
+				'style_selector' => 'body.theme-option .sub-menu ul li a span',
 				'style_property' => 'color'
 			),
 			$infinity_sub_menu_defaults
@@ -380,7 +380,7 @@ ice_register_group( 'sub-menu' );
 				'type' => 'select',
 				'title' => 'Font Weight',
 				'description' => 'Choose a font weight for links of the menu below the header.',
-				'style_selector' => '.sub-menu ul li a span',
+				'style_selector' => 'body.theme-option .sub-menu ul li a span',
 				'style_property' => 'font-weight'
 			),
 			$infinity_sub_menu_defaults
@@ -390,7 +390,7 @@ ice_register_group( 'sub-menu' );
 			array(
 				'name' => 'background-color',
 				'type' => 'css/bg-color',
-				'style_selector' => '.sub-menu'
+				'style_selector' => 'body.theme-option .sub-menu'
 			),
 			$infinity_sub_menu_defaults
 		);
@@ -401,7 +401,7 @@ ice_register_group( 'sub-menu' );
 				'type' => 'css/bg-color',
 				'title' => 'Sub-item Background',
 				'description' => 'Choose a background color for the submenu items of the menu below the header.',
-				'style_selector' => '.sub-menu ul ul'
+				'style_selector' => 'body.theme-option .sub-menu ul ul'
 			),
 			$infinity_sub_menu_defaults
 		);
@@ -409,7 +409,7 @@ ice_register_group( 'sub-menu' );
 		ice_register_option(
 			array(
 				'name' => 'overlay-image',
-				'style_selector' => '.sub-menu'
+				'style_selector' => 'body.theme-option .sub-menu'
 			),
 			array_merge( $infinity_sub_menu_defaults, $overlay_image_defaults )
 		);
@@ -418,7 +418,7 @@ ice_register_group( 'sub-menu' );
 			array(
 				'name' => 'overlay-opacity',
 				'type' => 'css/overlay-opacity',
-				'style_selector' => '.sub-menu:before',
+				'style_selector' => 'body.theme-option .sub-menu:before',
 				'parent' => 'overlay-image',
 				'linked_image' => 'overlay-image'
 			),
@@ -473,7 +473,7 @@ ice_register_group( 'sidebar' );
 			'group' => 'sidebar',
 			'section' => 'sidebar',
 			'required_feature' => 'layout',
-			'style_selector' => '#sidebar'
+			'style_selector' => 'body.theme-option #sidebar'
 		);
 
 		ice_register_option(
@@ -493,7 +493,7 @@ ice_register_group( 'sidebar' );
 				'type' => 'colorpicker',
 				'title' => 'Link Color',
 				'description' => 'Choose a color for links in the sidebar.',
-				'style_selector' => '#sidebar a',
+				'style_selector' => 'body.theme-option #sidebar a',
 				'style_property' => 'color'
 			),
 			$infinity_sidebar_layout_defaults
@@ -535,7 +535,7 @@ ice_register_group( 'sidebar' );
 			array(
 				'name' => 'overlay-opacity',
 				'type' => 'css/overlay-opacity',
-				'style_selector' => '#sidebar:before',
+				'style_selector' => 'body.theme-option #sidebar:before',
 				'parent' => 'overlay-image',
 				'linked_image' => 'overlay-image'
 			),
@@ -1398,7 +1398,7 @@ ice_register_group( 'body' );
 				'min' => 900,
 				'max' => 1250,
 				'step' => 10,
-				'style_selector' => '#wrapper',
+				'style_selector' => 'body.theme-option #wrapper',
 				'style_property' => 'max-width'
 			),
 			$infinity_body_layout_defaults
@@ -1468,7 +1468,7 @@ ice_register_group( 'header' );
 			'group' => 'header',
 			'section' => 'header',
 			'required_feature' => 'layout',
-			'style_selector' => '#header'
+			'style_selector' => 'body.theme-option #header'
 		);
 
 		ice_register_option(
@@ -1577,7 +1577,7 @@ ice_register_group( 'header' );
 			array(
 				'name' => 'overlay-opacity',
 				'type' => 'css/overlay-opacity',
-				'style_selector' => '#header:before',
+				'style_selector' => 'body.theme-option #header:before',
 				'parent' => 'overlay-image',
 				'linked_image' => 'overlay-image'
 			),
@@ -1712,7 +1712,7 @@ ice_register_group( 'content' );
 			'group' => 'content',
 			'section' => 'content',
 			'required_feature' => 'layout',
-			'style_selector' => '#content'
+			'style_selector' => 'body.theme-option #content'
 		);
 
 		ice_register_option(
@@ -1721,7 +1721,7 @@ ice_register_group( 'content' );
 				'type' => 'colorpicker',
 				'title' => 'Text Color',
 				'description' => 'Choose a color for text inside the content section.',
-				'style_selector' => '#content a',
+				'style_selector' => 'body.theme-option #content a',
 				'style_property' => 'color'
 			),
 			$infinity_content_layout_defaults
@@ -1733,7 +1733,7 @@ ice_register_group( 'content' );
 				'type' => 'colorpicker',
 				'title' => 'Link Color',
 				'description' => 'Choose a color for links inside the content section.',
-				'style_selector' => '#content a',
+				'style_selector' => 'body.theme-option #content a',
 				'style_property' => 'color'
 			),
 			$infinity_content_layout_defaults
@@ -1777,7 +1777,7 @@ ice_register_group( 'content' );
 			array(
 				'name' => 'overlay-opacity',
 				'type' => 'css/overlay-opacity',
-				'style_selector' => '#content:before',
+				'style_selector' => 'body.theme-option #content:before',
 				'parent' => 'overlay-image',
 				'linked_image' => 'overlay-image'
 			),
@@ -1804,7 +1804,7 @@ ice_register_group( 'widget' );
 			'group' => 'widget',
 			'section' => 'widgets',
 			'required_feature' => 'layout',
-			'style_selector' => '#sidebar .widget'
+			'style_selector' => 'body.theme-option #sidebar .widget'
 		);
 
 		ice_register_option(
@@ -1813,7 +1813,7 @@ ice_register_group( 'widget' );
 				'type' => 'colorpicker',
 				'title' => 'Widget Title Color',
 				'description' => 'Choose a font color for widget titles.',
-				'style_selector' => '#sidebar .widget h4',
+				'style_selector' => 'body.theme-option #sidebar .widget h4',
 				'style_property' => 'color'
 			),
 			$infinity_widget_layout_defaults
@@ -1825,7 +1825,7 @@ ice_register_group( 'widget' );
 				'type' => 'select',
 				'title' => 'Font Weight',
 				'description' => 'Choose a font weight for widget titles.',
-				'style_selector' => '#sidebar .widget h4',
+				'style_selector' => 'body.theme-option #sidebar .widget h4',
 				'style_property' => 'font-weight'
 			),
 			$infinity_widget_layout_defaults
@@ -1862,7 +1862,7 @@ ice_register_group( 'widget' );
 			array(
 				'name' => 'overlay-opacity',
 				'type' => 'css/overlay-opacity',
-				'style_selector' => '#sidebar .widget:before',
+				'style_selector' => 'body.theme-option #sidebar .widget:before',
 				'parent' => 'overlay-image',
 				'linked_image' => 'overlay-image'
 			),
@@ -1889,7 +1889,7 @@ ice_register_group( 'footer' );
 			'group' => 'footer',
 			'section' => 'footer',
 			'required_feature' => 'layout',
-			'style_selector' => '.footer-wrap'
+			'style_selector' => 'body.theme-option .footer-wrap'
 		);
 
 		ice_register_option(
@@ -1920,7 +1920,7 @@ ice_register_group( 'footer' );
 				'type' => 'colorpicker',
 				'title' => 'Link Color',
 				'description' => 'Choose a color for links inside the footer section.',
-				'style_selector' => '.footer-wrap a',
+				'style_selector' => 'body.theme-option .footer-wrap a',
 				'style_property' => 'color'
 			),
 			$infinity_footer_layout_defaults
@@ -1985,7 +1985,7 @@ ice_register_group( 'footer' );
 			array(
 				'name' => 'overlay-opacity',
 				'type' => 'css/overlay-opacity',
-				'style_selector' => '.footer-wrap:before',
+				'style_selector' => 'body.theme-option .footer-wrap:before',
 				'parent' => 'overlay-image',
 				'linked_image' => 'overlay-image'
 			),
