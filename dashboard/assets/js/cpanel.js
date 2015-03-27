@@ -46,7 +46,7 @@ function initOptionsPanel(panel)
 			header: 'ui-icon-folder-collapsed',
 			headerSelected: 'ui-icon-folder-open'
 		},
-		change: function(event, ui) {
+		activate: function(event, ui) {
 			if ( useCookies ) {
 				var states = [];
 				menu.each(function(){
