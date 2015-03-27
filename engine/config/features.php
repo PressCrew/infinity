@@ -774,8 +774,7 @@ ice_register_group( 'bp' );
 			'group' => 'bp',
 			'type' => 'bp/support',
 			'title' => 'BuddyPress Support',
-			'description' => 'Enables BuddyPress support',
-			'style' => 'assets/css/buddypress.css'
+			'description' => 'Enables BuddyPress support'
 		)
 	);
 
@@ -787,7 +786,8 @@ ice_register_group( 'bp' );
 			'type' => 'default',
 			'title' => 'BuddyPress Styles',
 			'description' => 'The base BuddyPress styles',
-			'body_class' => 'infinity-bp'
+			'body_class' => 'infinity-bp',
+			'style' => 'assets/css/plugins/buddypress.css'
 		)
 	);
 
@@ -805,31 +805,19 @@ ice_register_group( 'bp' );
 	);
 
 //
-// BP Plugins Compat Group
+// Plugins Compat Group
 //
-ice_register_group( 'bp-plugins' );
+ice_register_group( 'plugins' );
 
-	// Popular BuddyPress plugin support
+	// All other plugin styles
 	ice_register_feature(
 		array(
-			'name' => 'support',
-			'group' => 'bp-plugins',
+			'name' => 'other',
+			'group' => 'plugins',
 			'type' => 'default',
-			'title' => 'BuddyPress Plugins Support',
-			'description' => 'Popular BuddyPress plugins support'
-		)
-	);
-
-	// Popular BuddyPress plugin styles
-	ice_register_feature(
-		array(
-			'name' => 'style',
-			'group' => 'bp-plugins',
-			'type' => 'default',
-			'title' => 'BuddyPress Plugins Styles',
-			'description' => 'Popular BuddyPress plugins support styles',
-			'style' => 'assets/css/buddypress-plugins.css'
-//			'body_class' => 'infinity-bp'
+			'title' => 'Other Plugins Styles',
+			'description' => 'Other plugins support styles',
+			'style' => 'assets/css/plugins/other.css'
 		)
 	);
 
