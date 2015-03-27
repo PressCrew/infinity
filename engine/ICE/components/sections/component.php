@@ -74,12 +74,25 @@ abstract class ICE_Section extends ICE_Component
 	 *
 	 * @param ICE_Component $component
 	 */
-	public function add_component( ICE_Component $component )
+	public function add_component( ICE_Component $component, $children = false )
 	{
 		// does component section match my name?
 		if ( $component->get_property( 'section' ) == $this->get_name() ) {
 			// yep, add to components array
 			$this->__components__[] = $component;
+			// add children?
+			if ( true === $children ) {
+				// yes, try to get some
+				$component_children = $component->get_children();
+				// get any?
+				if ( false === empty( $component_children ) ) {
+					// loop all of them
+					foreach( $component_children as $component_child ) {
+						// recurse ONCE
+						$this->add_component( $component_child, false );
+					}
+				}
+			}
 		} else {
 			// not good
 			throw new Exception(

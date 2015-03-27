@@ -363,7 +363,7 @@ function infinity_options_render_options_screen()
 		// enable post override
 		$option_to_render->enable_post_override();
 		// add option to section components to render
-		$section->add_component( $option_to_render );
+		$section->add_component( $option_to_render, true );
 	}
 
 	// render the section
