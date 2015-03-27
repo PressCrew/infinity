@@ -4,7 +4,7 @@
  *
  * @author Marshall Sorenson <marshall@presscrew.com>
  * @link http://infinity.presscrew.com/
- * @copyright Copyright (C) 2010-2015 Marshall Sorenson & CBOX Team
+ * @copyright Copyright (C) 2010-2015 Marshall Sorenson & CUNY Academic Commons
  * @license http://www.gnu.org/licenses/gpl.html GPLv2 or later
  * @package Infinity
  * @subpackage base
