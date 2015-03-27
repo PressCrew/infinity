@@ -108,7 +108,7 @@ function initOptionsPanel(panel)
 			}
 		}
 		// load last option
-		loadOption(last, panel);
+		loadOption( 'a#' + last, panel);
 	}
 
 	// load option screen
