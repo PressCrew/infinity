@@ -30,7 +30,9 @@
 		do_action( 'open_wrapper' );
 	?>
 
-	<?php // the header-banner template contains all the markup for the header(logo) and menus. You can easily fork/modify this in your child theme without having to overwrite the entire header.php file.
+	<?php
+		// The header-banner template contains all the markup for the header(logo) and menus.
+		// You can easily fork/modify this in your child theme without having to overwrite the entire header.php file.
 		get_template_part( 'templates/parts/header-banner');
 	?>
 	<?php
@@ -41,4 +43,3 @@
 	<div class="main-wrap row <?php do_action( 'main_wrap_class' ); ?>">
 	<?php
 		do_action( 'open_main_wrap' );
-	?>

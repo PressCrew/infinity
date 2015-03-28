@@ -141,5 +141,3 @@ function infinity_dashboard_support_info()
 		<?php endforeach; ?>
 	</ul><?php
 }
-
-?>

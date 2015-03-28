@@ -78,4 +78,3 @@
 		get_search_form();
 		do_action( 'loop_not_found' );
 	endif;
-?>

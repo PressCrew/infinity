@@ -10,8 +10,8 @@
  * @package Infinity
  * @subpackage templates
  */
-	get_header(); ?>
-
+	get_header();
+?>
 	<div id="content" role="main" class="<?php do_action( 'content_class' ); ?>">
 
 		<?php do_action( 'before_content' ) ?>	
@@ -96,7 +96,5 @@
 	</div><!-- #content -->
 
 <?php
-get_sidebar();
-get_footer();
-?>
-
+	get_sidebar();
+	get_footer();

@@ -84,4 +84,3 @@
 		</div>
 <?php
 	endif;
-?>

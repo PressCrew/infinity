@@ -82,4 +82,3 @@ jQuery(document).ready(function($){
 <?php
 	// renders dynamic scripts and performs cleanup
 	infinity_dashboard_cpanel_render_end();
-?>

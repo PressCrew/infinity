@@ -71,4 +71,3 @@ while ($wp_query->have_posts()) : $wp_query->the_post();
 		endwhile;
    		infinity_base_paginate();
 		$wp_query = null; $wp_query = $temp;
-?>
