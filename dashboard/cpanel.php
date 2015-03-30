@@ -242,5 +242,3 @@ function infinity_dashboard_cpanel_screen()
 {
 	infinity_dashboard_load_template( 'cpanel.php' );
 }
-
-?>

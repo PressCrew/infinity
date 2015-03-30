@@ -12,7 +12,6 @@
  */
 
 /* @var $this ICE_Renderer */
-?>
-<?php if ( in_the_loop() ): ?>
-	<img src="<?php print $this->url() ?>" <?php $this->render_attrs( $this->component()->image_class ) ?>>
-<?php endif; ?>
+if ( in_the_loop() ): ?>
+	<img src="<?php print $this->url() ?>" <?php $this->render_attrs( $this->component()->image_class ) ?>><?php
+endif;

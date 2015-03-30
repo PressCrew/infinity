@@ -14,5 +14,3 @@
 /* @var $this ICE_Option_Renderer */
 
 $this->render_input( $this->component()->input_type() );
-
-?>

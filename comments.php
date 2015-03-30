@@ -82,4 +82,3 @@ if ( ! empty($comments_by_type['pings']) ) { ?>
 <?php
 	//This is where the comment form is generated.
 	comment_form();
-?>

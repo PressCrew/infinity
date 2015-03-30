@@ -12,12 +12,11 @@
  */
 
 /* @var $this ICE_Renderer */
-?>
 
-<?php if ( $content ): ?>
+if ( $content ): ?>
 	<div <?php $this->render_attrs() ?>>
 		<?php echo $content ?>
-	</div>
-<?php elseif ( $message ): ?>
-	<div class="alertbox white"><?php _e( 'Sorry, only registered users can see this text.', 'infinity' ) ?></div>
-<?php endif ?>
+	</div><?php
+elseif ( $message ): ?>
+	<div class="alertbox white"><?php _e( 'Sorry, only registered users can see this text.', 'infinity' ) ?></div><?php
+endif;

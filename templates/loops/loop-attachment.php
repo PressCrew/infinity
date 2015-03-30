@@ -103,4 +103,3 @@
 <?php
 		do_action( 'loop_not_found' );
 	endif;
-?>

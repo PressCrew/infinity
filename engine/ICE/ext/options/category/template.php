@@ -12,5 +12,5 @@
  */
 
 /* @var $this ICE_Option_Renderer */
-?>
-<?php $this->component()->render_field() ?>
+
+$this->component()->render_field();
