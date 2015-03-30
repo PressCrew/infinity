@@ -234,7 +234,7 @@ function infinity_slider_rename_image_metabox()
 	// replace with our custom one
 	add_meta_box(
 		'postimagediv',
-		__( 'Slide Image' ),
+		__( 'Slide Image', 'infinity' ),
 		'post_thumbnail_meta_box',
 		'infinity_slider',
 		'side',
