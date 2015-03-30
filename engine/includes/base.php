@@ -440,7 +440,7 @@ function infinity_base_cleaner_caption( $output, $attr, $content )
 	$content = apply_filters( 'infinity_base_cleaner_caption_content', $content );
 
 	// Set up the attributes for the caption <div>.
-	$attributes .= ' class="figure ' . esc_attr( $attr['align'] ) . '" style="width:'. esc_attr( $attr['width'] ) . 'px"';
+	$attributes = ' class="figure ' . esc_attr( $attr['align'] ) . '" style="width:'. esc_attr( $attr['width'] ) . 'px"';
 
 	// Open the caption <div>
 	$output = '<figure' . $attributes .'>';
