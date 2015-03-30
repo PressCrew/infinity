@@ -123,7 +123,7 @@ class ICE_Extensions extends ICE_Componentable
 	 * @param string $ext
 	 * @return array
 	 */
-	public function get_settings( $ext )
+	public function get_settings_array( $ext )
 	{
 		if ( isset( $this->extensions[ $ext ] ) ) {
 			return $this->extensions[ $ext ];
