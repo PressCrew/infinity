@@ -12,7 +12,7 @@
  */
 
 // are introduction boxes supported?
-if ( infinity_base_show_intro_boxes() ):
+if ( infinity_base_show_intro_box() ):
 
 	// show the category box when on a category page
 	if ( is_category() ):

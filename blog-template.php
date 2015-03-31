@@ -21,7 +21,7 @@
 	?>
 	<div id="home-page" role="main" <?php post_class(); ?>>
 		<?php
-			get_template_part( 'templates/parts/introduction-boxes', 'index' );
+			get_template_part( 'templates/parts/intro-box', 'index' );
 			get_template_part( 'templates/loops/loop-blog', 'index' );
 		?>
 	</div>

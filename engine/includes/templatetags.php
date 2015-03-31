@@ -76,7 +76,7 @@ function infinity_base_title()
  * @subpackage base
  * @return boolean
  */
-function infinity_base_show_intro_boxes()
+function infinity_base_show_intro_box()
 {
 	// are author boxes supported, and has the author filled out their description?
 	return current_theme_supports( 'infinity:post', 'intro-boxes' );

@@ -21,7 +21,7 @@
 	<div class="page" id="blog-tag">
 		<?php
 			// load intro boxes part
-			get_template_part( 'templates/parts/introduction-boxes' );
+			get_template_part( 'templates/parts/intro-box' );
 			// load tag loop
 			get_template_part( 'templates/loops/loop', 'tag' );
 		?>
