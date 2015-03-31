@@ -30,7 +30,7 @@
 							// is footer menu enabled?
 							if ( current_theme_supports( 'infinity:footer-menu', 'setup' ) ) :
 								// load footer menu part
-								get_template_part( 'templates/parts/footer-menu', 'footer' );
+								get_template_part( 'templates/parts/menu', 'footer' );
 							endif;
 						?>
 					</div>

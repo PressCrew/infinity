@@ -20,7 +20,7 @@
 		// is the top menu supported?
 		if ( current_theme_supports( 'infinity:top-menu', 'setup' ) ):
 			// load top menu template
-			get_template_part( 'templates/parts/top-menu', 'header' );
+			get_template_part( 'templates/parts/menu', 'top' );
 		endif;
 	?>
 	<!-- header -->
@@ -43,7 +43,7 @@
 				// is main menu supported?
 				if ( current_theme_supports( 'infinity:main-menu', 'setup' ) ):
 					// load main menu template
-					get_template_part( 'templates/parts/main-menu', 'header' );
+					get_template_part( 'templates/parts/menu', 'main' );
 				endif;
 
 				do_action( 'close_header' );
@@ -54,7 +54,7 @@
 		// is sub menu supported?
 		if ( current_theme_supports( 'infinity:sub-menu', 'setup' ) ):
 			// load sub menu template
-			get_template_part( 'templates/parts/sub-menu', 'header' );
+			get_template_part( 'templates/parts/menu', 'sub' );
 		endif;
 	?>
 </div><!-- end top wrap -->
