@@ -11,16 +11,17 @@
  * @since 1.0
  */
 
-if ( !has_nav_menu( 'over-menu' ) ) {
-	return;
-}
-?>
-<div id="top-menu-wrap" role="navigation">
-	<nav class="base-menu top-menu">
-		<?php
-			do_action('open_top_menu');
-			infinity_base_nav_menu( 'over-menu' );
-			do_action('close_top_menu');
-		?>
-	</nav>
-</div>
+// is top menu set?
+if ( has_nav_menu( 'over-menu' ) ):
+	// show top menu ?>
+	<div id="top-menu-wrap" role="navigation">
+		<nav class="base-menu top-menu">
+			<?php
+				do_action('open_top_menu');
+				infinity_base_nav_menu( 'over-menu' );
+				do_action('close_top_menu');
+			?>
+		</nav>
+	</div>
+	<?php
+endif;

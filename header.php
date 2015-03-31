@@ -18,28 +18,24 @@
 <!--[if IE 9 ]>        <html <?php language_attributes(); ?> class="no-js ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html <?php language_attributes(); ?> class="no-js"> <!--<![endif]-->
 <?php
-	get_template_part( 'templates/parts/header-head');	
+	get_template_part( 'templates/parts/header-head' );
 ?>
-<body <?php body_class() ?> id="infinity-base">
-<?php
-	do_action( 'open_body' );
-?>
-
-<div id="wrapper" class="hfeed">
+<body <?php body_class(); ?> id="infinity-base">
 	<?php
-		do_action( 'open_wrapper' );
+		do_action( 'open_body' );
 	?>
-
-	<?php
-		// The header-banner template contains all the markup for the header(logo) and menus.
-		// You can easily fork/modify this in your child theme without having to overwrite the entire header.php file.
-		get_template_part( 'templates/parts/header-banner');
-	?>
-	<?php
+	<div id="wrapper" class="hfeed">
+		<?php
+			// open wrapper action
+			do_action( 'open_wrapper' );
+			// The header-banner template contains all the markup for the
+			// header (logo) and menus. You can easily fork/modify this in your child
+			// theme without having to overwrite the entire header.php file.
+			get_template_part( 'templates/parts/header-banner');
+			// open container action
 			do_action( 'open_container' );
-	?>
-			
-	<!-- start main wrap. the main-wrap div will be closed in the footer template -->
-	<div class="main-wrap row <?php do_action( 'main_wrap_class' ); ?>">
-	<?php
-		do_action( 'open_main_wrap' );
+		?>
+		<!-- start main wrap. the main-wrap div will be closed in the footer template -->
+		<div class="main-wrap row <?php do_action( 'main_wrap_class' ); ?>">
+		<?php
+			do_action( 'open_main_wrap' );

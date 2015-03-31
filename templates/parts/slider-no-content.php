@@ -13,15 +13,17 @@
  ?>
 <li>
 	<img
-		src="<?php infinity_slider_no_slides_image_url() ?>"
-		width="<?php infinity_slider_width() ?>"
-		height="<?php infinity_slider_height() ?>"
-		style="width:<?php infinity_slider_width() ?>px; height:<?php infinity_slider_height() ?>px;"
+		src="<?php infinity_slider_no_slides_image_url(); ?>"
+		width="<?php infinity_slider_width(); ?>"
+		height="<?php infinity_slider_height(); ?>"
+		style="width:<?php infinity_slider_width(); ?>px; height:<?php infinity_slider_height(); ?>px;"
 	>
 	<div class="flex-caption">
-		<h3><?php infinity_slider_the_slide_title() ?></h3>
+		<h3>
+			<?php infinity_slider_the_slide_title(); ?>
+		</h3>
 		<p>
-			<?php infinity_slider_no_content_help() ?>
+			<?php infinity_slider_no_content_help(); ?>
 		</p>
 	</div>
 </li>

@@ -13,19 +13,15 @@
 
 	get_header();
 ?>
-	<div id="content" role="main" class="<?php do_action( 'content_class' ); ?>">
-			<?php
-			do_action( 'open_content' );
-			do_action( 'open_home' );
-		?>
-			<?php
-				get_template_part( 'templates/loops/loop', 'index' );
-			?>
-		<?php
-			do_action( 'close_home' );
-			do_action( 'close_content' );
-		?>
-	</div>
+<div id="content" role="main" class="<?php do_action( 'content_class' ); ?>">
+	<?php
+		do_action( 'open_content' );
+		do_action( 'open_home' );
+		get_template_part( 'templates/loops/loop', 'index' );
+		do_action( 'close_home' );
+		do_action( 'close_content' );
+	?>
+</div>
 <?php
 	get_sidebar();
 	get_footer();

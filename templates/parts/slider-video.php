@@ -12,5 +12,7 @@
  */
  ?>
 <li class="slide-video-embed">
-	<?php infinity_slider_the_slide_video_content() ?>
+	<?php
+		infinity_slider_the_slide_video_content();
+	?>
 </li>

@@ -13,63 +13,86 @@
 
 	get_header();
 ?>
-	<div id="content" role="main" class="<?php do_action( 'content_class' ); ?>">
-		<?php
-			do_action( 'open_404' );
-		?>
-		<article id="post-0" class="post error404 not-found">
-			<header>
-			<h1 class="entry-title">
-				<?php _e( 'Darn it.. Nothing found', 'infinity' ); ?>
-			</h1>
-			</header>
-			<div class="entry-content">
-				<p>
-						<?php
-							_e( 'Sorry, but nothing matched your search criteria. Please try again with some different keywords.', 'infinity' );
-						?>
-					</p>
-					<?php
-						get_search_form();
-					?>
-					
-					<div id="search-recent-posts" class="eight columns">
-
-					<?php the_widget( 'WP_Widget_Recent_Posts', array( 'number' => 10 ), array( 'widget_id' => '404' ) ); ?>	
-					
-					</div>		
-					
-					<div id="search-categories-widget" class="eight columns">
-
-						<h2 class="widgettitle">
-						<?php _e( 'Most Used Categories', 'infinity' ); ?>
-						</h2>
-						<ul>
-						<?php wp_list_categories( array( 'orderby' => 'count', 'order' => 'DESC', 'show_count' => 1, 'title_li' => '', 'number' => 10 ) ); ?>
-						</ul>
-					</div>	
-					<div class="clear"></div>
-					<?php
-					/* translators: %1$s: smilie */
-					$archive_content = '<p>' . sprintf( __( 'Try looking in the monthly archives. %1$s', 'infinity' ), convert_smilies( ':)' ) ) . '</p>';
-					the_widget( 'WP_Widget_Archives', array('count' => 0 , 'dropdown' => 1 ), array( 'after_title' => '</h2>'.$archive_content ) );
-					?>
-
-					<?php the_widget( 'WP_Widget_Tag_Cloud' ); ?>
-			</div>
-		</article>
-		<?php
-			do_action( 'close_404' );
-		?>
-	</div>
+<div id="content" role="main" class="<?php do_action( 'content_class' ); ?>">
 	<?php
-		get_sidebar();
+		do_action( 'open_404' );
 	?>
-	<script type="text/javascript">
-		//<![CDATA[
-		// focus on search field after it has loaded
-		document.getElementById('s') && document.getElementById('s').focus();
-		//]]>
-	</script>
+	<article id="post-0" class="post error404 not-found">
+		<header>
+			<h1 class="entry-title">
+				<?php
+					_e( 'Darn it.. Nothing found', 'infinity' );
+				?>
+			</h1>
+		</header>
+		<div class="entry-content">
+			<p>
+				<?php
+					_e( 'Sorry, but nothing matched your search criteria. Please try again with some different keywords.', 'infinity' );
+				?>
+			</p>
+			<?php
+				get_search_form();
+			?>
+			<div id="search-recent-posts" class="eight columns">
+				<?php
+					the_widget( 'WP_Widget_Recent_Posts', array( 'number' => 10 ), array( 'widget_id' => '404' ) );
+				?>
+			</div>
+			<div id="search-categories-widget" class="eight columns">
+				<h2 class="widgettitle">
+					<?php _e( 'Most Used Categories', 'infinity' ); ?>
+				</h2>
+				<ul>
+					<?php
+						wp_list_categories( array(
+							'orderby' => 'count',
+							'order' => 'DESC',
+							'show_count' => 1,
+							'title_li' => '',
+							'number' => 10
+						));
+					?>
+				</ul>
+			</div>
+			<div class="clear"></div>
+			<?php
+				// begine archive content markup
+				$archive_content = '<p>';
+				// archive content text
+				$archive_content .=
+					sprintf(
+						/* translators: %1$s: smilie */
+						__( 'Try looking in the monthly archives. %1$s', 'infinity' ),
+						convert_smilies( ':)' )
+					);
+				// close archive content
+				$archive_content .= '</p>';
+
+				// show archives widget
+				the_widget(
+					'WP_Widget_Archives',
+					array('count' => 0 , 'dropdown' => 1 ),
+					array( 'after_title' => '</h2>' . $archive_content )
+				);
+
+				// show tag cloud widget
+				the_widget( 'WP_Widget_Tag_Cloud' );
+			?>
+		</div>
+	</article>
+	<?php
+		do_action( 'close_404' );
+	?>
+</div>
+<?php
+	get_sidebar();
+?>
+<script type="text/javascript">
+	//<![CDATA[
+	// focus on search field after it has loaded
+	document.getElementById('s') && document.getElementById('s').focus();
+	//]]>
+</script>
 <?php
 	get_footer();

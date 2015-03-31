@@ -13,27 +13,31 @@
 
 	get_header();
 ?>
-
-	<div id="content" role="main" class="<?php do_action( 'content_class' ); ?>">
-		<?php
-			do_action( 'open_content' );
-			do_action( 'open_archive' );
-		?>
-		<div class="page" id="blog-archive">
-			<header>
+<div id="content" role="main" class="<?php do_action( 'content_class' ); ?>">
+	<?php
+		do_action( 'open_content' );
+		do_action( 'open_archive' );
+	?>
+	<div class="page" id="blog-archive">
+		<header>
 			<h1 class="page-title">
-				<?php printf( __( 'You are browsing the archive for %1$s.', 'infinity' ), wp_title( false, false ) ); ?>
+				<?php
+					printf(
+						__( 'You are browsing the archive for %1$s.', 'infinity' ),
+						wp_title( false, false )
+					);
+				?>
 			</h1>
-			</header>
-			<?php
-				get_template_part( 'templates/loops/loop', 'excerpt' );
-			?>
-		</div>
+		</header>
 		<?php
-			do_action( 'close_archive' );
-			do_action( 'close_content' );
+			get_template_part( 'templates/loops/loop', 'excerpt' );
 		?>
 	</div>
+	<?php
+		do_action( 'close_archive' );
+		do_action( 'close_content' );
+	?>
+</div>
 <?php
 	get_sidebar();
 	get_footer();

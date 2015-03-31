@@ -10,31 +10,47 @@
  * @subpackage templates
  * @since 1.0
  */
-?>
-<?php if ( is_active_sidebar( 'Footer Left' ) || is_active_sidebar( 'Footer Middle' ) || is_active_sidebar( 'Footer Right' )  ) : ?>
-	<div class="footer-widgets row">			
-		<?php if ( is_active_sidebar( 'Footer Left' ) ) : ?>
-			<!-- footer widgets -->
+
+if (
+	is_active_sidebar( 'Footer Left' ) ||
+	is_active_sidebar( 'Footer Middle' ) ||
+	is_active_sidebar( 'Footer Right' )
+):
+	// show footer widgets ?>
+	<div class="footer-widgets row">
+		<?php
+			// left widgets
+			if ( is_active_sidebar( 'Footer Left' ) ): ?>
+				<!-- footer widgets -->
 				<div class="five columns footer-widget " id="footer-widget-left">
 					<?php
 						dynamic_sidebar( 'Footer Left' );
 					?>
 				</div>
-		<?php endif;?>
-		<?php if ( is_active_sidebar( 'Footer Middle' ) ) : ?>
+				<?php
+			endif;
+
+			// middle widgets
+			if ( is_active_sidebar( 'Footer Middle' ) ): ?>
 				<div class="five columns footer-widget" id="footer-widget-middle">
 					<?php
 						dynamic_sidebar( 'Footer Middle' );
 					?>
 				</div>
-		<?php endif; ?>
-		<?php if ( is_active_sidebar( 'Footer Right' ) ) : ?>
+				<?php
+			endif;
+
+			// right widgets
+			if ( is_active_sidebar( 'Footer Right' ) ): ?>
 				<div class="six columns footer-widget " id="footer-widget-right">
 					<?php
 						dynamic_sidebar( 'Footer Right' );
 					?>
 				</div>
-		<?php endif; ?>
+				<?php
+			endif;
+		?>
 	</div>
-<?php endif; ?>
-<div class="clear"></div>
+	<div class="clear"></div>
+	<?php
+endif;

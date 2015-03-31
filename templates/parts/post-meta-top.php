@@ -10,26 +10,28 @@
  * @subpackage templates
  * @since 1.0
  *
- * This template display the post meta date attached to a post. You can hook into this section 
+ * This template display the post meta date attached to a post. You can hook into this section
  * to add your own stuff as well!
  */
 ?>
 <div class="post-meta-data post-top">
-<?php
-	do_action( 'open_loop_post_meta_data_top' );
-?>					
+	<?php
+		do_action( 'open_loop_post_meta_data_top' );
+	?>
 	<span class="post-author">
 		<?php
 			the_author_link();
 		?>
 	</span>
 	<span class="post-category">
-		<?php 
-			the_category(', ') 
-		?>						
+		<?php
+			the_category( ', ' );
+		?>
 	</span>
 	<span class="time-posted">
-		<?php infinity_posted_on() ?>
+		<?php
+			infinity_posted_on();
+		?>
 	</span>
 	<span class="post-comments">
 		<?php
@@ -40,7 +42,7 @@
 			);
 		?>
 	</span>
-<?php
-	do_action( 'close_loop_post_meta_data_top' );
-?>
+	<?php
+		do_action( 'close_loop_post_meta_data_top' );
+	?>
 </div>

@@ -13,13 +13,13 @@
 
 	do_action( 'before_sidebar' );
 ?>
-	<aside id="sidebar" role="complementary" class="<?php do_action( 'sidebar_class' ); ?>">
-		<!-- sidebar -->
-		<?php
-			do_action( 'open_sidebar' );
-			infinity_base_sidebars();
-			do_action( 'close_sidebar' );
-		?>
-	</aside>
+<aside id="sidebar" role="complementary" class="<?php do_action( 'sidebar_class' ); ?>">
+	<!-- sidebar -->
+	<?php
+		do_action( 'open_sidebar' );
+		infinity_base_sidebars();
+		do_action( 'close_sidebar' );
+	?>
+</aside>
 <?php
 	do_action( 'after_sidebar' );

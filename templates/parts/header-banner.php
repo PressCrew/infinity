@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Infinity Theme: Header Content
  *
@@ -14,11 +14,13 @@
  * @since 1.0
  */
 ?>
+
 <div class="top-wrap row <?php do_action( 'top_wrap_class' ); ?>">
 	<?php
-		// Load Top Menu only if it's enabled
-		if ( current_theme_supports( 'infinity:top-menu', 'setup' ) ) :
-		get_template_part( 'templates/parts/top-menu', 'header' );
+		// is the top menu supported?
+		if ( current_theme_supports( 'infinity:top-menu', 'setup' ) ):
+			// load top menu template
+			get_template_part( 'templates/parts/top-menu', 'header' );
 		endif;
 	?>
 	<!-- header -->
@@ -26,28 +28,32 @@
 		<div id="logo-menu-wrap">
 			<?php
 				do_action( 'open_header' );
+
+				// missing header logo support?
 				if ( !infinity_feature( 'support', 'header-logo' ) ):
-			?>
-			<?php
-				$heading_tag = ( is_home() || is_front_page() ) ? 'h1' : 'div';
-			?>
-			<<?php echo $heading_tag; ?> id="site-title">
-				<a href="<?php echo home_url( '/' ); ?>" title="<?php bloginfo('name'); ?> - <?php bloginfo('description'); ?>"><?php bloginfo('name'); ?></a>
-				<span id="site-description"><?php bloginfo('description'); ?></span>
-			</<?php echo $heading_tag; ?>>
-			<?php
+					$heading_tag = ( is_home() || is_front_page() ) ? 'h1' : 'div';
+				?>
+					<<?php echo $heading_tag; ?> id="site-title">
+						<a href="<?php echo home_url( '/' ); ?>" title="<?php bloginfo('name'); ?> - <?php bloginfo('description'); ?>"><?php bloginfo('name'); ?></a>
+						<span id="site-description"><?php bloginfo('description'); ?></span>
+					</<?php echo $heading_tag; ?>>
+					<?php
 				endif;
-				// Load Main Menu only if it's enabled
-				if ( current_theme_supports( 'infinity:main-menu', 'setup' ) ) :
-				get_template_part( 'templates/parts/main-menu', 'header' );
+
+				// is main menu supported?
+				if ( current_theme_supports( 'infinity:main-menu', 'setup' ) ):
+					// load main menu template
+					get_template_part( 'templates/parts/main-menu', 'header' );
 				endif;
+
 				do_action( 'close_header' );
 			?>
 		</div>
 	</header><!-- end header -->
 	<?php
-		// Load Sub Menu only if it's enabled
-		if ( current_theme_supports( 'infinity:sub-menu', 'setup' ) ) :
+		// is sub menu supported?
+		if ( current_theme_supports( 'infinity:sub-menu', 'setup' ) ):
+			// load sub menu template
 			get_template_part( 'templates/parts/sub-menu', 'header' );
 		endif;
 	?>
