@@ -18,7 +18,7 @@
 <div class="top-wrap row <?php do_action( 'top_wrap_class' ); ?>">
 	<?php
 		// load top menu template
-		get_template_part( 'templates/parts/menu', 'top' );
+		get_template_part( 'templates/parts/menu-top' );
 	?>
 	<!-- header -->
 	<header id="header" role="banner">
@@ -38,7 +38,7 @@
 				endif;
 
 				// load main menu template
-				get_template_part( 'templates/parts/menu', 'main' );
+				get_template_part( 'templates/parts/menu-main' );
 
 				do_action( 'close_header' );
 			?>
@@ -46,6 +46,6 @@
 	</header><!-- end header -->
 	<?php
 		// load sub menu template
-		get_template_part( 'templates/parts/menu', 'sub' );
+		get_template_part( 'templates/parts/menu-sub' );
 	?>
 </div><!-- end top wrap -->

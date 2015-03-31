@@ -27,7 +27,7 @@
 				<div id="powered-by">
 					<div id="footer-info" class="column ten">
 						<?php
-							get_template_part( 'templates/parts/menu', 'footer' );
+							get_template_part( 'templates/parts/menu-footer' );
 						?>
 					</div>
 					<div id="copyright-info" class="column six">
