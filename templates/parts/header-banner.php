@@ -17,11 +17,8 @@
 
 <div class="top-wrap row <?php do_action( 'top_wrap_class' ); ?>">
 	<?php
-		// is the top menu supported?
-		if ( current_theme_supports( 'infinity:top-menu', 'setup' ) ):
-			// load top menu template
-			get_template_part( 'templates/parts/menu', 'top' );
-		endif;
+		// load top menu template
+		get_template_part( 'templates/parts/menu', 'top' );
 	?>
 	<!-- header -->
 	<header id="header" role="banner">
@@ -40,21 +37,15 @@
 					<?php
 				endif;
 
-				// is main menu supported?
-				if ( current_theme_supports( 'infinity:main-menu', 'setup' ) ):
-					// load main menu template
-					get_template_part( 'templates/parts/menu', 'main' );
-				endif;
+				// load main menu template
+				get_template_part( 'templates/parts/menu', 'main' );
 
 				do_action( 'close_header' );
 			?>
 		</div>
 	</header><!-- end header -->
 	<?php
-		// is sub menu supported?
-		if ( current_theme_supports( 'infinity:sub-menu', 'setup' ) ):
-			// load sub menu template
-			get_template_part( 'templates/parts/menu', 'sub' );
-		endif;
+		// load sub menu template
+		get_template_part( 'templates/parts/menu', 'sub' );
 	?>
 </div><!-- end top wrap -->

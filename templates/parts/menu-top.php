@@ -11,8 +11,11 @@
  * @since 1.0
  */
 
-// is top menu set?
-if ( has_nav_menu( 'over-menu' ) ):
+// is top menu supported and is one set?
+if (
+	current_theme_supports( 'infinity:top-menu', 'setup' ) &&
+	has_nav_menu( 'over-menu' )
+):
 	// show top menu ?>
 	<div id="top-menu-wrap" role="navigation">
 		<nav class="base-menu top-menu">

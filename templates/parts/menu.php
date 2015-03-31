@@ -11,9 +11,16 @@
  * @since 1.0
  */
 
-// show if main menu is set or neither other top menu has been set
+// show main menu?
+$show_main_menu =
+	(
+		current_theme_supports( 'infinity:main-menu', 'setup' ) &&
+		has_nav_menu( 'main-menu' )
+	);
+
+// show if main menu is supported and set or neither other top menu has been set
 if (
-	has_nav_menu( 'main-menu' ) ||
+	true === $show_main_menu ||
 	(
 		!has_nav_menu( 'over-menu' ) &&
 		!has_nav_menu( 'sub-menu' )

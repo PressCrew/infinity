@@ -27,11 +27,7 @@
 				<div id="powered-by">
 					<div id="footer-info" class="column ten">
 						<?php
-							// is footer menu enabled?
-							if ( current_theme_supports( 'infinity:footer-menu', 'setup' ) ) :
-								// load footer menu part
-								get_template_part( 'templates/parts/menu', 'footer' );
-							endif;
+							get_template_part( 'templates/parts/menu', 'footer' );
 						?>
 					</div>
 					<div id="copyright-info" class="column six">

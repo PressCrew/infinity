@@ -11,8 +11,11 @@
  * @since 1.0
  */
 
-// is sub menu set?
-if ( has_nav_menu( 'sub-menu' ) ):
+// is sub menu supported and is one set?
+if (
+	current_theme_supports( 'infinity:sub-menu', 'setup' ) &&
+	has_nav_menu( 'sub-menu' )
+):
 	// show sub menu ?>
 	<div id="sub-menu-wrap" role="navigation">
 		<nav class="base-menu sub-menu">

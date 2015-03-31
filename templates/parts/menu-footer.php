@@ -11,8 +11,11 @@
  * @since 1.0
  */
 
-// is there a footer menu set?
-if ( has_nav_menu( 'footer-menu' ) ):
+// is footer menu supported and is there one set?
+if (
+	current_theme_supports( 'infinity:footer-menu', 'setup' ) &&
+	has_nav_menu( 'footer-menu' )
+):
 	// show footer nav ?>
 	<nav id="footer-menu" role="navigation">
 		<?php
