@@ -348,7 +348,7 @@ class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	 * @param string $group
 	 * @return array
 	 */
-	public function get_settings( $name, $group = self::DEFAULT_GROUP )
+	public function get_settings_array( $name, $group = self::DEFAULT_GROUP )
 	{
 		// any settings set?
 		if ( isset( $this->settings[ $group ][ $name ] ) ) {

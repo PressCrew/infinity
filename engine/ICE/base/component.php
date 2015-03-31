@@ -361,7 +361,7 @@ abstract class ICE_Component
 	final protected function import_settings( $config, $types = array() )
 	{
 		// get all raw setting values
-		$raw_values = $this->_policy->registry()->get_settings( $this->name, $this->group );
+		$raw_values = $this->_policy->registry()->get_settings_array( $this->name, $this->group );
 
 		// loop raw values, NOT settings
 		foreach ( $raw_values as $setting => $raw_value ) {

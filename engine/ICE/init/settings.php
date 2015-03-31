@@ -76,7 +76,7 @@ class ICE_Init_Settings
 	 * @param callable $callback The callback to use to seek to the correct theme stack position.
 	 * @return string
 	 */
-	public function get_theme( $name, $callback = 'end' )
+	public function get_theme_name( $name, $callback = 'end' )
 	{
 		// exists in value map?
 		if ( isset( $this->data[ $name ] ) ) {
