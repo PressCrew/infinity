@@ -1,5 +1,4 @@
 <div id="vertical-activity-tabs" class="activity-type-tabs sidebar-activity-tabs item-list-tabs" role="navigation">
-	<h4>Activity Filters</h4>
 	<ul>
 		<?php
 			do_action( 'bp_before_activity_type_tab_all' );

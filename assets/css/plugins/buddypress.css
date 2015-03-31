@@ -197,8 +197,8 @@
 	margin-top: 0;
 }
 .infinity-bp #vertical-activity-tabs,
-.infinity-bp #group-navigation,
-.infinity-bp #profile-navigation {
+.infinity-bp #group-sidebar,
+.infinity-bp #profile-sidebar {
 	border: 0 none;
 	-webkit-box-shadow: none;
 	box-shadow: none;

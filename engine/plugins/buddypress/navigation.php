@@ -17,7 +17,7 @@
 function infinity_bp_sidebar_activity_tabs()
 {
 	if ( bp_is_activity_component() && bp_is_directory() ):
-		infinity_get_template_part( 'templates/parts/activity-tabs' );
+		infinity_get_template_part( 'templates/parts/vertnav-activity' );
 	endif;
 }
 add_action( 'open_sidebar', 'infinity_bp_sidebar_activity_tabs' );
@@ -29,7 +29,7 @@ function infinity_bp_sidebar_group_navigation()
 {
 	if ( bp_is_group() ) :
 		infinity_bp_populate_group_global();
-		infinity_get_template_part( 'templates/parts/group-navigation' );
+		infinity_get_template_part( 'templates/parts/vertnav-group' );
 	endif;
 }
 add_action( 'open_sidebar', 'infinity_bp_sidebar_group_navigation' );
@@ -40,7 +40,7 @@ add_action( 'open_sidebar', 'infinity_bp_sidebar_group_navigation' );
 function infinity_bp_sidebar_member_navigation()
 {
 	if ( bp_is_user() ) :
-		infinity_get_template_part( 'templates/parts/member-navigation' );
+		infinity_get_template_part( 'templates/parts/vertnav-member' );
 	endif;
 }
 add_action( 'open_sidebar', 'infinity_bp_sidebar_member_navigation' );

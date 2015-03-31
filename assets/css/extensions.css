@@ -134,7 +134,7 @@ body.infinity-layout {
 .infinity-layout #powered-by,
 .infinity-layout #header #site-title,
 .infinity-layout .negative,
-.infinity-layout #group-navigation,
+.infinity-layout #group-sidebar,
 .infinity-layout #profile-sidebar,
 .infinity-layout .sidebar-activity-tabs,
 .infinity-layout #sidebar .widget h4,
@@ -148,7 +148,6 @@ body.infinity-layout {
 }
 /* Global Negative Vertical Padding */
 .infinity-layout #profile-sidebar {
-	margin-bottom: -30px;
     margin-top: -30px;
     padding-bottom: 30px;
     padding-top: 30px;
@@ -1341,7 +1340,7 @@ body.infinity-design {
 	background: url("../images/design/bg-body.gif") repeat transparent;
 }
 .infinity-design .widget h4,
-.infinity-design #vertical-activity-tabs h4 {
+.infinity-design #activity-navigation h4 {
 	border-bottom: 1px solid #EDEDED;
 	padding-bottom: 10px;
 }
