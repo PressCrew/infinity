@@ -21,7 +21,7 @@
 	<div class="page" id="blog-author">
 		<?php
 			// load intro boxes part
-			get_template_part( 'templates/parts/intro-box' );
+			get_template_part( 'templates/parts/intro-box', 'author' );
 			// load author loop
 			get_template_part( 'templates/loops/loop', 'author' );
 		?>

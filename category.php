@@ -21,7 +21,7 @@
 	<div class="page" id="blog-category">
 		<?php
 			// load intro boxes part
-			get_template_part( 'templates/parts/intro-box' );
+			get_template_part( 'templates/parts/intro-box', 'category' );
 			// load category loop
 			get_template_part( 'templates/loops/loop', 'category' );
 		?>

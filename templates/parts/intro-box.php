@@ -11,81 +11,37 @@
  * @since 1.0
  */
 
+// This part mostly exists for backwards compatibility, but
+// could be very useful in sub-templates where the post type
+// varies depending on which parent template loads it.
+
 // are introduction boxes supported?
 if ( infinity_base_show_intro_box() ):
 
-	// show the category box when on a category page
+	// on a category page?
 	if ( is_category() ):
-		// show category archives ?>
-		<div class="category-box">
-			<div id="category-description">
-				<header>
-					<h1 id= "category-title" class="page-title">
-						<?php
-							printf( __( 'Category Archives: <span>%s</span>', 'infinity' ), single_cat_title( '', false ) );
-						?>
-					</h1>
-				</header>
-				<?php
-					// get cat desc
-					$category_description = category_description();
-					// print it?
-					if ( !empty( $category_description ) ) {
-						print $category_description;
-					}
-				?>
-			</div>
-		</div>
-		<?php
-	endif;
 
-	// Show The tag box when on a Tags Page
-	if ( is_tag() ):
-		// show tag archives ?>
-		<div class="tag-box">
-			<div id="tag-description">
-			<header>
-				<h1 id="tag-title" class="page-title">
-					<?php
-						printf( __( 'Tag Archives: <span>%s</span>', 'infinity' ), single_tag_title( '', false ) );
-					?>
-				</h1>
-			</header>
-			<?php
-				$tag_description = tag_description();
-				if ( !empty( $tag_description ) ):
-					echo  $tag_description ;
-				endif;
-			?>
-			</div>
-		</div>
-		<?php
-	endif;
+		// show category archives
+		get_template_part( 'templates/parts/intro-box', 'category' );
+	
+	// on a tag page?
+	elseif ( is_tag() ):
+		
+		// show tag archives
+		get_template_part( 'templates/parts/intro-box', 'tag' );
+		
+	// on author page?
+	elseif ( is_author() ):
+		
+		// show author box
+		get_template_part( 'templates/parts/intro-box', 'author' );
+		
+	// on any archive page?
+	elseif ( is_day() || is_month() || is_year() ):
 
-	// maybe load author box
-	infinity_base_auto_author_box();
-
-	// show the archive box when on an archive page
-	if ( is_day() || is_month() || is_year() ):
-		// show daily archives ?>
-		<div class="category-box">
-			<div id="category-description">
-				<header>
-					<h1 id= "category-title" class="page-title">
-						<?php
-							if ( is_day() ):
-								printf( __( 'Daily Archives: %s', 'infinity' ), '<span>' . get_the_date() . '</span>' );
-							elseif ( is_month() ):
-								printf( __( 'Monthly Archives: %s', 'infinity' ), '<span>' . get_the_date( 'F Y' ) . '</span>' );
-							elseif ( is_year() ):
-								printf( __( 'Yearly Archives: %s', 'infinity' ), '<span>' . get_the_date( 'Y' ) . '</span>' );
-							endif;
-						?>
-					</h1>
-				</header>
-			</div>
-		</div>
-		<?php
+		// show post archives
+		get_template_part( 'templates/parts/intro-box', 'archive' );
+		
 	endif;
 
 endif;

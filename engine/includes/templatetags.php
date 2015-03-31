@@ -98,29 +98,6 @@ function infinity_base_show_author_box()
 }
 
 /**
- * Show author box if on an author page.
- *
- * @package Infinity
- * @subpackage base
- */
-function infinity_base_auto_author_box()
-{
-	// on author page?
-	if ( is_author() ):
-		// queue the first post, that way we know who the author is when we
-		// try to get their name, URL, description, avatar, etc.
-		if ( have_posts() ):
-			// set up this loop
-			the_post();
-			// load author box
-			get_template_part( 'templates/parts/author-box' );
-			// reset the loop so we don't break later queries
-			rewind_posts();
-		endif;
-	endif;
-}
-
-/**
  * Prints HTML with meta information for the current post-date/time and author.
  */
 function infinity_posted_on()
