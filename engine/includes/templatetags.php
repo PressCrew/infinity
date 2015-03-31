@@ -70,6 +70,19 @@ function infinity_base_title()
 }
 
 /**
+ * Returns true if introduction boxes are supported and should be displayed.
+ *
+ * @package Infinity
+ * @subpackage base
+ * @return boolean
+ */
+function infinity_base_show_intro_boxes()
+{
+	// are author boxes supported, and has the author filled out their description?
+	return current_theme_supports( 'infinity:post', 'intro-boxes' );
+}
+
+/**
  * Returns true if author has filled out their description in profile.
  *
  * @package Infinity

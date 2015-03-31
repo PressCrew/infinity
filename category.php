@@ -20,11 +20,8 @@
 	?>
 	<div class="page" id="blog-category">
 		<?php
-			// are intro boxes supported?
-			if ( current_theme_supports( 'infinity:post', 'intro-boxes' ) ):
-				// load intro boxes part
-				get_template_part( 'templates/parts/introduction-boxes' );
-			endif;
+			// load intro boxes part
+			get_template_part( 'templates/parts/introduction-boxes' );
 			// load category loop
 			get_template_part( 'templates/loops/loop', 'category' );
 		?>
