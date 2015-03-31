@@ -563,12 +563,10 @@ This CSS file contains all the default WordPress Styling.
 	display: inline;
 	padding: 4px;
 }
-.infinity-wp .post .aligncenter,
 .infinity-wp .post .aligncenter {
-	margin-left: auto;
-	margin-right: auto;
-	display: block;
+	text-align: center;
 }
+.infinity-wp .post .aligncenter,
 .infinity-wp .post img.centered,
 .infinity-wp img.aligncenter {
 	margin-left: auto;
