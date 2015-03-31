@@ -83,10 +83,11 @@ function infinity_base_show_intro_box()
 }
 
 /**
- * Returns true if author has filled out their description in profile.
+ * Returns true if author boxes are supported and author has filled out their description in profile.
  *
  * @package Infinity
  * @subpackage base
+ * @return boolean
  */
 function infinity_base_show_author_box()
 {
