@@ -121,15 +121,15 @@ class ICE_Ext_Feature_Header_Logo
 			// add rule
 			$pos = $style->rule( 'logo', $selectors );
 
-			if ( $opt_top ) {
-				$pos->ad( 'top', $opt_top . 'px' );
+			if ( is_numeric( $opt_top ) ) {
+				$pos->ad( 'top', (int) $opt_top . 'px' );
 			}
 
-			if ( $width ) {
-				$pos->ad( 'width', $width . 'px' );
+			if ( is_numeric( $width ) ) {
+				$pos->ad( 'width', (int) $width . 'px' );
 			}
 
-			if ( $height ) {
+			if ( is_numeric( $height ) ) {
 				$pos->ad( 'height', $height . 'px' );
 			}
 
@@ -142,8 +142,8 @@ class ICE_Ext_Feature_Header_Logo
 				switch ( $opt_pos ) {
 					// left position
 					case 'l':
-						if ( $opt_left ) {
-							$pos->ad( 'left', $opt_left . 'px' );
+						if ( is_numeric( $opt_left ) && $opt_left >= 1 ) {
+							$pos->ad( 'left', (int) $opt_left . 'px' );
 						} else {
 							$pos->ad( 'left', 'inherit' );
 						}
@@ -152,17 +152,17 @@ class ICE_Ext_Feature_Header_Logo
 					case 'c':
 						// put in middle
 						$pos->ad( 'left', '50%' );
-						// if we have a width, offset the margin by half
-						if ( $width ) {
-							$pos->ad( 'margin-left', sprintf( '-%dpx', $width / 2 ) );
+						// if we have a width of 2 or higher, offset the margin by half
+						if ( is_numeric( $width ) && $width >= 2 ) {
+							$pos->ad( 'margin-left', sprintf( '-%dpx', (int) $width / 2 ) );
 						}
 						break;
 					// right position
 					case 'r':
-						if ( $opt_right ) {
-							$pos->ad( 'right', $opt_right . 'px' );
+						if ( is_numeric( $opt_right ) ) {
+							$pos->ad( 'right', (int) $opt_right . 'px' );
 						} else {
-							$pos->ad( 'right', 'inherit' );
+							$pos->ad( 'right', 0 );
 						}
 						break;
 				}
