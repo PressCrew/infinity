@@ -14,35 +14,36 @@
  * @package Infinity
  * @since 1.0
  */
-?>
+
+// render slider markup ?>
 <div class="flex-container">
 	<div class="flexslider">
-	  	<ul class="slides">
+		<ul class="slides">
 		<?php
 			// setup slides loop
-			if ( infinity_slider_have_slides() ) {
+			if ( infinity_slider_have_slides() ):
 				// start slides loop
-				while( infinity_slider_have_slides() ) {
+				while( infinity_slider_have_slides() ):
 					// setup current slide
 					infinity_slider_the_slide();
 					// is video enabled?
-					if ( infinity_slider_the_slide_show_video() ) {
+					if ( infinity_slider_the_slide_show_video() ):
 						// yes, it's a video slide
 						get_template_part( 'templates/parts/slider-video' );
 					// does it have a thumbnail?
-					} elseif ( infinity_slider_the_slide_has_thumbnail() ) {
+					elseif ( infinity_slider_the_slide_has_thumbnail() ):
 						// yes, it's a post slide
 						get_template_part( 'templates/parts/slider-post' );
 					// everything else
-					} else {
+					else:
 						// it's an empty slide
 						get_template_part( 'templates/parts/slider-no-content' );
-					}
-				}
-			} else {
+					endif;
+				endwhile;
+			else:
 				// there are no slides
 				get_template_part( 'templates/parts/slider-no-slides' );
-			}
+			endif;
 		?>
 		</ul>
 	</div>

@@ -12,20 +12,20 @@
  */
  ?>
 <li>
-	<a href="<?php infinity_slider_the_slide_permalink(); ?>"><?php infinity_slider_the_slide_thumbnail() ?></a>
+	<a href="<?php infinity_slider_the_slide_permalink(); ?>"><?php infinity_slider_the_slide_thumbnail(); ?></a>
 	<?php
 		// show caption?
 		if ( infinity_slider_the_slide_show_caption() ):
-	?>
-		<div class="flex-caption">
-			<h3>
-				<a href="<?php infinity_slider_the_slide_permalink(); ?>">
-					<?php infinity_slider_the_slide_title();?>
-				</a>
-			</h3>
-			<?php infinity_slider_the_slide_excerpt(); ?>
-		</div>
-	<?php
+			// show slide caption ?>
+			<div class="flex-caption">
+				<h3>
+					<a href="<?php infinity_slider_the_slide_permalink(); ?>"><?php infinity_slider_the_slide_title();?></a>
+				</h3>
+				<?php
+					infinity_slider_the_slide_excerpt();
+				?>
+			</div>
+			<?php
 		endif;
 	?>
 </li>

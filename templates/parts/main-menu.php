@@ -11,17 +11,23 @@
  * @since 1.0
  */
 
-// skip this menu if no main menu is set and at least one menu has been set up
-if ( !has_nav_menu( 'main-menu' ) && ( has_nav_menu( 'over-menu' ) || has_nav_menu( 'sub-menu' ) ) ) {
-	return;
-}
-?>
-<div id="main-menu-wrap" role="navigation">
-	<nav class="base-menu main-menu">
-		<?php
-			do_action('open_main_menu');
-			infinity_base_nav_menu( 'main-menu' );
-			do_action('close_main_menu');
-		?>
-	</nav>
-</div>
+// show if main menu is set or neither other top menu has been set
+if (
+	has_nav_menu( 'main-menu' ) ||
+	(
+		!has_nav_menu( 'over-menu' ) &&
+		!has_nav_menu( 'sub-menu' )
+	)
+):
+	// show main menu ?>
+	<div id="main-menu-wrap" role="navigation">
+		<nav class="base-menu main-menu">
+			<?php
+				do_action('open_main_menu');
+				infinity_base_nav_menu( 'main-menu' );
+				do_action('close_main_menu');
+			?>
+		</nav>
+	</div>
+	<?php
+endif;

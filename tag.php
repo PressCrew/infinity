@@ -13,24 +13,27 @@
 
 	get_header();
 ?>
-	<div id="content" role="main" class="<?php do_action( 'content_class' ); ?>">
+<div id="content" role="main" class="<?php do_action( 'content_class' ); ?>">
+	<?php
+		do_action( 'open_content' );
+		do_action( 'open_tag' );
+	?>
+	<div class="page" id="blog-tag">
 		<?php
-			do_action( 'open_content' );
-			do_action( 'open_tag' );
-		?>
-		<div class="page" id="blog-tag">
-			<?php
-				if ( current_theme_supports( 'infinity:post', 'intro-boxes' ) ) :
+			// are intro boxes supported?
+			if ( current_theme_supports( 'infinity:post', 'intro-boxes' ) ):
+				// load intro boxes part
 				get_template_part( 'templates/parts/introduction-boxes' );
-				endif;
-				get_template_part( 'templates/loops/loop', 'tag' );
-			?>
-		</div>
-		<?php
-			do_action( 'close_tag' );
-			do_action( 'close_content' );
+			endif;
+			// load tag loop
+			get_template_part( 'templates/loops/loop', 'tag' );
 		?>
-	</div><!-- #content -->
+	</div>
+	<?php
+		do_action( 'close_tag' );
+		do_action( 'close_content' );
+	?>
+</div><!-- #content -->
 <?php
 	get_sidebar();
 	get_footer();

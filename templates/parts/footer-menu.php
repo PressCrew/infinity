@@ -11,14 +11,15 @@
  * @since 1.0
  */
 
-if ( !has_nav_menu( 'footer-menu' ) ) {
-	return;
-}
-?>
-<nav id="footer-menu" role="navigation">
+// is there a footer menu set?
+if ( has_nav_menu( 'footer-menu' ) ):
+	// show footer nav ?>
+	<nav id="footer-menu" role="navigation">
+		<?php
+			do_action('open_footer_menu');
+			wp_nav_menu( array( 'theme_location' => 'footer-menu' ) );
+			do_action('close_footer_menu');
+		?>
+	</nav>
 	<?php
-		do_action('open_footer_menu');
-		wp_nav_menu( array( 'theme_location' => 'footer-menu' ) );
-		do_action('close_footer_menu');
-	?>
-</nav>	
+endif;

@@ -10,28 +10,35 @@
  * @subpackage templates
  * @since 1.0
  */
-?>
-<?php if ( get_the_author_meta('description') && current_theme_supports( 'infinity:post', 'author-boxes' ) ): ?>
+
+// have author description and author boxes supported?
+if (
+	current_theme_supports( 'infinity:post', 'author-boxes' ) &&
+	get_the_author_meta('description')
+):
+	// show author box ?>
 	<div class="author-box">
 		<?php
 			do_action( 'open_author_box' );
 		?>
 		<div id="author-description">
 			<h3>
-				Something about <?php the_author_link(); ?> 
+				Something about <?php the_author_link(); ?>
 			</h3>
 			<?php
 				print get_avatar( get_the_author_meta( 'user_email' ), '50' );
 				the_author_meta('description');
 			?>
 			<div id="author-link">
-					<a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) ); ?>">
-						<?php printf( __( 'View all posts by %s', 'infinity' ), get_the_author() ); ?> <span class="meta-nav">&rarr;</span>
-					</a>
+				<a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) ); ?>">
+					<?php printf( __( 'View all posts by %s', 'infinity' ), get_the_author() ); ?> <span class="meta-nav">&rarr;</span>
+				</a>
 			</div>
 		</div>
 		<?php
 			do_action( 'close_author_box' );
 		?>
 	</div>
-<?php endif?>	
+	<?php
+
+endif;

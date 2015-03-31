@@ -13,19 +13,15 @@
 
 	get_header();
 ?>
-	<div id="content" role="main" class="<?php do_action( 'content_class' ); ?>">
-		<?php
-			do_action( 'open_content' );
-			do_action( 'open_single' );
-		?>
-			<?php /* Load Single Post Loop */
-				get_template_part( 'templates/loops/loop', 'single' );
-			?>
-		<?php
-			do_action( 'close_single' );
-			do_action( 'close_content' );
-		?>
-	</div>
+<div id="content" role="main" class="<?php do_action( 'content_class' ); ?>">
+	<?php
+		do_action( 'open_content' );
+		do_action( 'open_single' );
+		get_template_part( 'templates/loops/loop', 'single' );
+		do_action( 'close_single' );
+		do_action( 'close_content' );
+	?>
+</div>
 <?php
 	get_sidebar();
 	get_footer();

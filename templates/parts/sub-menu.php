@@ -11,16 +11,17 @@
  * @since 1.0
  */
 
-if ( !has_nav_menu( 'sub-menu' ) ) {
-	return;
-}
-?>
-<div id="sub-menu-wrap" role="navigation">
-	<nav class="base-menu sub-menu">
-		<?php
-			do_action('open_sub_menu');
-			infinity_base_nav_menu( 'sub-menu' );
-			do_action('close_sub_menu');
-		?>
-	</nav>
-</div>
+// is sub menu set?
+if ( has_nav_menu( 'sub-menu' ) ):
+	// show sub menu ?>
+	<div id="sub-menu-wrap" role="navigation">
+		<nav class="base-menu sub-menu">
+			<?php
+				do_action('open_sub_menu');
+				infinity_base_nav_menu( 'sub-menu' );
+				do_action('close_sub_menu');
+			?>
+		</nav>
+	</div>
+	<?php
+endif;

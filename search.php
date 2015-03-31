@@ -12,12 +12,16 @@
  */
 
 	get_header();
-?>	
-	<div id="content" role="main" class="<?php do_action( 'content_class' ); ?>">
+?>
+<div id="content" role="main" class="<?php do_action( 'content_class' ); ?>">
 	<?php
 		do_action( 'open_content' );
 		do_action( 'open_search' );
-		if ( have_posts() ): ?>
+
+		// have any results?
+		if ( have_posts() ):
+
+			// show results ?>
 			<header>
 				<h1 class="page-title search-title">
 					<?php
@@ -27,7 +31,11 @@
 			</header>
 			<?php
 				get_template_part( 'templates/loops/loop', 'search' );
-			else: ?>
+
+		// no results
+		else:
+
+			// show nothing found message ?>
 			<div id="post-0" class="post no-results not-found">
 				<h2 class="entry-title">
 					<?php
@@ -45,12 +53,15 @@
 					?>
 				</div>
 			</div>
-	<?php
+			<?php
+
+		// all done
 		endif;
-			do_action( 'close_search' );
-			do_action( 'close_content' );
-	?>
-	</div>
+
+		do_action( 'close_search' );
+		do_action( 'close_content' );
+?>
+</div>
 <?php
 	get_sidebar();
 	get_footer();
