@@ -11,11 +11,9 @@
  * @since 1.0
  */
 
-// have author description and author boxes supported?
-if (
-	current_theme_supports( 'infinity:post', 'author-boxes' ) &&
-	get_the_author_meta('description')
-):
+// check author box requirements
+if ( infinity_base_show_author_box() ):
+
 	// show author box ?>
 	<div class="author-box">
 		<?php

@@ -70,24 +70,37 @@ function infinity_base_title()
 }
 
 /**
- * Show author box (if on an author page)
+ * Returns true if author has filled out their description in profile.
  *
  * @package Infinity
  * @subpackage base
  */
-function infinity_base_author_box()
+function infinity_base_show_author_box()
 {
+	// are author boxes supported, and has the author filled out their description?
+	return (
+		current_theme_supports( 'infinity:post', 'author-boxes' ) &&
+		get_the_author_meta( 'description' )
+	);
+}
+
+/**
+ * Show author box if on an author page.
+ *
+ * @package Infinity
+ * @subpackage base
+ */
+function infinity_base_auto_author_box()
+{
+	// on author page?
 	if ( is_author() ):
 		// queue the first post, that way we know who the author is when we
 		// try to get their name, URL, description, avatar, etc.
 		if ( have_posts() ):
+			// set up this loop
 			the_post();
-
-			// if a user has filled out their description, show a bio on their entries.
-			if ( get_the_author_meta( 'description' ) ):
-				get_template_part( 'templates/parts/author-box' );
-			endif;
-
+			// load author box
+			get_template_part( 'templates/parts/author-box' );
 			// reset the loop so we don't break later queries
 			rewind_posts();
 		endif;

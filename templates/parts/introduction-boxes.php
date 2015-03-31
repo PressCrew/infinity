@@ -59,8 +59,8 @@ if ( is_tag() ):
 	<?php
 endif;
 
-// load author box if on author page
-infinity_base_author_box();
+// maybe load author box
+infinity_base_auto_author_box();
 
 // show the archive box when on an archive page
 if ( is_day() || is_month() || is_year() ):
