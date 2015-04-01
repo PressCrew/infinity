@@ -675,9 +675,8 @@ html body.infinity-layout .top-wrap ul.sub-menu {
 }
 .infinity-btns .post-tags a {
 	font-size: 10px;
-	padding: 3px 5px;
-	margin-left: 1px;
-	margin-right: 5px;
+	padding: 0 8px;
+	margin: 2px 4px 2px 2px;
 }
 .infinity-btns .big,
 .infinity-btns.infinity-bp #buddypress .big {
