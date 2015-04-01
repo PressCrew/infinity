@@ -740,6 +740,9 @@ This CSS file contains all the default WordPress Styling.
 	-moz-border-radius: 3px;
 	padding: 10px 20px;
 }
+.infinity-wp .post-content .author-box {
+	margin-top: 30px;
+}
 .infinity-wp #category-description p,
 .infinity-wp #tag-description p {
 	font-style: italic;
