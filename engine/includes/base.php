@@ -445,7 +445,7 @@ function infinity_base_cleaner_caption( $output, $attr, $content )
 	// is image center aligned?
 	if ( 'aligncenter' === $attr['align'] ) {
 		// yes, add fixed width
-		$attributes .= ' style="width:'. esc_attr( $attr['width'] ) . 'px"';
+		$attributes .= ' style="max-width:'. esc_attr( $attr['width'] ) . 'px"';
 	}
 	
 	// Open the caption <div>
