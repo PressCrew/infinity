@@ -114,6 +114,52 @@ function infinity_posted_on()
 	);
 }
 
+if ( !function_exists( 'infinity_comment_nav' ) ) {
+	/**
+	 * Display navigation to next/previous comments when applicable.
+	 *
+	 * @since Twenty Fifteen 1.0
+	 */
+	function infinity_comment_nav() {
+		// Are there comments to navigate through?
+		if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) :
+			?>
+			<nav class="navigation comment-navigation" role="navigation">
+				<div class="nav-links">
+					<?php
+
+						// previous link
+						$prev_link = get_previous_comments_link( __( 'Older Comments', 'infinity' ) );
+
+						// have prev link?
+						if ( $prev_link ):
+							?>
+							<div class="nav-previous">
+								<?php echo $prev_link; ?>
+							</div>
+							<?php
+						endif;
+
+						// next link
+						$next_link = get_next_comments_link( __( 'Newer Comments', 'infinity' ) );
+
+						// have next link?
+						if ( $next_link ):
+							?>
+							<div class="nav-next">
+								<?php echo $next_link; ?>
+							</div>
+							<?php
+						endif;
+
+					?>
+				</div><!-- .nav-links -->
+			</nav><!-- .comment-navigation -->
+			<?php
+		endif;
+	}
+}
+
 // define the_post_name() tag if not already exists.
 if ( false === function_exists( 'the_post_name' ) ) {
 	/**

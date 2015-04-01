@@ -655,11 +655,19 @@ This CSS file contains all the default WordPress Styling.
 	text-align: center;
 	word-spacing: 10px;
 }
+.infinity-wp .comment-navigation {
+	padding: 8px 12px;
+	word-spacing: inherit;
+}
 .infinity-wp ul.page-numbers li a:hover,
 .infinity-wp .paged-navigation:hover,
 .infinity-wp .comment-navigation:hover {
-	background: #444;
-	color: #FFF;
+	background: #777;
+	color: #eee;
+}
+.infinity-wp .paged-navigation:hover a,
+.infinity-wp .comment-navigation:hover a {
+	color: #eee;
 }
 .infinity-wp ul.page-numbers {
 	text-align: center;
@@ -776,126 +784,100 @@ This CSS file contains all the default WordPress Styling.
 /* ============ */
 /* ! Comments   */
 /* ============ */
-.infinity-wp .comment-content {
-	margin-bottom: 40px;
+
+.infinity-wp .comments-area {
+	margin: 20px 10px 10px 10px;
 	position: relative;
 }
-.infinity-wp #comments {
-	margin-top: 20px;
-	position: relative;
+.infinity-wp .comments-area h4.comments-title {
+	margin-top: 50px;
 }
-.infinity-wp #comments .pingbacks li.pingback {
+.infinity-wp .comments-area .pingbacks li.pingback {
 	margin: 10px 0;
 }
-.infinity-wp #comments .pingbacks li.pingback .reply {
+.infinity-wp .comments-area .pingbacks li.pingback .reply {
 	display: none;
 }
-.infinity-wp #comments .cancel-comment-reply {
+.infinity-wp .comments-area .cancel-comment-reply {
 	margin: 10px 0;
 }
-.infinity-wp #comments .comment-entry p {
-	padding-left: 10px;
-	padding-right: 10px;
-	margin: 0 0 20px 62px;
-}
-.infinity-wp #comments .bypostauthor {
-	background: #F9F9F9;
-}
-.infinity-wp #comments .comment-head {
-	margin: 0 0 15px 70px;
-}
-.infinity-wp #comments .comment-head .name {
-	font-weight: bold;
-	margin: 0;
-}
-.infinity-wp #comments .comment-head .date,
-.infinity-wp #comments .comment-head .edit,
-.infinity-wp #comments .comment-head .perma {
-	font-size: 11px;
-}
-.infinity-wp #comments .avatar img {
+.infinity-wp .comments-area .avatar img {
 	vertical-align: middle;
 	width: 40px;
 	height: 40px;
 	margin: 0;
 }
-.infinity-wp #comments ul.children {
-	margin: 10px 10px 0 25px;
+.infinity-wp .comments-area ol.children,
+.infinity-wp .comments-area ul.children {
+	margin: 30px 10px 0 30px;
 	padding: 0;
 }
-.infinity-wp #comments .navigation {
-	/* nothing yet */
-}
-.infinity-wp #comments .navigation a {
-	text-decoration: none;
-	margin: 15px 0 0 0;
-	display: block;
-}
-.infinity-wp #comments .navigation a:hover {
-	/* nothing yet */
-}
-.infinity-wp #comments blockquote {
-	font-style: italic;
-	font-weight: bold;
-	line-height: 150%;
-	margin-left: 71px;
-	padding-bottom: 5px;
-	padding-left: 0;
-	padding-top: 20px;
-}
-.infinity-wp #comments .comment {
-	margin-top: 10px;
-	list-style-type: none;
-	width: 100%;
-}
-.infinity-wp #comments .comment .comment-container {
-	border-bottom: 1px solid #F4F4F4;
-	padding: 10px;
-	position: relative;
-}
-.infinity-wp #comments .children .comment-container {
-	background: transparent;
-	-webkit-box-shadow: none;
-	box-shadow: none;
-}
-.infinity-wp #comments h3#pings {
-	margin-top: 25px;
-}
-.infinity-wp #comments .avatar {
-	float: left;
-	margin: 0 15px 10px 0;
-}
-.infinity-wp #comments .reply {
-	left: inherit;
-	position: absolute;
-	top: 45px;
-}
-.infinity-wp #comments .reply a {
-	font-size: 70%;
-	padding: 0 6px;
-}
-.infinity-wp #comments h3 {
-	/* nothing yet */
-}
-.infinity-wp ol.commentlist {
+.infinity-wp .comment-list {
 	margin-left: 0px;
 	list-style: none;
 	padding-left: 0px;
 }
-.infinity-wp #comments .unapproved {
+.infinity-wp .comment-list li.comment {
+	margin-top: 10px;
+	margin-bottom: 30px;
+	list-style-type: none;
+	width: 100%;
+}
+.infinity-wp .comment-list .comment .comment-container {
+	border-bottom: 1px solid #F4F4F4;
+	padding: 10px;
+	position: relative;
+}
+.infinity-wp .comment-list .children .comment-container {
+	background: transparent;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+.infinity-wp .comment-list .avatar {
+	margin: 0 5px 0 0;
+}
+.infinity-wp .comment-list .comment-body > * {
+	padding-left: 5px;
+}
+.infinity-wp .comment-list .comment-body blockquote {
+	font-style: italic;
+	font-weight: bold;
+	line-height: 150%;
+	margin-left: 71px;
+	padding: 5px 5px 5px 15px;
+}
+.infinity-wp .comment-list .comment-body blockquote > p {
+	margin: 0;
+}
+.infinity-wp .comment-list .comment-meta {
+	margin-top: 4px;
+}
+.infinity-wp .comment-list .reply {
+	font-size: 12px;
+}
+.infinity-wp .comment-list .reply a {
+	font-weight: bold;
+}
+.infinity-wp .comment-list .bypostauthor {
+	background: #F9F9F9;
+}
+.infinity-wp .comment-list .unapproved {
 	font-style: italic;
 	color: #999;
 }
 /* The Comments Forms */
-.infinity-wp #respond {
-	margin: 40px 0 0;
+.infinity-wp .comment-respond {
+	margin: 20px 0 0;
 }
-.infinity-wp #respond #reply-title small {
+.infinity-wp .comments-area > .comment-respond {
+	margin-top: 30px;
+}
+.infinity-wp .comment-respond .comment-reply-title small {
 	margin-top: 5px;
 	display: block;
 	font-size: 13px;
 }
-.infinity-wp #respond span.required {
+.infinity-wp .comment-respond span.required {
 	color: #CFCFCF;
 	display: block;
 	float: left;
@@ -903,70 +885,46 @@ This CSS file contains all the default WordPress Styling.
 	font-weight: bold;
 	margin: 4px 0 0 -12px;
 }
-.infinity-wp #respond .right {
+.infinity-wp .comment-respond .right {
 	float: left;
 	width: 380px;
 }
-.infinity-wp #respond label {
+.infinity-wp .comment-respond label {
 	color: #777777;
 	padding: 4px 0;
 	font-size: 11px;
 }
-.infinity-wp #respond .left {
+.infinity-wp .comment-respond .left {
 	margin-right: 15px;
 	float: left;
 	width: 200px;
 }
-.infinity-wp #commentform {
-	margin: 10px 0 0 10px;
+.infinity-wp .comment-form {
+	margin: 10px 0 0 0;
 }
-.infinity-wp #commentform input.txt,
-.infinity-wp #commentform textarea {
+.infinity-wp .comment-form input.txt,
+.infinity-wp .comment-form textarea {
 	border-color: #ccc #efefef #efefef #ccc;
 	border-width: 1px;
 	border-style: solid;
 	font-size: inherit;
 }
-.infinity-wp li.bypostauthor {
-	background: none repeat scroll 0 0 #F8FDFF !important;
-}
-.infinity-wp #commentform input.txt {
+.infinity-wp .comment-form input.txt {
 	background: #F9F9F9;
 	width: 170px;
 	color: #666;
 	margin: 0 5px 10px 0;
 	padding: 5px 7px;
 }
-.infinity-wp #commentform textarea {
+.infinity-wp .comment-form textarea {
 	width: 95%;
 	height: auto;
 }
-.infinity-wp #commentform #submit {
-	margin: 15px 0 0 0;
-}
-.infinity-wp .form-allowed-tags {
+.infinity-wp .comment-form .form-allowed-tags {
+	width: 95%;
 	font-size: 90%;
 	color: #777;
 }
-/* Ping backs */
-.infinity-wp h3#pings {
-	margin: 25px 0 10px 0;
-}
-.infinity-wp .pinglist li {
-	list-style-type: decimal;
-	margin: 0 0 0 20px;
-}
-.infinity-wp .pinglist li .pingcontent {
-	margin: 10px 0;
-	display: block;
-}
-.infinity-wp .pinglist li .author {
-	font-weight: bold;
-	font-size: 15px;
-}
-.infinity-wp .pinglist li .date {
-	font-size: 11px;
-}
-.infinity-wp p.form-allowed-tags {
-	width: 70%;
+.infinity-wp .comment-form input.submit {
+	margin: 10px 0 0 0;
 }

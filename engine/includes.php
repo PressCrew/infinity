@@ -19,7 +19,6 @@ require_once INFINITY_INC_PATH . '/menus.php';
 require_once INFINITY_INC_PATH . '/sidebars.php';
 require_once INFINITY_INC_PATH . '/widgets.php';
 require_once INFINITY_INC_PATH . '/slider.php';
-require_once INFINITY_INC_PATH . '/comments.php';
 require_once INFINITY_INC_PATH . '/templatetags.php';
 require_once INFINITY_INC_PATH . '/walkers.php';
 require_once INFINITY_INC_PATH . '/options.php';
