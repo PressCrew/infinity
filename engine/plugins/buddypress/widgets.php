@@ -36,8 +36,12 @@ class Infinity_BP_Blogs_Recent_Posts_Widget extends WP_Widget
 	 */
 	function __construct()
 	{
+		// define widget options
+		$widget_ops = array(
+			'classname' => 'widget_' . strtolower( __CLASS__ ) . ' buddypress',
+		);
 		// run parent
-		parent::__construct( false, $name = __( 'Recent Networkwide Blog Posts', 'infinity' ) );
+		parent::__construct( false, $name = __( 'Recent Networkwide Blog Posts', 'infinity' ), $widget_ops );
 	}
 
 	/**
