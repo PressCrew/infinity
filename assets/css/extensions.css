@@ -113,7 +113,7 @@ body.infinity-typog {
 
 /* ================== */
 /* ! Global & Wraps   */
-/* ================== */
+/* ================== */i
 body.infinity-layout {
 	-webkit-font-smoothing: antialiased;
 	-webkit-text-size-adjust: none;
@@ -759,6 +759,22 @@ html body.infinity-layout .top-wrap ul.sub-menu {
 }
 
 /* Blog Icons */
+.infinity-icons .post-title:before {
+	background: none repeat scroll 0 0 #555555;
+	border-radius: 50% 50% 50% 50%;
+	color: #FFFFFF;
+	float: right;
+	font-size: 130%;
+	padding: 0 0.8% 1.5%;
+	position: relative;
+	text-shadow: -1px 1px 0 #000000;
+	top: -4px;
+}
+
+.infinity-icons .sticky .post-title:before {
+	content: "&";
+}
+
 .infinity-icons #category-title:before {
 	content: "L"
 }
@@ -786,18 +802,6 @@ html body.infinity-layout .top-wrap ul.sub-menu {
 	line-height: 140%;
 	margin-bottom: 18px;
 	padding-left: 15px;
-}
-
-.infinity-icons .post-title:before {
-	background: none repeat scroll 0 0 #555555;
-	border-radius: 50% 50% 50% 50%;
-	color: #FFFFFF;
-	float: right;
-	font-size: 140%;
-	padding: 0 0.8% 1.5%;
-	position: relative;
-	text-shadow: -1px 1px 0 #000000;
-	top: -8px;
 }
 
 .infinity-icons .format-video .post-title:before {
