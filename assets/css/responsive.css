@@ -39,12 +39,7 @@ body {
 1.1 - Tablets - Landscape
 --------------------------------------------------------------*/
 @media only screen and (max-width: 1050px) {
-	/*
-	#infinity-base div.item-options {
-		float: none;
-		margin-top: 0;
-	}
-	*/
+	/* nothing yet */
 }
 @media only screen and (max-width: 768px) { 
 	.mobile-menu-container {
@@ -55,8 +50,6 @@ body {
 		border-top: 2px solid #525151;
 		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), 0 -1px 0 rgba(0, 0, 0, 0.1) inset;
 		display: block;
-		margin-left: -10px;
-		margin-right: -10px;
 		margin-top: -1px;
 		padding-left: 20px;
 		padding-right: 20px;
@@ -69,90 +62,77 @@ body {
 		box-shadow: none;
 		width: 60%;
 	}
-	#wpadminbar,
-	#header {
-		margin-top: 75px;
-		height: 100px;
-	}
-	#sidebar { 
-		min-height: auto !important;
-	}
-	body #wrapper { 
-		margin: 0 10px 10px; 
-	}
-	.main-menu select.mobileMenu {
-		float: right;
-	}
-	.callout-box,
-	.flex-caption,
-	#feature-box h3 {
-		display: none;
-	}
-	.callout-box {
-		padding: 0px;
-	}
 	html.js {
 		margin-top: 0 !important;
 	}
-	img,
-	fieldset {
-		max-width: 100%;
-		height: auto;
+	.infinity-wp #wrapper { 
+		margin: 0 10px 10px; 
 	}
-	.sf-menu,
-	#top-menu-wrap,
-	#sub-menu-wrap {
+	.infinity-wp #wpadminbar {
 		display: none;
 	}
-	#main-menu-wrap {
-		margin: 0 !important;
-		padding: 0px !important;
+	.infinity-wp #sidebar { 
+		min-height: auto !important;
 	}
-	.mobileMenu {
-		margin-top: 5px;
-	}
-	.post-category,
-	.time-posted {
-		display: none;
-	}
-	#wpadminbar {
-		display: none;
-	}
-	div#content .padder {
+	.infinity-wp #content .padder {
 		margin-right: 0;
 		width: auto;
 		float: none;
 		border: none;
 	}
-	.button {
+	.infinity-wp .callout-box,
+	.infinity-wp .flex-caption,
+	.infinity-wp #feature-box h3 {
+		display: none;
+	}
+	.infinity-wp .callout-box {
+		padding: 0px;
+	}
+	.infinity-wp img,
+	.infinity-wp fieldset {
+		max-width: 100%;
+		height: auto;
+	}
+	.infinity-wp .sf-menu,
+	.infinity-wp #top-menu-wrap,
+	.infinity-wp #sub-menu-wrap {
+		display: none;
+	}
+	.infinity-wp #main-menu-wrap {
+		margin: 0 !important;
+		padding: 0px !important;
+	}
+	.infinity-wp .post-category,
+	.infinity-wp .time-posted {
+		display: none;
+	}
+	.infinity-wp .button {
 		display: block;
 	}
-	button.button {
+	.infinity-wp button.button {
 		width: 100%;
 		padding-left: 0px;
 		padding-right: 0px;
 	}
-/*
-	div.item-list-tabs select {
+	.infinity-bp #buddypress div.item-list-tabs select {
 		margin-left: 20px;
 		margin-top: 10px;
 	}
-	#user-header-nav {
+	.infinity-bp #buddypress #user-header-nav {
 		display: block !important;
 	}
-	#subnav select {
+	.infinity-bp #buddypress #subnav select {
 		margin-top: 5px;
 	}
-	#item-header-avatar img.avatar {
+	.infinity-bp #buddypress #item-header-avatar img.avatar {
 		width: 40%;
 	}
-	.activity-list .activity-content {
+	.infinity-bp #buddypress .activity-list .activity-content {
 		margin-left: 0;
 	}
-	.activity-avatar {
+	.infinity-bp #buddypress .activity-avatar {
 		display: none;
 	}
-*/
 }
 /*--------------------------------------------------------------
 1.2 - Tablets - Portrait
@@ -162,80 +142,56 @@ body {
 		box-shadow: none;
 		width: 55%;
 	}
-	#feature-box #callout-button {
+	.infinity-wp #feature-box #callout-button {
 		position: inherit;
 		position: inherit;
 		right: inherit;
 		top: inherit;
 	}
-	li.featured-item {
+	.infinity-wp li.featured-item {
 		text-align: center;
 	}
-/*
-	div.dir-search {
+	.infinity-bp #buddypress div.dir-search {
 		float: none;
 		width: auto;
 		text-align: left;
 		margin: 1.25em 0 0;
+		position: inherit;
 	}
-	div#item-header div#item-header-content {
+	.infinity-bp #buddypress #item-header #item-header-content {
 		margin-left: 0px;
 	}
-	#div.activity-comments {
-		margin: 0;
-	}
-	div#item-header img.avatar {
+	.infinity-bp #buddypress #item-header img.avatar {
 		height: 80px !important;
 		width: 80px !important;
 	}
-	div#item-header ul img.avatar,
-	div#item-header ul.avatars img.avatar {
+	.infinity-bp #buddypress #item-header ul img.avatar,
+	.infinity-bp #buddypress #item-header ul.avatars img.avatar {
 		height: 30px !important;
 		margin: 2px;
 		width: 30px !important;
 	}
-	.activity-header p {
-		line-height: 280% !important;
-	}
-	.activity-list .activity-content .activity-header img.avatar {
-		display: none;
-	}
-	.my-account .activity-avatar {
-		display: none;
-	}
-	div.dir-search {
-		float: none;
-		margin: 1.25em 0 0;
-	}
-	ul.item-list li div.action {
-		padding-left: 64px;
-		position: relative;
-		right: auto;
-		text-align: left;
-		top: 1em;
-		margin-bottom: 1.25em;
-	}
-	.activity-list li.mini {
-		display: none;
-	}
-	div.dir-search {
-		position: inherit;
-	}
-	ul.item-list li div.action {
-		padding-left: 64px;
-		position: relative;
-		right: auto;
-		text-align: left;
-		top: 1em;
-		margin-bottom: 1.25em;
-	}
-	.activity-list .activity-content {
-		margin-left: 0;
-	}
-	div.activity-comments {
+	.infinity-bp #buddypress .activity-comments {
 		margin: 0;
 	}
-*/
+	.infinity-bp #buddypress .activity-header p {
+		line-height: 280% !important;
+	}
+	.infinity-bp #buddypress .activity-list .activity-content .activity-header img.avatar {
+		display: none;
+	}
+	.infinity-bp #buddypress ul.item-list li div.action {
+		margin-left: 0;
+		padding-left: 64px;
+		position: relative;
+		right: auto;
+		text-align: left;
+		top: 1em;
+		margin-bottom: 1.25em;
+	}
+	.infinity-bp #buddypress .activity-list li.mini {
+		display: none;
+	}
 }
 /*--------------------------------------------------------------
 2 - Smartphones
@@ -251,83 +207,110 @@ body {
 		box-shadow: none;
 		width: 45%;
 	}
-	#logo-menu-wrap img {
+	.infinity-wp#infinity-base #header {
+		text-align: center;
+		padding: 10px;
+		height: inherit;
+	}
+	.infinity-wp#infinity-base #header .icext-header-logo a {
+		position: relative;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		height: auto;
+		width: auto;
+	}
+	.infinity-wp #logo-menu-wrap {
+		padding: 0;
+	}
+	.infinity-wp #logo-menu-wrap img {
 		max-width: 80%;
 	}
-	#copyright-info {
+	.infinity-wp #copyright-info {
 		text-align: center;
 	}
-	#site-title {
+	.infinity-wp #site-title {
 		top: 10% !important;
 	}
-/*
-	.activity-list li.mini .activity-content p {
+	.infinity-bp #buddypress div.dir-search label {
+		max-width: 60%;
+	}
+	.infinity-bp #buddypress div.dir-search input[type="text"] {
+		width: 90%;
+	}
+	.infinity-bp #buddypress .activity-list li.mini .activity-content p {
 		width: 440% !important;
 	}
-	div.item-list-tabs ul li.last {
+	.infinity-bp #buddypress .item-list-tabs ul {
+		padding-top: 0;
+	}
+	.infinity-bp #buddypress .item-list-tabs ul li {
+		margin-top: 0;
+	}
+	.infinity-bp #buddypress .item-list-tabs ul li.last {
 		float: none;
 		margin: 0.3em 0.6em;
 	}
-	div#subnav.item-list-tabs ul li.last {
+	.infinity-bp #buddypress #subnav.item-list-tabs ul li.last {
 		margin-top: 1em;
 	}
-	div#subnav ul {
+	.infinity-bp #buddypress #subnav ul {
 		padding-top: 0.6em;
 	}
-	div.pagination {
+	.infinity-bp #buddypress div.pagination {
 		padding: 0.6em;
 	}
-	div.item-list-tabs ul {
-		padding-top: 0;
-	}
-	div.item-list-tabs ul li {
-		margin-top: 0;
-	}
-	form.standard-form #basic-details-section,
-	form.standard-form #blog-details-section,
-	form.standard-form #profile-details-section {
+	.infinity-bp #buddypress form.standard-form #basic-details-section,
+	.infinity-bp #buddypress form.standard-form #blog-details-section,
+	.infinity-bp #buddypress form.standard-form #profile-details-section {
 		float: none;
 		width: 100%;
 	}
-	div.item-list-tabs {
+	.infinity-bp #buddypress .item-list-tabs {
 		height: auto !important;
 	}
-*/
 }
 /*--------------------------------------------------------------
 2.1 - Smartphones - portrait
 --------------------------------------------------------------*/
-@media only screen and (max-width: 320px) {
+@media only screen and (max-width: 375px) {
 	.mobile-menu-container select {
 		box-shadow: none;
 		width: 40%;
 	}
-	#sidebar {
+	.infinity-wp #sidebar {
 		width: 100% !important;
 	}
-/*
-	form#groups-directory-form h3 a {
+	.infinity-bp #buddypress #groups-directory-form h3 a {
 		display: block;
 		margin-top: 0.6em;
 	}
-	#user-header-nav {
-		display: none !important;
-	}
-	form#whats-new-form div#whats-new-avatar {
+	.infinity-bp #buddypress form#whats-new-form #whats-new-avatar {
 		display: none;
 	}
-	form#whats-new-form h5 {
+	.infinity-bp #buddypress form#whats-new-form h5 {
 		margin: 0 0 0 0px;
 	}
-	form#whats-new-form #whats-new-content {
+	.infinity-bp #buddypress form#whats-new-form #whats-new-options {
+		font-size: 10px;
+		padding-bottom: 0;
+	}
+	.infinity-bp #buddypress form#whats-new-form #whats-new-content {
 		margin-left: 0px;
 		padding-left: 0px;
 	}
-	body.activity-permalink .activity-list li .activity-content {
-		margin-left: 0;
+	.infinity-bp #buddypress form#whats-new-form #whats-new-post-in {
+		max-width: 50%;
+		margin-top: 0;
 	}
-	body.activity-permalink .activity-list li.mini .activity-meta {
+	.infinity-bp #buddypress form#whats-new-form #whats-new-submit {
+		margin-top: 20px;
+	}
+	.infinity-bp #buddypress form#whats-new-form #whats-new-submit input {
+		padding: 2px 6px;
+	}
+	.infinity-bp.activity-permalink #buddypress .activity-list li.mini .activity-meta {
 		left: 0;
 	}
-*/
 }
