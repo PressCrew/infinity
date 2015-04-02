@@ -129,8 +129,8 @@ body.infinity-layout {
 /* Global Negative Horizontal Padding */
 .infinity-layout #bbpress-forums,
 .infinity-layout div.bbp-breadcrumb,
-.infinity-layout #item-body form#whats-new-form,
-.infinity-layout div.item-list-tabs,
+.infinity-layout #buddypress #item-body form#whats-new-form,
+.infinity-layout #buddypress div.item-list-tabs,
 .infinity-layout #powered-by,
 .infinity-layout #header #site-title,
 .infinity-layout .negative,
@@ -140,7 +140,7 @@ body.infinity-layout {
 .infinity-layout #sidebar .widget h4,
 .infinity-layout #vertical-activity-tabs,
 .infinity-layout .sidebar-activity-tabs ul li,
-.infinity-layout #content ul.item-list li {
+.infinity-layout #content #buddypress ul.item-list li {
 	margin-left: -30px;
     margin-right: -30px;
     padding-left: 30px;
@@ -476,12 +476,6 @@ html body.infinity-layout .top-wrap ul.sub-menu {
 	.infinity-layout #content.sidebar-left {
 		float: none;
 	}
-}
-
-.infinity-layout #content .widget .item-list li {
-	margin: auto;
-	padding-left: 0px;
-	padding-right: 0px;
 }
 
 /* ===========
@@ -1227,7 +1221,8 @@ body.infinity-design {
 }
 .infinity-design .base-menu a:hover,
 .infinity-design #object-nav a:hover,
-.infinity-design #subnav a:hover,
+.infinity-design #buddypress #object-nav a:hover,
+.infinity-design #buddypress #subnav a:hover,
 .infinity-design #logo-menu-wrap a:hover,
 .infinity-design .sidebar-activity-tabs a:hover,
 .infinity-design #main-menu-wrap a span:hover {
@@ -1380,22 +1375,23 @@ body.infinity-design {
 	box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
 	border-radius: 8px;
 }
-.infinity-design ul.item-list li img.avatar,
-.infinity-design #whats-new-avatar img,
 .infinity-design .item-avatar img,
-.infinity-design .bbp-author-avatar img,
-.infinity-design .messages .avatar {
+.infinity-design #buddypress .item-avatar img,
+.infinity-design #buddypress ul.item-list li img.avatar,
+.infinity-design #buddypress #whats-new-avatar img,
+.infinity-design #buddypress .bbp-author-avatar img,
+.infinity-design #buddypress .messages .avatar {
 	border-radius: 3px 3px 3px 3px;
 	-webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
 	box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
 }
 /* Activity Stream */
-.infinity-design div.activity-meta {
+.infinity-design #buddypress div.activity-meta {
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
 	filter: alpha(opacity=50);
 	opacity: 0.5;
 }
-.infinity-design div.activity-meta:hover {
+.infinity-design #buddypress div.activity-meta:hover {
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
 	filter: alpha(opacity=100);
 	opacity: 1;
@@ -1440,15 +1436,15 @@ body.infinity-design {
 	border-radius: 4px 4px 4px 4px;
 	color: #999;
 }
-.infinity-design #subnav ul {
+.infinity-design #buddypress #subnav ul {
 	background: none;
 	-webkit-box-shadow: none;
 	box-shadow: none;
 }
-.infinity-design ul.item-list li:last-child {
+.infinity-design #buddypress ul.item-list li:last-child {
 	border-bottom: 0px;
 }
-.infinity-design #subnav.item-list-tabs ul li a {
+.infinity-design #buddypress #subnav.item-list-tabs ul li a {
 	color: #787676;
 	font-weight: bold;
 	text-shadow: none;
@@ -1465,7 +1461,7 @@ body.infinity-design {
 	background-repeat: no-repeat !important;
 	background-position: 5px 8px !important;
 }
-.infinity-design span.activity {
+.infinity-design #buddypress span.activity {
 	border-radius: 3px 3px 3px 3px;
 	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
 	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
@@ -1478,12 +1474,14 @@ body.infinity-design {
 	color: #DDDDDD;
 	font-weight: bold;
 }
-.infinity-design #item-body form#whats-new-form {
+.infinity-design #buddypress #item-body form#whats-new-form {
 	background: none repeat scroll 0 0 #F8F8F8;
 	border-bottom: 1px solid #DDDDDD;
 }
 .infinity-design.bp-user #item-buttons .generic-button a:hover,
-.infinity-design #profile-nav-menu a:hover {
+.infinity-design #profile-nav-menu a:hover,
+.infinity-design.bp-user #buddypress #item-buttons .generic-button a:hover,
+.infinity-design #buddypress #profile-nav-menu a:hover {
 	color: #4183C4;
 }
 .infinity-design.bp-user #item-buttons .generic-button a {
@@ -1565,13 +1563,15 @@ body.infinity-design {
 	background: #444;
 }
 /* Second Level */
-.infinity-design #object-nav ul.profile-subnav {
+.infinity-design #object-nav ul.profile-subnav,
+.infinity-design #buddypress #object-nav ul.profile-subnav {
 	border-bottom: 0 none;
 	border-top: 1px solid #1A1A1A;
     margin: 15px 0 -12px -30px;
     padding-left: 30px;
 }
-.infinity-design ul.profile-subnav li {
+.infinity-design ul.profile-subnav li,
+.infinity-design #buddypress ul.profile-subnav li {
 	-webkit-box-shadow: none;
 	-moz-box-shadow: none;
 	box-shadow: none;
@@ -1627,14 +1627,16 @@ body.infinity-design {
 /* ! Misc   */
 /* ======== */
 .infinity-design thead:first-child tr th,
-.infinity-design thead:first-child tr td {
+.infinity-design thead:first-child tr td,
+.infinity-design #buddypress thead:first-child tr th,
+.infinity-design #buddypress thead:first-child tr td {
 	color: #DDD;
 }
-.infinity-design div#invite-list {
+.infinity-design #buddypress div#invite-list {
 	background: none repeat scroll 0 0 #F5F5F5;
 	border: 1px solid #E4E4E4;
 }
-.infinity-design ul.item-list li {
+.infinity-design #buddypress ul.item-list li {
 	border-bottom: 1px solid #F5F5F5;
 	padding-top: 30px;
 	padding-bottom: 20px;

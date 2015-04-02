@@ -124,7 +124,7 @@ body.wiki.single-bp_doc #subnav {
 .group-forum-topic #bbpress-forums h3 {
 	font-size: 2em;
 }
-.groups #item-buttons .group-button {
+.bbpress.groups #item-buttons .group-button {
 	padding: 2px 7px 5px;
 }
 .bbp-pagination {

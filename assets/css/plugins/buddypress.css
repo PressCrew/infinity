@@ -23,7 +23,6 @@
 	width: 55px;
 	height: 60px;
 }
-.infinity-bp ul.item-list div.item-avatar,
 .infinity-bp #buddypress ul.item-list div.item-avatar {
 	width: 50px;
 	height: 50px;
@@ -38,14 +37,11 @@
 	height: 34px;
 }
 /* end IE8 avatar fixes */
-.infinity-bp ul.item-list li img.avatar,
 .infinity-bp #buddypress ul.item-list li img.avatar {
 	width: 40px;
 	height: 40px;
 }
-.infinity-bp .avatar-block,
 .infinity-bp #buddypress .avatar-block,
-.infinity-bp .activity-avatar,
 .infinity-bp #buddypress .activity-avatar {
 	padding-left: 2px;
 }
@@ -63,13 +59,13 @@
 }
 
 .infinity-bp span.highlight,
-.infinity-bp #buddypress span.highlight,
 .infinity-bp span.activity,
+.infinity-bp .generic-button,
+.infinity-bp .activity-list div.activity-meta a,
+.infinity-bp #buddypress span.highlight,
 .infinity-bp #buddypress span.activity,
 .infinity-bp #buddypress div#message p,
-.infinity-bp .generic-button,
 .infinity-bp #buddypress .generic-button,
-.infinity-bp .activity-list div.activity-meta a,
 .infinity-bp #buddypress .activity-list div.activity-meta a {
 	display: inline-block;
 	text-decoration: none;
@@ -621,9 +617,12 @@
 3.11 - Widgets
 --------------------------------------------------------------*/
 .infinity-bp .widget.buddypress .item-list {
-	padding-left: 5px;
+	padding-left: 0;
 }
 .infinity-bp .widget.buddypress .item-list li {
+	margin: auto;
+	padding-left: 0;
+	padding-right: 0;
 	list-style-type: none;
 }
 .infinity-bp .widget.buddypress div.item-options {
