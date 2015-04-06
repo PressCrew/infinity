@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="Infinity" default="dist">
+
+	<!-- Vars -->
+	<property name="slug" value="infinity" />
+
+	<!-- Paths -->
+	<property name="phpunitpath" value="/usr/local/bin/phpunit" />
+	<property name="wpclipath" value="/usr/local/bin/wp" />
+	<property name="source.dir" location="${basedir}/src" />
+	<property name="build.dir" location="${basedir}/build" />
+	<property name="build.dist" location="${build.dir}/dist" />
+	<property name="build.doc" location="${build.dir}/doc" />
+	<property name="build.env" location="${build.dir}/env" />
+
+	<!-- Target: prepare -->
+	<target name="prepare">
+		<echo message="Preparing build dir..." />
+		<mkdir dir="${build.dir}" />
+	</target>
+
+	<!-- Target: dist-clean -->
+	<target name="dist-clean">
+		<echo message="Removing old dist artifacts..." />
+		<delete dir="${build.dist}" quiet="true" />
+	</target>
+
+	<!-- Target: dist-prepare -->
+	<target name="dist-prepare" depends="prepare">
+		<echo message="Preparing dist dir..." />
+		<mkdir dir="${build.dist}" />
+	</target>
+
+	<!-- Target: dist (default) -->
+	<target name="dist" depends="dist-prepare">
+		<echo message="Creating zip archive..." />
+		<zip destfile="${build.dist}/${slug}.zip">
+			<zipfileset dir="${source.dir}" prefix="${slug}" />
+		</zip>
+		<echo message="Files copied and compressed!" />
+	</target>
+</project>

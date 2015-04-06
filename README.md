@@ -10,19 +10,19 @@ extremely powerful parent theme.
 
 ### License
 
-Infinity is licensed under GPL v2.0 or higher.
-See LICENSE.txt for full details.
+Infinity is licensed under GPL v2.0 or later.
+See LICENSE.md for full details.
 
 ### Requirements
 
 #### Base Requirements
 
 * PHP 5.2.4 or higher
-* WordPress 3.2.0 or higher
+* WordPress 3.9.0 or higher
 
 #### BuddyPress Requirements (if installed)
 
-* BuddyPress 1.5.0 and higher
+* BuddyPress 2.0 and higher
 
 #### bbPress Requirements (if installed)
 
@@ -36,3 +36,8 @@ See LICENSE.txt for full details.
 ### Community
 
 * http://community.presscrew.com
+
+### Who's behind this thing?
+
+I am [Marshall Sorenson](https://github.com/MrMaz),
+co-founder of [Press Crew](https://github.com/PressCrew).
