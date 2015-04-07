@@ -219,7 +219,7 @@
 				$.extend( true, settings, options );
 
 				// kill existing mu dialog
-				if ( _muDialog ) {
+				if ( _muDialog && $('div.icextOptionUploadWin').hasClass('ui-dialog-content') ) {
 					_muDialog.dialog('destroy').remove();
 				}
 
