@@ -80,10 +80,19 @@ class Infinity_BP_Blogs_Recent_Posts_Widget extends WP_Widget
 		// load more items that we need, because many will be filtered out by privacy
 		$real_max = $instance['max_posts'] * 10;
 		$counter = 0;
+		
+		// set the default action
+		$action = 'new_blog_post';
+		
+		// also include new group blog post action?
+		if ( false === empty( $instance['include_groupblog'] ) ) {
+			// yes, append it to action string
+			$action .= ',new_groupblog_post';
+		}
 
 		// start bp activities loop
 		$bp_activities = bp_has_activities(
-			'action=new_blog_post' .
+			'action=' . $action .
 			'&max=' . $real_max .
 			'&per_page=' . $real_max
 		);
@@ -155,6 +164,7 @@ class Infinity_BP_Blogs_Recent_Posts_Widget extends WP_Widget
 		$instance['max_posts']  = strip_tags( $new_instance['max_posts'] );
 		$instance['title']      = strip_tags( $new_instance['title'] );
 		$instance['link_title'] = empty( $new_instance['link_title'] ) ? '0' : '1';
+		$instance['include_groupblog'] = empty( $new_instance['include_groupblog'] ) ? '0' : '1';
 
 		return $instance;
 	}
@@ -176,6 +186,7 @@ class Infinity_BP_Blogs_Recent_Posts_Widget extends WP_Widget
 		$max_posts  = strip_tags( $settings['max_posts'] );
 		$title      = strip_tags( $settings['title'] );
 		$link_title = (bool) $settings['link_title'];
+		$include_groupblog = (bool) $instance['include_groupblog'];
 
 		// render the form fields ?>
 		<p>
@@ -190,6 +201,23 @@ class Infinity_BP_Blogs_Recent_Posts_Widget extends WP_Widget
 			</label>
 			<input type="checkbox" name="<?php echo $this->get_field_name( 'link_title' ) ?>" value="1" <?php checked( $link_title ) ?>>
 		</p>
+		<?php
+			// display group blog checkbox?
+			if (
+				true === is_multisite() &&
+				true === bp_is_active( 'groups' ) &&
+				true === defined( 'BP_GROUPBLOG_IS_INSTALLED' )
+			):
+		?>
+			<p>
+				<label for="<?php echo $this->get_field_name( 'include_groupblog' ) ?>">
+					<?php _e( 'Include groupblog posts', 'cbox-theme' ) ?>
+				</label>
+				<input type="checkbox" name="<?php echo $this->get_field_name( 'include_groupblog' ) ?>" value="1" <?php checked( $include_groupblog ) ?>>
+			</p>
+		<?php
+			endif;
+		?>
 		<p>
 			<label for="<?php echo $this->get_field_id( 'max_posts' ) ?>">
 				<?php _e( 'Max posts to show:', 'infinity' ); ?>
