@@ -981,7 +981,7 @@ html body.infinity-layout .top-wrap ul.sub-menu {
 .infinity-icons #request-membership-groups-li a:before {
 	content: "y"
 }
-.infinity-icons li#group-blog-groups-li a:before {
+.infinity-icons li#nav-group-blog-groups-li a:before {
 	content: "C";
 }
 

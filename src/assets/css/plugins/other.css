@@ -196,12 +196,12 @@ body.wiki.single-bp_doc #subnav {
     display: none;
 }
 
-.bbp-reply-content span {
+.bbp-header .bbp-reply-content span {
     position: relative;
     top: -2px;
 }
 
-.bbp-reply-content span a {
+.bbp-header .bbp-reply-content span a {
     color: #FFF;
     padding-bottom: 3px;
 }
