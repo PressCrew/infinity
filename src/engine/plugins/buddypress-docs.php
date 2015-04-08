@@ -11,6 +11,32 @@
  * @since 1.2
  */
 
+//
+// Filters
+//
+
+/**
+ * Return path to custom BuddyPress Docs template if it exists.
+ *
+ * @param string $template_path
+ * @param string $template
+ * @return string
+ */
+function infinity_bp_docs_locate_template_filter( $template_path, $template )
+{
+	// custom path to check
+	$infinity_path = INFINITY_THEME_PATH . '/templates/plugins/buddypress-docs/' . $template;
+
+	// does custom template file exist?
+	if ( true === file_exists( $infinity_path ) ) {
+		// yes, return it
+		return $infinity_path;
+	}
+
+	// return original by default
+	return $template_path;
+}
+add_filter( 'bp_docs_locate_template', 'infinity_bp_docs_locate_template_filter', 99, 2 );
 
 //
 // Compat
