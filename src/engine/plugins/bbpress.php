@@ -12,6 +12,26 @@
  */
 
 //
+// Filters
+//
+
+/**
+ * Prepend our custom bbPress templates location to the template stack.
+ *
+ * @param array $stack
+ * @return array
+ */
+function infinity_bbpress_add_template_stack_locations_filter( $stack )
+{
+	// prepend our custom template location to the stack
+	array_unshift( $stack, INFINITY_THEME_PATH . '/templates/plugins/bbpress' );
+
+	// return modified stack
+	return $stack;
+}
+add_filter( 'bbp_add_template_stack_locations', 'infinity_bbpress_add_template_stack_locations_filter', 99 );
+
+//
 // Helpers
 //
 
