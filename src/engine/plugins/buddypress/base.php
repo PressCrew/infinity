@@ -12,6 +12,26 @@
  */
 
 //
+// Filters
+//
+
+/**
+ * Prepend our custom BuddyPress template overrides dir to the template stack.
+ *
+ * @param array $stack
+ * @return array
+ */
+function infinity_bp_get_template_stack_filter( $stack )
+{
+	// prepend buddypress templates location
+	array_unshift( $stack, INFINITY_THEME_PATH . '/templates/plugins/buddypress' );
+
+	// return modified stack
+	return $stack;
+}
+add_filter( 'bp_get_template_stack', 'infinity_bp_get_template_stack_filter', 1 );
+
+//
 // Actions
 //
 
