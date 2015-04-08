@@ -21,7 +21,7 @@
  * @param array $stack
  * @return array
  */
-function infinity_bbpress_add_template_stack_locations_filter( $stack )
+function infinity_bbp_add_template_stack_locations_filter( $stack )
 {
 	// prepend our custom template location to the stack
 	array_unshift( $stack, INFINITY_THEME_PATH . '/templates/plugins/bbpress' );
@@ -29,7 +29,7 @@ function infinity_bbpress_add_template_stack_locations_filter( $stack )
 	// return modified stack
 	return $stack;
 }
-add_filter( 'bbp_add_template_stack_locations', 'infinity_bbpress_add_template_stack_locations_filter', 99 );
+add_filter( 'bbp_add_template_stack_locations', 'infinity_bbp_add_template_stack_locations_filter', 99 );
 
 //
 // Helpers
@@ -40,7 +40,7 @@ add_filter( 'bbp_add_template_stack_locations', 'infinity_bbpress_add_template_s
  *
  * @return bool
  */
-function infinity_bbpress_is_page()
+function infinity_bbp_is_page()
 {
 	return (
 		true === function_exists( 'is_bbpress' ) &&
@@ -53,7 +53,7 @@ function infinity_bbpress_is_page()
  *
  * @uses bp_button() to render button html.
  */
-function infinity_bbpress_new_topic_button()
+function infinity_bbp_new_topic_button()
 {
 	// check some conditions
 	if (
@@ -87,7 +87,7 @@ function infinity_bbpress_new_topic_button()
  *
  * @return boolean
  */
-function infinity_bbpress_compat_is_group_forum()
+function infinity_bbp_compat_is_group_forum()
 {
 	return (
 		bp_is_single_item() &&
@@ -101,7 +101,7 @@ function infinity_bbpress_compat_is_group_forum()
  *
  * @todo Remove this when bbPress addresses this.
  */
-function infinity_bbpress_compat_new_topic_button()
+function infinity_bbp_compat_new_topic_button()
 {
 	// do all of these conditions exist?
 	if (
@@ -112,7 +112,7 @@ function infinity_bbpress_compat_new_topic_button()
 		// user is logged in?
 		true === is_user_logged_in() &&
 		// current screen is a group forum?
-		true === infinity_bbpress_compat_is_group_forum() &&
+		true === infinity_bbp_compat_is_group_forum() &&
 		// current screen is NOT a group forum topic
 		false === bp_is_group_forum_topic() &&
 		// logged in user is not banned?
@@ -122,7 +122,7 @@ function infinity_bbpress_compat_new_topic_button()
 		// this has to be done because the 'bp_get_group_new_topic_button' filter doesn't work properly.
 		remove_action( 'bp_group_header_actions', 'bp_group_new_topic_button' );
 		// now, add our customized 'New Topic' button
-		add_action( 'bp_group_header_actions', 'infinity_bbpress_new_topic_button' );
+		add_action( 'bp_group_header_actions', 'infinity_bbp_new_topic_button' );
 	}
 }
-add_action( 'bp_actions', 'infinity_bbpress_compat_new_topic_button' );
+add_action( 'bp_actions', 'infinity_bbp_compat_new_topic_button' );

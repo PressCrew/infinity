@@ -191,7 +191,7 @@ if ( false === function_exists( 'is_forum_page' ) ) {
 	{
 		return (
 			true === infinity_plugin_supported( 'bbpress' ) &&
-			true === infinity_bbpress_is_page()
+			true === infinity_bbp_is_page()
 		);
 	}
 }
