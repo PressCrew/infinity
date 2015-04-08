@@ -29,7 +29,7 @@ function infinity_bp_get_template_stack_filter( $stack )
 	// return modified stack
 	return $stack;
 }
-add_filter( 'bp_get_template_stack', 'infinity_bp_get_template_stack_filter', 1 );
+add_filter( 'bp_get_template_stack', 'infinity_bp_get_template_stack_filter', 99 );
 
 //
 // Actions
