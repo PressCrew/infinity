@@ -276,7 +276,7 @@ function infinity_options_render_menu_section( ICE_Section $section )
 
 	// load the menu section template
 	infinity_dashboard_load_template(
-		'options/menu_section.php',
+		'options/menu-section.php',
 		array(
 			'section' => $section,
 			'children' => $children,
@@ -296,7 +296,7 @@ function infinity_options_render_menu_options( $options )
 {
 	// load the menu options template
 	infinity_dashboard_load_template(
-		'options/menu_options.php',
+		'options/menu-options.php',
 		array( 'options' => $options )
 	);
 }

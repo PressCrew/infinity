@@ -25,7 +25,7 @@ ice_register_screen(
 		'type' => 'cpanel',
 		'title' => 'Start',
 		'priority' => 10,
-		'template' => 'dashboard/templates/screens/start.php'
+		'template' => 'templates/dashboard/screens/start.php'
 	)
 );
 
@@ -35,6 +35,6 @@ ice_register_screen(
 		'type' => 'cpanel',
 		'title' => 'Options',
 		'priority' => 20,
-		'template' => 'dashboard/templates/screens/options.php'
+		'template' => 'templates/dashboard/screens/options.php'
 	)
 );

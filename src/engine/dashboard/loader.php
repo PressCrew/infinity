@@ -12,17 +12,6 @@
  */
 
 //
-// Files
-//
-
-/**
- * Include control panel and support functions
- */
-require_once INFINITY_ADMIN_PATH . '/cpanel.php';
-require_once INFINITY_ADMIN_PATH . '/support.php';
-
-
-//
 // Functions
 //
 
@@ -84,7 +73,7 @@ add_action( 'admin_menu', 'infinity_dashboard_menu_setup' );
 function infinity_dashboard_locate_template( $rel_path )
 {
 	// format template path
-	$template = INFINITY_ADMIN_DIR . '/templates/' . $rel_path;
+	$template = 'templates/dashboard/' . $rel_path;
 
 	// locate the template
 	return infinity_locate_template( $template );
@@ -118,7 +107,7 @@ function infinity_dashboard_load_template( $rel_path, $args = null, $defaults = 
  */
 function infinity_dashboard_image( $name )
 {
-	$path = infinity_locate_file( INFINITY_ADMIN_DIR . '/assets/images/' . $name );
+	$path = infinity_locate_file( INFINITY_THEME_PATH . '/assets/images/dashboard/' . $name );
 
 	if ( $path ) {
 		return ICE_Files::file_to_site_url( $path );

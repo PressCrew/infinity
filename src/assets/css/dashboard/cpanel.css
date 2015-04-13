@@ -7,6 +7,8 @@ div#infinity-cpanel {
 	max-width: 1000px;
 	min-width: 720px;
 	margin-top: 20px;
+	padding: 20px;
+	background-color: #fff;
 }
 
 div#infinity-cpanel > .ui-tabs {
@@ -38,65 +40,19 @@ div#infinity-cpanel-header {
 	position: relative;
 	height: 65px;
 	border: 0 none;
-	margin-bottom: 10px;
-	padding: 10px 20px;
+	margin-bottom: 5px;
+	padding-left: 15px;
 	background: transparent;
 }
-div#infinity-cpanel-header-logo {
-	position: relative;
-	top: 10px;
-	height: 48px;
-	width: 187px;
-	background: url('../images/admin_logo.png') no-repeat scroll 0 0 transparent;
+img#infinity-cpanel-header-logo {
+	margin-top: 10px;
 }
-
-div#infinity-cpanel-header-version {
-	float: left;
-	position: relative;
-	top: 48px;
-	z-index: 1;
-	font-size: 10px;
-	letter-spacing: .05em;
-	color: #999999;
-}
-	div#infinity-cpanel-header-version a,
-	div#infinity-cpanel-header-version a:visited {
-		color: #777;
-	}
-
-/* toolbar */
-div#infinity-cpanel-toolbar {
-	float: right;
-	position: relative;
-	top: -80px;
-	right: 15px;
-	border-radius: 0 0 3px 3px;
-	border-top: 1px solid #D6D6D6;
-}
-	a#infinity-cpanel-menubutton {
-		margin-right: 0.8em;
-	}
-		a#infinity-cpanel-menubutton .ui-button-text {
-			font-size: 14px;
-			font-weight: bold;
-			line-height: 100%;
-		}
-	div#infinity-cpanel-toolbar .juicy-buttonmenu {
-		position: absolute;
-		top: 32px;
-		left: 14px;
-		z-index: 3;
-		padding: 4px 6px 6px 8px;
-	}
-	div#infinity-cpanel-toolbar .juicy-buttonmenu a,
-	div#infinity-cpanel-toolbar .juicy-buttonmenu a:hover {
-		text-decoration: none;
-	}
 
 /* tabs */
 div#infinity-cpanel-tabs {
 	margin: 3px;
 	background: #fff none;
+	border: none;
 }
 
 div#infinity-cpanel-tab-options {
@@ -104,8 +60,8 @@ div#infinity-cpanel-tab-options {
 }
 
 div#infinity-cpanel-tabs > ul.ui-tabs-nav {
-	margin-left: 2px;
 	border-width: 0 0 1px 0;
+	border-radius: 0;
 	padding: 0;
 	font-size: 12px;
 	background: transparent;
@@ -113,6 +69,10 @@ div#infinity-cpanel-tabs > ul.ui-tabs-nav {
 	div#infinity-cpanel-tabs > ul.ui-tabs-nav li a {
 		font-size: 1.3em;
 		font-weight: bold;
+	}
+	div#infinity-cpanel-tabs > .ui-tabs-panel {
+		border: 1px solid #aaaaaa;
+		border-top: none;
 	}
 
 

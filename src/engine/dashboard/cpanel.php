@@ -160,7 +160,7 @@ function infinity_dashboard_cpanel_assets()
 	ice_register_style(
 		'infinity-cpanel',
 		array(
-			'src' => INFINITY_THEME_URL . '/dashboard/assets/css/cpanel.css',
+			'src' => INFINITY_THEME_URL . '/assets/css/dashboard/cpanel.css',
 			'deps' => array( 'ice-ui' ),
 			'action' => 'admin_print_styles-appearance_page_infinity-theme',
 			'condition' => 'is_admin'
@@ -171,7 +171,7 @@ function infinity_dashboard_cpanel_assets()
 	ice_register_style(
 		'infinity-options',
 		array(
-			'src' => INFINITY_THEME_URL . '/dashboard/assets/css/options.css',
+			'src' => INFINITY_THEME_URL . '/assets/css/dashboard/options.css',
 			'action' => 'admin_print_styles-appearance_page_infinity-theme',
 			'condition' => 'is_admin'
 		)
@@ -181,7 +181,7 @@ function infinity_dashboard_cpanel_assets()
 	ice_register_style(
 		'infinity-docs',
 		array(
-			'src' => INFINITY_THEME_URL . '/dashboard/assets/css/docs.css',
+			'src' => INFINITY_THEME_URL . '/assets/css/dashboard/docs.css',
 			'action' => 'admin_print_styles-appearance_page_infinity-theme',
 			'condition' => 'is_admin'
 		)
@@ -191,7 +191,7 @@ function infinity_dashboard_cpanel_assets()
 	ice_register_script(
 		'cpanel',
 		array(
-			'src' => INFINITY_THEME_URL . '/dashboard/assets/js/cpanel.js',
+			'src' => INFINITY_THEME_URL . '/assets/js/dashboard/cpanel.js',
 			'deps' => array(
 				'ice-global',
 				'jquery-cookie',
@@ -217,7 +217,7 @@ function infinity_dashboard_cpanel_assets()
 	ice_register_script(
 		'docs',
 		array(
-			'src' => INFINITY_THEME_URL . '/dashboard/assets/js/docs.js',
+			'src' => INFINITY_THEME_URL . '/assets/js/dashboard/docs.js',
 			'deps' => array( 'jquery' ),
 			'in_footer' => true,
 			'action' => 'admin_print_scripts-appearance_page_infinity-theme',

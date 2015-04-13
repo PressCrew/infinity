@@ -12,14 +12,6 @@
  */
 
 /**
- * Include dashboard if applicable
- */
-if ( is_admin() ) {
-	// load admin functionality
-	require_once INFINITY_ADMIN_PATH . '/loader.php';
-}
-
-/**
  * Add support for base features.
  */
 function infinity_base_features()
