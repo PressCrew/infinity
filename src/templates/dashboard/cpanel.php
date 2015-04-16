@@ -8,7 +8,7 @@
 	<!-- header -->
 	<?php
 		// use load template to make header template overridable
-		infinity_dashboard_load_template( 'cpanel-header.php' );
+		get_template_part( 'templates/dashboard/cpanel-header', get_template() );
 	?>
 
 	<!-- tabs -->
