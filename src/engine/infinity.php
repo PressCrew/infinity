@@ -112,6 +112,11 @@ define( 'INFINITY_PLUGINS_PATH', INFINITY_ENGINE_PATH . '/plugins' );
 define( 'INFINITY_DASHBOARD_PATH', INFINITY_ENGINE_PATH . '/dashboard' );
 
 /**
+ * Infinity custom setup directory path
+ */
+define( 'INFINITY_CUSTOM_PATH', INFINITY_ENGINE_PATH . '/custom' );
+
+/**
  * Infinity AJAX url
  */
 define( 'INFINITY_AJAX_URL', admin_url( 'admin-ajax.php' ) );
@@ -153,6 +158,9 @@ require_once INFINITY_ENGINE_PATH . '/plugins.php';
 
 // load dashboard setup
 require_once INFINITY_ENGINE_PATH . '/dashboard.php';
+
+// load custom setup
+require_once INFINITY_ENGINE_PATH . '/custom.php';
 
 // initialize scheme
 infinity_scheme_init();
