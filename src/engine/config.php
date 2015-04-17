@@ -41,3 +41,6 @@ require_once INFINITY_CONFIG_PATH . '/screens.php';
 require_once INFINITY_CONFIG_PATH . '/sections.php';
 require_once INFINITY_CONFIG_PATH . '/shortcodes.php';
 require_once INFINITY_CONFIG_PATH . '/widgets.php';
+
+// Tell everyone that all configs have been loaded
+do_action( 'infinity_config_loaded' );
