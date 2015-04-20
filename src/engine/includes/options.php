@@ -45,13 +45,11 @@ function infinity_custom_favicon()
 {
 	// determine the image path
 	if ( infinity_option_get( 'core:custom-favicon' ) ) {
+		// get the image url
 		$image = infinity_option_image_url( 'core:custom-favicon', 'full' );
-	} else {
-		$image = get_template_directory_uri() . '/assets/images/favicon.png';
+		// render favicon link ?>
+		<link rel="shortcut icon" type="image/png" href="<?php print $image ?>" /><?php
 	}
-
-	// render favicon link ?>
-	<link rel="shortcut icon" type="image/png" href="<?php print $image ?>" /><?php
 }
 add_action( 'wp_head', 'infinity_custom_favicon' );
 

@@ -68,7 +68,8 @@ ice_register_group( 'core' );
 				'name' => 'custom-favicon',
 				'type' => 'upload',
 				'title' => 'Site Favicon',
-				'description' => 'Upload a favicon for your site'
+				'description' => 'Upload a favicon for your site',
+				'default_value' => 'assets/images/favicon.png'
 			),
 			$infinity_core_options_defaults
 		);
