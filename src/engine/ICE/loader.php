@@ -136,6 +136,8 @@ final class ICE_Loader extends ICE_Base
 		$upgrade = new ICE_Upgrade_1_2();
 		// run it
 		$upgrade->run();
+		// exec upgraded hook
+		do_action( 'ice_theme_upgraded', $upgrade );
 	}
 
 	/**
