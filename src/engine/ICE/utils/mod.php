@@ -154,6 +154,54 @@ class ICE_Mod extends ICE_Base
 			$this->stale = true;
 		}
 	}
+	
+	/**
+	 * Rename the given key.
+	 *
+	 * @param string $old_key
+	 * @param string $new_key
+	 * @param bool $silent
+	 * @return false
+	 */
+	public function rename( $old_key, $new_key, $silent = true )
+	{
+		// is new key a non-empty string?
+		if (
+			true === is_string( $new_key ) &&
+			false === empty( $new_key )
+		) {
+			// does new key already exist?
+			if ( true === array_key_exists( $new_key, $this->mods ) ) {
+
+				// new key is already set... never overwrite it!
+				// return true unless silent mode is toggled off.
+				return ( false === $silent ) ? false : true;
+
+			// does old key exist?
+			} elseif ( true === array_key_exists( $old_key, $this->mods ) ) {
+
+				// reference value to new key
+				$this->mods[ $new_key ] =& $this->mods[ $old_key ];
+				// remove old key
+				unset( $this->mods[ $old_key ] );
+				// stale condition exists
+				$this->stale = true;
+				// succussful rename
+				return true;
+
+			// nothing else to do
+			} else {
+
+				// old key not set... usually not a big deal!
+				// return true unless silent mode is toggled off.
+				return ( false === $silent ) ? false : true;
+
+			}
+		}
+
+		// new key is bad, this is a developer level fatal error
+		throw new Exception( 'Rename theme modification key failed: new key must be a non-empty string.' );
+	}
 
 	/**
 	 * Unset key, and completely remove from database.
