@@ -105,3 +105,16 @@ function ice_register_option( $args, $defaults = array() )
 {
 	ICE_Policy::options()->registry()->register( $args, $defaults );
 }
+
+/**
+ * Rename a list of old_name => new_name option names.
+ *
+ * This should only be used for backwards compatibility during upgrades, etc.
+ *
+ * @param array $list
+ * @return bool
+ */
+function ice_rename_options( $list )
+{
+	ICE_Policy::options()->registry()->rename_theme_mods( $list );
+}
