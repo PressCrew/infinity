@@ -88,6 +88,37 @@ class ICE_Option_Registry extends ICE_Registry
 	}
 
 	/**
+	 * Rename the given theme modification key.
+	 *
+	 * @param string $old_key
+	 * @param string $new_key
+	 * @return bool
+	 */
+	public function rename_theme_mod( $old_key, $new_key )
+	{
+		// call rename theme mods as array
+		return $this->rename_theme_mods( array( $old_key => $new_key ) );
+	}
+
+	/**
+	 * Rename theme modification keys for all old_key => new_key array items.
+	 *
+	 * @param array $list
+	 * @return bool
+	 */
+	public function rename_theme_mods( $list )
+	{
+		// loop entire list
+		foreach( $list as $old_key => $new_key ) {
+			// rename key using mod wrapper
+			$this->theme_mod->rename( $old_key, $new_key );
+		}
+
+		// save all changes
+		return $this->theme_mod->save();
+	}
+
+	/**
 	 * Return sibling options as an array.
 	 *
 	 * @param ICE_Option $option
