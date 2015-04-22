@@ -50,15 +50,28 @@ abstract class ICE_Upgrade extends ICE_Base
 	}
 
 	/**
+	 * Returns true if comparison of saved version to given version using given operator is successful.
+	 *
+	 * @uses version_compare()
+	 * @param string $version
+	 * @param string $operator
+	 * @return boolean
+	 */
+	final public function version_compare( $version, $operator )
+	{
+		return version_compare( $this->version, $version, $operator );
+	}
+
+	/**
 	 * Returns true if saved version exactly matches given version.
 	 *
 	 * @param string $version
 	 * @return boolean
 	 */
-	final protected function version_equals( $version )
+	final public function version_equals( $version )
 	{
 		// do versions match exactly?
-		return version_compare( $this->version, $version, '==' );
+		return $this->version_compare( $version, '==' );
 	}
 
 	/**
