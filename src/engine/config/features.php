@@ -1102,8 +1102,6 @@ ice_register_group( 'buttons' );
 
 		ice_register_option(
 			array(
-				// TODO import old name format(s) as commented out for compat
-				// 'name' => 'cbox_button_color',
 				'name' => 'custom-color',
 				'group' => 'buttons',
 				'section' => 'global',
@@ -1241,8 +1239,6 @@ ice_register_group( 'slider' );
 
 		ice_register_option(
 			array(
-				// TODO import old name format as commented out for compat
-				// 'name' => 'cbox_flex_slider',
 				'name' => 'mode',
 				'type' => 'select',
 				'title' => 'Slider Mode',
@@ -1263,8 +1259,6 @@ ice_register_group( 'slider' );
 
 		ice_register_option(
 			array(
-				// TODO import old name format as commented out for compat
-				// 'name' => 'cbox-flex-slider-height',
 				'name' => 'height',
 				'title' => 'Slider Height',
 				'description' => 'The height of the slider in pixels.',
@@ -1280,8 +1274,6 @@ ice_register_group( 'slider' );
 
 		ice_register_option(
 			array(
-				// TODO import old name format as commented out for compat
-				// 'name' => 'cbox-flex-slider-width',
 				'name' => 'width',
 				'title' => 'Slider Width',
 				'description' => 'The width of the slider in pixels.',
@@ -1297,8 +1289,6 @@ ice_register_group( 'slider' );
 
 		ice_register_option(
 			array(
-				// TODO import old name format as commented out for compat
-				// 'name' => 'cbox_flex_slider_amount',
 				'name' => 'amount',
 				'title' => 'Number of Slides',
 				'description' => 'Enter the number of slides you want to show.',
@@ -1310,8 +1300,6 @@ ice_register_group( 'slider' );
 
 		ice_register_option(
 			array(
-				// TODO import old name format as commented out for compat
-				// 'name' => 'cbox_flex_slider_time',
 				'name' => 'time',
 				'title' => 'Slider Delay',
 				'description' => 'The number of milliseconds between slide changes (1 second = 1000 milliseconds).',
@@ -1327,8 +1315,6 @@ ice_register_group( 'slider' );
 
 		ice_register_option(
 			array(
-				// TODO import old name format as commented out for compat
-				// 'name' => 'cbox_flex_slider_transition',
 				'name' => 'transition',
 				'title' => 'Transition Speed',
 				'description' => 'The number of milliseconds it takes the slide to change (1 second = 1000 milliseconds).',
@@ -1344,8 +1330,6 @@ ice_register_group( 'slider' );
 
 		ice_register_option(
 			array(
-				// TODO import old name format as commented out for compat
-				// 'name' => 'cbox_flex_slider_category',
 				'name' => 'category',
 				'section' => 'homepage',
 				'title' => 'Slider Category',

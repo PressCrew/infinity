@@ -29,8 +29,6 @@ ice_register_group( 'thumbs' );
 
 	ice_register_option(
 		array(
-			// TODO import old name format as commented out for compat
-			// 'name' => 'cbox-thumb-height',
 			'name' => 'image-height',
 			'group' => 'thumbs',
 			'section' => 'global',
@@ -47,8 +45,6 @@ ice_register_group( 'thumbs' );
 
 	ice_register_option(
 		array(
-			// TODO import old name format as commented out for compat
-			// 'name' => 'cbox-thumb-width',
 			'name' => 'image-width',
 			'group' => 'thumbs',
 			'section' => 'global',
