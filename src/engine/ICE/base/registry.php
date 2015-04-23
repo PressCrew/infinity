@@ -210,6 +210,8 @@ class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 
 	/**
 	 * Return a registered component object by name and optionally group.
+	 * 
+	 * Optionally, you can pass only the name param using sugary syntax in the format: [group].[name]
 	 *
 	 * @param string $name
 	 * @param string $group
@@ -217,6 +219,18 @@ class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	 */
 	final public function get( $name, $group = self::DEFAULT_GROUP )
 	{
+		// did we get only one arg?
+		if ( 1 === func_num_args() ) {
+			// yes, do sugary parsing
+			$sugary = $this->parse_sugary_name( $name );
+			// did it parse?
+			if ( true === is_object( $sugary ) ) {
+				// override name and group
+				$name = $sugary->name;
+				$group = $sugary->group;
+			}
+		}
+		
 		// are both group and name keys set?
 		if ( true === isset( $this->components[ $group ][ $name ] ) ) {
 			// yes, return component at those keys
@@ -225,23 +239,6 @@ class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 
 		// didn't find it
 		throw new Exception( sprintf( 'Unable to get component "%s": not registered', $name ) );
-	}
-
-	/**
-	 * Get component by passing [group].[name] sugared up syntax.
-	 *
-	 * @param string $name
-	 * @return ICE_Component
-	 */
-	final public function get_sugary( $name )
-	{
-		$parts = $this->parse_sugary_name( $name );
-
-		if ( true === is_object( $parts ) ) {
-			return $this->get( $parts->name, $parts->group );
-		} else {
-			return $this->get( $name );
-		}
 	}
 
 	/**
