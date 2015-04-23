@@ -17,8 +17,8 @@
 if ( current_theme_supports( 'post-thumbnails' ) && has_post_thumbnail() ):
 
 	// yep, get settings
-	$thumbheight = infinity_option_get( 'thumbs:image-height' );
-	$thumbwidth = infinity_option_get( 'thumbs:image-width' );
+	$thumbheight = infinity_option_get( 'thumbs.image-height' );
+	$thumbwidth = infinity_option_get( 'thumbs.image-width' );
 
 	// spit out the thumb ?>
 	<figure class="postthumb">

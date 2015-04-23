@@ -509,7 +509,7 @@ function infinity_button_styles()
 	// is custom colors enabled
 	if ( current_theme_supports( 'infinity:buttons', 'color' ) ) {
 		// get button color theme
-		$theme = infinity_option_get( 'buttons:custom-color' );
+		$theme = infinity_option_get( 'buttons.custom-color' );
 		// did we get a color?
 		if ( true === empty( $theme ) ) {
 			// no color!

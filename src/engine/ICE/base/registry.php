@@ -38,7 +38,7 @@ class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	/**
 	 * Sub item delimeter.
 	 */
-	const SUB_ITEM_DELIM = ':';
+	const SUB_ITEM_DELIM = '.';
 
 	/**
 	 * Array of valid component groups.

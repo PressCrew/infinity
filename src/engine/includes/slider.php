@@ -315,7 +315,7 @@ function infinity_slider_get_mode( $force = false )
 	// is mode null?
 	if ( null === $mode || true === $force ) {
 		// yep, get the setting
-		$mode = (integer) infinity_option_get( 'slider:mode' );
+		$mode = (integer) infinity_option_get( 'slider.mode' );
 	}
 
 	// return mode
@@ -329,7 +329,7 @@ function infinity_slider_get_mode( $force = false )
  */
 function infinity_slider_get_width()
 {
-	return infinity_option_get( 'slider:width' );
+	return infinity_option_get( 'slider.width' );
 }
 
 /**
@@ -339,7 +339,7 @@ function infinity_slider_get_width()
  */
 function infinity_slider_get_height()
 {
-	return infinity_option_get( 'slider:height' );
+	return infinity_option_get( 'slider.height' );
 }
 
 /**
@@ -349,7 +349,7 @@ function infinity_slider_get_height()
  */
 function infinity_slider_get_category_id()
 {
-	return (int) infinity_option_get( 'slider:category' );
+	return (int) infinity_option_get( 'slider.category' );
 }
 
 /**
@@ -359,7 +359,7 @@ function infinity_slider_get_category_id()
  */
 function infinity_slider_get_time()
 {
-	return (int) infinity_option_get( 'slider:time' );
+	return (int) infinity_option_get( 'slider.time' );
 }
 
 /**
@@ -369,7 +369,7 @@ function infinity_slider_get_time()
  */
 function infinity_slider_get_transition()
 {
-	return (int) infinity_option_get( 'slider:transition' );
+	return (int) infinity_option_get( 'slider.transition' );
 }
 
 /**
@@ -379,7 +379,7 @@ function infinity_slider_get_transition()
  */
 function infinity_slider_get_amount()
 {
-	return (int) infinity_option_get( 'slider:amount' );
+	return (int) infinity_option_get( 'slider.amount' );
 }
 
 /**

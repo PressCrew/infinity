@@ -32,7 +32,7 @@
 					</div>
 					<div id="copyright-info" class="column six">
 						<?php
-							echo infinity_option_get( 'core:footer-text' );
+							echo infinity_option_get( 'core.footer-text' );
 						?>
 					</div>
 				</div>
