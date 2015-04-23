@@ -228,17 +228,17 @@ class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	}
 
 	/**
-	 * Get component by passing [group].[name] syntax.
+	 * Get component by passing [group].[name] sugared up syntax.
 	 *
 	 * @param string $name
 	 * @return ICE_Component
 	 */
-	final public function get_fancy( $name )
+	final public function get_sugary( $name )
 	{
-		$parts = explode( self::SUB_ITEM_DELIM, $name );
+		$parts = $this->parse_sugary_name( $name );
 
-		if ( count( $parts ) > 1 ) {
-			return $this->get( $parts[1], $parts[0] );
+		if ( true === is_object( $parts ) ) {
+			return $this->get( $parts->group, $parts->name );
 		} else {
 			return $this->get( $name );
 		}
@@ -358,6 +358,31 @@ class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 
 		// return empty array by default
 		return array();
+	}
+
+	/**
+	 * Attempt to parse a sugary name string into group and name.
+	 *
+	 * @param string $name
+	 * @return stdClass|false
+	 */
+	final protected function parse_sugary_name( $name )
+	{
+		// try to split at sub item delimeter
+		$parts = explode( self::SUB_ITEM_DELIM, $name );
+
+		// get exactly two chunks?
+		if ( count( $parts ) == 2 ) {
+			// yes, set up object
+			$obj = new stdClass();
+			$obj->group = $parts[1];
+			$obj->name = $parts[0];
+			// return it
+			return $obj;
+		}
+
+		// failed to parse
+		return false;
 	}
 
 	/**

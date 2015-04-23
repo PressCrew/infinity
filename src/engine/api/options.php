@@ -48,7 +48,7 @@ function infinity_option( $option_name, $output = true )
  */
 function infinity_option_image_src( $option_name, $size = 'thumbnail' )
 {
-	return ICE_Policy::options()->registry()->get_fancy( $option_name )->get_image_src( $size );
+	return ICE_Policy::options()->registry()->get_sugary( $option_name )->get_image_src( $size );
 }
 
 /**
@@ -62,7 +62,7 @@ function infinity_option_image_src( $option_name, $size = 'thumbnail' )
  */
 function infinity_option_image_url( $option_name, $size = 'thumbnail' )
 {
-	return ICE_Policy::options()->registry()->get_fancy( $option_name )->get_image_url( $size );
+	return ICE_Policy::options()->registry()->get_sugary( $option_name )->get_image_url( $size );
 }
 
 /**
@@ -75,7 +75,7 @@ function infinity_option_image_url( $option_name, $size = 'thumbnail' )
  */
 function infinity_option_fetch( $option_name )
 {
-	return ICE_Policy::options()->registry()->get_fancy( $option_name );
+	return ICE_Policy::options()->registry()->get_sugary( $option_name );
 }
 
 /**
