@@ -386,6 +386,29 @@ class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 	}
 
 	/**
+	 * Parse a sugary name and return it reformated.
+	 *
+	 * @uses sprintf()
+	 * @param string $name
+	 * @param string $format A valid sprintf() format.
+	 * @return string
+	 */
+	final public function reformat_sugary_name( $name, $format = '%1$s_%2$s')
+	{
+		// try to parse the name
+		$sugary = $this->parse_sugary_name( $name );
+
+		// get an object?
+		if ( true === is_object( $sugary ) ) {
+			// yep, return it formated
+			return sprintf( $format, $sugary->group, $sugary->name );
+		} else {
+			// nope, return it untouched
+			return $name;
+		}
+	}
+
+	/**
 	 * Register a component's settings.
 	 *
 	 * @param array $args
