@@ -238,7 +238,7 @@ class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 		$parts = $this->parse_sugary_name( $name );
 
 		if ( true === is_object( $parts ) ) {
-			return $this->get( $parts->group, $parts->name );
+			return $this->get( $parts->name, $parts->group );
 		} else {
 			return $this->get( $name );
 		}
@@ -375,8 +375,8 @@ class ICE_Registry extends ICE_Componentable implements ICE_Visitable
 		if ( count( $parts ) == 2 ) {
 			// yes, set up object
 			$obj = new stdClass();
-			$obj->group = $parts[1];
-			$obj->name = $parts[0];
+			$obj->group = $parts[0];
+			$obj->name = $parts[1];
 			// return it
 			return $obj;
 		}
