@@ -46,6 +46,8 @@ function infinity_plugin_supported( $name )
 			'buddypress-docs' =>		function_exists( 'bp_docs_init' ),
 			// BuddyPress Docs wiki
 			'buddypress-docs-wiki' =>	function_exists( 'bpdw_init' ),
+			// CAC Featured Content Widget
+			'cac-featured-content' =>	function_exists( 'cac_featured_content_init' ),
 			// Commons In A Box
 			'commons-in-a-box' =>		function_exists( 'cbox' ),
 			// WordPress SEO
