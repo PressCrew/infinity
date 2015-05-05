@@ -10,3 +10,13 @@
  * @subpackage base
  * @since 1.2
  */
+
+/**
+ * Return URL of the create wiki page.
+ * 
+ * @return string
+ */
+function infinity_bp_docs_wiki_create_url()
+{
+	return trailingslashit( home_url( bpdw_slug() ) ) . trailingslashit( BP_DOCS_CREATE_SLUG );
+}

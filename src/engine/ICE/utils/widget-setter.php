@@ -18,29 +18,23 @@
 class ICE_Widget_Setter
 {
 	/**
-	 * Set a widget if it's id is not yet registered.
+	 * Set a new widget instance for a sidebar programmatically.
 	 *
 	 * @global array $wp_registered_sidebars
 	 * @global array $wp_registered_widget_updates
-	 * @param array $args
+	 *
+	 * @param string $sidebar_id The sidebar id to which the new widget instance should be added.
+	 * @param string $widget_id_base The registered widget type (id_base) to use for the new widget instance.
+	 * @param array $settings The settings to pass through to the new widget instance.
+	 *
 	 * @return \WP_Error|bool
 	 */
-	public static function set_widget( $args )
+	public static function set_widget( $sidebar_id, $widget_id_base, $settings )
 	{
 		global $wp_registered_sidebars, $wp_registered_widget_updates;
 
-		$r = wp_parse_args( $args, array(
-			'id_base' => '',
-			'sidebar_id' => '',
-			'settings' => array(),
-		) );
-
-		$id_base    = $r['id_base'];
-		$sidebar_id = $r['sidebar_id'];
-		$settings   = (array) $r['settings'];
-
 		// Don't try to set a widget if it hasn't been registered
-		if ( ! self::widget_exists( $id_base ) ) {
+		if ( ! self::widget_exists( $widget_id_base ) ) {
 			return new WP_Error( 'widget_does_not_exist', 'Widget does not exist' );
 		}
 
@@ -52,7 +46,7 @@ class ICE_Widget_Setter
 		$sidebar = (array) $sidebars[ $sidebar_id ];
 
 		// Multi-widgets can only be detected by looking at their settings
-		$option_name  = 'widget_' . $id_base;
+		$option_name  = 'widget_' . $widget_id_base;
 
 		// Don't let it get pulled from the cache
 		wp_cache_delete( $option_name, 'options' );
@@ -76,27 +70,30 @@ class ICE_Widget_Setter
 			}
 
 			$all_settings[ $multi_number ] = $settings;
-			//$all_settings = array( $multi_number => $settings );
+
 		} else {
 			$multi_number = 1;
 			$all_settings = array( $multi_number => $settings );
 		}
 
-		$widget_id = $id_base . '-' . $multi_number;
+		$widget_id = $widget_id_base . '-' . $multi_number;
 		$sidebar[] = $widget_id;
 
 		// Because of the way WP_Widget::update_callback() works, gotta fake the $_POST
-		$_POST['widget-' . $id_base] = $all_settings;
+		$_POST['widget-' . $widget_id_base] = $all_settings;
 
 		foreach ( (array) $wp_registered_widget_updates as $name => $control ) {
 
-			if ( $name == $id_base ) {
-				if ( !is_callable( $control['callback'] ) )
+			if ( $name == $widget_id_base ) {
+
+				if ( false === is_callable( $control['callback'] ) ) {
 					continue;
+				}
 
 				ob_start();
 					call_user_func_array( $control['callback'], $control['params'] );
 				ob_end_clean();
+
 				break;
 			}
 		}

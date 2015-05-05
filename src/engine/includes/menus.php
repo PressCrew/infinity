@@ -11,6 +11,31 @@
  * @since 1.1
  */
 
+//
+// Actions
+//
+
+/**
+ * Automagically set up menus on theme activiation.
+ *
+ * @global int $blog_id
+ */
+function infinity_menus_auto_populate()
+{
+	global $blog_id;
+
+	// make sure we are on the root bp blog
+	if ( (int) BP_ROOT_BLOG === (int) $blog_id ) {
+		// create our default sub-menu
+		infinity_menus_create_default_sub_menu();
+	}
+}
+add_action( 'infinity_dashboard_activated', 'infinity_menus_auto_populate' );
+
+//
+// Functions
+//
+
 /**
  * Register and create a custom BuddyPress menu
  */
@@ -143,4 +168,75 @@ function infinity_bp_nav_inject_options_filter( $html, $user_nav_item )
 
 	// no changes
 	return $html;
+}
+
+/**
+ * Creates a default sub menu and .
+ */
+function infinity_menus_create_default_sub_menu()
+{
+	// load menu utils
+	ICE_Loader::load( 'utils/menus' );
+
+	// new menu manager using our special name
+	$menu_mgr = new ICE_Menu_Manager( 'infinity-sub-menu' );
+
+	// try to register it
+	if ( true === $menu_mgr->register() ) {
+
+		// add home page
+		$menu_mgr->add_item(
+			array(
+				'title'		=> _x( 'Home', 'the link in the header navigation bar', 'infinity' ),
+				'position'	=> 0,
+				'url'		=> home_url( '/' )
+			)
+		);
+		// add members page
+		$menu_mgr->add_bp_page(
+			'members',
+			array(
+				'title'		=> _x( 'People', 'the link in the header navigation bar', 'infinity' ),
+				'position'	=> 10
+			)
+		);
+		// add groups page
+		$menu_mgr->add_bp_page(
+			'groups',
+			array(
+				'title'		=> _x( 'Groups', 'the link in the header navigation bar', 'infinity' ),
+				'position'	=> 20
+			)
+		);
+		// add blogs page
+		$menu_mgr->add_bp_page(
+			'blogs',
+			array(
+				'title'		=> _x( 'Blogs', 'the link in the header navigation bar', 'infinity' ),
+				'position'	=> 30
+			)
+		);
+		// add activity page
+		$menu_mgr->add_bp_page(
+			'activity',
+			array(
+				'title'		=> _x( 'Activity', 'the link in the header navigation bar', 'infinity' ),
+				'position'	=> 50
+			)
+		);
+		// is BuddyPress Docs Wiki plugin loaded?
+		if ( infinity_plugin_supported( 'buddypress-docs-wiki' ) ) {
+			// yep, add wiki page
+			$menu_mgr->add_item(
+				array(
+					'title'		=> _x( 'Wiki', 'the link in the header navigation bar', 'infinity' ),
+					'position'	=> 40,
+					'url'		=> home_url( 'wiki' )
+				)
+			);
+		}
+
+		// set location
+		$menu_mgr->add_location( 'sub-menu' );
+	}
 }
