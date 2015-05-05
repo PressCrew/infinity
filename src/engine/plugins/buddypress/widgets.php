@@ -211,7 +211,7 @@ class Infinity_BP_Blogs_Recent_Posts_Widget extends WP_Widget
 		?>
 			<p>
 				<label for="<?php echo $this->get_field_name( 'include_groupblog' ) ?>">
-					<?php _e( 'Include groupblog posts', 'cbox-theme' ) ?>
+					<?php _e( 'Include groupblog posts', 'infinity' ) ?>
 				</label>
 				<input type="checkbox" name="<?php echo $this->get_field_name( 'include_groupblog' ) ?>" value="1" <?php checked( $include_groupblog ) ?>>
 			</p>
