@@ -10,8 +10,3 @@
  * @subpackage cbox
  * @since 1.2
  */
-
-/**
- * Load requirements.
- */
-require_once INFINITY_PLUGINS_PATH . '/commons-in-a-box/sidebars.php';
