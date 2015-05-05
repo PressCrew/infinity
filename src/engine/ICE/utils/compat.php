@@ -12,6 +12,39 @@
  */
 
 /**
+ * Backwards compatibility helpers for the posts.
+ *
+ * @package ICE
+ * @subpackage utils
+ */
+class ICE_Compat_Posts
+{
+	/**
+	 * Rename every "old" postmeta key with the given new key.
+	 *
+	 * Prefixing of the new key is handled automatically, but can be overridden with a 3rd argument.
+	 *
+	 * @global wpdb $wpdb
+	 * @param string $old_key
+	 * @param string $new_key
+	 * @param string $new_key_prefix
+	 * @return int|false The number of keys renamed, or false on error.
+	 */
+	static public function rename_postmeta_key( $old_key, $new_key, $new_key_prefix = INFINITY_META_KEY_PREFIX )
+	{
+		global $wpdb;
+
+		// update every row matching old key with new key
+		return
+			$wpdb->update(
+				$wpdb->postmeta,
+				array( 'meta_key' => $new_key_prefix . $new_key ),
+				array( 'meta_key' => $old_key )
+			);
+	}
+}
+
+/**
  * Backwards compatibility helpers for the options component.
  *
  * @package ICE
