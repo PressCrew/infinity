@@ -35,17 +35,20 @@ abstract class ICE_Upgrade extends ICE_Base
 
 	/**
 	 * Constructor.
+	 *
+	 * @param string $mod_key The key to pass to the ICE_Mod constructor.
+	 * @param string $default_version The version to set if no previous version was found.
 	 */
-	final public function __construct()
+	final public function __construct( $mod_key, $default_version = '1.0' )
 	{
 		// setup mod instance
-		$this->mod = new ICE_Mod( 'ice_upgrade' );
+		$this->mod = new ICE_Mod( $mod_key );
 		// try to get last stored version
 		$this->version = $this->mod->get( 'version' );
 		// is a version set?
 		if ( empty( $this->version ) ) {
 			// nope, set it to 1.0
-			$this->version_bump( '1.0' );
+			$this->version_bump( $default_version );
 		}
 	}
 

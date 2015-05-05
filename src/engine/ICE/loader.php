@@ -133,7 +133,7 @@ final class ICE_Loader extends ICE_Base
 		// load upgrade lib
 		ICE_Loader::load_lib( 'utils/upgrade' );
 		// new upgrade instance
-		$upgrade = new ICE_Upgrade_1_2();
+		$upgrade = new ICE_Upgrade_1_2( 'ice_upgrade' );
 		// run it
 		$upgrade->run();
 		// exec upgraded hook
