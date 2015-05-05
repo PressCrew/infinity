@@ -869,36 +869,6 @@ add_action( 'wp_print_footer_scripts', 'infinity_slider_localize_script', 9 );
 //
 
 /**
- * Rename all deprecated slider postmeta keys known to exist for older theme versions.
- *
- * @global wpdb $wpdb
- */
-function infinity_slider_compat_postmeta_keys()
-{
-	global $wpdb;
-
-	// build up old => new key names map
-	$keymap = array(
-		'_cbox_custom_url' => INFINITY_META_KEY_PREFIX . 'slider_custom_url',
-		'_cbox_hide_caption' => INFINITY_META_KEY_PREFIX . 'slider_hide_caption',
-		'_cbox_slider_excerpt' => INFINITY_META_KEY_PREFIX . 'slider_excerpt',
-		'_cbox_enable_custom_video' => INFINITY_META_KEY_PREFIX . 'slider_video_enable',
-		'_cbox_video_url' => INFINITY_META_KEY_PREFIX . 'slider_video_url'
-	);
-
-	// loop the key map
-	foreach( $keymap as $old_key => $new_key ) {
-		// update every row matching old key with new key
-		$wpdb->update(
-			$wpdb->postmeta,
-			array( 'meta_key' => $new_key ),
-			array( 'meta_key' => $old_key )
-		);
-	}
-}
-add_action( 'infinity_dashboard_activated', 'infinity_slider_compat_postmeta_keys' );
-
-/**
  * Rename all deprecated post types known to exist for older theme versions.
  *
  * @global wpdb $wpdb
