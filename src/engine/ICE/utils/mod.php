@@ -84,7 +84,15 @@ class ICE_Mod extends ICE_Base
 		// condition cannot be stale
 		if ( true === $force || false === $this->stale ) {
 			// get fresh copy of theme mods from database
-			$this->mods = get_theme_mod( $this->name );
+			$mods = get_theme_mod( $this->name );
+			// did we get an array?
+			if ( true === is_array( $mods ) ) {
+				// yep, use it
+				$this->mods = $mods;
+			} else {
+				// no, force it to empty array
+				$this->mods = array();
+			}
 			// no longer stale
 			$this->stale = false;
 			// success
