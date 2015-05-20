@@ -168,55 +168,107 @@ class ICE_Upgrade_1_2 extends ICE_Upgrade_1_1
 	 */
 	private function import_options()
 	{
-		// load compat util
-		ICE_Loader::load_lib( 'utils/compat' );
+		ice_rename_options( array(
+			// core options
+			'infinity-core-options.text-color' => 'core.text-color',
+			'infinity-core-options.link-color' => 'core.link-color',
+			'infinity-core-options.custom-favicon' => 'core.custom-favicon',
+			'infinity-core-options.sidebar-position' => 'core.sidebar-position',
+			'infinity-core-options.sidebar-size' => 'core.sidebar-size',
+			'infinity-core-options.google-analytics' => 'core.google-analytics',
+			'infinity-core-options.footer-text' => 'core.footer-text',
+			// custom styles
+			'infinity-custom-css.markup' => 'custom.markup',
+			// body layout
+			'infinity-body-layout.width' => 'body.width',
+			'infinity-body-layout.background-color' => 'body.background-color',
+			'infinity-body-layout.background-image' => 'body.background-image',
+			'infinity-body-layout.background-repeat' => 'body.background-repeat',
+			'infinity-body-layout.overlay-image' => 'body.overlay-image',
+			'infinity-body-layout.overlay-opacity' => 'body.overlay-opacity',
+			// header logo
+			'infinity-header-logo.image' => 'header-logo.image',
+			'infinity-header-logo.toggle' => 'header-logo.toggle',
+			'infinity-header-logo.pos' => 'header-logo.pos',
+			'infinity-header-logo.top' => 'header-logo.top',
+			'infinity-header-logo.right' => 'header-logo.right',
+			'infinity-header-logo.left' => 'header-logo.left',
+			// header layout
+			'infinity-header-layout.min-height' => 'header.min-height',
+			'infinity-header-layout.margin-top' => 'header.margin-top',
+			'infinity-header-layout.padding-top' => 'header.padding-top',
+			'infinity-header-layout.margin-bottom' => 'header.margin-bottom',
+			'infinity-header-layout.padding-bottom' => 'header.padding-bottom',
+			'infinity-header-layout.background-color' => 'header.background-color',
+			'infinity-header-layout.background-image' => 'header.background-image',
+			'infinity-header-layout.background-repeat' => 'header.background-repeat',
+			'infinity-header-layout.overlay-image' => 'header.overlay-image',
+			'infinity-header-layout.overlay-opacity' => 'header.overlay-opacity',
+			// main menu layout
+			'infinity-main-menu-layout.color-link' => 'main-menu.color-link',
+			'infinity-main-menu-layout.font-weight' => 'main-menu.font-weight',
+			'infinity-main-menu-layout.padding' => 'main-menu.padding',
+			'infinity-main-menu-layout.background-color' => 'main-menu.background-color',
+			'infinity-main-menu-layout.overlay-image' => 'main-menu.overlay-image',
+			'infinity-main-menu-layout.overlay-opacity' => 'main-menu.overlay-opacity',
+			// top menu layout
+			'infinity-top-menu-layout.color-link' => 'top-menu.color-link',
+			'infinity-top-menu-layout.font-weight' => 'top-menu.font-weight',
+			'infinity-top-menu-layout.background-color' => 'top-menu.background-color',
+			'infinity-top-menu-layout.background-color-subitem' => 'top-menu.background-color-subitem',
+			'infinity-top-menu-layout.overlay-image' => 'top-menu.overlay-image',
+			'infinity-top-menu-layout.overlay-opacity' => 'top-menu.overlay-opacity',
+			// sub menu layout
+			'infinity-sub-menu-layout.color-link' => 'sub-menu.color-link',
+			'infinity-sub-menu-layout.font-weight' => 'sub-menu.font-weight',
+			'infinity-sub-menu-layout.background-color' => 'sub-menu.background-color',
+			'infinity-sub-menu-layout.background-color-subitem' => 'sub-menu.background-color-subitem',
+			'infinity-sub-menu-layout.overlay-image' => 'sub-menu.overlay-image',
+			'infinity-sub-menu-layout.overlay-opacity' => 'sub-menu.overlay-opacity',
+			// content layout
+			'infinity-content-layout.text-color' => 'content.text-color',
+			'infinity-content-layout.link-color' => 'content.link-color',
+			'infinity-content-layout.background-color' => 'content.background-color',
+			'infinity-content-layout.background-image' => 'content.background-image',
+			'infinity-content-layout.background-repeat' => 'content.background-repeat',
+			'infinity-content-layout.overlay-image' => 'content.overlay-image',
+			'infinity-content-layout.overlay-opacity' => 'content.overlay-opacity',
+			// sidebar layout
+			'infinity-sidebar-layout.text-color' => 'sidebar.text-color',
+			'infinity-sidebar-layout.link-color' => 'sidebar.link-color',
+			'infinity-sidebar-layout.background-color' => 'sidebar.background-color',
+			'infinity-sidebar-layout.background-image' => 'sidebar.background-image',
+			'infinity-sidebar-layout.background-repeat' => 'sidebar.background-repeat',
+			'infinity-sidebar-layout.overlay-image' => 'sidebar.overlay-image',
+			'infinity-sidebar-layout.overlay-opacity' => 'sidebar.overlay-opacity',
+			// widget layout
+			'infinity-widget-layout.color-link' => 'widget.color-link',
+			'infinity-widget-layout.font-weight' => 'widget.font-weight',
+			'infinity-widget-layout.padding' => 'widget.padding',
+			'infinity-widget-layout.background-color' => 'widget.background-color',
+			'infinity-widget-layout.overlay-image' => 'widget.overlay-image',
+			'infinity-widget-layout.overlay-opacity' => 'widget.overlay-opacity',
+			// footer layout
+			'infinity-footer-layout.text-color' => 'footer.text-color',
+			'infinity-footer-layout.link-color' => 'footer.link-color',
+			'infinity-footer-layout.margin-top' => 'footer.margin-top',
+			'infinity-footer-layout.background-color' => 'footer.background-color',
+			'infinity-footer-layout.background-image' => 'footer.background-image',
+			'infinity-footer-layout.background-repeat' => 'footer.background-repeat',
+			'infinity-footer-layout.overlay-image' => 'footer.overlay-image',
+			'infinity-footer-layout.overlay-opacity' => 'footer.overlay-opacity',
+			// post gravatar
+			'infinity-post-gravatar.size' => 'post-gravatar.size',
+			'infinity-post-gravatar.default-set' => 'post-gravatar.default-set',
+			'infinity-post-gravatar.default-img' => 'post-gravatar.default-img',
+			'infinity-post-gravatar.default-force' => 'post-gravatar.default-force',
+			'infinity-post-gravatar.rating' => 'post-gravatar.rating',
+			'infinity-post-gravatar.border-width' => 'post-gravatar.border-width',
+			'infinity-post-gravatar.border-color' => 'post-gravatar.border-color',
+			'infinity-post-gravatar.padding' => 'post-gravatar.padding',
+			'infinity-post-gravatar.bg-color' => 'post-gravatar.bg-color'
+		) );
 
-		// get options registry
-		$registry = ICE_Policy::options()->registry();
-		// new values array
-		$new_values = array();
-		// old api names array
-		$api_names = array();
-
-		// loop all option groups
-		foreach( $registry->get_all() as $options ) {
-			// loop all options
-			foreach( $options as $option ) {
-				// get deprecated api name
-				$api_name = ICE_Compat_Option::get_api_name( $option );
-				// get old value
-				$old_value = get_option( $api_name );
-				// get a value?
-				if ( false !== $old_value ) {
-					// yes, get option name
-					$name = $option->get_name();
-					// push onto new values
-					$new_values[ $name ] = $old_value;
-					// push onto api names
-					$api_names[] = $api_name;
-				}
-			}
-		}
-		
-		// do we have new values?
-		if ( count( $new_values ) ) {
-			// yep, update theme mods
-			$registry->set_theme_mods( $new_values );
-		}
-
-		// do we have old api names?
-		if ( count( $api_names ) ) {
-			// yes, loop all
-			foreach( $api_names as $api_name ) {
-				// remove it from settings api
-				delete_option( $api_name );
-			}
-		}
-
-		// all done
-		return true;
-
-		/* @var $registry ICE_Option_Registry */
-		/* @var $option ICE_Option */
 	}
+
 }

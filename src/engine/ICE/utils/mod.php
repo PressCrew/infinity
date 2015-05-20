@@ -169,7 +169,7 @@ class ICE_Mod extends ICE_Base
 	 * @param string $old_key
 	 * @param string $new_key
 	 * @param bool $silent
-	 * @return false
+	 * @return bool
 	 */
 	public function rename( $old_key, $new_key, $silent = true )
 	{
@@ -197,18 +197,59 @@ class ICE_Mod extends ICE_Base
 				// succussful rename
 				return true;
 
-			// nothing else to do
+			// old key does not exist
 			} else {
 
-				// old key not set... usually not a big deal!
-				// return true unless silent mode is toggled off.
-				return ( false === $silent ) ? false : true;
+				// hrmm... maybe it's a deprecated option?
+				if ( true === $this->rename_compat( $old_key, $new_key, $silent ) ) {
+					// successful rename (or silent mode is on)
+					return true;
+				} else {
+					// all rename methods failed,
+					// return true unless silent mode is toggled off.
+					return ( false === $silent ) ? false : true;
+				}
 
 			}
 		}
 
 		// new key is bad, this is a developer level fatal error
 		throw new Exception( 'Rename theme modification key failed: new key must be a non-empty string.' );
+	}
+
+	/**
+	 * Rename the given key using backwards compatible logic.
+	 *
+	 * Really old options were stored in their own rows in the options table (top level options).
+	 *
+	 * @param string $old_key
+	 * @param string $new_key
+	 * @param bool $silent
+	 * @return bool
+	 */
+	final protected function rename_compat( $old_key, $new_key, $silent = true )
+	{
+		// load compat util
+		ICE_Loader::load_lib( 'utils/compat' );
+		
+		// get deprecated api name
+		$api_name = ICE_Compat_Option::get_api_name( $old_key );
+
+		// try to get the old value
+		$old_value = get_option( $api_name );
+
+		// get a value? (missing a value is common, don't panic)
+		if ( false !== $old_value ) {
+			// yes, set the mod
+			$this->set( $new_key, $old_value );
+			// delete old option
+			delete_option( $api_name );
+			// successful rename
+			return true;
+		}
+
+		// no rename attempted
+		return ( false === $silent ) ? false : true;
 	}
 
 	/**

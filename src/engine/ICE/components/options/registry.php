@@ -112,7 +112,7 @@ class ICE_Option_Registry extends ICE_Registry
 		foreach( $list as $old_key => $new_key ) {
 			// rename key using mod wrapper
 			$this->theme_mod->rename(
-				$old_key,
+				$this->reformat_sugary_name( $old_key ),
 				$this->reformat_sugary_name( $new_key )
 			);
 		}

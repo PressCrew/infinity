@@ -55,18 +55,13 @@ class ICE_Compat_Option
 	/**
 	 * Return the old option "api name".
 	 *
-	 * @param ICE_Option $option
+	 * @param string $option_name The old option name.
 	 * @return string
 	 */
-	static public function get_api_name( ICE_Option $option )
+	static public function get_api_name( $option_name )
 	{
 		// pre 1.2 alpha aname format
-		$aname = sprintf(
-			'%s/%s_%s',
-			$option->policy()->get_handle( false ),
-			$option->get_group(),
-			$option->get_name()
-		);
+		$aname = 'option/' . $option_name;
 
 		// return old api name
 		return implode(
