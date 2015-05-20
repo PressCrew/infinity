@@ -592,11 +592,16 @@ ice_register_group( 'post' );
 		)
 	);
 
+//
+// Post Gravatars Group
+//
+ice_register_group( 'post-gravatar' );
+
 	// Post Gravatars
 	ice_register_feature(
 		array(
-			'name' => 'gravatar',
-			'group' => 'post',
+			'name' => 'post-gravatar',
+			'group' => 'post-gravatar',
 			'type' => 'gravatar',
 			'title' => 'Post Gravatars',
 			'description' => 'Total control over post gravatars',
@@ -605,7 +610,7 @@ ice_register_group( 'post' );
 	);
 
 		$infinity_post_grav_defaults = array(
-			'group' => 'post',
+			'group' => 'post-gravatar',
 			'section' => 'gravatars',
 			'required_feature' => 'gravatar'
 		);
