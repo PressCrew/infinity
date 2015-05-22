@@ -257,6 +257,8 @@ class ICE_Upgrade_1_2 extends ICE_Upgrade_1_1
 			'infinity-footer-layout.background-repeat' => 'footer.background-repeat',
 			'infinity-footer-layout.overlay-image' => 'footer.overlay-image',
 			'infinity-footer-layout.overlay-opacity' => 'footer.overlay-opacity',
+			// fb autoconnect
+			'infinity-bp-fbconnect.toggle' => 'bp-fbconnect.toggle',
 			// post gravatar
 			'infinity-post-gravatar.size' => 'post-gravatar.size',
 			'infinity-post-gravatar.default-set' => 'post-gravatar.default-set',
