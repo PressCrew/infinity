@@ -12,13 +12,6 @@
  */
 
 /**
- * Print a basic title
- *
- * @package Infinity
- * @subpackage base
- */
-
-/**
  * Returns true if introduction boxes are supported and should be displayed.
  *
  * @package Infinity
