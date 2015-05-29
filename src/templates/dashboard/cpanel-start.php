@@ -15,7 +15,7 @@
 </p>
 
 <?php
-	get_template_part( 'templates/dashboard/cpanel-help', get_template() );
+	get_template_part( 'templates/dashboard/cpanel-help', get_stylesheet() );
 ?>
 
 <h3>

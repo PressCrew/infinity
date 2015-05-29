@@ -8,7 +8,7 @@
 	<!-- header -->
 	<?php
 		// use load template to make header template overridable
-		get_template_part( 'templates/dashboard/cpanel-header', get_template() );
+		get_template_part( 'templates/dashboard/cpanel-header', get_stylesheet() );
 	?>
 
 	<!-- tabs -->
