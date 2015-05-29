@@ -33,7 +33,6 @@ abstract class ICE_Policy extends ICE_Base
 		'feature' => 'ICE_Feature_Policy',
 		'section' => 'ICE_Section_Policy',
 		'screen' => 'ICE_Screen_Policy',
-		'shortcode' => 'ICE_Shortcode_Policy',
 		'widget' => 'ICE_Widget_Policy'
 	);
 
@@ -116,14 +115,6 @@ abstract class ICE_Policy extends ICE_Base
 	final static public function sections()
 	{
 		return self::instance( 'section' );
-	}
-
-	/**
-	 * @return ICE_Shortcode_Policy
-	 */
-	final static public function shortcodes()
-	{
-		return self::instance( 'shortcode' );
 	}
 
 	/**

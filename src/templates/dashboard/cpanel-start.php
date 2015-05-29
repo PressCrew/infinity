@@ -130,17 +130,6 @@
 		</ul>
 	</li>
 	<li>
-		Shortcodes
-		<ul>
-			<li>Define custom shortcodes based on re-usable types</li>
-			<li>Define multiple shortcodes which execute the same callback but have different default attributes</li>
-			<li>Write custom shortcode types (req PHP)</li>
-			<li>Easily override a shortcode's settings that were defined by any parent theme (title, description, etc)</li>
-			<li>Easily override a shortcode's default attributes that were set by any parent theme</li>
-			<li>Easily override a shortcode's template that were set by any parent theme (override file, or location)</li>
-		</ul>
-	</li>
-	<li>
 		Extending Infinity
 		<ul>
 			<li>Extend using a child theme</li>
