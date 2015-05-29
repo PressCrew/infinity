@@ -19,7 +19,6 @@ require_once INFINITY_API_PATH . '/options.php';
 require_once INFINITY_API_PATH . '/features.php';
 require_once INFINITY_API_PATH . '/widgets.php';
 require_once INFINITY_API_PATH . '/screens.php';
-require_once INFINITY_API_PATH . '/shortcodes.php';
 
 /**
  * Initialize and load the scheme for the active theme
