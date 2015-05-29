@@ -19,57 +19,6 @@
  */
 
 /**
- * Print the <title> tag based on what is being viewed.
- *
- * If the WordPress SEO plugin is supported, wp_title() is called with no args.
- *
- * @global int $page
- * @global int $paged
- * @uses infinity_plugin_supported()
- */
-function infinity_base_title()
-{
-	global $page, $paged;
-
-	// is WordPress SEO plugin supported?
-	if ( true === infinity_plugin_supported( 'wordpress-seo' ) ) {
-
-		// yes, print title with no args
-		wp_title();
-		
-	} else {
-		
-		// no, print our own seo title
-		wp_title( '|', true, 'right' );
-
-		// add the blog name.
-		bloginfo( 'name' );
-
-		// try to get the blog description
-		$site_description = get_bloginfo( 'description', 'display' );
-
-		// got a site desc and on home/front page?
-		if (
-			false === empty( $site_description ) &&
-			true === (
-				true === is_home() ||
-				true === is_front_page()
-			)
-		) {
-			// yes, print it
-			echo ' | ' . $site_description;
-		}
-
-		// have a page number?
-		if ( $paged >= 2 || $page >= 2 ) {
-			// yes, print it
-			echo ' | ';
-			printf( __( 'Page %s', 'infinity' ), max( $paged, $page ) );
-		}
-	}
-}
-
-/**
  * Returns true if introduction boxes are supported and should be displayed.
  *
  * @package Infinity

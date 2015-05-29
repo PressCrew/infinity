@@ -137,6 +137,59 @@ function infinity_base_set_content_width()
 add_action( 'after_setup_theme', 'infinity_base_set_content_width' );
 
 /**
+ * Filter contents of the <title> tag based on what is being viewed.
+ *
+ * @uses infinity_plugin_supported()
+ *
+ * @global int $page
+ * @global int $paged
+ *
+ * @param string $title Incoming title string.
+ * @param string $sep Separator string.
+ * @param string $seplocation Separator location (left or right).
+ */
+function infinity_base_title( $title, $sep, $seplocation )
+{
+	global $page, $paged;
+
+	// is WordPress SEO plugin NOT supported?
+	if ( false === infinity_plugin_supported( 'wordpress-seo' ) ) {
+
+		// we are formatting our own custom title string
+
+		// first, append the blog name.
+		$title .= get_bloginfo( 'name' );
+
+		// now try to get the blog description
+		$site_description = get_bloginfo( 'description', 'display' );
+
+		// did we get a site desc AND on home/front page?
+		if (
+			false === empty( $site_description ) &&
+			true === (
+				true === is_home() ||
+				true === is_front_page()
+			)
+		) {
+			// yes, append it (including separator)
+			$title .= sprintf( ' %s %s', $sep, $site_description );
+		}
+
+		// last thing... do we have a page number?
+		if ( $paged >= 2 || $page >= 2 ) {
+			// yes, append it (including separator)
+			$title .=
+				sprintf( ' %s ', $sep ) .
+				sprintf( __( 'Page %s', 'infinity' ), max( $paged, $page ) );
+		}
+	}
+
+	// return title
+	return $title;
+}
+add_filter( 'wp_title', 'infinity_base_title', 1, 3 );
+
+/**
  * Add special "admin bar is showing" body class
  */
 function infinity_base_admin_bar_class( $classes )
