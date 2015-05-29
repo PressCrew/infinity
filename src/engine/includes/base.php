@@ -17,6 +17,7 @@
 function infinity_base_features()
 {
 	// WordPress Support
+	add_theme_support( 'title-tag' );
 	add_theme_support( 'menus' );
 	add_theme_support( 'post-thumbnails' );
 
@@ -137,7 +138,26 @@ function infinity_base_set_content_width()
 add_action( 'after_setup_theme', 'infinity_base_set_content_width' );
 
 /**
- * Filter contents of the <title> tag based on what is being viewed.
+ * Render a <title> tag if current version of WordPress doesn't support the title-tag feature.
+ */
+function infinity_base_title()
+{
+	// determine if we need to inject a title tag into head ourselves
+	if (
+		// is title-tag feature support missing from running version of WP?
+		false === function_exists( '_wp_render_title_tag' )
+	) {
+		// no native support, render a title tag
+		?>
+			<title><?php wp_title( '|', true, 'right' ); ?></title>
+		<?php
+	}
+}
+add_filter( 'wp_head', 'infinity_base_title', 1 );
+
+/**
+ * For WordPress versions older than 4.1, filter contents of
+ * the <title> tag based on what is being viewed.
  *
  * @uses infinity_plugin_supported()
  *
@@ -148,13 +168,19 @@ add_action( 'after_setup_theme', 'infinity_base_set_content_width' );
  * @param string $sep Separator string.
  * @param string $seplocation Separator location (left or right).
  */
-function infinity_base_title( $title, $sep, $seplocation )
+function infinity_base_title_filter( $title, $sep, $seplocation )
 {
 	global $page, $paged;
 
-	// is WordPress SEO plugin NOT supported?
-	if ( false === infinity_plugin_supported( 'wordpress-seo' ) ) {
-
+	// should we filter the title?
+	if (
+		// is title-tag support missing from the running copy of WordPress?
+		false === function_exists( '_wp_render_title_tag' ) &&
+		// is the current screen NOT a feed?
+		false === is_feed() &&
+		// is WordPress SEO plugin NOT supported?
+		false === infinity_plugin_supported( 'wordpress-seo' )
+	) {
 		// we are formatting our own custom title string
 
 		// first, append the blog name.
@@ -187,7 +213,7 @@ function infinity_base_title( $title, $sep, $seplocation )
 	// return title
 	return $title;
 }
-add_filter( 'wp_title', 'infinity_base_title', 1, 3 );
+add_filter( 'wp_title', 'infinity_base_title_filter', 1, 3 );
 
 /**
  * Add special "admin bar is showing" body class
