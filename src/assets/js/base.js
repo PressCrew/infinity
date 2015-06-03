@@ -67,11 +67,6 @@ jQuery(document).ready(function($)
 	// initial hover effects
 	infinity_theme_overlay();
 
-	// slider initialization
-	if ( typeof infinity_slider_options !== 'undefined' ) {
-		infinity_slider_init( '.slides', infinity_slider_options );
-	}
-
 });
 
 // make the sidebar and content area the same size
@@ -95,13 +90,4 @@ function infinity_theme_overlay()
 	}, function() {
 		jQuery(this).parent('.post-thumb').find('img').stop().animate({opacity : 1}, 200);
 	});
-}
-
-function infinity_slider_init( selector, options )
-{
-	var el = jQuery( selector );
-
-	if ( 0 < el.length && typeof el.bxSlider !== 'undefined' ) {
-		el.bxSlider( options );
-	}
 }
