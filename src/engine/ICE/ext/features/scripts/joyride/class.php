@@ -173,7 +173,7 @@ class ICE_Ext_Feature_Scripts_Joyride
 		$this->tip_content = '#' . $this->id;
 
 		// enqueue assets
-		add_action( 'ice_init_blog', array( $this, 'enqueue_assets' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_assets' ) );
 	}
 	
 	/**
