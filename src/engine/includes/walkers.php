@@ -70,11 +70,10 @@ class Infinity_Base_Walker_Nav_Menu extends Walker_Nav_Menu
 	 */
 	function end_el( &$output, $item, $depth = 0, $args = array() )
 	{
-		parent::end_el($output, $item);
 		// close link item
 		$output .= '</li>' . PHP_EOL;
-		
 	}
+
 }
 
 /**
