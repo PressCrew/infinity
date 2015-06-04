@@ -98,6 +98,14 @@ abstract class ICE_Enqueue extends ICE_Base
 	abstract protected function enqueue_now( $handle );
 
 	/**
+	 * Register an asset for later enqueueing.
+	 *
+	 * @param string $handle
+	 * @param array $args
+	 */
+	abstract public function register( $handle, $args = array() );
+
+	/**
 	 * The template method is called just in time to register defaults.
 	 */
 	abstract protected function register_defaults();
@@ -227,13 +235,10 @@ abstract class ICE_Enqueue extends ICE_Base
 	 * @param string $handle
 	 * @param array $args
 	 */
-	public function enqueue( $handle, $args )
+	public function enqueue( $handle, $args = array() )
 	{
-		// has already been added?
-		if ( false === $this->check_enqueued( $handle ) ) {
-			// nope, add it
-			$this->add( $handle, $args );
-		}
+		// simply call register
+		$this->register( $handle, $args );
 	}
 
 	/**
@@ -251,8 +256,8 @@ abstract class ICE_Enqueue extends ICE_Base
 		// add to asset objects stack
 		$this->objects[ $handle ] = $asset;
 
-		// call standard enqueuer
-		$this->add( $handle, $args );
+		// register it
+		$this->register( $handle, $args );
 
 		// return the handle for caller's reference
 		return $handle;
@@ -439,7 +444,7 @@ class ICE_Styles extends ICE_Enqueue
 	 * @param string $handle
 	 * @param array $args
 	 */
-	public function register( $handle, $args )
+	public function register( $handle, $args = array() )
 	{
 		// has already been enqueued?
 		if ( true === $this->check_enqueued( $handle ) ) {
@@ -723,7 +728,7 @@ class ICE_Scripts extends ICE_Enqueue
 	 * @param string $handle
 	 * @param array $args
 	 */
-	public function register( $handle, $args )
+	public function register( $handle, $args = array() )
 	{
 		// has already been enqueued?
 		if ( true === $this->check_enqueued( $handle ) ) {
