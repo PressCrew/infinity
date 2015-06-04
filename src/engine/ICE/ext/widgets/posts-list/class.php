@@ -421,15 +421,12 @@ class ICE_Posts_List extends WP_Posts_List_Table
 	/**
 	 * Print the content of one post row
 	 *
-	 * @param stdClass $a_post
+	 * @param stdClass $post
+	 * @param int $level
 	 * @return boolean
 	 */
-	function single_row( $a_post )
+	function single_row( $post, $level = 0 )
 	{
-		global $post, $post_type;
-
-		$global_post = $post;
-		$post = $a_post;
 		setup_postdata( $post );
 
 		$post_type_object = get_post_type_object( $post->post_type );
@@ -445,8 +442,6 @@ class ICE_Posts_List extends WP_Posts_List_Table
 			?></div><?php
 		}
 
-		$post = $global_post;
-		
 		return;
 	}
 
