@@ -30,7 +30,7 @@ class ICE_Compat_Posts
 	 * @param string $new_key_prefix
 	 * @return int|false The number of keys renamed, or false on error.
 	 */
-	static public function rename_postmeta_key( $old_key, $new_key, $new_key_prefix = INFINITY_META_KEY_PREFIX )
+	static public function rename_postmeta_key( $old_key, $new_key, $new_key_prefix )
 	{
 		global $wpdb;
 

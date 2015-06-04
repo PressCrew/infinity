@@ -173,21 +173,6 @@ body.infinity-layout {
 	margin: 0 0 60px;
 	position: relative;
 }
-.infinity-layout .flex-caption {
-	bottom: 0;
-	position: absolute;
-	width: inherit;
-	padding-top: 15px;
-	padding-bottom: 15px;
-}
-.infinity-layout .flex-caption p,
-.infinity-layout .flex-caption h3 {
-	padding-left: 15px;
-	padding-right: 15px;
-}
-.infinity-layout .flex-caption h3 a {
-	color: #FFF;
-}
 
 /* ========== */
 /* ! Header   */
@@ -1640,22 +1625,6 @@ body.infinity-design {
 	border-bottom: 1px solid #F5F5F5;
 	padding-top: 30px;
 	padding-bottom: 20px;
-}
-/* ========== */
-/* ! HomePage */
-/* ========== */
-.infinity-design .flexslider .slides img {
-	-webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-}
-.infinity-design .flex-caption {
-	background-image: url("../images/slider/bg.png");
-	color: #FFF;
-	text-shadow: 0 1px 0 #000000;
-	border-top: 1px solid #545353;
-}
-.infinity-design .flex-caption h2 {
-	color: #EFEFEF;
 }
 /* ======== */
 /* ! Docs   */

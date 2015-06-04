@@ -243,7 +243,6 @@ function infinity_base_post_thumb_sizes()
 	) {
 		set_post_thumbnail_size( 35, 35, true );
 		add_image_size( 'post-image', 674, 140, true );
-		add_image_size( 'slider-full', 980, 360, true );
 		add_image_size( 'thumbnail-large', 600, 200, true );
 		add_image_size( 'thumbnail-post', 210, 160, true );
 	}

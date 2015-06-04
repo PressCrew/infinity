@@ -10,7 +10,7 @@
  */
 
 	// determine if slider is enabled
-	$slider_enabled = infinity_slider_is_enabled();
+	$slider_enabled = infinity_plugin_enabled( 'infext-slider' );
 
 	// determine sidebar class
 	$sidebar_class = ( $slider_enabled ) ? 'six' : 'sixteen';
@@ -25,7 +25,7 @@
 				<div id="flex-slider-wrap-full" class="column ten">
 					<!-- load template for the slider-->
 					<?php
-						get_template_part( 'templates/loops/loop-slider' );
+						infext_slider_display();
 					?>
 					<!-- end -->
 				</div>

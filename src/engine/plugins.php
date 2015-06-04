@@ -50,6 +50,8 @@ function infinity_plugin_supported( $name )
 			'cac-featured-content' =>	function_exists( 'cac_featured_content_init' ),
 			// Commons In A Box
 			'commons-in-a-box' =>		function_exists( 'cbox' ),
+			// Infinity Slider Extension
+			'infext-slider' =>			function_exists( 'infext_slider_init' ),
 			// WordPress SEO
 			'wordpress-seo' =>			function_exists( 'wpseo_init' )
 		);
@@ -60,6 +62,36 @@ function infinity_plugin_supported( $name )
 		true === isset( $plugins_loaded[ $name ]  ) &&
 		true === $plugins_loaded[ $name ]
 	);
+}
+
+/**
+ * Returns true if the given plugin is supported natively and is configured to actually do something.
+ *
+ * @uses infinity_plugin_supported()
+ * 
+ * @param string $name The plugin name.
+ * @return boolean
+ */
+function infinity_plugin_enabled( $name )
+{
+	// first off, is plugin even supported?
+	if ( true === infinity_plugin_supported( $name ) ) {
+
+		// check if plugin enabled
+		switch ( $name ) {
+			// Infinity Slider Extension
+			case 'infext-slider':
+				return infext_slider_is_enabled();
+			// No enabled check exists (yet)
+			default:
+				throw new Exception(
+					sprintf( 'No enabled check has been configured for the %s plugin yet.' )
+				);
+		}
+	}
+
+	// plugin not supported, so can't be enabled
+	return false;
 }
 
 /**
