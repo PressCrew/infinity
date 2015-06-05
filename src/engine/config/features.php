@@ -81,7 +81,7 @@ ice_register_group( 'core' );
 				'title' => 'Sidebar Position',
 				'description' => 'Choose on which side you want to display the sidebar',
 				'type' => 'radio',
-				'default_value' => 'right',
+				'default_value' => 'left',
 				'field_options' => array(
 					'left' => 'Left',
 					'right' => 'Right'
