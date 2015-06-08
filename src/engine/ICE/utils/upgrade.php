@@ -53,6 +53,16 @@ abstract class ICE_Upgrade extends ICE_Base
 	}
 
 	/**
+	 * Return currently stored version.
+	 *
+	 * @return string
+	 */
+	final public function get_version()
+	{
+		return $this->version;
+	}
+
+	/**
 	 * Returns true if comparison of saved version to given version using given operator is successful.
 	 *
 	 * @uses version_compare()
@@ -168,7 +178,7 @@ class ICE_Upgrade_1_2 extends ICE_Upgrade_1_1
 	 */
 	private function import_options()
 	{
-		ice_rename_options( array(
+		return ice_rename_options( array(
 			// core options
 			'infinity-core-options.text-color' => 'core.text-color',
 			'infinity-core-options.link-color' => 'core.link-color',

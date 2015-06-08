@@ -116,5 +116,5 @@ function ice_register_option( $args, $defaults = array() )
  */
 function ice_rename_options( $list )
 {
-	ICE_Policy::options()->registry()->rename_theme_mods( $list );
+	return ICE_Policy::options()->registry()->rename_theme_mods( $list );
 }

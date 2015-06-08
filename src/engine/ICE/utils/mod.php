@@ -105,7 +105,7 @@ class ICE_Mod extends ICE_Base
 	/**
 	 * Saves all modifications to database.
 	 *
-	 * @return boolean
+	 * @return true
 	 */
 	public function save()
 	{
@@ -115,12 +115,10 @@ class ICE_Mod extends ICE_Base
 			set_theme_mod( $this->name, $this->mods );
 			// no longer stale
 			$this->stale = false;
-			// success
-			return true;
 		}
 
-		// no save occurred
-		return false;
+		// always return true
+		return true;
 	}
 
 	/**
