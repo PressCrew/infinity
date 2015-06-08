@@ -82,7 +82,7 @@ final class ICE_Loader extends ICE_Base
 				// add theme activation callback
 				add_action( 'load-themes.php', array( __CLASS__, 'do_activated_actions' ) );
 				// add upgrade callback
-				add_action( 'ice_theme_activated', array( __CLASS__, 'upgrade' ), 1 );
+				add_action( 'admin_init', array( __CLASS__, 'upgrade' ), 1 );
 			}
 		}
 	}
