@@ -20,7 +20,7 @@ if ( infinity_base_show_intro_box() ):
 		<header>
 			<h1 id="tag-title" class="page-title">
 				<?php
-					printf( __( 'Tag Archives: <span>%s</span>', 'infinity' ), single_tag_title( '', false ) );
+					printf( __( 'Tag Archives: <span>%s</span>', 'infinity-engine' ), single_tag_title( '', false ) );
 				?>
 			</h1>
 		</header>

@@ -155,10 +155,10 @@ class ICE_Ext_Option_Upload
 			if ( is_array($src) ) {
 				ICE_Ajax::response( true, $src[0], $src[1], $src[2] );
 			} else {
-				ICE_Ajax::response( false, __('Failed to lookup attachment URL', 'infinity') );
+				ICE_Ajax::response( false, __( 'Failed to lookup attachment URL', 'infinity-engine') );
 			}
 		} else {
-			ICE_Ajax::response( 0, __('No attachment ID received', 'infinity') );
+			ICE_Ajax::response( 0, __( 'No attachment ID received', 'infinity-engine') );
 		}
 	}
 

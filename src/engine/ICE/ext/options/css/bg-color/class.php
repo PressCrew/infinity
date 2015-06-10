@@ -26,8 +26,8 @@ class ICE_Ext_Option_Css_Bg_Color
 	protected function configure()
 	{
 		// set defaults first
-		$this->title = __( 'Background Color', 'infinity' );
-		$this->description = __( 'Choose a background color', 'infinity' );
+		$this->title = __( 'Background Color', 'infinity-engine' );
+		$this->description = __( 'Choose a background color', 'infinity-engine' );
 		$this->style_property = 'background-color';
 
 		// run parent

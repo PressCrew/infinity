@@ -730,7 +730,7 @@ final class ICE_Style_Property_Primitive extends ICE_Style_Property
 	{
 		if ( !isset( $this->value_helpers[ self::KEY_ENUM ] ) ) {
 			$this->value_helpers[ self::KEY_ENUM ] = ICE_Style_Value::get_flyweight( 'Enum' );
-			$this->value_list[ 'inherit' ] = __( 'Inherit', 'infinity' );
+			$this->value_list[ 'inherit' ] = __( 'Inherit', 'infinity-engine' );
 		}
 
 		$this->value_list[ $key ] = $desc;
@@ -975,10 +975,10 @@ final class ICE_Style_Property_Factory extends ICE_Base
 	{
 		return
 			ICE_Style_Property_Primitive::create( 'background-repeat' )
-				->add_enum( 'repeat', __( 'Full Tiling', 'infinity' ) )
-				->add_enum( 'repeat-x', __( 'Tile Horizontally Only', 'infinity' ) )
-				->add_enum( 'repeat-y', __( 'Tile Vertically Only', 'infinity' ) )
-				->add_enum( 'no-repeat', __( 'Disable Tiling', 'infinity' ) );
+				->add_enum( 'repeat', __( 'Full Tiling', 'infinity-engine' ) )
+				->add_enum( 'repeat-x', __( 'Tile Horizontally Only', 'infinity-engine' ) )
+				->add_enum( 'repeat-y', __( 'Tile Vertically Only', 'infinity-engine' ) )
+				->add_enum( 'no-repeat', __( 'Disable Tiling', 'infinity-engine' ) );
 	}
 
 	/**
@@ -1000,16 +1000,16 @@ final class ICE_Style_Property_Factory extends ICE_Base
 	{
 		return
 			ICE_Style_Property_Primitive::create( 'border-style' )
-				->add_enum( 'none', __( 'No Border', 'infinity' ) )
-				->add_enum( 'hidden', __( 'Hidden', 'infinity' ) )
-				->add_enum( 'dotted', __( 'Dotted', 'infinity' ) )
-				->add_enum( 'dashed', __( 'Dashed', 'infinity' ) )
-				->add_enum( 'solid', __( 'Solid', 'infinity' ) )
-				->add_enum( 'double', __( 'Double', 'infinity' ) )
-				->add_enum( 'groove', __( 'Groove', 'infinity' ) )
-				->add_enum( 'ridge', __( 'Ridge', 'infinity' ) )
-				->add_enum( 'inset', __( 'Inset', 'infinity' ) )
-				->add_enum( 'outset', __( 'Outset', 'infinity' ) );
+				->add_enum( 'none', __( 'No Border', 'infinity-engine' ) )
+				->add_enum( 'hidden', __( 'Hidden', 'infinity-engine' ) )
+				->add_enum( 'dotted', __( 'Dotted', 'infinity-engine' ) )
+				->add_enum( 'dashed', __( 'Dashed', 'infinity-engine' ) )
+				->add_enum( 'solid', __( 'Solid', 'infinity-engine' ) )
+				->add_enum( 'double', __( 'Double', 'infinity-engine' ) )
+				->add_enum( 'groove', __( 'Groove', 'infinity-engine' ) )
+				->add_enum( 'ridge', __( 'Ridge', 'infinity-engine' ) )
+				->add_enum( 'inset', __( 'Inset', 'infinity-engine' ) )
+				->add_enum( 'outset', __( 'Outset', 'infinity-engine' ) );
 	}
 
 	/**
@@ -1023,9 +1023,9 @@ final class ICE_Style_Property_Factory extends ICE_Base
 			ICE_Style_Property_Primitive::create( 'border-width' )
 				->add_length()
 				->add_percentage()
-				->add_enum( 'thin', __( 'Thin', 'infinity' ) )
-				->add_enum( 'medium', __( 'Medium', 'infinity' ) )
-				->add_enum( 'thick', __( 'Thick', 'infinity' ) );
+				->add_enum( 'thin', __( 'Thin', 'infinity-engine' ) )
+				->add_enum( 'medium', __( 'Medium', 'infinity-engine' ) )
+				->add_enum( 'thick', __( 'Thick', 'infinity-engine' ) );
 	}
 
 	/**
@@ -1038,22 +1038,22 @@ final class ICE_Style_Property_Factory extends ICE_Base
 		return
 			ICE_Style_Property_Primitive::create( $property )
 				->add_color()
-				->add_enum( 'black', __( 'Black', 'infinity' ) )
-				->add_enum( 'silver', __( 'Silver', 'infinity' ) )
-				->add_enum( 'gray', __( 'Gray', 'infinity' ) )
-				->add_enum( 'white', __( 'White', 'infinity' ) )
-				->add_enum( 'maroon', __( 'Maroon', 'infinity' ) )
-				->add_enum( 'red', __( 'Red', 'infinity' ) )
-				->add_enum( 'purple', __( 'Purple', 'infinity' ) )
-				->add_enum( 'fuchsia', __( 'Fuchsia', 'infinity' ) )
-				->add_enum( 'green', __( 'Green', 'infinity' ) )
-				->add_enum( 'lime', __( 'Lime', 'infinity' ) )
-				->add_enum( 'olive', __( 'Olive', 'infinity' ) )
-				->add_enum( 'yellow', __( 'Yellow', 'infinity' ) )
-				->add_enum( 'navy', __( 'Navy', 'infinity' ) )
-				->add_enum( 'blue', __( 'Blue', 'infinity' ) )
-				->add_enum( 'teal', __( 'Teal', 'infinity' ) )
-				->add_enum( 'aqua', __( 'Aqua', 'infinity' ) );
+				->add_enum( 'black', __( 'Black', 'infinity-engine' ) )
+				->add_enum( 'silver', __( 'Silver', 'infinity-engine' ) )
+				->add_enum( 'gray', __( 'Gray', 'infinity-engine' ) )
+				->add_enum( 'white', __( 'White', 'infinity-engine' ) )
+				->add_enum( 'maroon', __( 'Maroon', 'infinity-engine' ) )
+				->add_enum( 'red', __( 'Red', 'infinity-engine' ) )
+				->add_enum( 'purple', __( 'Purple', 'infinity-engine' ) )
+				->add_enum( 'fuchsia', __( 'Fuchsia', 'infinity-engine' ) )
+				->add_enum( 'green', __( 'Green', 'infinity-engine' ) )
+				->add_enum( 'lime', __( 'Lime', 'infinity-engine' ) )
+				->add_enum( 'olive', __( 'Olive', 'infinity-engine' ) )
+				->add_enum( 'yellow', __( 'Yellow', 'infinity-engine' ) )
+				->add_enum( 'navy', __( 'Navy', 'infinity-engine' ) )
+				->add_enum( 'blue', __( 'Blue', 'infinity-engine' ) )
+				->add_enum( 'teal', __( 'Teal', 'infinity-engine' ) )
+				->add_enum( 'aqua', __( 'Aqua', 'infinity-engine' ) );
 	}
 
 	/**
@@ -1077,11 +1077,11 @@ final class ICE_Style_Property_Factory extends ICE_Base
 	{
 		return
 			ICE_Style_Property_Primitive::create( 'font-family' )
-				->add_enum( 'serif', __( 'Times (serif)', 'infinity' ) )
-				->add_enum( 'sans-serif', __( 'Helvetica (sans-serif)', 'infinity' ) )
-				->add_enum( 'monospace', __( 'Courier (monospace)', 'infinity' ) )
-				->add_enum( 'cursive', __( 'Zapf-Chancery (cursive)', 'infinity' ) )
-				->add_enum( 'fantasy', __( 'Western (fantasy)', 'infinity' ) );
+				->add_enum( 'serif', __( 'Times (serif)', 'infinity-engine' ) )
+				->add_enum( 'sans-serif', __( 'Helvetica (sans-serif)', 'infinity-engine' ) )
+				->add_enum( 'monospace', __( 'Courier (monospace)', 'infinity-engine' ) )
+				->add_enum( 'cursive', __( 'Zapf-Chancery (cursive)', 'infinity-engine' ) )
+				->add_enum( 'fantasy', __( 'Western (fantasy)', 'infinity-engine' ) );
 	}
 
 	/**
@@ -1093,10 +1093,10 @@ final class ICE_Style_Property_Factory extends ICE_Base
 	{
 		return
 			ICE_Style_Property_Primitive::create( 'font-weight' )
-				->add_enum( 'lighter', __( 'Lighter', 'infinity' ) )
-				->add_enum( 'normal', __( 'Normal', 'infinity' ) )
-				->add_enum( 'bold', __( 'Bold', 'infinity' ) )
-				->add_enum( 'bolder', __( 'Bolder', 'infinity' ) )
+				->add_enum( 'lighter', __( 'Lighter', 'infinity-engine' ) )
+				->add_enum( 'normal', __( 'Normal', 'infinity-engine' ) )
+				->add_enum( 'bold', __( 'Bold', 'infinity-engine' ) )
+				->add_enum( 'bolder', __( 'Bolder', 'infinity-engine' ) )
 				->add_enum( '100', '100' )
 				->add_enum( '200', '200' )
 				->add_enum( '300', '300' )

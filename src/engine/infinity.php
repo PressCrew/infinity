@@ -22,7 +22,9 @@
 define( 'INFINITY_VERSION', '1.2a' );
 
 /**
- * Infinity slug
+ * Infinity slug.
+ *
+ * IMPORTANT: Do not use this constant for formatting file paths!
  */
 define( 'INFINITY_SLUG', 'infinity' );
 

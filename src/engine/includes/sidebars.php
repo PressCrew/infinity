@@ -163,7 +163,7 @@ function infinity_sidebars_auto_populate()
 		infinity_sidebars_set_pages(
 			'footer-right',
 			array(
-				'title' => __( 'Sitemap', 'infinity' )
+				'title' => __( 'Sitemap', 'infinity-engine' )
 			)
 		);
 
@@ -562,7 +562,7 @@ function infinity_sidebars_set_welcome( $sidebar_id, $args = array() )
 {
 	// setting defaults
 	$defaults = array(
-		'title' => __( 'Welcome', 'infinity' ),
+		'title' => __( 'Welcome', 'infinity-engine' ),
 		'text'  => null,
 		'filter' => false
 	);
@@ -586,14 +586,14 @@ function infinity_sidebars_set_welcome( $sidebar_id, $args = array() )
 		$settings['text'] =
 			'<p>' .
 				sprintf(
-					__( '<a %1$s>Join us</a> or <a %2$s>Login</a>', 'infinity' ),
+					__( '<a %1$s>Join us</a> or <a %2$s>Login</a>', 'infinity-engine' ),
 					'class="button" href="' . $reg_url . '"',
 					'class="button" href="' . wp_login_url() . '"'
 				) .
 			'</p>' .
 			'<p>' .
 				sprintf(
-					__( 'To modify the text of this widget, and other widgets you see throughout the site, visit <a %1$s>Dashboard > Appearance > Widgets</a>.', 'infinity' ),
+					__( 'To modify the text of this widget, and other widgets you see throughout the site, visit <a %1$s>Dashboard > Appearance > Widgets</a>.', 'infinity-engine' ),
 					'href="' . admin_url( 'widgets.php' ) . '"'
 				) .
 			'</p>';
@@ -615,8 +615,8 @@ function infinity_sidebars_set_contact( $sidebar_id, $args = array() )
 {
 	// setting defaults
 	$defaults = array(
-		'title' => __( 'Contact Us', 'infinity' ),
-		'text'  => __( 'Put your contact information in this widget.', 'infinity' ),
+		'title' => __( 'Contact Us', 'infinity-engine' ),
+		'text'  => __( 'Put your contact information in this widget.', 'infinity-engine' ),
 		'filter' => false
 	);
 
@@ -638,8 +638,8 @@ function infinity_sidebars_set_about( $sidebar_id, $args = array() )
 {
 	// setting defaults
 	$defaults = array(
-		'title' => __( 'About', 'infinity' ),
-		'text'  => __( 'Some brief information about your site.', 'infinity' ),
+		'title' => __( 'About', 'infinity-engine' ),
+		'text'  => __( 'Some brief information about your site.', 'infinity-engine' ),
 		'filter' => false
 	);
 
@@ -661,7 +661,7 @@ function infinity_sidebars_set_search( $sidebar_id, $args = array() )
 {
 	// setting defaults
 	$defaults = array(
-		'title' => __( 'Search', 'infinity' ),
+		'title' => __( 'Search', 'infinity-engine' ),
 		'filter' => false
 	);
 
@@ -683,7 +683,7 @@ function infinity_sidebars_set_archives( $sidebar_id, $args = array() )
 {
 	// setting defaults
 	$defaults = array(
-		'title' => __( 'Archives', 'infinity' ),
+		'title' => __( 'Archives', 'infinity-engine' ),
 		'filter' => false
 	);
 
@@ -705,7 +705,7 @@ function infinity_sidebars_set_pages( $sidebar_id, $args = array() )
 {
 	// setting defaults
 	$defaults = array(
-		'title' => __( 'Pages', 'infinity' ),
+		'title' => __( 'Pages', 'infinity-engine' ),
 		'filter' => false
 	);
 
@@ -727,7 +727,7 @@ function infinity_sidebars_set_recent_posts( $sidebar_id, $args = array() )
 {
 	// setting defaults
 	$defaults = array(
-		'title' => __( 'Recent Blog Posts', 'infinity' ),
+		'title' => __( 'Recent Blog Posts', 'infinity-engine' ),
 		'filter' => false
 	);
 
@@ -760,7 +760,7 @@ function infinity_sidebars_set_bp_recent_posts( $sidebar_id, $args = array() )
 	) {
 		// setting defaults
 		$defaults = array(
-			'title' => __( 'Recent Blog Posts', 'infinity' ),
+			'title' => __( 'Recent Blog Posts', 'infinity-engine' ),
 			'filter' => false
 		);
 
@@ -789,7 +789,7 @@ function infinity_sidebars_set_bp_recently_active( $sidebar_id, $args = array() 
 
 		// setting defaults
 		$defaults = array(
-			'title' => __( 'Recently Active Members', 'infinity' ),
+			'title' => __( 'Recently Active Members', 'infinity-engine' ),
 			'max_members' => 15,
 			'filter' => false,
 		);
@@ -819,7 +819,7 @@ function infinity_sidebars_set_bp_whos_online( $sidebar_id, $args = array() )
 		
 		// setting defaults
 		$defaults = array(
-			'title' => __( "Who's Online", 'infinity' ),
+			'title' => __( "Who's Online", 'infinity-engine' ),
 			'max_members' => 20,
 			'filter' => false
 		);
@@ -849,7 +849,7 @@ function infinity_sidebars_set_bp_members( $sidebar_id, $args = array() )
 
 		// setting defaults
 		$defaults = array(
-			'title' => __( 'Members', 'infinity' ),
+			'title' => __( 'Members', 'infinity-engine' ),
 			'max_members' => 20,
 			'link_title' => 1,
 			'member_default' => 'newest',
@@ -883,7 +883,7 @@ function infinity_sidebars_set_bp_groups( $sidebar_id, $args = array() )
 	) {
 		// setting defaults
 		$defaults = array(
-			'title' => __( 'Groups', 'infinity' ),
+			'title' => __( 'Groups', 'infinity-engine' ),
 			'max_groups'  => 20,
 			'link_title' => 1,
 			'group_default' => 'newest',
@@ -915,7 +915,7 @@ function infinity_sidebars_set_bbp_views( $sidebar_id, $args = array() )
 
 		// setting defaults
 		$defaults = array(
-			'title' => __( 'Topic View List', 'infinity' ),
+			'title' => __( 'Topic View List', 'infinity-engine' ),
 			'filter' => false
 		);
 
@@ -944,7 +944,7 @@ function infinity_sidebars_set_bbp_topics( $sidebar_id, $args = array() )
 
 		// setting defaults
 		$defaults = array(
-			'title' => __( 'Recent Topics', 'infinity' ),
+			'title' => __( 'Recent Topics', 'infinity-engine' ),
 			'max_shown' => 6,
 			'filter' => false
 		);
@@ -974,7 +974,7 @@ function infinity_sidebars_set_bbp_replies( $sidebar_id, $args = array() )
 
 		// setting defaults
 		$defaults = array(
-			'title' => __( 'Recent Replies', 'infinity' ),
+			'title' => __( 'Recent Replies', 'infinity-engine' ),
 			'max_shown' => 6,
 			'filter' => false
 		);
@@ -1006,7 +1006,7 @@ function infinity_sidebars_set_bpdw_welcome( $sidebar_id, $args = array() )
 
 		// setting defaults
 		$defaults = array(
-			'title' => __( 'Welcome To The Wiki', 'infinity' ),
+			'title' => __( 'Welcome To The Wiki', 'infinity-engine' ),
 			'text' => null,
 			'filter' => false
 		);
@@ -1021,13 +1021,13 @@ function infinity_sidebars_set_bpdw_welcome( $sidebar_id, $args = array() )
 			$settings['text'] =
 				'<p>' .
 					sprintf(
-						__( 'This sidebar appears on all Wiki pages. Use it to display content that you want your users to see whenever viewing the Wiki, such as a brief description of how wikis work, or a link to <a %1$s>create a new wiki page</a>.', 'infinity' ),
+						__( 'This sidebar appears on all Wiki pages. Use it to display content that you want your users to see whenever viewing the Wiki, such as a brief description of how wikis work, or a link to <a %1$s>create a new wiki page</a>.', 'infinity-engine' ),
 						'href="' . infinity_bp_docs_wiki_create_url() . '"'
 					) .
 				'</p>' .
 				'<p>' .
 					sprintf(
-						__( 'To edit this widget, or to add more widgets to the sidebar, visit <a %1$s>Dashboard > Appearance > Widgets</a> and look for the Wiki Sidebar.', 'infinity' ),
+						__( 'To edit this widget, or to add more widgets to the sidebar, visit <a %1$s>Dashboard > Appearance > Widgets</a> and look for the Wiki Sidebar.', 'infinity-engine' ),
 						'href="' . admin_url( 'widgets.php' ) . '"'
 					) .
 				'</p>';
@@ -1058,7 +1058,7 @@ function infinity_sidebars_set_bpdw_welcome_intro( $sidebar_id, $args = array() 
 
 		// setting defaults
 		$defaults = array(
-			'title' => __( 'Welcome To The Wiki Home', 'infinity' ),
+			'title' => __( 'Welcome To The Wiki Home', 'infinity-engine' ),
 			'text' => null,
 			'filter' => false
 		);
@@ -1072,11 +1072,11 @@ function infinity_sidebars_set_bpdw_welcome_intro( $sidebar_id, $args = array() 
 			// set default text
 			$settings['text'] =
 				'<p>' .
-					__( 'This is a text widget that you can use to introduce your users to the wiki, and perhaps to feature some outstanding wiki content.', 'infinity' ) .
+					__( 'This is a text widget that you can use to introduce your users to the wiki, and perhaps to feature some outstanding wiki content.', 'infinity-engine' ) .
 				'</p>' .
 				'<p>' .
 					sprintf(
-						__( 'Edit this widget, or add others to the Wiki Top sidebar, at <a %1$s>Dashboard > Appearance > Widgets</a>.', 'infinity' ),
+						__( 'Edit this widget, or add others to the Wiki Top sidebar, at <a %1$s>Dashboard > Appearance > Widgets</a>.', 'infinity-engine' ),
 						'href="' . admin_url( 'widgets.php' ) . '"'
 					) .
 				'</p>';
@@ -1118,7 +1118,7 @@ function infinity_sidebars_set_bpdw_create_new( $sidebar_id, $args = array() )
 			// set default text
 			$settings['text'] =
 				'<a href="' . infinity_bp_docs_wiki_create_url() . '" class="button">' .
-					__( 'Create New Wiki Page', 'infinity' ) .
+					__( 'Create New Wiki Page', 'infinity-engine' ) .
 				'</a>';
 
 		}
@@ -1145,7 +1145,7 @@ function infinity_sidebars_set_bpdw_tag_cloud( $sidebar_id, $args = array() )
 
 		// setting defaults
 		$defaults = array(
-			'title' => __( 'Wiki Tags', 'infinity' ),
+			'title' => __( 'Wiki Tags', 'infinity-engine' ),
 			'filter' => false
 		);
 
@@ -1174,7 +1174,7 @@ function infinity_sidebars_set_bpdw_most_active( $sidebar_id, $args = array() )
 
 		// setting defaults
 		$defaults = array(
-			'title' => __( 'Most Active', 'infinity' ),
+			'title' => __( 'Most Active', 'infinity-engine' ),
 			'max_pages' => 5,
 			'filter' => false
 		);
@@ -1204,7 +1204,7 @@ function infinity_sidebars_set_bpdw_recently_active( $sidebar_id, $args = array(
 
 		// setting defaults
 		$defaults = array(
-			'title' => __( 'Recently Active', 'infinity' ),
+			'title' => __( 'Recently Active', 'infinity-engine' ),
 			'max_pages' => 5,
 			'filter' => false
 		);
@@ -1236,7 +1236,7 @@ function infinity_sidebars_set_cacfc_member( $sidebar_id, $args = array() )
 
 		// default settings
 		$defaults = array(
-			'title' => __( 'Featured Member', 'infinity' ),
+			'title' => __( 'Featured Member', 'infinity-engine' ),
 			'title_element' => 'h4',
 			'featured_member' => '',
 			'display_images' => '1',

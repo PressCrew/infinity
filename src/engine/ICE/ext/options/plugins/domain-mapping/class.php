@@ -25,8 +25,8 @@ class ICE_Ext_Option_Plugins_Domain_Mapping
 	protected function configure()
 	{
 		// set defaults first
-		$this->title = __( 'Custom Domain', 'infinity' );
-		$this->description = __( 'Enter the custom domain name you wish to map to your site.', 'infinity' );
+		$this->title = __( 'Custom Domain', 'infinity-engine' );
+		$this->description = __( 'Enter the custom domain name you wish to map to your site.', 'infinity-engine' );
 
 		// run parent
 		parent::configure();

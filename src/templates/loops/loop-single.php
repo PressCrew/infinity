@@ -41,12 +41,12 @@ if ( have_posts()):
 				<div class="entry">
 					<?php
 						do_action( 'open_single_entry' );
-						the_content( __( 'Read the rest of this entry &rarr;', 'infinity' ) );
+						the_content( __( 'Read the rest of this entry &rarr;', 'infinity-engine' ) );
 					?>
 					<div class="clear"></div>
 					<?php
 						wp_link_pages( array(
-							'before' => '<p><strong>' . __( 'Pages:', 'infinity' ) . '</strong> ',
+							'before' => '<p><strong>' . __( 'Pages:', 'infinity-engine' ) . '</strong> ',
 							'after' => '</p>', 'next_or_number' => 'number'
 						) );
 						do_action( 'close_single_entry' );
@@ -73,7 +73,7 @@ if ( have_posts()):
 else:
 	// show no posts found message?>
 	<h1>
-		<?php _e( 'Sorry, no posts matched your criteria.', 'infinity' ); ?>
+		<?php _e( 'Sorry, no posts matched your criteria.', 'infinity-engine' ); ?>
 	</h1>
 	<?php
 		do_action( 'loop_not_found' );

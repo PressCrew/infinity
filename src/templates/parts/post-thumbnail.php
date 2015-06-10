@@ -22,7 +22,7 @@ if ( current_theme_supports( 'post-thumbnails' ) && has_post_thumbnail() ):
 
 	// spit out the thumb ?>
 	<figure class="postthumb">
-		<a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', 'infinity' ); ?> <?php the_title_attribute(); ?>"><?php the_post_thumbnail( array( $thumbwidth, $thumbheight ) ); ?></a>
+		<a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', 'infinity-engine' ); ?> <?php the_title_attribute(); ?>"><?php the_post_thumbnail( array( $thumbwidth, $thumbheight ) ); ?></a>
 	</figure>
 	<?php
 

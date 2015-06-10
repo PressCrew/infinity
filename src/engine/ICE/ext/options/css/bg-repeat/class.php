@@ -25,8 +25,8 @@ class ICE_Ext_Option_Css_Bg_Repeat
 	protected function configure()
 	{
 		// set defaults first
-		$this->title = __( 'Background Image Tiling', 'infinity' );
-		$this->description = __( 'Set the tiling mode of the background image', 'infinity' );
+		$this->title = __( 'Background Image Tiling', 'infinity-engine' );
+		$this->description = __( 'Set the tiling mode of the background image', 'infinity-engine' );
 		$this->style_property = 'background-repeat';
 		$this->default_value = 'repeat';
 

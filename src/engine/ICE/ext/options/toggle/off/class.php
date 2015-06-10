@@ -27,7 +27,7 @@ class ICE_Ext_Option_Toggle_Off
 	{
 		// this is true because you would be testing if "was `off` checked?"
 		return array(
-			true => __( 'Off', 'infinity' )
+			true => __( 'Off', 'infinity-engine' )
 		);
 	}
 }

@@ -26,7 +26,7 @@ class ICE_Ext_Option_Toggle_Yes
 	public function load_field_options()
 	{
 		return array(
-			true => __( 'Yes', 'infinity' )
+			true => __( 'Yes', 'infinity-engine' )
 		);
 	}
 }

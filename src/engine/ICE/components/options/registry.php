@@ -289,11 +289,11 @@ class ICE_Option_Registry extends ICE_Registry
 
 		// any options saved successfuly?
 		if ( $save_count == 1 ) {
-			ICE_Ajax::responseStd( true, sprintf( __('%d option successfully updated.', 'infinity'), $save_count ) );
+			ICE_Ajax::responseStd( true, sprintf( __( '%d option successfully updated.', 'infinity-engine'), $save_count ) );
 		} elseif ( $save_count > 1 ) {
-			ICE_Ajax::responseStd( true, sprintf( __('%d options successfully updated.', 'infinity'), $save_count ) );
+			ICE_Ajax::responseStd( true, sprintf( __( '%d options successfully updated.', 'infinity-engine'), $save_count ) );
 		} else {
-			ICE_Ajax::responseStd( false, __('An error has occurred. No options were updated.', 'infinity') );
+			ICE_Ajax::responseStd( false, __( 'An error has occurred. No options were updated.', 'infinity-engine') );
 		}
 	}
 }

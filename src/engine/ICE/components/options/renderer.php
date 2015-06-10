@@ -142,7 +142,7 @@ class ICE_Option_Renderer extends ICE_Renderer
 	{
 		// begin rendering ?>
 		<a class="<?php $this->merge_classes('ice-options-save', 'ice-options-save-one', $class) ?>" href="#<?php $this->render_name() ?>">
-			<?php _e( 'Save', 'infinity' ); ?>
+			<?php _e( 'Save', 'infinity-engine' ); ?>
 		</a><?php
 	}
 
@@ -155,7 +155,7 @@ class ICE_Option_Renderer extends ICE_Renderer
 	{
 		// begin rendering ?>
 		<a class="<?php $this->merge_classes('ice-options-save', 'ice-options-reset-one', $class) ?>" href="#<?php $this->render_name() ?>">
-			<?php _e( 'Reset', 'infinity' ); ?>
+			<?php _e( 'Reset', 'infinity-engine' ); ?>
 		</a><?php
 	}
 

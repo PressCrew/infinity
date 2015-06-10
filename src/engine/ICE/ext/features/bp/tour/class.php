@@ -28,8 +28,8 @@ class ICE_Ext_Feature_Bp_Tour
 		parent::init();
 
 		// set property defaults
-		$this->title = __( 'BuddyPress Tour', 'infinity' );
-		$this->description = __( 'Gives users a tour of the BuddyPress activity stream', 'infinity' );
+		$this->title = __( 'BuddyPress Tour', 'infinity-engine' );
+		$this->description = __( 'Gives users a tour of the BuddyPress activity stream', 'infinity-engine' );
 
 		// add action for the activity element renderer
 		add_action( 'bp_before_activity_loop', array( $this, 'render_activity_element' ) );

@@ -373,7 +373,7 @@ function infinity_options_render_options_screen()
 	if ( strlen($content) ) {
 		ICE_Ajax::responseStd( true, null, $content );
 	} else {
-		ICE_Ajax::responseStd( false, __('Failed to render options', 'infinity') );
+		ICE_Ajax::responseStd( false, __( 'Failed to render options', 'infinity-engine') );
 	}
 
 }

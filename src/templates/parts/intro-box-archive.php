@@ -21,11 +21,11 @@ if ( infinity_base_show_intro_box() ):
 				<h1 id= "category-title" class="page-title">
 					<?php
 						if ( is_day() ):
-							printf( __( 'Daily Archives: %s', 'infinity' ), '<span>' . get_the_date() . '</span>' );
+							printf( __( 'Daily Archives: %s', 'infinity-engine' ), '<span>' . get_the_date() . '</span>' );
 						elseif ( is_month() ):
-							printf( __( 'Monthly Archives: %s', 'infinity' ), '<span>' . get_the_date( 'F Y' ) . '</span>' );
+							printf( __( 'Monthly Archives: %s', 'infinity-engine' ), '<span>' . get_the_date( 'F Y' ) . '</span>' );
 						elseif ( is_year() ):
-							printf( __( 'Yearly Archives: %s', 'infinity' ), '<span>' . get_the_date( 'Y' ) . '</span>' );
+							printf( __( 'Yearly Archives: %s', 'infinity-engine' ), '<span>' . get_the_date( 'Y' ) . '</span>' );
 						endif;
 					?>
 				</h1>

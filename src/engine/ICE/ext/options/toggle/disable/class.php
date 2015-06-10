@@ -27,7 +27,7 @@ class ICE_Ext_Option_Toggle_Disable
 	{
 		// this is true because you would be testing if "was `disable` checked?"
 		return array(
-			true => __( 'Disable', 'infinity' )
+			true => __( 'Disable', 'infinity-engine' )
 		);
 	}
 }

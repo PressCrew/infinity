@@ -20,7 +20,7 @@
 	<div class="ui-widget-header">
 		<?php $this->render_title() ?>
 		<a href="<?php print admin_url( 'post-new.php' ) ?>?post_type=<?php print $post_type ?>" target="_parent" class="ice-do-create">
-			<?php _e( 'Create New', 'infinity' ) ?>
+			<?php _e( 'Create New', 'infinity-engine' ) ?>
 		</a>
 	</div>
 	<div class="ui-widget-content">

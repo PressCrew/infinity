@@ -25,8 +25,8 @@ class ICE_Ext_Option_Css_Bg_Image
 	protected function configure()
 	{
 		// set defaults first
-		$this->title = __( 'Background Image', 'infinity' );
-		$this->description = __( 'Upload an image to use as the background', 'infinity' );
+		$this->title = __( 'Background Image', 'infinity-engine' );
+		$this->description = __( 'Upload an image to use as the background', 'infinity-engine' );
 		$this->style_property = 'background-image';
 
 		// run parent

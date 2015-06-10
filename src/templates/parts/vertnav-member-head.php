@@ -20,16 +20,16 @@
 				// show quick menu ?>
 				<ul>
 					<li id="edit-profile">
-						<a class="button edit-profile-button" href="<?php echo $userLink; ?>profile/edit"><?php _e( 'Edit My Profile', 'infinity' ); ?></a>
+						<a class="button edit-profile-button" href="<?php echo $userLink; ?>profile/edit"><?php _e( 'Edit My Profile', 'infinity-engine' ); ?></a>
 					</li>
 					<li id="edit-avatar">
-						<a class="button edit-avatar-button" href="<?php echo $userLink; ?>profile/change-avatar"><?php _e( 'Change Avatar', 'infinity' ); ?></a>
+						<a class="button edit-avatar-button" href="<?php echo $userLink; ?>profile/change-avatar"><?php _e( 'Change Avatar', 'infinity-engine' ); ?></a>
 					</li>
 					<li id="edit-password">
-						<a class="button edit-password-button" href="<?php echo $userLink; ?>settings"><?php _e( 'Email/Password Settings', 'infinity' ); ?></a>
+						<a class="button edit-password-button" href="<?php echo $userLink; ?>settings"><?php _e( 'Email/Password Settings', 'infinity-engine' ); ?></a>
 					</li>
 					<li id="edit-notifications">
-						<a class="button edit-notifications-button" href="<?php echo $userLink; ?>settings/notifications/"><?php _e( 'Notification Settings', 'infinity' ); ?></a>
+						<a class="button edit-notifications-button" href="<?php echo $userLink; ?>settings/notifications/"><?php _e( 'Notification Settings', 'infinity-engine' ); ?></a>
 					</li>
 				</ul>
 			</div>

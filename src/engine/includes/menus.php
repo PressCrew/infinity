@@ -187,7 +187,7 @@ function infinity_menus_create_default_sub_menu()
 		// add home page
 		$menu_mgr->add_item(
 			array(
-				'title'		=> _x( 'Home', 'the link in the header navigation bar', 'infinity' ),
+				'title'		=> _x( 'Home', 'the link in the header navigation bar', 'infinity-engine' ),
 				'position'	=> 0,
 				'url'		=> home_url( '/' )
 			)
@@ -196,7 +196,7 @@ function infinity_menus_create_default_sub_menu()
 		$menu_mgr->add_bp_page(
 			'members',
 			array(
-				'title'		=> _x( 'People', 'the link in the header navigation bar', 'infinity' ),
+				'title'		=> _x( 'People', 'the link in the header navigation bar', 'infinity-engine' ),
 				'position'	=> 10
 			)
 		);
@@ -204,7 +204,7 @@ function infinity_menus_create_default_sub_menu()
 		$menu_mgr->add_bp_page(
 			'groups',
 			array(
-				'title'		=> _x( 'Groups', 'the link in the header navigation bar', 'infinity' ),
+				'title'		=> _x( 'Groups', 'the link in the header navigation bar', 'infinity-engine' ),
 				'position'	=> 20
 			)
 		);
@@ -212,7 +212,7 @@ function infinity_menus_create_default_sub_menu()
 		$menu_mgr->add_bp_page(
 			'blogs',
 			array(
-				'title'		=> _x( 'Blogs', 'the link in the header navigation bar', 'infinity' ),
+				'title'		=> _x( 'Blogs', 'the link in the header navigation bar', 'infinity-engine' ),
 				'position'	=> 30
 			)
 		);
@@ -220,7 +220,7 @@ function infinity_menus_create_default_sub_menu()
 		$menu_mgr->add_bp_page(
 			'activity',
 			array(
-				'title'		=> _x( 'Activity', 'the link in the header navigation bar', 'infinity' ),
+				'title'		=> _x( 'Activity', 'the link in the header navigation bar', 'infinity-engine' ),
 				'position'	=> 50
 			)
 		);
@@ -229,7 +229,7 @@ function infinity_menus_create_default_sub_menu()
 			// yep, add wiki page
 			$menu_mgr->add_item(
 				array(
-					'title'		=> _x( 'Wiki', 'the link in the header navigation bar', 'infinity' ),
+					'title'		=> _x( 'Wiki', 'the link in the header navigation bar', 'infinity-engine' ),
 					'position'	=> 40,
 					'url'		=> home_url( 'wiki' )
 				)

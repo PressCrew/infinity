@@ -26,8 +26,8 @@ class ICE_Ext_Option_Position_Left_Right
 	public function load_field_options()
 	{
 		return array(
-			'l' => __( 'Left', 'infinity' ),
-			'r' => __( 'Right', 'infinity' )
+			'l' => __( 'Left', 'infinity-engine' ),
+			'r' => __( 'Right', 'infinity-engine' )
 		);
 	}
 }

@@ -184,7 +184,7 @@ class ICE_Ext_Option_Ui_Slider
 		// return vars
 		return array(
 			'options' => $logic->export_variables(true),
-			'label' => ( $this->label ) ? $this->label : __( 'Current selection:', 'infinity' )
+			'label' => ( $this->label ) ? $this->label : __( 'Current selection:', 'infinity-engine' )
 		);
 	}
 }

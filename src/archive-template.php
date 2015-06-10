@@ -47,13 +47,13 @@
 						?>
 						<div class="entry">
 							<?php
-								the_content( '<p class="serif">' . __( 'Read the rest of this page &rarr;', 'infinity' ) . '</p>' );
+								the_content( '<p class="serif">' . __( 'Read the rest of this page &rarr;', 'infinity-engine' ) . '</p>' );
 								get_search_form();
 							?>
 							<div id="archives" class="grid_24">
 								<div id="archives-recent" class="grid_16 alpha">
 									<h4>
-										<?php _e('Last 30 Posts', 'infinity'); ?>
+										<?php _e( 'Last 30 Posts', 'infinity-engine'); ?>
 									</h4>
 									<ul>
 										<?php
@@ -72,7 +72,7 @@
 								</div>
 								<div id="archives-month" class="grid_8 omega">
 									<h4>
-										<?php _e('Archives by Month:', 'infinity'); ?>
+										<?php _e( 'Archives by Month:', 'infinity-engine'); ?>
 									</h4>
 									<ul>
 										<?php
@@ -83,7 +83,7 @@
 							</div>
 						<div id="archives-subject" class="grid_24">
 							<h4>
-								<?php _e('Archives by Subject:', 'infinity'); ?>
+								<?php _e( 'Archives by Subject:', 'infinity-engine'); ?>
 							</h4>
 							<ul>
 								<?php

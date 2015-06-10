@@ -25,8 +25,8 @@ class ICE_Ext_Option_Css_Overlay_Image
 	protected function configure()
 	{
 		// set defaults first
-		$this->title = __( 'Background Overlay', 'infinity' );
-		$this->description = __( 'Select a texture to use as the background overlay', 'infinity' );
+		$this->title = __( 'Background Overlay', 'infinity-engine' );
+		$this->description = __( 'Select a texture to use as the background overlay', 'infinity-engine' );
 		$this->item_width = '100px';
 		$this->item_height = '100px';
 

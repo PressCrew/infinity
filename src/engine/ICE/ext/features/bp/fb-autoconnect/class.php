@@ -28,8 +28,8 @@ class ICE_Ext_Feature_Bp_Fb_Autoconnect
 	protected function configure()
 	{
 		// set defaults first
-		$this->title = __( 'FaceBook Auto Connect', 'infinity' );
-		$this->description = __( 'Enables FaceBook Auto Connect support', 'infinity' );
+		$this->title = __( 'FaceBook Auto Connect', 'infinity-engine' );
+		$this->description = __( 'Enables FaceBook Auto Connect support', 'infinity-engine' );
 
 		// run parent
 		parent::configure();

@@ -28,12 +28,12 @@ $renderer->render_begin( 'infinity-cpanel-options-single' );
 	?>
 </div>
 <ul>
-	<li><a href="#<?php $renderer->render_name() ?>-tabs-1"><?php _e('Edit Setting', 'infinity') ?></a></li>
+	<li><a href="#<?php $renderer->render_name() ?>-tabs-1"><?php _e( 'Edit Setting', 'infinity-engine') ?></a></li>
 	<?php if ( $renderer->has_documentation() ): ?>
-	<li><a href="#<?php $renderer->render_name() ?>-tabs-2"><?php _e('Documentation', 'infinity') ?></a></li>
+	<li><a href="#<?php $renderer->render_name() ?>-tabs-2"><?php _e( 'Documentation', 'infinity-engine') ?></a></li>
 	<?php endif; ?>
 	<?php if ( true == INFINITY_DEV_MODE ): ?>
-		<li><a href="#<?php $renderer->render_name() ?>-tabs-3"><?php _e('Sample Code', 'infinity') ?></a></li>
+		<li><a href="#<?php $renderer->render_name() ?>-tabs-3"><?php _e( 'Sample Code', 'infinity-engine') ?></a></li>
 	<?php endif; ?>
 </ul>
 <div id="<?php $renderer->render_name() ?>-tabs-1">

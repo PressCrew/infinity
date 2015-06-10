@@ -88,7 +88,7 @@
 				// no further comments message ?>
 				<p class="no-comments">
 					<?php
-						_e( 'Closed to further comments.', 'infinity' );
+						_e( 'Closed to further comments.', 'infinity-engine' );
 					?>
 				</p>
 				<?php
@@ -118,7 +118,7 @@
 								'There are %1$s pings to &ldquo;%2$s&rdquo;',
 								count( $wp_query->comments_by_type['pings'] ),
 								'pings title',
-								'infinity'
+								'infinity-engine'
 							),
 							number_format_i18n( count( $wp_query->comments_by_type['pings'] ) ),
 							get_the_title()
@@ -145,7 +145,7 @@
 				?>
 				<p class="no-comments">
 					<?php
-						_e( 'Comments are closed.', 'infinity' );
+						_e( 'Comments are closed.', 'infinity-engine' );
 					?>
 				</p>
 				<?php

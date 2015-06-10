@@ -23,7 +23,7 @@
 			<h1 class="page-title">
 				<?php
 					printf(
-						__( 'You are browsing the archive for %1$s.', 'infinity' ),
+						__( 'You are browsing the archive for %1$s.', 'infinity-engine' ),
 						wp_title( false, false )
 					);
 				?>

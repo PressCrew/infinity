@@ -42,7 +42,7 @@ class ICE_Init_Settings
 			// yes, overwriting is not allowed
 			throw new OverflowException(
 				sprintf(
-					__( 'Cannot overwrite the value of setting "%s" for theme "%s".', 'infinity' ),
+					__( 'Cannot overwrite the value of setting "%s" for theme "%s".', 'infinity-engine' ),
 					$name,
 					$theme
 				)

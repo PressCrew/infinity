@@ -27,7 +27,7 @@ if ( have_posts() ):
 			<div class="post-content">
 				<header>
 					<h1 class="post-title">
-						<a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', 'infinity' ); ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a>
+						<a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', 'infinity-engine' ); ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a>
 					</h1>
 				</header>
 				<?php
@@ -68,11 +68,11 @@ if ( have_posts() ):
 								$metadata = wp_get_attachment_metadata();
 								// print link to full size image
 								printf(
-									__( 'Full size is %s pixels', 'infinity' ),
+									__( 'Full size is %s pixels', 'infinity-engine' ),
 									sprintf(
 										'<a href="%1$s" title="%2$s">%3$s &times; %4$s</a>',
 										wp_get_attachment_url(),
-										esc_attr( __( 'Link to full size image', 'infinity' ) ),
+										esc_attr( __( 'Link to full size image', 'infinity-engine' ) ),
 										$metadata['width'],
 										$metadata['height']
 									)
@@ -84,9 +84,9 @@ if ( have_posts() ):
 							<?php
 								// show comments popup
 								comments_popup_link(
-									__( 'No Comments', 'infinity' ),
-									__('1 Comment', 'infinity'),
-									__('% Comments', 'infinity')
+									__( 'No Comments', 'infinity-engine' ),
+									__( '1 Comment', 'infinity-engine'),
+									__( '% Comments', 'infinity-engine')
 								);
 							?>
 						</span>
@@ -99,7 +99,7 @@ if ( have_posts() ):
 
 						// print pages links
 						wp_link_pages( array(
-							'before' => __( '<p><strong>Pages:</strong> ', 'infinity' ),
+							'before' => __( '<p><strong>Pages:</strong> ', 'infinity-engine' ),
 							'after' => '</p>', 'next_or_number' => 'number')
 						);
 
@@ -126,7 +126,7 @@ else:
 	// display no posts message ?>
 	<h1>
 		<?php
-			_e( 'Sorry, no posts matched your criteria.', 'infinity' );
+			_e( 'Sorry, no posts matched your criteria.', 'infinity-engine' );
 		?>
 	</h1>
 	<?php

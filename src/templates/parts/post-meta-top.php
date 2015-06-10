@@ -36,9 +36,9 @@
 	<span class="post-comments">
 		<?php
 			comments_popup_link(
-				__( 'No Comments &#187;', 'infinity' ),
-				__( '1 Comment &#187;', 'infinity' ),
-				__( '% Comments &#187;', 'infinity' )
+				__( 'No Comments &#187;', 'infinity-engine' ),
+				__( '1 Comment &#187;', 'infinity-engine' ),
+				__( '% Comments &#187;', 'infinity-engine' )
 			);
 		?>
 	</span>

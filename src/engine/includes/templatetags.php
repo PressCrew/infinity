@@ -51,7 +51,7 @@ function infinity_posted_on()
 		esc_attr( get_the_date( 'c' ) ),
 		esc_html( get_the_date() ),
 		esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
-		esc_attr( sprintf( __( 'View all posts by %s', 'infinity' ), get_the_author() ) ),
+		esc_attr( sprintf( __( 'View all posts by %s', 'infinity-engine' ), get_the_author() ) ),
 		get_the_author()
 	);
 }
@@ -71,7 +71,7 @@ if ( !function_exists( 'infinity_comment_nav' ) ) {
 					<?php
 
 						// previous link
-						$prev_link = get_previous_comments_link( __( 'Older Comments', 'infinity' ) );
+						$prev_link = get_previous_comments_link( __( 'Older Comments', 'infinity-engine' ) );
 
 						// have prev link?
 						if ( $prev_link ):
@@ -83,7 +83,7 @@ if ( !function_exists( 'infinity_comment_nav' ) ) {
 						endif;
 
 						// next link
-						$next_link = get_next_comments_link( __( 'Newer Comments', 'infinity' ) );
+						$next_link = get_next_comments_link( __( 'Newer Comments', 'infinity-engine' ) );
 
 						// have next link?
 						if ( $next_link ):
