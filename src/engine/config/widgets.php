@@ -13,8 +13,8 @@ ice_register_widget(
 	array(
 		'name' => 'pages-list',
 		'type' => 'posts-list',
-		'title' => 'Edit blog pages',
-		'description' => 'Edit your blog pages and modify the order',
+		'title' => __( 'Edit blog pages', 'infinity-engine' ),
+		'description' => __( 'Edit your blog pages and modify the order', 'infinity-engine' ),
 		'post_type' => 'page'
 	)
 );

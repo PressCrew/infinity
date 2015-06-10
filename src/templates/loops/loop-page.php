@@ -34,11 +34,11 @@ if ( have_posts() ):
 			?>
 			<div class="entry">
 				<?php
-					the_content( '<p class="serif">' . __( 'Read the rest of this page &rarr;', 'infinity' ) . '</p>' );
+					the_content( '<p class="serif">' . __( 'Read the rest of this page &rarr;', 'infinity-engine' ) . '</p>' );
 				?>
 				<div class="clear"></div>
 				<?php
-					wp_link_pages( array( 'before' => '<p><strong>' . __( 'Pages:', 'infinity' ) . '</strong> ', 'after' => '</p>', 'next_or_number' => 'number'));
+					wp_link_pages( array( 'before' => '<p><strong>' . __( 'Pages:', 'infinity-engine' ) . '</strong> ', 'after' => '</p>', 'next_or_number' => 'number'));
 					edit_post_link( null, '<p>', '</p>');
 				?>
 			</div>

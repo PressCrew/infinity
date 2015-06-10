@@ -21,14 +21,14 @@
 		<header>
 			<h1 class="entry-title">
 				<?php
-					_e( 'Darn it.. Nothing found', 'infinity' );
+					_e( 'Darn it.. Nothing found', 'infinity-engine' );
 				?>
 			</h1>
 		</header>
 		<div class="entry-content">
 			<p>
 				<?php
-					_e( 'Sorry, but nothing matched your search criteria. Please try again with some different keywords.', 'infinity' );
+					_e( 'Sorry, but nothing matched your search criteria. Please try again with some different keywords.', 'infinity-engine' );
 				?>
 			</p>
 			<?php
@@ -41,7 +41,7 @@
 			</div>
 			<div id="search-categories-widget" class="eight columns">
 				<h2 class="widgettitle">
-					<?php _e( 'Most Used Categories', 'infinity' ); ?>
+					<?php _e( 'Most Used Categories', 'infinity-engine' ); ?>
 				</h2>
 				<ul>
 					<?php
@@ -63,7 +63,7 @@
 				$archive_content .=
 					sprintf(
 						/* translators: %1$s: smilie */
-						__( 'Try looking in the monthly archives. %1$s', 'infinity' ),
+						__( 'Try looking in the monthly archives. %1$s', 'infinity-engine' ),
 						convert_smilies( ':)' )
 					);
 				// close archive content

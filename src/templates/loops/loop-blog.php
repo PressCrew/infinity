@@ -40,7 +40,7 @@ while ( $wp_query->have_posts() ):
 		<div class="post-content">
 			<!-- post title -->
 			<h2 class="post-title">
-				<a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', 'infinity' ); ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a>
+				<a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', 'infinity-engine' ); ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a>
 				<?php edit_post_link(); ?>
 			</h2>
 			<?php
@@ -58,7 +58,7 @@ while ( $wp_query->have_posts() ):
 				</div>
 				<?php
 					do_action( 'before_loop_content' );
-					the_excerpt( __( 'Read More', 'infinity' ) );
+					the_excerpt( __( 'Read More', 'infinity-engine' ) );
 					do_action( 'after_loop_content' );
 				?>
 			</div>

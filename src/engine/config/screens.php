@@ -23,7 +23,7 @@ ice_register_screen(
 	array(
 		'name' => 'start',
 		'type' => 'cpanel',
-		'title' => 'Start',
+		'title' => __( 'Start', 'infinity-engine' ),
 		'priority' => 10,
 		'template' => 'templates/dashboard/screens/start.php'
 	)
@@ -33,7 +33,7 @@ ice_register_screen(
 	array(
 		'name' => 'options',
 		'type' => 'cpanel',
-		'title' => 'Options',
+		'title' => __( 'Options', 'infinity-engine' ),
 		'priority' => 20,
 		'template' => 'templates/dashboard/screens/options.php'
 	)

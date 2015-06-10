@@ -162,7 +162,7 @@ class ICE_Ext_Widget_Posts_List
 					ICE_Ajax::response(
 						false,
 						sprintf(
-							__('%d items updated, %d items failed', 'infinity'),
+							__( '%d items updated, %d items failed', 'infinity-engine'),
 							$posts_updated,
 							$posts_error
 						)
@@ -171,16 +171,16 @@ class ICE_Ext_Widget_Posts_List
 					ICE_Ajax::response(
 						true,
 						sprintf(
-							__('%d items updated', 'infinity'),
+							__( '%d items updated', 'infinity-engine'),
 							$posts_updated
 						)
 					);
 				}
 			} else {
-				ICE_Ajax::response( false, __('No items received', 'infinity') );
+				ICE_Ajax::response( false, __( 'No items received', 'infinity-engine') );
 			}
 		} else {
-			ICE_Ajax::response( false, __('Missing required data', 'infinity') );
+			ICE_Ajax::response( false, __( 'Missing required data', 'infinity-engine') );
 		}
 	}
 
@@ -208,15 +208,15 @@ class ICE_Ext_Widget_Posts_List
 						));
 					// result must match post ID
 					if ( $result === $post_id ) {
-						ICE_Ajax::response( true, __('Item status updated', 'infinity') );
+						ICE_Ajax::response( true, __( 'Item status updated', 'infinity-engine') );
 					} else {
-						ICE_Ajax::response( false, __('Item status update failed', 'infinity') );
+						ICE_Ajax::response( false, __( 'Item status update failed', 'infinity-engine') );
 					}
 				default:
-					ICE_Ajax::response( false, __('Invalid item status', 'infinity') );
+					ICE_Ajax::response( false, __( 'Invalid item status', 'infinity-engine') );
 			}
 		} else {
-			ICE_Ajax::response( false, __('Missing required data', 'infinity') );
+			ICE_Ajax::response( false, __( 'Missing required data', 'infinity-engine') );
 		}
 	}
 
@@ -233,13 +233,13 @@ class ICE_Ext_Widget_Posts_List
 
 			// attempt to trash the post
 			if ( wp_trash_post( $post_id ) !== false ) {
-				ICE_Ajax::response( true, __('Item moved to trash', 'infinity') );
+				ICE_Ajax::response( true, __( 'Item moved to trash', 'infinity-engine') );
 			} else {
-				ICE_Ajax::response( false, __('Move item to trash failed', 'infinity') );
+				ICE_Ajax::response( false, __( 'Move item to trash failed', 'infinity-engine') );
 			}
 
 		} else {
-			ICE_Ajax::response( false, __('Missing item id', 'infinity') );
+			ICE_Ajax::response( false, __( 'Missing item id', 'infinity-engine') );
 		}
 	}
 }
@@ -470,21 +470,21 @@ class ICE_Posts_List extends WP_Posts_List_Table
 				case 'publish':
 					// render buttons ?>
 					<input type="radio" id="post-draft-<?php print $post_id ?>" name="ice-posts-list-item-status-<?php print $post_id ?>" <?php if ($post_status == 'draft'): ?> checked="checked"<?php endif; ?>/>
-					<label for="post-draft-<?php print $post_id ?>"><?php _e( 'Draft', 'infinity' ) ?></label>
+					<label for="post-draft-<?php print $post_id ?>"><?php _e( 'Draft', 'infinity-engine' ) ?></label>
 					<input type="radio" id="post-publish-<?php print $post_id ?>" name="ice-posts-list-item-status-<?php print $post_id ?>" <?php if ($post_status == 'publish'): ?> checked="checked"<?php endif; ?>/>
-					<label for="post-publish-<?php print $post_id ?>"><?php _e( 'Published', 'infinity' ) ?></label><?php
+					<label for="post-publish-<?php print $post_id ?>"><?php _e( 'Published', 'infinity-engine' ) ?></label><?php
 					break;
 				case 'pending':
 					// render text ?>
-					<span><?php _e( 'Pending', 'infinity' ) ?></span><?php
+					<span><?php _e( 'Pending', 'infinity-engine' ) ?></span><?php
 					break;
 				case 'future':
 					// render text ?>
-					<span><?php _e( 'Scheduled', 'infinity' ) ?></span><?php
+					<span><?php _e( 'Scheduled', 'infinity-engine' ) ?></span><?php
 					break;
 				case 'trash':
 					// render text ?>
-					<span><?php _e( 'Trashed', 'infinity' ) ?></span><?php
+					<span><?php _e( 'Trashed', 'infinity-engine' ) ?></span><?php
 					break;
 			}
 		
@@ -499,7 +499,7 @@ class ICE_Posts_List extends WP_Posts_List_Table
 	private function post_trash()
 	{
 		// render button ?>
-		<a class="ice-do-trash" href="#<?php print $this->post->ID ?>"><?php _e( 'Trash', 'infinity' ) ?></a><?php
+		<a class="ice-do-trash" href="#<?php print $this->post->ID ?>"><?php _e( 'Trash', 'infinity-engine' ) ?></a><?php
 	}
 
 	/**

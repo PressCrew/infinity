@@ -96,7 +96,7 @@ add_action( 'after_setup_theme', 'infinity_base_assets' );
 // load infinity text domain
 function infinity_base_textdomain()
 {
-	load_theme_textdomain( 'infinity', INFINITY_LANGUAGES_PATH );
+	load_theme_textdomain( 'infinity-engine', INFINITY_LANGUAGES_PATH );
 }
 add_action( 'after_setup_theme', 'infinity_base_textdomain' );
 
@@ -206,7 +206,7 @@ function infinity_base_title_filter( $title, $sep, $seplocation )
 			// yes, append it (including separator)
 			$title .=
 				sprintf( ' %s ', $sep ) .
-				sprintf( __( 'Page %s', 'infinity' ), max( $paged, $page ) );
+				sprintf( __( 'Page %s', 'infinity-engine' ), max( $paged, $page ) );
 		}
 	}
 
@@ -272,16 +272,16 @@ add_action( 'comment_form_before', 'infinity_enqueue_comments_reply' );
 function infinity_base_register_menus()
 {
 	if ( current_theme_supports( 'infinity:top-menu', 'setup' ) ) {
-		register_nav_menu( 'over-menu', __( 'Above Header', 'infinity' ) );
+		register_nav_menu( 'over-menu', __( 'Above Header', 'infinity-engine' ) );
 	}
 	if ( current_theme_supports( 'infinity:main-menu', 'setup' ) ) {
-		register_nav_menu( 'main-menu', __( 'Inside Header', 'infinity' ) );
+		register_nav_menu( 'main-menu', __( 'Inside Header', 'infinity-engine' ) );
 	}
 	if ( current_theme_supports( 'infinity:sub-menu', 'setup' ) ) {
-		register_nav_menu( 'sub-menu', __( 'Below Header', 'infinity' ) );
+		register_nav_menu( 'sub-menu', __( 'Below Header', 'infinity-engine' ) );
 	}
 	if ( current_theme_supports( 'infinity:footer-menu', 'setup' ) ) {
-		register_nav_menu( 'footer-menu', __( 'Inside Footer', 'infinity' ) );
+		register_nav_menu( 'footer-menu', __( 'Inside Footer', 'infinity-engine' ) );
 	}
 }
 add_action( 'init', 'infinity_base_register_menus' );

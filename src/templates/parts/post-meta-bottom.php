@@ -25,7 +25,7 @@
 			<span class="post-tags">
 				<?php
 					// print the tag links
-					the_tags( __( 'Tags: ', 'infinity' ), ' ', '' );
+					the_tags( __( 'Tags: ', 'infinity-engine' ), ' ', '' );
 				?>
 			</span>
 			<?php

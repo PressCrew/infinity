@@ -166,8 +166,8 @@ class ICE_Ext_Feature_Scripts_Joyride
 		parent::init();
 
 		// set property defaults
-		$this->title = __( 'Joyride Plugin', 'infinity' );
-		$this->description = __( 'A wrapper for the jQuery Joyride plugin', 'infinity' );
+		$this->title = __( 'Joyride Plugin', 'infinity-engine' );
+		$this->description = __( 'A wrapper for the jQuery Joyride plugin', 'infinity-engine' );
 		$this->id = 'joyRideTipContent';
 		$this->cookie_monster = true;
 		$this->tip_content = '#' . $this->id;

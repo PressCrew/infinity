@@ -26,8 +26,8 @@ class ICE_Ext_Feature_Header_Logo
 	protected function configure()
 	{
 		// set defaults first
-		$this->title = __( 'Header Logo', 'infinity' );
-		$this->description = __( 'Custom header logo support', 'infinity' );
+		$this->title = __( 'Header Logo', 'infinity-engine' );
+		$this->description = __( 'Custom header logo support', 'infinity-engine' );
 
 		// run parent
 		parent::configure();

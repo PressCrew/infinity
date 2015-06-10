@@ -28,8 +28,8 @@ ice_register_group( 'core' );
 			'name' => 'options',
 			'group' => 'core',
 			'type' => 'default',
-			'title' => 'Custom CSS',
-			'description' => 'Core set of options included with Infinity Base'
+			'title' => __( 'Custom CSS', 'infinity-engine' ),
+			'description' => __( 'Core set of options included with Infinity Base', 'infinity-engine' )
 		)
 	);
 
@@ -43,8 +43,8 @@ ice_register_group( 'core' );
 			array(
 				'name' => 'text-color',
 				'type' => 'colorpicker',
-				'title' => 'Text Color',
-				'description' => 'Choose a text color',
+				'title' => __( 'Text Color', 'infinity-engine' ),
+				'description' => __( 'Choose a text color', 'infinity-engine' ),
 				'style_selector' => 'body.theme-option',
 				'style_property' => 'color'
 			),
@@ -55,8 +55,8 @@ ice_register_group( 'core' );
 			array(
 				'name' => 'link-color',
 				'type' => 'colorpicker',
-				'title' => 'Link Color',
-				'description' => 'Choose a link color',
+				'title' => __( 'Link Color', 'infinity-engine' ),
+				'description' => __( 'Choose a link color', 'infinity-engine' ),
 				'style_selector' => 'body.theme-option a, body.theme-option a:visited',
 				'style_property' => 'color'
 			),
@@ -67,8 +67,8 @@ ice_register_group( 'core' );
 			array(
 				'name' => 'custom-favicon',
 				'type' => 'upload',
-				'title' => 'Site Favicon',
-				'description' => 'Upload a favicon for your site',
+				'title' => __( 'Site Favicon', 'infinity-engine' ),
+				'description' => __( 'Upload a favicon for your site', 'infinity-engine' ),
 				'default_value' => 'assets/images/favicon.png'
 			),
 			$infinity_core_options_defaults
@@ -78,8 +78,8 @@ ice_register_group( 'core' );
 			array(
 				'name' => 'sidebar-position',
 				'section' => 'sidebar',
-				'title' => 'Sidebar Position',
-				'description' => 'Choose on which side you want to display the sidebar',
+				'title' => __( 'Sidebar Position', 'infinity-engine' ),
+				'description' => __( 'Choose on which side you want to display the sidebar', 'infinity-engine' ),
 				'type' => 'radio',
 				'default_value' => 'left',
 				'field_options' => array(
@@ -94,8 +94,8 @@ ice_register_group( 'core' );
 			array(
 				'name' => 'sidebar-size',
 				'section' => 'sidebar',
-				'title' => 'Sidebar Size',
-				'description' => 'Select a sidebar size',
+				'title' => __( 'Sidebar Size', 'infinity-engine' ),
+				'description' => __( 'Select a sidebar size', 'infinity-engine' ),
 				'type' => 'select',
 				'default_value' => 'twelve',
 				'field_options' => array(
@@ -116,8 +116,8 @@ ice_register_group( 'core' );
 			array(
 				'name' => 'google-analytics',
 				'type' => 'textarea',
-				'title' => 'Google Analytics Code',
-				'description' => 'Paste your GA Tracking code in the text area below. Including the script tags!'
+				'title' => __( 'Google Analytics Code', 'infinity-engine' ),
+				'description' => __( 'Paste your GA Tracking code in the text area below. Including the script tags!', 'infinity-engine' )
 			),
 			$infinity_core_options_defaults
 		);
@@ -127,9 +127,9 @@ ice_register_group( 'core' );
 				'name' => 'footer-text',
 				'section' => 'footer',
 				'type' => 'textarea',
-				'title' => 'Footer Text',
-				'description' => 'The footer text that appears at the bottom of every page, below the widgetized footer areas. This is commonly used for copyright, designed by, and powered by text. HTML tags are allowed.',
-				'default_value' => 'Infinity by <a href=http://infinity.presscrew.com>PressCrew</a> and powered by <a href=http://wordpress.org>WordPress</a>.'
+				'title' => __( 'Footer Text', 'infinity-engine' ),
+				'description' => __( 'The footer text that appears at the bottom of every page, below the widgetized footer areas. This is commonly used for copyright, designed by, and powered by text. HTML tags are allowed.', 'infinity-engine' ),
+				'default_value' => __( 'Infinity by <a href=http://infinity.presscrew.com>PressCrew</a> and powered by <a href=http://wordpress.org>WordPress</a>.', 'infinity-engine' )
 			),
 			$infinity_core_options_defaults
 		);
@@ -145,8 +145,8 @@ ice_register_group( 'top-menu' );
 			'name' => 'setup',
 			'group' => 'top-menu',
 			'type' => 'default',
-			'title' => 'Above Header Menu Setup',
-			'description' => 'Register the menu above the header.'
+			'title' => __( 'Above Header Menu Setup', 'infinity-engine' ),
+			'description' => __( 'Register the menu above the header.', 'infinity-engine' )
 		)
 	);
 
@@ -156,8 +156,8 @@ ice_register_group( 'top-menu' );
 			'name' => 'layout',
 			'group' => 'top-menu',
 			'type' => 'default',
-			'title' => 'Sub Menu Styles',
-			'description' => 'Customize the layout and colors of the menu above the header.'
+			'title' => __( 'Sub Menu Styles', 'infinity-engine' ),
+			'description' => __( 'Customize the layout and colors of the menu above the header.', 'infinity-engine' )
 		)
 	);
 
@@ -171,8 +171,8 @@ ice_register_group( 'top-menu' );
 			array(
 				'name' => 'color-link',		
 				'type' => 'colorpicker',
-				'title' => 'Font Color',
-				'description' => 'Choose a font color for links of the menu above the header.',
+				'title' => __( 'Font Color', 'infinity-engine' ),
+				'description' => __( 'Choose a font color for links of the menu above the header.', 'infinity-engine' ),
 				'style_selector' => 'body.theme-option .top-menu ul li a span',
 				'style_property' => 'color'
 			),
@@ -183,8 +183,8 @@ ice_register_group( 'top-menu' );
 			array(
 				'name' => 'font-weight',
 				'type' => 'select',
-				'title' => 'Font Weight',
-				'description' => 'Choose a font weight for links of the menu above the header.',
+				'title' => __( 'Font Weight', 'infinity-engine' ),
+				'description' => __( 'Choose a font weight for links of the menu above the header.', 'infinity-engine' ),
 				'style_selector' => 'body.theme-option .top-menu ul li a span',
 				'style_property' => 'font-weight'
 			),
@@ -204,8 +204,8 @@ ice_register_group( 'top-menu' );
 			array(
 				'name' => 'background-color-subitem',
 				'type' => 'css/bg-color',
-				'title' => 'Sub-item Background',
-				'description' => 'Choose a background color for the submenu items of the menu above the header.',
+				'title' => __( 'Sub-item Background', 'infinity-engine' ),
+				'description' => __( 'Choose a background color for the submenu items of the menu above the header.', 'infinity-engine' ),
 				'style_selector' => 'body.theme-option .top-menu ul ul'
 			),
 			$infinity_top_menu_defaults
@@ -243,8 +243,8 @@ ice_register_group( 'main-menu' );
 			'name' => 'setup',
 			'group' => 'main-menu',
 			'type' => 'default',
-			'title' => 'Inside Header Menu Setup',
-			'description' => 'Register the menu inside the header.'
+			'title' => __( 'Inside Header Menu Setup', 'infinity-engine' ),
+			'description' => __( 'Register the menu inside the header.', 'infinity-engine' )
 		)
 	);
 
@@ -254,8 +254,8 @@ ice_register_group( 'main-menu' );
 			'name' => 'layout',
 			'group' => 'main-menu',
 			'type' => 'default',
-			'title' => 'Main Menu Styles',
-			'description' => 'Customize the layout and colors of the menu inside the header.'
+			'title' => __( 'Main Menu Styles', 'infinity-engine' ),
+			'description' => __( 'Customize the layout and colors of the menu inside the header.', 'infinity-engine' )
 		)
 	);
 	
@@ -269,8 +269,8 @@ ice_register_group( 'main-menu' );
 			array(
 				'name' => 'color-link',
 				'type' => 'colorpicker',
-				'title' => 'Font Color',
-				'description' => 'Choose a font color for links of the menu inside the header.',
+				'title' => __( 'Font Color', 'infinity-engine' ),
+				'description' => __( 'Choose a font color for links of the menu inside the header.', 'infinity-engine' ),
 				'style_selector' => 'body.theme-option .main-menu ul li a span',
 				'style_property' => 'color'
 			),
@@ -281,8 +281,8 @@ ice_register_group( 'main-menu' );
 			array(
 				'name' => 'font-weight',
 				'type' => 'select',
-				'title' => 'Font Weight',
-				'description' => 'Choose a font weight for links of the menu inside the header.',
+				'title' => __( 'Font Weight', 'infinity-engine' ),
+				'description' => __( 'Choose a font weight for links of the menu inside the header.', 'infinity-engine' ),
 				'style_selector' => 'body.theme-option .main-menu ul li a span',
 				'style_property' => 'font-weight'
 			),
@@ -293,8 +293,8 @@ ice_register_group( 'main-menu' );
 			array(
 				'name' => 'padding',
 				'type' => 'css/length-px',
-				'title' => 'Padding',
-				'description' => 'Select the padding (spacing) around the menu links by moving the slider.',
+				'title' => __( 'Padding', 'infinity-engine' ),
+				'description' => __( 'Select the padding (spacing) around the menu links by moving the slider.', 'infinity-engine' ),
 				'max' => 30,
 				'style_selector' => 'body.theme-option .main-menu',
 				'style_property' => 'padding'
@@ -341,8 +341,8 @@ ice_register_group( 'sub-menu' );
 			'name' => 'setup',
 			'group' => 'sub-menu',
 			'type' => 'default',
-			'title' => 'Below Header Menu Setup',
-			'description' => 'Register the menu below the header.'
+			'title' => __( 'Below Header Menu Setup', 'infinity-engine' ),
+			'description' => __( 'Register the menu below the header.', 'infinity-engine' )
 		)
 	);
 
@@ -352,8 +352,8 @@ ice_register_group( 'sub-menu' );
 			'name' => 'layout',
 			'group' => 'sub-menu',
 			'type' => 'default',
-			'title' => 'Sub Menu Styles',
-			'description' => 'Customize the layout and colors of the menu below the header.'
+			'title' => __( 'Sub Menu Styles', 'infinity-engine' ),
+			'description' => __( 'Customize the layout and colors of the menu below the header.', 'infinity-engine' )
 		)
 	);
 	
@@ -367,8 +367,8 @@ ice_register_group( 'sub-menu' );
 			array(
 				'name' => 'color-link',
 				'type' => 'colorpicker',
-				'title' => 'Font Color',
-				'description' => 'Choose a font color for links of the menu below the header.',
+				'title' => __( 'Font Color', 'infinity-engine' ),
+				'description' => __( 'Choose a font color for links of the menu below the header.', 'infinity-engine' ),
 				'style_selector' => 'body.theme-option .sub-menu ul li a span',
 				'style_property' => 'color'
 			),
@@ -379,8 +379,8 @@ ice_register_group( 'sub-menu' );
 			array(
 				'name' => 'font-weight',
 				'type' => 'select',
-				'title' => 'Font Weight',
-				'description' => 'Choose a font weight for links of the menu below the header.',
+				'title' => __( 'Font Weight', 'infinity-engine' ),
+				'description' => __( 'Choose a font weight for links of the menu below the header.', 'infinity-engine' ),
 				'style_selector' => 'body.theme-option .sub-menu ul li a span',
 				'style_property' => 'font-weight'
 			),
@@ -400,8 +400,8 @@ ice_register_group( 'sub-menu' );
 			array(
 				'name' => 'background-color-subitem',
 				'type' => 'css/bg-color',
-				'title' => 'Sub-item Background',
-				'description' => 'Choose a background color for the submenu items of the menu below the header.',
+				'title' => __( 'Sub-item Background', 'infinity-engine' ),
+				'description' => __( 'Choose a background color for the submenu items of the menu below the header.', 'infinity-engine' ),
 				'style_selector' => 'body.theme-option .sub-menu ul ul'
 			),
 			$infinity_sub_menu_defaults
@@ -437,8 +437,8 @@ ice_register_group( 'footer-menu' );
 			'name' => 'setup',
 			'group' => 'footer-menu',
 			'type' => 'default',
-			'title' => 'Footer Menu Setup',
-			'description' => 'Register the footer menu.'
+			'title' => __( 'Footer Menu Setup', 'infinity-engine' ),
+			'description' => __( 'Register the footer menu.', 'infinity-engine' )
 		)
 	);
 
@@ -454,8 +454,8 @@ ice_register_group( 'sidebar' );
 			'name' => 'setup',
 			'group' => 'sidebar',
 			'type' => 'default',
-			'title' => 'Sidebar Setup',
-			'description' => 'Sidebar Registration'
+			'title' => __( 'Sidebar Setup', 'infinity-engine' ),
+			'description' => __( 'Sidebar Registration', 'infinity-engine' )
 		)
 	);
 
@@ -465,8 +465,8 @@ ice_register_group( 'sidebar' );
 			'name' => 'layout',
 			'group' => 'sidebar',
 			'type' => 'default',
-			'title' => 'sidebar Styles',
-			'description' => 'Customize the layout and colors of the sidebar'
+			'title' => __( 'sidebar Styles', 'infinity-engine' ),
+			'description' => __( 'Customize the layout and colors of the sidebar', 'infinity-engine' )
 		)
 	);
 
@@ -481,8 +481,8 @@ ice_register_group( 'sidebar' );
 			array(
 				'name' => 'text-color',
 				'type' => 'colorpicker',
-				'title' => 'Text Color',
-				'description' => 'Choose a color for text in the sidebar.',
+				'title' => __( 'Text Color', 'infinity-engine' ),
+				'description' => __( 'Choose a color for text in the sidebar.', 'infinity-engine' ),
 				'style_property' => 'color'
 			),
 			$infinity_sidebar_layout_defaults
@@ -492,8 +492,8 @@ ice_register_group( 'sidebar' );
 			array(
 				'name' => 'link-color',
 				'type' => 'colorpicker',
-				'title' => 'Link Color',
-				'description' => 'Choose a color for links in the sidebar.',
+				'title' => __( 'Link Color', 'infinity-engine' ),
+				'description' => __( 'Choose a color for links in the sidebar.', 'infinity-engine' ),
 				'style_selector' => 'body.theme-option #sidebar a',
 				'style_property' => 'color'
 			),
@@ -554,8 +554,8 @@ ice_register_group( 'post' );
 			'name' => 'pagination',
 			'group' => 'post',
 			'type' => 'default',
-			'title' => 'Pagination',
-			'description' => 'Enable pagination for your (custom) posts'
+			'title' => __( 'Pagination', 'infinity-engine' ),
+			'description' => __( 'Enable pagination for your (custom) posts', 'infinity-engine' )
 		)
 	);
 
@@ -565,8 +565,8 @@ ice_register_group( 'post' );
 			'name' => 'intro-boxes',
 			'group' => 'post',
 			'type' => 'default',
-			'title' => 'Introduction Boxes',
-			'description' => 'Introduction boxes that show above category, tag and author archives'
+			'title' => __( 'Introduction Boxes', 'infinity-engine' ),
+			'description' => __( 'Introduction boxes that show above category, tag and author archives', 'infinity-engine' )
 		)
 	);
 
@@ -576,8 +576,8 @@ ice_register_group( 'post' );
 			'name' => 'author-boxes',
 			'group' => 'post',
 			'type' => 'default',
-			'title' => 'Author Boxes',
-			'description' => 'Enable About the Author Boxes being displayed on single posts and author archives'
+			'title' => __( 'Author Boxes', 'infinity-engine' ),
+			'description' => __( 'Enable About the Author Boxes being displayed on single posts and author archives', 'infinity-engine' )
 		)
 	);
 
@@ -587,8 +587,8 @@ ice_register_group( 'post' );
 			'name' => 'avatars',
 			'group' => 'post',
 			'type' => 'default',
-			'title' => 'Post Avatars',
-			'description' => 'Enable Post avatars being displayed on single posts and pages'
+			'title' => __( 'Post Avatars', 'infinity-engine' ),
+			'description' => __( 'Enable Post avatars being displayed on single posts and pages', 'infinity-engine' )
 		)
 	);
 
@@ -603,8 +603,8 @@ ice_register_group( 'post-gravatar' );
 			'name' => 'post-gravatar',
 			'group' => 'post-gravatar',
 			'type' => 'gravatar',
-			'title' => 'Post Gravatars',
-			'description' => 'Total control over post gravatars',
+			'title' => __( 'Post Gravatars', 'infinity-engine' ),
+			'description' => __( 'Total control over post gravatars', 'infinity-engine' ),
 			'image_class' => 'infinity-post-gravatar'
 		)
 	);
@@ -619,8 +619,8 @@ ice_register_group( 'post-gravatar' );
 			array(
 				'name' => 'size',
 				'type' => 'text',
-				'title' => 'Size',
-				'description' => 'Enter the size in pixels for the Gravatar image'
+				'title' => __( 'Size', 'infinity-engine' ),
+				'description' => __( 'Enter the size in pixels for the Gravatar image', 'infinity-engine' )
 			),
 			$infinity_post_grav_defaults
 		);
@@ -629,8 +629,8 @@ ice_register_group( 'post-gravatar' );
 			array(
 				'name' => 'default-set',
 				'type' => 'select',
-				'title' => 'Default Image Set',
-				'description' => 'Select the default image set to use',
+				'title' => __( 'Default Image Set', 'infinity-engine' ),
+				'description' => __( 'Select the default image set to use', 'infinity-engine' ),
 				'default_value' => 'mm',
 				'field_options' => array(
 					'404' => 'Return 404 Error',
@@ -648,8 +648,8 @@ ice_register_group( 'post-gravatar' );
 			array(
 				'name' => 'default-img',
 				'type' => 'upload',
-				'title' => 'Default Image File',
-				'description' => 'Upload a default Gravatar image (overrides default set)'
+				'title' => __( 'Default Image File', 'infinity-engine' ),
+				'description' => __( 'Upload a default Gravatar image (overrides default set)', 'infinity-engine' )
 			),
 			$infinity_post_grav_defaults
 		);
@@ -658,8 +658,8 @@ ice_register_group( 'post-gravatar' );
 			array(
 				'name' => 'default-force',
 				'type' => 'toggle/yes-no',
-				'title' => 'Force Default',
-				'description' => 'Force default image to always load?',
+				'title' => __( 'Force Default', 'infinity-engine' ),
+				'description' => __( 'Force default image to always load?', 'infinity-engine' ),
 				'default_value' => false
 			),
 			$infinity_post_grav_defaults
@@ -669,8 +669,8 @@ ice_register_group( 'post-gravatar' );
 			array(
 				'name' => 'rating',
 				'type' => 'select',
-				'title' => 'Rating',
-				'description' => 'Select highest image rating to display',
+				'title' => __( 'Rating', 'infinity-engine' ),
+				'description' => __( 'Select highest image rating to display', 'infinity-engine' ),
 				'default_value' => 'g',
 				'field_options' => array(
 					'g' => 'G (suitable for display on all websites with any audience type)',
@@ -686,8 +686,8 @@ ice_register_group( 'post-gravatar' );
 			array(
 				'name' => 'border-width',
 				'type' => 'text',
-				'title' => 'Border Width',
-				'description' => 'Enter a border width in pixels for the Gravatar image'
+				'title' => __( 'Border Width', 'infinity-engine' ),
+				'description' => __( 'Enter a border width in pixels for the Gravatar image', 'infinity-engine' )
 			),
 			$infinity_post_grav_defaults
 		);
@@ -696,8 +696,8 @@ ice_register_group( 'post-gravatar' );
 			array(
 				'name' => 'border-color',
 				'type' => 'colorpicker',
-				'title' => 'Border Color',
-				'description' => 'Select a color for the Gravatar image border'
+				'title' => __( 'Border Color', 'infinity-engine' ),
+				'description' => __( 'Select a color for the Gravatar image border', 'infinity-engine' )
 			),
 			$infinity_post_grav_defaults
 		);
@@ -706,8 +706,8 @@ ice_register_group( 'post-gravatar' );
 			array(
 				'name' => 'padding',
 				'type' => 'text',
-				'title' => 'Padding',
-				'description' => 'Enter a padding size in pixels for the Gravatar image'
+				'title' => __( 'Padding', 'infinity-engine' ),
+				'description' => __( 'Enter a padding size in pixels for the Gravatar image', 'infinity-engine' )
 			),
 			$infinity_post_grav_defaults
 		);
@@ -716,8 +716,8 @@ ice_register_group( 'post-gravatar' );
 			array(
 				'name' => 'bg-color',
 				'type' => 'colorpicker',
-				'title' => 'Background Color',
-				'description' => 'Select a background color for the Gravatar image'
+				'title' => __( 'Background Color', 'infinity-engine' ),
+				'description' => __( 'Select a background color for the Gravatar image', 'infinity-engine' )
 			),
 			$infinity_post_grav_defaults
 		);
@@ -733,8 +733,8 @@ ice_register_group( 'font' );
 			'name' => 'iconsweets',
 			'group' => 'font',
 			'type' => 'default',
-			'title' => 'The Icon Font-Face being used',
-			'description' => 'Icons',
+			'title' => __( 'The Icon Font-Face being used', 'infinity-engine' ),
+			'description' => __( 'Icons', 'infinity-engine' ),
 			'style' => 'assets/fonts/iconsweets.css'
 		)
 	);
@@ -750,8 +750,8 @@ ice_register_group( 'wp' );
 			'name' => 'support',
 			'group' => 'wp',
 			'type' => 'default',
-			'title' => 'Wordpress Support',
-			'description' => 'Enables WordPress support',
+			'title' => __( 'Wordpress Support', 'infinity-engine' ),
+			'description' => __( 'Enables WordPress support', 'infinity-engine' ),
 			'style' => 'assets/css/wordpress.css'
 		)
 	);
@@ -762,8 +762,8 @@ ice_register_group( 'wp' );
 			'name' => 'style',
 			'group' => 'wp',
 			'type' => 'default',
-			'title' => 'WordPress Styles',
-			'description' => 'The base WordPress styling',
+			'title' => __( 'WordPress Styles', 'infinity-engine' ),
+			'description' => __( 'The base WordPress styling', 'infinity-engine' ),
 			'body_class' => 'infinity-wp'
 		)
 	);
@@ -779,8 +779,8 @@ ice_register_group( 'bp' );
 			'name' => 'support',
 			'group' => 'bp',
 			'type' => 'bp/support',
-			'title' => 'BuddyPress Support',
-			'description' => 'Enables BuddyPress support'
+			'title' => __( 'BuddyPress Support', 'infinity-engine' ),
+			'description' => __( 'Enables BuddyPress support', 'infinity-engine' )
 		)
 	);
 
@@ -790,8 +790,8 @@ ice_register_group( 'bp' );
 			'name' => 'style',
 			'group' => 'bp',
 			'type' => 'default',
-			'title' => 'BuddyPress Styles',
-			'description' => 'The base BuddyPress styles',
+			'title' => __( 'BuddyPress Styles', 'infinity-engine' ),
+			'description' => __( 'The base BuddyPress styles', 'infinity-engine' ),
 			'body_class' => 'infinity-bp',
 			'style' => 'assets/css/plugins/buddypress.css'
 		)
@@ -804,8 +804,8 @@ ice_register_group( 'bp' );
 			'group' => 'bp',
 			'section' => 'buddypress',
 			'type' => 'default',
-			'title' => 'BuddyPress Sidebar',
-			'description' => 'Special BuddyPress sidebar registration',
+			'title' => __( 'BuddyPress Sidebar', 'infinity-engine' ),
+			'description' => __( 'Special BuddyPress sidebar registration', 'infinity-engine' ),
 			'required_feature' => 'support'
 		)
 	);
@@ -821,8 +821,8 @@ ice_register_group( 'plugins' );
 			'name' => 'other',
 			'group' => 'plugins',
 			'type' => 'default',
-			'title' => 'Other Plugins Styles',
-			'description' => 'Other plugins support styles',
+			'title' => __( 'Other Plugins Styles', 'infinity-engine' ),
+			'description' => __( 'Other plugins support styles', 'infinity-engine' ),
 			'style' => 'assets/css/plugins/other.css'
 		)
 	);
@@ -848,8 +848,8 @@ ice_register_group( 'bp-fbconnect' );
 				'section' => 'buddypress',
 				'type' => 'toggle/yes-no',
 				'required_feature' => 'support',
-				'title' => 'FaceBook Connect',
-				'description' => 'Show connect with Facebook button?',
+				'title' => __( 'FaceBook Connect', 'infinity-engine' ),
+				'description' => __( 'Show connect with Facebook button?', 'infinity-engine' ),
 				'default_value' => true
 			)
 		);
@@ -874,8 +874,8 @@ ice_register_group( 'bp-protect' );
 				'section' => 'buddypress',
 				'type' => 'toggle/on-off',
 				'required_feature' => 'support',
-				'title' => 'Private Community',
-				'description' => 'Turn this option on to restrict access to your BuddyPress components to members only.',
+				'title' => __( 'Private Community', 'infinity-engine' ),
+				'description' => __( 'Turn this option on to restrict access to your BuddyPress components to members only.', 'infinity-engine' ),
 				'default_value' => false
 			)
 		);
@@ -904,9 +904,9 @@ ice_register_group( 'bp-tour' );
 		ice_register_option(
 			array(
 				'name' => 'start',
-				'title' => 'Activity Stream Tour',
-				'description' => 'The first text that is being displayed before the tour starts.',
-				'default_value' => "<h4>Hi there!</h4> It seems that this is the first time you've visited our Activity Stream, so let's give you a quick tour of our Features! Ready? Let's do this!"
+				'title' => __( 'Activity Stream Tour', 'infinity-engine' ),
+				'description' => __( 'The first text that is being displayed before the tour starts.', 'infinity-engine' ),
+				'default_value' => __( "<h4>Hi there!</h4> It seems that this is the first time you've visited our Activity Stream, so let's give you a quick tour of our Features! Ready? Let's do this!", 'infinity-engine' )
 			),
 			$infinity_bp_tour_defaults
 		);
@@ -914,9 +914,9 @@ ice_register_group( 'bp-tour' );
 		ice_register_option(
 			array(
 				'name' => 'all',
-				'title' => 'All Members Text',
-				'description' => 'The text explaining the All Members button.',
-				'default_value' => "<h4>All Members</h4> If you like to get a nice overview of <em>all the activity</em> posted by our community, this is the button to click!"
+				'title' => __( 'All Members Text', 'infinity-engine' ),
+				'description' => __( 'The text explaining the All Members button.', 'infinity-engine' ),
+				'default_value' => __( "<h4>All Members</h4> If you like to get a nice overview of <em>all the activity</em> posted by our community, this is the button to click!", 'infinity-engine' )
 			),
 			$infinity_bp_tour_defaults
 		);
@@ -924,9 +924,9 @@ ice_register_group( 'bp-tour' );
 		ice_register_option(
 			array(
 				'name' => 'friends',
-				'title' => 'Friends Text',
-				'description' => 'The text explaining the Friends button.',
-				'default_value' => "<h4>My Friends</h4> Keep track of what your friends are doing. No buddies yet? Why don't you make some by visting the Members Directory!</a>"
+				'title' => __( 'Friends Text', 'infinity-engine' ),
+				'description' => __( 'The text explaining the Friends button.', 'infinity-engine' ),
+				'default_value' => __( "<h4>My Friends</h4> Keep track of what your friends are doing. No buddies yet? Why don't you make some by visting the Members Directory!</a>", 'infinity-engine' )
 			),
 			$infinity_bp_tour_defaults
 		);
@@ -934,9 +934,9 @@ ice_register_group( 'bp-tour' );
 		ice_register_option(
 			array(
 				'name' => 'groups',
-				'title' => 'Groups Text',
-				'description' => 'The text explaining the Groups button.',
-				'default_value' => "<h4>My Groups</h4> By clicking the &quot;My Groups&quot; button you can keep track of what's happening in the groups you've joined. Not a member of a group yet? Check out the Groups Directory!</a>"
+				'title' => __( 'Groups Text', 'infinity-engine' ),
+				'description' => __( 'The text explaining the Groups button.', 'infinity-engine' ),
+				'default_value' => __( "<h4>My Groups</h4> By clicking the &quot;My Groups&quot; button you can keep track of what's happening in the groups you've joined. Not a member of a group yet? Check out the Groups Directory!</a>", 'infinity-engine' )
 			),
 			$infinity_bp_tour_defaults
 		);
@@ -944,9 +944,9 @@ ice_register_group( 'bp-tour' );
 		ice_register_option(
 			array(
 				'name' => 'mentions',
-				'title' => 'Mentions Text',
-				'description' => 'The text explaining the Mentions button.',
-				'default_value' => "<h4>Mentions</h4> You can easily &quot;Mention&quot; others in your updates or forum posts across our community. As soon as someone mentions you using @yourname you'll see these mentions appear under this button."
+				'title' => __( 'Mentions Text', 'infinity-engine' ),
+				'description' => __( 'The text explaining the Mentions button.', 'infinity-engine' ),
+				'default_value' => __( "<h4>Mentions</h4> You can easily &quot;Mention&quot; others in your updates or forum posts across our community. As soon as someone mentions you using @yourname you'll see these mentions appear under this button.", 'infinity-engine' )
 			),
 			$infinity_bp_tour_defaults
 		);
@@ -954,9 +954,9 @@ ice_register_group( 'bp-tour' );
 		ice_register_option(
 			array(
 				'name' => 'favorites',
-				'title' => 'Favorites Text',
-				'description' => 'The text explaining the Favorites button.',
-				'default_value' => "<h4>Keep Track</h4> If there's a conversation brewing that you find interesting, you can add your voice by clicking on the <strong>Comment</strong> button. By using the <strong>Favorite</strong> button you can easily bookmark the conversation so you go back to it back later. Go ahead and <strong>try it</strong> by clicking on a &quot;Favorite&quot; button!"
+				'title' => __( 'Favorites Text', 'infinity-engine' ),
+				'description' => __( 'The text explaining the Favorites button.', 'infinity-engine' ),
+				'default_value' => __( "<h4>Keep Track</h4> If there's a conversation brewing that you find interesting, you can add your voice by clicking on the <strong>Comment</strong> button. By using the <strong>Favorite</strong> button you can easily bookmark the conversation so you go back to it back later. Go ahead and <strong>try it</strong> by clicking on a &quot;Favorite&quot; button!", 'infinity-engine' )
 			),
 			$infinity_bp_tour_defaults
 		);
@@ -964,9 +964,9 @@ ice_register_group( 'bp-tour' );
 		ice_register_option(
 			array(
 				'name' => 'filter',
-				'title' => 'Filter Text',
-				'description' => 'The text explaining the filter dropdown.',
-				'default_value' => "<h4>Use the filter!</h4> You can filter the stream to only show the items that have caught your interest. For instance you could use the filter <strong>Posts</strong> to show blog posts from across our network. Awesome!"
+				'title' => __( 'Filter Text', 'infinity-engine' ),
+				'description' => __( 'The text explaining the filter dropdown.', 'infinity-engine' ),
+				'default_value' => __( "<h4>Use the filter!</h4> You can filter the stream to only show the items that have caught your interest. For instance you could use the filter <strong>Posts</strong> to show blog posts from across our network. Awesome!", 'infinity-engine' )
 			),
 			$infinity_bp_tour_defaults
 		);
@@ -974,9 +974,9 @@ ice_register_group( 'bp-tour' );
 		ice_register_option(
 			array(
 				'name' => 'update',
-				'title' => 'Update Text',
-				'description' => 'The last text in the tour prompting your user to post an update.',
-				'default_value' => "<h4>Update Away!</h4> We have taught you everything you need to know to get started! It's time for you to post your first update. Good luck young grasshopper, we've taught you well!"
+				'title' => __( 'Update Text', 'infinity-engine' ),
+				'description' => __( 'The last text in the tour prompting your user to post an update.', 'infinity-engine' ),
+				'default_value' => __( "<h4>Update Away!</h4> We have taught you everything you need to know to get started! It's time for you to post your first update. Good luck young grasshopper, we've taught you well!", 'infinity-engine' )
 			),
 			$infinity_bp_tour_defaults
 		);
@@ -992,8 +992,8 @@ ice_register_group( 'ext' );
 			'name' => 'support',
 			'group' => 'ext',
 			'type' => 'default',
-			'title' => 'Extension Styles',
-			'description' => 'Enables extensions support',
+			'title' => __( 'Extension Styles', 'infinity-engine' ),
+			'description' => __( 'Enables extensions support', 'infinity-engine' ),
 			'style' => 'assets/css/extensions.css'
 		)
 	);
@@ -1009,8 +1009,8 @@ ice_register_group( 'resp' );
 			'name' => 'support',
 			'group' => 'resp',
 			'type' => 'responsive/layout',
-			'title' => 'Responsive Layout',
-			'description' => 'Enables responsive layout support',
+			'title' => __( 'Responsive Layout', 'infinity-engine' ),
+			'description' => __( 'Enables responsive layout support', 'infinity-engine' ),
 			'style' => 'assets/css/responsive.css'
 		)
 	);
@@ -1021,8 +1021,8 @@ ice_register_group( 'resp' );
 			'name' => 'menu',
 			'group' => 'resp',
 			'type' => 'responsive/menu',
-			'title' => 'Responsive Menu',
-			'description' => 'Enables the responsive menu javascript',
+			'title' => __( 'Responsive Menu', 'infinity-engine' ),
+			'description' => __( 'Enables the responsive menu javascript', 'infinity-engine' ),
 			'target_selector' => '.sf-menu',
 			'switch_width' => 770,
 			'top_option_text' => 'Where to?',
@@ -1036,8 +1036,8 @@ ice_register_group( 'resp' );
 			'name' => 'videos',
 			'group' => 'resp',
 			'type' => 'responsive/videos',
-			'title' => 'Responsive Videos',
-			'description' => 'Enables the responsive videos javascript',
+			'title' => __( 'Responsive Videos', 'infinity-engine' ),
+			'description' => __( 'Enables the responsive videos javascript', 'infinity-engine' ),
 			'target_selector' => '#wrapper'
 		)
 	);
@@ -1053,8 +1053,8 @@ ice_register_group( 'typog' );
 			'name' => 'style',
 			'group' => 'typog',
 			'type' => 'default',
-			'title' => 'Typography Styles',
-			'description' => 'The base Typography styling',
+			'title' => __( 'Typography Styles', 'infinity-engine' ),
+			'description' => __( 'The base Typography styling', 'infinity-engine' ),
 			'body_class' => 'infinity-typog'
 		)
 	);
@@ -1070,8 +1070,8 @@ ice_register_group( 'layout' );
 			'name' => 'style',
 			'group' => 'layout',
 			'type' => 'default',
-			'title' => 'Layout Styles',
-			'description' => 'The base layout styling',
+			'title' => __( 'Layout Styles', 'infinity-engine' ),
+			'description' => __( 'The base layout styling', 'infinity-engine' ),
 			'body_class' => 'infinity-layout'
 		)
 	);
@@ -1087,8 +1087,8 @@ ice_register_group( 'buttons' );
 			'name' => 'style',
 			'group' => 'buttons',
 			'type' => 'default',
-			'title' => 'extras Styles',
-			'description' => 'The base buttons styling',
+			'title' => __( 'extras Styles', 'infinity-engine' ),
+			'description' => __( 'The base buttons styling', 'infinity-engine' ),
 			'body_class' => 'infinity-btns'
 		)
 	);
@@ -1099,8 +1099,8 @@ ice_register_group( 'buttons' );
 			'name' => 'color',
 			'group' => 'buttons',
 			'type' => 'default',
-			'title' => 'Custom button colors',
-			'description' => 'Custom button colors.',
+			'title' => __( 'Custom button colors', 'infinity-engine' ),
+			'description' => __( 'Custom button colors.', 'infinity-engine' ),
 			'body_class' => 'infinity-btns'
 		)
 	);
@@ -1111,8 +1111,8 @@ ice_register_group( 'buttons' );
 				'group' => 'buttons',
 				'section' => 'global',
 				'type' => 'select',
-				'title' => 'Button Color',
-				'description' => 'Choose a button color.',
+				'title' => __( 'Button Color', 'infinity-engine' ),
+				'description' => __( 'Choose a button color.', 'infinity-engine' ),
 				'field_options' => array(
 					'orange' => 'Orange',
 					'blue' => 'Blue',
@@ -1141,8 +1141,8 @@ ice_register_group( 'icons' );
 			'name' => 'style',
 			'group' => 'icons',
 			'type' => 'default',
-			'title' => 'The Icons used across the theme',
-			'description' => 'Icons',
+			'title' => __( 'The Icons used across the theme', 'infinity-engine' ),
+			'description' => __( 'Icons', 'infinity-engine' ),
 			'body_class' => 'infinity-icons'
 		)
 	);
@@ -1158,8 +1158,8 @@ ice_register_group( 'design' );
 			'name' => 'style',
 			'group' => 'design',
 			'type' => 'default',
-			'title' => 'Design Styles',
-			'description' => 'The styles which fancy things up a bit',
+			'title' => __( 'Design Styles', 'infinity-engine' ),
+			'description' => __( 'The styles which fancy things up a bit', 'infinity-engine' ),
 			'body_class' => 'infinity-design'
 		)
 	);
@@ -1175,8 +1175,8 @@ ice_register_group( 'base' );
 			'name' => 'script',
 			'group' => 'base',
 			'type' => 'default',
-			'title' => 'Base Javascript',
-			'description' => 'Some jQuery to spice up the Base Theme',
+			'title' => __( 'Base Javascript', 'infinity-engine' ),
+			'description' => __( 'Some jQuery to spice up the Base Theme', 'infinity-engine' ),
 			'script' => 'assets/js/base.js',
 			'script_depends' => array(
 				'jquery'
@@ -1195,8 +1195,8 @@ ice_register_group( 'custom' );
 			'name' => 'css',
 			'group' => 'custom',
 			'type' => 'default',
-			'title' => 'Custom CSS',
-			'description' => 'Allow custom CSS to be provided with theme options'
+			'title' => __( 'Custom CSS', 'infinity-engine' ),
+			'description' => __( 'Allow custom CSS to be provided with theme options', 'infinity-engine' )
 		)
 	);
 		ice_register_option(
@@ -1205,8 +1205,8 @@ ice_register_group( 'custom' );
 				'group' => 'custom',
 				'section' => 'global',
 				'type' => 'css/custom',
-				'title' => 'Custom CSS',
-				'description' => 'Enter custom CSS markup to fine tune the look of your site'
+				'title' => __( 'Custom CSS', 'infinity-engine' ),
+				'description' => __( 'Enter custom CSS markup to fine tune the look of your site', 'infinity-engine' )
 			)
 		);
 
@@ -1221,8 +1221,8 @@ ice_register_group( 'body' );
 			'name' => 'layout',
 			'group' => 'body',
 			'type' => 'default',
-			'title' => 'Body Layout',
-			'description' => 'Change the Body according to your taste'
+			'title' => __( 'Body Layout', 'infinity-engine' ),
+			'description' => __( 'Change the Body according to your taste', 'infinity-engine' )
 		)
 	);
 
@@ -1237,8 +1237,8 @@ ice_register_group( 'body' );
 			array(
 				'name' => 'width',
 				'type' => 'css/length-px',
-				'title' => 'Maximum Width',
-				'description' => 'Set the maximum width of the site\'s content between %min% and %max% pixels by moving the slider.',
+				'title' => __( 'Maximum Width', 'infinity-engine' ),
+				'description' => __( 'Set the maximum width of the site\'s content between %min% and %max% pixels by moving the slider.', 'infinity-engine' ),
 				'min' => 900,
 				'max' => 1250,
 				'step' => 10,
@@ -1303,8 +1303,8 @@ ice_register_group( 'header' );
 			'name' => 'layout',
 			'group' => 'header',
 			'type' => 'default',
-			'title' => 'Header Styles',
-			'description' => 'Customize the layout and colors of the header'
+			'title' => __( 'Header Styles', 'infinity-engine' ),
+			'description' => __( 'Customize the layout and colors of the header', 'infinity-engine' )
 		)
 	);
 
@@ -1319,8 +1319,8 @@ ice_register_group( 'header' );
 			array(
 				'name' => 'min-height',
 				'type' => 'css/length-px',
-				'title' => 'Height',
-				'description' => 'Select the height of the header by moving the slider',
+				'title' => __( 'Height', 'infinity-engine' ),
+				'description' => __( 'Select the height of the header by moving the slider', 'infinity-engine' ),
 				'min' => 100,
 				'max' => 500,
 				'step' => 10,
@@ -1333,8 +1333,8 @@ ice_register_group( 'header' );
 			array(
 				'name' => 'margin-top',
 				'type' => 'css/length-px',
-				'title' => 'Top Margin',
-				'description' => 'The margin (spacing) between the top of the header and the top of the page.',
+				'title' => __( 'Top Margin', 'infinity-engine' ),
+				'description' => __( 'The margin (spacing) between the top of the header and the top of the page.', 'infinity-engine' ),
 				'min' => 0,
 				'max' => 100,
 				'step' => 2,
@@ -1347,8 +1347,8 @@ ice_register_group( 'header' );
 			array(
 				'name' => 'padding-top',
 				'type' => 'css/length-px',
-				'title' => 'Top Padding',
-				'description' => 'The padding (spacing) between the top of the header and the header content.',
+				'title' => __( 'Top Padding', 'infinity-engine' ),
+				'description' => __( 'The padding (spacing) between the top of the header and the header content.', 'infinity-engine' ),
 				'min' => 0,
 				'max' => 100,
 				'step' => 2,
@@ -1361,8 +1361,8 @@ ice_register_group( 'header' );
 			array(
 				'name' => 'margin-bottom',
 				'type' => 'css/length-px',
-				'title' => 'Bottom Margin',
-				'description' => 'The margin (spacing) between the bottom of the header and the top of the content section.',
+				'title' => __( 'Bottom Margin', 'infinity-engine' ),
+				'description' => __( 'The margin (spacing) between the bottom of the header and the top of the content section.', 'infinity-engine' ),
 				'min' => 0,
 				'max' => 100,
 				'step' => 2,
@@ -1375,8 +1375,8 @@ ice_register_group( 'header' );
 			array(
 				'name' => 'padding-bottom',
 				'type' => 'css/length-px',
-				'title' => 'Bottom Padding',
-				'description' => 'The padding (spacing) between the bottom of the header and the header content.',
+				'title' => __( 'Bottom Padding', 'infinity-engine' ),
+				'description' => __( 'The padding (spacing) between the bottom of the header and the header content.', 'infinity-engine' ),
 				'min' => 0,
 				'max' => 100,
 				'step' => 2,
@@ -1452,8 +1452,8 @@ ice_register_group( 'header-logo' );
 			 array(
 				'name' => 'image',
 				'type' => 'upload',
-				'title' => 'Logo Image',
-				'description' => 'Upload a custom logo to appear in the header'
+				'title' => __( 'Logo Image', 'infinity-engine' ),
+				'description' => __( 'Upload a custom logo to appear in the header', 'infinity-engine' )
 			),
 			$infinity_header_logo_defaults
 		);
@@ -1462,8 +1462,8 @@ ice_register_group( 'header-logo' );
 			array(
 				'name' => 'toggle',
 				'type' => 'toggle/on-off',
-				'title' => 'Logo Image On/Off',
-				'description' => 'Turn this Off to prevent any image logo from displaying, even the default.',
+				'title' => __( 'Logo Image On/Off', 'infinity-engine' ),
+				'description' => __( 'Turn this Off to prevent any image logo from displaying, even the default.', 'infinity-engine' ),
 				'default_value' => true,
 				'parent' => 'image'
 			),
@@ -1474,8 +1474,8 @@ ice_register_group( 'header-logo' );
 			array(
 				'name' => 'pos',
 				'type' => 'position/left-center-right',
-				'title' => 'Logo Position',
-				'description' => 'Select a position for the logo',
+				'title' => __( 'Logo Position', 'infinity-engine' ),
+				'description' => __( 'Select a position for the logo', 'infinity-engine' ),
 				'default_value' => 'l',
 				'parent' => 'image',
 			),
@@ -1486,8 +1486,8 @@ ice_register_group( 'header-logo' );
 			array(
 				'name' => 'top',
 				'type' => 'ui/slider',
-				'title' => 'Logo Top Spacing',
-				'description' => 'Enter a height in pixels for top spacing',
+				'title' => __( 'Logo Top Spacing', 'infinity-engine' ),
+				'description' => __( 'Enter a height in pixels for top spacing', 'infinity-engine' ),
 				'min' => 0,
 				'max' => 100,
 				'step' => 1,
@@ -1504,8 +1504,8 @@ ice_register_group( 'header-logo' );
 			array(
 				'name' => 'left',
 				'type' => 'ui/slider',
-				'title' => 'Logo Left Spacing',
-				'description' => 'Enter a width in pixels for left spacing',
+				'title' => __( 'Logo Left Spacing', 'infinity-engine' ),
+				'description' => __( 'Enter a width in pixels for left spacing', 'infinity-engine' ),
 				'min' => 0,
 				'max' => 250,
 				'step' => 1,
@@ -1522,8 +1522,8 @@ ice_register_group( 'header-logo' );
 			array(
 				'name' => 'right',
 				'type' => 'ui/slider',
-				'title' => 'Logo Right Spacing',
-				'description' => 'Enter a width in pixels for right spacing',
+				'title' => __( 'Logo Right Spacing', 'infinity-engine' ),
+				'description' => __( 'Enter a width in pixels for right spacing', 'infinity-engine' ),
 				'min' => 0,
 				'max' => 250,
 				'step' => 1,
@@ -1547,8 +1547,8 @@ ice_register_group( 'content' );
 			'name' => 'layout',
 			'group' => 'content',
 			'type' => 'default',
-			'title' => 'Content Styles',
-			'description' => 'Customize the layout and colors of the content section.'
+			'title' => __( 'Content Styles', 'infinity-engine' ),
+			'description' => __( 'Customize the layout and colors of the content section.', 'infinity-engine' )
 		)
 	);
 
@@ -1563,8 +1563,8 @@ ice_register_group( 'content' );
 			array(
 				'name' => 'text-color',
 				'type' => 'colorpicker',
-				'title' => 'Text Color',
-				'description' => 'Choose a color for text inside the content section.',
+				'title' => __( 'Text Color', 'infinity-engine' ),
+				'description' => __( 'Choose a color for text inside the content section.', 'infinity-engine' ),
 				'style_selector' => 'body.theme-option #content a',
 				'style_property' => 'color'
 			),
@@ -1575,8 +1575,8 @@ ice_register_group( 'content' );
 			array(
 				'name' => 'link-color',
 				'type' => 'colorpicker',
-				'title' => 'Link Color',
-				'description' => 'Choose a color for links inside the content section.',
+				'title' => __( 'Link Color', 'infinity-engine' ),
+				'description' => __( 'Choose a color for links inside the content section.', 'infinity-engine' ),
 				'style_selector' => 'body.theme-option #content a',
 				'style_property' => 'color'
 			),
@@ -1639,8 +1639,8 @@ ice_register_group( 'widget' );
 			'name' => 'layout',
 			'group' => 'widget',
 			'type' => 'default',
-			'title' => 'Widget Styling',
-			'description' => 'Customize the layout and colors of widgets.'
+			'title' => __( 'Widget Styling', 'infinity-engine' ),
+			'description' => __( 'Customize the layout and colors of widgets.', 'infinity-engine' )
 		)
 	);
 
@@ -1655,8 +1655,8 @@ ice_register_group( 'widget' );
 			array(
 				'name' => 'color-link',
 				'type' => 'colorpicker',
-				'title' => 'Widget Title Color',
-				'description' => 'Choose a font color for widget titles.',
+				'title' => __( 'Widget Title Color', 'infinity-engine' ),
+				'description' => __( 'Choose a font color for widget titles.', 'infinity-engine' ),
 				'style_selector' => 'body.theme-option #sidebar .widget h4',
 				'style_property' => 'color'
 			),
@@ -1667,8 +1667,8 @@ ice_register_group( 'widget' );
 			array(
 				'name' => 'font-weight',
 				'type' => 'select',
-				'title' => 'Font Weight',
-				'description' => 'Choose a font weight for widget titles.',
+				'title' => __( 'Font Weight', 'infinity-engine' ),
+				'description' => __( 'Choose a font weight for widget titles.', 'infinity-engine' ),
 				'style_selector' => 'body.theme-option #sidebar .widget h4',
 				'style_property' => 'font-weight'
 			),
@@ -1679,8 +1679,8 @@ ice_register_group( 'widget' );
 			array(
 				'name' => 'padding',
 				'type' => 'css/length-px',
-				'title' => 'Padding',
-				'description' => 'The padding (spacing) between any widget border and it\'s content.',
+				'title' => __( 'Padding', 'infinity-engine' ),
+				'description' => __( 'The padding (spacing) between any widget border and it\'s content.', 'infinity-engine' ),
 				'max' => 30,
 				'style_property' => 'padding'
 			),
@@ -1724,8 +1724,8 @@ ice_register_group( 'footer' );
 			'name' => 'layout',
 			'group' => 'footer',
 			'type' => 'default',
-			'title' => 'footer Styles',
-			'description' => 'Customize the layout and colors of the footer'
+			'title' => __( 'footer Styles', 'infinity-engine' ),
+			'description' => __( 'Customize the layout and colors of the footer', 'infinity-engine' )
 		)
 	);
 
@@ -1740,8 +1740,8 @@ ice_register_group( 'footer' );
 			array(
 				'name' => 'text-color',
 				'type' => 'colorpicker',
-				'title' => 'Text Color',
-				'description' => 'Choose a color for text inside the footer section.',
+				'title' => __( 'Text Color', 'infinity-engine' ),
+				'description' => __( 'Choose a color for text inside the footer section.', 'infinity-engine' ),
 				'style_property' => 'color'
 			),
 			$infinity_footer_layout_defaults
@@ -1751,8 +1751,8 @@ ice_register_group( 'footer' );
 			array(
 				'name' => 'text-color',
 				'type' => 'colorpicker',
-				'title' => 'Text Color',
-				'description' => 'Choose a color for text inside the footer section.',
+				'title' => __( 'Text Color', 'infinity-engine' ),
+				'description' => __( 'Choose a color for text inside the footer section.', 'infinity-engine' ),
 				'style_property' => 'color'
 			),
 			$infinity_footer_layout_defaults
@@ -1762,8 +1762,8 @@ ice_register_group( 'footer' );
 			array(
 				'name' => 'link-color',
 				'type' => 'colorpicker',
-				'title' => 'Link Color',
-				'description' => 'Choose a color for links inside the footer section.',
+				'title' => __( 'Link Color', 'infinity-engine' ),
+				'description' => __( 'Choose a color for links inside the footer section.', 'infinity-engine' ),
 				'style_selector' => 'body.theme-option .footer-wrap a',
 				'style_property' => 'color'
 			),
@@ -1774,8 +1774,8 @@ ice_register_group( 'footer' );
 			array(
 				'name' => 'margin-top',
 				'type' => 'css/length-px',
-				'title' => 'Top Margin',
-				'description' => 'The margin (spacing) between the bottom of the content section and the top of the footer.',
+				'title' => __( 'Top Margin', 'infinity-engine' ),
+				'description' => __( 'The margin (spacing) between the bottom of the content section and the top of the footer.', 'infinity-engine' ),
 				'min' => 0,
 				'max' => 100,
 				'step' => 2,

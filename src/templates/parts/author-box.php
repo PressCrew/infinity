@@ -29,7 +29,7 @@ if ( infinity_base_show_author_box() ):
 			?>
 			<div id="author-link">
 				<a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) ); ?>">
-					<?php printf( __( 'View all posts by %s', 'infinity' ), get_the_author() ); ?> <span class="meta-nav">&rarr;</span>
+					<?php printf( __( 'View all posts by %s', 'infinity-engine' ), get_the_author() ); ?> <span class="meta-nav">&rarr;</span>
 				</a>
 			</div>
 		</div>

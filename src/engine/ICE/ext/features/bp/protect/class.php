@@ -42,8 +42,8 @@ class ICE_Ext_Feature_Bp_Protect
 		parent::init();
 
 		// init properties
-		$this->title = __( 'BuddyPress Protect', 'infinity' );
-		$this->description = __( 'Restrict access to your BuddyPress components to members only', 'infinity' );
+		$this->title = __( 'BuddyPress Protect', 'infinity-engine' );
+		$this->description = __( 'Restrict access to your BuddyPress components to members only', 'infinity-engine' );
 
 		// add action to get_header
 		add_action( 'wp', array($this,'maybe_redirect'), 1 );

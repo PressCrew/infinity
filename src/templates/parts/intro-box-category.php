@@ -20,7 +20,7 @@ if ( infinity_base_show_intro_box() ):
 			<header>
 				<h1 id= "category-title" class="page-title">
 					<?php
-						printf( __( 'Category Archives: <span>%s</span>', 'infinity' ), single_cat_title( '', false ) );
+						printf( __( 'Category Archives: <span>%s</span>', 'infinity-engine' ), single_cat_title( '', false ) );
 					?>
 				</h1>
 			</header>

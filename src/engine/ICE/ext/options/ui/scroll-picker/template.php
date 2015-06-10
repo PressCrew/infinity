@@ -16,11 +16,11 @@
 <div id="<?php $this->render_id('widget') ?>" class="<?php $this->render_class('widget') ?> ui-corner-all">
 	<div class="ice-value ui-widget-header ui-corner-all">
 		<div class="ui-widget-header ui-corner-bottom">
-			<?php _e( 'Current Selection', 'infinity' ) ?>
+			<?php _e( 'Current Selection', 'infinity-engine' ) ?>
 		</div>
 	</div>
 	<div class="ice-viewport">
-		<a id="<?php $this->render_id('widget','item','null') ?>" class="ice-item ui-widget-header ice-scroll-pane-item-null" href="#"><?php _e( 'None', 'infinity' ); ?></a>
+		<a id="<?php $this->render_id('widget','item','null') ?>" class="ice-item ui-widget-header ice-scroll-pane-item-null" href="#"><?php _e( 'None', 'infinity-engine' ); ?></a>
 		<?php foreach( $field_options as $field_option_val => $field_option_desc ): ?>
 			<a id="<?php $this->render_id('widget','item',$field_option_val) ?>" class="ice-item ui-widget-header" href="#<?php print esc_attr( $field_option_val ) ?>"><?php $this->component()->render_field_option( $field_option_val ) ?></a>
 		<?php endforeach; ?>

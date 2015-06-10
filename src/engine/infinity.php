@@ -22,7 +22,11 @@
 define( 'INFINITY_VERSION', '1.2a' );
 
 /**
- * Infinity slug
+ * Infinity slug.
+ *
+ * IMPORTANT:
+ * Do not use this constant for formatting file paths!
+ * Use the INFINITY_NAME constant instead.
  */
 define( 'INFINITY_SLUG', 'infinity' );
 
@@ -48,7 +52,13 @@ if ( !defined( 'INFINITY_PATH' ) ) {
 }
 
 /**
- * Infinity theme name (slug)
+ * Infinity theme name.
+ *
+ * The value is determined dynamically based on the path to the file in which it is defined.
+ *
+ * IMPORTANT:
+ * This is the theme directory name *as currently installed* under /themes.
+ * It *is* safe to use this constant for formatting file paths.
  */
 if ( !defined( 'INFINITY_NAME' ) ) {
 	define( 'INFINITY_NAME', basename( INFINITY_PATH ) );

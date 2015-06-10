@@ -10,7 +10,7 @@
  */
 
 // The parent theme.
-// Your child theme should set this to either 'infinity', or an ancestor of infinity.
+// Your child theme should set this to either 'infinity-engine', or an ancestor of infinity.
 ice_update_setting( INFINITY_NAME, 'parent_theme', null );
 
 // ---------------------------------------------------------------------
