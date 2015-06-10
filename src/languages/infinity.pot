@@ -1,586 +1,442 @@
-# Copyright (C) 2013 PressCrew
+# Copyright (C) 2015 PressCrew
 # This file is distributed under the GNU General Public License.
 msgid ""
 msgstr ""
 "Project-Id-Version: &#8734; Infinity 1.2a\n"
-"Report-Msgid-Bugs-To: http://wordpress.org/tags/infinity\n"
-"POT-Creation-Date: 2013-10-02 19:43:33+00:00\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/support/theme/infinity\n"
+"POT-Creation-Date: 2015-06-10 15:05:57+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2013-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: 404.php:23
+#: 404.php:24
 msgid "Darn it.. Nothing found"
 msgstr ""
 
-#: 404.php:29 search.php:40
+#: 404.php:31 search.php:48
 msgid ""
 "Sorry, but nothing matched your search criteria. Please try again with some "
 "different keywords."
 msgstr ""
 
-#: 404.php:45
+#: 404.php:44
 msgid "Most Used Categories"
 msgstr ""
 
 #. translators: %1$s: smilie
-#: 404.php:54
+#: 404.php:66
 msgid "Try looking in the monthly archives. %1$s"
 msgstr ""
 
-#: archive-template.php:45 templates/loops/loop-page.php:39
+#: archive-template.php:50 templates/loops/loop-page.php:37
 msgid "Read the rest of this page &rarr;"
 msgstr ""
 
-#: archive-template.php:52
+#: archive-template.php:56
 msgid "Last 30 Posts"
 msgstr ""
 
-#: archive-template.php:63
+#: archive-template.php:75
 msgid "Archives by Month:"
 msgstr ""
 
-#: archive-template.php:73
+#: archive-template.php:86
 msgid "Archives by Subject:"
 msgstr ""
 
-#: archive.php:25
+#: archive.php:26
 msgid "You are browsing the archive for %1$s."
 msgstr ""
 
-#: comments.php:13
-msgid "Please do not load this page directly. Thanks!"
-msgstr ""
-
-#: comments.php:16
-msgid "This post is password protected. Enter the password to view comments."
-msgstr ""
-
-#: comments.php:35
-msgid "One Response to %2$s"
-msgid_plural "%1$s Responses to %2$s"
+#: comments.php:60
+msgctxt "comments title"
+msgid "There is one thought on &ldquo;%2$s&rdquo;"
+msgid_plural "There are %1$s thoughts on &ldquo;%2$s&rdquo;"
 msgstr[0] ""
 msgstr[1] ""
 
-#: comments.php:51
-msgid "Older Comments"
+#: comments.php:91
+msgid "Closed to further comments."
 msgstr ""
 
-#: comments.php:52
-msgid "Newer Comments"
+#: comments.php:116
+msgctxt "pings title"
+msgid "There is one ping to &ldquo;%2$s&rdquo;"
+msgid_plural "There are %1$s pings to &ldquo;%2$s&rdquo;"
+msgstr[0] ""
+msgstr[1] ""
+
+#: comments.php:148
+msgid "Comments are closed."
 msgstr ""
 
-#: comments.php:58
-msgid "Trackbacks/Pingbacks"
-msgstr ""
-
-#: dashboard/loader.php:71
-msgid "%s Options"
-msgstr ""
-
-#: dashboard/support.php:69
-msgid "Enabled"
-msgstr ""
-
-#: dashboard/support.php:71
-msgid "Disabled"
-msgstr ""
-
-#: dashboard/support.php:91
-msgid "No other plugins are active"
-msgstr ""
-
-#: dashboard/support.php:97
-msgid "subdomain"
-msgstr ""
-
-#: dashboard/support.php:99
-msgid "subdirectory"
-msgstr ""
-
-#: dashboard/support.php:102
-msgid "no"
-msgstr ""
-
-#: dashboard/support.php:107
-msgid "default"
-msgstr ""
-
-#: dashboard/support.php:110
-msgid "almost"
-msgstr ""
-
-#: dashboard/support.php:112
-msgid "custom"
-msgstr ""
-
-#: dashboard/support.php:116
-msgid "Installation Details"
-msgstr ""
-
-#: dashboard/support.php:117
-msgid ""
-"If you are having issues with the theme and need support, below is some "
-"useful info about your installation."
-msgstr ""
-
-#: dashboard/support.php:118
-msgid ""
-"Please submit this information with your support request so its easier for "
-"us to help you!"
-msgstr ""
-
-#: dashboard/support.php:120
-msgid "Versions"
-msgstr ""
-
-#: dashboard/support.php:122
-msgid "Infinity Version: %s"
-msgstr ""
-
-#: dashboard/support.php:123
-msgid "Developer Mode: %s"
-msgstr ""
-
-#: dashboard/support.php:124
-msgid "BuddyPress: %s"
-msgstr ""
-
-#: dashboard/support.php:125
-msgid "MySQL: %s"
-msgstr ""
-
-#: dashboard/support.php:126
-msgid "Permalinks: %s"
-msgstr ""
-
-#: dashboard/support.php:127
-msgid "PHP: %s"
-msgstr ""
-
-#: dashboard/support.php:128
-msgid "WordPress: %s"
-msgstr ""
-
-#: dashboard/support.php:129
-msgid "WordPress multisite: %s"
-msgstr ""
-
-#: dashboard/support.php:132
-msgid "Theme"
-msgstr ""
-
-#: dashboard/support.php:134
-msgid "Current theme: %s version %s"
-msgstr ""
-
-#: dashboard/support.php:137
-msgid "Active Plugins"
-msgstr ""
-
-#: dashboard/templates/cpanel.php:20
-msgid "infinity"
-msgstr ""
-
-#: dashboard/templates/cpanel_header.php:2
-msgid "Version:"
-msgstr ""
-
-#: dashboard/templates/options/block.php:25
-msgid "Edit Setting"
-msgstr ""
-
-#: dashboard/templates/options/block.php:27
-msgid "Documentation"
-msgstr ""
-
-#: dashboard/templates/options/block.php:30
-msgid "Sample Code"
-msgstr ""
-
-#: dashboard/templates/options/menu_section.php:17
-msgid "Show All"
-msgstr ""
-
-#: dashboard/templates/screens/typography.php:13
-#: engine/ICE/ext/options/ui/font-picker/template.php:30
-msgid "Slant"
-msgstr ""
-
-#: dashboard/templates/screens/typography.php:14
-#: engine/ICE/ext/options/ui/font-picker/template.php:33
-msgid "Service"
-msgstr ""
-
-#: dashboard/templates/screens/typography.php:15
-#: engine/ICE/ext/options/ui/font-picker/template.php:34
-msgid "Thickness"
-msgstr ""
-
-#: dashboard/templates/screens/typography.php:16
-#: engine/ICE/ext/options/ui/font-picker/template.php:35
-msgid "Script"
-msgstr ""
-
-#: engine/ICE/components/options/registry.php:264
+#: engine/ICE/components/options/registry.php:292
 msgid "%d option successfully updated."
 msgstr ""
 
-#: engine/ICE/components/options/registry.php:266
+#: engine/ICE/components/options/registry.php:294
 msgid "%d options successfully updated."
 msgstr ""
 
-#: engine/ICE/components/options/registry.php:268
+#: engine/ICE/components/options/registry.php:296
 msgid "An error has occurred. No options were updated."
 msgstr ""
 
-#: engine/ICE/components/options/renderer.php:151
-msgid "Save All"
-msgstr ""
-
-#: engine/ICE/components/options/renderer.php:164
+#: engine/ICE/components/options/renderer.php:145
 msgid "Save"
 msgstr ""
 
-#: engine/ICE/components/options/renderer.php:177
+#: engine/ICE/components/options/renderer.php:158
 msgid "Reset"
 msgstr ""
 
-#: engine/ICE/dom/style.php:681
+#: engine/ICE/dom/style.php:733
 msgid "Inherit"
 msgstr ""
 
-#: engine/ICE/dom/style.php:1297
+#: engine/ICE/dom/style.php:978
 msgid "Full Tiling"
 msgstr ""
 
-#: engine/ICE/dom/style.php:1298
+#: engine/ICE/dom/style.php:979
 msgid "Tile Horizontally Only"
 msgstr ""
 
-#: engine/ICE/dom/style.php:1299
+#: engine/ICE/dom/style.php:980
 msgid "Tile Vertically Only"
 msgstr ""
 
-#: engine/ICE/dom/style.php:1300
+#: engine/ICE/dom/style.php:981
 msgid "Disable Tiling"
 msgstr ""
 
-#: engine/ICE/dom/style.php:1322
+#: engine/ICE/dom/style.php:1003
 msgid "No Border"
 msgstr ""
 
-#: engine/ICE/dom/style.php:1323
+#: engine/ICE/dom/style.php:1004
 msgid "Hidden"
 msgstr ""
 
-#: engine/ICE/dom/style.php:1324
+#: engine/ICE/dom/style.php:1005
 msgid "Dotted"
 msgstr ""
 
-#: engine/ICE/dom/style.php:1325
+#: engine/ICE/dom/style.php:1006
 msgid "Dashed"
 msgstr ""
 
-#: engine/ICE/dom/style.php:1326
+#: engine/ICE/dom/style.php:1007
 msgid "Solid"
 msgstr ""
 
-#: engine/ICE/dom/style.php:1327
+#: engine/ICE/dom/style.php:1008
 msgid "Double"
 msgstr ""
 
-#: engine/ICE/dom/style.php:1328
+#: engine/ICE/dom/style.php:1009
 msgid "Groove"
 msgstr ""
 
-#: engine/ICE/dom/style.php:1329
+#: engine/ICE/dom/style.php:1010
 msgid "Ridge"
 msgstr ""
 
-#: engine/ICE/dom/style.php:1330
+#: engine/ICE/dom/style.php:1011
 msgid "Inset"
 msgstr ""
 
-#: engine/ICE/dom/style.php:1331
+#: engine/ICE/dom/style.php:1012
 msgid "Outset"
 msgstr ""
 
-#: engine/ICE/dom/style.php:1345
+#: engine/ICE/dom/style.php:1026
 msgid "Thin"
 msgstr ""
 
-#: engine/ICE/dom/style.php:1346
+#: engine/ICE/dom/style.php:1027
 msgid "Medium"
 msgstr ""
 
-#: engine/ICE/dom/style.php:1347
+#: engine/ICE/dom/style.php:1028
 msgid "Thick"
 msgstr ""
 
-#: engine/ICE/dom/style.php:1360
+#: engine/ICE/dom/style.php:1041
 msgid "Black"
 msgstr ""
 
-#: engine/ICE/dom/style.php:1361
+#: engine/ICE/dom/style.php:1042
 msgid "Silver"
 msgstr ""
 
-#: engine/ICE/dom/style.php:1362
+#: engine/ICE/dom/style.php:1043
 msgid "Gray"
 msgstr ""
 
-#: engine/ICE/dom/style.php:1363
+#: engine/ICE/dom/style.php:1044
 msgid "White"
 msgstr ""
 
-#: engine/ICE/dom/style.php:1364
+#: engine/ICE/dom/style.php:1045
 msgid "Maroon"
 msgstr ""
 
-#: engine/ICE/dom/style.php:1365
+#: engine/ICE/dom/style.php:1046
 msgid "Red"
 msgstr ""
 
-#: engine/ICE/dom/style.php:1366
+#: engine/ICE/dom/style.php:1047
 msgid "Purple"
 msgstr ""
 
-#: engine/ICE/dom/style.php:1367
+#: engine/ICE/dom/style.php:1048
 msgid "Fuchsia"
 msgstr ""
 
-#: engine/ICE/dom/style.php:1368
+#: engine/ICE/dom/style.php:1049
 msgid "Green"
 msgstr ""
 
-#: engine/ICE/dom/style.php:1369
+#: engine/ICE/dom/style.php:1050
 msgid "Lime"
 msgstr ""
 
-#: engine/ICE/dom/style.php:1370
+#: engine/ICE/dom/style.php:1051
 msgid "Olive"
 msgstr ""
 
-#: engine/ICE/dom/style.php:1371
+#: engine/ICE/dom/style.php:1052
 msgid "Yellow"
 msgstr ""
 
-#: engine/ICE/dom/style.php:1372
+#: engine/ICE/dom/style.php:1053
 msgid "Navy"
 msgstr ""
 
-#: engine/ICE/dom/style.php:1373
+#: engine/ICE/dom/style.php:1054
 msgid "Blue"
 msgstr ""
 
-#: engine/ICE/dom/style.php:1374
+#: engine/ICE/dom/style.php:1055
 msgid "Teal"
 msgstr ""
 
-#: engine/ICE/dom/style.php:1375
+#: engine/ICE/dom/style.php:1056
 msgid "Aqua"
 msgstr ""
 
-#: engine/ICE/dom/style.php:1399
+#: engine/ICE/dom/style.php:1080
 msgid "Times (serif)"
 msgstr ""
 
-#: engine/ICE/dom/style.php:1400
+#: engine/ICE/dom/style.php:1081
 msgid "Helvetica (sans-serif)"
 msgstr ""
 
-#: engine/ICE/dom/style.php:1401
+#: engine/ICE/dom/style.php:1082
 msgid "Courier (monospace)"
 msgstr ""
 
-#: engine/ICE/dom/style.php:1402
+#: engine/ICE/dom/style.php:1083
 msgid "Zapf-Chancery (cursive)"
 msgstr ""
 
-#: engine/ICE/dom/style.php:1403
+#: engine/ICE/dom/style.php:1084
 msgid "Western (fantasy)"
 msgstr ""
 
-#: engine/ICE/dom/style.php:1415
+#: engine/ICE/dom/style.php:1096
 msgid "Lighter"
 msgstr ""
 
-#: engine/ICE/dom/style.php:1416
-#: engine/ICE/ext/options/ui/font-picker/template.php:31
+#: engine/ICE/dom/style.php:1097
+#: engine/ICE/ext/options/ui/font-picker/template.php:32
 msgid "Normal"
 msgstr ""
 
-#: engine/ICE/dom/style.php:1417
+#: engine/ICE/dom/style.php:1098
 msgid "Bold"
 msgstr ""
 
-#: engine/ICE/dom/style.php:1418
+#: engine/ICE/dom/style.php:1099
 msgid "Bolder"
 msgstr ""
 
-#: engine/ICE/ext/features/bp/fb-autoconnect/class.php:55
+#: engine/ICE/ext/features/bp/fb-autoconnect/class.php:31
 msgid "FaceBook Auto Connect"
 msgstr ""
 
-#: engine/ICE/ext/features/bp/fb-autoconnect/class.php:56
+#: engine/ICE/ext/features/bp/fb-autoconnect/class.php:32
 msgid "Enables FaceBook Auto Connect support"
 msgstr ""
 
-#: engine/ICE/ext/features/bp/support/class.php:63
-msgid ""
-"You have BuddyPress activated, but the templates are missing from your theme!"
+#: engine/ICE/ext/features/bp/protect/class.php:45
+msgid "BuddyPress Protect"
 msgstr ""
 
-#: engine/ICE/ext/features/bp/support/class.php:94
-msgid "My Favorites"
+#: engine/ICE/ext/features/bp/protect/class.php:46
+msgid "Restrict access to your BuddyPress components to members only"
 msgstr ""
 
-#: engine/ICE/ext/features/bp/support/class.php:95
-msgid "Accepted"
+#: engine/ICE/ext/features/bp/tour/class.php:31
+msgid "BuddyPress Tour"
 msgstr ""
 
-#: engine/ICE/ext/features/bp/support/class.php:96
-msgid "Rejected"
+#: engine/ICE/ext/features/bp/tour/class.php:32
+msgid "Gives users a tour of the BuddyPress activity stream"
 msgstr ""
 
-#: engine/ICE/ext/features/bp/support/class.php:97
-msgid "Show all comments for this thread"
-msgstr ""
-
-#: engine/ICE/ext/features/bp/support/class.php:98
-msgid "Show all"
-msgstr ""
-
-#: engine/ICE/ext/features/bp/support/class.php:99
-msgid "comments"
-msgstr ""
-
-#: engine/ICE/ext/features/bp/support/class.php:100
-msgid "Close"
-msgstr ""
-
-#: engine/ICE/ext/features/bp/support/class.php:101
-msgid "View"
-msgstr ""
-
-#: engine/ICE/ext/features/bp/support/class.php:102
-msgid "Favorite"
-msgstr ""
-
-#: engine/ICE/ext/features/bp/support/class.php:103
-msgid "Remove Favorite"
-msgstr ""
-
-#: engine/ICE/ext/features/header-logo/class.php:35
+#: engine/ICE/ext/features/header-logo/class.php:29
 msgid "Header Logo"
 msgstr ""
 
-#: engine/ICE/ext/features/header-logo/class.php:36
+#: engine/ICE/ext/features/header-logo/class.php:30
 msgid "Custom header logo support"
+msgstr ""
+
+#: engine/ICE/ext/features/scripts/joyride/class.php:169
+msgid "Joyride Plugin"
+msgstr ""
+
+#: engine/ICE/ext/features/scripts/joyride/class.php:170
+msgid "A wrapper for the jQuery Joyride plugin"
 msgstr ""
 
 #: engine/ICE/ext/options/categories/class.php:45
 msgid "Categories"
 msgstr ""
 
-#: engine/ICE/ext/options/css/bg-color/class.php:33
+#: engine/ICE/ext/options/css/bg-color/class.php:29
+#: engine/config/features.php:719
 msgid "Background Color"
 msgstr ""
 
-#: engine/ICE/ext/options/css/bg-color/class.php:34
+#: engine/ICE/ext/options/css/bg-color/class.php:30
 msgid "Choose a background color"
 msgstr ""
 
-#: engine/ICE/ext/options/css/bg-image/class.php:33
+#: engine/ICE/ext/options/css/bg-image/class.php:28
 msgid "Background Image"
 msgstr ""
 
-#: engine/ICE/ext/options/css/bg-image/class.php:34
+#: engine/ICE/ext/options/css/bg-image/class.php:29
 msgid "Upload an image to use as the background"
 msgstr ""
 
-#: engine/ICE/ext/options/css/bg-repeat/class.php:33
+#: engine/ICE/ext/options/css/bg-repeat/class.php:28
 msgid "Background Image Tiling"
 msgstr ""
 
-#: engine/ICE/ext/options/css/bg-repeat/class.php:34
+#: engine/ICE/ext/options/css/bg-repeat/class.php:29
 msgid "Set the tiling mode of the background image"
 msgstr ""
 
-#: engine/ICE/ext/options/css/border-style/class.php:33
+#: engine/ICE/ext/options/css/border-style/class.php:28
 msgid "Border Style"
 msgstr ""
 
-#: engine/ICE/ext/options/css/border-style/class.php:34
+#: engine/ICE/ext/options/css/border-style/class.php:29
 msgid "Choose a style for the border"
 msgstr ""
 
-#: engine/ICE/ext/options/plugins/domain-mapping/class.php:36
+#: engine/ICE/ext/options/css/overlay-image/class.php:28
+msgid "Background Overlay"
+msgstr ""
+
+#: engine/ICE/ext/options/css/overlay-image/class.php:29
+msgid "Select a texture to use as the background overlay"
+msgstr ""
+
+#: engine/ICE/ext/options/css/overlay-opacity/class.php:48
+msgid "Overlay Opacity"
+msgstr ""
+
+#: engine/ICE/ext/options/css/overlay-opacity/class.php:49
+msgid "Select the overlay opacity by moving the slider"
+msgstr ""
+
+#: engine/ICE/ext/options/plugins/domain-mapping/class.php:28
 msgid "Custom Domain"
 msgstr ""
 
-#: engine/ICE/ext/options/plugins/domain-mapping/class.php:37
+#: engine/ICE/ext/options/plugins/domain-mapping/class.php:29
 msgid "Enter the custom domain name you wish to map to your site."
 msgstr ""
 
-#: engine/ICE/ext/options/position/left-center-right/class.php:31
-#: engine/ICE/ext/options/position/left-right/class.php:31
+#: engine/ICE/ext/options/position/left-center-right/class.php:29
+#: engine/ICE/ext/options/position/left-right/class.php:29
 msgid "Left"
 msgstr ""
 
-#: engine/ICE/ext/options/position/left-center-right/class.php:32
+#: engine/ICE/ext/options/position/left-center-right/class.php:30
 msgid "Center"
 msgstr ""
 
-#: engine/ICE/ext/options/position/left-center-right/class.php:33
-#: engine/ICE/ext/options/position/left-right/class.php:32
+#: engine/ICE/ext/options/position/left-center-right/class.php:31
+#: engine/ICE/ext/options/position/left-right/class.php:30
 msgid "Right"
 msgstr ""
 
-#: engine/ICE/ext/options/position/top-bottom/class.php:31
+#: engine/ICE/ext/options/position/top-bottom/class.php:29
 msgid "Top"
 msgstr ""
 
-#: engine/ICE/ext/options/position/top-bottom/class.php:32
+#: engine/ICE/ext/options/position/top-bottom/class.php:30
 msgid "Bottom"
 msgstr ""
 
-#: engine/ICE/ext/options/toggle/disable/class.php:32
-#: engine/ICE/ext/options/toggle/enable-disable/class.php:32
+#: engine/ICE/ext/options/toggle/disable/class.php:30
+#: engine/ICE/ext/options/toggle/enable-disable/class.php:30
 msgid "Disable"
 msgstr ""
 
-#: engine/ICE/ext/options/toggle/enable/class.php:31
-#: engine/ICE/ext/options/toggle/enable-disable/class.php:31
+#: engine/ICE/ext/options/toggle/enable/class.php:29
+#: engine/ICE/ext/options/toggle/enable-disable/class.php:29
 msgid "Enable"
 msgstr ""
 
-#: engine/ICE/ext/options/toggle/no/class.php:32
-#: engine/ICE/ext/options/toggle/yes-no/class.php:32
+#: engine/ICE/ext/options/toggle/no/class.php:30
+#: engine/ICE/ext/options/toggle/yes-no/class.php:30
 msgid "No"
 msgstr ""
 
-#: engine/ICE/ext/options/toggle/off/class.php:32
-#: engine/ICE/ext/options/toggle/on-off/class.php:32
+#: engine/ICE/ext/options/toggle/off/class.php:30
+#: engine/ICE/ext/options/toggle/on-off/class.php:30
 msgid "Off"
 msgstr ""
 
-#: engine/ICE/ext/options/toggle/on/class.php:31
-#: engine/ICE/ext/options/toggle/on-off/class.php:31
+#: engine/ICE/ext/options/toggle/on/class.php:29
+#: engine/ICE/ext/options/toggle/on-off/class.php:29
 msgid "On"
 msgstr ""
 
-#: engine/ICE/ext/options/toggle/yes/class.php:31
-#: engine/ICE/ext/options/toggle/yes-no/class.php:31
+#: engine/ICE/ext/options/toggle/yes/class.php:29
+#: engine/ICE/ext/options/toggle/yes-no/class.php:29
 msgid "Yes"
 msgstr ""
 
-#: engine/ICE/ext/options/ui/font-picker/template.php:32
+#: engine/ICE/ext/options/ui/font-picker/template.php:31
+msgid "Slant"
+msgstr ""
+
+#: engine/ICE/ext/options/ui/font-picker/template.php:33
 msgid "Italic"
+msgstr ""
+
+#: engine/ICE/ext/options/ui/font-picker/template.php:34
+msgid "Service"
+msgstr ""
+
+#: engine/ICE/ext/options/ui/font-picker/template.php:35
+msgid "Thickness"
+msgstr ""
+
+#: engine/ICE/ext/options/ui/font-picker/template.php:36
+msgid "Script"
 msgstr ""
 
 #: engine/ICE/ext/options/ui/scroll-picker/template.php:19
@@ -591,15 +447,15 @@ msgstr ""
 msgid "None"
 msgstr ""
 
-#: engine/ICE/ext/options/ui/slider/class.php:216
+#: engine/ICE/ext/options/ui/slider/class.php:187
 msgid "Current selection:"
 msgstr ""
 
-#: engine/ICE/ext/options/upload/class.php:151
+#: engine/ICE/ext/options/upload/class.php:158
 msgid "Failed to lookup attachment URL"
 msgstr ""
 
-#: engine/ICE/ext/options/upload/class.php:154
+#: engine/ICE/ext/options/upload/class.php:161
 msgid "No attachment ID received"
 msgstr ""
 
@@ -620,7 +476,7 @@ msgid "Zoom"
 msgstr ""
 
 #: engine/ICE/ext/options/upload/template.php:34
-#: engine/ICE/ext/widgets/posts-list/class.php:504
+#: engine/ICE/ext/widgets/posts-list/class.php:502
 msgid "Trash"
 msgstr ""
 
@@ -628,81 +484,72 @@ msgstr ""
 msgid "Disable image, including default"
 msgstr ""
 
-#: engine/ICE/ext/options/upload/template.php:62
+#: engine/ICE/ext/options/upload/template.php:63
 msgid "Media Uploader"
 msgstr ""
 
-#: engine/ICE/ext/options/upload/template.php:66
+#: engine/ICE/ext/options/upload/template.php:67
 msgid "Zoom!"
 msgstr ""
 
-#: engine/ICE/ext/sections/default/template.php:18
-msgid "Options"
-msgstr ""
-
-#: engine/ICE/ext/shortcodes/access/template.php:22
-#: engine/ICE/ext/shortcodes/visitor/template.php:22
-msgid "Sorry, only registered users can see this text."
-msgstr ""
-
-#: engine/ICE/ext/widgets/posts-list/class.php:162
+#: engine/ICE/ext/widgets/posts-list/class.php:165
 msgid "%d items updated, %d items failed"
 msgstr ""
 
-#: engine/ICE/ext/widgets/posts-list/class.php:171
+#: engine/ICE/ext/widgets/posts-list/class.php:174
 msgid "%d items updated"
 msgstr ""
 
-#: engine/ICE/ext/widgets/posts-list/class.php:177
+#: engine/ICE/ext/widgets/posts-list/class.php:180
 msgid "No items received"
 msgstr ""
 
-#: engine/ICE/ext/widgets/posts-list/class.php:180
-#: engine/ICE/ext/widgets/posts-list/class.php:216
+#: engine/ICE/ext/widgets/posts-list/class.php:183
+#: engine/ICE/ext/widgets/posts-list/class.php:219
 msgid "Missing required data"
 msgstr ""
 
-#: engine/ICE/ext/widgets/posts-list/class.php:208
+#: engine/ICE/ext/widgets/posts-list/class.php:211
 msgid "Item status updated"
 msgstr ""
 
-#: engine/ICE/ext/widgets/posts-list/class.php:210
+#: engine/ICE/ext/widgets/posts-list/class.php:213
 msgid "Item status update failed"
 msgstr ""
 
-#: engine/ICE/ext/widgets/posts-list/class.php:213
+#: engine/ICE/ext/widgets/posts-list/class.php:216
 msgid "Invalid item status"
 msgstr ""
 
-#: engine/ICE/ext/widgets/posts-list/class.php:233
+#: engine/ICE/ext/widgets/posts-list/class.php:236
 msgid "Item moved to trash"
 msgstr ""
 
-#: engine/ICE/ext/widgets/posts-list/class.php:235
+#: engine/ICE/ext/widgets/posts-list/class.php:238
 msgid "Move item to trash failed"
 msgstr ""
 
-#: engine/ICE/ext/widgets/posts-list/class.php:239
+#: engine/ICE/ext/widgets/posts-list/class.php:242
 msgid "Missing item id"
 msgstr ""
 
-#: engine/ICE/ext/widgets/posts-list/class.php:475
+#: engine/ICE/ext/widgets/posts-list/class.php:473
 msgid "Draft"
 msgstr ""
 
-#: engine/ICE/ext/widgets/posts-list/class.php:477
+#: engine/ICE/ext/widgets/posts-list/class.php:475
 msgid "Published"
 msgstr ""
 
-#: engine/ICE/ext/widgets/posts-list/class.php:481
+#: engine/ICE/ext/widgets/posts-list/class.php:479
 msgid "Pending"
 msgstr ""
 
-#: engine/ICE/ext/widgets/posts-list/class.php:485
+#: engine/ICE/ext/widgets/posts-list/class.php:483
 msgid "Scheduled"
 msgstr ""
 
-#: engine/ICE/ext/widgets/posts-list/class.php:489
+#: engine/ICE/ext/widgets/posts-list/class.php:487
 msgid "Trashed"
 msgstr ""
 
@@ -710,165 +557,1429 @@ msgstr ""
 msgid "Create New"
 msgstr ""
 
-#: engine/api/options.php:574
+#: engine/ICE/init/settings.php:45
+msgid "Cannot overwrite the value of setting \"%s\" for theme \"%s\"."
+msgstr ""
+
+#: engine/api/options.php:376
 msgid "Failed to render options"
 msgstr ""
 
-#: engine/extensions/options/css/overlay-image/class.php:33
-msgid "Background Overlay"
+#: engine/config/features.php:31 engine/config/features.php:1198
+#: engine/config/features.php:1208
+msgid "Custom CSS"
 msgstr ""
 
-#: engine/extensions/options/css/overlay-image/class.php:34
-msgid "Select a texture to use as the background overlay"
+#: engine/config/features.php:32
+msgid "Core set of options included with Infinity Base"
 msgstr ""
 
-#: engine/extensions/options/css/overlay-opacity/class.php:41
-msgid "Overlay Opacity"
+#: engine/config/features.php:46 engine/config/features.php:484
+#: engine/config/features.php:1566 engine/config/features.php:1743
+#: engine/config/features.php:1754
+msgid "Text Color"
 msgstr ""
 
-#: engine/extensions/options/css/overlay-opacity/class.php:42
-msgid "Select the overlay opacity by moving the slider"
+#: engine/config/features.php:47
+msgid "Choose a text color"
 msgstr ""
 
-#: engine/includes/base.php:125
+#: engine/config/features.php:58 engine/config/features.php:495
+#: engine/config/features.php:1578 engine/config/features.php:1765
+msgid "Link Color"
+msgstr ""
+
+#: engine/config/features.php:59
+msgid "Choose a link color"
+msgstr ""
+
+#: engine/config/features.php:70
+msgid "Site Favicon"
+msgstr ""
+
+#: engine/config/features.php:71
+msgid "Upload a favicon for your site"
+msgstr ""
+
+#: engine/config/features.php:81
+msgid "Sidebar Position"
+msgstr ""
+
+#: engine/config/features.php:82
+msgid "Choose on which side you want to display the sidebar"
+msgstr ""
+
+#: engine/config/features.php:97
+msgid "Sidebar Size"
+msgstr ""
+
+#: engine/config/features.php:98
+msgid "Select a sidebar size"
+msgstr ""
+
+#: engine/config/features.php:119
+msgid "Google Analytics Code"
+msgstr ""
+
+#: engine/config/features.php:120
+msgid ""
+"Paste your GA Tracking code in the text area below. Including the script "
+"tags!"
+msgstr ""
+
+#: engine/config/features.php:130
+msgid "Footer Text"
+msgstr ""
+
+#: engine/config/features.php:131
+msgid ""
+"The footer text that appears at the bottom of every page, below the "
+"widgetized footer areas. This is commonly used for copyright, designed by, "
+"and powered by text. HTML tags are allowed."
+msgstr ""
+
+#: engine/config/features.php:132
+msgid ""
+"Infinity by <a href=http://infinity.presscrew.com>PressCrew</a> and powered "
+"by <a href=http://wordpress.org>WordPress</a>."
+msgstr ""
+
+#: engine/config/features.php:148
+msgid "Above Header Menu Setup"
+msgstr ""
+
+#: engine/config/features.php:149
+msgid "Register the menu above the header."
+msgstr ""
+
+#: engine/config/features.php:159 engine/config/features.php:355
+msgid "Sub Menu Styles"
+msgstr ""
+
+#: engine/config/features.php:160
+msgid "Customize the layout and colors of the menu above the header."
+msgstr ""
+
+#: engine/config/features.php:174 engine/config/features.php:272
+#: engine/config/features.php:370
+msgid "Font Color"
+msgstr ""
+
+#: engine/config/features.php:175
+msgid "Choose a font color for links of the menu above the header."
+msgstr ""
+
+#: engine/config/features.php:186 engine/config/features.php:284
+#: engine/config/features.php:382 engine/config/features.php:1670
+msgid "Font Weight"
+msgstr ""
+
+#: engine/config/features.php:187
+msgid "Choose a font weight for links of the menu above the header."
+msgstr ""
+
+#: engine/config/features.php:207 engine/config/features.php:403
+msgid "Sub-item Background"
+msgstr ""
+
+#: engine/config/features.php:208
+msgid ""
+"Choose a background color for the submenu items of the menu above the header."
+msgstr ""
+
+#: engine/config/features.php:246
+msgid "Inside Header Menu Setup"
+msgstr ""
+
+#: engine/config/features.php:247
+msgid "Register the menu inside the header."
+msgstr ""
+
+#: engine/config/features.php:257
+msgid "Main Menu Styles"
+msgstr ""
+
+#: engine/config/features.php:258
+msgid "Customize the layout and colors of the menu inside the header."
+msgstr ""
+
+#: engine/config/features.php:273
+msgid "Choose a font color for links of the menu inside the header."
+msgstr ""
+
+#: engine/config/features.php:285
+msgid "Choose a font weight for links of the menu inside the header."
+msgstr ""
+
+#: engine/config/features.php:296 engine/config/features.php:709
+#: engine/config/features.php:1682
+msgid "Padding"
+msgstr ""
+
+#: engine/config/features.php:297
+msgid ""
+"Select the padding (spacing) around the menu links by moving the slider."
+msgstr ""
+
+#: engine/config/features.php:344
+msgid "Below Header Menu Setup"
+msgstr ""
+
+#: engine/config/features.php:345
+msgid "Register the menu below the header."
+msgstr ""
+
+#: engine/config/features.php:356
+msgid "Customize the layout and colors of the menu below the header."
+msgstr ""
+
+#: engine/config/features.php:371
+msgid "Choose a font color for links of the menu below the header."
+msgstr ""
+
+#: engine/config/features.php:383
+msgid "Choose a font weight for links of the menu below the header."
+msgstr ""
+
+#: engine/config/features.php:404
+msgid ""
+"Choose a background color for the submenu items of the menu below the header."
+msgstr ""
+
+#: engine/config/features.php:440
+msgid "Footer Menu Setup"
+msgstr ""
+
+#: engine/config/features.php:441
+msgid "Register the footer menu."
+msgstr ""
+
+#: engine/config/features.php:457
+msgid "Sidebar Setup"
+msgstr ""
+
+#: engine/config/features.php:458
+msgid "Sidebar Registration"
+msgstr ""
+
+#: engine/config/features.php:468
+msgid "sidebar Styles"
+msgstr ""
+
+#: engine/config/features.php:469
+msgid "Customize the layout and colors of the sidebar"
+msgstr ""
+
+#: engine/config/features.php:485
+msgid "Choose a color for text in the sidebar."
+msgstr ""
+
+#: engine/config/features.php:496
+msgid "Choose a color for links in the sidebar."
+msgstr ""
+
+#: engine/config/features.php:557
+msgid "Pagination"
+msgstr ""
+
+#: engine/config/features.php:558
+msgid "Enable pagination for your (custom) posts"
+msgstr ""
+
+#: engine/config/features.php:568
+msgid "Introduction Boxes"
+msgstr ""
+
+#: engine/config/features.php:569
+msgid "Introduction boxes that show above category, tag and author archives"
+msgstr ""
+
+#: engine/config/features.php:579
+msgid "Author Boxes"
+msgstr ""
+
+#: engine/config/features.php:580
+msgid ""
+"Enable About the Author Boxes being displayed on single posts and author "
+"archives"
+msgstr ""
+
+#: engine/config/features.php:590
+msgid "Post Avatars"
+msgstr ""
+
+#: engine/config/features.php:591
+msgid "Enable Post avatars being displayed on single posts and pages"
+msgstr ""
+
+#: engine/config/features.php:606 engine/config/sections.php:150
+msgid "Post Gravatars"
+msgstr ""
+
+#: engine/config/features.php:607
+msgid "Total control over post gravatars"
+msgstr ""
+
+#: engine/config/features.php:622
+msgid "Size"
+msgstr ""
+
+#: engine/config/features.php:623
+msgid "Enter the size in pixels for the Gravatar image"
+msgstr ""
+
+#: engine/config/features.php:632
+msgid "Default Image Set"
+msgstr ""
+
+#: engine/config/features.php:633
+msgid "Select the default image set to use"
+msgstr ""
+
+#: engine/config/features.php:651
+msgid "Default Image File"
+msgstr ""
+
+#: engine/config/features.php:652
+msgid "Upload a default Gravatar image (overrides default set)"
+msgstr ""
+
+#: engine/config/features.php:661
+msgid "Force Default"
+msgstr ""
+
+#: engine/config/features.php:662
+msgid "Force default image to always load?"
+msgstr ""
+
+#: engine/config/features.php:672
+msgid "Rating"
+msgstr ""
+
+#: engine/config/features.php:673
+msgid "Select highest image rating to display"
+msgstr ""
+
+#: engine/config/features.php:689
+msgid "Border Width"
+msgstr ""
+
+#: engine/config/features.php:690
+msgid "Enter a border width in pixels for the Gravatar image"
+msgstr ""
+
+#: engine/config/features.php:699
+msgid "Border Color"
+msgstr ""
+
+#: engine/config/features.php:700
+msgid "Select a color for the Gravatar image border"
+msgstr ""
+
+#: engine/config/features.php:710
+msgid "Enter a padding size in pixels for the Gravatar image"
+msgstr ""
+
+#: engine/config/features.php:720
+msgid "Select a background color for the Gravatar image"
+msgstr ""
+
+#: engine/config/features.php:736
+msgid "The Icon Font-Face being used"
+msgstr ""
+
+#: engine/config/features.php:737 engine/config/features.php:1145
+msgid "Icons"
+msgstr ""
+
+#: engine/config/features.php:753
+msgid "Wordpress Support"
+msgstr ""
+
+#: engine/config/features.php:754
+msgid "Enables WordPress support"
+msgstr ""
+
+#: engine/config/features.php:765
+msgid "WordPress Styles"
+msgstr ""
+
+#: engine/config/features.php:766
+msgid "The base WordPress styling"
+msgstr ""
+
+#: engine/config/features.php:782
+msgid "BuddyPress Support"
+msgstr ""
+
+#: engine/config/features.php:783
+msgid "Enables BuddyPress support"
+msgstr ""
+
+#: engine/config/features.php:793
+msgid "BuddyPress Styles"
+msgstr ""
+
+#: engine/config/features.php:794
+msgid "The base BuddyPress styles"
+msgstr ""
+
+#: engine/config/features.php:807
+msgid "BuddyPress Sidebar"
+msgstr ""
+
+#: engine/config/features.php:808
+msgid "Special BuddyPress sidebar registration"
+msgstr ""
+
+#: engine/config/features.php:824
+msgid "Other Plugins Styles"
+msgstr ""
+
+#: engine/config/features.php:825
+msgid "Other plugins support styles"
+msgstr ""
+
+#: engine/config/features.php:851
+msgid "FaceBook Connect"
+msgstr ""
+
+#: engine/config/features.php:852
+msgid "Show connect with Facebook button?"
+msgstr ""
+
+#: engine/config/features.php:877
+msgid "Private Community"
+msgstr ""
+
+#: engine/config/features.php:878
+msgid ""
+"Turn this option on to restrict access to your BuddyPress components to "
+"members only."
+msgstr ""
+
+#: engine/config/features.php:907
+msgid "Activity Stream Tour"
+msgstr ""
+
+#: engine/config/features.php:908
+msgid "The first text that is being displayed before the tour starts."
+msgstr ""
+
+#: engine/config/features.php:909
+msgid ""
+"<h4>Hi there!</h4> It seems that this is the first time you've visited our "
+"Activity Stream, so let's give you a quick tour of our Features! Ready? "
+"Let's do this!"
+msgstr ""
+
+#: engine/config/features.php:917
+msgid "All Members Text"
+msgstr ""
+
+#: engine/config/features.php:918
+msgid "The text explaining the All Members button."
+msgstr ""
+
+#: engine/config/features.php:919
+msgid ""
+"<h4>All Members</h4> If you like to get a nice overview of <em>all the "
+"activity</em> posted by our community, this is the button to click!"
+msgstr ""
+
+#: engine/config/features.php:927
+msgid "Friends Text"
+msgstr ""
+
+#: engine/config/features.php:928
+msgid "The text explaining the Friends button."
+msgstr ""
+
+#: engine/config/features.php:929
+msgid ""
+"<h4>My Friends</h4> Keep track of what your friends are doing. No buddies "
+"yet? Why don't you make some by visting the Members Directory!</a>"
+msgstr ""
+
+#: engine/config/features.php:937
+msgid "Groups Text"
+msgstr ""
+
+#: engine/config/features.php:938
+msgid "The text explaining the Groups button."
+msgstr ""
+
+#: engine/config/features.php:939
+msgid ""
+"<h4>My Groups</h4> By clicking the &quot;My Groups&quot; button you can keep "
+"track of what's happening in the groups you've joined. Not a member of a "
+"group yet? Check out the Groups Directory!</a>"
+msgstr ""
+
+#: engine/config/features.php:947
+msgid "Mentions Text"
+msgstr ""
+
+#: engine/config/features.php:948
+msgid "The text explaining the Mentions button."
+msgstr ""
+
+#: engine/config/features.php:949
+msgid ""
+"<h4>Mentions</h4> You can easily &quot;Mention&quot; others in your updates "
+"or forum posts across our community. As soon as someone mentions you using "
+"@yourname you'll see these mentions appear under this button."
+msgstr ""
+
+#: engine/config/features.php:957
+msgid "Favorites Text"
+msgstr ""
+
+#: engine/config/features.php:958
+msgid "The text explaining the Favorites button."
+msgstr ""
+
+#: engine/config/features.php:959
+msgid ""
+"<h4>Keep Track</h4> If there's a conversation brewing that you find "
+"interesting, you can add your voice by clicking on the <strong>Comment</"
+"strong> button. By using the <strong>Favorite</strong> button you can easily "
+"bookmark the conversation so you go back to it back later. Go ahead and "
+"<strong>try it</strong> by clicking on a &quot;Favorite&quot; button!"
+msgstr ""
+
+#: engine/config/features.php:967
+msgid "Filter Text"
+msgstr ""
+
+#: engine/config/features.php:968
+msgid "The text explaining the filter dropdown."
+msgstr ""
+
+#: engine/config/features.php:969
+msgid ""
+"<h4>Use the filter!</h4> You can filter the stream to only show the items "
+"that have caught your interest. For instance you could use the filter "
+"<strong>Posts</strong> to show blog posts from across our network. Awesome!"
+msgstr ""
+
+#: engine/config/features.php:977
+msgid "Update Text"
+msgstr ""
+
+#: engine/config/features.php:978
+msgid "The last text in the tour prompting your user to post an update."
+msgstr ""
+
+#: engine/config/features.php:979
+msgid ""
+"<h4>Update Away!</h4> We have taught you everything you need to know to get "
+"started! It's time for you to post your first update. Good luck young "
+"grasshopper, we've taught you well!"
+msgstr ""
+
+#: engine/config/features.php:995
+msgid "Extension Styles"
+msgstr ""
+
+#: engine/config/features.php:996
+msgid "Enables extensions support"
+msgstr ""
+
+#: engine/config/features.php:1012
+msgid "Responsive Layout"
+msgstr ""
+
+#: engine/config/features.php:1013
+msgid "Enables responsive layout support"
+msgstr ""
+
+#: engine/config/features.php:1024
+msgid "Responsive Menu"
+msgstr ""
+
+#: engine/config/features.php:1025
+msgid "Enables the responsive menu javascript"
+msgstr ""
+
+#: engine/config/features.php:1039
+msgid "Responsive Videos"
+msgstr ""
+
+#: engine/config/features.php:1040
+msgid "Enables the responsive videos javascript"
+msgstr ""
+
+#: engine/config/features.php:1056
+msgid "Typography Styles"
+msgstr ""
+
+#: engine/config/features.php:1057
+msgid "The base Typography styling"
+msgstr ""
+
+#: engine/config/features.php:1073
+msgid "Layout Styles"
+msgstr ""
+
+#: engine/config/features.php:1074
+msgid "The base layout styling"
+msgstr ""
+
+#: engine/config/features.php:1090
+msgid "extras Styles"
+msgstr ""
+
+#: engine/config/features.php:1091
+msgid "The base buttons styling"
+msgstr ""
+
+#: engine/config/features.php:1102
+msgid "Custom button colors"
+msgstr ""
+
+#: engine/config/features.php:1103
+msgid "Custom button colors."
+msgstr ""
+
+#: engine/config/features.php:1114
+msgid "Button Color"
+msgstr ""
+
+#: engine/config/features.php:1115
+msgid "Choose a button color."
+msgstr ""
+
+#: engine/config/features.php:1144
+msgid "The Icons used across the theme"
+msgstr ""
+
+#: engine/config/features.php:1161
+msgid "Design Styles"
+msgstr ""
+
+#: engine/config/features.php:1162
+msgid "The styles which fancy things up a bit"
+msgstr ""
+
+#: engine/config/features.php:1178
+msgid "Base Javascript"
+msgstr ""
+
+#: engine/config/features.php:1179
+msgid "Some jQuery to spice up the Base Theme"
+msgstr ""
+
+#: engine/config/features.php:1199
+msgid "Allow custom CSS to be provided with theme options"
+msgstr ""
+
+#: engine/config/features.php:1209
+msgid "Enter custom CSS markup to fine tune the look of your site"
+msgstr ""
+
+#: engine/config/features.php:1224
+msgid "Body Layout"
+msgstr ""
+
+#: engine/config/features.php:1225
+msgid "Change the Body according to your taste"
+msgstr ""
+
+#: engine/config/features.php:1240
+msgid "Maximum Width"
+msgstr ""
+
+#: engine/config/features.php:1241
+msgid ""
+"Set the maximum width of the site's content between %min% and %max% pixels "
+"by moving the slider."
+msgstr ""
+
+#: engine/config/features.php:1306
+msgid "Header Styles"
+msgstr ""
+
+#: engine/config/features.php:1307
+msgid "Customize the layout and colors of the header"
+msgstr ""
+
+#: engine/config/features.php:1322
+msgid "Height"
+msgstr ""
+
+#: engine/config/features.php:1323
+msgid "Select the height of the header by moving the slider"
+msgstr ""
+
+#: engine/config/features.php:1336 engine/config/features.php:1777
+msgid "Top Margin"
+msgstr ""
+
+#: engine/config/features.php:1337
+msgid ""
+"The margin (spacing) between the top of the header and the top of the page."
+msgstr ""
+
+#: engine/config/features.php:1350
+msgid "Top Padding"
+msgstr ""
+
+#: engine/config/features.php:1351
+msgid ""
+"The padding (spacing) between the top of the header and the header content."
+msgstr ""
+
+#: engine/config/features.php:1364
+msgid "Bottom Margin"
+msgstr ""
+
+#: engine/config/features.php:1365
+msgid ""
+"The margin (spacing) between the bottom of the header and the top of the "
+"content section."
+msgstr ""
+
+#: engine/config/features.php:1378
+msgid "Bottom Padding"
+msgstr ""
+
+#: engine/config/features.php:1379
+msgid ""
+"The padding (spacing) between the bottom of the header and the header "
+"content."
+msgstr ""
+
+#: engine/config/features.php:1455
+msgid "Logo Image"
+msgstr ""
+
+#: engine/config/features.php:1456
+msgid "Upload a custom logo to appear in the header"
+msgstr ""
+
+#: engine/config/features.php:1465
+msgid "Logo Image On/Off"
+msgstr ""
+
+#: engine/config/features.php:1466
+msgid ""
+"Turn this Off to prevent any image logo from displaying, even the default."
+msgstr ""
+
+#: engine/config/features.php:1477
+msgid "Logo Position"
+msgstr ""
+
+#: engine/config/features.php:1478
+msgid "Select a position for the logo"
+msgstr ""
+
+#: engine/config/features.php:1489
+msgid "Logo Top Spacing"
+msgstr ""
+
+#: engine/config/features.php:1490
+msgid "Enter a height in pixels for top spacing"
+msgstr ""
+
+#: engine/config/features.php:1507
+msgid "Logo Left Spacing"
+msgstr ""
+
+#: engine/config/features.php:1508
+msgid "Enter a width in pixels for left spacing"
+msgstr ""
+
+#: engine/config/features.php:1525
+msgid "Logo Right Spacing"
+msgstr ""
+
+#: engine/config/features.php:1526
+msgid "Enter a width in pixels for right spacing"
+msgstr ""
+
+#: engine/config/features.php:1550
+msgid "Content Styles"
+msgstr ""
+
+#: engine/config/features.php:1551
+msgid "Customize the layout and colors of the content section."
+msgstr ""
+
+#: engine/config/features.php:1567
+msgid "Choose a color for text inside the content section."
+msgstr ""
+
+#: engine/config/features.php:1579
+msgid "Choose a color for links inside the content section."
+msgstr ""
+
+#: engine/config/features.php:1642
+msgid "Widget Styling"
+msgstr ""
+
+#: engine/config/features.php:1643
+msgid "Customize the layout and colors of widgets."
+msgstr ""
+
+#: engine/config/features.php:1658
+msgid "Widget Title Color"
+msgstr ""
+
+#: engine/config/features.php:1659
+msgid "Choose a font color for widget titles."
+msgstr ""
+
+#: engine/config/features.php:1671
+msgid "Choose a font weight for widget titles."
+msgstr ""
+
+#: engine/config/features.php:1683
+msgid "The padding (spacing) between any widget border and it's content."
+msgstr ""
+
+#: engine/config/features.php:1727
+msgid "footer Styles"
+msgstr ""
+
+#: engine/config/features.php:1728
+msgid "Customize the layout and colors of the footer"
+msgstr ""
+
+#: engine/config/features.php:1744 engine/config/features.php:1755
+msgid "Choose a color for text inside the footer section."
+msgstr ""
+
+#: engine/config/features.php:1766
+msgid "Choose a color for links inside the footer section."
+msgstr ""
+
+#: engine/config/features.php:1778
+msgid ""
+"The margin (spacing) between the bottom of the content section and the top "
+"of the footer."
+msgstr ""
+
+#: engine/config/options.php:35
+msgid "Post Thumbnail Height"
+msgstr ""
+
+#: engine/config/options.php:36
+msgid "The height in pixels of the featured images."
+msgstr ""
+
+#: engine/config/options.php:51
+msgid "Post Thumbnail Width"
+msgstr ""
+
+#: engine/config/options.php:52
+msgid "The width in pixels of the featured images."
+msgstr ""
+
+#: engine/config/screens.php:26
+msgid "Start"
+msgstr ""
+
+#: engine/config/screens.php:36
+#: engine/extensions/sections/cpanel/template.php:19
+msgid "Options"
+msgstr ""
+
+#: engine/config/sections.php:27
+msgid "General"
+msgstr ""
+
+#: engine/config/sections.php:35
+msgid "Global"
+msgstr ""
+
+#: engine/config/sections.php:43
+msgid "Custom"
+msgstr ""
+
+#: engine/config/sections.php:51
+msgid "Layout"
+msgstr ""
+
+#: engine/config/sections.php:59
+msgid "Header"
+msgstr ""
+
+#: engine/config/sections.php:67
+msgid "Menus"
+msgstr ""
+
+#: engine/config/sections.php:76 engine/includes/base.php:275
 msgid "Above Header"
 msgstr ""
 
-#: engine/includes/base.php:128
+#: engine/config/sections.php:85 engine/includes/base.php:278
 msgid "Inside Header"
 msgstr ""
 
-#: engine/includes/base.php:131
+#: engine/config/sections.php:94 engine/includes/base.php:281
 msgid "Below Header"
 msgstr ""
 
-#: engine/includes/base.php:134
-msgid "Inside Footer"
+#: engine/config/sections.php:102
+msgid "Content"
 msgstr ""
 
-#: engine/includes/comments.php:37
-msgid "at"
+#: engine/config/sections.php:110
+msgid "Sidebar"
 msgstr ""
 
-#: engine/includes/comments.php:38
-msgid "Direct link to this comment"
+#: engine/config/sections.php:118
+msgid "Widgets"
 msgstr ""
 
-#: engine/includes/comments.php:39
-msgid "Edit"
+#: engine/config/sections.php:126
+msgid "Footer"
 msgstr ""
 
-#: engine/includes/comments.php:44
-msgid "Your comment is awaiting moderation."
+#: engine/config/sections.php:134
+msgid "BuddyPress"
 msgstr ""
 
-#: engine/includes/templatetags.php:40
+#: engine/config/sections.php:142
+msgid "White Label"
+msgstr ""
+
+#: engine/config/sections.php:160
+msgid "Other"
+msgstr ""
+
+#: engine/config/widgets.php:16
+msgid "Edit blog pages"
+msgstr ""
+
+#: engine/config/widgets.php:17
+msgid "Edit your blog pages and modify the order"
+msgstr ""
+
+#: engine/dashboard/loader.php:52
+msgid "%s Options"
+msgstr ""
+
+#: engine/dashboard/support.php:69
+msgid "Enabled"
+msgstr ""
+
+#: engine/dashboard/support.php:71
+msgid "Disabled"
+msgstr ""
+
+#: engine/dashboard/support.php:91
+msgid "No other plugins are active"
+msgstr ""
+
+#: engine/dashboard/support.php:97
+msgid "subdomain"
+msgstr ""
+
+#: engine/dashboard/support.php:99
+msgid "subdirectory"
+msgstr ""
+
+#: engine/dashboard/support.php:102
+msgid "no"
+msgstr ""
+
+#: engine/dashboard/support.php:107
+msgid "default"
+msgstr ""
+
+#: engine/dashboard/support.php:110
+msgid "almost"
+msgstr ""
+
+#: engine/dashboard/support.php:112
+msgid "custom"
+msgstr ""
+
+#: engine/dashboard/support.php:116
+msgid "Installation Details"
+msgstr ""
+
+#: engine/dashboard/support.php:117
+msgid ""
+"If you are having issues with the theme and need support, below is some "
+"useful info about your installation."
+msgstr ""
+
+#: engine/dashboard/support.php:118
+msgid ""
+"Please submit this information with your support request so its easier for "
+"us to help you!"
+msgstr ""
+
+#: engine/dashboard/support.php:120
+msgid "Versions"
+msgstr ""
+
+#: engine/dashboard/support.php:122
+msgid "Infinity Version: %s"
+msgstr ""
+
+#: engine/dashboard/support.php:123
+msgid "Developer Mode: %s"
+msgstr ""
+
+#: engine/dashboard/support.php:124
+msgid "BuddyPress: %s"
+msgstr ""
+
+#: engine/dashboard/support.php:125
+msgid "MySQL: %s"
+msgstr ""
+
+#: engine/dashboard/support.php:126
+msgid "Permalinks: %s"
+msgstr ""
+
+#: engine/dashboard/support.php:127
+msgid "PHP: %s"
+msgstr ""
+
+#: engine/dashboard/support.php:128
+msgid "WordPress: %s"
+msgstr ""
+
+#: engine/dashboard/support.php:129
+msgid "WordPress multisite: %s"
+msgstr ""
+
+#: engine/dashboard/support.php:132
+msgid "Theme"
+msgstr ""
+
+#: engine/dashboard/support.php:134
+msgid "Current theme: %s version %s"
+msgstr ""
+
+#: engine/dashboard/support.php:137
+msgid "Active Plugins"
+msgstr ""
+
+#: engine/extensions/sections/cpanel/template_option.php:31
+msgid "Edit Setting"
+msgstr ""
+
+#: engine/extensions/sections/cpanel/template_option.php:33
+msgid "Documentation"
+msgstr ""
+
+#: engine/extensions/sections/cpanel/template_option.php:36
+msgid "Sample Code"
+msgstr ""
+
+#: engine/includes/base.php:209
 msgid "Page %s"
 msgstr ""
 
-#: engine/includes/templatetags.php:79 templates/parts/author-box.php:29
+#: engine/includes/base.php:284
+msgid "Inside Footer"
+msgstr ""
+
+#: engine/includes/menus.php:190
+msgctxt "the link in the header navigation bar"
+msgid "Home"
+msgstr ""
+
+#: engine/includes/menus.php:199
+msgctxt "the link in the header navigation bar"
+msgid "People"
+msgstr ""
+
+#: engine/includes/menus.php:207
+msgctxt "the link in the header navigation bar"
+msgid "Groups"
+msgstr ""
+
+#: engine/includes/menus.php:215
+msgctxt "the link in the header navigation bar"
+msgid "Blogs"
+msgstr ""
+
+#: engine/includes/menus.php:223
+msgctxt "the link in the header navigation bar"
+msgid "Activity"
+msgstr ""
+
+#: engine/includes/menus.php:232
+msgctxt "the link in the header navigation bar"
+msgid "Wiki"
+msgstr ""
+
+#: engine/includes/sidebars.php:166
+msgid "Sitemap"
+msgstr ""
+
+#: engine/includes/sidebars.php:565
+msgid "Welcome"
+msgstr ""
+
+#: engine/includes/sidebars.php:589
+msgid "<a %1$s>Join us</a> or <a %2$s>Login</a>"
+msgstr ""
+
+#: engine/includes/sidebars.php:596
+msgid ""
+"To modify the text of this widget, and other widgets you see throughout the "
+"site, visit <a %1$s>Dashboard > Appearance > Widgets</a>."
+msgstr ""
+
+#: engine/includes/sidebars.php:618
+msgid "Contact Us"
+msgstr ""
+
+#: engine/includes/sidebars.php:619
+msgid "Put your contact information in this widget."
+msgstr ""
+
+#: engine/includes/sidebars.php:641
+msgid "About"
+msgstr ""
+
+#: engine/includes/sidebars.php:642
+msgid "Some brief information about your site."
+msgstr ""
+
+#: engine/includes/sidebars.php:664
+msgid "Search"
+msgstr ""
+
+#: engine/includes/sidebars.php:686
+msgid "Archives"
+msgstr ""
+
+#: engine/includes/sidebars.php:708
+msgid "Pages"
+msgstr ""
+
+#: engine/includes/sidebars.php:730 engine/includes/sidebars.php:763
+#: engine/plugins/buddypress/widgets.php:181
+msgid "Recent Blog Posts"
+msgstr ""
+
+#: engine/includes/sidebars.php:792
+msgid "Recently Active Members"
+msgstr ""
+
+#: engine/includes/sidebars.php:822
+msgid "Who's Online"
+msgstr ""
+
+#: engine/includes/sidebars.php:852
+msgid "Members"
+msgstr ""
+
+#: engine/includes/sidebars.php:886
+msgid "Groups"
+msgstr ""
+
+#: engine/includes/sidebars.php:918
+msgid "Topic View List"
+msgstr ""
+
+#: engine/includes/sidebars.php:947
+msgid "Recent Topics"
+msgstr ""
+
+#: engine/includes/sidebars.php:977
+msgid "Recent Replies"
+msgstr ""
+
+#: engine/includes/sidebars.php:1009
+msgid "Welcome To The Wiki"
+msgstr ""
+
+#: engine/includes/sidebars.php:1024
+msgid ""
+"This sidebar appears on all Wiki pages. Use it to display content that you "
+"want your users to see whenever viewing the Wiki, such as a brief "
+"description of how wikis work, or a link to <a %1$s>create a new wiki page</"
+"a>."
+msgstr ""
+
+#: engine/includes/sidebars.php:1030
+msgid ""
+"To edit this widget, or to add more widgets to the sidebar, visit <a "
+"%1$s>Dashboard > Appearance > Widgets</a> and look for the Wiki Sidebar."
+msgstr ""
+
+#: engine/includes/sidebars.php:1061
+msgid "Welcome To The Wiki Home"
+msgstr ""
+
+#: engine/includes/sidebars.php:1075
+msgid ""
+"This is a text widget that you can use to introduce your users to the wiki, "
+"and perhaps to feature some outstanding wiki content."
+msgstr ""
+
+#: engine/includes/sidebars.php:1079
+msgid ""
+"Edit this widget, or add others to the Wiki Top sidebar, at <a "
+"%1$s>Dashboard > Appearance > Widgets</a>."
+msgstr ""
+
+#: engine/includes/sidebars.php:1121
+msgid "Create New Wiki Page"
+msgstr ""
+
+#: engine/includes/sidebars.php:1148
+msgid "Wiki Tags"
+msgstr ""
+
+#: engine/includes/sidebars.php:1177
+msgid "Most Active"
+msgstr ""
+
+#: engine/includes/sidebars.php:1207
+msgid "Recently Active"
+msgstr ""
+
+#: engine/includes/sidebars.php:1239
+msgid "Featured Member"
+msgstr ""
+
+#: engine/includes/templatetags.php:54 templates/parts/author-box.php:32
 msgid "View all posts by %s"
 msgstr ""
 
-#: search.php:24
+#: engine/includes/templatetags.php:74
+msgid "Older Comments"
+msgstr ""
+
+#: engine/includes/templatetags.php:86
+msgid "Newer Comments"
+msgstr ""
+
+#: engine/plugins/bbpress.php:75 engine/plugins/bbpress.php:76
+msgid "New Topic"
+msgstr ""
+
+#: engine/plugins/buddypress/widgets.php:44
+msgid "Recent Networkwide Blog Posts"
+msgstr ""
+
+#: engine/plugins/buddypress/widgets.php:141
+msgid "More Blogs"
+msgstr ""
+
+#: engine/plugins/buddypress/widgets.php:149
+msgid "Sorry, there were no blog posts found. Why not write one?"
+msgstr ""
+
+#: engine/plugins/buddypress/widgets.php:194
+msgid "Title: "
+msgstr ""
+
+#: engine/plugins/buddypress/widgets.php:200
+msgid "Link widget title to Blogs directory:"
+msgstr ""
+
+#: engine/plugins/buddypress/widgets.php:214
+msgid "Include groupblog posts"
+msgstr ""
+
+#: engine/plugins/buddypress/widgets.php:223
+msgid "Max posts to show:"
+msgstr ""
+
+#: search.php:28
 msgid "Search Results for: <span>%s</span>"
 msgstr ""
 
-#: search.php:34
+#: search.php:42
 msgid "Nothing Found"
 msgstr ""
 
-#: templates/loops/loop-attachment.php:26 templates/loops/loop-blog.php:30
-#: templates/loops/loop.php:29 templates/parts/post-thumbnail.php:19
+#: templates/dashboard/options/menu-section.php:17
+msgid "Show All"
+msgstr ""
+
+#: templates/loops/loop-attachment.php:30 templates/loops/loop-blog.php:43
+#: templates/loops/loop.php:33 templates/parts/post-thumbnail.php:25
 msgid "Permanent Link to"
 msgstr ""
 
-#: templates/loops/loop-attachment.php:59
+#: templates/loops/loop-attachment.php:71
 msgid "Full size is %s pixels"
 msgstr ""
 
-#: templates/loops/loop-attachment.php:62
+#: templates/loops/loop-attachment.php:75
 msgid "Link to full size image"
 msgstr ""
 
-#: templates/loops/loop-attachment.php:72
+#: templates/loops/loop-attachment.php:87
 msgid "No Comments"
 msgstr ""
 
-#: templates/loops/loop-attachment.php:72
+#: templates/loops/loop-attachment.php:88
 msgid "1 Comment"
 msgstr ""
 
-#: templates/loops/loop-attachment.php:72
+#: templates/loops/loop-attachment.php:89
 msgid "% Comments"
 msgstr ""
 
-#: templates/loops/loop-attachment.php:84
+#: templates/loops/loop-attachment.php:102
 msgid "<p><strong>Pages:</strong> "
 msgstr ""
 
-#: templates/loops/loop-attachment.php:101 templates/loops/loop-single.php:76
+#: templates/loops/loop-attachment.php:129 templates/loops/loop-single.php:76
 msgid "Sorry, no posts matched your criteria."
 msgstr ""
 
-#: templates/loops/loop-blog.php:54 templates/loops/loop.php:52
+#: templates/loops/loop-blog.php:61 templates/loops/loop.php:50
 msgid "Read More"
 msgstr ""
 
-#: templates/loops/loop-page.php:43 templates/loops/loop-single.php:52
+#: templates/loops/loop-page.php:41 templates/loops/loop-single.php:49
 msgid "Pages:"
 msgstr ""
 
-#: templates/loops/loop-single.php:47
+#: templates/loops/loop-single.php:44
 msgid "Read the rest of this entry &rarr;"
 msgstr ""
 
-#: templates/loops/loop.php:75
+#: templates/loops/loop.php:77
 msgid "Not Found"
 msgstr ""
 
-#: templates/parts/header-head.php:34
+#: templates/parts/header-head.php:26
 msgid "Blog Posts RSS Feed"
 msgstr ""
 
-#: templates/parts/header-head.php:35
+#: templates/parts/header-head.php:27
 msgid "Blog Posts Atom Feed"
 msgstr ""
 
-#: templates/parts/introduction-boxes.php:22
-msgid "Category Archives: <span>%s</span>"
-msgstr ""
-
-#: templates/parts/introduction-boxes.php:49
-msgid "Tag Archives: <span>%s</span>"
-msgstr ""
-
-#: templates/parts/introduction-boxes.php:76
+#: templates/parts/intro-box-archive.php:24
 msgid "Daily Archives: %s"
 msgstr ""
 
-#: templates/parts/introduction-boxes.php:78
+#: templates/parts/intro-box-archive.php:26
 msgid "Monthly Archives: %s"
 msgstr ""
 
-#: templates/parts/introduction-boxes.php:80
+#: templates/parts/intro-box-archive.php:28
 msgid "Yearly Archives: %s"
 msgstr ""
 
-#: templates/parts/post-meta-bottom.php:25
+#: templates/parts/intro-box-category.php:23
+msgid "Category Archives: <span>%s</span>"
+msgstr ""
+
+#: templates/parts/intro-box-tag.php:23
+msgid "Tag Archives: <span>%s</span>"
+msgstr ""
+
+#: templates/parts/post-meta-bottom.php:28
 msgid "Tags: "
 msgstr ""
 
-#: templates/parts/post-meta-top.php:37
+#: templates/parts/post-meta-top.php:39
 msgid "No Comments &#187;"
 msgstr ""
 
-#: templates/parts/post-meta-top.php:38
+#: templates/parts/post-meta-top.php:40
 msgid "1 Comment &#187;"
 msgstr ""
 
-#: templates/parts/post-meta-top.php:39
+#: templates/parts/post-meta-top.php:41
 msgid "% Comments &#187;"
+msgstr ""
+
+#: templates/parts/vertnav-activity-tabs.php:8
+msgid "The public activity for everyone on this site."
+msgstr ""
+
+#: templates/parts/vertnav-activity-tabs.php:8
+msgid "All Members <span>%s</span>"
+msgstr ""
+
+#: templates/parts/vertnav-activity-tabs.php:24
+msgid "The activity of my friends only."
+msgstr ""
+
+#: templates/parts/vertnav-activity-tabs.php:24
+msgid "My Friends <span>%s</span>"
+msgstr ""
+
+#: templates/parts/vertnav-activity-tabs.php:40
+msgid "The activity of groups I am a member of."
+msgstr ""
+
+#: templates/parts/vertnav-activity-tabs.php:40
+msgid "My Groups <span>%s</span>"
+msgstr ""
+
+#: templates/parts/vertnav-activity-tabs.php:54
+msgid "The activity I've marked as a favorite."
+msgstr ""
+
+#: templates/parts/vertnav-activity-tabs.php:54
+msgid "My Favorites <span>%s</span>"
+msgstr ""
+
+#: templates/parts/vertnav-activity-tabs.php:64
+msgid "Activity that I have been mentioned in."
+msgstr ""
+
+#: templates/parts/vertnav-activity-tabs.php:64
+msgid "Mentions"
+msgstr ""
+
+#: templates/parts/vertnav-activity-tabs.php:64
+msgid "<span>%s new</span>"
+msgstr ""
+
+#: templates/parts/vertnav-member-head.php:23
+msgid "Edit My Profile"
+msgstr ""
+
+#: templates/parts/vertnav-member-head.php:26
+msgid "Change Avatar"
+msgstr ""
+
+#: templates/parts/vertnav-member-head.php:29
+msgid "Email/Password Settings"
+msgstr ""
+
+#: templates/parts/vertnav-member-head.php:32
+msgid "Notification Settings"
+msgstr ""
+
+#: templates/plugins/buddypress/activity/index.php:17
+msgid "RSS Feed"
+msgstr ""
+
+#: templates/plugins/buddypress/activity/index.php:17
+msgid "RSS"
+msgstr ""
+
+#: templates/plugins/buddypress/activity/index.php:22
+msgid "Show:"
+msgstr ""
+
+#: templates/plugins/buddypress/activity/index.php:24
+msgid "&mdash; Everything &mdash;"
+msgstr ""
+
+#: templates/plugins/buddypress/groups/single/group-header.php:11
+msgid "Group Admins"
+msgstr ""
+
+#: templates/plugins/buddypress/groups/single/group-header.php:20
+msgid "Group Mods"
+msgstr ""
+
+#: templates/plugins/buddypress/groups/single/group-header.php:34
+msgid "active %s"
 msgstr ""
 
 #. Theme Name of the plugin/theme
@@ -904,6 +2015,10 @@ msgstr ""
 
 #. Template Name of the plugin/theme
 msgid "Full Width Page"
+msgstr ""
+
+#. Template Name of the plugin/theme
+msgid "Homepage Template"
 msgstr ""
 
 #. Template Name of the plugin/theme
