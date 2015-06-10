@@ -24,7 +24,7 @@ ice_register_section(
 	array(
 		'name' => 'general',
 		'type' => 'cpanel',
-		'title' => 'General'
+		'title' => __( 'General', 'infinity-engine' )
 	)
 );
 
@@ -32,7 +32,7 @@ ice_register_section(
 	array(
 		'name' => 'global',
 		'type' => 'cpanel',
-		'title' => 'Global'
+		'title' => __( 'Global', 'infinity-engine' )
 	)
 );
 
@@ -40,7 +40,7 @@ ice_register_section(
 	array(
 		'name' => 'custom',
 		'type' => 'cpanel',
-		'title' => 'Custom'
+		'title' => __( 'Custom', 'infinity-engine' )
 	)
 );
 
@@ -48,7 +48,7 @@ ice_register_section(
 	array(
 		'name' => 'layout',
 		'type' => 'cpanel',
-		'title' => 'Layout'
+		'title' => __( 'Layout', 'infinity-engine' )
 	)
 );
 
@@ -56,7 +56,7 @@ ice_register_section(
 	array(
 		'name' => 'header',
 		'type' => 'cpanel',
-		'title' => 'Header'
+		'title' => __( 'Header', 'infinity-engine' )
 	)
 );
 
@@ -64,7 +64,7 @@ ice_register_section(
 	array(
 		'name' => 'menus',
 		'type' => 'cpanel',
-		'title' => 'Menus'
+		'title' => __( 'Menus', 'infinity-engine' )
 	)
 );
 
@@ -73,7 +73,7 @@ ice_register_section(
 		'name' => 'menus-top',
 		'type' => 'cpanel',
 		'parent' => 'menus',
-		'title' => 'Above Header'
+		'title' => __( 'Above Header', 'infinity-engine' )
 	)
 );
 
@@ -82,7 +82,7 @@ ice_register_section(
 		'name' => 'menus-main',
 		'type' => 'cpanel',
 		'parent' => 'menus',
-		'title' => 'Inside Header'
+		'title' => __( 'Inside Header', 'infinity-engine' )
 	)
 );
 
@@ -91,7 +91,7 @@ ice_register_section(
 		'name' => 'menus-sub',
 		'type' => 'cpanel',
 		'parent' => 'menus',
-		'title' => 'Below Header'
+		'title' => __( 'Below Header', 'infinity-engine' )
 	)
 );
 
@@ -99,7 +99,7 @@ ice_register_section(
 	array(
 		'name' => 'content',
 		'type' => 'cpanel',
-		'title' => 'Content'
+		'title' => __( 'Content', 'infinity-engine' )
 	)
 );
 
@@ -107,7 +107,7 @@ ice_register_section(
 	array(
 		'name' => 'sidebar',
 		'type' => 'cpanel',
-		'title' => 'Sidebar'
+		'title' => __( 'Sidebar', 'infinity-engine' )
 	)
 );
 
@@ -115,7 +115,7 @@ ice_register_section(
 	array(
 		'name' => 'widgets',
 		'type' => 'cpanel',
-		'title' => 'Widgets'
+		'title' => __( 'Widgets', 'infinity-engine' )
 	)
 );
 
@@ -123,7 +123,7 @@ ice_register_section(
 	array(
 		'name' => 'footer',
 		'type' => 'cpanel',
-		'title' => 'Footer'
+		'title' => __( 'Footer', 'infinity-engine' )
 	)
 );
 
@@ -131,7 +131,7 @@ ice_register_section(
 	array(
 		'name' => 'buddypress',
 		'type' => 'cpanel',
-		'title' => 'BuddyPress'
+		'title' => __( 'BuddyPress', 'infinity-engine' )
 	)
 );
 
@@ -139,7 +139,7 @@ ice_register_section(
 	array(
 		'name' => 'whitelabel',
 		'type' => 'cpanel',
-		'title' => 'White Label'
+		'title' => __( 'White Label', 'infinity-engine' )
 	)
 );
 
@@ -147,7 +147,7 @@ ice_register_section(
 	array(
 		'name' => 'gravatars',
 		'type' => 'cpanel',
-		'title' => 'Post Gravatars'
+		'title' => __( 'Post Gravatars', 'infinity-engine' )
 	)
 );
 
@@ -157,6 +157,6 @@ ice_register_section(
 	array(
 		'name' => 'default',
 		'type' => 'cpanel',
-		'title' => 'Other'
+		'title' => __( 'Other', 'infinity-engine' )
 	)
 );
