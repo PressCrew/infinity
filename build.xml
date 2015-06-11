@@ -3,11 +3,12 @@
 <project name="Infinity" default="dist">
 
 	<!-- Vars -->
-	<property name="slug" value="infinity" />
+	<property name="slug" value="infinity-engine" />
 
 	<!-- Paths -->
 	<property name="phpunitpath" value="/usr/local/bin/phpunit" />
 	<property name="wpclipath" value="/usr/local/bin/wp" />
+	<property name="etc.dir" location="${basedir}/etc" />
 	<property name="source.dir" location="${basedir}/src" />
 	<property name="build.dir" location="${basedir}/build" />
 	<property name="build.dist" location="${build.dir}/dist" />
@@ -18,6 +19,41 @@
 	<target name="prepare">
 		<echo message="Preparing build dir..." />
 		<mkdir dir="${build.dir}" />
+	</target>
+
+	<!-- Target: build-info-ant -->
+	<target name="build-info-ant">
+		<echo message="Writing ant build info..." />
+		<tstamp />
+		<copy file="${etc.dir}/build.ant.txt" tofile="${build.dist}/BUILD.txt" overwrite="true">
+			<filterchain>
+				<replacetokens>
+					<token key="BUILD_WHEN" value="${TODAY} ${TSTAMP}" />
+					<token key="BUILD_ANT_VER" value="${ant.version}" />
+					<token key="BUILD_ANT_PROJ" value="${ant.project.name}" />
+					<token key="BUILD_ANT_TARG" value="${ant.project.invoked-targets}" />
+				</replacetokens>
+			</filterchain>
+		</copy>
+	</target>
+
+	<!-- Target: build-info-bamboo -->
+	<target name="build-info-bamboo" if="bamboo.plan" depends="build-info-ant">
+		<echo message="Writing bamboo build info..." />
+		<concat destfile="${build.dist}/BUILD.txt" overwrite="yes" append="yes">
+			<fileset dir="${etc.dir}" includes="build.bamboo.txt" />
+			<filterchain>
+				<replacetokens>
+					<token key="BUILD_BAM_PLAN" value="${bamboo.plan}" />
+					<token key="BUILD_BAM_URL" value="${bamboo.url}" />
+				</replacetokens>
+			</filterchain>
+		</concat>
+	</target>
+
+	<!-- Target: build-info -->
+	<target name="build-info" depends="build-info-ant, build-info-bamboo">
+		<echo message="Done writing build info..." />
 	</target>
 
 	<!-- Target: dist-clean -->
@@ -33,11 +69,15 @@
 	</target>
 
 	<!-- Target: dist (default) -->
-	<target name="dist" depends="dist-prepare">
+	<target name="dist" depends="dist-prepare, build-info">
+		<echo message="Preparing build info..." />
+		<copy file="${etc.dir}/build.ant.txt" tofile="${build.dir}/BUILD.txt" />
 		<echo message="Creating zip archive..." />
 		<zip destfile="${build.dist}/${slug}.zip">
 			<zipfileset dir="${source.dir}" prefix="${slug}" />
+			<zipfileset file="${build.dist}/BUILD.txt" prefix="${slug}" />
 		</zip>
 		<echo message="Files copied and compressed!" />
 	</target>
+
 </project>

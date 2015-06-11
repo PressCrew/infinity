@@ -1,0 +1,8 @@
+-------------------
+   Ant Results
+-------------------
+Time:		@BUILD_WHEN@
+Version:	@BUILD_ANT_VER@
+Project:	@BUILD_ANT_PROJ@
+Targets:	@BUILD_ANT_TARG@
+

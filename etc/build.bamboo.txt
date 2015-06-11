@@ -1,0 +1,5 @@
+--------------------
+   Bamboo Results
+--------------------
+Plan:		@BUILD_BAM_PLAN@
+URL:		@BUILD_BAM_URL@
