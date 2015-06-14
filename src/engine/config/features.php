@@ -1262,7 +1262,7 @@ ice_register_group( 'body' );
 				'description' => __( 'Set the maximum width of the site\'s content between %min% and %max% pixels by moving the slider.', 'infinity-engine' ),
 				'min' => 900,
 				'max' => 1250,
-				'step' => 10,
+				'step' => 1,
 				'style_selector' => 'body.theme-option #wrapper',
 				'style_property' => 'max-width'
 			),
@@ -1344,7 +1344,7 @@ ice_register_group( 'header' );
 				'description' => __( 'Select the height of the header by moving the slider', 'infinity-engine' ),
 				'min' => 100,
 				'max' => 500,
-				'step' => 10,
+				'step' => 1,
 				'style_property' => 'height'
 			),
 			$infinity_header_layout_defaults
@@ -1358,7 +1358,7 @@ ice_register_group( 'header' );
 				'description' => __( 'The margin (spacing) between the top of the header and the top of the page.', 'infinity-engine' ),
 				'min' => 0,
 				'max' => 100,
-				'step' => 2,
+				'step' => 1,
 				'style_property' => 'margin-top'
 			),
 			$infinity_header_layout_defaults
@@ -1372,7 +1372,7 @@ ice_register_group( 'header' );
 				'description' => __( 'The padding (spacing) between the top of the header and the header content.', 'infinity-engine' ),
 				'min' => 0,
 				'max' => 100,
-				'step' => 2,
+				'step' => 1,
 				'style_property' => 'padding-top'
 			),
 			$infinity_header_layout_defaults
@@ -1386,7 +1386,7 @@ ice_register_group( 'header' );
 				'description' => __( 'The margin (spacing) between the bottom of the header and the top of the content section.', 'infinity-engine' ),
 				'min' => 0,
 				'max' => 100,
-				'step' => 2,
+				'step' => 1,
 				'style_property' => 'margin-bottom'
 			),
 			$infinity_header_layout_defaults
@@ -1400,7 +1400,7 @@ ice_register_group( 'header' );
 				'description' => __( 'The padding (spacing) between the bottom of the header and the header content.', 'infinity-engine' ),
 				'min' => 0,
 				'max' => 100,
-				'step' => 2,
+				'step' => 1,
 				'style_property' => 'padding-bottom'
 			),
 			$infinity_header_layout_defaults
@@ -1799,7 +1799,7 @@ ice_register_group( 'footer' );
 				'description' => __( 'The margin (spacing) between the bottom of the content section and the top of the footer.', 'infinity-engine' ),
 				'min' => 0,
 				'max' => 100,
-				'step' => 2,
+				'step' => 1,
 				'style_property' => 'margin-top'
 			),
 			$infinity_footer_layout_defaults
