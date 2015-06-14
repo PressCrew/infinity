@@ -173,7 +173,7 @@ ice_register_group( 'top-menu' );
 				'type' => 'colorpicker',
 				'title' => __( 'Font Color', 'infinity-engine' ),
 				'description' => __( 'Choose a font color for links of the menu above the header.', 'infinity-engine' ),
-				'style_selector' => 'body.theme-option .top-menu ul li a span',
+				'style_selector' => 'body.theme-option nav.base-menu.top-menu ul li a span',
 				'style_property' => 'color'
 			),
 			$infinity_top_menu_defaults
@@ -185,7 +185,7 @@ ice_register_group( 'top-menu' );
 				'type' => 'select',
 				'title' => __( 'Font Weight', 'infinity-engine' ),
 				'description' => __( 'Choose a font weight for links of the menu above the header.', 'infinity-engine' ),
-				'style_selector' => 'body.theme-option .top-menu ul li a span',
+				'style_selector' => 'body.theme-option nav.base-menu.top-menu ul li a span',
 				'style_property' => 'font-weight'
 			),
 			$infinity_top_menu_defaults
@@ -195,7 +195,7 @@ ice_register_group( 'top-menu' );
 			array(
 				'name' => 'background-color',
 				'type' => 'css/bg-color',
-				'style_selector' => 'body.theme-option .top-menu'
+				'style_selector' => 'body.theme-option nav.base-menu.top-menu'
 			),
 			$infinity_top_menu_defaults
 		);
@@ -206,7 +206,7 @@ ice_register_group( 'top-menu' );
 				'type' => 'css/bg-color',
 				'title' => __( 'Sub-item Background', 'infinity-engine' ),
 				'description' => __( 'Choose a background color for the submenu items of the menu above the header.', 'infinity-engine' ),
-				'style_selector' => 'body.theme-option .top-menu ul ul'
+				'style_selector' => 'body.theme-option nav.base-menu.top-menu ul ul'
 			),
 			$infinity_top_menu_defaults
 		);
@@ -216,7 +216,7 @@ ice_register_group( 'top-menu' );
 				'name' => 'overlay-image',
 				'group' => 'top-menu',
 				'section' => 'menus-top',
-				'style_selector' => 'body.theme-option .top-menu'
+				'style_selector' => 'body.theme-option nav.base-menu.top-menu'
 			),
 			array_merge( $infinity_top_menu_defaults, $overlay_image_defaults )
 		);
@@ -225,7 +225,7 @@ ice_register_group( 'top-menu' );
 			array(
 				'name' => 'overlay-opacity',
 				'type' => 'css/overlay-opacity',
-				'style_selector' => 'body.theme-option .top-menu:before',
+				'style_selector' => 'body.theme-option nav.base-menu.top-menu:before',
 				'parent' => 'overlay-image',
 				'linked_image' => 'overlay-image'
 			),
@@ -271,7 +271,7 @@ ice_register_group( 'main-menu' );
 				'type' => 'colorpicker',
 				'title' => __( 'Font Color', 'infinity-engine' ),
 				'description' => __( 'Choose a font color for links of the menu inside the header.', 'infinity-engine' ),
-				'style_selector' => 'body.theme-option .main-menu ul li a span',
+				'style_selector' => 'body.theme-option nav.base-menu.main-menu ul li a span',
 				'style_property' => 'color'
 			),
 			$infinity_main_menu_defaults
@@ -283,7 +283,7 @@ ice_register_group( 'main-menu' );
 				'type' => 'select',
 				'title' => __( 'Font Weight', 'infinity-engine' ),
 				'description' => __( 'Choose a font weight for links of the menu inside the header.', 'infinity-engine' ),
-				'style_selector' => 'body.theme-option .main-menu ul li a span',
+				'style_selector' => 'body.theme-option nav.base-menu.main-menu ul li a span',
 				'style_property' => 'font-weight'
 			),
 			$infinity_main_menu_defaults
@@ -296,7 +296,7 @@ ice_register_group( 'main-menu' );
 				'title' => __( 'Padding', 'infinity-engine' ),
 				'description' => __( 'Select the padding (spacing) around the menu links by moving the slider.', 'infinity-engine' ),
 				'max' => 30,
-				'style_selector' => 'body.theme-option .main-menu',
+				'style_selector' => 'body.theme-option nav.base-menu.main-menu',
 				'style_property' => 'padding'
 			),
 			$infinity_main_menu_defaults
@@ -306,7 +306,7 @@ ice_register_group( 'main-menu' );
 			array(
 				'name' => 'background-color',
 				'type' => 'css/bg-color',
-				'style_selector' => 'body.theme-option .main-menu'
+				'style_selector' => 'body.theme-option nav.base-menu.main-menu'
 			),
 			$infinity_main_menu_defaults
 		);
@@ -314,7 +314,7 @@ ice_register_group( 'main-menu' );
 		ice_register_option(
 			array(
 				'name' => 'overlay-image',
-				'style_selector' => 'body.theme-option .main-menu'
+				'style_selector' => 'body.theme-option nav.base-menu.main-menu'
 			),
 			array_merge( $infinity_main_menu_defaults, $overlay_image_defaults )
 		);
@@ -323,9 +323,30 @@ ice_register_group( 'main-menu' );
 			array(
 				'name' => 'overlay-opacity',
 				'type' => 'css/overlay-opacity',
-				'style_selector' => 'body.theme-option .main-menu:before',
+				'style_selector' => 'body.theme-option nav.base-menu.main-menu:before',
 				'parent' => 'overlay-image',
 				'linked_image' => 'overlay-image'
+			),
+			$infinity_main_menu_defaults
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'hover-background',
+				'title' => __( 'Hover Background', 'infinity-engine' ),
+				'style_selector' => 'body.theme-option nav.base-menu.main-menu ul a:hover'
+			),
+			array_merge( $infinity_main_menu_defaults, $overlay_image_defaults )
+		);
+
+		ice_register_option(
+			array(
+				'name' => 'hover-opacity',
+				'type' => 'css/overlay-opacity',
+				'title' => __( 'Hover Background Opacity', 'infinity-engine' ),
+				'style_selector' => 'body.theme-option nav.base-menu.main-menu ul a:hover:before',
+				'parent' => 'hover-background',
+				'linked_image' => 'hover-background'
 			),
 			$infinity_main_menu_defaults
 		);
@@ -369,7 +390,7 @@ ice_register_group( 'sub-menu' );
 				'type' => 'colorpicker',
 				'title' => __( 'Font Color', 'infinity-engine' ),
 				'description' => __( 'Choose a font color for links of the menu below the header.', 'infinity-engine' ),
-				'style_selector' => 'body.theme-option .sub-menu ul li a span',
+				'style_selector' => 'body.theme-option nav.base-menu.sub-menu ul li a span',
 				'style_property' => 'color'
 			),
 			$infinity_sub_menu_defaults
@@ -381,7 +402,7 @@ ice_register_group( 'sub-menu' );
 				'type' => 'select',
 				'title' => __( 'Font Weight', 'infinity-engine' ),
 				'description' => __( 'Choose a font weight for links of the menu below the header.', 'infinity-engine' ),
-				'style_selector' => 'body.theme-option .sub-menu ul li a span',
+				'style_selector' => 'body.theme-option nav.base-menu.sub-menu ul li a span',
 				'style_property' => 'font-weight'
 			),
 			$infinity_sub_menu_defaults
@@ -391,7 +412,7 @@ ice_register_group( 'sub-menu' );
 			array(
 				'name' => 'background-color',
 				'type' => 'css/bg-color',
-				'style_selector' => 'body.theme-option .sub-menu'
+				'style_selector' => 'body.theme-option nav.base-menu.sub-menu'
 			),
 			$infinity_sub_menu_defaults
 		);
@@ -402,7 +423,7 @@ ice_register_group( 'sub-menu' );
 				'type' => 'css/bg-color',
 				'title' => __( 'Sub-item Background', 'infinity-engine' ),
 				'description' => __( 'Choose a background color for the submenu items of the menu below the header.', 'infinity-engine' ),
-				'style_selector' => 'body.theme-option .sub-menu ul ul'
+				'style_selector' => 'body.theme-option nav.base-menu.sub-menu ul ul'
 			),
 			$infinity_sub_menu_defaults
 		);
@@ -410,7 +431,7 @@ ice_register_group( 'sub-menu' );
 		ice_register_option(
 			array(
 				'name' => 'overlay-image',
-				'style_selector' => 'body.theme-option .sub-menu'
+				'style_selector' => 'body.theme-option nav.base-menu.sub-menu'
 			),
 			array_merge( $infinity_sub_menu_defaults, $overlay_image_defaults )
 		);
@@ -419,7 +440,7 @@ ice_register_group( 'sub-menu' );
 			array(
 				'name' => 'overlay-opacity',
 				'type' => 'css/overlay-opacity',
-				'style_selector' => 'body.theme-option .sub-menu:before',
+				'style_selector' => 'body.theme-option nav.base-menu.sub-menu:before',
 				'parent' => 'overlay-image',
 				'linked_image' => 'overlay-image'
 			),

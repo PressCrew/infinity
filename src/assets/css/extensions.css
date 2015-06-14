@@ -252,6 +252,7 @@ body.infinity-layout {
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
+	background-color: #333333;
 }
 .infinity-layout .base-menu ul li {
 	float: left;
@@ -261,65 +262,12 @@ body.infinity-layout {
 .infinity-layout .base-menu ul li.right {
 	float: right;
 }
-.infinity-layout .base-menu ul li li:hover ul,
-.infinity-layout .base-menu ul li li.sfHover ul,
-.infinity-layout .base-menu ul li li li:hover ul,
-.infinity-layout .base-menu ul li li li.sfHover ul,
-.infinity-layout .base-menu ul li li li li:hover ul,
-.infinity-layout .base-menu ul li li li li.sfHover ul {
-	/* match .nav ul width */
-	top: -5px;
-	left: 190px;
-}
 .infinity-layout .base-menu ul li:hover {
 	visibility: inherit; /* fixes IE7 'sticky bug' */
-}
-.infinity-layout .base-menu ul li:hover li ul,
-.infinity-layout .base-menu ul li.sfHover li ul,
-.infinity-layout .base-menu ul li li:hover li ul,
-.infinity-layout .base-menu ul li li.sfHover li ul,
-.infinity-layout .base-menu ul li li li:hover li ul,
-.infinity-layout .base-menu ul li li li.sfHover li ul {
-	top: -9999em;
-}
-.infinity-layout .base-menu ul li:hover ul,
-.infinity-layout .base-menu ul li.sfHover ul {
-	top: 27px;
-	/* match top ul list item height */
-	left: 0px;
-	z-index: 95;
 }
 /* display as block, or hover fails to work properly when text wraps */
 .infinity-layout .base-menu a span {
 	display: block;
-}
-.infinity-layout .base-menu ul ul {
-	top: -9999em;
-	width: 210px;
-	/* left offset of submenus need to match (see below) */
-	margin: 3px 0 0 0;
-	padding: 15px 5px 15px 5px;
-	z-index: 50;
-	position: absolute;
-}
-.infinity-layout .base-menu ul ul li {
-	float: left;
-	width: 180px;
-}
-.infinity-layout .base-menu ul ul ul {
-	margin-left: -10px;
-}
-.infinity-layout .base-menu ul ul li {
-	width: 85%;
-}
-.infinity-layout .base-menu ul ul li:first-child {
-	border-top: none;
-}
-.infinity-layout .base-menu ul ul li:last-child {
-	border-bottom: none;
-}
-.infinity-layout .base-menu ul ul li a {
-	width: 180px;
 }
 .infinity-layout .base-menu ul a {
 	float: left;
@@ -330,13 +278,14 @@ body.infinity-layout {
 .infinity-layout .base-menu li.sfHover li a {
 	background: none;
 }
+.infinity-layout .base-menu li li a span {
+	padding: 0;
+	color: #BBB;
+}
 .infinity-layout .base-menu li li a span.sf-sub-indicator,
 .infinity-layout .base-menu li.sfHover li a span.sf-sub-indicator {
 	float: right;
 	margin: 5px 0 0 0;
-}
-.infinity-layout .base-menu li li a span {
-	padding: 0; color: #BBB;
 }
 .infinity-layout .base-menu ul li.sfHover li a,
 .infinity-layout .base-menu ul li.sfHover li a:hover,
@@ -344,12 +293,12 @@ body.infinity-layout {
 .infinity-layout .base-menu ul li.sfHover li.sfHover > a span,
 .infinity-layout .base-menu ul li.sfHover li.sfHover li.sfHover > a span,
 .infinity-layout .base-menu ul li.sfHover li a span:hover {
-	color: #DDD;
+	/*opacity: 0.8;*/
 }
 /*  Make sub menus appear */
 .infinity-layout .base-menu ul li:hover ul,
 .infinity-layout .base-menu ul li.sfHover ul {
-	top: 34px; /* match top ul list item height */
+	top: 30px; /* match top ul list item height */
 	z-index: 150;
 }
 /* Hide all subs subs (4 levels deep) */
@@ -368,11 +317,12 @@ body.infinity-layout {
 .infinity-layout .base-menu ul li li li.sfHover ul,
 .infinity-layout .base-menu ul li li li li:hover ul,
 .infinity-layout .base-menu ul li li li li.sfHover ul {
-	left: 190px; /* match .nav ul width */
-	top: -5px;
+	left: 180px; /* match .nav ul width */
+	top: 5px;
 }
 /* 2nd level skin */
 .infinity-layout .base-menu ul ul {
+	z-index: 50;
 	position: absolute;
 	top: -9999em;
 	width: 180px; /* left offset of submenus need to match (see below) */
@@ -386,7 +336,7 @@ body.infinity-layout {
 	background: none;
 }
 .infinity-layout .base-menu li a:hover {
-	color: #DDD;
+	opacity: 0.8;
 }
 .infinity-layout .base-menu ul ul li:first-child {
 	border-top: none;
@@ -432,6 +382,7 @@ html body.infinity-layout .top-wrap ul.sub-menu {
 	margin: 8px 0 0;
 	padding: 0 !important;
 	z-index: 150 !important;
+	background-color: #333333;
 }
 .infinity-layout .main-menu ul.sub-menu a {
 	margin-right: 0;
@@ -441,7 +392,7 @@ html body.infinity-layout .top-wrap ul.sub-menu {
 }
 .infinity-layout #main-menu-wrap ul ul li.sfHover ul {
 	left: 180px; /* match .nav ul width */
-	top: -2px;
+	top: 10px;
 }
 .infinity-layout #footer ul.sub-menu,
 .infinity-layout #footer ul.sub-menu:before {
@@ -505,7 +456,7 @@ html body.infinity-layout .top-wrap ul.sub-menu {
 	margin-left: 0px;
 }
 .infinity-layout #footer-menu ul li a:hover {
-	color: #777;
+	opacity: 0.8;
 }
 .infinity-layout #footer-menu ul li {
 	display: inline;
@@ -1237,13 +1188,10 @@ body.infinity-design {
 	background: #FFF;
 }
 /* Global CSS3 Stuff */
-.infinity-design .top-menu,
-.infinity-design .top-wrap .sub-menu,
 .infinity-design .item-list-tabs,
 .infinity-design .footer-wrap,
 .infinity-design thead:first-child tr th,
 .infinity-design thead:first-child tr td,
-.infinity-design .base-menu ul ul,
 .infinity-design .sidebar-activity-tabs ul li.current,
 .infinity-design .sidebar-activity-tabs ul li.selected,
 .infinity-design .docs .toggle-switch,
@@ -1299,11 +1247,6 @@ body.infinity-design {
 .infinity-design #footer-menu ul li a {
 	color: #FFF;
 	font-weight: 400;
-	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-}
-.infinity-design .base-menu ul a:hover,
-.infinity-design #footer-menu ul li a:hover {
-	color: #BBB;
 }
 .infinity-design .main-menu {
 	border-radius: 6px 6px 6px 6px;
@@ -1313,14 +1256,13 @@ body.infinity-design {
 	font-weight: 500;
 	border-radius: 6px 6px 6px 6px;
 }
-.infinity-design .main-menu ul a:hover {
-	background: url("../images/design/bg-body.gif") repeat transparent;
+.infinity-design .main-menu ul a:hover:before {
+	border-radius: 6px 6px 6px 6px;
 }
 .infinity-design .base-menu ul li.current-cat a,
 .infinity-design .base-menu ul li.current_page_item a,
 .infinity-design .base-menu ul li.current-menu-item a {
 	font-weight: bold;
-	background: url("../images/design/bg-body.gif") repeat transparent;
 }
 .infinity-design .widget h4,
 .infinity-design #activity-navigation h4 {
