@@ -13,7 +13,7 @@
 /**
  * ICE API: version.
  */
-define( 'ICE_VERSION', '1.2a' );
+define( 'ICE_VERSION', '1.2b2' );
 /**
  * ICE API: library directory (3rd party).
  */
